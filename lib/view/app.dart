@@ -2,6 +2,9 @@ import 'package:device_preview_screenshot/device_preview_screenshot.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:kentei_quiz/resource/initial_resource.dart';
+
+import '../resource/theme_resource.dart';
 
 class QuizApp extends StatelessWidget {
   const QuizApp({Key? key}) : super(key: key);
@@ -34,19 +37,20 @@ class _App extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
 
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: I18n().appName,
+      //デフォルト設定
+      theme: DefaultTheme.getDefaultTheme(Brightness.light),
+      darkTheme: DefaultTheme.getDefaultTheme(Brightness.dark),
+
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MyHomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -65,7 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("タイトル"),
+        backgroundColor: Colors.cyan.shade400,
       ),
       body: Center(
         child: Column(
