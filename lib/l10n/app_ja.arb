@@ -1,0 +1,11 @@
+{
+  "@@locale": "ja",
+
+  "rate": "レート",
+  "player": "プレイヤー数",
+  "shake": "乱数生成",
+  "allowDuplicateNumber": "重複を許可",
+  "noServiceMessage": "Androidには対応しておりません。\n現在開発中のためしばらくお待ち下さい。",
+  "feedback": "フィードバック",
+  "privacyPolicy": "プライバシー・ポリシー"
+}

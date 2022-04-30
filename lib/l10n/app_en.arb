@@ -1,0 +1,38 @@
+{
+  "@@locale": "en",
+
+  "rate": "Rate",
+  "@rate": {
+    "description": "rate title label"
+  },
+
+  "player": "Player",
+  "@player": {
+    "description": "number of player label"
+  },
+
+  "shake": "Shake!!",
+  "@shake": {
+    "description": "start create random number"
+  },
+
+  "allowDuplicateNumber": "Allow duplicate number",
+  "@allowDuplicateNumber": {
+    "description": "Allow duplicate number"
+  },
+
+  "noServiceMessage": "Not compatible with Android.\nPlease wait for a while as it is currently under development.",
+  "@noServiceMessage": {
+    "description": "Not compatible with Android.Please wait for a while as it is currently under development."
+  },
+
+  "feedback": "Feedback",
+  "@feedback": {
+    "description": "feedback"
+  },
+
+  "privacyPolicy": "Privacy policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy"
+  }
+}
