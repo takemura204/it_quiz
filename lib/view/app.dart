@@ -7,13 +7,12 @@ class QuizApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //デパイス確認
+    //デバイスのレイアウトを確認
     return DevicePreview(
-      enabled: kDebugMode,
+      enabled: !kReleaseMode,
       builder: (context) => const _App(),
       tools: const [
         ...DevicePreview.defaultTools,
-        // スクショ機能を追加
         DevicePreviewScreenshot(),
       ],
     );
