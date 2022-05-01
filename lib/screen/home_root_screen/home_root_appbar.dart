@@ -13,10 +13,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       title: IndexedStack(
         alignment: Alignment.center,
         children: [
-          Text(I18n().titleHomeSearch),
-          Text(I18n().titleOffers),
-          Text(I18n().titleHomeClip),
-          Text(I18n().titleHomeNotification),
+          Text(I18n().titleStudy),
+          Text(I18n().titleReview),
+          Text(I18n().titleTest),
+          Text(I18n().titleSetting),
         ],
         index: state.currentIndex,
       ),

@@ -8,43 +8,27 @@ class _BottomNavBar extends ConsumerWidget {
     final state = ref.watch<HomeRootScreenState>(homeScreenControllerProvider);
 
     return BottomNavigationBar(
-      iconSize: 22,
+      iconSize: 35,
       items: [
         BottomNavigationBarItem(
-          icon: const Icon(
-            DefaultIcons.ic_home,
-          ),
-          activeIcon: const Icon(
-            DefaultIcons.ic_home_solid,
-          ),
-          label: I18n().labelHomeCampaigns,
+          icon: const Icon(Icons.list_alt),
+          activeIcon: const Icon(Icons.list_alt),
+          label: I18n().titleStudy,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(
-            DefaultIcons.ic_search,
-          ),
-          activeIcon: const Icon(
-            DefaultIcons.ic_search_solid,
-          ),
-          label: I18n().labelHomeSearch,
+          icon: const Icon(Icons.checklist_rtl),
+          activeIcon: const Icon(Icons.checklist_rtl),
+          label: I18n().titleReview,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(
-            DefaultIcons.ic_home,
-          ),
-          activeIcon: const Icon(
-            DefaultIcons.ic_home_solid,
-          ),
-          label: I18n().labelHomeCampaigns,
+          icon: const Icon(Icons.edit_note),
+          activeIcon: const Icon(Icons.edit_note),
+          label: I18n().titleTest,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(
-            DefaultIcons.ic_heart,
-          ),
-          activeIcon: const Icon(
-            DefaultIcons.ic_heart_solid,
-          ),
-          label: I18n().labelHomeClips,
+          icon: const Icon(Icons.settings),
+          activeIcon: const Icon(Icons.settings),
+          label: I18n().titleSetting,
         ),
       ],
       currentIndex: state.currentIndex,

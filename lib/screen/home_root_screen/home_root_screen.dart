@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:provider/provider.dart';
 
 import '../../controller/home_root_screen/home_root_screen_controller.dart';
 import '../../controller/home_root_screen/home_root_screen_state.dart';
