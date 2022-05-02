@@ -1,9 +1,11 @@
 class QuizItem {
   final int id;
-  final String? title;
+  final String group;
+  final String title;
 
   const QuizItem({
     required this.id,
+    required this.group,
     required this.title,
   });
 }
