@@ -19,4 +19,8 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   void dispose() {
     super.dispose();
   }
+
+  void onTapItem(int id) {
+    print(id);
+  }
 }

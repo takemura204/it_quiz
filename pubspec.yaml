@@ -28,6 +28,7 @@ dependencies:
 
   # よりよいproviderを使いたい
   hooks_riverpod: ^1.0.3
+  provider: ^6.0.2
 
   # StateNotifierを使って状態管理したい
   state_notifier: ^0.7.2+1
@@ -48,6 +49,10 @@ dependencies:
 
   #  Listをグループ化したい
   grouped_list: ^4.2.0
+
+  # Row or Column の中に楽にスペースを挿入したい
+  gap: ^2.0.0
+
 
 
 
