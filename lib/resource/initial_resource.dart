@@ -6,7 +6,7 @@ class I18n {
   factory I18n() => _instance ??= I18n._();
 
   ///アプリ全体
-  String get appName => "toridori base";
+  String get appName => "Kentei Quiz";
 
   ///title
   String get titleStudy => "問題";
@@ -15,7 +15,5 @@ class I18n {
   String get titleSetting => "設定";
 
   ///BottomNavigationBar
-
-  ///
 
 }

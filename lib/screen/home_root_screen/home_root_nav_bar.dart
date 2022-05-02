@@ -5,7 +5,8 @@ class _BottomNavBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch<HomeRootScreenState>(homeScreenControllerProvider);
+    final state =
+        ref.watch<HomeRootScreenState>(homeRootScreenControllerProvider);
 
     return BottomNavigationBar(
       iconSize: 35,
@@ -33,7 +34,7 @@ class _BottomNavBar extends ConsumerWidget {
       ],
       currentIndex: state.currentIndex,
       onTap: (index) => ref
-          .watch(homeScreenControllerProvider.notifier)
+          .watch(homeRootScreenControllerProvider.notifier)
           .changeTabIndex(index),
     );
   }

@@ -5,7 +5,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch<HomeRootScreenState>(homeScreenControllerProvider);
+    final state =
+        ref.watch<HomeRootScreenState>(homeRootScreenControllerProvider);
 
     return AppBar(
       titleSpacing: 0,

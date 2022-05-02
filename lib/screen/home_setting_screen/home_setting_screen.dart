@@ -8,7 +8,7 @@ class HomeSettingScreen extends StatelessWidget {
     return Column(
       children: [
         Container(),
-        Text("3"),
+        const Text("設定画面"),
       ],
     );
   }

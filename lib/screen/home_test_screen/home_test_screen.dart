@@ -8,7 +8,7 @@ class HomeTestScreen extends StatelessWidget {
     return Column(
       children: [
         Container(),
-        Text("1"),
+        const Text("テスト画面"),
       ],
     );
   }

@@ -22,6 +22,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+  localization: ^2.1.0
 
   cupertino_icons: ^1.0.2
 
@@ -41,12 +42,12 @@ dependencies:
   # アプリのローカルストレージに値を保存したい
   shared_preferences: ^2.0.13
 
-
   #様々なデバイス上でのレイアウトを確認したい
   device_preview: ^1.0.0
   device_preview_screenshot: ^1.0.0
 
-  localization: ^2.1.0
+  #  Listをグループ化したい
+  grouped_list: ^4.2.0
 
 
 

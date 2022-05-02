@@ -8,7 +8,7 @@ class HomeReviewScreen extends StatelessWidget {
     return Column(
       children: [
         Container(),
-        Text("2"),
+        const Text("復習画面"),
       ],
     );
   }

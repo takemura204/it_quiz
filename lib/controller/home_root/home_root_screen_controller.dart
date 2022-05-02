@@ -4,7 +4,7 @@ import 'package:state_notifier/state_notifier.dart';
 
 import 'home_root_screen_state.dart';
 
-final homeScreenControllerProvider =
+final homeRootScreenControllerProvider =
     StateNotifierProvider<HomeRootScreenController, HomeRootScreenState>(
   (ref) => HomeRootScreenController(ref: ref),
 );
@@ -14,12 +14,7 @@ class HomeRootScreenController extends StateNotifier<HomeRootScreenState>
   HomeRootScreenController({required this.ref})
       : super(const HomeRootScreenState());
 
-  final ProviderReference ref;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  final Ref ref;
 
   @override
   void dispose() {
@@ -29,6 +24,5 @@ class HomeRootScreenController extends StateNotifier<HomeRootScreenState>
   ///BttomNavigationBar変更
   void changeTabIndex(int index) {
     state = state.copyWith(currentIndex: index);
-    print(index);
   }
 }
