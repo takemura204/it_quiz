@@ -19,13 +19,13 @@ class SelectAnsDialog extends ConsumerWidget {
       contentPadding: const EdgeInsets.all(0),
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * 0.7,
-          width: MediaQuery.of(context).size.width * 0.8,
+          height: context.height * 0.7,
+          width: context.width * 0.8,
           child: Column(
             children: [
               ///Clearボタン
               Container(
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: context.height * 0.05,
                 alignment: Alignment.bottomRight,
                 child: IconButton(
                   padding:
@@ -42,7 +42,7 @@ class SelectAnsDialog extends ConsumerWidget {
 
               ///問題タイトル
               Container(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: context.height * 0.1,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                 ),
@@ -58,7 +58,7 @@ class SelectAnsDialog extends ConsumerWidget {
 
               ///進行度
               Container(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: context.height * 0.1,
                 padding: const EdgeInsets.all(16),
                 alignment: Alignment.centerLeft,
                 child: Row(
@@ -82,7 +82,7 @@ class SelectAnsDialog extends ConsumerWidget {
               Divider(height: 1, color: context.colors.dark54),
 
               Container(
-                height: MediaQuery.of(context).size.height * 0.44,
+                height: context.height * 0.44,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -93,7 +93,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: context.height * 0.08,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -121,7 +121,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: context.height * 0.08,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -149,7 +149,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: context.height * 0.08,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -177,7 +177,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: context.height * 0.08,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(

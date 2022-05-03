@@ -6,4 +6,8 @@ extension BuildContextEx on BuildContext {
 
   /// Theme.of(context).textTheme への convenience method です
   TextTheme get texts => Theme.of(this).textTheme;
+
+  /// MediaQuery.of(this).size への convenience method です
+  double get height => MediaQuery.of(this).size.height;
+  double get width => MediaQuery.of(this).size.width;
 }
