@@ -15,10 +15,10 @@ class I18n {
   String get titleSetting => "設定";
 
   ///問題形式
-  String get ansOneQuestion => "一問一答で学習する";
-  String get ansFourChoice => "4択クイズで挑戦する";
-  String get ansTrueFalse => "◯×クイズで挑戦する";
-  String get ansFillBlank => "穴埋めクイズで挑戦する";
+  String get quizOneQuestion => "一問一答で学習する";
+  String get quizFourChoice => "4択クイズで挑戦する";
+  String get quizTrueFalse => "◯×クイズで挑戦する";
+  String get quizFillBlank => "穴埋めクイズで挑戦する";
 
   ///BottomNavigationBar
 

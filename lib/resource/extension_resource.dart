@@ -10,4 +10,8 @@ extension BuildContextEx on BuildContext {
   /// MediaQuery.of(this).size への convenience method です
   double get height => MediaQuery.of(this).size.height;
   double get width => MediaQuery.of(this).size.width;
+
+  ///Navigator.of(context).push への convenience method
+  Future Function<T extends Object?>(Route<T> route) get showScreen =>
+      Navigator.of(this).push;
 }

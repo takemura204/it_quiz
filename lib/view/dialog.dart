@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/color_resource.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/initial_resource.dart';
+import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../entity/quiz_item/quiz_item.dart';
 
@@ -103,7 +104,7 @@ class SelectAnsDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().ansOneQuestion,
+                          I18n().quizOneQuestion,
                           style: TextStyle(
                             color: context.colors.main50.withOpacity(0.7),
                             fontWeight: FontWeight.bold,
@@ -112,7 +113,11 @@ class SelectAnsDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().ansOneQuestion}');
+                        Navigator.pop(context, '${I18n().quizOneQuestion}');
+                        context.showScreen(QuizOneQuestionScreenArguments(
+                          item: item,
+                          quizStyle: I18n().quizOneQuestion,
+                        ).generateRoute());
                       },
                     ),
 
@@ -131,7 +136,7 @@ class SelectAnsDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().ansFillBlank,
+                          I18n().quizFillBlank,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -140,7 +145,7 @@ class SelectAnsDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().ansFillBlank}');
+                        Navigator.pop(context, '${I18n().quizFillBlank}');
                       },
                     ),
 
@@ -159,7 +164,7 @@ class SelectAnsDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().ansFourChoice,
+                          I18n().quizFourChoice,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -168,7 +173,7 @@ class SelectAnsDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().ansFourChoice}');
+                        Navigator.pop(context, '${I18n().quizFourChoice}');
                       },
                     ),
 
@@ -187,7 +192,7 @@ class SelectAnsDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().ansTrueFalse,
+                          I18n().quizTrueFalse,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -196,7 +201,7 @@ class SelectAnsDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().ansTrueFalse}');
+                        Navigator.pop(context, '${I18n().quizTrueFalse}');
                       },
                     ),
                     const Spacer(),
