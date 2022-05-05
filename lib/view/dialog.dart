@@ -113,7 +113,7 @@ class SelectAnsDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().quizOneQuestion}');
+                        // Navigator.pop(context, '${I18n().quizOneQuestion}');
                         context.showScreen(QuizOneQuestionScreenArguments(
                           item: item,
                           quizStyle: I18n().quizOneQuestion,

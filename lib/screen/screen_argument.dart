@@ -18,9 +18,18 @@ class QuizOneQuestionScreenArguments
   String get screenNameFormat => "/quiz_one_question";
 
   @override
-  Route generateRoute() => MaterialPageRoute(
-        builder: (_) => QuizOneQuestionScreen(this),
-        settings: settings,
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            QuizOneQuestionScreen(this),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(
+                  builder: (context) => QuizOneQuestionScreen(this)),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
       );
 }
 
