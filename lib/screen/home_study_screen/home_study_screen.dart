@@ -3,20 +3,8 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/entity/quiz_item/quiz_item.dart';
 
+import '../../resource/quiz_resource.dart';
 import '../../view/dialog.dart';
-
-List<QuizItem> quizItems = [
-  const QuizItem(id: 1, group: "TeamA", title: "問題A-1"),
-  const QuizItem(id: 2, group: "TeamA", title: "問題A-2"),
-  const QuizItem(id: 3, group: "TeamB", title: "問題B-1"),
-  const QuizItem(id: 4, group: "TeamB", title: "問題B-2"),
-  const QuizItem(id: 5, group: "TeamC", title: "問題C-1"),
-  const QuizItem(id: 6, group: "TeamC", title: "問題C-2"),
-  const QuizItem(id: 7, group: "TeamA", title: "問題A-3"),
-  const QuizItem(id: 8, group: "TeamB", title: "問題B-3"),
-  const QuizItem(id: 9, group: "TeamC", title: "問題C-3"),
-  const QuizItem(id: 10, group: "TeamD", title: "問題D-1"),
-];
 
 class HomeStudyScreen extends ConsumerWidget {
   const HomeStudyScreen();

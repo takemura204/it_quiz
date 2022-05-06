@@ -205,7 +205,6 @@ class SelectAnsDialog extends ConsumerWidget {
                       },
                     ),
                     const Spacer(),
-                    Divider(height: 1, color: context.colors.dark54),
                   ],
                 ),
               ),

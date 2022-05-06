@@ -22,6 +22,9 @@ extension ColorSchemeEx on ColorScheme {
   Color get onMain50 => DefaultColorScheme(brightness).onMain50;
   Color get onMain10 => DefaultColorScheme(brightness).onMain10;
   Color get red50 => DefaultColorScheme(brightness).red50;
+  Color get orange50 => DefaultColorScheme(brightness).orange50;
+  Color get orange100 => DefaultColorScheme(brightness).orange100;
+  Color get orange200 => DefaultColorScheme(brightness).orange200;
 }
 
 class DefaultColorScheme {
@@ -44,6 +47,9 @@ class DefaultColorScheme {
   final Color youtube;
   final Color line;
   final Color facebook;
+  final Color orange50;
+  final Color orange100;
+  final Color orange200;
 
   Color get onMain50 => _light100;
   Color get onMain10 => dark54;
@@ -63,6 +69,9 @@ class DefaultColorScheme {
     required this.light30,
     required this.light70,
     required this.light100,
+    required this.orange50,
+    required this.orange100,
+    required this.orange200,
     this.twitter = const Color(0xff1da1f3),
     this.instagram = const Color(0xffD93177),
     this.youtube = const Color(0xfffe0400),
@@ -99,6 +108,9 @@ class DefaultColorScheme {
           light30: _dark26,
           light70: _dark54,
           light100: _dark87,
+          orange50: _orange50,
+          orange100: _orange100,
+          orange200: _orange200,
         );
 
   const DefaultColorScheme.light()
@@ -117,6 +129,9 @@ class DefaultColorScheme {
           light30: _light30,
           light70: _light70,
           light100: _light100,
+          orange50: _orange50,
+          orange100: _orange100,
+          orange200: _orange200,
         );
 
   static const Color _main50 = Color(0xffcd001a);
@@ -139,4 +154,8 @@ class DefaultColorScheme {
   static const Color _dark26 = Color(0x42000000);
   static const Color _dark54 = Color(0x8a000000);
   static const Color _dark87 = Color(0xdf000000);
+
+  static const Color _orange50 = Color(0xFFFFF0B2);
+  static const Color _orange100 = Color(0xFFFFE0B2);
+  static const Color _orange200 = Color(0xFFFFCC80);
 }

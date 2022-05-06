@@ -20,6 +20,6 @@ class I18n {
   String get quizTrueFalse => "◯×クイズで挑戦する";
   String get quizFillBlank => "穴埋めクイズで挑戦する";
 
-  ///BottomNavigationBar
-
+  ///Button
+  String get buttonConfirm => "確認する";
 }
