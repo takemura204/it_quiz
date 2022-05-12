@@ -12,7 +12,7 @@ class HomeStudyScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GroupedListView<QuizItem, String>(
-        elements: quizItems,
+        elements: quizItems!,
         groupBy: (QuizItem item) => item.group,
         groupComparator: (value1, value2) =>
             value2.compareTo(value1), //グループのカスタムソートを定義

@@ -7,8 +7,11 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isAns = ref.watch(quizOneQuestionScreenControllerProvider).isAnsView;
+
     return Column(
       children: [
+        ///問題形式
         Container(
           height: context.height * 0.05,
           color: context.colors.main10,
@@ -35,24 +38,31 @@ class _Body extends ConsumerWidget {
             alignment: Alignment.center,
             child: Column(
               children: [
-                ///問題文
                 Container(
                   height: context.height * 0.45,
                   alignment: Alignment.center,
                   child: Column(
                     children: [
                       const Spacer(),
+
+                      ///問題文
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: AutoSizeText(
-                          oneQuestions[2].question,
+                          isAns
+                              ? arguments.item.oneQuestions[0].question
+                              : arguments.item.oneQuestions[0].question
+                                  .replaceAll(
+                                      arguments.item.oneQuestions[0].ans,
+                                      I18n().hideText(
+                                          arguments.item.oneQuestions[0].ans)),
                           style: context.texts.bodyText1,
                           minFontSize: 20,
                         ),
                       ),
                       const Spacer(),
 
-                      ///問題数と進行度
+                      ///問題数と進行数
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
@@ -63,9 +73,9 @@ class _Body extends ConsumerWidget {
                               style: context.texts.subtitle1,
                               minFontSize: 20,
                             ),
-                            Text("/"),
+                            const Text("/"),
                             AutoSizeText(
-                              oneQuestions.length.toString(),
+                              oneQuestions1.length.toString(),
                               style: context.texts.bodyText1,
                               minFontSize: 16,
                             ),
@@ -79,22 +89,74 @@ class _Body extends ConsumerWidget {
                 Divider(height: 1, color: context.colors.dark54),
 
                 ///確認ボタン
-                GestureDetector(
-                  onTap: () {
-                    print("a");
-                  },
-                  child: Container(
-                    width: context.height * 0.85,
-                    height: context.height * 0.1,
-                    color: context.colors.orange100.withOpacity(0.2),
-                    alignment: Alignment.center,
-                    child: AutoSizeText(
-                      I18n().buttonConfirm,
-                      style: context.texts.subtitle1,
-                      minFontSize: 16,
+                if (isAns)
+                  Row(
+                    ///知らない
+                    children: [
+                      GestureDetector(
+                        onTap: () => ref
+                            .read(quizOneQuestionScreenControllerProvider
+                                .notifier)
+                            .tapUnkowButton(),
+                        child: Container(
+                          width: context.width * 0.42,
+                          height: context.height * 0.1,
+                          color: context.colors.orange100.withOpacity(0.2),
+                          alignment: Alignment.center,
+                          child: AutoSizeText(
+                            I18n().buttonUnKnow,
+                            style: context.texts.bodyText1
+                                ?.copyWith(color: Colors.redAccent.shade100),
+                            minFontSize: 18,
+                          ),
+                        ),
+                      ),
+
+                      ///境界線
+                      Container(
+                        height: context.height * 0.1,
+                        width: context.height * 0.002,
+                        color: context.colors.dark12,
+                      ),
+
+                      ///知っている
+                      GestureDetector(
+                        onTap: () => ref
+                            .read(quizOneQuestionScreenControllerProvider
+                                .notifier)
+                            .tapKnowButton(),
+                        child: Container(
+                          width: context.width * 0.42,
+                          height: context.height * 0.1,
+                          color: context.colors.orange100.withOpacity(0.2),
+                          alignment: Alignment.center,
+                          child: AutoSizeText(
+                            I18n().buttonKnow,
+                            style: context.texts.bodyText1
+                                ?.copyWith(color: Colors.green.shade400),
+                            minFontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  GestureDetector(
+                    onTap: () => ref
+                        .read(quizOneQuestionScreenControllerProvider.notifier)
+                        .tapConfirmButton(),
+                    child: Container(
+                      width: context.height * 0.85,
+                      height: context.height * 0.1,
+                      color: context.colors.orange100.withOpacity(0.2),
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        I18n().buttonConfirm,
+                        style: context.texts.subtitle1,
+                        minFontSize: 16,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

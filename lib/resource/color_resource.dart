@@ -25,6 +25,10 @@ extension ColorSchemeEx on ColorScheme {
   Color get orange50 => DefaultColorScheme(brightness).orange50;
   Color get orange100 => DefaultColorScheme(brightness).orange100;
   Color get orange200 => DefaultColorScheme(brightness).orange200;
+  Color get greenAccent100 => DefaultColorScheme(brightness).greenAccent100;
+  Color get greenAccent200 => DefaultColorScheme(brightness).greenAccent200;
+  Color get greenAccent400 => DefaultColorScheme(brightness).greenAccent400;
+  Color get greenAccent700 => DefaultColorScheme(brightness).greenAccent700;
 }
 
 class DefaultColorScheme {
@@ -50,6 +54,10 @@ class DefaultColorScheme {
   final Color orange50;
   final Color orange100;
   final Color orange200;
+  final Color greenAccent100;
+  final Color greenAccent200;
+  final Color greenAccent400;
+  final Color greenAccent700;
 
   Color get onMain50 => _light100;
   Color get onMain10 => dark54;
@@ -72,6 +80,10 @@ class DefaultColorScheme {
     required this.orange50,
     required this.orange100,
     required this.orange200,
+    required this.greenAccent100,
+    required this.greenAccent200,
+    required this.greenAccent400,
+    required this.greenAccent700,
     this.twitter = const Color(0xff1da1f3),
     this.instagram = const Color(0xffD93177),
     this.youtube = const Color(0xfffe0400),
@@ -111,6 +123,10 @@ class DefaultColorScheme {
           orange50: _orange50,
           orange100: _orange100,
           orange200: _orange200,
+          greenAccent100: _greenAccent100,
+          greenAccent200: _greenAccent200,
+          greenAccent400: _greenAccent400,
+          greenAccent700: _greenAccent700,
         );
 
   const DefaultColorScheme.light()
@@ -132,6 +148,10 @@ class DefaultColorScheme {
           orange50: _orange50,
           orange100: _orange100,
           orange200: _orange200,
+          greenAccent100: _greenAccent100,
+          greenAccent200: _greenAccent200,
+          greenAccent400: _greenAccent400,
+          greenAccent700: _greenAccent700,
         );
 
   static const Color _main50 = Color(0xffcd001a);
@@ -158,4 +178,9 @@ class DefaultColorScheme {
   static const Color _orange50 = Color(0xFFFFF0B2);
   static const Color _orange100 = Color(0xFFFFE0B2);
   static const Color _orange200 = Color(0xFFFFCC80);
+
+  static const Color _greenAccent100 = Color(0xFFB9F6CA);
+  static const Color _greenAccent200 = Color(0xFF69F0AE);
+  static const Color _greenAccent400 = Color(0xFF00E676);
+  static const Color _greenAccent700 = Color(0xFF00C853);
 }
