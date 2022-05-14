@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_remember/quiz_remember_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -13,6 +14,14 @@ class QuizRememberScreenController
       : super(const QuizRememberScreenState());
 
   final Ref ref;
+
+  final db = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    // db.collection(collectionPath)
+    super.initState();
+  }
 
   @override
   void dispose() {

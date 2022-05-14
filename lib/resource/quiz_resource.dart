@@ -34,7 +34,7 @@ final List<RememberQuiz> rememberQuiz2 = [
       questionId: 2, question: '更新世 氷河時代 とも呼ばれる', ans: '氷河時代', isKnow: false),
   const RememberQuiz(
       questionId: 3,
-      question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
+      question: '猫の目には、タンペムという反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる。\n',
       ans: 'タンペム',
       isKnow: false),
 ];

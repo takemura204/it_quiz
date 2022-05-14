@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "974493237650",
+    "project_id": "kentei-quiz",
+    "storage_bucket": "kentei-quiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974493237650:android:c1561573210af4ca1c014b",
+        "android_client_info": {
+          "package_name": "com.example.kentei_quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974493237650-dpa9tqmhvgb36m4k2bcm58ok0b75frjq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBchrzKnJCANHhbjBRQIbImL1p0WXSNW8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974493237650-dpa9tqmhvgb36m4k2bcm58ok0b75frjq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974493237650-6preondqr1cbmtuns0nu9t8umvvugmke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kenteiQuiz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
