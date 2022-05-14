@@ -1,9 +1,9 @@
-part of 'quiz_one_question_screen.dart';
+part of 'quiz_remember_screen.dart';
 
 class _Body extends ConsumerWidget {
   const _Body(this.arguments);
 
-  final QuizOneQuestionScreenArguments arguments;
+  final QuizRememberScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -75,7 +75,7 @@ class _Body extends ConsumerWidget {
                             ),
                             const Text("/"),
                             AutoSizeText(
-                              oneQuestions1.length.toString(),
+                              rememberQuiz1.length.toString(),
                               style: context.texts.bodyText1,
                               minFontSize: 16,
                             ),

@@ -8,12 +8,12 @@ import 'package:kentei_quiz/resource/initial_resource.dart';
 import 'package:kentei_quiz/resource/quiz_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
-part 'quiz_one_question_appbar.dart';
-part 'quiz_one_question_body.dart';
+part 'quiz_remember_appbar.dart';
+part 'quiz_remember_body.dart';
 
-class QuizOneQuestionScreen extends StatelessWidget {
-  const QuizOneQuestionScreen(this.arguments);
-  final QuizOneQuestionScreenArguments arguments;
+class QuizRememberScreen extends StatelessWidget {
+  const QuizRememberScreen(this.arguments);
+  final QuizRememberScreenArguments arguments;
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,9 @@
-part of 'quiz_one_question_screen.dart';
+part of 'quiz_remember_screen.dart';
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.arguments);
 
-  final QuizOneQuestionScreenArguments arguments;
+  final QuizRememberScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

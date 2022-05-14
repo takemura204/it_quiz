@@ -4,7 +4,7 @@ class QuizItem {
   final String group; //問題のジャンル別に分ける
   final String title; //問題タイトル
 
-  final List<OneQuestion> oneQuestions; //一問一答形式
+  final List<RememberQuiz> oneQuestions; //一問一答形式
 
   const QuizItem({
     required this.id,
@@ -15,13 +15,13 @@ class QuizItem {
 }
 
 ///一問一答形式
-class OneQuestion {
+class RememberQuiz {
   final int questionId; //問題番号
   final String question; //問題文
   final String ans; //答え
   final bool isKnow; //問題を知っているか？
 
-  const OneQuestion({
+  const RememberQuiz({
     required this.question,
     required this.ans,
     required this.questionId,
