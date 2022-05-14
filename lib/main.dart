@@ -6,5 +6,7 @@ Future main() async {
   // Firebase初期化
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  //アプリ実行
   runApp(const QuizApp());
 }

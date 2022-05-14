@@ -7,7 +7,7 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizOneQuestionScreenControllerProvider).isAnsView;
+    final isAns = ref.watch(quizRememberScreenControllerProvider).isAnsView;
 
     return Column(
       children: [
@@ -95,8 +95,7 @@ class _Body extends ConsumerWidget {
                     children: [
                       GestureDetector(
                         onTap: () => ref
-                            .read(quizOneQuestionScreenControllerProvider
-                                .notifier)
+                            .read(quizRememberScreenControllerProvider.notifier)
                             .tapUnkowButton(),
                         child: Container(
                           width: context.width * 0.42,
@@ -122,8 +121,7 @@ class _Body extends ConsumerWidget {
                       ///知っている
                       GestureDetector(
                         onTap: () => ref
-                            .read(quizOneQuestionScreenControllerProvider
-                                .notifier)
+                            .read(quizRememberScreenControllerProvider.notifier)
                             .tapKnowButton(),
                         child: Container(
                           width: context.width * 0.42,
@@ -143,7 +141,7 @@ class _Body extends ConsumerWidget {
                 else
                   GestureDetector(
                     onTap: () => ref
-                        .read(quizOneQuestionScreenControllerProvider.notifier)
+                        .read(quizRememberScreenControllerProvider.notifier)
                         .tapConfirmButton(),
                     child: Container(
                       width: context.height * 0.85,

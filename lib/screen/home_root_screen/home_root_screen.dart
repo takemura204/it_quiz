@@ -21,11 +21,7 @@ class HomeRootScreen extends StatelessWidget {
     return const Scaffold(
       appBar: _AppBar(),
       body: _Body(),
-      // drawer: Drawer(
-      //   child: MediaMenu(),
-      // ),
       bottomNavigationBar: _BottomNavBar(),
-      // floatingActionButton: _FloatingButton(),
     );
   }
 }

@@ -1,16 +1,16 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/quiz_one_question/quiz_one_question_screen_state.dart';
+import 'package:kentei_quiz/controller/quiz_remember/quiz_remember_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final quizOneQuestionScreenControllerProvider = StateNotifierProvider<
-    QuizOneQuestionScreenController, QuizOneQuestionScreenState>(
-  (ref) => QuizOneQuestionScreenController(ref: ref),
+final quizRememberScreenControllerProvider = StateNotifierProvider<
+    QuizRememberScreenController, QuizRememberScreenState>(
+  (ref) => QuizRememberScreenController(ref: ref),
 );
 
-class QuizOneQuestionScreenController
-    extends StateNotifier<QuizOneQuestionScreenState> with LocatorMixin {
-  QuizOneQuestionScreenController({required this.ref})
-      : super(const QuizOneQuestionScreenState());
+class QuizRememberScreenController
+    extends StateNotifier<QuizRememberScreenState> with LocatorMixin {
+  QuizRememberScreenController({required this.ref})
+      : super(const QuizRememberScreenState());
 
   final Ref ref;
 
