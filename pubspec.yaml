@@ -18,11 +18,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #  他言語対応したい
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  localization: ^2.1.0
 
   cupertino_icons: ^1.0.2
 
   # よりよいproviderを使いたい
   hooks_riverpod: ^1.0.3
+  provider: ^6.0.2
 
   # StateNotifierを使って状態管理したい
   state_notifier: ^0.7.2+1
@@ -37,11 +43,33 @@ dependencies:
   # アプリのローカルストレージに値を保存したい
   shared_preferences: ^2.0.13
 
-
   #様々なデバイス上でのレイアウトを確認したい
   device_preview: ^1.0.0
   device_preview_screenshot: ^1.0.0
 
+  #  Listをグループ化したい
+  grouped_list: ^4.2.0
+
+  # Row or Column の中に楽にスペースを挿入したい
+  gap: ^2.0.0
+
+  #firebase関連を導入したい
+  firebase_core: ^1.16.0
+  firebase_auth: ^3.3.17
+  cloud_firestore: ^3.1.14
+  cloud_functions: ^3.2.14
+  firebase_messaging: ^11.3.0
+  firebase_storage: ^10.2.15
+  firebase_crashlytics: ^2.7.2
+  firebase_analytics: ^9.1.7
+  firebase_dynamic_links: ^4.2.2
+  firebase_in_app_messaging: ^0.6.0+13
+  firebase_performance: ^0.8.0+11
+  firebase_database: ^9.0.13
+  firebase_remote_config: ^2.0.6
+
+  #キーワードと一致する文字列をハイライトしたい。
+  substring_highlight: ^1.0.33
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +84,6 @@ dev_dependencies:
   freezed: ^1.1.1
 
 flutter:
-
-
   uses-material-design: true
-
+  #  自動姿勢フラグの有効
+  generate: true
