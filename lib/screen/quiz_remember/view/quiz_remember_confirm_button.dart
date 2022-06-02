@@ -16,11 +16,11 @@ class _ConfirmButton extends ConsumerWidget {
               GestureDetector(
                 onTap: () => ref
                     .read(quizRememberScreenControllerProvider.notifier)
-                    .tapUnkowButton(),
+                    .tapUnKnownButton(arguments),
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: context.colors.orange100.withOpacity(0.2),
+                  color: context.colors.orange100.withOpacity(0.1),
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     I18n().buttonUnKnow,
@@ -42,11 +42,11 @@ class _ConfirmButton extends ConsumerWidget {
               GestureDetector(
                 onTap: () => ref
                     .read(quizRememberScreenControllerProvider.notifier)
-                    .tapKnowButton(),
+                    .tapKnownButton(arguments),
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: context.colors.orange100.withOpacity(0.2),
+                  color: context.colors.orange100.withOpacity(0.1),
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     I18n().buttonKnow,
@@ -65,7 +65,7 @@ class _ConfirmButton extends ConsumerWidget {
             child: Container(
               width: context.height * 0.85,
               height: context.height * 0.1,
-              color: context.colors.orange100.withOpacity(0.2),
+              color: context.colors.orange100.withOpacity(0.1),
               alignment: Alignment.center,
               child: AutoSizeText(
                 I18n().buttonConfirm,

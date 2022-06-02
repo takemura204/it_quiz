@@ -9,12 +9,26 @@ class _Question extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isAns = ref.watch(quizRememberScreenControllerProvider).isAnsView;
 
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      transitionBuilder: (Widget child, Animation<double> animation) {
-        return FadeTransition(child: child, opacity: animation); //スケールアニメーション
-      },
-      child: isAns ? _AnsQuestion(arguments) : _ConfirmQuestion(arguments),
+    return Container(
+      height: context.height * 0.35,
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: [
+          const Spacer(),
+          AnimatedSwitcher(
+            /// アニメーションがおかしい
+            duration: const Duration(milliseconds: 0),
+
+            // reverseDuration: const Duration(milliseconds: 100),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return FadeTransition(child: child, opacity: animation);
+            },
+            child:
+                isAns ? _ConfirmQuestion(arguments) : _AnsQuestion(arguments),
+          ),
+          const Spacer(),
+        ],
+      ),
     );
   }
 }
@@ -25,28 +39,20 @@ class _ConfirmQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: context.height * 0.35,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: [
-          const Spacer(),
-          SubstringHighlight(
-            text: arguments.item.oneQuestions[2].question,
-            term: arguments.item.oneQuestions[2].ans,
-            textStyle: TextStyle(
-              color: context.colors.dark54,
-              fontWeight: FontWeight.w500,
-              fontSize: 21,
-            ),
-            textStyleHighlight: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: context.colors.main50.withOpacity(0.5),
-              decoration: TextDecoration.underline,
-            ),
-          ),
-          const Spacer(),
-        ],
+    final quizIndex = ref.watch(quizRememberScreenControllerProvider).quizIndex;
+
+    return SubstringHighlight(
+      text: arguments.item.rememberQuestions[quizIndex].question,
+      term: arguments.item.rememberQuestions[quizIndex].ans,
+      textStyle: TextStyle(
+        color: context.colors.dark54,
+        fontWeight: FontWeight.w500,
+        fontSize: 21,
+      ),
+      textStyleHighlight: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: context.colors.main50.withOpacity(0.5),
+        decoration: TextDecoration.underline,
       ),
     );
   }
@@ -58,30 +64,22 @@ class _AnsQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: context.height * 0.35,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: [
-          const Spacer(),
-          SubstringHighlight(
-            text: arguments.item.oneQuestions[2].question.replaceAll(
-                arguments.item.oneQuestions[2].ans,
-                I18n().hideText(arguments.item.oneQuestions[2].ans)),
-            term: arguments.item.oneQuestions[2].ans,
-            textStyle: TextStyle(
-              color: context.colors.dark54,
-              fontWeight: FontWeight.w500,
-              fontSize: 21,
-            ),
-            textStyleHighlight: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: context.colors.main50.withOpacity(0.5),
-              decoration: TextDecoration.underline,
-            ),
-          ),
-          const Spacer(),
-        ],
+    final quizIndex = ref.watch(quizRememberScreenControllerProvider).quizIndex;
+
+    return SubstringHighlight(
+      text: arguments.item.rememberQuestions[quizIndex].question.replaceAll(
+          arguments.item.rememberQuestions[quizIndex].ans,
+          I18n().hideText(arguments.item.rememberQuestions[quizIndex].ans)),
+      term: arguments.item.rememberQuestions[quizIndex].ans,
+      textStyle: TextStyle(
+        color: context.colors.dark54,
+        fontWeight: FontWeight.w500,
+        fontSize: 21,
+      ),
+      textStyleHighlight: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: context.colors.main50.withOpacity(0.5),
+        decoration: TextDecoration.underline,
       ),
     );
   }

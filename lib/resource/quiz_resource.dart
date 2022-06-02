@@ -2,16 +2,76 @@ import '../entity/quiz_item/quiz_item.dart';
 
 ///問題ジャンル
 List<QuizItem>? quizItems = [
-  QuizItem(id: 1, group: "TeamA", title: "問題A-1", oneQuestions: rememberQuiz1),
-  QuizItem(id: 2, group: "TeamA", title: "問題A-2", oneQuestions: rememberQuiz2),
-  QuizItem(id: 3, group: "TeamB", title: "問題B-1", oneQuestions: rememberQuiz3),
-  QuizItem(id: 4, group: "TeamB", title: "問題B-2", oneQuestions: rememberQuiz1),
-  QuizItem(id: 5, group: "TeamC", title: "問題C-1", oneQuestions: rememberQuiz1),
-  QuizItem(id: 6, group: "TeamC", title: "問題C-2", oneQuestions: rememberQuiz1),
-  QuizItem(id: 7, group: "TeamA", title: "問題A-3", oneQuestions: rememberQuiz1),
-  QuizItem(id: 8, group: "TeamB", title: "問題B-3", oneQuestions: rememberQuiz1),
-  QuizItem(id: 9, group: "TeamC", title: "問題C-3", oneQuestions: rememberQuiz1),
-  QuizItem(id: 10, group: "TeamD", title: "問題D-1", oneQuestions: rememberQuiz1),
+  QuizItem(
+      id: 1,
+      group: "TeamA",
+      title: "問題A-1",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 2,
+      group: "TeamA",
+      title: "問題A-2",
+      rememberQuestions: rememberQuiz2,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 3,
+      group: "TeamB",
+      title: "問題B-1",
+      rememberQuestions: rememberQuiz3,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 4,
+      group: "TeamB",
+      title: "問題B-2",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 5,
+      group: "TeamC",
+      title: "問題C-1",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 6,
+      group: "TeamC",
+      title: "問題C-2",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 7,
+      group: "TeamA",
+      title: "問題A-3",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 8,
+      group: "TeamB",
+      title: "問題B-3",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 9,
+      group: "TeamC",
+      title: "問題C-3",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
+  QuizItem(
+      id: 10,
+      group: "TeamD",
+      title: "問題D-1",
+      rememberQuestions: rememberQuiz1,
+      knowRememberQuestions: [],
+      unKnowRememberQuestions: []),
 ];
 
 ///問題形式　<一問一答>

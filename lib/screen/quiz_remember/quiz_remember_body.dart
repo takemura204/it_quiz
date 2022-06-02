@@ -7,25 +7,31 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizRememberScreenControllerProvider).isAnsView;
+    final quizIndex =
+        ref.watch(quizRememberScreenControllerProvider).quizIndex + 1;
+    final lapIndex = ref.watch(quizRememberScreenControllerProvider).lapIndex;
 
     return Column(
       children: [
         ///問題形式表示
-        Container(
-          height: context.height * 0.05,
-          color: context.colors.main10,
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  arguments.quizStyle,
-                  style: context.texts.subtitle1,
+        Card(
+          elevation: 1,
+          margin: const EdgeInsets.all(0),
+          child: Container(
+            height: context.height * 0.05,
+            color: context.colors.main10,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    arguments.quizStyle,
+                    style: context.texts.subtitle1,
+                  ),
                 ),
-              ),
-              const Spacer(),
-            ],
+                const Spacer(),
+              ],
+            ),
           ),
         ),
         const Spacer(),
@@ -55,7 +61,7 @@ class _Body extends ConsumerWidget {
                           children: [
                             const Spacer(),
                             AutoSizeText(
-                              "0",
+                              quizIndex.toString(),
                               style: context.texts.subtitle1,
                               minFontSize: 20,
                             ),
@@ -83,22 +89,79 @@ class _Body extends ConsumerWidget {
         const Spacer(),
 
         ///知っている、知らないの問題判別
-        Container(
-          height: context.height * 0.07,
-          alignment: Alignment.center,
-          color: context.colors.main10,
-          child: Row(
-            children: const [
-              Text("何周目"),
-              VerticalDivider(),
-              Spacer(),
-              Text("知っている"),
-              Spacer(),
-              VerticalDivider(),
-              Spacer(),
-              Text("知らない"),
-              Spacer(),
-            ],
+        Card(
+          elevation: 3,
+          margin: const EdgeInsets.all(0),
+          child: Container(
+            height: context.height * 0.06,
+            alignment: Alignment.center,
+            color: Colors.white70,
+            child: Row(
+              children: [
+                const Divider(),
+                Container(
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 12, 4, 12),
+                        child: AutoSizeText(
+                          lapIndex.toString(),
+                          style: context.texts.subtitle1,
+                          minFontSize: 20,
+                        ),
+                      ),
+                      const Text("周目"),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: const [
+                    VerticalDivider(),
+                  ],
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    const Text("知っている"),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 12, 4, 12),
+                      child: AutoSizeText(
+                        ref
+                            .watch(quizRememberScreenControllerProvider)
+                            .knowRememberQuestions
+                            .length
+                            .toString(),
+                        style: context.texts.bodyText1
+                            ?.copyWith(color: Colors.green.shade400),
+                        minFontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                const VerticalDivider(),
+                const Spacer(),
+                Row(
+                  children: [
+                    const Text("知らない"),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(4, 12, 4, 12),
+                      child: AutoSizeText(
+                        ref
+                            .watch(quizRememberScreenControllerProvider)
+                            .unKnowRememberQuestions
+                            .length
+                            .toString(),
+                        style: context.texts.bodyText1
+                            ?.copyWith(color: Colors.redAccent.shade100),
+                        minFontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+              ],
+            ),
           ),
         ),
       ],

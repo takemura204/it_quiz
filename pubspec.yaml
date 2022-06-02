@@ -71,9 +71,6 @@ dependencies:
   #キーワードと一致する文字列をハイライトしたい。
   substring_highlight: ^1.0.33
 
-  #テキストをアニメーションで表示したい。
-  animated_text_kit: ^4.2.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

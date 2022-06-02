@@ -18,9 +18,18 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$QuizRememberScreenStateTearOff {
   const _$QuizRememberScreenStateTearOff();
 
-  _Create call({bool isAnsView = false}) {
+  _Create call(
+      {bool isAnsView = false,
+      int quizIndex = 0,
+      int lapIndex = 0,
+      List<RememberQuiz> knowRememberQuestions = const [],
+      List<RememberQuiz> unKnowRememberQuestions = const []}) {
     return _Create(
       isAnsView: isAnsView,
+      quizIndex: quizIndex,
+      lapIndex: lapIndex,
+      knowRememberQuestions: knowRememberQuestions,
+      unKnowRememberQuestions: unKnowRememberQuestions,
     );
   }
 }
@@ -31,6 +40,12 @@ const $QuizRememberScreenState = _$QuizRememberScreenStateTearOff();
 /// @nodoc
 mixin _$QuizRememberScreenState {
   bool get isAnsView => throw _privateConstructorUsedError;
+  int get quizIndex => throw _privateConstructorUsedError; //問題番号
+  int get lapIndex => throw _privateConstructorUsedError; //何周目
+  List<RememberQuiz> get knowRememberQuestions =>
+      throw _privateConstructorUsedError;
+  List<RememberQuiz> get unKnowRememberQuestions =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizRememberScreenStateCopyWith<QuizRememberScreenState> get copyWith =>
@@ -42,7 +57,12 @@ abstract class $QuizRememberScreenStateCopyWith<$Res> {
   factory $QuizRememberScreenStateCopyWith(QuizRememberScreenState value,
           $Res Function(QuizRememberScreenState) then) =
       _$QuizRememberScreenStateCopyWithImpl<$Res>;
-  $Res call({bool isAnsView});
+  $Res call(
+      {bool isAnsView,
+      int quizIndex,
+      int lapIndex,
+      List<RememberQuiz> knowRememberQuestions,
+      List<RememberQuiz> unKnowRememberQuestions});
 }
 
 /// @nodoc
@@ -57,12 +77,32 @@ class _$QuizRememberScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isAnsView = freezed,
+    Object? quizIndex = freezed,
+    Object? lapIndex = freezed,
+    Object? knowRememberQuestions = freezed,
+    Object? unKnowRememberQuestions = freezed,
   }) {
     return _then(_value.copyWith(
       isAnsView: isAnsView == freezed
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
               as bool,
+      quizIndex: quizIndex == freezed
+          ? _value.quizIndex
+          : quizIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      lapIndex: lapIndex == freezed
+          ? _value.lapIndex
+          : lapIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      knowRememberQuestions: knowRememberQuestions == freezed
+          ? _value.knowRememberQuestions
+          : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
+              as List<RememberQuiz>,
+      unKnowRememberQuestions: unKnowRememberQuestions == freezed
+          ? _value.unKnowRememberQuestions
+          : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
+              as List<RememberQuiz>,
     ));
   }
 }
@@ -73,7 +113,12 @@ abstract class _$CreateCopyWith<$Res>
   factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
       __$CreateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isAnsView});
+  $Res call(
+      {bool isAnsView,
+      int quizIndex,
+      int lapIndex,
+      List<RememberQuiz> knowRememberQuestions,
+      List<RememberQuiz> unKnowRememberQuestions});
 }
 
 /// @nodoc
@@ -89,12 +134,32 @@ class __$CreateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isAnsView = freezed,
+    Object? quizIndex = freezed,
+    Object? lapIndex = freezed,
+    Object? knowRememberQuestions = freezed,
+    Object? unKnowRememberQuestions = freezed,
   }) {
     return _then(_Create(
       isAnsView: isAnsView == freezed
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
               as bool,
+      quizIndex: quizIndex == freezed
+          ? _value.quizIndex
+          : quizIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      lapIndex: lapIndex == freezed
+          ? _value.lapIndex
+          : lapIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      knowRememberQuestions: knowRememberQuestions == freezed
+          ? _value.knowRememberQuestions
+          : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
+              as List<RememberQuiz>,
+      unKnowRememberQuestions: unKnowRememberQuestions == freezed
+          ? _value.unKnowRememberQuestions
+          : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
+              as List<RememberQuiz>,
     ));
   }
 }
@@ -102,15 +167,32 @@ class __$CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create implements _Create {
-  const _$_Create({this.isAnsView = false});
+  const _$_Create(
+      {this.isAnsView = false,
+      this.quizIndex = 0,
+      this.lapIndex = 0,
+      this.knowRememberQuestions = const [],
+      this.unKnowRememberQuestions = const []});
 
   @JsonKey()
   @override
   final bool isAnsView;
+  @JsonKey()
+  @override
+  final int quizIndex;
+  @JsonKey()
+  @override //問題番号
+  final int lapIndex;
+  @JsonKey()
+  @override //何周目
+  final List<RememberQuiz> knowRememberQuestions;
+  @JsonKey()
+  @override
+  final List<RememberQuiz> unKnowRememberQuestions;
 
   @override
   String toString() {
-    return 'QuizRememberScreenState(isAnsView: $isAnsView)';
+    return 'QuizRememberScreenState(isAnsView: $isAnsView, quizIndex: $quizIndex, lapIndex: $lapIndex, knowRememberQuestions: $knowRememberQuestions, unKnowRememberQuestions: $unKnowRememberQuestions)';
   }
 
   @override
@@ -118,12 +200,23 @@ class _$_Create implements _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Create &&
-            const DeepCollectionEquality().equals(other.isAnsView, isAnsView));
+            const DeepCollectionEquality().equals(other.isAnsView, isAnsView) &&
+            const DeepCollectionEquality().equals(other.quizIndex, quizIndex) &&
+            const DeepCollectionEquality().equals(other.lapIndex, lapIndex) &&
+            const DeepCollectionEquality()
+                .equals(other.knowRememberQuestions, knowRememberQuestions) &&
+            const DeepCollectionEquality().equals(
+                other.unKnowRememberQuestions, unKnowRememberQuestions));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(isAnsView));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isAnsView),
+      const DeepCollectionEquality().hash(quizIndex),
+      const DeepCollectionEquality().hash(lapIndex),
+      const DeepCollectionEquality().hash(knowRememberQuestions),
+      const DeepCollectionEquality().hash(unKnowRememberQuestions));
 
   @JsonKey(ignore: true)
   @override
@@ -132,10 +225,23 @@ class _$_Create implements _Create {
 }
 
 abstract class _Create implements QuizRememberScreenState {
-  const factory _Create({bool isAnsView}) = _$_Create;
+  const factory _Create(
+      {bool isAnsView,
+      int quizIndex,
+      int lapIndex,
+      List<RememberQuiz> knowRememberQuestions,
+      List<RememberQuiz> unKnowRememberQuestions}) = _$_Create;
 
   @override
   bool get isAnsView;
+  @override
+  int get quizIndex;
+  @override //問題番号
+  int get lapIndex;
+  @override //何周目
+  List<RememberQuiz> get knowRememberQuestions;
+  @override
+  List<RememberQuiz> get unKnowRememberQuestions;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

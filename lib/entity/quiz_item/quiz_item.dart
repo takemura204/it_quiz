@@ -4,13 +4,18 @@ class QuizItem {
   final String group; //問題のジャンル別に分ける
   final String title; //問題タイトル
 
-  final List<RememberQuiz> oneQuestions; //一問一答形式
+  ///一問一答問題
+  final List<RememberQuiz> rememberQuestions; //一問一答形式
+  final List<RememberQuiz> knowRememberQuestions; //知っている問題
+  final List<RememberQuiz> unKnowRememberQuestions; //知らない問題
 
   const QuizItem({
     required this.id,
     required this.group,
     required this.title,
-    required this.oneQuestions,
+    required this.rememberQuestions,
+    required this.knowRememberQuestions,
+    required this.unKnowRememberQuestions,
   });
 }
 
