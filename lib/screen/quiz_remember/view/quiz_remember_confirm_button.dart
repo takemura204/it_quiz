@@ -1,7 +1,7 @@
 part of '../quiz_remember_screen.dart';
 
-class _ConfirmButton extends ConsumerWidget {
-  const _ConfirmButton(this.arguments);
+class _ConfirmButtonView extends ConsumerWidget {
+  const _ConfirmButtonView(this.arguments);
 
   final QuizRememberScreenArguments arguments;
 
@@ -40,9 +40,22 @@ class _ConfirmButton extends ConsumerWidget {
 
               ///知っている
               GestureDetector(
-                onTap: () => ref
-                    .read(quizRememberScreenControllerProvider.notifier)
-                    .tapKnownButton(arguments),
+                onTap: () {
+                  ref
+                      .read(quizRememberScreenControllerProvider.notifier)
+                      .tapKnownButton(arguments);
+                  //「知っている」が全てになった時結果画面に遷移
+                  if (ref
+                          .watch(quizRememberScreenControllerProvider)
+                          .knowRememberQuestions
+                          .length ==
+                      arguments.item.rememberQuestions.length) {
+                    context.showScreen(QuizResultScreenArguments(
+                      item: arguments.item,
+                      quizStyle: I18n().quizOneQuestion,
+                    ).generateRoute());
+                  }
+                },
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,

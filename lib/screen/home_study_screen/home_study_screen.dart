@@ -34,7 +34,7 @@ class HomeStudyScreen extends ConsumerWidget {
           return GestureDetector(
             onTap: () async {
               final selectedText = await showDialog(
-                  context: context, builder: (_) => SelectAnsDialog(item));
+                  context: context, builder: (_) => SelectQuizDialog(item));
               print(selectedText);
             },
             child: Card(

@@ -77,36 +77,38 @@ List<QuizItem>? quizItems = [
 ///問題形式　<一問一答>
 final List<RememberQuiz> rememberQuiz1 = [
   const RememberQuiz(
-      questionId: 1, question: '1 + 1 = 2', ans: '2', isKnow: false),
+      questionId: 1, question: '1 + 1 = 2', ans: '2', isWeak: false),
   const RememberQuiz(
-      questionId: 2, question: '更新世 氷河時代 とも呼ばれる', ans: '氷河時代', isKnow: false),
+      questionId: 2, question: '更新世 氷河時代 とも呼ばれる', ans: '氷河時代', isWeak: false),
   const RememberQuiz(
       questionId: 3,
       question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
       ans: 'タンペム',
-      isKnow: false),
+      isWeak: false),
 ];
 
 final List<RememberQuiz> rememberQuiz2 = [
   const RememberQuiz(
-      questionId: 1, question: '2 + 2 = 4', ans: '4', isKnow: false),
+      questionId: 1, question: '2 + 2 = 4', ans: '4', isWeak: false),
   const RememberQuiz(
-      questionId: 2, question: '更新世 氷河時代 とも呼ばれる', ans: '氷河時代', isKnow: false),
+      questionId: 2, question: '更新世 氷河時代 とも呼ばれる', ans: '氷河時代', isWeak: false),
   const RememberQuiz(
       questionId: 3,
       question: '猫の目には、タンペムという反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる。\n',
       ans: 'タンペム',
-      isKnow: false),
+      isWeak: false),
+  const RememberQuiz(
+      questionId: 4, question: '今は4問目！\n', ans: '4', isWeak: false),
 ];
 
 final List<RememberQuiz> rememberQuiz3 = [
   const RememberQuiz(
-      questionId: 1, question: '3 + 3 = 6', ans: '6', isKnow: false),
+      questionId: 1, question: '3 + 3 = 6', ans: '6', isWeak: false),
   const RememberQuiz(
-      questionId: 2, question: '更新世 氷河時代 とも呼ばれる', ans: '氷河時代', isKnow: false),
+      questionId: 2, question: '更新世 氷河時代 とも呼ばれる', ans: '氷河時代', isWeak: false),
   const RememberQuiz(
       questionId: 3,
       question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
       ans: 'タンペム',
-      isKnow: false),
+      isWeak: false),
 ];

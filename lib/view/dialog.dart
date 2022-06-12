@@ -8,8 +8,8 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../entity/quiz_item/quiz_item.dart';
 
-class SelectAnsDialog extends ConsumerWidget {
-  const SelectAnsDialog(this.item);
+class SelectQuizDialog extends ConsumerWidget {
+  const SelectQuizDialog(this.item);
 
   final QuizItem item;
 
@@ -20,7 +20,7 @@ class SelectAnsDialog extends ConsumerWidget {
       contentPadding: const EdgeInsets.all(0),
       children: [
         Container(
-          height: context.height * 0.7,
+          height: context.height * 0.75,
           width: context.width * 0.8,
           child: Column(
             children: [
@@ -71,11 +71,21 @@ class SelectAnsDialog extends ConsumerWidget {
                       maxLines: 1,
                     ),
                     const Spacer(),
-                    AutoSizeText(
-                      "0/10",
-                      style: context.texts.titleMedium,
-                      minFontSize: 20,
-                      maxLines: 1,
+                    Row(
+                      children: [
+                        AutoSizeText(
+                          "0/",
+                          style: context.texts.titleMedium,
+                          minFontSize: 20,
+                          maxLines: 1,
+                        ),
+                        AutoSizeText(
+                          item.rememberQuestions.length.toString(),
+                          style: context.texts.titleMedium,
+                          minFontSize: 20,
+                          maxLines: 1,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -83,7 +93,7 @@ class SelectAnsDialog extends ConsumerWidget {
               Divider(height: 1, color: context.colors.dark54),
 
               Container(
-                height: context.height * 0.44,
+                height: context.height * 0.49,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -94,7 +104,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: context.height * 0.08,
+                        height: context.height * 0.085,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -126,7 +136,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: context.height * 0.08,
+                        height: context.height * 0.085,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -154,7 +164,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: context.height * 0.08,
+                        height: context.height * 0.085,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -182,7 +192,7 @@ class SelectAnsDialog extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Container(
-                        height: context.height * 0.08,
+                        height: context.height * 0.085,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(

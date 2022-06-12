@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_remember/quiz_remember_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../entity/quiz_item/quiz_item.dart';
 import '../../screen/screen_argument.dart';
 
 final quizRememberScreenControllerProvider = StateNotifierProvider<
@@ -21,7 +22,6 @@ class QuizRememberScreenController
 
   @override
   void initState() {
-    // db.collection(collectionPath)
     super.initState();
   }
 
@@ -40,6 +40,7 @@ class QuizRememberScreenController
     addKnownQuestion(arguments);
     nextQuiz(arguments);
     switchAnsView();
+    switchKnowState(arguments);
   }
 
   ///知らないボタンを押した時
@@ -47,6 +48,7 @@ class QuizRememberScreenController
     addUnKnownQuestion(arguments);
     nextQuiz(arguments);
     switchAnsView();
+    switchUnKnowState(arguments);
   }
 
   ///クリアボタン
@@ -70,29 +72,42 @@ class QuizRememberScreenController
     final lapIndex = state.lapIndex;
     if (quizIndex == arguments.item.rememberQuestions.length - 1) {
       state = state.copyWith(quizIndex: 0, lapIndex: lapIndex + 1);
+    } else if (state.knowRememberQuestions.length ==
+        arguments.item.rememberQuestions.length) {
+      print("全部解き終わったよ！");
     } else {
       state = state.copyWith(quizIndex: quizIndex + 1);
     }
   }
 
-  ///知っているか、知ってないか分類
-  void classifyQuiz(QuizRememberScreenArguments arguments) {
-    final knowRememberQuestions = [...state.knowRememberQuestions];
-    final unKnowRememberQuestions = [...state.unKnowRememberQuestions];
-    //すでに含まれている場合
-    if (knowRememberQuestions
-            .contains(arguments.item.rememberQuestions[state.quizIndex]) ||
-        unKnowRememberQuestions
-            .contains(arguments.item.rememberQuestions[state.quizIndex])) {
-    } else if (state.knowRememberQuestions
-        .contains(arguments.item.rememberQuestions[state.quizIndex])) {
+  ///知らないボタンを押した時の苦手リストに追加
+  void switchUnKnowState(QuizRememberScreenArguments arguments) {
+    final rememberQuestions = [...arguments.item.rememberQuestions];
+    if (!rememberQuestions[state.quizIndex].isWeak) {
+      rememberQuestions[state.quizIndex] = RememberQuiz(
+        questionId: rememberQuestions[state.quizIndex].questionId,
+        question: rememberQuestions[state.quizIndex].question,
+        ans: rememberQuestions[state.quizIndex].ans,
+        isWeak: true,
+      );
     } else {
-      unKnowRememberQuestions
-          .add(arguments.item.rememberQuestions[state.quizIndex]);
+      return;
     }
-    state = state.copyWith(
-        knowRememberQuestions: knowRememberQuestions,
-        unKnowRememberQuestions: unKnowRememberQuestions);
+  }
+
+  ///知らないボタンを押した時の苦手リストから解除
+  void switchKnowState(QuizRememberScreenArguments arguments) {
+    final rememberQuestions = [...arguments.item.rememberQuestions];
+    if (!rememberQuestions[state.quizIndex].isWeak) {
+      rememberQuestions[state.quizIndex] = RememberQuiz(
+        questionId: rememberQuestions[state.quizIndex].questionId,
+        question: rememberQuestions[state.quizIndex].question,
+        ans: rememberQuestions[state.quizIndex].ans,
+        isWeak: false,
+      );
+    } else {
+      return;
+    }
   }
 
   void addKnownQuestion(QuizRememberScreenArguments arguments) {
@@ -102,7 +117,6 @@ class QuizRememberScreenController
     //すでに知ってるリストに含まれているとき
     if (knowRememberQuestions
         .contains(arguments.item.rememberQuestions[state.quizIndex])) {
-      print("すでに入っているよ");
     }
     //、知らないリストに含まれている場合
     else if (unKnowRememberQuestions
@@ -111,13 +125,11 @@ class QuizRememberScreenController
           .add(arguments.item.rememberQuestions[state.quizIndex]);
       unKnowRememberQuestions
           .remove(arguments.item.rememberQuestions[state.quizIndex]);
-      print("変更したよ");
     }
     //それ以外
     else {
       knowRememberQuestions
           .add(arguments.item.rememberQuestions[state.quizIndex]);
-      print("新しく入れたよ！");
     }
     state = state.copyWith(
       knowRememberQuestions: knowRememberQuestions,
@@ -133,7 +145,6 @@ class QuizRememberScreenController
     //すでに含まれている場合
     if (unKnowRememberQuestions
         .contains(arguments.item.rememberQuestions[state.quizIndex])) {
-      print("すでに入っているよ");
     }
     //知ってるリストに含まれている場合
     else if (knowRememberQuestions
@@ -142,13 +153,11 @@ class QuizRememberScreenController
           .remove(arguments.item.rememberQuestions[state.quizIndex]);
       unKnowRememberQuestions
           .add(arguments.item.rememberQuestions[state.quizIndex]);
-      print("変更したよ！");
     }
     //それ以外
     else {
       unKnowRememberQuestions
           .add(arguments.item.rememberQuestions[state.quizIndex]);
-      print("新しく入れたよ！");
     }
     state = state.copyWith(
       knowRememberQuestions: knowRememberQuestions,

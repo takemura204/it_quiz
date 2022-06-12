@@ -67,7 +67,8 @@ class _Body extends ConsumerWidget {
                             ),
                             const Text("/"),
                             AutoSizeText(
-                              rememberQuiz1.length.toString(),
+                              arguments.item.rememberQuestions.length
+                                  .toString(),
                               style: context.texts.bodyText1,
                               minFontSize: 16,
                             ),
@@ -81,7 +82,7 @@ class _Body extends ConsumerWidget {
                 Divider(height: 1, color: context.colors.dark54),
 
                 ///確認ボタン
-                _ConfirmButton(arguments),
+                _ConfirmButtonView(arguments),
               ],
             ),
           ),

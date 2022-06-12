@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/entity/quiz_item/quiz_item.dart';
 import 'package:kentei_quiz/screen/quiz_remember/quiz_remember_screen.dart';
+import 'package:kentei_quiz/screen/quiz_result/quiz_result_screen.dart';
 
 import '../resource/screen_argument_resource.dart';
 
@@ -29,6 +30,25 @@ class QuizRememberScreenArguments
               secondaryAnimation,
               child);
         },
+      );
+}
+
+///クイズ結果画面
+class QuizResultScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const QuizResultScreenArguments(
+      {required this.item, required this.quizStyle});
+
+  final QuizItem item;
+  final String quizStyle;
+
+  @override
+  String get screenNameFormat => "/quiz_result";
+
+  @override
+  Route generateRoute() => MaterialPageRoute(
+        builder: (_) => QuizResultScreen(this),
       );
 }
 
