@@ -14,16 +14,13 @@ final quizRememberScreenControllerProvider = StateNotifierProvider<
 class QuizRememberScreenController
     extends StateNotifier<QuizRememberScreenState> with LocatorMixin {
   QuizRememberScreenController({required this.ref})
-      : super(const QuizRememberScreenState());
+      : super(const QuizRememberScreenState()) {
+    initState();
+  }
 
   final Ref ref;
 
   final db = FirebaseFirestore.instance;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -70,10 +67,10 @@ class QuizRememberScreenController
   void nextQuiz(QuizRememberScreenArguments arguments) {
     final quizIndex = state.quizIndex;
     final lapIndex = state.lapIndex;
-    if (quizIndex == arguments.item.rememberQuestions.length - 1) {
+    if (quizIndex == arguments.item.rememberQuiz.length - 1) {
       state = state.copyWith(quizIndex: 0, lapIndex: lapIndex + 1);
     } else if (state.knowRememberQuestions.length ==
-        arguments.item.rememberQuestions.length) {
+        arguments.item.rememberQuiz.length) {
       print("全部解き終わったよ！");
     } else {
       state = state.copyWith(quizIndex: quizIndex + 1);
@@ -82,7 +79,7 @@ class QuizRememberScreenController
 
   ///知らないボタンを押した時の苦手リストに追加
   void switchUnKnowState(QuizRememberScreenArguments arguments) {
-    final rememberQuestions = [...arguments.item.rememberQuestions];
+    final rememberQuestions = [...arguments.item.rememberQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
       rememberQuestions[state.quizIndex] = RememberQuiz(
         questionId: rememberQuestions[state.quizIndex].questionId,
@@ -97,7 +94,7 @@ class QuizRememberScreenController
 
   ///知らないボタンを押した時の苦手リストから解除
   void switchKnowState(QuizRememberScreenArguments arguments) {
-    final rememberQuestions = [...arguments.item.rememberQuestions];
+    final rememberQuestions = [...arguments.item.rememberQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
       rememberQuestions[state.quizIndex] = RememberQuiz(
         questionId: rememberQuestions[state.quizIndex].questionId,
@@ -116,20 +113,18 @@ class QuizRememberScreenController
 
     //すでに知ってるリストに含まれているとき
     if (knowRememberQuestions
-        .contains(arguments.item.rememberQuestions[state.quizIndex])) {
+        .contains(arguments.item.rememberQuiz[state.quizIndex])) {
     }
     //、知らないリストに含まれている場合
     else if (unKnowRememberQuestions
-        .contains(arguments.item.rememberQuestions[state.quizIndex])) {
-      knowRememberQuestions
-          .add(arguments.item.rememberQuestions[state.quizIndex]);
+        .contains(arguments.item.rememberQuiz[state.quizIndex])) {
+      knowRememberQuestions.add(arguments.item.rememberQuiz[state.quizIndex]);
       unKnowRememberQuestions
-          .remove(arguments.item.rememberQuestions[state.quizIndex]);
+          .remove(arguments.item.rememberQuiz[state.quizIndex]);
     }
     //それ以外
     else {
-      knowRememberQuestions
-          .add(arguments.item.rememberQuestions[state.quizIndex]);
+      knowRememberQuestions.add(arguments.item.rememberQuiz[state.quizIndex]);
     }
     state = state.copyWith(
       knowRememberQuestions: knowRememberQuestions,
@@ -144,20 +139,18 @@ class QuizRememberScreenController
 
     //すでに含まれている場合
     if (unKnowRememberQuestions
-        .contains(arguments.item.rememberQuestions[state.quizIndex])) {
+        .contains(arguments.item.rememberQuiz[state.quizIndex])) {
     }
     //知ってるリストに含まれている場合
     else if (knowRememberQuestions
-        .contains(arguments.item.rememberQuestions[state.quizIndex])) {
+        .contains(arguments.item.rememberQuiz[state.quizIndex])) {
       knowRememberQuestions
-          .remove(arguments.item.rememberQuestions[state.quizIndex]);
-      unKnowRememberQuestions
-          .add(arguments.item.rememberQuestions[state.quizIndex]);
+          .remove(arguments.item.rememberQuiz[state.quizIndex]);
+      unKnowRememberQuestions.add(arguments.item.rememberQuiz[state.quizIndex]);
     }
     //それ以外
     else {
-      unKnowRememberQuestions
-          .add(arguments.item.rememberQuestions[state.quizIndex]);
+      unKnowRememberQuestions.add(arguments.item.rememberQuiz[state.quizIndex]);
     }
     state = state.copyWith(
       knowRememberQuestions: knowRememberQuestions,

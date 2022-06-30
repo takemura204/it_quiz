@@ -49,10 +49,10 @@ class _ConfirmButtonView extends ConsumerWidget {
                           .watch(quizRememberScreenControllerProvider)
                           .knowRememberQuestions
                           .length ==
-                      arguments.item.rememberQuestions.length) {
+                      arguments.item.rememberQuiz.length) {
                     context.showScreen(QuizResultScreenArguments(
                       item: arguments.item,
-                      quizStyle: I18n().quizOneQuestion,
+                      quizStyle: I18n().studyOneQuestion,
                     ).generateRoute());
                   }
                 },

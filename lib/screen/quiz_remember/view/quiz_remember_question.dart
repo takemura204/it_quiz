@@ -42,8 +42,8 @@ class _ConfirmQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizRememberScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.rememberQuestions[quizIndex].question,
-      term: arguments.item.rememberQuestions[quizIndex].ans,
+      text: arguments.item.rememberQuiz[quizIndex].question,
+      term: arguments.item.rememberQuiz[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -67,10 +67,10 @@ class _AnsQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizRememberScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.rememberQuestions[quizIndex].question.replaceAll(
-          arguments.item.rememberQuestions[quizIndex].ans,
-          I18n().hideText(arguments.item.rememberQuestions[quizIndex].ans)),
-      term: arguments.item.rememberQuestions[quizIndex].ans,
+      text: arguments.item.rememberQuiz[quizIndex].question.replaceAll(
+          arguments.item.rememberQuiz[quizIndex].ans,
+          I18n().hideText(arguments.item.rememberQuiz[quizIndex].ans)),
+      term: arguments.item.rememberQuiz[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,

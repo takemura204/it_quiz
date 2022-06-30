@@ -9,16 +9,19 @@ class I18n {
   String get appName => "Kentei Quiz";
 
   ///title
-  String get titleStudy => "問題";
+  String get titleStudy => "学ぶ";
   String get titleReview => "復習";
   String get titleTest => "テスト";
   String get titleSetting => "設定";
 
-  ///問題形式
-  String get quizOneQuestion => "一問一答で学習する";
-  String get quizFourChoice => "4択クイズで挑戦する";
-  String get quizTrueFalse => "◯×クイズで挑戦する";
-  String get quizFillBlank => "穴埋めクイズで挑戦する";
+  ///「学ぶ」形式
+  String get studyOneQuestion => "一問一答で学習する";
+  String get studyFourChoice => "4択クイズで挑戦する";
+  String get studyTrueFalse => "◯×クイズで挑戦する";
+  String get studyFillBlank => "穴埋めクイズで挑戦する";
+
+  ///「復習形式」
+  String get quizReview => "一問一答復習する";
 
   ///Button
   String get buttonConfirm => "確認する";

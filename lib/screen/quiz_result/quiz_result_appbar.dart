@@ -23,6 +23,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
               //2つ前の画面に戻る
               int count = 0;
               Navigator.popUntil(context, (route) => count++ >= 2);
+
               //問題リセット
               ref
                   .read(quizRememberScreenControllerProvider.notifier)

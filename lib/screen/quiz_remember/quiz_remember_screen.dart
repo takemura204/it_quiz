@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/color_resource.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/initial_resource.dart';
-import 'package:kentei_quiz/resource/quiz_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 

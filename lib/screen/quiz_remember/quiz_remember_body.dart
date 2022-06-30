@@ -67,8 +67,7 @@ class _Body extends ConsumerWidget {
                             ),
                             const Text("/"),
                             AutoSizeText(
-                              arguments.item.rememberQuestions.length
-                                  .toString(),
+                              arguments.item.rememberQuiz.length.toString(),
                               style: context.texts.bodyText1,
                               minFontSize: 16,
                             ),

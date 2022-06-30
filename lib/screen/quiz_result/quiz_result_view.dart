@@ -46,7 +46,7 @@ class _AnsRateView extends ConsumerWidget {
               ),
               const Text("/"),
               AutoSizeText(
-                arguments.item.rememberQuestions.length.toString(),
+                arguments.item.rememberQuiz.length.toString(),
                 style: context.texts.bodyText1,
                 minFontSize: 16,
               ),
@@ -131,8 +131,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                     .watch(quizResultScreenControllerProvider)
                                     .knowRememberQuestions[index]
                                     .question,
-                                term:
-                                    arguments.item.rememberQuestions[index].ans,
+                                term: arguments.item.rememberQuiz[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
                                   fontWeight: FontWeight.w500,
@@ -153,6 +152,13 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                     .read(quizResultScreenControllerProvider
                                         .notifier)
                                     .switchUnKnowCheckBox(arguments, index);
+                                ref
+                                    .read(homeReviewScreenControllerProvider
+                                        .notifier)
+                                    .addRememberQuestions(ref
+                                        .watch(
+                                            quizResultScreenControllerProvider)
+                                        .unKnowRememberQuestions[index]);
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -262,8 +268,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                                     .watch(quizResultScreenControllerProvider)
                                     .knowRememberQuestions[index]
                                     .question,
-                                term:
-                                    arguments.item.rememberQuestions[index].ans,
+                                term: arguments.item.rememberQuiz[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
                                   fontWeight: FontWeight.w500,
@@ -283,7 +288,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                                 ref
                                     .read(quizResultScreenControllerProvider
                                         .notifier)
-                                    .switchKnowCheckBox(arguments, index);
+                                    .switchKnowCheckBox(index);
                               },
                               child: Container(
                                 alignment: Alignment.center,

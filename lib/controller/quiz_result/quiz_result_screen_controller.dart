@@ -6,6 +6,7 @@ import 'package:state_notifier/state_notifier.dart';
 
 import '../../entity/quiz_item/quiz_item.dart';
 import '../../screen/screen_argument.dart';
+import '../home_review/home_review_screen_controller.dart';
 
 final quizResultScreenControllerProvider =
     StateNotifierProvider<QuizResultScreenController, QuizResultScreenState>(
@@ -47,7 +48,7 @@ class QuizResultScreenController extends StateNotifier<QuizResultScreenState>
   }
 
   ///知っている問題のチェックボックス切り替え
-  void switchKnowCheckBox(QuizResultScreenArguments arguments, int index) {
+  void switchKnowCheckBox(int index) {
     final knowRememberQuestions = [...state.knowRememberQuestions];
     if (!knowRememberQuestions[index].isWeak) {
       knowRememberQuestions[index] = RememberQuiz(
@@ -56,6 +57,9 @@ class QuizResultScreenController extends StateNotifier<QuizResultScreenState>
         ans: knowRememberQuestions[index].ans,
         isWeak: true,
       );
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .addRememberQuestions(knowRememberQuestions[index]);
     } else if (knowRememberQuestions[index].isWeak) {
       knowRememberQuestions[index] = RememberQuiz(
         questionId: knowRememberQuestions[index].questionId,
@@ -63,6 +67,9 @@ class QuizResultScreenController extends StateNotifier<QuizResultScreenState>
         ans: knowRememberQuestions[index].ans,
         isWeak: false,
       );
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .removeRememberQuestions(knowRememberQuestions[index]);
     } else {
       return;
     }

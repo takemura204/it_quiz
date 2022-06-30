@@ -80,7 +80,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           maxLines: 1,
                         ),
                         AutoSizeText(
-                          item.rememberQuestions.length.toString(),
+                          item.rememberQuiz.length.toString(),
                           style: context.texts.titleMedium,
                           minFontSize: 20,
                           maxLines: 1,
@@ -114,7 +114,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().quizOneQuestion,
+                          I18n().studyOneQuestion,
                           style: TextStyle(
                             color: context.colors.main50.withOpacity(0.7),
                             fontWeight: FontWeight.bold,
@@ -126,7 +126,7 @@ class SelectQuizDialog extends ConsumerWidget {
                         // Navigator.pop(context, '${I18n().quizOneQuestion}');
                         context.showScreen(QuizRememberScreenArguments(
                           item: item,
-                          quizStyle: I18n().quizOneQuestion,
+                          quizStyle: I18n().studyOneQuestion,
                         ).generateRoute());
                       },
                     ),
@@ -146,7 +146,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().quizFillBlank,
+                          I18n().studyFillBlank,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -155,7 +155,7 @@ class SelectQuizDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().quizFillBlank}');
+                        Navigator.pop(context, '${I18n().studyFillBlank}');
                       },
                     ),
 
@@ -174,7 +174,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().quizFourChoice,
+                          I18n().studyFourChoice,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -183,7 +183,7 @@ class SelectQuizDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().quizFourChoice}');
+                        Navigator.pop(context, '${I18n().studyFourChoice}');
                       },
                     ),
 
@@ -202,7 +202,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().quizTrueFalse,
+                          I18n().studyTrueFalse,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -211,7 +211,7 @@ class SelectQuizDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().quizTrueFalse}');
+                        Navigator.pop(context, '${I18n().studyTrueFalse}');
                       },
                     ),
                     const Spacer(),
