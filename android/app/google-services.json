@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "974493237650",
-    "project_id": "kentei-quiz",
-    "storage_bucket": "kentei-quiz.appspot.com"
+    "project_number": "219522966725",
+    "project_id": "kentei-quiz-18ce5",
+    "storage_bucket": "kentei-quiz-18ce5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:974493237650:android:c1561573210af4ca1c014b",
+        "mobilesdk_app_id": "1:219522966725:android:e424d75dec0443524f3cac",
         "android_client_info": {
           "package_name": "com.example.kentei_quiz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "974493237650-dpa9tqmhvgb36m4k2bcm58ok0b75frjq.apps.googleusercontent.com",
+          "client_id": "219522966725-9k5q7bg2qmrt6ic1jbefa9g1jm6nr2a1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBchrzKnJCANHhbjBRQIbImL1p0WXSNW8A"
+          "current_key": "AIzaSyCccT2iHPlLppePI3nL3kws7mFFpADs5gQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "974493237650-dpa9tqmhvgb36m4k2bcm58ok0b75frjq.apps.googleusercontent.com",
+              "client_id": "219522966725-9k5q7bg2qmrt6ic1jbefa9g1jm6nr2a1.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "974493237650-6preondqr1cbmtuns0nu9t8umvvugmke.apps.googleusercontent.com",
+              "client_id": "219522966725-ahq8u9te7aacjo31ab73qq0krv07781t.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.kenteiQuiz"
