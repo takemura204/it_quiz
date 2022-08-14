@@ -1,15 +1,15 @@
-part of 'quiz_remember_screen.dart';
+part of 'quiz_learn_screen.dart';
 
 class _Body extends ConsumerWidget {
   const _Body(this.arguments);
 
-  final QuizRememberScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex =
-        ref.watch(quizRememberScreenControllerProvider).quizIndex + 1;
-    final lapIndex = ref.watch(quizRememberScreenControllerProvider).lapIndex;
+        ref.watch(quizLearnScreenControllerProvider).quizIndex + 1;
+    final lapIndex = ref.watch(quizLearnScreenControllerProvider).lapIndex;
 
     return Column(
       children: [
@@ -127,7 +127,7 @@ class _Body extends ConsumerWidget {
                       padding: const EdgeInsets.fromLTRB(16, 12, 4, 12),
                       child: AutoSizeText(
                         ref
-                            .watch(quizRememberScreenControllerProvider)
+                            .watch(quizLearnScreenControllerProvider)
                             .knowRememberQuestions
                             .length
                             .toString(),
@@ -148,7 +148,7 @@ class _Body extends ConsumerWidget {
                       padding: const EdgeInsets.fromLTRB(4, 12, 4, 12),
                       child: AutoSizeText(
                         ref
-                            .watch(quizRememberScreenControllerProvider)
+                            .watch(quizLearnScreenControllerProvider)
                             .unKnowRememberQuestions
                             .length
                             .toString(),

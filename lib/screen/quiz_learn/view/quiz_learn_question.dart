@@ -1,13 +1,13 @@
-part of '../quiz_remember_screen.dart';
+part of '../quiz_learn_screen.dart';
 
 class _Question extends ConsumerWidget {
   const _Question(this.arguments);
 
-  final QuizRememberScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizRememberScreenControllerProvider).isAnsView;
+    final isAns = ref.watch(quizLearnScreenControllerProvider).isAnsView;
 
     return Container(
       height: context.height * 0.35,
@@ -35,11 +35,11 @@ class _Question extends ConsumerWidget {
 
 class _ConfirmQuestion extends ConsumerWidget {
   const _ConfirmQuestion(this.arguments);
-  final QuizRememberScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizRememberScreenControllerProvider).quizIndex;
+    final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
       text: arguments.item.rememberQuiz[quizIndex].question,
@@ -60,11 +60,11 @@ class _ConfirmQuestion extends ConsumerWidget {
 
 class _AnsQuestion extends ConsumerWidget {
   const _AnsQuestion(this.arguments);
-  final QuizRememberScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizRememberScreenControllerProvider).quizIndex;
+    final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
       text: arguments.item.rememberQuiz[quizIndex].question.replaceAll(

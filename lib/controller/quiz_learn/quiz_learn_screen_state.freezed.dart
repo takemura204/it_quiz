@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'quiz_remember_screen_state.dart';
+part of 'quiz_learn_screen_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,8 +15,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$QuizRememberScreenStateTearOff {
-  const _$QuizRememberScreenStateTearOff();
+class _$QuizLearnScreenStateTearOff {
+  const _$QuizLearnScreenStateTearOff();
 
   _Create call(
       {bool isAnsView = false,
@@ -35,10 +35,10 @@ class _$QuizRememberScreenStateTearOff {
 }
 
 /// @nodoc
-const $QuizRememberScreenState = _$QuizRememberScreenStateTearOff();
+const $QuizLearnScreenState = _$QuizLearnScreenStateTearOff();
 
 /// @nodoc
-mixin _$QuizRememberScreenState {
+mixin _$QuizLearnScreenState {
   bool get isAnsView => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
@@ -48,15 +48,15 @@ mixin _$QuizRememberScreenState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $QuizRememberScreenStateCopyWith<QuizRememberScreenState> get copyWith =>
+  $QuizLearnScreenStateCopyWith<QuizLearnScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $QuizRememberScreenStateCopyWith<$Res> {
-  factory $QuizRememberScreenStateCopyWith(QuizRememberScreenState value,
-          $Res Function(QuizRememberScreenState) then) =
-      _$QuizRememberScreenStateCopyWithImpl<$Res>;
+abstract class $QuizLearnScreenStateCopyWith<$Res> {
+  factory $QuizLearnScreenStateCopyWith(QuizLearnScreenState value,
+          $Res Function(QuizLearnScreenState) then) =
+      _$QuizLearnScreenStateCopyWithImpl<$Res>;
   $Res call(
       {bool isAnsView,
       int quizIndex,
@@ -66,13 +66,13 @@ abstract class $QuizRememberScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$QuizRememberScreenStateCopyWithImpl<$Res>
-    implements $QuizRememberScreenStateCopyWith<$Res> {
-  _$QuizRememberScreenStateCopyWithImpl(this._value, this._then);
+class _$QuizLearnScreenStateCopyWithImpl<$Res>
+    implements $QuizLearnScreenStateCopyWith<$Res> {
+  _$QuizLearnScreenStateCopyWithImpl(this._value, this._then);
 
-  final QuizRememberScreenState _value;
+  final QuizLearnScreenState _value;
   // ignore: unused_field
-  final $Res Function(QuizRememberScreenState) _then;
+  final $Res Function(QuizLearnScreenState) _then;
 
   @override
   $Res call({
@@ -109,7 +109,7 @@ class _$QuizRememberScreenStateCopyWithImpl<$Res>
 
 /// @nodoc
 abstract class _$CreateCopyWith<$Res>
-    implements $QuizRememberScreenStateCopyWith<$Res> {
+    implements $QuizLearnScreenStateCopyWith<$Res> {
   factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
       __$CreateCopyWithImpl<$Res>;
   @override
@@ -123,7 +123,7 @@ abstract class _$CreateCopyWith<$Res>
 
 /// @nodoc
 class __$CreateCopyWithImpl<$Res>
-    extends _$QuizRememberScreenStateCopyWithImpl<$Res>
+    extends _$QuizLearnScreenStateCopyWithImpl<$Res>
     implements _$CreateCopyWith<$Res> {
   __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
       : super(_value, (v) => _then(v as _Create));
@@ -192,7 +192,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'QuizRememberScreenState(isAnsView: $isAnsView, quizIndex: $quizIndex, lapIndex: $lapIndex, knowRememberQuestions: $knowRememberQuestions, unKnowRememberQuestions: $unKnowRememberQuestions)';
+    return 'QuizLearnScreenState(isAnsView: $isAnsView, quizIndex: $quizIndex, lapIndex: $lapIndex, knowRememberQuestions: $knowRememberQuestions, unKnowRememberQuestions: $unKnowRememberQuestions)';
   }
 
   @override
@@ -224,7 +224,7 @@ class _$_Create implements _Create {
       __$CreateCopyWithImpl<_Create>(this, _$identity);
 }
 
-abstract class _Create implements QuizRememberScreenState {
+abstract class _Create implements QuizLearnScreenState {
   const factory _Create(
       {bool isAnsView,
       int quizIndex,

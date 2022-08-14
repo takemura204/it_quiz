@@ -1,4 +1,4 @@
-import '../entity/quiz_item/quiz_item.dart';
+import '../entity/quiz_item.dart';
 
 ///問題ジャンル
 List<QuizItem> studyItems = [

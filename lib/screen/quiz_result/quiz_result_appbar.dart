@@ -26,7 +26,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
               //問題リセット
               ref
-                  .read(quizRememberScreenControllerProvider.notifier)
+                  .read(quizLearnScreenControllerProvider.notifier)
                   .tapClearButton();
             },
             icon: const Icon(

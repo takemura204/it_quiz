@@ -1,13 +1,13 @@
-part of '../quiz_remember_screen.dart';
+part of '../quiz_learn_screen.dart';
 
 class _ConfirmButtonView extends ConsumerWidget {
   const _ConfirmButtonView(this.arguments);
 
-  final QuizRememberScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizRememberScreenControllerProvider).isAnsView;
+    final isAns = ref.watch(quizLearnScreenControllerProvider).isAnsView;
 
     return isAns
         ? Row(
@@ -15,7 +15,7 @@ class _ConfirmButtonView extends ConsumerWidget {
             children: [
               GestureDetector(
                 onTap: () => ref
-                    .read(quizRememberScreenControllerProvider.notifier)
+                    .read(quizLearnScreenControllerProvider.notifier)
                     .tapUnKnownButton(arguments),
                 child: Container(
                   width: context.width * 0.42,
@@ -42,11 +42,11 @@ class _ConfirmButtonView extends ConsumerWidget {
               GestureDetector(
                 onTap: () {
                   ref
-                      .read(quizRememberScreenControllerProvider.notifier)
+                      .read(quizLearnScreenControllerProvider.notifier)
                       .tapKnownButton(arguments);
                   //「知っている」が全てになった時結果画面に遷移
                   if (ref
-                          .watch(quizRememberScreenControllerProvider)
+                          .watch(quizLearnScreenControllerProvider)
                           .knowRememberQuestions
                           .length ==
                       arguments.item.rememberQuiz.length) {
@@ -73,7 +73,7 @@ class _ConfirmButtonView extends ConsumerWidget {
           )
         : GestureDetector(
             onTap: () => ref
-                .read(quizRememberScreenControllerProvider.notifier)
+                .read(quizLearnScreenControllerProvider.notifier)
                 .tapConfirmButton(),
             child: Container(
               width: context.height * 0.85,

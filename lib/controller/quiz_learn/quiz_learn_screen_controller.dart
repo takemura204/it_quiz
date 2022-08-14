@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/quiz_remember/quiz_remember_screen_state.dart';
+import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../entity/quiz_item/quiz_item.dart';
+import '../../entity/quiz_item.dart';
 import '../../screen/screen_argument.dart';
 
-final quizRememberScreenControllerProvider = StateNotifierProvider<
-    QuizRememberScreenController, QuizRememberScreenState>(
-  (ref) => QuizRememberScreenController(ref: ref),
+final quizLearnScreenControllerProvider =
+    StateNotifierProvider<QuizLearnScreenController, QuizLearnScreenState>(
+  (ref) => QuizLearnScreenController(ref: ref),
 );
 
-class QuizRememberScreenController
-    extends StateNotifier<QuizRememberScreenState> with LocatorMixin {
-  QuizRememberScreenController({required this.ref})
-      : super(const QuizRememberScreenState()) {
+class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
+    with LocatorMixin {
+  QuizLearnScreenController({required this.ref})
+      : super(const QuizLearnScreenState()) {
     initState();
   }
 
@@ -33,7 +33,7 @@ class QuizRememberScreenController
   }
 
   ///知ってるボタンを押したとき
-  void tapKnownButton(QuizRememberScreenArguments arguments) {
+  void tapKnownButton(QuizLearnScreenArguments arguments) {
     addKnownQuestion(arguments);
     nextQuiz(arguments);
     switchAnsView();
@@ -41,7 +41,7 @@ class QuizRememberScreenController
   }
 
   ///知らないボタンを押した時
-  void tapUnKnownButton(QuizRememberScreenArguments arguments) {
+  void tapUnKnownButton(QuizLearnScreenArguments arguments) {
     addUnKnownQuestion(arguments);
     nextQuiz(arguments);
     switchAnsView();
@@ -64,7 +64,7 @@ class QuizRememberScreenController
   }
 
   ///次の問題に進む
-  void nextQuiz(QuizRememberScreenArguments arguments) {
+  void nextQuiz(QuizLearnScreenArguments arguments) {
     final quizIndex = state.quizIndex;
     final lapIndex = state.lapIndex;
     if (quizIndex == arguments.item.rememberQuiz.length - 1) {
@@ -78,7 +78,7 @@ class QuizRememberScreenController
   }
 
   ///知らないボタンを押した時の苦手リストに追加
-  void switchUnKnowState(QuizRememberScreenArguments arguments) {
+  void switchUnKnowState(QuizLearnScreenArguments arguments) {
     final rememberQuestions = [...arguments.item.rememberQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
       rememberQuestions[state.quizIndex] = RememberQuiz(
@@ -93,7 +93,7 @@ class QuizRememberScreenController
   }
 
   ///知らないボタンを押した時の苦手リストから解除
-  void switchKnowState(QuizRememberScreenArguments arguments) {
+  void switchKnowState(QuizLearnScreenArguments arguments) {
     final rememberQuestions = [...arguments.item.rememberQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
       rememberQuestions[state.quizIndex] = RememberQuiz(
@@ -107,7 +107,7 @@ class QuizRememberScreenController
     }
   }
 
-  void addKnownQuestion(QuizRememberScreenArguments arguments) {
+  void addKnownQuestion(QuizLearnScreenArguments arguments) {
     final knowRememberQuestions = [...state.knowRememberQuestions];
     final unKnowRememberQuestions = [...state.unKnowRememberQuestions];
 
@@ -133,7 +133,7 @@ class QuizRememberScreenController
   }
 
   //知らないリストに追加
-  void addUnKnownQuestion(QuizRememberScreenArguments arguments) {
+  void addUnKnownQuestion(QuizLearnScreenArguments arguments) {
     final knowRememberQuestions = [...state.knowRememberQuestions];
     final unKnowRememberQuestions = [...state.unKnowRememberQuestions];
 

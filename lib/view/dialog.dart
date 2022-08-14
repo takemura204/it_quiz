@@ -6,7 +6,7 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/initial_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
-import '../entity/quiz_item/quiz_item.dart';
+import '../entity/quiz_item.dart';
 
 class SelectQuizDialog extends ConsumerWidget {
   const SelectQuizDialog(this.item);
@@ -124,7 +124,7 @@ class SelectQuizDialog extends ConsumerWidget {
                       ),
                       onPressed: () {
                         // Navigator.pop(context, '${I18n().quizOneQuestion}');
-                        context.showScreen(QuizRememberScreenArguments(
+                        context.showScreen(QuizLearnScreenArguments(
                           item: item,
                           quizStyle: I18n().studyOneQuestion,
                         ).generateRoute());

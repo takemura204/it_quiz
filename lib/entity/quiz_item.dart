@@ -23,9 +23,9 @@ class RememberQuiz {
   final bool isWeak; //問題を知っているか？
 
   const RememberQuiz({
+    required this.questionId,
     required this.question,
     required this.ans,
-    required this.questionId,
     required this.isWeak,
   });
 }

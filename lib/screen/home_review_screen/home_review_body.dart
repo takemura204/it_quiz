@@ -40,7 +40,7 @@ class _Body extends ConsumerWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  context.showScreen(QuizRememberScreenArguments(
+                  context.showScreen(QuizLearnScreenArguments(
                     item: ref
                         .watch(homeReviewScreenControllerProvider)
                         .reviewItem[index],

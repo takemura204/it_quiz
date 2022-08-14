@@ -1,9 +1,9 @@
-part of 'quiz_remember_screen.dart';
+part of 'quiz_learn_screen.dart';
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.arguments);
 
-  final QuizRememberScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
           iconSize: 25,
           onPressed: () {
             ref
-                .read(quizRememberScreenControllerProvider.notifier)
+                .read(quizLearnScreenControllerProvider.notifier)
                 .tapClearButton();
             Navigator.pop(context);
           },

@@ -37,7 +37,7 @@ class _AnsRateView extends ConsumerWidget {
               const Spacer(),
               AutoSizeText(
                 ref
-                    .watch(quizRememberScreenControllerProvider)
+                    .watch(quizLearnScreenControllerProvider)
                     .knowRememberQuestions
                     .length
                     .toString(),

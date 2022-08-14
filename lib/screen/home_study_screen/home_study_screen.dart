@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/entity/quiz_item/quiz_item.dart';
+import 'package:kentei_quiz/entity/quiz_item.dart';
 
 import '../../resource/quiz_resource.dart';
 import '../../view/dialog.dart';

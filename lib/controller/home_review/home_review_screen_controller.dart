@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../entity/quiz_item/quiz_item.dart';
+import '../../entity/quiz_item.dart';
 import 'home_review_screen_state.dart';
 
 final homeReviewScreenControllerProvider =
@@ -12,7 +12,7 @@ final homeReviewScreenControllerProvider =
 class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     with LocatorMixin {
   HomeReviewScreenController({required this.ref})
-      : super(const HomeReviewScreenState()) {}
+      : super(const HomeReviewScreenState());
 
   final Ref ref;
 

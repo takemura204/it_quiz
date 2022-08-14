@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/quiz_remember/quiz_remember_screen_controller.dart';
 import 'package:kentei_quiz/controller/quiz_result/quiz_result_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../entity/quiz_item/quiz_item.dart';
+import '../../entity/quiz_item.dart';
 import '../../screen/screen_argument.dart';
 import '../home_review/home_review_screen_controller.dart';
+import '../quiz_learn/quiz_learn_screen_controller.dart';
 
 final quizResultScreenControllerProvider =
     StateNotifierProvider<QuizResultScreenController, QuizResultScreenState>(
@@ -37,10 +37,10 @@ class QuizResultScreenController extends StateNotifier<QuizResultScreenState>
 
   void addQuestions() {
     final knowRememberQuestions = [
-      ...ref.watch(quizRememberScreenControllerProvider).knowRememberQuestions
+      ...ref.watch(quizLearnScreenControllerProvider).knowRememberQuestions
     ];
     final unKnowRememberQuestions = [
-      ...ref.watch(quizRememberScreenControllerProvider).unKnowRememberQuestions
+      ...ref.watch(quizLearnScreenControllerProvider).unKnowRememberQuestions
     ];
     state = state.copyWith(
         knowRememberQuestions: knowRememberQuestions,

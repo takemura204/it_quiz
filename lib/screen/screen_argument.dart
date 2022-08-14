@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kentei_quiz/entity/quiz_item/quiz_item.dart';
-import 'package:kentei_quiz/screen/quiz_remember/quiz_remember_screen.dart';
+import 'package:kentei_quiz/entity/quiz_item.dart';
+import 'package:kentei_quiz/screen/quiz_learn/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_result/quiz_result_screen.dart';
 
 import '../resource/screen_argument_resource.dart';
 
 ///一問一答形式の画面
-class QuizRememberScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
-  const QuizRememberScreenArguments(
-      {required this.item, required this.quizStyle});
+class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
+  const QuizLearnScreenArguments({required this.item, required this.quizStyle});
 
   final QuizItem item;
   final String quizStyle;
@@ -21,10 +18,10 @@ class QuizRememberScreenArguments
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizRememberScreen(this),
+            QuizLearnScreen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => QuizRememberScreen(this)),
+              MaterialPageRoute(builder: (context) => QuizLearnScreen(this)),
               context,
               animation,
               secondaryAnimation,

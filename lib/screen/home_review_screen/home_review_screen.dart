@@ -6,7 +6,6 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/home_review/home_review_screen_controller.dart';
 import '../../resource/initial_resource.dart';
-import '../../resource/quiz_resource.dart';
 import '../screen_argument.dart';
 
 part 'home_review_body.dart';
