@@ -22,8 +22,8 @@ class _$QuizResultScreenStateTearOff {
       {bool isAnsView = false,
       int quizIndex = 0,
       int lapIndex = 0,
-      List<RememberQuiz> knowRememberQuestions = const [],
-      List<RememberQuiz> unKnowRememberQuestions = const []}) {
+      List<LearnQuiz> knowRememberQuestions = const [],
+      List<LearnQuiz> unKnowRememberQuestions = const []}) {
     return _Create(
       isAnsView: isAnsView,
       quizIndex: quizIndex,
@@ -42,9 +42,9 @@ mixin _$QuizResultScreenState {
   bool get isAnsView => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
-  List<RememberQuiz> get knowRememberQuestions =>
+  List<LearnQuiz> get knowRememberQuestions =>
       throw _privateConstructorUsedError;
-  List<RememberQuiz> get unKnowRememberQuestions =>
+  List<LearnQuiz> get unKnowRememberQuestions =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -61,8 +61,8 @@ abstract class $QuizResultScreenStateCopyWith<$Res> {
       {bool isAnsView,
       int quizIndex,
       int lapIndex,
-      List<RememberQuiz> knowRememberQuestions,
-      List<RememberQuiz> unKnowRememberQuestions});
+      List<LearnQuiz> knowRememberQuestions,
+      List<LearnQuiz> unKnowRememberQuestions});
 }
 
 /// @nodoc
@@ -98,11 +98,11 @@ class _$QuizResultScreenStateCopyWithImpl<$Res>
       knowRememberQuestions: knowRememberQuestions == freezed
           ? _value.knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<RememberQuiz>,
+              as List<LearnQuiz>,
       unKnowRememberQuestions: unKnowRememberQuestions == freezed
           ? _value.unKnowRememberQuestions
           : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<RememberQuiz>,
+              as List<LearnQuiz>,
     ));
   }
 }
@@ -117,8 +117,8 @@ abstract class _$CreateCopyWith<$Res>
       {bool isAnsView,
       int quizIndex,
       int lapIndex,
-      List<RememberQuiz> knowRememberQuestions,
-      List<RememberQuiz> unKnowRememberQuestions});
+      List<LearnQuiz> knowRememberQuestions,
+      List<LearnQuiz> unKnowRememberQuestions});
 }
 
 /// @nodoc
@@ -155,11 +155,11 @@ class __$CreateCopyWithImpl<$Res>
       knowRememberQuestions: knowRememberQuestions == freezed
           ? _value.knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<RememberQuiz>,
+              as List<LearnQuiz>,
       unKnowRememberQuestions: unKnowRememberQuestions == freezed
           ? _value.unKnowRememberQuestions
           : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<RememberQuiz>,
+              as List<LearnQuiz>,
     ));
   }
 }
@@ -185,10 +185,10 @@ class _$_Create implements _Create {
   final int lapIndex;
   @JsonKey()
   @override //何周目
-  final List<RememberQuiz> knowRememberQuestions;
+  final List<LearnQuiz> knowRememberQuestions;
   @JsonKey()
   @override
-  final List<RememberQuiz> unKnowRememberQuestions;
+  final List<LearnQuiz> unKnowRememberQuestions;
 
   @override
   String toString() {
@@ -229,8 +229,8 @@ abstract class _Create implements QuizResultScreenState {
       {bool isAnsView,
       int quizIndex,
       int lapIndex,
-      List<RememberQuiz> knowRememberQuestions,
-      List<RememberQuiz> unKnowRememberQuestions}) = _$_Create;
+      List<LearnQuiz> knowRememberQuestions,
+      List<LearnQuiz> unKnowRememberQuestions}) = _$_Create;
 
   @override
   bool get isAnsView;
@@ -239,9 +239,9 @@ abstract class _Create implements QuizResultScreenState {
   @override //問題番号
   int get lapIndex;
   @override //何周目
-  List<RememberQuiz> get knowRememberQuestions;
+  List<LearnQuiz> get knowRememberQuestions;
   @override
-  List<RememberQuiz> get unKnowRememberQuestions;
+  List<LearnQuiz> get unKnowRememberQuestions;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

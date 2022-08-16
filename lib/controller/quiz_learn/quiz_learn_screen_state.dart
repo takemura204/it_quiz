@@ -10,7 +10,7 @@ class QuizLearnScreenState with _$QuizLearnScreenState {
     @Default(false) final bool isAnsView,
     @Default(0) final int quizIndex, //問題番号
     @Default(0) final int lapIndex, //何周目
-    @Default([]) final List<RememberQuiz> knowRememberQuestions,
-    @Default([]) final List<RememberQuiz> unKnowRememberQuestions,
+    @Default([]) final List<LearnQuiz> knowRememberQuestions,
+    @Default([]) final List<LearnQuiz> unKnowRememberQuestions,
   }) = _Create;
 }

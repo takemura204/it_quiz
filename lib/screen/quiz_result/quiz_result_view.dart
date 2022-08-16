@@ -85,7 +85,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
-                          "間違えた問題リスト",
+                          "間違えた問題",
                           style: context.texts.subtitle1,
                         ),
                       ),
@@ -222,7 +222,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
-                          "正解した問題リスト",
+                          "正解した問題",
                           style: context.texts.subtitle1,
                         ),
                       ),

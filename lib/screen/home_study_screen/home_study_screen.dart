@@ -3,7 +3,7 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/entity/quiz_item.dart';
 
-import '../../resource/quiz_resource.dart';
+import '../../resource/quiz/quiz_resource.dart';
 import '../../view/dialog.dart';
 
 class HomeStudyScreen extends ConsumerWidget {

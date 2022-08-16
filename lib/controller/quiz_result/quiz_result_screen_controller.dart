@@ -51,8 +51,8 @@ class QuizResultScreenController extends StateNotifier<QuizResultScreenState>
   void switchKnowCheckBox(int index) {
     final knowRememberQuestions = [...state.knowRememberQuestions];
     if (!knowRememberQuestions[index].isWeak) {
-      knowRememberQuestions[index] = RememberQuiz(
-        questionId: knowRememberQuestions[index].questionId,
+      knowRememberQuestions[index] = LearnQuiz(
+        quizId: knowRememberQuestions[index].quizId,
         question: knowRememberQuestions[index].question,
         ans: knowRememberQuestions[index].ans,
         isWeak: true,
@@ -61,8 +61,8 @@ class QuizResultScreenController extends StateNotifier<QuizResultScreenState>
           .read(homeReviewScreenControllerProvider.notifier)
           .addRememberQuestions(knowRememberQuestions[index]);
     } else if (knowRememberQuestions[index].isWeak) {
-      knowRememberQuestions[index] = RememberQuiz(
-        questionId: knowRememberQuestions[index].questionId,
+      knowRememberQuestions[index] = LearnQuiz(
+        quizId: knowRememberQuestions[index].quizId,
         question: knowRememberQuestions[index].question,
         ans: knowRememberQuestions[index].ans,
         isWeak: false,
@@ -80,15 +80,15 @@ class QuizResultScreenController extends StateNotifier<QuizResultScreenState>
   void switchUnKnowCheckBox(QuizResultScreenArguments arguments, int index) {
     final unknowRememberQuestions = [...state.unKnowRememberQuestions];
     if (!unknowRememberQuestions[index].isWeak) {
-      unknowRememberQuestions[index] = RememberQuiz(
-        questionId: unknowRememberQuestions[index].questionId,
+      unknowRememberQuestions[index] = LearnQuiz(
+        quizId: unknowRememberQuestions[index].quizId,
         question: unknowRememberQuestions[index].question,
         ans: unknowRememberQuestions[index].ans,
         isWeak: true,
       );
     } else if (unknowRememberQuestions[index].isWeak) {
-      unknowRememberQuestions[index] = RememberQuiz(
-        questionId: unknowRememberQuestions[index].questionId,
+      unknowRememberQuestions[index] = LearnQuiz(
+        quizId: unknowRememberQuestions[index].quizId,
         question: unknowRememberQuestions[index].question,
         ans: unknowRememberQuestions[index].ans,
         isWeak: false,

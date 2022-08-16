@@ -3,7 +3,7 @@ import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:kentei_quiz/screen/quiz_learn/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_result/quiz_result_screen.dart';
 
-import '../resource/screen_argument_resource.dart';
+import '../resource/controller/screen_argument_resource.dart';
 
 ///一問一答形式の画面
 class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {

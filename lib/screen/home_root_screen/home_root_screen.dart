@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../controller/home_root/home_root_screen_controller.dart';
 import '../../controller/home_root/home_root_screen_state.dart';
-import '../../resource/initial_resource.dart';
+import '../../resource/lang/initial_resource.dart';
 import '../home_review_screen/home_review_screen.dart';
 import '../home_setting_screen/home_setting_screen.dart';
 import '../home_study_screen/home_study_screen.dart';

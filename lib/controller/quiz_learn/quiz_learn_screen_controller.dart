@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -19,8 +18,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   final Ref ref;
-
-  final db = FirebaseFirestore.instance;
 
   @override
   void dispose() {
@@ -81,8 +78,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   void switchUnKnowState(QuizLearnScreenArguments arguments) {
     final rememberQuestions = [...arguments.item.rememberQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
-      rememberQuestions[state.quizIndex] = RememberQuiz(
-        questionId: rememberQuestions[state.quizIndex].questionId,
+      rememberQuestions[state.quizIndex] = LearnQuiz(
+        quizId: rememberQuestions[state.quizIndex].quizId,
         question: rememberQuestions[state.quizIndex].question,
         ans: rememberQuestions[state.quizIndex].ans,
         isWeak: true,
@@ -96,8 +93,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   void switchKnowState(QuizLearnScreenArguments arguments) {
     final rememberQuestions = [...arguments.item.rememberQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
-      rememberQuestions[state.quizIndex] = RememberQuiz(
-        questionId: rememberQuestions[state.quizIndex].questionId,
+      rememberQuestions[state.quizIndex] = LearnQuiz(
+        quizId: rememberQuestions[state.quizIndex].quizId,
         question: rememberQuestions[state.quizIndex].question,
         ans: rememberQuestions[state.quizIndex].ans,
         isWeak: false,

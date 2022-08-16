@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../resource/screen_argument_resource.dart';
+import '../../resource/controller/screen_argument_resource.dart';
 import 'app_state.dart';
 
 /// アプリ全体に関するもろもろを詰め込む

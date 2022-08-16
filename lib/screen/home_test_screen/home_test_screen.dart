@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 
 class HomeTestScreen extends StatelessWidget {
   const HomeTestScreen();
@@ -10,15 +11,9 @@ class HomeTestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
     final CollectionReference _quiz = _fireStore.collection('quiz');
+
     Future addQuiz() async {
       await _quiz.add({
-        "ans": "答え",
-        "question": "問題",
-      });
-    }
-
-    Future updateQuiz(String docId) async {
-      await _quiz.doc(docId).update({
         "ans": "答え",
         "question": "問題",
       });
@@ -28,11 +23,11 @@ class HomeTestScreen extends StatelessWidget {
       child: Column(
         children: [
           const _GetQuizWidget(),
+          QuizList(),
           const Spacer(),
           GestureDetector(
             onTap: () async {
               addQuiz();
-              // updateQuiz();
             },
             child: Container(
               height: context.height * 0.085,
@@ -70,8 +65,8 @@ class _GetQuizWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final _fireStore = FirebaseFirestore.instance;
     final _quiz = _fireStore.collection('quiz');
-    // final _quizStream = _quiz.snapshots();
-    final _quizStream = _quiz.orderBy('ans', descending: true).snapshots();
+    final _quizStream = _quiz.get();
+    // final _quizStream = _quiz.orderBy('ans', descending: true).snapshots();
 
     Future updateQuiz(String docId) async {
       await _quiz.doc(docId).update({
@@ -80,8 +75,8 @@ class _GetQuizWidget extends StatelessWidget {
       });
     }
 
-    return StreamBuilder(
-        stream: _quizStream,
+    return FutureBuilder(
+        future: _quizStream,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           //データがない場合
           if (snapshot.hasError) {
@@ -97,7 +92,7 @@ class _GetQuizWidget extends StatelessWidget {
           }
           //それ以外の時
           else {
-            final List<QueryDocumentSnapshot> docs = snapshot.data!.docs;
+            final docs = snapshot.data!.docs;
             return ListView(
               shrinkWrap: true,
               children: docs.map((doc) {
@@ -115,5 +110,53 @@ class _GetQuizWidget extends StatelessWidget {
             );
           }
         });
+  }
+}
+
+class QuizList extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final question =　ref.watch(homeTestScreenControllerProvider).quizLearn.question;
+    final _fireStore = FirebaseFirestore.instance;
+    final _learnQuiz = _fireStore.collection('learnQuiz');
+    final _learnQuizStream = _learnQuiz.snapshots();
+
+    return StreamBuilder(
+      stream: _learnQuizStream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        //データを取得できなかった場合の返り値を指定
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text('取得できませんでした'),
+          );
+        }
+        //取得中の返り値を指定
+        if (!snapshot.hasData) {
+          return const Center(
+            child: Text("Loading"),
+          );
+        }
+        //データを取得できた場合の返り値を指定
+        return ListView(
+          shrinkWrap: true,
+          children: snapshot.data!.docs.map((DocumentSnapshot document) {
+            final Map<String, dynamic> data =
+                document.data()! as Map<String, dynamic>;
+
+            final quiz1 = data["quiz1"];
+
+            return Card(
+              child: ListTile(
+                title: Text(data["quiz1"]["ans"]),
+                subtitle: Text(quiz1["question"]),
+                onTap: () {
+                  print(data);
+                },
+              ),
+            );
+          }).toList(),
+        );
+      },
+    );
   }
 }

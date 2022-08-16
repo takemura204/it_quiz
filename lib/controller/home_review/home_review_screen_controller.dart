@@ -31,7 +31,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   ///苦手リストに追加
-  void addRememberQuestions(RememberQuiz checkQuiz) {
+  void addRememberQuestions(LearnQuiz checkQuiz) {
     final reviewQuizList = [...state.reviewQuestions];
     final rememberItem = state.reviewItem;
 
@@ -47,6 +47,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       group: "rememberQuestions",
       title: "一問一答で復習する",
       rememberQuiz: reviewQuizList,
+      choiceQuiz: [],
     );
 
     state = state.copyWith(
@@ -54,7 +55,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   ///苦手リストから削除
-  void removeRememberQuestions(RememberQuiz checkQuiz) {
+  void removeRememberQuestions(LearnQuiz checkQuiz) {
     final reviewQuizList = [...state.reviewQuestions];
     reviewQuizList.remove(
         reviewQuizList.where((x) => x.question == checkQuiz.question).first);
@@ -65,6 +66,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       group: "rememberQuestions",
       title: "一問一答で復習する",
       rememberQuiz: reviewQuizList,
+      choiceQuiz: [],
     );
 
     state = state.copyWith(
@@ -88,6 +90,7 @@ const reviewItem1 = QuizItem(
   group: "rememberQuestions",
   title: "一問一答で復習する",
   rememberQuiz: [],
+  choiceQuiz: [],
 );
 
 const reviewItem2 = QuizItem(
@@ -95,4 +98,5 @@ const reviewItem2 = QuizItem(
   group: "rememberQuestions",
   title: "一問一答で復習する2",
   rememberQuiz: [],
+  choiceQuiz: [],
 );

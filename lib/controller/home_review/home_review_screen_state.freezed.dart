@@ -20,7 +20,7 @@ class _$HomeReviewScreenStateTearOff {
 
   _Create call(
       {int currentIndex = 0,
-      List<RememberQuiz> reviewQuestions = const [],
+      List<LearnQuiz> reviewQuestions = const [],
       List<QuizItem> reviewItem = const []}) {
     return _Create(
       currentIndex: currentIndex,
@@ -36,7 +36,7 @@ const $HomeReviewScreenState = _$HomeReviewScreenStateTearOff();
 /// @nodoc
 mixin _$HomeReviewScreenState {
   int get currentIndex => throw _privateConstructorUsedError;
-  List<RememberQuiz> get reviewQuestions => throw _privateConstructorUsedError;
+  List<LearnQuiz> get reviewQuestions => throw _privateConstructorUsedError;
   List<QuizItem> get reviewItem => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $HomeReviewScreenStateCopyWith<$Res> {
       _$HomeReviewScreenStateCopyWithImpl<$Res>;
   $Res call(
       {int currentIndex,
-      List<RememberQuiz> reviewQuestions,
+      List<LearnQuiz> reviewQuestions,
       List<QuizItem> reviewItem});
 }
 
@@ -78,7 +78,7 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res>
       reviewQuestions: reviewQuestions == freezed
           ? _value.reviewQuestions
           : reviewQuestions // ignore: cast_nullable_to_non_nullable
-              as List<RememberQuiz>,
+              as List<LearnQuiz>,
       reviewItem: reviewItem == freezed
           ? _value.reviewItem
           : reviewItem // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ abstract class _$CreateCopyWith<$Res>
   @override
   $Res call(
       {int currentIndex,
-      List<RememberQuiz> reviewQuestions,
+      List<LearnQuiz> reviewQuestions,
       List<QuizItem> reviewItem});
 }
 
@@ -123,7 +123,7 @@ class __$CreateCopyWithImpl<$Res>
       reviewQuestions: reviewQuestions == freezed
           ? _value.reviewQuestions
           : reviewQuestions // ignore: cast_nullable_to_non_nullable
-              as List<RememberQuiz>,
+              as List<LearnQuiz>,
       reviewItem: reviewItem == freezed
           ? _value.reviewItem
           : reviewItem // ignore: cast_nullable_to_non_nullable
@@ -145,7 +145,7 @@ class _$_Create implements _Create {
   final int currentIndex;
   @JsonKey()
   @override
-  final List<RememberQuiz> reviewQuestions;
+  final List<LearnQuiz> reviewQuestions;
   @JsonKey()
   @override
   final List<QuizItem> reviewItem;
@@ -184,13 +184,13 @@ class _$_Create implements _Create {
 abstract class _Create implements HomeReviewScreenState {
   const factory _Create(
       {int currentIndex,
-      List<RememberQuiz> reviewQuestions,
+      List<LearnQuiz> reviewQuestions,
       List<QuizItem> reviewItem}) = _$_Create;
 
   @override
   int get currentIndex;
   @override
-  List<RememberQuiz> get reviewQuestions;
+  List<LearnQuiz> get reviewQuestions;
   @override
   List<QuizItem> get reviewItem;
   @override
