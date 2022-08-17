@@ -70,6 +70,7 @@ dependencies:
 
   #キーワードと一致する文字列をハイライトしたい。
   substring_highlight: ^1.0.33
+  analyzer: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -79,7 +80,6 @@ dev_dependencies:
 
   # freezed用
   json_serializable: ^6.2.0
-  analyzer: ^3.0.0
   build_runner: ^2.0.0
   freezed: ^1.1.1
 

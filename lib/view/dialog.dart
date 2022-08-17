@@ -7,6 +7,7 @@ import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../entity/quiz_item.dart';
+import 'button.dart';
 
 class SelectQuizDialog extends ConsumerWidget {
   const SelectQuizDialog(this.item);
@@ -20,26 +21,12 @@ class SelectQuizDialog extends ConsumerWidget {
       contentPadding: const EdgeInsets.all(0),
       children: [
         Container(
-          height: context.height * 0.75,
+          height: context.height * 0.65,
           width: context.width * 0.8,
           child: Column(
             children: [
               ///Clearボタン
-              Container(
-                height: context.height * 0.05,
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  iconSize: 40,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.clear,
-                  ),
-                ),
-              ),
+              const ClearButton(),
 
               ///問題タイトル
               Container(
@@ -92,8 +79,9 @@ class SelectQuizDialog extends ConsumerWidget {
               ),
               Divider(height: 1, color: context.colors.dark54),
 
+              ///形式選択
               Container(
-                height: context.height * 0.49,
+                height: context.height * 0.39,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -114,7 +102,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().studyOneQuestion,
+                          I18n().styleLeanQuiz,
                           style: TextStyle(
                             color: context.colors.main50.withOpacity(0.7),
                             fontWeight: FontWeight.bold,
@@ -122,41 +110,12 @@ class SelectQuizDialog extends ConsumerWidget {
                           minFontSize: 16,
                         ),
                       ),
-                      onPressed: () {
-                        // Navigator.pop(context, '${I18n().quizOneQuestion}');
-                        context.showScreen(QuizLearnScreenArguments(
+                      onPressed: () => context.showScreen(
+                        QuizLearnScreenArguments(
                           item: item,
-                          quizStyle: I18n().studyOneQuestion,
-                        ).generateRoute());
-                      },
-                    ),
-
-                    ///穴埋め形式
-                    SimpleDialogOption(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: Container(
-                        height: context.height * 0.085,
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: context.colors.main50.withOpacity(0.6),
-                          border: Border.all(
-                              color: context.colors.main50.withOpacity(0.7)),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: AutoSizeText(
-                          I18n().studyFillBlank,
-                          style: TextStyle(
-                            color: context.colors.onMain50,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          minFontSize: 16,
-                        ),
+                          quizStyle: I18n().styleLeanQuiz,
+                        ).generateRoute(),
                       ),
-                      onPressed: () {
-                        Navigator.pop(context, '${I18n().studyFillBlank}');
-                      },
                     ),
 
                     ///4択形式
@@ -174,7 +133,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().studyFourChoice,
+                          I18n().styleChoiceQuiz,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -182,9 +141,12 @@ class SelectQuizDialog extends ConsumerWidget {
                           minFontSize: 16,
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.pop(context, '${I18n().studyFourChoice}');
-                      },
+                      onPressed: () => context.showScreen(
+                        QuizLearnScreenArguments(
+                          item: item,
+                          quizStyle: I18n().styleChoiceQuiz,
+                        ).generateRoute(),
+                      ),
                     ),
 
                     ///◯×形式で答える
@@ -202,7 +164,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: AutoSizeText(
-                          I18n().studyTrueFalse,
+                          I18n().styleTrueFalseQuiz,
                           style: TextStyle(
                             color: context.colors.onMain50,
                             fontWeight: FontWeight.bold,
@@ -211,7 +173,7 @@ class SelectQuizDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, '${I18n().studyTrueFalse}');
+                        Navigator.pop(context, '${I18n().styleTrueFalseQuiz}');
                       },
                     ),
                     const Spacer(),

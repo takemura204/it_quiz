@@ -15,10 +15,9 @@ class I18n {
   String get titleSetting => "設定";
 
   ///「学ぶ」形式
-  String get studyOneQuestion => "一問一答で学習する";
-  String get studyFourChoice => "4択クイズで挑戦する";
-  String get studyTrueFalse => "◯×クイズで挑戦する";
-  String get studyFillBlank => "穴埋めクイズで挑戦する";
+  String get styleLeanQuiz => "一問一答で学習する";
+  String get styleChoiceQuiz => "4択クイズで挑戦する";
+  String get styleTrueFalseQuiz => "◯×クイズで挑戦する";
 
   ///「復習形式」
   String get quizReview => "一問一答復習する";
