@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_state.dart';
+import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 final quizChoiceScreenControllerProvider =

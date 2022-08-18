@@ -4,8 +4,6 @@ import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
-import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
-
 part 'quiz_choice_appbar.dart';
 part 'quiz_choice_body.dart';
 

@@ -19,9 +19,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
           iconSize: 25,
           onPressed: () {
-            ref
-                .read(quizLearnScreenControllerProvider.notifier)
-                .tapClearButton();
             Navigator.pop(context);
           },
           icon: const Icon(
