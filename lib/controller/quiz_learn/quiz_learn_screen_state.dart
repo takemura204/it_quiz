@@ -6,7 +6,7 @@ part 'quiz_learn_screen_state.freezed.dart';
 
 @freezed
 class QuizLearnScreenState with _$QuizLearnScreenState {
-  QuizLearnScreenState._();
+  const QuizLearnScreenState._();
   const factory QuizLearnScreenState({
     @Default(false) final bool isAnsView,
     @Default(0) final int quizIndex, //問題番号
