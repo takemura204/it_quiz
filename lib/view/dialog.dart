@@ -142,7 +142,7 @@ class SelectQuizDialog extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () => context.showScreen(
-                        QuizLearnScreenArguments(
+                        QuizChoiceScreenArguments(
                           item: item,
                           quizStyle: I18n().styleChoiceQuiz,
                         ).generateRoute(),

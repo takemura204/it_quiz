@@ -7,6 +7,7 @@ class QuizChoiceScreenState with _$QuizChoiceScreenState {
   const QuizChoiceScreenState._();
   const factory QuizChoiceScreenState({
     @Default(false) final bool isAnsView,
-    @Default(0) final int quizIndex, //問題番号]
+    @Default(0) final int quizIndex, //問題番号
+    @Default([]) final List<String> choices, //選択肢
   }) = _Create;
 }

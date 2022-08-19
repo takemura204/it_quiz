@@ -14,6 +14,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     with LocatorMixin {
   QuizLearnScreenController({required this.ref})
       : super(const QuizLearnScreenState()) {
+    print("a");
     initState();
   }
 

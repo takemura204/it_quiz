@@ -9,28 +9,32 @@ class _Body extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        ///問題形式表示
+        ///問題形式タイトル
+        _QuizStyleTitle(arguments),
+        const Spacer(),
+
+        ///問題画面
         Card(
-          elevation: 1,
-          margin: const EdgeInsets.all(0),
+          elevation: 3,
           child: Container(
-            height: context.height * 0.05,
-            color: context.colors.main10,
-            child: Row(
+            width: context.width * 0.85,
+            height: context.height * 0.45,
+            alignment: Alignment.center,
+            child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    arguments.quizStyle,
-                    style: context.texts.subtitle1,
-                  ),
-                ),
-                const Spacer(),
+                ///問題文
+                _Question(arguments),
+
+                ///進捗状況
+                _QuizProgress(arguments),
               ],
             ),
           ),
         ),
         const Spacer(),
+
+        ///選択肢
+        _SelectAnswer(arguments),
       ],
     );
   }

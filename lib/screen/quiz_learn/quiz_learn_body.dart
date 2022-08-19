@@ -23,7 +23,7 @@ class _Body extends ConsumerWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(6.0),
                   child: Text(
                     arguments.quizStyle,
                     style: context.texts.subtitle1,
@@ -49,8 +49,6 @@ class _Body extends ConsumerWidget {
                   alignment: Alignment.center,
                   child: Column(
                     children: [
-                      const Spacer(),
-
                       ///問題文
                       _Question(arguments),
 

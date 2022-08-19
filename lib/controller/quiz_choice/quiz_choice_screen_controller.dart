@@ -17,7 +17,18 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   final Ref ref;
 
   @override
+  void initState() {
+    print("A");
+    super.initState();
+  }
+
+  @override
   void dispose() {
     super.dispose();
+  }
+
+  void tapConfirmButton() {
+    //画面切り替え
+    // switchAnsView();
   }
 }

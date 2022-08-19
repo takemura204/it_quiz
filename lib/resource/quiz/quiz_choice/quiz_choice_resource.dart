@@ -1,7 +1,7 @@
 import '../../../entity/quiz_item.dart';
 
 ///問題形式　<一問一答>
-final List<ChoiceQuiz> learnQuiz1 = [
+final List<ChoiceQuiz> choiceQuiz1 = [
   const ChoiceQuiz(
     quizId: 1,
     question: '1 + 1 = 2',
@@ -28,7 +28,7 @@ final List<ChoiceQuiz> learnQuiz1 = [
       ]),
 ];
 
-final List<ChoiceQuiz> learnQuiz2 = [
+final List<ChoiceQuiz> choiceQuiz2 = [
   const ChoiceQuiz(
     quizId: 1,
     question: '1 + 2 = 3',
