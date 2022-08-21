@@ -157,7 +157,6 @@ class _SelectAnswer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
-    final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
     final choices = ref.watch(quizChoiceScreenControllerProvider).choices;
 

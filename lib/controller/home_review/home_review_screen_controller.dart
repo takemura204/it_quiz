@@ -46,7 +46,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       id: 1,
       group: "rememberQuestions",
       title: "一問一答で復習する",
-      rememberQuiz: reviewQuizList,
+      learnQuiz: reviewQuizList,
       choiceQuiz: [],
     );
 
@@ -65,7 +65,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       id: 1,
       group: "rememberQuestions",
       title: "一問一答で復習する",
-      rememberQuiz: reviewQuizList,
+      learnQuiz: reviewQuizList,
       choiceQuiz: [],
     );
 
@@ -89,7 +89,7 @@ const reviewItem1 = QuizItem(
   id: 1,
   group: "rememberQuestions",
   title: "一問一答で復習する",
-  rememberQuiz: [],
+  learnQuiz: [],
   choiceQuiz: [],
 );
 
@@ -97,6 +97,6 @@ const reviewItem2 = QuizItem(
   id: 2,
   group: "rememberQuestions",
   title: "一問一答で復習する2",
-  rememberQuiz: [],
+  learnQuiz: [],
   choiceQuiz: [],
 );

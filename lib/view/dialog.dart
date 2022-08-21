@@ -67,7 +67,7 @@ class SelectQuizDialog extends ConsumerWidget {
                           maxLines: 1,
                         ),
                         AutoSizeText(
-                          item.rememberQuiz.length.toString(),
+                          item.learnQuiz.length.toString(),
                           style: context.texts.titleMedium,
                           minFontSize: 20,
                           maxLines: 1,

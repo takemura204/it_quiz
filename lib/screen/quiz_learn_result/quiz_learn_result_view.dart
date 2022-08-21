@@ -1,10 +1,10 @@
-part of 'quiz_result_screen.dart';
+part of 'quiz_learn_result_screen.dart';
 
 ///正答率
 class _AnsRateView extends ConsumerWidget {
   const _AnsRateView(this.arguments);
 
-  final QuizResultScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +21,7 @@ class _AnsRateView extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    "正解結果",
+                    "正解数",
                     style: context.texts.subtitle1,
                   ),
                 ),
@@ -46,7 +46,7 @@ class _AnsRateView extends ConsumerWidget {
               ),
               const Text("/"),
               AutoSizeText(
-                arguments.item.rememberQuiz.length.toString(),
+                arguments.item.learnQuiz.length.toString(),
                 style: context.texts.bodyText1,
                 minFontSize: 16,
               ),
@@ -63,13 +63,13 @@ class _AnsRateView extends ConsumerWidget {
 class _UnKnowQuestionsView extends ConsumerWidget {
   const _UnKnowQuestionsView(this.arguments);
 
-  final QuizResultScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: ref
-              .watch(quizResultScreenControllerProvider)
+              .watch(quizLearnScreenControllerProvider)
               .unKnowRememberQuestions
               .isEmpty
           ? []
@@ -99,7 +99,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: ref
-                    .watch(quizResultScreenControllerProvider)
+                    .watch(quizLearnScreenControllerProvider)
                     .unKnowRememberQuestions
                     .length,
                 itemBuilder: (BuildContext context, int index) {
@@ -128,10 +128,10 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                               width: context.width * 0.65,
                               child: SubstringHighlight(
                                 text: ref
-                                    .watch(quizResultScreenControllerProvider)
+                                    .watch(quizLearnScreenControllerProvider)
                                     .knowRememberQuestions[index]
                                     .question,
-                                term: arguments.item.rememberQuiz[index].ans,
+                                term: arguments.item.learnQuiz[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
                                   fontWeight: FontWeight.w500,
@@ -149,7 +149,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                             GestureDetector(
                               onTap: () {
                                 ref
-                                    .read(quizResultScreenControllerProvider
+                                    .read(quizLearnScreenControllerProvider
                                         .notifier)
                                     .switchUnKnowCheckBox(arguments, index);
                                 ref
@@ -157,7 +157,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                         .notifier)
                                     .addRememberQuestions(ref
                                         .watch(
-                                            quizResultScreenControllerProvider)
+                                            quizLearnScreenControllerProvider)
                                         .unKnowRememberQuestions[index]);
                               },
                               child: Container(
@@ -168,7 +168,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                   child: Icon(
                                     ref
                                             .watch(
-                                                quizResultScreenControllerProvider)
+                                                quizLearnScreenControllerProvider)
                                             .unKnowRememberQuestions[index]
                                             .isWeak
                                         ? Icons.check_box_outlined
@@ -176,7 +176,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                     size: 30,
                                     color: ref
                                             .watch(
-                                                quizResultScreenControllerProvider)
+                                                quizLearnScreenControllerProvider)
                                             .unKnowRememberQuestions[index]
                                             .isWeak
                                         ? context.colors.main50
@@ -200,13 +200,13 @@ class _UnKnowQuestionsView extends ConsumerWidget {
 class _KnowQuestionsView extends ConsumerWidget {
   const _KnowQuestionsView(this.arguments);
 
-  final QuizResultScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: ref
-              .watch(quizResultScreenControllerProvider)
+              .watch(quizLearnScreenControllerProvider)
               .knowRememberQuestions
               .isEmpty
           ? []
@@ -236,7 +236,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: ref
-                    .watch(quizResultScreenControllerProvider)
+                    .watch(quizLearnScreenControllerProvider)
                     .knowRememberQuestions
                     .length,
                 itemBuilder: (BuildContext context, int index) {
@@ -265,10 +265,10 @@ class _KnowQuestionsView extends ConsumerWidget {
                               width: context.width * 0.65,
                               child: SubstringHighlight(
                                 text: ref
-                                    .watch(quizResultScreenControllerProvider)
+                                    .watch(quizLearnScreenControllerProvider)
                                     .knowRememberQuestions[index]
                                     .question,
-                                term: arguments.item.rememberQuiz[index].ans,
+                                term: arguments.item.learnQuiz[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
                                   fontWeight: FontWeight.w500,
@@ -286,7 +286,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                             GestureDetector(
                               onTap: () {
                                 ref
-                                    .read(quizResultScreenControllerProvider
+                                    .read(quizLearnScreenControllerProvider
                                         .notifier)
                                     .switchKnowCheckBox(index);
                               },
@@ -298,7 +298,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                                   child: Icon(
                                     ref
                                             .watch(
-                                                quizResultScreenControllerProvider)
+                                                quizLearnScreenControllerProvider)
                                             .knowRememberQuestions[index]
                                             .isWeak
                                         ? Icons.check_box_outlined
@@ -306,7 +306,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                                     size: 30,
                                     color: ref
                                             .watch(
-                                                quizResultScreenControllerProvider)
+                                                quizLearnScreenControllerProvider)
                                             .knowRememberQuestions[index]
                                             .isWeak
                                         ? context.colors.main50

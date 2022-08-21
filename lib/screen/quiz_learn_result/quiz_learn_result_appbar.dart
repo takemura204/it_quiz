@@ -1,9 +1,9 @@
-part of 'quiz_result_screen.dart';
+part of 'quiz_learn_result_screen.dart';
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.arguments);
 
-  final QuizResultScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,9 +20,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
             iconSize: 30,
             onPressed: () {
-              //2つ前の画面に戻る
-              int count = 0;
-              Navigator.popUntil(context, (route) => count++ >= 2);
+              //画面に戻る
+              Navigator.pop(context);
 
               //問題リセット
               ref

@@ -1,9 +1,9 @@
-part of 'quiz_result_screen.dart';
+part of 'quiz_learn_result_screen.dart';
 
 class _Body extends ConsumerWidget {
   const _Body(this.arguments);
 
-  final QuizResultScreenArguments arguments;
+  final QuizLearnScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
