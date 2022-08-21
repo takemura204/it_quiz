@@ -152,6 +152,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                     .read(quizLearnScreenControllerProvider
                                         .notifier)
                                     .switchUnKnowCheckBox(arguments, index);
+                                //復習リスト追加
                                 ref
                                     .read(homeReviewScreenControllerProvider
                                         .notifier)
