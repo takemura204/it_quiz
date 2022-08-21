@@ -67,11 +67,10 @@ class _UnKnowQuestionsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final unKnowRememberQuestions =
+        ref.watch(quizLearnScreenControllerProvider).unKnowRememberQuestions;
     return Column(
-      children: ref
-              .watch(quizLearnScreenControllerProvider)
-              .unKnowRememberQuestions
-              .isEmpty
+      children: unKnowRememberQuestions.isEmpty
           ? []
           : [
               Card(
@@ -98,10 +97,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: ref
-                    .watch(quizLearnScreenControllerProvider)
-                    .unKnowRememberQuestions
-                    .length,
+                itemCount: unKnowRememberQuestions.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -151,15 +147,13 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                 ref
                                     .read(quizLearnScreenControllerProvider
                                         .notifier)
-                                    .switchUnKnowCheckBox(arguments, index);
+                                    .switchUnKnowCheckBox(index);
                                 //復習リスト追加
                                 ref
                                     .read(homeReviewScreenControllerProvider
                                         .notifier)
-                                    .addRememberQuestions(ref
-                                        .watch(
-                                            quizLearnScreenControllerProvider)
-                                        .unKnowRememberQuestions[index]);
+                                    .addRememberQuestions(
+                                        unKnowRememberQuestions[index]);
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -167,19 +161,11 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Icon(
-                                    ref
-                                            .watch(
-                                                quizLearnScreenControllerProvider)
-                                            .unKnowRememberQuestions[index]
-                                            .isWeak
+                                    unKnowRememberQuestions[index].isWeak
                                         ? Icons.check_box_outlined
                                         : Icons.check_box_outline_blank,
                                     size: 30,
-                                    color: ref
-                                            .watch(
-                                                quizLearnScreenControllerProvider)
-                                            .unKnowRememberQuestions[index]
-                                            .isWeak
+                                    color: unKnowRememberQuestions[index].isWeak
                                         ? context.colors.main50
                                         : context.colors.dark26,
                                   ),
@@ -205,11 +191,10 @@ class _KnowQuestionsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final knowRememberQuestions =
+        ref.watch(quizLearnScreenControllerProvider).knowRememberQuestions;
     return Column(
-      children: ref
-              .watch(quizLearnScreenControllerProvider)
-              .knowRememberQuestions
-              .isEmpty
+      children: knowRememberQuestions.isEmpty
           ? []
           : [
               Card(
@@ -236,10 +221,7 @@ class _KnowQuestionsView extends ConsumerWidget {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: ref
-                    .watch(quizLearnScreenControllerProvider)
-                    .knowRememberQuestions
-                    .length,
+                itemCount: knowRememberQuestions.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -265,10 +247,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                             Container(
                               width: context.width * 0.65,
                               child: SubstringHighlight(
-                                text: ref
-                                    .watch(quizLearnScreenControllerProvider)
-                                    .knowRememberQuestions[index]
-                                    .question,
+                                text: knowRememberQuestions[index].question,
                                 term: arguments.item.learnQuiz[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
@@ -297,19 +276,11 @@ class _KnowQuestionsView extends ConsumerWidget {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Icon(
-                                    ref
-                                            .watch(
-                                                quizLearnScreenControllerProvider)
-                                            .knowRememberQuestions[index]
-                                            .isWeak
+                                    knowRememberQuestions[index].isWeak
                                         ? Icons.check_box_outlined
                                         : Icons.check_box_outline_blank,
                                     size: 30,
-                                    color: ref
-                                            .watch(
-                                                quizLearnScreenControllerProvider)
-                                            .knowRememberQuestions[index]
-                                            .isWeak
+                                    color: knowRememberQuestions[index].isWeak
                                         ? context.colors.main50
                                         : context.colors.dark26,
                                   ),

@@ -8,17 +8,18 @@ import '../home_review/home_review_screen_controller.dart';
 
 final quizLearnScreenControllerProvider =
     StateNotifierProvider<QuizLearnScreenController, QuizLearnScreenState>(
-  (ref) => QuizLearnScreenController(ref: ref),
+  (ref) => throw UnimplementedError(),
 );
 
 class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     with LocatorMixin {
-  QuizLearnScreenController({required this.ref})
+  QuizLearnScreenController({required this.ref, required this.arguments})
       : super(const QuizLearnScreenState()) {
     initState();
   }
 
   final Ref ref;
+  QuizLearnScreenArguments arguments;
 
   @override
   void dispose() {
@@ -32,27 +33,27 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///知ってるボタンを押したとき
-  void tapKnownButton(QuizLearnScreenArguments arguments) {
+  void tapKnownButton() {
     //知ってるリストに追加
-    addKnownQuestion(arguments);
+    addKnownQuestion();
     //次の問題
-    nextQuiz(arguments);
+    nextQuiz();
     // 答え画面切り替え
     switchAnsView();
     //「知ってる」にScore切り替え
-    switchKnowState(arguments);
+    switchKnowState();
   }
 
   ///知らないボタンを押した時
-  void tapUnKnownButton(QuizLearnScreenArguments arguments) {
+  void tapUnKnownButton() {
     //知らないリストに追加
-    addUnKnownQuestion(arguments);
+    addUnKnownQuestion();
     //次の問題
-    nextQuiz(arguments);
+    nextQuiz();
     //画面切り替え
     switchAnsView();
     //「知らない」に切り替え
-    switchUnKnowState(arguments);
+    switchUnKnowState();
   }
 
   ///クリアボタン
@@ -78,7 +79,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///次の問題に進む
-  void nextQuiz(QuizLearnScreenArguments arguments) {
+  void nextQuiz() {
     final quizIndex = state.quizIndex;
     final lapIndex = state.lapIndex;
     //問題が終わったが,「知ってる」リストに全て含まれていない場合
@@ -99,7 +100,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///知らないボタンを押した時の苦手リストに追加
-  void switchUnKnowState(QuizLearnScreenArguments arguments) {
+  void switchUnKnowState() {
     final rememberQuestions = [...arguments.item.learnQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
       rememberQuestions[state.quizIndex] = LearnQuiz(
@@ -114,7 +115,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///知らないボタンを押した時の苦手リストから解除
-  void switchKnowState(QuizLearnScreenArguments arguments) {
+  void switchKnowState() {
     final rememberQuestions = [...arguments.item.learnQuiz];
     if (!rememberQuestions[state.quizIndex].isWeak) {
       rememberQuestions[state.quizIndex] = LearnQuiz(
@@ -129,7 +130,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///知ってるリストに追加
-  void addKnownQuestion(QuizLearnScreenArguments arguments) {
+  void addKnownQuestion() {
     final knowRememberQuestions = [...state.knowRememberQuestions];
     final unKnowRememberQuestions = [...state.unKnowRememberQuestions];
 
@@ -154,7 +155,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///知らないリストに追加
-  void addUnKnownQuestion(QuizLearnScreenArguments arguments) {
+  void addUnKnownQuestion() {
     final knowRememberQuestions = [...state.knowRememberQuestions];
     final unKnowRememberQuestions = [...state.unKnowRememberQuestions];
 
@@ -208,7 +209,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///知らない問題のチェックボックス切り替え
-  void switchUnKnowCheckBox(QuizLearnScreenArguments arguments, int index) {
+  void switchUnKnowCheckBox(int index) {
     final unknowRememberQuestions = [...state.unKnowRememberQuestions];
     if (!unknowRememberQuestions[index].isWeak) {
       unknowRememberQuestions[index] = LearnQuiz(

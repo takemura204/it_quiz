@@ -164,7 +164,7 @@ class _ConfirmButton extends ConsumerWidget {
               GestureDetector(
                 onTap: () => ref
                     .read(quizLearnScreenControllerProvider.notifier)
-                    .tapUnKnownButton(arguments),
+                    .tapUnKnownButton(),
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
@@ -191,7 +191,7 @@ class _ConfirmButton extends ConsumerWidget {
                 onTap: () {
                   ref
                       .read(quizLearnScreenControllerProvider.notifier)
-                      .tapKnownButton(arguments);
+                      .tapKnownButton();
                   //「知っている」が全てになった時結果画面に遷移
                   if (ref
                           .watch(quizLearnScreenControllerProvider)
