@@ -157,6 +157,8 @@ class _SelectAnswer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
+    final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
+    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
     final choices = ref.watch(quizChoiceScreenControllerProvider).choices;
 
     return Container(
@@ -171,18 +173,27 @@ class _SelectAnswer extends ConsumerWidget {
               GestureDetector(
                 onTap: isAnsView
                     ? null
-                    : () {
-                        ref
-                            .read(quizChoiceScreenControllerProvider.notifier)
-                            .tapChoiceButton(choices[0]);
-                      },
+                    : () => ref
+                        .read(quizChoiceScreenControllerProvider.notifier)
+                        .tapChoiceButton(choices[0]),
                 child: Container(
                   width: context.width * 0.5,
                   height: context.height * 0.1,
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.5, color: Colors.black45)),
                   alignment: Alignment.center,
-                  child: Text(choices[0]),
+                  child: Text(
+                    choices[0],
+                    style: isAnsView
+                        ? TextStyle(
+                            fontWeight: FontWeight.w800,
+                            color: (choices[0] ==
+                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                ? Colors.green.withOpacity(0.7)
+                                : context.colors.main50.withOpacity(0.5),
+                          )
+                        : null,
+                  ),
                 ),
               ),
 
@@ -199,7 +210,18 @@ class _SelectAnswer extends ConsumerWidget {
                   width: context.width * 0.5,
                   height: context.height * 0.1,
                   alignment: Alignment.center,
-                  child: Text(choices[1]),
+                  child: Text(
+                    choices[1],
+                    style: isAnsView
+                        ? TextStyle(
+                            fontWeight: FontWeight.w800,
+                            color: (choices[1] ==
+                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                ? Colors.green.withOpacity(0.7)
+                                : context.colors.main50.withOpacity(0.5),
+                          )
+                        : null,
+                  ),
                 ),
               ),
             ],
@@ -219,7 +241,18 @@ class _SelectAnswer extends ConsumerWidget {
                   width: context.width * 0.5,
                   height: context.height * 0.1,
                   alignment: Alignment.center,
-                  child: Text(choices[2]),
+                  child: Text(
+                    choices[2],
+                    style: isAnsView
+                        ? TextStyle(
+                            fontWeight: FontWeight.w800,
+                            color: (choices[2] ==
+                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                ? Colors.green.withOpacity(0.7)
+                                : context.colors.main50.withOpacity(0.5),
+                          )
+                        : null,
+                  ),
                 ),
               ),
 
@@ -236,7 +269,18 @@ class _SelectAnswer extends ConsumerWidget {
                   width: context.width * 0.5,
                   height: context.height * 0.1,
                   alignment: Alignment.center,
-                  child: Text(choices[3]),
+                  child: Text(
+                    choices[3],
+                    style: isAnsView
+                        ? TextStyle(
+                            fontWeight: FontWeight.w800,
+                            color: (choices[3] ==
+                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                ? Colors.green.withOpacity(0.7)
+                                : context.colors.main50.withOpacity(0.5),
+                          )
+                        : null,
+                  ),
                 ),
               ),
             ],
@@ -266,15 +310,12 @@ class _JudgeIcon extends ConsumerWidget {
               child: isJudge
                   ? Icon(
                       Icons.circle_outlined,
-                      color: Colors.green.withOpacity(0.7),
+                      color: Colors.green.withOpacity(0.6),
                       size: context.width * 1.0,
                     )
-                  : Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: Icon(Icons.clear,
-                          color: context.colors.main50.withOpacity(0.5),
-                          size: context.width * 1.0),
-                    ),
+                  : Icon(Icons.clear,
+                      color: context.colors.main50.withOpacity(0.6),
+                      size: context.width * 1.0),
             ),
           )
         : const SizedBox.shrink();

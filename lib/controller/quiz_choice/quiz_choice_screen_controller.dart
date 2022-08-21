@@ -6,7 +6,8 @@ import '../../screen/screen_argument.dart';
 
 final quizChoiceScreenControllerProvider =
     StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
-        (ref) => throw UnimplementedError());
+  (ref) => throw UnimplementedError(),
+);
 
 class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     with LocatorMixin {
@@ -21,7 +22,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void initState() {
     //選択肢表示
     shuffleChoice();
-    print("initState");
+    print({"QuizChoiceScreenController", "initState"});
     super.initState();
   }
 
@@ -78,7 +79,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void nextQuiz() {
     final quizIndex = state.quizIndex;
     if (quizIndex == arguments.item.choiceQuiz.length - 1) {
-      print("終わり!");
+      print("終了!");
       state = state.copyWith(quizIndex: 0);
     } else {
       state = state.copyWith(quizIndex: quizIndex + 1);
