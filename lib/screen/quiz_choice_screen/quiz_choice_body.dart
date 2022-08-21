@@ -7,34 +7,39 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
+    return Stack(
       children: [
-        ///問題形式タイトル
-        _QuizStyleTitle(arguments),
-        const Spacer(),
+        Column(
+          children: [
+            ///問題形式タイトル
+            _QuizStyleTitle(arguments),
+            const Spacer(),
 
-        ///問題画面
-        Card(
-          elevation: 3,
-          child: Container(
-            width: context.width * 0.85,
-            height: context.height * 0.45,
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                ///問題文
-                _Question(arguments),
+            ///問題画面
+            Card(
+              elevation: 3,
+              child: Container(
+                width: context.width * 0.85,
+                height: context.height * 0.45,
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    ///問題文
+                    _Question(arguments),
 
-                ///進捗状況
-                _QuizProgress(arguments),
-              ],
+                    ///進捗状況
+                    _QuizProgress(arguments),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-        const Spacer(),
+            const Spacer(),
 
-        ///選択肢
-        _SelectAnswer(arguments),
+            ///選択肢
+            _SelectAnswer(arguments),
+          ],
+        ),
+        _JudgeIcon(arguments),
       ],
     );
   }
