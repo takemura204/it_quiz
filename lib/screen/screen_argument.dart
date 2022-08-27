@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
-import 'package:kentei_quiz/screen/quiz_learn/quiz_learn_screen.dart';
+import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 
 import '../resource/controller/screen_argument_resource.dart';
 

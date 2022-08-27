@@ -22,7 +22,6 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void initState() {
     //選択肢表示
     shuffleChoice();
-    print({"QuizChoiceScreenController", "initState"});
     super.initState();
   }
 
@@ -52,23 +51,29 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ判定
   void judgementQuiz(String choice) {
-    final choiceQuiz = [...arguments.item.choiceQuiz];
+    final choiceQuiz = [...arguments.item.choiceQuiz][state.quizIndex];
+    final correctList = [...state.correctList];
+    final incorrectList = [...state.incorrectList];
+
     //正誤
-    if (choice == choiceQuiz[state.quizIndex].ans) {
+    if (choice == choiceQuiz.ans) {
       //スコア反映
-      state = state.copyWith(isJudge: true);
+      correctList.add(choiceQuiz);
+      print("correctList");
+      state = state.copyWith(isJudge: true, correctList: correctList);
     }
     //不正解
     else {
-      state = state.copyWith(isJudge: false);
+      incorrectList.add(choiceQuiz);
+      print("incorrectList");
+      state = state.copyWith(isJudge: false, incorrectList: incorrectList);
     }
   }
 
   ///正解表示
   void switchAnsView() {
     state = state.copyWith(isAnsView: true);
-
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 800), () {
       state = state.copyWith(isAnsView: false);
       //次のクイズ
       nextQuiz();
@@ -80,10 +85,26 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final quizIndex = state.quizIndex;
     if (quizIndex == arguments.item.choiceQuiz.length - 1) {
       print("終了!");
-      state = state.copyWith(quizIndex: 0);
+      state = state.copyWith(quizIndex: 0, isResultScreen: true);
     } else {
       state = state.copyWith(quizIndex: quizIndex + 1);
     }
     shuffleChoice();
+  }
+
+  ///クリアボタン
+  void tapClearButton() {
+    state = state.copyWith(
+      quizIndex: 0,
+      isAnsView: false,
+      isResultScreen: false,
+      correctList: [],
+      incorrectList: [],
+    );
+  }
+
+  ///結果画面に切り替え
+  void switchResultScreen() {
+    state = state.copyWith(isResultScreen: !state.isResultScreen);
   }
 }

@@ -41,8 +41,8 @@ const $QuizLearnScreenState = _$QuizLearnScreenStateTearOff();
 
 /// @nodoc
 mixin _$QuizLearnScreenState {
-  bool get isAnsView => throw _privateConstructorUsedError;
-  bool get isResultScreen => throw _privateConstructorUsedError;
+  bool get isAnsView => throw _privateConstructorUsedError; //正解画面切り替え
+  bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
   List<LearnQuiz> get knowRememberQuestions =>
@@ -195,10 +195,10 @@ class _$_Create extends _Create {
   @override
   final bool isAnsView;
   @JsonKey()
-  @override
+  @override //正解画面切り替え
   final bool isResultScreen;
   @JsonKey()
-  @override
+  @override //結果画面切り替え
   final int quizIndex;
   @JsonKey()
   @override //問題番号
@@ -259,9 +259,9 @@ abstract class _Create extends QuizLearnScreenState {
 
   @override
   bool get isAnsView;
-  @override
+  @override //正解画面切り替え
   bool get isResultScreen;
-  @override
+  @override //結果画面切り替え
   int get quizIndex;
   @override //問題番号
   int get lapIndex;

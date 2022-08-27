@@ -21,16 +21,20 @@ class _$QuizChoiceScreenStateTearOff {
   _Create call(
       {bool isAnsView = false,
       bool isJudge = false,
+      bool isResultScreen = false,
       int quizIndex = 0,
       List<String> choices = const [],
-      List<ChoiceQuiz> choicesQuiz = const [],
+      List<ChoiceQuiz> correctList = const [],
+      List<ChoiceQuiz> incorrectList = const [],
       List<ChoiceQuiz> reviewList = const []}) {
     return _Create(
       isAnsView: isAnsView,
       isJudge: isJudge,
+      isResultScreen: isResultScreen,
       quizIndex: quizIndex,
       choices: choices,
-      choicesQuiz: choicesQuiz,
+      correctList: correctList,
+      incorrectList: incorrectList,
       reviewList: reviewList,
     );
   }
@@ -43,9 +47,13 @@ const $QuizChoiceScreenState = _$QuizChoiceScreenStateTearOff();
 mixin _$QuizChoiceScreenState {
   bool get isAnsView => throw _privateConstructorUsedError; //答え表示
   bool get isJudge => throw _privateConstructorUsedError; //正解判定
+  bool get isResultScreen => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
-  List<ChoiceQuiz> get choicesQuiz => throw _privateConstructorUsedError; //クイズ
+  List<ChoiceQuiz> get correctList =>
+      throw _privateConstructorUsedError; //正解リスト
+  List<ChoiceQuiz> get incorrectList =>
+      throw _privateConstructorUsedError; //不正解リスト
   List<ChoiceQuiz> get reviewList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -61,9 +69,11 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
   $Res call(
       {bool isAnsView,
       bool isJudge,
+      bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<ChoiceQuiz> choicesQuiz,
+      List<ChoiceQuiz> correctList,
+      List<ChoiceQuiz> incorrectList,
       List<ChoiceQuiz> reviewList});
 }
 
@@ -80,9 +90,11 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? isAnsView = freezed,
     Object? isJudge = freezed,
+    Object? isResultScreen = freezed,
     Object? quizIndex = freezed,
     Object? choices = freezed,
-    Object? choicesQuiz = freezed,
+    Object? correctList = freezed,
+    Object? incorrectList = freezed,
     Object? reviewList = freezed,
   }) {
     return _then(_value.copyWith(
@@ -94,6 +106,10 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res>
           ? _value.isJudge
           : isJudge // ignore: cast_nullable_to_non_nullable
               as bool,
+      isResultScreen: isResultScreen == freezed
+          ? _value.isResultScreen
+          : isResultScreen // ignore: cast_nullable_to_non_nullable
+              as bool,
       quizIndex: quizIndex == freezed
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
@@ -102,9 +118,13 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res>
           ? _value.choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      choicesQuiz: choicesQuiz == freezed
-          ? _value.choicesQuiz
-          : choicesQuiz // ignore: cast_nullable_to_non_nullable
+      correctList: correctList == freezed
+          ? _value.correctList
+          : correctList // ignore: cast_nullable_to_non_nullable
+              as List<ChoiceQuiz>,
+      incorrectList: incorrectList == freezed
+          ? _value.incorrectList
+          : incorrectList // ignore: cast_nullable_to_non_nullable
               as List<ChoiceQuiz>,
       reviewList: reviewList == freezed
           ? _value.reviewList
@@ -123,9 +143,11 @@ abstract class _$CreateCopyWith<$Res>
   $Res call(
       {bool isAnsView,
       bool isJudge,
+      bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<ChoiceQuiz> choicesQuiz,
+      List<ChoiceQuiz> correctList,
+      List<ChoiceQuiz> incorrectList,
       List<ChoiceQuiz> reviewList});
 }
 
@@ -143,9 +165,11 @@ class __$CreateCopyWithImpl<$Res>
   $Res call({
     Object? isAnsView = freezed,
     Object? isJudge = freezed,
+    Object? isResultScreen = freezed,
     Object? quizIndex = freezed,
     Object? choices = freezed,
-    Object? choicesQuiz = freezed,
+    Object? correctList = freezed,
+    Object? incorrectList = freezed,
     Object? reviewList = freezed,
   }) {
     return _then(_Create(
@@ -157,6 +181,10 @@ class __$CreateCopyWithImpl<$Res>
           ? _value.isJudge
           : isJudge // ignore: cast_nullable_to_non_nullable
               as bool,
+      isResultScreen: isResultScreen == freezed
+          ? _value.isResultScreen
+          : isResultScreen // ignore: cast_nullable_to_non_nullable
+              as bool,
       quizIndex: quizIndex == freezed
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
@@ -165,9 +193,13 @@ class __$CreateCopyWithImpl<$Res>
           ? _value.choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      choicesQuiz: choicesQuiz == freezed
-          ? _value.choicesQuiz
-          : choicesQuiz // ignore: cast_nullable_to_non_nullable
+      correctList: correctList == freezed
+          ? _value.correctList
+          : correctList // ignore: cast_nullable_to_non_nullable
+              as List<ChoiceQuiz>,
+      incorrectList: incorrectList == freezed
+          ? _value.incorrectList
+          : incorrectList // ignore: cast_nullable_to_non_nullable
               as List<ChoiceQuiz>,
       reviewList: reviewList == freezed
           ? _value.reviewList
@@ -183,9 +215,11 @@ class _$_Create extends _Create {
   const _$_Create(
       {this.isAnsView = false,
       this.isJudge = false,
+      this.isResultScreen = false,
       this.quizIndex = 0,
       this.choices = const [],
-      this.choicesQuiz = const [],
+      this.correctList = const [],
+      this.incorrectList = const [],
       this.reviewList = const []})
       : super._();
 
@@ -197,20 +231,26 @@ class _$_Create extends _Create {
   final bool isJudge;
   @JsonKey()
   @override //正解判定
+  final bool isResultScreen;
+  @JsonKey()
+  @override
   final int quizIndex;
   @JsonKey()
   @override //問題番号
   final List<String> choices;
   @JsonKey()
   @override //選択肢
-  final List<ChoiceQuiz> choicesQuiz;
+  final List<ChoiceQuiz> correctList;
   @JsonKey()
-  @override //クイズ
+  @override //正解リスト
+  final List<ChoiceQuiz> incorrectList;
+  @JsonKey()
+  @override //不正解リスト
   final List<ChoiceQuiz> reviewList;
 
   @override
   String toString() {
-    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, quizIndex: $quizIndex, choices: $choices, choicesQuiz: $choicesQuiz, reviewList: $reviewList)';
+    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, choices: $choices, correctList: $correctList, incorrectList: $incorrectList, reviewList: $reviewList)';
   }
 
   @override
@@ -220,10 +260,14 @@ class _$_Create extends _Create {
             other is _Create &&
             const DeepCollectionEquality().equals(other.isAnsView, isAnsView) &&
             const DeepCollectionEquality().equals(other.isJudge, isJudge) &&
+            const DeepCollectionEquality()
+                .equals(other.isResultScreen, isResultScreen) &&
             const DeepCollectionEquality().equals(other.quizIndex, quizIndex) &&
             const DeepCollectionEquality().equals(other.choices, choices) &&
             const DeepCollectionEquality()
-                .equals(other.choicesQuiz, choicesQuiz) &&
+                .equals(other.correctList, correctList) &&
+            const DeepCollectionEquality()
+                .equals(other.incorrectList, incorrectList) &&
             const DeepCollectionEquality()
                 .equals(other.reviewList, reviewList));
   }
@@ -233,9 +277,11 @@ class _$_Create extends _Create {
       runtimeType,
       const DeepCollectionEquality().hash(isAnsView),
       const DeepCollectionEquality().hash(isJudge),
+      const DeepCollectionEquality().hash(isResultScreen),
       const DeepCollectionEquality().hash(quizIndex),
       const DeepCollectionEquality().hash(choices),
-      const DeepCollectionEquality().hash(choicesQuiz),
+      const DeepCollectionEquality().hash(correctList),
+      const DeepCollectionEquality().hash(incorrectList),
       const DeepCollectionEquality().hash(reviewList));
 
   @JsonKey(ignore: true)
@@ -248,9 +294,11 @@ abstract class _Create extends QuizChoiceScreenState {
   const factory _Create(
       {bool isAnsView,
       bool isJudge,
+      bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<ChoiceQuiz> choicesQuiz,
+      List<ChoiceQuiz> correctList,
+      List<ChoiceQuiz> incorrectList,
       List<ChoiceQuiz> reviewList}) = _$_Create;
   const _Create._() : super._();
 
@@ -259,12 +307,16 @@ abstract class _Create extends QuizChoiceScreenState {
   @override //答え表示
   bool get isJudge;
   @override //正解判定
+  bool get isResultScreen;
+  @override
   int get quizIndex;
   @override //問題番号
   List<String> get choices;
   @override //選択肢
-  List<ChoiceQuiz> get choicesQuiz;
-  @override //クイズ
+  List<ChoiceQuiz> get correctList;
+  @override //正解リスト
+  List<ChoiceQuiz> get incorrectList;
+  @override //不正解リスト
   List<ChoiceQuiz> get reviewList;
   @override
   @JsonKey(ignore: true)

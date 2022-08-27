@@ -1,9 +1,9 @@
-part of 'quiz_learn_result_screen.dart';
+part of 'quiz_choice_result_screen.dart';
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.arguments);
 
-  final QuizLearnScreenArguments arguments;
+  final QuizChoiceScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +22,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             onPressed: () {
               //画面に戻る
               Navigator.pop(context);
-
               //問題リセット
               ref
                   .read(quizLearnScreenControllerProvider.notifier)
