@@ -24,7 +24,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
               Navigator.pop(context);
               //問題リセット
               ref
-                  .read(quizLearnScreenControllerProvider.notifier)
+                  .read(quizChoiceScreenControllerProvider.notifier)
                   .tapClearButton();
             },
             icon: const Icon(

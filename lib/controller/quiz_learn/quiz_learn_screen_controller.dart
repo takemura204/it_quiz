@@ -182,6 +182,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   ///知っている問題のチェックボックス切り替え
   void switchKnowCheckBox(int index) {
     final knowRememberQuestions = [...state.knowRememberQuestions];
+    //チェックした時
     if (!knowRememberQuestions[index].isWeak) {
       knowRememberQuestions[index] = LearnQuiz(
         quizId: knowRememberQuestions[index].quizId,
@@ -189,21 +190,23 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         ans: knowRememberQuestions[index].ans,
         isWeak: true,
       );
+      //復習リストに追加
       ref
           .read(homeReviewScreenControllerProvider.notifier)
-          .addRememberQuestions(knowRememberQuestions[index]);
-    } else if (knowRememberQuestions[index].isWeak) {
+          .addLearnQuiz(knowRememberQuestions[index]);
+    }
+    //チェックしてない時
+    else {
       knowRememberQuestions[index] = LearnQuiz(
         quizId: knowRememberQuestions[index].quizId,
         question: knowRememberQuestions[index].question,
         ans: knowRememberQuestions[index].ans,
         isWeak: false,
       );
+      //復習リストから除外
       ref
           .read(homeReviewScreenControllerProvider.notifier)
-          .removeRememberQuestions(knowRememberQuestions[index]);
-    } else {
-      return;
+          .removeLearnQuiz(knowRememberQuestions[index]);
     }
     state = state.copyWith(knowRememberQuestions: knowRememberQuestions);
   }

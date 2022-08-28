@@ -1,8 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart';
+import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../screen/screen_argument.dart';
+import '../home_review/home_review_screen_controller.dart';
 
 final quizChoiceScreenControllerProvider =
     StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
@@ -59,13 +61,11 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     if (choice == choiceQuiz.ans) {
       //スコア反映
       correctList.add(choiceQuiz);
-      print("correctList");
       state = state.copyWith(isJudge: true, correctList: correctList);
     }
     //不正解
     else {
       incorrectList.add(choiceQuiz);
-      print("incorrectList");
       state = state.copyWith(isJudge: false, incorrectList: incorrectList);
     }
   }
@@ -106,5 +106,70 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///結果画面に切り替え
   void switchResultScreen() {
     state = state.copyWith(isResultScreen: !state.isResultScreen);
+  }
+
+  ///チェックボックス切り替え(正解リスト)
+  void tapCorrectCheckBox(int index) {
+    final correctList = [...state.correctList];
+    //チェックした時
+    if (!correctList[index].isWeak) {
+      correctList[index] = ChoiceQuiz(
+        quizId: correctList[index].quizId,
+        question: correctList[index].question,
+        ans: correctList[index].ans,
+        choices: correctList[index].choices,
+        isWeak: true,
+      );
+      //復習リストに追加
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .addChoiceQuiz(correctList[index]);
+    }
+    //チェックしてない時
+    else {
+      correctList[index] = ChoiceQuiz(
+        quizId: correctList[index].quizId,
+        question: correctList[index].question,
+        ans: correctList[index].ans,
+        choices: correctList[index].choices,
+        isWeak: false,
+      );
+    }
+    state = state.copyWith(correctList: correctList);
+  }
+
+  ///チェックボックス切り替え(不正解リスト)
+  void tapIncorrectCheckBox(int index) {
+    final incorrectList = [...state.incorrectList];
+    //チェックした時
+    if (!incorrectList[index].isWeak) {
+      incorrectList[index] = ChoiceQuiz(
+        quizId: incorrectList[index].quizId,
+        question: incorrectList[index].question,
+        ans: incorrectList[index].ans,
+        choices: incorrectList[index].choices,
+        isWeak: true,
+      );
+      //復習リストに追加
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .addChoiceQuiz(incorrectList[index]);
+    }
+    //チェックしてない時
+    else {
+      incorrectList[index] = ChoiceQuiz(
+        quizId: incorrectList[index].quizId,
+        question: incorrectList[index].question,
+        ans: incorrectList[index].ans,
+        choices: incorrectList[index].choices,
+        isWeak: false,
+      );
+
+      //復習リストから削除
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .removeChoiceQuiz(incorrectList[index]);
+    }
+    state = state.copyWith(incorrectList: incorrectList);
   }
 }

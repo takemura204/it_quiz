@@ -9,6 +9,7 @@ import '../../resource/lang/initial_resource.dart';
 import '../screen_argument.dart';
 
 part 'home_review_body.dart';
+part 'home_review_view.dart';
 
 class HomeReviewScreen extends ConsumerWidget {
   const HomeReviewScreen();
@@ -16,14 +17,6 @@ class HomeReviewScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const ProviderScope(
-      // overrides: [
-      //   homeReviewScreenControllerProvider.overrideWithProvider(
-      //     StateNotifierProvider<HomeReviewScreenController,
-      //         HomeReviewScreenState>(
-      //       (ref) => HomeReviewScreenController(ref: ref),
-      //     ),
-      //   ),
-      // ],
       child: _Body(),
     );
   }

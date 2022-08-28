@@ -20,7 +20,8 @@ class I18n {
   String get styleTrueFalseQuiz => "◯×クイズで挑戦する";
 
   ///「復習形式」
-  String get quizReview => "一問一答復習する";
+  String get reviewLearnQuiz => "一問一答を復習する";
+  String get reviewChoiceQuiz => "選択問題を復習する";
 
   ///Button
   String get buttonConfirm => "確認する";

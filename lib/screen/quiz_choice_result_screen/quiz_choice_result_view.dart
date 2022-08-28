@@ -139,16 +139,15 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                             const Spacer(),
                             GestureDetector(
                               onTap: () {
-                                // ref
-                                //     .read(quizLearnScreenControllerProvider
-                                //         .notifier)
-                                //     .switchUnKnowCheckBox(index);
+                                ref
+                                    .read(quizChoiceScreenControllerProvider
+                                        .notifier)
+                                    .tapIncorrectCheckBox(index);
                                 // //復習リスト追加
                                 // ref
                                 //     .read(homeReviewScreenControllerProvider
                                 //         .notifier)
-                                //     .addRememberQuestions(
-                                //         unKnowRememberQuestions[index]);
+                                //     .addLearnQuiz(incorrectList[index]);
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -243,7 +242,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                               width: context.width * 0.65,
                               child: SubstringHighlight(
                                 text: correctList[index].question,
-                                term: arguments.item.learnQuiz[index].ans,
+                                term: correctList[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
                                   fontWeight: FontWeight.w500,
@@ -261,9 +260,9 @@ class _KnowQuestionsView extends ConsumerWidget {
                             GestureDetector(
                               onTap: () {
                                 ref
-                                    .read(quizLearnScreenControllerProvider
+                                    .read(quizChoiceScreenControllerProvider
                                         .notifier)
-                                    .switchKnowCheckBox(index);
+                                    .tapCorrectCheckBox(index);
                               },
                               child: Container(
                                 alignment: Alignment.center,

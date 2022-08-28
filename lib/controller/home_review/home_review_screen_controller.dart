@@ -19,6 +19,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   @override
   void initState() {
     addItem();
+    super.initState();
   }
 
   @override
@@ -26,76 +27,112 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     super.dispose();
   }
 
-  void onTapItem(int id) {
-    print(id);
-  }
-
-  ///苦手リストに追加
-  void addRememberQuestions(LearnQuiz checkQuiz) {
-    final reviewQuizList = [...state.reviewQuestions];
-    final rememberItem = state.reviewItem;
-
-    if (reviewQuizList.any((x) => x.question == checkQuiz.question)) {
-      print("同じクイズだよ！");
-      return;
-    }
-
-    reviewQuizList.add(checkQuiz);
-
-    rememberItem[0] = QuizItem(
-      id: 1,
-      group: "rememberQuestions",
-      title: "一問一答で復習する",
-      learnQuiz: reviewQuizList,
-      choiceQuiz: [],
-    );
-
-    state = state.copyWith(
-        reviewQuestions: reviewQuizList, reviewItem: rememberItem);
-  }
-
-  ///苦手リストから削除
-  void removeRememberQuestions(LearnQuiz checkQuiz) {
-    final reviewQuizList = [...state.reviewQuestions];
-    reviewQuizList.remove(
-        reviewQuizList.where((x) => x.question == checkQuiz.question).first);
-
-    final rememberItem = state.reviewItem;
-    rememberItem[0] = QuizItem(
-      id: 1,
-      group: "rememberQuestions",
-      title: "一問一答で復習する",
-      learnQuiz: reviewQuizList,
-      choiceQuiz: [],
-    );
-
-    state = state.copyWith(
-        reviewQuestions: reviewQuizList, reviewItem: rememberItem);
-  }
-
   void addItem() {
     final reviewItem = [...state.reviewItem];
     reviewItem.addAll(
       [
-        reviewItem1,
-        reviewItem2,
+        reviewLearnQuiz,
+        reviewChoiceQuiz,
       ],
     );
     state = state.copyWith(reviewItem: reviewItem);
   }
+
+  ///一問一答リストに追加
+  void addLearnQuiz(LearnQuiz learnQuiz) {
+    final learnList = [...state.learnList];
+    final rememberItem = state.reviewItem;
+
+    if (learnList.any((x) => x.question == learnQuiz.question)) {
+      print("同じクイズだよ！");
+      return;
+    }
+
+    learnList.add(learnQuiz);
+
+    //reviewLearnQuizに追加
+    rememberItem[0] = QuizItem(
+      id: 1,
+      group: "rememberQuestions",
+      title: "一問一答で復習する",
+      learnQuiz: learnList,
+      choiceQuiz: [],
+    );
+
+    state = state.copyWith(learnList: learnList, reviewItem: rememberItem);
+  }
+
+  ///一問一答リストから削除
+  void removeLearnQuiz(LearnQuiz learnQuiz) {
+    final learnList = [...state.learnList];
+    final rememberItem = state.reviewItem;
+    learnList
+        .remove(learnList.where((x) => x.question == learnQuiz.question).first);
+    rememberItem[0] = QuizItem(
+      id: 1,
+      group: "rememberQuestions",
+      title: "一問一答で復習する",
+      learnQuiz: learnList,
+      choiceQuiz: [],
+    );
+
+    state = state.copyWith(learnList: learnList, reviewItem: rememberItem);
+  }
+
+  ///4択リストに追加
+  void addChoiceQuiz(ChoiceQuiz choiceQuiz) {
+    final choiceList = [...state.choiceList];
+    final rememberItem = state.reviewItem;
+
+    if (choiceList.any((x) => x.question == choiceQuiz.question)) {
+      print("同じクイズだよ！");
+      return;
+    }
+
+    choiceList.add(choiceQuiz);
+
+    rememberItem[1] = QuizItem(
+      id: 2,
+      group: "LearnQuiz",
+      title: "一問一答で復習する",
+      learnQuiz: [],
+      choiceQuiz: choiceList,
+    );
+
+    state = state.copyWith(choiceList: choiceList, reviewItem: rememberItem);
+  }
+
+  ///4択リストから削除
+  void removeChoiceQuiz(ChoiceQuiz choiceQuiz) {
+    final choiceList = [...state.choiceList];
+    final reviewItem = state.reviewItem;
+    choiceList.remove(
+        choiceList.where((x) => x.question == choiceQuiz.question).first);
+
+    //選択問題に追加
+    reviewItem[1] = QuizItem(
+      id: 2,
+      group: "ChoiceQuiz",
+      title: "一問一答で復習する",
+      learnQuiz: [],
+      choiceQuiz: choiceList,
+    );
+
+    state = state.copyWith(choiceList: choiceList, reviewItem: reviewItem);
+  }
 }
 
-const reviewItem1 = QuizItem(
+const reviewLearnQuiz = QuizItem(
   id: 1,
-  group: "rememberQuestions",
+  group: "LearnQuiz",
   title: "一問一答で復習する",
   learnQuiz: [],
   choiceQuiz: [],
 );
 
-const reviewItem2 = QuizItem(
+const reviewChoiceQuiz = QuizItem(
   id: 2,
-  group: "rememberQuestions",
+  group: "ChoiceQuiz",
   title: "一問一答で復習する2",
   learnQuiz: [],
   choiceQuiz: [],

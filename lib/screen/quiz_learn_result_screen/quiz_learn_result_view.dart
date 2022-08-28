@@ -152,7 +152,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                 ref
                                     .read(homeReviewScreenControllerProvider
                                         .notifier)
-                                    .addRememberQuestions(
+                                    .addLearnQuiz(
                                         unKnowRememberQuestions[index]);
                               },
                               child: Container(
