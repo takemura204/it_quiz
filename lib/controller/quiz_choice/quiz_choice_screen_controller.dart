@@ -53,19 +53,31 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ判定
   void judgementQuiz(String choice) {
-    final choiceQuiz = [...arguments.item.choiceQuiz][state.quizIndex];
+    final choiceQuiz = [...arguments.item.choiceQuiz];
     final correctList = [...state.correctList];
     final incorrectList = [...state.incorrectList];
 
     //正誤
-    if (choice == choiceQuiz.ans) {
+    if (choice == choiceQuiz[state.quizIndex].ans) {
       //スコア反映
-      correctList.add(choiceQuiz);
+      correctList.add(choiceQuiz[state.quizIndex]);
       state = state.copyWith(isJudge: true, correctList: correctList);
     }
     //不正解
     else {
-      incorrectList.add(choiceQuiz);
+      choiceQuiz[state.quizIndex] = ChoiceQuiz(
+        quizId: choiceQuiz[state.quizIndex].quizId,
+        question: choiceQuiz[state.quizIndex].question,
+        ans: choiceQuiz[state.quizIndex].ans,
+        choices: choiceQuiz[state.quizIndex].choices,
+        isWeak: true,
+      );
+      incorrectList.add(choiceQuiz[state.quizIndex]);
+      //復習リストに追加
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .addChoiceQuiz(choiceQuiz[state.quizIndex]);
+
       state = state.copyWith(isJudge: false, incorrectList: incorrectList);
     }
   }

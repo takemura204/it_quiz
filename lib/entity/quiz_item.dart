@@ -46,3 +46,18 @@ class ChoiceQuiz {
       required this.isWeak,
       required this.choices});
 }
+
+///○×形式
+class TrueFalseQuiz {
+  final int quizId; //問題番号
+  final String question; //問題文
+  final String ans; //答え
+  final bool isWeak; //問題を知っているか？
+
+  const TrueFalseQuiz({
+    required this.quizId,
+    required this.question,
+    required this.ans,
+    required this.isWeak,
+  });
+}

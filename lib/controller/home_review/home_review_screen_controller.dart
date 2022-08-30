@@ -42,9 +42,8 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   void addLearnQuiz(LearnQuiz learnQuiz) {
     final learnList = [...state.learnList];
     final rememberItem = state.reviewItem;
-
+    //同じクイズの時
     if (learnList.any((x) => x.question == learnQuiz.question)) {
-      print("同じクイズだよ！");
       return;
     }
 
@@ -84,8 +83,8 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final choiceList = [...state.choiceList];
     final rememberItem = state.reviewItem;
 
+    //同じクイズの時
     if (choiceList.any((x) => x.question == choiceQuiz.question)) {
-      print("同じクイズだよ！");
       return;
     }
 
