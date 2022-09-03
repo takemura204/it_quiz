@@ -42,7 +42,7 @@ class _Question extends ConsumerWidget {
     final isAns = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
 
     return Container(
-      height: context.height * 0.40,
+      height: context.height * 0.45,
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [

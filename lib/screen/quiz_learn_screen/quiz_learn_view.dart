@@ -41,7 +41,7 @@ class _Question extends ConsumerWidget {
     final isAns = ref.watch(quizLearnScreenControllerProvider).isAnsView;
 
     return Container(
-      height: context.height * 0.35,
+      height: context.height * 0.45,
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
@@ -250,7 +250,7 @@ class _LapInfoBar extends ConsumerWidget {
       elevation: 3,
       margin: const EdgeInsets.all(0),
       child: Container(
-        height: context.height * 0.06,
+        height: context.height * 0.1,
         alignment: Alignment.center,
         color: Colors.white70,
         child: Row(

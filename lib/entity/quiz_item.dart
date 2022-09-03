@@ -5,7 +5,8 @@ class QuizItem {
   final String title; //問題タイトル
   ///問題形式
   final List<LearnQuiz> learnQuiz; //学習形式
-  final List<ChoiceQuiz> choiceQuiz; //学習形式
+  final List<ChoiceQuiz> choiceQuiz; //4択形式
+  final List<TrueFalseQuiz> trueFalseQuiz;
 
   const QuizItem({
     required this.id,
@@ -13,6 +14,7 @@ class QuizItem {
     required this.title,
     required this.learnQuiz,
     required this.choiceQuiz,
+    required this.trueFalseQuiz,
   });
 }
 
@@ -37,7 +39,7 @@ class ChoiceQuiz {
   final String question; //問題文
   final String ans; //答え
   final bool isWeak; //問題を知っているか？
-  final List<String> choices;
+  final List<String> choices; //選択肢
 
   const ChoiceQuiz(
       {required this.quizId,
@@ -53,11 +55,13 @@ class TrueFalseQuiz {
   final String question; //問題文
   final String ans; //答え
   final bool isWeak; //問題を知っているか？
+  final List<String> choices; //選択肢
 
   const TrueFalseQuiz({
     required this.quizId,
     required this.question,
     required this.ans,
     required this.isWeak,
+    required this.choices,
   });
 }

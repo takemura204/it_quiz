@@ -56,6 +56,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       learnQuiz: learnList,
       choiceQuiz: [],
+      trueFalseQuiz: [],
     );
 
     state = state.copyWith(learnList: learnList, reviewItem: rememberItem);
@@ -73,6 +74,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       learnQuiz: learnList,
       choiceQuiz: [],
+      trueFalseQuiz: [],
     );
 
     state = state.copyWith(learnList: learnList, reviewItem: rememberItem);
@@ -96,6 +98,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       learnQuiz: [],
       choiceQuiz: choiceList,
+      trueFalseQuiz: [],
     );
 
     state = state.copyWith(choiceList: choiceList, reviewItem: rememberItem);
@@ -115,6 +118,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       learnQuiz: [],
       choiceQuiz: choiceList,
+      trueFalseQuiz: [],
     );
 
     state = state.copyWith(choiceList: choiceList, reviewItem: reviewItem);
@@ -127,6 +131,7 @@ const reviewLearnQuiz = QuizItem(
   title: "一問一答で復習する",
   learnQuiz: [],
   choiceQuiz: [],
+  trueFalseQuiz: [],
 );
 
 const reviewChoiceQuiz = QuizItem(
@@ -135,4 +140,5 @@ const reviewChoiceQuiz = QuizItem(
   title: "一問一答で復習する2",
   learnQuiz: [],
   choiceQuiz: [],
+  trueFalseQuiz: [],
 );

@@ -7,18 +7,24 @@ final List<TrueFalseQuiz> tureFalseQuiz1 = [
     question: '1 + 1 = 2',
     ans: '2',
     isWeak: false,
+    choices: ["2", "3", "4"],
   ),
   const TrueFalseQuiz(
-    quizId: 2,
-    question: '更新世は氷河時代とも呼ばれる',
-    ans: '氷河時代',
-    isWeak: false,
-  ),
+      quizId: 2,
+      question: '更新世は氷河時代とも呼ばれる',
+      ans: '氷河時代',
+      isWeak: false,
+      choices: ["氷河時代", "地質時代", "旧石器時代"]),
   const TrueFalseQuiz(
     quizId: 3,
     question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',
     isWeak: false,
+    choices: [
+      "グアニン",
+      'タンペム',
+      "キャッツアイ",
+    ],
   ),
 ];
 
@@ -28,17 +34,24 @@ final List<TrueFalseQuiz> tureFalseQuiz2 = [
     question: '2 + 2 = 4',
     ans: '4',
     isWeak: false,
+    choices: ["2", "3", "4"],
   ),
   const TrueFalseQuiz(
     quizId: 2,
     question: '更新世は氷河時代とも呼ばれる',
     ans: '氷河時代',
     isWeak: false,
+    choices: ["氷河時代", "地質時代", "旧石器時代"],
   ),
   const TrueFalseQuiz(
     quizId: 3,
     question: '猫の目には、タンペムという反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',
     isWeak: false,
+    choices: [
+      "グアニン",
+      'タンペム',
+      "キャッツアイ",
+    ],
   ),
 ];

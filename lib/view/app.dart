@@ -33,6 +33,8 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      //右上のdebugラベルを消す
+      debugShowCheckedModeBanner: false,
       // DevicePreviewに必要
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
+import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
 
 import '../resource/controller/screen_argument_resource.dart';
 
@@ -58,24 +59,34 @@ class QuizChoiceScreenArguments
       );
 }
 
-///クイズ結果画面
-// class QuizLearnResultScreenArguments
-//     with _NoParamsMixin
-//     implements IScreenArguments {
-//   const QuizLearnResultScreenArguments(
-//       {required this.item, required this.quizStyle});
-//
-//   final QuizItem item;
-//   final String quizStyle;
-//
-//   @override
-//   String get screenNameFormat => "/quiz_result";
-//
-//   @override
-//   Route generateRoute() => MaterialPageRoute(
-//         builder: (_) => QuizLearnResultScreen(this),
-//       );
-// }
+///○×クイズ
+class QuizTrueFalseScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const QuizTrueFalseScreenArguments(
+      {required this.item, required this.quizStyle});
+
+  final QuizItem item;
+  final String quizStyle;
+
+  @override
+  String get screenNameFormat => "/quiz_choice";
+
+  @override
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            QuizTureFalseScreen(this),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(
+                  builder: (context) => QuizTureFalseScreen(this)),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
+      );
+}
 
 mixin _NoParamsMixin<T> implements IScreenArguments<T> {
   @override

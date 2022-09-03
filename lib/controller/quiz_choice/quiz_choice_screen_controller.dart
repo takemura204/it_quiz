@@ -57,7 +57,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final correctList = [...state.correctList];
     final incorrectList = [...state.incorrectList];
 
-    //正誤
+    //正解
     if (choice == choiceQuiz[state.quizIndex].ans) {
       //スコア反映
       correctList.add(choiceQuiz[state.quizIndex]);

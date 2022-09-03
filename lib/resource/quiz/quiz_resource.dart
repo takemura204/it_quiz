@@ -1,5 +1,6 @@
 import 'package:kentei_quiz/resource/quiz/quiz_choice/quiz_choice_resource.dart';
 import 'package:kentei_quiz/resource/quiz/quiz_lean/quiz_lean_resource.dart';
+import 'package:kentei_quiz/resource/quiz/quiz_true_false/quiz_true_false_resource.dart';
 
 import '../../entity/quiz_item.dart';
 
@@ -11,6 +12,7 @@ List<QuizItem> studyItems = [
     title: "問題A-1",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 2,
@@ -18,6 +20,7 @@ List<QuizItem> studyItems = [
     title: "問題A-2",
     learnQuiz: learnQuiz2,
     choiceQuiz: choiceQuiz2,
+    trueFalseQuiz: tureFalseQuiz2,
   ),
   QuizItem(
     id: 3,
@@ -25,6 +28,7 @@ List<QuizItem> studyItems = [
     title: "問題B-1",
     learnQuiz: learnQuiz3,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 4,
@@ -32,6 +36,7 @@ List<QuizItem> studyItems = [
     title: "問題B-2",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 5,
@@ -39,6 +44,7 @@ List<QuizItem> studyItems = [
     title: "問題C-1",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 6,
@@ -46,6 +52,7 @@ List<QuizItem> studyItems = [
     title: "問題C-2",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 7,
@@ -53,6 +60,7 @@ List<QuizItem> studyItems = [
     title: "問題A-3",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 8,
@@ -60,6 +68,7 @@ List<QuizItem> studyItems = [
     title: "問題B-3",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 9,
@@ -67,6 +76,7 @@ List<QuizItem> studyItems = [
     title: "問題C-3",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
   QuizItem(
     id: 10,
@@ -74,6 +84,7 @@ List<QuizItem> studyItems = [
     title: "問題D-1",
     learnQuiz: learnQuiz1,
     choiceQuiz: choiceQuiz1,
+    trueFalseQuiz: tureFalseQuiz1,
   ),
 ];
 
@@ -85,5 +96,6 @@ List<QuizItem> reviewItem = [
     title: "一問一答で復習する",
     learnQuiz: [],
     choiceQuiz: [],
+    trueFalseQuiz: [],
   ),
 ];

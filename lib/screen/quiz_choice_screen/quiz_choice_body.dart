@@ -20,7 +20,7 @@ class _Body extends ConsumerWidget {
               elevation: 3,
               child: Container(
                 width: context.width * 0.85,
-                height: context.height * 0.45,
+                height: context.height * 0.5,
                 alignment: Alignment.center,
                 child: Column(
                   children: [

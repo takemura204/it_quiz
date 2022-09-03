@@ -3,7 +3,7 @@ part of 'quiz_true_false_screen.dart';
 class _Body extends ConsumerWidget {
   const _Body(this.arguments);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class _Body extends ConsumerWidget {
               elevation: 3,
               child: Container(
                 width: context.width * 0.85,
-                height: context.height * 0.45,
+                height: context.height * 0.5,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -37,6 +37,8 @@ class _Body extends ConsumerWidget {
 
             ///選択肢
             _SelectAnswer(arguments),
+
+            const Spacer(),
           ],
         ),
         _JudgeIcon(arguments),

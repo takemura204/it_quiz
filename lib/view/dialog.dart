@@ -172,9 +172,12 @@ class SelectQuizDialog extends ConsumerWidget {
                           minFontSize: 16,
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.pop(context, '${I18n().styleTrueFalseQuiz}');
-                      },
+                      onPressed: () => context.showScreen(
+                        QuizTrueFalseScreenArguments(
+                          item: item,
+                          quizStyle: I18n().styleTrueFalseQuiz,
+                        ).generateRoute(),
+                      ),
                     ),
                     const Spacer(),
                   ],

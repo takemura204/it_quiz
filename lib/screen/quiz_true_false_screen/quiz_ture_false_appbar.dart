@@ -3,7 +3,7 @@ part of 'quiz_true_false_screen.dart';
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.arguments);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

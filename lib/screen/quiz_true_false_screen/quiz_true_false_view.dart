@@ -4,7 +4,7 @@ part of 'quiz_true_false_screen.dart';
 class _QuizStyleTitle extends ConsumerWidget {
   const _QuizStyleTitle(this.arguments);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,14 +35,14 @@ class _QuizStyleTitle extends ConsumerWidget {
 class _Question extends ConsumerWidget {
   const _Question(this.arguments);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
+    final isAns = ref.watch(quizTureFalseScreenControllerProvider).isAnsView;
 
     return Container(
-      height: context.height * 0.40,
+      height: context.height * 0.45,
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
@@ -66,12 +66,13 @@ class _Question extends ConsumerWidget {
 
 class _AnsQuestion extends ConsumerWidget {
   const _AnsQuestion(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
-    final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
+    final quizIndex =
+        ref.watch(quizTureFalseScreenControllerProvider).quizIndex;
+    final isJudge = ref.watch(quizTureFalseScreenControllerProvider).isJudge;
     return SubstringHighlight(
       text: arguments.item.choiceQuiz[quizIndex].question,
       term: arguments.item.choiceQuiz[quizIndex].ans,
@@ -93,25 +94,27 @@ class _AnsQuestion extends ConsumerWidget {
 
 class _QuizQuestion extends ConsumerWidget {
   const _QuizQuestion(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
+    final quizIndex =
+        ref.watch(quizTureFalseScreenControllerProvider).quizIndex;
+    final randomAns =
+        ref.watch(quizTureFalseScreenControllerProvider).randomAns;
 
     return SubstringHighlight(
-      text: arguments.item.choiceQuiz[quizIndex].question.replaceAll(
-          arguments.item.choiceQuiz[quizIndex].ans,
-          I18n().hideText(arguments.item.choiceQuiz[quizIndex].ans)),
-      term: arguments.item.choiceQuiz[quizIndex].ans,
+      text: arguments.item.choiceQuiz[quizIndex].question
+          .replaceAll(arguments.item.choiceQuiz[quizIndex].ans, randomAns),
+      term: randomAns,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
         fontSize: 21,
       ),
       textStyleHighlight: TextStyle(
+        color: context.colors.dark54,
         fontWeight: FontWeight.bold,
-        color: context.colors.main50.withOpacity(0.5),
         decoration: TextDecoration.underline,
       ),
     );
@@ -120,12 +123,12 @@ class _QuizQuestion extends ConsumerWidget {
 
 class _QuizProgress extends ConsumerWidget {
   const _QuizProgress(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex =
-        ref.watch(quizChoiceScreenControllerProvider).quizIndex + 1;
+        ref.watch(quizTureFalseScreenControllerProvider).quizIndex + 1;
 
     return Container(
       height: context.height * 0.05,
@@ -152,152 +155,87 @@ class _QuizProgress extends ConsumerWidget {
 
 class _SelectAnswer extends ConsumerWidget {
   const _SelectAnswer(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
-    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
-    final choices = ref.watch(quizChoiceScreenControllerProvider).choices;
+    final isAnsView =
+        ref.watch(quizTureFalseScreenControllerProvider).isAnsView;
 
     return Container(
       width: context.width * 1.0,
       height: context.height * 0.2,
       alignment: Alignment.center,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              ///選択肢1
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[0]),
-                child: Container(
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Colors.black45)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    choices[0],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: (choices[0] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : null,
-                  ),
-                ),
-              ),
+      child: Column(children: [
+        Row(
+          children: [
+            const Spacer(),
 
-              ///選択肢2
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[1]),
+            ///◯ボタンを押した時
+            GestureDetector(
+              onTap: isAnsView
+                  ? null
+                  : () => ref
+                      .read(quizTureFalseScreenControllerProvider.notifier)
+                      .tapBoolButton(true),
+              child: Card(
+                elevation: 6,
                 child: Container(
+                  width: context.width * 0.4,
+                  height: context.height * 0.15,
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.5, color: Colors.black45)),
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
                   alignment: Alignment.center,
-                  child: Text(
-                    choices[1],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: (choices[1] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : null,
+                  child: Icon(
+                    Icons.circle_outlined,
+                    color: Colors.green.withOpacity(0.6),
+                    size: context.height * 0.1,
                   ),
                 ),
               ),
-            ],
-          ),
-          Row(
-            children: [
-              ///選択肢3
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[2]),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Colors.black45)),
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
-                  alignment: Alignment.center,
-                  child: Text(
-                    choices[2],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: (choices[2] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : null,
-                  ),
-                ),
-              ),
+            ),
+            const Spacer(),
 
-              ///選択肢4
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[3]),
+            ///×ボタンを押した時
+            GestureDetector(
+              onTap: isAnsView
+                  ? null
+                  : () => ref
+                      .read(quizTureFalseScreenControllerProvider.notifier)
+                      .tapBoolButton(false),
+              child: Card(
+                elevation: 6,
                 child: Container(
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.5, color: Colors.black45)),
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
+                  width: context.width * 0.4,
+                  height: context.height * 0.15,
                   alignment: Alignment.center,
-                  child: Text(
-                    choices[3],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: (choices[3] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : null,
+                  child: Icon(
+                    Icons.clear,
+                    color: context.colors.main50.withOpacity(0.6),
+                    size: context.height * 0.1,
                   ),
                 ),
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ]),
     );
   }
 }
 
 class _JudgeIcon extends ConsumerWidget {
   const _JudgeIcon(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  final QuizTrueFalseScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
-    final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
+    final isJudge = ref.watch(quizTureFalseScreenControllerProvider).isJudge;
+    final isAnsView =
+        ref.watch(quizTureFalseScreenControllerProvider).isAnsView;
 
     return isAnsView
         ? Align(
