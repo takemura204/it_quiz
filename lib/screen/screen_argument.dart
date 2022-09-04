@@ -70,7 +70,7 @@ class QuizTrueFalseScreenArguments
   final String quizStyle;
 
   @override
-  String get screenNameFormat => "/quiz_choice";
+  String get screenNameFormat => "/quiz_true_false";
 
   @override
   Route generateRoute() => PageRouteBuilder(

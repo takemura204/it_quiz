@@ -130,7 +130,7 @@ class QuizTrueFalseScreenController
   ///次の問題
   void nextQuiz() {
     final quizIndex = state.quizIndex;
-    if (quizIndex == arguments.item.choiceQuiz.length - 1) {
+    if (quizIndex == arguments.item.trueFalseQuiz.length - 1) {
       print("終了!");
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
     } else {
@@ -181,6 +181,9 @@ class QuizTrueFalseScreenController
         isWeak: false,
         choices: correctList[index].choices,
       );
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .removeTrueFalseQuiz(correctList[index]);
     }
     state = state.copyWith(correctList: correctList);
   }

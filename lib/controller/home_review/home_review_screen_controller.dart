@@ -146,7 +146,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       trueFalseQuiz: trueFalseList,
     );
 
-    print(reviewItem[2].trueFalseQuiz);
+    print(reviewItem[2].trueFalseQuiz.length);
 
     state =
         state.copyWith(trueFalseList: trueFalseList, reviewItem: reviewItem);
@@ -169,7 +169,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       trueFalseQuiz: trueFalseList,
     );
 
-    print(reviewItem[2].trueFalseQuiz);
+    print(reviewItem[2].trueFalseQuiz.length);
     state =
         state.copyWith(trueFalseList: trueFalseList, reviewItem: reviewItem);
   }

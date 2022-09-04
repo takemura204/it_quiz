@@ -44,7 +44,7 @@ class _AnsRateView extends ConsumerWidget {
               ),
               const Text("/"),
               AutoSizeText(
-                arguments.item.choiceQuiz.length.toString(),
+                arguments.item.trueFalseQuiz.length.toString(),
                 style: context.texts.bodyText1,
                 minFontSize: 16,
               ),
@@ -138,17 +138,10 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                             ),
                             const Spacer(),
                             GestureDetector(
-                              onTap: () {
-                                ref
-                                    .read(quizTureFalseScreenControllerProvider
-                                        .notifier)
-                                    .tapIncorrectCheckBox(index);
-                                //復習リスト追加
-                                ref
-                                    .read(homeReviewScreenControllerProvider
-                                        .notifier)
-                                    .addTrueFalseQuiz(incorrectList[index]);
-                              },
+                              onTap: () => ref
+                                  .read(quizTureFalseScreenControllerProvider
+                                      .notifier)
+                                  .tapIncorrectCheckBox(index),
                               child: Container(
                                 alignment: Alignment.center,
                                 width: context.width * 0.1,
@@ -258,12 +251,10 @@ class _KnowQuestionsView extends ConsumerWidget {
                             ),
                             const Spacer(),
                             GestureDetector(
-                              onTap: () {
-                                ref
-                                    .read(quizTureFalseScreenControllerProvider
-                                        .notifier)
-                                    .tapCorrectCheckBox(index);
-                              },
+                              onTap: () => ref
+                                  .read(quizTureFalseScreenControllerProvider
+                                      .notifier)
+                                  .tapCorrectCheckBox(index),
                               child: Container(
                                 alignment: Alignment.center,
                                 width: context.width * 0.1,

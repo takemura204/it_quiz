@@ -74,8 +74,8 @@ class _AnsQuestion extends ConsumerWidget {
         ref.watch(quizTureFalseScreenControllerProvider).quizIndex;
     final isJudge = ref.watch(quizTureFalseScreenControllerProvider).isJudge;
     return SubstringHighlight(
-      text: arguments.item.choiceQuiz[quizIndex].question,
-      term: arguments.item.choiceQuiz[quizIndex].ans,
+      text: arguments.item.trueFalseQuiz[quizIndex].question,
+      term: arguments.item.trueFalseQuiz[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -104,8 +104,8 @@ class _QuizQuestion extends ConsumerWidget {
         ref.watch(quizTureFalseScreenControllerProvider).randomAns;
 
     return SubstringHighlight(
-      text: arguments.item.choiceQuiz[quizIndex].question
-          .replaceAll(arguments.item.choiceQuiz[quizIndex].ans, randomAns),
+      text: arguments.item.trueFalseQuiz[quizIndex].question
+          .replaceAll(arguments.item.trueFalseQuiz[quizIndex].ans, randomAns),
       term: randomAns,
       textStyle: TextStyle(
         color: context.colors.dark54,
@@ -142,7 +142,7 @@ class _QuizProgress extends ConsumerWidget {
           ),
           const Text("/"),
           AutoSizeText(
-            arguments.item.choiceQuiz.length.toString(),
+            arguments.item.trueFalseQuiz.length.toString(),
             style: context.texts.bodyText1,
             minFontSize: 16,
           ),

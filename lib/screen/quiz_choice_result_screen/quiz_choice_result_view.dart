@@ -138,17 +138,10 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                             ),
                             const Spacer(),
                             GestureDetector(
-                              onTap: () {
-                                ref
-                                    .read(quizChoiceScreenControllerProvider
-                                        .notifier)
-                                    .tapIncorrectCheckBox(index);
-                                // //復習リスト追加
-                                // ref
-                                //     .read(homeReviewScreenControllerProvider
-                                //         .notifier)
-                                //     .addLearnQuiz(incorrectList[index]);
-                              },
+                              onTap: () => ref
+                                  .read(quizChoiceScreenControllerProvider
+                                      .notifier)
+                                  .tapIncorrectCheckBox(index),
                               child: Container(
                                 alignment: Alignment.center,
                                 width: context.width * 0.1,
