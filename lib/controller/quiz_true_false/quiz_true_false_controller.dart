@@ -4,6 +4,7 @@ import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../screen/screen_argument.dart';
+import '../home_review/home_review_screen_controller.dart';
 
 final quizTureFalseScreenControllerProvider = StateNotifierProvider<
     QuizTrueFalseScreenController, QuizTrueFalseScreenState>(
@@ -79,10 +80,10 @@ class QuizTrueFalseScreenController
           isWeak: true,
         );
         incorrectList.add(trueFalseQuiz[state.quizIndex]);
-        //復習リストに追加
-        // ref
-        //     .read(homeReviewScreenControllerProvider.notifier)
-        //     .addChoiceQuiz(trueFalseQuiz[state.quizIndex]);
+        // 復習リストに追加
+        ref
+            .read(homeReviewScreenControllerProvider.notifier)
+            .addTrueFalseQuiz(trueFalseQuiz[state.quizIndex]);
 
         state = state.copyWith(isJudge: false, incorrectList: incorrectList);
       }
@@ -107,9 +108,9 @@ class QuizTrueFalseScreenController
         );
         incorrectList.add(trueFalseQuiz[state.quizIndex]);
         //復習リストに追加
-        // ref
-        //     .read(homeReviewScreenControllerProvider.notifier)
-        //     .addChoiceQuiz(trueFalseQuiz[state.quizIndex]);
+        ref
+            .read(homeReviewScreenControllerProvider.notifier)
+            .addTrueFalseQuiz(trueFalseQuiz[state.quizIndex]);
 
         state = state.copyWith(isJudge: false, incorrectList: incorrectList);
       }
@@ -167,9 +168,9 @@ class QuizTrueFalseScreenController
         choices: correctList[index].choices,
       );
       //復習リストに追加
-      // ref
-      //     .read(homeReviewScreenControllerProvider.notifier)
-      //     .addChoiceQuiz(correctList[index]);
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .addTrueFalseQuiz(correctList[index]);
     }
     //チェックしてない時
     else {
@@ -197,9 +198,9 @@ class QuizTrueFalseScreenController
         choices: incorrectList[index].choices,
       );
       //復習リストに追加
-      // ref
-      //     .read(homeReviewScreenControllerProvider.notifier)
-      //     .addChoiceQuiz(incorrectList[index]);
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .addTrueFalseQuiz(incorrectList[index]);
     }
     //チェックしてない時
     else {
@@ -212,9 +213,9 @@ class QuizTrueFalseScreenController
       );
 
       //復習リストから削除
-      // ref
-      //     .read(homeReviewScreenControllerProvider.notifier)
-      //     .removeChoiceQuiz(incorrectList[index]);
+      ref
+          .read(homeReviewScreenControllerProvider.notifier)
+          .removeTrueFalseQuiz(incorrectList[index]);
     }
     state = state.copyWith(incorrectList: incorrectList);
   }

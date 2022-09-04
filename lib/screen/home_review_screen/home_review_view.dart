@@ -109,3 +109,40 @@ class _ChoiceQuizButton extends ConsumerWidget {
     );
   }
 }
+
+class _TrueFalseQuizButton extends ConsumerWidget {
+  const _TrueFalseQuizButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: () {
+        context.showScreen(QuizTrueFalseScreenArguments(
+          item: ref.watch(homeReviewScreenControllerProvider).reviewItem[2],
+          quizStyle: I18n().reviewTrueFalseQuiz,
+        ).generateRoute());
+      },
+      child: Container(
+        height: context.height * 0.08,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: context.colors.onMain50,
+          border: Border.all(
+            color: context.colors.main50.withOpacity(0.7),
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: AutoSizeText(
+          "○×問題から復習する",
+          style: TextStyle(
+            color: context.colors.main50.withOpacity(0.7),
+            fontWeight: FontWeight.bold,
+          ),
+          minFontSize: 16,
+        ),
+      ),
+    );
+  }
+}

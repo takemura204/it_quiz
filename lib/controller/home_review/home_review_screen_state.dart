@@ -11,5 +11,6 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
     @Default([]) final List<QuizItem> reviewItem,
     @Default([]) final List<LearnQuiz> learnList,
     @Default([]) final List<ChoiceQuiz> choiceList,
+    @Default([]) final List<TrueFalseQuiz> trueFalseList,
   }) = _Create;
 }

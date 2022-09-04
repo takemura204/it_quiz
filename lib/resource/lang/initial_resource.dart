@@ -22,6 +22,7 @@ class I18n {
   ///「復習形式」
   String get reviewLearnQuiz => "一問一答を復習する";
   String get reviewChoiceQuiz => "選択問題を復習する";
+  String get reviewTrueFalseQuiz => "○×問題を復習する";
 
   ///Button
   String get buttonConfirm => "確認する";

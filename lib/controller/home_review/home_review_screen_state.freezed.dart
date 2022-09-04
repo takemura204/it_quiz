@@ -22,12 +22,14 @@ class _$HomeReviewScreenStateTearOff {
       {int currentIndex = 0,
       List<QuizItem> reviewItem = const [],
       List<LearnQuiz> learnList = const [],
-      List<ChoiceQuiz> choiceList = const []}) {
+      List<ChoiceQuiz> choiceList = const [],
+      List<TrueFalseQuiz> trueFalseList = const []}) {
     return _Create(
       currentIndex: currentIndex,
       reviewItem: reviewItem,
       learnList: learnList,
       choiceList: choiceList,
+      trueFalseList: trueFalseList,
     );
   }
 }
@@ -41,6 +43,7 @@ mixin _$HomeReviewScreenState {
   List<QuizItem> get reviewItem => throw _privateConstructorUsedError;
   List<LearnQuiz> get learnList => throw _privateConstructorUsedError;
   List<ChoiceQuiz> get choiceList => throw _privateConstructorUsedError;
+  List<TrueFalseQuiz> get trueFalseList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeReviewScreenStateCopyWith<HomeReviewScreenState> get copyWith =>
@@ -56,7 +59,8 @@ abstract class $HomeReviewScreenStateCopyWith<$Res> {
       {int currentIndex,
       List<QuizItem> reviewItem,
       List<LearnQuiz> learnList,
-      List<ChoiceQuiz> choiceList});
+      List<ChoiceQuiz> choiceList,
+      List<TrueFalseQuiz> trueFalseList});
 }
 
 /// @nodoc
@@ -74,6 +78,7 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res>
     Object? reviewItem = freezed,
     Object? learnList = freezed,
     Object? choiceList = freezed,
+    Object? trueFalseList = freezed,
   }) {
     return _then(_value.copyWith(
       currentIndex: currentIndex == freezed
@@ -92,6 +97,10 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res>
           ? _value.choiceList
           : choiceList // ignore: cast_nullable_to_non_nullable
               as List<ChoiceQuiz>,
+      trueFalseList: trueFalseList == freezed
+          ? _value.trueFalseList
+          : trueFalseList // ignore: cast_nullable_to_non_nullable
+              as List<TrueFalseQuiz>,
     ));
   }
 }
@@ -106,7 +115,8 @@ abstract class _$CreateCopyWith<$Res>
       {int currentIndex,
       List<QuizItem> reviewItem,
       List<LearnQuiz> learnList,
-      List<ChoiceQuiz> choiceList});
+      List<ChoiceQuiz> choiceList,
+      List<TrueFalseQuiz> trueFalseList});
 }
 
 /// @nodoc
@@ -125,6 +135,7 @@ class __$CreateCopyWithImpl<$Res>
     Object? reviewItem = freezed,
     Object? learnList = freezed,
     Object? choiceList = freezed,
+    Object? trueFalseList = freezed,
   }) {
     return _then(_Create(
       currentIndex: currentIndex == freezed
@@ -143,6 +154,10 @@ class __$CreateCopyWithImpl<$Res>
           ? _value.choiceList
           : choiceList // ignore: cast_nullable_to_non_nullable
               as List<ChoiceQuiz>,
+      trueFalseList: trueFalseList == freezed
+          ? _value.trueFalseList
+          : trueFalseList // ignore: cast_nullable_to_non_nullable
+              as List<TrueFalseQuiz>,
     ));
   }
 }
@@ -154,7 +169,8 @@ class _$_Create implements _Create {
       {this.currentIndex = 0,
       this.reviewItem = const [],
       this.learnList = const [],
-      this.choiceList = const []});
+      this.choiceList = const [],
+      this.trueFalseList = const []});
 
   @JsonKey()
   @override
@@ -168,10 +184,13 @@ class _$_Create implements _Create {
   @JsonKey()
   @override
   final List<ChoiceQuiz> choiceList;
+  @JsonKey()
+  @override
+  final List<TrueFalseQuiz> trueFalseList;
 
   @override
   String toString() {
-    return 'HomeReviewScreenState(currentIndex: $currentIndex, reviewItem: $reviewItem, learnList: $learnList, choiceList: $choiceList)';
+    return 'HomeReviewScreenState(currentIndex: $currentIndex, reviewItem: $reviewItem, learnList: $learnList, choiceList: $choiceList, trueFalseList: $trueFalseList)';
   }
 
   @override
@@ -185,7 +204,9 @@ class _$_Create implements _Create {
                 .equals(other.reviewItem, reviewItem) &&
             const DeepCollectionEquality().equals(other.learnList, learnList) &&
             const DeepCollectionEquality()
-                .equals(other.choiceList, choiceList));
+                .equals(other.choiceList, choiceList) &&
+            const DeepCollectionEquality()
+                .equals(other.trueFalseList, trueFalseList));
   }
 
   @override
@@ -194,7 +215,8 @@ class _$_Create implements _Create {
       const DeepCollectionEquality().hash(currentIndex),
       const DeepCollectionEquality().hash(reviewItem),
       const DeepCollectionEquality().hash(learnList),
-      const DeepCollectionEquality().hash(choiceList));
+      const DeepCollectionEquality().hash(choiceList),
+      const DeepCollectionEquality().hash(trueFalseList));
 
   @JsonKey(ignore: true)
   @override
@@ -207,7 +229,8 @@ abstract class _Create implements HomeReviewScreenState {
       {int currentIndex,
       List<QuizItem> reviewItem,
       List<LearnQuiz> learnList,
-      List<ChoiceQuiz> choiceList}) = _$_Create;
+      List<ChoiceQuiz> choiceList,
+      List<TrueFalseQuiz> trueFalseList}) = _$_Create;
 
   @override
   int get currentIndex;
@@ -217,6 +240,8 @@ abstract class _Create implements HomeReviewScreenState {
   List<LearnQuiz> get learnList;
   @override
   List<ChoiceQuiz> get choiceList;
+  @override
+  List<TrueFalseQuiz> get trueFalseList;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

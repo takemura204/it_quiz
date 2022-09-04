@@ -8,6 +8,7 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_true_false/quiz_true_false_controller.dart';
+import '../quiz_true_false_result_screen/quiz_choice_result_screen/quiz_true_false_result_screen.dart';
 
 part 'quiz_true_false_body.dart';
 part 'quiz_true_false_view.dart';
@@ -41,17 +42,15 @@ class _Scaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isResultScreen =
         ref.watch(quizTureFalseScreenControllerProvider).isResultScreen;
-    return
-        // isResultScreen
-        //
-        //   ///結果画面
-        //   ? QuizChoiceResultScreen(arguments)
-        //
-        //   ///クイズ画面
-        //   :
-        Scaffold(
-      appBar: _AppBar(arguments),
-      body: _Body(arguments),
-    );
+    return isResultScreen
+
+        ///結果画面
+        ? QuizTrueFalseResultScreen(arguments)
+
+        ///クイズ画面
+        : Scaffold(
+            appBar: _AppBar(arguments),
+            body: _Body(arguments),
+          );
   }
 }
