@@ -9,7 +9,7 @@ class HomeSettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsList(
       sections: [
-        ///マイページだよa
+        ///マイページだよa-2
         CustomSettingsSection(
           child: Container(
             height: context.height * 0.08,
