@@ -45,5 +45,17 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<!--　TODO  GoogleService-Info.plistからREVERSED_CLIENT_IDキーをコピーして、ここの値を置き換える -->
+    			<string>com.googleusercontent.apps.219522966725-ahq8u9te7aacjo31ab73qq0krv07781t</string>
+    		</array>
+    	</dict>
+    </array>
 </dict>
 </plist>

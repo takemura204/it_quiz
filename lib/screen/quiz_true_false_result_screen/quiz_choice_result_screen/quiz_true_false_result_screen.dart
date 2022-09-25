@@ -7,7 +7,6 @@ import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../../controller/home_review/home_review_screen_controller.dart';
 import '../../../controller/quiz_true_false/quiz_true_false_controller.dart';
 
 part 'quiz_true_false_result_appbar.dart';

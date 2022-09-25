@@ -74,6 +74,13 @@ dependencies:
   #freezed用
   analyzer: ^3.4.1
 
+  #設定画面を反映させたい
+  settings_ui: ^2.0.2
+
+  #ほかのSNSからログインしたい
+  google_sign_in: ^5.4.2
+  flutter_signin_button: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -89,3 +96,8 @@ flutter:
   uses-material-design: true
   #  自動姿勢フラグの有効
   generate: true
+
+  #画像
+  assets:
+    - assets/icon/
+

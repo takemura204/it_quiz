@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/entity/quiz_item.dart';
+import 'package:kentei_quiz/screen/login_screen/login_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
@@ -88,17 +89,29 @@ class QuizTrueFalseScreenArguments
       );
 }
 
+///ログイン画面
+class LoginScreenArguments with _NoParamsMixin implements IScreenArguments {
+  const LoginScreenArguments();
+
+  @override
+  String get screenNameFormat => "/login";
+
+  @override
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            LoginScreen(this),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(builder: (context) => LoginScreen(this)),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
+      );
+}
+
 mixin _NoParamsMixin<T> implements IScreenArguments<T> {
   @override
   String get screenName => screenNameFormat;
-}
-
-mixin _QuizIdParamsMixin<T> implements IScreenArguments<T> {
-  int? get quizId;
-
-  String get programIdKey => ":program_id";
-
-  @override
-  String get screenName =>
-      screenNameFormat.replaceAll(RegExp(programIdKey), quizId.toString());
 }
