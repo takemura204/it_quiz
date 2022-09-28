@@ -4,27 +4,33 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
+import 'package:kentei_quiz/view/text_field.dart';
 
-import '../../controller/login/login_screen_controller.dart';
-import '../../view/text_field.dart';
+import '../../controller/create_account/create_account_screen_controller.dart';
 
-class LoginScreen extends ConsumerWidget {
-  const LoginScreen(this.arguments);
+class CreateAccountScreen extends ConsumerWidget {
+  const CreateAccountScreen(this.arguments);
 
-  final LoginScreenArguments arguments;
+  final CreateAccountScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidEmail = ref.watch(loginScreenControllerProvider).isValidEmail;
-    final isSafetyPass = ref.watch(loginScreenControllerProvider).isSafetyPass;
-    final isObscure = ref.watch(loginScreenControllerProvider).isObscure;
-    final emailController =
-        ref.watch(loginScreenControllerProvider.notifier).emailController;
-    final passwordController =
-        ref.watch(loginScreenControllerProvider.notifier).passwordController;
-    final formKey = ref.watch(loginScreenControllerProvider.notifier).formKey;
+    final isValidEmail =
+        ref.watch(createAccountScreenControllerProvider).isValidEmail;
+    final isSafetyPass =
+        ref.watch(createAccountScreenControllerProvider).isSafetyPass;
+    final isObscure =
+        ref.watch(createAccountScreenControllerProvider).isObscure;
+    final emailController = ref
+        .watch(createAccountScreenControllerProvider.notifier)
+        .emailController;
+    final passwordController = ref
+        .watch(createAccountScreenControllerProvider.notifier)
+        .passwordController;
+    final formKey =
+        ref.watch(createAccountScreenControllerProvider.notifier).formKey;
     final focusNode =
-        ref.watch(loginScreenControllerProvider.notifier).focusNode;
+        ref.watch(createAccountScreenControllerProvider.notifier).focusNode;
 
     return Focus(
       focusNode: focusNode,
@@ -33,7 +39,7 @@ class LoginScreen extends ConsumerWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false, //キーボードによって画面サイズを変更させないため
           appBar: AppBar(
-            title: const Text("ログイン"),
+            title: const Text("会員登録"),
           ),
           body: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -48,7 +54,8 @@ class LoginScreen extends ConsumerWidget {
                         emailController: emailController,
                         isValidEmail: isValidEmail,
                         onChanged: (email) => ref
-                            .read(loginScreenControllerProvider.notifier)
+                            .read(
+                                createAccountScreenControllerProvider.notifier)
                             .setEmail(email),
                       ),
                       const Gap(20),
@@ -60,15 +67,18 @@ class LoginScreen extends ConsumerWidget {
                         isSafetyPass: isSafetyPass,
                         isObscure: isObscure,
                         onChanged: (password) => ref
-                            .read(loginScreenControllerProvider.notifier)
+                            .read(
+                                createAccountScreenControllerProvider.notifier)
                             .setPassword(password),
                         obscureIconButtonPressed: () => ref
-                            .read(loginScreenControllerProvider.notifier)
+                            .read(
+                                createAccountScreenControllerProvider.notifier)
                             .switchObscure(),
                       ),
                     ],
                   ),
                 ),
+
                 const Gap(20),
 
                 const Text("パスワードを忘れた場合"),
@@ -76,7 +86,7 @@ class LoginScreen extends ConsumerWidget {
                 const Text("端末に保存"),
                 const Text("利用規約に同意"),
 
-                ///送信ボタン
+                ///登録ボタン
                 ElevatedButton(
                   child: const Text('新規登録'),
                   onPressed: isValidEmail && isSafetyPass
@@ -87,12 +97,6 @@ class LoginScreen extends ConsumerWidget {
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             );
-
-                            const snackBar = SnackBar(
-                              content: Text('Success!'),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
                           } catch (e) {
                             print(e);
                           }
@@ -137,7 +141,7 @@ class LoginScreen extends ConsumerWidget {
                       ],
                     ),
                     onPressed: () async => ref
-                        .read(loginScreenControllerProvider.notifier)
+                        .read(createAccountScreenControllerProvider.notifier)
                         .signInWithGoogle(),
                   ),
                 ),

@@ -10,18 +10,48 @@ class HomeSettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsList(
       sections: [
-        ///マイページだよa
-        CustomSettingsSection(
-          child: Container(
-            height: context.height * 0.08,
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            color: Colors.blue.shade300,
-            child: SettingsTile.navigation(
-              leading: const Icon(Icons.account_circle),
-              title: const Text('プロフィール'),
-              value: const Text('Takemurataiki'),
+        // ///マイページ
+        // CustomSettingsSection(
+        //   child: SettingsTile.navigation(
+        //     leading: const Icon(Icons.account_circle),
+        //     title: const Text('プロフィール'),
+        //     value: const Text('Takemurataiki'),
+        //   ),
+        // ),
+        ///基本情報(ゲスト)
+        SettingsSection(
+          title: const Text('アカウント情報(ゲスト)'),
+          tiles: [
+            //会員登録
+            SettingsTile.navigation(
+              leading: const Icon(Icons.language),
+              title: const Text('新規登録'),
+              onPressed: (_) {
+                context.showScreen(
+                    const CreateAccountScreenArguments().generateRoute());
+              },
             ),
-          ),
+            //ログイン
+            SettingsTile.navigation(
+              leading: const Icon(Icons.star),
+              title: const Text('ログイン'),
+              onPressed: (_) {
+                context
+                    .showScreen(const LoginScreenArguments().generateRoute());
+              },
+            ),
+          ],
+        ),
+
+        ///基本情報(ログイン済み)
+        SettingsSection(
+          title: const Text('アカウント情報(ログイン済み)'),
+          tiles: [
+            SettingsTile.navigation(
+              leading: const Icon(Icons.language),
+              title: const Text('アカウント情報'),
+            ),
+          ],
         ),
         SettingsSection(
           title: const Text('kentei_quizについて'),
