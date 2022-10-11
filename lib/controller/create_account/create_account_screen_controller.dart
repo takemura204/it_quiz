@@ -33,6 +33,23 @@ class CreateAccountScreenController
     super.dispose();
   }
 
+  ///リセット
+  void reset() {
+    emailController.clear();
+    passwordController.clear();
+
+    state = state.copyWith(
+      email: "",
+      password: "",
+      errorText: "",
+      isObscure: true,
+      isValidEmail: false,
+      isSafetyPass: false,
+      isCheck: false,
+      hasError: false,
+    );
+  }
+
   ///メールアドレスの入力
   void setEmail(String email) {
     final regExp = RegExp(
@@ -53,6 +70,11 @@ class CreateAccountScreenController
     state = state.copyWith(isObscure: !state.isObscure);
   }
 
+  /// チェックボックスタップ
+  void switchIsCheck() {
+    state = state.copyWith(isCheck: !state.isCheck);
+  }
+
   ///新規登録
   Future signUp() async {
     try {
@@ -60,14 +82,14 @@ class CreateAccountScreenController
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      // 確認メール送信
+      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+      print("会員登録成功");
+      state = state.copyWith(hasError: false, isSucceeded: true);
     } catch (e) {
       print(e);
+      state = state.copyWith(hasError: true, errorText: e.toString());
     }
-  }
-
-  ///ログイン
-  void signIn() {
-    state = state.copyWith(isObscure: !state.isObscure);
   }
 
   ///Googleから登録

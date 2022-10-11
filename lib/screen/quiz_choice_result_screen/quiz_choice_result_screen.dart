@@ -8,6 +8,8 @@ import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
+import '../../view/button.dart';
+
 part 'quiz_choice_result_appbar.dart';
 part "quiz_choice_result_body.dart";
 part 'quiz_choice_result_view.dart';

@@ -8,6 +8,7 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../../controller/quiz_true_false/quiz_true_false_controller.dart';
+import '../../../view/button.dart';
 
 part 'quiz_true_false_result_appbar.dart';
 part "quiz_true_false_result_body.dart";

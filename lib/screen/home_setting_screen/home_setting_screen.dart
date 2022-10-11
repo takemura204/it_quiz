@@ -3,12 +3,29 @@ import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:settings_ui/settings_ui.dart';
 
+import '../../view/bar.dart';
+
 class HomeSettingScreen extends StatelessWidget {
   const HomeSettingScreen();
 
   @override
   Widget build(BuildContext context) {
-    return SettingsList(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SettingTitleBar(
+            title: "title",
+            onTap: null,
+          ),
+          const SettingListBar(
+            title: "Subtitle",
+            onTap: null,
+          ),
+        ],
+      ),
+    );
+
+    SettingsList(
       sections: [
         // ///マイページ
         // CustomSettingsSection(

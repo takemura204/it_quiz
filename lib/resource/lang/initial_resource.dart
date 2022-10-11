@@ -65,4 +65,27 @@ class I18n {
   String get caseHideText7 => "＿＿＿＿＿＿";
   String get caseHideText8 => "＿＿＿＿＿＿＿";
   String get caseHideText9 => "＿＿＿＿＿＿＿＿";
+
+  ///　ログインエラー
+  String loginErrorText(String errorText) {
+    switch (errorText) {
+      case "[firebase_auth/email-already-in-use] The email address is already in use by another account.":
+        return caseErrorText1;
+      case "[firebase_auth/invalid-email] The email address is badly formatted.":
+        return caseErrorText2;
+      case "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.":
+        return caseErrorText3;
+      case "[firebase_auth/wrong-password] The password is invalid or the user does not have a password.":
+        return caseErrorText4;
+      default:
+        return caseErrorText5;
+    }
+  }
+
+  ///　テキスト候補
+  String get caseErrorText1 => "このメールアドレスは既に登録済みです";
+  String get caseErrorText2 => "このメールアドレスは無効となっています";
+  String get caseErrorText3 => "このメールアドレスは登録されていません。新規登録画面からお願いします";
+  String get caseErrorText4 => "メールアドレスまたはパスワードが正しくありません";
+  String get caseErrorText5 => "予期せぬエラーが発生しました";
 }

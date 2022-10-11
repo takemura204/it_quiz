@@ -86,7 +86,7 @@ class PasswordTextField extends ConsumerWidget {
       enabled: true,
       keyboardType: TextInputType.visiblePassword,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) => isSafetyPass ? null : '6文字以上の英数字に設定してください',
+      validator: (value) => isSafetyPass ? null : '無効なパスワードです',
       onChanged: onChanged,
       minLines: null,
       maxLines: 1,

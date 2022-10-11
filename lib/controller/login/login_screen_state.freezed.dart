@@ -22,16 +22,20 @@ class _$LoginScreenStateTearOff {
       {int currentIndex = 0,
       String email = '',
       String password = '',
+      String errorText = '',
       bool isObscure = true,
       bool isValidEmail = false,
-      bool isSafetyPass = false}) {
+      bool isSafetyPass = false,
+      bool hasError = false}) {
     return _Create(
       currentIndex: currentIndex,
       email: email,
       password: password,
+      errorText: errorText,
       isObscure: isObscure,
       isValidEmail: isValidEmail,
       isSafetyPass: isSafetyPass,
+      hasError: hasError,
     );
   }
 }
@@ -44,9 +48,11 @@ mixin _$LoginScreenState {
   int get currentIndex => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get errorText => throw _privateConstructorUsedError;
   bool get isObscure => throw _privateConstructorUsedError;
   bool get isValidEmail => throw _privateConstructorUsedError;
   bool get isSafetyPass => throw _privateConstructorUsedError;
+  bool get hasError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginScreenStateCopyWith<LoginScreenState> get copyWith =>
@@ -62,9 +68,11 @@ abstract class $LoginScreenStateCopyWith<$Res> {
       {int currentIndex,
       String email,
       String password,
+      String errorText,
       bool isObscure,
       bool isValidEmail,
-      bool isSafetyPass});
+      bool isSafetyPass,
+      bool hasError});
 }
 
 /// @nodoc
@@ -81,9 +89,11 @@ class _$LoginScreenStateCopyWithImpl<$Res>
     Object? currentIndex = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? errorText = freezed,
     Object? isObscure = freezed,
     Object? isValidEmail = freezed,
     Object? isSafetyPass = freezed,
+    Object? hasError = freezed,
   }) {
     return _then(_value.copyWith(
       currentIndex: currentIndex == freezed
@@ -98,6 +108,10 @@ class _$LoginScreenStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      errorText: errorText == freezed
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String,
       isObscure: isObscure == freezed
           ? _value.isObscure
           : isObscure // ignore: cast_nullable_to_non_nullable
@@ -109,6 +123,10 @@ class _$LoginScreenStateCopyWithImpl<$Res>
       isSafetyPass: isSafetyPass == freezed
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -124,9 +142,11 @@ abstract class _$CreateCopyWith<$Res>
       {int currentIndex,
       String email,
       String password,
+      String errorText,
       bool isObscure,
       bool isValidEmail,
-      bool isSafetyPass});
+      bool isSafetyPass,
+      bool hasError});
 }
 
 /// @nodoc
@@ -143,9 +163,11 @@ class __$CreateCopyWithImpl<$Res> extends _$LoginScreenStateCopyWithImpl<$Res>
     Object? currentIndex = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? errorText = freezed,
     Object? isObscure = freezed,
     Object? isValidEmail = freezed,
     Object? isSafetyPass = freezed,
+    Object? hasError = freezed,
   }) {
     return _then(_Create(
       currentIndex: currentIndex == freezed
@@ -160,6 +182,10 @@ class __$CreateCopyWithImpl<$Res> extends _$LoginScreenStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      errorText: errorText == freezed
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String,
       isObscure: isObscure == freezed
           ? _value.isObscure
           : isObscure // ignore: cast_nullable_to_non_nullable
@@ -172,6 +198,10 @@ class __$CreateCopyWithImpl<$Res> extends _$LoginScreenStateCopyWithImpl<$Res>
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -183,9 +213,11 @@ class _$_Create implements _Create {
       {this.currentIndex = 0,
       this.email = '',
       this.password = '',
+      this.errorText = '',
       this.isObscure = true,
       this.isValidEmail = false,
-      this.isSafetyPass = false});
+      this.isSafetyPass = false,
+      this.hasError = false});
 
   @JsonKey()
   @override
@@ -198,6 +230,9 @@ class _$_Create implements _Create {
   final String password;
   @JsonKey()
   @override
+  final String errorText;
+  @JsonKey()
+  @override
   final bool isObscure;
   @JsonKey()
   @override
@@ -205,10 +240,13 @@ class _$_Create implements _Create {
   @JsonKey()
   @override
   final bool isSafetyPass;
+  @JsonKey()
+  @override
+  final bool hasError;
 
   @override
   String toString() {
-    return 'LoginScreenState(currentIndex: $currentIndex, email: $email, password: $password, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass)';
+    return 'LoginScreenState(currentIndex: $currentIndex, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, hasError: $hasError)';
   }
 
   @override
@@ -220,11 +258,13 @@ class _$_Create implements _Create {
                 .equals(other.currentIndex, currentIndex) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.errorText, errorText) &&
             const DeepCollectionEquality().equals(other.isObscure, isObscure) &&
             const DeepCollectionEquality()
                 .equals(other.isValidEmail, isValidEmail) &&
             const DeepCollectionEquality()
-                .equals(other.isSafetyPass, isSafetyPass));
+                .equals(other.isSafetyPass, isSafetyPass) &&
+            const DeepCollectionEquality().equals(other.hasError, hasError));
   }
 
   @override
@@ -233,9 +273,11 @@ class _$_Create implements _Create {
       const DeepCollectionEquality().hash(currentIndex),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(errorText),
       const DeepCollectionEquality().hash(isObscure),
       const DeepCollectionEquality().hash(isValidEmail),
-      const DeepCollectionEquality().hash(isSafetyPass));
+      const DeepCollectionEquality().hash(isSafetyPass),
+      const DeepCollectionEquality().hash(hasError));
 
   @JsonKey(ignore: true)
   @override
@@ -248,9 +290,11 @@ abstract class _Create implements LoginScreenState {
       {int currentIndex,
       String email,
       String password,
+      String errorText,
       bool isObscure,
       bool isValidEmail,
-      bool isSafetyPass}) = _$_Create;
+      bool isSafetyPass,
+      bool hasError}) = _$_Create;
 
   @override
   int get currentIndex;
@@ -259,11 +303,15 @@ abstract class _Create implements LoginScreenState {
   @override
   String get password;
   @override
+  String get errorText;
+  @override
   bool get isObscure;
   @override
   bool get isValidEmail;
   @override
   bool get isSafetyPass;
+  @override
+  bool get hasError;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

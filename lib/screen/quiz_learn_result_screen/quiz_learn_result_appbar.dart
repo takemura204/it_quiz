@@ -13,24 +13,12 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: const Text("結果"),
       actions: [
-        Container(
-          height: context.height * 0.05,
-          alignment: Alignment.bottomRight,
-          child: IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-            iconSize: 30,
-            onPressed: () {
-              //画面に戻る
-              Navigator.pop(context);
-              //問題リセット
+        ClearButton(
+          iconSize: 30,
+          onPressed: () => //問題リセット
               ref
                   .read(quizLearnScreenControllerProvider.notifier)
-                  .tapClearButton();
-            },
-            icon: const Icon(
-              Icons.clear,
-            ),
-          ),
+                  .tapClearButton(),
         ),
       ],
     );

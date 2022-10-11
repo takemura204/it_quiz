@@ -9,6 +9,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../controller/quiz_choice/quiz_choice_screen_state.dart';
 import '../../resource/lang/initial_resource.dart';
+import '../../view/button.dart';
 import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
 
 part 'quiz_choice_appbar.dart';

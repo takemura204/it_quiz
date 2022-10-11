@@ -22,16 +22,24 @@ class _$CreateAccountScreenStateTearOff {
       {int currentIndex = 0,
       String email = '',
       String password = '',
+      String errorText = '',
       bool isObscure = true,
       bool isValidEmail = false,
-      bool isSafetyPass = false}) {
+      bool isSafetyPass = false,
+      bool isCheck = false,
+      bool isSucceeded = false,
+      bool hasError = false}) {
     return _Create(
       currentIndex: currentIndex,
       email: email,
       password: password,
+      errorText: errorText,
       isObscure: isObscure,
       isValidEmail: isValidEmail,
       isSafetyPass: isSafetyPass,
+      isCheck: isCheck,
+      isSucceeded: isSucceeded,
+      hasError: hasError,
     );
   }
 }
@@ -44,9 +52,13 @@ mixin _$CreateAccountScreenState {
   int get currentIndex => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get errorText => throw _privateConstructorUsedError;
   bool get isObscure => throw _privateConstructorUsedError;
   bool get isValidEmail => throw _privateConstructorUsedError;
   bool get isSafetyPass => throw _privateConstructorUsedError;
+  bool get isCheck => throw _privateConstructorUsedError;
+  bool get isSucceeded => throw _privateConstructorUsedError;
+  bool get hasError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreateAccountScreenStateCopyWith<CreateAccountScreenState> get copyWith =>
@@ -62,9 +74,13 @@ abstract class $CreateAccountScreenStateCopyWith<$Res> {
       {int currentIndex,
       String email,
       String password,
+      String errorText,
       bool isObscure,
       bool isValidEmail,
-      bool isSafetyPass});
+      bool isSafetyPass,
+      bool isCheck,
+      bool isSucceeded,
+      bool hasError});
 }
 
 /// @nodoc
@@ -81,9 +97,13 @@ class _$CreateAccountScreenStateCopyWithImpl<$Res>
     Object? currentIndex = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? errorText = freezed,
     Object? isObscure = freezed,
     Object? isValidEmail = freezed,
     Object? isSafetyPass = freezed,
+    Object? isCheck = freezed,
+    Object? isSucceeded = freezed,
+    Object? hasError = freezed,
   }) {
     return _then(_value.copyWith(
       currentIndex: currentIndex == freezed
@@ -98,6 +118,10 @@ class _$CreateAccountScreenStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      errorText: errorText == freezed
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String,
       isObscure: isObscure == freezed
           ? _value.isObscure
           : isObscure // ignore: cast_nullable_to_non_nullable
@@ -109,6 +133,18 @@ class _$CreateAccountScreenStateCopyWithImpl<$Res>
       isSafetyPass: isSafetyPass == freezed
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCheck: isCheck == freezed
+          ? _value.isCheck
+          : isCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSucceeded: isSucceeded == freezed
+          ? _value.isSucceeded
+          : isSucceeded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -124,9 +160,13 @@ abstract class _$CreateCopyWith<$Res>
       {int currentIndex,
       String email,
       String password,
+      String errorText,
       bool isObscure,
       bool isValidEmail,
-      bool isSafetyPass});
+      bool isSafetyPass,
+      bool isCheck,
+      bool isSucceeded,
+      bool hasError});
 }
 
 /// @nodoc
@@ -144,9 +184,13 @@ class __$CreateCopyWithImpl<$Res>
     Object? currentIndex = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? errorText = freezed,
     Object? isObscure = freezed,
     Object? isValidEmail = freezed,
     Object? isSafetyPass = freezed,
+    Object? isCheck = freezed,
+    Object? isSucceeded = freezed,
+    Object? hasError = freezed,
   }) {
     return _then(_Create(
       currentIndex: currentIndex == freezed
@@ -161,6 +205,10 @@ class __$CreateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      errorText: errorText == freezed
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String,
       isObscure: isObscure == freezed
           ? _value.isObscure
           : isObscure // ignore: cast_nullable_to_non_nullable
@@ -173,6 +221,18 @@ class __$CreateCopyWithImpl<$Res>
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCheck: isCheck == freezed
+          ? _value.isCheck
+          : isCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSucceeded: isSucceeded == freezed
+          ? _value.isSucceeded
+          : isSucceeded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -184,9 +244,13 @@ class _$_Create implements _Create {
       {this.currentIndex = 0,
       this.email = '',
       this.password = '',
+      this.errorText = '',
       this.isObscure = true,
       this.isValidEmail = false,
-      this.isSafetyPass = false});
+      this.isSafetyPass = false,
+      this.isCheck = false,
+      this.isSucceeded = false,
+      this.hasError = false});
 
   @JsonKey()
   @override
@@ -199,6 +263,9 @@ class _$_Create implements _Create {
   final String password;
   @JsonKey()
   @override
+  final String errorText;
+  @JsonKey()
+  @override
   final bool isObscure;
   @JsonKey()
   @override
@@ -206,10 +273,19 @@ class _$_Create implements _Create {
   @JsonKey()
   @override
   final bool isSafetyPass;
+  @JsonKey()
+  @override
+  final bool isCheck;
+  @JsonKey()
+  @override
+  final bool isSucceeded;
+  @JsonKey()
+  @override
+  final bool hasError;
 
   @override
   String toString() {
-    return 'CreateAccountScreenState(currentIndex: $currentIndex, email: $email, password: $password, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass)';
+    return 'CreateAccountScreenState(currentIndex: $currentIndex, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isCheck: $isCheck, isSucceeded: $isSucceeded, hasError: $hasError)';
   }
 
   @override
@@ -221,11 +297,16 @@ class _$_Create implements _Create {
                 .equals(other.currentIndex, currentIndex) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.errorText, errorText) &&
             const DeepCollectionEquality().equals(other.isObscure, isObscure) &&
             const DeepCollectionEquality()
                 .equals(other.isValidEmail, isValidEmail) &&
             const DeepCollectionEquality()
-                .equals(other.isSafetyPass, isSafetyPass));
+                .equals(other.isSafetyPass, isSafetyPass) &&
+            const DeepCollectionEquality().equals(other.isCheck, isCheck) &&
+            const DeepCollectionEquality()
+                .equals(other.isSucceeded, isSucceeded) &&
+            const DeepCollectionEquality().equals(other.hasError, hasError));
   }
 
   @override
@@ -234,9 +315,13 @@ class _$_Create implements _Create {
       const DeepCollectionEquality().hash(currentIndex),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(errorText),
       const DeepCollectionEquality().hash(isObscure),
       const DeepCollectionEquality().hash(isValidEmail),
-      const DeepCollectionEquality().hash(isSafetyPass));
+      const DeepCollectionEquality().hash(isSafetyPass),
+      const DeepCollectionEquality().hash(isCheck),
+      const DeepCollectionEquality().hash(isSucceeded),
+      const DeepCollectionEquality().hash(hasError));
 
   @JsonKey(ignore: true)
   @override
@@ -249,9 +334,13 @@ abstract class _Create implements CreateAccountScreenState {
       {int currentIndex,
       String email,
       String password,
+      String errorText,
       bool isObscure,
       bool isValidEmail,
-      bool isSafetyPass}) = _$_Create;
+      bool isSafetyPass,
+      bool isCheck,
+      bool isSucceeded,
+      bool hasError}) = _$_Create;
 
   @override
   int get currentIndex;
@@ -260,11 +349,19 @@ abstract class _Create implements CreateAccountScreenState {
   @override
   String get password;
   @override
+  String get errorText;
+  @override
   bool get isObscure;
   @override
   bool get isValidEmail;
   @override
   bool get isSafetyPass;
+  @override
+  bool get isCheck;
+  @override
+  bool get isSucceeded;
+  @override
+  bool get hasError;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

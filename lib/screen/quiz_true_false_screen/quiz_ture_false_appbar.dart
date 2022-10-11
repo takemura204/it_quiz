@@ -12,19 +12,11 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       centerTitle: true,
       automaticallyImplyLeading: false,
       title: Text(arguments.item.title),
-      leading: Container(
-        height: context.height * 0.05,
-        alignment: Alignment.bottomRight,
-        child: IconButton(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-          iconSize: 25,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_outlined,
-          ),
-        ),
+      leading: CustomBackButton(
+        iconSize: 25,
+        onPressed: () => ref
+            .read(quizTureFalseScreenControllerProvider.notifier)
+            .tapClearButton(),
       ),
     );
   }

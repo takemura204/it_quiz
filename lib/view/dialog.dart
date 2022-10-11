@@ -26,7 +26,10 @@ class SelectQuizDialog extends ConsumerWidget {
           child: Column(
             children: [
               ///Clearボタン
-              const ClearButton(),
+              ClearButton(
+                iconSize: 40,
+                onPressed: () {},
+              ),
 
               ///問題タイトル
               Container(

@@ -5,7 +5,10 @@ import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
 ///Clearボタン
 class ClearButton extends ConsumerWidget {
-  const ClearButton();
+  const ClearButton({required this.iconSize, required this.onPressed});
+  final double iconSize;
+  final VoidCallback onPressed;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -13,12 +16,38 @@ class ClearButton extends ConsumerWidget {
       alignment: Alignment.bottomRight,
       child: IconButton(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        iconSize: 40,
+        iconSize: iconSize,
         onPressed: () {
           Navigator.pop(context);
+          onPressed();
         },
         icon: const Icon(
           Icons.clear,
+        ),
+      ),
+    );
+  }
+}
+
+///Backボタン
+class CustomBackButton extends ConsumerWidget {
+  const CustomBackButton({required this.iconSize, required this.onPressed});
+  final double iconSize;
+  final VoidCallback onPressed;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.05,
+      alignment: Alignment.bottomRight,
+      child: IconButton(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        iconSize: iconSize,
+        onPressed: () {
+          Navigator.pop(context);
+          onPressed();
+        },
+        icon: const Icon(
+          Icons.arrow_back_ios_new,
         ),
       ),
     );
@@ -39,6 +68,29 @@ class ObscureIconButton extends ConsumerWidget {
           ? const Icon(Icons.visibility_off)
           : const Icon(Icons.visibility_outlined),
       color: isObscure ? Colors.grey : context.colors.main50,
+    );
+  }
+}
+
+///チェエクボックスボタン
+class CheckBoxIconButton extends ConsumerWidget {
+  const CheckBoxIconButton({required this.onPressed, required this.isCheck});
+  final VoidCallback? onPressed;
+  final bool isCheck;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.08,
+      height: context.height * 0.05,
+      child: IconButton(
+        padding: const EdgeInsets.all(0.0),
+        onPressed: onPressed,
+        // 表示アイコン
+        icon: isCheck
+            ? const Icon(Icons.check_box_outlined)
+            : const Icon(Icons.check_box_outline_blank_outlined),
+        color: isCheck ? context.colors.main50 : Colors.grey,
+      ),
     );
   }
 }

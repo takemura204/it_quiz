@@ -1,0 +1,137 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/resource/widget/color_resource.dart';
+
+///ログインエラーBar
+class LoginErrorBar extends ConsumerWidget {
+  const LoginErrorBar({required this.errorText});
+  final String errorText;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.05,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: context.colors.main50,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        color: context.colors.main50.withOpacity(0.1),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: Icon(
+              Icons.error_outline,
+              color: context.colors.main50,
+            ),
+          ),
+          Container(
+            width: context.width * 0.84,
+            child: Text(
+              errorText,
+              style: TextStyle(
+                color: context.colors.main50,
+              ),
+              overflow: TextOverflow.fade,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+///問題一覧Bar
+class StudyListBar extends ConsumerWidget {
+  const StudyListBar({required this.title, required this.onTap});
+  final String title;
+  final VoidCallback? onTap;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 1.0,
+        margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
+        child: Container(
+          child: ListTile(
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            leading: const Icon(Icons.account_circle),
+            title: Text(title),
+            trailing: const Icon(Icons.arrow_forward),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+///設定タイトルBar
+class SettingTitleBar extends ConsumerWidget {
+  const SettingTitleBar({required this.title, required this.onTap});
+  final String title;
+  final VoidCallback? onTap;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 1.0,
+        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        child: Container(
+          child: Container(
+            height: context.height * 0.07,
+            color: Colors.grey.withOpacity(0.3),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SettingListBar extends ConsumerWidget {
+  const SettingListBar({required this.title, required this.onTap});
+  final String title;
+  final VoidCallback? onTap;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 1.0,
+        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        child: Container(
+          height: context.height * 0.08,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                const Icon(Icons.arrow_forward_ios_sharp),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -32,6 +32,22 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
     super.dispose();
   }
 
+  ///リセット
+  void reset() {
+    emailController.clear();
+    passwordController.clear();
+
+    state = state.copyWith(
+      email: "",
+      password: "",
+      errorText: "",
+      isObscure: true,
+      isValidEmail: false,
+      isSafetyPass: false,
+      hasError: false,
+    );
+  }
+
   ///メールアドレスの入力
   void setEmail(String email) {
     final regExp = RegExp(
@@ -52,21 +68,18 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
     state = state.copyWith(isObscure: !state.isObscure);
   }
 
-  ///新規登録
-  Future signUp() async {
+  ///ログイン
+  Future signIn() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      state = state.copyWith(hasError: false);
     } catch (e) {
       print(e);
+      state = state.copyWith(hasError: true, errorText: e.toString());
     }
-  }
-
-  ///ログイン
-  void signIn() {
-    state = state.copyWith(isObscure: !state.isObscure);
   }
 
   ///Googleから登録
