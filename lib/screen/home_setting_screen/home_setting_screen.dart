@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
+import 'package:kentei_quiz/view/button.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../view/bar.dart';
+
+part 'home_setting_view.dart';
 
 class HomeSettingScreen extends StatelessWidget {
   const HomeSettingScreen();
@@ -12,13 +17,26 @@ class HomeSettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: [
-          const SettingTitleBar(
-            title: "title",
+        children: const [
+          /// プロフィール
+          UserProfile(),
+          Gap(10),
+
+          SettingTitleBar(
+            title: "アカウント情報",
             onTap: null,
           ),
-          const SettingListBar(
-            title: "Subtitle",
+
+          SettingTitleBar(
+            title: "設定",
+            onTap: null,
+          ),
+          SettingListBar(
+            title: "通知",
+            onTap: null,
+          ),
+          SettingTitleBar(
+            title: "アプリについて",
             onTap: null,
           ),
         ],

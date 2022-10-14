@@ -17,7 +17,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
           Text(I18n().titleStudy),
           Text(I18n().titleReview),
           Text(I18n().titleTest),
-          Text(I18n().titleSetting),
+          Text(I18n().titleMyPage),
         ],
         index: state.currentIndex,
       ),

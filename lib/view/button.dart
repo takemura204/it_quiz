@@ -94,3 +94,38 @@ class CheckBoxIconButton extends ConsumerWidget {
     );
   }
 }
+
+///会員登録・ログインボタン
+class LoginAndCreateAccountButton extends ConsumerWidget {
+  const LoginAndCreateAccountButton({required this.onPressed});
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.05,
+      width: context.width * 1,
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.15),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.colors.background,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          side: BorderSide(
+            color: context.colors.main50.withOpacity(0.7),
+            width: 2,
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          "会員登録・ログイン",
+          style: TextStyle(
+            color: context.colors.main50.withOpacity(0.7),
+            fontSize: context.height * 0.02,
+          ),
+        ),
+      ),
+    );
+  }
+}

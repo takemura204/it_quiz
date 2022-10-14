@@ -12,7 +12,7 @@ class I18n {
   String get titleStudy => "学ぶ";
   String get titleReview => "復習";
   String get titleTest => "テスト";
-  String get titleSetting => "設定";
+  String get titleMyPage => "マイページ";
 
   ///「学ぶ」形式
   String get styleLeanQuiz => "一問一答で学習する";

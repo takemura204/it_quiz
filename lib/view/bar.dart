@@ -83,8 +83,9 @@ class SettingTitleBar extends ConsumerWidget {
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         child: Container(
           child: Container(
-            height: context.height * 0.07,
+            height: context.height * 0.05,
             color: Colors.grey.withOpacity(0.3),
+            alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -116,7 +117,7 @@ class SettingListBar extends ConsumerWidget {
         elevation: 1.0,
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         child: Container(
-          height: context.height * 0.08,
+          height: context.height * 0.05,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

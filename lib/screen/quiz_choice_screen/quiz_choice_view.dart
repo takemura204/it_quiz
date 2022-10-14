@@ -3,7 +3,6 @@ part of 'quiz_choice_screen.dart';
 ///問題形式表示
 class _QuizStyleTitle extends ConsumerWidget {
   const _QuizStyleTitle(this.arguments);
-
   final QuizChoiceScreenArguments arguments;
 
   @override
