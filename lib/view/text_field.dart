@@ -24,7 +24,6 @@ class EmailTextField extends ConsumerWidget {
       autofocus: true, //TextFieldに自動でfocusを当てる
       enabled: true,
       obscureText: false,
-
       textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
       maxLines: 1,
       decoration: InputDecoration(

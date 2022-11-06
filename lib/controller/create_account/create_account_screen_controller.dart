@@ -45,7 +45,6 @@ class CreateAccountScreenController
       isObscure: true,
       isValidEmail: false,
       isSafetyPass: false,
-      isCheck: false,
       hasError: false,
     );
   }
@@ -68,11 +67,6 @@ class CreateAccountScreenController
   /// パスワードの表示
   void switchObscure() {
     state = state.copyWith(isObscure: !state.isObscure);
-  }
-
-  /// チェックボックスタップ
-  void switchIsCheck() {
-    state = state.copyWith(isCheck: !state.isCheck);
   }
 
   ///新規登録
@@ -109,10 +103,8 @@ class CreateAccountScreenController
       // サインインしたら、UserCredentialを返す
       return FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      print('FirebaseAuthException');
       print('${e.code}');
     } on Exception catch (e) {
-      print('Other Exception');
       print('${e.toString()}');
     }
   }

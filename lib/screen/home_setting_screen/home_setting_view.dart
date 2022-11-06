@@ -73,9 +73,10 @@ class UserProfile extends ConsumerWidget {
           ),
 
           ///ログイン・会員登録ボタン
-          LoginAndCreateAccountButton(
+          SetAccountButton(
             onPressed: () => context.showScreen(
-                const CreateAccountScreenArguments().generateRoute()),
+              const AuthScreenArguments().generateRoute(),
+            ),
           ),
         ],
       ),

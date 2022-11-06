@@ -6,6 +6,7 @@ import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
 
 import '../resource/controller/screen_argument_resource.dart';
+import 'auth_screen/auth_screen.dart';
 import 'create_account_screen/create_account_screen.dart';
 
 ///一問一答形式へ画面遷移
@@ -82,6 +83,28 @@ class QuizTrueFalseScreenArguments
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
               MaterialPageRoute(
                   builder: (context) => QuizTureFalseScreen(this)),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
+      );
+}
+
+///認証画面
+class AuthScreenArguments with _NoParamsMixin implements IScreenArguments {
+  const AuthScreenArguments();
+
+  @override
+  String get screenNameFormat => "/auth";
+
+  @override
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            AuthScreen(this),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(builder: (context) => AuthScreen(this)),
               context,
               animation,
               secondaryAnimation,

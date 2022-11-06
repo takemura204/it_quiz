@@ -81,6 +81,9 @@ dependencies:
   google_sign_in: ^5.4.2
   flutter_signin_button: ^2.0.0
 
+  #カルセールスライダーを使いたい
+  carousel_slider: ^4.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

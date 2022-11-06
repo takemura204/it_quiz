@@ -26,7 +26,6 @@ class _$CreateAccountScreenStateTearOff {
       bool isObscure = true,
       bool isValidEmail = false,
       bool isSafetyPass = false,
-      bool isCheck = false,
       bool isSucceeded = false,
       bool hasError = false}) {
     return _Create(
@@ -37,7 +36,6 @@ class _$CreateAccountScreenStateTearOff {
       isObscure: isObscure,
       isValidEmail: isValidEmail,
       isSafetyPass: isSafetyPass,
-      isCheck: isCheck,
       isSucceeded: isSucceeded,
       hasError: hasError,
     );
@@ -56,7 +54,6 @@ mixin _$CreateAccountScreenState {
   bool get isObscure => throw _privateConstructorUsedError;
   bool get isValidEmail => throw _privateConstructorUsedError;
   bool get isSafetyPass => throw _privateConstructorUsedError;
-  bool get isCheck => throw _privateConstructorUsedError;
   bool get isSucceeded => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
 
@@ -78,7 +75,6 @@ abstract class $CreateAccountScreenStateCopyWith<$Res> {
       bool isObscure,
       bool isValidEmail,
       bool isSafetyPass,
-      bool isCheck,
       bool isSucceeded,
       bool hasError});
 }
@@ -101,7 +97,6 @@ class _$CreateAccountScreenStateCopyWithImpl<$Res>
     Object? isObscure = freezed,
     Object? isValidEmail = freezed,
     Object? isSafetyPass = freezed,
-    Object? isCheck = freezed,
     Object? isSucceeded = freezed,
     Object? hasError = freezed,
   }) {
@@ -134,10 +129,6 @@ class _$CreateAccountScreenStateCopyWithImpl<$Res>
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
               as bool,
-      isCheck: isCheck == freezed
-          ? _value.isCheck
-          : isCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
       isSucceeded: isSucceeded == freezed
           ? _value.isSucceeded
           : isSucceeded // ignore: cast_nullable_to_non_nullable
@@ -164,7 +155,6 @@ abstract class _$CreateCopyWith<$Res>
       bool isObscure,
       bool isValidEmail,
       bool isSafetyPass,
-      bool isCheck,
       bool isSucceeded,
       bool hasError});
 }
@@ -188,7 +178,6 @@ class __$CreateCopyWithImpl<$Res>
     Object? isObscure = freezed,
     Object? isValidEmail = freezed,
     Object? isSafetyPass = freezed,
-    Object? isCheck = freezed,
     Object? isSucceeded = freezed,
     Object? hasError = freezed,
   }) {
@@ -221,10 +210,6 @@ class __$CreateCopyWithImpl<$Res>
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
               as bool,
-      isCheck: isCheck == freezed
-          ? _value.isCheck
-          : isCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
       isSucceeded: isSucceeded == freezed
           ? _value.isSucceeded
           : isSucceeded // ignore: cast_nullable_to_non_nullable
@@ -248,7 +233,6 @@ class _$_Create implements _Create {
       this.isObscure = true,
       this.isValidEmail = false,
       this.isSafetyPass = false,
-      this.isCheck = false,
       this.isSucceeded = false,
       this.hasError = false});
 
@@ -275,9 +259,6 @@ class _$_Create implements _Create {
   final bool isSafetyPass;
   @JsonKey()
   @override
-  final bool isCheck;
-  @JsonKey()
-  @override
   final bool isSucceeded;
   @JsonKey()
   @override
@@ -285,7 +266,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'CreateAccountScreenState(currentIndex: $currentIndex, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isCheck: $isCheck, isSucceeded: $isSucceeded, hasError: $hasError)';
+    return 'CreateAccountScreenState(currentIndex: $currentIndex, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError)';
   }
 
   @override
@@ -303,7 +284,6 @@ class _$_Create implements _Create {
                 .equals(other.isValidEmail, isValidEmail) &&
             const DeepCollectionEquality()
                 .equals(other.isSafetyPass, isSafetyPass) &&
-            const DeepCollectionEquality().equals(other.isCheck, isCheck) &&
             const DeepCollectionEquality()
                 .equals(other.isSucceeded, isSucceeded) &&
             const DeepCollectionEquality().equals(other.hasError, hasError));
@@ -319,7 +299,6 @@ class _$_Create implements _Create {
       const DeepCollectionEquality().hash(isObscure),
       const DeepCollectionEquality().hash(isValidEmail),
       const DeepCollectionEquality().hash(isSafetyPass),
-      const DeepCollectionEquality().hash(isCheck),
       const DeepCollectionEquality().hash(isSucceeded),
       const DeepCollectionEquality().hash(hasError));
 
@@ -338,7 +317,6 @@ abstract class _Create implements CreateAccountScreenState {
       bool isObscure,
       bool isValidEmail,
       bool isSafetyPass,
-      bool isCheck,
       bool isSucceeded,
       bool hasError}) = _$_Create;
 
@@ -356,8 +334,6 @@ abstract class _Create implements CreateAccountScreenState {
   bool get isValidEmail;
   @override
   bool get isSafetyPass;
-  @override
-  bool get isCheck;
   @override
   bool get isSucceeded;
   @override

@@ -12,7 +12,6 @@ abstract class CreateAccountScreenState with _$CreateAccountScreenState {
     @Default(true) final bool isObscure,
     @Default(false) final bool isValidEmail,
     @Default(false) final bool isSafetyPass,
-    @Default(false) final bool isCheck,
     @Default(false) final bool isSucceeded,
     @Default(false) final bool hasError,
   }) = _Create;
