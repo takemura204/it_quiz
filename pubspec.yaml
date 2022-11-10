@@ -84,6 +84,9 @@ dependencies:
   #カルセールスライダーを使いたい
   carousel_slider: ^4.1.1
 
+  #インジケーターをアニメーションしたい
+  smooth_page_indicator: ^1.0.0+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -103,4 +106,5 @@ flutter:
   #画像
   assets:
     - assets/icon/
+    - assets/image/
 

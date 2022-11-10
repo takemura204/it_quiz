@@ -1,9 +1,13 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../controller/auth/auth_screen_controller.dart';
 import '../../controller/login/login_screen_controller.dart';
 import '../../view/button.dart';
 
@@ -28,11 +32,7 @@ class AuthScreen extends ConsumerWidget {
       body: Column(
         children: [
           ///説明画面
-          Container(
-            color: Colors.redAccent,
-            height: context.height * 0.4,
-            child: const _Tutorial(),
-          ),
+          const _Tutorial(),
           const Spacer(),
 
           ///認証方法選択

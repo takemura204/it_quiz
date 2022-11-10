@@ -194,12 +194,13 @@ class SignInWithGoogleButton extends ConsumerWidget {
         child: Row(
           children: [
             Container(
-                width: context.width * 0.1,
-                height: context.height * 0.03,
-                child: Image.asset(
-                  'assets/icon/Google_icon.png',
-                  fit: BoxFit.contain,
-                )),
+              width: context.width * 0.1,
+              height: context.height * 0.03,
+              child: Image.asset(
+                'assets/icon/Google_icon.png',
+                fit: BoxFit.contain,
+              ),
+            ),
             Container(
               width: context.width * 0.65,
               child: Text(
