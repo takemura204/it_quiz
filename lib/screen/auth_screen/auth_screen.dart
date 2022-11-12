@@ -33,6 +33,7 @@ class AuthScreen extends ConsumerWidget {
         children: [
           ///説明画面
           const _Tutorial(),
+
           const Spacer(),
 
           ///認証方法選択
@@ -48,12 +49,12 @@ class AuthScreen extends ConsumerWidget {
                   ),
                 ),
 
-                Gap(context.height * 0.01),
+                Gap(context.height * 0.012),
 
-                SignInWithEmailButton(
+                SignUpWithEmailButton(
                   text: '新規会員登録',
                   onPressed: () => context.showScreen(
-                    const CreateAccountScreenArguments().generateRoute(),
+                    const RegistrationScreenArguments().generateRoute(),
                   ),
                 ),
 
@@ -77,19 +78,19 @@ class AuthScreen extends ConsumerWidget {
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
                   onPressed: () => ref
-                      .read(loginScreenControllerProvider.notifier)
+                      .read(authScreenControllerProvider.notifier)
                       .signInWithGoogle(),
                 ),
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
                   onPressed: () => ref
-                      .read(loginScreenControllerProvider.notifier)
+                      .read(authScreenControllerProvider.notifier)
                       .signInWithGoogle(),
                 ),
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
                   onPressed: () => ref
-                      .read(loginScreenControllerProvider.notifier)
+                      .read(authScreenControllerProvider.notifier)
                       .signInWithGoogle(),
                 ),
 

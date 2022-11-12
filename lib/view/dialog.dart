@@ -9,9 +9,32 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 import '../entity/quiz_item.dart';
 import 'button.dart';
 
+class ResultDialog extends ConsumerWidget {
+  const ResultDialog({required this.title, required this.content});
+  final String title;
+  final String content;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return AlertDialog(
+      title: Text(title),
+      content: Text(content),
+      actions: [
+        Container(
+          width: context.width * 1,
+          child: ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+///クイズ選択
 class SelectQuizDialog extends ConsumerWidget {
   const SelectQuizDialog(this.item);
-
   final QuizItem item;
 
   @override

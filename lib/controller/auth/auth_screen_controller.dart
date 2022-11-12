@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -38,5 +40,30 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
 
   void changeImageIndex(int index) {
     state = state.copyWith(currentImageIndex: index);
+  }
+
+  ///Googleから登録
+  Future signInWithGoogle() async {
+    try {
+      // 認証フローのトリガー
+      final googleUser = await GoogleSignIn(scopes: [
+        'email',
+      ]).signIn();
+      // リクエストから、認証情報を取得
+      final googleAuth = await googleUser?.authentication;
+      // クレデンシャルを新しく作成
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      // サインインしたら、UserCredentialを返す
+      return FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      print('FirebaseAuthException');
+      print('${e.code}');
+    } on Exception catch (e) {
+      print('Other Exception');
+      print('${e.toString()}');
+    }
   }
 }

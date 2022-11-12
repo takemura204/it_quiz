@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'create_account_screen_state.dart';
+part of 'registration_screen_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,8 +15,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$CreateAccountScreenStateTearOff {
-  const _$CreateAccountScreenStateTearOff();
+class _$RegistrationScreenStateTearOff {
+  const _$RegistrationScreenStateTearOff();
 
   _Create call(
       {int currentIndex = 0,
@@ -43,10 +43,10 @@ class _$CreateAccountScreenStateTearOff {
 }
 
 /// @nodoc
-const $CreateAccountScreenState = _$CreateAccountScreenStateTearOff();
+const $RegistrationScreenState = _$RegistrationScreenStateTearOff();
 
 /// @nodoc
-mixin _$CreateAccountScreenState {
+mixin _$RegistrationScreenState {
   int get currentIndex => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
@@ -58,15 +58,15 @@ mixin _$CreateAccountScreenState {
   bool get hasError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CreateAccountScreenStateCopyWith<CreateAccountScreenState> get copyWith =>
+  $RegistrationScreenStateCopyWith<RegistrationScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CreateAccountScreenStateCopyWith<$Res> {
-  factory $CreateAccountScreenStateCopyWith(CreateAccountScreenState value,
-          $Res Function(CreateAccountScreenState) then) =
-      _$CreateAccountScreenStateCopyWithImpl<$Res>;
+abstract class $RegistrationScreenStateCopyWith<$Res> {
+  factory $RegistrationScreenStateCopyWith(RegistrationScreenState value,
+          $Res Function(RegistrationScreenState) then) =
+      _$RegistrationScreenStateCopyWithImpl<$Res>;
   $Res call(
       {int currentIndex,
       String email,
@@ -80,13 +80,13 @@ abstract class $CreateAccountScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CreateAccountScreenStateCopyWithImpl<$Res>
-    implements $CreateAccountScreenStateCopyWith<$Res> {
-  _$CreateAccountScreenStateCopyWithImpl(this._value, this._then);
+class _$RegistrationScreenStateCopyWithImpl<$Res>
+    implements $RegistrationScreenStateCopyWith<$Res> {
+  _$RegistrationScreenStateCopyWithImpl(this._value, this._then);
 
-  final CreateAccountScreenState _value;
+  final RegistrationScreenState _value;
   // ignore: unused_field
-  final $Res Function(CreateAccountScreenState) _then;
+  final $Res Function(RegistrationScreenState) _then;
 
   @override
   $Res call({
@@ -143,7 +143,7 @@ class _$CreateAccountScreenStateCopyWithImpl<$Res>
 
 /// @nodoc
 abstract class _$CreateCopyWith<$Res>
-    implements $CreateAccountScreenStateCopyWith<$Res> {
+    implements $RegistrationScreenStateCopyWith<$Res> {
   factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
       __$CreateCopyWithImpl<$Res>;
   @override
@@ -161,7 +161,7 @@ abstract class _$CreateCopyWith<$Res>
 
 /// @nodoc
 class __$CreateCopyWithImpl<$Res>
-    extends _$CreateAccountScreenStateCopyWithImpl<$Res>
+    extends _$RegistrationScreenStateCopyWithImpl<$Res>
     implements _$CreateCopyWith<$Res> {
   __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
       : super(_value, (v) => _then(v as _Create));
@@ -266,7 +266,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'CreateAccountScreenState(currentIndex: $currentIndex, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError)';
+    return 'RegistrationScreenState(currentIndex: $currentIndex, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError)';
   }
 
   @override
@@ -308,7 +308,7 @@ class _$_Create implements _Create {
       __$CreateCopyWithImpl<_Create>(this, _$identity);
 }
 
-abstract class _Create implements CreateAccountScreenState {
+abstract class _Create implements RegistrationScreenState {
   const factory _Create(
       {int currentIndex,
       String email,

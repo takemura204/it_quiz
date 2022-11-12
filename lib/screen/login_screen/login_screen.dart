@@ -8,13 +8,13 @@ import '../../controller/login/login_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/bar.dart';
 import '../../view/button.dart';
+import '../../view/dialog.dart';
 import '../../view/text_field.dart';
 
 part 'login_appbar.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen(this.arguments);
-
   final LoginScreenArguments arguments;
 
   @override
@@ -109,53 +109,18 @@ class LoginScreen extends ConsumerWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onPressed: isValidEmail && isSafetyPass
-                        ? () => ref
-                            .read(loginScreenControllerProvider.notifier)
-                            .signIn()
+                        ? () {
+                            ref
+                                .read(loginScreenControllerProvider.notifier)
+                                .signIn();
+                            showDialog(
+                                context: context,
+                                builder: (_) => ResultDialog(
+                                      title: "a",
+                                      content: I18n().loginErrorText(errorText),
+                                    ));
+                          }
                         : null,
-                  ),
-                ),
-                const Divider(),
-
-                ///Googleから登録
-                Container(
-                  width: context.width * 0.8,
-                  height: context.height * 0.06,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 4,
-                      padding: const EdgeInsets.all(3.0),
-                      alignment: Alignment.center,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                            width: context.width * 0.1,
-                            height: context.height * 0.03,
-                            child: Image.asset(
-                              'assets/icon/Google_icon.png',
-                              fit: BoxFit.contain,
-                            )),
-                        const Spacer(),
-                        const Text(
-                          'Googleアカウントでサインイン',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                    onPressed: () async => ref
-                        .read(loginScreenControllerProvider.notifier)
-                        .signInWithGoogle(),
                   ),
                 ),
               ],

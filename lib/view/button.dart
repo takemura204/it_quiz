@@ -130,7 +130,7 @@ class SetAccountButton extends ConsumerWidget {
   }
 }
 
-///メールアドレスから登録ボタン
+///メールアドレスでログイン
 class SignInWithEmailButton extends ConsumerWidget {
   const SignInWithEmailButton({required this.text, required this.onPressed});
   final String text;
@@ -143,7 +143,7 @@ class SignInWithEmailButton extends ConsumerWidget {
       height: context.height * 0.06,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.redAccent.shade700,
+          backgroundColor: context.colors.main50,
           elevation: 4,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
@@ -157,6 +157,48 @@ class SignInWithEmailButton extends ConsumerWidget {
           text,
           textAlign: TextAlign.center,
           style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: context.height * 0.018,
+          ),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+///メールアドレスで登録
+class SignUpWithEmailButton extends ConsumerWidget {
+  const SignUpWithEmailButton({required this.text, required this.onPressed});
+  final String text;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.8,
+      height: context.height * 0.06,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.colors.background,
+          elevation: 4,
+          padding: const EdgeInsets.all(3.0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          side: BorderSide(
+            color: context.colors.main50.withOpacity(0.7),
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: context.colors.main50.withOpacity(0.7),
             fontWeight: FontWeight.bold,
             fontSize: context.height * 0.018,
           ),
