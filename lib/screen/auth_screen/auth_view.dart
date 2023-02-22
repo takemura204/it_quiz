@@ -39,9 +39,14 @@ class _Tutorial extends ConsumerWidget {
               width: context.width,
               height: context.height * 0.35,
               decoration: const BoxDecoration(color: Colors.amber),
-              child: Image.asset(
-                images[itemIndex],
-                fit: BoxFit.cover,
+              // child: Image.asset(
+              //   images[itemIndex],
+              //   fit: BoxFit.cover,
+              child: Center(
+                child: Text(
+                  "画面" + itemIndex.toString(),
+                  style: const TextStyle(fontSize: 24),
+                ),
               ),
             ),
           ),

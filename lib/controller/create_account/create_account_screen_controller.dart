@@ -4,17 +4,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import 'registration_screen_state.dart';
+import 'create_account_screen_state.dart';
 
-final registrationScreenControllerProvider = StateNotifierProvider<
-    RegistrationScreenController, RegistrationScreenState>(
-  (ref) => RegistrationScreenController(ref: ref),
+final createAccountScreenControllerProvider = StateNotifierProvider<
+    CreateAccountScreenController, CreateAccountScreenState>(
+  (ref) => CreateAccountScreenController(ref: ref),
 );
 
-class RegistrationScreenController
-    extends StateNotifier<RegistrationScreenState> with LocatorMixin {
-  RegistrationScreenController({required this.ref})
-      : super(const RegistrationScreenState());
+class CreateAccountScreenController
+    extends StateNotifier<CreateAccountScreenState> with LocatorMixin {
+  CreateAccountScreenController({required this.ref})
+      : super(const CreateAccountScreenState());
 
   final Ref ref;
   final formKey = GlobalKey<FormState>();

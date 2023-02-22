@@ -105,7 +105,7 @@ class SetAccountButton extends ConsumerWidget {
     return Container(
       height: context.height * 0.05,
       width: context.width * 1,
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.15),
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: context.colors.background,
@@ -131,15 +131,15 @@ class SetAccountButton extends ConsumerWidget {
 }
 
 ///メールアドレスでログイン
-class SignInWithEmailButton extends ConsumerWidget {
-  const SignInWithEmailButton({required this.text, required this.onPressed});
+class LoginWithEmailButton extends ConsumerWidget {
+  const LoginWithEmailButton({required this.text, required this.onPressed});
   final String text;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: context.width * 0.8,
+      width: context.width * 0.7,
       height: context.height * 0.06,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -158,7 +158,7 @@ class SignInWithEmailButton extends ConsumerWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: context.height * 0.018,
+            fontSize: context.height * 0.02,
           ),
         ),
         onPressed: onPressed,
@@ -168,15 +168,16 @@ class SignInWithEmailButton extends ConsumerWidget {
 }
 
 ///メールアドレスで登録
-class SignUpWithEmailButton extends ConsumerWidget {
-  const SignUpWithEmailButton({required this.text, required this.onPressed});
+class CreateAccountWithEmailButton extends ConsumerWidget {
+  const CreateAccountWithEmailButton(
+      {required this.text, required this.onPressed});
   final String text;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: context.width * 0.8,
+      width: context.width * 0.7,
       height: context.height * 0.06,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -190,17 +191,19 @@ class SignUpWithEmailButton extends ConsumerWidget {
             ),
           ),
           side: BorderSide(
-            color: context.colors.main50.withOpacity(0.7),
-            width: 2,
+            color: onPressed == null
+                ? Colors.black45:context.colors.main50.withOpacity(0.7),
+            width: 1,
           ),
         ),
         child: Text(
           text,
-          textAlign: TextAlign.center,
           style: TextStyle(
-            color: context.colors.main50.withOpacity(0.7),
+            color: onPressed == null
+                ? Colors.black45
+                : context.colors.main50.withOpacity(0.7),
             fontWeight: FontWeight.bold,
-            fontSize: context.height * 0.018,
+            fontSize: context.height * 0.02,
           ),
         ),
         onPressed: onPressed,
@@ -250,11 +253,125 @@ class SignInWithGoogleButton extends ConsumerWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black54,
-                  fontSize: context.height * 0.018,
+                  fontSize: context.height * 0.02,
                 ),
               ),
             ),
           ],
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+///Googleアイコン
+class GoogleIconButton extends ConsumerWidget {
+  const GoogleIconButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.15,
+      height: context.width * 0.15,
+      margin: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          elevation: 4,
+          padding: const EdgeInsets.all(3.0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+        ),
+        child: Container(
+          width: context.width * 0.1,
+          height: context.width * 0.1,
+          child: Image.asset(
+            'assets/icon/Google_icon.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+///Twitterアイコン
+class TwitterIconButton extends ConsumerWidget {
+  const TwitterIconButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.15,
+      height: context.width * 0.15,
+      margin: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          elevation: 4,
+          padding: const EdgeInsets.all(0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+        ),
+        child: Container(
+          width: context.width * 0.15,
+          height: context.width * 0.15,
+          child: Image.asset(
+            'assets/icon/Twitter_icon.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+///Lineアイコン
+class LineIconButton extends ConsumerWidget {
+  const LineIconButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.15,
+      height: context.width * 0.15,
+      margin: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          elevation: 4,
+          padding: const EdgeInsets.all(0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+        ),
+        child: Container(
+          width: context.width * 0.15,
+          height: context.width * 0.15,
+          child: Image.asset(
+            'assets/icon/Line_icon.png',
+            fit: BoxFit.contain,
+          ),
         ),
         onPressed: onPressed,
       ),

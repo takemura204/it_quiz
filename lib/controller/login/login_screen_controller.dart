@@ -15,6 +15,7 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
   LoginScreenController({required this.ref}) : super(const LoginScreenState());
 
   final Ref ref;
+  final auth = FirebaseAuth.instance;
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -35,7 +36,6 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
   void reset() {
     emailController.clear();
     passwordController.clear();
-
     state = state.copyWith(
       email: "",
       password: "",
@@ -70,12 +70,12 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
   ///新規登録
   Future signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
       // 確認メール送信
-      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+      await auth.currentUser?.sendEmailVerification();
       print("会員登録成功");
       state = state.copyWith(hasError: false, isSucceeded: true);
     } catch (e) {
@@ -87,7 +87,7 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
   ///ログイン
   Future signIn() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );

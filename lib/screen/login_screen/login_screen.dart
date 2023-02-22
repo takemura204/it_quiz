@@ -4,14 +4,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
+import '../../controller/auth/auth_screen_controller.dart';
 import '../../controller/login/login_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
-import '../../view/bar.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
 import '../../view/text_field.dart';
 
 part 'login_appbar.dart';
+part 'login_view.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen(this.arguments);
@@ -29,7 +30,6 @@ class LoginScreen extends ConsumerWidget {
     final formKey = ref.watch(loginScreenControllerProvider.notifier).formKey;
     final focusNode =
         ref.watch(loginScreenControllerProvider.notifier).focusNode;
-    final hasError = ref.watch(loginScreenControllerProvider).hasError;
     final errorText = ref.watch(loginScreenControllerProvider).errorText;
 
     return Focus(
@@ -43,16 +43,17 @@ class LoginScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
+                const Spacer(),
                 Form(
                   key: formKey,
                   child: Column(
                     children: [
-                      if (hasError)
-                        LoginErrorBar(
-                            errorText: I18n().loginErrorText(errorText))
-                      else
-                        const Gap(0),
-                      const Gap(20),
+                      // if (hasError)
+                      //   LoginErrorBar(
+                      //       errorText: I18n().loginErrorText(errorText))
+                      // else
+                      //   const Gap(0),
+                      // const Gap(20),
 
                       ///メールアドレス
                       EmailTextField(
@@ -62,67 +63,99 @@ class LoginScreen extends ConsumerWidget {
                             .read(loginScreenControllerProvider.notifier)
                             .setEmail(email),
                       ),
-                      const Gap(20),
+
+                      const Gap(10),
 
                       ///パスワード
-                      PasswordTextField(
-                        passwordController: passwordController,
-                        isValidEmail: isValidEmail,
-                        isSafetyPass: isSafetyPass,
-                        isObscure: isObscure,
-                        onChanged: (password) => ref
-                            .read(loginScreenControllerProvider.notifier)
-                            .setPassword(password),
-                        obscureIconButtonPressed: () => ref
-                            .read(loginScreenControllerProvider.notifier)
-                            .switchObscure(),
+                      Stack(
+                        children: [
+                          PasswordTextField(
+                            passwordController: passwordController,
+                            isValidEmail: isValidEmail,
+                            isSafetyPass: isSafetyPass,
+                            isObscure: isObscure,
+                            onChanged: (password) => ref
+                                .read(loginScreenControllerProvider.notifier)
+                                .setPassword(password),
+                            obscureIconButtonPressed: () => ref
+                                .read(loginScreenControllerProvider.notifier)
+                                .switchObscure(),
+                          ),
+                          Container(
+                              alignment: Alignment.bottomRight,
+                              height: context.height * 0.1,
+                              child: const Text("パスワードを忘れた場合")),
+                        ],
                       ),
                     ],
                   ),
                 ),
 
-                const Align(
-                    alignment: Alignment.centerRight,
-                    child: Text("パスワードを忘れた場合")),
-                const Gap(10),
+                const Gap(20),
 
                 ///送信ボタン
-                Container(
-                  width: context.width * 0.8,
-                  height: context.height * 0.06,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent.shade700,
-                      elevation: 4,
-                      padding: const EdgeInsets.all(3.0),
-                      alignment: Alignment.center,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
+                LoginWithEmailButton(
+                  text: 'ログイン',
+                  onPressed: isValidEmail && isSafetyPass
+                      ? () {
+                          ref
+                              .read(loginScreenControllerProvider.notifier)
+                              .signIn();
+                          showDialog(
+                              context: context,
+                              builder: (_) => ResultDialog(
+                                    title: "a",
+                                    content: I18n().loginErrorText(errorText),
+                                  ));
+                        }
+                      : null,
+                ),
+                const Gap(20),
+
+                ///区切り線
+                Row(
+                  children: [
+                    const Expanded(child: Divider()),
+                    Text(
+                      "または",
+                      style: TextStyle(
+                        fontSize: context.height * 0.02,
                       ),
                     ),
-                    child: const Text(
-                      'ログイン',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    const Expanded(child: Divider()),
+                  ],
+                ),
+                const Gap(10),
+
+                ///ソーシャルログイン
+                const _SocialLogin(),
+
+                const Gap(30),
+
+                ///区切り線
+                Row(
+                  children: [
+                    const Expanded(child: Divider()),
+                    Text(
+                      '会員登録をしていない方',
+                      style: TextStyle(
+                        fontSize: context.height * 0.02,
+                      ),
                     ),
-                    onPressed: isValidEmail && isSafetyPass
-                        ? () {
-                            ref
-                                .read(loginScreenControllerProvider.notifier)
-                                .signIn();
-                            showDialog(
-                                context: context,
-                                builder: (_) => ResultDialog(
-                                      title: "a",
-                                      content: I18n().loginErrorText(errorText),
-                                    ));
-                          }
-                        : null,
+                    const Expanded(child: Divider()),
+                  ],
+                ),
+
+                const Gap(20),
+
+                ///新規会員登録画面
+                CreateAccountWithEmailButton(
+                  text: '新規会員登録',
+                  onPressed: () => context.showScreen(
+                    const CreateAccountScreenArguments().generateRoute(),
                   ),
                 ),
+                const Spacer(),
               ],
             ),
           ),

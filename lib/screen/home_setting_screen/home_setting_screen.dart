@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/auth/auth_screen_controller.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:kentei_quiz/view/button.dart';

@@ -18,9 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthScreenStateTearOff {
   const _$AuthScreenStateTearOff();
 
-  _Create call({int currentImageIndex = 0}) {
+  _Create call(
+      {int currentImageIndex = 0, String userName = 'ゲスト', String email = ''}) {
     return _Create(
       currentImageIndex: currentImageIndex,
+      userName: userName,
+      email: email,
     );
   }
 }
@@ -31,6 +34,8 @@ const $AuthScreenState = _$AuthScreenStateTearOff();
 /// @nodoc
 mixin _$AuthScreenState {
   int get currentImageIndex => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthScreenStateCopyWith<AuthScreenState> get copyWith =>
@@ -42,7 +47,7 @@ abstract class $AuthScreenStateCopyWith<$Res> {
   factory $AuthScreenStateCopyWith(
           AuthScreenState value, $Res Function(AuthScreenState) then) =
       _$AuthScreenStateCopyWithImpl<$Res>;
-  $Res call({int currentImageIndex});
+  $Res call({int currentImageIndex, String userName, String email});
 }
 
 /// @nodoc
@@ -57,12 +62,22 @@ class _$AuthScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentImageIndex = freezed,
+    Object? userName = freezed,
+    Object? email = freezed,
   }) {
     return _then(_value.copyWith(
       currentImageIndex: currentImageIndex == freezed
           ? _value.currentImageIndex
           : currentImageIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -73,7 +88,7 @@ abstract class _$CreateCopyWith<$Res>
   factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
       __$CreateCopyWithImpl<$Res>;
   @override
-  $Res call({int currentImageIndex});
+  $Res call({int currentImageIndex, String userName, String email});
 }
 
 /// @nodoc
@@ -88,12 +103,22 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentImageIndex = freezed,
+    Object? userName = freezed,
+    Object? email = freezed,
   }) {
     return _then(_Create(
       currentImageIndex: currentImageIndex == freezed
           ? _value.currentImageIndex
           : currentImageIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -101,15 +126,22 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create implements _Create {
-  const _$_Create({this.currentImageIndex = 0});
+  const _$_Create(
+      {this.currentImageIndex = 0, this.userName = 'ゲスト', this.email = ''});
 
   @JsonKey()
   @override
   final int currentImageIndex;
+  @JsonKey()
+  @override
+  final String userName;
+  @JsonKey()
+  @override
+  final String email;
 
   @override
   String toString() {
-    return 'AuthScreenState(currentImageIndex: $currentImageIndex)';
+    return 'AuthScreenState(currentImageIndex: $currentImageIndex, userName: $userName, email: $email)';
   }
 
   @override
@@ -118,12 +150,17 @@ class _$_Create implements _Create {
         (other.runtimeType == runtimeType &&
             other is _Create &&
             const DeepCollectionEquality()
-                .equals(other.currentImageIndex, currentImageIndex));
+                .equals(other.currentImageIndex, currentImageIndex) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
+            const DeepCollectionEquality().equals(other.email, email));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(currentImageIndex));
+      runtimeType,
+      const DeepCollectionEquality().hash(currentImageIndex),
+      const DeepCollectionEquality().hash(userName),
+      const DeepCollectionEquality().hash(email));
 
   @JsonKey(ignore: true)
   @override
@@ -132,10 +169,15 @@ class _$_Create implements _Create {
 }
 
 abstract class _Create implements AuthScreenState {
-  const factory _Create({int currentImageIndex}) = _$_Create;
+  const factory _Create(
+      {int currentImageIndex, String userName, String email}) = _$_Create;
 
   @override
   int get currentImageIndex;
+  @override
+  String get userName;
+  @override
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

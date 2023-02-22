@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'registration_screen_state.freezed.dart';
+part 'create_account_screen_state.freezed.dart';
 
 @freezed
-abstract class RegistrationScreenState with _$RegistrationScreenState {
-  const factory RegistrationScreenState({
+abstract class CreateAccountScreenState with _$CreateAccountScreenState {
+  const factory CreateAccountScreenState({
     @Default(0) final int currentIndex,
     @Default('') final String email,
     @Default('') final String password,

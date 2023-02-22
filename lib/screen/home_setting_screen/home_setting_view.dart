@@ -6,6 +6,9 @@ class UserProfile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userName = ref.watch(authScreenControllerProvider).userName;
+    final email = ref.watch(authScreenControllerProvider).email;
+
     return Container(
       height: context.height * 0.15,
       child: Column(
@@ -41,7 +44,7 @@ class UserProfile extends ConsumerWidget {
                     Row(
                       children: [
                         Text(
-                          "ゲスト",
+                          userName,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: context.height * 0.02,
@@ -55,7 +58,7 @@ class UserProfile extends ConsumerWidget {
                     Row(
                       children: [
                         Text(
-                          "メール",
+                          email,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: context.height * 0.015,
@@ -75,7 +78,7 @@ class UserProfile extends ConsumerWidget {
           ///ログイン・会員登録ボタン
           SetAccountButton(
             onPressed: () => context.showScreen(
-              const AuthScreenArguments().generateRoute(),
+              const LoginScreenArguments().generateRoute(),
             ),
           ),
         ],

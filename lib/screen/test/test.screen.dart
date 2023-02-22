@@ -1,38 +1,21 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../controller/auth/auth_screen_controller.dart';
-import '../../controller/login/login_screen_controller.dart';
 import '../../view/button.dart';
 
-part 'auth_view.dart';
+class TestScreen extends ConsumerWidget {
+  const TestScreen();
 
-class AuthScreen extends ConsumerWidget {
-  const AuthScreen(this.arguments);
-  final AuthScreenArguments arguments;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        leading: ClearButton(
-          iconSize: context.width * 0.1,
-          onPressed: () =>
-              ref.read(loginScreenControllerProvider.notifier).reset(),
-        ),
-      ),
       body: Column(
         children: [
           ///説明画面
-          const _Tutorial(),
 
           const Spacer(),
 
@@ -75,6 +58,12 @@ class AuthScreen extends ConsumerWidget {
                 ),
 
                 ///Googleから登録
+                SignInWithGoogleButton(
+                  text: 'Googleアカウントで続ける',
+                  onPressed: () => ref
+                      .read(authScreenControllerProvider.notifier)
+                      .signInWithGoogle(),
+                ),
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
                   onPressed: () => ref
