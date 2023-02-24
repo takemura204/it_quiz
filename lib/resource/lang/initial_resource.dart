@@ -77,15 +77,18 @@ class I18n {
         return caseErrorText3;
       case "[firebase_auth/wrong-password] The password is invalid or the user does not have a password.":
         return caseErrorText4;
-      default:
+      case "[firebase_auth/too-many-requests] Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.":
         return caseErrorText5;
+      default:
+        return caseErrorText6;
     }
   }
 
   ///　テキスト候補
   String get caseErrorText1 => "このメールアドレスは既に登録済みです";
   String get caseErrorText2 => "このメールアドレスは無効となっています";
-  String get caseErrorText3 => "このメールアドレスは登録されていません。新規登録画面からお願いします";
+  String get caseErrorText3 => "このメールアドレスは登録されていません\n新規登録画面からお願いします";
   String get caseErrorText4 => "メールアドレスまたはパスワードが正しくありません";
-  String get caseErrorText5 => "予期せぬエラーが発生しました";
+  String get caseErrorText5 => "このアカウントは一時的に無効になっています\nしばらくしてからお試しください";
+  String get caseErrorText6 => "予期せぬエラーが発生しました";
 }

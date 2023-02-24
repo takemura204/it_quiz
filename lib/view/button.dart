@@ -95,10 +95,11 @@ class CheckBoxIconButton extends ConsumerWidget {
   }
 }
 
-///会員登録・ログインボタン
+///ログイン・ログアウトボタン
 class SetAccountButton extends ConsumerWidget {
-  const SetAccountButton({required this.onPressed});
+  const SetAccountButton({required this.onPressed, required this.text});
   final VoidCallback onPressed;
+  final String text;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -119,10 +120,11 @@ class SetAccountButton extends ConsumerWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          "ログイン・新規登録",
+          text,
           style: TextStyle(
-            color: context.colors.main50.withOpacity(0.7),
-            fontSize: context.height * 0.02,
+            color: context.colors.main50.withOpacity(0.6),
+            fontSize: context.height * 0.018,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -192,7 +194,8 @@ class CreateAccountWithEmailButton extends ConsumerWidget {
           ),
           side: BorderSide(
             color: onPressed == null
-                ? Colors.black45:context.colors.main50.withOpacity(0.7),
+                ? Colors.black45
+                : context.colors.main50.withOpacity(0.7),
             width: 1,
           ),
         ),
@@ -374,6 +377,43 @@ class LineIconButton extends ConsumerWidget {
           ),
         ),
         onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+///ログアウトボタン
+class SignOutButton extends ConsumerWidget {
+  const SignOutButton({required this.onPressed});
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      // color: Colors.amber,
+      height: context.height * 0.05,
+      width: context.width * 1,
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.colors.background,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          side: BorderSide(
+            color: context.colors.main50.withOpacity(0.7),
+            width: 2,
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          "ログアウト",
+          style: TextStyle(
+            color: context.colors.main50.withOpacity(0.6),
+            fontSize: context.height * 0.018,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

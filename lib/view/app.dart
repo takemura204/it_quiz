@@ -1,4 +1,5 @@
 import 'package:device_preview_screenshot/device_preview_screenshot.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -49,7 +50,39 @@ class _App extends StatelessWidget {
       theme: DefaultTheme.getDefaultTheme(Brightness.light),
       darkTheme: DefaultTheme.getDefaultTheme(Brightness.dark),
 
-      home: const HomeRootScreen(),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // スプラッシュ画面などに書き換えても良い
+            return const SizedBox();
+          }
+          if (snapshot.hasData) {
+            // User が null でなない、つまりサインイン済みのホーム画面へ
+            return const HomeRootScreen();
+          }
+          // User が null である、つまり未サインインのサインイン画面へ
+          return const HomeRootScreen();
+        },
+      ),
     );
   }
+}
+
+class SignInPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => const Scaffold(
+        body: Center(
+          child: Text('未サインイン時に表示するサインイン画面です。'),
+        ),
+      );
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => const Scaffold(
+        body: Center(
+          child: Text('サインイン済み時に表示するホーム画面です。'),
+        ),
+      );
 }

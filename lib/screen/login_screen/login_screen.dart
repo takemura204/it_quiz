@@ -5,7 +5,6 @@ import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_screen_controller.dart';
-import '../../controller/login/login_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
@@ -20,18 +19,20 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidEmail = ref.watch(loginScreenControllerProvider).isValidEmail;
-    final isSafetyPass = ref.watch(loginScreenControllerProvider).isSafetyPass;
-    final isObscure = ref.watch(loginScreenControllerProvider).isObscure;
+    final isValidEmail = ref.watch(authScreenControllerProvider).isValidEmail;
+    final isSafetyPass = ref.watch(authScreenControllerProvider).isSafetyPass;
+    final isObscure = ref.watch(authScreenControllerProvider).isObscure;
     final emailController =
-        ref.watch(loginScreenControllerProvider.notifier).emailController;
+        ref.watch(authScreenControllerProvider.notifier).emailController;
     final passwordController =
-        ref.watch(loginScreenControllerProvider.notifier).passwordController;
-    final formKey = ref.watch(loginScreenControllerProvider.notifier).formKey;
+        ref.watch(authScreenControllerProvider.notifier).passwordController;
+    final formKey =
+        ref.watch(authScreenControllerProvider.notifier).loginFormKey;
     final focusNode =
-        ref.watch(loginScreenControllerProvider.notifier).focusNode;
-    final errorText = ref.watch(loginScreenControllerProvider).errorText;
-
+        ref.watch(authScreenControllerProvider.notifier).loginFocusNode;
+    final errorText = ref.watch(authScreenControllerProvider).errorText;
+    final hasError = ref.watch(authScreenControllerProvider).hasError;
+    final isNotTap = ref.watch(authScreenControllerProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -48,19 +49,12 @@ class LoginScreen extends ConsumerWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      // if (hasError)
-                      //   LoginErrorBar(
-                      //       errorText: I18n().loginErrorText(errorText))
-                      // else
-                      //   const Gap(0),
-                      // const Gap(20),
-
                       ///メールアドレス
                       EmailTextField(
                         emailController: emailController,
                         isValidEmail: isValidEmail,
                         onChanged: (email) => ref
-                            .read(loginScreenControllerProvider.notifier)
+                            .read(authScreenControllerProvider.notifier)
                             .setEmail(email),
                       ),
 
@@ -75,10 +69,10 @@ class LoginScreen extends ConsumerWidget {
                             isSafetyPass: isSafetyPass,
                             isObscure: isObscure,
                             onChanged: (password) => ref
-                                .read(loginScreenControllerProvider.notifier)
+                                .read(authScreenControllerProvider.notifier)
                                 .setPassword(password),
                             obscureIconButtonPressed: () => ref
-                                .read(loginScreenControllerProvider.notifier)
+                                .read(authScreenControllerProvider.notifier)
                                 .switchObscure(),
                           ),
                           Container(
@@ -96,17 +90,35 @@ class LoginScreen extends ConsumerWidget {
                 ///送信ボタン
                 LoginWithEmailButton(
                   text: 'ログイン',
-                  onPressed: isValidEmail && isSafetyPass
+                  onPressed: isValidEmail && isSafetyPass && !isNotTap
                       ? () {
                           ref
-                              .read(loginScreenControllerProvider.notifier)
-                              .signIn();
-                          showDialog(
-                              context: context,
-                              builder: (_) => ResultDialog(
-                                    title: "a",
+                              .read(authScreenControllerProvider.notifier)
+                              .switchTap();
+                          ref
+                              .read(authScreenControllerProvider.notifier)
+                              .signIn()
+                            ..then((value) {
+                              //ログイン失敗
+                              if (hasError) {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => ErrorDialog(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
                                     content: I18n().loginErrorText(errorText),
-                                  ));
+                                  ),
+                                );
+                              }
+                              //ログイン成功
+                              else {
+                                Navigator.of(context).pop();
+                              }
+                              ref
+                                  .read(authScreenControllerProvider.notifier)
+                                  .switchTap();
+                            });
                         }
                       : null,
                 ),
@@ -150,11 +162,13 @@ class LoginScreen extends ConsumerWidget {
 
                 ///新規会員登録画面
                 CreateAccountWithEmailButton(
-                  text: '新規会員登録',
-                  onPressed: () => context.showScreen(
-                    const CreateAccountScreenArguments().generateRoute(),
-                  ),
-                ),
+                    text: '新規会員登録',
+                    onPressed: () {
+                      context.showScreen(
+                        const CreateAccountScreenArguments().generateRoute(),
+                      );
+                      ref.read(authScreenControllerProvider.notifier).reset();
+                    }),
                 const Spacer(),
               ],
             ),

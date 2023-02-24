@@ -8,7 +8,6 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../controller/auth/auth_screen_controller.dart';
-import '../../controller/login/login_screen_controller.dart';
 import '../../view/button.dart';
 
 part 'auth_view.dart';
@@ -26,7 +25,7 @@ class AuthScreen extends ConsumerWidget {
         leading: ClearButton(
           iconSize: context.width * 0.1,
           onPressed: () =>
-              ref.read(loginScreenControllerProvider.notifier).reset(),
+              ref.read(authScreenControllerProvider.notifier).reset(),
         ),
       ),
       body: Column(

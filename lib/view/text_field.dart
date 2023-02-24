@@ -4,6 +4,7 @@ import 'package:kentei_quiz/resource/controller/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
 
+///メールアドレス入力
 class EmailTextField extends ConsumerWidget {
   const EmailTextField(
       {required this.emailController,
@@ -66,6 +67,7 @@ class EmailTextField extends ConsumerWidget {
   }
 }
 
+///パスワード入力
 class PasswordTextField extends ConsumerWidget {
   const PasswordTextField({
     required this.passwordController,
@@ -107,6 +109,69 @@ class PasswordTextField extends ConsumerWidget {
             onPressed: obscureIconButtonPressed,
             isObscure: isObscure,
           ),
+          border: const OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: const BorderSide(
+              color: Colors.black26,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: context.colors.main50,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: context.colors.main50,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: context.colors.main50,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+///ユーザー名入力
+class UserNameTextField extends ConsumerWidget {
+  const UserNameTextField(
+      {required this.userNameController,
+      required this.isValidUserName,
+      required this.onChanged});
+  final TextEditingController userNameController;
+  final bool isValidUserName;
+  final ValueChanged<String>? onChanged;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.1,
+      child: TextFormField(
+        controller: userNameController,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
+        keyboardType: TextInputType.name,
+        onChanged: onChanged,
+        autocorrect: true, //予測変換
+        autofocus: true, //TextFieldに自動でfocusを当てる
+        enabled: true,
+        obscureText: false,
+        textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+        maxLines: 1,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: const Color(0xffF8FAFA),
+          hintMaxLines: null,
+          hintText: 'Name',
+          labelText: "ユーザー名",
+          prefixIcon: const Icon(Icons.person_outline_outlined),
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),

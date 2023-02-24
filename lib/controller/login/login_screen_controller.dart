@@ -67,23 +67,6 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
     state = state.copyWith(isObscure: !state.isObscure);
   }
 
-  ///新規登録
-  Future signUp() async {
-    try {
-      await auth.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      // 確認メール送信
-      await auth.currentUser?.sendEmailVerification();
-      print("会員登録成功");
-      state = state.copyWith(hasError: false, isSucceeded: true);
-    } catch (e) {
-      print(e);
-      state = state.copyWith(hasError: true, errorText: e.toString());
-    }
-  }
-
   ///ログイン
   Future signIn() async {
     try {

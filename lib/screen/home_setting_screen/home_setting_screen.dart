@@ -1,31 +1,71 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_screen_controller.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
-import 'package:kentei_quiz/screen/screen_argument.dart';
-import 'package:kentei_quiz/view/button.dart';
 
 import '../../view/bar.dart';
+import '../../view/button.dart';
+import '../../view/dialog.dart';
+import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
 
-class HomeSettingScreen extends StatelessWidget {
+class HomeSettingScreen extends ConsumerWidget {
   const HomeSettingScreen();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Column(
-        children: const [
+        children: [
           /// プロフィール
-          UserProfile(),
-          Gap(10),
+          Container(
+            child: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // スプラッシュ画面などに書き換えても良い
+                  return const SizedBox();
+                }
+                if (snapshot.hasData) {
+                  // User が null でなない、つまりサインイン済みのホーム画面へ
+                  return Column(
+                    children: const [
+                      SettingTitleBar(
+                        title: "アカウント情報(サインイン済み)",
+                        onTap: null,
+                      ),
+                      UserProfile(),
+                    ],
+                  );
+                }
+                // User が null である、つまり未サインインのサインイン画面へ
+                return Container(
+                  child: Column(
+                    children: [
+                      const SettingTitleBar(
+                        title: "アカウント情報(未サインイン)",
+                        onTap: null,
+                      ),
+                      const UserProfile(),
 
-          SettingTitleBar(
-            title: "アカウント情報",
-            onTap: null,
+                      ///ログイン・会員登録ボタン
+                      SetAccountButton(
+                        onPressed: () => context.showScreen(
+                          const LoginScreenArguments().generateRoute(),
+                        ),
+                        text: "ログイン・新規登録",
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
+          const Gap(10),
+
           SettingListBar(
             title: "プロフィール設定",
             onTap: null,
@@ -63,6 +103,38 @@ class HomeSettingScreen extends StatelessWidget {
             title: "アプリを削除する",
             onTap: null,
           ),
+          const Gap(30),
+          Container(
+            child: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // スプラッシュ画面などに書き換えても良い
+                  return const SizedBox();
+                }
+                if (snapshot.hasData) {
+                  // User が null でなない、つまりサインイン済みのホーム画面へ
+                  return
+
+                      ///ログイン・会員登録ボタン
+                      SetAccountButton(
+                    onPressed: () async {
+                      await showDialog<Dialog>(
+                          context: context,
+                          builder: (context) {
+                            return const SignOutDialog();
+                          });
+                    },
+                    text: "ログアウト",
+                  );
+                }
+
+                // User が null である、つまり未サインインのサインイン画面へ
+                return const SizedBox();
+              },
+            ),
+          ),
+          const Gap(30),
         ],
       ),
     );

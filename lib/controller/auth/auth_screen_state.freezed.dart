@@ -19,11 +19,33 @@ class _$AuthScreenStateTearOff {
   const _$AuthScreenStateTearOff();
 
   _Create call(
-      {int currentImageIndex = 0, String userName = 'ゲスト', String email = ''}) {
+      {int currentImageIndex = 0,
+      String userName = 'ゲスト',
+      File? userImage = null,
+      String email = '',
+      String password = '',
+      String errorText = '',
+      bool isObscure = true,
+      bool isValidUserName = false,
+      bool isValidEmail = false,
+      bool isSafetyPass = false,
+      bool isSucceeded = false,
+      bool hasError = false,
+      bool isNotTap = false}) {
     return _Create(
       currentImageIndex: currentImageIndex,
       userName: userName,
+      userImage: userImage,
       email: email,
+      password: password,
+      errorText: errorText,
+      isObscure: isObscure,
+      isValidUserName: isValidUserName,
+      isValidEmail: isValidEmail,
+      isSafetyPass: isSafetyPass,
+      isSucceeded: isSucceeded,
+      hasError: hasError,
+      isNotTap: isNotTap,
     );
   }
 }
@@ -35,7 +57,17 @@ const $AuthScreenState = _$AuthScreenStateTearOff();
 mixin _$AuthScreenState {
   int get currentImageIndex => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  File? get userImage => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String get errorText => throw _privateConstructorUsedError;
+  bool get isObscure => throw _privateConstructorUsedError;
+  bool get isValidUserName => throw _privateConstructorUsedError;
+  bool get isValidEmail => throw _privateConstructorUsedError;
+  bool get isSafetyPass => throw _privateConstructorUsedError;
+  bool get isSucceeded => throw _privateConstructorUsedError;
+  bool get hasError => throw _privateConstructorUsedError;
+  bool get isNotTap => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthScreenStateCopyWith<AuthScreenState> get copyWith =>
@@ -47,7 +79,20 @@ abstract class $AuthScreenStateCopyWith<$Res> {
   factory $AuthScreenStateCopyWith(
           AuthScreenState value, $Res Function(AuthScreenState) then) =
       _$AuthScreenStateCopyWithImpl<$Res>;
-  $Res call({int currentImageIndex, String userName, String email});
+  $Res call(
+      {int currentImageIndex,
+      String userName,
+      File? userImage,
+      String email,
+      String password,
+      String errorText,
+      bool isObscure,
+      bool isValidUserName,
+      bool isValidEmail,
+      bool isSafetyPass,
+      bool isSucceeded,
+      bool hasError,
+      bool isNotTap});
 }
 
 /// @nodoc
@@ -63,7 +108,17 @@ class _$AuthScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? currentImageIndex = freezed,
     Object? userName = freezed,
+    Object? userImage = freezed,
     Object? email = freezed,
+    Object? password = freezed,
+    Object? errorText = freezed,
+    Object? isObscure = freezed,
+    Object? isValidUserName = freezed,
+    Object? isValidEmail = freezed,
+    Object? isSafetyPass = freezed,
+    Object? isSucceeded = freezed,
+    Object? hasError = freezed,
+    Object? isNotTap = freezed,
   }) {
     return _then(_value.copyWith(
       currentImageIndex: currentImageIndex == freezed
@@ -74,10 +129,50 @@ class _$AuthScreenStateCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      userImage: userImage == freezed
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
+              as File?,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorText: errorText == freezed
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String,
+      isObscure: isObscure == freezed
+          ? _value.isObscure
+          : isObscure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidUserName: isValidUserName == freezed
+          ? _value.isValidUserName
+          : isValidUserName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidEmail: isValidEmail == freezed
+          ? _value.isValidEmail
+          : isValidEmail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSafetyPass: isSafetyPass == freezed
+          ? _value.isSafetyPass
+          : isSafetyPass // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSucceeded: isSucceeded == freezed
+          ? _value.isSucceeded
+          : isSucceeded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isNotTap: isNotTap == freezed
+          ? _value.isNotTap
+          : isNotTap // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -88,7 +183,20 @@ abstract class _$CreateCopyWith<$Res>
   factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
       __$CreateCopyWithImpl<$Res>;
   @override
-  $Res call({int currentImageIndex, String userName, String email});
+  $Res call(
+      {int currentImageIndex,
+      String userName,
+      File? userImage,
+      String email,
+      String password,
+      String errorText,
+      bool isObscure,
+      bool isValidUserName,
+      bool isValidEmail,
+      bool isSafetyPass,
+      bool isSucceeded,
+      bool hasError,
+      bool isNotTap});
 }
 
 /// @nodoc
@@ -104,7 +212,17 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? currentImageIndex = freezed,
     Object? userName = freezed,
+    Object? userImage = freezed,
     Object? email = freezed,
+    Object? password = freezed,
+    Object? errorText = freezed,
+    Object? isObscure = freezed,
+    Object? isValidUserName = freezed,
+    Object? isValidEmail = freezed,
+    Object? isSafetyPass = freezed,
+    Object? isSucceeded = freezed,
+    Object? hasError = freezed,
+    Object? isNotTap = freezed,
   }) {
     return _then(_Create(
       currentImageIndex: currentImageIndex == freezed
@@ -115,10 +233,50 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      userImage: userImage == freezed
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
+              as File?,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorText: errorText == freezed
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String,
+      isObscure: isObscure == freezed
+          ? _value.isObscure
+          : isObscure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidUserName: isValidUserName == freezed
+          ? _value.isValidUserName
+          : isValidUserName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidEmail: isValidEmail == freezed
+          ? _value.isValidEmail
+          : isValidEmail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSafetyPass: isSafetyPass == freezed
+          ? _value.isSafetyPass
+          : isSafetyPass // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSucceeded: isSucceeded == freezed
+          ? _value.isSucceeded
+          : isSucceeded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isNotTap: isNotTap == freezed
+          ? _value.isNotTap
+          : isNotTap // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -127,7 +285,19 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
 
 class _$_Create implements _Create {
   const _$_Create(
-      {this.currentImageIndex = 0, this.userName = 'ゲスト', this.email = ''});
+      {this.currentImageIndex = 0,
+      this.userName = 'ゲスト',
+      this.userImage = null,
+      this.email = '',
+      this.password = '',
+      this.errorText = '',
+      this.isObscure = true,
+      this.isValidUserName = false,
+      this.isValidEmail = false,
+      this.isSafetyPass = false,
+      this.isSucceeded = false,
+      this.hasError = false,
+      this.isNotTap = false});
 
   @JsonKey()
   @override
@@ -137,11 +307,41 @@ class _$_Create implements _Create {
   final String userName;
   @JsonKey()
   @override
+  final File? userImage;
+  @JsonKey()
+  @override
   final String email;
+  @JsonKey()
+  @override
+  final String password;
+  @JsonKey()
+  @override
+  final String errorText;
+  @JsonKey()
+  @override
+  final bool isObscure;
+  @JsonKey()
+  @override
+  final bool isValidUserName;
+  @JsonKey()
+  @override
+  final bool isValidEmail;
+  @JsonKey()
+  @override
+  final bool isSafetyPass;
+  @JsonKey()
+  @override
+  final bool isSucceeded;
+  @JsonKey()
+  @override
+  final bool hasError;
+  @JsonKey()
+  @override
+  final bool isNotTap;
 
   @override
   String toString() {
-    return 'AuthScreenState(currentImageIndex: $currentImageIndex, userName: $userName, email: $email)';
+    return 'AuthScreenState(currentImageIndex: $currentImageIndex, userName: $userName, userImage: $userImage, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
   }
 
   @override
@@ -152,7 +352,21 @@ class _$_Create implements _Create {
             const DeepCollectionEquality()
                 .equals(other.currentImageIndex, currentImageIndex) &&
             const DeepCollectionEquality().equals(other.userName, userName) &&
-            const DeepCollectionEquality().equals(other.email, email));
+            const DeepCollectionEquality().equals(other.userImage, userImage) &&
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.errorText, errorText) &&
+            const DeepCollectionEquality().equals(other.isObscure, isObscure) &&
+            const DeepCollectionEquality()
+                .equals(other.isValidUserName, isValidUserName) &&
+            const DeepCollectionEquality()
+                .equals(other.isValidEmail, isValidEmail) &&
+            const DeepCollectionEquality()
+                .equals(other.isSafetyPass, isSafetyPass) &&
+            const DeepCollectionEquality()
+                .equals(other.isSucceeded, isSucceeded) &&
+            const DeepCollectionEquality().equals(other.hasError, hasError) &&
+            const DeepCollectionEquality().equals(other.isNotTap, isNotTap));
   }
 
   @override
@@ -160,7 +374,17 @@ class _$_Create implements _Create {
       runtimeType,
       const DeepCollectionEquality().hash(currentImageIndex),
       const DeepCollectionEquality().hash(userName),
-      const DeepCollectionEquality().hash(email));
+      const DeepCollectionEquality().hash(userImage),
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(errorText),
+      const DeepCollectionEquality().hash(isObscure),
+      const DeepCollectionEquality().hash(isValidUserName),
+      const DeepCollectionEquality().hash(isValidEmail),
+      const DeepCollectionEquality().hash(isSafetyPass),
+      const DeepCollectionEquality().hash(isSucceeded),
+      const DeepCollectionEquality().hash(hasError),
+      const DeepCollectionEquality().hash(isNotTap));
 
   @JsonKey(ignore: true)
   @override
@@ -170,14 +394,46 @@ class _$_Create implements _Create {
 
 abstract class _Create implements AuthScreenState {
   const factory _Create(
-      {int currentImageIndex, String userName, String email}) = _$_Create;
+      {int currentImageIndex,
+      String userName,
+      File? userImage,
+      String email,
+      String password,
+      String errorText,
+      bool isObscure,
+      bool isValidUserName,
+      bool isValidEmail,
+      bool isSafetyPass,
+      bool isSucceeded,
+      bool hasError,
+      bool isNotTap}) = _$_Create;
 
   @override
   int get currentImageIndex;
   @override
   String get userName;
   @override
+  File? get userImage;
+  @override
   String get email;
+  @override
+  String get password;
+  @override
+  String get errorText;
+  @override
+  bool get isObscure;
+  @override
+  bool get isValidUserName;
+  @override
+  bool get isValidEmail;
+  @override
+  bool get isSafetyPass;
+  @override
+  bool get isSucceeded;
+  @override
+  bool get hasError;
+  @override
+  bool get isNotTap;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

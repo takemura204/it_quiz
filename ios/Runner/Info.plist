@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires to access your photo library</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This app requires to add file to your camera</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app requires to add file to your photo library your microphone</string>
 	<key>CFBundleDisplayName</key>
 	<string>Kentei Quiz</string>
 	<key>CFBundleExecutable</key>

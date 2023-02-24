@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/screen/home_setting_screen/home_setting_screen.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_screen_controller.dart';
-import '../../controller/create_account/create_account_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
@@ -20,25 +20,24 @@ class CreateAccountScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidEmail =
-        ref.watch(createAccountScreenControllerProvider).isValidEmail;
-    final isSafetyPass =
-        ref.watch(createAccountScreenControllerProvider).isSafetyPass;
-    final isObscure =
-        ref.watch(createAccountScreenControllerProvider).isObscure;
-    final emailController = ref
-        .watch(createAccountScreenControllerProvider.notifier)
-        .emailController;
-    final passwordController = ref
-        .watch(createAccountScreenControllerProvider.notifier)
-        .passwordController;
+    final isValidUserName =
+        ref.watch(authScreenControllerProvider).isValidUserName;
+    final isValidEmail = ref.watch(authScreenControllerProvider).isValidEmail;
+    final isSafetyPass = ref.watch(authScreenControllerProvider).isSafetyPass;
+    final isObscure = ref.watch(authScreenControllerProvider).isObscure;
+    final userNameController =
+        ref.watch(authScreenControllerProvider.notifier).userNameController;
+    final emailController =
+        ref.watch(authScreenControllerProvider.notifier).emailController;
+    final passwordController =
+        ref.watch(authScreenControllerProvider.notifier).passwordController;
     final formKey =
-        ref.watch(createAccountScreenControllerProvider.notifier).formKey;
+        ref.watch(authScreenControllerProvider.notifier).createAccountFormKey;
     final focusNode =
-        ref.watch(createAccountScreenControllerProvider.notifier).focusNode;
-    final errorText =
-        ref.watch(createAccountScreenControllerProvider).errorText;
-
+        ref.watch(authScreenControllerProvider.notifier).createAccountFocusNode;
+    final errorText = ref.watch(authScreenControllerProvider).errorText;
+    final hasError = ref.watch(authScreenControllerProvider).hasError;
+    final isNotTap = ref.watch(authScreenControllerProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -52,9 +51,8 @@ class CreateAccountScreen extends ConsumerWidget {
             title: const Text("新規登録"),
             leading: CustomBackButton(
               iconSize: 25,
-              onPressed: () => ref
-                  .read(createAccountScreenControllerProvider.notifier)
-                  .reset(),
+              onPressed: () =>
+                  ref.read(authScreenControllerProvider.notifier).reset(),
             ),
           ),
           body: Padding(
@@ -66,13 +64,34 @@ class CreateAccountScreen extends ConsumerWidget {
                   key: formKey,
                   child: Column(
                     children: [
+                      ///ユーザアイコン
+                      UserImage(
+                        onTap: () {
+                          //画像選択
+                          ref
+                              .read(authScreenControllerProvider.notifier)
+                              .pickImage();
+                        },
+                        height: context.height * 0.12,
+                        isLinkedEmail: true,
+                      ),
+                      const Gap(20),
+
+                      ///ユーザー名入力
+                      UserNameTextField(
+                        userNameController: userNameController,
+                        isValidUserName: isValidUserName,
+                        onChanged: (name) => ref
+                            .read(authScreenControllerProvider.notifier)
+                            .setUserName(name),
+                      ),
+
                       ///メールアドレス
                       EmailTextField(
                         emailController: emailController,
                         isValidEmail: isValidEmail,
                         onChanged: (email) => ref
-                            .read(
-                                createAccountScreenControllerProvider.notifier)
+                            .read(authScreenControllerProvider.notifier)
                             .setEmail(email),
                       ),
 
@@ -85,29 +104,49 @@ class CreateAccountScreen extends ConsumerWidget {
                         isSafetyPass: isSafetyPass,
                         isObscure: isObscure,
                         onChanged: (password) => ref
-                            .read(
-                                createAccountScreenControllerProvider.notifier)
+                            .read(authScreenControllerProvider.notifier)
                             .setPassword(password),
                         obscureIconButtonPressed: () => ref
-                            .read(
-                                createAccountScreenControllerProvider.notifier)
+                            .read(authScreenControllerProvider.notifier)
                             .switchObscure(),
                       ),
                       CreateAccountWithEmailButton(
                         text: '新規登録',
-                        onPressed: isValidEmail && isSafetyPass
+                        onPressed: (isValidEmail && isSafetyPass) && !isNotTap
                             ? () {
                                 ref
-                                    .read(createAccountScreenControllerProvider
-                                        .notifier)
-                                    .signUp();
-                                showDialog(
-                                    context: context,
-                                    builder: (_) => ResultDialog(
-                                          title: "a",
-                                          content:
-                                              I18n().loginErrorText(errorText),
-                                        ));
+                                    .read(authScreenControllerProvider.notifier)
+                                    .switchTap();
+                                ref
+                                    .read(authScreenControllerProvider.notifier)
+                                    .signUp()
+                                  ..then(
+                                    (value) {
+                                      //ログイン失敗
+                                      if (hasError) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => ErrorDialog(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            content: I18n()
+                                                .loginErrorText(errorText),
+                                          ),
+                                        );
+                                        print(hasError);
+                                      }
+                                      //ログイン成功
+                                      else {
+                                        Navigator.of(context).pop();
+                                      }
+                                      ref
+                                          .read(authScreenControllerProvider
+                                              .notifier)
+                                          .switchTap();
+                                      print(hasError);
+                                    },
+                                  );
                               }
                             : null,
                       ),
