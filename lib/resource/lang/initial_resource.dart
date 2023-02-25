@@ -85,7 +85,7 @@ class I18n {
   }
 
   ///　テキスト候補
-  String get caseErrorText1 => "このメールアドレスは既に登録済みです";
+  String get caseErrorText1 => "このメールアドレスは既に登録済みです\nログイン画面からお願いします";
   String get caseErrorText2 => "このメールアドレスは無効となっています";
   String get caseErrorText3 => "このメールアドレスは登録されていません\n新規登録画面からお願いします";
   String get caseErrorText4 => "メールアドレスまたはパスワードが正しくありません";

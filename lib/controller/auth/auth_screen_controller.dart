@@ -81,7 +81,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   }
 
   ///新規登録
-  Future signUp() async {
+  Future<AuthScreenState> signUp() async {
     try {
       ///FirebaseAuthに登録
       final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -105,15 +105,14 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     } catch (e) {
       print(e);
       print("登録失敗");
-
       final hasError = state.hasError;
       state = state.copyWith(errorText: e.toString(), hasError: true);
-      print(hasError);
     }
+    return state;
   }
 
   ///ログイン
-  Future signIn() async {
+  Future<AuthScreenState> signIn() async {
     try {
       final result = await auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
@@ -127,6 +126,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
       print(e);
       state = state.copyWith(errorText: e.toString(), hasError: true);
     }
+    return state;
   }
 
   ///ログアウト
@@ -198,7 +198,6 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   void switchHasError() {
     final hasError = state.hasError;
     state = state.copyWith(hasError: false);
-    print(hasError);
   }
 
   void switchTap() {

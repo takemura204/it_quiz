@@ -132,6 +132,43 @@ class SetAccountButton extends ConsumerWidget {
   }
 }
 
+///
+class EditProfileButton extends ConsumerWidget {
+  const EditProfileButton({required this.onPressed, required this.text});
+  final VoidCallback onPressed;
+  final String text;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.05,
+      width: context.width * 1,
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.colors.background,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          side: BorderSide(
+            color: context.colors.main50.withOpacity(0.7),
+            width: 2,
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: context.colors.main50.withOpacity(0.6),
+            fontSize: context.height * 0.018,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 ///メールアドレスでログイン
 class LoginWithEmailButton extends ConsumerWidget {
   const LoginWithEmailButton({required this.text, required this.onPressed});

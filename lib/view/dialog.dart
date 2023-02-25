@@ -346,7 +346,7 @@ class NeedSignUpDialog extends ConsumerWidget {
                           style: BorderStyle.solid),
                     ),
                     child: Text(
-                      "登録しない",
+                      "キャンセル",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.black54,

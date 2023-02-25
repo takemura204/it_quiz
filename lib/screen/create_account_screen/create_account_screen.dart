@@ -123,28 +123,31 @@ class CreateAccountScreen extends ConsumerWidget {
                                   ..then(
                                     (value) {
                                       //ログイン失敗
-                                      if (hasError) {
+                                      if (value.hasError) {
                                         showDialog(
                                           context: context,
                                           builder: (_) => ErrorDialog(
                                             onPressed: () {
+                                              ref
+                                                  .read(
+                                                      authScreenControllerProvider
+                                                          .notifier)
+                                                  .switchHasError();
                                               Navigator.of(context).pop();
                                             },
-                                            content: I18n()
-                                                .loginErrorText(errorText),
+                                            content: I18n().loginErrorText(
+                                                value.errorText),
                                           ),
                                         );
-                                        print(hasError);
                                       }
                                       //ログイン成功
                                       else {
-                                        Navigator.of(context).pop();
+                                        // Navigator.of(context).pop();
                                       }
                                       ref
                                           .read(authScreenControllerProvider
                                               .notifier)
                                           .switchTap();
-                                      print(hasError);
                                     },
                                   );
                               }

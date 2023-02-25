@@ -99,21 +99,23 @@ class LoginScreen extends ConsumerWidget {
                               .read(authScreenControllerProvider.notifier)
                               .signIn()
                             ..then((value) {
+                              print(value.hasError);
                               //ログイン失敗
-                              if (hasError) {
+                              if (value.hasError) {
                                 showDialog(
                                   context: context,
                                   builder: (_) => ErrorDialog(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    content: I18n().loginErrorText(errorText),
+                                    content:
+                                        I18n().loginErrorText(value.errorText),
                                   ),
                                 );
                               }
                               //ログイン成功
                               else {
-                                Navigator.of(context).pop();
+                                // Navigator.of(context).pop();
                               }
                               ref
                                   .read(authScreenControllerProvider.notifier)
