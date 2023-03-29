@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/entity/quiz_item.dart';
+import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/view/bar.dart';
 
 import '../../resource/quiz/quiz_resource.dart';
@@ -22,23 +24,24 @@ class HomeStudyScreen extends ConsumerWidget {
         order: GroupedListOrder.DESC, //グループの並べ替え
         useStickyGroupSeparators: true, //現在表示されているグループのグループヘッダーが一番上に表示
 
-        groupSeparatorBuilder: (String value) => Padding(
+        groupSeparatorBuilder: (String value) => Container(
+              color: context.colors.main50.withOpacity(0.4),
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 value,
-                textAlign: TextAlign.center,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
             ),
         itemBuilder: (BuildContext context, QuizItem item) {
           return StudyListBar(
             title: item.title,
-            onTap: () async {
-              final selectedText = await showDialog(
-                  context: context, builder: (_) => SelectQuizDialog(item));
-              print(selectedText);
-            },
+            isCompleted: item.isCompleted,
+            onTap: () => showDialog(
+                context: context, builder: (_) => SelectQuizDialog(item)),
           );
         });
   }

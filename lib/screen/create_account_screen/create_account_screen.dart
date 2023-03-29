@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/controller/extension_resource.dart';
-import 'package:kentei_quiz/screen/home_setting_screen/home_setting_screen.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_screen_controller.dart';
@@ -35,8 +34,6 @@ class CreateAccountScreen extends ConsumerWidget {
         ref.watch(authScreenControllerProvider.notifier).createAccountFormKey;
     final focusNode =
         ref.watch(authScreenControllerProvider.notifier).createAccountFocusNode;
-    final errorText = ref.watch(authScreenControllerProvider).errorText;
-    final hasError = ref.watch(authScreenControllerProvider).hasError;
     final isNotTap = ref.watch(authScreenControllerProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
@@ -64,27 +61,27 @@ class CreateAccountScreen extends ConsumerWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      ///ユーザアイコン
-                      UserImage(
-                        onTap: () {
-                          //画像選択
-                          ref
-                              .read(authScreenControllerProvider.notifier)
-                              .pickImage();
-                        },
-                        height: context.height * 0.12,
-                        isLinkedEmail: true,
-                      ),
-                      const Gap(20),
-
-                      ///ユーザー名入力
-                      UserNameTextField(
-                        userNameController: userNameController,
-                        isValidUserName: isValidUserName,
-                        onChanged: (name) => ref
-                            .read(authScreenControllerProvider.notifier)
-                            .setUserName(name),
-                      ),
+                      // ///ユーザアイコン
+                      // UserImage(
+                      //   onTap: () {
+                      //     //画像選択
+                      //     ref
+                      //         .read(authScreenControllerProvider.notifier)
+                      //         .pickImage();
+                      //   },
+                      //   height: context.height * 0.12,
+                      //   isLinkedEmail: true,
+                      // ),
+                      // const Gap(20),
+                      //
+                      // ///ユーザー名入力
+                      // UserNameTextField(
+                      //   userNameController: userNameController,
+                      //   isValidUserName: isValidUserName,
+                      //   onChanged: (name) => ref
+                      //       .read(authScreenControllerProvider.notifier)
+                      //       .setUserName(name),
+                      // ),
 
                       ///メールアドレス
                       EmailTextField(

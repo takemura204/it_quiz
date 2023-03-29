@@ -16,8 +16,8 @@ class I18n {
 
   ///「学ぶ」形式
   String get styleLeanQuiz => "一問一答で学習する";
-  String get styleChoiceQuiz => "4択クイズで挑戦する";
-  String get styleTrueFalseQuiz => "◯×クイズで挑戦する";
+  String get styleChoiceQuiz => "クイズに挑戦する";
+  String get styleTrueFalseQuiz => "◯×クイズに挑戦する";
 
   ///「復習形式」
   String get reviewLearnQuiz => "一問一答を復習する";

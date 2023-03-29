@@ -202,3 +202,65 @@ class UserNameTextField extends ConsumerWidget {
     );
   }
 }
+
+///直接編集可能
+class EditTextField extends ConsumerWidget {
+  const EditTextField({
+    required this.textController,
+    required this.isValid,
+    required this.onChanged,
+    required this.hintText,
+    required this.labelText,
+    required this.errorText,
+    required this.prefixIcon,
+    required this.isTap,
+    required this.isObscure,
+    required this.onTap,
+  });
+  final TextEditingController textController;
+  final bool isValid;
+  final ValueChanged<String>? onChanged;
+  final String labelText;
+  final String hintText;
+  final String errorText;
+  final Icon prefixIcon;
+  final bool isTap;
+  final bool isObscure;
+  final VoidCallback? onTap;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.1,
+      child: TextFormField(
+        controller: textController,
+        keyboardType: TextInputType.name,
+        textInputAction: TextInputAction.done,
+        maxLines: 1,
+        obscureText: isObscure, //入力非表示
+        decoration: InputDecoration(
+          labelText: labelText,
+          hintMaxLines: null,
+          hintText: hintText,
+          fillColor: const Color(0xffF8FAFA),
+          prefixIcon: prefixIcon,
+          border: const OutlineInputBorder(),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.black26, //通常時
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: context.colors.main50,
+              width: 1, //入力中
+            ),
+          ),
+        ),
+        validator: (x) => isValid ? null : errorText,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        readOnly: isTap, //編集可能か
+        onTap: onTap,
+      ),
+    );
+  }
+}

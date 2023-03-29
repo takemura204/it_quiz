@@ -90,6 +90,9 @@ dependencies:
   #プロフィール画像を選択したい
   image_picker: ^0.8.6+3
 
+  #生年月日をドラムロールしたい
+  flutter_datetime_picker: ^1.5.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

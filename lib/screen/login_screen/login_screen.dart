@@ -30,8 +30,6 @@ class LoginScreen extends ConsumerWidget {
         ref.watch(authScreenControllerProvider.notifier).loginFormKey;
     final focusNode =
         ref.watch(authScreenControllerProvider.notifier).loginFocusNode;
-    final errorText = ref.watch(authScreenControllerProvider).errorText;
-    final hasError = ref.watch(authScreenControllerProvider).hasError;
     final isNotTap = ref.watch(authScreenControllerProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
@@ -99,7 +97,6 @@ class LoginScreen extends ConsumerWidget {
                               .read(authScreenControllerProvider.notifier)
                               .signIn()
                             ..then((value) {
-                              print(value.hasError);
                               //ログイン失敗
                               if (value.hasError) {
                                 showDialog(
@@ -115,7 +112,7 @@ class LoginScreen extends ConsumerWidget {
                               }
                               //ログイン成功
                               else {
-                                // Navigator.of(context).pop();
+                                Navigator.of(context).pop();
                               }
                               ref
                                   .read(authScreenControllerProvider.notifier)

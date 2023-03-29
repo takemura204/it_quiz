@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:kentei_quiz/screen/login_screen/login_screen.dart';
+import 'package:kentei_quiz/screen/profile_screen/profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
 
 import '../resource/controller/screen_argument_resource.dart';
-import 'auth_screen/auth_screen.dart';
 import 'create_account_screen/create_account_screen.dart';
 
 ///一問一答形式へ画面遷移
@@ -91,20 +91,20 @@ class QuizTrueFalseScreenArguments
       );
 }
 
-///認証画面
-class AuthScreenArguments with _NoParamsMixin implements IScreenArguments {
-  const AuthScreenArguments();
+///プロフィール画面
+class ProfileScreenArguments with _NoParamsMixin implements IScreenArguments {
+  const ProfileScreenArguments();
 
   @override
-  String get screenNameFormat => "/auth";
+  String get screenNameFormat => "/profile";
 
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            AuthScreen(this),
+            ProfileScreen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => AuthScreen(this)),
+              MaterialPageRoute(builder: (context) => ProfileScreen(this)),
               context,
               animation,
               secondaryAnimation,

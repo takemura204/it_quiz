@@ -3,15 +3,17 @@ class QuizItem {
   final int id; //問題ID
   final String group; //問題のジャンル別に分ける
   final String title; //問題タイトル
+  final bool isCompleted; //全て問題を解いたか
   ///問題形式
   final List<LearnQuiz> learnQuiz; //学習形式
   final List<ChoiceQuiz> choiceQuiz; //4択形式
-  final List<TrueFalseQuiz> trueFalseQuiz;
+  final List<TrueFalseQuiz> trueFalseQuiz; //○×問題
 
   const QuizItem({
     required this.id,
     required this.group,
     required this.title,
+    required this.isCompleted,
     required this.learnQuiz,
     required this.choiceQuiz,
     required this.trueFalseQuiz,

@@ -7,11 +7,15 @@ part 'auth_screen_state.freezed.dart';
 @freezed
 abstract class AuthScreenState with _$AuthScreenState {
   const factory AuthScreenState({
-    @Default(0) final int currentImageIndex,
+    //ユーザー情報
     @Default('ゲスト') final String userName,
     @Default(null) final File? userImage,
     @Default('') final String email,
     @Default('') final String password,
+    @Default('') final String birthDay,
+    @Default('') final String gender,
+    //その他
+    @Default(0) final int currentImageIndex,
     @Default('') final String errorText,
     @Default(true) final bool isObscure,
     @Default(false) final bool isValidUserName,

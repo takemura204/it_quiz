@@ -19,11 +19,13 @@ class _$AuthScreenStateTearOff {
   const _$AuthScreenStateTearOff();
 
   _Create call(
-      {int currentImageIndex = 0,
-      String userName = 'ゲスト',
+      {String userName = 'ゲスト',
       File? userImage = null,
       String email = '',
       String password = '',
+      String birthDay = '',
+      String gender = '',
+      int currentImageIndex = 0,
       String errorText = '',
       bool isObscure = true,
       bool isValidUserName = false,
@@ -33,11 +35,13 @@ class _$AuthScreenStateTearOff {
       bool hasError = false,
       bool isNotTap = false}) {
     return _Create(
-      currentImageIndex: currentImageIndex,
       userName: userName,
       userImage: userImage,
       email: email,
       password: password,
+      birthDay: birthDay,
+      gender: gender,
+      currentImageIndex: currentImageIndex,
       errorText: errorText,
       isObscure: isObscure,
       isValidUserName: isValidUserName,
@@ -55,11 +59,14 @@ const $AuthScreenState = _$AuthScreenStateTearOff();
 
 /// @nodoc
 mixin _$AuthScreenState {
-  int get currentImageIndex => throw _privateConstructorUsedError;
+//ユーザー情報
   String get userName => throw _privateConstructorUsedError;
   File? get userImage => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get birthDay => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError; //その他
+  int get currentImageIndex => throw _privateConstructorUsedError;
   String get errorText => throw _privateConstructorUsedError;
   bool get isObscure => throw _privateConstructorUsedError;
   bool get isValidUserName => throw _privateConstructorUsedError;
@@ -80,11 +87,13 @@ abstract class $AuthScreenStateCopyWith<$Res> {
           AuthScreenState value, $Res Function(AuthScreenState) then) =
       _$AuthScreenStateCopyWithImpl<$Res>;
   $Res call(
-      {int currentImageIndex,
-      String userName,
+      {String userName,
       File? userImage,
       String email,
       String password,
+      String birthDay,
+      String gender,
+      int currentImageIndex,
       String errorText,
       bool isObscure,
       bool isValidUserName,
@@ -106,11 +115,13 @@ class _$AuthScreenStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? currentImageIndex = freezed,
     Object? userName = freezed,
     Object? userImage = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? birthDay = freezed,
+    Object? gender = freezed,
+    Object? currentImageIndex = freezed,
     Object? errorText = freezed,
     Object? isObscure = freezed,
     Object? isValidUserName = freezed,
@@ -121,10 +132,6 @@ class _$AuthScreenStateCopyWithImpl<$Res>
     Object? isNotTap = freezed,
   }) {
     return _then(_value.copyWith(
-      currentImageIndex: currentImageIndex == freezed
-          ? _value.currentImageIndex
-          : currentImageIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       userName: userName == freezed
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -141,6 +148,18 @@ class _$AuthScreenStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      birthDay: birthDay == freezed
+          ? _value.birthDay
+          : birthDay // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentImageIndex: currentImageIndex == freezed
+          ? _value.currentImageIndex
+          : currentImageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       errorText: errorText == freezed
           ? _value.errorText
           : errorText // ignore: cast_nullable_to_non_nullable
@@ -184,11 +203,13 @@ abstract class _$CreateCopyWith<$Res>
       __$CreateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int currentImageIndex,
-      String userName,
+      {String userName,
       File? userImage,
       String email,
       String password,
+      String birthDay,
+      String gender,
+      int currentImageIndex,
       String errorText,
       bool isObscure,
       bool isValidUserName,
@@ -210,11 +231,13 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? currentImageIndex = freezed,
     Object? userName = freezed,
     Object? userImage = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? birthDay = freezed,
+    Object? gender = freezed,
+    Object? currentImageIndex = freezed,
     Object? errorText = freezed,
     Object? isObscure = freezed,
     Object? isValidUserName = freezed,
@@ -225,10 +248,6 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
     Object? isNotTap = freezed,
   }) {
     return _then(_Create(
-      currentImageIndex: currentImageIndex == freezed
-          ? _value.currentImageIndex
-          : currentImageIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       userName: userName == freezed
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -245,6 +264,18 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      birthDay: birthDay == freezed
+          ? _value.birthDay
+          : birthDay // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentImageIndex: currentImageIndex == freezed
+          ? _value.currentImageIndex
+          : currentImageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       errorText: errorText == freezed
           ? _value.errorText
           : errorText // ignore: cast_nullable_to_non_nullable
@@ -285,11 +316,13 @@ class __$CreateCopyWithImpl<$Res> extends _$AuthScreenStateCopyWithImpl<$Res>
 
 class _$_Create implements _Create {
   const _$_Create(
-      {this.currentImageIndex = 0,
-      this.userName = 'ゲスト',
+      {this.userName = 'ゲスト',
       this.userImage = null,
       this.email = '',
       this.password = '',
+      this.birthDay = '',
+      this.gender = '',
+      this.currentImageIndex = 0,
       this.errorText = '',
       this.isObscure = true,
       this.isValidUserName = false,
@@ -300,10 +333,7 @@ class _$_Create implements _Create {
       this.isNotTap = false});
 
   @JsonKey()
-  @override
-  final int currentImageIndex;
-  @JsonKey()
-  @override
+  @override //ユーザー情報
   final String userName;
   @JsonKey()
   @override
@@ -314,6 +344,15 @@ class _$_Create implements _Create {
   @JsonKey()
   @override
   final String password;
+  @JsonKey()
+  @override
+  final String birthDay;
+  @JsonKey()
+  @override
+  final String gender;
+  @JsonKey()
+  @override //その他
+  final int currentImageIndex;
   @JsonKey()
   @override
   final String errorText;
@@ -341,7 +380,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'AuthScreenState(currentImageIndex: $currentImageIndex, userName: $userName, userImage: $userImage, email: $email, password: $password, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
+    return 'AuthScreenState(userName: $userName, userImage: $userImage, email: $email, password: $password, birthDay: $birthDay, gender: $gender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
   }
 
   @override
@@ -349,12 +388,14 @@ class _$_Create implements _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Create &&
-            const DeepCollectionEquality()
-                .equals(other.currentImageIndex, currentImageIndex) &&
             const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.userImage, userImage) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.birthDay, birthDay) &&
+            const DeepCollectionEquality().equals(other.gender, gender) &&
+            const DeepCollectionEquality()
+                .equals(other.currentImageIndex, currentImageIndex) &&
             const DeepCollectionEquality().equals(other.errorText, errorText) &&
             const DeepCollectionEquality().equals(other.isObscure, isObscure) &&
             const DeepCollectionEquality()
@@ -372,11 +413,13 @@ class _$_Create implements _Create {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(currentImageIndex),
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(userImage),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(birthDay),
+      const DeepCollectionEquality().hash(gender),
+      const DeepCollectionEquality().hash(currentImageIndex),
       const DeepCollectionEquality().hash(errorText),
       const DeepCollectionEquality().hash(isObscure),
       const DeepCollectionEquality().hash(isValidUserName),
@@ -394,11 +437,13 @@ class _$_Create implements _Create {
 
 abstract class _Create implements AuthScreenState {
   const factory _Create(
-      {int currentImageIndex,
-      String userName,
+      {String userName,
       File? userImage,
       String email,
       String password,
+      String birthDay,
+      String gender,
+      int currentImageIndex,
       String errorText,
       bool isObscure,
       bool isValidUserName,
@@ -408,9 +453,7 @@ abstract class _Create implements AuthScreenState {
       bool hasError,
       bool isNotTap}) = _$_Create;
 
-  @override
-  int get currentImageIndex;
-  @override
+  @override //ユーザー情報
   String get userName;
   @override
   File? get userImage;
@@ -418,6 +461,12 @@ abstract class _Create implements AuthScreenState {
   String get email;
   @override
   String get password;
+  @override
+  String get birthDay;
+  @override
+  String get gender;
+  @override //その他
+  int get currentImageIndex;
   @override
   String get errorText;
   @override

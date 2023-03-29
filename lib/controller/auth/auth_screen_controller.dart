@@ -27,6 +27,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final birthdayController = TextEditingController();
   final loginFocusNode = FocusNode();
   final createAccountFocusNode = FocusNode();
   final images = [
@@ -75,9 +76,26 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     state = state.copyWith(password: password, isSafetyPass: isSafetyPass);
   }
 
+  ///生年月日の入力
+  void setBirthday(DateTime date) {
+    state = state.copyWith(birthDay: '${date.year}/${date.month}/${date.day}');
+    print(state.birthDay);
+  }
+
   /// パスワードの表示
   void switchObscure() {
     state = state.copyWith(isObscure: !state.isObscure);
+  }
+
+  ///エラーの表示
+  void switchHasError() {
+    state = state.copyWith(hasError: false);
+  }
+
+  ///ボタンタップの可否
+  void switchTap() {
+    final isNotTap = state.isNotTap;
+    state = state.copyWith(isNotTap: !isNotTap);
   }
 
   ///新規登録
@@ -88,8 +106,8 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      final User? user = result.user;
-      await user?.updateDisplayName(userNameController.text.trim());
+      // final User? user = result.user;
+      // await user?.updateDisplayName(userNameController.text.trim());
 
       ///FireStoreに登録
       final users = FirebaseFirestore.instance.collection('users');
@@ -105,7 +123,6 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     } catch (e) {
       print(e);
       print("登録失敗");
-      final hasError = state.hasError;
       state = state.copyWith(errorText: e.toString(), hasError: true);
     }
     return state;
@@ -195,14 +212,18 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     }
   }
 
-  void switchHasError() {
-    final hasError = state.hasError;
-    state = state.copyWith(hasError: false);
-  }
-
-  void switchTap() {
-    final isNotTap = state.isNotTap;
-    state = state.copyWith(isNotTap: !isNotTap);
+  void saveAccount() {
+    // emailController.clear();
+    // passwordController.clear();
+    // state = state.copyWith(
+    //   email: "",
+    //   password: "",
+    //   errorText: "",
+    //   isObscure: true,
+    //   isValidEmail: false,
+    //   isSafetyPass: false,
+    //   hasError: false,
+    // );
   }
 
   ///リセット

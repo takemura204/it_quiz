@@ -132,7 +132,7 @@ class SetAccountButton extends ConsumerWidget {
   }
 }
 
-///
+///プロフィール編集ボタン
 class EditProfileButton extends ConsumerWidget {
   const EditProfileButton({required this.onPressed, required this.text});
   final VoidCallback onPressed;

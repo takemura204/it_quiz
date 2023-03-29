@@ -30,7 +30,7 @@ class UserProfile extends ConsumerWidget {
               }
             },
             height: context.height * 0.1,
-            isLinkedEmail: email != "ログインしていません",
+            isLinkedEmail: false,
           ),
 
           ///ユーザネーム・メールアドレス

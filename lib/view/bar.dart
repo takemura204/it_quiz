@@ -45,23 +45,35 @@ class LoginErrorBar extends ConsumerWidget {
 
 ///問題一覧Bar
 class StudyListBar extends ConsumerWidget {
-  const StudyListBar({required this.title, required this.onTap});
+  const StudyListBar(
+      {required this.title, required this.onTap, required this.isCompleted});
   final String title;
   final VoidCallback? onTap;
+  final bool isCompleted;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: onTap,
       child: Card(
         elevation: 1.0,
-        margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
+        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 3.0),
         child: Container(
           child: ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            leading: const Icon(Icons.account_circle),
-            title: Text(title),
-            trailing: const Icon(Icons.arrow_forward),
+            contentPadding: const EdgeInsets.only(
+                left: 10.0, top: 1.0, bottom: 1.0, right: 5),
+            title: Text(
+              title,
+              style: const TextStyle(fontSize: 16),
+            ),
+            leading: isCompleted
+                ? Icon(
+                    Icons.pets,
+                    color: context.colors.main50.withOpacity(0.6),
+                  )
+                : const Icon(
+                    Icons.pets,
+                  ),
+            trailing: const Icon(Icons.arrow_forward_ios),
           ),
         ),
       ),
@@ -124,10 +136,16 @@ class SettingListBar extends ConsumerWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.height * 0.015,
+                  ),
                 ),
                 const Spacer(),
-                const Icon(Icons.arrow_forward_ios_sharp),
+                Icon(
+                  Icons.arrow_forward_ios_sharp,
+                  size: context.height * 0.025,
+                ),
               ],
             ),
           ),

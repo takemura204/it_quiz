@@ -32,12 +32,18 @@ class HomeSettingScreen extends ConsumerWidget {
                 if (snapshot.hasData) {
                   // User が null でなない、つまりサインイン済みのホーム画面へ
                   return Column(
-                    children: const [
-                      SettingTitleBar(
+                    children: [
+                      const SettingTitleBar(
                         title: "アカウント情報(サインイン済み)",
                         onTap: null,
                       ),
-                      UserProfile(),
+                      const UserProfile(),
+                      SettingListBar(
+                        title: "プロフィール編集",
+                        onTap: () => context.showScreen(
+                          const ProfileScreenArguments().generateRoute(),
+                        ),
+                      ),
                     ],
                   );
                 }
@@ -64,45 +70,44 @@ class HomeSettingScreen extends ConsumerWidget {
               },
             ),
           ),
-          const Gap(10),
 
-          SettingListBar(
-            title: "プロフィール設定",
-            onTap: null,
+          Column(
+            children: const [
+              SettingTitleBar(
+                title: "設定",
+                onTap: null,
+              ),
+              SettingListBar(
+                title: "通知",
+                onTap: null,
+              ),
+              SettingTitleBar(
+                title: "アプリについて",
+                onTap: null,
+              ),
+              SettingListBar(
+                title: "お問合せ",
+                onTap: null,
+              ),
+              SettingListBar(
+                title: "シェア",
+                onTap: null,
+              ),
+              SettingListBar(
+                title: "開発者",
+                onTap: null,
+              ),
+              SettingTitleBar(
+                title: "アカウント情報",
+                onTap: null,
+              ),
+              SettingListBar(
+                title: "アプリを削除する",
+                onTap: null,
+              ),
+            ],
           ),
 
-          SettingTitleBar(
-            title: "設定",
-            onTap: null,
-          ),
-          SettingListBar(
-            title: "通知",
-            onTap: null,
-          ),
-          SettingTitleBar(
-            title: "アプリについて",
-            onTap: null,
-          ),
-          SettingListBar(
-            title: "お問合せ",
-            onTap: null,
-          ),
-          SettingListBar(
-            title: "シェア",
-            onTap: null,
-          ),
-          SettingListBar(
-            title: "開発者",
-            onTap: null,
-          ),
-          SettingTitleBar(
-            title: "アカウント情報",
-            onTap: null,
-          ),
-          SettingListBar(
-            title: "アプリを削除する",
-            onTap: null,
-          ),
           const Gap(30),
           Container(
             child: StreamBuilder<User?>(
