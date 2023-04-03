@@ -19,7 +19,7 @@ class _QuizStyleTitle extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: Text(
-                arguments.quizStyle,
+                arguments.item.title,
                 style: context.texts.subtitle1,
               ),
             ),
@@ -41,11 +41,12 @@ class _Question extends ConsumerWidget {
     final isAns = ref.watch(quizLearnScreenControllerProvider).isAnsView;
 
     return Container(
-      height: context.height * 0.45,
+      height: context.height * 0.4,
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
           const Spacer(),
+          const Gap(20),
           AnimatedSwitcher(
             /// アニメーションがおかしい
             duration: const Duration(milliseconds: 0),
@@ -55,7 +56,7 @@ class _Question extends ConsumerWidget {
               return FadeTransition(child: child, opacity: animation);
             },
             child:
-                isAns ? _ConfirmQuestion(arguments) : _AnsQuestion(arguments),
+                isAns ? _AnsQuestion(arguments) : _ConfirmQuestion(arguments),
           ),
           const Spacer(),
         ],
@@ -64,8 +65,9 @@ class _Question extends ConsumerWidget {
   }
 }
 
-class _ConfirmQuestion extends ConsumerWidget {
-  const _ConfirmQuestion(this.arguments);
+///穴埋め問題(答え)
+class _AnsQuestion extends ConsumerWidget {
+  const _AnsQuestion(this.arguments);
   final QuizLearnScreenArguments arguments;
 
   @override
@@ -78,7 +80,7 @@ class _ConfirmQuestion extends ConsumerWidget {
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
-        fontSize: 21,
+        fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
@@ -89,8 +91,9 @@ class _ConfirmQuestion extends ConsumerWidget {
   }
 }
 
-class _AnsQuestion extends ConsumerWidget {
-  const _AnsQuestion(this.arguments);
+///穴埋め問題
+class _ConfirmQuestion extends ConsumerWidget {
+  const _ConfirmQuestion(this.arguments);
   final QuizLearnScreenArguments arguments;
 
   @override
@@ -105,11 +108,11 @@ class _AnsQuestion extends ConsumerWidget {
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
-        fontSize: 21,
+        fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
-        color: context.colors.main50.withOpacity(0.5),
+        color: context.colors.main50.withOpacity(0.8),
         decoration: TextDecoration.underline,
       ),
     );
@@ -130,16 +133,13 @@ class _QuizProgress extends ConsumerWidget {
       child: Row(
         children: [
           const Spacer(),
-          AutoSizeText(
+          Text(
             quizIndex.toString(),
-            style: context.texts.subtitle1,
-            minFontSize: 20,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
-          const Text("/"),
-          AutoSizeText(
-            arguments.item.learnQuiz.length.toString(),
-            style: context.texts.bodyText1,
-            minFontSize: 16,
+          Text(
+            "/" + arguments.item.learnQuiz.length.toString(),
+            style: const TextStyle(fontSize: 18),
           ),
           const Spacer(),
         ],
@@ -170,11 +170,9 @@ class _ConfirmButton extends ConsumerWidget {
                   height: context.height * 0.1,
                   color: context.colors.orange100.withOpacity(0.1),
                   alignment: Alignment.center,
-                  child: AutoSizeText(
+                  child: Text(
                     I18n().buttonUnKnow,
-                    style: context.texts.bodyText1
-                        ?.copyWith(color: Colors.redAccent.shade100),
-                    minFontSize: 18,
+                    style: TextStyle(fontSize: 20, color: Colors.red.shade400),
                   ),
                 ),
               ),
@@ -186,7 +184,7 @@ class _ConfirmButton extends ConsumerWidget {
                 color: context.colors.dark12,
               ),
 
-              ///知っている
+              ///知ってる
               GestureDetector(
                 onTap: () {
                   ref
@@ -211,14 +209,18 @@ class _ConfirmButton extends ConsumerWidget {
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     I18n().buttonKnow,
-                    style: context.texts.bodyText1
-                        ?.copyWith(color: Colors.green.shade400),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.green.shade400),
                     minFontSize: 16,
                   ),
                 ),
               ),
             ],
           )
+
+        ///確認する
         : GestureDetector(
             onTap: () => ref
                 .read(quizLearnScreenControllerProvider.notifier)
@@ -228,10 +230,10 @@ class _ConfirmButton extends ConsumerWidget {
               height: context.height * 0.1,
               color: context.colors.orange100.withOpacity(0.1),
               alignment: Alignment.center,
-              child: AutoSizeText(
+              child: Text(
                 I18n().buttonConfirm,
-                style: context.texts.subtitle1,
-                minFontSize: 16,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
           );
@@ -250,26 +252,26 @@ class _LapInfoBar extends ConsumerWidget {
       elevation: 3,
       margin: const EdgeInsets.all(0),
       child: Container(
-        height: context.height * 0.1,
+        height: context.height * 0.05,
         alignment: Alignment.center,
         color: Colors.white70,
         child: Row(
           children: [
             const Divider(),
-            Container(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 12, 4, 12),
-                    child: AutoSizeText(
-                      lapIndex.toString(),
-                      style: context.texts.subtitle1,
-                      minFontSize: 20,
-                    ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
+                  child: AutoSizeText(
+                    lapIndex.toString(),
+                    style: context.texts.subtitle1,
+                    minFontSize: 20,
                   ),
-                  const Text("周目"),
-                ],
-              ),
+                ),
+                const Text(
+                  "周目",
+                ),
+              ],
             ),
             Row(
               children: const [
@@ -279,16 +281,19 @@ class _LapInfoBar extends ConsumerWidget {
             const Spacer(),
             Row(
               children: [
-                const Text("知っている"),
+                const Text(
+                  "知っている",
+                  style: TextStyle(fontSize: 14),
+                ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 4, 12),
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: AutoSizeText(
                     ref
                         .watch(quizLearnScreenControllerProvider)
                         .knowRememberQuestions
                         .length
                         .toString(),
-                    style: context.texts.bodyText1
+                    style: context.texts.subtitle1
                         ?.copyWith(color: Colors.green.shade400),
                     minFontSize: 20,
                   ),
@@ -300,16 +305,16 @@ class _LapInfoBar extends ConsumerWidget {
             const Spacer(),
             Row(
               children: [
-                const Text("知らない"),
+                const Text("知らない", style: TextStyle(fontSize: 14)),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(4, 12, 4, 12),
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: AutoSizeText(
                     ref
                         .watch(quizLearnScreenControllerProvider)
                         .unKnowRememberQuestions
                         .length
                         .toString(),
-                    style: context.texts.bodyText1
+                    style: context.texts.subtitle1
                         ?.copyWith(color: Colors.redAccent.shade100),
                     minFontSize: 20,
                   ),

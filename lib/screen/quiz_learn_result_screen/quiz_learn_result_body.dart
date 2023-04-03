@@ -12,8 +12,8 @@ class _Body extends ConsumerWidget {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              ///正答率
-              _AnsRateView(arguments),
+              // ///正答率
+              // _AnsRateView(arguments),
 
               ///間違えた問題リスト
               _UnKnowQuestionsView(arguments),

@@ -21,18 +21,14 @@ class _Body extends ConsumerWidget {
             alignment: Alignment.center,
             child: Column(
               children: [
-                Container(
-                  height: context.height * 0.5,
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      ///問題文
-                      _Question(arguments),
+                Column(
+                  children: [
+                    ///問題文
+                    _Question(arguments),
 
-                      ///問題進捗状況
-                      _QuizProgress(arguments),
-                    ],
-                  ),
+                    ///問題進捗状況
+                    _QuizProgress(arguments),
+                  ],
                 ),
                 Divider(height: 1, color: context.colors.dark54),
 
@@ -46,6 +42,22 @@ class _Body extends ConsumerWidget {
 
         ///何周目か確認
         _LapInfoBar(arguments),
+
+        ///広告
+        Container(
+          height: context.height * 0.07,
+          color: Colors.cyan,
+          child: Row(
+            children: const [
+              Spacer(),
+              Text(
+                "広告入れたい",
+                style: TextStyle(fontSize: 30),
+              ),
+              Spacer(),
+            ],
+          ),
+        )
       ],
     );
   }

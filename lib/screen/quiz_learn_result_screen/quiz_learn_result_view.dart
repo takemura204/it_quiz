@@ -202,13 +202,13 @@ class _KnowQuestionsView extends ConsumerWidget {
                 margin: const EdgeInsets.all(0),
                 child: Container(
                   height: context.height * 0.05,
-                  color: context.colors.dark12,
+                  color: context.colors.main10,
                   child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
-                          "正解した問題",
+                          arguments.item.title,
                           style: context.texts.subtitle1,
                         ),
                       ),

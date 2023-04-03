@@ -103,31 +103,38 @@ class SelectQuizDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SimpleDialog(
       insetPadding: const EdgeInsets.all(4),
-      contentPadding: const EdgeInsets.all(0),
+      contentPadding: const EdgeInsets.all(4),
       children: [
         Container(
-          height: context.height * 0.31,
+          height: context.height * 0.26,
           width: context.width * 0.8,
           child: Column(
             children: [
-              ///Clearボタン
-              ClearButton(
-                iconSize: context.height * 0.05,
-                onPressed: () {},
+              Row(
+                children: [
+                  ///問題タイトル
+                  Container(
+                    // color: Colors.redAccent,
+                    height: context.height * 0.05,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      item.title,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Spacer(),
+
+                  ///Clearボタン
+                  ClearButton(
+                    iconSize: context.height * 0.04,
+                    onPressed: () {},
+                  ),
+                ],
               ),
 
-              ///問題タイトル
-              Container(
-                // color: Colors.redAccent,
-                height: context.height * 0.05,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  item.title,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
               Divider(height: 1, color: context.colors.dark54),
 
               ///クイズ挑戦結果
@@ -177,7 +184,7 @@ class SelectQuizDialog extends ConsumerWidget {
                   children: [
                     const Spacer(),
 
-                    ///一問一答形式
+                    ///一問一答形式で学習する
                     SimpleDialogOption(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 4),
@@ -207,7 +214,7 @@ class SelectQuizDialog extends ConsumerWidget {
                       ),
                     ),
 
-                    ///4択形式
+                    ///4択形式クイズに挑戦する
                     SimpleDialogOption(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 4),

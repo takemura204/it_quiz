@@ -26,7 +26,7 @@ class I18n {
 
   ///Button
   String get buttonConfirm => "確認する";
-  String get buttonKnow => "知っている";
+  String get buttonKnow => "知ってる";
   String get buttonUnKnow => "知らない";
 
   ///　問題画面
@@ -62,9 +62,9 @@ class I18n {
   String get caseHideText4 => "＿＿＿＿";
   String get caseHideText5 => "＿＿＿＿＿";
   String get caseHideText6 => "＿＿＿＿＿＿";
-  String get caseHideText7 => "＿＿＿＿＿＿";
-  String get caseHideText8 => "＿＿＿＿＿＿＿";
-  String get caseHideText9 => "＿＿＿＿＿＿＿＿";
+  String get caseHideText7 => "＿＿＿＿＿＿＿";
+  String get caseHideText8 => "＿＿＿＿＿＿＿＿";
+  String get caseHideText9 => "＿＿＿＿＿＿＿＿＿";
 
   ///　ログインエラー
   String loginErrorText(String errorText) {
