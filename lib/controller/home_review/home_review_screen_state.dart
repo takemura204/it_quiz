@@ -9,8 +9,6 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
   const factory HomeReviewScreenState({
     @Default(0) final int currentIndex,
     @Default([]) final List<QuizItem> reviewItem,
-    @Default([]) final List<LearnQuiz> learnList,
-    @Default([]) final List<ChoiceQuiz> choiceList,
-    @Default([]) final List<TrueFalseQuiz> trueFalseList,
+    @Default([]) final List<Quiz> quizList,
   }) = _Create;
 }

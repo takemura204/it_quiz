@@ -24,9 +24,9 @@ class _$QuizChoiceScreenStateTearOff {
       bool isResultScreen = false,
       int quizIndex = 0,
       List<String> choices = const [],
-      List<ChoiceQuiz> correctList = const [],
-      List<ChoiceQuiz> incorrectList = const [],
-      List<ChoiceQuiz> reviewList = const []}) {
+      List<Quiz> correctList = const [],
+      List<Quiz> incorrectList = const [],
+      List<Quiz> reviewList = const []}) {
     return _Create(
       isAnsView: isAnsView,
       isJudge: isJudge,
@@ -50,11 +50,9 @@ mixin _$QuizChoiceScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
-  List<ChoiceQuiz> get correctList =>
-      throw _privateConstructorUsedError; //正解リスト
-  List<ChoiceQuiz> get incorrectList =>
-      throw _privateConstructorUsedError; //不正解リスト
-  List<ChoiceQuiz> get reviewList => throw _privateConstructorUsedError;
+  List<Quiz> get correctList => throw _privateConstructorUsedError; //正解リスト
+  List<Quiz> get incorrectList => throw _privateConstructorUsedError; //不正解リスト
+  List<Quiz> get reviewList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizChoiceScreenStateCopyWith<QuizChoiceScreenState> get copyWith =>
@@ -72,9 +70,9 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<ChoiceQuiz> correctList,
-      List<ChoiceQuiz> incorrectList,
-      List<ChoiceQuiz> reviewList});
+      List<Quiz> correctList,
+      List<Quiz> incorrectList,
+      List<Quiz> reviewList});
 }
 
 /// @nodoc
@@ -121,15 +119,15 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res>
       correctList: correctList == freezed
           ? _value.correctList
           : correctList // ignore: cast_nullable_to_non_nullable
-              as List<ChoiceQuiz>,
+              as List<Quiz>,
       incorrectList: incorrectList == freezed
           ? _value.incorrectList
           : incorrectList // ignore: cast_nullable_to_non_nullable
-              as List<ChoiceQuiz>,
+              as List<Quiz>,
       reviewList: reviewList == freezed
           ? _value.reviewList
           : reviewList // ignore: cast_nullable_to_non_nullable
-              as List<ChoiceQuiz>,
+              as List<Quiz>,
     ));
   }
 }
@@ -146,9 +144,9 @@ abstract class _$CreateCopyWith<$Res>
       bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<ChoiceQuiz> correctList,
-      List<ChoiceQuiz> incorrectList,
-      List<ChoiceQuiz> reviewList});
+      List<Quiz> correctList,
+      List<Quiz> incorrectList,
+      List<Quiz> reviewList});
 }
 
 /// @nodoc
@@ -196,15 +194,15 @@ class __$CreateCopyWithImpl<$Res>
       correctList: correctList == freezed
           ? _value.correctList
           : correctList // ignore: cast_nullable_to_non_nullable
-              as List<ChoiceQuiz>,
+              as List<Quiz>,
       incorrectList: incorrectList == freezed
           ? _value.incorrectList
           : incorrectList // ignore: cast_nullable_to_non_nullable
-              as List<ChoiceQuiz>,
+              as List<Quiz>,
       reviewList: reviewList == freezed
           ? _value.reviewList
           : reviewList // ignore: cast_nullable_to_non_nullable
-              as List<ChoiceQuiz>,
+              as List<Quiz>,
     ));
   }
 }
@@ -240,13 +238,13 @@ class _$_Create extends _Create {
   final List<String> choices;
   @JsonKey()
   @override //選択肢
-  final List<ChoiceQuiz> correctList;
+  final List<Quiz> correctList;
   @JsonKey()
   @override //正解リスト
-  final List<ChoiceQuiz> incorrectList;
+  final List<Quiz> incorrectList;
   @JsonKey()
   @override //不正解リスト
-  final List<ChoiceQuiz> reviewList;
+  final List<Quiz> reviewList;
 
   @override
   String toString() {
@@ -297,9 +295,9 @@ abstract class _Create extends QuizChoiceScreenState {
       bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<ChoiceQuiz> correctList,
-      List<ChoiceQuiz> incorrectList,
-      List<ChoiceQuiz> reviewList}) = _$_Create;
+      List<Quiz> correctList,
+      List<Quiz> incorrectList,
+      List<Quiz> reviewList}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -313,11 +311,11 @@ abstract class _Create extends QuizChoiceScreenState {
   @override //問題番号
   List<String> get choices;
   @override //選択肢
-  List<ChoiceQuiz> get correctList;
+  List<Quiz> get correctList;
   @override //正解リスト
-  List<ChoiceQuiz> get incorrectList;
+  List<Quiz> get incorrectList;
   @override //不正解リスト
-  List<ChoiceQuiz> get reviewList;
+  List<Quiz> get reviewList;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

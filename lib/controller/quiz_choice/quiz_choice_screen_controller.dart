@@ -35,9 +35,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///選択肢を混ぜる
   void shuffleChoice() {
     final choices = [...state.choices]..clear();
-    final argumentsChoices = [
-      ...arguments.item.choiceQuiz[state.quizIndex].choices
-    ];
+    final argumentsChoices = [...arguments.item.quiz[state.quizIndex].choices];
     argumentsChoices.shuffle();
     choices.addAll(argumentsChoices);
     state = state.copyWith(choices: choices);
@@ -53,7 +51,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ判定
   void judgementQuiz(String choice) {
-    final choiceQuiz = [...arguments.item.choiceQuiz];
+    final choiceQuiz = [...arguments.item.quiz];
     final correctList = [...state.correctList];
     final incorrectList = [...state.incorrectList];
 
@@ -65,7 +63,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     }
     //不正解
     else {
-      choiceQuiz[state.quizIndex] = ChoiceQuiz(
+      choiceQuiz[state.quizIndex] = Quiz(
         quizId: choiceQuiz[state.quizIndex].quizId,
         question: choiceQuiz[state.quizIndex].question,
         ans: choiceQuiz[state.quizIndex].ans,
@@ -80,6 +78,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
       state = state.copyWith(isJudge: false, incorrectList: incorrectList);
     }
+    print(correctList.length);
   }
 
   ///正解表示
@@ -95,7 +94,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///次の問題
   void nextQuiz() {
     final quizIndex = state.quizIndex;
-    if (quizIndex == arguments.item.choiceQuiz.length - 1) {
+    if (quizIndex == arguments.item.quiz.length - 1) {
       print("終了!");
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
     } else {
@@ -125,7 +124,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final correctList = [...state.correctList];
     //チェックした時
     if (!correctList[index].isWeak) {
-      correctList[index] = ChoiceQuiz(
+      correctList[index] = Quiz(
         quizId: correctList[index].quizId,
         question: correctList[index].question,
         ans: correctList[index].ans,
@@ -139,7 +138,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     }
     //チェックしてない時
     else {
-      correctList[index] = ChoiceQuiz(
+      correctList[index] = Quiz(
         quizId: correctList[index].quizId,
         question: correctList[index].question,
         ans: correctList[index].ans,
@@ -155,7 +154,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final incorrectList = [...state.incorrectList];
     //チェックした時
     if (!incorrectList[index].isWeak) {
-      incorrectList[index] = ChoiceQuiz(
+      incorrectList[index] = Quiz(
         quizId: incorrectList[index].quizId,
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,
@@ -169,7 +168,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     }
     //チェックしてない時
     else {
-      incorrectList[index] = ChoiceQuiz(
+      incorrectList[index] = Quiz(
         quizId: incorrectList[index].quizId,
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,

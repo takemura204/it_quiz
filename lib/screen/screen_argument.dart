@@ -6,7 +6,7 @@ import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
 
-import '../resource/controller/screen_argument_resource.dart';
+import '../resource/screen_argument_resource.dart';
 import 'create_account_screen/create_account_screen.dart';
 
 ///一問一答形式へ画面遷移

@@ -25,9 +25,9 @@ class _$QuizTrueFalseScreenStateTearOff {
       int quizIndex = 0,
       String randomAns = "",
       List<String> choices = const [],
-      List<TrueFalseQuiz> correctList = const [],
-      List<TrueFalseQuiz> incorrectList = const [],
-      List<TrueFalseQuiz> reviewList = const []}) {
+      List<Quiz> correctList = const [],
+      List<Quiz> incorrectList = const [],
+      List<Quiz> reviewList = const []}) {
     return _Create(
       isAnsView: isAnsView,
       isJudge: isJudge,
@@ -53,11 +53,9 @@ mixin _$QuizTrueFalseScreenState {
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   String get randomAns => throw _privateConstructorUsedError; //ランダムな答え
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
-  List<TrueFalseQuiz> get correctList =>
-      throw _privateConstructorUsedError; //正解リスト
-  List<TrueFalseQuiz> get incorrectList =>
-      throw _privateConstructorUsedError; //不正解リスト
-  List<TrueFalseQuiz> get reviewList => throw _privateConstructorUsedError;
+  List<Quiz> get correctList => throw _privateConstructorUsedError; //正解リスト
+  List<Quiz> get incorrectList => throw _privateConstructorUsedError; //不正解リスト
+  List<Quiz> get reviewList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizTrueFalseScreenStateCopyWith<QuizTrueFalseScreenState> get copyWith =>
@@ -76,9 +74,9 @@ abstract class $QuizTrueFalseScreenStateCopyWith<$Res> {
       int quizIndex,
       String randomAns,
       List<String> choices,
-      List<TrueFalseQuiz> correctList,
-      List<TrueFalseQuiz> incorrectList,
-      List<TrueFalseQuiz> reviewList});
+      List<Quiz> correctList,
+      List<Quiz> incorrectList,
+      List<Quiz> reviewList});
 }
 
 /// @nodoc
@@ -130,15 +128,15 @@ class _$QuizTrueFalseScreenStateCopyWithImpl<$Res>
       correctList: correctList == freezed
           ? _value.correctList
           : correctList // ignore: cast_nullable_to_non_nullable
-              as List<TrueFalseQuiz>,
+              as List<Quiz>,
       incorrectList: incorrectList == freezed
           ? _value.incorrectList
           : incorrectList // ignore: cast_nullable_to_non_nullable
-              as List<TrueFalseQuiz>,
+              as List<Quiz>,
       reviewList: reviewList == freezed
           ? _value.reviewList
           : reviewList // ignore: cast_nullable_to_non_nullable
-              as List<TrueFalseQuiz>,
+              as List<Quiz>,
     ));
   }
 }
@@ -156,9 +154,9 @@ abstract class _$CreateCopyWith<$Res>
       int quizIndex,
       String randomAns,
       List<String> choices,
-      List<TrueFalseQuiz> correctList,
-      List<TrueFalseQuiz> incorrectList,
-      List<TrueFalseQuiz> reviewList});
+      List<Quiz> correctList,
+      List<Quiz> incorrectList,
+      List<Quiz> reviewList});
 }
 
 /// @nodoc
@@ -211,15 +209,15 @@ class __$CreateCopyWithImpl<$Res>
       correctList: correctList == freezed
           ? _value.correctList
           : correctList // ignore: cast_nullable_to_non_nullable
-              as List<TrueFalseQuiz>,
+              as List<Quiz>,
       incorrectList: incorrectList == freezed
           ? _value.incorrectList
           : incorrectList // ignore: cast_nullable_to_non_nullable
-              as List<TrueFalseQuiz>,
+              as List<Quiz>,
       reviewList: reviewList == freezed
           ? _value.reviewList
           : reviewList // ignore: cast_nullable_to_non_nullable
-              as List<TrueFalseQuiz>,
+              as List<Quiz>,
     ));
   }
 }
@@ -259,13 +257,13 @@ class _$_Create extends _Create {
   final List<String> choices;
   @JsonKey()
   @override //選択肢
-  final List<TrueFalseQuiz> correctList;
+  final List<Quiz> correctList;
   @JsonKey()
   @override //正解リスト
-  final List<TrueFalseQuiz> incorrectList;
+  final List<Quiz> incorrectList;
   @JsonKey()
   @override //不正解リスト
-  final List<TrueFalseQuiz> reviewList;
+  final List<Quiz> reviewList;
 
   @override
   String toString() {
@@ -319,9 +317,9 @@ abstract class _Create extends QuizTrueFalseScreenState {
       int quizIndex,
       String randomAns,
       List<String> choices,
-      List<TrueFalseQuiz> correctList,
-      List<TrueFalseQuiz> incorrectList,
-      List<TrueFalseQuiz> reviewList}) = _$_Create;
+      List<Quiz> correctList,
+      List<Quiz> incorrectList,
+      List<Quiz> reviewList}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -337,11 +335,11 @@ abstract class _Create extends QuizTrueFalseScreenState {
   @override //ランダムな答え
   List<String> get choices;
   @override //選択肢
-  List<TrueFalseQuiz> get correctList;
+  List<Quiz> get correctList;
   @override //正解リスト
-  List<TrueFalseQuiz> get incorrectList;
+  List<Quiz> get incorrectList;
   @override //不正解リスト
-  List<TrueFalseQuiz> get reviewList;
+  List<Quiz> get reviewList;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;

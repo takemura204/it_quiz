@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/entity/quiz_item.dart';
-import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/view/bar.dart';
 
-import '../../resource/quiz/quiz_resource.dart';
+import '../../resource/quiz/quiz_item_resource.dart';
 import '../../view/dialog.dart';
 
 class HomeStudyScreen extends ConsumerWidget {
@@ -15,7 +15,7 @@ class HomeStudyScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GroupedListView<QuizItem, String>(
-        elements: studyItems,
+        elements: quizItems,
         groupBy: (QuizItem item) => item.group,
         groupComparator: (value1, value2) =>
             value2.compareTo(value1), //グループのカスタムソートを定義

@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/lang/initial_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
@@ -147,12 +147,12 @@ class SelectQuizDialog extends ConsumerWidget {
                     const Text(
                       "前回のクイズ挑戦結果",
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           "0",
 
                           ///正解数
@@ -161,8 +161,10 @@ class SelectQuizDialog extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+
+                        ///問題数
                         Text(
-                          "/" + item.learnQuiz.length.toString(),
+                          "/" + item.quiz.length.toString(),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

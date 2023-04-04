@@ -36,9 +36,7 @@ class QuizTrueFalseScreenController
   ///選択肢を混ぜる
   void shuffleAns() {
     final choices = [...state.choices]..clear();
-    final argumentsChoices = [
-      ...arguments.item.trueFalseQuiz[state.quizIndex].choices
-    ];
+    final argumentsChoices = [...arguments.item.quiz[state.quizIndex].choices];
     argumentsChoices.shuffle();
     choices.addAll(argumentsChoices);
 
@@ -57,33 +55,33 @@ class QuizTrueFalseScreenController
   ///クイズ判定
   void judgementQuiz(bool ans) {
     final randomAns = state.choices.first;
-    final trueFalseQuiz = [...arguments.item.trueFalseQuiz];
+    final quiz = [...arguments.item.quiz];
     final correctList = [...state.correctList];
     final incorrectList = [...state.incorrectList];
 
     //丸ボタンを押した時
     if (ans) {
       //正解の時
-      if (randomAns == trueFalseQuiz[state.quizIndex].ans) {
+      if (randomAns == quiz[state.quizIndex].ans) {
         //正解リストに追加
-        correctList.add(trueFalseQuiz[state.quizIndex]);
+        correctList.add(quiz[state.quizIndex]);
         //スコア反映
         state = state.copyWith(isJudge: true, correctList: correctList);
       }
       //不正解の時
       else {
-        trueFalseQuiz[state.quizIndex] = TrueFalseQuiz(
-          quizId: trueFalseQuiz[state.quizIndex].quizId,
-          question: trueFalseQuiz[state.quizIndex].question,
-          ans: trueFalseQuiz[state.quizIndex].ans,
-          choices: trueFalseQuiz[state.quizIndex].choices,
+        quiz[state.quizIndex] = Quiz(
+          quizId: quiz[state.quizIndex].quizId,
+          question: quiz[state.quizIndex].question,
+          ans: quiz[state.quizIndex].ans,
+          choices: quiz[state.quizIndex].choices,
           isWeak: true,
         );
-        incorrectList.add(trueFalseQuiz[state.quizIndex]);
+        incorrectList.add(quiz[state.quizIndex]);
         // 復習リストに追加
         ref
             .read(homeReviewScreenControllerProvider.notifier)
-            .addTrueFalseQuiz(trueFalseQuiz[state.quizIndex]);
+            .addTrueFalseQuiz(quiz[state.quizIndex]);
 
         state = state.copyWith(isJudge: false, incorrectList: incorrectList);
       }
@@ -91,26 +89,26 @@ class QuizTrueFalseScreenController
     //×ボタンを押した時
     else {
       //正解の時
-      if (randomAns != trueFalseQuiz[state.quizIndex].ans) {
+      if (randomAns != quiz[state.quizIndex].ans) {
         //正解リストに追加
-        correctList.add(trueFalseQuiz[state.quizIndex]);
+        correctList.add(quiz[state.quizIndex]);
         //スコア反映
         state = state.copyWith(isJudge: true, correctList: correctList);
       }
       //不正解の時
       else {
-        trueFalseQuiz[state.quizIndex] = TrueFalseQuiz(
-          quizId: trueFalseQuiz[state.quizIndex].quizId,
-          question: trueFalseQuiz[state.quizIndex].question,
-          ans: trueFalseQuiz[state.quizIndex].ans,
-          choices: trueFalseQuiz[state.quizIndex].choices,
+        quiz[state.quizIndex] = Quiz(
+          quizId: quiz[state.quizIndex].quizId,
+          question: quiz[state.quizIndex].question,
+          ans: quiz[state.quizIndex].ans,
+          choices: quiz[state.quizIndex].choices,
           isWeak: true,
         );
-        incorrectList.add(trueFalseQuiz[state.quizIndex]);
+        incorrectList.add(quiz[state.quizIndex]);
         //復習リストに追加
         ref
             .read(homeReviewScreenControllerProvider.notifier)
-            .addTrueFalseQuiz(trueFalseQuiz[state.quizIndex]);
+            .addTrueFalseQuiz(quiz[state.quizIndex]);
 
         state = state.copyWith(isJudge: false, incorrectList: incorrectList);
       }
@@ -130,7 +128,7 @@ class QuizTrueFalseScreenController
   ///次の問題
   void nextQuiz() {
     final quizIndex = state.quizIndex;
-    if (quizIndex == arguments.item.trueFalseQuiz.length - 1) {
+    if (quizIndex == arguments.item.quiz.length - 1) {
       print("終了!");
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
     } else {
@@ -160,7 +158,7 @@ class QuizTrueFalseScreenController
     final correctList = [...state.correctList];
     //チェックした時
     if (!correctList[index].isWeak) {
-      correctList[index] = TrueFalseQuiz(
+      correctList[index] = Quiz(
         quizId: correctList[index].quizId,
         question: correctList[index].question,
         ans: correctList[index].ans,
@@ -174,7 +172,7 @@ class QuizTrueFalseScreenController
     }
     //チェックしてない時
     else {
-      correctList[index] = TrueFalseQuiz(
+      correctList[index] = Quiz(
         quizId: correctList[index].quizId,
         question: correctList[index].question,
         ans: correctList[index].ans,
@@ -193,7 +191,7 @@ class QuizTrueFalseScreenController
     final incorrectList = [...state.incorrectList];
     //チェックした時
     if (!incorrectList[index].isWeak) {
-      incorrectList[index] = TrueFalseQuiz(
+      incorrectList[index] = Quiz(
         quizId: incorrectList[index].quizId,
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,
@@ -207,7 +205,7 @@ class QuizTrueFalseScreenController
     }
     //チェックしてない時
     else {
-      incorrectList[index] = TrueFalseQuiz(
+      incorrectList[index] = Quiz(
         quizId: incorrectList[index].quizId,
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,

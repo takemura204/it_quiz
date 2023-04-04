@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_review/home_review_screen_controller.dart';
-import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:substring_highlight/substring_highlight.dart';

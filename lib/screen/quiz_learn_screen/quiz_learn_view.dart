@@ -75,8 +75,8 @@ class _AnsQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.learnQuiz[quizIndex].question,
-      term: arguments.item.learnQuiz[quizIndex].ans,
+      text: arguments.item.quiz[quizIndex].question,
+      term: arguments.item.quiz[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -101,10 +101,10 @@ class _ConfirmQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.learnQuiz[quizIndex].question.replaceAll(
-          arguments.item.learnQuiz[quizIndex].ans,
-          I18n().hideText(arguments.item.learnQuiz[quizIndex].ans)),
-      term: arguments.item.learnQuiz[quizIndex].ans,
+      text: arguments.item.quiz[quizIndex].question.replaceAll(
+          arguments.item.quiz[quizIndex].ans,
+          I18n().hideText(arguments.item.quiz[quizIndex].ans)),
+      term: arguments.item.quiz[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -138,7 +138,7 @@ class _QuizProgress extends ConsumerWidget {
             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           Text(
-            "/" + arguments.item.learnQuiz.length.toString(),
+            "/" + arguments.item.quiz.length.toString(),
             style: const TextStyle(fontSize: 18),
           ),
           const Spacer(),
@@ -195,7 +195,7 @@ class _ConfirmButton extends ConsumerWidget {
                           .watch(quizLearnScreenControllerProvider)
                           .knowRememberQuestions
                           .length ==
-                      arguments.item.learnQuiz.length) {
+                      arguments.item.quiz.length) {
                     // context.showScreen(QuizLearnResultScreenArguments(
                     //   item: arguments.item,
                     //   quizStyle: I18n().styleLeanQuiz,

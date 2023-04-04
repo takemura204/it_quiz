@@ -44,7 +44,7 @@ class _AnsRateView extends ConsumerWidget {
               ),
               const Text("/"),
               AutoSizeText(
-                arguments.item.trueFalseQuiz.length.toString(),
+                arguments.item.quiz.length.toString(),
                 style: context.texts.bodyText1,
                 minFontSize: 16,
               ),
@@ -122,7 +122,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                               width: context.width * 0.65,
                               child: SubstringHighlight(
                                 text: incorrectList[index].question,
-                                term: arguments.item.trueFalseQuiz[index].ans,
+                                term: arguments.item.quiz[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
                                   fontWeight: FontWeight.w500,

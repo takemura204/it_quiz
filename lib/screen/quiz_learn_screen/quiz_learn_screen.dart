@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/controller/extension_resource.dart';
+import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/lang/initial_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';

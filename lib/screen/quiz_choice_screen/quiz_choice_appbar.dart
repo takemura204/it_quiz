@@ -11,7 +11,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: Text(arguments.item.title),
+      title: Text(arguments.item.group),
       leading: CustomBackButton(
         iconSize: 25,
         onPressed: () => ref

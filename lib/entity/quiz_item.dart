@@ -5,18 +5,30 @@ class QuizItem {
   final String title; //問題タイトル
   final bool isCompleted; //全て問題を解いたか
   ///問題形式
-  final List<LearnQuiz> learnQuiz; //学習形式
-  final List<ChoiceQuiz> choiceQuiz; //4択形式
-  final List<TrueFalseQuiz> trueFalseQuiz; //○×問題
+  final List<Quiz> quiz; //学習形式
 
   const QuizItem({
     required this.id,
     required this.group,
     required this.title,
     required this.isCompleted,
-    required this.learnQuiz,
-    required this.choiceQuiz,
-    required this.trueFalseQuiz,
+    required this.quiz,
+  });
+}
+
+class Quiz {
+  final int quizId; //問題番号
+  final String question; //問題文
+  final String ans; //答え
+  final bool isWeak; //問題を知っているか？
+  final List<String> choices; //選択肢
+
+  const Quiz({
+    required this.quizId,
+    required this.question,
+    required this.ans,
+    required this.isWeak,
+    required this.choices,
   });
 }
 

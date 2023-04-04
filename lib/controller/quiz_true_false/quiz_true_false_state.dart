@@ -14,8 +14,8 @@ class QuizTrueFalseScreenState with _$QuizTrueFalseScreenState {
     @Default(0) final int quizIndex, //問題番号
     @Default("") final String randomAns, //ランダムな答え
     @Default([]) final List<String> choices, //選択肢
-    @Default([]) final List<TrueFalseQuiz> correctList, //正解リスト
-    @Default([]) final List<TrueFalseQuiz> incorrectList, //不正解リスト
-    @Default([]) final List<TrueFalseQuiz> reviewList, //復習リスト
+    @Default([]) final List<Quiz> correctList, //正解リスト
+    @Default([]) final List<Quiz> incorrectList, //不正解リスト
+    @Default([]) final List<Quiz> reviewList, //復習リスト
   }) = _Create;
 }

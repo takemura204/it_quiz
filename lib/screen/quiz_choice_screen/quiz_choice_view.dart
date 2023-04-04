@@ -18,7 +18,7 @@ class _QuizStyleTitle extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: Text(
-                arguments.quizStyle,
+                arguments.item.title,
                 style: context.texts.subtitle1,
               ),
             ),
@@ -72,12 +72,12 @@ class _AnsQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
     final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
     return SubstringHighlight(
-      text: arguments.item.choiceQuiz[quizIndex].question,
-      term: arguments.item.choiceQuiz[quizIndex].ans,
+      text: arguments.item.quiz[quizIndex].question,
+      term: arguments.item.quiz[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
-        fontSize: 21,
+        fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
@@ -99,14 +99,14 @@ class _QuizQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.choiceQuiz[quizIndex].question.replaceAll(
-          arguments.item.choiceQuiz[quizIndex].ans,
-          I18n().hideText(arguments.item.choiceQuiz[quizIndex].ans)),
-      term: arguments.item.choiceQuiz[quizIndex].ans,
+      text: arguments.item.quiz[quizIndex].question.replaceAll(
+          arguments.item.quiz[quizIndex].ans,
+          I18n().hideText(arguments.item.quiz[quizIndex].ans)),
+      term: arguments.item.quiz[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
-        fontSize: 21,
+        fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
@@ -134,13 +134,13 @@ class _QuizProgress extends ConsumerWidget {
           AutoSizeText(
             quizIndex.toString(),
             style: context.texts.subtitle1,
-            minFontSize: 20,
+            minFontSize: 22,
           ),
           const Text("/"),
           AutoSizeText(
-            arguments.item.choiceQuiz.length.toString(),
+            arguments.item.quiz.length.toString(),
             style: context.texts.bodyText1,
-            minFontSize: 16,
+            minFontSize: 18,
           ),
           const Spacer(),
         ],
@@ -184,13 +184,17 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[0],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: (choices[0] ==
+                                    arguments.item.quiz[quizIndex].ans)
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            fontSize: context.width * 0.05,
                             color: (choices[0] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                    arguments.item.quiz[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
-                        : null,
+                        : TextStyle(fontSize: context.width * 0.05),
                   ),
                 ),
               ),
@@ -212,13 +216,17 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[1],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: (choices[1] ==
+                                    arguments.item.quiz[quizIndex].ans)
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            fontSize: context.width * 0.05,
                             color: (choices[1] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                    arguments.item.quiz[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
-                        : null,
+                        : TextStyle(fontSize: context.width * 0.05),
                   ),
                 ),
               ),
@@ -243,13 +251,17 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[2],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: (choices[2] ==
+                                    arguments.item.quiz[quizIndex].ans)
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            fontSize: context.width * 0.05,
                             color: (choices[2] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                    arguments.item.quiz[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
-                        : null,
+                        : TextStyle(fontSize: context.width * 0.05),
                   ),
                 ),
               ),
@@ -271,13 +283,17 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[3],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: (choices[3] ==
+                                    arguments.item.quiz[quizIndex].ans)
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            fontSize: context.width * 0.05,
                             color: (choices[3] ==
-                                    arguments.item.choiceQuiz[quizIndex].ans)
+                                    arguments.item.quiz[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
-                        : null,
+                        : TextStyle(fontSize: context.width * 0.05),
                   ),
                 ),
               ),

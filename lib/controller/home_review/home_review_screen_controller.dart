@@ -40,80 +40,72 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   ///一問一答リストに追加
-  void addLearnQuiz(LearnQuiz learnQuiz) {
-    final learnList = [...state.learnList];
+  void addLearnQuiz(Quiz quiz) {
+    final quizList = [...state.quizList];
     final reviewItem = state.reviewItem;
     //同じクイズの時
-    if (learnList.any((x) => x.question == learnQuiz.question)) {
+    if (quizList.any((x) => x.question == quiz.question)) {
       return;
     }
 
-    learnList.add(learnQuiz);
+    quizList.add(quiz);
 
     //reviewLearnQuizに追加
     reviewItem[0] = QuizItem(
       id: 1,
       group: "rememberQuestions",
       title: "一問一答で復習する",
-      learnQuiz: learnList,
-      choiceQuiz: [],
-      trueFalseQuiz: [],
+      quiz: quizList,
       isCompleted: false,
     );
 
-    state = state.copyWith(learnList: learnList, reviewItem: reviewItem);
+    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
   }
 
   ///一問一答リストから削除
-  void removeLearnQuiz(LearnQuiz learnQuiz) {
-    final learnList = [...state.learnList];
+  void removeLearnQuiz(Quiz quiz) {
+    final quizList = [...state.quizList];
     final reviewItem = state.reviewItem;
-    learnList
-        .remove(learnList.where((x) => x.question == learnQuiz.question).first);
-    reviewItem[0] = QuizItem(
+    quizList.remove(quizList.where((x) => x.question == quiz.question).first);
+    reviewItem[0] = const QuizItem(
       id: 1,
       group: "rememberQuestions",
       title: "一問一答で復習する",
       isCompleted: false,
-      learnQuiz: learnList,
-      choiceQuiz: [],
-      trueFalseQuiz: [],
+      quiz: [],
     );
 
-    state = state.copyWith(learnList: learnList, reviewItem: reviewItem);
+    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
   }
 
   ///4択リストに追加
-  void addChoiceQuiz(ChoiceQuiz choiceQuiz) {
-    final choiceList = [...state.choiceList];
+  void addChoiceQuiz(Quiz quiz) {
+    final quizList = [...state.quizList];
     final reviewItem = state.reviewItem;
 
     //同じクイズの時
-    if (choiceList.any((x) => x.question == choiceQuiz.question)) {
+    if (quizList.any((x) => x.question == quiz.question)) {
       return;
     }
 
-    choiceList.add(choiceQuiz);
+    quizList.add(quiz);
 
     reviewItem[1] = QuizItem(
       id: 2,
       group: "LearnQuiz",
       title: "一問一答で復習する",
       isCompleted: false,
-      learnQuiz: [],
-      choiceQuiz: choiceList,
-      trueFalseQuiz: [],
+      quiz: quizList,
     );
 
-    state = state.copyWith(choiceList: choiceList, reviewItem: reviewItem);
+    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
   }
 
   ///4択リストから削除
-  void removeChoiceQuiz(ChoiceQuiz choiceQuiz) {
-    final choiceList = [...state.choiceList];
+  void removeChoiceQuiz(Quiz quiz) {
+    final quizList = [...state.quizList];
     final reviewItem = state.reviewItem;
-    choiceList.remove(
-        choiceList.where((x) => x.question == choiceQuiz.question).first);
+    quizList.remove(quizList.where((x) => x.question == quiz.question).first);
 
     //選択問題に追加
     reviewItem[1] = QuizItem(
@@ -121,48 +113,42 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       group: "ChoiceQuiz",
       title: "一問一答で復習する",
       isCompleted: false,
-      learnQuiz: [],
-      choiceQuiz: choiceList,
-      trueFalseQuiz: [],
+      quiz: quizList,
     );
 
-    state = state.copyWith(choiceList: choiceList, reviewItem: reviewItem);
+    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
   }
 
   ///○×クイズに追加
-  void addTrueFalseQuiz(TrueFalseQuiz trueFalseQuiz) {
-    final trueFalseList = [...state.trueFalseList];
+  void addTrueFalseQuiz(Quiz quiz) {
+    final quizList = [...state.quizList];
     final reviewItem = state.reviewItem;
 
     //同じクイズの時
-    if (trueFalseList.any((x) => x.question == trueFalseQuiz.question)) {
+    if (quizList.any((x) => x.question == quiz.question)) {
       return;
     }
 
-    trueFalseList.add(trueFalseQuiz);
+    quizList.add(quiz);
 
     reviewItem[2] = QuizItem(
       id: 3,
       group: "TrueFalseQuiz",
       title: "○×問題で復習する",
       isCompleted: false,
-      learnQuiz: [],
-      choiceQuiz: [],
-      trueFalseQuiz: trueFalseList,
+      quiz: quizList,
     );
 
-    print(reviewItem[2].trueFalseQuiz.length);
+    print(reviewItem[2].quiz.length);
 
-    state =
-        state.copyWith(trueFalseList: trueFalseList, reviewItem: reviewItem);
+    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
   }
 
   ///○×クイズから削除
-  void removeTrueFalseQuiz(TrueFalseQuiz trueFalseQuiz) {
-    final trueFalseList = [...state.trueFalseList];
+  void removeTrueFalseQuiz(Quiz quiz) {
+    final quizList = [...state.quizList];
     final reviewItem = state.reviewItem;
-    trueFalseList.remove(
-        trueFalseList.where((x) => x.question == trueFalseQuiz.question).first);
+    quizList.remove(quizList.where((x) => x.question == quiz.question).first);
 
     //○×問題から削除
     reviewItem[2] = QuizItem(
@@ -170,35 +156,27 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       group: "TrueFalseQuiz",
       title: "○×問題で復習する",
       isCompleted: false,
-      learnQuiz: [],
-      choiceQuiz: [],
-      trueFalseQuiz: trueFalseList,
+      quiz: quizList,
     );
 
-    print(reviewItem[2].trueFalseQuiz.length);
-    state =
-        state.copyWith(trueFalseList: trueFalseList, reviewItem: reviewItem);
+    print(reviewItem[2].quiz.length);
+    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
   }
 }
 
 const reviewLearnQuiz = QuizItem(
-  id: 1,
-  group: "LearnQuiz",
-  title: "一問一答で復習する",
-  isCompleted: false,
-  learnQuiz: [],
-  choiceQuiz: [],
-  trueFalseQuiz: [],
-);
+    id: 1,
+    group: "LearnQuiz",
+    title: "一問一答で復習する",
+    isCompleted: false,
+    quiz: []);
 
 const reviewChoiceQuiz = QuizItem(
   id: 2,
   group: "ChoiceQuiz",
   title: "選択問題で復習する",
   isCompleted: false,
-  learnQuiz: [],
-  choiceQuiz: [],
-  trueFalseQuiz: [],
+  quiz: [],
 );
 
 const reviewTrueFalseQuiz = QuizItem(
@@ -206,7 +184,5 @@ const reviewTrueFalseQuiz = QuizItem(
   group: "TrueFalseQuiz",
   title: "○×問題で復習する",
   isCompleted: false,
-  learnQuiz: [],
-  choiceQuiz: [],
-  trueFalseQuiz: [],
+  quiz: [],
 );

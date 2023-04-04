@@ -46,7 +46,7 @@ class _AnsRateView extends ConsumerWidget {
               ),
               const Text("/"),
               AutoSizeText(
-                arguments.item.learnQuiz.length.toString(),
+                arguments.item.quiz.length.toString(),
                 style: context.texts.bodyText1,
                 minFontSize: 16,
               ),
@@ -127,7 +127,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                     .watch(quizLearnScreenControllerProvider)
                                     .knowRememberQuestions[index]
                                     .question,
-                                term: arguments.item.learnQuiz[index].ans,
+                                term: arguments.item.quiz[index].ans,
                                 textStyle: TextStyle(
                                   color: context.colors.dark54,
                                   fontWeight: FontWeight.w500,
@@ -206,7 +206,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           arguments.item.title,
                           style: context.texts.subtitle1,
@@ -224,9 +224,9 @@ class _KnowQuestionsView extends ConsumerWidget {
                 itemCount: knowRememberQuestions.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      height: context.height * 0.1,
+                      height: context.height * 0.15,
                       child: Card(
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(
@@ -236,24 +236,23 @@ class _KnowQuestionsView extends ConsumerWidget {
                           children: [
                             const Gap(5),
                             Container(
-                              width: context.width * 0.08,
+                              width: context.width * 0.1,
                               child: Icon(
-                                Icons.trip_origin_outlined,
-                                size: 40,
+                                Icons.circle_outlined,
+                                size: context.width * 0.1,
                                 color: Colors.greenAccent.shade200,
                               ),
                             ),
-                            const Gap(20),
+                            const Spacer(),
                             Container(
                               width: context.width * 0.65,
                               child: SubstringHighlight(
                                 text: knowRememberQuestions[index].question,
-                                term: arguments.item.learnQuiz[index].ans,
+                                term: arguments.item.quiz[index].ans,
                                 textStyle: TextStyle(
-                                  color: context.colors.dark54,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                maxLines: 3,
+                                    color: context.colors.dark54,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: context.width * 0.04),
                                 overflow: TextOverflow.clip,
                                 textStyleHighlight: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -279,9 +278,9 @@ class _KnowQuestionsView extends ConsumerWidget {
                                     knowRememberQuestions[index].isWeak
                                         ? Icons.check_box_outlined
                                         : Icons.check_box_outline_blank,
-                                    size: 30,
+                                    size: context.width * 0.08,
                                     color: knowRememberQuestions[index].isWeak
-                                        ? context.colors.main50
+                                        ? context.colors.main50.withOpacity(0.6)
                                         : context.colors.dark26,
                                   ),
                                 ),

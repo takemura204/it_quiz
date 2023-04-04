@@ -23,8 +23,8 @@ class _$QuizLearnScreenStateTearOff {
       bool isResultScreen = false,
       int quizIndex = 0,
       int lapIndex = 0,
-      List<LearnQuiz> knowRememberQuestions = const [],
-      List<LearnQuiz> unKnowRememberQuestions = const []}) {
+      List<Quiz> knowRememberQuestions = const [],
+      List<Quiz> unKnowRememberQuestions = const []}) {
     return _Create(
       isAnsView: isAnsView,
       isResultScreen: isResultScreen,
@@ -45,10 +45,8 @@ mixin _$QuizLearnScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
-  List<LearnQuiz> get knowRememberQuestions =>
-      throw _privateConstructorUsedError;
-  List<LearnQuiz> get unKnowRememberQuestions =>
-      throw _privateConstructorUsedError;
+  List<Quiz> get knowRememberQuestions => throw _privateConstructorUsedError;
+  List<Quiz> get unKnowRememberQuestions => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizLearnScreenStateCopyWith<QuizLearnScreenState> get copyWith =>
@@ -65,8 +63,8 @@ abstract class $QuizLearnScreenStateCopyWith<$Res> {
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<LearnQuiz> knowRememberQuestions,
-      List<LearnQuiz> unKnowRememberQuestions});
+      List<Quiz> knowRememberQuestions,
+      List<Quiz> unKnowRememberQuestions});
 }
 
 /// @nodoc
@@ -107,11 +105,11 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res>
       knowRememberQuestions: knowRememberQuestions == freezed
           ? _value.knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
+              as List<Quiz>,
       unKnowRememberQuestions: unKnowRememberQuestions == freezed
           ? _value.unKnowRememberQuestions
           : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
+              as List<Quiz>,
     ));
   }
 }
@@ -127,8 +125,8 @@ abstract class _$CreateCopyWith<$Res>
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<LearnQuiz> knowRememberQuestions,
-      List<LearnQuiz> unKnowRememberQuestions});
+      List<Quiz> knowRememberQuestions,
+      List<Quiz> unKnowRememberQuestions});
 }
 
 /// @nodoc
@@ -170,11 +168,11 @@ class __$CreateCopyWithImpl<$Res>
       knowRememberQuestions: knowRememberQuestions == freezed
           ? _value.knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
+              as List<Quiz>,
       unKnowRememberQuestions: unKnowRememberQuestions == freezed
           ? _value.unKnowRememberQuestions
           : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
+              as List<Quiz>,
     ));
   }
 }
@@ -205,10 +203,10 @@ class _$_Create extends _Create {
   final int lapIndex;
   @JsonKey()
   @override //何周目
-  final List<LearnQuiz> knowRememberQuestions;
+  final List<Quiz> knowRememberQuestions;
   @JsonKey()
   @override
-  final List<LearnQuiz> unKnowRememberQuestions;
+  final List<Quiz> unKnowRememberQuestions;
 
   @override
   String toString() {
@@ -253,8 +251,8 @@ abstract class _Create extends QuizLearnScreenState {
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<LearnQuiz> knowRememberQuestions,
-      List<LearnQuiz> unKnowRememberQuestions}) = _$_Create;
+      List<Quiz> knowRememberQuestions,
+      List<Quiz> unKnowRememberQuestions}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -266,9 +264,9 @@ abstract class _Create extends QuizLearnScreenState {
   @override //問題番号
   int get lapIndex;
   @override //何周目
-  List<LearnQuiz> get knowRememberQuestions;
+  List<Quiz> get knowRememberQuestions;
   @override
-  List<LearnQuiz> get unKnowRememberQuestions;
+  List<Quiz> get unKnowRememberQuestions;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
