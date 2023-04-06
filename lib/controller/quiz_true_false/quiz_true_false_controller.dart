@@ -36,7 +36,9 @@ class QuizTrueFalseScreenController
   ///選択肢を混ぜる
   void shuffleAns() {
     final choices = [...state.choices]..clear();
-    final argumentsChoices = [...arguments.item.quiz[state.quizIndex].choices];
+    final argumentsChoices = [
+      ...arguments.item.quizList[state.quizIndex].choices
+    ];
     argumentsChoices.shuffle();
     choices.addAll(argumentsChoices);
 
@@ -55,7 +57,7 @@ class QuizTrueFalseScreenController
   ///クイズ判定
   void judgementQuiz(bool ans) {
     final randomAns = state.choices.first;
-    final quiz = [...arguments.item.quiz];
+    final quiz = [...arguments.item.quizList];
     final correctList = [...state.correctList];
     final incorrectList = [...state.incorrectList];
 
@@ -63,6 +65,14 @@ class QuizTrueFalseScreenController
     if (ans) {
       //正解の時
       if (randomAns == quiz[state.quizIndex].ans) {
+        quiz[state.quizIndex] = Quiz(
+          quizId: quiz[state.quizIndex].quizId,
+          question: quiz[state.quizIndex].question,
+          ans: quiz[state.quizIndex].ans,
+          choices: quiz[state.quizIndex].choices,
+          isJudge: true,
+          isWeak: false,
+        );
         //正解リストに追加
         correctList.add(quiz[state.quizIndex]);
         //スコア反映
@@ -75,6 +85,7 @@ class QuizTrueFalseScreenController
           question: quiz[state.quizIndex].question,
           ans: quiz[state.quizIndex].ans,
           choices: quiz[state.quizIndex].choices,
+          isJudge: false,
           isWeak: true,
         );
         incorrectList.add(quiz[state.quizIndex]);
@@ -102,6 +113,7 @@ class QuizTrueFalseScreenController
           question: quiz[state.quizIndex].question,
           ans: quiz[state.quizIndex].ans,
           choices: quiz[state.quizIndex].choices,
+          isJudge: false,
           isWeak: true,
         );
         incorrectList.add(quiz[state.quizIndex]);
@@ -128,7 +140,7 @@ class QuizTrueFalseScreenController
   ///次の問題
   void nextQuiz() {
     final quizIndex = state.quizIndex;
-    if (quizIndex == arguments.item.quiz.length - 1) {
+    if (quizIndex == arguments.item.quizList.length - 1) {
       print("終了!");
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
     } else {
@@ -163,6 +175,7 @@ class QuizTrueFalseScreenController
         question: correctList[index].question,
         ans: correctList[index].ans,
         isWeak: true,
+        isJudge: correctList[index].isJudge,
         choices: correctList[index].choices,
       );
       //復習リストに追加
@@ -177,6 +190,7 @@ class QuizTrueFalseScreenController
         question: correctList[index].question,
         ans: correctList[index].ans,
         isWeak: false,
+        isJudge: correctList[index].isJudge,
         choices: correctList[index].choices,
       );
       ref
@@ -196,6 +210,7 @@ class QuizTrueFalseScreenController
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,
         isWeak: true,
+        isJudge: incorrectList[index].isJudge,
         choices: incorrectList[index].choices,
       );
       //復習リストに追加
@@ -210,6 +225,7 @@ class QuizTrueFalseScreenController
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,
         isWeak: false,
+        isJudge: incorrectList[index].isJudge,
         choices: incorrectList[index].choices,
       );
 

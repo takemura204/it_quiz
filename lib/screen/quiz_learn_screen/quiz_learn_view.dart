@@ -75,8 +75,8 @@ class _AnsQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.quiz[quizIndex].question,
-      term: arguments.item.quiz[quizIndex].ans,
+      text: arguments.item.quizList[quizIndex].question,
+      term: arguments.item.quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -101,10 +101,10 @@ class _ConfirmQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.quiz[quizIndex].question.replaceAll(
-          arguments.item.quiz[quizIndex].ans,
-          I18n().hideText(arguments.item.quiz[quizIndex].ans)),
-      term: arguments.item.quiz[quizIndex].ans,
+      text: arguments.item.quizList[quizIndex].question.replaceAll(
+          arguments.item.quizList[quizIndex].ans,
+          I18n().hideText(arguments.item.quizList[quizIndex].ans)),
+      term: arguments.item.quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -138,7 +138,7 @@ class _QuizProgress extends ConsumerWidget {
             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           Text(
-            "/" + arguments.item.quiz.length.toString(),
+            "/" + arguments.item.quizList.length.toString(),
             style: const TextStyle(fontSize: 18),
           ),
           const Spacer(),
@@ -195,7 +195,7 @@ class _ConfirmButton extends ConsumerWidget {
                           .watch(quizLearnScreenControllerProvider)
                           .knowRememberQuestions
                           .length ==
-                      arguments.item.quiz.length) {
+                      arguments.item.quizList.length) {
                     // context.showScreen(QuizLearnResultScreenArguments(
                     //   item: arguments.item,
                     //   quizStyle: I18n().styleLeanQuiz,

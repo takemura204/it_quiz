@@ -35,7 +35,9 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///選択肢を混ぜる
   void shuffleChoice() {
     final choices = [...state.choices]..clear();
-    final argumentsChoices = [...arguments.item.quiz[state.quizIndex].choices];
+    final argumentsChoices = [
+      ...arguments.item.quizList[state.quizIndex].choices
+    ];
     argumentsChoices.shuffle();
     choices.addAll(argumentsChoices);
     state = state.copyWith(choices: choices);
@@ -51,34 +53,42 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ判定
   void judgementQuiz(String choice) {
-    final choiceQuiz = [...arguments.item.quiz];
+    final quizList = arguments.item.quizList;
     final correctList = [...state.correctList];
-    final incorrectList = [...state.incorrectList];
 
     //正解
-    if (choice == choiceQuiz[state.quizIndex].ans) {
+    if (choice == quizList[state.quizIndex].ans) {
+      quizList[state.quizIndex] = Quiz(
+        quizId: quizList[state.quizIndex].quizId,
+        question: quizList[state.quizIndex].question,
+        ans: quizList[state.quizIndex].ans,
+        isJudge: true, //正解
+        isWeak: false, //苦手リスト除外
+        choices: quizList[state.quizIndex].choices,
+      );
       //スコア反映
-      correctList.add(choiceQuiz[state.quizIndex]);
-      state = state.copyWith(isJudge: true, correctList: correctList);
+      correctList.add(quizList[state.quizIndex]);
+      state = state.copyWith(isJudge: true, correctList: quizList);
     }
     //不正解
     else {
-      choiceQuiz[state.quizIndex] = Quiz(
-        quizId: choiceQuiz[state.quizIndex].quizId,
-        question: choiceQuiz[state.quizIndex].question,
-        ans: choiceQuiz[state.quizIndex].ans,
-        choices: choiceQuiz[state.quizIndex].choices,
-        isWeak: true,
+      quizList[state.quizIndex] = Quiz(
+        quizId: quizList[state.quizIndex].quizId,
+        question: quizList[state.quizIndex].question,
+        ans: quizList[state.quizIndex].ans,
+        choices: quizList[state.quizIndex].choices,
+        isJudge: false, //不正解
+        isWeak: true, //苦手リスト追加
       );
-      incorrectList.add(choiceQuiz[state.quizIndex]);
+      correctList.add(quizList[state.quizIndex]);
       //復習リストに追加
       ref
           .read(homeReviewScreenControllerProvider.notifier)
-          .addChoiceQuiz(choiceQuiz[state.quizIndex]);
+          .addChoiceQuiz(quizList[state.quizIndex]);
 
-      state = state.copyWith(isJudge: false, incorrectList: incorrectList);
+      state = state.copyWith(isJudge: false, correctList: quizList);
     }
-    print(correctList.length);
+    print(quizList[state.quizIndex].isJudge);
   }
 
   ///正解表示
@@ -94,8 +104,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///次の問題
   void nextQuiz() {
     final quizIndex = state.quizIndex;
-    if (quizIndex == arguments.item.quiz.length - 1) {
-      print("終了!");
+    if (quizIndex == arguments.item.quizList.length - 1) {
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
     } else {
       state = state.copyWith(quizIndex: quizIndex + 1);
@@ -119,68 +128,40 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     state = state.copyWith(isResultScreen: !state.isResultScreen);
   }
 
-  ///チェックボックス切り替え(正解リスト)
+  ///チェックボックス切り替え
   void tapCorrectCheckBox(int index) {
-    final correctList = [...state.correctList];
+    final quizList = arguments.item.quizList;
+
     //チェックした時
-    if (!correctList[index].isWeak) {
-      correctList[index] = Quiz(
-        quizId: correctList[index].quizId,
-        question: correctList[index].question,
-        ans: correctList[index].ans,
-        choices: correctList[index].choices,
+    if (!quizList[index].isWeak) {
+      quizList[index] = Quiz(
+        quizId: quizList[index].quizId,
+        question: quizList[index].question,
+        ans: quizList[index].ans,
         isWeak: true,
+        isJudge: quizList[index].isJudge,
+        choices: quizList[index].choices,
       );
       //復習リストに追加
       ref
           .read(homeReviewScreenControllerProvider.notifier)
-          .addChoiceQuiz(correctList[index]);
+          .addLearnQuiz(quizList[index]);
     }
-    //チェックしてない時
+    //チェック外した時
     else {
-      correctList[index] = Quiz(
-        quizId: correctList[index].quizId,
-        question: correctList[index].question,
-        ans: correctList[index].ans,
-        choices: correctList[index].choices,
+      quizList[index] = Quiz(
+        quizId: quizList[index].quizId,
+        question: quizList[index].question,
+        ans: quizList[index].ans,
         isWeak: false,
+        isJudge: quizList[index].isJudge,
+        choices: quizList[index].choices,
       );
-    }
-    state = state.copyWith(correctList: correctList);
-  }
-
-  ///チェックボックス切り替え(不正解リスト)
-  void tapIncorrectCheckBox(int index) {
-    final incorrectList = [...state.incorrectList];
-    //チェックした時
-    if (!incorrectList[index].isWeak) {
-      incorrectList[index] = Quiz(
-        quizId: incorrectList[index].quizId,
-        question: incorrectList[index].question,
-        ans: incorrectList[index].ans,
-        choices: incorrectList[index].choices,
-        isWeak: true,
-      );
-      //復習リストに追加
+      //復習リストから除外
       ref
           .read(homeReviewScreenControllerProvider.notifier)
-          .addChoiceQuiz(incorrectList[index]);
+          .removeLearnQuiz(quizList[index]);
     }
-    //チェックしてない時
-    else {
-      incorrectList[index] = Quiz(
-        quizId: incorrectList[index].quizId,
-        question: incorrectList[index].question,
-        ans: incorrectList[index].ans,
-        choices: incorrectList[index].choices,
-        isWeak: false,
-      );
-
-      //復習リストから削除
-      ref
-          .read(homeReviewScreenControllerProvider.notifier)
-          .removeChoiceQuiz(incorrectList[index]);
-    }
-    state = state.copyWith(incorrectList: incorrectList);
+    state = state.copyWith(correctList: quizList);
   }
 }

@@ -72,8 +72,8 @@ class _AnsQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
     final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
     return SubstringHighlight(
-      text: arguments.item.quiz[quizIndex].question,
-      term: arguments.item.quiz[quizIndex].ans,
+      text: arguments.item.quizList[quizIndex].question,
+      term: arguments.item.quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -99,10 +99,10 @@ class _QuizQuestion extends ConsumerWidget {
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.quiz[quizIndex].question.replaceAll(
-          arguments.item.quiz[quizIndex].ans,
-          I18n().hideText(arguments.item.quiz[quizIndex].ans)),
-      term: arguments.item.quiz[quizIndex].ans,
+      text: arguments.item.quizList[quizIndex].question.replaceAll(
+          arguments.item.quizList[quizIndex].ans,
+          I18n().hideText(arguments.item.quizList[quizIndex].ans)),
+      term: arguments.item.quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -138,7 +138,7 @@ class _QuizProgress extends ConsumerWidget {
           ),
           const Text("/"),
           AutoSizeText(
-            arguments.item.quiz.length.toString(),
+            arguments.item.quizList.length.toString(),
             style: context.texts.bodyText1,
             minFontSize: 18,
           ),
@@ -185,12 +185,12 @@ class _SelectAnswer extends ConsumerWidget {
                     style: isAnsView
                         ? TextStyle(
                             fontWeight: (choices[0] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? FontWeight.bold
                                 : FontWeight.normal,
                             fontSize: context.width * 0.05,
                             color: (choices[0] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
@@ -217,12 +217,12 @@ class _SelectAnswer extends ConsumerWidget {
                     style: isAnsView
                         ? TextStyle(
                             fontWeight: (choices[1] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? FontWeight.bold
                                 : FontWeight.normal,
                             fontSize: context.width * 0.05,
                             color: (choices[1] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
@@ -252,12 +252,12 @@ class _SelectAnswer extends ConsumerWidget {
                     style: isAnsView
                         ? TextStyle(
                             fontWeight: (choices[2] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? FontWeight.bold
                                 : FontWeight.normal,
                             fontSize: context.width * 0.05,
                             color: (choices[2] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
@@ -284,12 +284,12 @@ class _SelectAnswer extends ConsumerWidget {
                     style: isAnsView
                         ? TextStyle(
                             fontWeight: (choices[3] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? FontWeight.bold
                                 : FontWeight.normal,
                             fontSize: context.width * 0.05,
                             color: (choices[3] ==
-                                    arguments.item.quiz[quizIndex].ans)
+                                    arguments.item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )

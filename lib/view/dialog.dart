@@ -164,7 +164,7 @@ class SelectQuizDialog extends ConsumerWidget {
 
                         ///問題数
                         Text(
-                          "/" + item.quiz.length.toString(),
+                          "/" + item.quizList.length.toString(),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

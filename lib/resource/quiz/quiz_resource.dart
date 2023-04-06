@@ -7,6 +7,7 @@ final List<Quiz> quiz1 = [
     question: '1 + 1 = 2',
     ans: '2',
     isWeak: false,
+    isJudge: false,
     choices: ["1", "2", "3", "4"],
   ),
   const Quiz(
@@ -14,6 +15,7 @@ final List<Quiz> quiz1 = [
     question: '更新世は氷河時代とも呼ばれる',
     ans: '氷河時代',
     isWeak: false,
+    isJudge: false,
     choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
   ),
   const Quiz(
@@ -21,6 +23,7 @@ final List<Quiz> quiz1 = [
     question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',
     isWeak: false,
+    isJudge: false,
     choices: [
       "グアニン",
       'タンペム',
@@ -36,6 +39,7 @@ final List<Quiz> quiz2 = [
     question: '1 + 2 = 3',
     ans: '3',
     isWeak: false,
+    isJudge: false,
     choices: ["1", "2", "3", "4"],
   ),
   const Quiz(
@@ -43,6 +47,7 @@ final List<Quiz> quiz2 = [
     question: '更新世は氷河時代とも呼ばれる',
     ans: '氷河時代',
     isWeak: false,
+    isJudge: false,
     choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
   ),
   const Quiz(
@@ -50,6 +55,7 @@ final List<Quiz> quiz2 = [
     question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',
     isWeak: false,
+    isJudge: false,
     choices: [
       "グアニン",
       'タンペム',
@@ -62,6 +68,7 @@ final List<Quiz> quiz2 = [
     question: '更新世は氷河時代とも呼ばれる',
     ans: '氷河時代',
     isWeak: false,
+    isJudge: false,
     choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
   ),
   const Quiz(
@@ -69,6 +76,7 @@ final List<Quiz> quiz2 = [
     question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',
     isWeak: false,
+    isJudge: false,
     choices: [
       "グアニン",
       'タンペム',
