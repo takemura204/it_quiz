@@ -73,10 +73,11 @@ class _AnsQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
+    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
 
     return SubstringHighlight(
-      text: arguments.item.quizList[quizIndex].question,
-      term: arguments.item.quizList[quizIndex].ans,
+      text: quizList[quizIndex].question,
+      term: quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -99,12 +100,11 @@ class _ConfirmQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
-
+    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
     return SubstringHighlight(
-      text: arguments.item.quizList[quizIndex].question.replaceAll(
-          arguments.item.quizList[quizIndex].ans,
-          I18n().hideText(arguments.item.quizList[quizIndex].ans)),
-      term: arguments.item.quizList[quizIndex].ans,
+      text: quizList[quizIndex].question.replaceAll(
+          quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
+      term: quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -127,7 +127,7 @@ class _QuizProgress extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex =
         ref.watch(quizLearnScreenControllerProvider).quizIndex + 1;
-
+    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
     return Container(
       height: context.height * 0.05,
       child: Row(
@@ -138,7 +138,7 @@ class _QuizProgress extends ConsumerWidget {
             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           Text(
-            "/" + arguments.item.quizList.length.toString(),
+            "/" + quizList.length.toString(),
             style: const TextStyle(fontSize: 18),
           ),
           const Spacer(),
@@ -156,7 +156,7 @@ class _ConfirmButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAns = ref.watch(quizLearnScreenControllerProvider).isAnsView;
-
+    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
     return isAns
         ? Row(
             ///知らない
@@ -195,7 +195,7 @@ class _ConfirmButton extends ConsumerWidget {
                           .watch(quizLearnScreenControllerProvider)
                           .knowRememberQuestions
                           .length ==
-                      arguments.item.quizList.length) {
+                      quizList.length) {
                     // context.showScreen(QuizLearnResultScreenArguments(
                     //   item: arguments.item,
                     //   quizStyle: I18n().styleLeanQuiz,

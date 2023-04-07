@@ -23,6 +23,7 @@ class _$QuizLearnScreenStateTearOff {
       bool isResultScreen = false,
       int quizIndex = 0,
       int lapIndex = 0,
+      List<Quiz> quizList = const [],
       List<Quiz> knowRememberQuestions = const [],
       List<Quiz> unKnowRememberQuestions = const []}) {
     return _Create(
@@ -30,6 +31,7 @@ class _$QuizLearnScreenStateTearOff {
       isResultScreen: isResultScreen,
       quizIndex: quizIndex,
       lapIndex: lapIndex,
+      quizList: quizList,
       knowRememberQuestions: knowRememberQuestions,
       unKnowRememberQuestions: unKnowRememberQuestions,
     );
@@ -45,6 +47,7 @@ mixin _$QuizLearnScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
+  List<Quiz> get quizList => throw _privateConstructorUsedError;
   List<Quiz> get knowRememberQuestions => throw _privateConstructorUsedError;
   List<Quiz> get unKnowRememberQuestions => throw _privateConstructorUsedError;
 
@@ -63,6 +66,7 @@ abstract class $QuizLearnScreenStateCopyWith<$Res> {
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
+      List<Quiz> quizList,
       List<Quiz> knowRememberQuestions,
       List<Quiz> unKnowRememberQuestions});
 }
@@ -82,6 +86,7 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res>
     Object? isResultScreen = freezed,
     Object? quizIndex = freezed,
     Object? lapIndex = freezed,
+    Object? quizList = freezed,
     Object? knowRememberQuestions = freezed,
     Object? unKnowRememberQuestions = freezed,
   }) {
@@ -102,6 +107,10 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      quizList: quizList == freezed
+          ? _value.quizList
+          : quizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
       knowRememberQuestions: knowRememberQuestions == freezed
           ? _value.knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
@@ -125,6 +134,7 @@ abstract class _$CreateCopyWith<$Res>
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
+      List<Quiz> quizList,
       List<Quiz> knowRememberQuestions,
       List<Quiz> unKnowRememberQuestions});
 }
@@ -145,6 +155,7 @@ class __$CreateCopyWithImpl<$Res>
     Object? isResultScreen = freezed,
     Object? quizIndex = freezed,
     Object? lapIndex = freezed,
+    Object? quizList = freezed,
     Object? knowRememberQuestions = freezed,
     Object? unKnowRememberQuestions = freezed,
   }) {
@@ -165,6 +176,10 @@ class __$CreateCopyWithImpl<$Res>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      quizList: quizList == freezed
+          ? _value.quizList
+          : quizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
       knowRememberQuestions: knowRememberQuestions == freezed
           ? _value.knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
@@ -185,6 +200,7 @@ class _$_Create extends _Create {
       this.isResultScreen = false,
       this.quizIndex = 0,
       this.lapIndex = 0,
+      this.quizList = const [],
       this.knowRememberQuestions = const [],
       this.unKnowRememberQuestions = const []})
       : super._();
@@ -203,6 +219,9 @@ class _$_Create extends _Create {
   final int lapIndex;
   @JsonKey()
   @override //何周目
+  final List<Quiz> quizList;
+  @JsonKey()
+  @override
   final List<Quiz> knowRememberQuestions;
   @JsonKey()
   @override
@@ -210,7 +229,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, knowRememberQuestions: $knowRememberQuestions, unKnowRememberQuestions: $unKnowRememberQuestions)';
+    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, quizList: $quizList, knowRememberQuestions: $knowRememberQuestions, unKnowRememberQuestions: $unKnowRememberQuestions)';
   }
 
   @override
@@ -223,6 +242,7 @@ class _$_Create extends _Create {
                 .equals(other.isResultScreen, isResultScreen) &&
             const DeepCollectionEquality().equals(other.quizIndex, quizIndex) &&
             const DeepCollectionEquality().equals(other.lapIndex, lapIndex) &&
+            const DeepCollectionEquality().equals(other.quizList, quizList) &&
             const DeepCollectionEquality()
                 .equals(other.knowRememberQuestions, knowRememberQuestions) &&
             const DeepCollectionEquality().equals(
@@ -236,6 +256,7 @@ class _$_Create extends _Create {
       const DeepCollectionEquality().hash(isResultScreen),
       const DeepCollectionEquality().hash(quizIndex),
       const DeepCollectionEquality().hash(lapIndex),
+      const DeepCollectionEquality().hash(quizList),
       const DeepCollectionEquality().hash(knowRememberQuestions),
       const DeepCollectionEquality().hash(unKnowRememberQuestions));
 
@@ -251,6 +272,7 @@ abstract class _Create extends QuizLearnScreenState {
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
+      List<Quiz> quizList,
       List<Quiz> knowRememberQuestions,
       List<Quiz> unKnowRememberQuestions}) = _$_Create;
   const _Create._() : super._();
@@ -264,6 +286,8 @@ abstract class _Create extends QuizLearnScreenState {
   @override //問題番号
   int get lapIndex;
   @override //何周目
+  List<Quiz> get quizList;
+  @override
   List<Quiz> get knowRememberQuestions;
   @override
   List<Quiz> get unKnowRememberQuestions;
