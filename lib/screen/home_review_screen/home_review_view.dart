@@ -82,7 +82,6 @@ class _ChoiceQuizButton extends ConsumerWidget {
       onTap: () {
         context.showScreen(QuizChoiceScreenArguments(
           item: ref.watch(homeReviewScreenControllerProvider).reviewItem[1],
-          quizStyle: I18n().reviewChoiceQuiz,
         ).generateRoute());
       },
       child: Container(

@@ -22,10 +22,10 @@ class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizLearnScreen(this),
+            QuizLearnScreen(item),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => QuizLearnScreen(this)),
+              MaterialPageRoute(builder: (context) => QuizLearnScreen(item)),
               context,
               animation,
               secondaryAnimation,
@@ -38,11 +38,9 @@ class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
 class QuizChoiceScreenArguments
     with _NoParamsMixin
     implements IScreenArguments {
-  const QuizChoiceScreenArguments(
-      {required this.item, required this.quizStyle});
+  const QuizChoiceScreenArguments({required this.item});
 
   final QuizItem item;
-  final String quizStyle;
 
   @override
   String get screenNameFormat => "/quiz_choice";
@@ -50,10 +48,10 @@ class QuizChoiceScreenArguments
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizChoiceScreen(this),
+            QuizChoiceScreen(item),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => QuizChoiceScreen(this)),
+              MaterialPageRoute(builder: (context) => QuizChoiceScreen(item)),
               context,
               animation,
               secondaryAnimation,

@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
+import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../entity/quiz_item.dart';
-import '../../screen/screen_argument.dart';
+import '../../entity/quiz.dart';
 import '../home_review/home_review_screen_controller.dart';
 
 final quizLearnScreenControllerProvider =
@@ -13,13 +13,13 @@ final quizLearnScreenControllerProvider =
 
 class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     with LocatorMixin {
-  QuizLearnScreenController({required this.ref, required this.arguments})
+  QuizLearnScreenController({required this.ref, required this.item})
       : super(const QuizLearnScreenState()) {
     initState();
   }
 
   final Ref ref;
-  QuizLearnScreenArguments arguments;
+  QuizItem item;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   void addQuizList() {
     final quizList = [...state.quizList];
-    quizList.addAll(arguments.item.quizList);
+    quizList.addAll(item.quizList);
     state = state.copyWith(quizList: quizList);
   }
 
@@ -97,14 +97,13 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     final unKnowRememberQuestions = state.unKnowRememberQuestions;
     //問題が終わったが,「知ってる」リストに全て含まれていない場合
     if (quizIndex == quizList.length - 1 &&
-        knowRememberQuestions.length != arguments.item.quizList.length) {
+        knowRememberQuestions.length != item.quizList.length) {
       quizList.clear();
       quizList.addAll(unKnowRememberQuestions);
       state = state.copyWith(quizIndex: 0, lapIndex: lapIndex + 1);
     }
     //問題が終わり,「知ってる」リストに全て含まれている場合
-    else if (state.knowRememberQuestions.length ==
-        arguments.item.quizList.length) {
+    else if (state.knowRememberQuestions.length == item.quizList.length) {
       state = state.copyWith(
           quizIndex: 0, lapIndex: lapIndex + 1, isResultScreen: true);
     }
@@ -116,7 +115,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   ///知らないボタンを押した時の苦手リストに追加
   void switchUnKnowState() {
-    final quiz = [...arguments.item.quizList];
+    final quiz = [...item.quizList];
     if (!quiz[state.quizIndex].isWeak) {
       quiz[state.quizIndex] = Quiz(
         quizId: quiz[state.quizIndex].quizId,
@@ -133,7 +132,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   ///知らないボタンを押した時の苦手リストから解除
   void switchKnowState() {
-    final quizList = [...arguments.item.quizList];
+    final quizList = [...item.quizList];
     if (!quizList[state.quizIndex].isWeak) {
       quizList[state.quizIndex] = Quiz(
         quizId: quizList[state.quizIndex].quizId,

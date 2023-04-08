@@ -1,9 +1,9 @@
 part of 'quiz_choice_screen.dart';
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _AppBar(this.arguments);
+  const _AppBar(this.item);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -11,7 +11,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: Text(arguments.item.group),
+      title: Text(item.group),
       leading: CustomBackButton(
         iconSize: 25,
         onPressed: () => ref

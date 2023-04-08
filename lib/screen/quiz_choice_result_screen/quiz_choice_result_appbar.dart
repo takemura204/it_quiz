@@ -3,7 +3,7 @@ part of 'quiz_choice_result_screen.dart';
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.arguments);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizItem arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

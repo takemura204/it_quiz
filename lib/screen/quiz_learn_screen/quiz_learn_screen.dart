@@ -2,10 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/lang/initial_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
-import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
@@ -18,8 +18,8 @@ part 'quiz_learn_body.dart';
 part 'quiz_learn_view.dart';
 
 class QuizLearnScreen extends ConsumerWidget {
-  const QuizLearnScreen(this.arguments);
-  final QuizLearnScreenArguments arguments;
+  const QuizLearnScreen(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,17 +28,17 @@ class QuizLearnScreen extends ConsumerWidget {
         quizLearnScreenControllerProvider.overrideWithProvider(
             StateNotifierProvider<QuizLearnScreenController,
                 QuizLearnScreenState>(
-          (ref) => QuizLearnScreenController(ref: ref, arguments: arguments),
+          (ref) => QuizLearnScreenController(ref: ref, item: item),
         )),
       ],
-      child: _Scaffold(arguments),
+      child: _Scaffold(item),
     );
   }
 }
 
 class _Scaffold extends ConsumerWidget {
-  const _Scaffold(this.arguments);
-  final QuizLearnScreenArguments arguments;
+  const _Scaffold(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,12 +48,12 @@ class _Scaffold extends ConsumerWidget {
     return isResultScreen
 
         ///結果画面
-        ? QuizLearnResultScreen(arguments)
+        ? QuizLearnResultScreen(item)
 
         ///クイズ画面
         : Scaffold(
-            appBar: _AppBar(arguments),
-            body: _Body(arguments),
+            appBar: _AppBar(item),
+            body: _Body(item),
           );
   }
 }

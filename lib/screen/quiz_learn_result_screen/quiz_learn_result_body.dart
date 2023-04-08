@@ -1,9 +1,9 @@
 part of 'quiz_learn_result_screen.dart';
 
 class _Body extends ConsumerWidget {
-  const _Body(this.arguments);
+  const _Body(this.item);
 
-  final QuizLearnScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -12,7 +12,7 @@ class _Body extends ConsumerWidget {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              _QuizResultView(arguments),
+              _QuizResultView(item),
             ],
           ),
         ),

@@ -3,7 +3,7 @@ part of 'quiz_choice_result_screen.dart';
 class _Body extends ConsumerWidget {
   const _Body(this.arguments);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizItem arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

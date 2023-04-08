@@ -1,9 +1,9 @@
 part of 'quiz_choice_screen.dart';
 
 class _Body extends ConsumerWidget {
-  const _Body(this.arguments);
+  const _Body(this.item);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -12,7 +12,7 @@ class _Body extends ConsumerWidget {
         Column(
           children: [
             ///問題形式タイトル
-            _QuizStyleTitle(arguments),
+            _QuizStyleTitle(item),
             const Spacer(),
 
             ///問題画面
@@ -25,10 +25,10 @@ class _Body extends ConsumerWidget {
                 child: Column(
                   children: [
                     ///問題文
-                    _Question(arguments),
+                    _Question(item),
 
                     ///進捗状況
-                    _QuizProgress(arguments),
+                    _QuizProgress(item),
                   ],
                 ),
               ),
@@ -36,10 +36,10 @@ class _Body extends ConsumerWidget {
             const Spacer(),
 
             ///選択肢
-            _SelectAnswer(arguments),
+            _SelectAnswer(item),
           ],
         ),
-        _JudgeIcon(arguments),
+        _JudgeIcon(item),
       ],
     );
   }

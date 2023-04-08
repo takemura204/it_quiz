@@ -1,4 +1,4 @@
-import '../../../entity/quiz_item.dart';
+import '../../entity/quiz.dart';
 
 ///問題一覧
 final List<Quiz> quiz1 = [

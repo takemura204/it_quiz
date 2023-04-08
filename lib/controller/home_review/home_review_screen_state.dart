@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entity/quiz.dart';
 import '../../entity/quiz_item.dart';
 
 part 'home_review_screen_state.freezed.dart';

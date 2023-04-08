@@ -44,8 +44,8 @@ class LoginErrorBar extends ConsumerWidget {
 }
 
 ///問題一覧Bar
-class StudyListBar extends ConsumerWidget {
-  const StudyListBar(
+class QuizItemBar extends ConsumerWidget {
+  const QuizItemBar(
       {required this.title, required this.onTap, required this.isCompleted});
   final String title;
   final VoidCallback? onTap;

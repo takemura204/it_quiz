@@ -1,13 +1,13 @@
 part of 'quiz_choice_result_screen.dart';
 
 class _QuizResultView extends ConsumerWidget {
-  const _QuizResultView(this.arguments);
+  const _QuizResultView(this.item);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = arguments.item.quizList;
+    final quizList = item.quizList;
     return Column(
       children: quizList.isEmpty
           ? []
@@ -23,7 +23,7 @@ class _QuizResultView extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         child: Text(
-                          arguments.item.title,
+                          item.title,
                           style: context.texts.subtitle1,
                         ),
                       ),

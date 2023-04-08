@@ -2,8 +2,8 @@ part of 'quiz_choice_screen.dart';
 
 ///問題形式表示
 class _QuizStyleTitle extends ConsumerWidget {
-  const _QuizStyleTitle(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const _QuizStyleTitle(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,7 +18,7 @@ class _QuizStyleTitle extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: Text(
-                arguments.item.title,
+                item.title,
                 style: context.texts.subtitle1,
               ),
             ),
@@ -32,9 +32,9 @@ class _QuizStyleTitle extends ConsumerWidget {
 
 ///問題文
 class _Question extends ConsumerWidget {
-  const _Question(this.arguments);
+  const _Question(this.item);
 
-  final QuizChoiceScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,7 +54,7 @@ class _Question extends ConsumerWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
             },
-            child: isAns ? _AnsQuestion(arguments) : _QuizQuestion(arguments),
+            child: isAns ? _AnsQuestion(item) : _QuizQuestion(item),
           ),
           const Spacer(),
         ],
@@ -64,16 +64,16 @@ class _Question extends ConsumerWidget {
 }
 
 class _AnsQuestion extends ConsumerWidget {
-  const _AnsQuestion(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const _AnsQuestion(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
     final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
     return SubstringHighlight(
-      text: arguments.item.quizList[quizIndex].question,
-      term: arguments.item.quizList[quizIndex].ans,
+      text: item.quizList[quizIndex].question,
+      term: item.quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -91,18 +91,18 @@ class _AnsQuestion extends ConsumerWidget {
 }
 
 class _QuizQuestion extends ConsumerWidget {
-  const _QuizQuestion(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const _QuizQuestion(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: arguments.item.quizList[quizIndex].question.replaceAll(
-          arguments.item.quizList[quizIndex].ans,
-          I18n().hideText(arguments.item.quizList[quizIndex].ans)),
-      term: arguments.item.quizList[quizIndex].ans,
+      text: item.quizList[quizIndex].question.replaceAll(
+          item.quizList[quizIndex].ans,
+          I18n().hideText(item.quizList[quizIndex].ans)),
+      term: item.quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -118,8 +118,8 @@ class _QuizQuestion extends ConsumerWidget {
 }
 
 class _QuizProgress extends ConsumerWidget {
-  const _QuizProgress(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const _QuizProgress(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -138,7 +138,7 @@ class _QuizProgress extends ConsumerWidget {
           ),
           const Text("/"),
           AutoSizeText(
-            arguments.item.quizList.length.toString(),
+            item.quizList.length.toString(),
             style: context.texts.bodyText1,
             minFontSize: 18,
           ),
@@ -150,8 +150,8 @@ class _QuizProgress extends ConsumerWidget {
 }
 
 class _SelectAnswer extends ConsumerWidget {
-  const _SelectAnswer(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const _SelectAnswer(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -184,13 +184,12 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[0],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: (choices[0] ==
-                                    arguments.item.quizList[quizIndex].ans)
-                                ? FontWeight.bold
-                                : FontWeight.normal,
+                            fontWeight:
+                                (choices[0] == item.quizList[quizIndex].ans)
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                             fontSize: context.width * 0.05,
-                            color: (choices[0] ==
-                                    arguments.item.quizList[quizIndex].ans)
+                            color: (choices[0] == item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
@@ -216,13 +215,12 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[1],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: (choices[1] ==
-                                    arguments.item.quizList[quizIndex].ans)
-                                ? FontWeight.bold
-                                : FontWeight.normal,
+                            fontWeight:
+                                (choices[1] == item.quizList[quizIndex].ans)
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                             fontSize: context.width * 0.05,
-                            color: (choices[1] ==
-                                    arguments.item.quizList[quizIndex].ans)
+                            color: (choices[1] == item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
@@ -251,13 +249,12 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[2],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: (choices[2] ==
-                                    arguments.item.quizList[quizIndex].ans)
-                                ? FontWeight.bold
-                                : FontWeight.normal,
+                            fontWeight:
+                                (choices[2] == item.quizList[quizIndex].ans)
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                             fontSize: context.width * 0.05,
-                            color: (choices[2] ==
-                                    arguments.item.quizList[quizIndex].ans)
+                            color: (choices[2] == item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
@@ -283,13 +280,12 @@ class _SelectAnswer extends ConsumerWidget {
                     choices[3],
                     style: isAnsView
                         ? TextStyle(
-                            fontWeight: (choices[3] ==
-                                    arguments.item.quizList[quizIndex].ans)
-                                ? FontWeight.bold
-                                : FontWeight.normal,
+                            fontWeight:
+                                (choices[3] == item.quizList[quizIndex].ans)
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                             fontSize: context.width * 0.05,
-                            color: (choices[3] ==
-                                    arguments.item.quizList[quizIndex].ans)
+                            color: (choices[3] == item.quizList[quizIndex].ans)
                                 ? Colors.green.withOpacity(0.7)
                                 : context.colors.main50.withOpacity(0.5),
                           )
@@ -306,8 +302,8 @@ class _SelectAnswer extends ConsumerWidget {
 }
 
 class _JudgeIcon extends ConsumerWidget {
-  const _JudgeIcon(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const _JudgeIcon(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

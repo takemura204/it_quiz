@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kentei_quiz/entity/quiz_item.dart';
 
-import '../../entity/quiz_item.dart';
+import '../../entity/quiz.dart';
 
 part 'quiz_choice_screen_state.freezed.dart';
 
@@ -16,5 +17,6 @@ class QuizChoiceScreenState with _$QuizChoiceScreenState {
     @Default([]) final List<Quiz> correctList, //正解リスト
     @Default([]) final List<Quiz> incorrectList, //不正解リスト
     @Default([]) final List<Quiz> reviewList, //復習リスト
+    @Default(QuizItem()) final QuizItem quizItem, //復習リスト
   }) = _Create;
 }

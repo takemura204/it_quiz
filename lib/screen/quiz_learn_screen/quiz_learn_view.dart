@@ -2,9 +2,9 @@ part of 'quiz_learn_screen.dart';
 
 ///問題形式表示
 class _QuizStyleTitle extends ConsumerWidget {
-  const _QuizStyleTitle(this.arguments);
+  const _QuizStyleTitle(this.item);
 
-  final QuizLearnScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +19,7 @@ class _QuizStyleTitle extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: Text(
-                arguments.item.title,
+                item.title,
                 style: context.texts.subtitle1,
               ),
             ),
@@ -32,9 +32,9 @@ class _QuizStyleTitle extends ConsumerWidget {
 }
 
 class _Question extends ConsumerWidget {
-  const _Question(this.arguments);
+  const _Question(this.item);
 
-  final QuizLearnScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,8 +55,7 @@ class _Question extends ConsumerWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
             },
-            child:
-                isAns ? _AnsQuestion(arguments) : _ConfirmQuestion(arguments),
+            child: isAns ? _AnsQuestion(item) : _ConfirmQuestion(item),
           ),
           const Spacer(),
         ],
@@ -67,8 +66,8 @@ class _Question extends ConsumerWidget {
 
 ///穴埋め問題(答え)
 class _AnsQuestion extends ConsumerWidget {
-  const _AnsQuestion(this.arguments);
-  final QuizLearnScreenArguments arguments;
+  const _AnsQuestion(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -94,8 +93,8 @@ class _AnsQuestion extends ConsumerWidget {
 
 ///穴埋め問題
 class _ConfirmQuestion extends ConsumerWidget {
-  const _ConfirmQuestion(this.arguments);
-  final QuizLearnScreenArguments arguments;
+  const _ConfirmQuestion(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -120,8 +119,8 @@ class _ConfirmQuestion extends ConsumerWidget {
 }
 
 class _QuizProgress extends ConsumerWidget {
-  const _QuizProgress(this.arguments);
-  final QuizLearnScreenArguments arguments;
+  const _QuizProgress(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -149,9 +148,9 @@ class _QuizProgress extends ConsumerWidget {
 }
 
 class _ConfirmButton extends ConsumerWidget {
-  const _ConfirmButton(this.arguments);
+  const _ConfirmButton(this.item);
 
-  final QuizLearnScreenArguments arguments;
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -241,8 +240,8 @@ class _ConfirmButton extends ConsumerWidget {
 }
 
 class _LapInfoBar extends ConsumerWidget {
-  const _LapInfoBar(this.arguments);
-  final QuizLearnScreenArguments arguments;
+  const _LapInfoBar(this.item);
+  final QuizItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

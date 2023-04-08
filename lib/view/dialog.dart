@@ -153,10 +153,14 @@ class SelectQuizDialog extends ConsumerWidget {
                     Row(
                       children: [
                         Text(
-                          "0",
+                          item.quizList
+                              .where((x) => x.isJudge == true)
+                              .toList()
+                              .length
+                              .toString(),
 
                           ///正解数
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -241,7 +245,6 @@ class SelectQuizDialog extends ConsumerWidget {
                       onPressed: () => context.showScreen(
                         QuizChoiceScreenArguments(
                           item: item,
-                          quizStyle: I18n().styleChoiceQuiz,
                         ).generateRoute(),
                       ),
                     ),

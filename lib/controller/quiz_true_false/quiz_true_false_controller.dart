@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_true_false/quiz_true_false_state.dart';
-import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../entity/quiz.dart';
 import '../../screen/screen_argument.dart';
 import '../home_review/home_review_screen_controller.dart';
 
