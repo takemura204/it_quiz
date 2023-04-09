@@ -16,11 +16,6 @@ class AppController extends StateNotifier<AppState> with LocatorMixin {
 
   final Ref ref;
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   Future<T?> showScreen<T>(IScreenArguments<T> arguments) async {
     final navigator = state.navigator;
 

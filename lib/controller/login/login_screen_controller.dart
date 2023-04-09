@@ -27,11 +27,6 @@ class LoginScreenController extends StateNotifier<LoginScreenState>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   ///リセット
   void reset() {
     emailController.clear();

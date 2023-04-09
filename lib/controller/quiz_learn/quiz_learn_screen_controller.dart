@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
-import 'package:kentei_quiz/entity/quiz_item.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../entity/quiz.dart';
 import '../home_review/home_review_screen_controller.dart';
+import '../quiz/quiz_state.dart';
 
 final quizLearnScreenControllerProvider =
     StateNotifierProvider<QuizLearnScreenController, QuizLearnScreenState>(
@@ -19,17 +19,12 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   final Ref ref;
-  QuizItem item;
+  QuizItemState item;
 
   @override
   void initState() {
     addQuizList();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   void addQuizList() {
@@ -117,7 +112,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   void switchUnKnowState() {
     final quiz = [...item.quizList];
     if (!quiz[state.quizIndex].isWeak) {
-      quiz[state.quizIndex] = Quiz(
+      quiz[state.quizIndex] = QuizState(
         quizId: quiz[state.quizIndex].quizId,
         question: quiz[state.quizIndex].question,
         ans: quiz[state.quizIndex].ans,
@@ -134,7 +129,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   void switchKnowState() {
     final quizList = [...item.quizList];
     if (!quizList[state.quizIndex].isWeak) {
-      quizList[state.quizIndex] = Quiz(
+      quizList[state.quizIndex] = QuizState(
         quizId: quizList[state.quizIndex].quizId,
         question: quizList[state.quizIndex].question,
         ans: quizList[state.quizIndex].ans,
@@ -199,64 +194,37 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   ///知っている問題のチェックボックス切り替え
   void switchKnowCheckBox(int index) {
-    final knowRememberQuestions = [...state.knowRememberQuestions];
+    final quizList = item.quizList;
     //チェックした時
-    if (!knowRememberQuestions[index].isWeak) {
-      knowRememberQuestions[index] = Quiz(
-        quizId: knowRememberQuestions[index].quizId,
-        question: knowRememberQuestions[index].question,
-        ans: knowRememberQuestions[index].ans,
+    if (!quizList[index].isWeak) {
+      quizList[index] = QuizState(
+        quizId: quizList[index].quizId,
+        question: quizList[index].question,
+        ans: quizList[index].ans,
         isWeak: true,
-        isJudge: knowRememberQuestions[state.quizIndex].isJudge,
-        choices: knowRememberQuestions[index].choices,
+        isJudge: quizList[index].isJudge,
+        choices: quizList[index].choices,
       );
       //復習リストに追加
       ref
           .read(homeReviewScreenControllerProvider.notifier)
-          .addLearnQuiz(knowRememberQuestions[index]);
+          .addLearnQuiz(quizList[index]);
     }
-    //チェックしてない時
+    //チェック外した時
     else {
-      knowRememberQuestions[index] = Quiz(
-        quizId: knowRememberQuestions[index].quizId,
-        question: knowRememberQuestions[index].question,
-        ans: knowRememberQuestions[index].ans,
+      quizList[index] = QuizState(
+        quizId: quizList[index].quizId,
+        question: quizList[index].question,
+        ans: quizList[index].ans,
         isWeak: false,
-        isJudge: knowRememberQuestions[state.quizIndex].isJudge,
-        choices: knowRememberQuestions[index].choices,
+        isJudge: quizList[index].isJudge,
+        choices: quizList[index].choices,
       );
       //復習リストから除外
       ref
           .read(homeReviewScreenControllerProvider.notifier)
-          .removeLearnQuiz(knowRememberQuestions[index]);
+          .removeLearnQuiz(quizList[index]);
     }
-    state = state.copyWith(knowRememberQuestions: knowRememberQuestions);
-  }
-
-  ///知らない問題のチェックボックス切り替え
-  void switchUnKnowCheckBox(int index) {
-    final unknowRememberQuestions = [...state.unKnowRememberQuestions];
-    if (!unknowRememberQuestions[index].isWeak) {
-      unknowRememberQuestions[index] = Quiz(
-        quizId: unknowRememberQuestions[index].quizId,
-        question: unknowRememberQuestions[index].question,
-        ans: unknowRememberQuestions[index].ans,
-        isWeak: true,
-        isJudge: unknowRememberQuestions[state.quizIndex].isJudge,
-        choices: unknowRememberQuestions[index].choices,
-      );
-    } else if (unknowRememberQuestions[index].isWeak) {
-      unknowRememberQuestions[index] = Quiz(
-        quizId: unknowRememberQuestions[index].quizId,
-        question: unknowRememberQuestions[index].question,
-        ans: unknowRememberQuestions[index].ans,
-        isWeak: false,
-        isJudge: unknowRememberQuestions[state.quizIndex].isJudge,
-        choices: unknowRememberQuestions[index].choices,
-      );
-    } else {
-      return;
-    }
-    state = state.copyWith(unKnowRememberQuestions: unknowRememberQuestions);
+    state = state.copyWith(quizList: quizList);
   }
 }

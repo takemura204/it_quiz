@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_study_screen_state.dart';
 
@@ -12,36 +12,12 @@ part of 'home_study_screen_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$HomeStudyScreenStateTearOff {
-  const _$HomeStudyScreenStateTearOff();
-
-  _Create call(
-      {int quizIndex = 0,
-      List<QuizItem> quizItemList = const [],
-      QuizItem? quizItem,
-      int score = 0,
-      bool isCompleted = false}) {
-    return _Create(
-      quizIndex: quizIndex,
-      quizItemList: quizItemList,
-      quizItem: quizItem,
-      score: score,
-      isCompleted: isCompleted,
-    );
-  }
-}
-
-/// @nodoc
-const $HomeStudyScreenState = _$HomeStudyScreenStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$HomeStudyScreenState {
   int get quizIndex => throw _privateConstructorUsedError; //クイズ番号
-  List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
-  QuizItem? get quizItem => throw _privateConstructorUsedError;
+  List<QuizItemState> get quizItemList => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError; //正解数
   bool get isCompleted => throw _privateConstructorUsedError;
 
@@ -54,123 +30,98 @@ mixin _$HomeStudyScreenState {
 abstract class $HomeStudyScreenStateCopyWith<$Res> {
   factory $HomeStudyScreenStateCopyWith(HomeStudyScreenState value,
           $Res Function(HomeStudyScreenState) then) =
-      _$HomeStudyScreenStateCopyWithImpl<$Res>;
+      _$HomeStudyScreenStateCopyWithImpl<$Res, HomeStudyScreenState>;
+  @useResult
   $Res call(
       {int quizIndex,
-      List<QuizItem> quizItemList,
-      QuizItem? quizItem,
+      List<QuizItemState> quizItemList,
       int score,
       bool isCompleted});
-
-  $QuizItemCopyWith<$Res>? get quizItem;
 }
 
 /// @nodoc
-class _$HomeStudyScreenStateCopyWithImpl<$Res>
+class _$HomeStudyScreenStateCopyWithImpl<$Res,
+        $Val extends HomeStudyScreenState>
     implements $HomeStudyScreenStateCopyWith<$Res> {
   _$HomeStudyScreenStateCopyWithImpl(this._value, this._then);
 
-  final HomeStudyScreenState _value;
   // ignore: unused_field
-  final $Res Function(HomeStudyScreenState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quizIndex = freezed,
-    Object? quizItemList = freezed,
-    Object? quizItem = freezed,
-    Object? score = freezed,
-    Object? isCompleted = freezed,
+    Object? quizIndex = null,
+    Object? quizItemList = null,
+    Object? score = null,
+    Object? isCompleted = null,
   }) {
     return _then(_value.copyWith(
-      quizIndex: quizIndex == freezed
+      quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      quizItemList: quizItemList == freezed
+      quizItemList: null == quizItemList
           ? _value.quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      quizItem: quizItem == freezed
-          ? _value.quizItem
-          : quizItem // ignore: cast_nullable_to_non_nullable
-              as QuizItem?,
-      score: score == freezed
+              as List<QuizItemState>,
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
-      isCompleted: isCompleted == freezed
+      isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
-  }
-
-  @override
-  $QuizItemCopyWith<$Res>? get quizItem {
-    if (_value.quizItem == null) {
-      return null;
-    }
-
-    return $QuizItemCopyWith<$Res>(_value.quizItem!, (value) {
-      return _then(_value.copyWith(quizItem: value));
-    });
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CreateCopyWith<$Res>
+abstract class _$$_CreateCopyWith<$Res>
     implements $HomeStudyScreenStateCopyWith<$Res> {
-  factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
-      __$CreateCopyWithImpl<$Res>;
+  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
+      __$$_CreateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int quizIndex,
-      List<QuizItem> quizItemList,
-      QuizItem? quizItem,
+      List<QuizItemState> quizItemList,
       int score,
       bool isCompleted});
-
-  @override
-  $QuizItemCopyWith<$Res>? get quizItem;
 }
 
 /// @nodoc
-class __$CreateCopyWithImpl<$Res>
-    extends _$HomeStudyScreenStateCopyWithImpl<$Res>
-    implements _$CreateCopyWith<$Res> {
-  __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
-      : super(_value, (v) => _then(v as _Create));
+class __$$_CreateCopyWithImpl<$Res>
+    extends _$HomeStudyScreenStateCopyWithImpl<$Res, _$_Create>
+    implements _$$_CreateCopyWith<$Res> {
+  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+      : super(_value, _then);
 
-  @override
-  _Create get _value => super._value as _Create;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quizIndex = freezed,
-    Object? quizItemList = freezed,
-    Object? quizItem = freezed,
-    Object? score = freezed,
-    Object? isCompleted = freezed,
+    Object? quizIndex = null,
+    Object? quizItemList = null,
+    Object? score = null,
+    Object? isCompleted = null,
   }) {
-    return _then(_Create(
-      quizIndex: quizIndex == freezed
+    return _then(_$_Create(
+      quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      quizItemList: quizItemList == freezed
-          ? _value.quizItemList
+      quizItemList: null == quizItemList
+          ? _value._quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      quizItem: quizItem == freezed
-          ? _value.quizItem
-          : quizItem // ignore: cast_nullable_to_non_nullable
-              as QuizItem?,
-      score: score == freezed
+              as List<QuizItemState>,
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
-      isCompleted: isCompleted == freezed
+      isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -183,79 +134,80 @@ class __$CreateCopyWithImpl<$Res>
 class _$_Create implements _Create {
   const _$_Create(
       {this.quizIndex = 0,
-      this.quizItemList = const [],
-      this.quizItem,
+      final List<QuizItemState> quizItemList = const [],
       this.score = 0,
-      this.isCompleted = false});
+      this.isCompleted = false})
+      : _quizItemList = quizItemList;
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int quizIndex;
-  @JsonKey()
-  @override //クイズ番号
-  final List<QuizItem> quizItemList;
+//クイズ番号
+  final List<QuizItemState> _quizItemList;
+//クイズ番号
   @override
-  final QuizItem? quizItem;
   @JsonKey()
+  List<QuizItemState> get quizItemList {
+    if (_quizItemList is EqualUnmodifiableListView) return _quizItemList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quizItemList);
+  }
+
   @override
+  @JsonKey()
   final int score;
+//正解数
+  @override
   @JsonKey()
-  @override //正解数
   final bool isCompleted;
 
   @override
   String toString() {
-    return 'HomeStudyScreenState(quizIndex: $quizIndex, quizItemList: $quizItemList, quizItem: $quizItem, score: $score, isCompleted: $isCompleted)';
+    return 'HomeStudyScreenState(quizIndex: $quizIndex, quizItemList: $quizItemList, score: $score, isCompleted: $isCompleted)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Create &&
-            const DeepCollectionEquality().equals(other.quizIndex, quizIndex) &&
+            other is _$_Create &&
+            (identical(other.quizIndex, quizIndex) ||
+                other.quizIndex == quizIndex) &&
             const DeepCollectionEquality()
-                .equals(other.quizItemList, quizItemList) &&
-            const DeepCollectionEquality().equals(other.quizItem, quizItem) &&
-            const DeepCollectionEquality().equals(other.score, score) &&
-            const DeepCollectionEquality()
-                .equals(other.isCompleted, isCompleted));
+                .equals(other._quizItemList, _quizItemList) &&
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(quizIndex),
-      const DeepCollectionEquality().hash(quizItemList),
-      const DeepCollectionEquality().hash(quizItem),
-      const DeepCollectionEquality().hash(score),
-      const DeepCollectionEquality().hash(isCompleted));
+  int get hashCode => Object.hash(runtimeType, quizIndex,
+      const DeepCollectionEquality().hash(_quizItemList), score, isCompleted);
 
   @JsonKey(ignore: true)
   @override
-  _$CreateCopyWith<_Create> get copyWith =>
-      __$CreateCopyWithImpl<_Create>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
 abstract class _Create implements HomeStudyScreenState {
   const factory _Create(
-      {int quizIndex,
-      List<QuizItem> quizItemList,
-      QuizItem? quizItem,
-      int score,
-      bool isCompleted}) = _$_Create;
+      {final int quizIndex,
+      final List<QuizItemState> quizItemList,
+      final int score,
+      final bool isCompleted}) = _$_Create;
 
   @override
   int get quizIndex;
   @override //クイズ番号
-  List<QuizItem> get quizItemList;
-  @override
-  QuizItem? get quizItem;
+  List<QuizItemState> get quizItemList;
   @override
   int get score;
   @override //正解数
   bool get isCompleted;
   @override
   @JsonKey(ignore: true)
-  _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      throw _privateConstructorUsedError;
 }

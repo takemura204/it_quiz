@@ -8,7 +8,7 @@ import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../controller/auth/auth_screen_controller.dart';
-import '../entity/quiz_item.dart';
+import '../controller/quiz_item/quiz_item_state.dart';
 import 'button.dart';
 
 class ErrorDialog extends ConsumerWidget {
@@ -97,7 +97,7 @@ class ErrorDialog extends ConsumerWidget {
 ///クイズ選択
 class SelectQuizDialog extends ConsumerWidget {
   const SelectQuizDialog(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

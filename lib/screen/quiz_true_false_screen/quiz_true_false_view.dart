@@ -20,7 +20,7 @@ class _QuizStyleTitle extends ConsumerWidget {
               padding: const EdgeInsets.all(6.0),
               child: Text(
                 arguments.quizStyle,
-                style: context.texts.subtitle1,
+                style: context.texts.titleMedium,
               ),
             ),
             const Spacer(),
@@ -137,13 +137,13 @@ class _QuizProgress extends ConsumerWidget {
           const Spacer(),
           AutoSizeText(
             quizIndex.toString(),
-            style: context.texts.subtitle1,
+            style: context.texts.titleMedium,
             minFontSize: 20,
           ),
           const Text("/"),
           AutoSizeText(
             arguments.item.quizList.length.toString(),
-            style: context.texts.bodyText1,
+            style: context.texts.bodyLarge,
             minFontSize: 16,
           ),
           const Spacer(),

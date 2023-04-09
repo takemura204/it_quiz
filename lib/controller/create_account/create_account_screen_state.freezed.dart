@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'create_account_screen_state.dart';
 
@@ -12,38 +12,7 @@ part of 'create_account_screen_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CreateAccountScreenStateTearOff {
-  const _$CreateAccountScreenStateTearOff();
-
-  _Create call(
-      {int currentIndex = 0,
-      String email = '',
-      String password = '',
-      String errorText = '',
-      bool isObscure = true,
-      bool isValidEmail = false,
-      bool isSafetyPass = false,
-      bool isSucceeded = false,
-      bool hasError = false}) {
-    return _Create(
-      currentIndex: currentIndex,
-      email: email,
-      password: password,
-      errorText: errorText,
-      isObscure: isObscure,
-      isValidEmail: isValidEmail,
-      isSafetyPass: isSafetyPass,
-      isSucceeded: isSucceeded,
-      hasError: hasError,
-    );
-  }
-}
-
-/// @nodoc
-const $CreateAccountScreenState = _$CreateAccountScreenStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CreateAccountScreenState {
@@ -66,7 +35,8 @@ mixin _$CreateAccountScreenState {
 abstract class $CreateAccountScreenStateCopyWith<$Res> {
   factory $CreateAccountScreenStateCopyWith(CreateAccountScreenState value,
           $Res Function(CreateAccountScreenState) then) =
-      _$CreateAccountScreenStateCopyWithImpl<$Res>;
+      _$CreateAccountScreenStateCopyWithImpl<$Res, CreateAccountScreenState>;
+  @useResult
   $Res call(
       {int currentIndex,
       String email,
@@ -80,73 +50,77 @@ abstract class $CreateAccountScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CreateAccountScreenStateCopyWithImpl<$Res>
+class _$CreateAccountScreenStateCopyWithImpl<$Res,
+        $Val extends CreateAccountScreenState>
     implements $CreateAccountScreenStateCopyWith<$Res> {
   _$CreateAccountScreenStateCopyWithImpl(this._value, this._then);
 
-  final CreateAccountScreenState _value;
   // ignore: unused_field
-  final $Res Function(CreateAccountScreenState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
-    Object? errorText = freezed,
-    Object? isObscure = freezed,
-    Object? isValidEmail = freezed,
-    Object? isSafetyPass = freezed,
-    Object? isSucceeded = freezed,
-    Object? hasError = freezed,
+    Object? currentIndex = null,
+    Object? email = null,
+    Object? password = null,
+    Object? errorText = null,
+    Object? isObscure = null,
+    Object? isValidEmail = null,
+    Object? isSafetyPass = null,
+    Object? isSucceeded = null,
+    Object? hasError = null,
   }) {
     return _then(_value.copyWith(
-      currentIndex: currentIndex == freezed
+      currentIndex: null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      errorText: errorText == freezed
+      errorText: null == errorText
           ? _value.errorText
           : errorText // ignore: cast_nullable_to_non_nullable
               as String,
-      isObscure: isObscure == freezed
+      isObscure: null == isObscure
           ? _value.isObscure
           : isObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      isValidEmail: isValidEmail == freezed
+      isValidEmail: null == isValidEmail
           ? _value.isValidEmail
           : isValidEmail // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSafetyPass: isSafetyPass == freezed
+      isSafetyPass: null == isSafetyPass
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSucceeded: isSucceeded == freezed
+      isSucceeded: null == isSucceeded
           ? _value.isSucceeded
           : isSucceeded // ignore: cast_nullable_to_non_nullable
               as bool,
-      hasError: hasError == freezed
+      hasError: null == hasError
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CreateCopyWith<$Res>
+abstract class _$$_CreateCopyWith<$Res>
     implements $CreateAccountScreenStateCopyWith<$Res> {
-  factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
-      __$CreateCopyWithImpl<$Res>;
+  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
+      __$$_CreateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int currentIndex,
       String email,
@@ -160,61 +134,59 @@ abstract class _$CreateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$CreateCopyWithImpl<$Res>
-    extends _$CreateAccountScreenStateCopyWithImpl<$Res>
-    implements _$CreateCopyWith<$Res> {
-  __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
-      : super(_value, (v) => _then(v as _Create));
+class __$$_CreateCopyWithImpl<$Res>
+    extends _$CreateAccountScreenStateCopyWithImpl<$Res, _$_Create>
+    implements _$$_CreateCopyWith<$Res> {
+  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+      : super(_value, _then);
 
-  @override
-  _Create get _value => super._value as _Create;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
-    Object? errorText = freezed,
-    Object? isObscure = freezed,
-    Object? isValidEmail = freezed,
-    Object? isSafetyPass = freezed,
-    Object? isSucceeded = freezed,
-    Object? hasError = freezed,
+    Object? currentIndex = null,
+    Object? email = null,
+    Object? password = null,
+    Object? errorText = null,
+    Object? isObscure = null,
+    Object? isValidEmail = null,
+    Object? isSafetyPass = null,
+    Object? isSucceeded = null,
+    Object? hasError = null,
   }) {
-    return _then(_Create(
-      currentIndex: currentIndex == freezed
+    return _then(_$_Create(
+      currentIndex: null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      errorText: errorText == freezed
+      errorText: null == errorText
           ? _value.errorText
           : errorText // ignore: cast_nullable_to_non_nullable
               as String,
-      isObscure: isObscure == freezed
+      isObscure: null == isObscure
           ? _value.isObscure
           : isObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      isValidEmail: isValidEmail == freezed
+      isValidEmail: null == isValidEmail
           ? _value.isValidEmail
           : isValidEmail // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSafetyPass: isSafetyPass == freezed
+      isSafetyPass: null == isSafetyPass
           ? _value.isSafetyPass
           : isSafetyPass // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSucceeded: isSucceeded == freezed
+      isSucceeded: null == isSucceeded
           ? _value.isSucceeded
           : isSucceeded // ignore: cast_nullable_to_non_nullable
               as bool,
-      hasError: hasError == freezed
+      hasError: null == hasError
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -236,32 +208,32 @@ class _$_Create implements _Create {
       this.isSucceeded = false,
       this.hasError = false});
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int currentIndex;
-  @JsonKey()
   @override
+  @JsonKey()
   final String email;
-  @JsonKey()
   @override
+  @JsonKey()
   final String password;
-  @JsonKey()
   @override
+  @JsonKey()
   final String errorText;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isObscure;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isValidEmail;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isSafetyPass;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isSucceeded;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool hasError;
 
   @override
@@ -273,52 +245,48 @@ class _$_Create implements _Create {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Create &&
-            const DeepCollectionEquality()
-                .equals(other.currentIndex, currentIndex) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality().equals(other.errorText, errorText) &&
-            const DeepCollectionEquality().equals(other.isObscure, isObscure) &&
-            const DeepCollectionEquality()
-                .equals(other.isValidEmail, isValidEmail) &&
-            const DeepCollectionEquality()
-                .equals(other.isSafetyPass, isSafetyPass) &&
-            const DeepCollectionEquality()
-                .equals(other.isSucceeded, isSucceeded) &&
-            const DeepCollectionEquality().equals(other.hasError, hasError));
+            other is _$_Create &&
+            (identical(other.currentIndex, currentIndex) ||
+                other.currentIndex == currentIndex) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.errorText, errorText) ||
+                other.errorText == errorText) &&
+            (identical(other.isObscure, isObscure) ||
+                other.isObscure == isObscure) &&
+            (identical(other.isValidEmail, isValidEmail) ||
+                other.isValidEmail == isValidEmail) &&
+            (identical(other.isSafetyPass, isSafetyPass) ||
+                other.isSafetyPass == isSafetyPass) &&
+            (identical(other.isSucceeded, isSucceeded) ||
+                other.isSucceeded == isSucceeded) &&
+            (identical(other.hasError, hasError) ||
+                other.hasError == hasError));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(currentIndex),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(errorText),
-      const DeepCollectionEquality().hash(isObscure),
-      const DeepCollectionEquality().hash(isValidEmail),
-      const DeepCollectionEquality().hash(isSafetyPass),
-      const DeepCollectionEquality().hash(isSucceeded),
-      const DeepCollectionEquality().hash(hasError));
+  int get hashCode => Object.hash(runtimeType, currentIndex, email, password,
+      errorText, isObscure, isValidEmail, isSafetyPass, isSucceeded, hasError);
 
   @JsonKey(ignore: true)
   @override
-  _$CreateCopyWith<_Create> get copyWith =>
-      __$CreateCopyWithImpl<_Create>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
 abstract class _Create implements CreateAccountScreenState {
   const factory _Create(
-      {int currentIndex,
-      String email,
-      String password,
-      String errorText,
-      bool isObscure,
-      bool isValidEmail,
-      bool isSafetyPass,
-      bool isSucceeded,
-      bool hasError}) = _$_Create;
+      {final int currentIndex,
+      final String email,
+      final String password,
+      final String errorText,
+      final bool isObscure,
+      final bool isValidEmail,
+      final bool isSafetyPass,
+      final bool isSucceeded,
+      final bool hasError}) = _$_Create;
 
   @override
   int get currentIndex;
@@ -340,5 +308,6 @@ abstract class _Create implements CreateAccountScreenState {
   bool get hasError;
   @override
   @JsonKey(ignore: true)
-  _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      throw _privateConstructorUsedError;
 }

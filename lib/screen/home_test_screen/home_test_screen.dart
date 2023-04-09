@@ -1,8 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
 
 class HomeTestScreen extends StatelessWidget {
   const HomeTestScreen();
@@ -12,46 +10,39 @@ class HomeTestScreen extends StatelessWidget {
     final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
     final CollectionReference _quiz = _fireStore.collection('quiz');
 
-    Future addQuiz() async {
-      await _quiz.add({
-        "ans": "答え",
-        "question": "問題",
-      });
-    }
-
     return Center(
       child: Column(
-        children: [
-          const _GetQuizWidget(),
-          QuizList(),
-          const Spacer(),
-          GestureDetector(
-            onTap: () async {
-              addQuiz();
-            },
-            child: Container(
-              height: context.height * 0.085,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.blueAccent.shade200,
-                border: Border.all(
-                  color: Colors.grey.shade200,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: const AutoSizeText(
-                "テストボタン",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-                minFontSize: 16,
-              ),
-            ),
-          ),
-          const Spacer(),
+        children: const [
+          _GetQuizWidget(),
+          // QuizList(),
+          // const Spacer(),
+          // GestureDetector(
+          //   onTap: () async {
+          //     addQuiz();
+          //   },
+          //   child: Container(
+          //     height: context.height * 0.085,
+          //     alignment: Alignment.center,
+          //     padding: const EdgeInsets.all(16),
+          //     margin: const EdgeInsets.all(20),
+          //     decoration: BoxDecoration(
+          //       color: Colors.blueAccent.shade200,
+          //       border: Border.all(
+          //         color: Colors.grey.shade200,
+          //       ),
+          //       borderRadius: BorderRadius.circular(5),
+          //     ),
+          //     child: const AutoSizeText(
+          //       "テストボタン",
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //       minFontSize: 16,
+          //     ),
+          //   ),
+          // ),
+          // const Spacer(),
         ],
       ),
     );

@@ -4,7 +4,7 @@ part of 'quiz_learn_result_screen.dart';
 class _QuizResultView extends ConsumerWidget {
   const _QuizResultView(this.item);
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +25,7 @@ class _QuizResultView extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           item.title,
-                          style: context.texts.subtitle1,
+                          style: context.texts.titleMedium,
                         ),
                       ),
                       const Spacer(),

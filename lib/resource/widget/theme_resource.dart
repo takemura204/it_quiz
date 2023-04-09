@@ -8,73 +8,73 @@ class DefaultTheme {
 
     const weight = 0.9;
     final customize = TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
           fontSize: 96 * weight,
           fontFamily: "NotoSans",
           color: colors.dark87,
           fontWeight: FontWeight.w600,
           letterSpacing: -1.5),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
           fontSize: 60 * weight,
           fontFamily: "NotoSans",
           color: colors.dark87,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.5),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
           fontSize: 48 * weight,
           fontFamily: "NotoSans",
           color: colors.dark87,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.0),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
           fontSize: 34 * weight,
           fontFamily: "NotoSans",
           color: colors.dark87,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.25),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
           fontSize: 24 * weight,
           fontFamily: "NotoSans",
           color: colors.dark87,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.0),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
           fontSize: 20 * weight,
           fontFamily: "NotoSans",
           color: colors.dark87,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.15),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
           fontSize: 16 * weight,
           fontFamily: "NotoSans",
           color: colors.dark54,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.15),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
           fontSize: 14 * weight,
           fontFamily: "NotoSans",
           color: colors.dark54,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.1),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
           fontSize: 16 * weight,
           fontFamily: "NotoSans",
           color: colors.dark54,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.5),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
           fontSize: 14 * weight,
           fontFamily: "NotoSans",
           color: colors.dark54,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.25),
-      caption: TextStyle(
+      bodySmall: TextStyle(
           fontSize: 12 * weight,
           fontFamily: "NotoSans",
           color: colors.dark54,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.4),
-      overline: TextStyle(
+      labelSmall: TextStyle(
           fontSize: 10 * weight,
           fontFamily: "NotoSans",
           color: colors.dark54,
@@ -101,10 +101,10 @@ class DefaultTheme {
         selectedItemColor: colors.dark87,
         unselectedItemColor: colors.dark26,
         backgroundColor: colors.light100,
-        selectedLabelStyle: customize.caption?.apply(
+        selectedLabelStyle: customize.bodySmall?.apply(
           fontWeightDelta: 2,
         ),
-        unselectedLabelStyle: customize.caption?.apply(
+        unselectedLabelStyle: customize.bodySmall?.apply(
           fontWeightDelta: 2,
         ),
       ),
@@ -112,10 +112,10 @@ class DefaultTheme {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
-        titleTextStyle: customize.subtitle1?.apply(
+        titleTextStyle: customize.titleMedium?.apply(
           color: colors.dark87,
         ),
-        contentTextStyle: customize.bodyText2,
+        contentTextStyle: customize.bodyMedium,
         backgroundColor: colors.alto10,
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -126,13 +126,13 @@ class DefaultTheme {
         filled: true,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        hintStyle: original.black.caption?.apply(
+        hintStyle: original.black.bodySmall?.apply(
           color: colors.dark26,
         ),
-        errorStyle: original.black.caption?.apply(
+        errorStyle: original.black.bodySmall?.apply(
           color: colors.red50,
         ),
-        labelStyle: original.black.headline6?.apply(
+        labelStyle: original.black.titleLarge?.apply(
           color: colors.dark87,
         ),
         helperMaxLines: 5,
@@ -185,7 +185,7 @@ class DefaultTheme {
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         padding: const EdgeInsets.all(8),
-        textStyle: customize.subtitle2?.apply(
+        textStyle: customize.titleSmall?.apply(
           color: colors.onMain10,
         ),
       ),
@@ -193,7 +193,7 @@ class DefaultTheme {
         behavior: SnackBarBehavior.fixed,
         backgroundColor: colors.main10.withOpacity(0.98),
         actionTextColor: colors.main50,
-        contentTextStyle: customize.subtitle2?.apply(
+        contentTextStyle: customize.titleSmall?.apply(
           color: colors.onMain10,
         ),
         shape: const RoundedRectangleBorder(
@@ -207,7 +207,6 @@ class DefaultTheme {
         color: colors.dark54,
         size: 24,
       ),
-      toggleableActiveColor: colors.main50,
       dividerColor: colors.dark26,
       tabBarTheme: TabBarTheme(
         indicator: UnderlineTabIndicator(
@@ -249,6 +248,52 @@ class DefaultTheme {
         onBackground: colors.dark87,
         onError: colors.onMain50,
         brightness: brightness,
+      ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return colors.main50;
+          }
+          return null;
+        }),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return colors.main50;
+          }
+          return null;
+        }),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return colors.main50;
+          }
+          return null;
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return colors.main50;
+          }
+          return null;
+        }),
       ),
     );
   }

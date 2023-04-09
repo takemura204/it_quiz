@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'quiz_learn_screen_state.dart';
 
@@ -12,34 +12,7 @@ part of 'quiz_learn_screen_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$QuizLearnScreenStateTearOff {
-  const _$QuizLearnScreenStateTearOff();
-
-  _Create call(
-      {bool isAnsView = false,
-      bool isResultScreen = false,
-      int quizIndex = 0,
-      int lapIndex = 0,
-      List<Quiz> quizList = const [],
-      List<Quiz> knowRememberQuestions = const [],
-      List<Quiz> unKnowRememberQuestions = const []}) {
-    return _Create(
-      isAnsView: isAnsView,
-      isResultScreen: isResultScreen,
-      quizIndex: quizIndex,
-      lapIndex: lapIndex,
-      quizList: quizList,
-      knowRememberQuestions: knowRememberQuestions,
-      unKnowRememberQuestions: unKnowRememberQuestions,
-    );
-  }
-}
-
-/// @nodoc
-const $QuizLearnScreenState = _$QuizLearnScreenStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$QuizLearnScreenState {
@@ -47,9 +20,11 @@ mixin _$QuizLearnScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
-  List<Quiz> get quizList => throw _privateConstructorUsedError;
-  List<Quiz> get knowRememberQuestions => throw _privateConstructorUsedError;
-  List<Quiz> get unKnowRememberQuestions => throw _privateConstructorUsedError;
+  List<QuizState> get quizList => throw _privateConstructorUsedError;
+  List<QuizState> get knowRememberQuestions =>
+      throw _privateConstructorUsedError;
+  List<QuizState> get unKnowRememberQuestions =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizLearnScreenStateCopyWith<QuizLearnScreenState> get copyWith =>
@@ -60,134 +35,137 @@ mixin _$QuizLearnScreenState {
 abstract class $QuizLearnScreenStateCopyWith<$Res> {
   factory $QuizLearnScreenStateCopyWith(QuizLearnScreenState value,
           $Res Function(QuizLearnScreenState) then) =
-      _$QuizLearnScreenStateCopyWithImpl<$Res>;
+      _$QuizLearnScreenStateCopyWithImpl<$Res, QuizLearnScreenState>;
+  @useResult
   $Res call(
       {bool isAnsView,
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<Quiz> quizList,
-      List<Quiz> knowRememberQuestions,
-      List<Quiz> unKnowRememberQuestions});
+      List<QuizState> quizList,
+      List<QuizState> knowRememberQuestions,
+      List<QuizState> unKnowRememberQuestions});
 }
 
 /// @nodoc
-class _$QuizLearnScreenStateCopyWithImpl<$Res>
+class _$QuizLearnScreenStateCopyWithImpl<$Res,
+        $Val extends QuizLearnScreenState>
     implements $QuizLearnScreenStateCopyWith<$Res> {
   _$QuizLearnScreenStateCopyWithImpl(this._value, this._then);
 
-  final QuizLearnScreenState _value;
   // ignore: unused_field
-  final $Res Function(QuizLearnScreenState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAnsView = freezed,
-    Object? isResultScreen = freezed,
-    Object? quizIndex = freezed,
-    Object? lapIndex = freezed,
-    Object? quizList = freezed,
-    Object? knowRememberQuestions = freezed,
-    Object? unKnowRememberQuestions = freezed,
+    Object? isAnsView = null,
+    Object? isResultScreen = null,
+    Object? quizIndex = null,
+    Object? lapIndex = null,
+    Object? quizList = null,
+    Object? knowRememberQuestions = null,
+    Object? unKnowRememberQuestions = null,
   }) {
     return _then(_value.copyWith(
-      isAnsView: isAnsView == freezed
+      isAnsView: null == isAnsView
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
               as bool,
-      isResultScreen: isResultScreen == freezed
+      isResultScreen: null == isResultScreen
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
-      quizIndex: quizIndex == freezed
+      quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      lapIndex: lapIndex == freezed
+      lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      quizList: quizList == freezed
+      quizList: null == quizList
           ? _value.quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-      knowRememberQuestions: knowRememberQuestions == freezed
+              as List<QuizState>,
+      knowRememberQuestions: null == knowRememberQuestions
           ? _value.knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-      unKnowRememberQuestions: unKnowRememberQuestions == freezed
+              as List<QuizState>,
+      unKnowRememberQuestions: null == unKnowRememberQuestions
           ? _value.unKnowRememberQuestions
           : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-    ));
+              as List<QuizState>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CreateCopyWith<$Res>
+abstract class _$$_CreateCopyWith<$Res>
     implements $QuizLearnScreenStateCopyWith<$Res> {
-  factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
-      __$CreateCopyWithImpl<$Res>;
+  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
+      __$$_CreateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isAnsView,
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<Quiz> quizList,
-      List<Quiz> knowRememberQuestions,
-      List<Quiz> unKnowRememberQuestions});
+      List<QuizState> quizList,
+      List<QuizState> knowRememberQuestions,
+      List<QuizState> unKnowRememberQuestions});
 }
 
 /// @nodoc
-class __$CreateCopyWithImpl<$Res>
-    extends _$QuizLearnScreenStateCopyWithImpl<$Res>
-    implements _$CreateCopyWith<$Res> {
-  __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
-      : super(_value, (v) => _then(v as _Create));
+class __$$_CreateCopyWithImpl<$Res>
+    extends _$QuizLearnScreenStateCopyWithImpl<$Res, _$_Create>
+    implements _$$_CreateCopyWith<$Res> {
+  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+      : super(_value, _then);
 
-  @override
-  _Create get _value => super._value as _Create;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAnsView = freezed,
-    Object? isResultScreen = freezed,
-    Object? quizIndex = freezed,
-    Object? lapIndex = freezed,
-    Object? quizList = freezed,
-    Object? knowRememberQuestions = freezed,
-    Object? unKnowRememberQuestions = freezed,
+    Object? isAnsView = null,
+    Object? isResultScreen = null,
+    Object? quizIndex = null,
+    Object? lapIndex = null,
+    Object? quizList = null,
+    Object? knowRememberQuestions = null,
+    Object? unKnowRememberQuestions = null,
   }) {
-    return _then(_Create(
-      isAnsView: isAnsView == freezed
+    return _then(_$_Create(
+      isAnsView: null == isAnsView
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
               as bool,
-      isResultScreen: isResultScreen == freezed
+      isResultScreen: null == isResultScreen
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
-      quizIndex: quizIndex == freezed
+      quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      lapIndex: lapIndex == freezed
+      lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      quizList: quizList == freezed
-          ? _value.quizList
+      quizList: null == quizList
+          ? _value._quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-      knowRememberQuestions: knowRememberQuestions == freezed
-          ? _value.knowRememberQuestions
+              as List<QuizState>,
+      knowRememberQuestions: null == knowRememberQuestions
+          ? _value._knowRememberQuestions
           : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-      unKnowRememberQuestions: unKnowRememberQuestions == freezed
-          ? _value.unKnowRememberQuestions
+              as List<QuizState>,
+      unKnowRememberQuestions: null == unKnowRememberQuestions
+          ? _value._unKnowRememberQuestions
           : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
+              as List<QuizState>,
     ));
   }
 }
@@ -200,32 +178,59 @@ class _$_Create extends _Create {
       this.isResultScreen = false,
       this.quizIndex = 0,
       this.lapIndex = 0,
-      this.quizList = const [],
-      this.knowRememberQuestions = const [],
-      this.unKnowRememberQuestions = const []})
-      : super._();
+      final List<QuizState> quizList = const [],
+      final List<QuizState> knowRememberQuestions = const [],
+      final List<QuizState> unKnowRememberQuestions = const []})
+      : _quizList = quizList,
+        _knowRememberQuestions = knowRememberQuestions,
+        _unKnowRememberQuestions = unKnowRememberQuestions,
+        super._();
 
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isAnsView;
+//正解画面切り替え
+  @override
   @JsonKey()
-  @override //正解画面切り替え
   final bool isResultScreen;
+//結果画面切り替え
+  @override
   @JsonKey()
-  @override //結果画面切り替え
   final int quizIndex;
+//問題番号
+  @override
   @JsonKey()
-  @override //問題番号
   final int lapIndex;
-  @JsonKey()
-  @override //何周目
-  final List<Quiz> quizList;
-  @JsonKey()
+//何周目
+  final List<QuizState> _quizList;
+//何周目
   @override
-  final List<Quiz> knowRememberQuestions;
   @JsonKey()
+  List<QuizState> get quizList {
+    if (_quizList is EqualUnmodifiableListView) return _quizList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quizList);
+  }
+
+  final List<QuizState> _knowRememberQuestions;
   @override
-  final List<Quiz> unKnowRememberQuestions;
+  @JsonKey()
+  List<QuizState> get knowRememberQuestions {
+    if (_knowRememberQuestions is EqualUnmodifiableListView)
+      return _knowRememberQuestions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_knowRememberQuestions);
+  }
+
+  final List<QuizState> _unKnowRememberQuestions;
+  @override
+  @JsonKey()
+  List<QuizState> get unKnowRememberQuestions {
+    if (_unKnowRememberQuestions is EqualUnmodifiableListView)
+      return _unKnowRememberQuestions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_unKnowRememberQuestions);
+  }
 
   @override
   String toString() {
@@ -236,45 +241,49 @@ class _$_Create extends _Create {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Create &&
-            const DeepCollectionEquality().equals(other.isAnsView, isAnsView) &&
+            other is _$_Create &&
+            (identical(other.isAnsView, isAnsView) ||
+                other.isAnsView == isAnsView) &&
+            (identical(other.isResultScreen, isResultScreen) ||
+                other.isResultScreen == isResultScreen) &&
+            (identical(other.quizIndex, quizIndex) ||
+                other.quizIndex == quizIndex) &&
+            (identical(other.lapIndex, lapIndex) ||
+                other.lapIndex == lapIndex) &&
+            const DeepCollectionEquality().equals(other._quizList, _quizList) &&
             const DeepCollectionEquality()
-                .equals(other.isResultScreen, isResultScreen) &&
-            const DeepCollectionEquality().equals(other.quizIndex, quizIndex) &&
-            const DeepCollectionEquality().equals(other.lapIndex, lapIndex) &&
-            const DeepCollectionEquality().equals(other.quizList, quizList) &&
-            const DeepCollectionEquality()
-                .equals(other.knowRememberQuestions, knowRememberQuestions) &&
+                .equals(other._knowRememberQuestions, _knowRememberQuestions) &&
             const DeepCollectionEquality().equals(
-                other.unKnowRememberQuestions, unKnowRememberQuestions));
+                other._unKnowRememberQuestions, _unKnowRememberQuestions));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isAnsView),
-      const DeepCollectionEquality().hash(isResultScreen),
-      const DeepCollectionEquality().hash(quizIndex),
-      const DeepCollectionEquality().hash(lapIndex),
-      const DeepCollectionEquality().hash(quizList),
-      const DeepCollectionEquality().hash(knowRememberQuestions),
-      const DeepCollectionEquality().hash(unKnowRememberQuestions));
+      isAnsView,
+      isResultScreen,
+      quizIndex,
+      lapIndex,
+      const DeepCollectionEquality().hash(_quizList),
+      const DeepCollectionEquality().hash(_knowRememberQuestions),
+      const DeepCollectionEquality().hash(_unKnowRememberQuestions));
 
   @JsonKey(ignore: true)
   @override
-  _$CreateCopyWith<_Create> get copyWith =>
-      __$CreateCopyWithImpl<_Create>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
 abstract class _Create extends QuizLearnScreenState {
   const factory _Create(
-      {bool isAnsView,
-      bool isResultScreen,
-      int quizIndex,
-      int lapIndex,
-      List<Quiz> quizList,
-      List<Quiz> knowRememberQuestions,
-      List<Quiz> unKnowRememberQuestions}) = _$_Create;
+      {final bool isAnsView,
+      final bool isResultScreen,
+      final int quizIndex,
+      final int lapIndex,
+      final List<QuizState> quizList,
+      final List<QuizState> knowRememberQuestions,
+      final List<QuizState> unKnowRememberQuestions}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -286,12 +295,13 @@ abstract class _Create extends QuizLearnScreenState {
   @override //問題番号
   int get lapIndex;
   @override //何周目
-  List<Quiz> get quizList;
+  List<QuizState> get quizList;
   @override
-  List<Quiz> get knowRememberQuestions;
+  List<QuizState> get knowRememberQuestions;
   @override
-  List<Quiz> get unKnowRememberQuestions;
+  List<QuizState> get unKnowRememberQuestions;
   @override
   @JsonKey(ignore: true)
-  _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      throw _privateConstructorUsedError;
 }

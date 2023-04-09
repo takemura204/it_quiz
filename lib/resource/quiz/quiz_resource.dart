@@ -1,8 +1,8 @@
-import '../../entity/quiz.dart';
+import '../../controller/quiz/quiz_state.dart';
 
 ///問題一覧
-final List<Quiz> quiz1 = [
-  const Quiz(
+final List<QuizState> quiz1 = [
+  const QuizState(
     quizId: 1,
     question: '1 + 1 = 2',
     ans: '2',
@@ -10,7 +10,7 @@ final List<Quiz> quiz1 = [
     isJudge: false,
     choices: ["1", "2", "3", "4"],
   ),
-  const Quiz(
+  const QuizState(
     quizId: 2,
     question: '更新世は氷河時代とも呼ばれる',
     ans: '氷河時代',
@@ -18,7 +18,7 @@ final List<Quiz> quiz1 = [
     isJudge: false,
     choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
   ),
-  const Quiz(
+  const QuizState(
     quizId: 3,
     question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',
@@ -33,8 +33,8 @@ final List<Quiz> quiz1 = [
   ),
 ];
 
-final List<Quiz> quiz2 = [
-  const Quiz(
+final List<QuizState> quiz2 = [
+  const QuizState(
     quizId: 1,
     question: '1 + 2 = 3',
     ans: '3',
@@ -42,7 +42,7 @@ final List<Quiz> quiz2 = [
     isJudge: false,
     choices: ["1", "2", "3", "4"],
   ),
-  const Quiz(
+  const QuizState(
     quizId: 2,
     question: '更新世は氷河時代とも呼ばれる',
     ans: '氷河時代',
@@ -50,7 +50,7 @@ final List<Quiz> quiz2 = [
     isJudge: false,
     choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
   ),
-  const Quiz(
+  const QuizState(
     quizId: 3,
     question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',
@@ -63,7 +63,7 @@ final List<Quiz> quiz2 = [
       "キャッツアイ",
     ],
   ),
-  const Quiz(
+  const QuizState(
     quizId: 4,
     question: '更新世は氷河時代とも呼ばれる',
     ans: '氷河時代',
@@ -71,7 +71,7 @@ final List<Quiz> quiz2 = [
     isJudge: false,
     choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
   ),
-  const Quiz(
+  const QuizState(
     quizId: 5,
     question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
     ans: 'タンペム',

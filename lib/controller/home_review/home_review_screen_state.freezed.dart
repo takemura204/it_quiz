@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_review_screen_state.dart';
 
@@ -12,32 +12,13 @@ part of 'home_review_screen_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$HomeReviewScreenStateTearOff {
-  const _$HomeReviewScreenStateTearOff();
-
-  _Create call(
-      {int currentIndex = 0,
-      List<QuizItem> reviewItem = const [],
-      List<Quiz> quizList = const []}) {
-    return _Create(
-      currentIndex: currentIndex,
-      reviewItem: reviewItem,
-      quizList: quizList,
-    );
-  }
-}
-
-/// @nodoc
-const $HomeReviewScreenState = _$HomeReviewScreenStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$HomeReviewScreenState {
   int get currentIndex => throw _privateConstructorUsedError;
-  List<QuizItem> get reviewItem => throw _privateConstructorUsedError;
-  List<Quiz> get quizList => throw _privateConstructorUsedError;
+  List<QuizItemState> get reviewItem => throw _privateConstructorUsedError;
+  List<QuizState> get quizList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeReviewScreenStateCopyWith<HomeReviewScreenState> get copyWith =>
@@ -48,80 +29,89 @@ mixin _$HomeReviewScreenState {
 abstract class $HomeReviewScreenStateCopyWith<$Res> {
   factory $HomeReviewScreenStateCopyWith(HomeReviewScreenState value,
           $Res Function(HomeReviewScreenState) then) =
-      _$HomeReviewScreenStateCopyWithImpl<$Res>;
-  $Res call({int currentIndex, List<QuizItem> reviewItem, List<Quiz> quizList});
+      _$HomeReviewScreenStateCopyWithImpl<$Res, HomeReviewScreenState>;
+  @useResult
+  $Res call(
+      {int currentIndex,
+      List<QuizItemState> reviewItem,
+      List<QuizState> quizList});
 }
 
 /// @nodoc
-class _$HomeReviewScreenStateCopyWithImpl<$Res>
+class _$HomeReviewScreenStateCopyWithImpl<$Res,
+        $Val extends HomeReviewScreenState>
     implements $HomeReviewScreenStateCopyWith<$Res> {
   _$HomeReviewScreenStateCopyWithImpl(this._value, this._then);
 
-  final HomeReviewScreenState _value;
   // ignore: unused_field
-  final $Res Function(HomeReviewScreenState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = freezed,
-    Object? reviewItem = freezed,
-    Object? quizList = freezed,
+    Object? currentIndex = null,
+    Object? reviewItem = null,
+    Object? quizList = null,
   }) {
     return _then(_value.copyWith(
-      currentIndex: currentIndex == freezed
+      currentIndex: null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      reviewItem: reviewItem == freezed
+      reviewItem: null == reviewItem
           ? _value.reviewItem
           : reviewItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      quizList: quizList == freezed
+              as List<QuizItemState>,
+      quizList: null == quizList
           ? _value.quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-    ));
+              as List<QuizState>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CreateCopyWith<$Res>
+abstract class _$$_CreateCopyWith<$Res>
     implements $HomeReviewScreenStateCopyWith<$Res> {
-  factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
-      __$CreateCopyWithImpl<$Res>;
+  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
+      __$$_CreateCopyWithImpl<$Res>;
   @override
-  $Res call({int currentIndex, List<QuizItem> reviewItem, List<Quiz> quizList});
+  @useResult
+  $Res call(
+      {int currentIndex,
+      List<QuizItemState> reviewItem,
+      List<QuizState> quizList});
 }
 
 /// @nodoc
-class __$CreateCopyWithImpl<$Res>
-    extends _$HomeReviewScreenStateCopyWithImpl<$Res>
-    implements _$CreateCopyWith<$Res> {
-  __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
-      : super(_value, (v) => _then(v as _Create));
+class __$$_CreateCopyWithImpl<$Res>
+    extends _$HomeReviewScreenStateCopyWithImpl<$Res, _$_Create>
+    implements _$$_CreateCopyWith<$Res> {
+  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+      : super(_value, _then);
 
-  @override
-  _Create get _value => super._value as _Create;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = freezed,
-    Object? reviewItem = freezed,
-    Object? quizList = freezed,
+    Object? currentIndex = null,
+    Object? reviewItem = null,
+    Object? quizList = null,
   }) {
-    return _then(_Create(
-      currentIndex: currentIndex == freezed
+    return _then(_$_Create(
+      currentIndex: null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      reviewItem: reviewItem == freezed
-          ? _value.reviewItem
+      reviewItem: null == reviewItem
+          ? _value._reviewItem
           : reviewItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      quizList: quizList == freezed
-          ? _value.quizList
+              as List<QuizItemState>,
+      quizList: null == quizList
+          ? _value._quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
+              as List<QuizState>,
     ));
   }
 }
@@ -131,18 +121,31 @@ class __$CreateCopyWithImpl<$Res>
 class _$_Create implements _Create {
   const _$_Create(
       {this.currentIndex = 0,
-      this.reviewItem = const [],
-      this.quizList = const []});
+      final List<QuizItemState> reviewItem = const [],
+      final List<QuizState> quizList = const []})
+      : _reviewItem = reviewItem,
+        _quizList = quizList;
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int currentIndex;
-  @JsonKey()
+  final List<QuizItemState> _reviewItem;
   @override
-  final List<QuizItem> reviewItem;
   @JsonKey()
+  List<QuizItemState> get reviewItem {
+    if (_reviewItem is EqualUnmodifiableListView) return _reviewItem;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reviewItem);
+  }
+
+  final List<QuizState> _quizList;
   @override
-  final List<Quiz> quizList;
+  @JsonKey()
+  List<QuizState> get quizList {
+    if (_quizList is EqualUnmodifiableListView) return _quizList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quizList);
+  }
 
   @override
   String toString() {
@@ -153,40 +156,42 @@ class _$_Create implements _Create {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Create &&
+            other is _$_Create &&
+            (identical(other.currentIndex, currentIndex) ||
+                other.currentIndex == currentIndex) &&
             const DeepCollectionEquality()
-                .equals(other.currentIndex, currentIndex) &&
-            const DeepCollectionEquality()
-                .equals(other.reviewItem, reviewItem) &&
-            const DeepCollectionEquality().equals(other.quizList, quizList));
+                .equals(other._reviewItem, _reviewItem) &&
+            const DeepCollectionEquality().equals(other._quizList, _quizList));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(currentIndex),
-      const DeepCollectionEquality().hash(reviewItem),
-      const DeepCollectionEquality().hash(quizList));
+      currentIndex,
+      const DeepCollectionEquality().hash(_reviewItem),
+      const DeepCollectionEquality().hash(_quizList));
 
   @JsonKey(ignore: true)
   @override
-  _$CreateCopyWith<_Create> get copyWith =>
-      __$CreateCopyWithImpl<_Create>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
 abstract class _Create implements HomeReviewScreenState {
   const factory _Create(
-      {int currentIndex,
-      List<QuizItem> reviewItem,
-      List<Quiz> quizList}) = _$_Create;
+      {final int currentIndex,
+      final List<QuizItemState> reviewItem,
+      final List<QuizState> quizList}) = _$_Create;
 
   @override
   int get currentIndex;
   @override
-  List<QuizItem> get reviewItem;
+  List<QuizItemState> get reviewItem;
   @override
-  List<Quiz> get quizList;
+  List<QuizState> get quizList;
   @override
   @JsonKey(ignore: true)
-  _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      throw _privateConstructorUsedError;
 }

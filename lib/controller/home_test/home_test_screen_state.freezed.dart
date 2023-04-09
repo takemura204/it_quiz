@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_test_screen_state.dart';
 
@@ -12,21 +12,7 @@ part of 'home_test_screen_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$HomeTestScreenStateTearOff {
-  const _$HomeTestScreenStateTearOff();
-
-  _Create call({List<String> tabNames = const []}) {
-    return _Create(
-      tabNames: tabNames,
-    );
-  }
-}
-
-/// @nodoc
-const $HomeTestScreenState = _$HomeTestScreenStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$HomeTestScreenState {
@@ -41,58 +27,60 @@ mixin _$HomeTestScreenState {
 abstract class $HomeTestScreenStateCopyWith<$Res> {
   factory $HomeTestScreenStateCopyWith(
           HomeTestScreenState value, $Res Function(HomeTestScreenState) then) =
-      _$HomeTestScreenStateCopyWithImpl<$Res>;
+      _$HomeTestScreenStateCopyWithImpl<$Res, HomeTestScreenState>;
+  @useResult
   $Res call({List<String> tabNames});
 }
 
 /// @nodoc
-class _$HomeTestScreenStateCopyWithImpl<$Res>
+class _$HomeTestScreenStateCopyWithImpl<$Res, $Val extends HomeTestScreenState>
     implements $HomeTestScreenStateCopyWith<$Res> {
   _$HomeTestScreenStateCopyWithImpl(this._value, this._then);
 
-  final HomeTestScreenState _value;
   // ignore: unused_field
-  final $Res Function(HomeTestScreenState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tabNames = freezed,
+    Object? tabNames = null,
   }) {
     return _then(_value.copyWith(
-      tabNames: tabNames == freezed
+      tabNames: null == tabNames
           ? _value.tabNames
           : tabNames // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CreateCopyWith<$Res>
+abstract class _$$_CreateCopyWith<$Res>
     implements $HomeTestScreenStateCopyWith<$Res> {
-  factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
-      __$CreateCopyWithImpl<$Res>;
+  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
+      __$$_CreateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<String> tabNames});
 }
 
 /// @nodoc
-class __$CreateCopyWithImpl<$Res>
-    extends _$HomeTestScreenStateCopyWithImpl<$Res>
-    implements _$CreateCopyWith<$Res> {
-  __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
-      : super(_value, (v) => _then(v as _Create));
+class __$$_CreateCopyWithImpl<$Res>
+    extends _$HomeTestScreenStateCopyWithImpl<$Res, _$_Create>
+    implements _$$_CreateCopyWith<$Res> {
+  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+      : super(_value, _then);
 
-  @override
-  _Create get _value => super._value as _Create;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tabNames = freezed,
+    Object? tabNames = null,
   }) {
-    return _then(_Create(
-      tabNames: tabNames == freezed
-          ? _value.tabNames
+    return _then(_$_Create(
+      tabNames: null == tabNames
+          ? _value._tabNames
           : tabNames // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -102,11 +90,18 @@ class __$CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create extends _Create {
-  _$_Create({this.tabNames = const []}) : super._();
+  _$_Create({final List<String> tabNames = const []})
+      : _tabNames = tabNames,
+        super._();
 
-  @JsonKey()
+  final List<String> _tabNames;
   @override
-  final List<String> tabNames;
+  @JsonKey()
+  List<String> get tabNames {
+    if (_tabNames is EqualUnmodifiableListView) return _tabNames;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tabNames);
+  }
 
   @override
   String toString() {
@@ -117,27 +112,29 @@ class _$_Create extends _Create {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Create &&
-            const DeepCollectionEquality().equals(other.tabNames, tabNames));
+            other is _$_Create &&
+            const DeepCollectionEquality().equals(other._tabNames, _tabNames));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tabNames));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tabNames));
 
   @JsonKey(ignore: true)
   @override
-  _$CreateCopyWith<_Create> get copyWith =>
-      __$CreateCopyWithImpl<_Create>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
 abstract class _Create extends HomeTestScreenState {
-  factory _Create({List<String> tabNames}) = _$_Create;
+  factory _Create({final List<String> tabNames}) = _$_Create;
   _Create._() : super._();
 
   @override
   List<String> get tabNames;
   @override
   @JsonKey(ignore: true)
-  _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      throw _privateConstructorUsedError;
 }

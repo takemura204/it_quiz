@@ -1,9 +1,9 @@
 part of 'quiz_choice_result_screen.dart';
 
 class _Body extends ConsumerWidget {
-  const _Body(this.arguments);
+  const _Body(this.item);
 
-  final QuizItem arguments;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -13,7 +13,7 @@ class _Body extends ConsumerWidget {
           delegate: SliverChildListDelegate(
             [
               ///正解した問題リスト
-              _QuizResultView(arguments),
+              _QuizResultView(item),
             ],
           ),
         ),

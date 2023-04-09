@@ -43,11 +43,6 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   void changeImageIndex(int index) {
     state = state.copyWith(currentImageIndex: index);
   }

@@ -3,7 +3,7 @@ part of 'quiz_learn_result_screen.dart';
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.item);
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

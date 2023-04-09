@@ -6,7 +6,7 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../entity/quiz_item.dart';
+import '../../controller/quiz_item/quiz_item_state.dart';
 import '../../view/button.dart';
 
 part 'quiz_choice_result_appbar.dart';
@@ -15,7 +15,7 @@ part 'quiz_choice_result_view.dart';
 
 class QuizChoiceResultScreen extends StatelessWidget {
   const QuizChoiceResultScreen(this.arguments);
-  final QuizItem arguments;
+  final QuizItemState arguments;
 
   @override
   Widget build(BuildContext context) {

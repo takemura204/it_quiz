@@ -27,7 +27,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # よりよいproviderを使いたい
-  hooks_riverpod: ^1.0.3
+  hooks_riverpod: ^2.3.4
   provider: ^6.0.2
 
   # StateNotifierを使って状態管理したい
@@ -35,7 +35,7 @@ dependencies:
   flutter_state_notifier: ^0.7.1
 
   # データクラスのEqualsとかcopyWithとかを自動生成したい
-  freezed_annotation: ^1.1.0
+  freezed_annotation: ^2.2.0
 
   # Textの文字サイズを自動で調整したい
   auto_size_text: ^3.0.0
@@ -48,37 +48,37 @@ dependencies:
   device_preview_screenshot: ^1.0.0
 
   #  Listをグループ化したい
-  grouped_list: ^4.2.0
+  grouped_list: ^5.1.2
 
   # Row or Column の中に楽にスペースを挿入したい
   gap: ^2.0.0
 
   #firebase関連を導入したい
-  firebase_core: ^1.16.0
-  firebase_auth: ^3.3.17
-  cloud_firestore: ^3.1.14
-  cloud_functions: ^3.2.14
-  firebase_messaging: ^11.3.0
-  firebase_storage: ^10.2.15
-  firebase_crashlytics: ^2.7.2
-  firebase_analytics: ^9.1.7
-  firebase_dynamic_links: ^4.2.2
-  firebase_in_app_messaging: ^0.6.0+13
-  firebase_performance: ^0.8.0+11
-  firebase_database: ^9.0.13
-  firebase_remote_config: ^2.0.6
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.4.0
+  cloud_firestore: ^4.5.0
+  cloud_functions: ^4.1.0
+  firebase_messaging: ^14.4.0
+  firebase_storage: ^11.1.0
+  firebase_crashlytics: ^3.1.0
+  firebase_analytics: ^10.2.0
+  firebase_dynamic_links: ^5.1.0
+  firebase_in_app_messaging: ^0.7.1
+  firebase_performance: ^0.9.1
+  firebase_database: ^10.1.0
+  firebase_remote_config: ^4.0.0
 
   #キーワードと一致する文字列をハイライトしたい。
   substring_highlight: ^1.0.33
 
   #freezed用
-  analyzer: ^3.4.1
+  analyzer: ^5.2.0
 
   #設定画面を反映させたい
   settings_ui: ^2.0.2
 
   #ほかのSNSからログインしたい
-  google_sign_in: ^5.4.2
+  google_sign_in: ^6.1.0
   flutter_signin_button: ^2.0.0
 
   #カルセールスライダーを使いたい
@@ -97,12 +97,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
   # freezed用
   json_serializable: ^6.2.0
   build_runner: ^2.2.0
-  freezed: ^1.1.1
+  freezed: ^2.3.2
 
 flutter:
   uses-material-design: true

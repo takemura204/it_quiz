@@ -16,9 +16,4 @@ class HomeTestScreenController extends StateNotifier<HomeTestScreenState>
 
   @override
   void initState() {}
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

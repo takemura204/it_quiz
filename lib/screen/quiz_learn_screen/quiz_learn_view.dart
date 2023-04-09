@@ -4,7 +4,7 @@ part of 'quiz_learn_screen.dart';
 class _QuizStyleTitle extends ConsumerWidget {
   const _QuizStyleTitle(this.item);
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class _QuizStyleTitle extends ConsumerWidget {
               padding: const EdgeInsets.all(6.0),
               child: Text(
                 item.title,
-                style: context.texts.subtitle1,
+                style: context.texts.titleMedium,
               ),
             ),
             const Spacer(),
@@ -34,7 +34,7 @@ class _QuizStyleTitle extends ConsumerWidget {
 class _Question extends ConsumerWidget {
   const _Question(this.item);
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -67,7 +67,7 @@ class _Question extends ConsumerWidget {
 ///穴埋め問題(答え)
 class _AnsQuestion extends ConsumerWidget {
   const _AnsQuestion(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -94,7 +94,7 @@ class _AnsQuestion extends ConsumerWidget {
 ///穴埋め問題
 class _ConfirmQuestion extends ConsumerWidget {
   const _ConfirmQuestion(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -120,7 +120,7 @@ class _ConfirmQuestion extends ConsumerWidget {
 
 class _QuizProgress extends ConsumerWidget {
   const _QuizProgress(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -150,7 +150,7 @@ class _QuizProgress extends ConsumerWidget {
 class _ConfirmButton extends ConsumerWidget {
   const _ConfirmButton(this.item);
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -241,7 +241,7 @@ class _ConfirmButton extends ConsumerWidget {
 
 class _LapInfoBar extends ConsumerWidget {
   const _LapInfoBar(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -263,7 +263,7 @@ class _LapInfoBar extends ConsumerWidget {
                   padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
                   child: AutoSizeText(
                     lapIndex.toString(),
-                    style: context.texts.subtitle1,
+                    style: context.texts.titleMedium,
                     minFontSize: 20,
                   ),
                 ),
@@ -292,7 +292,7 @@ class _LapInfoBar extends ConsumerWidget {
                         .knowRememberQuestions
                         .length
                         .toString(),
-                    style: context.texts.subtitle1
+                    style: context.texts.titleMedium
                         ?.copyWith(color: Colors.green.shade400),
                     minFontSize: 20,
                   ),
@@ -313,7 +313,7 @@ class _LapInfoBar extends ConsumerWidget {
                         .unKnowRememberQuestions
                         .length
                         .toString(),
-                    style: context.texts.subtitle1
+                    style: context.texts.titleMedium
                         ?.copyWith(color: Colors.redAccent.shade100),
                     minFontSize: 20,
                   ),

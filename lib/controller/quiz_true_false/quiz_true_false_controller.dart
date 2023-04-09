@@ -2,9 +2,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_true_false/quiz_true_false_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../entity/quiz.dart';
 import '../../screen/screen_argument.dart';
 import '../home_review/home_review_screen_controller.dart';
+import '../quiz/quiz_state.dart';
 
 final quizTureFalseScreenControllerProvider = StateNotifierProvider<
     QuizTrueFalseScreenController, QuizTrueFalseScreenState>(
@@ -26,11 +26,6 @@ class QuizTrueFalseScreenController
     //選択肢表示
     shuffleAns();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   ///選択肢を混ぜる
@@ -65,7 +60,7 @@ class QuizTrueFalseScreenController
     if (ans) {
       //正解の時
       if (randomAns == quiz[state.quizIndex].ans) {
-        quiz[state.quizIndex] = Quiz(
+        quiz[state.quizIndex] = QuizState(
           quizId: quiz[state.quizIndex].quizId,
           question: quiz[state.quizIndex].question,
           ans: quiz[state.quizIndex].ans,
@@ -80,7 +75,7 @@ class QuizTrueFalseScreenController
       }
       //不正解の時
       else {
-        quiz[state.quizIndex] = Quiz(
+        quiz[state.quizIndex] = QuizState(
           quizId: quiz[state.quizIndex].quizId,
           question: quiz[state.quizIndex].question,
           ans: quiz[state.quizIndex].ans,
@@ -108,7 +103,7 @@ class QuizTrueFalseScreenController
       }
       //不正解の時
       else {
-        quiz[state.quizIndex] = Quiz(
+        quiz[state.quizIndex] = QuizState(
           quizId: quiz[state.quizIndex].quizId,
           question: quiz[state.quizIndex].question,
           ans: quiz[state.quizIndex].ans,
@@ -170,7 +165,7 @@ class QuizTrueFalseScreenController
     final correctList = [...state.correctList];
     //チェックした時
     if (!correctList[index].isWeak) {
-      correctList[index] = Quiz(
+      correctList[index] = QuizState(
         quizId: correctList[index].quizId,
         question: correctList[index].question,
         ans: correctList[index].ans,
@@ -185,7 +180,7 @@ class QuizTrueFalseScreenController
     }
     //チェックしてない時
     else {
-      correctList[index] = Quiz(
+      correctList[index] = QuizState(
         quizId: correctList[index].quizId,
         question: correctList[index].question,
         ans: correctList[index].ans,
@@ -205,7 +200,7 @@ class QuizTrueFalseScreenController
     final incorrectList = [...state.incorrectList];
     //チェックした時
     if (!incorrectList[index].isWeak) {
-      incorrectList[index] = Quiz(
+      incorrectList[index] = QuizState(
         quizId: incorrectList[index].quizId,
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,
@@ -220,7 +215,7 @@ class QuizTrueFalseScreenController
     }
     //チェックしてない時
     else {
-      incorrectList[index] = Quiz(
+      incorrectList[index] = QuizState(
         quizId: incorrectList[index].quizId,
         question: incorrectList[index].question,
         ans: incorrectList[index].ans,

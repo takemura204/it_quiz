@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/quiz_true_false/quiz_true_false_state.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
@@ -23,12 +22,10 @@ class QuizTureFalseScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
-        quizTureFalseScreenControllerProvider.overrideWithProvider(
-            StateNotifierProvider<QuizTrueFalseScreenController,
-                QuizTrueFalseScreenState>(
+        quizTureFalseScreenControllerProvider.overrideWith(
           (ref) =>
               QuizTrueFalseScreenController(ref: ref, arguments: arguments),
-        )),
+        ),
       ],
       child: _Scaffold(arguments),
     );

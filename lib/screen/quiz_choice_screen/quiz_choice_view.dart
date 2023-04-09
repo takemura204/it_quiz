@@ -3,7 +3,7 @@ part of 'quiz_choice_screen.dart';
 ///問題形式表示
 class _QuizStyleTitle extends ConsumerWidget {
   const _QuizStyleTitle(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +19,7 @@ class _QuizStyleTitle extends ConsumerWidget {
               padding: const EdgeInsets.all(6.0),
               child: Text(
                 item.title,
-                style: context.texts.subtitle1,
+                style: context.texts.titleMedium,
               ),
             ),
             const Spacer(),
@@ -34,7 +34,7 @@ class _QuizStyleTitle extends ConsumerWidget {
 class _Question extends ConsumerWidget {
   const _Question(this.item);
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,7 +65,7 @@ class _Question extends ConsumerWidget {
 
 class _AnsQuestion extends ConsumerWidget {
   const _AnsQuestion(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -92,7 +92,7 @@ class _AnsQuestion extends ConsumerWidget {
 
 class _QuizQuestion extends ConsumerWidget {
   const _QuizQuestion(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -119,7 +119,7 @@ class _QuizQuestion extends ConsumerWidget {
 
 class _QuizProgress extends ConsumerWidget {
   const _QuizProgress(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -133,13 +133,13 @@ class _QuizProgress extends ConsumerWidget {
           const Spacer(),
           AutoSizeText(
             quizIndex.toString(),
-            style: context.texts.subtitle1,
+            style: context.texts.titleMedium,
             minFontSize: 22,
           ),
           const Text("/"),
           AutoSizeText(
             item.quizList.length.toString(),
-            style: context.texts.bodyText1,
+            style: context.texts.bodyLarge,
             minFontSize: 18,
           ),
           const Spacer(),
@@ -151,7 +151,7 @@ class _QuizProgress extends ConsumerWidget {
 
 class _SelectAnswer extends ConsumerWidget {
   const _SelectAnswer(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -303,7 +303,7 @@ class _SelectAnswer extends ConsumerWidget {
 
 class _JudgeIcon extends ConsumerWidget {
   const _JudgeIcon(this.item);
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kentei_quiz/entity/quiz_item.dart';
+import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/screen/login_screen/login_screen.dart';
 import 'package:kentei_quiz/screen/profile_screen/profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
@@ -13,7 +13,7 @@ import 'create_account_screen/create_account_screen.dart';
 class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
   const QuizLearnScreenArguments({required this.item, required this.quizStyle});
 
-  final QuizItem item;
+  final QuizItemState item;
   final String quizStyle;
 
   @override
@@ -40,7 +40,7 @@ class QuizChoiceScreenArguments
     implements IScreenArguments {
   const QuizChoiceScreenArguments({required this.item});
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   String get screenNameFormat => "/quiz_choice";
@@ -67,7 +67,7 @@ class QuizTrueFalseScreenArguments
   const QuizTrueFalseScreenArguments(
       {required this.item, required this.quizStyle});
 
-  final QuizItem item;
+  final QuizItemState item;
   final String quizStyle;
 
   @override

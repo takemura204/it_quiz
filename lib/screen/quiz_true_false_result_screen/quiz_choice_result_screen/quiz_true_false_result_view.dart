@@ -24,7 +24,7 @@ class _AnsRateView extends ConsumerWidget {
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
                     "正解数",
-                    style: context.texts.subtitle1,
+                    style: context.texts.titleMedium,
                   ),
                 ),
                 const Spacer(),
@@ -39,13 +39,13 @@ class _AnsRateView extends ConsumerWidget {
               const Spacer(),
               AutoSizeText(
                 correctList.length.toString(),
-                style: context.texts.subtitle1,
+                style: context.texts.titleMedium,
                 minFontSize: 20,
               ),
               const Text("/"),
               AutoSizeText(
                 arguments.item.quizList.length.toString(),
-                style: context.texts.bodyText1,
+                style: context.texts.bodyLarge,
                 minFontSize: 16,
               ),
               const Spacer(),
@@ -83,7 +83,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
                           "間違えた問題",
-                          style: context.texts.subtitle1,
+                          style: context.texts.titleMedium,
                         ),
                       ),
                       const Spacer(),
@@ -196,7 +196,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
                           "正解した問題",
-                          style: context.texts.subtitle1,
+                          style: context.texts.titleMedium,
                         ),
                       ),
                       const Spacer(),

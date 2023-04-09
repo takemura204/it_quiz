@@ -43,44 +43,6 @@ class LoginErrorBar extends ConsumerWidget {
   }
 }
 
-///問題一覧Bar
-class QuizItemBar extends ConsumerWidget {
-  const QuizItemBar(
-      {required this.title, required this.onTap, required this.isCompleted});
-  final String title;
-  final VoidCallback? onTap;
-  final bool isCompleted;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        elevation: 1.0,
-        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 3.0),
-        child: Container(
-          child: ListTile(
-            contentPadding: const EdgeInsets.only(
-                left: 10.0, top: 1.0, bottom: 1.0, right: 5),
-            title: Text(
-              title,
-              style: const TextStyle(fontSize: 16),
-            ),
-            leading: isCompleted
-                ? Icon(
-                    Icons.pets,
-                    color: context.colors.main50.withOpacity(0.6),
-                  )
-                : const Icon(
-                    Icons.pets,
-                  ),
-            trailing: const Icon(Icons.arrow_forward_ios),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 ///設定タイトルBar
 class SettingTitleBar extends ConsumerWidget {
   const SettingTitleBar({required this.title, required this.onTap});

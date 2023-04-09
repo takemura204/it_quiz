@@ -3,7 +3,7 @@ part of 'quiz_learn_screen.dart';
 class _Body extends ConsumerWidget {
   const _Body(this.item);
 
-  final QuizItem item;
+  final QuizItemState item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
