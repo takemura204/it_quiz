@@ -163,7 +163,7 @@ class _ConfirmButton extends ConsumerWidget {
               GestureDetector(
                 onTap: () => ref
                     .read(quizLearnScreenControllerProvider.notifier)
-                    .tapUnKnownButton(),
+                    .tapIsKnowButton(false),
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
@@ -188,11 +188,11 @@ class _ConfirmButton extends ConsumerWidget {
                 onTap: () {
                   ref
                       .read(quizLearnScreenControllerProvider.notifier)
-                      .tapKnownButton();
+                      .tapIsKnowButton(true);
                   //「知っている」が全てになった時結果画面に遷移
                   if (ref
                           .watch(quizLearnScreenControllerProvider)
-                          .knowRememberQuestions
+                          .knowQuizList
                           .length ==
                       quizList.length) {
                     // context.showScreen(QuizLearnResultScreenArguments(
@@ -289,7 +289,7 @@ class _LapInfoBar extends ConsumerWidget {
                   child: AutoSizeText(
                     ref
                         .watch(quizLearnScreenControllerProvider)
-                        .knowRememberQuestions
+                        .knowQuizList
                         .length
                         .toString(),
                     style: context.texts.titleMedium
@@ -310,7 +310,7 @@ class _LapInfoBar extends ConsumerWidget {
                   child: AutoSizeText(
                     ref
                         .watch(quizLearnScreenControllerProvider)
-                        .unKnowRememberQuestions
+                        .unKnowQuizList
                         .length
                         .toString(),
                     style: context.texts.titleMedium

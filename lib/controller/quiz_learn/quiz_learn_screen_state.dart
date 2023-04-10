@@ -13,7 +13,7 @@ class QuizLearnScreenState with _$QuizLearnScreenState {
     @Default(0) final int quizIndex, //問題番号
     @Default(0) final int lapIndex, //何周目
     @Default([]) final List<QuizState> quizList,
-    @Default([]) final List<QuizState> knowRememberQuestions,
-    @Default([]) final List<QuizState> unKnowRememberQuestions,
+    @Default([]) final List<QuizState> knowQuizList,
+    @Default([]) final List<QuizState> unKnowQuizList,
   }) = _Create;
 }
