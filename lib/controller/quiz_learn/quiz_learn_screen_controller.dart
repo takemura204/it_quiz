@@ -47,16 +47,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     switchAnsView(); // 画面切り替え
   }
 
-  ///正解画面に切り替え
-  void switchAnsView() {
-    state = state.copyWith(isAnsView: !state.isAnsView);
-  }
-
-  ///結果画面に切り替え
-  void switchResultScreen() {
-    state = state.copyWith(isResultScreen: !state.isResultScreen);
-  }
-
   ///クイズ更新
   void setQuiz(bool isJudge) {
     final quizList = [...state.quizList];
@@ -134,7 +124,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     //問題が終わり,「知ってる」リストに全て含まれている場合
     else if (state.knowQuizList.length == item.quizList.length) {
       quizList.clear();
-      quizList.addAll(knowQuizList);
+      quizList.addAll(item.quizList);
       state = state.copyWith(
           quizIndex: 0,
           lapIndex: lapIndex + 1,
@@ -172,36 +162,9 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     );
   }
 
-  ///知らないリストに追加
-  void addUnKnowQuiz() {
-    final knowQuizList = [...state.knowQuizList];
-    final unKnowQuizList = [...state.unKnowQuizList];
-    final quizList = [...state.quizList];
-
-    //すでに含まれている場合
-    if (unKnowQuizList.contains(quizList[state.quizIndex])) {
-    }
-    //知ってるリストに含まれている場合
-    else if (knowQuizList.contains(quizList[state.quizIndex])) {
-      knowQuizList.remove(quizList[state.quizIndex]);
-      unKnowQuizList.add(quizList[state.quizIndex]);
-    }
-    //それ以外
-    else {
-      unKnowQuizList.add(quizList[state.quizIndex]);
-    }
-    state = state.copyWith(
-      knowQuizList: knowQuizList,
-      unKnowQuizList: unKnowQuizList,
-      quizList: quizList,
-    );
-    print(quizList.length);
-  }
-
   ///知っている問題のチェックボックス切り替え
-  void switchKnowCheckBox() {
+  void switchKnowCheckBox(int index) {
     final quizList = [...state.quizList];
-    final index = state.quizIndex;
     //チェックした時
     if (!quizList[index].isWeak) {
       quizList[index] = QuizState(
@@ -233,6 +196,16 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       //     .removeLearnQuiz(quizList[index]);
     }
     state = state.copyWith(quizList: quizList);
+  }
+
+  ///正解画面に切り替え
+  void switchAnsView() {
+    state = state.copyWith(isAnsView: !state.isAnsView);
+  }
+
+  ///結果画面に切り替え
+  void switchResultScreen() {
+    state = state.copyWith(isResultScreen: !state.isResultScreen);
   }
 
   ///クリアボタン

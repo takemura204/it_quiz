@@ -84,7 +84,7 @@ class _QuizResultView extends ConsumerWidget {
                               onTap: () => ref
                                   .read(quizLearnScreenControllerProvider
                                       .notifier)
-                                  .switchKnowCheckBox(),
+                                  .switchKnowCheckBox(index),
                               child: Container(
                                 alignment: Alignment.center,
                                 width: context.width * 0.1,
