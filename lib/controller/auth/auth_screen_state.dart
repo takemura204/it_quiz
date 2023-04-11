@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'auth_screen_state.freezed.dart';
 
 @freezed
-abstract class AuthScreenState with _$AuthScreenState {
+class AuthScreenState with _$AuthScreenState {
   const factory AuthScreenState({
     //ユーザー情報
     @Default('ゲスト') final String userName,

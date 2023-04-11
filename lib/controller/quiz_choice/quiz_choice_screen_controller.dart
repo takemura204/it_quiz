@@ -22,8 +22,17 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   @override
   void initState() {
+    addQuizList(); //クイズ追加
     shuffleChoice(); //選択肢表示
     super.initState();
+  }
+
+  ///クイズ更新
+  void addQuizList() {
+    //クイズリスト更新
+    final quizList = [...state.quizList];
+    quizList.addAll(item.quizList);
+    state = state.copyWith(quizList: quizList);
   }
 
   ///選択肢を混ぜる
@@ -43,7 +52,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ判定
   void judgementQuiz(String choice) {
-    final quizList = [...item.quizList];
+    final quizList = [...state.quizList];
     final quizIndex = state.quizIndex;
     //正解
     if (choice == quizList[quizIndex].ans) {
@@ -106,7 +115,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///チェックボックス切り替え
   void switchCheckBox(int index) {
-    final quizList = [...item.quizList];
+    final quizList = [...state.quizList];
     quizList[index] = QuizState(
       quizId: quizList[index].quizId,
       question: quizList[index].question,
@@ -118,8 +127,9 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     state = state.copyWith(quizList: quizList);
   }
 
+  ///クイズ更新
   void setResult() {
-    final quizList = item.quizList;
+    final quizList = state.quizList;
     final correctList = quizList.where((x) => x.isJudge == true).toList();
     final isResult = quizList.length == correctList.length;
     //homeStudyScreenに反映
