@@ -69,11 +69,12 @@ class _AnsQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
     final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
     return SubstringHighlight(
-      text: item.quizList[quizIndex].question,
-      term: item.quizList[quizIndex].ans,
+      text: quizList[quizIndex].question,
+      term: quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -96,13 +97,13 @@ class _QuizQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
     final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
 
     return SubstringHighlight(
-      text: item.quizList[quizIndex].question.replaceAll(
-          item.quizList[quizIndex].ans,
-          I18n().hideText(item.quizList[quizIndex].ans)),
-      term: item.quizList[quizIndex].ans,
+      text: quizList[quizIndex].question.replaceAll(
+          quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
+      term: quizList[quizIndex].ans,
       textStyle: TextStyle(
         color: context.colors.dark54,
         fontWeight: FontWeight.w500,
@@ -123,6 +124,7 @@ class _QuizProgress extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
     final quizIndex =
         ref.watch(quizChoiceScreenControllerProvider).quizIndex + 1;
 
@@ -138,7 +140,7 @@ class _QuizProgress extends ConsumerWidget {
           ),
           const Text("/"),
           AutoSizeText(
-            item.quizList.length.toString(),
+            quizList.length.toString(),
             style: context.texts.bodyLarge,
             minFontSize: 18,
           ),
@@ -155,10 +157,6 @@ class _SelectAnswer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
-    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
-    final choices = ref.watch(quizChoiceScreenControllerProvider).choices;
-
     return Container(
       width: context.width * 1.0,
       height: context.height * 0.2,
@@ -166,136 +164,66 @@ class _SelectAnswer extends ConsumerWidget {
       child: Column(
         children: [
           Row(
-            children: [
+            children: const [
               ///選択肢1
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[0]),
-                child: Container(
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Colors.black45)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    choices[0],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight:
-                                (choices[0] == item.quizList[quizIndex].ans)
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                            fontSize: context.width * 0.05,
-                            color: (choices[0] == item.quizList[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : TextStyle(fontSize: context.width * 0.05),
-                  ),
-                ),
-              ),
+              _SelectChoice(0),
 
               ///選択肢2
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[1]),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Colors.black45)),
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
-                  alignment: Alignment.center,
-                  child: Text(
-                    choices[1],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight:
-                                (choices[1] == item.quizList[quizIndex].ans)
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                            fontSize: context.width * 0.05,
-                            color: (choices[1] == item.quizList[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : TextStyle(fontSize: context.width * 0.05),
-                  ),
-                ),
-              ),
+              _SelectChoice(1),
             ],
           ),
           Row(
-            children: [
+            children: const [
               ///選択肢3
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[2]),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Colors.black45)),
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
-                  alignment: Alignment.center,
-                  child: Text(
-                    choices[2],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight:
-                                (choices[2] == item.quizList[quizIndex].ans)
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                            fontSize: context.width * 0.05,
-                            color: (choices[2] == item.quizList[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : TextStyle(fontSize: context.width * 0.05),
-                  ),
-                ),
-              ),
+              _SelectChoice(2),
 
               ///選択肢4
-              GestureDetector(
-                onTap: isAnsView
-                    ? null
-                    : () => ref
-                        .read(quizChoiceScreenControllerProvider.notifier)
-                        .tapChoiceButton(choices[3]),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Colors.black45)),
-                  width: context.width * 0.5,
-                  height: context.height * 0.1,
-                  alignment: Alignment.center,
-                  child: Text(
-                    choices[3],
-                    style: isAnsView
-                        ? TextStyle(
-                            fontWeight:
-                                (choices[3] == item.quizList[quizIndex].ans)
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                            fontSize: context.width * 0.05,
-                            color: (choices[3] == item.quizList[quizIndex].ans)
-                                ? Colors.green.withOpacity(0.7)
-                                : context.colors.main50.withOpacity(0.5),
-                          )
-                        : TextStyle(fontSize: context.width * 0.05),
-                  ),
-                ),
-              ),
+              _SelectChoice(3),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SelectChoice extends ConsumerWidget {
+  const _SelectChoice(this.index);
+  final int index;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
+    final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
+    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
+    final choices = ref.watch(quizChoiceScreenControllerProvider).choices;
+
+    return GestureDetector(
+      onTap: isAnsView
+          ? null
+          : () => ref
+              .read(quizChoiceScreenControllerProvider.notifier)
+              .tapChoiceButton(choices[index]),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(width: 0.5, color: Colors.black45)),
+        width: context.width * 0.5,
+        height: context.height * 0.1,
+        alignment: Alignment.center,
+        child: Text(
+          choices[index],
+          style: isAnsView
+              ? TextStyle(
+                  fontWeight: (choices[index] == quizList[quizIndex].ans)
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  fontSize: context.width * 0.05,
+                  color: (choices[index] == quizList[quizIndex].ans)
+                      ? Colors.green.withOpacity(0.7)
+                      : context.colors.main50.withOpacity(0.5),
+                )
+              : TextStyle(fontSize: context.width * 0.05),
+        ),
       ),
     );
   }
@@ -307,6 +235,7 @@ class _JudgeIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
     final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
     final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
 
@@ -314,9 +243,7 @@ class _JudgeIcon extends ConsumerWidget {
         ? Align(
             alignment: Alignment.center,
             child: Container(
-              // height: context.height * 1.0,
               width: context.width * 1.0,
-
               child: isJudge
                   ? Icon(
                       Icons.circle_outlined,

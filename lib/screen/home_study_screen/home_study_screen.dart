@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
-import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
-import '../../resource/quiz/quiz_item_resource.dart';
 import '../../view/dialog.dart';
 
 class HomeStudyScreen extends ConsumerWidget {
@@ -14,8 +13,26 @@ class HomeStudyScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return ProviderScope(
+      overrides: [
+        homeStudyScreenControllerProvider.overrideWith(
+          (ref) => HomeStudyScreenController(ref: ref),
+        ),
+      ],
+      child: const _Scaffold(),
+    );
+  }
+}
+
+class _Scaffold extends ConsumerWidget {
+  const _Scaffold();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final quizItemList =
+        ref.watch(homeStudyScreenControllerProvider).quizItemList;
     return GroupedListView<QuizItemState, String>(
-      elements: quizItems,
+      elements: quizItemList,
       groupBy: (QuizItemState item) => item.group,
       groupComparator: (value1, value2) =>
           value2.compareTo(value1), //グループのカスタムソートを定義
@@ -36,16 +53,9 @@ class HomeStudyScreen extends ConsumerWidget {
       ),
       indexedItemBuilder:
           (BuildContext context, QuizItemState item, int index) {
-        return ProviderScope(
-          overrides: [
-            quizChoiceScreenControllerProvider.overrideWith(
-              (ref) => QuizChoiceScreenController(ref: ref, item: item),
-            ),
-          ],
-          child: QuizItemBar(
-            item: item,
-            index: index,
-          ),
+        return QuizItemBar(
+          item: item,
+          index: index,
         );
       },
     );
@@ -60,23 +70,13 @@ class QuizItemBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = quizItems.reversed.toList();
-    final quizItem =
-        ref.watch(quizChoiceScreenControllerProvider).quizItem ?? item;
     return GestureDetector(
       onTap: () {
-        print(quizList[index].isCompleted);
-        quizList[index] = QuizItemState(
-          id: quizItem.id,
-          group: quizItem.group,
-          title: quizItem.title,
-          isCompleted: true,
-          quizList: quizItem.quizList,
-        );
-        print(quizList[index].isCompleted);
-        showDialog(
-            context: context, builder: (_) => SelectQuizDialog(quizItem));
-        // ref.read(quizChoiceScreenControllerProvider.notifier).setQuizScore();
+        ref
+            .read(homeStudyScreenControllerProvider.notifier)
+            .tapQuizItemBar(index);
+        //ダイアログ表示
+        showDialog(context: context, builder: (_) => SelectQuizDialog(item));
       },
       child: Card(
         elevation: 1.0,
@@ -89,7 +89,7 @@ class QuizItemBar extends ConsumerWidget {
               item.title,
               style: const TextStyle(fontSize: 16),
             ),
-            leading: quizList[index].isCompleted
+            leading: item.isCompleted
                 ? Icon(
                     Icons.pets,
                     color: context.colors.main50.withOpacity(0.6),

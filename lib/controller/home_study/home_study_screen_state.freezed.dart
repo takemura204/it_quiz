@@ -16,10 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeStudyScreenState {
-  int get quizIndex => throw _privateConstructorUsedError; //クイズ番号
-  List<QuizItemState> get quizItemList => throw _privateConstructorUsedError;
+  int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
   int get score => throw _privateConstructorUsedError; //正解数
-  bool get isCompleted => throw _privateConstructorUsedError;
+  List<QuizItemState> get quizItemList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStudyScreenStateCopyWith<HomeStudyScreenState> get copyWith =>
@@ -32,11 +31,7 @@ abstract class $HomeStudyScreenStateCopyWith<$Res> {
           $Res Function(HomeStudyScreenState) then) =
       _$HomeStudyScreenStateCopyWithImpl<$Res, HomeStudyScreenState>;
   @useResult
-  $Res call(
-      {int quizIndex,
-      List<QuizItemState> quizItemList,
-      int score,
-      bool isCompleted});
+  $Res call({int itemIndex, int score, List<QuizItemState> quizItemList});
 }
 
 /// @nodoc
@@ -53,28 +48,23 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quizIndex = null,
-    Object? quizItemList = null,
+    Object? itemIndex = null,
     Object? score = null,
-    Object? isCompleted = null,
+    Object? quizItemList = null,
   }) {
     return _then(_value.copyWith(
-      quizIndex: null == quizIndex
-          ? _value.quizIndex
-          : quizIndex // ignore: cast_nullable_to_non_nullable
+      itemIndex: null == itemIndex
+          ? _value.itemIndex
+          : itemIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       quizItemList: null == quizItemList
           ? _value.quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItemState>,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -86,11 +76,7 @@ abstract class _$$_CreateCopyWith<$Res>
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int quizIndex,
-      List<QuizItemState> quizItemList,
-      int score,
-      bool isCompleted});
+  $Res call({int itemIndex, int score, List<QuizItemState> quizItemList});
 }
 
 /// @nodoc
@@ -103,28 +89,23 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quizIndex = null,
-    Object? quizItemList = null,
+    Object? itemIndex = null,
     Object? score = null,
-    Object? isCompleted = null,
+    Object? quizItemList = null,
   }) {
     return _then(_$_Create(
-      quizIndex: null == quizIndex
-          ? _value.quizIndex
-          : quizIndex // ignore: cast_nullable_to_non_nullable
+      itemIndex: null == itemIndex
+          ? _value.itemIndex
+          : itemIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       quizItemList: null == quizItemList
           ? _value._quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItemState>,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -133,18 +114,21 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create implements _Create {
   const _$_Create(
-      {this.quizIndex = 0,
-      final List<QuizItemState> quizItemList = const [],
+      {this.itemIndex = 0,
       this.score = 0,
-      this.isCompleted = false})
+      final List<QuizItemState> quizItemList = const []})
       : _quizItemList = quizItemList;
 
   @override
   @JsonKey()
-  final int quizIndex;
+  final int itemIndex;
 //クイズ番号
+  @override
+  @JsonKey()
+  final int score;
+//正解数
   final List<QuizItemState> _quizItemList;
-//クイズ番号
+//正解数
   @override
   @JsonKey()
   List<QuizItemState> get quizItemList {
@@ -154,16 +138,8 @@ class _$_Create implements _Create {
   }
 
   @override
-  @JsonKey()
-  final int score;
-//正解数
-  @override
-  @JsonKey()
-  final bool isCompleted;
-
-  @override
   String toString() {
-    return 'HomeStudyScreenState(quizIndex: $quizIndex, quizItemList: $quizItemList, score: $score, isCompleted: $isCompleted)';
+    return 'HomeStudyScreenState(itemIndex: $itemIndex, score: $score, quizItemList: $quizItemList)';
   }
 
   @override
@@ -171,18 +147,16 @@ class _$_Create implements _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
-            (identical(other.quizIndex, quizIndex) ||
-                other.quizIndex == quizIndex) &&
-            const DeepCollectionEquality()
-                .equals(other._quizItemList, _quizItemList) &&
+            (identical(other.itemIndex, itemIndex) ||
+                other.itemIndex == itemIndex) &&
             (identical(other.score, score) || other.score == score) &&
-            (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted));
+            const DeepCollectionEquality()
+                .equals(other._quizItemList, _quizItemList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, quizIndex,
-      const DeepCollectionEquality().hash(_quizItemList), score, isCompleted);
+  int get hashCode => Object.hash(runtimeType, itemIndex, score,
+      const DeepCollectionEquality().hash(_quizItemList));
 
   @JsonKey(ignore: true)
   @override
@@ -193,19 +167,16 @@ class _$_Create implements _Create {
 
 abstract class _Create implements HomeStudyScreenState {
   const factory _Create(
-      {final int quizIndex,
-      final List<QuizItemState> quizItemList,
+      {final int itemIndex,
       final int score,
-      final bool isCompleted}) = _$_Create;
+      final List<QuizItemState> quizItemList}) = _$_Create;
 
   @override
-  int get quizIndex;
+  int get itemIndex;
   @override //クイズ番号
-  List<QuizItemState> get quizItemList;
-  @override
   int get score;
   @override //正解数
-  bool get isCompleted;
+  List<QuizItemState> get quizItemList;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

@@ -152,14 +152,13 @@ class SelectQuizDialog extends ConsumerWidget {
                     const Spacer(),
                     Row(
                       children: [
+                        ///正解数
                         Text(
                           item.quizList
                               .where((x) => x.isJudge == true)
                               .toList()
                               .length
                               .toString(),
-
-                          ///正解数
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

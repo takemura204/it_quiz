@@ -7,7 +7,7 @@ class _QuizResultView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = item.quizList;
+    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
     return Column(
       children: quizList.isEmpty
           ? []
@@ -87,7 +87,7 @@ class _QuizResultView extends ConsumerWidget {
                                 ref
                                     .read(quizChoiceScreenControllerProvider
                                         .notifier)
-                                    .tapCorrectCheckBox(index);
+                                    .switchCheckBox(index);
                               },
                               child: Container(
                                 alignment: Alignment.center,

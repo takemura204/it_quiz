@@ -21,13 +21,7 @@ mixin _$QuizChoiceScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
-  List<QuizState> get correctList => throw _privateConstructorUsedError; //正解リスト
-  List<QuizState> get incorrectList =>
-      throw _privateConstructorUsedError; //不正解リスト
-  List<QuizState> get reviewList => throw _privateConstructorUsedError; //復習リスト
-  QuizItemState? get quizItem => throw _privateConstructorUsedError;
-  List<QuizItemState> get quizItemList => throw _privateConstructorUsedError;
-  int get scoreCount => throw _privateConstructorUsedError;
+  List<QuizState> get quizList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizChoiceScreenStateCopyWith<QuizChoiceScreenState> get copyWith =>
@@ -46,14 +40,7 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<QuizState> correctList,
-      List<QuizState> incorrectList,
-      List<QuizState> reviewList,
-      QuizItemState? quizItem,
-      List<QuizItemState> quizItemList,
-      int scoreCount});
-
-  $QuizItemStateCopyWith<$Res>? get quizItem;
+      List<QuizState> quizList});
 }
 
 /// @nodoc
@@ -75,12 +62,7 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
     Object? isResultScreen = null,
     Object? quizIndex = null,
     Object? choices = null,
-    Object? correctList = null,
-    Object? incorrectList = null,
-    Object? reviewList = null,
-    Object? quizItem = freezed,
-    Object? quizItemList = null,
-    Object? scoreCount = null,
+    Object? quizList = null,
   }) {
     return _then(_value.copyWith(
       isAnsView: null == isAnsView
@@ -103,43 +85,11 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
           ? _value.choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      correctList: null == correctList
-          ? _value.correctList
-          : correctList // ignore: cast_nullable_to_non_nullable
+      quizList: null == quizList
+          ? _value.quizList
+          : quizList // ignore: cast_nullable_to_non_nullable
               as List<QuizState>,
-      incorrectList: null == incorrectList
-          ? _value.incorrectList
-          : incorrectList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
-      reviewList: null == reviewList
-          ? _value.reviewList
-          : reviewList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
-      quizItem: freezed == quizItem
-          ? _value.quizItem
-          : quizItem // ignore: cast_nullable_to_non_nullable
-              as QuizItemState?,
-      quizItemList: null == quizItemList
-          ? _value.quizItemList
-          : quizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItemState>,
-      scoreCount: null == scoreCount
-          ? _value.scoreCount
-          : scoreCount // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuizItemStateCopyWith<$Res>? get quizItem {
-    if (_value.quizItem == null) {
-      return null;
-    }
-
-    return $QuizItemStateCopyWith<$Res>(_value.quizItem!, (value) {
-      return _then(_value.copyWith(quizItem: value) as $Val);
-    });
   }
 }
 
@@ -156,15 +106,7 @@ abstract class _$$_CreateCopyWith<$Res>
       bool isResultScreen,
       int quizIndex,
       List<String> choices,
-      List<QuizState> correctList,
-      List<QuizState> incorrectList,
-      List<QuizState> reviewList,
-      QuizItemState? quizItem,
-      List<QuizItemState> quizItemList,
-      int scoreCount});
-
-  @override
-  $QuizItemStateCopyWith<$Res>? get quizItem;
+      List<QuizState> quizList});
 }
 
 /// @nodoc
@@ -182,12 +124,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isResultScreen = null,
     Object? quizIndex = null,
     Object? choices = null,
-    Object? correctList = null,
-    Object? incorrectList = null,
-    Object? reviewList = null,
-    Object? quizItem = freezed,
-    Object? quizItemList = null,
-    Object? scoreCount = null,
+    Object? quizList = null,
   }) {
     return _then(_$_Create(
       isAnsView: null == isAnsView
@@ -210,30 +147,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value._choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      correctList: null == correctList
-          ? _value._correctList
-          : correctList // ignore: cast_nullable_to_non_nullable
+      quizList: null == quizList
+          ? _value._quizList
+          : quizList // ignore: cast_nullable_to_non_nullable
               as List<QuizState>,
-      incorrectList: null == incorrectList
-          ? _value._incorrectList
-          : incorrectList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
-      reviewList: null == reviewList
-          ? _value._reviewList
-          : reviewList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
-      quizItem: freezed == quizItem
-          ? _value.quizItem
-          : quizItem // ignore: cast_nullable_to_non_nullable
-              as QuizItemState?,
-      quizItemList: null == quizItemList
-          ? _value._quizItemList
-          : quizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItemState>,
-      scoreCount: null == scoreCount
-          ? _value.scoreCount
-          : scoreCount // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -247,17 +164,9 @@ class _$_Create extends _Create {
       this.isResultScreen = false,
       this.quizIndex = 0,
       final List<String> choices = const [],
-      final List<QuizState> correctList = const [],
-      final List<QuizState> incorrectList = const [],
-      final List<QuizState> reviewList = const [],
-      this.quizItem,
-      final List<QuizItemState> quizItemList = const [],
-      this.scoreCount = 0})
+      final List<QuizState> quizList = const []})
       : _choices = choices,
-        _correctList = correctList,
-        _incorrectList = incorrectList,
-        _reviewList = reviewList,
-        _quizItemList = quizItemList,
+        _quizList = quizList,
         super._();
 
   @override
@@ -286,57 +195,19 @@ class _$_Create extends _Create {
   }
 
 //選択肢
-  final List<QuizState> _correctList;
+  final List<QuizState> _quizList;
 //選択肢
   @override
   @JsonKey()
-  List<QuizState> get correctList {
-    if (_correctList is EqualUnmodifiableListView) return _correctList;
+  List<QuizState> get quizList {
+    if (_quizList is EqualUnmodifiableListView) return _quizList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_correctList);
+    return EqualUnmodifiableListView(_quizList);
   }
-
-//正解リスト
-  final List<QuizState> _incorrectList;
-//正解リスト
-  @override
-  @JsonKey()
-  List<QuizState> get incorrectList {
-    if (_incorrectList is EqualUnmodifiableListView) return _incorrectList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_incorrectList);
-  }
-
-//不正解リスト
-  final List<QuizState> _reviewList;
-//不正解リスト
-  @override
-  @JsonKey()
-  List<QuizState> get reviewList {
-    if (_reviewList is EqualUnmodifiableListView) return _reviewList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reviewList);
-  }
-
-//復習リスト
-  @override
-  final QuizItemState? quizItem;
-  final List<QuizItemState> _quizItemList;
-  @override
-  @JsonKey()
-  List<QuizItemState> get quizItemList {
-    if (_quizItemList is EqualUnmodifiableListView) return _quizItemList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_quizItemList);
-  }
-
-  @override
-  @JsonKey()
-  final int scoreCount;
 
   @override
   String toString() {
-    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, choices: $choices, correctList: $correctList, incorrectList: $incorrectList, reviewList: $reviewList, quizItem: $quizItem, quizItemList: $quizItemList, scoreCount: $scoreCount)';
+    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, choices: $choices, quizList: $quizList)';
   }
 
   @override
@@ -352,18 +223,7 @@ class _$_Create extends _Create {
             (identical(other.quizIndex, quizIndex) ||
                 other.quizIndex == quizIndex) &&
             const DeepCollectionEquality().equals(other._choices, _choices) &&
-            const DeepCollectionEquality()
-                .equals(other._correctList, _correctList) &&
-            const DeepCollectionEquality()
-                .equals(other._incorrectList, _incorrectList) &&
-            const DeepCollectionEquality()
-                .equals(other._reviewList, _reviewList) &&
-            (identical(other.quizItem, quizItem) ||
-                other.quizItem == quizItem) &&
-            const DeepCollectionEquality()
-                .equals(other._quizItemList, _quizItemList) &&
-            (identical(other.scoreCount, scoreCount) ||
-                other.scoreCount == scoreCount));
+            const DeepCollectionEquality().equals(other._quizList, _quizList));
   }
 
   @override
@@ -374,12 +234,7 @@ class _$_Create extends _Create {
       isResultScreen,
       quizIndex,
       const DeepCollectionEquality().hash(_choices),
-      const DeepCollectionEquality().hash(_correctList),
-      const DeepCollectionEquality().hash(_incorrectList),
-      const DeepCollectionEquality().hash(_reviewList),
-      quizItem,
-      const DeepCollectionEquality().hash(_quizItemList),
-      scoreCount);
+      const DeepCollectionEquality().hash(_quizList));
 
   @JsonKey(ignore: true)
   @override
@@ -395,12 +250,7 @@ abstract class _Create extends QuizChoiceScreenState {
       final bool isResultScreen,
       final int quizIndex,
       final List<String> choices,
-      final List<QuizState> correctList,
-      final List<QuizState> incorrectList,
-      final List<QuizState> reviewList,
-      final QuizItemState? quizItem,
-      final List<QuizItemState> quizItemList,
-      final int scoreCount}) = _$_Create;
+      final List<QuizState> quizList}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -414,17 +264,7 @@ abstract class _Create extends QuizChoiceScreenState {
   @override //問題番号
   List<String> get choices;
   @override //選択肢
-  List<QuizState> get correctList;
-  @override //正解リスト
-  List<QuizState> get incorrectList;
-  @override //不正解リスト
-  List<QuizState> get reviewList;
-  @override //復習リスト
-  QuizItemState? get quizItem;
-  @override
-  List<QuizItemState> get quizItemList;
-  @override
-  int get scoreCount;
+  List<QuizState> get quizList;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

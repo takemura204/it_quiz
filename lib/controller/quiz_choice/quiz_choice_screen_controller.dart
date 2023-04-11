@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../home_review/home_review_screen_controller.dart';
 import '../quiz/quiz_state.dart';
 import '../quiz_item/quiz_item_state.dart';
 
@@ -18,13 +18,11 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     initState();
   }
   final Ref ref;
-  // QuizChoiceScreenArguments arguments;
   QuizItemState item;
 
   @override
   void initState() {
-    //選択肢表示
-    shuffleChoice();
+    shuffleChoice(); //選択肢表示
     super.initState();
   }
 
@@ -39,48 +37,37 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///選択肢を押した時
   void tapChoiceButton(String choice) {
-    //正誤判定,スコア判定
-    judgementQuiz(choice);
-    //答え表示,次の問題
-    switchAnsView();
+    judgementQuiz(choice); //正誤判定,スコア判定
+    switchAnsView(); //答え表示,次の問題
   }
 
   ///クイズ判定
   void judgementQuiz(String choice) {
-    final quizList = item.quizList;
-    final correctList = [...state.correctList];
-
+    final quizList = [...item.quizList];
+    final quizIndex = state.quizIndex;
     //正解
-    if (choice == quizList[state.quizIndex].ans) {
-      quizList[state.quizIndex] = QuizState(
-        quizId: quizList[state.quizIndex].quizId,
-        question: quizList[state.quizIndex].question,
-        ans: quizList[state.quizIndex].ans,
+    if (choice == quizList[quizIndex].ans) {
+      quizList[quizIndex] = QuizState(
+        quizId: quizList[quizIndex].quizId,
+        question: quizList[quizIndex].question,
+        ans: quizList[quizIndex].ans,
         isJudge: true, //正解
-        isWeak: quizList[state.quizIndex].isWeak, //苦手リスト除外
-        choices: quizList[state.quizIndex].choices,
+        isWeak: quizList[quizIndex].isWeak, //苦手リスト除外
+        choices: quizList[quizIndex].choices,
       );
-      //スコア反映
-      correctList.add(quizList[state.quizIndex]);
-      state = state.copyWith(isJudge: true, correctList: quizList);
+      state = state.copyWith(isJudge: true, quizList: quizList);
     }
     //不正解
     else {
-      quizList[state.quizIndex] = QuizState(
-        quizId: quizList[state.quizIndex].quizId,
-        question: quizList[state.quizIndex].question,
-        ans: quizList[state.quizIndex].ans,
-        choices: quizList[state.quizIndex].choices,
+      quizList[quizIndex] = QuizState(
+        quizId: quizList[quizIndex].quizId,
+        question: quizList[quizIndex].question,
+        ans: quizList[quizIndex].ans,
+        choices: quizList[quizIndex].choices,
         isJudge: false, //不正解
         isWeak: true, //苦手リスト追加
       );
-      correctList.add(quizList[state.quizIndex]);
-      //復習リストに追加
-      ref
-          .read(homeReviewScreenControllerProvider.notifier)
-          .addChoiceQuiz(quizList[state.quizIndex]);
-
-      state = state.copyWith(isJudge: false, correctList: quizList);
+      state = state.copyWith(isJudge: false, quizList: quizList);
     }
   }
 
@@ -100,7 +87,6 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     //問題が終わった時
     if (quizIndex == item.quizList.length - 1) {
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
-      setQuizScore();
     }
     //問題がまだある時
     else {
@@ -115,78 +101,30 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       quizIndex: 0,
       isAnsView: false,
       isResultScreen: false,
-      correctList: [],
-      incorrectList: [],
     );
   }
 
   ///チェックボックス切り替え
-  void tapCorrectCheckBox(int index) {
-    final quizList = item.quizList;
-    //チェックした時
-    if (!quizList[index].isWeak) {
-      quizList[index] = QuizState(
-        quizId: quizList[index].quizId,
-        question: quizList[index].question,
-        ans: quizList[index].ans,
-        isWeak: true,
-        isJudge: quizList[index].isJudge,
-        choices: quizList[index].choices,
-      );
-      //復習リストに追加
-      ref
-          .read(homeReviewScreenControllerProvider.notifier)
-          .addLearnQuiz(quizList[index]);
-    }
-    //チェック外した時
-    else {
-      quizList[index] = QuizState(
-        quizId: quizList[index].quizId,
-        question: quizList[index].question,
-        ans: quizList[index].ans,
-        isWeak: false,
-        isJudge: quizList[index].isJudge,
-        choices: quizList[index].choices,
-      );
-      //復習リストから除外
-      ref
-          .read(homeReviewScreenControllerProvider.notifier)
-          .removeLearnQuiz(quizList[index]);
-    }
-    state = state.copyWith(correctList: quizList);
+  void switchCheckBox(int index) {
+    final quizList = [...item.quizList];
+    quizList[index] = QuizState(
+      quizId: quizList[index].quizId,
+      question: quizList[index].question,
+      ans: quizList[index].ans,
+      isWeak: !quizList[index].isWeak,
+      isJudge: quizList[index].isJudge,
+      choices: quizList[index].choices,
+    );
+    state = state.copyWith(quizList: quizList);
   }
 
-  ///クイズスコア反映
-  void setQuizScore() {
-    var quizItem = item;
-    final scoreCount =
-        quizItem.quizList.where((x) => x.isJudge == true).toList().length;
-    final quizCount = quizItem.quizList.length;
-
-    //全問正解の時
-    if (scoreCount == quizCount) {
-      quizItem = QuizItemState(
-        id: quizItem.id,
-        group: quizItem.group,
-        title: quizItem.title,
-        isCompleted: true,
-        quizList: quizItem.quizList,
-      );
-    }
-    //全問正解じゃない時
-    else {
-      quizItem = QuizItemState(
-        id: quizItem.id,
-        group: quizItem.group,
-        title: quizItem.title,
-        isCompleted: true,
-        quizList: quizItem.quizList,
-      );
-    }
-    print(quizItem.isCompleted);
-    state = state.copyWith(
-        scoreCount:
-            item.quizList.where((x) => x.isJudge == true).toList().length,
-        quizItem: quizItem);
+  void setResult() {
+    final quizList = item.quizList;
+    final correctList = quizList.where((x) => x.isJudge == true).toList();
+    final isResult = quizList.length == correctList.length;
+    //homeStudyScreenに反映
+    ref
+        .read(homeStudyScreenControllerProvider.notifier)
+        .setQuizItem(isResult, correctList.length);
   }
 }
