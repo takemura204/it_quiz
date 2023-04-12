@@ -4,6 +4,7 @@ import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/resource/quiz/quiz_item_resource.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../quiz/quiz_state.dart';
 import 'home_study_screen_state.dart';
 
 final homeStudyScreenControllerProvider =
@@ -37,6 +38,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   ///QuizItemBarをタップした時
   void tapQuizItemBar(int index) {
     setItemIndex(index); //問題番号を設定
+    setQuizItem(true, state.quizItemList[index].quizList);
   }
 
   ///クイズ番号更新
@@ -45,17 +47,22 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   ///クイズ更新
-  void setQuizItem(bool isCompleted, int score) {
-    final quizItemList = [...state.quizItemList];
+  void setQuizItem(bool isCompleted, List<QuizState> quizList) {
+    final quizItemList = [...quizItems];
     final itemIndex = state.itemIndex;
+    final score = quizList.where((x) => x.isJudge == true).toList().length;
     quizItemList[itemIndex] = QuizItemState(
       id: quizItemList[itemIndex].id,
       group: quizItemList[itemIndex].group,
       title: quizItemList[itemIndex].title,
-      isCompleted: isCompleted,
+      isCompleted: true,
       quizList: quizItemList[itemIndex].quizList,
+      score: score,
     );
-    state = state.copyWith(quizItemList: quizItemList, score: score);
+
+    print(quizItemList[itemIndex].isCompleted);
+
+    state = state.copyWith(quizItemList: quizItemList);
   }
 
   List<QuizItemState> groupAndSort(List<QuizItemState> items) {

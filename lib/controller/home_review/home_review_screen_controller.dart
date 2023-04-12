@@ -53,6 +53,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       quizList: quizList,
       isCompleted: false,
+      score: 0,
     );
 
     state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
@@ -69,6 +70,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       isCompleted: false,
       quizList: [],
+      score: 0,
     );
 
     state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
@@ -92,6 +94,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       isCompleted: false,
       quizList: quizList,
+      score: 0,
     );
 
     state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
@@ -110,6 +113,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "一問一答で復習する",
       isCompleted: false,
       quizList: quizList,
+      score: 0,
     );
 
     state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
@@ -133,6 +137,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "○×問題で復習する",
       isCompleted: false,
       quizList: quizList,
+      score: 0,
     );
 
     print(reviewItem[2].quizList.length);
@@ -153,6 +158,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       title: "○×問題で復習する",
       isCompleted: false,
       quizList: quizList,
+      score: 0,
     );
 
     print(reviewItem[2].quizList.length);
@@ -161,11 +167,13 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
 }
 
 const reviewLearnQuiz = QuizItemState(
-    id: 1,
-    group: "LearnQuiz",
-    title: "一問一答で復習する",
-    isCompleted: false,
-    quizList: []);
+  id: 1,
+  group: "LearnQuiz",
+  title: "一問一答で復習する",
+  isCompleted: false,
+  quizList: [],
+  score: 0,
+);
 
 const reviewChoiceQuiz = QuizItemState(
   id: 2,
@@ -173,6 +181,7 @@ const reviewChoiceQuiz = QuizItemState(
   title: "選択問題で復習する",
   isCompleted: false,
   quizList: [],
+  score: 0,
 );
 
 const reviewTrueFalseQuiz = QuizItemState(
@@ -181,4 +190,5 @@ const reviewTrueFalseQuiz = QuizItemState(
   title: "○×問題で復習する",
   isCompleted: false,
   quizList: [],
+  score: 0,
 );

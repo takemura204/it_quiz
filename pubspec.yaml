@@ -41,7 +41,7 @@ dependencies:
   auto_size_text: ^3.0.0
 
   # アプリのローカルストレージに値を保存したい
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.1.0
 
   #様々なデバイス上でのレイアウトを確認したい
   device_preview: ^1.0.0

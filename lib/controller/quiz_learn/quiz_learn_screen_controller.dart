@@ -3,9 +3,10 @@ import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../home_study/home_study_screen_controller.dart';
 import '../quiz/quiz_state.dart';
 
-final quizLearnScreenControllerProvider =
+final quizLearnScreenProvider =
     StateNotifierProvider<QuizLearnScreenController, QuizLearnScreenState>(
   (ref) => throw UnimplementedError(),
 );
@@ -130,6 +131,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
           lapIndex: lapIndex + 1,
           isResultScreen: true,
           quizList: quizList);
+      setResult(); //結果反映
     }
     //まだ問題が続蹴られる時
     else {
@@ -175,10 +177,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         isJudge: quizList[index].isJudge,
         choices: quizList[index].choices,
       );
-      //復習リストに追加
-      // ref
-      //     .read(homeReviewScreenControllerProvider.notifier)
-      //     .addLearnQuiz(quizList[index]);
     }
     //チェック外した時
     else {
@@ -190,10 +188,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         isJudge: quizList[index].isJudge,
         choices: quizList[index].choices,
       );
-      //復習リストから除外
-      // ref
-      //     .read(homeReviewScreenControllerProvider.notifier)
-      //     .removeLearnQuiz(quizList[index]);
     }
     state = state.copyWith(quizList: quizList);
   }
@@ -218,5 +212,15 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       knowQuizList: [],
       unKnowQuizList: [],
     );
+  }
+
+  ///クイズ更新
+  void setResult() {
+    final quizList = state.quizList;
+    final correctList = quizList.where((x) => x.isJudge == true).toList();
+    final isResult = quizList.length == correctList.length;
+    ref
+        .read(homeStudyScreenControllerProvider.notifier)
+        .setQuizItem(isResult, quizList); //homeStudyScreenに反映
   }
 }

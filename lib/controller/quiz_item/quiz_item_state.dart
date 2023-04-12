@@ -13,5 +13,6 @@ class QuizItemState with _$QuizItemState {
     required final String title, //問題タイトル
     required final bool isCompleted, //全て問題を解いたか
     required final List<QuizState> quizList, //クイズ一覧
+    required final int score, //正解数
   }) = _Create;
 }

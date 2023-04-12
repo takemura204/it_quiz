@@ -20,7 +20,8 @@ mixin _$QuizItemState {
   String get group => throw _privateConstructorUsedError; //問題のジャンル別に分ける
   String get title => throw _privateConstructorUsedError; //問題タイトル
   bool get isCompleted => throw _privateConstructorUsedError; //全て問題を解いたか
-  List<QuizState> get quizList => throw _privateConstructorUsedError;
+  List<QuizState> get quizList => throw _privateConstructorUsedError; //クイズ一覧
+  int get score => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizItemStateCopyWith<QuizItemState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $QuizItemStateCopyWith<$Res> {
       String group,
       String title,
       bool isCompleted,
-      List<QuizState> quizList});
+      List<QuizState> quizList,
+      int score});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$QuizItemStateCopyWithImpl<$Res, $Val extends QuizItemState>
     Object? title = null,
     Object? isCompleted = null,
     Object? quizList = null,
+    Object? score = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -81,6 +84,10 @@ class _$QuizItemStateCopyWithImpl<$Res, $Val extends QuizItemState>
           ? _value.quizList
           : quizList // ignore: cast_nullable_to_non_nullable
               as List<QuizState>,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -97,7 +104,8 @@ abstract class _$$_CreateCopyWith<$Res>
       String group,
       String title,
       bool isCompleted,
-      List<QuizState> quizList});
+      List<QuizState> quizList,
+      int score});
 }
 
 /// @nodoc
@@ -115,6 +123,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? title = null,
     Object? isCompleted = null,
     Object? quizList = null,
+    Object? score = null,
   }) {
     return _then(_$_Create(
       id: null == id
@@ -137,6 +146,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value._quizList
           : quizList // ignore: cast_nullable_to_non_nullable
               as List<QuizState>,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -149,7 +162,8 @@ class _$_Create implements _Create {
       required this.group,
       required this.title,
       required this.isCompleted,
-      required final List<QuizState> quizList})
+      required final List<QuizState> quizList,
+      required this.score})
       : _quizList = quizList;
 
   @override
@@ -173,9 +187,13 @@ class _$_Create implements _Create {
     return EqualUnmodifiableListView(_quizList);
   }
 
+//クイズ一覧
+  @override
+  final int score;
+
   @override
   String toString() {
-    return 'QuizItemState(id: $id, group: $group, title: $title, isCompleted: $isCompleted, quizList: $quizList)';
+    return 'QuizItemState(id: $id, group: $group, title: $title, isCompleted: $isCompleted, quizList: $quizList, score: $score)';
   }
 
   @override
@@ -188,12 +206,13 @@ class _$_Create implements _Create {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.isCompleted, isCompleted) ||
                 other.isCompleted == isCompleted) &&
-            const DeepCollectionEquality().equals(other._quizList, _quizList));
+            const DeepCollectionEquality().equals(other._quizList, _quizList) &&
+            (identical(other.score, score) || other.score == score));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, group, title, isCompleted,
-      const DeepCollectionEquality().hash(_quizList));
+      const DeepCollectionEquality().hash(_quizList), score);
 
   @JsonKey(ignore: true)
   @override
@@ -208,7 +227,8 @@ abstract class _Create implements QuizItemState {
       required final String group,
       required final String title,
       required final bool isCompleted,
-      required final List<QuizState> quizList}) = _$_Create;
+      required final List<QuizState> quizList,
+      required final int score}) = _$_Create;
 
   @override
   int get id;
@@ -220,6 +240,8 @@ abstract class _Create implements QuizItemState {
   bool get isCompleted;
   @override //全て問題を解いたか
   List<QuizState> get quizList;
+  @override //クイズ一覧
+  int get score;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

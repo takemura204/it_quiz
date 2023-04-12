@@ -16,9 +16,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         ClearButton(
           iconSize: 30,
           onPressed: () => //問題リセット
-              ref
-                  .read(quizLearnScreenControllerProvider.notifier)
-                  .tapClearButton(),
+              ref.read(quizLearnScreenProvider.notifier).tapClearButton(),
         ),
       ],
     );

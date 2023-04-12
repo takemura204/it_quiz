@@ -23,7 +23,7 @@ class QuizChoiceScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
-        quizChoiceScreenControllerProvider.overrideWith(
+        quizChoiceScreenProvider.overrideWith(
           (ref) => QuizChoiceScreenController(ref: ref, item: item),
         ),
       ],
@@ -38,8 +38,7 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isResultScreen =
-        ref.watch(quizChoiceScreenControllerProvider).isResultScreen;
+    final isResultScreen = ref.watch(quizChoiceScreenProvider).isResultScreen;
     return isResultScreen
 
         ///結果画面

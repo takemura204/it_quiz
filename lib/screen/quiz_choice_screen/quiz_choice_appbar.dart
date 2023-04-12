@@ -14,9 +14,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       title: Text(item.group),
       leading: CustomBackButton(
         iconSize: 25,
-        onPressed: () => ref
-            .read(quizChoiceScreenControllerProvider.notifier)
-            .tapClearButton(),
+        onPressed: () =>
+            ref.read(quizChoiceScreenProvider.notifier).tapClearButton(),
       ),
     );
   }

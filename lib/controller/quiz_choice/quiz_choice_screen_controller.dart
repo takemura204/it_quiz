@@ -6,7 +6,7 @@ import 'package:state_notifier/state_notifier.dart';
 import '../quiz/quiz_state.dart';
 import '../quiz_item/quiz_item_state.dart';
 
-final quizChoiceScreenControllerProvider =
+final quizChoiceScreenProvider =
     StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
   (ref) => throw UnimplementedError(),
 );
@@ -96,6 +96,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     //問題が終わった時
     if (quizIndex == item.quizList.length - 1) {
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
+      setResult();
     }
     //問題がまだある時
     else {
@@ -132,9 +133,8 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final quizList = state.quizList;
     final correctList = quizList.where((x) => x.isJudge == true).toList();
     final isResult = quizList.length == correctList.length;
-    //homeStudyScreenに反映
     ref
         .read(homeStudyScreenControllerProvider.notifier)
-        .setQuizItem(isResult, correctList.length);
+        .setQuizItem(isResult, quizList); //homeStudyScreenに反映
   }
 }

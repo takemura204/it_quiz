@@ -1,30 +1,26 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
-import 'package:state_notifier/state_notifier.dart';
+import 'package:kentei_quiz/resource/quiz/quiz_item_resource.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final quizItemControllerProvider =
-    StateNotifierProvider<QuizItemController, QuizItemState>(
-  (ref) => QuizItemController(ref: ref),
-);
+final quizItemProvider =
+    StateNotifierProvider<QuizList, List<QuizItemState>>((ref) {
+  // ここにQuizItemStateのリストを作成。
+  final quizList = [...quizItems];
+  return QuizList()..state = quizList;
+});
 
-class QuizItemController extends StateNotifier<QuizItemState>
-    with LocatorMixin {
-  QuizItemController({required this.ref})
-      : super(
-          const QuizItemState(
-              id: 1,
-              group: "TeamA",
-              title: "問題A-1",
-              isCompleted: false,
-              quizList: []),
-        ) {
-    initState();
-  }
+class QuizList extends StateNotifier<List<QuizItemState>> {
+  QuizList() : super([]);
 
-  final Ref ref;
-
-  @override
-  void initState() {
-    super.initState();
+  Future<void> toggleCompletion(int index) async {
+    final prefs = await SharedPreferences.getInstance();
+    state = state.map((quizItem) {
+      if (quizItem.id == index) {
+        prefs.setBool('isCompleted_$index', !quizItem.isCompleted);
+        return quizItem.copyWith(isCompleted: !quizItem.isCompleted);
+      }
+      return quizItem;
+    }).toList();
   }
 }

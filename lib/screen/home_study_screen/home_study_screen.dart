@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/resource/quiz/quiz_item_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
 import '../../view/dialog.dart';
@@ -32,7 +33,7 @@ class _Scaffold extends ConsumerWidget {
     final quizItemList =
         ref.watch(homeStudyScreenControllerProvider).quizItemList;
     return GroupedListView<QuizItemState, String>(
-      elements: quizItemList,
+      elements: quizItems,
       groupBy: (QuizItemState item) => item.group,
       groupComparator: (value1, value2) =>
           value2.compareTo(value1), //グループのカスタムソートを定義

@@ -10,6 +10,7 @@ List<QuizItemState> quizItems = [
     title: "問題A-1",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 2,
@@ -17,6 +18,7 @@ List<QuizItemState> quizItems = [
     title: "問題A-2",
     isCompleted: false,
     quizList: quiz2,
+    score: 0,
   ),
   QuizItemState(
     id: 3,
@@ -24,6 +26,7 @@ List<QuizItemState> quizItems = [
     title: "問題B-1",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 4,
@@ -31,6 +34,7 @@ List<QuizItemState> quizItems = [
     title: "問題B-2",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 5,
@@ -38,6 +42,7 @@ List<QuizItemState> quizItems = [
     title: "問題C-1",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 6,
@@ -45,6 +50,7 @@ List<QuizItemState> quizItems = [
     title: "問題C-2",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 7,
@@ -52,6 +58,7 @@ List<QuizItemState> quizItems = [
     title: "問題A-3",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 8,
@@ -59,6 +66,7 @@ List<QuizItemState> quizItems = [
     title: "問題B-3",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 9,
@@ -66,6 +74,7 @@ List<QuizItemState> quizItems = [
     title: "問題C-3",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
   QuizItemState(
     id: 10,
@@ -73,6 +82,7 @@ List<QuizItemState> quizItems = [
     title: "問題D-1",
     isCompleted: false,
     quizList: quiz1,
+    score: 0,
   ),
 ];
 
@@ -84,5 +94,6 @@ List<QuizItemState> reviewItem = [
     title: "一問一答で復習する",
     isCompleted: false,
     quizList: [],
+    score: 0,
   ),
 ];

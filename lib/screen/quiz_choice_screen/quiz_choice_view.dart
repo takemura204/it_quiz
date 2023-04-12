@@ -38,7 +38,7 @@ class _Question extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
+    final isAns = ref.watch(quizChoiceScreenProvider).isAnsView;
 
     return Container(
       height: context.height * 0.45,
@@ -69,9 +69,9 @@ class _AnsQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
-    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
-    final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
+    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
+    final isJudge = ref.watch(quizChoiceScreenProvider).isJudge;
     return SubstringHighlight(
       text: quizList[quizIndex].question,
       term: quizList[quizIndex].ans,
@@ -97,8 +97,8 @@ class _QuizQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
-    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
+    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
 
     return SubstringHighlight(
       text: quizList[quizIndex].question.replaceAll(
@@ -124,9 +124,8 @@ class _QuizProgress extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
-    final quizIndex =
-        ref.watch(quizChoiceScreenControllerProvider).quizIndex + 1;
+    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex + 1;
 
     return Container(
       height: context.height * 0.05,
@@ -193,16 +192,16 @@ class _SelectChoice extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
-    final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
-    final quizIndex = ref.watch(quizChoiceScreenControllerProvider).quizIndex;
-    final choices = ref.watch(quizChoiceScreenControllerProvider).choices;
+    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final isAnsView = ref.watch(quizChoiceScreenProvider).isAnsView;
+    final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
+    final choices = ref.watch(quizChoiceScreenProvider).choices;
 
     return GestureDetector(
       onTap: isAnsView
           ? null
           : () => ref
-              .read(quizChoiceScreenControllerProvider.notifier)
+              .read(quizChoiceScreenProvider.notifier)
               .tapChoiceButton(choices[index]),
       child: Container(
         decoration: BoxDecoration(
@@ -235,9 +234,9 @@ class _JudgeIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
-    final isJudge = ref.watch(quizChoiceScreenControllerProvider).isJudge;
-    final isAnsView = ref.watch(quizChoiceScreenControllerProvider).isAnsView;
+    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final isJudge = ref.watch(quizChoiceScreenProvider).isJudge;
+    final isAnsView = ref.watch(quizChoiceScreenProvider).isAnsView;
 
     return isAnsView
         ? Align(

@@ -7,7 +7,7 @@ class _QuizResultView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenControllerProvider).quizList;
+    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
     return Column(
       children: quizList.isEmpty
           ? []
@@ -85,8 +85,7 @@ class _QuizResultView extends ConsumerWidget {
                             GestureDetector(
                               onTap: () {
                                 ref
-                                    .read(quizChoiceScreenControllerProvider
-                                        .notifier)
+                                    .read(quizChoiceScreenProvider.notifier)
                                     .switchCheckBox(index);
                               },
                               child: Container(

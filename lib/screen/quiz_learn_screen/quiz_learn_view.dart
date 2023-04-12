@@ -38,7 +38,7 @@ class _Question extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizLearnScreenControllerProvider).isAnsView;
+    final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
 
     return Container(
       height: context.height * 0.4,
@@ -71,8 +71,8 @@ class _AnsQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
-    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
+    final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex;
+    final quizList = ref.watch(quizLearnScreenProvider).quizList;
 
     return SubstringHighlight(
       text: quizList[quizIndex].question,
@@ -98,8 +98,8 @@ class _ConfirmQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizLearnScreenControllerProvider).quizIndex;
-    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
+    final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex;
+    final quizList = ref.watch(quizLearnScreenProvider).quizList;
     return SubstringHighlight(
       text: quizList[quizIndex].question.replaceAll(
           quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
@@ -124,9 +124,8 @@ class _QuizProgress extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex =
-        ref.watch(quizLearnScreenControllerProvider).quizIndex + 1;
-    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
+    final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex + 1;
+    final quizList = ref.watch(quizLearnScreenProvider).quizList;
     return Container(
       height: context.height * 0.05,
       child: Row(
@@ -154,15 +153,15 @@ class _ConfirmButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizLearnScreenControllerProvider).isAnsView;
-    final quizList = ref.watch(quizLearnScreenControllerProvider).quizList;
+    final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
+    final quizList = ref.watch(quizLearnScreenProvider).quizList;
     return isAns
         ? Row(
             ///知らない
             children: [
               GestureDetector(
                 onTap: () => ref
-                    .read(quizLearnScreenControllerProvider.notifier)
+                    .read(quizLearnScreenProvider.notifier)
                     .tapIsKnowButton(false),
                 child: Container(
                   width: context.width * 0.42,
@@ -187,13 +186,10 @@ class _ConfirmButton extends ConsumerWidget {
               GestureDetector(
                 onTap: () {
                   ref
-                      .read(quizLearnScreenControllerProvider.notifier)
+                      .read(quizLearnScreenProvider.notifier)
                       .tapIsKnowButton(true);
                   //「知っている」が全てになった時結果画面に遷移
-                  if (ref
-                          .watch(quizLearnScreenControllerProvider)
-                          .knowQuizList
-                          .length ==
+                  if (ref.watch(quizLearnScreenProvider).knowQuizList.length ==
                       quizList.length) {
                     // context.showScreen(QuizLearnResultScreenArguments(
                     //   item: arguments.item,
@@ -221,9 +217,8 @@ class _ConfirmButton extends ConsumerWidget {
 
         ///確認する
         : GestureDetector(
-            onTap: () => ref
-                .read(quizLearnScreenControllerProvider.notifier)
-                .tapConfirmButton(),
+            onTap: () =>
+                ref.read(quizLearnScreenProvider.notifier).tapConfirmButton(),
             child: Container(
               width: context.height * 0.85,
               height: context.height * 0.1,
@@ -245,7 +240,7 @@ class _LapInfoBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lapIndex = ref.watch(quizLearnScreenControllerProvider).lapIndex;
+    final lapIndex = ref.watch(quizLearnScreenProvider).lapIndex;
 
     return Card(
       elevation: 3,
@@ -288,7 +283,7 @@ class _LapInfoBar extends ConsumerWidget {
                   padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: AutoSizeText(
                     ref
-                        .watch(quizLearnScreenControllerProvider)
+                        .watch(quizLearnScreenProvider)
                         .knowQuizList
                         .length
                         .toString(),
@@ -309,7 +304,7 @@ class _LapInfoBar extends ConsumerWidget {
                   padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: AutoSizeText(
                     ref
-                        .watch(quizLearnScreenControllerProvider)
+                        .watch(quizLearnScreenProvider)
                         .unKnowQuizList
                         .length
                         .toString(),
