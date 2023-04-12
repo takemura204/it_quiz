@@ -69,8 +69,10 @@ class QuizItemBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizItemList = ref.watch(quizItemProvider); // quizItemListを監視
     return GestureDetector(
       onTap: () {
+        ref.read(quizItemProvider.notifier).updateItem(index, true);
         ref
             .read(homeStudyScreenControllerProvider.notifier)
             .tapQuizItemBar(index);

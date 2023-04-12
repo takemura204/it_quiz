@@ -23,12 +23,12 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   @override
   void initState() {
-    addQuizList();
+    _addQuizList();
     super.initState();
   }
 
   ///クイズ更新
-  void addQuizList() {
+  void _addQuizList() {
     //クイズリスト更新
     final quizList = [...state.quizList];
     quizList.addAll(item.quizList);
@@ -37,19 +37,19 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   ///確認ボタンを押した時
   void tapConfirmButton() {
-    switchAnsView(); //画面切り替え
+    _switchAnsView(); //画面切り替え
   }
 
   ///「知っている・知らない」ボタンを押した時
   void tapIsKnowButton(bool isKnow) {
-    setQuiz(isKnow); //更新
-    addQuiz(isKnow); //追加
-    nextQuiz(); //次の問題
-    switchAnsView(); // 画面切り替え
+    _setQuiz(isKnow); //更新
+    _addQuiz(isKnow); //追加
+    _nextQuiz(); //次の問題
+    _switchAnsView(); // 画面切り替え
   }
 
   ///クイズ更新
-  void setQuiz(bool isJudge) {
+  void _setQuiz(bool isJudge) {
     final quizList = [...state.quizList];
     final index = state.quizIndex;
     quizList[index] = QuizState(
@@ -63,7 +63,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///「知っている・知らない」リストに追加
-  void addQuiz(bool isJudge) {
+  void _addQuiz(bool isJudge) {
     final quizList = [...state.quizList];
     final knowQuizList = [...state.knowQuizList];
     final unKnowQuizList = [...state.unKnowQuizList];
@@ -107,8 +107,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     );
   }
 
-  ///次の問題に進む(順番がおかしい)
-  void nextQuiz() {
+  ///次の問題に進む
+  void _nextQuiz() {
     final quizIndex = state.quizIndex;
     final lapIndex = state.lapIndex;
     final quizList = [...state.quizList];
@@ -140,7 +140,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///知ってるリストに追加
-  void addKnowQuiz() {
+  void _addKnowQuiz() {
     final quizList = [...state.quizList];
     final knowQuizList = [...state.knowQuizList];
     final unKnowQuizList = [...state.unKnowQuizList];
@@ -193,13 +193,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///正解画面に切り替え
-  void switchAnsView() {
+  void _switchAnsView() {
     state = state.copyWith(isAnsView: !state.isAnsView);
-  }
-
-  ///結果画面に切り替え
-  void switchResultScreen() {
-    state = state.copyWith(isResultScreen: !state.isResultScreen);
   }
 
   ///クリアボタン

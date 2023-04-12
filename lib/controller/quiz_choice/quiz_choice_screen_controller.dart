@@ -22,13 +22,13 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   @override
   void initState() {
-    addQuizList(); //クイズ追加
-    shuffleChoice(); //選択肢表示
+    _addQuizList(); //クイズ追加
+    _shuffleChoice(); //選択肢表示
     super.initState();
   }
 
   ///クイズ更新
-  void addQuizList() {
+  void _addQuizList() {
     //クイズリスト更新
     final quizList = [...state.quizList];
     quizList.addAll(item.quizList);
@@ -36,7 +36,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   }
 
   ///選択肢を混ぜる
-  void shuffleChoice() {
+  void _shuffleChoice() {
     final choices = [...state.choices]..clear();
     final argumentsChoices = [...item.quizList[state.quizIndex].choices];
     argumentsChoices.shuffle();
@@ -46,12 +46,12 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///選択肢を押した時
   void tapChoiceButton(String choice) {
-    judgementQuiz(choice); //正誤判定,スコア判定
-    switchAnsView(); //答え表示,次の問題
+    _judgementQuiz(choice); //正誤判定,スコア判定
+    _switchAnsView(); //答え表示,次の問題
   }
 
   ///クイズ判定
-  void judgementQuiz(String choice) {
+  void _judgementQuiz(String choice) {
     final quizList = [...state.quizList];
     final quizIndex = state.quizIndex;
     //正解
@@ -81,17 +81,17 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   }
 
   ///正解表示
-  void switchAnsView() {
+  void _switchAnsView() {
     state = state.copyWith(isAnsView: true);
     Future.delayed(const Duration(milliseconds: 800), () {
       state = state.copyWith(isAnsView: false);
       //次のクイズ
-      nextQuiz();
+      _nextQuiz();
     });
   }
 
   ///次の問題
-  void nextQuiz() {
+  void _nextQuiz() {
     final quizIndex = state.quizIndex;
     //問題が終わった時
     if (quizIndex == item.quizList.length - 1) {
@@ -102,7 +102,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     else {
       state = state.copyWith(quizIndex: quizIndex + 1);
     }
-    shuffleChoice();
+    _shuffleChoice();
   }
 
   ///クリアボタン

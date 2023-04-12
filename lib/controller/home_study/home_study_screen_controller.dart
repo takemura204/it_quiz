@@ -38,7 +38,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   ///QuizItemBarをタップした時
   void tapQuizItemBar(int index) {
     setItemIndex(index); //問題番号を設定
-    setQuizItem(true, state.quizItemList[index].quizList);
+    // setQuizItem(true, state.quizItemList[index].quizList);
   }
 
   ///クイズ番号更新
