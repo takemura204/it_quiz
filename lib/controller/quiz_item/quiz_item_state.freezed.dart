@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+QuizItemState _$QuizItemStateFromJson(Map<String, dynamic> json) {
+  return _QuizItemState.fromJson(json);
+}
+
 /// @nodoc
 mixin _$QuizItemState {
   int get id => throw _privateConstructorUsedError; //問題ID
@@ -23,6 +27,7 @@ mixin _$QuizItemState {
   List<QuizState> get quizList => throw _privateConstructorUsedError; //クイズ一覧
   int get score => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $QuizItemStateCopyWith<QuizItemState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -93,10 +98,11 @@ class _$QuizItemStateCopyWithImpl<$Res, $Val extends QuizItemState>
 }
 
 /// @nodoc
-abstract class _$$_CreateCopyWith<$Res>
+abstract class _$$_QuizItemStateCopyWith<$Res>
     implements $QuizItemStateCopyWith<$Res> {
-  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
-      __$$_CreateCopyWithImpl<$Res>;
+  factory _$$_QuizItemStateCopyWith(
+          _$_QuizItemState value, $Res Function(_$_QuizItemState) then) =
+      __$$_QuizItemStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -109,10 +115,11 @@ abstract class _$$_CreateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateCopyWithImpl<$Res>
-    extends _$QuizItemStateCopyWithImpl<$Res, _$_Create>
-    implements _$$_CreateCopyWith<$Res> {
-  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+class __$$_QuizItemStateCopyWithImpl<$Res>
+    extends _$QuizItemStateCopyWithImpl<$Res, _$_QuizItemState>
+    implements _$$_QuizItemStateCopyWith<$Res> {
+  __$$_QuizItemStateCopyWithImpl(
+      _$_QuizItemState _value, $Res Function(_$_QuizItemState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -125,7 +132,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? quizList = null,
     Object? score = null,
   }) {
-    return _then(_$_Create(
+    return _then(_$_QuizItemState(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -155,9 +162,9 @@ class __$$_CreateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$_Create implements _Create {
-  const _$_Create(
+@JsonSerializable()
+class _$_QuizItemState implements _QuizItemState {
+  const _$_QuizItemState(
       {required this.id,
       required this.group,
       required this.title,
@@ -165,6 +172,9 @@ class _$_Create implements _Create {
       required final List<QuizState> quizList,
       required this.score})
       : _quizList = quizList;
+
+  factory _$_QuizItemState.fromJson(Map<String, dynamic> json) =>
+      _$$_QuizItemStateFromJson(json);
 
   @override
   final int id;
@@ -200,7 +210,7 @@ class _$_Create implements _Create {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Create &&
+            other is _$_QuizItemState &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.group, group) || other.group == group) &&
             (identical(other.title, title) || other.title == title) &&
@@ -210,6 +220,7 @@ class _$_Create implements _Create {
             (identical(other.score, score) || other.score == score));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, group, title, isCompleted,
       const DeepCollectionEquality().hash(_quizList), score);
@@ -217,18 +228,28 @@ class _$_Create implements _Create {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
-      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
+  _$$_QuizItemStateCopyWith<_$_QuizItemState> get copyWith =>
+      __$$_QuizItemStateCopyWithImpl<_$_QuizItemState>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_QuizItemStateToJson(
+      this,
+    );
+  }
 }
 
-abstract class _Create implements QuizItemState {
-  const factory _Create(
+abstract class _QuizItemState implements QuizItemState {
+  const factory _QuizItemState(
       {required final int id,
       required final String group,
       required final String title,
       required final bool isCompleted,
       required final List<QuizState> quizList,
-      required final int score}) = _$_Create;
+      required final int score}) = _$_QuizItemState;
+
+  factory _QuizItemState.fromJson(Map<String, dynamic> json) =
+      _$_QuizItemState.fromJson;
 
   @override
   int get id;
@@ -244,6 +265,6 @@ abstract class _Create implements QuizItemState {
   int get score;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
+  _$$_QuizItemStateCopyWith<_$_QuizItemState> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -4,9 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/quiz/quiz_item_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
+import '../../controller/quiz_item/quiz_item_controller.dart';
 import '../../view/dialog.dart';
 
 class HomeStudyScreen extends ConsumerWidget {
@@ -30,10 +30,9 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList =
-        ref.watch(homeStudyScreenControllerProvider).quizItemList;
+    final quizItemList = ref.watch(quizItemProvider); // quizItemListを監視
     return GroupedListView<QuizItemState, String>(
-      elements: quizItems,
+      elements: quizItemList,
       groupBy: (QuizItemState item) => item.group,
       groupComparator: (value1, value2) =>
           value2.compareTo(value1), //グループのカスタムソートを定義
@@ -41,7 +40,6 @@ class _Scaffold extends ConsumerWidget {
           item2.title.compareTo(item1.title), //各グループ内の要素のカスタムソートを定義
       order: GroupedListOrder.DESC, //グループの並べ替え
       useStickyGroupSeparators: true, //現在表示されているグループのグループヘッダーが一番上に表示
-
       groupSeparatorBuilder: (String group) => Container(
         color: context.colors.main50.withOpacity(0.4),
         padding: const EdgeInsets.all(8.0),

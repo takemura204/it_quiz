@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../quiz/quiz_state.dart';
 
 part 'quiz_item_state.freezed.dart';
+part 'quiz_item_state.g.dart';
 
 ///問題ジャンル
 @freezed
@@ -14,5 +15,7 @@ class QuizItemState with _$QuizItemState {
     required final bool isCompleted, //全て問題を解いたか
     required final List<QuizState> quizList, //クイズ一覧
     required final int score, //正解数
-  }) = _Create;
+  }) = _QuizItemState;
+  factory QuizItemState.fromJson(Map<String, dynamic> json) =>
+      _$QuizItemStateFromJson(json);
 }
