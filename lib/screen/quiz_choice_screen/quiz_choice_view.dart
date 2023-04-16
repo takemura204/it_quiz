@@ -234,7 +234,6 @@ class _JudgeIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
     final isJudge = ref.watch(quizChoiceScreenProvider).isJudge;
     final isAnsView = ref.watch(quizChoiceScreenProvider).isAnsView;
 

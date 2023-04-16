@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,7 +8,11 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
 import '../../controller/quiz_item/quiz_item_controller.dart';
-import '../../view/dialog.dart';
+import '../../resource/lang/initial_resource.dart';
+import '../../view/button.dart';
+import '../screen_argument.dart';
+
+part 'home_study_view.dart';
 
 class HomeStudyScreen extends ConsumerWidget {
   const HomeStudyScreen();
@@ -16,7 +21,7 @@ class HomeStudyScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
-        homeStudyScreenControllerProvider.overrideWith(
+        homeStudyScreenProvider.overrideWith(
           (ref) => HomeStudyScreenController(ref: ref),
         ),
       ],
@@ -30,7 +35,7 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizItemProvider); // quizItemListを監視
+    final quizItemList = ref.watch(quizItemProvider);
     return GroupedListView<QuizItemState, String>(
       elements: quizItemList,
       groupBy: (QuizItemState item) => item.group,
@@ -52,56 +57,11 @@ class _Scaffold extends ConsumerWidget {
       ),
       indexedItemBuilder:
           (BuildContext context, QuizItemState item, int index) {
-        return QuizItemBar(
+        return _QuizItemBar(
           item: item,
           index: index,
         );
       },
-    );
-  }
-}
-
-///問題一覧Bar
-class QuizItemBar extends ConsumerWidget {
-  const QuizItemBar({required this.item, required this.index});
-  final QuizItemState item;
-  final int index;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizItemProvider); // quizItemListを監視
-    return GestureDetector(
-      onTap: () {
-        ref.read(quizItemProvider.notifier).updateItem(index, true);
-        ref
-            .read(homeStudyScreenControllerProvider.notifier)
-            .tapQuizItemBar(index);
-        //ダイアログ表示
-        showDialog(context: context, builder: (_) => SelectQuizDialog(item));
-      },
-      child: Card(
-        elevation: 1.0,
-        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 3.0),
-        child: Container(
-          child: ListTile(
-            contentPadding: const EdgeInsets.only(
-                left: 10.0, top: 1.0, bottom: 1.0, right: 5),
-            title: Text(
-              item.title,
-              style: const TextStyle(fontSize: 16),
-            ),
-            leading: item.isCompleted
-                ? Icon(
-                    Icons.pets,
-                    color: context.colors.main50.withOpacity(0.6),
-                  )
-                : const Icon(
-                    Icons.pets,
-                  ),
-            trailing: const Icon(Icons.arrow_forward_ios),
-          ),
-        ),
-      ),
     );
   }
 }

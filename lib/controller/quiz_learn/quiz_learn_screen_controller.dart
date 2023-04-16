@@ -3,7 +3,6 @@ import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../home_study/home_study_screen_controller.dart';
 import '../quiz/quiz_state.dart';
 
 final quizLearnScreenProvider =
@@ -131,37 +130,11 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
           lapIndex: lapIndex + 1,
           isResultScreen: true,
           quizList: quizList);
-      setResult(); //結果反映
     }
     //まだ問題が続蹴られる時
     else {
       state = state.copyWith(quizIndex: quizIndex + 1);
     }
-  }
-
-  ///知ってるリストに追加
-  void _addKnowQuiz() {
-    final quizList = [...state.quizList];
-    final knowQuizList = [...state.knowQuizList];
-    final unKnowQuizList = [...state.unKnowQuizList];
-
-    //すでに知ってるリストに含まれているとき
-    if (knowQuizList.contains(quizList[state.quizIndex])) {
-    }
-    //、知らないリストに含まれている場合
-    else if (unKnowQuizList.contains(quizList[state.quizIndex])) {
-      knowQuizList.add(quizList[state.quizIndex]);
-      unKnowQuizList.remove(quizList[state.quizIndex]);
-    }
-    //それ以外
-    else {
-      knowQuizList.add(quizList[state.quizIndex]);
-    }
-    state = state.copyWith(
-      knowQuizList: knowQuizList,
-      unKnowQuizList: unKnowQuizList,
-      quizList: quizList,
-    );
   }
 
   ///知っている問題のチェックボックス切り替え
@@ -207,15 +180,5 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       knowQuizList: [],
       unKnowQuizList: [],
     );
-  }
-
-  ///クイズ更新
-  void setResult() {
-    final quizList = state.quizList;
-    final correctList = quizList.where((x) => x.isJudge == true).toList();
-    final isResult = quizList.length == correctList.length;
-    ref
-        .read(homeStudyScreenControllerProvider.notifier)
-        .setQuizItem(isResult, quizList); //homeStudyScreenに反映
   }
 }

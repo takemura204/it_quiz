@@ -11,10 +11,9 @@ import 'create_account_screen/create_account_screen.dart';
 
 ///一問一答形式へ画面遷移
 class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
-  const QuizLearnScreenArguments({required this.item, required this.quizStyle});
+  const QuizLearnScreenArguments({required this.item});
 
   final QuizItemState item;
-  final String quizStyle;
 
   @override
   String get screenNameFormat => "/quiz_learn";

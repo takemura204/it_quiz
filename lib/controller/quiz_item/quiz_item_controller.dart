@@ -7,16 +7,25 @@ import 'package:kentei_quiz/resource/quiz/quiz_item_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../quiz/quiz_state.dart';
+
+// final quizItemProvider =
+//     StateNotifierProvider<QuizItemController, List<QuizItemState>>(
+//         (ref) => QuizItemController(ref),
+//         dependencies: [homeStudyScreenProvider]);
 final quizItemProvider =
     StateNotifierProvider<QuizItemController, List<QuizItemState>>(
-  (ref) => QuizItemController(),
+  (ref) => QuizItemController(ref),
 );
 
 class QuizItemController extends StateNotifier<List<QuizItemState>>
     with LocatorMixin {
-  QuizItemController() : super(_initialValue()) {
+  QuizItemController(this.ref) : super(_initialValue()) {
     initState();
   }
+  final Ref ref;
+  int selectedIndex = 0; // 追加する
+
   @override
   void initState() {
     _loadData();
@@ -53,18 +62,27 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     }
   }
 
+  /// 現在のインデックスを取得し、更新
+  void tapQuizItemBar(int index) {
+    selectedIndex = index;
+    print(selectedIndex);
+  }
+
   ///値を更新し、端末に保存する
-  void updateItem(int index, bool isCompleted) {
+  void updateItem(List<QuizState> quizList) {
+    final score = quizList.where((x) => x.isJudge == true).toList().length;
+    final isCompleted = quizList.length == score;
     state = state.map((item) {
-      if (item.title == state[index].title) {
-        return state[index].copyWith(isCompleted: isCompleted);
+      if (item.title == state[selectedIndex].title) {
+        print(item.title + "保存");
+        return state[selectedIndex].copyWith(
+            isCompleted: isCompleted, score: score, quizList: quizList);
       }
       return item;
     }).toList();
+    print(state[selectedIndex].score);
 
     _saveData();
-
-    // _resetData();
   }
 
   /// 現在のstateを端末に保存する
@@ -77,7 +95,9 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   /// 現在のstateをリセット
   Future _resetData() async {
     final prefs = await SharedPreferences.getInstance();
+    final data = state.map((e) => json.encode(e.toJson())).toList();
     prefs.remove("quiz_items");
+    await prefs.setStringList('quiz_items', data);
     print("削除");
   }
 }

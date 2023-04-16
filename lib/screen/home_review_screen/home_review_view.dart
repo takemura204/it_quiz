@@ -45,7 +45,6 @@ class _LearnQuizButton extends ConsumerWidget {
       onTap: () {
         context.showScreen(QuizLearnScreenArguments(
           item: ref.watch(homeReviewScreenControllerProvider).reviewItem[0],
-          quizStyle: I18n().reviewLearnQuiz,
         ).generateRoute());
       },
       child: Container(

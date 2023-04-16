@@ -20,6 +20,7 @@ mixin _$QuizChoiceScreenState {
   bool get isJudge => throw _privateConstructorUsedError; //正解判定
   bool get isResultScreen => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
+  int get quizItemIndex => throw _privateConstructorUsedError; //クイズアイテム番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
   List<QuizState> get quizList => throw _privateConstructorUsedError;
 
@@ -39,6 +40,7 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       bool isJudge,
       bool isResultScreen,
       int quizIndex,
+      int quizItemIndex,
       List<String> choices,
       List<QuizState> quizList});
 }
@@ -61,6 +63,7 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
     Object? isJudge = null,
     Object? isResultScreen = null,
     Object? quizIndex = null,
+    Object? quizItemIndex = null,
     Object? choices = null,
     Object? quizList = null,
   }) {
@@ -80,6 +83,10 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
       quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      quizItemIndex: null == quizItemIndex
+          ? _value.quizItemIndex
+          : quizItemIndex // ignore: cast_nullable_to_non_nullable
               as int,
       choices: null == choices
           ? _value.choices
@@ -105,6 +112,7 @@ abstract class _$$_CreateCopyWith<$Res>
       bool isJudge,
       bool isResultScreen,
       int quizIndex,
+      int quizItemIndex,
       List<String> choices,
       List<QuizState> quizList});
 }
@@ -123,6 +131,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isJudge = null,
     Object? isResultScreen = null,
     Object? quizIndex = null,
+    Object? quizItemIndex = null,
     Object? choices = null,
     Object? quizList = null,
   }) {
@@ -142,6 +151,10 @@ class __$$_CreateCopyWithImpl<$Res>
       quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      quizItemIndex: null == quizItemIndex
+          ? _value.quizItemIndex
+          : quizItemIndex // ignore: cast_nullable_to_non_nullable
               as int,
       choices: null == choices
           ? _value._choices
@@ -163,6 +176,7 @@ class _$_Create extends _Create {
       this.isJudge = false,
       this.isResultScreen = false,
       this.quizIndex = 0,
+      this.quizItemIndex = 0,
       final List<String> choices = const [],
       final List<QuizState> quizList = const []})
       : _choices = choices,
@@ -184,8 +198,12 @@ class _$_Create extends _Create {
   @JsonKey()
   final int quizIndex;
 //問題番号
+  @override
+  @JsonKey()
+  final int quizItemIndex;
+//クイズアイテム番号
   final List<String> _choices;
-//問題番号
+//クイズアイテム番号
   @override
   @JsonKey()
   List<String> get choices {
@@ -207,7 +225,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, choices: $choices, quizList: $quizList)';
+    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, choices: $choices, quizList: $quizList)';
   }
 
   @override
@@ -222,6 +240,8 @@ class _$_Create extends _Create {
                 other.isResultScreen == isResultScreen) &&
             (identical(other.quizIndex, quizIndex) ||
                 other.quizIndex == quizIndex) &&
+            (identical(other.quizItemIndex, quizItemIndex) ||
+                other.quizItemIndex == quizItemIndex) &&
             const DeepCollectionEquality().equals(other._choices, _choices) &&
             const DeepCollectionEquality().equals(other._quizList, _quizList));
   }
@@ -233,6 +253,7 @@ class _$_Create extends _Create {
       isJudge,
       isResultScreen,
       quizIndex,
+      quizItemIndex,
       const DeepCollectionEquality().hash(_choices),
       const DeepCollectionEquality().hash(_quizList));
 
@@ -249,6 +270,7 @@ abstract class _Create extends QuizChoiceScreenState {
       final bool isJudge,
       final bool isResultScreen,
       final int quizIndex,
+      final int quizItemIndex,
       final List<String> choices,
       final List<QuizState> quizList}) = _$_Create;
   const _Create._() : super._();
@@ -262,6 +284,8 @@ abstract class _Create extends QuizChoiceScreenState {
   @override
   int get quizIndex;
   @override //問題番号
+  int get quizItemIndex;
+  @override //クイズアイテム番号
   List<String> get choices;
   @override //選択肢
   List<QuizState> get quizList;

@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart';
+import 'package:kentei_quiz/controller/quiz_item/quiz_item_controller.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../quiz/quiz_state.dart';
@@ -96,7 +96,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     //問題が終わった時
     if (quizIndex == item.quizList.length - 1) {
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
-      setResult();
+      _saveQuizItem();
     }
     //問題がまだある時
     else {
@@ -108,6 +108,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///クリアボタン
   void tapClearButton() {
     state = state.copyWith(
+      quizItemIndex: 0,
       quizIndex: 0,
       isAnsView: false,
       isResultScreen: false,
@@ -128,13 +129,11 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     state = state.copyWith(quizList: quizList);
   }
 
-  ///クイズ更新
-  void setResult() {
+  ///クイズ結果更新(端末保存)
+  void _saveQuizItem() {
     final quizList = state.quizList;
-    final correctList = quizList.where((x) => x.isJudge == true).toList();
-    final isResult = quizList.length == correctList.length;
     ref
-        .read(homeStudyScreenControllerProvider.notifier)
-        .setQuizItem(isResult, quizList); //homeStudyScreenに反映
+        .read(quizItemProvider.notifier)
+        .updateItem(quizList); //homeStudyScreenに反映
   }
 }

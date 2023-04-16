@@ -7,7 +7,6 @@ import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
-import '../../controller/quiz_item/quiz_item_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
