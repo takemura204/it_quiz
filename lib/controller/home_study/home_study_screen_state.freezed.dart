@@ -16,9 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeStudyScreenState {
-  int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
-  int get score => throw _privateConstructorUsedError; //正解数
-  List<QuizItemState> get quizItemList => throw _privateConstructorUsedError;
+  int get itemIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStudyScreenStateCopyWith<HomeStudyScreenState> get copyWith =>
@@ -31,7 +29,7 @@ abstract class $HomeStudyScreenStateCopyWith<$Res> {
           $Res Function(HomeStudyScreenState) then) =
       _$HomeStudyScreenStateCopyWithImpl<$Res, HomeStudyScreenState>;
   @useResult
-  $Res call({int itemIndex, int score, List<QuizItemState> quizItemList});
+  $Res call({int itemIndex});
 }
 
 /// @nodoc
@@ -49,22 +47,12 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? itemIndex = null,
-    Object? score = null,
-    Object? quizItemList = null,
   }) {
     return _then(_value.copyWith(
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
-      quizItemList: null == quizItemList
-          ? _value.quizItemList
-          : quizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItemState>,
     ) as $Val);
   }
 }
@@ -76,7 +64,7 @@ abstract class _$$_CreateCopyWith<$Res>
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int itemIndex, int score, List<QuizItemState> quizItemList});
+  $Res call({int itemIndex});
 }
 
 /// @nodoc
@@ -90,22 +78,12 @@ class __$$_CreateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? itemIndex = null,
-    Object? score = null,
-    Object? quizItemList = null,
   }) {
     return _then(_$_Create(
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
-      quizItemList: null == quizItemList
-          ? _value._quizItemList
-          : quizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItemState>,
     ));
   }
 }
@@ -113,33 +91,15 @@ class __$$_CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create implements _Create {
-  const _$_Create(
-      {this.itemIndex = 0,
-      this.score = 0,
-      final List<QuizItemState> quizItemList = const []})
-      : _quizItemList = quizItemList;
+  const _$_Create({this.itemIndex = 0});
 
   @override
   @JsonKey()
   final int itemIndex;
-//クイズ番号
-  @override
-  @JsonKey()
-  final int score;
-//正解数
-  final List<QuizItemState> _quizItemList;
-//正解数
-  @override
-  @JsonKey()
-  List<QuizItemState> get quizItemList {
-    if (_quizItemList is EqualUnmodifiableListView) return _quizItemList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_quizItemList);
-  }
 
   @override
   String toString() {
-    return 'HomeStudyScreenState(itemIndex: $itemIndex, score: $score, quizItemList: $quizItemList)';
+    return 'HomeStudyScreenState(itemIndex: $itemIndex)';
   }
 
   @override
@@ -148,15 +108,11 @@ class _$_Create implements _Create {
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
             (identical(other.itemIndex, itemIndex) ||
-                other.itemIndex == itemIndex) &&
-            (identical(other.score, score) || other.score == score) &&
-            const DeepCollectionEquality()
-                .equals(other._quizItemList, _quizItemList));
+                other.itemIndex == itemIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemIndex, score,
-      const DeepCollectionEquality().hash(_quizItemList));
+  int get hashCode => Object.hash(runtimeType, itemIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -166,17 +122,10 @@ class _$_Create implements _Create {
 }
 
 abstract class _Create implements HomeStudyScreenState {
-  const factory _Create(
-      {final int itemIndex,
-      final int score,
-      final List<QuizItemState> quizItemList}) = _$_Create;
+  const factory _Create({final int itemIndex}) = _$_Create;
 
   @override
   int get itemIndex;
-  @override //クイズ番号
-  int get score;
-  @override //正解数
-  List<QuizItemState> get quizItemList;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

@@ -15,8 +15,7 @@ class _QuizItemBar extends ConsumerWidget {
         quizItemController.tapQuizItemBar(index);
         //ダイアログ表示
         showDialog(
-            context: context,
-            builder: (_) => _SelectQuizDialog(item: item, index: index));
+            context: context, builder: (_) => _SelectQuizDialog(index: index));
       },
       child: Card(
         elevation: 1.0,
@@ -46,11 +45,11 @@ class _QuizItemBar extends ConsumerWidget {
 }
 
 class _SelectQuizDialog extends ConsumerWidget {
-  const _SelectQuizDialog({required this.item, required this.index});
-  final QuizItemState item;
+  const _SelectQuizDialog({required this.index});
   final int index;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(quizItemProvider)[index];
     return SimpleDialog(
       insetPadding: const EdgeInsets.all(4),
       contentPadding: const EdgeInsets.all(4),
@@ -145,7 +144,7 @@ class _QuizResult extends ConsumerWidget {
             children: [
               ///正解数
               Text(
-                item.score.toString(),
+                "${item.score}",
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

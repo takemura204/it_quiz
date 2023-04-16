@@ -40,16 +40,14 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     for (final group in groupMap.keys) {
       groupMap[group]!.sort((a, b) => a.id.compareTo(b.id));
     }
-
     // グループの順にリストを並べ替え
     final sortedGroups = groupMap.keys.toList()..sort((a, b) => a.compareTo(b));
-
     // グループごとのリストを結合して結果のリストを作成
     final result = <QuizItemState>[];
     for (final group in sortedGroups) {
       result.addAll(groupMap[group]!);
     }
-    // ここで初期値を設定しています
+    // ここで初期値を設定
     return result;
   }
 
@@ -65,7 +63,6 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   /// 現在のインデックスを取得し、更新
   void tapQuizItemBar(int index) {
     selectedIndex = index;
-    print(selectedIndex);
   }
 
   ///値を更新し、端末に保存する
@@ -74,13 +71,11 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     final isCompleted = quizList.length == score;
     state = state.map((item) {
       if (item.title == state[selectedIndex].title) {
-        print(item.title + "保存");
         return state[selectedIndex].copyWith(
             isCompleted: isCompleted, score: score, quizList: quizList);
       }
       return item;
     }).toList();
-    print(state[selectedIndex].score);
 
     _saveData();
   }
@@ -98,6 +93,5 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     final data = state.map((e) => json.encode(e.toJson())).toList();
     prefs.remove("quiz_items");
     await prefs.setStringList('quiz_items', data);
-    print("削除");
   }
 }

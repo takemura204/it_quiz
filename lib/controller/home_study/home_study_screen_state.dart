@@ -8,7 +8,5 @@ part 'home_study_screen_state.freezed.dart';
 class HomeStudyScreenState with _$HomeStudyScreenState {
   const factory HomeStudyScreenState({
     @Default(0) final int itemIndex, //クイズ番号
-    @Default(0) final int score, //正解数
-    @Default([]) final List<QuizItemState> quizItemList,
   }) = _Create;
 }

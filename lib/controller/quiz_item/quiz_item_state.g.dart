@@ -16,7 +16,6 @@ _$_QuizItemState _$$_QuizItemStateFromJson(Map<String, dynamic> json) =>
           .map((e) => QuizState.fromJson(e as Map<String, dynamic>))
           .toList(),
       score: json['score'] as int,
-      selectedIndex: json['selectedIndex'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_QuizItemStateToJson(_$_QuizItemState instance) =>
@@ -27,5 +26,4 @@ Map<String, dynamic> _$$_QuizItemStateToJson(_$_QuizItemState instance) =>
       'isCompleted': instance.isCompleted,
       'quizList': instance.quizList,
       'score': instance.score,
-      'selectedIndex': instance.selectedIndex,
     };

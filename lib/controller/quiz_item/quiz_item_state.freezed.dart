@@ -25,8 +25,7 @@ mixin _$QuizItemState {
   String get title => throw _privateConstructorUsedError; //問題タイトル
   bool get isCompleted => throw _privateConstructorUsedError; //全て問題を解いたか
   List<QuizState> get quizList => throw _privateConstructorUsedError; //クイズ一覧
-  int get score => throw _privateConstructorUsedError; //正解数
-  int get selectedIndex => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,8 +45,7 @@ abstract class $QuizItemStateCopyWith<$Res> {
       String title,
       bool isCompleted,
       List<QuizState> quizList,
-      int score,
-      int selectedIndex});
+      int score});
 }
 
 /// @nodoc
@@ -69,7 +67,6 @@ class _$QuizItemStateCopyWithImpl<$Res, $Val extends QuizItemState>
     Object? isCompleted = null,
     Object? quizList = null,
     Object? score = null,
-    Object? selectedIndex = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -96,10 +93,6 @@ class _$QuizItemStateCopyWithImpl<$Res, $Val extends QuizItemState>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
-      selectedIndex: null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
@@ -118,8 +111,7 @@ abstract class _$$_QuizItemStateCopyWith<$Res>
       String title,
       bool isCompleted,
       List<QuizState> quizList,
-      int score,
-      int selectedIndex});
+      int score});
 }
 
 /// @nodoc
@@ -139,7 +131,6 @@ class __$$_QuizItemStateCopyWithImpl<$Res>
     Object? isCompleted = null,
     Object? quizList = null,
     Object? score = null,
-    Object? selectedIndex = null,
   }) {
     return _then(_$_QuizItemState(
       id: null == id
@@ -166,10 +157,6 @@ class __$$_QuizItemStateCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
-      selectedIndex: null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -183,8 +170,7 @@ class _$_QuizItemState implements _QuizItemState {
       required this.title,
       required this.isCompleted,
       required final List<QuizState> quizList,
-      required this.score,
-      this.selectedIndex = 0})
+      required this.score})
       : _quizList = quizList;
 
   factory _$_QuizItemState.fromJson(Map<String, dynamic> json) =>
@@ -214,14 +200,10 @@ class _$_QuizItemState implements _QuizItemState {
 //クイズ一覧
   @override
   final int score;
-//正解数
-  @override
-  @JsonKey()
-  final int selectedIndex;
 
   @override
   String toString() {
-    return 'QuizItemState(id: $id, group: $group, title: $title, isCompleted: $isCompleted, quizList: $quizList, score: $score, selectedIndex: $selectedIndex)';
+    return 'QuizItemState(id: $id, group: $group, title: $title, isCompleted: $isCompleted, quizList: $quizList, score: $score)';
   }
 
   @override
@@ -235,15 +217,13 @@ class _$_QuizItemState implements _QuizItemState {
             (identical(other.isCompleted, isCompleted) ||
                 other.isCompleted == isCompleted) &&
             const DeepCollectionEquality().equals(other._quizList, _quizList) &&
-            (identical(other.score, score) || other.score == score) &&
-            (identical(other.selectedIndex, selectedIndex) ||
-                other.selectedIndex == selectedIndex));
+            (identical(other.score, score) || other.score == score));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, group, title, isCompleted,
-      const DeepCollectionEquality().hash(_quizList), score, selectedIndex);
+      const DeepCollectionEquality().hash(_quizList), score);
 
   @JsonKey(ignore: true)
   @override
@@ -266,8 +246,7 @@ abstract class _QuizItemState implements QuizItemState {
       required final String title,
       required final bool isCompleted,
       required final List<QuizState> quizList,
-      required final int score,
-      final int selectedIndex}) = _$_QuizItemState;
+      required final int score}) = _$_QuizItemState;
 
   factory _QuizItemState.fromJson(Map<String, dynamic> json) =
       _$_QuizItemState.fromJson;
@@ -284,8 +263,6 @@ abstract class _QuizItemState implements QuizItemState {
   List<QuizState> get quizList;
   @override //クイズ一覧
   int get score;
-  @override //正解数
-  int get selectedIndex;
   @override
   @JsonKey(ignore: true)
   _$$_QuizItemStateCopyWith<_$_QuizItemState> get copyWith =>

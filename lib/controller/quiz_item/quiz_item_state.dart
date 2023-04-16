@@ -15,7 +15,6 @@ class QuizItemState with _$QuizItemState {
     required final bool isCompleted, //全て問題を解いたか
     required final List<QuizState> quizList, //クイズ一覧
     required final int score, //正解数
-    @Default(0) final int selectedIndex,
   }) = _QuizItemState;
   factory QuizItemState.fromJson(Map<String, dynamic> json) =>
       _$QuizItemStateFromJson(json);
