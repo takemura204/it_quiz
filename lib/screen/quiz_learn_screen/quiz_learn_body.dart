@@ -44,20 +44,7 @@ class _Body extends ConsumerWidget {
         _LapInfoBar(item),
 
         ///広告
-        Container(
-          height: context.height * 0.07,
-          color: Colors.cyan,
-          child: Row(
-            children: const [
-              Spacer(),
-              Text(
-                "広告入れたい",
-                style: TextStyle(fontSize: 30),
-              ),
-              Spacer(),
-            ],
-          ),
-        )
+        AdBanner(),
       ],
     );
   }

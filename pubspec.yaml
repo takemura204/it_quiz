@@ -96,6 +96,9 @@ dependencies:
   #freezed用
   json_annotation: ^4.8.0
 
+  #広告を入れたい
+  google_mobile_ads: ^2.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

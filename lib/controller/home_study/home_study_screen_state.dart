@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../quiz_item/quiz_item_state.dart';
-
 part 'home_study_screen_state.freezed.dart';
 
 @freezed

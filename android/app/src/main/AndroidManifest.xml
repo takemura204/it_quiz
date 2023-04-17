@@ -1,9 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kentei_quiz">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="kentei_quiz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+       <meta-data
+           android:name="com.google.android.gms.ads.ca-app-pub-5053471763020307~7242186229"
+           android:value="ca-app-pub-5053471763020307/2204949130"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -37,6 +37,22 @@ class _Body extends ConsumerWidget {
 
             ///選択肢
             _SelectAnswer(item),
+
+            ///広告
+            Container(
+              height: context.height * 0.07,
+              color: Colors.cyan,
+              child: Row(
+                children: const [
+                  Spacer(),
+                  Text(
+                    "広告入れたい",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Spacer(),
+                ],
+              ),
+            )
           ],
         ),
         _JudgeIcon(item),
