@@ -4,6 +4,7 @@ import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../quiz/quiz_state.dart';
+import '../quiz_item/quiz_item_controller.dart';
 
 final quizLearnScreenProvider =
     StateNotifierProvider<QuizLearnScreenController, QuizLearnScreenState>(
@@ -170,6 +171,12 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     state = state.copyWith(isAnsView: !state.isAnsView);
   }
 
+  ///クイズ結果更新(端末保存)
+  void _updateItem() {
+    final quizList = state.quizList;
+    ref.read(quizItemProvider.notifier).updateItem(quizList);
+  }
+
   ///クリアボタン
   void tapClearButton() {
     state = state.copyWith(
@@ -180,5 +187,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       knowQuizList: [],
       unKnowQuizList: [],
     );
+    _updateItem();
   }
 }

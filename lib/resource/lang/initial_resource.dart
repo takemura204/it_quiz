@@ -9,10 +9,10 @@ class I18n {
   String get appName => "Kentei Quiz";
 
   ///title
-  String get titleStudy => "学ぶ";
-  String get titleReview => "復習";
-  String get titleTest => "テスト";
-  String get titleMyPage => "マイページ";
+  String get titleStudy => "クイズ";
+  String get titleReview => "チャレンジ";
+  String get titleTest => "スコア";
+  String get titleSetting => "マイページ";
 
   ///「学ぶ」形式
   String get styleLeanQuiz => "一問一答で学習する";

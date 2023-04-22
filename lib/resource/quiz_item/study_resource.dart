@@ -3,7 +3,7 @@ import 'package:kentei_quiz/resource/quiz/quiz_resource.dart';
 import '../../controller/quiz_item/quiz_item_state.dart';
 
 ///問題ジャンル
-List<QuizItemState> quizItems = [
+List<QuizItemState> quizStudyItems = [
   QuizItemState(
     id: 1,
     group: "TeamA",
@@ -82,18 +82,6 @@ List<QuizItemState> quizItems = [
     title: "問題D-1",
     isCompleted: false,
     quizList: quiz1,
-    score: 0,
-  ),
-];
-
-///「復習リスト」
-List<QuizItemState> reviewItem = [
-  const QuizItemState(
-    id: 1,
-    group: "rememberQuestions",
-    title: "一問一答で復習する",
-    isCompleted: false,
-    quizList: [],
     score: 0,
   ),
 ];

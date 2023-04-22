@@ -178,30 +178,32 @@ class _SimpleDialogOption1 extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SimpleDialogOption(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: Container(
-        height: context.height * 0.06,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: context.colors.onMain50.withOpacity(0.6),
-          border: Border.all(color: context.colors.main50.withOpacity(0.7)),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: context.colors.main50.withOpacity(0.7),
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Container(
+          height: context.height * 0.06,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: context.colors.onMain50.withOpacity(0.6),
+            border: Border.all(color: context.colors.main50.withOpacity(0.7)),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: context.colors.main50.withOpacity(0.7),
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
           ),
         ),
-      ),
-      onPressed: () => context.showScreen(
-        QuizLearnScreenArguments(
-          item: item,
-        ).generateRoute(),
-      ),
-    );
+        onPressed: () {
+          ref.read(quizItemProvider.notifier).setQuizType(QuizType.study);
+          context.showScreen(
+            QuizLearnScreenArguments(
+              item: item,
+            ).generateRoute(),
+          );
+        });
   }
 }
 
@@ -216,29 +218,31 @@ class _SimpleDialogOption2 extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SimpleDialogOption(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: Container(
-        height: context.height * 0.06,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: context.colors.main50.withOpacity(0.6),
-          border: Border.all(color: context.colors.main50.withOpacity(0.7)),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: AutoSizeText(
-          text,
-          style: TextStyle(
-            color: context.colors.onMain50,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Container(
+          height: context.height * 0.06,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: context.colors.main50.withOpacity(0.6),
+            border: Border.all(color: context.colors.main50.withOpacity(0.7)),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: AutoSizeText(
+            text,
+            style: TextStyle(
+              color: context.colors.onMain50,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
           ),
         ),
-      ),
-      onPressed: () => context.showScreen(
-        QuizChoiceScreenArguments(
-          item: item,
-        ).generateRoute(),
-      ),
-    );
+        onPressed: () {
+          ref.read(quizItemProvider.notifier).setQuizType(QuizType.study);
+          context.showScreen(
+            QuizChoiceScreenArguments(
+              item: item,
+            ).generateRoute(),
+          );
+        });
   }
 }

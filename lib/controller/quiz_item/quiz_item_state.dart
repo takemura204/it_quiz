@@ -19,3 +19,10 @@ class QuizItemState with _$QuizItemState {
   factory QuizItemState.fromJson(Map<String, dynamic> json) =>
       _$QuizItemStateFromJson(json);
 }
+
+enum QuizType {
+  study,
+  review,
+  daily,
+  test,
+}

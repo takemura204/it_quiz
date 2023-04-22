@@ -1,11 +1,16 @@
+import 'dart:convert';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../resource/quiz_item/review_resource.dart';
 import '../quiz/quiz_state.dart';
+import '../quiz_item/quiz_item_controller.dart';
 import '../quiz_item/quiz_item_state.dart';
 import 'home_review_screen_state.dart';
 
-final homeReviewScreenControllerProvider =
+final homeReviewScreenProvider =
     StateNotifierProvider<HomeReviewScreenController, HomeReviewScreenState>(
   (ref) => HomeReviewScreenController(ref: ref),
 );
@@ -13,182 +18,78 @@ final homeReviewScreenControllerProvider =
 class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     with LocatorMixin {
   HomeReviewScreenController({required this.ref})
-      : super(const HomeReviewScreenState());
+      : super(const HomeReviewScreenState()) {
+    initState();
+  }
 
   final Ref ref;
 
   @override
   void initState() {
-    addItem();
+    _initialize(); // 新しい初期化関数を呼び出す
     super.initState();
   }
 
-  void addItem() {
-    final reviewItem = [...state.reviewItem];
-    reviewItem.addAll(
-      [
-        reviewLearnQuiz,
-        reviewChoiceQuiz,
-        reviewTrueFalseQuiz,
-      ],
-    );
-    state = state.copyWith(reviewItem: reviewItem);
+  Future<void> _initialize() async {
+    await _loadData(); // データを読み込む
+    _updateData(); // クイズ追加
   }
 
-  ///一問一答リストに追加
-  void addLearnQuiz(QuizState quiz) {
-    final quizList = [...state.quizList];
-    final reviewItem = state.reviewItem;
-    //同じクイズの時
-    if (quizList.any((x) => x.question == quiz.question)) {
-      return;
+  /// weakQuizを読み込み
+  Future _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('weak_quiz');
+    if (data != null) {
+      final quiz = QuizItemState.fromJson(json.decode(data));
+      state = state.copyWith(weakQuiz: quiz);
     }
-
-    quizList.add(quiz);
-
-    //reviewLearnQuizに追加
-    reviewItem[0] = QuizItemState(
-      id: 1,
-      group: "rememberQuestions",
-      title: "一問一答で復習する",
-      quizList: quizList,
-      isCompleted: false,
-      score: 0,
-    );
-
-    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
   }
 
-  ///一問一答リストから削除
-  void removeLearnQuiz(QuizState quiz) {
-    final quizList = [...state.quizList];
-    final reviewItem = state.reviewItem;
-    quizList.remove(quizList.where((x) => x.question == quiz.question).first);
-    reviewItem[0] = const QuizItemState(
-      id: 1,
-      group: "rememberQuestions",
-      title: "一問一答で復習する",
-      isCompleted: false,
-      quizList: [],
-      score: 0,
-    );
+  ///クイズ更新
+  Future<void> _updateData() async {
+    final weakAllList = ref
+        .read(quizItemProvider)
+        .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
+        .toList();
+    // questionが同じものを重複しないようにまとめる
+    final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
+    final weakList = weakSetList.map((question) {
+      return weakAllList.firstWhere((quiz) => quiz.question == question);
+    }).toList();
 
-    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
+    final weakQuiz = weakItem.copyWith(quizList: weakList);
+    state = state.copyWith(weakQuiz: weakQuiz);
+    _saveData(); // 保存
   }
 
-  ///4択リストに追加
-  void addChoiceQuiz(QuizState quiz) {
-    final quizList = [...state.quizList];
-    final reviewItem = state.reviewItem;
+  ///クイズ更新
+  Future<void> updateWeakItem(List<QuizState> quizList) async {
+    //全ての苦手クイズから同じ問題を絞り込み
+    final weakAllList = ref
+        .read(quizItemProvider)
+        .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
+        .toList();
+    final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
+    final weakList = weakSetList.map((question) {
+      return weakAllList.firstWhere((quiz) => quiz.question == question);
+    }).toList();
 
-    //同じクイズの時
-    if (quizList.any((x) => x.question == quiz.question)) {
-      return;
-    }
+    final weakQuiz = state.weakQuiz.copyWith(quizList: weakList);
 
-    quizList.add(quiz);
-
-    reviewItem[1] = QuizItemState(
-      id: 2,
-      group: "LearnQuiz",
-      title: "一問一答で復習する",
-      isCompleted: false,
-      quizList: quizList,
-      score: 0,
-    );
-
-    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
+    state = state.copyWith(weakQuiz: weakQuiz);
+    _saveData(); // 保存
   }
 
-  ///4択リストから削除
-  void removeChoiceQuiz(QuizState quiz) {
-    final quizList = [...state.quizList];
-    final reviewItem = state.reviewItem;
-    quizList.remove(quizList.where((x) => x.question == quiz.question).first);
-
-    //選択問題に追加
-    reviewItem[1] = QuizItemState(
-      id: 2,
-      group: "ChoiceQuiz",
-      title: "一問一答で復習する",
-      isCompleted: false,
-      quizList: quizList,
-      score: 0,
-    );
-
-    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
+  ///weakQuizを保存
+  Future _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = json.encode(state.weakQuiz.toJson());
+    await prefs.setString('weak_quiz', data);
   }
 
-  ///○×クイズに追加
-  void addTrueFalseQuiz(QuizState quiz) {
-    final quizList = [...state.quizList];
-    final reviewItem = state.reviewItem;
-
-    //同じクイズの時
-    if (quizList.any((x) => x.question == quiz.question)) {
-      return;
-    }
-
-    quizList.add(quiz);
-
-    reviewItem[2] = QuizItemState(
-      id: 3,
-      group: "TrueFalseQuiz",
-      title: "○×問題で復習する",
-      isCompleted: false,
-      quizList: quizList,
-      score: 0,
-    );
-
-    print(reviewItem[2].quizList.length);
-
-    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
-  }
-
-  ///○×クイズから削除
-  void removeTrueFalseQuiz(QuizState quiz) {
-    final quizList = [...state.quizList];
-    final reviewItem = state.reviewItem;
-    quizList.remove(quizList.where((x) => x.question == quiz.question).first);
-
-    //○×問題から削除
-    reviewItem[2] = QuizItemState(
-      id: 3,
-      group: "TrueFalseQuiz",
-      title: "○×問題で復習する",
-      isCompleted: false,
-      quizList: quizList,
-      score: 0,
-    );
-
-    print(reviewItem[2].quizList.length);
-    state = state.copyWith(quizList: quizList, reviewItem: reviewItem);
-  }
+  /// 端末に保存されているデータをリセットする
+  // Future<void> _resetData() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.remove("weak_quiz");
+  // }
 }
-
-const reviewLearnQuiz = QuizItemState(
-  id: 1,
-  group: "LearnQuiz",
-  title: "一問一答で復習する",
-  isCompleted: false,
-  quizList: [],
-  score: 0,
-);
-
-const reviewChoiceQuiz = QuizItemState(
-  id: 2,
-  group: "ChoiceQuiz",
-  title: "選択問題で復習する",
-  isCompleted: false,
-  quizList: [],
-  score: 0,
-);
-
-const reviewTrueFalseQuiz = QuizItemState(
-  id: 3,
-  group: "TrueFalseQuiz",
-  title: "○×問題で復習する",
-  isCompleted: false,
-  quizList: [],
-  score: 0,
-);

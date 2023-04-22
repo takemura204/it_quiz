@@ -29,7 +29,7 @@ class _BottomNavBar extends ConsumerWidget {
         BottomNavigationBarItem(
           icon: const Icon(Icons.account_circle),
           activeIcon: const Icon(Icons.account_circle),
-          label: I18n().titleMyPage,
+          label: I18n().titleSetting,
         ),
       ],
       currentIndex: state.currentIndex,

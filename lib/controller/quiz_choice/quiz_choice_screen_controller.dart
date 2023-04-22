@@ -60,9 +60,9 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         quizId: quizList[quizIndex].quizId,
         question: quizList[quizIndex].question,
         ans: quizList[quizIndex].ans,
-        isJudge: true, //正解
-        isWeak: quizList[quizIndex].isWeak, //苦手リスト除外
         choices: quizList[quizIndex].choices,
+        isJudge: true, //正解
+        isWeak: false, //苦手リスト除外
       );
       state = state.copyWith(isJudge: true, quizList: quizList);
     }
@@ -96,23 +96,13 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     //問題が終わった時
     if (quizIndex == item.quizList.length - 1) {
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
-      _saveQuizItem();
+      _updateItem();
     }
     //問題がまだある時
     else {
       state = state.copyWith(quizIndex: quizIndex + 1);
     }
     _shuffleChoice();
-  }
-
-  ///クリアボタン
-  void tapClearButton() {
-    state = state.copyWith(
-      quizItemIndex: 0,
-      quizIndex: 0,
-      isAnsView: false,
-      isResultScreen: false,
-    );
   }
 
   ///チェックボックス切り替え
@@ -129,11 +119,20 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     state = state.copyWith(quizList: quizList);
   }
 
+  ///クリアボタン
+  void tapClearButton() {
+    state = state.copyWith(
+      quizItemIndex: 0,
+      quizIndex: 0,
+      isAnsView: false,
+      isResultScreen: false,
+    );
+    _updateItem();
+  }
+
   ///クイズ結果更新(端末保存)
-  void _saveQuizItem() {
+  void _updateItem() {
     final quizList = state.quizList;
-    ref
-        .read(quizItemProvider.notifier)
-        .updateItem(quizList); //homeStudyScreenに反映
+    ref.read(quizItemProvider.notifier).updateItem(quizList);
   }
 }
