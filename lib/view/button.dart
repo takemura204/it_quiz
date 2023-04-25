@@ -13,9 +13,9 @@ class ClearButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: context.height * 0.05,
-      alignment: Alignment.bottomRight,
       child: IconButton(
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        alignment: Alignment.topRight,
         iconSize: iconSize,
         onPressed: () {
           Navigator.pop(context);
