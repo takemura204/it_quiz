@@ -9,30 +9,32 @@ class _BottomNavBar extends ConsumerWidget {
         ref.watch<HomeRootScreenState>(homeRootScreenControllerProvider);
 
     return BottomNavigationBar(
+      elevation: 300,
       iconSize: 35,
       items: [
         BottomNavigationBarItem(
-          icon: const Icon(Icons.list_alt),
-          activeIcon: const Icon(Icons.list_alt),
+          icon: const Icon(Icons.list_alt_outlined),
+          activeIcon: const Icon(Icons.list_alt_outlined),
           label: I18n().titleStudy,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.checklist_rtl),
-          activeIcon: const Icon(Icons.checklist_rtl),
+          icon: const Icon(Icons.checklist_rtl_outlined),
+          activeIcon: const Icon(Icons.checklist_rtl_outlined),
           label: I18n().titleReview,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.edit_note),
-          activeIcon: const Icon(Icons.edit_note),
+          icon: const Icon(Icons.insights_outlined),
+          activeIcon: const Icon(Icons.insights_outlined),
           label: I18n().titleTest,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.account_circle),
-          activeIcon: const Icon(Icons.account_circle),
+          icon: const Icon(Icons.person_outline),
+          activeIcon: const Icon(Icons.person_outline),
           label: I18n().titleSetting,
         ),
       ],
       currentIndex: state.currentIndex,
+      fixedColor: context.colors.main50.withOpacity(0.7),
       onTap: (index) => ref
           .watch(homeRootScreenControllerProvider.notifier)
           .changeTabIndex(index),

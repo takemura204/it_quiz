@@ -46,7 +46,7 @@ class _Scaffold extends ConsumerWidget {
       order: GroupedListOrder.DESC, //グループの並べ替え
       useStickyGroupSeparators: true, //現在表示されているグループのグループヘッダーが一番上に表示
       groupSeparatorBuilder: (String group) => Container(
-        color: context.colors.main50.withOpacity(0.4),
+        color: context.colors.main50.withOpacity(0.5),
         padding: const EdgeInsets.all(8.0),
         child: Text(
           group,

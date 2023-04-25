@@ -15,7 +15,7 @@ class _QuizItemBar extends ConsumerWidget {
         quizItemController.tapQuizItemBar(index);
         //ダイアログ表示
         showDialog(
-            context: context, builder: (_) => _SelectQuizDialog(index: index));
+            context: context, builder: (_) => _StudyQuizDialog(index: index));
       },
       child: Card(
         elevation: 1.0,
@@ -44,15 +44,15 @@ class _QuizItemBar extends ConsumerWidget {
   }
 }
 
-class _SelectQuizDialog extends ConsumerWidget {
-  const _SelectQuizDialog({required this.index});
+class _StudyQuizDialog extends ConsumerWidget {
+  const _StudyQuizDialog({required this.index});
   final int index;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(quizItemProvider)[index];
     return SimpleDialog(
-      insetPadding: const EdgeInsets.all(4),
-      contentPadding: const EdgeInsets.all(4),
+      insetPadding: EdgeInsets.all(context.width * 0.01),
+      contentPadding: EdgeInsets.all(context.width * 0.01),
       children: [
         Container(
           height: context.height * 0.26,
@@ -89,11 +89,11 @@ class _SelectQuizDialog extends ConsumerWidget {
 
                     ///一問一答形式で学習する
                     _SimpleDialogOption1(
-                        item: item, index: 0, text: I18n().styleLeanQuiz),
+                        item: item, text: I18n().styleLeanQuiz),
 
                     ///4択形式クイズに挑戦する
                     _SimpleDialogOption2(
-                        item: item, index: 0, text: I18n().styleChoiceQuiz),
+                        item: item, text: I18n().styleChoiceQuiz),
                   ],
                 ),
               ),
@@ -117,7 +117,8 @@ class _Title extends ConsumerWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         item.title,
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: context.width * 0.05, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -135,9 +136,10 @@ class _QuizResult extends ConsumerWidget {
       alignment: Alignment.centerLeft,
       child: Row(
         children: [
-          const Text(
+          Text(
             "前回のクイズ挑戦結果",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: context.width * 0.04, fontWeight: FontWeight.bold),
           ),
           const Spacer(),
           Row(
@@ -145,8 +147,8 @@ class _QuizResult extends ConsumerWidget {
               ///正解数
               Text(
                 "${item.score}",
-                style: const TextStyle(
-                  fontSize: 20,
+                style: TextStyle(
+                  fontSize: context.width * 0.05,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -154,8 +156,8 @@ class _QuizResult extends ConsumerWidget {
               ///問題数
               Text(
                 "/" + item.quizList.length.toString(),
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: context.width * 0.04,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -169,30 +171,33 @@ class _QuizResult extends ConsumerWidget {
 
 ///クイズ選択ボタン1
 class _SimpleDialogOption1 extends ConsumerWidget {
-  const _SimpleDialogOption1(
-      {required this.item, required this.index, required this.text});
+  const _SimpleDialogOption1({required this.item, required this.text});
   final QuizItemState item;
-  final int index;
   final String text;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SimpleDialogOption(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        child: Container(
-          height: context.height * 0.06,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: context.colors.onMain50.withOpacity(0.6),
-            border: Border.all(color: context.colors.main50.withOpacity(0.7)),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: context.colors.main50.withOpacity(0.7),
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+        padding: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        child: Card(
+          elevation: 3,
+          margin: const EdgeInsets.all(0),
+          child: Container(
+            height: context.height * 0.06,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: context.colors.onMain50.withOpacity(0.6),
+              border: Border.all(color: context.colors.main50.withOpacity(0.7)),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Text(
+              text,
+              style: TextStyle(
+                color: context.colors.main50.withOpacity(0.7),
+                fontWeight: FontWeight.bold,
+                fontSize: context.width * 0.045,
+              ),
             ),
           ),
         ),
@@ -209,30 +214,33 @@ class _SimpleDialogOption1 extends ConsumerWidget {
 
 ///クイズ選択ボタン2
 class _SimpleDialogOption2 extends ConsumerWidget {
-  const _SimpleDialogOption2(
-      {required this.item, required this.index, required this.text});
+  const _SimpleDialogOption2({required this.item, required this.text});
   final QuizItemState item;
-  final int index;
   final String text;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SimpleDialogOption(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        child: Container(
-          height: context.height * 0.06,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: context.colors.main50.withOpacity(0.6),
-            border: Border.all(color: context.colors.main50.withOpacity(0.7)),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: AutoSizeText(
-            text,
-            style: TextStyle(
-              color: context.colors.onMain50,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+        padding: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        child: Card(
+          elevation: 3,
+          margin: const EdgeInsets.all(0),
+          child: Container(
+            height: context.height * 0.06,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: context.colors.main50.withOpacity(0.6),
+              border: Border.all(color: context.colors.main50.withOpacity(0.7)),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: AutoSizeText(
+              text,
+              style: TextStyle(
+                color: context.colors.onMain50,
+                fontWeight: FontWeight.bold,
+                fontSize: context.width * 0.045,
+              ),
             ),
           ),
         ),

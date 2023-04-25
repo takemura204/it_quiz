@@ -92,6 +92,7 @@ class _TestQuiz extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizItemProvider);
+    final score = ref.watch(homeReviewScreenProvider).testScore;
     return Column(
       children: [
         if (quizItemList.isEmpty)
@@ -101,15 +102,67 @@ class _TestQuiz extends ConsumerWidget {
         else
           _QuizButton(
             title: "力だめし",
-            subTitle: "前回の結果:〇〇点",
+            subTitle: (score == 0) ? "あなたの実力が試せます！" : "前回の結果:${score}点",
             icon: Icons.abc,
             onTap: () {
-              ref.read(quizItemProvider.notifier).setQuizType(QuizType.test);
-              context.showScreen(QuizChoiceScreenArguments(
-                item: ref.watch(homeReviewScreenProvider).reviewItem[0],
-              ).generateRoute());
+              showDialog(
+                  context: context, builder: (_) => const _TestQuizDialog());
             },
           ),
+      ],
+    );
+  }
+}
+
+class _TestQuizDialog extends ConsumerWidget {
+  const _TestQuizDialog();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final testQuiz = ref.watch(homeReviewScreenProvider).testQuiz;
+    return SimpleDialog(
+      insetPadding: EdgeInsets.all(context.width * 0.01),
+      contentPadding: EdgeInsets.all(context.width * 0.01),
+      children: [
+        Container(
+          height: context.height * 0.55,
+          width: context.width * 0.8,
+          child: Column(
+            children: [
+              ///タイトル
+              Row(
+                children: [
+                  _DialogTitle(testQuiz),
+                  const Spacer(),
+                  ClearButton(
+                    iconSize: context.height * 0.04,
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+
+              Divider(height: 1, color: context.colors.dark54),
+
+              ///クイズ挑戦結果
+              _QuizResult(testQuiz),
+
+              Divider(height: 1, color: context.colors.dark54),
+              const Spacer(),
+
+              ///選択範囲
+              const _QuizRange(),
+              const Spacer(),
+              Divider(height: 1, color: context.colors.dark54),
+              const Spacer(),
+              const _SelectLength(),
+              const Spacer(),
+              Divider(height: 1, color: context.colors.dark54),
+              const Spacer(),
+
+              ///クイズに挑戦する
+              _SimpleDialogOption(item: testQuiz, text: I18n().styleTestQuiz),
+            ],
+          ),
+        ),
       ],
     );
   }

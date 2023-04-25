@@ -20,7 +20,10 @@ mixin _$HomeReviewScreenState {
   List<QuizItemState> get reviewItem => throw _privateConstructorUsedError;
   QuizItemState get weakQuiz => throw _privateConstructorUsedError; //苦手克服
   QuizItemState get dailyQuiz => throw _privateConstructorUsedError; //今日のクイズ
-  QuizItemState get testQuiz => throw _privateConstructorUsedError;
+  QuizItemState get testQuiz => throw _privateConstructorUsedError; //全てのクイズ
+  int get testScore => throw _privateConstructorUsedError; //全てのクイズ
+  bool get isSelected => throw _privateConstructorUsedError;
+  List<String> get groupList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeReviewScreenStateCopyWith<HomeReviewScreenState> get copyWith =>
@@ -38,7 +41,10 @@ abstract class $HomeReviewScreenStateCopyWith<$Res> {
       List<QuizItemState> reviewItem,
       QuizItemState weakQuiz,
       QuizItemState dailyQuiz,
-      QuizItemState testQuiz});
+      QuizItemState testQuiz,
+      int testScore,
+      bool isSelected,
+      List<String> groupList});
 
   $QuizItemStateCopyWith<$Res> get weakQuiz;
   $QuizItemStateCopyWith<$Res> get dailyQuiz;
@@ -64,6 +70,9 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
     Object? weakQuiz = null,
     Object? dailyQuiz = null,
     Object? testQuiz = null,
+    Object? testScore = null,
+    Object? isSelected = null,
+    Object? groupList = null,
   }) {
     return _then(_value.copyWith(
       currentIndex: null == currentIndex
@@ -86,6 +95,18 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
           ? _value.testQuiz
           : testQuiz // ignore: cast_nullable_to_non_nullable
               as QuizItemState,
+      testScore: null == testScore
+          ? _value.testScore
+          : testScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      groupList: null == groupList
+          ? _value.groupList
+          : groupList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 
@@ -126,7 +147,10 @@ abstract class _$$_CreateCopyWith<$Res>
       List<QuizItemState> reviewItem,
       QuizItemState weakQuiz,
       QuizItemState dailyQuiz,
-      QuizItemState testQuiz});
+      QuizItemState testQuiz,
+      int testScore,
+      bool isSelected,
+      List<String> groupList});
 
   @override
   $QuizItemStateCopyWith<$Res> get weakQuiz;
@@ -151,6 +175,9 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? weakQuiz = null,
     Object? dailyQuiz = null,
     Object? testQuiz = null,
+    Object? testScore = null,
+    Object? isSelected = null,
+    Object? groupList = null,
   }) {
     return _then(_$_Create(
       currentIndex: null == currentIndex
@@ -173,6 +200,18 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.testQuiz
           : testQuiz // ignore: cast_nullable_to_non_nullable
               as QuizItemState,
+      testScore: null == testScore
+          ? _value.testScore
+          : testScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      groupList: null == groupList
+          ? _value._groupList
+          : groupList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -185,8 +224,12 @@ class _$_Create implements _Create {
       final List<QuizItemState> reviewItem = const [],
       this.weakQuiz = weakItem,
       this.dailyQuiz = todayItem,
-      this.testQuiz = testItem})
-      : _reviewItem = reviewItem;
+      this.testQuiz = testItem,
+      this.testScore = 0,
+      this.isSelected = false,
+      final List<String> groupList = const []})
+      : _reviewItem = reviewItem,
+        _groupList = groupList;
 
   @override
   @JsonKey()
@@ -211,10 +254,26 @@ class _$_Create implements _Create {
   @override
   @JsonKey()
   final QuizItemState testQuiz;
+//全てのクイズ
+  @override
+  @JsonKey()
+  final int testScore;
+//全てのクイズ
+  @override
+  @JsonKey()
+  final bool isSelected;
+  final List<String> _groupList;
+  @override
+  @JsonKey()
+  List<String> get groupList {
+    if (_groupList is EqualUnmodifiableListView) return _groupList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_groupList);
+  }
 
   @override
   String toString() {
-    return 'HomeReviewScreenState(currentIndex: $currentIndex, reviewItem: $reviewItem, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz)';
+    return 'HomeReviewScreenState(currentIndex: $currentIndex, reviewItem: $reviewItem, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz, testScore: $testScore, isSelected: $isSelected, groupList: $groupList)';
   }
 
   @override
@@ -231,7 +290,13 @@ class _$_Create implements _Create {
             (identical(other.dailyQuiz, dailyQuiz) ||
                 other.dailyQuiz == dailyQuiz) &&
             (identical(other.testQuiz, testQuiz) ||
-                other.testQuiz == testQuiz));
+                other.testQuiz == testQuiz) &&
+            (identical(other.testScore, testScore) ||
+                other.testScore == testScore) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected) &&
+            const DeepCollectionEquality()
+                .equals(other._groupList, _groupList));
   }
 
   @override
@@ -241,7 +306,10 @@ class _$_Create implements _Create {
       const DeepCollectionEquality().hash(_reviewItem),
       weakQuiz,
       dailyQuiz,
-      testQuiz);
+      testQuiz,
+      testScore,
+      isSelected,
+      const DeepCollectionEquality().hash(_groupList));
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +324,10 @@ abstract class _Create implements HomeReviewScreenState {
       final List<QuizItemState> reviewItem,
       final QuizItemState weakQuiz,
       final QuizItemState dailyQuiz,
-      final QuizItemState testQuiz}) = _$_Create;
+      final QuizItemState testQuiz,
+      final int testScore,
+      final bool isSelected,
+      final List<String> groupList}) = _$_Create;
 
   @override
   int get currentIndex;
@@ -268,6 +339,12 @@ abstract class _Create implements HomeReviewScreenState {
   QuizItemState get dailyQuiz;
   @override //今日のクイズ
   QuizItemState get testQuiz;
+  @override //全てのクイズ
+  int get testScore;
+  @override //全てのクイズ
+  bool get isSelected;
+  @override
+  List<String> get groupList;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

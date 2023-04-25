@@ -13,5 +13,8 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
     @Default(weakItem) final QuizItemState weakQuiz, //苦手克服
     @Default(todayItem) final QuizItemState dailyQuiz, //今日のクイズ
     @Default(testItem) final QuizItemState testQuiz, //全てのクイズ
+    @Default(0) final int testScore, //全てのクイズ
+    @Default(false) bool isSelected,
+    @Default([]) final List<String> groupList,
   }) = _Create;
 }

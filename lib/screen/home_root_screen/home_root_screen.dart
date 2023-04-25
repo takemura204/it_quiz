@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
 import '../../controller/home_root/home_root_screen_controller.dart';
 import '../../controller/home_root/home_root_screen_state.dart';

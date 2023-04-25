@@ -30,23 +30,37 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     super.initState();
   }
 
-  Future<void> _initialize() async {
+  Future _initialize() async {
     await _loadData(); // データを読み込む
     _updateData(); // クイズ追加
   }
 
-  /// weakQuizを読み込み
+  ///クイズ読み込み
   Future _loadData() async {
     final prefs = await SharedPreferences.getInstance();
-    final data = prefs.getString('weak_quiz');
-    if (data != null) {
-      final quiz = QuizItemState.fromJson(json.decode(data));
-      state = state.copyWith(weakQuiz: quiz);
+
+    final weakData = prefs.getString('weak_quiz');
+    final testData = prefs.getString('test_quiz');
+
+    // weakQuizを読み込み
+    if (weakData != null) {
+      final weakQuiz = QuizItemState.fromJson(json.decode(weakData));
+      state = state.copyWith(weakQuiz: weakQuiz);
+    }
+    //testQuiz読み込み
+    if (testData != null) {
+      final testQuiz = QuizItemState.fromJson(json.decode(testData));
+      state = state.copyWith(testQuiz: testQuiz);
     }
   }
 
   ///クイズ更新
-  Future<void> _updateData() async {
+  Future _updateData() async {
+    _addWeakQuiz(); // weakQuiz追加
+  }
+
+  /// weakQuiz追加
+  void _addWeakQuiz() {
     final weakAllList = ref
         .read(quizItemProvider)
         .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
@@ -62,7 +76,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     _saveData(); // 保存
   }
 
-  ///クイズ更新
+  ///WeakItem更新
   Future<void> updateWeakItem(List<QuizState> quizList) async {
     //全ての苦手クイズから同じ問題を絞り込み
     final weakAllList = ref
@@ -83,8 +97,10 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   ///weakQuizを保存
   Future _saveData() async {
     final prefs = await SharedPreferences.getInstance();
-    final data = json.encode(state.weakQuiz.toJson());
-    await prefs.setString('weak_quiz', data);
+    final weakData = json.encode(state.weakQuiz.toJson());
+    final testData = json.encode(state.testQuiz.toJson());
+    await prefs.setString('weak_quiz', weakData);
+    await prefs.setString('test_quiz', testData);
   }
 
   /// 端末に保存されているデータをリセットする
@@ -92,4 +108,13 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   //   final prefs = await SharedPreferences.getInstance();
   //   prefs.remove("weak_quiz");
   // }
+
+  void selectGroup(String group) {
+    final groupList = [...state.groupList];
+    if (groupList.contains(group)) {
+      state = state.copyWith(groupList: groupList..remove(group));
+    } else {
+      state = state.copyWith(groupList: groupList..add(group));
+    }
+  }
 }
