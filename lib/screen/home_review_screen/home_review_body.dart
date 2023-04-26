@@ -159,7 +159,7 @@ class _TestQuizDialog extends ConsumerWidget {
               const Spacer(),
 
               ///クイズに挑戦する
-              _SimpleDialogOption(item: testQuiz, text: I18n().styleTestQuiz),
+              _SimpleDialogOption(text: I18n().styleTestQuiz),
             ],
           ),
         ),

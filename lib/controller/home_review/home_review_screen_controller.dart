@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,20 +26,16 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   final Ref ref;
 
   @override
-  void initState() {
-    _initialize(); // 新しい初期化関数を呼び出す
-    super.initState();
-  }
-
-  Future _initialize() async {
+  Future initState() async {
+    _resetData(); //データリセット
     await _loadData(); // データを読み込む
-    _updateData(); // クイズ追加
+    await _updateData(); // クイズ追加
+    super.initState();
   }
 
   ///クイズ読み込み
   Future _loadData() async {
     final prefs = await SharedPreferences.getInstance();
-
     final weakData = prefs.getString('weak_quiz');
     final testData = prefs.getString('test_quiz');
 
@@ -57,6 +54,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   ///クイズ更新
   Future _updateData() async {
     _addWeakQuiz(); // weakQuiz追加
+    // addTestQuiz(); // testQuiz追加
   }
 
   /// weakQuiz追加
@@ -70,9 +68,36 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final weakList = weakSetList.map((question) {
       return weakAllList.firstWhere((quiz) => quiz.question == question);
     }).toList();
-
     final weakQuiz = weakItem.copyWith(quizList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
+    _saveData(); // 保存
+  }
+
+  /// testQuiz追加
+  Future addTestQuiz() async {
+    final testGroup = state.testGroup;
+    final testLength = state.testLength;
+    final filteredQuizList = [
+      ...ref
+          .read(quizItemProvider)
+          .where((quizItem) => testGroup.contains(quizItem.group))
+          .expand((quizItem) => quizItem.quizList)
+          .toList()
+    ];
+    final random = Random();
+    final pickedQuizList = <QuizState>[];
+
+    for (int i = 0; i < testLength; i++) {
+      if (filteredQuizList.isNotEmpty) {
+        final randomIndex = random.nextInt(filteredQuizList.length);
+        pickedQuizList.add(filteredQuizList[randomIndex]);
+        filteredQuizList.removeAt(randomIndex);
+      } else {
+        break;
+      }
+    }
+    final testQuiz = testItem.copyWith(quizList: pickedQuizList);
+    state = state.copyWith(testQuiz: testQuiz);
     _saveData(); // 保存
   }
 
@@ -89,7 +114,6 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     }).toList();
 
     final weakQuiz = state.weakQuiz.copyWith(quizList: weakList);
-
     state = state.copyWith(weakQuiz: weakQuiz);
     _saveData(); // 保存
   }
@@ -104,17 +128,24 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   /// 端末に保存されているデータをリセットする
-  // Future<void> _resetData() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.remove("weak_quiz");
-  // }
+  Future _resetData() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("weak_quiz");
+    prefs.remove("test_quiz");
+  }
 
+  ///問題範囲指定
   void selectGroup(String group) {
-    final groupList = [...state.groupList];
-    if (groupList.contains(group)) {
-      state = state.copyWith(groupList: groupList..remove(group));
+    final testGroup = [...state.testGroup];
+    if (testGroup.contains(group)) {
+      state = state.copyWith(testGroup: testGroup..remove(group));
     } else {
-      state = state.copyWith(groupList: groupList..add(group));
+      state = state.copyWith(testGroup: testGroup..add(group));
     }
+  }
+
+  ///問題数指定
+  void selectLength(int length) {
+    state = state.copyWith(testLength: length);
   }
 }

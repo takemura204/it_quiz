@@ -217,7 +217,7 @@ class _SelectRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isSelected =
-        ref.watch(homeReviewScreenProvider).groupList.contains(text);
+        ref.watch(homeReviewScreenProvider).testGroup.contains(text);
     return GestureDetector(
       onTap: () {
         ref.read(homeReviewScreenProvider.notifier).selectGroup(text);
@@ -228,14 +228,16 @@ class _SelectRange extends ConsumerWidget {
         padding: EdgeInsets.symmetric(
             horizontal: context.width * 0.02, vertical: context.width * 0.01),
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2),
           border: Border.all(
-              width: isSelected ? 1 : 0.5,
-              color: isSelected
-                  ? context.colors.main50.withOpacity(0.6)
-                  : Colors.black45),
+            width: isSelected ? 1 : 0.5,
+            color: isSelected
+                ? context.colors.main50.withOpacity(0.6)
+                : Colors.black45,
+          ),
           color: isSelected
-              ? context.colors.main20.withOpacity(0.1)
-              : Colors.grey.withOpacity(0.1),
+              ? context.colors.main10.withOpacity(0.1)
+              : Colors.grey.withOpacity(0.05),
         ),
         alignment: Alignment.center,
         child: Row(
@@ -254,7 +256,7 @@ class _SelectRange extends ConsumerWidget {
                 color: isSelected
                     ? context.colors.main50.withOpacity(0.6)
                     : Colors.black54,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
               ),
             ),
           ],
@@ -269,6 +271,11 @@ class _SelectLength extends ConsumerWidget {
   const _SelectLength();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final List<int> testLength = [10, 20, 50];
+    final selectedLength = ref.watch(
+      homeReviewScreenProvider.select((state) => state.testLength),
+    );
+    final initialIndex = testLength.indexOf(selectedLength);
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: context.width * 0.02, vertical: context.width * 0.01),
@@ -292,7 +299,13 @@ class _SelectLength extends ConsumerWidget {
               ),
               child: DefaultTabController(
                 length: 3,
+                initialIndex: initialIndex,
                 child: TabBar(
+                    onTap: (index) {
+                      ref
+                          .read(homeReviewScreenProvider.notifier)
+                          .selectLength(testLength[index]);
+                    },
                     labelColor: Colors.white,
                     labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                     unselectedLabelStyle:
@@ -306,21 +319,21 @@ class _SelectLength extends ConsumerWidget {
                     tabs: [
                       Tab(
                         child: Text(
-                          "10問",
+                          "${testLength[0]}問",
                           style: TextStyle(fontSize: context.width * 0.04),
                         ),
                       ),
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text("20問",
+                          child: Text("${testLength[1]}問",
                               style: TextStyle(fontSize: context.width * 0.04)),
                         ),
                       ),
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text("50問",
+                          child: Text("${testLength[2]}問",
                               style: TextStyle(fontSize: context.width * 0.04)),
                         ),
                       ),
@@ -336,52 +349,54 @@ class _SelectLength extends ConsumerWidget {
 
 ///クイズ選択ボタン
 class _SimpleDialogOption extends ConsumerWidget {
-  const _SimpleDialogOption({required this.item, required this.text});
-  final QuizItemState item;
+  const _SimpleDialogOption({required this.text});
   final String text;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isGroup = ref.watch(homeReviewScreenProvider).groupList.isNotEmpty;
+    final isGroup = ref.watch(homeReviewScreenProvider).testGroup.isNotEmpty;
     return SimpleDialogOption(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        child: Card(
-          elevation: 3,
-          margin: const EdgeInsets.all(0),
-          child: Container(
-            height: context.height * 0.06,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
+      onPressed: isGroup
+          ? () async {
+              ref.read(quizItemProvider.notifier).setQuizType(QuizType.test);
+              await ref.read(homeReviewScreenProvider.notifier).addTestQuiz();
+              final testQuiz = ref.read(homeReviewScreenProvider).testQuiz;
+              context.showScreen(
+                QuizChoiceScreenArguments(
+                  item: testQuiz,
+                ).generateRoute(),
+              );
+            }
+          : null,
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 0.02, vertical: context.width * 0.01),
+      child: Card(
+        elevation: 3,
+        margin: const EdgeInsets.all(0),
+        child: Container(
+          height: context.height * 0.06,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isGroup
+                ? context.colors.main50.withOpacity(0.6)
+                : Colors.black12,
+            border: Border.all(
               color: isGroup
-                  ? context.colors.main50.withOpacity(0.6)
-                  : Colors.black12,
-              border: Border.all(
-                color: isGroup
-                    ? context.colors.main50.withOpacity(0.7)
-                    : Colors.black12.withOpacity(0.1),
-              ),
-              borderRadius: BorderRadius.circular(5),
+                  ? context.colors.main50.withOpacity(0.7)
+                  : Colors.black12.withOpacity(0.1),
             ),
-            child: AutoSizeText(
-              text,
-              style: TextStyle(
-                color: isGroup ? context.colors.onMain50 : Colors.black26,
-                fontWeight: FontWeight.bold,
-                fontSize: context.width * 0.05,
-              ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: AutoSizeText(
+            text,
+            style: TextStyle(
+              color: isGroup ? context.colors.onMain50 : Colors.black26,
+              fontWeight: FontWeight.bold,
+              fontSize: context.width * 0.05,
             ),
           ),
         ),
-        onPressed: isGroup
-            ? () {
-                ref.read(quizItemProvider.notifier).setQuizType(QuizType.test);
-                context.showScreen(
-                  QuizChoiceScreenArguments(
-                    item: item,
-                  ).generateRoute(),
-                );
-              }
-            : null);
+      ),
+    );
   }
 }

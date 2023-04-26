@@ -8,13 +8,13 @@ part 'home_review_screen_state.freezed.dart';
 @freezed
 class HomeReviewScreenState with _$HomeReviewScreenState {
   const factory HomeReviewScreenState({
-    @Default(0) final int currentIndex,
     @Default([]) final List<QuizItemState> reviewItem,
     @Default(weakItem) final QuizItemState weakQuiz, //苦手克服
     @Default(todayItem) final QuizItemState dailyQuiz, //今日のクイズ
     @Default(testItem) final QuizItemState testQuiz, //全てのクイズ
     @Default(0) final int testScore, //全てのクイズ
     @Default(false) bool isSelected,
-    @Default([]) final List<String> groupList,
+    @Default([]) final List<String> testGroup,
+    @Default(10) final int testLength,
   }) = _Create;
 }
