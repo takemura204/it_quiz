@@ -92,7 +92,7 @@ class _TestQuiz extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizItemProvider);
-    final score = ref.watch(homeReviewScreenProvider).testScore;
+    final testQuiz = ref.watch(homeReviewScreenProvider).testQuiz;
     return Column(
       children: [
         if (quizItemList.isEmpty)
@@ -102,7 +102,9 @@ class _TestQuiz extends ConsumerWidget {
         else
           _QuizButton(
             title: "力だめし",
-            subTitle: (score == 0) ? "あなたの実力が試せます！" : "前回の結果:${score}点",
+            subTitle: (testQuiz.score == 0)
+                ? "あなたの実力が試せます！"
+                : "前回の結果:${testQuiz.score}点",
             icon: Icons.abc,
             onTap: () {
               showDialog(

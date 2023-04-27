@@ -112,13 +112,25 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final weakList = weakSetList.map((question) {
       return weakAllList.firstWhere((quiz) => quiz.question == question);
     }).toList();
-
     final weakQuiz = state.weakQuiz.copyWith(quizList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
     _saveData(); // 保存
   }
 
-  ///weakQuizを保存
+  ///TestItem更新
+  void updateTestItem(List<QuizState> quizList) {
+    final score = (quizList.where((x) => x.isJudge == true).toList().length /
+            quizList.length *
+            100)
+        .toInt();
+    final isCompleted = quizList.length == score;
+    final testQuiz = state.weakQuiz
+        .copyWith(score: score, isCompleted: isCompleted, quizList: quizList);
+    state = state.copyWith(testQuiz: testQuiz);
+    _saveData(); // 保存
+  }
+
+  ///Quizを保存
   Future _saveData() async {
     final prefs = await SharedPreferences.getInstance();
     final weakData = json.encode(state.weakQuiz.toJson());

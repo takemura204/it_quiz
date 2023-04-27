@@ -278,7 +278,7 @@ class _SelectLength extends ConsumerWidget {
     final initialIndex = testLength.indexOf(selectedLength);
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.width * 0.01),
+          horizontal: context.width * 0.04, vertical: context.width * 0.01),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -287,58 +287,53 @@ class _SelectLength extends ConsumerWidget {
             style: TextStyle(fontSize: context.width * 0.03),
           ),
           const Gap(5),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
-            child: Container(
-              height: context.height * 0.05,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border:
-                    Border.all(color: context.colors.main50.withOpacity(0.6)),
-              ),
-              child: DefaultTabController(
-                length: 3,
-                initialIndex: initialIndex,
-                child: TabBar(
-                    onTap: (index) {
-                      ref
-                          .read(homeReviewScreenProvider.notifier)
-                          .selectLength(testLength[index]);
-                    },
-                    labelColor: Colors.white,
-                    labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                    unselectedLabelStyle:
-                        const TextStyle(fontWeight: FontWeight.normal),
-                    unselectedLabelColor:
-                        context.colors.main50.withOpacity(0.7),
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: context.colors.main50.withOpacity(0.6)),
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          "${testLength[0]}問",
-                          style: TextStyle(fontSize: context.width * 0.04),
-                        ),
+          Container(
+            height: context.height * 0.05,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: context.colors.main50.withOpacity(0.6)),
+            ),
+            child: DefaultTabController(
+              length: 3,
+              initialIndex: initialIndex,
+              child: TabBar(
+                  onTap: (index) {
+                    ref
+                        .read(homeReviewScreenProvider.notifier)
+                        .selectLength(testLength[index]);
+                  },
+                  labelColor: Colors.white,
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  unselectedLabelStyle:
+                      const TextStyle(fontWeight: FontWeight.normal),
+                  unselectedLabelColor: context.colors.main50.withOpacity(0.7),
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: context.colors.main50.withOpacity(0.6)),
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        "${testLength[0]}問",
+                        style: TextStyle(fontSize: context.width * 0.04),
                       ),
-                      Tab(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text("${testLength[1]}問",
-                              style: TextStyle(fontSize: context.width * 0.04)),
-                        ),
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text("${testLength[1]}問",
+                            style: TextStyle(fontSize: context.width * 0.04)),
                       ),
-                      Tab(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text("${testLength[2]}問",
-                              style: TextStyle(fontSize: context.width * 0.04)),
-                        ),
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text("${testLength[2]}問",
+                            style: TextStyle(fontSize: context.width * 0.04)),
                       ),
-                    ]),
-              ),
+                    ),
+                  ]),
             ),
           ),
         ],

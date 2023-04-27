@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -84,13 +83,14 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
         break;
 
-      ///Dailyクイズ更新
-      case QuizType.daily:
-        // ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
-        break;
-
       ///Testクイズ更新
       case QuizType.test:
+        ref.read(homeReviewScreenProvider.notifier).updateTestItem(quizList);
+        ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+        break;
+
+      ///Dailyクイズ更新
+      case QuizType.daily:
         // ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
         break;
     }
@@ -129,25 +129,6 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     }).toList();
 
     _saveData();
-  }
-
-  // 複数のグループと範囲を選択して、その範囲の問題をランダムに抽出して保存するメソッド
-  Future<void> _updateTestItems(List<String> selectedGroups, int range) async {
-    // 選択されたグループの問題をフィルタリング
-    final filteredQuizItems =
-        state.where((item) => selectedGroups.contains(item.group)).toList();
-
-    // 問題をランダムに選択
-    final random = Random();
-    final selectedQuizList = List.generate(range, (index) {
-      return filteredQuizItems[random.nextInt(filteredQuizItems.length)]
-          .quizList;
-    }).expand((quizList) => quizList).toList();
-
-    // 保存処理を実行
-    final prefs = await SharedPreferences.getInstance();
-    final data = selectedQuizList.map((e) => json.encode(e.toJson())).toList();
-    await prefs.setStringList('selected_quiz_list', data);
   }
 
   /// 現在のstateを端末に保存する
