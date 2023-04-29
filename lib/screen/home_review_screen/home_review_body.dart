@@ -32,7 +32,7 @@ class _DailyQuiz extends ConsumerWidget {
     return Column(
       children: [
         // if (quizItemList.isEmpty)
-        if (quizItemList.isNotEmpty)
+        if (!quizItemList.isNotEmpty)
           const _NullQuizButton(
             title: "今日のクイズは完了しました",
           )
@@ -40,7 +40,9 @@ class _DailyQuiz extends ConsumerWidget {
           _QuizButton(
             title: "今日のクイズ",
             subTitle: "◯日連続継続中！",
-            icon: Icons.abc,
+            icon: Icons.help_center_outlined,
+            score: 1,
+            unit: "日目",
             onTap: () {
               ref.read(quizItemProvider.notifier).setQuizType(QuizType.daily);
               context.showScreen(QuizChoiceScreenArguments(
@@ -71,7 +73,9 @@ class _WeakQuiz extends ConsumerWidget {
           _QuizButton(
               title: "苦手克服",
               subTitle: "あなたの苦手問題数:${weakList.length}問",
-              icon: Icons.abc,
+              icon: Icons.checklist_rtl_outlined,
+              score: 2,
+              unit: "問　",
               onTap: () {
                 ref
                     .read(quizItemProvider.notifier)
@@ -105,7 +109,9 @@ class _TestQuiz extends ConsumerWidget {
             subTitle: (testQuiz.score == 0)
                 ? "あなたの実力が試せます！"
                 : "前回の結果:${testQuiz.score}点",
-            icon: Icons.abc,
+            icon: Icons.edit_note_outlined,
+            score: testQuiz.score,
+            unit: "点　",
             onTap: () {
               showDialog(
                   context: context, builder: (_) => const _TestQuizDialog());
@@ -126,7 +132,7 @@ class _TestQuizDialog extends ConsumerWidget {
       contentPadding: EdgeInsets.all(context.width * 0.01),
       children: [
         Container(
-          height: context.height * 0.55,
+          height: context.height * 0.5,
           width: context.width * 0.8,
           child: Column(
             children: [
@@ -141,11 +147,6 @@ class _TestQuizDialog extends ConsumerWidget {
                   ),
                 ],
               ),
-
-              Divider(height: 1, color: context.colors.dark54),
-
-              ///クイズ挑戦結果
-              _QuizResult(testQuiz),
 
               Divider(height: 1, color: context.colors.dark54),
               const Spacer(),

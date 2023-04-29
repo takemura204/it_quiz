@@ -13,18 +13,15 @@ class _NullQuizButton extends ConsumerWidget {
           onTap: null,
           child: Card(
             elevation: 2,
+            color: Colors.grey.shade200,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
             margin: const EdgeInsets.all(20),
             child: Container(
-              height: context.height * 0.12,
+              height: context.height * 0.15,
               alignment: Alignment.center,
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                border: Border.all(
-                  color: Colors.grey.shade200,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
               child: Text(
                 title,
                 style: TextStyle(
@@ -43,13 +40,18 @@ class _NullQuizButton extends ConsumerWidget {
 
 ///クイズボタン
 class _QuizButton extends ConsumerWidget {
-  const _QuizButton(
-      {required this.title,
-      required this.subTitle,
-      required this.icon,
-      required this.onTap});
+  const _QuizButton({
+    required this.title,
+    required this.subTitle,
+    required this.icon,
+    required this.onTap,
+    required this.score,
+    required this.unit,
+  });
   final String title;
   final String subTitle;
+  final int score;
+  final String unit;
   final IconData? icon;
   final VoidCallback onTap;
   @override
@@ -57,49 +59,105 @@ class _QuizButton extends ConsumerWidget {
     return GestureDetector(
         onTap: onTap,
         child: Card(
-          elevation: 2,
+          elevation: 4,
+          color: context.colors.onMain50,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: context.colors.main50.withOpacity(0.6),
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
           margin: const EdgeInsets.all(20),
           child: Container(
-            height: context.height * 0.12,
-            alignment: Alignment.center,
-            // padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: context.colors.onMain50,
-              border: Border.all(
-                color: context.colors.main50.withOpacity(0.7),
-              ),
-              borderRadius: BorderRadius.circular(5),
-            ),
+            height: context.height * 0.13,
             child: Column(
               children: [
                 const Spacer(),
                 Row(
                   children: [
-                    const Spacer(),
-                    Icon(
-                      icon,
-                      size: context.width * 0.1,
-                    ),
-                    const Gap(10),
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: context.width * 0.05,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
+                    ///アイコン
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.width * 0.03),
+                      child: Icon(
+                        icon,
+                        size: context.width * 0.14,
+                        color: context.colors.main50.withOpacity(0.6),
                       ),
                     ),
+                    const Gap(10),
+
+                    ///タイトル
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: context.width * 0.05,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Gap(5),
+                        Text(
+                          subTitle,
+                          style: TextStyle(
+                            fontSize: context.width * 0.03,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                     const Spacer(),
+
+                    ///スコア
+                    Container(
+                      child: Row(
+                        children: [
+                          Container(
+                            width: context.width * 0.15,
+                            height: context.width * 0.15,
+                            decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: CircleBorder(
+                                    side: BorderSide(
+                                  width: 3,
+                                  color: context.colors.main50.withOpacity(0.5),
+                                ))),
+                            alignment: Alignment.center,
+                            child: Text(
+                              score.toString(),
+                              style: TextStyle(
+                                fontSize: context.width * 0.05,
+                                color: Colors.black45,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: context.width * 0.15,
+                            alignment: Alignment.bottomCenter,
+                            margin: EdgeInsets.only(
+                              left: context.width * 0.01,
+                              right: context.width * 0.03,
+                              bottom: context.width * 0.06,
+                            ),
+                            child: Text(
+                              unit,
+                              style: TextStyle(
+                                fontSize: context.width * 0.04,
+                                color: Colors.black45,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
-                ),
-                const Gap(5),
-                Text(
-                  subTitle,
-                  style: TextStyle(
-                    fontSize: context.width * 0.04,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
                 const Spacer(),
               ],
@@ -133,51 +191,6 @@ class _DialogTitle extends ConsumerWidget {
                 fontSize: context.width * 0.025, fontWeight: FontWeight.normal),
           ),
           const Spacer(),
-        ],
-      ),
-    );
-  }
-}
-
-class _QuizResult extends ConsumerWidget {
-  const _QuizResult(this.item);
-  final QuizItemState item;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: context.height * 0.05,
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
-      alignment: Alignment.centerLeft,
-      child: Row(
-        children: [
-          Text(
-            "前回のクイズ挑戦結果",
-            style: TextStyle(
-                fontSize: context.width * 0.04, fontWeight: FontWeight.bold),
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              ///正解数
-              Text(
-                "${item.score}",
-                style: TextStyle(
-                  fontSize: context.width * 0.05,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-              ///問題数
-              Text(
-                "点",
-                style: TextStyle(
-                  fontSize: context.width * 0.04,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );

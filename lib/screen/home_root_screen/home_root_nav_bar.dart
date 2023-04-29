@@ -18,8 +18,8 @@ class _BottomNavBar extends ConsumerWidget {
           label: I18n().titleStudy,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.checklist_rtl_outlined),
-          activeIcon: const Icon(Icons.checklist_rtl_outlined),
+          icon: const Icon(Icons.tips_and_updates_outlined),
+          activeIcon: const Icon(Icons.tips_and_updates_outlined),
           label: I18n().titleReview,
         ),
         BottomNavigationBarItem(

@@ -124,7 +124,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
             100)
         .toInt();
     final isCompleted = quizList.length == score;
-    final testQuiz = state.weakQuiz
+    final testQuiz = state.testQuiz
         .copyWith(score: score, isCompleted: isCompleted, quizList: quizList);
     state = state.copyWith(testQuiz: testQuiz);
     _saveData(); // 保存
