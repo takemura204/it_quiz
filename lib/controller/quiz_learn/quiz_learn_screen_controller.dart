@@ -190,6 +190,5 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       knowQuizList: [],
       unKnowQuizList: [],
     );
-    _updateItem();
   }
 }

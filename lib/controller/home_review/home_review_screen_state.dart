@@ -16,6 +16,5 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
     @Default(false) bool isSelected,
     @Default([]) final List<String> testGroup,
     @Default(10) final int testLength,
-    @Default(null) final DateTime? lastTappedDate, // 最後にタップされた日付を追加
   }) = _Create;
 }

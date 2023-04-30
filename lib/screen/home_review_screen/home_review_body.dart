@@ -30,23 +30,25 @@ class _DailyQuiz extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dailyQuiz = ref.watch(homeReviewScreenProvider).dailyQuiz;
     final now = DateTime.now();
-    final lastTappedDate = ref.read(homeReviewScreenProvider).lastTappedDate;
+    final timeStamp = dailyQuiz.timeStamp;
     return Column(
       children: [
         _QuizButton(
           title: "今日のクイズ",
-          subTitle: '挑戦日:${DateFormat('yyyy-MM-dd').format(lastTappedDate!)}',
+          subTitle: (timeStamp != null)
+              ? '挑戦日:${DateFormat('yyyy-MM-dd').format(dailyQuiz.timeStamp!)}'
+              : "未挑戦",
           icon: Icons.help_center_outlined,
           score: dailyQuiz.score,
           unit: "日目",
           onTap: () {
             ref.read(quizItemProvider.notifier).setQuizType(QuizType.daily);
             // 最後にタップされた日付がないか、前日以前であればタップを許可
-            if (lastTappedDate == null ||
-                (lastTappedDate.year != now.year ||
-                    lastTappedDate.month != now.month ||
-                    lastTappedDate.day != now.day)) {
-              // ref.read(homeReviewScreenProvider.notifier).addDailyQuiz();
+            if (dailyQuiz.timeStamp == null ||
+                (dailyQuiz.timeStamp!.year != now.year ||
+                    dailyQuiz.timeStamp!.month != now.month ||
+                    dailyQuiz.timeStamp!.day != now.day ||
+                    dailyQuiz.timeStamp!.minute != now.minute)) {
               context.showScreen(QuizChoiceScreenArguments(
                 item: dailyQuiz,
               ).generateRoute());
@@ -85,7 +87,7 @@ class _WeakQuiz extends ConsumerWidget {
               title: "苦手克服",
               subTitle: "あなたの苦手問題数:${weakList.length}問",
               icon: Icons.checklist_rtl_outlined,
-              score: 2,
+              score: weakList.length,
               unit: "問　",
               onTap: () {
                 ref
@@ -117,9 +119,9 @@ class _TestQuiz extends ConsumerWidget {
         else
           _QuizButton(
             title: "力だめし",
-            subTitle: (testQuiz.score == 0)
-                ? "あなたの実力が試せます！"
-                : "前回の結果:${testQuiz.score}点",
+            subTitle: (testQuiz.timeStamp != null)
+                ? '挑戦日:${DateFormat('yyyy-MM-dd').format(testQuiz.timeStamp!)}'
+                : "未挑戦",
             icon: Icons.edit_note_outlined,
             score: testQuiz.score,
             unit: "点　",

@@ -136,10 +136,27 @@ class _QuizResult extends ConsumerWidget {
       alignment: Alignment.centerLeft,
       child: Row(
         children: [
-          Text(
-            "前回のクイズ挑戦結果",
-            style: TextStyle(
-                fontSize: context.width * 0.04, fontWeight: FontWeight.bold),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(),
+              Text(
+                "前回のクイズ挑戦結果",
+                style: TextStyle(
+                    fontSize: context.width * 0.04,
+                    fontWeight: FontWeight.bold),
+              ),
+              const Spacer(),
+              Text(
+                (item.timeStamp != null)
+                    ? '${DateFormat('yyyy-MM-dd').format(item.timeStamp!)}'
+                    : "未挑戦",
+                style: TextStyle(
+                    fontSize: context.width * 0.03,
+                    fontWeight: FontWeight.normal),
+              ),
+              const Spacer(),
+            ],
           ),
           const Spacer(),
           Row(

@@ -102,11 +102,10 @@ class UserImage extends ConsumerWidget {
           // color: Colors.greenAccent,
           child: GestureDetector(
             onTap: onTap,
-            child: ClipOval(
-              child: Image.network(
-                "https://storage.googleapis.com/funwork-dev-401bf.appspot.com/app/default_user_image.png",
-                fit: BoxFit.cover,
-              ),
+            child: Icon(
+              Icons.account_circle_outlined,
+              size: context.height * 0.07,
+              color: context.colors.main50.withOpacity(0.6),
             ),
           ),
         ),

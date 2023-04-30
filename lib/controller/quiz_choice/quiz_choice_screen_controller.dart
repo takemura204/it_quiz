@@ -130,6 +130,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       isAnsView: false,
       isResultScreen: false,
     );
+
     _updateItem();
   }
 

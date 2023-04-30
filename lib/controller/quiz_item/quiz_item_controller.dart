@@ -104,7 +104,11 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     state = state.map((item) {
       if (item.title == state[selectedIndex].title) {
         return state[selectedIndex].copyWith(
-            isCompleted: isCompleted, score: score, quizList: quizList);
+          isCompleted: isCompleted,
+          score: score,
+          quizList: quizList,
+          timeStamp: DateTime.now(),
+        );
       }
       return item;
     }).toList();

@@ -73,7 +73,6 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     ];
     final random = Random();
     final pickedQuizList = <QuizState>[];
-
     for (int i = 0; i < 5; i++) {
       if (quizList.isNotEmpty) {
         final randomIndex = random.nextInt(quizList.length);
@@ -135,10 +134,13 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   /// DailyItem
   void updateDailyItem(List<QuizState> quizList) {
     final score = state.dailyQuiz.score + 1;
-    final now = DateTime.now();
-    final dailyQuiz = state.dailyQuiz
-        .copyWith(score: score, isCompleted: true, quizList: quizList);
-    state = state.copyWith(dailyQuiz: dailyQuiz, lastTappedDate: now);
+    print("aa");
+    final dailyQuiz = state.dailyQuiz.copyWith(
+        score: score,
+        isCompleted: true,
+        quizList: quizList,
+        timeStamp: DateTime.now());
+    state = state.copyWith(dailyQuiz: dailyQuiz);
     _saveData(); // 保存
   }
 
@@ -165,8 +167,11 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
             100)
         .toInt();
     final isCompleted = quizList.length == score;
-    final testQuiz = state.testQuiz
-        .copyWith(score: score, isCompleted: isCompleted, quizList: quizList);
+    final testQuiz = state.testQuiz.copyWith(
+        score: score,
+        isCompleted: isCompleted,
+        quizList: quizList,
+        timeStamp: DateTime.now());
     state = state.copyWith(testQuiz: testQuiz);
     _saveData(); // 保存
   }
