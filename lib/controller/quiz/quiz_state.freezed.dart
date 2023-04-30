@@ -23,6 +23,7 @@ mixin _$QuizState {
   int get quizId => throw _privateConstructorUsedError; //問題番号
   String get question => throw _privateConstructorUsedError; //問題文
   String get ans => throw _privateConstructorUsedError; //答え
+  String get comment => throw _privateConstructorUsedError; //解説
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
   bool get isJudge => throw _privateConstructorUsedError; //正解したか?
   List<String> get choices => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $QuizStateCopyWith<$Res> {
       {int quizId,
       String question,
       String ans,
+      String comment,
       bool isWeak,
       bool isJudge,
       List<String> choices});
@@ -63,6 +65,7 @@ class _$QuizStateCopyWithImpl<$Res, $Val extends QuizState>
     Object? quizId = null,
     Object? question = null,
     Object? ans = null,
+    Object? comment = null,
     Object? isWeak = null,
     Object? isJudge = null,
     Object? choices = null,
@@ -79,6 +82,10 @@ class _$QuizStateCopyWithImpl<$Res, $Val extends QuizState>
       ans: null == ans
           ? _value.ans
           : ans // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
               as String,
       isWeak: null == isWeak
           ? _value.isWeak
@@ -107,6 +114,7 @@ abstract class _$$_QuizStateCopyWith<$Res> implements $QuizStateCopyWith<$Res> {
       {int quizId,
       String question,
       String ans,
+      String comment,
       bool isWeak,
       bool isJudge,
       List<String> choices});
@@ -126,6 +134,7 @@ class __$$_QuizStateCopyWithImpl<$Res>
     Object? quizId = null,
     Object? question = null,
     Object? ans = null,
+    Object? comment = null,
     Object? isWeak = null,
     Object? isJudge = null,
     Object? choices = null,
@@ -142,6 +151,10 @@ class __$$_QuizStateCopyWithImpl<$Res>
       ans: null == ans
           ? _value.ans
           : ans // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
               as String,
       isWeak: null == isWeak
           ? _value.isWeak
@@ -166,6 +179,7 @@ class _$_QuizState implements _QuizState {
       {required this.quizId,
       required this.question,
       required this.ans,
+      required this.comment,
       required this.isWeak,
       required this.isJudge,
       required final List<String> choices})
@@ -184,6 +198,9 @@ class _$_QuizState implements _QuizState {
   final String ans;
 //答え
   @override
+  final String comment;
+//解説
+  @override
   final bool isWeak;
 //苦手か？
   @override
@@ -200,7 +217,7 @@ class _$_QuizState implements _QuizState {
 
   @override
   String toString() {
-    return 'QuizState(quizId: $quizId, question: $question, ans: $ans, isWeak: $isWeak, isJudge: $isJudge, choices: $choices)';
+    return 'QuizState(quizId: $quizId, question: $question, ans: $ans, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, choices: $choices)';
   }
 
   @override
@@ -212,6 +229,7 @@ class _$_QuizState implements _QuizState {
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.ans, ans) || other.ans == ans) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.isWeak, isWeak) || other.isWeak == isWeak) &&
             (identical(other.isJudge, isJudge) || other.isJudge == isJudge) &&
             const DeepCollectionEquality().equals(other._choices, _choices));
@@ -219,8 +237,8 @@ class _$_QuizState implements _QuizState {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, quizId, question, ans, isWeak,
-      isJudge, const DeepCollectionEquality().hash(_choices));
+  int get hashCode => Object.hash(runtimeType, quizId, question, ans, comment,
+      isWeak, isJudge, const DeepCollectionEquality().hash(_choices));
 
   @JsonKey(ignore: true)
   @override
@@ -241,6 +259,7 @@ abstract class _QuizState implements QuizState {
       {required final int quizId,
       required final String question,
       required final String ans,
+      required final String comment,
       required final bool isWeak,
       required final bool isJudge,
       required final List<String> choices}) = _$_QuizState;
@@ -255,6 +274,8 @@ abstract class _QuizState implements QuizState {
   @override //問題文
   String get ans;
   @override //答え
+  String get comment;
+  @override //解説
   bool get isWeak;
   @override //苦手か？
   bool get isJudge;

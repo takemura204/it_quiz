@@ -12,6 +12,16 @@
         </dict>
         <!-- 他のSKAdNetwork識別子もここに追加できます。 -->
     </array>
+   <key>UIBackgroundModes</key>
+   <array>
+     <string>fetch</string>
+   </array>
+    <key>UIUserNotificationSettings</key>
+    <array>
+        <string>UIUserNotificationTypeAlert</string>
+        <string>UIUserNotificationTypeBadge</string>
+        <string>UIUserNotificationTypeSound</string>
+    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSPhotoLibraryUsageDescription</key>

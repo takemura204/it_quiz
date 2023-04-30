@@ -24,6 +24,7 @@ mixin _$HomeReviewScreenState {
   bool get isSelected => throw _privateConstructorUsedError;
   List<String> get testGroup => throw _privateConstructorUsedError;
   int get testLength => throw _privateConstructorUsedError;
+  DateTime? get lastTappedDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeReviewScreenStateCopyWith<HomeReviewScreenState> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $HomeReviewScreenStateCopyWith<$Res> {
       int testScore,
       bool isSelected,
       List<String> testGroup,
-      int testLength});
+      int testLength,
+      DateTime? lastTappedDate});
 
   $QuizItemStateCopyWith<$Res> get weakQuiz;
   $QuizItemStateCopyWith<$Res> get dailyQuiz;
@@ -73,6 +75,7 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
     Object? isSelected = null,
     Object? testGroup = null,
     Object? testLength = null,
+    Object? lastTappedDate = freezed,
   }) {
     return _then(_value.copyWith(
       reviewItem: null == reviewItem
@@ -107,6 +110,10 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
           ? _value.testLength
           : testLength // ignore: cast_nullable_to_non_nullable
               as int,
+      lastTappedDate: freezed == lastTappedDate
+          ? _value.lastTappedDate
+          : lastTappedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -150,7 +157,8 @@ abstract class _$$_CreateCopyWith<$Res>
       int testScore,
       bool isSelected,
       List<String> testGroup,
-      int testLength});
+      int testLength,
+      DateTime? lastTappedDate});
 
   @override
   $QuizItemStateCopyWith<$Res> get weakQuiz;
@@ -178,6 +186,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isSelected = null,
     Object? testGroup = null,
     Object? testLength = null,
+    Object? lastTappedDate = freezed,
   }) {
     return _then(_$_Create(
       reviewItem: null == reviewItem
@@ -212,6 +221,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.testLength
           : testLength // ignore: cast_nullable_to_non_nullable
               as int,
+      lastTappedDate: freezed == lastTappedDate
+          ? _value.lastTappedDate
+          : lastTappedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -222,12 +235,13 @@ class _$_Create implements _Create {
   const _$_Create(
       {final List<QuizItemState> reviewItem = const [],
       this.weakQuiz = weakItem,
-      this.dailyQuiz = todayItem,
+      this.dailyQuiz = dailyItem,
       this.testQuiz = testItem,
       this.testScore = 0,
       this.isSelected = false,
       final List<String> testGroup = const [],
-      this.testLength = 10})
+      this.testLength = 10,
+      this.lastTappedDate = null})
       : _reviewItem = reviewItem,
         _testGroup = testGroup;
 
@@ -271,10 +285,13 @@ class _$_Create implements _Create {
   @override
   @JsonKey()
   final int testLength;
+  @override
+  @JsonKey()
+  final DateTime? lastTappedDate;
 
   @override
   String toString() {
-    return 'HomeReviewScreenState(reviewItem: $reviewItem, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz, testScore: $testScore, isSelected: $isSelected, testGroup: $testGroup, testLength: $testLength)';
+    return 'HomeReviewScreenState(reviewItem: $reviewItem, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz, testScore: $testScore, isSelected: $isSelected, testGroup: $testGroup, testLength: $testLength, lastTappedDate: $lastTappedDate)';
   }
 
   @override
@@ -297,7 +314,9 @@ class _$_Create implements _Create {
             const DeepCollectionEquality()
                 .equals(other._testGroup, _testGroup) &&
             (identical(other.testLength, testLength) ||
-                other.testLength == testLength));
+                other.testLength == testLength) &&
+            (identical(other.lastTappedDate, lastTappedDate) ||
+                other.lastTappedDate == lastTappedDate));
   }
 
   @override
@@ -310,7 +329,8 @@ class _$_Create implements _Create {
       testScore,
       isSelected,
       const DeepCollectionEquality().hash(_testGroup),
-      testLength);
+      testLength,
+      lastTappedDate);
 
   @JsonKey(ignore: true)
   @override
@@ -328,7 +348,8 @@ abstract class _Create implements HomeReviewScreenState {
       final int testScore,
       final bool isSelected,
       final List<String> testGroup,
-      final int testLength}) = _$_Create;
+      final int testLength,
+      final DateTime? lastTappedDate}) = _$_Create;
 
   @override
   List<QuizItemState> get reviewItem;
@@ -346,6 +367,8 @@ abstract class _Create implements HomeReviewScreenState {
   List<String> get testGroup;
   @override
   int get testLength;
+  @override
+  DateTime? get lastTappedDate;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

@@ -1,19 +1,14 @@
 import '../../controller/quiz_item/quiz_item_state.dart';
 
-List<QuizItemState> reviewItem = [
-  todayItem,
-  weakItem,
-  testItem,
-];
-
 ///今日のクイズ
-const todayItem = QuizItemState(
+const dailyItem = QuizItemState(
   id: 1,
   group: "review",
   title: "今日のクイズ",
   isCompleted: false,
   quizList: [],
   score: 0,
+  timeStamp: null,
 );
 
 ///苦手克服
@@ -24,6 +19,7 @@ const weakItem = QuizItemState(
   isCompleted: false,
   quizList: [],
   score: 0,
+  timeStamp: null,
 );
 
 ///力だめし
@@ -34,4 +30,5 @@ const testItem = QuizItemState(
   isCompleted: false,
   quizList: [],
   score: 0,
+  timeStamp: null,
 );

@@ -16,6 +16,9 @@ _$_QuizItemState _$$_QuizItemStateFromJson(Map<String, dynamic> json) =>
           .map((e) => QuizState.fromJson(e as Map<String, dynamic>))
           .toList(),
       score: json['score'] as int,
+      timeStamp: json['timeStamp'] == null
+          ? null
+          : DateTime.parse(json['timeStamp'] as String),
     );
 
 Map<String, dynamic> _$$_QuizItemStateToJson(_$_QuizItemState instance) =>
@@ -26,4 +29,5 @@ Map<String, dynamic> _$$_QuizItemStateToJson(_$_QuizItemState instance) =>
       'isCompleted': instance.isCompleted,
       'quizList': instance.quizList,
       'score': instance.score,
+      'timeStamp': instance.timeStamp?.toIso8601String(),
     };

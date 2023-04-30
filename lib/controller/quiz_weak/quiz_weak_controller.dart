@@ -51,38 +51,41 @@ class QuizTrueFalseScreenController
   ///クイズ判定
   void judgementQuiz(bool ans) {
     final randomAns = state.choices.first;
-    final quiz = [...arguments.item.quizList];
+    final quizList = [...arguments.item.quizList];
     final correctList = [...state.correctList];
     final incorrectList = [...state.incorrectList];
+    final quizIndex = state.quizIndex;
 
     //丸ボタンを押した時
     if (ans) {
       //正解の時
-      if (randomAns == quiz[state.quizIndex].ans) {
-        quiz[state.quizIndex] = QuizState(
-          quizId: quiz[state.quizIndex].quizId,
-          question: quiz[state.quizIndex].question,
-          ans: quiz[state.quizIndex].ans,
-          choices: quiz[state.quizIndex].choices,
+      if (randomAns == quizList[quizIndex].ans) {
+        quizList[quizIndex] = QuizState(
+          quizId: quizList[quizIndex].quizId,
+          question: quizList[quizIndex].question,
+          ans: quizList[quizIndex].ans,
+          choices: quizList[quizIndex].choices,
+          comment: quizList[quizIndex].comment,
           isJudge: true,
           isWeak: false,
         );
         //正解リストに追加
-        correctList.add(quiz[state.quizIndex]);
+        correctList.add(quizList[quizIndex]);
         //スコア反映
         state = state.copyWith(isJudge: true, correctList: correctList);
       }
       //不正解の時
       else {
-        quiz[state.quizIndex] = QuizState(
-          quizId: quiz[state.quizIndex].quizId,
-          question: quiz[state.quizIndex].question,
-          ans: quiz[state.quizIndex].ans,
-          choices: quiz[state.quizIndex].choices,
+        quizList[quizIndex] = QuizState(
+          quizId: quizList[quizIndex].quizId,
+          question: quizList[quizIndex].question,
+          ans: quizList[quizIndex].ans,
+          choices: quizList[quizIndex].choices,
+          comment: quizList[quizIndex].comment,
           isJudge: false,
           isWeak: true,
         );
-        incorrectList.add(quiz[state.quizIndex]);
+        incorrectList.add(quizList[quizIndex]);
 
         state = state.copyWith(isJudge: false, incorrectList: incorrectList);
       }
@@ -90,23 +93,24 @@ class QuizTrueFalseScreenController
     //×ボタンを押した時
     else {
       //正解の時
-      if (randomAns != quiz[state.quizIndex].ans) {
+      if (randomAns != quizList[quizIndex].ans) {
         //正解リストに追加
-        correctList.add(quiz[state.quizIndex]);
+        correctList.add(quizList[quizIndex]);
         //スコア反映
         state = state.copyWith(isJudge: true, correctList: correctList);
       }
       //不正解の時
       else {
-        quiz[state.quizIndex] = QuizState(
-          quizId: quiz[state.quizIndex].quizId,
-          question: quiz[state.quizIndex].question,
-          ans: quiz[state.quizIndex].ans,
-          choices: quiz[state.quizIndex].choices,
+        quizList[quizIndex] = QuizState(
+          quizId: quizList[quizIndex].quizId,
+          question: quizList[quizIndex].question,
+          ans: quizList[quizIndex].ans,
+          comment: incorrectList[quizIndex].comment,
+          choices: quizList[quizIndex].choices,
           isJudge: false,
           isWeak: true,
         );
-        incorrectList.add(quiz[state.quizIndex]);
+        incorrectList.add(quizList[quizIndex]);
 
         state = state.copyWith(isJudge: false, incorrectList: incorrectList);
       }
@@ -152,56 +156,60 @@ class QuizTrueFalseScreenController
   }
 
   ///チェックボックス切り替え(正解リスト)
-  void tapCorrectCheckBox(int index) {
+  void tapCorrectCheckBox(int quizIndex) {
     final correctList = [...state.correctList];
     //チェックした時
-    if (!correctList[index].isWeak) {
-      correctList[index] = QuizState(
-        quizId: correctList[index].quizId,
-        question: correctList[index].question,
-        ans: correctList[index].ans,
+    if (!correctList[quizIndex].isWeak) {
+      correctList[quizIndex] = QuizState(
+        quizId: correctList[quizIndex].quizId,
+        question: correctList[quizIndex].question,
+        ans: correctList[quizIndex].ans,
+        comment: correctList[quizIndex].comment,
         isWeak: true,
-        isJudge: correctList[index].isJudge,
-        choices: correctList[index].choices,
+        isJudge: correctList[quizIndex].isJudge,
+        choices: correctList[quizIndex].choices,
       );
     }
     //チェックしてない時
     else {
-      correctList[index] = QuizState(
-        quizId: correctList[index].quizId,
-        question: correctList[index].question,
-        ans: correctList[index].ans,
+      correctList[quizIndex] = QuizState(
+        quizId: correctList[quizIndex].quizId,
+        question: correctList[quizIndex].question,
+        ans: correctList[quizIndex].ans,
+        comment: correctList[quizIndex].comment,
         isWeak: false,
-        isJudge: correctList[index].isJudge,
-        choices: correctList[index].choices,
+        isJudge: correctList[quizIndex].isJudge,
+        choices: correctList[quizIndex].choices,
       );
     }
     state = state.copyWith(correctList: correctList);
   }
 
   ///チェックボックス切り替え(不正解リスト)
-  void tapIncorrectCheckBox(int index) {
+  void tapIncorrectCheckBox(int quizIndex) {
     final incorrectList = [...state.incorrectList];
     //チェックした時
-    if (!incorrectList[index].isWeak) {
-      incorrectList[index] = QuizState(
-        quizId: incorrectList[index].quizId,
-        question: incorrectList[index].question,
-        ans: incorrectList[index].ans,
+    if (!incorrectList[quizIndex].isWeak) {
+      incorrectList[quizIndex] = QuizState(
+        quizId: incorrectList[quizIndex].quizId,
+        question: incorrectList[quizIndex].question,
+        ans: incorrectList[quizIndex].ans,
+        comment: incorrectList[quizIndex].comment,
         isWeak: true,
-        isJudge: incorrectList[index].isJudge,
-        choices: incorrectList[index].choices,
+        isJudge: incorrectList[quizIndex].isJudge,
+        choices: incorrectList[quizIndex].choices,
       );
     }
     //チェックしてない時
     else {
-      incorrectList[index] = QuizState(
-        quizId: incorrectList[index].quizId,
-        question: incorrectList[index].question,
-        ans: incorrectList[index].ans,
+      incorrectList[quizIndex] = QuizState(
+        quizId: incorrectList[quizIndex].quizId,
+        question: incorrectList[quizIndex].question,
+        ans: incorrectList[quizIndex].ans,
+        comment: incorrectList[quizIndex].comment,
         isWeak: false,
-        isJudge: incorrectList[index].isJudge,
-        choices: incorrectList[index].choices,
+        isJudge: incorrectList[quizIndex].isJudge,
+        choices: incorrectList[quizIndex].choices,
       );
     }
     state = state.copyWith(incorrectList: incorrectList);

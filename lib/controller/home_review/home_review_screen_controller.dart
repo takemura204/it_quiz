@@ -36,9 +36,15 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   ///クイズ読み込み
   Future _loadData() async {
     final prefs = await SharedPreferences.getInstance();
+    final dailyData = prefs.getString('daily_quiz');
     final weakData = prefs.getString('weak_quiz');
     final testData = prefs.getString('test_quiz');
 
+    // dailyQuiz読み込み
+    if (dailyData != null) {
+      final dailyQuiz = QuizItemState.fromJson(json.decode(dailyData));
+      state = state.copyWith(dailyQuiz: dailyQuiz);
+    }
     // weakQuizを読み込み
     if (weakData != null) {
       final weakQuiz = QuizItemState.fromJson(json.decode(weakData));
@@ -53,12 +59,37 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
 
   ///クイズ更新
   Future _updateData() async {
-    _addWeakQuiz(); // weakQuiz追加
-    // addTestQuiz(); // testQuiz追加
+    addDailyQuiz(); // dailyQuiz追加
+    addWeakQuiz(); // weakQuiz追加
+  }
+
+  /// dailyQuiz追加
+  void addDailyQuiz() {
+    final quizList = [
+      ...ref
+          .read(quizItemProvider)
+          .expand((quizItem) => quizItem.quizList)
+          .toList()
+    ];
+    final random = Random();
+    final pickedQuizList = <QuizState>[];
+
+    for (int i = 0; i < 5; i++) {
+      if (quizList.isNotEmpty) {
+        final randomIndex = random.nextInt(quizList.length);
+        pickedQuizList.add(quizList[randomIndex]);
+        quizList.removeAt(randomIndex);
+      } else {
+        break;
+      }
+    }
+    final dailyQuiz = dailyItem.copyWith(quizList: pickedQuizList);
+    state = state.copyWith(dailyQuiz: dailyQuiz);
+    _saveData(); // 保存
   }
 
   /// weakQuiz追加
-  void _addWeakQuiz() {
+  void addWeakQuiz() {
     final weakAllList = ref
         .read(quizItemProvider)
         .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
@@ -74,7 +105,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   /// testQuiz追加
-  Future addTestQuiz() async {
+  void addTestQuiz() {
     final testGroup = state.testGroup;
     final testLength = state.testLength;
     final filteredQuizList = [
@@ -98,6 +129,16 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     }
     final testQuiz = testItem.copyWith(quizList: pickedQuizList);
     state = state.copyWith(testQuiz: testQuiz);
+    _saveData(); // 保存
+  }
+
+  /// DailyItem
+  void updateDailyItem(List<QuizState> quizList) {
+    final score = state.dailyQuiz.score + 1;
+    final now = DateTime.now();
+    final dailyQuiz = state.dailyQuiz
+        .copyWith(score: score, isCompleted: true, quizList: quizList);
+    state = state.copyWith(dailyQuiz: dailyQuiz, lastTappedDate: now);
     _saveData(); // 保存
   }
 
@@ -133,8 +174,11 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   ///Quizを保存
   Future _saveData() async {
     final prefs = await SharedPreferences.getInstance();
+    final dailyData = json.encode(state.dailyQuiz.toJson());
     final weakData = json.encode(state.weakQuiz.toJson());
     final testData = json.encode(state.testQuiz.toJson());
+
+    await prefs.setString('daily_quiz', dailyData);
     await prefs.setString('weak_quiz', weakData);
     await prefs.setString('test_quiz', testData);
   }
@@ -142,6 +186,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   /// 端末に保存されているデータをリセットする
   Future _resetData() async {
     final prefs = await SharedPreferences.getInstance();
+    prefs.remove("daily_quiz");
     prefs.remove("weak_quiz");
     prefs.remove("test_quiz");
   }

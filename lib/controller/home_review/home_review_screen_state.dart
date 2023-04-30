@@ -10,11 +10,12 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
   const factory HomeReviewScreenState({
     @Default([]) final List<QuizItemState> reviewItem,
     @Default(weakItem) final QuizItemState weakQuiz, //苦手克服
-    @Default(todayItem) final QuizItemState dailyQuiz, //今日のクイズ
+    @Default(dailyItem) final QuizItemState dailyQuiz, //今日のクイズ
     @Default(testItem) final QuizItemState testQuiz, //全てのクイズ
     @Default(0) final int testScore, //全てのクイズ
     @Default(false) bool isSelected,
     @Default([]) final List<String> testGroup,
     @Default(10) final int testLength,
+    @Default(null) final DateTime? lastTappedDate, // 最後にタップされた日付を追加
   }) = _Create;
 }

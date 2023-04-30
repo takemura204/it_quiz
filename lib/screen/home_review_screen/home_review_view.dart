@@ -365,9 +365,9 @@ class _SimpleDialogOption extends ConsumerWidget {
     final isGroup = ref.watch(homeReviewScreenProvider).testGroup.isNotEmpty;
     return SimpleDialogOption(
       onPressed: isGroup
-          ? () async {
+          ? () {
               ref.read(quizItemProvider.notifier).setQuizType(QuizType.test);
-              await ref.read(homeReviewScreenProvider.notifier).addTestQuiz();
+              ref.read(homeReviewScreenProvider.notifier).addTestQuiz();
               final testQuiz = ref.read(homeReviewScreenProvider).testQuiz;
               context.showScreen(
                 QuizChoiceScreenArguments(

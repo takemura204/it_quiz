@@ -11,6 +11,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 2,
@@ -19,6 +20,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz2,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 3,
@@ -27,6 +29,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 4,
@@ -35,6 +38,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 5,
@@ -43,6 +47,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 6,
@@ -51,6 +56,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 7,
@@ -59,6 +65,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 8,
@@ -67,6 +74,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 9,
@@ -75,6 +83,7 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
   QuizItemState(
     id: 10,
@@ -83,5 +92,6 @@ List<QuizItemState> quizStudyItems = [
     isCompleted: false,
     quizList: quiz1,
     score: 0,
+    timeStamp: null,
   ),
 ];

@@ -77,6 +77,12 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
         break;
 
+      ///Dailyクイズ更新
+      case QuizType.daily:
+        ref.read(homeReviewScreenProvider.notifier).updateDailyItem(quizList);
+        ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+        break;
+
       ///　Reviewクイズ更新
       case QuizType.review:
         _updateWeakItems(quizList);
@@ -87,11 +93,6 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
       case QuizType.test:
         ref.read(homeReviewScreenProvider.notifier).updateTestItem(quizList);
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
-        break;
-
-      ///Dailyクイズ更新
-      case QuizType.daily:
-        // ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
         break;
     }
   }

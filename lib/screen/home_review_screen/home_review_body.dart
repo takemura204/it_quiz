@@ -28,28 +28,39 @@ class _DailyQuiz extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizItemProvider);
+    final dailyQuiz = ref.watch(homeReviewScreenProvider).dailyQuiz;
+    final now = DateTime.now();
+    final lastTappedDate = ref.read(homeReviewScreenProvider).lastTappedDate;
     return Column(
       children: [
-        // if (quizItemList.isEmpty)
-        if (!quizItemList.isNotEmpty)
-          const _NullQuizButton(
-            title: "今日のクイズは完了しました",
-          )
-        else
-          _QuizButton(
-            title: "今日のクイズ",
-            subTitle: "◯日連続継続中！",
-            icon: Icons.help_center_outlined,
-            score: 1,
-            unit: "日目",
-            onTap: () {
-              ref.read(quizItemProvider.notifier).setQuizType(QuizType.daily);
+        _QuizButton(
+          title: "今日のクイズ",
+          subTitle: '挑戦日:${DateFormat('yyyy-MM-dd').format(lastTappedDate!)}',
+          icon: Icons.help_center_outlined,
+          score: dailyQuiz.score,
+          unit: "日目",
+          onTap: () {
+            ref.read(quizItemProvider.notifier).setQuizType(QuizType.daily);
+            // 最後にタップされた日付がないか、前日以前であればタップを許可
+            if (lastTappedDate == null ||
+                (lastTappedDate.year != now.year ||
+                    lastTappedDate.month != now.month ||
+                    lastTappedDate.day != now.day)) {
+              // ref.read(homeReviewScreenProvider.notifier).addDailyQuiz();
               context.showScreen(QuizChoiceScreenArguments(
-                item: ref.watch(homeReviewScreenProvider).reviewItem[0],
+                item: dailyQuiz,
               ).generateRoute());
-            },
-          ),
+            } else {
+              // すでにタップされた日であればメッセージを表示
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('今日のクイズはすでに実行されました。明日再度お試しください。'),
+                  duration: Duration(seconds: 3),
+                ),
+              );
+            }
+          },
+        ),
       ],
     );
   }
@@ -153,9 +164,10 @@ class _TestQuizDialog extends ConsumerWidget {
 
               ///選択範囲
               const _QuizRange(),
-              const Spacer(),
-              Divider(height: 1, color: context.colors.dark54),
-              const Spacer(),
+
+              const Gap(5),
+
+              ///問題数
               const _SelectLength(),
               const Spacer(),
               Divider(height: 1, color: context.colors.dark54),
@@ -163,6 +175,7 @@ class _TestQuizDialog extends ConsumerWidget {
 
               ///クイズに挑戦する
               _SimpleDialogOption(text: I18n().styleTestQuiz),
+              const Spacer(),
             ],
           ),
         ),

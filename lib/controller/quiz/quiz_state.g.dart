@@ -10,6 +10,7 @@ _$_QuizState _$$_QuizStateFromJson(Map<String, dynamic> json) => _$_QuizState(
       quizId: json['quizId'] as int,
       question: json['question'] as String,
       ans: json['ans'] as String,
+      comment: json['comment'] as String,
       isWeak: json['isWeak'] as bool,
       isJudge: json['isJudge'] as bool,
       choices:
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$_QuizStateToJson(_$_QuizState instance) =>
       'quizId': instance.quizId,
       'question': instance.question,
       'ans': instance.ans,
+      'comment': instance.comment,
       'isWeak': instance.isWeak,
       'isJudge': instance.isJudge,
       'choices': instance.choices,

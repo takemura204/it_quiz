@@ -61,6 +61,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         question: quizList[quizIndex].question,
         ans: quizList[quizIndex].ans,
         choices: quizList[quizIndex].choices,
+        comment: quizList[quizIndex].comment,
         isJudge: true, //正解
         isWeak: false, //苦手リスト除外
       );
@@ -73,6 +74,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         question: quizList[quizIndex].question,
         ans: quizList[quizIndex].ans,
         choices: quizList[quizIndex].choices,
+        comment: quizList[quizIndex].comment,
         isJudge: false, //不正解
         isWeak: true, //苦手リスト追加
       );
@@ -112,6 +114,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       quizId: quizList[index].quizId,
       question: quizList[index].question,
       ans: quizList[index].ans,
+      comment: quizList[index].comment,
       isWeak: !quizList[index].isWeak,
       isJudge: quizList[index].isJudge,
       choices: quizList[index].choices,

@@ -56,6 +56,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       quizId: quizList[index].quizId,
       question: quizList[index].question,
       ans: quizList[index].ans,
+      comment: quizList[index].comment,
       isWeak: quizList[index].isWeak,
       isJudge: isJudge, //更新
       choices: quizList[index].choices,
@@ -147,6 +148,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         quizId: quizList[index].quizId,
         question: quizList[index].question,
         ans: quizList[index].ans,
+        comment: quizList[index].comment,
         isWeak: true,
         isJudge: quizList[index].isJudge,
         choices: quizList[index].choices,
@@ -158,6 +160,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         quizId: quizList[index].quizId,
         question: quizList[index].question,
         ans: quizList[index].ans,
+        comment: quizList[index].comment,
         isWeak: false,
         isJudge: quizList[index].isJudge,
         choices: quizList[index].choices,
