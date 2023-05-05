@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
 ///Clearボタン
 class ClearButton extends ConsumerWidget {
@@ -67,7 +66,7 @@ class ObscureIconButton extends ConsumerWidget {
       icon: isObscure
           ? const Icon(Icons.visibility_off)
           : const Icon(Icons.visibility_outlined),
-      color: isObscure ? Colors.grey : context.colors.main50,
+      color: isObscure ? Colors.grey : context.mainColor,
     );
   }
 }
@@ -89,7 +88,7 @@ class CheckBoxIconButton extends ConsumerWidget {
         icon: isCheck
             ? const Icon(Icons.check_box_outlined)
             : const Icon(Icons.check_box_outline_blank_outlined),
-        color: isCheck ? context.colors.main50 : Colors.grey,
+        color: isCheck ? context.mainColor : Colors.grey,
       ),
     );
   }
@@ -109,12 +108,12 @@ class SetAccountButton extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: context.colors.background,
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
           side: BorderSide(
-            color: context.colors.main50.withOpacity(0.7),
+            color: context.mainColor,
             width: 2,
           ),
         ),
@@ -122,7 +121,7 @@ class SetAccountButton extends ConsumerWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: context.colors.main50.withOpacity(0.6),
+            color: context.mainColor,
             fontSize: context.height * 0.018,
             fontWeight: FontWeight.bold,
           ),
@@ -146,12 +145,12 @@ class EditProfileButton extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: context.colors.background,
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
           side: BorderSide(
-            color: context.colors.main50.withOpacity(0.7),
+            color: context.mainColor,
             width: 2,
           ),
         ),
@@ -159,7 +158,7 @@ class EditProfileButton extends ConsumerWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: context.colors.main50.withOpacity(0.6),
+            color: context.mainColor,
             fontSize: context.height * 0.018,
             fontWeight: FontWeight.bold,
           ),
@@ -182,7 +181,7 @@ class LoginWithEmailButton extends ConsumerWidget {
       height: context.height * 0.06,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: context.colors.main50,
+          backgroundColor: context.mainColor,
           elevation: 4,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
@@ -220,7 +219,7 @@ class CreateAccountWithEmailButton extends ConsumerWidget {
       height: context.height * 0.06,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: context.colors.background,
+          backgroundColor: Colors.white,
           elevation: 4,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
@@ -230,18 +229,14 @@ class CreateAccountWithEmailButton extends ConsumerWidget {
             ),
           ),
           side: BorderSide(
-            color: onPressed == null
-                ? Colors.black45
-                : context.colors.main50.withOpacity(0.7),
+            color: onPressed == null ? Colors.black45 : context.mainColor,
             width: 1,
           ),
         ),
         child: Text(
           text,
           style: TextStyle(
-            color: onPressed == null
-                ? Colors.black45
-                : context.colors.main50.withOpacity(0.7),
+            color: onPressed == null ? Colors.black45 : context.mainColor,
             fontWeight: FontWeight.bold,
             fontSize: context.height * 0.02,
           ),
@@ -433,12 +428,12 @@ class SignOutButton extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: context.colors.background,
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
           side: BorderSide(
-            color: context.colors.main50.withOpacity(0.7),
+            color: context.mainColor,
             width: 2,
           ),
         ),
@@ -446,7 +441,7 @@ class SignOutButton extends ConsumerWidget {
         child: Text(
           "ログアウト",
           style: TextStyle(
-            color: context.colors.main50.withOpacity(0.6),
+            color: context.mainColor,
             fontSize: context.height * 0.018,
             fontWeight: FontWeight.bold,
           ),

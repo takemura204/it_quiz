@@ -12,7 +12,7 @@ class _QuizStyleTitle extends ConsumerWidget {
       margin: const EdgeInsets.all(0),
       child: Container(
         height: context.height * 0.05,
-        color: context.colors.main10,
+        color: context.backgroundColor,
         child: Row(
           children: [
             Padding(
@@ -75,16 +75,14 @@ class _AnsQuestion extends ConsumerWidget {
     return SubstringHighlight(
       text: quizList[quizIndex].question,
       term: quizList[quizIndex].ans,
-      textStyle: TextStyle(
-        color: context.colors.dark54,
+      textStyle: const TextStyle(
+        color: Colors.black54,
         fontWeight: FontWeight.w500,
         fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
-        color: isJudge
-            ? Colors.green.withOpacity(0.7)
-            : context.colors.main50.withOpacity(0.5),
+        color: isJudge ? Colors.green.withOpacity(0.7) : context.mainColor,
         decoration: TextDecoration.underline,
       ),
     );
@@ -104,14 +102,14 @@ class _QuizQuestion extends ConsumerWidget {
       text: quizList[quizIndex].question.replaceAll(
           quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
       term: quizList[quizIndex].ans,
-      textStyle: TextStyle(
-        color: context.colors.dark54,
+      textStyle: const TextStyle(
+        color: Colors.black54,
         fontWeight: FontWeight.w500,
         fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
-        color: context.colors.main50.withOpacity(0.5),
+        color: context.mainColor,
         decoration: TextDecoration.underline,
       ),
     );
@@ -219,7 +217,7 @@ class _SelectChoice extends ConsumerWidget {
                   fontSize: context.width * 0.05,
                   color: (choices[index] == quizList[quizIndex].ans)
                       ? Colors.green.withOpacity(0.7)
-                      : context.colors.main50.withOpacity(0.5),
+                      : context.mainColor,
                 )
               : TextStyle(fontSize: context.width * 0.05),
         ),
@@ -249,8 +247,7 @@ class _JudgeIcon extends ConsumerWidget {
                       size: context.width * 1.0,
                     )
                   : Icon(Icons.clear,
-                      color: context.colors.main50.withOpacity(0.6),
-                      size: context.width * 1.0),
+                      color: context.mainColor, size: context.width * 1.0),
             ),
           )
         : const SizedBox.shrink();

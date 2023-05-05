@@ -131,7 +131,7 @@ class __$$_CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create extends _Create {
-  _$_Create(
+  const _$_Create(
       {this.themeData,
       this.mainColor,
       this.themeId = 0,
@@ -180,12 +180,12 @@ class _$_Create extends _Create {
 }
 
 abstract class _Create extends SettingColorState {
-  factory _Create(
+  const factory _Create(
       {final ThemeData? themeData,
       final MaterialColor? mainColor,
       final int themeId,
       final bool isLoading}) = _$_Create;
-  _Create._() : super._();
+  const _Create._() : super._();
 
   @override
   ThemeData? get themeData;

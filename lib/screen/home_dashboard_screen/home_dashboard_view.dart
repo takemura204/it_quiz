@@ -213,9 +213,8 @@ class BarChartSample extends ConsumerWidget {
                 showTitles: true,
                 reservedSize: context.width * 0.05,
                 getTitlesWidget: (value, meta) {
-                  final color = (value == maxY / 2)
-                      ? context.colors.main50.withOpacity(0.6)
-                      : Colors.grey;
+                  final color =
+                      (value == maxY / 2) ? context.mainColor : Colors.grey;
                   return Text(
                     value.toInt().toString(),
                     textAlign: TextAlign.left,
@@ -257,7 +256,7 @@ class BarChartSample extends ConsumerWidget {
                                 shape: CircleBorder(
                                     side: BorderSide(
                               width: 2,
-                              color: context.colors.main50.withOpacity(0.6),
+                              color: context.mainColor,
                             ))),
                             alignment: Alignment.center,
                             child: Column(
@@ -266,8 +265,7 @@ class BarChartSample extends ConsumerWidget {
                                   weekdays[index % 7],
                                   style: TextStyle(
                                       color: (selectedIndex == index)
-                                          ? context.colors.main50
-                                              .withOpacity(0.6)
+                                          ? context.mainColor
                                           : Colors.black54,
                                       fontWeight: FontWeight.bold,
                                       fontSize: context.width * 0.03),
@@ -276,7 +274,7 @@ class BarChartSample extends ConsumerWidget {
                                   monthDay,
                                   style: TextStyle(
                                     color: (selectedIndex == index)
-                                        ? context.colors.main50.withOpacity(0.6)
+                                        ? context.mainColor
                                         : Colors.black54,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -300,7 +298,7 @@ class BarChartSample extends ConsumerWidget {
                                   monthDay,
                                   style: TextStyle(
                                     color: (selectedIndex == index)
-                                        ? context.colors.main50.withOpacity(0.6)
+                                        ? context.mainColor
                                         : Colors.grey,
                                   ),
                                 ),
@@ -321,9 +319,8 @@ class BarChartSample extends ConsumerWidget {
             show: true,
             drawVerticalLine: false,
             getDrawingHorizontalLine: (value) {
-              final color = (value == maxY / 2)
-                  ? context.colors.main50.withOpacity(0.6)
-                  : Colors.grey;
+              final color =
+                  (value == maxY / 2) ? context.mainColor : Colors.grey;
               return FlLine(
                 color: color,
                 strokeWidth: 1,
@@ -335,7 +332,7 @@ class BarChartSample extends ConsumerWidget {
             final index = e.key;
             final data = e.value;
             final color =
-                (data.value >= 10) ? Color(0xffCC6E6E) : Colors.grey.shade200;
+                (data.value >= 10) ? context.mainColor : Colors.grey.shade200;
 
             return BarChartGroupData(
               x: index,

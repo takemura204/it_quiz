@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
 ///ログインエラーBar
 class LoginErrorBar extends ConsumerWidget {
@@ -13,26 +12,26 @@ class LoginErrorBar extends ConsumerWidget {
       height: context.height * 0.05,
       decoration: BoxDecoration(
         border: Border.all(
-          color: context.colors.main50,
+          color: Colors.red,
         ),
         borderRadius: BorderRadius.circular(10),
-        color: context.colors.main50.withOpacity(0.1),
+        color: context.backgroundColor.withOpacity(0.5),
       ),
       child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.0),
             child: Icon(
               Icons.error_outline,
-              color: context.colors.main50,
+              color: Colors.red,
             ),
           ),
           Container(
             width: context.width * 0.84,
             child: Text(
               errorText,
-              style: TextStyle(
-                color: context.colors.main50,
+              style: const TextStyle(
+                color: Colors.red,
               ),
               overflow: TextOverflow.fade,
             ),

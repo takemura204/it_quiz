@@ -34,7 +34,7 @@ class _BottomNavBar extends ConsumerWidget {
         ),
       ],
       currentIndex: state.currentIndex,
-      fixedColor: context.colors.main50.withOpacity(0.7),
+      fixedColor: context.mainColor,
       onTap: (index) => ref
           .watch(homeRootScreenControllerProvider.notifier)
           .changeTabIndex(index),

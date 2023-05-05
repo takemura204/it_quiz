@@ -30,7 +30,7 @@ class _Body extends ConsumerWidget {
                     _QuizProgress(item),
                   ],
                 ),
-                Divider(height: 1, color: context.colors.dark54),
+                const Divider(height: 1),
 
                 ///確認ボタン
                 _ConfirmButton(item),

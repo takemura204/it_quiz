@@ -161,7 +161,7 @@ class _TestQuizDialog extends ConsumerWidget {
                 ],
               ),
 
-              Divider(height: 1, color: context.colors.dark54),
+              const Divider(height: 1),
               const Spacer(),
 
               ///選択範囲
@@ -172,7 +172,7 @@ class _TestQuizDialog extends ConsumerWidget {
               ///問題数
               const _SelectLength(),
               const Spacer(),
-              Divider(height: 1, color: context.colors.dark54),
+              const Divider(height: 1),
               const Spacer(),
 
               ///クイズに挑戦する

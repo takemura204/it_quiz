@@ -94,7 +94,7 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
 
   #freezed用
-  json_annotation: ^4.8.0
+  json_annotation: ^4.8.1
 
   #広告を入れたい
   google_mobile_ads: ^2.4.0

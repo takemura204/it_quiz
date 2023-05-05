@@ -17,7 +17,7 @@ class _AnsRateView extends ConsumerWidget {
           margin: const EdgeInsets.all(0),
           child: Container(
             height: context.height * 0.05,
-            color: context.colors.main10,
+            color: context.backgroundColor,
             child: Row(
               children: [
                 Padding(
@@ -76,7 +76,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                 margin: const EdgeInsets.all(0),
                 child: Container(
                   height: context.height * 0.05,
-                  color: context.colors.dark12,
+                  color: Colors.black12,
                   child: Row(
                     children: [
                       Padding(
@@ -105,7 +105,7 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 1.0),
-                        color: context.colors.background,
+                        color: Colors.white,
                         child: Row(
                           children: [
                             const Gap(5),
@@ -123,15 +123,15 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                               child: SubstringHighlight(
                                 text: incorrectList[index].question,
                                 term: arguments.item.quizList[index].ans,
-                                textStyle: TextStyle(
-                                  color: context.colors.dark54,
+                                textStyle: const TextStyle(
+                                  color: Colors.black54,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 maxLines: 3,
                                 overflow: TextOverflow.clip,
                                 textStyleHighlight: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: context.colors.main50.withOpacity(0.5),
+                                  color: context.mainColor,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -153,8 +153,8 @@ class _UnKnowQuestionsView extends ConsumerWidget {
                                         : Icons.check_box_outline_blank,
                                     size: 30,
                                     color: incorrectList[index].isWeak
-                                        ? context.colors.main50
-                                        : context.colors.dark26,
+                                        ? context.mainColor
+                                        : Colors.black26,
                                   ),
                                 ),
                               ),
@@ -189,7 +189,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                 margin: const EdgeInsets.all(0),
                 child: Container(
                   height: context.height * 0.05,
-                  color: context.colors.dark12,
+                  color: Colors.black12,
                   child: Row(
                     children: [
                       Padding(
@@ -218,7 +218,7 @@ class _KnowQuestionsView extends ConsumerWidget {
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 1.0),
-                        color: context.colors.background,
+                        color: Colors.white,
                         child: Row(
                           children: [
                             const Gap(5),
@@ -236,15 +236,15 @@ class _KnowQuestionsView extends ConsumerWidget {
                               child: SubstringHighlight(
                                 text: correctList[index].question,
                                 term: correctList[index].ans,
-                                textStyle: TextStyle(
-                                  color: context.colors.dark54,
+                                textStyle: const TextStyle(
+                                  color: Colors.black54,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 maxLines: 3,
                                 overflow: TextOverflow.clip,
                                 textStyleHighlight: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: context.colors.main50.withOpacity(0.5),
+                                  color: context.mainColor,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -266,8 +266,8 @@ class _KnowQuestionsView extends ConsumerWidget {
                                         : Icons.check_box_outline_blank,
                                     size: 30,
                                     color: correctList[index].isWeak
-                                        ? context.colors.main50
-                                        : context.colors.dark26,
+                                        ? context.mainColor
+                                        : Colors.black26,
                                   ),
                                 ),
                               ),

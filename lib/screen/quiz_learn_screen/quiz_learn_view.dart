@@ -13,7 +13,7 @@ class _QuizStyleTitle extends ConsumerWidget {
       margin: const EdgeInsets.all(0),
       child: Container(
         height: context.height * 0.05,
-        color: context.colors.main10,
+        color: context.backgroundColor,
         child: Row(
           children: [
             Padding(
@@ -77,14 +77,14 @@ class _AnsQuestion extends ConsumerWidget {
     return SubstringHighlight(
       text: quizList[quizIndex].question,
       term: quizList[quizIndex].ans,
-      textStyle: TextStyle(
-        color: context.colors.dark54,
+      textStyle: const TextStyle(
+        color: Colors.black54,
         fontWeight: FontWeight.w500,
         fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
-        color: context.colors.main50.withOpacity(0.5),
+        color: context.mainColor,
         decoration: TextDecoration.underline,
       ),
     );
@@ -104,14 +104,14 @@ class _ConfirmQuestion extends ConsumerWidget {
       text: quizList[quizIndex].question.replaceAll(
           quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
       term: quizList[quizIndex].ans,
-      textStyle: TextStyle(
-        color: context.colors.dark54,
+      textStyle: const TextStyle(
+        color: Colors.black54,
         fontWeight: FontWeight.w500,
         fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
-        color: context.colors.main50.withOpacity(0.8),
+        color: context.mainColor,
         decoration: TextDecoration.underline,
       ),
     );
@@ -166,7 +166,7 @@ class _ConfirmButton extends ConsumerWidget {
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: context.colors.orange100.withOpacity(0.1),
+                  color: Colors.orange.shade50,
                   alignment: Alignment.center,
                   child: Text(
                     I18n().buttonUnKnow,
@@ -179,7 +179,7 @@ class _ConfirmButton extends ConsumerWidget {
               Container(
                 height: context.height * 0.1,
                 width: context.height * 0.002,
-                color: context.colors.dark12,
+                color: Colors.black12,
               ),
 
               ///知ってる
@@ -200,7 +200,7 @@ class _ConfirmButton extends ConsumerWidget {
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: context.colors.orange100.withOpacity(0.1),
+                  color: Colors.orange.shade50,
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     I18n().buttonKnow,
@@ -222,7 +222,7 @@ class _ConfirmButton extends ConsumerWidget {
             child: Container(
               width: context.height * 0.85,
               height: context.height * 0.1,
-              color: context.colors.orange100.withOpacity(0.1),
+              color: Colors.orange.shade50,
               alignment: Alignment.center,
               child: Text(
                 I18n().buttonConfirm,

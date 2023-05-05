@@ -5,14 +5,15 @@ import 'package:state_notifier/state_notifier.dart';
 
 import 'home_dashboard_screen_state.dart';
 
-final homeDashboardScreenProvider = StateNotifierProvider(
+final homeDashboardScreenProvider = StateNotifierProvider<
+    HomeDashboardScreenController, HomeDashboardScreenState>(
   (ref) => HomeDashboardScreenController(ref: ref),
 );
 
 class HomeDashboardScreenController
     extends StateNotifier<HomeDashboardScreenState> with LocatorMixin {
   HomeDashboardScreenController({required this.ref})
-      : super(HomeDashboardScreenState());
+      : super(const HomeDashboardScreenState());
 
   final Ref ref;
 

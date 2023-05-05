@@ -31,7 +31,7 @@ class _QuizItemBar extends ConsumerWidget {
             leading: item.isCompleted
                 ? Icon(
                     Icons.pets,
-                    color: context.colors.main50.withOpacity(0.6),
+                    color: context.mainColor,
                   )
                 : const Icon(
                     Icons.pets,
@@ -71,12 +71,12 @@ class _StudyQuizDialog extends ConsumerWidget {
                 ],
               ),
 
-              Divider(height: 1, color: context.colors.dark54),
+              const Divider(height: 1),
 
               ///クイズ挑戦結果
               _QuizResult(item),
 
-              Divider(height: 1, color: context.colors.dark54),
+              const Divider(height: 1),
 
               ///クイズ形式選択
               Container(
@@ -204,14 +204,14 @@ class _SimpleDialogOption1 extends ConsumerWidget {
             height: context.height * 0.06,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: context.colors.onMain50.withOpacity(0.6),
-              border: Border.all(color: context.colors.main50.withOpacity(0.7)),
+              color: context.mainColor,
+              border: Border.all(color: context.mainColor),
               borderRadius: BorderRadius.circular(5),
             ),
             child: Text(
               text,
               style: TextStyle(
-                color: context.colors.main50.withOpacity(0.7),
+                color: context.mainColor,
                 fontWeight: FontWeight.bold,
                 fontSize: context.width * 0.045,
               ),
@@ -247,14 +247,14 @@ class _SimpleDialogOption2 extends ConsumerWidget {
             height: context.height * 0.06,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: context.colors.main50.withOpacity(0.6),
-              border: Border.all(color: context.colors.main50.withOpacity(0.7)),
+              color: context.mainColor,
+              border: Border.all(color: context.mainColor),
               borderRadius: BorderRadius.circular(5),
             ),
             child: AutoSizeText(
               text,
               style: TextStyle(
-                color: context.colors.onMain50,
+                color: context.mainColor,
                 fontWeight: FontWeight.bold,
                 fontSize: context.width * 0.045,
               ),

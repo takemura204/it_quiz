@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
 
 import '../../controller/home_review/home_review_screen_controller.dart';
 import '../../controller/quiz_item/quiz_item_controller.dart';

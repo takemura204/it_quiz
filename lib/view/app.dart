@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/lang/initial_resource.dart';
 
-import '../resource/widget/theme_resource.dart';
+import '../controller/setting_color/setting_color_controller.dart';
 import '../screen/home_root_screen/home_root_screen.dart';
 
 class QuizApp extends StatelessWidget {
@@ -28,11 +28,12 @@ class QuizApp extends StatelessWidget {
   }
 }
 
-class _App extends StatelessWidget {
+class _App extends ConsumerWidget {
   const _App();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeData = ref.watch(settingColorProvider).themeData;
     return MaterialApp(
       //右上のdebugラベルを消す
       debugShowCheckedModeBanner: false,
@@ -47,8 +48,8 @@ class _App extends StatelessWidget {
 
       title: I18n().appName,
       //デフォルト設定
-      theme: DefaultTheme.getDefaultTheme(Brightness.light),
-      darkTheme: DefaultTheme.getDefaultTheme(Brightness.light),
+      theme: themeData,
+      darkTheme: themeData,
 
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),

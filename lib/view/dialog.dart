@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../controller/auth/auth_screen_controller.dart';
@@ -56,7 +55,7 @@ class ErrorDialog extends ConsumerWidget {
               child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: context.colors.background,
+                  backgroundColor: Colors.white,
                   elevation: 4,
                   padding: const EdgeInsets.all(3.0),
                   alignment: Alignment.center,
@@ -142,7 +141,7 @@ class NeedSignUpDialog extends ConsumerWidget {
                       return Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: context.colors.background,
+                      backgroundColor: Colors.white,
                       elevation: 4,
                       padding: const EdgeInsets.all(3.0),
                       alignment: Alignment.center,
@@ -180,7 +179,7 @@ class NeedSignUpDialog extends ConsumerWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: context.colors.background,
+                      backgroundColor: Colors.white,
                       elevation: 4,
                       padding: const EdgeInsets.all(3.0),
                       alignment: Alignment.center,
@@ -190,14 +189,14 @@ class NeedSignUpDialog extends ConsumerWidget {
                         ),
                       ),
                       side: BorderSide(
-                        color: context.colors.main50.withOpacity(0.7),
+                        color: context.mainColor,
                         width: 1,
                       ),
                     ),
                     child: Text(
                       "新規登録",
                       style: TextStyle(
-                        color: context.colors.main50.withOpacity(0.7),
+                        color: context.mainColor,
                         fontWeight: FontWeight.bold,
                         fontSize: context.height * 0.02,
                       ),
@@ -258,7 +257,7 @@ class SignOutDialog extends ConsumerWidget {
                       return Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: context.colors.background,
+                      backgroundColor: Colors.white,
                       elevation: 4,
                       padding: const EdgeInsets.all(3.0),
                       alignment: Alignment.center,
@@ -295,7 +294,7 @@ class SignOutDialog extends ConsumerWidget {
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: context.colors.main50.withOpacity(0.7),
+                      backgroundColor: context.mainColor,
                       elevation: 4,
                       padding: const EdgeInsets.all(3.0),
                       alignment: Alignment.center,
@@ -308,7 +307,7 @@ class SignOutDialog extends ConsumerWidget {
                     child: Text(
                       "ログアウト",
                       style: TextStyle(
-                        color: context.colors.onMain50,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: context.height * 0.02,
                       ),

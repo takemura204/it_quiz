@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../controller/auth/auth_screen_controller.dart';
@@ -66,12 +65,12 @@ class Tutorial extends ConsumerWidget {
             count: images.length,
             activeIndex: currentImageIndex,
             curve: Curves.decelerate,
-            effect: WormEffect(
+            effect: const WormEffect(
               strokeWidth: 0.5,
               dotWidth: 10,
               dotHeight: 10,
-              activeDotColor: context.colors.dark87,
-              dotColor: context.colors.dark87,
+              activeDotColor: Colors.black87,
+              dotColor: Colors.black87,
               paintStyle: PaintingStyle.stroke,
             ),
           ),

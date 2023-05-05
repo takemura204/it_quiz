@@ -60,10 +60,10 @@ class _QuizButton extends ConsumerWidget {
         onTap: onTap,
         child: Card(
           elevation: 4,
-          color: context.colors.onMain50,
+          color: context.mainColor,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: context.colors.main50.withOpacity(0.6),
+              color: context.mainColor,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
@@ -83,7 +83,7 @@ class _QuizButton extends ConsumerWidget {
                       child: Icon(
                         icon,
                         size: context.width * 0.14,
-                        color: context.colors.main50.withOpacity(0.6),
+                        color: context.mainColor,
                       ),
                     ),
                     const Gap(10),
@@ -125,7 +125,7 @@ class _QuizButton extends ConsumerWidget {
                                 shape: CircleBorder(
                                     side: BorderSide(
                                   width: 3,
-                                  color: context.colors.main50.withOpacity(0.5),
+                                  color: context.mainColor,
                                 ))),
                             alignment: Alignment.center,
                             child: Text(
@@ -244,12 +244,10 @@ class _SelectRange extends ConsumerWidget {
           borderRadius: BorderRadius.circular(2),
           border: Border.all(
             width: isSelected ? 1 : 0.5,
-            color: isSelected
-                ? context.colors.main50.withOpacity(0.6)
-                : Colors.black45,
+            color: isSelected ? context.mainColor : Colors.black45,
           ),
           color: isSelected
-              ? context.colors.main10.withOpacity(0.1)
+              ? context.backgroundColor.withOpacity(0.2)
               : Colors.grey.withOpacity(0.05),
         ),
         alignment: Alignment.center,
@@ -257,18 +255,14 @@ class _SelectRange extends ConsumerWidget {
           children: [
             Icon(
               isSelected ? Icons.check_circle_outline : Icons.circle_outlined,
-              color: isSelected
-                  ? context.colors.main50.withOpacity(0.6)
-                  : Colors.black54,
+              color: isSelected ? context.mainColor : Colors.black54,
             ),
             const Gap(5),
             Text(
               text,
               style: TextStyle(
                 fontSize: context.width * 0.04,
-                color: isSelected
-                    ? context.colors.main50.withOpacity(0.6)
-                    : Colors.black54,
+                color: isSelected ? context.mainColor : Colors.black54,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
               ),
             ),
@@ -305,7 +299,7 @@ class _SelectLength extends ConsumerWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: context.colors.main50.withOpacity(0.6)),
+              border: Border.all(color: context.mainColor),
             ),
             child: DefaultTabController(
               length: 3,
@@ -320,11 +314,11 @@ class _SelectLength extends ConsumerWidget {
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                   unselectedLabelStyle:
                       const TextStyle(fontWeight: FontWeight.normal),
-                  unselectedLabelColor: context.colors.main50.withOpacity(0.7),
+                  unselectedLabelColor: context.mainColor,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: context.colors.main50.withOpacity(0.6)),
+                      color: context.mainColor),
                   tabs: [
                     Tab(
                       child: Text(
@@ -385,20 +379,17 @@ class _SimpleDialogOption extends ConsumerWidget {
           height: context.height * 0.06,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: isGroup
-                ? context.colors.main50.withOpacity(0.6)
-                : Colors.black12,
+            color: isGroup ? context.mainColor : Colors.black12,
             border: Border.all(
-              color: isGroup
-                  ? context.colors.main50.withOpacity(0.7)
-                  : Colors.black12.withOpacity(0.1),
+              color:
+                  isGroup ? context.mainColor : Colors.black12.withOpacity(0.1),
             ),
             borderRadius: BorderRadius.circular(5),
           ),
           child: AutoSizeText(
             text,
             style: TextStyle(
-              color: isGroup ? context.colors.onMain50 : Colors.black26,
+              color: isGroup ? context.mainColor : Colors.black26,
               fontWeight: FontWeight.bold,
               fontSize: context.width * 0.05,
             ),

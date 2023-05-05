@@ -19,7 +19,7 @@ class _QuizResultView extends ConsumerWidget {
                 margin: const EdgeInsets.all(0),
                 child: Container(
                   height: context.height * 0.05,
-                  color: context.colors.main10,
+                  color: context.backgroundColor,
                   child: Row(
                     children: [
                       Padding(
@@ -48,7 +48,7 @@ class _QuizResultView extends ConsumerWidget {
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 1.0),
-                        color: context.colors.background,
+                        color: Colors.white,
                         child: Row(
                           children: [
                             const Gap(5),
@@ -67,14 +67,14 @@ class _QuizResultView extends ConsumerWidget {
                                 text: quizList[index].question,
                                 term: quizList[index].ans,
                                 textStyle: TextStyle(
-                                  color: context.colors.dark54,
+                                  color: Colors.black54,
                                   fontWeight: FontWeight.w500,
                                   fontSize: context.width * 0.04,
                                 ),
                                 overflow: TextOverflow.clip,
                                 textStyleHighlight: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: context.colors.main50.withOpacity(0.5),
+                                  color: context.mainColor,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -95,8 +95,8 @@ class _QuizResultView extends ConsumerWidget {
                                         : Icons.check_box_outline_blank,
                                     size: context.width * 0.08,
                                     color: quizList[index].isWeak
-                                        ? context.colors.main50.withOpacity(0.6)
-                                        : context.colors.dark26,
+                                        ? context.mainColor
+                                        : Colors.black26,
                                   ),
                                 ),
                               ),

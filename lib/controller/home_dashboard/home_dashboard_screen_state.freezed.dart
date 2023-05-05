@@ -113,7 +113,7 @@ class __$$_CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create extends _Create {
-  _$_Create(
+  const _$_Create(
       {final List<String> tabNames = const [],
       this.selectedIndex = -1,
       this.maxY = 20.0})
@@ -164,11 +164,11 @@ class _$_Create extends _Create {
 }
 
 abstract class _Create extends HomeDashboardScreenState {
-  factory _Create(
+  const factory _Create(
       {final List<String> tabNames,
       final int selectedIndex,
       final double maxY}) = _$_Create;
-  _Create._() : super._();
+  const _Create._() : super._();
 
   @override
   List<String> get tabNames;

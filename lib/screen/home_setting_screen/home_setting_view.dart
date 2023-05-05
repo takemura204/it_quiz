@@ -105,7 +105,7 @@ class UserImage extends ConsumerWidget {
             child: Icon(
               Icons.account_circle_outlined,
               size: context.height * 0.07,
-              color: context.colors.main50.withOpacity(0.6),
+              color: context.mainColor,
             ),
           ),
         ),

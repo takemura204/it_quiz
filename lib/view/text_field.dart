@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
 
 ///メールアドレス入力
@@ -29,38 +28,11 @@ class EmailTextField extends ConsumerWidget {
         obscureText: false,
         textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
         maxLines: 1,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: const Color(0xffF8FAFA),
+        decoration: const InputDecoration(
           hintMaxLines: null,
           hintText: 'Email',
           labelText: "メールアドレス",
-          prefixIcon: const Icon(Icons.mail_outline),
-          border: const OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Colors.black26,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
-            ),
-          ),
+          prefixIcon: Icon(Icons.mail_outline),
         ),
       ),
     );
@@ -99,8 +71,6 @@ class PasswordTextField extends ConsumerWidget {
         maxLines: 1,
         obscureText: isObscure, //入力非表示
         decoration: InputDecoration(
-          filled: true,
-          fillColor: const Color(0xffF8FAFA),
           hintMaxLines: null,
           hintText: 'Password',
           labelText: "パスワード(6文字以上)",
@@ -108,31 +78,6 @@ class PasswordTextField extends ConsumerWidget {
           suffixIcon: ObscureIconButton(
             onPressed: obscureIconButtonPressed,
             isObscure: isObscure,
-          ),
-          border: const OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Colors.black26,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
-            ),
           ),
         ),
       ),
@@ -182,19 +127,19 @@ class UserNameTextField extends ConsumerWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide(
-              color: context.colors.main50,
+              color: context.mainColor,
             ),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
+            borderSide: const BorderSide(
+              color: Colors.red,
             ),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.colors.main50,
+            borderSide: const BorderSide(
+              color: Colors.red,
             ),
           ),
         ),
@@ -251,7 +196,7 @@ class EditTextField extends ConsumerWidget {
           ),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: context.colors.main50,
+              color: context.mainColor,
               width: 1, //入力中
             ),
           ),

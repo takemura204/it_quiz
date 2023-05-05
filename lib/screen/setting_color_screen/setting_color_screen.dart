@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
-import '../../resource/color_resource.dart';
 import '../../view/button.dart';
 
+///カラーテーマ選択
 class SettingColorScreen extends ConsumerWidget {
   const SettingColorScreen();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -16,23 +16,23 @@ class SettingColorScreen extends ConsumerWidget {
         titleSpacing: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: const Text("カラーテーマ"),
+        title: const Text("テーマ変更"),
         leading: CustomBackButton(iconSize: 25, onPressed: () {}),
       ),
       body: const SingleChildScrollView(
-        child: SkinCards(),
+        child: _ColorCards(),
       ),
     );
   }
 }
 
-class SkinCards extends ConsumerWidget {
-  const SkinCards();
+class _ColorCards extends ConsumerWidget {
+  const _ColorCards();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(settingColorProvider.notifier);
-    final selectedThemeId = ref.watch(settingColorProvider);
+    final colors = ref.watch(settingColorProvider.notifier).colors;
+    final themeId = ref.watch(settingColorProvider).themeId;
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -40,54 +40,88 @@ class SkinCards extends ConsumerWidget {
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: AppColor.colors.length, // 色の数に変更
+        itemCount: colors.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1 / 1,
         ),
         itemBuilder: (context, index) {
-          final isSelected = index == selectedThemeId;
+          final _isSelected = index == themeId;
 
           return GestureDetector(
             onTap: () async {
-              // 選択したカードの色を設定し、端末に保存します。
-              await controller.setTheme(index);
-              await controller.setThemeId(index);
+              await ref.read(settingColorProvider.notifier).setTheme(index);
+              await ref.read(settingColorProvider.notifier).setThemeId(index);
             },
             child: Card(
               elevation: 3,
-              color: AppColor.colors[index], // 選択する色に変更
               margin: EdgeInsets.symmetric(
                   horizontal: context.width * 0.02,
                   vertical: context.width * 0.02),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
+                side: BorderSide(
+                  color: _isSelected ? colors[index] : Colors.transparent,
+                  width: 2,
+                ),
               ),
-              child: Stack(
+              child: Column(
                 children: [
+                  ///チェックアイコン
                   Container(
-                    padding: EdgeInsets.all(context.width * 0.02),
+                    padding: EdgeInsets.all(context.width * 0.01),
                     alignment: Alignment.topRight,
                     child: Icon(
                       // 選択している時、Icons.check_circle、選択していない時、circle_outlinedに変更
-                      isSelected ? Icons.check_circle : Icons.circle_outlined,
-                      color: Colors.red,
-                      size: context.width * 0.1,
+                      _isSelected ? Icons.check_circle : Icons.circle_outlined,
+                      color: _isSelected ? colors[index] : Colors.grey,
+                      size: context.width * 0.08,
                     ),
                   ),
-                  Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        skinCardName(index),
-                        style: const TextStyle(
-                          color: AppColor.black,
-                          fontSize: 16,
+
+                  ///背景カラー
+                  Container(
+                    width: context.width * 0.21,
+                    height: context.width * 0.21,
+                    alignment: Alignment.bottomRight,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: colors[index].shade50,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 0, //ぼかし
+                          offset: Offset(13, 13), // 1
                         ),
+                      ],
+                    ),
+
+                    ///ボタンカラー
+                    child: Container(
+                      height: context.width * 0.07,
+                      width: context.width * 0.07,
+                      margin: EdgeInsets.all(context.width * 0.02),
+                      decoration: ShapeDecoration(
+                        shape: const CircleBorder(),
+                        color: colors[index].shade600,
                       ),
-                      const Spacer(),
-                    ],
+                    ),
                   ),
+                  const Spacer(),
+                  const Gap(10),
+
+                  ///テキスト
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      ref.watch(settingColorProvider.notifier).colorName(index),
+                      style: TextStyle(
+                        color: _isSelected ? Colors.black54 : Colors.grey,
+                        fontSize: context.width * 0.04,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
                 ],
               ),
             ),
@@ -95,28 +129,5 @@ class SkinCards extends ConsumerWidget {
         },
       ),
     );
-  }
-}
-
-String skinCardName(int themeId) {
-  switch (themeId) {
-    case 0:
-      return "デフォルト";
-    case 1:
-      return "レッド";
-    case 2:
-      return "ブルー";
-    case 3:
-      return "グリーン";
-    case 4:
-      return "イエロー";
-    case 5:
-      return "オレンジ";
-    case 6:
-      return "ブラック";
-    case 7:
-      return "パープル";
-    default:
-      return '';
   }
 }
