@@ -73,36 +73,44 @@ class HomeSettingScreen extends ConsumerWidget {
           ),
 
           Column(
-            children: const [
-              SettingTitleBar(
+            children: [
+              const SettingTitleBar(
                 title: "設定",
                 onTap: null,
               ),
               SettingListBar(
+                title: "カラーテーマ",
+                onTap: () {
+                  context.showScreen(
+                    const SettingColorScreenArguments().generateRoute(),
+                  );
+                },
+              ),
+              const SettingListBar(
                 title: "通知",
                 onTap: null,
               ),
-              SettingTitleBar(
+              const SettingTitleBar(
                 title: "アプリについて",
                 onTap: null,
               ),
-              SettingListBar(
+              const SettingListBar(
                 title: "お問合せ",
                 onTap: null,
               ),
-              SettingListBar(
+              const SettingListBar(
                 title: "シェア",
                 onTap: null,
               ),
-              SettingListBar(
+              const SettingListBar(
                 title: "開発者",
                 onTap: null,
               ),
-              SettingTitleBar(
+              const SettingTitleBar(
                 title: "アカウント情報",
                 onTap: null,
               ),
-              SettingListBar(
+              const SettingListBar(
                 title: "アプリを削除する",
                 onTap: null,
               ),

@@ -155,6 +155,7 @@ class DefaultColorScheme {
         );
 
   static const Color _main50 = Color(0xffcd001a);
+
   static const Color _main20 = Color(0xffF5CCD1);
   static const Color _main20Dark = Color(0xff900012);
   static const Color _main10 = Color(0xfffceff1);

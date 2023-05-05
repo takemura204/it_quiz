@@ -5,6 +5,7 @@ import 'package:kentei_quiz/screen/profile_screen/profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
+import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 
 import '../resource/screen_argument_resource.dart';
 import 'create_account_screen/create_account_screen.dart';
@@ -80,6 +81,31 @@ class QuizTrueFalseScreenArguments
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
               MaterialPageRoute(
                   builder: (context) => QuizTureFalseScreen(this)),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
+      );
+}
+
+///カラーテーマ画面
+class SettingColorScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const SettingColorScreenArguments();
+
+  @override
+  String get screenNameFormat => "/setting_color";
+
+  @override
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const SettingColorScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(
+                  builder: (context) => const SettingColorScreen()),
               context,
               animation,
               secondaryAnimation,

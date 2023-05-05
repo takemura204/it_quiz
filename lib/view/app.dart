@@ -48,7 +48,7 @@ class _App extends StatelessWidget {
       title: I18n().appName,
       //デフォルト設定
       theme: DefaultTheme.getDefaultTheme(Brightness.light),
-      darkTheme: DefaultTheme.getDefaultTheme(Brightness.dark),
+      darkTheme: DefaultTheme.getDefaultTheme(Brightness.light),
 
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),

@@ -14,7 +14,7 @@ class _Body extends ConsumerWidget {
       children: const [
         HomeStudyScreen(),
         HomeReviewScreen(),
-        HomeTestScreen(),
+        HomeDashboardScreen(),
         HomeSettingScreen(),
       ],
     );

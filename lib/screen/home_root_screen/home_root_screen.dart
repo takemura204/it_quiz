@@ -6,10 +6,10 @@ import 'package:kentei_quiz/resource/widget/color_resource.dart';
 import '../../controller/home_root/home_root_screen_controller.dart';
 import '../../controller/home_root/home_root_screen_state.dart';
 import '../../resource/lang/initial_resource.dart';
+import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_review_screen/home_review_screen.dart';
 import '../home_setting_screen/home_setting_screen.dart';
 import '../home_study_screen/home_study_screen.dart';
-import '../home_test_screen/home_test_screen.dart';
 
 part 'home_root_appbar.dart';
 part 'home_root_body.dart';

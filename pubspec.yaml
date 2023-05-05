@@ -72,7 +72,7 @@ dependencies:
   substring_highlight: ^1.0.33
 
   #freezed用
-  analyzer: ^5.2.0
+  analyzer: ^5.11.1
 
   #設定画面を反映させたい
   settings_ui: ^2.0.2
@@ -99,6 +99,16 @@ dependencies:
   #広告を入れたい
   google_mobile_ads: ^2.4.0
 
+  #スプラッシュ画面を簡単に作成したい
+  flutter_native_splash: ^2.2.19
+
+  #さまざまなアイコンを追加したい
+  font_awesome_flutter: ^9.2.0
+
+  #グラフを作成したい
+  fl_chart: ^0.62.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -106,9 +116,9 @@ dev_dependencies:
   flutter_lints: ^2.0.1
 
   # freezed用
-  json_serializable: ^6.2.0
-  build_runner: ^2.2.0
+  json_serializable: ^6.6.2
   freezed: ^2.3.2
+  build_runner: ^2.3.3
 
 flutter:
   uses-material-design: true
