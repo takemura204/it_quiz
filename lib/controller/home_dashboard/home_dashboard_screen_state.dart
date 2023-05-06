@@ -8,6 +8,6 @@ class HomeDashboardScreenState with _$HomeDashboardScreenState {
   const factory HomeDashboardScreenState({
     @Default([]) final List<String> tabNames,
     @Default(-1) final int selectedIndex,
-    @Default(20.0) final double maxY,
+    @Default(10.0) final double goalY,
   }) = _Create;
 }

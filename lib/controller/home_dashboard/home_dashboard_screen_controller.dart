@@ -16,9 +16,8 @@ class HomeDashboardScreenController
       : super(const HomeDashboardScreenState());
 
   final Ref ref;
-
   final dataList = const [
-    _BarData(18),
+    _BarData(30),
     _BarData(9),
     _BarData(10),
     _BarData(2.5),
@@ -26,6 +25,7 @@ class HomeDashboardScreenController
     _BarData(9.9),
     _BarData(14),
   ];
+  final weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   @override
   void initState() {
