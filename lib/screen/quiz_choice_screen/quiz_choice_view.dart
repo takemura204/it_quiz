@@ -1,39 +1,8 @@
 part of 'quiz_choice_screen.dart';
 
-///問題形式表示
-class _QuizStyleTitle extends ConsumerWidget {
-  const _QuizStyleTitle(this.item);
-  final QuizItemState item;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Card(
-      elevation: 1,
-      margin: const EdgeInsets.all(0),
-      child: Container(
-        height: context.height * 0.05,
-        color: context.backgroundColor,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Text(
-                item.title,
-                style: context.texts.titleMedium,
-              ),
-            ),
-            const Spacer(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 ///問題文
 class _Question extends ConsumerWidget {
   const _Question(this.item);
-
   final QuizItemState item;
 
   @override
@@ -42,14 +11,13 @@ class _Question extends ConsumerWidget {
 
     return Container(
       height: context.height * 0.45,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.04),
       child: Column(
         children: [
           const Spacer(),
           AnimatedSwitcher(
-            /// アニメーションがおかしい
+            // アニメーションがおかしい
             duration: const Duration(milliseconds: 0),
-
             // reverseDuration: const Duration(milliseconds: 100),
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
@@ -75,14 +43,17 @@ class _AnsQuestion extends ConsumerWidget {
     return SubstringHighlight(
       text: quizList[quizIndex].question,
       term: quizList[quizIndex].ans,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w500,
-        fontSize: 24,
+        fontSize: context.width * 0.06,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
-        color: isJudge ? Colors.green.withOpacity(0.7) : context.mainColor,
+        fontSize: context.width * 0.06,
+        color: isJudge
+            ? Colors.green.withOpacity(0.7)
+            : Colors.red.withOpacity(0.7),
         decoration: TextDecoration.underline,
       ),
     );
@@ -102,14 +73,15 @@ class _QuizQuestion extends ConsumerWidget {
       text: quizList[quizIndex].question.replaceAll(
           quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
       term: quizList[quizIndex].ans,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w500,
-        fontSize: 24,
+        fontSize: context.width * 0.06,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
         color: context.mainColor,
+        fontSize: context.width * 0.06,
         decoration: TextDecoration.underline,
       ),
     );
@@ -130,16 +102,19 @@ class _QuizProgress extends ConsumerWidget {
       child: Row(
         children: [
           const Spacer(),
-          AutoSizeText(
+          Text(
             quizIndex.toString(),
-            style: context.texts.titleMedium,
-            minFontSize: 22,
+            style: TextStyle(
+              fontSize: context.width * 0.05,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          const Text("/"),
-          AutoSizeText(
-            quizList.length.toString(),
-            style: context.texts.bodyLarge,
-            minFontSize: 18,
+          Text(
+            "/" + quizList.length.toString(),
+            style: TextStyle(
+              fontSize: context.width * 0.05,
+              fontWeight: FontWeight.normal,
+            ),
           ),
           const Spacer(),
         ],
@@ -184,6 +159,7 @@ class _SelectAnswer extends ConsumerWidget {
   }
 }
 
+///選択肢
 class _SelectChoice extends ConsumerWidget {
   const _SelectChoice(this.index);
   final int index;
@@ -201,25 +177,34 @@ class _SelectChoice extends ConsumerWidget {
           : () => ref
               .read(quizChoiceScreenProvider.notifier)
               .tapChoiceButton(choices[index]),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(width: 0.5, color: Colors.black45)),
-        width: context.width * 0.5,
-        height: context.height * 0.1,
-        alignment: Alignment.center,
-        child: Text(
-          choices[index],
-          style: isAnsView
-              ? TextStyle(
-                  fontWeight: (choices[index] == quizList[quizIndex].ans)
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                  fontSize: context.width * 0.05,
-                  color: (choices[index] == quizList[quizIndex].ans)
-                      ? Colors.green.withOpacity(0.7)
-                      : context.mainColor,
-                )
-              : TextStyle(fontSize: context.width * 0.05),
+      child: Card(
+        elevation: 1,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(width: 0.5, color: Colors.black45)),
+          width: context.width * 0.5,
+          height: context.height * 0.1,
+          alignment: Alignment.center,
+          child: Text(
+            choices[index],
+            style: isAnsView
+                ? TextStyle(
+                    fontWeight: (choices[index] == quizList[quizIndex].ans)
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontSize: context.width * 0.05,
+                    color: (choices[index] == quizList[quizIndex].ans)
+                        ? Colors.green.withOpacity(0.7)
+                        : Colors.red.withOpacity(0.7),
+                  )
+                : TextStyle(fontSize: context.width * 0.05),
+          ),
         ),
       ),
     );
@@ -243,11 +228,12 @@ class _JudgeIcon extends ConsumerWidget {
               child: isJudge
                   ? Icon(
                       Icons.circle_outlined,
-                      color: Colors.green.withOpacity(0.6),
+                      color: Colors.green.withOpacity(0.7),
                       size: context.width * 1.0,
                     )
                   : Icon(Icons.clear,
-                      color: context.mainColor, size: context.width * 1.0),
+                      color: Colors.red.withOpacity(0.7),
+                      size: context.width * 1.0),
             ),
           )
         : const SizedBox.shrink();

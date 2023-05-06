@@ -7,7 +7,7 @@ final List<QuizState> quiz1 = [
     question: '1 + 1 = 2',
     ans: '2',
     choices: ["1", "2", "3", "4"],
-    comment: "1 + 1 = 2 です",
+    comment: "1 + 1 = 2 ",
     isWeak: false,
     isJudge: false,
   ),
@@ -22,7 +22,7 @@ final List<QuizState> quiz1 = [
   ),
   const QuizState(
     quizId: 3,
-    question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
+    question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.',
     ans: 'タンペム',
     isWeak: false,
     isJudge: false,
@@ -57,7 +57,7 @@ final List<QuizState> quiz2 = [
   ),
   const QuizState(
     quizId: 3,
-    question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
+    question: '猫の目には、タンペムという反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる。',
     ans: 'タンペム',
     isWeak: false,
     isJudge: false,
@@ -80,7 +80,7 @@ final List<QuizState> quiz2 = [
   ),
   const QuizState(
     quizId: 5,
-    question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.\n',
+    question: '猫の目には、タンペムという反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.',
     ans: 'タンペム',
     choices: [
       "グアニン",

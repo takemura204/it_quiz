@@ -106,6 +106,7 @@ class SettingListBar extends ConsumerWidget {
                 Icon(
                   Icons.arrow_forward_ios_sharp,
                   size: context.height * 0.025,
+                  color: context.mainColor,
                 ),
               ],
             ),

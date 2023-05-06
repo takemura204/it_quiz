@@ -18,7 +18,7 @@ class _QuizItemBar extends ConsumerWidget {
             context: context, builder: (_) => _StudyQuizDialog(index: index));
       },
       child: Card(
-        elevation: 1.0,
+        elevation: 2,
         margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 3.0),
         child: Container(
           child: ListTile(
@@ -36,7 +36,10 @@ class _QuizItemBar extends ConsumerWidget {
                 : const Icon(
                     Icons.pets,
                   ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: context.mainColor,
+            ),
           ),
         ),
       ),
@@ -204,7 +207,7 @@ class _SimpleDialogOption1 extends ConsumerWidget {
             height: context.height * 0.06,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: context.mainColor,
+              color: Colors.white,
               border: Border.all(color: context.mainColor),
               borderRadius: BorderRadius.circular(5),
             ),
@@ -254,7 +257,7 @@ class _SimpleDialogOption2 extends ConsumerWidget {
             child: AutoSizeText(
               text,
               style: TextStyle(
-                color: context.mainColor,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: context.width * 0.045,
               ),

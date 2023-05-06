@@ -26,7 +26,6 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
 
   @override
   void initState() {
-    _resetData();
     _loadData();
     super.initState();
   }
@@ -54,8 +53,43 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   Future _loadData() async {
     final prefs = await SharedPreferences.getInstance();
     final data = prefs.getStringList('quiz_items');
+
     if (data != null) {
       state = data.map((e) => QuizItemState.fromJson(json.decode(e))).toList();
+
+      // stateの各要素に対して、quizStudyItemsの更新を適用
+      state = state.map((item) {
+        // quizStudyItemsから、対応するアイテムを探す
+        final updatedItem =
+            quizStudyItems.firstWhereOrNull((e) => e.id == item.id);
+        // 対応するアイテムが見つかった場合
+        if (updatedItem != null) {
+          // 各クイズに対して、questionの更新を適用
+          return item.copyWith(
+            quizList: item.quizList.map((quiz) {
+              // updatedItemのクイズリストから、対応するクイズを探す
+              final updatedQuiz = updatedItem.quizList
+                  .firstWhereOrNull((e) => e.quizId == quiz.quizId);
+
+              // 対応するクイズが見つかった場合
+              if (updatedQuiz != null) {
+                // questionだけを更新
+                return quiz.copyWith(
+                  question: updatedQuiz.question,
+                  ans: updatedQuiz.ans,
+                  choices: updatedQuiz.choices,
+                  comment: updatedQuiz.comment,
+                );
+              }
+              // 対応するクイズが見つからなかった場合、変更なし
+              return quiz;
+            }).toList(),
+          );
+        }
+        return item;
+      }).toList();
+    } else {
+      state = quizStudyItems;
     }
   }
 

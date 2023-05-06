@@ -1,39 +1,7 @@
 part of 'quiz_learn_screen.dart';
 
-///問題形式表示
-class _QuizStyleTitle extends ConsumerWidget {
-  const _QuizStyleTitle(this.item);
-
-  final QuizItemState item;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Card(
-      elevation: 1,
-      margin: const EdgeInsets.all(0),
-      child: Container(
-        height: context.height * 0.05,
-        color: context.backgroundColor,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Text(
-                item.title,
-                style: context.texts.titleMedium,
-              ),
-            ),
-            const Spacer(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _Question extends ConsumerWidget {
   const _Question(this.item);
-
   final QuizItemState item;
 
   @override
@@ -41,16 +9,14 @@ class _Question extends ConsumerWidget {
     final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
 
     return Container(
-      height: context.height * 0.4,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      height: context.height * 0.45,
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.04),
       child: Column(
         children: [
           const Spacer(),
-          const Gap(20),
           AnimatedSwitcher(
-            /// アニメーションがおかしい
+            // アニメーションがおかしい
             duration: const Duration(milliseconds: 0),
-
             // reverseDuration: const Duration(milliseconds: 100),
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
@@ -77,12 +43,13 @@ class _AnsQuestion extends ConsumerWidget {
     return SubstringHighlight(
       text: quizList[quizIndex].question,
       term: quizList[quizIndex].ans,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
+        fontSize: context.width * 0.06,
         color: Colors.black54,
         fontWeight: FontWeight.w500,
-        fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
+        fontSize: context.width * 0.06,
         fontWeight: FontWeight.bold,
         color: context.mainColor,
         decoration: TextDecoration.underline,
@@ -104,12 +71,13 @@ class _ConfirmQuestion extends ConsumerWidget {
       text: quizList[quizIndex].question.replaceAll(
           quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
       term: quizList[quizIndex].ans,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
+        fontSize: context.width * 0.06,
         color: Colors.black54,
         fontWeight: FontWeight.w500,
-        fontSize: 24,
       ),
       textStyleHighlight: TextStyle(
+        fontSize: context.width * 0.06,
         fontWeight: FontWeight.bold,
         color: context.mainColor,
         decoration: TextDecoration.underline,
@@ -133,11 +101,17 @@ class _QuizProgress extends ConsumerWidget {
           const Spacer(),
           Text(
             quizIndex.toString(),
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: context.width * 0.06,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Text(
             "/" + quizList.length.toString(),
-            style: const TextStyle(fontSize: 18),
+            style: TextStyle(
+              fontSize: context.width * 0.05,
+              fontWeight: FontWeight.normal,
+            ),
           ),
           const Spacer(),
         ],
@@ -166,7 +140,7 @@ class _ConfirmButton extends ConsumerWidget {
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: Colors.orange.shade50,
+                  color: Colors.orange.shade50.withOpacity(0.1),
                   alignment: Alignment.center,
                   child: Text(
                     I18n().buttonUnKnow,
@@ -178,29 +152,19 @@ class _ConfirmButton extends ConsumerWidget {
               ///境界線
               Container(
                 height: context.height * 0.1,
-                width: context.height * 0.002,
-                color: Colors.black12,
+                width: 1.5,
+                color: context.mainColor,
               ),
 
               ///知ってる
               GestureDetector(
-                onTap: () {
-                  ref
-                      .read(quizLearnScreenProvider.notifier)
-                      .tapIsKnowButton(true);
-                  //「知っている」が全てになった時結果画面に遷移
-                  if (ref.watch(quizLearnScreenProvider).knowQuizList.length ==
-                      quizList.length) {
-                    // context.showScreen(QuizLearnResultScreenArguments(
-                    //   item: arguments.item,
-                    //   quizStyle: I18n().styleLeanQuiz,
-                    // ).generateRoute());
-                  }
-                },
+                onTap: () => ref
+                    .read(quizLearnScreenProvider.notifier)
+                    .tapIsKnowButton(true),
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: Colors.orange.shade50,
+                  color: Colors.orange.shade50.withOpacity(0.1),
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     I18n().buttonKnow,
@@ -222,7 +186,7 @@ class _ConfirmButton extends ConsumerWidget {
             child: Container(
               width: context.height * 0.85,
               height: context.height * 0.1,
-              color: Colors.orange.shade50,
+              color: Colors.orange.shade50.withOpacity(0.1),
               alignment: Alignment.center,
               child: Text(
                 I18n().buttonConfirm,

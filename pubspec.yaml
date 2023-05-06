@@ -108,6 +108,8 @@ dependencies:
   #グラフを作成したい
   fl_chart: ^0.62.0
 
+  #アプリのバージョンを確認したい
+  package_info_plus: ^3.1.2
 
 dev_dependencies:
   flutter_test:

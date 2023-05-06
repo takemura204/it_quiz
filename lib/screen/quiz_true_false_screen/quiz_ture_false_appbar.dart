@@ -13,7 +13,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: Text(arguments.item.title),
       leading: CustomBackButton(
-        iconSize: 25,
         onPressed: () => ref
             .read(quizTureFalseScreenControllerProvider.notifier)
             .tapClearButton(),

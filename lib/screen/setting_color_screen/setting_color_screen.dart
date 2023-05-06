@@ -17,7 +17,7 @@ class SettingColorScreen extends ConsumerWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: const Text("テーマ変更"),
-        leading: CustomBackButton(iconSize: 25, onPressed: () {}),
+        leading: CustomBackButton(onPressed: () {}),
       ),
       body: const SingleChildScrollView(
         child: _ColorCards(),

@@ -2,6 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
+///Backボタン
+class CustomBackButton extends ConsumerWidget {
+  const CustomBackButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.05,
+      alignment: Alignment.center,
+      child: IconButton(
+        padding: EdgeInsets.all(context.width * 0.01),
+        iconSize: context.width * 0.06,
+        onPressed: () {
+          Navigator.pop(context);
+          onPressed();
+        },
+        icon: Icon(
+          Icons.arrow_back_ios_new,
+          color: context.mainColor,
+        ),
+      ),
+    );
+  }
+}
+
 ///Clearボタン
 class ClearButton extends ConsumerWidget {
   const ClearButton({required this.iconSize, required this.onPressed});
@@ -13,40 +39,16 @@ class ClearButton extends ConsumerWidget {
     return Container(
       height: context.height * 0.05,
       child: IconButton(
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        padding: EdgeInsets.all(context.width * 0.01),
         alignment: Alignment.topRight,
         iconSize: iconSize,
         onPressed: () {
           Navigator.pop(context);
           onPressed();
         },
-        icon: const Icon(
+        icon: Icon(
           Icons.clear,
-        ),
-      ),
-    );
-  }
-}
-
-///Backボタン
-class CustomBackButton extends ConsumerWidget {
-  const CustomBackButton({required this.iconSize, required this.onPressed});
-  final double iconSize;
-  final VoidCallback onPressed;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: context.height * 0.05,
-      alignment: Alignment.bottomRight,
-      child: IconButton(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        iconSize: iconSize,
-        onPressed: () {
-          Navigator.pop(context);
-          onPressed();
-        },
-        icon: const Icon(
-          Icons.arrow_back_ios_new,
+          color: context.mainColor,
         ),
       ),
     );

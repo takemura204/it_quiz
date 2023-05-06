@@ -47,7 +47,6 @@ class CreateAccountScreen extends ConsumerWidget {
             automaticallyImplyLeading: false,
             title: const Text("新規登録"),
             leading: CustomBackButton(
-              iconSize: 25,
               onPressed: () =>
                   ref.read(authScreenControllerProvider.notifier).reset(),
             ),

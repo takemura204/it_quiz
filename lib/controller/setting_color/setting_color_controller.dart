@@ -186,12 +186,14 @@ class SettingColorController extends StateNotifier<SettingColorState>
 
       ///AppBar
       appBarTheme: AppBarTheme(
-        titleTextStyle: const TextStyle(
-          color: Colors.black87,
+        titleTextStyle: TextStyle(
+          color: getThemePrimaryColor(themeId),
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
-        color: getThemePrimaryColor(themeId).shade50,
+        shape: Border(
+            bottom: BorderSide(color: getThemePrimaryColor(themeId), width: 3)),
+        color: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(
           color: Colors.black87,
@@ -426,13 +428,16 @@ class SettingColorController extends StateNotifier<SettingColorState>
 
         ///AppBar
         appBarTheme: AppBarTheme(
-          titleTextStyle: const TextStyle(
-            color: Colors.black87,
+          titleTextStyle: TextStyle(
+            color: getThemePrimaryColor(themeId),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-          color: getThemePrimaryColor(themeId).shade50,
-          elevation: 0,
+          shape: Border(
+              bottom:
+                  BorderSide(color: getThemePrimaryColor(themeId), width: 3)),
+          color: Colors.white,
+          elevation: 2,
           iconTheme: const IconThemeData(
             color: Colors.black87,
           ),

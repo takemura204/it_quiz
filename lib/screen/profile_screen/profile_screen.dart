@@ -37,7 +37,6 @@ class ProfileScreen extends ConsumerWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: CustomBackButton(
-          iconSize: 25,
           onPressed: () {},
         ),
       ),
