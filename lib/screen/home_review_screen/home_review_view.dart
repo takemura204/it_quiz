@@ -60,14 +60,16 @@ class _QuizButton extends ConsumerWidget {
         onTap: onTap,
         child: Card(
           elevation: 4,
-          color: context.mainColor,
+          color: Colors.white,
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: context.mainColor,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
-          margin: const EdgeInsets.all(20),
+          margin: EdgeInsets.symmetric(
+              horizontal: context.width * 0.03, vertical: context.width * 0.03),
           child: Container(
             height: context.height * 0.13,
             child: Column(
@@ -201,6 +203,7 @@ class _QuizRange extends ConsumerWidget {
   const _QuizRange();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isGroup = ref.watch(homeReviewScreenProvider).testGroup.isNotEmpty;
     final groupTitle =
         ref.read(quizItemProvider).map((item) => item.group).toSet().toList();
     return Container(
@@ -210,7 +213,9 @@ class _QuizRange extends ConsumerWidget {
         children: [
           Text(
             '問題範囲を選択してください。',
-            style: TextStyle(fontSize: context.width * 0.03),
+            style: TextStyle(
+              fontSize: context.width * 0.03,
+            ),
           ),
           const Gap(5),
           _SelectRange(groupTitle[0]),
@@ -389,7 +394,7 @@ class _SimpleDialogOption extends ConsumerWidget {
           child: AutoSizeText(
             text,
             style: TextStyle(
-              color: isGroup ? context.mainColor : Colors.black26,
+              color: isGroup ? Colors.white : Colors.black26,
               fontWeight: FontWeight.bold,
               fontSize: context.width * 0.05,
             ),

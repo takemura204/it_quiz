@@ -50,7 +50,11 @@ class _QuizResultView extends ConsumerWidget {
                           ),
                           const Spacer(),
                           Container(
-                            width: context.width * 0.65,
+                            width: context.width * 0.745,
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: context.width * 0.02,
+                                vertical: context.width * 0.02),
                             child: SubstringHighlight(
                               text: quizList[index].question,
                               term: quizList[index].ans,
@@ -62,7 +66,9 @@ class _QuizResultView extends ConsumerWidget {
                               overflow: TextOverflow.clip,
                               textStyleHighlight: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: context.mainColor,
+                                color: quizList[index].isJudge
+                                    ? Colors.green.withOpacity(0.7)
+                                    : Colors.red.withOpacity(0.7),
                                 decoration: TextDecoration.underline,
                               ),
                             ),

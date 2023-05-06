@@ -113,6 +113,7 @@ class _QuizResultView extends ConsumerWidget {
                               ),
                             ),
                           ),
+                          const Spacer(),
                         ],
                       ),
                     ),
