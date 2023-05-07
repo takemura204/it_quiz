@@ -27,7 +27,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
 
   @override
   Future initState() async {
-    _resetData(); //データリセット
+    // _resetData(); //データリセット
     await _loadData(); // データを読み込む
     await _updateData(); // クイズ追加
     super.initState();

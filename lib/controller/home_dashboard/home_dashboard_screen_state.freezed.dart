@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeDashboardScreenState {
   List<String> get tabNames => throw _privateConstructorUsedError;
   int get selectedIndex => throw _privateConstructorUsedError;
-  double get goalY => throw _privateConstructorUsedError;
+  int get goalY => throw _privateConstructorUsedError;
+  int get dayScore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeDashboardScreenStateCopyWith<HomeDashboardScreenState> get copyWith =>
@@ -31,7 +32,8 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
           $Res Function(HomeDashboardScreenState) then) =
       _$HomeDashboardScreenStateCopyWithImpl<$Res, HomeDashboardScreenState>;
   @useResult
-  $Res call({List<String> tabNames, int selectedIndex, double goalY});
+  $Res call(
+      {List<String> tabNames, int selectedIndex, int goalY, int dayScore});
 }
 
 /// @nodoc
@@ -51,6 +53,7 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
     Object? tabNames = null,
     Object? selectedIndex = null,
     Object? goalY = null,
+    Object? dayScore = null,
   }) {
     return _then(_value.copyWith(
       tabNames: null == tabNames
@@ -64,7 +67,11 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
       goalY: null == goalY
           ? _value.goalY
           : goalY // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
+      dayScore: null == dayScore
+          ? _value.dayScore
+          : dayScore // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -76,7 +83,8 @@ abstract class _$$_CreateCopyWith<$Res>
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> tabNames, int selectedIndex, double goalY});
+  $Res call(
+      {List<String> tabNames, int selectedIndex, int goalY, int dayScore});
 }
 
 /// @nodoc
@@ -92,6 +100,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? tabNames = null,
     Object? selectedIndex = null,
     Object? goalY = null,
+    Object? dayScore = null,
   }) {
     return _then(_$_Create(
       tabNames: null == tabNames
@@ -105,7 +114,11 @@ class __$$_CreateCopyWithImpl<$Res>
       goalY: null == goalY
           ? _value.goalY
           : goalY // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
+      dayScore: null == dayScore
+          ? _value.dayScore
+          : dayScore // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -116,7 +129,8 @@ class _$_Create extends _Create {
   const _$_Create(
       {final List<String> tabNames = const [],
       this.selectedIndex = -1,
-      this.goalY = 10.0})
+      this.goalY = 10,
+      this.dayScore = 0})
       : _tabNames = tabNames,
         super._();
 
@@ -134,11 +148,14 @@ class _$_Create extends _Create {
   final int selectedIndex;
   @override
   @JsonKey()
-  final double goalY;
+  final int goalY;
+  @override
+  @JsonKey()
+  final int dayScore;
 
   @override
   String toString() {
-    return 'HomeDashboardScreenState(tabNames: $tabNames, selectedIndex: $selectedIndex, goalY: $goalY)';
+    return 'HomeDashboardScreenState(tabNames: $tabNames, selectedIndex: $selectedIndex, goalY: $goalY, dayScore: $dayScore)';
   }
 
   @override
@@ -149,12 +166,18 @@ class _$_Create extends _Create {
             const DeepCollectionEquality().equals(other._tabNames, _tabNames) &&
             (identical(other.selectedIndex, selectedIndex) ||
                 other.selectedIndex == selectedIndex) &&
-            (identical(other.goalY, goalY) || other.goalY == goalY));
+            (identical(other.goalY, goalY) || other.goalY == goalY) &&
+            (identical(other.dayScore, dayScore) ||
+                other.dayScore == dayScore));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_tabNames), selectedIndex, goalY);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_tabNames),
+      selectedIndex,
+      goalY,
+      dayScore);
 
   @JsonKey(ignore: true)
   @override
@@ -167,7 +190,8 @@ abstract class _Create extends HomeDashboardScreenState {
   const factory _Create(
       {final List<String> tabNames,
       final int selectedIndex,
-      final double goalY}) = _$_Create;
+      final int goalY,
+      final int dayScore}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -175,7 +199,9 @@ abstract class _Create extends HomeDashboardScreenState {
   @override
   int get selectedIndex;
   @override
-  double get goalY;
+  int get goalY;
+  @override
+  int get dayScore;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

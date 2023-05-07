@@ -16,16 +16,17 @@ class HomeDashboardScreenController
       : super(const HomeDashboardScreenState());
 
   final Ref ref;
-  final dataList = const [
-    _BarData(30),
-    _BarData(9),
-    _BarData(10),
-    _BarData(2.5),
-    _BarData(2),
-    _BarData(9.9),
-    _BarData(14),
+  late List<_BarData> weekDataList = [
+    _BarData(30, "Mon"),
+    _BarData(9, "Tue"),
+    _BarData(10, "Wed"),
+    _BarData(2, "Thu"),
+    _BarData(2, "Fri"),
+    _BarData(9, "Sat"),
+    _BarData(14, "Sun"),
   ];
-  final weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  final now = DateTime.now();
+  final todayIndex = DateTime.now().weekday - 1;
 
   @override
   void initState() {
@@ -34,6 +35,22 @@ class HomeDashboardScreenController
 
   void selectIndex(int selectedIndex) {
     state = state.copyWith(selectedIndex: selectedIndex);
+  }
+
+  void setGoalY(int index) {
+    if (index >= 10 && index <= 50) {
+      state = state.copyWith(goalY: index);
+    }
+  }
+
+  void setTodayData(int value) {
+    final weekList = [...weekDataList];
+    final newValue = weekList[todayIndex].value + value;
+    weekList[todayIndex] = _BarData(newValue, weekDataList[todayIndex].weekDay);
+
+    state = state.copyWith(dayScore: newValue);
+    print(newValue);
+    print(weekDataList[todayIndex].value);
   }
 
   BarChartGroupData generateBarGroup(int x, Color color, double value) {
@@ -53,18 +70,23 @@ class HomeDashboardScreenController
 }
 
 class _BarData {
-  const _BarData(this.value);
-  final double value;
+  const _BarData(this.value, this.weekDay);
+  final int value;
+  final String weekDay;
 }
 
 class CustomBarChartRodData extends BarChartRodData {
   CustomBarChartRodData({
-    required double toY,
+    required int toY,
     required Color color,
     required double width,
     required BorderRadius borderRadius,
     this.icon,
-  }) : super(toY: toY, color: color, width: width, borderRadius: borderRadius);
+  }) : super(
+            toY: toY.toDouble(),
+            color: color,
+            width: width,
+            borderRadius: borderRadius);
 
   final IconData? icon;
 }
