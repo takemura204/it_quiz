@@ -53,7 +53,7 @@ class _WeekDashboard extends ConsumerWidget {
         elevation: 3,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+            horizontal: context.width * 0.02, vertical: context.width * 0.00),
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: context.mainColor,
@@ -62,7 +62,9 @@ class _WeekDashboard extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
-          padding: EdgeInsets.all(context.height * 0.01),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.width * 0.01,
+              vertical: context.width * 0.008),
           child: Column(
             children: [
               ///凡例

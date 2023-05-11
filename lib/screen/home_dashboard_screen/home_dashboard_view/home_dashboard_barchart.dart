@@ -45,7 +45,8 @@ class _BarChartSample extends ConsumerWidget {
           ///タイトル
           titlesData: FlTitlesData(
             show: true,
-            //Y軸
+
+            ///Y軸
             leftTitles: AxisTitles(
               drawBehindEverything: true,
               sideTitles: SideTitles(
@@ -65,13 +66,25 @@ class _BarChartSample extends ConsumerWidget {
                 },
               ),
             ),
-            // X軸
+
+            /// X軸
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: context.height * 0.04,
-                getTitlesWidget: (value, meta) =>
-                    _BottomTitles(meta: meta, value: value),
+                getTitlesWidget: (value, meta) {
+                  final state = ref.watch(homeDashboardScreenProvider);
+                  switch (state.selectedDayRange) {
+                    case 7:
+                      return _BottomWeekTitles(meta: meta, value: value);
+                    case 31:
+                      return _BottomMonthTitles(meta: meta, value: value);
+                    case 12:
+                      return _BottomYearTitles(meta: meta, value: value);
+                    default:
+                      return _BottomWeekTitles(meta: meta, value: value);
+                  }
+                },
               ),
             ),
             rightTitles: AxisTitles(),
@@ -79,77 +92,72 @@ class _BarChartSample extends ConsumerWidget {
           ),
 
           /// グラフ本体
-          barGroups:
-              // 週間データの処理
-              selectedDayRange == 7
-                  ? weeklyDataList.asMap().entries.map((e) {
-                      final index = e.key;
-                      final data = e.value;
-                      final color = (data.score >= goalY)
-                          ? context.mainColor
-                          : Colors.grey.shade400;
+          barGroups: selectedDayRange == 7
+              ? weeklyDataList.asMap().entries.map((e) {
+            final index = e.key;
+            final data = e.value;
+            final color = (data.score >= goalY)
+                ? context.mainColor
+                : Colors.grey.shade400;
 
-                      return BarChartGroupData(
-                        x: index,
-                        barsSpace: 1,
-                        barRods: [
-                          CustomBarChartRodData(
-                            toY: data.score > maxY ? maxY + 1 : data.score,
-                            color: color,
-                            width: 30,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ],
-                        showingTooltipIndicators:
-                            selectedIndex == index ? [0] : [],
-                      );
-                    }).toList()
-                  : selectedDayRange == 31
-                      // 月間データの処理
-                      ? monthlyDataList.asMap().entries.map((e) {
-                          final index = e.key;
-                          final data = e.value;
-                          final color = (data.score >= goalY)
-                              ? context.mainColor
-                              : Colors.grey.shade400;
+            return BarChartGroupData(
+              x: index,
+              barsSpace: 1,
+              barRods: [
+                CustomBarChartRodData(
+                  toY: data.score > maxY ? maxY + 1 : data.score,
+                  color: color,
+                  width: 30,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ],
+              showingTooltipIndicators: selectedIndex == index ? [0] : [],
+            );
+          }).toList()
+              : selectedDayRange == 31
+              ? monthlyDataList.asMap().entries.map((e) {
+            final index = e.key;
+            final data = e.value;
+            final color = (data.score >= goalY)
+                ? context.mainColor
+                : Colors.grey.shade400;
 
-                          return BarChartGroupData(
-                            x: index,
-                            barsSpace: 1,
-                            barRods: [
-                              CustomBarChartRodData(
-                                toY: data.score > maxY ? maxY + 1 : data.score,
-                                color: color,
-                                width: 30,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ],
-                            showingTooltipIndicators:
-                                selectedIndex == index ? [0] : [],
-                          );
-                        }).toList()
-                      : totalDataList.asMap().entries.map((e) {
-                          final index = e.key;
-                          final data = e.value;
-                          final color = (data.score >= goalY)
-                              ? context.mainColor
-                              : Colors.grey.shade400;
+            return BarChartGroupData(
+              x: index,
+              barsSpace: 1,
+              barRods: [
+                CustomBarChartRodData(
+                  toY: data.score > maxY ? maxY + 1 : data.score,
+                  color: color,
+                  width: 10, // 月間データのときは棒グラフの幅を10にする
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ],
+              showingTooltipIndicators: selectedIndex == index ? [0] : [],
+            );
+          }).toList()
+              : totalDataList.asMap().entries.map((e) {
+            final index = e.key;
+            final data = e.value;
+            final color = (data.score >= goalY)
+                ? context.mainColor
+                : Colors.grey.shade400;
 
-                          return BarChartGroupData(
-                            x: index,
-                            barsSpace: 1,
-                            barRods: [
-                              CustomBarChartRodData(
-                                toY: data.score > maxY ? maxY + 1 : data.score,
-                                color: color,
-                                width: 30,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ],
-                            showingTooltipIndicators:
-                                selectedIndex == index ? [0] : [],
-                          );
-                        }).toList(),
+            return BarChartGroupData(
+              x: index,
+              barsSpace: 1,
+              barRods: [
+                CustomBarChartRodData(
+                  toY: data.score > maxY ? maxY + 1 : data.score,
+                  color: color,
+                  width: index % 30 == 0 ? 30 : 0, // 1ヶ月ごとに表示
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ],
+              showingTooltipIndicators: selectedIndex == index ? [0] : [],
+            );
+          }).toList(),
+
           maxY: maxY.toDouble(),
           barTouchData: BarTouchData(
             enabled: true,
@@ -196,8 +204,8 @@ class _BarChartSample extends ConsumerWidget {
   }
 }
 
-class _BottomTitles extends ConsumerWidget {
-  const _BottomTitles({required this.meta, required this.value});
+class _BottomWeekTitles extends ConsumerWidget {
+  const _BottomWeekTitles({required this.meta, required this.value});
   final TitleMeta meta;
   final double value;
   @override
@@ -238,6 +246,82 @@ class _BottomTitles extends ConsumerWidget {
               ),
               textAlign: TextAlign.center,
             ),
+    );
+  }
+}
+
+class _BottomMonthTitles extends ConsumerWidget {
+  const _BottomMonthTitles({required this.meta, required this.value});
+  final TitleMeta meta;
+  final double value;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
+    final valueIndex = value.toInt();
+
+    // 5日ごとに日付を表示
+    if (valueIndex % 5 != 1) {
+      return const SizedBox.shrink();
+    }
+
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 2,
+      child: Text(
+        valueIndex.toString(),
+        style: TextStyle(
+          color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
+          fontSize: context.width * 0.03,
+          fontWeight: (selectedIndex == valueIndex)
+              ? FontWeight.bold
+              : FontWeight.normal,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+///あとで修正
+class _BottomYearTitles extends ConsumerWidget {
+  const _BottomYearTitles({required this.meta, required this.value});
+  final TitleMeta meta;
+  final double value;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
+    final valueIndex = value.toInt();
+    final months = [
+      '1月',
+      '2月',
+      '3月',
+      '4月',
+      '5月',
+      '6月',
+      '7月',
+      '8月',
+      '9月',
+      '10月',
+      '11月',
+      '12月'
+    ];
+
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 2,
+      child: Text(
+        months[valueIndex],
+        style: TextStyle(
+          color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
+          fontSize: context.width * 0.03,
+          fontWeight: (selectedIndex == valueIndex)
+              ? FontWeight.bold
+              : FontWeight.normal,
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }
