@@ -106,7 +106,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   /// testQuiz追加
   void addTestQuiz() {
     final testGroup = state.testGroup;
-    final testLength = state.testLength;
+    final testLength = state.selectedTestLength;
     final filteredQuizList = [
       ...ref
           .read(quizItemProvider)
@@ -207,7 +207,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   ///問題数指定
-  void selectLength(int length) {
-    state = state.copyWith(testLength: length);
+  void selectTestLength(int length) {
+    state = state.copyWith(selectedTestLength: length);
   }
 }

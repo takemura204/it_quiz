@@ -6,7 +6,8 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/home_dashboard/home_dashboard_screen_controller.dart';
 
-part 'home_dashboard_view.dart';
+part 'home_dashboard_view/home_dashboard_barchart.dart';
+part 'home_dashboard_view/home_dashboard_view.dart';
 
 class HomeDashboardScreen extends StatelessWidget {
   const HomeDashboardScreen();
@@ -16,17 +17,23 @@ class HomeDashboardScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: const [
-          ///ミッション
+          ///X軸操作
+          // _SetTodayData(),
+
+          ///X軸範囲
+          _SelectDayLength(),
+
+          ///学習状況ダッシュボード
+          _WeekDashboard(),
+
+          ///目標値設定
+          _SetGoalY(),
+
+          ///デイリーミッション
           _DailyMission(),
 
           ///詳細
           _TotalScore(),
-
-          _SetGoalY(),
-          _TodayData(),
-
-          ///学習状況ダッシュボード
-          _WeekDashboard(),
         ],
       ),
     );

@@ -15,6 +15,6 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
     @Default(0) final int testScore, //全てのクイズ
     @Default(false) bool isSelected,
     @Default([]) final List<String> testGroup,
-    @Default(10) final int testLength,
+    @Default(10) final int selectedTestLength,
   }) = _Create;
 }

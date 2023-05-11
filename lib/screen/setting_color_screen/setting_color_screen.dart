@@ -89,7 +89,7 @@ class _ColorCards extends ConsumerWidget {
                       color: colors[index].shade50,
                       boxShadow: const [
                         BoxShadow(
-                          color: Colors.black54,
+                          color: Colors.grey,
                           blurRadius: 0, //ぼかし
                           offset: Offset(13, 13), // 1
                         ),

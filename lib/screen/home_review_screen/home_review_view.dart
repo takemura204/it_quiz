@@ -228,6 +228,7 @@ class _QuizRange extends ConsumerWidget {
   }
 }
 
+///出題数
 class _SelectRange extends ConsumerWidget {
   const _SelectRange(this.text);
   final String text;
@@ -253,21 +254,21 @@ class _SelectRange extends ConsumerWidget {
           ),
           color: isSelected
               ? context.backgroundColor.withOpacity(0.2)
-              : Colors.grey.withOpacity(0.05),
+              : Colors.grey.shade400.withOpacity(0.1),
         ),
         alignment: Alignment.center,
         child: Row(
           children: [
             Icon(
               isSelected ? Icons.check_circle_outline : Icons.circle_outlined,
-              color: isSelected ? context.mainColor : Colors.black54,
+              color: isSelected ? context.mainColor : Colors.grey,
             ),
             const Gap(5),
             Text(
               text,
               style: TextStyle(
                 fontSize: context.width * 0.04,
-                color: isSelected ? context.mainColor : Colors.black54,
+                color: isSelected ? context.mainColor : Colors.grey,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
               ),
             ),
@@ -284,10 +285,10 @@ class _SelectLength extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<int> testLength = [10, 20, 50];
-    final selectedLength = ref.watch(
-      homeReviewScreenProvider.select((state) => state.testLength),
+    final selectedTestLength = ref.watch(
+      homeReviewScreenProvider.select((state) => state.selectedTestLength),
     );
-    final initialIndex = testLength.indexOf(selectedLength);
+    final initialIndex = testLength.indexOf(selectedTestLength);
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: context.width * 0.04, vertical: context.width * 0.01),
@@ -313,7 +314,7 @@ class _SelectLength extends ConsumerWidget {
                   onTap: (index) {
                     ref
                         .read(homeReviewScreenProvider.notifier)
-                        .selectLength(testLength[index]);
+                        .selectTestLength(testLength[index]);
                   },
                   labelColor: Colors.white,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -386,15 +387,14 @@ class _SimpleDialogOption extends ConsumerWidget {
           decoration: BoxDecoration(
             color: isGroup ? context.mainColor : Colors.black12,
             border: Border.all(
-              color:
-                  isGroup ? context.mainColor : Colors.black12.withOpacity(0.1),
+              color: isGroup ? context.mainColor : Colors.grey.withOpacity(0.1),
             ),
             borderRadius: BorderRadius.circular(5),
           ),
           child: AutoSizeText(
             text,
             style: TextStyle(
-              color: isGroup ? Colors.white : Colors.black26,
+              color: isGroup ? Colors.white : Colors.grey,
               fontWeight: FontWeight.bold,
               fontSize: context.width * 0.05,
             ),
