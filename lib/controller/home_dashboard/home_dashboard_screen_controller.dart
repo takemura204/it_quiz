@@ -19,6 +19,7 @@ class HomeDashboardScreenController
       : super(HomeDashboardScreenState()) {
     initState();
   }
+
   final Ref ref;
   final tabs = [7, 31, 12];
   final now = DateTime.now();
@@ -26,7 +27,7 @@ class HomeDashboardScreenController
 
   @override
   void initState() {
-    _setDayRangeText();
+    _initDayRangeText();
     _initDataList();
   }
 
@@ -36,7 +37,6 @@ class HomeDashboardScreenController
     _getMonthlyDataList();
   }
 
-  ///すべての期間を取得
   void _getTotalDataList() {
     final random = Random();
     const days = 90;
@@ -46,69 +46,52 @@ class HomeDashboardScreenController
 
   BarData _createBarData(int daysAgo, Random random) {
     final day = now.subtract(Duration(days: daysAgo));
-    return BarData(random.nextInt(40) + 1, day);
+    final score = random.nextInt(40) + 1;
+    return BarData(score, day);
   }
 
-  ///1週間ごとに取得
   void _getWeeklyDataList() {
-    final totalDataList = state.totalDataList;
-    final weeklyDataList = [...state.weeklyDataList];
-    for (int i = 0; i < totalDataList.length; i += 7) {
-      final end = i + 7 <= totalDataList.length ? i + 7 : totalDataList.length;
-      weeklyDataList.add(totalDataList.sublist(i, end));
-      while (weeklyDataList.last.length < 7) {
-        weeklyDataList.last.add(BarData(
-            0, now.subtract(Duration(days: weeklyDataList.last.length))));
-      }
-    }
+    final totalDataList = [...state.totalDataList];
+    final weeklyDataList = _groupDataByPeriod(
+      totalDataList,
+      (date) => DateTime(date.year, date.month, date.day - date.weekday + 1),
+      7,
+    );
     state = state.copyWith(weeklyDataList: weeklyDataList);
   }
 
-  ///1ヶ月ごとに取得
   void _getMonthlyDataList() {
-    final totalDataList = state.totalDataList;
-    final monthlyDataList = [...state.monthlyDataList];
-
-    // Get the number of days in the month for the current date
-    int daysInMonth(DateTime date) {
-      return (date.month < 12
-              ? DateTime(date.year, date.month + 1, 0)
-              : DateTime(date.year + 1, 1, 0))
-          .day;
-    }
-
-    int currentMonth = now.month;
-    int currentYear = now.year;
-    List<BarData> currentMonthData = [];
-    for (var data in totalDataList) {
-      // If the data belongs to a different month, add the current month data to the list and start a new month
-      if (data.day.month != currentMonth) {
-        // Add an extra day to the month data if there is not enough data for the month
-        while (currentMonthData.length <
-            daysInMonth(DateTime(currentYear, currentMonth))) {
-          currentMonthData.add(BarData(
-              0,
-              DateTime(
-                  currentYear, currentMonth, currentMonthData.length + 1)));
-        }
-        monthlyDataList.add(currentMonthData);
-
-        currentMonth = data.day.month;
-        currentYear = data.day.year;
-        currentMonthData = [data];
-      } else {
-        currentMonthData.add(data);
-      }
-    }
-    // Add the data for the last month
-    while (currentMonthData.length <
-        daysInMonth(DateTime(currentYear, currentMonth))) {
-      currentMonthData.add(BarData(
-          0, DateTime(currentYear, currentMonth, currentMonthData.length + 1)));
-    }
-    monthlyDataList.add(currentMonthData);
-
+    final totalDataList = [...state.totalDataList];
+    final currentMonthDays = DateTime(now.year, now.month + 1, 0).day;
+    final monthlyDataList = _groupDataByPeriod(
+      totalDataList,
+      (date) => DateTime(date.year, date.month, 1),
+      currentMonthDays,
+    );
     state = state.copyWith(monthlyDataList: monthlyDataList);
+  }
+
+  List<List<BarData>> _groupDataByPeriod(
+    List<BarData> dataList,
+    DateTime Function(DateTime) getStartOfPeriod,
+    int periodDays,
+  ) {
+    final Map<DateTime, List<BarData>> dataByPeriod = {};
+    for (var data in dataList) {
+      final periodStart = getStartOfPeriod(data.day);
+      final periodData = dataByPeriod.putIfAbsent(periodStart, () => []);
+
+      final periodEnd = periodStart.add(Duration(days: periodDays));
+      for (var day = periodStart;
+          day.isBefore(periodEnd);
+          day = day.add(const Duration(days: 1))) {
+        if (!periodData.any((d) => d.day == day)) {
+          periodData.add(BarData(0, day));
+        }
+      }
+      periodData.sort((a, b) => a.day.compareTo(b.day));
+    }
+    return dataByPeriod.values.toList();
   }
 
   int _getScore(List<BarData> dataList) {
@@ -142,7 +125,7 @@ class HomeDashboardScreenController
   ///TabBarをタップした時
   void tapTabBar(int index) {
     _setDayRange(index);
-    _setDayRangeText();
+    _initDayRangeText();
   }
 
   /// 前の期間に戻るボタンをタップした時
@@ -153,7 +136,7 @@ class HomeDashboardScreenController
     } else if (selectedDayRange == 31) {
       _goPrevMonth();
     }
-    _setDayRangeText();
+    _initDayRangeText();
   }
 
   /// 前の期間に戻るボタンをタップした時
@@ -164,7 +147,7 @@ class HomeDashboardScreenController
     } else if (selectedDayRange == 31) {
       _goNextMonth();
     }
-    _setDayRangeText();
+    _initDayRangeText();
   }
 
   ///今日の日付を取得
@@ -178,7 +161,7 @@ class HomeDashboardScreenController
   }
 
   ///選択期間のText取得
-  void _setDayRangeText() {
+  void _initDayRangeText() {
     final weekText = getWeekText();
     final monthText = getMonthText();
     final selectedDayRange = state.selectedDayRange;

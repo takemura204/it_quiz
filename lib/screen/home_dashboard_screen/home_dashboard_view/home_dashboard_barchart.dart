@@ -282,7 +282,7 @@ class _BottomWeekTitles extends ConsumerWidget {
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedIndex = state.selectedXIndex;
     final weeklyIndex = state.weeklyIndex;
-    final weekDataList = state.weeklyDataList[weeklyIndex].reversed.toList();
+    final weekDataList = state.weeklyDataList[weeklyIndex];
     final adjustedIndex = (value.toInt()) % 7;
     final barData = weekDataList[adjustedIndex];
     final isToday = DateTime.now().weekday == barData.day.weekday;
