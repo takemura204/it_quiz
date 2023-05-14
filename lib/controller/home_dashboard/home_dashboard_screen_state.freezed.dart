@@ -34,7 +34,7 @@ mixin _$HomeDashboardScreenState {
       throw _privateConstructorUsedError; //全部のスコア(3ヶ月)
   List<List<BarData>> get weeklyDataList =>
       throw _privateConstructorUsedError; //1週間のスコア
-  List<BarData> get monthlyDataList =>
+  List<List<BarData>> get monthlyDataList =>
       throw _privateConstructorUsedError; //1ヶ月のスコア
   List<BarData> get yearDataList => throw _privateConstructorUsedError;
 
@@ -66,7 +66,7 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
       String dayRangeText,
       List<BarData> totalDataList,
       List<List<BarData>> weeklyDataList,
-      List<BarData> monthlyDataList,
+      List<List<BarData>> monthlyDataList,
       List<BarData> yearDataList});
 }
 
@@ -171,7 +171,7 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
       monthlyDataList: null == monthlyDataList
           ? _value.monthlyDataList
           : monthlyDataList // ignore: cast_nullable_to_non_nullable
-              as List<BarData>,
+              as List<List<BarData>>,
       yearDataList: null == yearDataList
           ? _value.yearDataList
           : yearDataList // ignore: cast_nullable_to_non_nullable
@@ -204,7 +204,7 @@ abstract class _$$_CreateCopyWith<$Res>
       String dayRangeText,
       List<BarData> totalDataList,
       List<List<BarData>> weeklyDataList,
-      List<BarData> monthlyDataList,
+      List<List<BarData>> monthlyDataList,
       List<BarData> yearDataList});
 }
 
@@ -305,7 +305,7 @@ class __$$_CreateCopyWithImpl<$Res>
       monthlyDataList: null == monthlyDataList
           ? _value._monthlyDataList
           : monthlyDataList // ignore: cast_nullable_to_non_nullable
-              as List<BarData>,
+              as List<List<BarData>>,
       yearDataList: null == yearDataList
           ? _value._yearDataList
           : yearDataList // ignore: cast_nullable_to_non_nullable
@@ -334,7 +334,7 @@ class _$_Create extends _Create {
       this.dayRangeText = "",
       final List<BarData> totalDataList = const [],
       final List<List<BarData>> weeklyDataList = const [],
-      final List<BarData> monthlyDataList = const [],
+      final List<List<BarData>> monthlyDataList = const [],
       final List<BarData> yearDataList = const []})
       : _totalDataList = totalDataList,
         _weeklyDataList = weeklyDataList,
@@ -419,11 +419,11 @@ class _$_Create extends _Create {
   }
 
 //1週間のスコア
-  final List<BarData> _monthlyDataList;
+  final List<List<BarData>> _monthlyDataList;
 //1週間のスコア
   @override
   @JsonKey()
-  List<BarData> get monthlyDataList {
+  List<List<BarData>> get monthlyDataList {
     if (_monthlyDataList is EqualUnmodifiableListView) return _monthlyDataList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_monthlyDataList);
@@ -534,7 +534,7 @@ abstract class _Create extends HomeDashboardScreenState {
       final String dayRangeText,
       final List<BarData> totalDataList,
       final List<List<BarData>> weeklyDataList,
-      final List<BarData> monthlyDataList,
+      final List<List<BarData>> monthlyDataList,
       final List<BarData> yearDataList}) = _$_Create;
   _Create._() : super._();
 
@@ -571,7 +571,7 @@ abstract class _Create extends HomeDashboardScreenState {
   @override //全部のスコア(3ヶ月)
   List<List<BarData>> get weeklyDataList;
   @override //1週間のスコア
-  List<BarData> get monthlyDataList;
+  List<List<BarData>> get monthlyDataList;
   @override //1ヶ月のスコア
   List<BarData> get yearDataList;
   @override

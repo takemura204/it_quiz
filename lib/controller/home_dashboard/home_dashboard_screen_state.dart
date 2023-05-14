@@ -24,7 +24,7 @@ class HomeDashboardScreenState with _$HomeDashboardScreenState {
     @Default("") final String dayRangeText, //タブ
     @Default([]) final List<BarData> totalDataList, //全部のスコア(3ヶ月)
     @Default([]) final List<List<BarData>> weeklyDataList, //1週間のスコア
-    @Default([]) final List<BarData> monthlyDataList, //1ヶ月のスコア
+    @Default([]) final List<List<BarData>> monthlyDataList, //1ヶ月のスコア
     @Default([]) final List<BarData> yearDataList, //1ヶ月のスコア
   }) = _Create;
 }

@@ -33,6 +33,7 @@ class HomeDashboardScreenController
   void _initDataList() {
     _getTotalDataList();
     _getWeeklyDataList();
+    _getMonthlyDataList();
   }
 
   ///すべての期間を取得
@@ -51,7 +52,7 @@ class HomeDashboardScreenController
   ///1週間ごとに取得
   void _getWeeklyDataList() {
     final totalDataList = state.totalDataList;
-    final weeklyDataList = <List<BarData>>[];
+    final weeklyDataList = [...state.weeklyDataList];
     for (int i = 0; i < totalDataList.length; i += 7) {
       final end = i + 7 <= totalDataList.length ? i + 7 : totalDataList.length;
       weeklyDataList.add(totalDataList.sublist(i, end));
@@ -61,6 +62,53 @@ class HomeDashboardScreenController
       }
     }
     state = state.copyWith(weeklyDataList: weeklyDataList);
+  }
+
+  ///1ヶ月ごとに取得
+  void _getMonthlyDataList() {
+    final totalDataList = state.totalDataList;
+    final monthlyDataList = [...state.monthlyDataList];
+
+    // Get the number of days in the month for the current date
+    int daysInMonth(DateTime date) {
+      return (date.month < 12
+              ? DateTime(date.year, date.month + 1, 0)
+              : DateTime(date.year + 1, 1, 0))
+          .day;
+    }
+
+    int currentMonth = now.month;
+    int currentYear = now.year;
+    List<BarData> currentMonthData = [];
+    for (var data in totalDataList) {
+      // If the data belongs to a different month, add the current month data to the list and start a new month
+      if (data.day.month != currentMonth) {
+        // Add an extra day to the month data if there is not enough data for the month
+        while (currentMonthData.length <
+            daysInMonth(DateTime(currentYear, currentMonth))) {
+          currentMonthData.add(BarData(
+              0,
+              DateTime(
+                  currentYear, currentMonth, currentMonthData.length + 1)));
+        }
+        monthlyDataList.add(currentMonthData);
+
+        currentMonth = data.day.month;
+        currentYear = data.day.year;
+        currentMonthData = [data];
+      } else {
+        currentMonthData.add(data);
+      }
+    }
+    // Add the data for the last month
+    while (currentMonthData.length <
+        daysInMonth(DateTime(currentYear, currentMonth))) {
+      currentMonthData.add(BarData(
+          0, DateTime(currentYear, currentMonth, currentMonthData.length + 1)));
+    }
+    monthlyDataList.add(currentMonthData);
+
+    state = state.copyWith(monthlyDataList: monthlyDataList);
   }
 
   int _getScore(List<BarData> dataList) {

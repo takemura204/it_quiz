@@ -6,10 +6,12 @@ class _BarChartSample extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedIndex = state.selectedXIndex;
+    final weeklyIndex = state.weeklyIndex;
+    final monthlyIndex = state.monthlyIndex;
     final selectedDayRange = state.selectedDayRange;
     final totalDataList = state.totalDataList;
-    final weeklyDataList = state.weeklyDataList[0];
-    final monthlyDataList = state.monthlyDataList;
+    final weeklyDataList = state.weeklyDataList[weeklyIndex];
+    final monthlyDataList = state.monthlyDataList[monthlyIndex];
     final yearDataList = state.yearDataList;
     final goalY = state.goalY;
     final maxY = goalY * 2;
@@ -225,15 +227,13 @@ class _BarChartSample extends ConsumerWidget {
                 BarChartRodData rod,
                 int rodIndex,
               ) {
-                final state = ref.read(homeDashboardScreenProvider);
                 int dataValue;
                 switch (state.selectedDayRange) {
                   case 7:
-                    dataValue =
-                        state.weeklyDataList[0][groupIndex].score.toInt();
+                    dataValue = weeklyDataList[groupIndex].score.toInt();
                     break;
                   case 31:
-                    dataValue = state.monthlyDataList[groupIndex].score.toInt();
+                    dataValue = monthlyDataList[groupIndex].score.toInt();
                     break;
                   case 12:
                     dataValue = state.yearDataList[groupIndex].score.toInt();
