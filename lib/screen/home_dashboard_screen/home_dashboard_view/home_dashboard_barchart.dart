@@ -280,27 +280,39 @@ class _BottomWeekTitles extends ConsumerWidget {
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedIndex = state.selectedXIndex;
     final valueIndex = value.toInt();
+    final now = DateTime.now();
+    final today = now.weekday;
+    final startDate = now.subtract(Duration(days: today - 1));
+    final date = startDate.add(Duration(days: valueIndex));
+    final monthDay = '${date.month}/${date.day}';
+    final isToday = date.day == now.day && date.month == now.month;
     final weekDataList = ref.watch(homeDashboardScreenProvider).totalDataList;
-    final barData = weekDataList[(valueIndex + 1) % 7];
-    final monthDay = '${barData.day.month}/${barData.day.day}';
-    final isToday = barData.day.day == DateTime.now().day &&
-        barData.day.month == DateTime.now().month;
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 2,
-      child: Text(
-        "${barData.weekDay} \n $monthDay",
-        style: TextStyle(
-            color: isToday
-                ? context.mainColor
-                : selectedIndex == valueIndex
+      child: isToday
+          ? Text(
+              "${weekDataList[valueIndex % 7].weekDay} \n $monthDay",
+              style: TextStyle(
+                  color: context.mainColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: context.width * 0.03),
+              textAlign: TextAlign.center,
+            )
+          : Text(
+              "${weekDataList[valueIndex % 7].weekDay} \n $monthDay",
+              style: TextStyle(
+                color: (selectedIndex == valueIndex)
                     ? Colors.black54
                     : Colors.grey,
-            fontWeight: FontWeight.bold,
-            fontSize: context.width * 0.03),
-        textAlign: TextAlign.center,
-      ),
+                fontSize: context.width * 0.03,
+                fontWeight: (selectedIndex == valueIndex)
+                    ? FontWeight.bold
+                    : FontWeight.normal,
+              ),
+              textAlign: TextAlign.center,
+            ),
     );
   }
 }
@@ -314,9 +326,15 @@ class _BottomMonthTitles extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
     final valueIndex = value.toInt();
+    final now = DateTime.now();
+    final today = now.weekday;
+    final startDate = now.subtract(Duration(days: today - 1));
+    final date = startDate.add(Duration(days: valueIndex));
+    final monthDay = '${date.month}/${date.day}';
+    final isToday = date.day == now.day && date.month == now.month;
 
     // 5日ごとに日付を表示
-    if (valueIndex % 5 != 0) {
+    if (valueIndex % 5 != 1) {
       return const SizedBox.shrink();
     }
 
@@ -324,7 +342,7 @@ class _BottomMonthTitles extends ConsumerWidget {
       axisSide: meta.axisSide,
       space: 2,
       child: Text(
-        "${valueIndex + 1}",
+        valueIndex.toString(),
         style: TextStyle(
           color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
           fontSize: context.width * 0.03,
