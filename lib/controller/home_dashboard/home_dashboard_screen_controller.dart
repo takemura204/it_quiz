@@ -30,42 +30,62 @@ class HomeDashboardScreenController
     _initDataList();
   }
 
-  ///週・月・年のデータ取得
   void _initDataList() {
     final random = Random();
     final totalDataList = [...state.totalDataList];
     final weeklyDataList = [...state.weeklyDataList];
     final monthlyDataList = [...state.monthlyDataList];
-    //1週間のデータ取得
-    for (int i = 0; i < 7; i++) {
-      final day = now.subtract(Duration(days: i));
-      weeklyDataList.add(BarData(random.nextInt(40) + 1, day));
-    }
-    //1ヶ月のデータ取得
-    for (int i = 0; i < 90; i++) {
-      final day = now.subtract(Duration(days: i));
-      totalDataList.add(BarData(random.nextInt(40) + 1, day));
-    }
-    //  1年(3ヶ月)のデータ取得
-    for (int i = 0; i < 31; i++) {
-      final day = now.subtract(Duration(days: i));
-      monthlyDataList.add(BarData(random.nextInt(40) + 1, day));
-    }
-    final descWeeklyDataList = weeklyDataList.reversed.toList();
-    final weekScore =
-        descWeeklyDataList.map((data) => data.score).reduce((a, b) => a + b);
-    final descMonthlyDataList = monthlyDataList.reversed.toList();
-    final monthScore =
-        descMonthlyDataList.map((data) => data.score).reduce((a, b) => a + b);
-    final descTotalDataList = totalDataList.reversed.toList();
-
+    final yearDataList = [...state.yearDataList];
+    totalDataList.addAll(_createDataList(random, 90));
+    weeklyDataList.addAll(_createDataList(random, 7));
+    monthlyDataList.addAll(_createDataList(random, 31));
+    yearDataList.addAll(_createYearlyDataList(random));
     state = state.copyWith(
-      weeklyDataList: descWeeklyDataList,
-      weekScore: weekScore,
-      monthlyDataList: descMonthlyDataList,
-      monthScore: monthScore,
-      totalDataList: descTotalDataList,
+      weeklyDataList: weeklyDataList.reversed.toList(),
+      weekScore: _getScore(weeklyDataList),
+      monthlyDataList: monthlyDataList.reversed.toList(),
+      monthScore: _getScore(monthlyDataList),
+      yearDataList: yearDataList..sort((a, b) => a.day.compareTo(b.day)),
+      yearScore: _getScore(yearDataList),
+      totalDataList: totalDataList.reversed.toList(),
     );
+  }
+
+  List<BarData> _createDataList(Random random, int days) {
+    return List.generate(days, (i) => _createBarData(i, random));
+  }
+
+  BarData _createBarData(int daysAgo, Random random) {
+    final day = now.subtract(Duration(days: daysAgo));
+    return BarData(random.nextInt(40) + 1, day);
+  }
+
+  int _getScore(List<BarData> dataList) {
+    return dataList.map((data) => data.score).reduce((a, b) => a + b);
+  }
+
+  List<BarData> _createYearlyDataList(Random random) {
+    final Map<int, List<BarData>> yearDataByMonth = {};
+    for (int i = 0; i < 365; i++) {
+      final barData = _createBarData(i, random);
+      yearDataByMonth.putIfAbsent(barData.day.month, () => []);
+      yearDataByMonth[barData.day.month]!.add(barData);
+    }
+    final List<BarData> yearDataList = [];
+    for (int i = 1; i <= 12; i++) {
+      if (yearDataByMonth.containsKey(i)) {
+        final List<BarData> barData = yearDataByMonth[i]!;
+        final int totalScore =
+            barData.map((data) => data.score).reduce((a, b) => a + b);
+        final DateTime firstDay = barData.first.day;
+        yearDataList.add(BarData(totalScore, firstDay));
+      } else {
+        // データが存在しない月はスコア0のデータを作成
+        yearDataList.add(BarData(0, DateTime(now.year, i, 1)));
+      }
+    }
+    yearDataList.sort((a, b) => a.day.month.compareTo(b.day.month));
+    return yearDataList;
   }
 
   ///TabBarをタップした時
@@ -206,13 +226,13 @@ class HomeDashboardScreenController
 }
 
 class BarData {
-  BarData(this.score, this.day) : weekDay = getWeekDayString(day);
+  BarData(this.score, this.day) : weekDay = _getWeekDayString(day);
 
   final int score;
   final DateTime day;
   final String weekDay;
 
-  static String getWeekDayString(DateTime dateTime) {
+  static String _getWeekDayString(DateTime dateTime) {
     switch (dateTime.weekday) {
       case 1:
         return "Mon";

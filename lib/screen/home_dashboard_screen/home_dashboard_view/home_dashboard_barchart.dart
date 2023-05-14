@@ -10,6 +10,7 @@ class _BarChartSample extends ConsumerWidget {
     final totalDataList = state.totalDataList;
     final weeklyDataList = state.weeklyDataList;
     final monthlyDataList = state.monthlyDataList;
+    final yearDataList = state.yearDataList;
     final goalY = state.goalY;
     final maxY = goalY * 2;
 
@@ -78,7 +79,7 @@ class _BarChartSample extends ConsumerWidget {
                     case 7:
                       return _BottomWeekTitles(meta: meta, value: value);
                     case 31:
-                      return _BottomMonthTitles(meta: meta, value: value);
+                      return _BottomMonthTitles(meta: meta, value: value + 1);
                     case 12:
                       return _BottomYearTitles(meta: meta, value: value);
                     default:
@@ -92,71 +93,122 @@ class _BarChartSample extends ConsumerWidget {
           ),
 
           /// グラフ本体
-          barGroups: selectedDayRange == 7
-              ? weeklyDataList.asMap().entries.map((e) {
-            final index = e.key;
-            final data = e.value;
-            final color = (data.score >= goalY)
-                ? context.mainColor
-                : Colors.grey.shade400;
+          barGroups: (() {
+            switch (selectedDayRange) {
+              case 7:
+                return weeklyDataList
+                    .asMap()
+                    .entries
+                    .map((e) {
+                      final index = e.key;
+                      final data = e.value;
+                      final color = (data.score >= goalY)
+                          ? context.mainColor
+                          : Colors.grey.shade400;
 
-            return BarChartGroupData(
-              x: index,
-              barsSpace: 1,
-              barRods: [
-                CustomBarChartRodData(
-                  toY: data.score > maxY ? maxY + 1 : data.score,
-                  color: color,
-                  width: 30,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ],
-              showingTooltipIndicators: selectedIndex == index ? [0] : [],
-            );
-          }).toList()
-              : selectedDayRange == 31
-              ? monthlyDataList.asMap().entries.map((e) {
-            final index = e.key;
-            final data = e.value;
-            final color = (data.score >= goalY)
-                ? context.mainColor
-                : Colors.grey.shade400;
+                      return BarChartGroupData(
+                        x: index,
+                        barsSpace: 1,
+                        barRods: [
+                          CustomBarChartRodData(
+                            toY: data.score > maxY ? maxY + 1 : data.score,
+                            color: color,
+                            width: 30,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ],
+                        showingTooltipIndicators:
+                            selectedIndex == index ? [0] : [],
+                      );
+                    })
+                    .whereType<BarChartGroupData>()
+                    .toList();
+              case 31:
+                return monthlyDataList
+                    .asMap()
+                    .entries
+                    .map((e) {
+                      final index = e.key;
+                      final data = e.value;
+                      final color = (data.score >= goalY)
+                          ? context.mainColor
+                          : Colors.grey.shade400;
 
-            return BarChartGroupData(
-              x: index,
-              barsSpace: 1,
-              barRods: [
-                CustomBarChartRodData(
-                  toY: data.score > maxY ? maxY + 1 : data.score,
-                  color: color,
-                  width: 10, // 月間データのときは棒グラフの幅を10にする
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ],
-              showingTooltipIndicators: selectedIndex == index ? [0] : [],
-            );
-          }).toList()
-              : totalDataList.asMap().entries.map((e) {
-            final index = e.key;
-            final data = e.value;
-            final color = (data.score >= goalY)
-                ? context.mainColor
-                : Colors.grey.shade400;
+                      return BarChartGroupData(
+                        x: index,
+                        barsSpace: 1,
+                        barRods: [
+                          CustomBarChartRodData(
+                            toY: data.score > maxY ? maxY + 1 : data.score,
+                            color: color,
+                            width: 10, // 月間データのときは棒グラフの幅を10にする
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ],
+                        showingTooltipIndicators:
+                            selectedIndex == index ? [0] : [],
+                      );
+                    })
+                    .whereType<BarChartGroupData>()
+                    .toList();
+              case 12:
+                return yearDataList
+                    .asMap()
+                    .entries
+                    .map((e) {
+                      final index = e.key;
+                      final data = e.value;
+                      final color = (data.score >= goalY)
+                          ? context.mainColor
+                          : Colors.grey.shade400;
 
-            return BarChartGroupData(
-              x: index,
-              barsSpace: 1,
-              barRods: [
-                CustomBarChartRodData(
-                  toY: data.score > maxY ? maxY + 1 : data.score,
-                  color: color,
-                  width: index % 30 == 0 ? 30 : 0, // 1ヶ月ごとに表示
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ],
-              showingTooltipIndicators: selectedIndex == index ? [0] : [],
-            );
-          }).toList(),
+                      return BarChartGroupData(
+                        x: index,
+                        barsSpace: 1,
+                        barRods: [
+                          CustomBarChartRodData(
+                            toY: data.score > maxY ? maxY + 1 : data.score,
+                            color: color,
+                            width: index % 30 == 0 ? 30 : 0, // 1ヶ月ごとに表示
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ],
+                        showingTooltipIndicators:
+                            selectedIndex == index ? [0] : [],
+                      );
+                    })
+                    .whereType<BarChartGroupData>()
+                    .toList();
+              default:
+                return totalDataList
+                    .asMap()
+                    .entries
+                    .map((e) {
+                      final index = e.key;
+                      final data = e.value;
+                      final color = (data.score >= goalY)
+                          ? context.mainColor
+                          : Colors.grey.shade400;
+
+                      return BarChartGroupData(
+                        x: index,
+                        barsSpace: 1,
+                        barRods: [
+                          CustomBarChartRodData(
+                            toY: data.score > maxY ? maxY + 1 : data.score,
+                            color: color,
+                            width: 30, // すべてのデータを表示するように変更
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ],
+                        showingTooltipIndicators:
+                            selectedIndex == index ? [0] : [],
+                      );
+                    })
+                    .whereType<BarChartGroupData>()
+                    .toList();
+            }
+          })(),
 
           maxY: maxY.toDouble(),
           barTouchData: BarTouchData(
@@ -173,7 +225,22 @@ class _BarChartSample extends ConsumerWidget {
                 BarChartRodData rod,
                 int rodIndex,
               ) {
-                final dataValue = totalDataList[groupIndex].score.toInt();
+                final state = ref.read(homeDashboardScreenProvider);
+                int dataValue;
+                switch (state.selectedDayRange) {
+                  case 7:
+                    dataValue = state.weeklyDataList[groupIndex].score.toInt();
+                    break;
+                  case 31:
+                    dataValue = state.monthlyDataList[groupIndex].score.toInt();
+                    break;
+                  case 12:
+                    dataValue = state.yearDataList[groupIndex].score.toInt();
+                    break;
+                  default:
+                    dataValue = state.totalDataList[groupIndex].score.toInt();
+                    break;
+                }
                 return BarTooltipItem(
                   "$dataValue",
                   TextStyle(
@@ -213,39 +280,27 @@ class _BottomWeekTitles extends ConsumerWidget {
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedIndex = state.selectedXIndex;
     final valueIndex = value.toInt();
-    final now = DateTime.now();
-    final today = now.weekday;
-    final startDate = now.subtract(Duration(days: today - 1));
-    final date = startDate.add(Duration(days: valueIndex));
-    final monthDay = '${date.month}/${date.day}';
-    final isToday = date.day == now.day && date.month == now.month;
     final weekDataList = ref.watch(homeDashboardScreenProvider).totalDataList;
+    final barData = weekDataList[(valueIndex + 1) % 7];
+    final monthDay = '${barData.day.month}/${barData.day.day}';
+    final isToday = barData.day.day == DateTime.now().day &&
+        barData.day.month == DateTime.now().month;
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 2,
-      child: isToday
-          ? Text(
-              "${weekDataList[valueIndex % 7].weekDay} \n $monthDay",
-              style: TextStyle(
-                  color: context.mainColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: context.width * 0.03),
-              textAlign: TextAlign.center,
-            )
-          : Text(
-              "${weekDataList[valueIndex % 7].weekDay} \n $monthDay",
-              style: TextStyle(
-                color: (selectedIndex == valueIndex)
+      child: Text(
+        "${barData.weekDay} \n $monthDay",
+        style: TextStyle(
+            color: isToday
+                ? context.mainColor
+                : selectedIndex == valueIndex
                     ? Colors.black54
                     : Colors.grey,
-                fontSize: context.width * 0.03,
-                fontWeight: (selectedIndex == valueIndex)
-                    ? FontWeight.bold
-                    : FontWeight.normal,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            fontWeight: FontWeight.bold,
+            fontSize: context.width * 0.03),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }
@@ -261,7 +316,7 @@ class _BottomMonthTitles extends ConsumerWidget {
     final valueIndex = value.toInt();
 
     // 5日ごとに日付を表示
-    if (valueIndex % 5 != 1) {
+    if (valueIndex % 5 != 0) {
       return const SizedBox.shrink();
     }
 
@@ -269,7 +324,7 @@ class _BottomMonthTitles extends ConsumerWidget {
       axisSide: meta.axisSide,
       space: 2,
       child: Text(
-        valueIndex.toString(),
+        "${valueIndex + 1}",
         style: TextStyle(
           color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
           fontSize: context.width * 0.03,
@@ -283,7 +338,6 @@ class _BottomMonthTitles extends ConsumerWidget {
   }
 }
 
-///あとで修正
 class _BottomYearTitles extends ConsumerWidget {
   const _BottomYearTitles({required this.meta, required this.value});
   final TitleMeta meta;
@@ -293,26 +347,16 @@ class _BottomYearTitles extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
     final valueIndex = value.toInt();
-    final months = [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月'
-    ];
-
+    final yearDataList = ref.watch(homeDashboardScreenProvider).yearDataList;
+    if (valueIndex < 0 || valueIndex >= yearDataList.length) {
+      return const SizedBox.shrink();
+    }
+    final month = yearDataList[valueIndex].weekDay;
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      space: 2,
+      space: 0,
       child: Text(
-        months[valueIndex],
+        month,
         style: TextStyle(
           color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
           fontSize: context.width * 0.03,
