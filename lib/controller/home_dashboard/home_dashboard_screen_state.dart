@@ -9,6 +9,9 @@ class HomeDashboardScreenState with _$HomeDashboardScreenState {
   const HomeDashboardScreenState._();
   factory HomeDashboardScreenState({
     @Default(-1) final int selectedXIndex,
+    @Default(0) final int weeklyIndex, //1週間の単位
+    @Default(0) final int monthlyIndex, //1ヶ月の単位
+    @Default(0) final int yearIndex, //1年の単位
     @Default(10) final int goalY, //毎日の目標
     @Default(0) final int dayScore, //1日のトータルスコア
     @Default(0) final int weekScore, //1週間のトータルスコア
@@ -20,7 +23,7 @@ class HomeDashboardScreenState with _$HomeDashboardScreenState {
     @Default(0) final int tabIndex, //タブ
     @Default("") final String dayRangeText, //タブ
     @Default([]) final List<BarData> totalDataList, //全部のスコア(3ヶ月)
-    @Default([]) final List<BarData> weeklyDataList, //1週間のスコア
+    @Default([]) final List<List<BarData>> weeklyDataList, //1週間のスコア
     @Default([]) final List<BarData> monthlyDataList, //1ヶ月のスコア
     @Default([]) final List<BarData> yearDataList, //1ヶ月のスコア
   }) = _Create;

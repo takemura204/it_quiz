@@ -8,7 +8,7 @@ class _BarChartSample extends ConsumerWidget {
     final selectedIndex = state.selectedXIndex;
     final selectedDayRange = state.selectedDayRange;
     final totalDataList = state.totalDataList;
-    final weeklyDataList = state.weeklyDataList;
+    final weeklyDataList = state.weeklyDataList[0];
     final monthlyDataList = state.monthlyDataList;
     final yearDataList = state.yearDataList;
     final goalY = state.goalY;
@@ -229,7 +229,8 @@ class _BarChartSample extends ConsumerWidget {
                 int dataValue;
                 switch (state.selectedDayRange) {
                   case 7:
-                    dataValue = state.weeklyDataList[groupIndex].score.toInt();
+                    dataValue =
+                        state.weeklyDataList[0][groupIndex].score.toInt();
                     break;
                   case 31:
                     dataValue = state.monthlyDataList[groupIndex].score.toInt();
@@ -275,44 +276,35 @@ class _BottomWeekTitles extends ConsumerWidget {
   const _BottomWeekTitles({required this.meta, required this.value});
   final TitleMeta meta;
   final double value;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedIndex = state.selectedXIndex;
-    final valueIndex = value.toInt();
-    final now = DateTime.now();
-    final today = now.weekday;
-    final startDate = now.subtract(Duration(days: today - 1));
-    final date = startDate.add(Duration(days: valueIndex));
-    final monthDay = '${date.month}/${date.day}';
-    final isToday = date.day == now.day && date.month == now.month;
-    final weekDataList = ref.watch(homeDashboardScreenProvider).totalDataList;
+    final weeklyIndex = state.weeklyIndex;
+    final weekDataList = state.weeklyDataList[weeklyIndex].reversed.toList();
+    final adjustedIndex = (value.toInt()) % 7;
+    final barData = weekDataList[adjustedIndex];
+    final isToday = DateTime.now().weekday == barData.day.weekday;
+    final displayText =
+        "${barData.weekDay} \n ${barData.day.month}/${barData.day.day}";
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 2,
-      child: isToday
-          ? Text(
-              "${weekDataList[valueIndex % 7].weekDay} \n $monthDay",
-              style: TextStyle(
-                  color: context.mainColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: context.width * 0.03),
-              textAlign: TextAlign.center,
-            )
-          : Text(
-              "${weekDataList[valueIndex % 7].weekDay} \n $monthDay",
-              style: TextStyle(
-                color: (selectedIndex == valueIndex)
-                    ? Colors.black54
-                    : Colors.grey,
-                fontSize: context.width * 0.03,
-                fontWeight: (selectedIndex == valueIndex)
-                    ? FontWeight.bold
-                    : FontWeight.normal,
-              ),
-              textAlign: TextAlign.center,
-            ),
+      child: Text(
+        displayText,
+        style: TextStyle(
+          color: (isToday || selectedIndex == adjustedIndex)
+              ? context.mainColor
+              : Colors.grey,
+          fontWeight: (isToday || selectedIndex == adjustedIndex)
+              ? FontWeight.bold
+              : FontWeight.normal,
+          fontSize: context.width * 0.03,
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }
@@ -326,14 +318,8 @@ class _BottomMonthTitles extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
     final valueIndex = value.toInt();
-    final now = DateTime.now();
-    final today = now.weekday;
-    final startDate = now.subtract(Duration(days: today - 1));
-    final date = startDate.add(Duration(days: valueIndex));
-    final monthDay = '${date.month}/${date.day}';
-    final isToday = date.day == now.day && date.month == now.month;
+    final monthDay = '$valueIndex';
 
-    // 5日ごとに日付を表示
     if (valueIndex % 5 != 1) {
       return const SizedBox.shrink();
     }
@@ -342,7 +328,7 @@ class _BottomMonthTitles extends ConsumerWidget {
       axisSide: meta.axisSide,
       space: 2,
       child: Text(
-        valueIndex.toString(),
+        monthDay,
         style: TextStyle(
           color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
           fontSize: context.width * 0.03,
@@ -369,7 +355,10 @@ class _BottomYearTitles extends ConsumerWidget {
     if (valueIndex < 0 || valueIndex >= yearDataList.length) {
       return const SizedBox.shrink();
     }
-    final month = yearDataList[valueIndex].weekDay;
+
+    final month =
+        DateFormat('MMM', 'ja_JP').format(yearDataList[valueIndex].day);
+
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 0,

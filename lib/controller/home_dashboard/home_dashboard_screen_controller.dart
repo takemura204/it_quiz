@@ -31,33 +31,36 @@ class HomeDashboardScreenController
   }
 
   void _initDataList() {
-    final random = Random();
-    final totalDataList = [...state.totalDataList];
-    final weeklyDataList = [...state.weeklyDataList];
-    final monthlyDataList = [...state.monthlyDataList];
-    final yearDataList = [...state.yearDataList];
-    totalDataList.addAll(_createDataList(random, 90));
-    weeklyDataList.addAll(_createDataList(random, 7));
-    monthlyDataList.addAll(_createDataList(random, 31));
-    yearDataList.addAll(_createYearlyDataList(random));
-    state = state.copyWith(
-      weeklyDataList: weeklyDataList.reversed.toList(),
-      weekScore: _getScore(weeklyDataList),
-      monthlyDataList: monthlyDataList.reversed.toList(),
-      monthScore: _getScore(monthlyDataList),
-      yearDataList: yearDataList..sort((a, b) => a.day.compareTo(b.day)),
-      yearScore: _getScore(yearDataList),
-      totalDataList: totalDataList.reversed.toList(),
-    );
+    _getTotalDataList();
+    _getWeeklyDataList();
   }
 
-  List<BarData> _createDataList(Random random, int days) {
-    return List.generate(days, (i) => _createBarData(i, random));
+  ///すべての期間を取得
+  void _getTotalDataList() {
+    final random = Random();
+    const days = 90;
+    final totalDataList = List.generate(days, (i) => _createBarData(i, random));
+    state = state.copyWith(totalDataList: totalDataList);
   }
 
   BarData _createBarData(int daysAgo, Random random) {
     final day = now.subtract(Duration(days: daysAgo));
     return BarData(random.nextInt(40) + 1, day);
+  }
+
+  ///1週間ごとに取得
+  void _getWeeklyDataList() {
+    final totalDataList = state.totalDataList;
+    final weeklyDataList = <List<BarData>>[];
+    for (int i = 0; i < totalDataList.length; i += 7) {
+      final end = i + 7 <= totalDataList.length ? i + 7 : totalDataList.length;
+      weeklyDataList.add(totalDataList.sublist(i, end));
+      while (weeklyDataList.last.length < 7) {
+        weeklyDataList.last.add(BarData(
+            0, now.subtract(Duration(days: weeklyDataList.last.length))));
+      }
+    }
+    state = state.copyWith(weeklyDataList: weeklyDataList);
   }
 
   int _getScore(List<BarData> dataList) {
@@ -160,16 +163,20 @@ class HomeDashboardScreenController
   ///先週へ
   void _goPrevWeek() {
     final weekOffset = state.weekOffset;
+    final weeklyIndex = state.weeklyIndex;
     if (weekOffset > -3) {
-      state = state.copyWith(weekOffset: weekOffset - 1);
+      state = state.copyWith(
+          weekOffset: weekOffset - 1, weeklyIndex: weeklyIndex + 1);
     }
   }
 
   ///来週へ
   void _goNextWeek() {
     final weekOffset = state.weekOffset;
-    if (weekOffset < 2) {
-      state = state.copyWith(weekOffset: weekOffset + 1);
+    final weeklyIndex = state.weeklyIndex;
+    if (weekOffset < 0) {
+      state = state.copyWith(
+          weekOffset: weekOffset + 1, weeklyIndex: weeklyIndex - 1);
     }
   }
 
@@ -233,6 +240,7 @@ class BarData {
   final String weekDay;
 
   static String _getWeekDayString(DateTime dateTime) {
+    // 1が月曜日、7が日曜日
     switch (dateTime.weekday) {
       case 1:
         return "Mon";
