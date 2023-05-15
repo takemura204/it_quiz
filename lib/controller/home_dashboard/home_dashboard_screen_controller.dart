@@ -54,7 +54,7 @@ class HomeDashboardScreenController
     final totalDataList = [...state.totalDataList];
     final weeklyDataList = _groupDataByPeriod(
       totalDataList,
-      (date) => DateTime(date.year, date.month, date.day - date.weekday + 1),
+      (date) => DateTime(date.year, date.month, date.day - (date.weekday - 1)),
       7,
     );
     state = state.copyWith(weeklyDataList: weeklyDataList);
@@ -71,26 +71,33 @@ class HomeDashboardScreenController
     state = state.copyWith(monthlyDataList: monthlyDataList);
   }
 
+  ///各期間ごとにデータを集計
   List<List<BarData>> _groupDataByPeriod(
     List<BarData> dataList,
     DateTime Function(DateTime) getStartOfPeriod,
     int periodDays,
   ) {
     final Map<DateTime, List<BarData>> dataByPeriod = {};
+
     for (var data in dataList) {
       final periodStart = getStartOfPeriod(data.day);
-      final periodData = dataByPeriod.putIfAbsent(periodStart, () => []);
-
-      final periodEnd = periodStart.add(Duration(days: periodDays));
-      for (var day = periodStart;
-          day.isBefore(periodEnd);
-          day = day.add(const Duration(days: 1))) {
-        if (!periodData.any((d) => d.day == day)) {
-          periodData.add(BarData(0, day));
-        }
+      (dataByPeriod[periodStart] ??= []).add(data);
+    }
+    final periodStart = getStartOfPeriod(DateTime.now());
+    for (var day = DateTime.now();
+        day.isBefore(periodStart.add(Duration(days: periodDays)));
+        day = day.add(const Duration(days: 1))) {
+      if (dataByPeriod[periodStart] == null ||
+          (dataByPeriod[periodStart]?.any((d) => d.day == day) ?? false) ==
+              false) {
+        (dataByPeriod[periodStart] ??= []).add(BarData(0, day));
       }
+    }
+
+    for (var periodData in dataByPeriod.values) {
       periodData.sort((a, b) => a.day.compareTo(b.day));
     }
+
     return dataByPeriod.values.toList();
   }
 
@@ -214,16 +221,20 @@ class HomeDashboardScreenController
   ///先月へ
   void _goPrevMonth() {
     final monthOffset = state.monthOffset;
-    if (monthOffset > -3) {
-      state = state.copyWith(monthOffset: monthOffset - 1);
+    final monthlyIndex = state.monthlyIndex;
+    if (monthOffset > -2) {
+      state = state.copyWith(
+          monthOffset: monthOffset - 1, monthlyIndex: monthlyIndex + 1);
     }
   }
 
   ///来月へ
   void _goNextMonth() {
     final monthOffset = state.monthOffset;
-    if (monthOffset < 2) {
-      state = state.copyWith(monthOffset: monthOffset + 1);
+    final monthlyIndex = state.monthlyIndex;
+    if (monthOffset < 0) {
+      state = state.copyWith(
+          monthOffset: monthOffset + 1, monthlyIndex: monthlyIndex - 1);
     }
   }
 

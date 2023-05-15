@@ -285,9 +285,11 @@ class _BottomWeekTitles extends ConsumerWidget {
     final weekDataList = state.weeklyDataList[weeklyIndex];
     final adjustedIndex = (value.toInt()) % 7;
     final barData = weekDataList[adjustedIndex];
-    final isToday = DateTime.now().weekday == barData.day.weekday;
+    final isToday = DateTime.now().day == barData.day.day &&
+        DateTime.now().weekday == barData.day.weekday;
     final displayText =
         "${barData.weekDay} \n ${barData.day.month}/${barData.day.day}";
+    print(weekDataList.length);
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -295,9 +297,7 @@ class _BottomWeekTitles extends ConsumerWidget {
       child: Text(
         displayText,
         style: TextStyle(
-          color: (isToday || selectedIndex == adjustedIndex)
-              ? context.mainColor
-              : Colors.grey,
+          color: isToday ? context.mainColor : Colors.grey,
           fontWeight: (isToday || selectedIndex == adjustedIndex)
               ? FontWeight.bold
               : FontWeight.normal,
