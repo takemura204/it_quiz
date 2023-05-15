@@ -54,7 +54,8 @@ class HomeDashboardScreenController
     final totalDataList = [...state.totalDataList];
     final weeklyDataList = _groupDataByPeriod(
       totalDataList,
-      (date) => DateTime(date.year, date.month, date.day - (date.weekday - 1)),
+      (date) => DateTime(
+          date.year, date.month, date.day - (date.weekday - 1 + 7) % 7),
       7,
     );
     state = state.copyWith(weeklyDataList: weeklyDataList);
@@ -87,10 +88,12 @@ class HomeDashboardScreenController
     for (var day = DateTime.now();
         day.isBefore(periodStart.add(Duration(days: periodDays)));
         day = day.add(const Duration(days: 1))) {
-      if (dataByPeriod[periodStart] == null ||
-          (dataByPeriod[periodStart]?.any((d) => d.day == day) ?? false) ==
-              false) {
-        (dataByPeriod[periodStart] ??= []).add(BarData(0, day));
+      if (day.isAfter(DateTime.now())) {
+        if (dataByPeriod[periodStart] == null ||
+            (dataByPeriod[periodStart]?.any((d) => d.day == day) ?? false) ==
+                false) {
+          (dataByPeriod[periodStart] ??= []).add(BarData(0, day));
+        }
       }
     }
 

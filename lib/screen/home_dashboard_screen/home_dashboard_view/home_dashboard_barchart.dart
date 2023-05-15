@@ -283,13 +283,14 @@ class _BottomWeekTitles extends ConsumerWidget {
     final selectedIndex = state.selectedXIndex;
     final weeklyIndex = state.weeklyIndex;
     final weekDataList = state.weeklyDataList[weeklyIndex];
-    final adjustedIndex = (value.toInt()) % 7;
+
+    final adjustedIndex = min(max(0, value.toInt()), weekDataList.length - 1);
+
     final barData = weekDataList[adjustedIndex];
     final isToday = DateTime.now().day == barData.day.day &&
         DateTime.now().weekday == barData.day.weekday;
     final displayText =
         "${barData.weekDay} \n ${barData.day.month}/${barData.day.day}";
-    print(weekDataList.length);
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
