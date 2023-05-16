@@ -1,6 +1,6 @@
 ---
 name: Issue_新規作成_テンプレート
-about: Issueを作成する時のテンプレ
+about: Issueの内容をまとめるテンプレです。
 title: ''
 labels: ''
 assignees: ''
