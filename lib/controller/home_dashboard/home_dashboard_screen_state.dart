@@ -8,23 +8,21 @@ part 'home_dashboard_screen_state.freezed.dart';
 class HomeDashboardScreenState with _$HomeDashboardScreenState {
   const HomeDashboardScreenState._();
   factory HomeDashboardScreenState({
+    @Default(0) final int tabIndex, //タブ
     @Default(-1) final int selectedXIndex,
     @Default(0) final int weeklyIndex, //1週間の単位
     @Default(0) final int monthlyIndex, //1ヶ月の単位
-    @Default(0) final int yearIndex, //1年の単位
     @Default(10) final int goalY, //毎日の目標
+    @Default(0) final int totalScore, //1日のトータルスコア
     @Default(0) final int dayScore, //1日のトータルスコア
     @Default(0) final int weekScore, //1週間のトータルスコア
     @Default(0) final int monthScore, //1ヶ月のトータルスコア
-    @Default(0) final int yearScore, //1年間のトータルスコア
     @Default(7) final int selectedDayRange, //
     @Default(0) final int weekOffset, //週の操作
     @Default(0) final int monthOffset, //今月・先月・来月
-    @Default(0) final int tabIndex, //タブ
     @Default("") final String dayRangeText, //タブ
     @Default([]) final List<BarData> totalDataList, //全部のスコア(3ヶ月)
     @Default([]) final List<List<BarData>> weeklyDataList, //1週間のスコア
     @Default([]) final List<List<BarData>> monthlyDataList, //1ヶ月のスコア
-    @Default([]) final List<BarData> yearDataList, //1ヶ月のスコア
   }) = _Create;
 }

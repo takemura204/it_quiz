@@ -12,7 +12,6 @@ class _BarChartSample extends ConsumerWidget {
     final totalDataList = state.totalDataList;
     final weeklyDataList = state.weeklyDataList[weeklyIndex];
     final monthlyDataList = state.monthlyDataList[monthlyIndex];
-    final yearDataList = state.yearDataList;
     final goalY = state.goalY;
     final maxY = goalY * 2;
 
@@ -82,8 +81,7 @@ class _BarChartSample extends ConsumerWidget {
                       return _BottomWeekTitles(meta: meta, value: value);
                     case 31:
                       return _BottomMonthTitles(meta: meta, value: value + 1);
-                    case 12:
-                      return _BottomYearTitles(meta: meta, value: value);
+
                     default:
                       return _BottomWeekTitles(meta: meta, value: value);
                   }
@@ -153,34 +151,6 @@ class _BarChartSample extends ConsumerWidget {
                     })
                     .whereType<BarChartGroupData>()
                     .toList();
-              case 12:
-                return yearDataList
-                    .asMap()
-                    .entries
-                    .map((e) {
-                      final index = e.key;
-                      final data = e.value;
-                      final color = (data.score >= goalY)
-                          ? context.mainColor
-                          : Colors.grey.shade400;
-
-                      return BarChartGroupData(
-                        x: index,
-                        barsSpace: 1,
-                        barRods: [
-                          CustomBarChartRodData(
-                            toY: data.score > maxY ? maxY + 1 : data.score,
-                            color: color,
-                            width: index % 30 == 0 ? 30 : 0, // 1ヶ月ごとに表示
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ],
-                        showingTooltipIndicators:
-                            selectedIndex == index ? [0] : [],
-                      );
-                    })
-                    .whereType<BarChartGroupData>()
-                    .toList();
               default:
                 return totalDataList
                     .asMap()
@@ -235,9 +205,6 @@ class _BarChartSample extends ConsumerWidget {
                   case 31:
                     dataValue = monthlyDataList[groupIndex].score.toInt();
                     break;
-                  case 12:
-                    dataValue = state.yearDataList[groupIndex].score.toInt();
-                    break;
                   default:
                     dataValue = state.totalDataList[groupIndex].score.toInt();
                     break;
@@ -280,12 +247,10 @@ class _BottomWeekTitles extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeDashboardScreenProvider);
-    final selectedIndex = state.selectedXIndex;
+    final selectedXIndex = state.selectedXIndex;
     final weeklyIndex = state.weeklyIndex;
     final weekDataList = state.weeklyDataList[weeklyIndex];
-
     final adjustedIndex = min(max(0, value.toInt()), weekDataList.length - 1);
-
     final barData = weekDataList[adjustedIndex];
     final isToday = DateTime.now().day == barData.day.day &&
         DateTime.now().weekday == barData.day.weekday;
@@ -299,7 +264,7 @@ class _BottomWeekTitles extends ConsumerWidget {
         displayText,
         style: TextStyle(
           color: isToday ? context.mainColor : Colors.grey,
-          fontWeight: (isToday || selectedIndex == adjustedIndex)
+          fontWeight: (isToday || selectedXIndex == adjustedIndex)
               ? FontWeight.bold
               : FontWeight.normal,
           fontSize: context.width * 0.03,
@@ -343,37 +308,15 @@ class _BottomMonthTitles extends ConsumerWidget {
   }
 }
 
-class _BottomYearTitles extends ConsumerWidget {
-  const _BottomYearTitles({required this.meta, required this.value});
-  final TitleMeta meta;
-  final double value;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
-    final valueIndex = value.toInt();
-    final yearDataList = ref.watch(homeDashboardScreenProvider).yearDataList;
-    if (valueIndex < 0 || valueIndex >= yearDataList.length) {
-      return const SizedBox.shrink();
-    }
-
-    final month =
-        DateFormat('MMM', 'ja_JP').format(yearDataList[valueIndex].day);
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 0,
-      child: Text(
-        month,
-        style: TextStyle(
-          color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
-          fontSize: context.width * 0.03,
-          fontWeight: (selectedIndex == valueIndex)
-              ? FontWeight.bold
-              : FontWeight.normal,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+class CustomBarChartRodData extends BarChartRodData {
+  CustomBarChartRodData({
+    required int toY,
+    required Color color,
+    required double width,
+    required BorderRadius borderRadius,
+  }) : super(
+            toY: toY.toDouble(),
+            color: color,
+            width: width,
+            borderRadius: borderRadius);
 }

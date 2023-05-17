@@ -1,5 +1,75 @@
 part of '../home_dashboard_screen.dart';
 
+class _DailyDashBoard extends ConsumerWidget {
+  const _DailyDashBoard();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.22,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            const Spacer(),
+            Container(
+              width: context.width * 0.45,
+              child: Column(
+                children: [
+                  Text(
+                    "毎日の目標",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: context.width * 0.04,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+            Container(
+              width: context.width * 0.45,
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Text(
+                    "〇〇さん、千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続はここからスタートです！",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.normal,
+                      fontSize: context.width * 0.028,
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    width: context.width * 0.2,
+                    height: context.width * 0.2,
+                    child: Image.asset(
+                      'assets/image/cat_grey.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 ///今日のX軸操作
 class _SetTodayData extends ConsumerWidget {
   const _SetTodayData();
@@ -92,126 +162,98 @@ class _SelectDayLength extends ConsumerWidget {
     final tabs = controller.tabs;
     final initialIndex = tabs.indexOf(state.selectedDayRange);
     final dayRangeText = state.dayRangeText;
-
     return Container(
-      height: context.height * 0.15,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.width * 0.04, vertical: context.width * 0.01),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'X軸の範囲を選択してください。',
-                style: TextStyle(fontSize: context.width * 0.03),
-              ),
-
-              ///[週/月/年]の選択タブ
-              Container(
-                height: context.height * 0.05,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: context.mainColor),
-                ),
-                child: DefaultTabController(
-                  length: tabs.length,
-                  initialIndex: initialIndex,
-                  child: TabBar(
-                      onTap: (index) => ref
-                          .read(homeDashboardScreenProvider.notifier)
-                          .tapTabBar(index),
-                      labelColor: Colors.white,
-                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                      unselectedLabelStyle:
-                          const TextStyle(fontWeight: FontWeight.normal),
-                      unselectedLabelColor: context.mainColor,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      indicator: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: context.mainColor),
-                      tabs: [
-                        Tab(
-                          child: Text(
-                            "週",
-                            style: TextStyle(fontSize: context.width * 0.04),
-                          ),
-                        ),
-                        Tab(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text("月",
-                                style:
-                                    TextStyle(fontSize: context.width * 0.04)),
-                          ),
-                        ),
-                        Tab(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text("年",
-                                style:
-                                    TextStyle(fontSize: context.width * 0.04)),
-                          ),
-                        ),
-                      ]),
-                ),
-              ),
-              const Spacer(),
-
-              ///トータルスコア
-              Row(
-                children: [
-                  const Spacer(),
-                  IconButton(
-                    padding: EdgeInsets.all(context.width * 0.01),
-                    iconSize: context.width * 0.08,
-                    onPressed: () => ref
-                        .read(homeDashboardScreenProvider.notifier)
-                        .tapPreButton(),
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: context.mainColor,
+      height: context.height * 0.1,
+      margin: EdgeInsets.symmetric(
+          horizontal: context.width * 0.02, vertical: context.width * 0.01),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ///[週/月]の選択タブ
+          Container(
+            height: context.height * 0.04,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: context.mainColor),
+            ),
+            child: DefaultTabController(
+              length: tabs.length,
+              initialIndex: initialIndex,
+              child: TabBar(
+                  onTap: (index) => ref
+                      .read(homeDashboardScreenProvider.notifier)
+                      .tapTabBar(index),
+                  labelColor: Colors.white,
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  unselectedLabelStyle:
+                      const TextStyle(fontWeight: FontWeight.normal),
+                  unselectedLabelColor: context.mainColor,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: context.mainColor),
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        "週",
+                        style: TextStyle(fontSize: context.width * 0.03),
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-
-                  ///選択期間のスコア
-                  Text(
-                    dayRangeText,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: context.width * 0.05),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    padding: EdgeInsets.all(context.width * 0.01),
-                    iconSize: context.width * 0.08,
-                    onPressed: () => ref
-                        .read(homeDashboardScreenProvider.notifier)
-                        .tapNextButton(),
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: context.mainColor,
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text("月",
+                            style: TextStyle(fontSize: context.width * 0.03)),
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                ],
-              )
-            ],
+                  ]),
+            ),
           ),
-        ),
+
+          ///トータルスコア
+          Container(
+            height: context.height * 0.06,
+            child: Row(
+              children: [
+                const Spacer(),
+                IconButton(
+                  padding: EdgeInsets.all(context.width * 0.01),
+                  iconSize: context.width * 0.08,
+                  onPressed: () => ref
+                      .read(homeDashboardScreenProvider.notifier)
+                      .tapPreButton(),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: context.mainColor,
+                  ),
+                ),
+                const Spacer(),
+
+                ///選択期間のスコア
+                Text(
+                  dayRangeText,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.width * 0.05),
+                ),
+                const Spacer(),
+                IconButton(
+                  padding: EdgeInsets.all(context.width * 0.01),
+                  iconSize: context.width * 0.08,
+                  onPressed: () => ref
+                      .read(homeDashboardScreenProvider.notifier)
+                      .tapNextButton(),
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: context.mainColor,
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -257,7 +299,6 @@ class _SetGoalY extends ConsumerWidget {
                       ref
                           .read(homeDashboardScreenProvider.notifier)
                           .setGoalY(goalY - 10);
-                      print("a");
                     },
               icon: Icon(
                 Icons.remove_circle_outline,

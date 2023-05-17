@@ -66,9 +66,7 @@ class _QuizResultView extends ConsumerWidget {
                               overflow: TextOverflow.clip,
                               textStyleHighlight: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: quizList[index].isJudge
-                                    ? Colors.green.withOpacity(0.7)
-                                    : Colors.red.withOpacity(0.7),
+                                color: Colors.green.withOpacity(0.7),
                                 decoration: TextDecoration.underline,
                               ),
                             ),

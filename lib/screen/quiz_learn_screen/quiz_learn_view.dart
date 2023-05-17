@@ -51,7 +51,7 @@ class _AnsQuestion extends ConsumerWidget {
       textStyleHighlight: TextStyle(
         fontSize: context.width * 0.06,
         fontWeight: FontWeight.bold,
-        color: context.mainColor,
+        color: Colors.green.withOpacity(0.7),
         decoration: TextDecoration.underline,
       ),
     );
@@ -128,7 +128,6 @@ class _ConfirmButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
-    final quizList = ref.watch(quizLearnScreenProvider).quizList;
     return isAns
         ? Row(
             ///知らない

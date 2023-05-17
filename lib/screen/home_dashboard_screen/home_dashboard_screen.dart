@@ -4,7 +4,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/home_dashboard/home_dashboard_screen_controller.dart';
@@ -20,11 +19,13 @@ class HomeDashboardScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: const [
+          Gap(5),
+
+          ///今日のデータ
+          _DailyDashBoard(),
+
           ///X軸操作
           // _SetTodayData(),
-
-          ///X軸範囲
-          _SelectDayLength(),
 
           ///学習状況ダッシュボード
           _WeekDashboard(),
@@ -49,14 +50,14 @@ class _WeekDashboard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.35,
+      height: context.height * 0.45,
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
         elevation: 3,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.00),
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: context.mainColor,
@@ -70,12 +71,14 @@ class _WeekDashboard extends ConsumerWidget {
               vertical: context.width * 0.008),
           child: Column(
             children: [
-              ///凡例
-              const _Legend(),
+              ///X軸範囲
+              const _SelectDayLength(),
+
               const Spacer(),
 
               ///ダッシュボード
               _BarChartSample(),
+              const Spacer(),
             ],
           ),
         ),

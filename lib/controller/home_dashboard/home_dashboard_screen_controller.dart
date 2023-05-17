@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -21,7 +19,7 @@ class HomeDashboardScreenController
   }
 
   final Ref ref;
-  final tabs = [7, 31, 12];
+  final tabs = [7, 31];
   final now = DateTime.now();
   final days = DateTime.now().weekday - 1;
 
@@ -31,17 +29,21 @@ class HomeDashboardScreenController
     _initDataList();
   }
 
+  ///ダッシュボードデータ取得
   void _initDataList() {
     _getTotalDataList();
     _getWeeklyDataList();
     _getMonthlyDataList();
   }
 
+  ///「全期間」のダッシュボードデータ取得
   void _getTotalDataList() {
     final random = Random();
     const days = 90;
     final totalDataList = List.generate(days, (i) => _createBarData(i, random));
-    state = state.copyWith(totalDataList: totalDataList);
+    final totalScore = _getScore(totalDataList);
+    state =
+        state.copyWith(totalDataList: totalDataList, totalScore: totalScore);
   }
 
   BarData _createBarData(int daysAgo, Random random) {
@@ -50,17 +52,22 @@ class HomeDashboardScreenController
     return BarData(score, day);
   }
 
+  ///「週間」のダッシュボードデータ取得
   void _getWeeklyDataList() {
     final totalDataList = [...state.totalDataList];
+    final weeklyIndex = state.weeklyIndex;
     final weeklyDataList = _groupDataByPeriod(
       totalDataList,
       (date) => DateTime(
           date.year, date.month, date.day - (date.weekday - 1 + 7) % 7),
       7,
     );
-    state = state.copyWith(weeklyDataList: weeklyDataList);
+    final weekScore = _getScore(weeklyDataList[weeklyIndex]);
+    state =
+        state.copyWith(weeklyDataList: weeklyDataList, weekScore: weekScore);
   }
 
+  ///「月間」のダッシュボードデータ取得
   void _getMonthlyDataList() {
     final totalDataList = [...state.totalDataList];
     final currentMonthDays = DateTime(now.year, now.month + 1, 0).day;
@@ -69,7 +76,9 @@ class HomeDashboardScreenController
       (date) => DateTime(date.year, date.month, 1),
       currentMonthDays,
     );
-    state = state.copyWith(monthlyDataList: monthlyDataList);
+    final monthScore = state.monthScore;
+    state = state.copyWith(
+        monthlyDataList: monthlyDataList, monthScore: monthScore);
   }
 
   ///各期間ごとにデータを集計
@@ -106,30 +115,6 @@ class HomeDashboardScreenController
 
   int _getScore(List<BarData> dataList) {
     return dataList.map((data) => data.score).reduce((a, b) => a + b);
-  }
-
-  List<BarData> _createYearlyDataList(Random random) {
-    final Map<int, List<BarData>> yearDataByMonth = {};
-    for (int i = 0; i < 365; i++) {
-      final barData = _createBarData(i, random);
-      yearDataByMonth.putIfAbsent(barData.day.month, () => []);
-      yearDataByMonth[barData.day.month]!.add(barData);
-    }
-    final List<BarData> yearDataList = [];
-    for (int i = 1; i <= 12; i++) {
-      if (yearDataByMonth.containsKey(i)) {
-        final List<BarData> barData = yearDataByMonth[i]!;
-        final int totalScore =
-            barData.map((data) => data.score).reduce((a, b) => a + b);
-        final DateTime firstDay = barData.first.day;
-        yearDataList.add(BarData(totalScore, firstDay));
-      } else {
-        // データが存在しない月はスコア0のデータを作成
-        yearDataList.add(BarData(0, DateTime(now.year, i, 1)));
-      }
-    }
-    yearDataList.sort((a, b) => a.day.month.compareTo(b.day.month));
-    return yearDataList;
   }
 
   ///TabBarをタップした時
@@ -260,21 +245,6 @@ class HomeDashboardScreenController
 
     return '$year年$month月';
   }
-
-  BarChartGroupData generateBarGroup(int x, Color color, double value) {
-    return BarChartGroupData(
-      x: x,
-      barRods: [
-        BarChartRodData(
-          toY: value,
-          color: color,
-          width: 30, // 棒グラフの太さ
-          borderRadius: BorderRadius.circular(5),
-        ),
-      ],
-      showingTooltipIndicators: state.selectedXIndex == x ? [0] : [],
-    );
-  }
 }
 
 class BarData {
@@ -305,17 +275,4 @@ class BarData {
         return "";
     }
   }
-}
-
-class CustomBarChartRodData extends BarChartRodData {
-  CustomBarChartRodData({
-    required int toY,
-    required Color color,
-    required double width,
-    required BorderRadius borderRadius,
-  }) : super(
-            toY: toY.toDouble(),
-            color: color,
-            width: width,
-            borderRadius: borderRadius);
 }
