@@ -4,6 +4,10 @@ class _DailyDashBoard extends ConsumerWidget {
   const _DailyDashBoard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeDashboardScreenProvider);
+    final dailyScore = state.dailyScore;
+    final goalScore = state.goalScore;
+
     return Container(
       height: context.height * 0.22,
       child: Card(
@@ -21,38 +25,97 @@ class _DailyDashBoard extends ConsumerWidget {
         child: Row(
           children: [
             const Spacer(),
+
+            ///Circle Chart
             Container(
               width: context.width * 0.45,
-              child: Column(
+              alignment: Alignment.center,
+              child: Stack(
                 children: [
-                  Text(
-                    "毎日の目標",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: context.width * 0.04,
+                  Container(
+                    width: context.height * 0.16,
+                    height: context.height * 0.16,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: context.height * 0.02,
+                        vertical: context.height * 0.02),
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "今日の\n学習問題数",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: context.height * 0.015,
+                            height: 1.2,
+                          ),
+                        ),
+                        Text(
+                          "$dailyScore",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.045,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        Text(
+                          "/$goalScore",
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.015,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: context.height * 0.16,
+                    height: context.height * 0.16,
+                    child: CircularProgressIndicator(
+                      value: dailyScore / goalScore,
+                      strokeWidth: context.width * 0.04,
+                      color: context.mainColor,
+                      backgroundColor: Colors.grey.shade400,
                     ),
                   ),
                 ],
               ),
             ),
             const Spacer(),
+
+            ///今日の一言
             Container(
               width: context.width * 0.45,
               child: Column(
                 children: [
                   const Spacer(),
-                  Text(
-                    "〇〇さん、千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続はここからスタートです！",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.normal,
-                      fontSize: context.width * 0.028,
+                  Container(
+                    height: context.height * 0.1,
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続は今日からです！",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.normal,
+                            fontSize: context.width * 0.03,
+                          ),
+                          maxLines: 3,
+                        ),
+                        const Spacer(),
+                      ],
                     ),
                   ),
                   const Spacer(),
                   Container(
-                    width: context.width * 0.2,
-                    height: context.width * 0.2,
+                    width: context.height * 0.1,
+                    height: context.height * 0.1,
                     child: Image.asset(
                       'assets/image/cat_grey.png',
                       fit: BoxFit.contain,
@@ -75,7 +138,7 @@ class _SetTodayData extends ConsumerWidget {
   const _SetTodayData();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dayScore = ref.watch(homeDashboardScreenProvider).dayScore;
+    final dailyScore = ref.watch(homeDashboardScreenProvider).dailyScore;
     return Container(
       height: context.height * 0.1,
       child: Card(
@@ -104,21 +167,21 @@ class _SetTodayData extends ConsumerWidget {
             IconButton(
               padding: EdgeInsets.all(context.width * 0.01),
               iconSize: context.width * 0.08,
-              onPressed: dayScore <= 10
+              onPressed: dailyScore <= 10
                   ? null
                   : () {
                       ref
                           .read(homeDashboardScreenProvider.notifier)
-                          .setTodayData(dayScore - 1);
+                          .setTodayData(dailyScore - 1);
                     },
               icon: Icon(
                 Icons.remove_circle_outline,
                 color:
-                    dayScore <= 10 ? Colors.grey.shade400 : context.mainColor,
+                    dailyScore <= 10 ? Colors.grey.shade400 : context.mainColor,
               ),
             ),
             Text(
-              "$dayScore",
+              "$dailyScore",
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: context.width * 0.05),
             ),
@@ -131,17 +194,17 @@ class _SetTodayData extends ConsumerWidget {
             IconButton(
               padding: EdgeInsets.all(context.width * 0.01),
               iconSize: context.width * 0.08,
-              onPressed: dayScore >= 50
+              onPressed: dailyScore >= 50
                   ? null
                   : () {
                       ref
                           .read(homeDashboardScreenProvider.notifier)
-                          .setTodayData(dayScore + 1);
+                          .setTodayData(dailyScore + 1);
                     },
               icon: Icon(
                 Icons.add_circle_outline,
                 color:
-                    dayScore >= 50 ? Colors.grey.shade400 : context.mainColor,
+                    dailyScore >= 50 ? Colors.grey.shade400 : context.mainColor,
               ),
             ),
             const Spacer(),
@@ -264,7 +327,7 @@ class _SetGoalY extends ConsumerWidget {
   const _SetGoalY();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final goalY = ref.watch(homeDashboardScreenProvider).goalY;
+    final goalScore = ref.watch(homeDashboardScreenProvider).goalScore;
     return Container(
       height: context.height * 0.1,
       child: Card(
@@ -293,20 +356,21 @@ class _SetGoalY extends ConsumerWidget {
             IconButton(
               padding: EdgeInsets.all(context.width * 0.01),
               iconSize: context.width * 0.08,
-              onPressed: goalY <= 10
+              onPressed: goalScore <= 10
                   ? null
                   : () {
                       ref
                           .read(homeDashboardScreenProvider.notifier)
-                          .setGoalY(goalY - 10);
+                          .setGoalY(goalScore - 10);
                     },
               icon: Icon(
                 Icons.remove_circle_outline,
-                color: goalY <= 10 ? Colors.grey.shade400 : context.mainColor,
+                color:
+                    goalScore <= 10 ? Colors.grey.shade400 : context.mainColor,
               ),
             ),
             Text(
-              "$goalY",
+              "$goalScore",
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: context.width * 0.05),
             ),
@@ -319,16 +383,17 @@ class _SetGoalY extends ConsumerWidget {
             IconButton(
               padding: EdgeInsets.all(context.width * 0.01),
               iconSize: context.width * 0.08,
-              onPressed: goalY >= 50
+              onPressed: goalScore >= 50
                   ? null
                   : () {
                       ref
                           .read(homeDashboardScreenProvider.notifier)
-                          .setGoalY(goalY + 10);
+                          .setGoalY(goalScore + 10);
                     },
               icon: Icon(
                 Icons.add_circle_outline,
-                color: goalY >= 50 ? Colors.grey.shade400 : context.mainColor,
+                color:
+                    goalScore >= 50 ? Colors.grey.shade400 : context.mainColor,
               ),
             ),
             const Spacer(),

@@ -12,8 +12,8 @@ class _BarChartSample extends ConsumerWidget {
     final totalDataList = state.totalDataList;
     final weeklyDataList = state.weeklyDataList[weeklyIndex];
     final monthlyDataList = state.monthlyDataList[monthlyIndex];
-    final goalY = state.goalY;
-    final maxY = goalY * 2;
+    final goalScore = state.goalScore;
+    final maxY = goalScore * 2;
 
     return Container(
       height: context.height * 0.29,
@@ -36,10 +36,11 @@ class _BarChartSample extends ConsumerWidget {
             show: true,
             drawVerticalLine: false,
             getDrawingHorizontalLine: (value) {
-              final color = (value == goalY) ? context.mainColor : Colors.grey;
+              final color =
+                  (value == goalScore) ? context.mainColor : Colors.grey;
               return FlLine(
                 color: color,
-                strokeWidth: (value == goalY) ? 2 : 1,
+                strokeWidth: (value == goalScore) ? 2 : 1,
               );
             },
           ),
@@ -55,13 +56,13 @@ class _BarChartSample extends ConsumerWidget {
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
                   final color =
-                      (value == goalY) ? context.mainColor : Colors.grey;
+                      (value == goalScore) ? context.mainColor : Colors.grey;
                   return Text(
                     value.toInt().toString(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: color,
-                        fontWeight: (value == goalY)
+                        fontWeight: (value == goalScore)
                             ? FontWeight.bold
                             : FontWeight.normal),
                   );
@@ -102,7 +103,7 @@ class _BarChartSample extends ConsumerWidget {
                     .map((e) {
                       final index = e.key;
                       final data = e.value;
-                      final color = (data.score >= goalY)
+                      final color = (data.score >= goalScore)
                           ? context.mainColor
                           : Colors.grey.shade400;
 
@@ -130,7 +131,7 @@ class _BarChartSample extends ConsumerWidget {
                     .map((e) {
                       final index = e.key;
                       final data = e.value;
-                      final color = (data.score >= goalY)
+                      final color = (data.score >= goalScore)
                           ? context.mainColor
                           : Colors.grey.shade400;
 
@@ -158,7 +159,7 @@ class _BarChartSample extends ConsumerWidget {
                     .map((e) {
                       final index = e.key;
                       final data = e.value;
-                      final color = (data.score >= goalY)
+                      final color = (data.score >= goalScore)
                           ? context.mainColor
                           : Colors.grey.shade400;
 

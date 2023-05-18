@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../quiz/quiz_state.dart';
 import 'home_dashboard_screen_state.dart';
 
 final homeDashboardScreenProvider = StateNotifierProvider<
@@ -152,7 +153,7 @@ class HomeDashboardScreenController
     weekList[days] = BarData(newValue,
         state.totalDataList[days].day); // using `day` instead of `weekDay`
 
-    state = state.copyWith(dayScore: newValue);
+    state = state.copyWith(dailyScore: newValue);
   }
 
   ///選択期間のText取得
@@ -167,13 +168,29 @@ class HomeDashboardScreenController
     }
   }
 
+  ///ここから
+  Future updateDailyScore(List<QuizState> quizList) async {
+    //全ての苦手クイズから同じ問題を絞り込み
+    // final weakAllList = ref
+    //     .read(quizItemProvider)
+    //     .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
+    //     .toList();
+    // final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
+    // final weakList = weakSetList.map((question) {
+    //   return weakAllList.firstWhere((quiz) => quiz.question == question);
+    // }).toList();
+    // final weakQuiz = state.weakQuiz.copyWith(quizList: weakList);
+    // state = state.copyWith(weakQuiz: weakQuiz);
+    // _saveData(); // 保存
+  }
+
   void selectXIndex(int selectedXIndex) {
     state = state.copyWith(selectedXIndex: selectedXIndex);
   }
 
   void setGoalY(int index) {
     if (index >= 10 && index <= 50) {
-      state = state.copyWith(goalY: index);
+      state = state.copyWith(goalScore: index);
     }
   }
 
@@ -183,7 +200,6 @@ class HomeDashboardScreenController
     final tabIndex = index;
     state =
         state.copyWith(selectedDayRange: selectedDayRange, tabIndex: tabIndex);
-    ;
   }
 
   ///先週へ
@@ -253,6 +269,7 @@ class BarData {
   final int score;
   final DateTime day;
   final String weekDay;
+  // final List<QuizItemState> dailyData;
 
   static String _getWeekDayString(DateTime dateTime) {
     // 1が月曜日、7が日曜日

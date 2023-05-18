@@ -16,20 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeDashboardScreenState {
+  int get tabIndex => throw _privateConstructorUsedError; //タブ
   int get selectedXIndex => throw _privateConstructorUsedError;
   int get weeklyIndex => throw _privateConstructorUsedError; //1週間の単位
   int get monthlyIndex => throw _privateConstructorUsedError; //1ヶ月の単位
-  int get goalY => throw _privateConstructorUsedError; //毎日の目標
+  int get goalScore => throw _privateConstructorUsedError; //毎日の目標
   int get totalScore => throw _privateConstructorUsedError; //1日のトータルスコア
-  int get dayScore => throw _privateConstructorUsedError; //1日のトータルスコア
+  int get dailyScore => throw _privateConstructorUsedError; //1日のトータルスコア
   int get weekScore => throw _privateConstructorUsedError; //1週間のトータルスコア
   int get monthScore => throw _privateConstructorUsedError; //1ヶ月のトータルスコア
   int get selectedDayRange => throw _privateConstructorUsedError; //
   int get weekOffset => throw _privateConstructorUsedError; //週の操作
   int get monthOffset => throw _privateConstructorUsedError; //今月・先月・来月
-  int get tabIndex => throw _privateConstructorUsedError; //タブ
   String get dayRangeText => throw _privateConstructorUsedError; //タブ
   List<BarData> get totalDataList =>
+      throw _privateConstructorUsedError; //全部のスコア(3ヶ月)
+  List<BarData> get dailyDataList =>
       throw _privateConstructorUsedError; //全部のスコア(3ヶ月)
   List<List<BarData>> get weeklyDataList =>
       throw _privateConstructorUsedError; //1週間のスコア
@@ -47,20 +49,21 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
       _$HomeDashboardScreenStateCopyWithImpl<$Res, HomeDashboardScreenState>;
   @useResult
   $Res call(
-      {int selectedXIndex,
+      {int tabIndex,
+      int selectedXIndex,
       int weeklyIndex,
       int monthlyIndex,
-      int goalY,
+      int goalScore,
       int totalScore,
-      int dayScore,
+      int dailyScore,
       int weekScore,
       int monthScore,
       int selectedDayRange,
       int weekOffset,
       int monthOffset,
-      int tabIndex,
       String dayRangeText,
       List<BarData> totalDataList,
+      List<BarData> dailyDataList,
       List<List<BarData>> weeklyDataList,
       List<List<BarData>> monthlyDataList});
 }
@@ -79,24 +82,29 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? tabIndex = null,
     Object? selectedXIndex = null,
     Object? weeklyIndex = null,
     Object? monthlyIndex = null,
-    Object? goalY = null,
+    Object? goalScore = null,
     Object? totalScore = null,
-    Object? dayScore = null,
+    Object? dailyScore = null,
     Object? weekScore = null,
     Object? monthScore = null,
     Object? selectedDayRange = null,
     Object? weekOffset = null,
     Object? monthOffset = null,
-    Object? tabIndex = null,
     Object? dayRangeText = null,
     Object? totalDataList = null,
+    Object? dailyDataList = null,
     Object? weeklyDataList = null,
     Object? monthlyDataList = null,
   }) {
     return _then(_value.copyWith(
+      tabIndex: null == tabIndex
+          ? _value.tabIndex
+          : tabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedXIndex: null == selectedXIndex
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
@@ -109,17 +117,17 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
           ? _value.monthlyIndex
           : monthlyIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      goalY: null == goalY
-          ? _value.goalY
-          : goalY // ignore: cast_nullable_to_non_nullable
+      goalScore: null == goalScore
+          ? _value.goalScore
+          : goalScore // ignore: cast_nullable_to_non_nullable
               as int,
       totalScore: null == totalScore
           ? _value.totalScore
           : totalScore // ignore: cast_nullable_to_non_nullable
               as int,
-      dayScore: null == dayScore
-          ? _value.dayScore
-          : dayScore // ignore: cast_nullable_to_non_nullable
+      dailyScore: null == dailyScore
+          ? _value.dailyScore
+          : dailyScore // ignore: cast_nullable_to_non_nullable
               as int,
       weekScore: null == weekScore
           ? _value.weekScore
@@ -141,10 +149,6 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
           ? _value.monthOffset
           : monthOffset // ignore: cast_nullable_to_non_nullable
               as int,
-      tabIndex: null == tabIndex
-          ? _value.tabIndex
-          : tabIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       dayRangeText: null == dayRangeText
           ? _value.dayRangeText
           : dayRangeText // ignore: cast_nullable_to_non_nullable
@@ -152,6 +156,10 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
       totalDataList: null == totalDataList
           ? _value.totalDataList
           : totalDataList // ignore: cast_nullable_to_non_nullable
+              as List<BarData>,
+      dailyDataList: null == dailyDataList
+          ? _value.dailyDataList
+          : dailyDataList // ignore: cast_nullable_to_non_nullable
               as List<BarData>,
       weeklyDataList: null == weeklyDataList
           ? _value.weeklyDataList
@@ -173,20 +181,21 @@ abstract class _$$_CreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int selectedXIndex,
+      {int tabIndex,
+      int selectedXIndex,
       int weeklyIndex,
       int monthlyIndex,
-      int goalY,
+      int goalScore,
       int totalScore,
-      int dayScore,
+      int dailyScore,
       int weekScore,
       int monthScore,
       int selectedDayRange,
       int weekOffset,
       int monthOffset,
-      int tabIndex,
       String dayRangeText,
       List<BarData> totalDataList,
+      List<BarData> dailyDataList,
       List<List<BarData>> weeklyDataList,
       List<List<BarData>> monthlyDataList});
 }
@@ -201,24 +210,29 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? tabIndex = null,
     Object? selectedXIndex = null,
     Object? weeklyIndex = null,
     Object? monthlyIndex = null,
-    Object? goalY = null,
+    Object? goalScore = null,
     Object? totalScore = null,
-    Object? dayScore = null,
+    Object? dailyScore = null,
     Object? weekScore = null,
     Object? monthScore = null,
     Object? selectedDayRange = null,
     Object? weekOffset = null,
     Object? monthOffset = null,
-    Object? tabIndex = null,
     Object? dayRangeText = null,
     Object? totalDataList = null,
+    Object? dailyDataList = null,
     Object? weeklyDataList = null,
     Object? monthlyDataList = null,
   }) {
     return _then(_$_Create(
+      tabIndex: null == tabIndex
+          ? _value.tabIndex
+          : tabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedXIndex: null == selectedXIndex
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
@@ -231,17 +245,17 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.monthlyIndex
           : monthlyIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      goalY: null == goalY
-          ? _value.goalY
-          : goalY // ignore: cast_nullable_to_non_nullable
+      goalScore: null == goalScore
+          ? _value.goalScore
+          : goalScore // ignore: cast_nullable_to_non_nullable
               as int,
       totalScore: null == totalScore
           ? _value.totalScore
           : totalScore // ignore: cast_nullable_to_non_nullable
               as int,
-      dayScore: null == dayScore
-          ? _value.dayScore
-          : dayScore // ignore: cast_nullable_to_non_nullable
+      dailyScore: null == dailyScore
+          ? _value.dailyScore
+          : dailyScore // ignore: cast_nullable_to_non_nullable
               as int,
       weekScore: null == weekScore
           ? _value.weekScore
@@ -263,10 +277,6 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.monthOffset
           : monthOffset // ignore: cast_nullable_to_non_nullable
               as int,
-      tabIndex: null == tabIndex
-          ? _value.tabIndex
-          : tabIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       dayRangeText: null == dayRangeText
           ? _value.dayRangeText
           : dayRangeText // ignore: cast_nullable_to_non_nullable
@@ -274,6 +284,10 @@ class __$$_CreateCopyWithImpl<$Res>
       totalDataList: null == totalDataList
           ? _value._totalDataList
           : totalDataList // ignore: cast_nullable_to_non_nullable
+              as List<BarData>,
+      dailyDataList: null == dailyDataList
+          ? _value._dailyDataList
+          : dailyDataList // ignore: cast_nullable_to_non_nullable
               as List<BarData>,
       weeklyDataList: null == weeklyDataList
           ? _value._weeklyDataList
@@ -291,27 +305,33 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create extends _Create {
   _$_Create(
-      {this.selectedXIndex = -1,
+      {this.tabIndex = 0,
+      this.selectedXIndex = -1,
       this.weeklyIndex = 0,
       this.monthlyIndex = 0,
-      this.goalY = 10,
+      this.goalScore = 10,
       this.totalScore = 0,
-      this.dayScore = 0,
+      this.dailyScore = 0,
       this.weekScore = 0,
       this.monthScore = 0,
       this.selectedDayRange = 7,
       this.weekOffset = 0,
       this.monthOffset = 0,
-      this.tabIndex = 0,
       this.dayRangeText = "",
       final List<BarData> totalDataList = const [],
+      final List<BarData> dailyDataList = const [],
       final List<List<BarData>> weeklyDataList = const [],
       final List<List<BarData>> monthlyDataList = const []})
       : _totalDataList = totalDataList,
+        _dailyDataList = dailyDataList,
         _weeklyDataList = weeklyDataList,
         _monthlyDataList = monthlyDataList,
         super._();
 
+  @override
+  @JsonKey()
+  final int tabIndex;
+//タブ
   @override
   @JsonKey()
   final int selectedXIndex;
@@ -325,7 +345,7 @@ class _$_Create extends _Create {
 //1ヶ月の単位
   @override
   @JsonKey()
-  final int goalY;
+  final int goalScore;
 //毎日の目標
   @override
   @JsonKey()
@@ -333,7 +353,7 @@ class _$_Create extends _Create {
 //1日のトータルスコア
   @override
   @JsonKey()
-  final int dayScore;
+  final int dailyScore;
 //1日のトータルスコア
   @override
   @JsonKey()
@@ -357,10 +377,6 @@ class _$_Create extends _Create {
 //今月・先月・来月
   @override
   @JsonKey()
-  final int tabIndex;
-//タブ
-  @override
-  @JsonKey()
   final String dayRangeText;
 //タブ
   final List<BarData> _totalDataList;
@@ -371,6 +387,17 @@ class _$_Create extends _Create {
     if (_totalDataList is EqualUnmodifiableListView) return _totalDataList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_totalDataList);
+  }
+
+//全部のスコア(3ヶ月)
+  final List<BarData> _dailyDataList;
+//全部のスコア(3ヶ月)
+  @override
+  @JsonKey()
+  List<BarData> get dailyDataList {
+    if (_dailyDataList is EqualUnmodifiableListView) return _dailyDataList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dailyDataList);
   }
 
 //全部のスコア(3ヶ月)
@@ -397,7 +424,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'HomeDashboardScreenState(selectedXIndex: $selectedXIndex, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, goalY: $goalY, totalScore: $totalScore, dayScore: $dayScore, weekScore: $weekScore, monthScore: $monthScore, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, tabIndex: $tabIndex, dayRangeText: $dayRangeText, totalDataList: $totalDataList, weeklyDataList: $weeklyDataList, monthlyDataList: $monthlyDataList)';
+    return 'HomeDashboardScreenState(tabIndex: $tabIndex, selectedXIndex: $selectedXIndex, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, goalScore: $goalScore, totalScore: $totalScore, dailyScore: $dailyScore, weekScore: $weekScore, monthScore: $monthScore, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, dayRangeText: $dayRangeText, totalDataList: $totalDataList, dailyDataList: $dailyDataList, weeklyDataList: $weeklyDataList, monthlyDataList: $monthlyDataList)';
   }
 
   @override
@@ -405,17 +432,20 @@ class _$_Create extends _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
+            (identical(other.tabIndex, tabIndex) ||
+                other.tabIndex == tabIndex) &&
             (identical(other.selectedXIndex, selectedXIndex) ||
                 other.selectedXIndex == selectedXIndex) &&
             (identical(other.weeklyIndex, weeklyIndex) ||
                 other.weeklyIndex == weeklyIndex) &&
             (identical(other.monthlyIndex, monthlyIndex) ||
                 other.monthlyIndex == monthlyIndex) &&
-            (identical(other.goalY, goalY) || other.goalY == goalY) &&
+            (identical(other.goalScore, goalScore) ||
+                other.goalScore == goalScore) &&
             (identical(other.totalScore, totalScore) ||
                 other.totalScore == totalScore) &&
-            (identical(other.dayScore, dayScore) ||
-                other.dayScore == dayScore) &&
+            (identical(other.dailyScore, dailyScore) ||
+                other.dailyScore == dailyScore) &&
             (identical(other.weekScore, weekScore) ||
                 other.weekScore == weekScore) &&
             (identical(other.monthScore, monthScore) ||
@@ -426,12 +456,12 @@ class _$_Create extends _Create {
                 other.weekOffset == weekOffset) &&
             (identical(other.monthOffset, monthOffset) ||
                 other.monthOffset == monthOffset) &&
-            (identical(other.tabIndex, tabIndex) ||
-                other.tabIndex == tabIndex) &&
             (identical(other.dayRangeText, dayRangeText) ||
                 other.dayRangeText == dayRangeText) &&
             const DeepCollectionEquality()
                 .equals(other._totalDataList, _totalDataList) &&
+            const DeepCollectionEquality()
+                .equals(other._dailyDataList, _dailyDataList) &&
             const DeepCollectionEquality()
                 .equals(other._weeklyDataList, _weeklyDataList) &&
             const DeepCollectionEquality()
@@ -441,20 +471,21 @@ class _$_Create extends _Create {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      tabIndex,
       selectedXIndex,
       weeklyIndex,
       monthlyIndex,
-      goalY,
+      goalScore,
       totalScore,
-      dayScore,
+      dailyScore,
       weekScore,
       monthScore,
       selectedDayRange,
       weekOffset,
       monthOffset,
-      tabIndex,
       dayRangeText,
       const DeepCollectionEquality().hash(_totalDataList),
+      const DeepCollectionEquality().hash(_dailyDataList),
       const DeepCollectionEquality().hash(_weeklyDataList),
       const DeepCollectionEquality().hash(_monthlyDataList));
 
@@ -467,36 +498,39 @@ class _$_Create extends _Create {
 
 abstract class _Create extends HomeDashboardScreenState {
   factory _Create(
-      {final int selectedXIndex,
+      {final int tabIndex,
+      final int selectedXIndex,
       final int weeklyIndex,
       final int monthlyIndex,
-      final int goalY,
+      final int goalScore,
       final int totalScore,
-      final int dayScore,
+      final int dailyScore,
       final int weekScore,
       final int monthScore,
       final int selectedDayRange,
       final int weekOffset,
       final int monthOffset,
-      final int tabIndex,
       final String dayRangeText,
       final List<BarData> totalDataList,
+      final List<BarData> dailyDataList,
       final List<List<BarData>> weeklyDataList,
       final List<List<BarData>> monthlyDataList}) = _$_Create;
   _Create._() : super._();
 
   @override
+  int get tabIndex;
+  @override //タブ
   int get selectedXIndex;
   @override
   int get weeklyIndex;
   @override //1週間の単位
   int get monthlyIndex;
   @override //1ヶ月の単位
-  int get goalY;
+  int get goalScore;
   @override //毎日の目標
   int get totalScore;
   @override //1日のトータルスコア
-  int get dayScore;
+  int get dailyScore;
   @override //1日のトータルスコア
   int get weekScore;
   @override //1週間のトータルスコア
@@ -508,11 +542,11 @@ abstract class _Create extends HomeDashboardScreenState {
   @override //週の操作
   int get monthOffset;
   @override //今月・先月・来月
-  int get tabIndex;
-  @override //タブ
   String get dayRangeText;
   @override //タブ
   List<BarData> get totalDataList;
+  @override //全部のスコア(3ヶ月)
+  List<BarData> get dailyDataList;
   @override //全部のスコア(3ヶ月)
   List<List<BarData>> get weeklyDataList;
   @override //1週間のスコア

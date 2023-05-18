@@ -134,7 +134,6 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   /// DailyItem
   void updateDailyItem(List<QuizState> quizList) {
     final score = state.dailyQuiz.score + 1;
-    print("aa");
     final dailyQuiz = state.dailyQuiz.copyWith(
         score: score,
         isCompleted: true,
@@ -145,7 +144,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   ///WeakItem更新
-  Future<void> updateWeakItem(List<QuizState> quizList) async {
+  Future updateWeakItem(List<QuizState> quizList) async {
     //全ての苦手クイズから同じ問題を絞り込み
     final weakAllList = ref
         .read(quizItemProvider)
