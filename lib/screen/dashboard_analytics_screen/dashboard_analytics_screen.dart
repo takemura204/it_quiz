@@ -1,17 +1,232 @@
-part of '../home_dashboard_screen.dart';
+import 'dart:math';
+
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
+import 'package:kentei_quiz/resource/extension_resource.dart';
+
+import '../../controller/dashboard_analytics/bar_data_state.dart';
+import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
+
+part 'dashboard_analytics_view.dart';
+
+class DashBoardAnalyticsScreen extends ConsumerWidget {
+  const DashBoardAnalyticsScreen();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          Gap(5),
+
+          ///今日のデータ
+          _DailyDashBoard(),
+
+          ///X軸操作
+          // _SetTodayData(),
+
+          ///学習状況ダッシュボード
+          _WeekDashboard(),
+
+          ///目標値設定
+          _SetGoalY(),
+        ],
+      ),
+    );
+  }
+}
+
+class _DailyDashBoard extends ConsumerWidget {
+  const _DailyDashBoard();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    final dailyData = state.dailyData;
+    final dailyScore = dailyData.length;
+    final goalScore = state.goalScore;
+
+    return Container(
+      height: context.height * 0.22,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            const Spacer(),
+
+            ///Circle Chart
+            Container(
+              width: context.width * 0.45,
+              alignment: Alignment.center,
+              child: Stack(
+                children: [
+                  Container(
+                    width: context.height * 0.16,
+                    height: context.height * 0.16,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: context.height * 0.02,
+                        vertical: context.height * 0.02),
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "今日の\n学習問題数",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: context.height * 0.015,
+                            height: 1.2,
+                          ),
+                        ),
+                        Text(
+                          "$dailyScore",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.045,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        Text(
+                          "/$goalScore",
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.015,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: context.height * 0.16,
+                    height: context.height * 0.16,
+                    child: CircularProgressIndicator(
+                      value: dailyScore / goalScore,
+                      strokeWidth: context.width * 0.04,
+                      color: context.mainColor,
+                      backgroundColor: Colors.grey.shade400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+
+            ///今日の一言
+            Container(
+              width: context.width * 0.45,
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Container(
+                    height: context.height * 0.1,
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続は今日からです！",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.normal,
+                            fontSize: context.width * 0.03,
+                          ),
+                          maxLines: 3,
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    width: context.height * 0.1,
+                    height: context.height * 0.1,
+                    child: Image.asset(
+                      'assets/image/cat_grey.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+///1週間のデータ
+class _WeekDashboard extends ConsumerWidget {
+  const _WeekDashboard();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.45,
+      width: context.width * 1,
+      alignment: Alignment.center,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: context.width * 0.01,
+              vertical: context.width * 0.008),
+          child: Column(
+            children: [
+              ///X軸範囲
+              const _SelectDayLength(),
+
+              const Spacer(),
+
+              ///ダッシュボード
+              _BarChartSample(),
+              const Spacer(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 ///ダッシュボード
 class _BarChartSample extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeDashboardScreenProvider);
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
     final selectedIndex = state.selectedXIndex;
     final weeklyIndex = state.weeklyIndex;
     final monthlyIndex = state.monthlyIndex;
     final selectedDayRange = state.selectedDayRange;
-    final totalDataList = state.totalDataList;
-    final weeklyDataList = state.weeklyDataList[weeklyIndex];
-    final monthlyDataList = state.monthlyDataList[monthlyIndex];
+    final totalData = state.totalData;
+    final weeklyData = state.weeklyData[weeklyIndex];
+    final monthlyData = state.monthlyData[monthlyIndex];
     final goalScore = state.goalScore;
     final maxY = goalScore * 2;
 
@@ -57,14 +272,19 @@ class _BarChartSample extends ConsumerWidget {
                 getTitlesWidget: (value, meta) {
                   final color =
                       (value == goalScore) ? context.mainColor : Colors.grey;
+                  final fontSize = (value == 100)
+                      ? context.width * 0.025
+                      : context.width * 0.03;
                   return Text(
                     value.toInt().toString(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: color,
-                        fontWeight: (value == goalScore)
-                            ? FontWeight.bold
-                            : FontWeight.normal),
+                      color: color,
+                      fontSize: fontSize,
+                      fontWeight: (value == goalScore)
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
                   );
                 },
               ),
@@ -76,7 +296,7 @@ class _BarChartSample extends ConsumerWidget {
                 showTitles: true,
                 reservedSize: context.height * 0.04,
                 getTitlesWidget: (value, meta) {
-                  final state = ref.watch(homeDashboardScreenProvider);
+                  final state = ref.watch(dashboardAnalyticsScreenProvider);
                   switch (state.selectedDayRange) {
                     case 7:
                       return _BottomWeekTitles(meta: meta, value: value);
@@ -97,7 +317,7 @@ class _BarChartSample extends ConsumerWidget {
           barGroups: (() {
             switch (selectedDayRange) {
               case 7:
-                return weeklyDataList
+                return weeklyData
                     .asMap()
                     .entries
                     .map((e) {
@@ -125,7 +345,7 @@ class _BarChartSample extends ConsumerWidget {
                     .whereType<BarChartGroupData>()
                     .toList();
               case 31:
-                return monthlyDataList
+                return monthlyData
                     .asMap()
                     .entries
                     .map((e) {
@@ -153,7 +373,7 @@ class _BarChartSample extends ConsumerWidget {
                     .whereType<BarChartGroupData>()
                     .toList();
               default:
-                return totalDataList
+                return totalData
                     .asMap()
                     .entries
                     .map((e) {
@@ -201,13 +421,13 @@ class _BarChartSample extends ConsumerWidget {
                 int dataValue;
                 switch (state.selectedDayRange) {
                   case 7:
-                    dataValue = weeklyDataList[groupIndex].score.toInt();
+                    dataValue = weeklyData[groupIndex].score.toInt();
                     break;
                   case 31:
-                    dataValue = monthlyDataList[groupIndex].score.toInt();
+                    dataValue = monthlyData[groupIndex].score.toInt();
                     break;
                   default:
-                    dataValue = state.totalDataList[groupIndex].score.toInt();
+                    dataValue = totalData[groupIndex].score.toInt();
                     break;
                 }
                 return BarTooltipItem(
@@ -227,10 +447,12 @@ class _BarChartSample extends ConsumerWidget {
                   response != null &&
                   response.spot != null) {
                 ref
-                    .read(homeDashboardScreenProvider.notifier)
+                    .read(dashboardAnalyticsScreenProvider.notifier)
                     .selectXIndex(response.spot!.touchedBarGroupIndex);
               } else {
-                ref.read(homeDashboardScreenProvider.notifier).selectXIndex(-1);
+                ref
+                    .read(dashboardAnalyticsScreenProvider.notifier)
+                    .selectXIndex(-1);
               }
             },
           ),
@@ -247,12 +469,12 @@ class _BottomWeekTitles extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeDashboardScreenProvider);
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
     final selectedXIndex = state.selectedXIndex;
     final weeklyIndex = state.weeklyIndex;
-    final weekDataList = state.weeklyDataList[weeklyIndex];
-    final adjustedIndex = min(max(0, value.toInt()), weekDataList.length - 1);
-    final barData = weekDataList[adjustedIndex];
+    final weekData = state.weeklyData[weeklyIndex];
+    final adjustedIndex = min(max(0, value.toInt()), weekData.length - 1);
+    final barData = weekData[adjustedIndex];
     final isToday = DateTime.now().day == barData.day.day &&
         DateTime.now().weekday == barData.day.weekday;
     final displayText =
@@ -307,17 +529,4 @@ class _BottomMonthTitles extends ConsumerWidget {
       ),
     );
   }
-}
-
-class CustomBarChartRodData extends BarChartRodData {
-  CustomBarChartRodData({
-    required int toY,
-    required Color color,
-    required double width,
-    required BorderRadius borderRadius,
-  }) : super(
-            toY: toY.toDouble(),
-            color: color,
-            width: width,
-            borderRadius: borderRadius);
 }

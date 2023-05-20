@@ -10,9 +10,7 @@ import '../home_review_screen/home_review_screen.dart';
 import '../home_setting_screen/home_setting_screen.dart';
 import '../home_study_screen/home_study_screen.dart';
 
-part 'home_root_appbar.dart';
-part 'home_root_body.dart';
-part 'home_root_nav_bar.dart';
+part 'home_root_view.dart';
 
 class HomeRootScreen extends StatelessWidget {
   const HomeRootScreen();
@@ -20,7 +18,6 @@ class HomeRootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: _AppBar(),
       body: _Body(),
       bottomNavigationBar: _BottomNavBar(),
     );

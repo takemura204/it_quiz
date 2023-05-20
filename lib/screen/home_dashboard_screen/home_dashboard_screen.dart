@@ -1,37 +1,96 @@
-import 'dart:math';
-
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
-import '../../controller/home_dashboard/home_dashboard_screen_controller.dart';
+import '../../resource/lang/initial_resource.dart';
 
-part 'home_dashboard_view/home_dashboard_barchart.dart';
-part 'home_dashboard_view/home_dashboard_view.dart';
+part 'home_dashboard_view.dart';
 
-class HomeDashboardScreen extends StatelessWidget {
+class HomeDashboardScreen extends ConsumerWidget {
   const HomeDashboardScreen();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tabs = ref.watch(homeDashboardScreenProvider.notifier).tabs;
+
+    return DefaultTabController(
+      initialIndex: 0, // 最初に表示するタブ
+      length: tabs.length, // タブの数
+      child: const Scaffold(
+        appBar: _AppBar(),
+        body: TabBarView(
+          children: [
+            DashBoardAnalyticsScreen(),
+            _DashBoardRankScreen(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const _AppBar();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tabs = ref.watch(homeDashboardScreenProvider.notifier).tabs;
+
+    return AppBar(
+      title: Text(I18n().titleTest),
+      bottom: TabBar(
+          onTap: (index) =>
+              ref.read(homeDashboardScreenProvider.notifier).tapTabBar(index),
+          labelColor: context.mainColor,
+          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+          unselectedLabelColor: Colors.black45.withOpacity(0.3),
+          tabs: [
+            Tab(
+              child: Container(
+                width: context.width * 0.5,
+                alignment: Alignment.center,
+                child: Text(
+                  "${tabs[0]}",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.width * 0.04),
+                ),
+              ),
+            ),
+            Tab(
+              child: Container(
+                width: context.width * 0.5,
+                alignment: Alignment.center,
+                child: Text(
+                  "${tabs[1]}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.width * 0.04,
+                  ),
+                ),
+              ),
+            ),
+          ]),
+      shape: Border(bottom: BorderSide(color: context.mainColor, width: 0)),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(100);
+}
+
+class _DashBoardRankScreen extends ConsumerWidget {
+  const _DashBoardRankScreen();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Column(
         children: const [
           Gap(5),
-
-          ///今日のデータ
-          _DailyDashBoard(),
-
-          ///X軸操作
-          // _SetTodayData(),
-
-          ///学習状況ダッシュボード
-          _WeekDashboard(),
-
-          ///目標値設定
-          _SetGoalY(),
 
           ///デイリーミッション
           _DailyMission(),
@@ -39,49 +98,6 @@ class HomeDashboardScreen extends StatelessWidget {
           ///詳細
           _TotalScore(),
         ],
-      ),
-    );
-  }
-}
-
-///1週間のデータ
-class _WeekDashboard extends ConsumerWidget {
-  const _WeekDashboard();
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: context.height * 0.45,
-      width: context.width * 1,
-      alignment: Alignment.center,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.width * 0.01,
-              vertical: context.width * 0.008),
-          child: Column(
-            children: [
-              ///X軸範囲
-              const _SelectDayLength(),
-
-              const Spacer(),
-
-              ///ダッシュボード
-              _BarChartSample(),
-              const Spacer(),
-            ],
-          ),
-        ),
       ),
     );
   }

@@ -20,28 +20,33 @@ class HomeReviewScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const ProviderScope(
-      child: _Body(),
+      child: _Scaffold(),
     );
   }
 }
 
-class _Body extends ConsumerWidget {
-  const _Body();
+class _Scaffold extends ConsumerWidget {
+  const _Scaffold();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: Column(
-        children: const [
-          ///今日のクイズ
-          _DailyQuiz(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(I18n().titleReview),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            ///今日のクイズ
+            _DailyQuiz(),
 
-          ///苦手学習
-          _WeakQuiz(),
+            ///苦手学習
+            _WeakQuiz(),
 
-          ///力試し
-          _TestQuiz(),
-        ],
+            ///力試し
+            _TestQuiz(),
+          ],
+        ),
       ),
     );
   }

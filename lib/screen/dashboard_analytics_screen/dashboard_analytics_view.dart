@@ -1,144 +1,11 @@
-part of '../home_dashboard_screen.dart';
-
-class _DailyDashBoard extends ConsumerWidget {
-  const _DailyDashBoard();
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeDashboardScreenProvider);
-    final dailyScore = state.dailyScore;
-    final goalScore = state.goalScore;
-
-    return Container(
-      height: context.height * 0.22,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            const Spacer(),
-
-            ///Circle Chart
-            Container(
-              width: context.width * 0.45,
-              alignment: Alignment.center,
-              child: Stack(
-                children: [
-                  Container(
-                    width: context.height * 0.16,
-                    height: context.height * 0.16,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.height * 0.02,
-                        vertical: context.height * 0.02),
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "今日の\n学習問題数",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: context.height * 0.015,
-                            height: 1.2,
-                          ),
-                        ),
-                        Text(
-                          "$dailyScore",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.045,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        Text(
-                          "/$goalScore",
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.015,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: context.height * 0.16,
-                    height: context.height * 0.16,
-                    child: CircularProgressIndicator(
-                      value: dailyScore / goalScore,
-                      strokeWidth: context.width * 0.04,
-                      color: context.mainColor,
-                      backgroundColor: Colors.grey.shade400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-
-            ///今日の一言
-            Container(
-              width: context.width * 0.45,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  Container(
-                    height: context.height * 0.1,
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続は今日からです！",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.normal,
-                            fontSize: context.width * 0.03,
-                          ),
-                          maxLines: 3,
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    width: context.height * 0.1,
-                    height: context.height * 0.1,
-                    child: Image.asset(
-                      'assets/image/cat_grey.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ),
-            const Spacer(),
-          ],
-        ),
-      ),
-    );
-  }
-}
+part of 'dashboard_analytics_screen.dart';
 
 ///今日のX軸操作
 class _SetTodayData extends ConsumerWidget {
   const _SetTodayData();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dailyScore = ref.watch(homeDashboardScreenProvider).dailyScore;
+    final dailyScore = ref.watch(dashboardAnalyticsScreenProvider).dailyScore;
     return Container(
       height: context.height * 0.1,
       child: Card(
@@ -170,9 +37,9 @@ class _SetTodayData extends ConsumerWidget {
               onPressed: dailyScore <= 10
                   ? null
                   : () {
-                      ref
-                          .read(homeDashboardScreenProvider.notifier)
-                          .setTodayData(dailyScore - 1);
+                      // ref
+                      //     .read(homeDashboardScreenProvider.notifier)
+                      //     .setDailyData(dailyScore - 1);
                     },
               icon: Icon(
                 Icons.remove_circle_outline,
@@ -197,9 +64,9 @@ class _SetTodayData extends ConsumerWidget {
               onPressed: dailyScore >= 50
                   ? null
                   : () {
-                      ref
-                          .read(homeDashboardScreenProvider.notifier)
-                          .setTodayData(dailyScore + 1);
+                      // ref
+                      //     .read(homeDashboardScreenProvider.notifier)
+                      //     .setDailyData(dailyScore + 1);
                     },
               icon: Icon(
                 Icons.add_circle_outline,
@@ -220,8 +87,8 @@ class _SelectDayLength extends ConsumerWidget {
   const _SelectDayLength();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeDashboardScreenProvider);
-    final controller = ref.watch(homeDashboardScreenProvider.notifier);
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    final controller = ref.watch(dashboardAnalyticsScreenProvider.notifier);
     final tabs = controller.tabs;
     final initialIndex = tabs.indexOf(state.selectedDayRange);
     final dayRangeText = state.dayRangeText;
@@ -245,7 +112,7 @@ class _SelectDayLength extends ConsumerWidget {
               initialIndex: initialIndex,
               child: TabBar(
                   onTap: (index) => ref
-                      .read(homeDashboardScreenProvider.notifier)
+                      .read(dashboardAnalyticsScreenProvider.notifier)
                       .tapTabBar(index),
                   labelColor: Colors.white,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -284,7 +151,7 @@ class _SelectDayLength extends ConsumerWidget {
                   padding: EdgeInsets.all(context.width * 0.01),
                   iconSize: context.width * 0.08,
                   onPressed: () => ref
-                      .read(homeDashboardScreenProvider.notifier)
+                      .read(dashboardAnalyticsScreenProvider.notifier)
                       .tapPreButton(),
                   icon: Icon(
                     Icons.arrow_back_ios,
@@ -305,7 +172,7 @@ class _SelectDayLength extends ConsumerWidget {
                   padding: EdgeInsets.all(context.width * 0.01),
                   iconSize: context.width * 0.08,
                   onPressed: () => ref
-                      .read(homeDashboardScreenProvider.notifier)
+                      .read(dashboardAnalyticsScreenProvider.notifier)
                       .tapNextButton(),
                   icon: Icon(
                     Icons.arrow_forward_ios,
@@ -327,7 +194,7 @@ class _SetGoalY extends ConsumerWidget {
   const _SetGoalY();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final goalScore = ref.watch(homeDashboardScreenProvider).goalScore;
+    final goalScore = ref.watch(dashboardAnalyticsScreenProvider).goalScore;
     return Container(
       height: context.height * 0.1,
       child: Card(
@@ -360,7 +227,7 @@ class _SetGoalY extends ConsumerWidget {
                   ? null
                   : () {
                       ref
-                          .read(homeDashboardScreenProvider.notifier)
+                          .read(dashboardAnalyticsScreenProvider.notifier)
                           .setGoalY(goalScore - 10);
                     },
               icon: Icon(
@@ -387,7 +254,7 @@ class _SetGoalY extends ConsumerWidget {
                   ? null
                   : () {
                       ref
-                          .read(homeDashboardScreenProvider.notifier)
+                          .read(dashboardAnalyticsScreenProvider.notifier)
                           .setGoalY(goalScore + 10);
                     },
               icon: Icon(
