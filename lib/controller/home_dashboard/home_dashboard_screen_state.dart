@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../dashboard_analytics/bar_data_state.dart';
-
 part 'home_dashboard_screen_state.freezed.dart';
 
 @freezed

@@ -1,12 +1,12 @@
-import 'dart:math';
+import 'dart:convert';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../dashboard_analytics/bar_data_state.dart';
 import '../quiz/quiz_state.dart';
-import '../quiz_item/quiz_item_controller.dart';
 import 'dashboard_analytics_screen_state.dart';
 
 final dashboardAnalyticsScreenProvider = StateNotifierProvider<
@@ -27,64 +27,86 @@ class DashboardAnalyticsScreenController
 
   @override
   void initState() {
-    _initData();
+    _initQuizData();
     _initDayRangeText();
   }
 
   ///ダッシュボードデータ取得
-  Future _initData() async {
-    _getTotalData();
-    _getWeeklyData();
-    _getMonthlyData();
+  Future _initQuizData() async {
+    await _getQuizData('total_data');
+    await _getQuizData('daily_data');
+    await _getQuizData('weekly_data');
+    await _getQuizData('monthly_data');
+  }
+
+  Future _getQuizData(String type) async {
+    switch (type) {
+      case 'total_data':
+        final prefs = await SharedPreferences.getInstance();
+        final totalDataJson = prefs.getString('total_data');
+        if (totalDataJson != null) {
+          final totalData = (json.decode(totalDataJson) as List)
+              .map((data) => BarData.fromJson(data as Map<String, dynamic>))
+              .toList();
+          state = state.copyWith(totalData: totalData);
+        } else {
+          _getTotalData();
+        }
+        break;
+      case 'daily_data':
+        _getDailyData();
+        break;
+      case 'weekly_data':
+        _getWeeklyData();
+        break;
+      case 'monthly_data':
+        _getMonthlyData();
+        break;
+      default:
+        break;
+    }
+  }
+
+  ///Quizを保存
+  Future _saveData(String type, List<BarData> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    final dataJson = json.encode(data.map((data) => data.toJson()).toList());
+    await prefs.setString(type, dataJson);
   }
 
   ///「全期間」のダッシュボードデータ取得
   Future _getTotalData() async {
-    final random = Random();
-    const days = 90;
-    final totalData = List.generate(days, (i) => _createBarData(i, random));
-    final totalScore = _getScore(totalData);
-    state = state.copyWith(totalData: totalData, totalScore: totalScore);
+    const days = 90; //3ヶ月分のデータ
+    final totalData = List.generate(days, (i) => _createBarData(i));
+    state = state.copyWith(totalData: totalData);
+    _saveData('total_data', totalData);
   }
 
-  BarData _createBarData(int daysAgo, Random random) {
-    final quizList = [
-      ...ref
-          .read(quizItemProvider)
-          .expand((quizItem) => quizItem.quizList)
-          .toList()
-    ];
-    final random = Random();
-    final dailyData = <QuizState>[];
-    final randomLength = random.nextInt(40) + 1;
-    for (int i = 0; i < randomLength; i++) {
-      if (quizList.isNotEmpty) {
-        final randomIndex = random.nextInt(quizList.length);
-        dailyData.add(quizList[randomIndex]);
-        quizList.removeAt(randomIndex);
-      } else {
-        break;
-      }
-    }
+  BarData _createBarData(int daysAgo) {
     final day = now.subtract(Duration(days: daysAgo));
-    return BarData(dailyData, day);
+    return BarData(quizData: [], day: day); // quizDataは初期値0とする
   }
 
-  ///「週間」のダッシュボードデータ取得
+  ///「今日」のデータ取得
+  void _getDailyData() {
+    final totalData = [...state.totalData];
+    final dailyData = totalData.first;
+    state = state.copyWith(dailyData: dailyData);
+  }
+
+  ///「週間」のデータ取得
   void _getWeeklyData() {
     final totalData = [...state.totalData];
-    final weeklyIndex = state.weeklyIndex;
     final weeklyData = _groupDataByPeriod(
       totalData,
       (date) => DateTime(
           date.year, date.month, date.day - (date.weekday - 1 + 7) % 7),
       7,
     );
-    final weekScore = _getScore(weeklyData[weeklyIndex]);
-    state = state.copyWith(weeklyData: weeklyData, weekScore: weekScore);
+    state = state.copyWith(weeklyData: weeklyData);
   }
 
-  ///「月間」のダッシュボードデータ取得
+  ///「月間」のデータ取得
   void _getMonthlyData() {
     final totalData = [...state.totalData];
     final currentMonthDays = DateTime(now.year, now.month + 1, 0).day;
@@ -93,8 +115,7 @@ class DashboardAnalyticsScreenController
       (date) => DateTime(date.year, date.month, 1),
       currentMonthDays,
     );
-    final monthScore = state.monthScore;
-    state = state.copyWith(monthlyData: monthlyData, monthScore: monthScore);
+    state = state.copyWith(monthlyData: monthlyData);
   }
 
   ///各期間ごとにデータを集計
@@ -117,7 +138,8 @@ class DashboardAnalyticsScreenController
         if (dataByPeriod[periodStart] == null ||
             (dataByPeriod[periodStart]?.any((d) => d.day == day) ?? false) ==
                 false) {
-          (dataByPeriod[periodStart] ??= []).add(BarData([], day));
+          (dataByPeriod[periodStart] ??= [])
+              .add(BarData(quizData: [], day: day));
         }
       }
     }
@@ -127,10 +149,6 @@ class DashboardAnalyticsScreenController
     }
 
     return dataByPeriod.values.toList();
-  }
-
-  int _getScore(List<BarData> dataList) {
-    return dataList.map((data) => data.score).reduce((a, b) => a + b);
   }
 
   ///TabBarをタップした時
@@ -183,27 +201,11 @@ class DashboardAnalyticsScreenController
   }
 
   ///ここから
-  Future updateDailyScore(List<QuizState> quizList) async {
-    final dailyData = [...state.dailyData];
-    // dailyDataList.addAll(quizList);
-    // final weakAllList = ref
-    //     .read(quizItemProvider)
-    //     .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
-    //     .toList();
-    // final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
-    // final weakList = weakSetList.map((question) {
-    //   return weakAllList.firstWhere((quiz) => quiz.question == question);
-    // }).toList();
-    // final weakQuiz = state.weakQuiz.copyWith(quizList: weakList);
-    // state = state.copyWith(weakQuiz: weakQuiz);
-    _saveData(); // 保存
-  }
-
-  ///Quizを保存
-  Future _saveData() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // final dailyData = json.encode(state.dailyData.toJson());
-    // await prefs.setString('daily_data', dailyData);
+  Future updateScore(List<QuizState> quizList) async {
+    final dailyData = state.dailyData;
+    final quizData = [...?dailyData?.quizData];
+    quizData.addAll(quizList);
+    state = state.copyWith(dailyData: dailyData);
   }
 
   void selectXIndex(int selectedXIndex) {

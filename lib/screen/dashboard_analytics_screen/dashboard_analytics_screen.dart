@@ -43,8 +43,8 @@ class _DailyDashBoard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsScreenProvider);
-    final dailyData = state.dailyData;
-    final dailyScore = dailyData.length;
+    final dailyData = state.dailyData!;
+    final dailyScore = dailyData.quizData.length;
     final goalScore = state.goalScore;
 
     return Container(

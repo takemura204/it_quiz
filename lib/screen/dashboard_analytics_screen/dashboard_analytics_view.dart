@@ -5,7 +5,8 @@ class _SetTodayData extends ConsumerWidget {
   const _SetTodayData();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dailyScore = ref.watch(dashboardAnalyticsScreenProvider).dailyScore;
+    final dailyData = ref.watch(dashboardAnalyticsScreenProvider).dailyData!;
+    final dailyScore = dailyData.score;
     return Container(
       height: context.height * 0.1,
       child: Card(

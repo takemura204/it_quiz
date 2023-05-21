@@ -1,32 +1,28 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../quiz/quiz_state.dart';
 
-class BarData {
-  BarData(this.dailyData, this.day)
-      : weekDay = _getWeekDayString(day),
-        score = dailyData.length;
+part 'bar_data_state.freezed.dart';
+part 'bar_data_state.g.dart';
 
-  final List<QuizState> dailyData;
-  final int score;
-  final DateTime day;
-  final String weekDay;
+@freezed
+class BarData with _$BarData {
+  const factory BarData({
+    required final List<QuizState> quizData,
+    required final DateTime day,
+  }) = _BarData;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'dailyData': dailyData
-          .map((quizState) => quizState.toJson())
-          .toList(), // もしQuizStateクラスにtoJsonメソッドがなければ、それも追加する必要があります。
-      'score': score,
-      'day': day.toIso8601String(),
-      'weekDay': weekDay,
-    };
-  }
+  factory BarData.fromJson(Map<String, dynamic> json) =>
+      _$BarDataFromJson(json);
+}
 
-  static String _getWeekDayString(DateTime dateTime) {
-    // 1が月曜日、7が日曜日
-    switch (dateTime.weekday) {
+extension BarDataEX on BarData {
+  int get score => quizData.length;
+
+  String get weekDay {
+    switch (day.weekday) {
       case 1:
         return "Mon";
       case 2:
