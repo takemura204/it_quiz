@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
@@ -43,6 +44,14 @@ class _DailyDashBoard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsScreenProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.22,
+        ),
+      );
+    }
     final dailyData = state.dailyData!;
     final dailyScore = dailyData.quizData.length;
     final goalScore = state.goalScore;
@@ -177,6 +186,15 @@ class _WeekDashboard extends ConsumerWidget {
   const _WeekDashboard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.45,
+        ),
+      );
+    }
     return Container(
       height: context.height * 0.45,
       width: context.width * 1,

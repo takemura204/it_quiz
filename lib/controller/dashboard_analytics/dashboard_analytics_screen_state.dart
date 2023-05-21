@@ -8,6 +8,7 @@ part 'dashboard_analytics_screen_state.freezed.dart';
 class DashboardAnalyticsScreenState with _$DashboardAnalyticsScreenState {
   const DashboardAnalyticsScreenState._();
   factory DashboardAnalyticsScreenState({
+    @Default(false) bool isLoading, // データのローディングステータス
     @Default(0) final int tabIndex, //タブ
     @Default(-1) final int selectedXIndex,
     @Default(10) final int goalScore, //毎日の目標

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DashboardAnalyticsScreenState {
+  bool get isLoading => throw _privateConstructorUsedError; // データのローディングステータス
   int get tabIndex => throw _privateConstructorUsedError; //タブ
   int get selectedXIndex => throw _privateConstructorUsedError;
   int get goalScore => throw _privateConstructorUsedError; //毎日の目標
@@ -47,7 +48,8 @@ abstract class $DashboardAnalyticsScreenStateCopyWith<$Res> {
           DashboardAnalyticsScreenState>;
   @useResult
   $Res call(
-      {int tabIndex,
+      {bool isLoading,
+      int tabIndex,
       int selectedXIndex,
       int goalScore,
       int weeklyIndex,
@@ -78,6 +80,7 @@ class _$DashboardAnalyticsScreenStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? tabIndex = null,
     Object? selectedXIndex = null,
     Object? goalScore = null,
@@ -93,6 +96,10 @@ class _$DashboardAnalyticsScreenStateCopyWithImpl<$Res,
     Object? dailyData = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       tabIndex: null == tabIndex
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
@@ -169,7 +176,8 @@ abstract class _$$_CreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int tabIndex,
+      {bool isLoading,
+      int tabIndex,
       int selectedXIndex,
       int goalScore,
       int weeklyIndex,
@@ -197,6 +205,7 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? tabIndex = null,
     Object? selectedXIndex = null,
     Object? goalScore = null,
@@ -212,6 +221,10 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? dailyData = freezed,
   }) {
     return _then(_$_Create(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       tabIndex: null == tabIndex
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
@@ -272,7 +285,8 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create extends _Create {
   _$_Create(
-      {this.tabIndex = 0,
+      {this.isLoading = false,
+      this.tabIndex = 0,
       this.selectedXIndex = -1,
       this.goalScore = 10,
       this.weeklyIndex = 0,
@@ -290,6 +304,10 @@ class _$_Create extends _Create {
         _monthlyData = monthlyData,
         super._();
 
+  @override
+  @JsonKey()
+  final bool isLoading;
+// データのローディングステータス
   @override
   @JsonKey()
   final int tabIndex;
@@ -363,7 +381,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'DashboardAnalyticsScreenState(tabIndex: $tabIndex, selectedXIndex: $selectedXIndex, goalScore: $goalScore, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, dayRangeText: $dayRangeText, totalData: $totalData, weeklyData: $weeklyData, monthlyData: $monthlyData, dailyData: $dailyData)';
+    return 'DashboardAnalyticsScreenState(isLoading: $isLoading, tabIndex: $tabIndex, selectedXIndex: $selectedXIndex, goalScore: $goalScore, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, dayRangeText: $dayRangeText, totalData: $totalData, weeklyData: $weeklyData, monthlyData: $monthlyData, dailyData: $dailyData)';
   }
 
   @override
@@ -371,6 +389,8 @@ class _$_Create extends _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.tabIndex, tabIndex) ||
                 other.tabIndex == tabIndex) &&
             (identical(other.selectedXIndex, selectedXIndex) ||
@@ -402,6 +422,7 @@ class _$_Create extends _Create {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isLoading,
       tabIndex,
       selectedXIndex,
       goalScore,
@@ -425,7 +446,8 @@ class _$_Create extends _Create {
 
 abstract class _Create extends DashboardAnalyticsScreenState {
   factory _Create(
-      {final int tabIndex,
+      {final bool isLoading,
+      final int tabIndex,
       final int selectedXIndex,
       final int goalScore,
       final int weeklyIndex,
@@ -441,6 +463,8 @@ abstract class _Create extends DashboardAnalyticsScreenState {
   _Create._() : super._();
 
   @override
+  bool get isLoading;
+  @override // データのローディングステータス
   int get tabIndex;
   @override //タブ
   int get selectedXIndex;

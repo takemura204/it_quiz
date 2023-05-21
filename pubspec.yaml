@@ -111,6 +111,9 @@ dependencies:
   #アプリのバージョンを確認したい
   package_info_plus: ^3.1.2
 
+  #ローディング画面をおしゃれにしたい
+  flutter_spinkit: ^5.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

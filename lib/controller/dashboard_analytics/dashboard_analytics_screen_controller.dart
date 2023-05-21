@@ -27,7 +27,10 @@ class DashboardAnalyticsScreenController
 
   @override
   void initState() {
-    _initQuizData();
+    state = state.copyWith(isLoading: true); // データロード開始を反映
+    _initQuizData().then((_) {
+      state = state.copyWith(isLoading: false); // データロード終了を反映
+    });
     _initDayRangeText();
   }
 
@@ -179,15 +182,6 @@ class DashboardAnalyticsScreenController
     _initDayRangeText();
   }
 
-  ///今日の日付を取得
-  // void setDailyData(int value) {
-  //   final weekList = [...state.totalDataList];
-  //   final newValue = weekList[days].score + value;
-  //   weekList[days] = BarData(newValue, state.totalDataList[days].day);
-  //
-  //   state = state.copyWith(dailyScore: newValue);
-  // }
-
   ///選択期間のText取得
   void _initDayRangeText() {
     final weekText = getWeekText();
@@ -212,6 +206,7 @@ class DashboardAnalyticsScreenController
     state = state.copyWith(selectedXIndex: selectedXIndex);
   }
 
+  ///目標設定
   void setGoalY(int index) {
     if (index >= 10 && index <= 50) {
       state = state.copyWith(goalScore: index);
