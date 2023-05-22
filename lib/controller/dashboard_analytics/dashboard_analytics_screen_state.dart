@@ -24,3 +24,7 @@ class DashboardAnalyticsScreenState with _$DashboardAnalyticsScreenState {
     BarData? dailyData, //1日のスコア
   }) = _Create;
 }
+
+extension DashboardAnalyticsScreenStateEX on DashboardAnalyticsScreenState {
+  int get totalScore => totalData.length;
+}

@@ -3,6 +3,7 @@ import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_controller.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../home_review/home_review_screen_controller.dart';
 import '../quiz/quiz_state.dart';
 import '../quiz_item/quiz_item_state.dart';
 
@@ -108,7 +109,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   }
 
   ///チェックボックス切り替え
-  void switchCheckBox(int index) {
+  void tapCheckBox(int index) {
     final quizList = [...state.quizList];
     quizList[index] = QuizState(
       quizId: quizList[index].quizId,
@@ -120,6 +121,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);
+    ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
   }
 
   ///クリアボタン
@@ -130,8 +132,6 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       isAnsView: false,
       isResultScreen: false,
     );
-
-    _updateItem();
   }
 
   ///クイズ結果更新(端末保存)

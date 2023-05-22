@@ -3,6 +3,7 @@ import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../home_review/home_review_screen_controller.dart';
 import '../quiz/quiz_state.dart';
 import '../quiz_item/quiz_item_controller.dart';
 
@@ -128,10 +129,12 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       quizList.clear();
       quizList.addAll(item.quizList);
       state = state.copyWith(
-          quizIndex: 0,
-          lapIndex: lapIndex + 1,
-          isResultScreen: true,
-          quizList: quizList);
+        quizIndex: 0,
+        lapIndex: lapIndex + 1,
+        isResultScreen: true,
+        quizList: quizList,
+      );
+      _updateItem();
     }
     //まだ問題が続蹴られる時
     else {
@@ -139,7 +142,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     }
   }
 
-  ///知っている問題のチェックボックス切り替え
+  ///チェックボックス切り替え
   void switchKnowCheckBox(int index) {
     final quizList = [...state.quizList];
     //チェックした時
@@ -167,6 +170,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       );
     }
     state = state.copyWith(quizList: quizList);
+    ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
   }
 
   ///正解画面に切り替え

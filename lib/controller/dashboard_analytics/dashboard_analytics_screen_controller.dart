@@ -38,7 +38,6 @@ class DashboardAnalyticsScreenController
   ///ダッシュボードデータ取得
   Future _initQuizData() async {
     await _getTotalData();
-    await _getTotalData();
     _getDailyData();
     _getWeeklyData();
     _getMonthlyData();
@@ -62,8 +61,9 @@ class DashboardAnalyticsScreenController
             day1.day == day2.day;
       }
 
-      if (differenceInDays > 0) {
-        for (int i = 1; i <= differenceInDays; i++) {
+      // 新規起動日（"今日"）がtotalDataに含まれていなければ追加する
+      if (differenceInDays >= 0) {
+        for (int i = 0; i <= differenceInDays; i++) {
           final dateToAdd = now.subtract(Duration(days: i));
           if (!totalData.any((barData) => _isSameDay(barData.day, dateToAdd))) {
             totalData.add(_createBarData(i));
@@ -88,7 +88,7 @@ class DashboardAnalyticsScreenController
   ///「今日」のデータ取得
   void _getDailyData() {
     final totalData = [...state.totalData];
-    final dailyData = totalData.first;
+    final dailyData = totalData.last;
     state = state.copyWith(dailyData: dailyData);
   }
 
@@ -156,6 +156,23 @@ class DashboardAnalyticsScreenController
     await prefs.setString(type, dataJson);
   }
 
+  ///スコア反映
+  Future updateScore(List<QuizState> quizList) async {
+    final totalData = [...state.totalData]; // 状態を変更しないように新しいリストを作成します
+    final updatedDailyData = totalData.last.copyWith(
+      // 最後の要素を取得し、quizDataにquizListを追加した新しいBarDataを作成します
+      quizData: [...totalData.last.quizData, ...quizList],
+    );
+    totalData[totalData.length - 1] = updatedDailyData; // totalDataの最後の要素を更新します
+    state = state.copyWith(totalData: totalData); // 状態を更新します
+    _saveData('total_data', totalData);
+    print({'total_data', totalData.last.quizData.length});
+    //各データ更新
+    _getDailyData();
+    _getWeeklyData();
+    _getMonthlyData();
+  }
+
   ///TabBarをタップした時
   void tapTabBar(int index) {
     _setDayRange(index);
@@ -194,14 +211,6 @@ class DashboardAnalyticsScreenController
     } else if (selectedDayRange == 31) {
       state = state.copyWith(dayRangeText: monthText);
     }
-  }
-
-  ///ここから
-  Future updateScore(List<QuizState> quizList) async {
-    final dailyData = state.dailyData;
-    final quizData = [...?dailyData?.quizData];
-    quizData.addAll(quizList);
-    state = state.copyWith(dailyData: dailyData);
   }
 
   void selectXIndex(int selectedXIndex) {
