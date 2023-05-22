@@ -27,6 +27,7 @@ class DashboardAnalyticsScreenController
 
   @override
   void initState() {
+    // _resetData();
     state = state.copyWith(isLoading: true); // データロード開始を反映
     _initQuizData().then((_) {
       state = state.copyWith(isLoading: false); // データロード終了を反映
@@ -36,53 +37,47 @@ class DashboardAnalyticsScreenController
 
   ///ダッシュボードデータ取得
   Future _initQuizData() async {
-    await _getQuizData('total_data');
-    await _getQuizData('daily_data');
-    await _getQuizData('weekly_data');
-    await _getQuizData('monthly_data');
-  }
-
-  Future _getQuizData(String type) async {
-    switch (type) {
-      case 'total_data':
-        final prefs = await SharedPreferences.getInstance();
-        final totalDataJson = prefs.getString('total_data');
-        if (totalDataJson != null) {
-          final totalData = (json.decode(totalDataJson) as List)
-              .map((data) => BarData.fromJson(data as Map<String, dynamic>))
-              .toList();
-          state = state.copyWith(totalData: totalData);
-        } else {
-          _getTotalData();
-        }
-        break;
-      case 'daily_data':
-        _getDailyData();
-        break;
-      case 'weekly_data':
-        _getWeeklyData();
-        break;
-      case 'monthly_data':
-        _getMonthlyData();
-        break;
-      default:
-        break;
-    }
-  }
-
-  ///Quizを保存
-  Future _saveData(String type, List<BarData> data) async {
-    final prefs = await SharedPreferences.getInstance();
-    final dataJson = json.encode(data.map((data) => data.toJson()).toList());
-    await prefs.setString(type, dataJson);
+    await _getTotalData();
+    await _getTotalData();
+    _getDailyData();
+    _getWeeklyData();
+    _getMonthlyData();
   }
 
   ///「全期間」のダッシュボードデータ取得
   Future _getTotalData() async {
-    const days = 90; //3ヶ月分のデータ
-    final totalData = List.generate(days, (i) => _createBarData(i));
-    state = state.copyWith(totalData: totalData);
-    _saveData('total_data', totalData);
+    final prefs = await SharedPreferences.getInstance();
+    final totalDataJson = prefs.getString('total_data');
+    if (totalDataJson != null) {
+      final totalData = (json.decode(totalDataJson) as List)
+          .map((data) => BarData.fromJson(data as Map<String, dynamic>))
+          .toList();
+
+      // 新規に起動した日が前回のtotalDataに含まれていない場合、それらの日にちを追加する
+      final lastSavedDate = totalData.last.day;
+      final differenceInDays = now.difference(lastSavedDate).inDays;
+      bool _isSameDay(DateTime day1, DateTime day2) {
+        return day1.year == day2.year &&
+            day1.month == day2.month &&
+            day1.day == day2.day;
+      }
+
+      if (differenceInDays > 0) {
+        for (int i = 1; i <= differenceInDays; i++) {
+          final dateToAdd = now.subtract(Duration(days: i));
+          if (!totalData.any((barData) => _isSameDay(barData.day, dateToAdd))) {
+            totalData.add(_createBarData(i));
+          }
+        }
+      }
+      state = state.copyWith(totalData: totalData);
+      _saveData('total_data', totalData);
+    } else {
+      const days = 90; //3ヶ月分のデータ
+      final totalData = List.generate(days, (i) => _createBarData(i));
+      state = state.copyWith(totalData: totalData);
+      _saveData('total_data', totalData);
+    }
   }
 
   BarData _createBarData(int daysAgo) {
@@ -152,6 +147,13 @@ class DashboardAnalyticsScreenController
     }
 
     return dataByPeriod.values.toList();
+  }
+
+  ///Quizを保存
+  Future _saveData(String type, List<BarData> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    final dataJson = json.encode(data.map((data) => data.toJson()).toList());
+    await prefs.setString(type, dataJson);
   }
 
   ///TabBarをタップした時
@@ -279,5 +281,10 @@ class DashboardAnalyticsScreenController
     final month = (currentMonth - 1) % 12 + 1;
 
     return '$year年$month月';
+  }
+
+  Future _resetData() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("total_data");
   }
 }
