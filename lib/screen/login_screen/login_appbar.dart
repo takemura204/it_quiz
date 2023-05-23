@@ -9,7 +9,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       centerTitle: true,
       automaticallyImplyLeading: false,
       title: const Text("ログイン"),
-      leading: CustomBackButton(onPressed: () {}
+      leading: CustomBackButton(onPressed: () {
+        Navigator.pop(context);
+      }
           // => ref.read(authScreenControllerProvider.notifier).reset(),
           ),
     );

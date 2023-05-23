@@ -27,7 +27,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
 
   @override
   void initState() {
-    _resetData();
+    // _resetData();
     _loadData();
     super.initState();
   }

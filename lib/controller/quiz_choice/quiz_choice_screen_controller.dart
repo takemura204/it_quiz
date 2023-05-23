@@ -125,7 +125,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   }
 
   ///クリアボタン
-  void tapClearButton() {
+  void resetScreen() {
     state = state.copyWith(
       quizItemIndex: 0,
       quizIndex: 0,

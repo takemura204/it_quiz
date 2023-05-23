@@ -16,7 +16,6 @@ class CustomBackButton extends ConsumerWidget {
         padding: EdgeInsets.all(context.width * 0.01),
         iconSize: context.width * 0.06,
         onPressed: () {
-          Navigator.pop(context);
           onPressed();
         },
         icon: Icon(
@@ -43,8 +42,8 @@ class ClearButton extends ConsumerWidget {
         alignment: Alignment.topRight,
         iconSize: iconSize,
         onPressed: () {
-          Navigator.pop(context);
           onPressed();
+          Navigator.of(context).pop();
         },
         icon: Icon(
           Icons.clear,

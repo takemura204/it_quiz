@@ -13,9 +13,12 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: Text(arguments.item.title),
       leading: CustomBackButton(
-        onPressed: () => ref
-            .read(quizTureFalseScreenControllerProvider.notifier)
-            .tapClearButton(),
+        onPressed: () {
+          ref
+              .read(quizTureFalseScreenControllerProvider.notifier)
+              .tapClearButton();
+          Navigator.pop(context);
+        },
       ),
     );
   }

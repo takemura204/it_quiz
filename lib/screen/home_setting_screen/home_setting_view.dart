@@ -17,10 +17,18 @@ class UserProfile extends ConsumerWidget {
               //ログインしていない時
               if (email == "ログインしていません") {
                 //ログイン画面遷移
-                await showDialog<Dialog>(
+                await showDialog(
                     context: context,
                     builder: (context) {
-                      return const NeedSignUpDialog();
+                      return DialogDefault2(
+                        title: "アカウントを作成しましょう",
+                        subTitle: "名前やプロフィール画像を設定するには\nアカウントの登録が必要です",
+                        cancelText: "キャンセル",
+                        doneText: "新規登録",
+                        onPressed: () {
+                          const CreateAccountScreenArguments().generateRoute();
+                        },
+                      );
                     });
               }
               //ログインしている時

@@ -101,11 +101,12 @@ class LoginScreen extends ConsumerWidget {
                               if (value.hasError) {
                                 showDialog(
                                   context: context,
-                                  builder: (_) => ErrorDialog(
+                                  builder: (_) => DialogError(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    content:
+                                    title: "エラー",
+                                    subTitle:
                                         I18n().loginErrorText(value.errorText),
                                   ),
                                 );

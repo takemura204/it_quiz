@@ -137,10 +137,21 @@ class HomeSettingScreen extends ConsumerWidget {
                         ///ログイン・会員登録ボタン
                         SetAccountButton(
                       onPressed: () async {
-                        await showDialog<Dialog>(
+                        await showDialog(
                             context: context,
                             builder: (context) {
-                              return const SignOutDialog();
+                              return DialogDefault1(
+                                  onPressed: () {
+                                    ref
+                                        .read(authScreenControllerProvider
+                                            .notifier)
+                                        .signOut();
+                                    Navigator.of(context).pop();
+                                  },
+                                  title: "ログアウトしますか？",
+                                  subTitle: "ログアウトすると\n一部の機能が制限されます。",
+                                  cancelText: "キャンセル",
+                                  doneText: "ログアウト");
                             });
                       },
                       text: "ログアウト",

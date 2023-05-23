@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -51,12 +52,14 @@ class _Scaffold extends ConsumerWidget {
         useStickyGroupSeparators: true, //現在表示されているグループのグループヘッダーが一番上に表示
         groupSeparatorBuilder: (String group) => Container(
           color: context.mainColor,
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(context.width * 0.015),
           child: Text(
             group,
             textAlign: TextAlign.left,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: context.width * 0.05,
+                fontWeight: FontWeight.bold),
           ),
         ),
         indexedItemBuilder:

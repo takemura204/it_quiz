@@ -47,8 +47,10 @@ class CreateAccountScreen extends ConsumerWidget {
             automaticallyImplyLeading: false,
             title: const Text("新規登録"),
             leading: CustomBackButton(
-              onPressed: () =>
-                  ref.read(authScreenControllerProvider.notifier).reset(),
+              onPressed: () {
+                ref.read(authScreenControllerProvider.notifier).reset();
+                Navigator.pop(context);
+              },
             ),
           ),
           body: Padding(
@@ -122,7 +124,7 @@ class CreateAccountScreen extends ConsumerWidget {
                                       if (value.hasError) {
                                         showDialog(
                                           context: context,
-                                          builder: (_) => ErrorDialog(
+                                          builder: (_) => DialogError(
                                             onPressed: () {
                                               ref
                                                   .read(
@@ -131,7 +133,8 @@ class CreateAccountScreen extends ConsumerWidget {
                                                   .switchHasError();
                                               Navigator.of(context).pop();
                                             },
-                                            content: I18n().loginErrorText(
+                                            title: "エラー",
+                                            subTitle: I18n().loginErrorText(
                                                 value.errorText),
                                           ),
                                         );

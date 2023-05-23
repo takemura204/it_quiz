@@ -64,10 +64,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       centerTitle: true,
       automaticallyImplyLeading: false,
       title: Text(item.group),
-      leading: CustomBackButton(
-        onPressed: () =>
-            ref.read(quizLearnScreenProvider.notifier).tapClearButton(),
-      ),
+      leading: CustomBackButton(onPressed: () {
+        ref.read(quizLearnScreenProvider.notifier).tapClearButton();
+        Navigator.pop(context);
+      }),
     );
   }
 

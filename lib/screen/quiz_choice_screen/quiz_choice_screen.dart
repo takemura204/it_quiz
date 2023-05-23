@@ -7,6 +7,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
+import '../../view/dialog.dart';
 import '../../view/quiz_widget.dart';
 import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
 
@@ -61,10 +62,23 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       centerTitle: true,
       automaticallyImplyLeading: false,
       title: Text(item.group),
-      leading: CustomBackButton(
-        onPressed: () =>
-            ref.read(quizChoiceScreenProvider.notifier).tapClearButton(),
-      ),
+      leading: CustomBackButton(onPressed: () async {
+        await showDialog(
+            context: context,
+            builder: (context) {
+              return DialogDefault1(
+                onPressed: () {
+                  ref.read(quizChoiceScreenProvider.notifier).resetScreen();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+                title: "学習を中断しますか？",
+                subTitle: "学習を中断すると\nこれまでの内容は保存されません。",
+                cancelText: "続ける",
+                doneText: "中断する",
+              );
+            });
+      }),
     );
   }
 

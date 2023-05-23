@@ -19,27 +19,47 @@ class _QuizItemBar extends ConsumerWidget {
       },
       child: Card(
         elevation: 2,
-        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 3.0),
-        child: Container(
-          child: ListTile(
-            contentPadding: const EdgeInsets.only(
-                left: 10.0, top: 1.0, bottom: 1.0, right: 5),
-            title: Text(
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.01, vertical: context.height * 0.001),
+        child: ListTile(
+          contentPadding: EdgeInsets.only(
+              left: context.width * 0.02,
+              top: 1.0,
+              bottom: 1.0,
+              right: context.width * 0.02),
+          title: Container(
+            child: Text(
               item.title,
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: context.width * 0.04),
             ),
-            leading: item.isCompleted
-                ? Icon(
-                    Icons.pets,
-                    color: context.mainColor,
-                  )
-                : const Icon(
-                    Icons.pets,
+          ),
+          leading: Container(
+            width: context.width * 0.08,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Spacer(),
+                Text(
+                  item.isCompleted ? "good!" : "",
+                  style: TextStyle(
+                    fontSize: context.width * 0.025,
+                    fontWeight: FontWeight.bold,
+                    color:
+                        item.isCompleted ? context.mainColor : Colors.black26,
                   ),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: context.mainColor,
+                ),
+                Icon(
+                  Icons.pets,
+                  color: item.isCompleted ? context.mainColor : Colors.black26,
+                ),
+                const Spacer(),
+                Gap(context.height * 0.01),
+              ],
             ),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: context.mainColor,
           ),
         ),
       ),
@@ -148,15 +168,6 @@ class _QuizResult extends ConsumerWidget {
                 style: TextStyle(
                     fontSize: context.width * 0.04,
                     fontWeight: FontWeight.bold),
-              ),
-              const Spacer(),
-              Text(
-                (item.timeStamp != null)
-                    ? '${DateFormat('yyyy-MM-dd').format(item.timeStamp!)}'
-                    : "未挑戦",
-                style: TextStyle(
-                    fontSize: context.width * 0.03,
-                    fontWeight: FontWeight.normal),
               ),
               const Spacer(),
             ],
