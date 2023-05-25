@@ -88,7 +88,7 @@ class DashboardAnalyticsScreenController
   ///「今日」のデータ取得
   void _getDailyData() {
     final totalData = [...state.totalData];
-    final dailyData = totalData.last;
+    final dailyData = totalData.first;
     state = state.copyWith(dailyData: dailyData);
   }
 
@@ -156,18 +156,18 @@ class DashboardAnalyticsScreenController
     await prefs.setString(type, dataJson);
   }
 
-  ///スコア反映
+  /// スコア更新
   Future updateScore(List<QuizState> quizList) async {
-    final totalData = [...state.totalData]; // 状態を変更しないように新しいリストを作成します
-    final updatedDailyData = totalData.last.copyWith(
-      // 最後の要素を取得し、quizDataにquizListを追加した新しいBarDataを作成します
-      quizData: [...totalData.last.quizData, ...quizList],
-    );
-    totalData[totalData.length - 1] = updatedDailyData; // totalDataの最後の要素を更新します
-    state = state.copyWith(totalData: totalData); // 状態を更新します
+    final totalData = [...state.totalData];
+    // 当日のデータを更新
+    final todayQuizData = [...totalData.first.quizData];
+    todayQuizData.addAll(quizList);
+    final updatedDailyData = totalData.first.copyWith(quizData: todayQuizData);
+    // 更新された当日のデータを全データの最初に設定して保存
+    totalData[0] = updatedDailyData;
+    state = state.copyWith(totalData: totalData);
     _saveData('total_data', totalData);
-    print({'total_data', totalData.last.quizData.length});
-    //各データ更新
+    // 各データの更新
     _getDailyData();
     _getWeeklyData();
     _getMonthlyData();
