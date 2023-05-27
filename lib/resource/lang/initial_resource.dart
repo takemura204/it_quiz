@@ -11,7 +11,7 @@ class I18n {
   ///title
   String get titleStudy => "クイズ";
   String get titleReview => "チャレンジ";
-  String get titleTest => "スコア";
+  String get titleScore => "スコア";
   String get titleSetting => "マイページ";
 
   ///「学ぶ」形式

@@ -136,6 +136,7 @@ class CreateAccountScreen extends ConsumerWidget {
                                             title: "エラー",
                                             subTitle: I18n().loginErrorText(
                                                 value.errorText),
+                                            doneText: "OK",
                                           ),
                                         );
                                       }

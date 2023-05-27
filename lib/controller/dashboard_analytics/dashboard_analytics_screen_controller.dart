@@ -43,7 +43,7 @@ class DashboardAnalyticsScreenController
     _getMonthlyData();
   }
 
-  ///「全期間」のダッシュボードデータ取得
+  /// "全期間"のダッシュボードデータ取得
   Future _getTotalData() async {
     final prefs = await SharedPreferences.getInstance();
     final totalDataJson = prefs.getString('total_data');
@@ -52,9 +52,19 @@ class DashboardAnalyticsScreenController
           .map((data) => BarData.fromJson(data as Map<String, dynamic>))
           .toList();
 
-      // 新規に起動した日が前回のtotalDataに含まれていない場合、それらの日にちを追加する
-      final lastSavedDate = totalData.last.day;
-      final differenceInDays = now.difference(lastSavedDate).inDays;
+      final firstSavedDate = DateTime(
+        totalData.first.day.year,
+        totalData.first.day.month,
+        totalData.first.day.day,
+      );
+      final nowDate = DateTime(now.year, now.month, now.day);
+      final differenceInDays = nowDate.difference(firstSavedDate).inDays;
+      // print({
+      //   totalData.first.day,
+      //   firstSavedDate.day,
+      //   nowDate.day,
+      //   differenceInDays,
+      // });
       bool _isSameDay(DateTime day1, DateTime day2) {
         return day1.year == day2.year &&
             day1.month == day2.month &&
@@ -62,11 +72,11 @@ class DashboardAnalyticsScreenController
       }
 
       // 新規起動日（"今日"）がtotalDataに含まれていなければ追加する
-      if (differenceInDays >= 0) {
+      if (differenceInDays > 0) {
         for (int i = 0; i <= differenceInDays; i++) {
-          final dateToAdd = now.subtract(Duration(days: i));
+          final dateToAdd = nowDate.subtract(Duration(days: i));
           if (!totalData.any((barData) => _isSameDay(barData.day, dateToAdd))) {
-            totalData.add(_createBarData(i));
+            totalData.insert(0, _createBarData(dateToAdd));
           }
         }
       }
@@ -74,14 +84,16 @@ class DashboardAnalyticsScreenController
       _saveData('total_data', totalData);
     } else {
       const days = 90; //3ヶ月分のデータ
-      final totalData = List.generate(days, (i) => _createBarData(i));
+      final totalData = List.generate(
+          days,
+          (i) => _createBarData(DateTime(now.year, now.month, now.day)
+              .subtract(Duration(days: i))));
       state = state.copyWith(totalData: totalData);
       _saveData('total_data', totalData);
     }
   }
 
-  BarData _createBarData(int daysAgo) {
-    final day = now.subtract(Duration(days: daysAgo));
+  BarData _createBarData(DateTime day) {
     return BarData(quizData: [], day: day); // quizDataは初期値0とする
   }
 

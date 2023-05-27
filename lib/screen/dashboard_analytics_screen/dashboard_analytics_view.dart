@@ -1,89 +1,129 @@
 part of 'dashboard_analytics_screen.dart';
 
-///今日のX軸操作
-class _SetTodayData extends ConsumerWidget {
-  const _SetTodayData();
+/// 今日のCircle Chart
+class _DailyCart extends ConsumerWidget {
+  const _DailyCart();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dailyData = ref.watch(dashboardAnalyticsScreenProvider).dailyData!;
-    final dailyScore = dailyData.score;
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.22,
+        ),
+      );
+    }
+    final dailyData = state.dailyData!;
+    final dailyScore = dailyData.quizData.length;
+    final goalScore = state.goalScore;
     return Container(
-      height: context.height * 0.1,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
+      width: context.width * 0.45,
+      alignment: Alignment.center,
+      child: Stack(
+        children: [
+          Container(
+            width: context.height * 0.16,
+            height: context.height * 0.16,
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(
+                horizontal: context.height * 0.02,
+                vertical: context.height * 0.02),
+            child: Column(
+              children: [
+                const Spacer(),
+                Text(
+                  "今日の\n学習問題数",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: context.height * 0.015,
+                    height: 1.2,
+                  ),
+                ),
+                Text(
+                  "$dailyScore",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.height * 0.045,
+                    color: context.mainColor,
+                  ),
+                ),
+                Text(
+                  "/$goalScore",
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.height * 0.015,
+                    color: context.mainColor,
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
           ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            const Spacer(),
-            Text(
-              "今日のデータ",
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: context.width * 0.04,
-              ),
+          Container(
+            width: context.height * 0.16,
+            height: context.height * 0.16,
+            child: CircularProgressIndicator(
+              value: dailyScore / goalScore,
+              strokeWidth: context.width * 0.04,
+              color: context.mainColor,
+              backgroundColor: Colors.grey.shade400,
             ),
-            const Spacer(),
-            IconButton(
-              padding: EdgeInsets.all(context.width * 0.01),
-              iconSize: context.width * 0.08,
-              onPressed: dailyScore <= 10
-                  ? null
-                  : () {
-                      // ref
-                      //     .read(homeDashboardScreenProvider.notifier)
-                      //     .setDailyData(dailyScore - 1);
-                    },
-              icon: Icon(
-                Icons.remove_circle_outline,
-                color:
-                    dailyScore <= 10 ? Colors.grey.shade400 : context.mainColor,
-              ),
-            ),
-            Text(
-              "$dailyScore",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: context.width * 0.05),
-            ),
-            Text(
-              "操作",
-              style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: context.width * 0.04),
-            ),
-            IconButton(
-              padding: EdgeInsets.all(context.width * 0.01),
-              iconSize: context.width * 0.08,
-              onPressed: dailyScore >= 50
-                  ? null
-                  : () {
-                      // ref
-                      //     .read(homeDashboardScreenProvider.notifier)
-                      //     .setDailyData(dailyScore + 1);
-                    },
-              icon: Icon(
-                Icons.add_circle_outline,
-                color:
-                    dailyScore >= 50 ? Colors.grey.shade400 : context.mainColor,
-              ),
-            ),
-            const Spacer(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
-///x軸の範囲操作
+///今日のメッセージ
+class _DailyMessage extends ConsumerWidget {
+  const _DailyMessage();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.45,
+      child: Column(
+        children: [
+          const Spacer(),
+          Container(
+            height: context.height * 0.1,
+            child: Column(
+              children: [
+                const Spacer(),
+                Text(
+                  "千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続は今日からです！",
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.normal,
+                    fontSize: context.width * 0.03,
+                  ),
+                  maxLines: 3,
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+          const Spacer(),
+          Container(
+            width: context.height * 0.1,
+            height: context.height * 0.1,
+            child: Image.asset(
+              'assets/image/cat_grey.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+}
+
+///[週/月]の選択
 class _SelectDayLength extends ConsumerWidget {
   const _SelectDayLength();
   @override
@@ -100,7 +140,9 @@ class _SelectDayLength extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ///[週/月]の選択タブ
+          const Spacer(),
+
+          ///タブ
           Container(
             height: context.height * 0.04,
             alignment: Alignment.center,
@@ -141,6 +183,7 @@ class _SelectDayLength extends ConsumerWidget {
                   ]),
             ),
           ),
+          const Spacer(),
 
           ///トータルスコア
           Container(
@@ -183,7 +226,8 @@ class _SelectDayLength extends ConsumerWidget {
                 const Spacer(),
               ],
             ),
-          )
+          ),
+          const Spacer(),
         ],
       ),
     );
@@ -304,6 +348,136 @@ class _Legend extends ConsumerWidget {
             "未達成",
             style: TextStyle(
                 fontWeight: FontWeight.normal, fontSize: context.width * 0.03),
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+}
+
+///グループごとの進捗状況
+class _GroupScore extends ConsumerWidget {
+  const _GroupScore();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.2,
+      width: context.width * 1,
+      margin: EdgeInsets.symmetric(
+          horizontal: context.width * 0.02, vertical: context.width * 0.01),
+      color: Colors.grey.shade200,
+      child: Column(
+        children: [
+          const Spacer(),
+          Row(
+            children: [
+              Container(
+                height: context.height * 0.1,
+                width: context.width * 0.48,
+                child: Card(
+                  elevation: 3,
+                  margin: EdgeInsets.only(
+                    left: context.width * 0.02,
+                    right: context.width * 0.01,
+                    top: context.width * 0.02,
+                    bottom: context.width * 0.01,
+                  ),
+                  color: Colors.green.shade200,
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "通算ログイン",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: context.width * 0.05,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: context.height * 0.1,
+                width: context.width * 0.48,
+                child: Card(
+                  elevation: 3,
+                  margin: EdgeInsets.only(
+                    left: context.width * 0.01,
+                    right: context.width * 0.02,
+                    top: context.width * 0.02,
+                    bottom: context.width * 0.01,
+                  ),
+                  color: Colors.green.shade200,
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "達成クイズ数",
+                        style: TextStyle(fontSize: context.width * 0.05),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              Container(
+                height: context.height * 0.1,
+                width: context.width * 0.48,
+                child: Card(
+                  elevation: 3,
+                  margin: EdgeInsets.only(
+                    left: context.width * 0.02,
+                    right: context.width * 0.01,
+                    top: context.width * 0.01,
+                    bottom: context.width * 0.02,
+                  ),
+                  color: Colors.green.shade200,
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "苦手クイズ数",
+                        style: TextStyle(fontSize: context.width * 0.05),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: context.height * 0.1,
+                width: context.width * 0.48,
+                child: Card(
+                  elevation: 3,
+                  margin: EdgeInsets.only(
+                    left: context.width * 0.01,
+                    right: context.width * 0.02,
+                    top: context.width * 0.01,
+                    bottom: context.width * 0.02,
+                  ),
+                  color: Colors.green.shade200,
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "経験値",
+                        style: TextStyle(fontSize: context.width * 0.05),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           const Spacer(),
         ],

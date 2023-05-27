@@ -42,10 +42,9 @@ class DialogDefault1 extends ConsumerWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: context.width * 0.05,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                        fontSize: context.width * 0.05,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87),
                   ),
                   const Spacer(),
                 ],
@@ -60,7 +59,8 @@ class DialogDefault1 extends ConsumerWidget {
                   Text(
                     subTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: context.width * 0.04),
+                    style: TextStyle(
+                        fontSize: context.width * 0.04, color: Colors.black87),
                     maxLines: 2,
                   ),
                   const Spacer(),
@@ -182,10 +182,9 @@ class DialogDefault2 extends ConsumerWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: context.width * 0.05,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                        fontSize: context.width * 0.05,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87),
                   ),
                   const Spacer(),
                 ],
@@ -200,7 +199,8 @@ class DialogDefault2 extends ConsumerWidget {
                   Text(
                     subTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: context.width * 0.04),
+                    style: TextStyle(
+                        fontSize: context.width * 0.04, color: Colors.black87),
                     maxLines: 2,
                   ),
                   const Spacer(),
@@ -289,10 +289,14 @@ class DialogDefault2 extends ConsumerWidget {
 
 class DialogError extends ConsumerWidget {
   const DialogError(
-      {required this.onPressed, required this.title, required this.subTitle});
+      {required this.onPressed,
+      required this.title,
+      required this.subTitle,
+      required this.doneText});
   final VoidCallback? onPressed;
   final String title;
   final String subTitle;
+  final String doneText;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -336,7 +340,8 @@ class DialogError extends ConsumerWidget {
                   Text(
                     subTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: context.width * 0.04),
+                    style: TextStyle(
+                        fontSize: context.width * 0.04, color: Colors.black87),
                     maxLines: 2,
                   ),
                   const Spacer(),
@@ -364,7 +369,7 @@ class DialogError extends ConsumerWidget {
                   ),
                 ),
                 child: Text(
-                  "OK",
+                  doneText,
                   style: TextStyle(
                     color: context.mainColor,
                     fontWeight: FontWeight.bold,

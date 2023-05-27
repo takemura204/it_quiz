@@ -22,40 +22,28 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
         children: const [
           Gap(5),
 
+          ///目標値設定
+          _SetGoalY(),
+
           ///今日のデータ
           _DailyDashBoard(),
-
-          ///X軸操作
-          // _SetTodayData(),
 
           ///学習状況ダッシュボード
           _WeekDashboard(),
 
-          ///目標値設定
-          _SetGoalY(),
+          ///グループごとの進捗
+          _GroupScore(),
         ],
       ),
     );
   }
 }
 
+///今日の学習問題数
 class _DailyDashBoard extends ConsumerWidget {
   const _DailyDashBoard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
-    if (state.isLoading) {
-      return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.22,
-        ),
-      );
-    }
-    final dailyData = state.dailyData!;
-    final dailyScore = dailyData.quizData.length;
-    final goalScore = state.goalScore;
-
     return Container(
       height: context.height * 0.22,
       child: Card(
@@ -71,109 +59,17 @@ class _DailyDashBoard extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
-          children: [
-            const Spacer(),
+          children: const [
+            Spacer(),
 
-            ///Circle Chart
-            Container(
-              width: context.width * 0.45,
-              alignment: Alignment.center,
-              child: Stack(
-                children: [
-                  Container(
-                    width: context.height * 0.16,
-                    height: context.height * 0.16,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.height * 0.02,
-                        vertical: context.height * 0.02),
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "今日の\n学習問題数",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: context.height * 0.015,
-                            height: 1.2,
-                          ),
-                        ),
-                        Text(
-                          "$dailyScore",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.045,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        Text(
-                          "/$goalScore",
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.015,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: context.height * 0.16,
-                    height: context.height * 0.16,
-                    child: CircularProgressIndicator(
-                      value: dailyScore / goalScore,
-                      strokeWidth: context.width * 0.04,
-                      color: context.mainColor,
-                      backgroundColor: Colors.grey.shade400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
+            ///チャート
+            _DailyCart(),
+            Spacer(),
 
             ///今日の一言
-            Container(
-              width: context.width * 0.45,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  Container(
-                    height: context.height * 0.1,
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続は今日からです！",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.normal,
-                            fontSize: context.width * 0.03,
-                          ),
-                          maxLines: 3,
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    width: context.height * 0.1,
-                    height: context.height * 0.1,
-                    child: Image.asset(
-                      'assets/image/cat_grey.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ),
-            const Spacer(),
+            _DailyMessage(),
+
+            Spacer(),
           ],
         ),
       ),
@@ -191,12 +87,12 @@ class _WeekDashboard extends ConsumerWidget {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
-          size: context.height * 0.45,
+          size: context.height * 0.4,
         ),
       );
     }
     return Container(
-      height: context.height * 0.45,
+      height: context.height * 0.4,
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
@@ -249,7 +145,7 @@ class _BarChartSample extends ConsumerWidget {
     final maxY = goalScore * 2;
 
     return Container(
-      height: context.height * 0.29,
+      height: context.height * 0.25,
       child: BarChart(
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
