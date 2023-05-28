@@ -143,32 +143,17 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///チェックボックス切り替え
-  void switchKnowCheckBox(int index) {
+  void tapCheckBox(int index) {
     final quizList = [...state.quizList];
-    //チェックした時
-    if (!quizList[index].isWeak) {
-      quizList[index] = QuizState(
-        quizId: quizList[index].quizId,
-        question: quizList[index].question,
-        ans: quizList[index].ans,
-        comment: quizList[index].comment,
-        isWeak: true,
-        isJudge: quizList[index].isJudge,
-        choices: quizList[index].choices,
-      );
-    }
-    //チェック外した時
-    else {
-      quizList[index] = QuizState(
-        quizId: quizList[index].quizId,
-        question: quizList[index].question,
-        ans: quizList[index].ans,
-        comment: quizList[index].comment,
-        isWeak: false,
-        isJudge: quizList[index].isJudge,
-        choices: quizList[index].choices,
-      );
-    }
+    quizList[index] = QuizState(
+      quizId: quizList[index].quizId,
+      question: quizList[index].question,
+      ans: quizList[index].ans,
+      comment: quizList[index].comment,
+      isWeak: !quizList[index].isWeak,
+      isJudge: quizList[index].isJudge,
+      choices: quizList[index].choices,
+    );
     state = state.copyWith(quizList: quizList);
     ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
   }

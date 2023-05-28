@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
@@ -113,6 +114,50 @@ class SettingListBar extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class LineProgressBar extends ConsumerWidget {
+  const LineProgressBar(
+      {required this.height,
+      required this.width,
+      required this.score,
+      required this.quizLength});
+  final double height;
+  final double width;
+  final int score;
+  final int quizLength;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      children: [
+        Container(
+          height: height,
+          width: width,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
+            child: LinearProgressIndicator(
+              value: (quizLength != 0) ? score / quizLength : 0.0,
+              color: context.mainColor,
+              backgroundColor: Colors.grey.shade400,
+            ),
+          ),
+        ),
+        Gap(context.width * 0.01),
+        Text(
+          "$score",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: context.width * 0.035,
+          ),
+        ),
+        Text(
+          "/$quizLength",
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: context.width * 0.03),
+        ),
+      ],
     );
   }
 }

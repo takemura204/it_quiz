@@ -133,13 +133,21 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
 
   /// DailyItem
   void updateDailyItem(List<QuizState> quizList) {
-    final score = state.dailyQuiz.score + 1;
-    final dailyQuiz = state.dailyQuiz.copyWith(
-        score: score,
+    final score = state.dailyQuiz.score;
+    final dailyQuiz = state.dailyQuiz;
+    final now = DateTime.now();
+    final isUpdate = dailyQuiz.timeStamp == null ||
+        (dailyQuiz.timeStamp!.year != now.year ||
+            dailyQuiz.timeStamp!.month != now.month ||
+            dailyQuiz.timeStamp!.day != now.day ||
+            dailyQuiz.timeStamp!.minute != now.minute);
+
+    final updateDailyQuiz = dailyQuiz.copyWith(
+        score: isUpdate ? score + 1 : score,
         isCompleted: true,
         quizList: quizList,
         timeStamp: DateTime.now());
-    state = state.copyWith(dailyQuiz: dailyQuiz);
+    state = state.copyWith(dailyQuiz: updateDailyQuiz);
     _saveData(); // 保存
   }
 

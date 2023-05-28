@@ -6,7 +6,7 @@ import 'package:kentei_quiz/controller/auth/auth_screen_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../resource/lang/initial_resource.dart';
-import '../../view/bar.dart';
+import '../../view/barchart.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
 import '../screen_argument.dart';

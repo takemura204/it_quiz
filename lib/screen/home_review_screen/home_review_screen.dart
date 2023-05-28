@@ -9,6 +9,7 @@ import '../../controller/home_review/home_review_screen_controller.dart';
 import '../../controller/quiz_item/quiz_item_controller.dart';
 import '../../controller/quiz_item/quiz_item_state.dart';
 import '../../resource/lang/initial_resource.dart';
+import '../../view/barchart.dart';
 import '../../view/button.dart';
 import '../screen_argument.dart';
 
@@ -60,14 +61,18 @@ class _DailyQuiz extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dailyQuiz = ref.watch(homeReviewScreenProvider).dailyQuiz;
     final now = DateTime.now();
-    final timeStamp = dailyQuiz.timeStamp;
+    final score = dailyQuiz.score;
+    final quizLength = dailyQuiz.quizList.length;
+
     return Column(
       children: [
         _QuizButton(
           title: "今日のクイズ",
-          subTitle: (timeStamp != null)
-              ? '挑戦日:${DateFormat('yyyy-MM-dd').format(dailyQuiz.timeStamp!)}'
-              : "未挑戦",
+          subWidget: LineProgressBar(
+              height: context.height * 0.01,
+              width: context.width * 0.35,
+              score: score,
+              quizLength: quizLength),
           icon: Icons.help_center_outlined,
           score: dailyQuiz.score,
           unit: "日目",
@@ -101,7 +106,6 @@ class _DailyQuiz extends ConsumerWidget {
 ///苦手克服クイズ
 class _WeakQuiz extends ConsumerWidget {
   const _WeakQuiz();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weakQuiz = ref.watch(homeReviewScreenProvider).weakQuiz;
@@ -115,7 +119,7 @@ class _WeakQuiz extends ConsumerWidget {
         else
           _QuizButton(
               title: "苦手克服",
-              subTitle: "あなたの苦手問題数:${weakList.length}問",
+              subWidget: Text("あなたの苦手問題数:${weakList.length}問"),
               icon: Icons.checklist_rtl_outlined,
               score: weakList.length,
               unit: "問　",
@@ -149,9 +153,9 @@ class _TestQuiz extends ConsumerWidget {
         else
           _QuizButton(
             title: "力だめし",
-            subTitle: (testQuiz.timeStamp != null)
+            subWidget: Text((testQuiz.timeStamp != null)
                 ? '挑戦日:${DateFormat('yyyy-MM-dd').format(testQuiz.timeStamp!)}'
-                : "未挑戦",
+                : "未挑戦"),
             icon: Icons.edit_note_outlined,
             score: testQuiz.score,
             unit: "点　",

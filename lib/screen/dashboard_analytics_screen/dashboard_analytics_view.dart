@@ -364,6 +364,16 @@ class _GroupProgress extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final group =
+        ref.read(quizItemProvider).map((item) => item.group).toSet().toList();
+    if (group.isEmpty) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.15,
+        ),
+      );
+    }
     return Container(
       height: context.height * 0.15,
       child: Card(
@@ -382,16 +392,16 @@ class _GroupProgress extends ConsumerWidget {
           children: [
             const Spacer(),
             Row(
-              children: const [
-                Spacer(),
-                _ProgressChart(),
-                Spacer(),
-                _ProgressChart(),
-                Spacer(),
-                _ProgressChart(),
-                Spacer(),
-                _ProgressChart(),
-                Spacer(),
+              children: [
+                const Spacer(),
+                _ProgressChart(groupName: group[0]),
+                const Spacer(),
+                _ProgressChart(groupName: group[1]),
+                const Spacer(),
+                _ProgressChart(groupName: group[2]),
+                const Spacer(),
+                _ProgressChart(groupName: group[3]),
+                const Spacer(),
               ],
             ),
             const Spacer(),
@@ -404,21 +414,19 @@ class _GroupProgress extends ConsumerWidget {
 
 ///グループごとの進捗状況
 class _ProgressChart extends ConsumerWidget {
-  const _ProgressChart();
+  const _ProgressChart({required this.groupName});
+  final String groupName;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
-    if (state.isLoading) {
-      return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.13,
-        ),
-      );
-    }
-    final dailyData = state.dailyData!;
-    final dailyScore = dailyData.quizData.length;
-    final goalScore = state.goalScore;
+    final filterQuizList = ref
+        .read(quizItemProvider)
+        .where((x) => x.group == groupName)
+        .expand((quizItem) => quizItem.quizList)
+        .toList();
+    final quizLength = filterQuizList.length;
+    final score =
+        filterQuizList.where((x) => x.isJudge == true).toList().length;
+    final scoreRatio = ((score / quizLength) * 100).toStringAsFixed(0);
     return Container(
       width: context.width * 0.2,
       height: context.height * 0.13,
@@ -429,17 +437,17 @@ class _ProgressChart extends ConsumerWidget {
           Container(
             alignment: Alignment.center,
             child: Text(
-              "猫のからだだ", //6文字まで
+              groupName, //6文字まで
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: context.height * 0.013,
+                fontSize: context.height * 0.015,
                 color: context.mainColor,
               ),
               maxLines: 1,
             ),
           ),
-          Gap(context.height * 0.008),
+          Gap(context.height * 0.01),
           Stack(
             children: [
               Container(
@@ -455,7 +463,7 @@ class _ProgressChart extends ConsumerWidget {
                       children: [
                         const Spacer(),
                         Text(
-                          "$dailyScore",
+                          "$scoreRatio",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -464,7 +472,7 @@ class _ProgressChart extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          "％",
+                          "%",
                           textAlign: TextAlign.end,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -483,7 +491,7 @@ class _ProgressChart extends ConsumerWidget {
                 width: context.width * 0.16,
                 height: context.width * 0.16,
                 child: CircularProgressIndicator(
-                  value: dailyScore / goalScore,
+                  value: score / quizLength,
                   strokeWidth: context.width * 0.015,
                   color: context.mainColor,
                   backgroundColor: Colors.grey.shade400,

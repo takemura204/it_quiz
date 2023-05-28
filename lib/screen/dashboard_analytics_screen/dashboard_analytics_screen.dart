@@ -10,6 +10,7 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/dashboard_analytics/bar_data_state.dart';
 import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
+import '../../controller/quiz_item/quiz_item_controller.dart';
 
 part 'dashboard_analytics_view.dart';
 
@@ -87,7 +88,7 @@ class _WeekDashboard extends ConsumerWidget {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
-          size: context.height * 0.4,
+          size: context.height * 0.35,
         ),
       );
     }
@@ -109,12 +110,9 @@ class _WeekDashboard extends ConsumerWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: context.width * 0.01,
-              vertical: context.width * 0.008),
+              horizontal: context.width * 0.01, vertical: context.width * 0.01),
           child: Column(
             children: [
-              const Spacer(),
-
               ///X軸範囲
               const _SelectDayLength(),
 
@@ -122,7 +120,6 @@ class _WeekDashboard extends ConsumerWidget {
 
               ///ダッシュボード
               _BarChartSample(),
-              const Spacer(),
             ],
           ),
         ),

@@ -16,7 +16,7 @@ class HomeDashboardScreenController
   }
 
   final Ref ref;
-  final tabs = ["推移データ", "称号ランク"];
+  final tabs = ["学習データ", "称号ランク"];
 
   @override
   void initState() {}

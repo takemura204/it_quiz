@@ -42,14 +42,14 @@ class _NullQuizButton extends ConsumerWidget {
 class _QuizButton extends ConsumerWidget {
   const _QuizButton({
     required this.title,
-    required this.subTitle,
+    required this.subWidget,
     required this.icon,
     required this.onTap,
     required this.score,
     required this.unit,
   });
   final String title;
-  final String subTitle;
+  final Widget subWidget;
   final int score;
   final String unit;
   final IconData? icon;
@@ -88,12 +88,13 @@ class _QuizButton extends ConsumerWidget {
                         color: context.mainColor,
                       ),
                     ),
-                    const Gap(10),
+                    Gap(context.height * 0.01),
 
                     ///タイトル
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Gap(context.height * 0.01),
                         Text(
                           title,
                           style: TextStyle(
@@ -102,15 +103,8 @@ class _QuizButton extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Gap(5),
-                        Text(
-                          subTitle,
-                          style: TextStyle(
-                            fontSize: context.width * 0.03,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Gap(context.height * 0.01),
+                        subWidget,
                       ],
                     ),
                     const Spacer(),
@@ -203,8 +197,7 @@ class _QuizRange extends ConsumerWidget {
   const _QuizRange();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isGroup = ref.watch(homeReviewScreenProvider).testGroup.isNotEmpty;
-    final groupTitle =
+    final group =
         ref.read(quizItemProvider).map((item) => item.group).toSet().toList();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
@@ -218,10 +211,10 @@ class _QuizRange extends ConsumerWidget {
             ),
           ),
           const Gap(5),
-          _SelectRange(groupTitle[0]),
-          _SelectRange(groupTitle[1]),
-          _SelectRange(groupTitle[2]),
-          _SelectRange(groupTitle[3]),
+          _SelectRange(group[0]),
+          _SelectRange(group[1]),
+          _SelectRange(group[2]),
+          _SelectRange(group[3]),
         ],
       ),
     );
