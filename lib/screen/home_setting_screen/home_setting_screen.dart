@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_screen_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
+import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/barchart.dart';
 import '../../view/button.dart';
@@ -27,6 +28,8 @@ class HomeSettingScreen extends ConsumerWidget {
           children: [
             /// プロフィール
             Container(
+              color: Colors.white,
+              height: context.height * 0.23,
               child: StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
@@ -54,6 +57,7 @@ class HomeSettingScreen extends ConsumerWidget {
                   }
                   // User が null である、つまり未サインインのサインイン画面へ
                   return Container(
+                    height: context.height * 0.2,
                     child: Column(
                       children: [
                         const SettingTitleBar(
@@ -88,6 +92,23 @@ class HomeSettingScreen extends ConsumerWidget {
                     context.showScreen(
                       const SettingColorScreenArguments().generateRoute(),
                     );
+                  },
+                ),
+                SettingListBar(
+                  title: "毎日の目標設定",
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DialogClose1(
+                            title: "目標設定",
+                            subWidget: const _SetGoalY(),
+                            doneText: "目標を設定する",
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          );
+                        });
                   },
                 ),
                 const SettingListBar(
@@ -149,7 +170,14 @@ class HomeSettingScreen extends ConsumerWidget {
                                     Navigator.of(context).pop();
                                   },
                                   title: "ログアウトしますか？",
-                                  subTitle: "ログアウトすると\n一部の機能が制限されます。",
+                                  subWidget: Text(
+                                    "ログアウトすると\n一部の機能が制限されます。",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: context.width * 0.04,
+                                        color: Colors.black87),
+                                    maxLines: 2,
+                                  ),
                                   cancelText: "キャンセル",
                                   doneText: "ログアウト");
                             });

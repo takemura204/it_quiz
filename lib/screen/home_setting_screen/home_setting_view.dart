@@ -22,7 +22,14 @@ class UserProfile extends ConsumerWidget {
                     builder: (context) {
                       return DialogDefault2(
                         title: "アカウントを作成しましょう",
-                        subTitle: "名前やプロフィール画像を設定するには\nアカウントの登録が必要です",
+                        subWidget: Text(
+                          "名前やプロフィール画像を設定するには\nアカウントの登録が必要です",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: context.width * 0.04,
+                              color: Colors.black87),
+                          maxLines: 2,
+                        ),
                         cancelText: "キャンセル",
                         doneText: "新規登録",
                         onPressed: () {
@@ -143,6 +150,87 @@ class UserImage extends ConsumerWidget {
             ),
           ),
       ],
+    );
+  }
+}
+
+///毎日の目標設定
+class _SetGoalY extends ConsumerWidget {
+  const _SetGoalY();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final goalScore = ref.watch(dashboardAnalyticsScreenProvider).goalScore;
+    return Container(
+      height: context.height * 0.12,
+      child: Column(
+        children: [
+          const Spacer(),
+          Text(
+            "1日に何問勉強したいですか？",
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: context.width * 0.04,
+            ),
+            maxLines: 1,
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              const Spacer(),
+              IconButton(
+                padding: EdgeInsets.all(context.width * 0.01),
+                iconSize: context.width * 0.1,
+                onPressed: goalScore <= 10
+                    ? null
+                    : () {
+                        ref
+                            .read(dashboardAnalyticsScreenProvider.notifier)
+                            .setGoalY(goalScore - 10);
+                      },
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                  color: goalScore <= 10
+                      ? Colors.grey.shade400
+                      : context.mainColor,
+                ),
+              ),
+              Gap(context.width * 0.05),
+              Text(
+                "$goalScore",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.width * 0.06),
+              ),
+              Text(
+                "問",
+                style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: context.width * 0.055),
+              ),
+              Gap(context.width * 0.05),
+              IconButton(
+                padding: EdgeInsets.all(context.width * 0.01),
+                iconSize: context.width * 0.1,
+                onPressed: goalScore >= 50
+                    ? null
+                    : () {
+                        ref
+                            .read(dashboardAnalyticsScreenProvider.notifier)
+                            .setGoalY(goalScore + 10);
+                      },
+                icon: Icon(
+                  Icons.add_circle_outline,
+                  color: goalScore >= 50
+                      ? Colors.grey.shade400
+                      : context.mainColor,
+                ),
+              ),
+              const Spacer(),
+            ],
+          ),
+          const Spacer(),
+        ],
+      ),
     );
   }
 }

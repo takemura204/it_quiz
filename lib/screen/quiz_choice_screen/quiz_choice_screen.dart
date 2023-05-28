@@ -73,7 +73,13 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                   Navigator.of(context).pop();
                 },
                 title: "学習を中断しますか？",
-                subTitle: "学習を中断すると\nこれまでの内容は保存されません。",
+                subWidget: Text(
+                  "学習を中断すると\nこれまでの内容は保存されません。",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: context.width * 0.04, color: Colors.black87),
+                  maxLines: 2,
+                ),
                 cancelText: "続ける",
                 doneText: "中断する",
               );

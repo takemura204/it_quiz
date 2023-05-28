@@ -16,5 +16,6 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
     @Default(false) bool isSelected,
     @Default([]) final List<String> testGroup,
     @Default(10) final int selectedTestLength,
+    @Default(0) final int dailyScore, //継続日数
   }) = _Create;
 }

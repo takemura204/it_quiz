@@ -104,25 +104,22 @@ class SetAccountButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.05,
+      height: context.height * 0.06,
       width: context.width * 1,
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 0.2, vertical: context.width * 0.01),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
+          backgroundColor: context.mainColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
-          ),
-          side: BorderSide(
-            color: context.mainColor,
-            width: 2,
           ),
         ),
         onPressed: onPressed,
         child: Text(
           text,
           style: TextStyle(
-            color: context.mainColor,
+            color: Colors.white,
             fontSize: context.height * 0.018,
             fontWeight: FontWeight.bold,
           ),

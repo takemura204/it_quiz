@@ -7,14 +7,14 @@ class DialogDefault1 extends ConsumerWidget {
   const DialogDefault1({
     required this.onPressed,
     required this.title,
-    required this.subTitle,
+    required this.subWidget,
     required this.cancelText,
     required this.doneText,
   });
 
   final VoidCallback onPressed;
   final String title;
-  final String subTitle;
+  final Widget subWidget;
   final String cancelText;
   final String doneText;
 
@@ -25,7 +25,7 @@ class DialogDefault1 extends ConsumerWidget {
       insetPadding: EdgeInsets.all(context.width * 0.05),
       child: Container(
         width: context.width * 1,
-        height: context.height * 0.25,
+        height: context.height * 0.26,
         padding: EdgeInsets.all(context.width * 0.02),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -52,17 +52,11 @@ class DialogDefault1 extends ConsumerWidget {
             ),
             const Spacer(),
             Container(
-              height: context.height * 0.08,
+              height: context.height * 0.12,
               child: Column(
                 children: [
                   const Spacer(),
-                  Text(
-                    subTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: context.width * 0.04, color: Colors.black87),
-                    maxLines: 2,
-                  ),
+                  subWidget,
                   const Spacer(),
                 ],
               ),
@@ -107,7 +101,7 @@ class DialogDefault1 extends ConsumerWidget {
                 ),
                 Gap(context.width * 0.05),
 
-                ///ログアウトする
+                ///実行する
                 Container(
                   width: context.width * 0.4,
                   height: context.height * 0.06,
@@ -147,14 +141,14 @@ class DialogDefault2 extends ConsumerWidget {
   const DialogDefault2({
     required this.onPressed,
     required this.title,
-    required this.subTitle,
+    required this.subWidget,
     required this.cancelText,
     required this.doneText,
   });
 
   final VoidCallback onPressed;
   final String title;
-  final String subTitle;
+  final Widget subWidget;
   final String cancelText;
   final String doneText;
 
@@ -165,7 +159,7 @@ class DialogDefault2 extends ConsumerWidget {
       insetPadding: EdgeInsets.all(context.width * 0.05),
       child: Container(
         width: context.width * 1,
-        height: context.height * 0.25,
+        height: context.height * 0.26,
         padding: EdgeInsets.all(context.width * 0.02),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -192,17 +186,11 @@ class DialogDefault2 extends ConsumerWidget {
             ),
             const Spacer(),
             Container(
-              height: context.height * 0.08,
+              height: context.height * 0.12,
               child: Column(
                 children: [
                   const Spacer(),
-                  Text(
-                    subTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: context.width * 0.04, color: Colors.black87),
-                    maxLines: 2,
-                  ),
+                  subWidget,
                   const Spacer(),
                 ],
               ),
@@ -287,15 +275,15 @@ class DialogDefault2 extends ConsumerWidget {
   }
 }
 
-class DialogError extends ConsumerWidget {
-  const DialogError(
+class DialogClose1 extends ConsumerWidget {
+  const DialogClose1(
       {required this.onPressed,
       required this.title,
-      required this.subTitle,
+      required this.subWidget,
       required this.doneText});
   final VoidCallback? onPressed;
   final String title;
-  final String subTitle;
+  final Widget subWidget;
   final String doneText;
 
   @override
@@ -305,7 +293,7 @@ class DialogError extends ConsumerWidget {
       insetPadding: EdgeInsets.all(context.width * 0.05),
       child: Container(
         width: context.width * 1,
-        height: context.height * 0.25,
+        height: context.height * 0.26,
         padding: EdgeInsets.all(context.width * 0.02),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -333,17 +321,102 @@ class DialogError extends ConsumerWidget {
             ),
             const Spacer(),
             Container(
-              height: context.height * 0.08,
+              height: context.height * 0.12,
+              child: Column(
+                children: [
+                  const Spacer(),
+                  subWidget,
+                  const Spacer(),
+                ],
+              ),
+            ),
+            const Spacer(),
+
+            ///閉じるボタン
+            Container(
+              width: context.width * 0.8,
+              height: context.height * 0.06,
+              child: ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: context.mainColor,
+                  elevation: 4,
+                  alignment: Alignment.center,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  doneText,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.width * 0.04,
+                  ),
+                ),
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DialogClose2 extends ConsumerWidget {
+  const DialogClose2(
+      {required this.onPressed,
+      required this.title,
+      required this.subWidget,
+      required this.doneText});
+  final VoidCallback? onPressed;
+  final String title;
+  final Widget subWidget;
+  final String doneText;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(context.width * 0.05),
+      child: Container(
+        width: context.width * 1,
+        height: context.height * 0.26,
+        padding: EdgeInsets.all(context.width * 0.02),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
+        child: Column(
+          children: [
+            const Spacer(),
+            Container(
+              height: context.height * 0.05,
               child: Column(
                 children: [
                   const Spacer(),
                   Text(
-                    subTitle,
-                    textAlign: TextAlign.center,
+                    title,
                     style: TextStyle(
-                        fontSize: context.width * 0.04, color: Colors.black87),
-                    maxLines: 2,
+                      fontSize: context.width * 0.05,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+            const Spacer(),
+            Container(
+              height: context.height * 0.12,
+              child: Column(
+                children: [
+                  const Spacer(),
+                  subWidget,
                   const Spacer(),
                 ],
               ),

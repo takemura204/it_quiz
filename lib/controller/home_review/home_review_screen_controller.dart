@@ -37,6 +37,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   Future _loadData() async {
     final prefs = await SharedPreferences.getInstance();
     final dailyData = prefs.getString('daily_quiz');
+    final dailyScoreData = prefs.getInt('daily_score');
     final weakData = prefs.getString('weak_quiz');
     final testData = prefs.getString('test_quiz');
 
@@ -44,6 +45,11 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     if (dailyData != null) {
       final dailyQuiz = QuizItemState.fromJson(json.decode(dailyData));
       state = state.copyWith(dailyQuiz: dailyQuiz);
+    }
+    // dailyScoreData読み込み
+    if (dailyScoreData != null) {
+      final dailyScore = dailyScoreData;
+      state = state.copyWith(dailyScore: dailyScore);
     }
     // weakQuizを読み込み
     if (weakData != null) {
@@ -55,6 +61,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       final testQuiz = QuizItemState.fromJson(json.decode(testData));
       state = state.copyWith(testQuiz: testQuiz);
     }
+    _saveData();
   }
 
   ///クイズ更新
@@ -133,21 +140,22 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
 
   /// DailyItem
   void updateDailyItem(List<QuizState> quizList) {
-    final score = state.dailyQuiz.score;
+    final score = quizList.where((x) => x.isJudge == true).toList().length;
+    final dailyScore = state.dailyScore;
     final dailyQuiz = state.dailyQuiz;
     final now = DateTime.now();
     final isUpdate = dailyQuiz.timeStamp == null ||
         (dailyQuiz.timeStamp!.year != now.year ||
             dailyQuiz.timeStamp!.month != now.month ||
-            dailyQuiz.timeStamp!.day != now.day ||
-            dailyQuiz.timeStamp!.minute != now.minute);
-
+            dailyQuiz.timeStamp!.day != now.day);
     final updateDailyQuiz = dailyQuiz.copyWith(
-        score: isUpdate ? score + 1 : score,
+        score: score,
         isCompleted: true,
         quizList: quizList,
         timeStamp: DateTime.now());
-    state = state.copyWith(dailyQuiz: updateDailyQuiz);
+    state = state.copyWith(
+        dailyQuiz: updateDailyQuiz,
+        dailyScore: isUpdate ? dailyScore + 1 : dailyScore);
     _saveData(); // 保存
   }
 
@@ -187,10 +195,12 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   Future _saveData() async {
     final prefs = await SharedPreferences.getInstance();
     final dailyData = json.encode(state.dailyQuiz.toJson());
+    final dailyScore = state.dailyScore;
     final weakData = json.encode(state.weakQuiz.toJson());
     final testData = json.encode(state.testQuiz.toJson());
 
     await prefs.setString('daily_quiz', dailyData);
+    await prefs.setInt('daily_score', dailyScore);
     await prefs.setString('weak_quiz', weakData);
     await prefs.setString('test_quiz', testData);
   }

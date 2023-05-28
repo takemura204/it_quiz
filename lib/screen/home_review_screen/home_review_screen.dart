@@ -59,8 +59,9 @@ class _DailyQuiz extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dailyQuiz = ref.watch(homeReviewScreenProvider).dailyQuiz;
-    final now = DateTime.now();
+    final state = ref.watch(homeReviewScreenProvider);
+    final dailyQuiz = state.dailyQuiz;
+    final dailyScore = state.dailyScore;
     final score = dailyQuiz.score;
     final quizLength = dailyQuiz.quizList.length;
 
@@ -74,28 +75,13 @@ class _DailyQuiz extends ConsumerWidget {
               score: score,
               quizLength: quizLength),
           icon: Icons.help_center_outlined,
-          score: dailyQuiz.score,
+          score: dailyScore,
           unit: "日目",
           onTap: () {
             ref.read(quizItemProvider.notifier).setQuizType(QuizType.daily);
-            // 最後にタップされた日付がないか、前日以前であればタップを許可
-            if (dailyQuiz.timeStamp == null ||
-                (dailyQuiz.timeStamp!.year != now.year ||
-                    dailyQuiz.timeStamp!.month != now.month ||
-                    dailyQuiz.timeStamp!.day != now.day ||
-                    dailyQuiz.timeStamp!.minute != now.minute)) {
-              context.showScreen(QuizChoiceScreenArguments(
-                item: dailyQuiz,
-              ).generateRoute());
-            } else {
-              // すでにタップされた日であればメッセージを表示
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('今日のクイズはすでに実行されました。明日再度お試しください。'),
-                  duration: Duration(seconds: 3),
-                ),
-              );
-            }
+            context.showScreen(QuizChoiceScreenArguments(
+              item: dailyQuiz,
+            ).generateRoute());
           },
         ),
       ],

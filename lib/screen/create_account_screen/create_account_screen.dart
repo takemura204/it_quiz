@@ -124,7 +124,7 @@ class CreateAccountScreen extends ConsumerWidget {
                                       if (value.hasError) {
                                         showDialog(
                                           context: context,
-                                          builder: (_) => DialogError(
+                                          builder: (_) => DialogClose2(
                                             onPressed: () {
                                               ref
                                                   .read(
@@ -134,8 +134,16 @@ class CreateAccountScreen extends ConsumerWidget {
                                               Navigator.of(context).pop();
                                             },
                                             title: "エラー",
-                                            subTitle: I18n().loginErrorText(
-                                                value.errorText),
+                                            subWidget: Text(
+                                              I18n().loginErrorText(
+                                                  value.errorText),
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      context.width * 0.04,
+                                                  color: Colors.black87),
+                                              maxLines: 2,
+                                            ),
                                             doneText: "OK",
                                           ),
                                         );

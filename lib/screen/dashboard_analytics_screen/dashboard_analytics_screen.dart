@@ -11,6 +11,7 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 import '../../controller/dashboard_analytics/bar_data_state.dart';
 import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
 import '../../controller/quiz_item/quiz_item_controller.dart';
+import '../../view/dialog.dart';
 
 part 'dashboard_analytics_view.dart';
 
@@ -31,9 +32,6 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
 
           ///グループごとの進捗
           _GroupProgress(),
-
-          ///目標値設定
-          _SetGoalY(),
         ],
       ),
     );

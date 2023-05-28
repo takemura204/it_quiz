@@ -24,6 +24,7 @@ mixin _$HomeReviewScreenState {
   bool get isSelected => throw _privateConstructorUsedError;
   List<String> get testGroup => throw _privateConstructorUsedError;
   int get selectedTestLength => throw _privateConstructorUsedError;
+  int get dailyScore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeReviewScreenStateCopyWith<HomeReviewScreenState> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $HomeReviewScreenStateCopyWith<$Res> {
       int testScore,
       bool isSelected,
       List<String> testGroup,
-      int selectedTestLength});
+      int selectedTestLength,
+      int dailyScore});
 
   $QuizItemStateCopyWith<$Res> get weakQuiz;
   $QuizItemStateCopyWith<$Res> get dailyQuiz;
@@ -73,6 +75,7 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
     Object? isSelected = null,
     Object? testGroup = null,
     Object? selectedTestLength = null,
+    Object? dailyScore = null,
   }) {
     return _then(_value.copyWith(
       reviewItem: null == reviewItem
@@ -106,6 +109,10 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
       selectedTestLength: null == selectedTestLength
           ? _value.selectedTestLength
           : selectedTestLength // ignore: cast_nullable_to_non_nullable
+              as int,
+      dailyScore: null == dailyScore
+          ? _value.dailyScore
+          : dailyScore // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -150,7 +157,8 @@ abstract class _$$_CreateCopyWith<$Res>
       int testScore,
       bool isSelected,
       List<String> testGroup,
-      int selectedTestLength});
+      int selectedTestLength,
+      int dailyScore});
 
   @override
   $QuizItemStateCopyWith<$Res> get weakQuiz;
@@ -178,6 +186,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isSelected = null,
     Object? testGroup = null,
     Object? selectedTestLength = null,
+    Object? dailyScore = null,
   }) {
     return _then(_$_Create(
       reviewItem: null == reviewItem
@@ -212,6 +221,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.selectedTestLength
           : selectedTestLength // ignore: cast_nullable_to_non_nullable
               as int,
+      dailyScore: null == dailyScore
+          ? _value.dailyScore
+          : dailyScore // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -227,7 +240,8 @@ class _$_Create implements _Create {
       this.testScore = 0,
       this.isSelected = false,
       final List<String> testGroup = const [],
-      this.selectedTestLength = 10})
+      this.selectedTestLength = 10,
+      this.dailyScore = 0})
       : _reviewItem = reviewItem,
         _testGroup = testGroup;
 
@@ -271,10 +285,13 @@ class _$_Create implements _Create {
   @override
   @JsonKey()
   final int selectedTestLength;
+  @override
+  @JsonKey()
+  final int dailyScore;
 
   @override
   String toString() {
-    return 'HomeReviewScreenState(reviewItem: $reviewItem, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz, testScore: $testScore, isSelected: $isSelected, testGroup: $testGroup, selectedTestLength: $selectedTestLength)';
+    return 'HomeReviewScreenState(reviewItem: $reviewItem, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz, testScore: $testScore, isSelected: $isSelected, testGroup: $testGroup, selectedTestLength: $selectedTestLength, dailyScore: $dailyScore)';
   }
 
   @override
@@ -297,7 +314,9 @@ class _$_Create implements _Create {
             const DeepCollectionEquality()
                 .equals(other._testGroup, _testGroup) &&
             (identical(other.selectedTestLength, selectedTestLength) ||
-                other.selectedTestLength == selectedTestLength));
+                other.selectedTestLength == selectedTestLength) &&
+            (identical(other.dailyScore, dailyScore) ||
+                other.dailyScore == dailyScore));
   }
 
   @override
@@ -310,7 +329,8 @@ class _$_Create implements _Create {
       testScore,
       isSelected,
       const DeepCollectionEquality().hash(_testGroup),
-      selectedTestLength);
+      selectedTestLength,
+      dailyScore);
 
   @JsonKey(ignore: true)
   @override
@@ -328,7 +348,8 @@ abstract class _Create implements HomeReviewScreenState {
       final int testScore,
       final bool isSelected,
       final List<String> testGroup,
-      final int selectedTestLength}) = _$_Create;
+      final int selectedTestLength,
+      final int dailyScore}) = _$_Create;
 
   @override
   List<QuizItemState> get reviewItem;
@@ -346,6 +367,8 @@ abstract class _Create implements HomeReviewScreenState {
   List<String> get testGroup;
   @override
   int get selectedTestLength;
+  @override
+  int get dailyScore;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>
