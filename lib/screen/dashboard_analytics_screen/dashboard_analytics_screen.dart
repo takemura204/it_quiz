@@ -22,6 +22,9 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
         children: const [
           Gap(5),
 
+          ///グループごとの進捗
+          _GroupProgress(),
+
           ///目標値設定
           _SetGoalY(),
 
@@ -30,9 +33,6 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
 
           ///学習状況ダッシュボード
           _WeekDashboard(),
-
-          ///グループごとの進捗
-          _GroupScore(),
         ],
       ),
     );
@@ -92,7 +92,7 @@ class _WeekDashboard extends ConsumerWidget {
       );
     }
     return Container(
-      height: context.height * 0.4,
+      height: context.height * 0.35,
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
@@ -113,6 +113,8 @@ class _WeekDashboard extends ConsumerWidget {
               vertical: context.width * 0.008),
           child: Column(
             children: [
+              const Spacer(),
+
               ///X軸範囲
               const _SelectDayLength(),
 

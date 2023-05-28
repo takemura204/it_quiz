@@ -68,7 +68,7 @@ class _DailyCart extends ConsumerWidget {
             height: context.height * 0.16,
             child: CircularProgressIndicator(
               value: dailyScore / goalScore,
-              strokeWidth: context.width * 0.04,
+              strokeWidth: context.width * 0.03,
               color: context.mainColor,
               backgroundColor: Colors.grey.shade400,
             ),
@@ -134,18 +134,59 @@ class _SelectDayLength extends ConsumerWidget {
     final initialIndex = tabs.indexOf(state.selectedDayRange);
     final dayRangeText = state.dayRangeText;
     return Container(
-      height: context.height * 0.1,
+      height: context.height * 0.04,
       margin: EdgeInsets.symmetric(
           horizontal: context.width * 0.02, vertical: context.width * 0.01),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          const Spacer(),
-
-          ///タブ
+          ///期間
           Container(
-            height: context.height * 0.04,
+            width: context.width * 0.55,
+            // color: Colors.red,
+            child: Row(
+              children: [
+                const Spacer(),
+                IconButton(
+                  padding: EdgeInsets.all(context.width * 0.01),
+                  iconSize: context.width * 0.06,
+                  onPressed: () => ref
+                      .read(dashboardAnalyticsScreenProvider.notifier)
+                      .tapPreButton(),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: context.mainColor,
+                  ),
+                ),
+                const Spacer(),
+
+                ///選択期間のスコア
+                Text(
+                  dayRangeText,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.width * 0.05),
+                ),
+                const Spacer(),
+                IconButton(
+                  padding: EdgeInsets.all(context.width * 0.01),
+                  iconSize: context.width * 0.06,
+                  onPressed: () => ref
+                      .read(dashboardAnalyticsScreenProvider.notifier)
+                      .tapNextButton(),
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: context.mainColor,
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+          const Spacer(),
+          Container(
+            width: context.width * 0.3,
             alignment: Alignment.center,
+            // color: Colors.blue,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               border: Border.all(color: context.mainColor),
@@ -183,51 +224,6 @@ class _SelectDayLength extends ConsumerWidget {
                   ]),
             ),
           ),
-          const Spacer(),
-
-          ///トータルスコア
-          Container(
-            height: context.height * 0.06,
-            child: Row(
-              children: [
-                const Spacer(),
-                IconButton(
-                  padding: EdgeInsets.all(context.width * 0.01),
-                  iconSize: context.width * 0.08,
-                  onPressed: () => ref
-                      .read(dashboardAnalyticsScreenProvider.notifier)
-                      .tapPreButton(),
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: context.mainColor,
-                  ),
-                ),
-                const Spacer(),
-
-                ///選択期間のスコア
-                Text(
-                  dayRangeText,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.05),
-                ),
-                const Spacer(),
-                IconButton(
-                  padding: EdgeInsets.all(context.width * 0.01),
-                  iconSize: context.width * 0.08,
-                  onPressed: () => ref
-                      .read(dashboardAnalyticsScreenProvider.notifier)
-                      .tapNextButton(),
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    color: context.mainColor,
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
-          const Spacer(),
         ],
       ),
     );
@@ -357,124 +353,134 @@ class _Legend extends ConsumerWidget {
 }
 
 ///グループごとの進捗状況
-class _GroupScore extends ConsumerWidget {
-  const _GroupScore();
+class _GroupProgress extends ConsumerWidget {
+  const _GroupProgress();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.2,
-      width: context.width * 1,
-      margin: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.width * 0.01),
-      color: Colors.grey.shade200,
+      height: context.height * 0.15,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            const Spacer(),
+            Row(
+              children: const [
+                Spacer(),
+                _ProgressChart(),
+                Spacer(),
+                _ProgressChart(),
+                Spacer(),
+                _ProgressChart(),
+                Spacer(),
+                _ProgressChart(),
+                Spacer(),
+              ],
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+///グループごとの進捗状況
+class _ProgressChart extends ConsumerWidget {
+  const _ProgressChart();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.13,
+        ),
+      );
+    }
+    final dailyData = state.dailyData!;
+    final dailyScore = dailyData.quizData.length;
+    final goalScore = state.goalScore;
+    return Container(
+      width: context.width * 0.2,
+      height: context.height * 0.13,
+      alignment: Alignment.center,
       child: Column(
         children: [
           const Spacer(),
-          Row(
-            children: [
-              Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.02,
-                    right: context.width * 0.01,
-                    top: context.width * 0.02,
-                    bottom: context.width * 0.01,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "通算ログイン",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: context.width * 0.05,
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ),
+          Container(
+            alignment: Alignment.center,
+            child: Text(
+              "猫のからだだ", //6文字まで
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: context.height * 0.013,
+                color: context.mainColor,
               ),
-              Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.01,
-                    right: context.width * 0.02,
-                    top: context.width * 0.02,
-                    bottom: context.width * 0.01,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "達成クイズ数",
-                        style: TextStyle(fontSize: context.width * 0.05),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              maxLines: 1,
+            ),
           ),
-          const Spacer(),
-          Row(
+          Gap(context.height * 0.008),
+          Stack(
             children: [
               Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.02,
-                    right: context.width * 0.01,
-                    top: context.width * 0.01,
-                    bottom: context.width * 0.02,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "苦手クイズ数",
-                        style: TextStyle(fontSize: context.width * 0.05),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
+                width: context.width * 0.16,
+                height: context.width * 0.16,
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    const Spacer(),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "$dailyScore",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.025,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        Text(
+                          "％",
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.01,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                    const Spacer(),
+                  ],
                 ),
               ),
               Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.01,
-                    right: context.width * 0.02,
-                    top: context.width * 0.01,
-                    bottom: context.width * 0.02,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "経験値",
-                        style: TextStyle(fontSize: context.width * 0.05),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
+                width: context.width * 0.16,
+                height: context.width * 0.16,
+                child: CircularProgressIndicator(
+                  value: dailyScore / goalScore,
+                  strokeWidth: context.width * 0.015,
+                  color: context.mainColor,
+                  backgroundColor: Colors.grey.shade400,
                 ),
               ),
             ],

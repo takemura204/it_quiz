@@ -59,12 +59,13 @@ class DashboardAnalyticsScreenController
       );
       final nowDate = DateTime(now.year, now.month, now.day);
       final differenceInDays = nowDate.difference(firstSavedDate).inDays;
-      // print({
-      //   totalData.first.day,
-      //   firstSavedDate.day,
-      //   nowDate.day,
-      //   differenceInDays,
-      // });
+      print({
+        "_getTotalData",
+        totalData.first.day,
+        firstSavedDate.day,
+        nowDate.day,
+        differenceInDays,
+      });
       bool _isSameDay(DateTime day1, DateTime day2) {
         return day1.year == day2.year &&
             day1.month == day2.month &&
