@@ -7,11 +7,11 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../controller/dashboard_analytics/bar_data_state.dart';
 import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
 import '../../controller/quiz_item/quiz_item_controller.dart';
-import '../../view/dialog.dart';
 
 part 'dashboard_analytics_view.dart';
 

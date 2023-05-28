@@ -24,17 +24,17 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   final Ref ref;
+  final now = DateTime.now();
 
   @override
   Future initState() async {
     // _resetData(); //データリセット
-    await _loadData(); // データを読み込む
-    await _updateData(); // クイズ追加
+    await loadData(); // データを読み込む
     super.initState();
   }
 
   ///クイズ読み込み
-  Future _loadData() async {
+  Future loadData() async {
     final prefs = await SharedPreferences.getInstance();
     final dailyData = prefs.getString('daily_quiz');
     final dailyScoreData = prefs.getInt('daily_score');
@@ -61,41 +61,66 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       final testQuiz = QuizItemState.fromJson(json.decode(testData));
       state = state.copyWith(testQuiz: testQuiz);
     }
+    //更新
+    _loadDailyQuiz();
+    _loadWeakQuiz();
     _saveData();
   }
 
-  ///クイズ更新
-  Future _updateData() async {
-    addDailyQuiz(); // dailyQuiz追加
-    addWeakQuiz(); // weakQuiz追加
-  }
-
   /// dailyQuiz追加
-  void addDailyQuiz() {
+  void _loadDailyQuiz() {
+    final dailyQuiz = state.dailyQuiz;
+    final timeStamp = dailyQuiz.timeStamp;
     final quizList = [
       ...ref
           .read(quizItemProvider)
           .expand((quizItem) => quizItem.quizList)
           .toList()
     ];
-    final random = Random();
     final pickedQuizList = <QuizState>[];
-    for (int i = 0; i < 5; i++) {
-      if (quizList.isNotEmpty) {
-        final randomIndex = random.nextInt(quizList.length);
-        pickedQuizList.add(quizList[randomIndex]);
-        quizList.removeAt(randomIndex);
-      } else {
-        break;
+    final random = Random();
+    //初回のみ
+    if (timeStamp == null) {
+      for (int i = 0; i < 5; i++) {
+        if (quizList.isNotEmpty) {
+          final randomIndex = random.nextInt(quizList.length);
+          pickedQuizList.add(quizList[randomIndex]);
+          quizList.removeAt(randomIndex);
+        } else {
+          break;
+        }
       }
+      final updateDailyQuiz = dailyItem.copyWith(quizList: pickedQuizList);
+      state = state.copyWith(dailyQuiz: updateDailyQuiz);
+      return;
     }
-    final dailyQuiz = dailyItem.copyWith(quizList: pickedQuizList);
-    state = state.copyWith(dailyQuiz: dailyQuiz);
-    _saveData(); // 保存
+    final saveDate = DateTime(timeStamp.year, timeStamp.month, timeStamp.day);
+    final nowDate = DateTime(now.year, now.month, now.day);
+    final _isSameDay = saveDate.year == nowDate.year &&
+        saveDate.month == nowDate.month &&
+        saveDate.day == nowDate.day;
+    //同じ日の時
+    if (_isSameDay) {
+      return; //更新しない
+    }
+    //違う日の時更新
+    else {
+      for (int i = 0; i < 5; i++) {
+        if (quizList.isNotEmpty) {
+          final randomIndex = random.nextInt(quizList.length);
+          pickedQuizList.add(quizList[randomIndex]);
+          quizList.removeAt(randomIndex);
+        } else {
+          break;
+        }
+      }
+      final updateDailyQuiz = dailyItem.copyWith(quizList: pickedQuizList);
+      state = state.copyWith(dailyQuiz: updateDailyQuiz);
+    }
   }
 
   /// weakQuiz追加
-  void addWeakQuiz() {
+  void _loadWeakQuiz() {
     final weakAllList = ref
         .read(quizItemProvider)
         .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
@@ -107,11 +132,10 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     }).toList();
     final weakQuiz = weakItem.copyWith(quizList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
-    _saveData(); // 保存
   }
 
   /// testQuiz追加
-  void addTestQuiz() {
+  void updateTestQuiz() {
     final testGroup = state.testGroup;
     final testLength = state.selectedTestLength;
     final filteredQuizList = [
@@ -135,7 +159,6 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     }
     final testQuiz = testItem.copyWith(quizList: pickedQuizList);
     state = state.copyWith(testQuiz: testQuiz);
-    _saveData(); // 保存
   }
 
   /// DailyItem
@@ -143,24 +166,46 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final score = quizList.where((x) => x.isJudge == true).toList().length;
     final dailyScore = state.dailyScore;
     final dailyQuiz = state.dailyQuiz;
-    final now = DateTime.now();
-    final isUpdate = dailyQuiz.timeStamp == null ||
-        (dailyQuiz.timeStamp!.year != now.year ||
-            dailyQuiz.timeStamp!.month != now.month ||
-            dailyQuiz.timeStamp!.day != now.day);
-    final updateDailyQuiz = dailyQuiz.copyWith(
-        score: score,
-        isCompleted: true,
-        quizList: quizList,
-        timeStamp: DateTime.now());
-    state = state.copyWith(
-        dailyQuiz: updateDailyQuiz,
-        dailyScore: isUpdate ? dailyScore + 1 : dailyScore);
+    final timeStamp = dailyQuiz.timeStamp;
+    final nowDate = DateTime(now.year, now.month, now.day);
+    if (timeStamp == null) {
+      final updateDailyQuiz = dailyQuiz.copyWith(
+          score: score,
+          isCompleted: true,
+          quizList: quizList,
+          timeStamp: nowDate);
+      state =
+          state.copyWith(dailyQuiz: updateDailyQuiz, dailyScore: dailyScore);
+      _saveData(); // 保存
+      return;
+    }
+    final saveDate = DateTime(timeStamp.year, timeStamp.month, timeStamp.day);
+    final _isSameDay = saveDate.year == nowDate.year &&
+        saveDate.month == nowDate.month &&
+        saveDate.day == nowDate.day;
+
+    if (_isSameDay) {
+      final updateDailyQuiz = dailyQuiz.copyWith(
+          score: score,
+          isCompleted: true,
+          quizList: quizList,
+          timeStamp: nowDate);
+      state =
+          state.copyWith(dailyQuiz: updateDailyQuiz, dailyScore: dailyScore);
+    } else {
+      final updateDailyQuiz = dailyQuiz.copyWith(
+          score: score,
+          isCompleted: true,
+          quizList: quizList,
+          timeStamp: nowDate);
+      state = state.copyWith(
+          dailyQuiz: updateDailyQuiz, dailyScore: dailyScore + 1);
+    }
     _saveData(); // 保存
   }
 
   ///WeakItem更新
-  Future updateWeakItem(List<QuizState> quizList) async {
+  Future updateWeakItem() async {
     //全ての苦手クイズから同じ問題を絞り込み
     final weakAllList = ref
         .read(quizItemProvider)

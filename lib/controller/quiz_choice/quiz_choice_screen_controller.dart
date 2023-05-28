@@ -121,7 +121,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);
-    ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+    ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
   }
 
   ///クリアボタン

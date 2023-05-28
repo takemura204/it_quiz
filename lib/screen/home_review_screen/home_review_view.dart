@@ -360,7 +360,7 @@ class _SimpleDialogOption extends ConsumerWidget {
       onPressed: isGroup
           ? () {
               ref.read(quizItemProvider.notifier).setQuizType(QuizType.test);
-              ref.read(homeReviewScreenProvider.notifier).addTestQuiz();
+              ref.read(homeReviewScreenProvider.notifier).updateTestQuiz();
               final testQuiz = ref.read(homeReviewScreenProvider).testQuiz;
               context.showScreen(
                 QuizChoiceScreenArguments(

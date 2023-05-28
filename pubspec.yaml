@@ -114,6 +114,9 @@ dependencies:
   #ローディング画面をおしゃれにしたい
   flutter_spinkit: ^5.2.0
 
+  #CircularProgressIndicator をカスタムしたい
+  syncfusion_flutter_gauges: ^21.2.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

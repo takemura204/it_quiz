@@ -155,7 +155,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);
-    ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+    ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
   }
 
   ///正解画面に切り替え

@@ -55,12 +55,14 @@ class _BottomNavBar extends ConsumerWidget {
         ],
         currentIndex: state.currentIndex,
         fixedColor: context.mainColor,
-        onTap: (index) {
+        onTap: (index) async {
           ref
               .watch(homeRootScreenControllerProvider.notifier)
               .changeTabIndex(index);
 
-          if (index == 2) {
+          if (index == 1) {
+            await ref.read(homeReviewScreenProvider.notifier).initState();
+          } else if (index == 2) {
             ref.read(dashboardAnalyticsScreenProvider.notifier).initState();
           }
         });

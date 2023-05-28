@@ -113,7 +113,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
       ///　Studyクイズ更新
       case QuizType.study:
         _updateStudyItem(quizList);
-        ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+        ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
         ref
             .read(dashboardAnalyticsScreenProvider.notifier)
             .updateScore(quizList);
@@ -122,7 +122,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
       ///Dailyクイズ更新
       case QuizType.daily:
         ref.read(homeReviewScreenProvider.notifier).updateDailyItem(quizList);
-        ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+        ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
         ref
             .read(dashboardAnalyticsScreenProvider.notifier)
             .updateScore(quizList);
@@ -131,7 +131,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
       ///　Reviewクイズ更新
       case QuizType.review:
         _updateWeakItems(quizList);
-        ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+        ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
         ref
             .read(dashboardAnalyticsScreenProvider.notifier)
             .updateScore(quizList);
@@ -140,7 +140,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
       ///Testクイズ更新
       case QuizType.test:
         ref.read(homeReviewScreenProvider.notifier).updateTestItem(quizList);
-        ref.read(homeReviewScreenProvider.notifier).updateWeakItem(quizList);
+        ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
         ref
             .read(dashboardAnalyticsScreenProvider.notifier)
             .updateScore(quizList);

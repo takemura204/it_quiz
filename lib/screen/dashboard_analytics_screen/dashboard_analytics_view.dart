@@ -70,7 +70,7 @@ class _DailyCart extends ConsumerWidget {
               value: dailyScore / goalScore,
               strokeWidth: context.width * 0.03,
               color: context.mainColor,
-              backgroundColor: Colors.grey.shade400,
+              backgroundColor: Colors.grey.shade300,
             ),
           ),
         ],
@@ -353,69 +353,76 @@ class _ProgressChart extends ConsumerWidget {
         children: [
           const Spacer(),
           Container(
-            alignment: Alignment.center,
-            child: Text(
-              groupName, //6文字まで
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: context.height * 0.015,
-                color: context.mainColor,
-              ),
-              maxLines: 1,
-            ),
-          ),
-          Gap(context.height * 0.01),
-          Stack(
-            children: [
-              Container(
-                width: context.width * 0.16,
-                height: context.width * 0.16,
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    const Spacer(),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "$scoreRatio",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.025,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        Text(
-                          "%",
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.01,
-                            color: Colors.black54,
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                    const Spacer(),
+            width: context.width * 0.2,
+            height: context.width * 0.2,
+            child: SfRadialGauge(axes: [
+              RadialAxis(
+                  minimum: 0,
+                  maximum: quizLength.toDouble(),
+                  showLabels: false,
+                  showTicks: false,
+                  axisLineStyle: AxisLineStyle(
+                    thickness: 0.2,
+                    cornerStyle: CornerStyle.bothCurve,
+                    color: Colors.grey.shade300,
+                    thicknessUnit: GaugeSizeUnit.factor,
+                  ),
+                  pointers: [
+                    RangePointer(
+                      value: score.toDouble(),
+                      cornerStyle: CornerStyle.bothCurve,
+                      width: 0.2,
+                      sizeUnit: GaugeSizeUnit.factor,
+                      color: context.mainColor,
+                    )
                   ],
-                ),
-              ),
-              Container(
-                width: context.width * 0.16,
-                height: context.width * 0.16,
-                child: CircularProgressIndicator(
-                  value: score / quizLength,
-                  strokeWidth: context.width * 0.015,
-                  color: context.mainColor,
-                  backgroundColor: Colors.grey.shade400,
-                ),
-              ),
-            ],
+                  annotations: <GaugeAnnotation>[
+                    GaugeAnnotation(
+                      positionFactor: 0.1,
+                      angle: 90,
+                      widget: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          const Spacer(),
+                          Text(
+                            "$scoreRatio",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.03,
+                              color: context.mainColor,
+                            ),
+                          ),
+                          Text(
+                            "%",
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.015,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
+                    ),
+                    GaugeAnnotation(
+                      positionFactor: 1.1,
+                      angle: 90,
+                      widget: Text(
+                        groupName,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: context.height * 0.015,
+                          color: context.mainColor,
+                        ),
+                        maxLines: 1,
+                      ),
+                    ),
+                  ]),
+            ]),
           ),
           const Spacer(),
         ],
