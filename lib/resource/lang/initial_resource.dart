@@ -8,6 +8,12 @@ class I18n {
   ///アプリ全体
   String get appName => "Kentei Quiz";
 
+  ///Group
+  String get group1 => "TeamA";
+  String get group2 => "TeamB";
+  String get group3 => "TeamC";
+  String get group4 => "TeamD";
+
   ///title
   String get titleStudy => "クイズ";
   String get titleReview => "チャレンジ";

@@ -22,17 +22,17 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
         children: const [
           Gap(5),
 
-          ///グループごとの進捗
-          _GroupProgress(),
-
-          ///目標値設定
-          _SetGoalY(),
-
           ///今日のデータ
           _DailyDashBoard(),
 
           ///学習状況ダッシュボード
           _WeekDashboard(),
+
+          ///グループごとの進捗
+          _GroupProgress(),
+
+          ///目標値設定
+          _SetGoalY(),
         ],
       ),
     );

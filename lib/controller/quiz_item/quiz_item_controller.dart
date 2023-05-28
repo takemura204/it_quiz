@@ -18,7 +18,7 @@ final quizItemProvider =
 
 class QuizItemController extends StateNotifier<List<QuizItemState>>
     with LocatorMixin {
-  QuizItemController(this.ref) : super(_initialValue()) {
+  QuizItemController(this.ref) : super([]) {
     initState();
   }
   final Ref ref;
@@ -54,10 +54,11 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   /// 端末に保存されているデータを読み込む
   Future _loadData() async {
     final prefs = await SharedPreferences.getInstance();
-    final data = prefs.getStringList('quiz_items');
-
-    if (data != null) {
-      state = data.map((e) => QuizItemState.fromJson(json.decode(e))).toList();
+    final quizItemDataJson = prefs.getStringList('quiz_items');
+    if (quizItemDataJson != null && quizItemDataJson.isNotEmpty) {
+      state = quizItemDataJson
+          .map((e) => QuizItemState.fromJson(json.decode(e)))
+          .toList();
 
       // stateの各要素に対して、quizStudyItemsの更新を適用
       state = state.map((item) {
@@ -91,8 +92,10 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
         return item;
       }).toList();
     } else {
-      state = quizStudyItems;
+      print("null or empty list");
+      state = _initialValue();
     }
+    _saveData();
   }
 
   /// 現在のインデックスを取得し、更新

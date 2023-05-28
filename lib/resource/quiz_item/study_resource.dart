@@ -1,3 +1,4 @@
+import 'package:kentei_quiz/resource/lang/initial_resource.dart';
 import 'package:kentei_quiz/resource/quiz/quiz_resource.dart';
 
 import '../../controller/quiz_item/quiz_item_state.dart';
@@ -6,7 +7,7 @@ import '../../controller/quiz_item/quiz_item_state.dart';
 List<QuizItemState> quizStudyItems = [
   QuizItemState(
     id: 1,
-    group: "TeamA",
+    group: I18n().group1,
     title: "問題A-1",
     isCompleted: false,
     quizList: quiz1,
@@ -15,7 +16,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 2,
-    group: "TeamA",
+    group: I18n().group1,
     title: "問題A-2",
     isCompleted: false,
     quizList: quiz2,
@@ -24,7 +25,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 3,
-    group: "TeamB",
+    group: I18n().group2,
     title: "問題B-1",
     isCompleted: false,
     quizList: quiz1,
@@ -33,7 +34,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 4,
-    group: "TeamB",
+    group: I18n().group2,
     title: "問題B-2",
     isCompleted: false,
     quizList: quiz1,
@@ -42,7 +43,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 5,
-    group: "TeamC",
+    group: I18n().group3,
     title: "問題C-1",
     isCompleted: false,
     quizList: quiz1,
@@ -51,7 +52,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 6,
-    group: "TeamC",
+    group: I18n().group3,
     title: "問題C-2",
     isCompleted: false,
     quizList: quiz1,
@@ -60,7 +61,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 7,
-    group: "TeamA",
+    group: I18n().group1,
     title: "問題A-3",
     isCompleted: false,
     quizList: quiz1,
@@ -69,7 +70,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 8,
-    group: "TeamB",
+    group: I18n().group2,
     title: "問題B-3",
     isCompleted: false,
     quizList: quiz1,
@@ -78,7 +79,7 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 9,
-    group: "TeamC",
+    group: I18n().group3,
     title: "問題C-3",
     isCompleted: false,
     quizList: quiz1,
@@ -87,8 +88,17 @@ List<QuizItemState> quizStudyItems = [
   ),
   QuizItemState(
     id: 10,
-    group: "TeamD",
+    group: I18n().group4,
     title: "問題D-1",
+    isCompleted: false,
+    quizList: quiz1,
+    score: 0,
+    timeStamp: null,
+  ),
+  QuizItemState(
+    id: 11,
+    group: I18n().group4,
+    title: "問題D-2",
     isCompleted: false,
     quizList: quiz1,
     score: 0,

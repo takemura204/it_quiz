@@ -243,6 +243,7 @@ class DashboardAnalyticsScreenController
     final tabIndex = index;
     state =
         state.copyWith(selectedDayRange: selectedDayRange, tabIndex: tabIndex);
+    print(tabIndex);
   }
 
   ///先週へ

@@ -132,7 +132,10 @@ class _SelectDayLength extends ConsumerWidget {
     final controller = ref.watch(dashboardAnalyticsScreenProvider.notifier);
     final tabs = controller.tabs;
     final initialIndex = tabs.indexOf(state.selectedDayRange);
+    final tabIndex = state.tabIndex;
     final dayRangeText = state.dayRangeText;
+    final weekOffset = state.weekOffset;
+    final monthOffset = state.monthOffset;
     return Container(
       height: context.height * 0.04,
       margin: EdgeInsets.symmetric(
@@ -142,10 +145,8 @@ class _SelectDayLength extends ConsumerWidget {
           ///期間
           Container(
             width: context.width * 0.55,
-            // color: Colors.red,
             child: Row(
               children: [
-                const Spacer(),
                 IconButton(
                   padding: EdgeInsets.all(context.width * 0.01),
                   iconSize: context.width * 0.06,
@@ -154,7 +155,10 @@ class _SelectDayLength extends ConsumerWidget {
                       .tapPreButton(),
                   icon: Icon(
                     Icons.arrow_back_ios,
-                    color: context.mainColor,
+                    color: ((tabIndex == 0 && weekOffset == -3) ||
+                            (tabIndex == 1 && monthOffset == -2))
+                        ? Colors.grey.shade400
+                        : context.mainColor,
                   ),
                 ),
                 const Spacer(),
@@ -164,7 +168,7 @@ class _SelectDayLength extends ConsumerWidget {
                   dayRangeText,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.05),
+                      fontSize: context.width * 0.04),
                 ),
                 const Spacer(),
                 IconButton(
@@ -175,16 +179,18 @@ class _SelectDayLength extends ConsumerWidget {
                       .tapNextButton(),
                   icon: Icon(
                     Icons.arrow_forward_ios,
-                    color: context.mainColor,
+                    color: ((tabIndex == 0 && weekOffset == 0) ||
+                            (tabIndex == 1 && monthOffset == 0))
+                        ? Colors.grey.shade400
+                        : context.mainColor,
                   ),
                 ),
-                const Spacer(),
               ],
             ),
           ),
           const Spacer(),
           Container(
-            width: context.width * 0.3,
+            width: context.width * 0.35,
             alignment: Alignment.center,
             // color: Colors.blue,
             decoration: BoxDecoration(
