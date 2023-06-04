@@ -23,8 +23,8 @@ class HomeDashboardScreen extends ConsumerWidget {
         appBar: _AppBar(),
         body: TabBarView(
           children: [
-            DashBoardAnalyticsScreen(),
             DashBoardRankScreen(),
+            DashBoardAnalyticsScreen(),
           ],
         ),
       ),

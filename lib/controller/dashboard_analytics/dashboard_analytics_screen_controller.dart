@@ -22,8 +22,8 @@ class DashboardAnalyticsScreenController
   }
   final Ref ref;
   final tabs = [7, 31];
-  final now = DateTime.now();
-  final days = DateTime.now().weekday - 1;
+  // final now = DateTime.now();
+  // final days = DateTime.now().weekday - 1;
 
   @override
   void initState() {
@@ -45,6 +45,7 @@ class DashboardAnalyticsScreenController
 
   /// "全期間"のダッシュボードデータ取得
   Future _getTotalData() async {
+    final now = DateTime.now();
     final prefs = await SharedPreferences.getInstance();
     final totalDataJson = prefs.getString('total_data');
     if (totalDataJson != null) {
@@ -119,6 +120,7 @@ class DashboardAnalyticsScreenController
 
   ///「月間」のデータ取得
   void _getMonthlyData() {
+    final now = DateTime.now();
     final totalData = [...state.totalData];
     final currentMonthDays = DateTime(now.year, now.month + 1, 0).day;
     final monthlyData = _groupDataByPeriod(
@@ -243,7 +245,6 @@ class DashboardAnalyticsScreenController
     final tabIndex = index;
     state =
         state.copyWith(selectedDayRange: selectedDayRange, tabIndex: tabIndex);
-    print(tabIndex);
   }
 
   ///先週へ
@@ -287,6 +288,8 @@ class DashboardAnalyticsScreenController
   }
 
   String getWeekText() {
+    final now = DateTime.now();
+    final days = DateTime.now().weekday - 1;
     final weekOffset = state.weekOffset;
     final startOfWeek =
         now.subtract(Duration(days: days)).add(Duration(days: 7 * weekOffset));
@@ -297,6 +300,7 @@ class DashboardAnalyticsScreenController
   }
 
   String getMonthText() {
+    final now = DateTime.now();
     final monthOffset = state.monthOffset;
     final currentMonth = now.month + monthOffset;
 

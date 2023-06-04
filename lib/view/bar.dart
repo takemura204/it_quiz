@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 ///ログインエラーBar
 class LoginErrorBar extends ConsumerWidget {
@@ -136,7 +137,7 @@ class LineProgressBar extends ConsumerWidget {
           height: height,
           width: width,
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(25)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             child: LinearProgressIndicator(
               value: (quizLength != 0) ? score / quizLength : 0.0,
               color: context.mainColor,
@@ -145,19 +146,84 @@ class LineProgressBar extends ConsumerWidget {
           ),
         ),
         Gap(context.width * 0.01),
-        Text(
-          "$score",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: context.width * 0.035,
-          ),
-        ),
-        Text(
-          "/$quizLength",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: context.width * 0.03),
+        Row(
+          children: [
+            Text(
+              "$score",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: context.width * 0.035,
+              ),
+            ),
+            Text(
+              "/$quizLength",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: context.width * 0.03),
+            ),
+          ],
         ),
       ],
+    );
+  }
+}
+
+class ProgressRangeChart extends ConsumerWidget {
+  const ProgressRangeChart({
+    required this.width,
+    required this.size,
+    required this.length,
+    required this.score,
+    required this.widget,
+  });
+  final double width;
+  final double size;
+  final int length;
+  final int score;
+  final Widget widget;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      child: SfRadialGauge(axes: [
+        RadialAxis(
+            startAngle: 270,
+            endAngle: 270,
+            minimum: 0,
+            maximum: length.toDouble(),
+            showLabels: false,
+            showTicks: false,
+            axisLineStyle: AxisLineStyle(
+              thickness: 0.2,
+              color: Colors.grey.shade300,
+              thicknessUnit: GaugeSizeUnit.factor,
+            ),
+            pointers: [
+              RangePointer(
+                value: score.toDouble(),
+                cornerStyle: CornerStyle.bothCurve,
+                width: 0.2,
+                sizeUnit: GaugeSizeUnit.factor,
+                color: context.mainColor,
+              )
+            ],
+            annotations: [
+              GaugeAnnotation(
+                positionFactor: 0.1,
+                angle: 90,
+                widget: Container(
+                  width: width,
+                  height: size,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.height * 0.02,
+                      vertical: context.height * 0.02),
+                  child: widget,
+                ),
+              ),
+            ]),
+      ]),
     );
   }
 }

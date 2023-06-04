@@ -166,7 +166,7 @@ class _SetGoalY extends ConsumerWidget {
         children: [
           const Spacer(),
           Text(
-            "1日に何問勉強したいですか？",
+            "毎日何問解きたいですか？",
             style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: context.width * 0.04,

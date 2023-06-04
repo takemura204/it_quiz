@@ -9,7 +9,7 @@ import '../../controller/home_review/home_review_screen_controller.dart';
 import '../../controller/quiz_item/quiz_item_controller.dart';
 import '../../controller/quiz_item/quiz_item_state.dart';
 import '../../resource/lang/initial_resource.dart';
-import '../../view/barchart.dart';
+import '../../view/bar.dart';
 import '../../view/button.dart';
 import '../screen_argument.dart';
 

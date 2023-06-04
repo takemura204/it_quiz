@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/dashboard_rank/dahboard_rank_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/view/bar.dart';
+
+import '../../view/icon.dart';
+
+part 'dashboard_rank_view.dart';
 
 class DashBoardRankScreen extends ConsumerWidget {
   const DashBoardRankScreen();
@@ -16,7 +22,7 @@ class DashBoardRankScreen extends ConsumerWidget {
           _DailyMission(),
 
           ///詳細
-          _TotalScore(),
+          _RankRate(),
         ],
       ),
     );
@@ -30,22 +36,53 @@ class _DailyMission extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.2,
+      height: context.height * 0.36,
       width: context.width * 1,
       child: Card(
         elevation: 3,
-        color: Colors.blue.shade200,
+        color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: context.width * 0.02, vertical: context.width * 0.01),
         shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
           children: [
             const Spacer(),
-            Text(
-              "デイリーミッション",
-              style: TextStyle(fontSize: context.width * 0.05),
+            const _Title(
+              title: "デイリーミッション",
+              subtitle: "あと〇〇時間",
+              icon: Icons.pending_actions_outlined,
+            ),
+            const Spacer(),
+            Container(
+              height: context.height * 0.27,
+              margin: EdgeInsets.symmetric(
+                  horizontal: context.width * 0.02,
+                  vertical: context.width * 0.01),
+              child: Column(
+                children: const [
+                  Spacer(),
+
+                  ///ミッション1
+                  _DailyMissionCard(
+                      title: "クイズを10問解く", isDone: true, point: 10),
+
+                  ///ミッション2
+                  _DailyMissionCard(
+                      title: "今日のクイズに挑戦する", isDone: false, point: 10),
+
+                  ///ミッション3
+                  _DailyMissionCard(
+                      title: "クイズをコンプリートする", isDone: false, point: 15),
+
+                  Spacer(),
+                ],
+              ),
             ),
             const Spacer(),
           ],
@@ -55,130 +92,62 @@ class _DailyMission extends ConsumerWidget {
   }
 }
 
-class _TotalScore extends ConsumerWidget {
-  const _TotalScore();
+///　ランクレート
+class _RankRate extends ConsumerWidget {
+  const _RankRate();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final rankColor = ref.watch(dashboardRankProvider.notifier).rankData;
     return Container(
-      height: context.height * 0.2,
-      width: context.width * 1,
-      margin: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.width * 0.01),
-      color: Colors.grey.shade200,
-      child: Column(
-        children: [
-          const Spacer(),
-          Row(
-            children: [
-              Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.02,
-                    right: context.width * 0.01,
-                    top: context.width * 0.02,
-                    bottom: context.width * 0.01,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "通算ログイン",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: context.width * 0.05,
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.01,
-                    right: context.width * 0.02,
-                    top: context.width * 0.02,
-                    bottom: context.width * 0.01,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "達成クイズ数",
-                        style: TextStyle(fontSize: context.width * 0.05),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+      height: context.height * 0.3,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
           ),
-          const Spacer(),
-          Row(
-            children: [
-              Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.02,
-                    right: context.width * 0.01,
-                    top: context.width * 0.01,
-                    bottom: context.width * 0.02,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "苦手クイズ数",
-                        style: TextStyle(fontSize: context.width * 0.05),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            ///タイトル
+            const _Title(
+              title: "称号レベル",
+              subtitle: "次まであと〇〇pt",
+              icon: Icons.workspace_premium_outlined,
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                const Spacer(),
+
+                ///バッチアイコン
+                Container(
+                  width: context.width * 0.3,
+                  height: context.height * 0.2,
+                  color: Colors.black12,
+                  child: const _RankBatch(),
                 ),
-              ),
-              Container(
-                height: context.height * 0.1,
-                width: context.width * 0.48,
-                child: Card(
-                  elevation: 3,
-                  margin: EdgeInsets.only(
-                    left: context.width * 0.01,
-                    right: context.width * 0.02,
-                    top: context.width * 0.01,
-                    bottom: context.width * 0.02,
-                  ),
-                  color: Colors.green.shade200,
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "経験値",
-                        style: TextStyle(fontSize: context.width * 0.05),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
+                const Spacer(),
+
+                /// 称号
+                Container(
+                  width: context.width * 0.6,
+                  height: context.height * 0.2,
+                  color: Colors.blueAccent,
+                  child: const _RankName(),
                 ),
-              ),
-            ],
-          ),
-          const Spacer(),
-        ],
+                const Spacer(),
+              ],
+            ),
+            const Spacer(),
+          ],
+        ),
       ),
     );
   }

@@ -24,7 +24,6 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   final Ref ref;
-  final now = DateTime.now();
 
   @override
   Future initState() async {
@@ -69,6 +68,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
 
   /// dailyQuiz追加
   void _loadDailyQuiz() {
+    final now = DateTime.now();
     final dailyQuiz = state.dailyQuiz;
     final timeStamp = dailyQuiz.timeStamp;
     final quizList = [
@@ -79,32 +79,14 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     ];
     final pickedQuizList = <QuizState>[];
     final random = Random();
-    //初回のみ
-    if (timeStamp == null) {
-      for (int i = 0; i < 5; i++) {
-        if (quizList.isNotEmpty) {
-          final randomIndex = random.nextInt(quizList.length);
-          pickedQuizList.add(quizList[randomIndex]);
-          quizList.removeAt(randomIndex);
-        } else {
-          break;
-        }
-      }
-      final updateDailyQuiz = dailyItem.copyWith(quizList: pickedQuizList);
-      state = state.copyWith(dailyQuiz: updateDailyQuiz);
-      return;
-    }
-    final saveDate = DateTime(timeStamp.year, timeStamp.month, timeStamp.day);
+
+    final saveDate = timeStamp != null
+        ? DateTime(timeStamp.year, timeStamp.month, timeStamp.day)
+        : null;
     final nowDate = DateTime(now.year, now.month, now.day);
-    final _isSameDay = saveDate.year == nowDate.year &&
-        saveDate.month == nowDate.month &&
-        saveDate.day == nowDate.day;
-    //同じ日の時
-    if (_isSameDay) {
-      return; //更新しない
-    }
-    //違う日の時更新
-    else {
+
+    //初回のみ or 違う日の時更新
+    if (timeStamp == null || !_isSameDay(saveDate, nowDate)) {
       for (int i = 0; i < 5; i++) {
         if (quizList.isNotEmpty) {
           final randomIndex = random.nextInt(quizList.length);
@@ -114,9 +96,18 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
           break;
         }
       }
-      final updateDailyQuiz = dailyItem.copyWith(quizList: pickedQuizList);
+      final updateDailyQuiz = dailyQuiz.copyWith(quizList: pickedQuizList);
       state = state.copyWith(dailyQuiz: updateDailyQuiz);
     }
+  }
+
+  bool _isSameDay(DateTime? date1, DateTime date2) {
+    if (date1 == null) {
+      return false;
+    }
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
 
   /// weakQuiz追加
@@ -163,44 +154,29 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
 
   /// DailyItem
   void updateDailyItem(List<QuizState> quizList) {
+    final now = DateTime.now();
     final score = quizList.where((x) => x.isJudge == true).toList().length;
     final dailyScore = state.dailyScore;
     final dailyQuiz = state.dailyQuiz;
     final timeStamp = dailyQuiz.timeStamp;
+    final saveDate = timeStamp != null
+        ? DateTime(timeStamp.year, timeStamp.month, timeStamp.day)
+        : null;
     final nowDate = DateTime(now.year, now.month, now.day);
-    if (timeStamp == null) {
-      final updateDailyQuiz = dailyQuiz.copyWith(
-          score: score,
-          isCompleted: true,
-          quizList: quizList,
-          timeStamp: nowDate);
-      state =
-          state.copyWith(dailyQuiz: updateDailyQuiz, dailyScore: dailyScore);
-      _saveData(); // 保存
-      return;
-    }
-    final saveDate = DateTime(timeStamp.year, timeStamp.month, timeStamp.day);
-    final _isSameDay = saveDate.year == nowDate.year &&
-        saveDate.month == nowDate.month &&
-        saveDate.day == nowDate.day;
+    int updatedDailyScore = dailyScore; // 初期値として現在のdailyScoreを設定
 
-    if (_isSameDay) {
-      final updateDailyQuiz = dailyQuiz.copyWith(
-          score: score,
-          isCompleted: true,
-          quizList: quizList,
-          timeStamp: nowDate);
-      state =
-          state.copyWith(dailyQuiz: updateDailyQuiz, dailyScore: dailyScore);
-    } else {
-      final updateDailyQuiz = dailyQuiz.copyWith(
-          score: score,
-          isCompleted: true,
-          quizList: quizList,
-          timeStamp: nowDate);
-      state = state.copyWith(
-          dailyQuiz: updateDailyQuiz, dailyScore: dailyScore + 1);
+    //初回のみ or 違う日の時更新
+    if (timeStamp == null || !_isSameDay(timeStamp, nowDate)) {
+      updatedDailyScore++; // タイムスタンプがnullまたは日付が違う場合、スコアをインクリメント
     }
+    final updateDailyQuiz = dailyQuiz.copyWith(
+        score: score,
+        isCompleted: true,
+        quizList: quizList,
+        timeStamp: nowDate);
+
+    state = state.copyWith(
+        dailyQuiz: updateDailyQuiz, dailyScore: updatedDailyScore);
     _saveData(); // 保存
   }
 

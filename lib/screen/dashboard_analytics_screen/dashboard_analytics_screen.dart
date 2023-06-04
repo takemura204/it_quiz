@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/view/bar.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../controller/dashboard_analytics/bar_data_state.dart';
@@ -43,6 +44,18 @@ class _DailyDashBoard extends ConsumerWidget {
   const _DailyDashBoard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.22,
+        ),
+      );
+    }
+    final dailyData = state.dailyData!;
+    final dailyScore = dailyData.quizData.length;
+    final goalScore = state.goalScore;
     return Container(
       height: context.height * 0.22,
       child: Card(
@@ -58,17 +71,55 @@ class _DailyDashBoard extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
-          children: const [
-            Spacer(),
+          children: [
+            const Spacer(),
 
             ///チャート
-            _DailyCart(),
-            Spacer(),
+            ProgressRangeChart(
+              width: context.height * 0.2,
+              size: context.height * 0.2,
+              length: goalScore,
+              score: dailyScore,
+              widget: Column(
+                children: [
+                  const Spacer(),
+                  Text(
+                    "今日の\n学習問題数",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: context.height * 0.015,
+                      height: 1.2,
+                    ),
+                  ),
+                  Text(
+                    "$dailyScore",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.height * 0.045,
+                      color: context.mainColor,
+                    ),
+                  ),
+                  Text(
+                    "/$goalScore",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.height * 0.015,
+                      color: context.mainColor,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+            const Spacer(),
 
             ///今日の一言
-            _DailyMessage(),
+            const _DailyMessage(),
 
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),
@@ -389,7 +440,7 @@ class _BottomWeekTitles extends ConsumerWidget {
     final isToday = DateTime.now().day == barData.day.day &&
         DateTime.now().weekday == barData.day.weekday;
     final displayText =
-        "${barData.weekDay} \n ${barData.day.month}/${barData.day.day}";
+        "${barData.day.month}/${barData.day.day}\n${barData.weekDay}";
 
     return SideTitleWidget(
       axisSide: meta.axisSide,

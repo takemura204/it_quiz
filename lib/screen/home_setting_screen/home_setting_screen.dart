@@ -7,7 +7,7 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
-import '../../view/barchart.dart';
+import '../../view/bar.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
 import '../screen_argument.dart';
@@ -95,15 +95,15 @@ class HomeSettingScreen extends ConsumerWidget {
                   },
                 ),
                 SettingListBar(
-                  title: "毎日の目標設定",
+                  title: "毎日の目標",
                   onTap: () {
                     showDialog(
                         context: context,
                         builder: (context) {
                           return DialogClose1(
-                            title: "目標設定",
+                            title: "目標を設定",
                             subWidget: const _SetGoalY(),
-                            doneText: "目標を設定する",
+                            doneText: "保存",
                             onPressed: () {
                               Navigator.pop(context);
                             },

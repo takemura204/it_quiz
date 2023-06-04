@@ -1,84 +1,5 @@
 part of 'dashboard_analytics_screen.dart';
 
-/// 今日のCircle Chart
-class _DailyCart extends ConsumerWidget {
-  const _DailyCart();
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
-    if (state.isLoading) {
-      return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.22,
-        ),
-      );
-    }
-    final dailyData = state.dailyData!;
-    final dailyScore = dailyData.quizData.length;
-    final goalScore = state.goalScore;
-    return Container(
-      width: context.width * 0.45,
-      alignment: Alignment.center,
-      child: Stack(
-        children: [
-          Container(
-            width: context.height * 0.16,
-            height: context.height * 0.16,
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(
-                horizontal: context.height * 0.02,
-                vertical: context.height * 0.02),
-            child: Column(
-              children: [
-                const Spacer(),
-                Text(
-                  "今日の\n学習問題数",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: context.height * 0.015,
-                    height: 1.2,
-                  ),
-                ),
-                Text(
-                  "$dailyScore",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.height * 0.045,
-                    color: context.mainColor,
-                  ),
-                ),
-                Text(
-                  "/$goalScore",
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.height * 0.015,
-                    color: context.mainColor,
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
-          Container(
-            width: context.height * 0.16,
-            height: context.height * 0.16,
-            child: CircularProgressIndicator(
-              value: dailyScore / goalScore,
-              strokeWidth: context.width * 0.03,
-              color: context.mainColor,
-              backgroundColor: Colors.grey.shade300,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 ///今日のメッセージ
 class _DailyMessage extends ConsumerWidget {
   const _DailyMessage();
@@ -312,13 +233,13 @@ class _GroupProgress extends ConsumerWidget {
             Row(
               children: [
                 const Spacer(),
-                _ProgressChart(groupName: group[0]),
+                _ProgressMeterCart(groupName: group[0]),
                 const Spacer(),
-                _ProgressChart(groupName: group[1]),
+                _ProgressMeterCart(groupName: group[1]),
                 const Spacer(),
-                _ProgressChart(groupName: group[2]),
+                _ProgressMeterCart(groupName: group[2]),
                 const Spacer(),
-                _ProgressChart(groupName: group[3]),
+                _ProgressMeterCart(groupName: group[3]),
                 const Spacer(),
               ],
             ),
@@ -331,8 +252,8 @@ class _GroupProgress extends ConsumerWidget {
 }
 
 ///グループごとの進捗状況
-class _ProgressChart extends ConsumerWidget {
-  const _ProgressChart({required this.groupName});
+class _ProgressMeterCart extends ConsumerWidget {
+  const _ProgressMeterCart({required this.groupName});
   final String groupName;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

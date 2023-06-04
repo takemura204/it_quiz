@@ -24,19 +24,19 @@ extension BarDataEX on BarData {
   String get weekDay {
     switch (day.weekday) {
       case 1:
-        return "Mon";
+        return "(月)";
       case 2:
-        return "Tue";
+        return "(火)";
       case 3:
-        return "Wed";
+        return "(水)";
       case 4:
-        return "Thu";
+        return "(木)";
       case 5:
-        return "Fri";
+        return "(金)";
       case 6:
-        return "Sat";
+        return "(土)";
       case 7:
-        return "Sun";
+        return "(日)";
       default:
         return "";
     }
