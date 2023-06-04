@@ -119,14 +119,17 @@ class SettingListBar extends ConsumerWidget {
   }
 }
 
-class LineProgressBar extends ConsumerWidget {
-  const LineProgressBar(
-      {required this.height,
-      required this.width,
-      required this.score,
-      required this.quizLength});
+class ProgressLineBar extends ConsumerWidget {
+  const ProgressLineBar({
+    required this.height,
+    required this.width,
+    required this.score,
+    required this.quizLength,
+    required this.isUnit,
+  });
   final double height;
   final double width;
+  final bool isUnit;
   final int score;
   final int quizLength;
   @override
@@ -137,7 +140,7 @@ class LineProgressBar extends ConsumerWidget {
           height: height,
           width: width,
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             child: LinearProgressIndicator(
               value: (quizLength != 0) ? score / quizLength : 0.0,
               color: context.mainColor,
@@ -146,22 +149,24 @@ class LineProgressBar extends ConsumerWidget {
           ),
         ),
         Gap(context.width * 0.01),
-        Row(
-          children: [
-            Text(
-              "$score",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: context.width * 0.035,
+        if (isUnit)
+          Row(
+            children: [
+              Text(
+                "$score",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: context.width * 0.035,
+                ),
               ),
-            ),
-            Text(
-              "/$quizLength",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: context.width * 0.03),
-            ),
-          ],
-        ),
+              Text(
+                "/$quizLength",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.width * 0.03),
+              ),
+            ],
+          ),
       ],
     );
   }

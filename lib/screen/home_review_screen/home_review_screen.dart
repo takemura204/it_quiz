@@ -69,19 +69,23 @@ class _DailyQuiz extends ConsumerWidget {
       children: [
         _QuizButton(
           title: "今日のクイズ",
-          subWidget: LineProgressBar(
-              height: context.height * 0.01,
-              width: context.width * 0.35,
-              score: score,
-              quizLength: quizLength),
+          subWidget: ProgressLineBar(
+            height: context.height * 0.01,
+            width: context.width * 0.35,
+            score: score,
+            quizLength: quizLength,
+            isUnit: true,
+          ),
           icon: Icons.help_center_outlined,
           score: dailyScore,
           unit: "日目",
           onTap: () {
             ref.read(quizItemProvider.notifier).setQuizType(QuizType.daily);
-            context.showScreen(QuizChoiceScreenArguments(
-              item: dailyQuiz,
-            ).generateRoute());
+            context.showScreen(
+              QuizChoiceScreenArguments(
+                item: dailyQuiz,
+              ).generateRoute(),
+            );
           },
         ),
       ],

@@ -18,40 +18,40 @@ class DashboardRankController extends StateNotifier<DashboardRankState>
   final Ref ref;
   final rankData = [
     // ビギナーランク
-    RankData("ビギナーランク", [Color(0xFFE0F7FA), Color(0xFF00838F)], 200,
-        Icons.grade_rounded),
+    RankData(
+        "ビギナーランク", [Color(0xFFE0F7FA), Color(0xFF00838F)], 200, Icons.pets),
 
     // ルーキーランク
-    RankData("ルーキーランク", [Color(0xFFE8F5E9), Color(0xFF1B5E20)], 400,
-        Icons.stars_rounded),
+    RankData(
+        "ルーキーランク", [Color(0xFFE8F5E9), Color(0xFF1B5E20)], 400, Icons.pets),
 
     // ブロンズランク
-    RankData("ブロンズランク", [Color(0xFFFFF8E1), Color(0xFFFF6F00)], 600,
-        Icons.emoji_events_rounded),
+    RankData(
+        "ブロンズランク", [Color(0xFFFFF8E1), Color(0xFFFF6F00)], 600, Icons.pets),
 
     // シルバーランク
-    RankData("シルバーランク", [Color(0xFFECEFF1), Color(0xFF263238)], 800,
-        Icons.verified_rounded),
+    RankData(
+        "シルバーランク", [Color(0xFFECEFF1), Color(0xFF263238)], 800, Icons.pets),
 
     // ゴールドランク
-    RankData("ゴールドランク", [Color(0xFFFFF9C4), Color(0xFFFFA000)], 1000,
-        Icons.verified_user_rounded),
+    RankData(
+        "ゴールドランク", [Color(0xFFFFF9C4), Color(0xFFFFA000)], 1000, Icons.pets),
 
     // プラチナランク
-    RankData("プラチナランク", [Color(0xFFE1F5FE), Color(0xFF01579B)], 1200,
-        Icons.shield_rounded),
+    RankData(
+        "プラチナランク", [Color(0xFFE1F5FE), Color(0xFF01579B)], 1200, Icons.pets),
 
     // チャンピオンランク
-    RankData("チャンピオンランク", [Color(0xFFE0F2F1), Color(0xFF004D40)], 1400,
-        Icons.military_tech_rounded),
+    RankData(
+        "チャンピオンランク", [Color(0xFFE0F2F1), Color(0xFF004D40)], 1400, Icons.pets),
 
     // マスターランク
-    RankData("マスターランク", [Color(0xFFF3E5F5), Color(0xFF4A148C)], 1600,
-        Icons.emoji_flags_rounded),
+    RankData(
+        "マスターランク", [Color(0xFFF3E5F5), Color(0xFF4A148C)], 1600, Icons.pets),
 
     // レジェンドランク
-    RankData("レジェンドランク", [Color(0xFFFFEBEE), Color(0xFFB71C1C)], 1800,
-        Icons.king_bed_rounded),
+    RankData(
+        "レジェンドランク", [Color(0xFFFFEBEE), Color(0xFFB71C1C)], 1800, Icons.pets),
   ];
 
   @override

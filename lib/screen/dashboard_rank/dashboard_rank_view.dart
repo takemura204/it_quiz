@@ -119,11 +119,13 @@ class _DailyMissionCard extends ConsumerWidget {
                   ),
                 ),
                 Gap(context.width * 0.005),
-                LineProgressBar(
-                    height: context.height * 0.015,
-                    width: context.width * 0.6,
-                    score: 1,
-                    quizLength: 10),
+                ProgressLineBar(
+                  height: context.height * 0.015,
+                  width: context.width * 0.6,
+                  score: 1,
+                  quizLength: 10,
+                  isUnit: true,
+                ),
                 const Spacer(),
               ],
             ),
@@ -147,52 +149,39 @@ class _RankBatch extends ConsumerWidget {
         ref.read(dashboardRankProvider.notifier).tap(rankIndex);
       },
       child: Container(
-        width: context.width * 0.3,
-        height: context.width * 0.3,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-        ),
+        width: context.width * 0.2,
+        height: context.width * 0.2,
         child: Stack(
           alignment: Alignment.center,
           children: [
-            ShaderMask(
-              child: Icon(
-                Icons.circle, // 変更されたアイコン
-                size: context.width * 0.3,
-                color: Colors.white,
-              ),
-              shaderCallback: (Rect rect) {
-                return LinearGradient(
-                  colors: [
-                    rankData[rankIndex].colors.first,
-                    rankData[rankIndex].colors.last,
-                  ],
-                  begin: Alignment.topRight,
-                  end: Alignment.topLeft,
-                ).createShader(rect);
-              },
-            ),
             Icon(
-              Icons.circle, // 変更されたアイコン
-              size: context.width * 0.27,
-              color: Colors.white,
+              Icons.workspace_premium_outlined, // 変更されたアイコン
+              size: context.width * 0.3,
+              color: context.mainColor,
             ),
-            ShaderMask(
-              child: Icon(
-                Icons.school, // 変更されたアイコン
-                size: context.width * 0.15,
-                color: Colors.white,
+            Container(
+              width: context.width * 0.2,
+              height: context.width * 0.2,
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Icon(
+                        Icons.circle, // 変更されたアイコン
+                        size: context.width * 0.15,
+                        color: context.backgroundColor,
+                      ),
+                      Icon(
+                        Icons.pets, // 変更されたアイコン
+                        size: context.width * 0.1,
+                        color: context.mainColor,
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                ],
               ),
-              shaderCallback: (Rect rect) {
-                return LinearGradient(
-                  colors: [
-                    rankData[rankIndex].colors.first,
-                    rankData[rankIndex].colors.last,
-                  ],
-                  begin: Alignment.topRight,
-                  end: Alignment.topLeft,
-                ).createShader(rect);
-              },
             ),
           ],
         ),
@@ -209,15 +198,15 @@ class _RankName extends ConsumerWidget {
     final rankIndex = ref.watch(dashboardRankProvider).rankIndex;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const Spacer(),
             Text(
               rankData[rankIndex].rankName,
               style: TextStyle(
-                  fontSize: context.height * 0.022,
+                  fontSize: context.height * 0.025,
                   color: context.mainColor,
                   fontWeight: FontWeight.bold),
             ),
@@ -225,6 +214,16 @@ class _RankName extends ConsumerWidget {
           ],
         ),
         const Spacer(),
+        Container(
+          alignment: Alignment.centerRight,
+          child: Text(
+            "100,000pt",
+            style: TextStyle(
+                fontSize: context.height * 0.045,
+                color: context.mainColor,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
       ],
     );
   }

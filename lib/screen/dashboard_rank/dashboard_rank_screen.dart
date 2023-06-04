@@ -21,7 +21,7 @@ class DashBoardRankScreen extends ConsumerWidget {
           ///デイリーミッション
           _DailyMission(),
 
-          ///詳細
+          ///称号レベル
           _RankRate(),
         ],
       ),
@@ -118,7 +118,7 @@ class _RankRate extends ConsumerWidget {
             ///タイトル
             const _Title(
               title: "称号レベル",
-              subtitle: "次まであと〇〇pt",
+              subtitle: "",
               icon: Icons.workspace_premium_outlined,
             ),
             const Spacer(),
@@ -129,23 +129,62 @@ class _RankRate extends ConsumerWidget {
                 ///バッチアイコン
                 Container(
                   width: context.width * 0.3,
-                  height: context.height * 0.2,
-                  color: Colors.black12,
-                  child: const _RankBatch(),
+                  height: context.width * 0.3,
+                  child: Card(
+                      elevation: 3,
+                      color: context.backgroundColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const _RankBatch()),
                 ),
                 const Spacer(),
 
                 /// 称号
                 Container(
-                  width: context.width * 0.6,
-                  height: context.height * 0.2,
-                  color: Colors.blueAccent,
+                  width: context.width * 0.55,
+                  height: context.width * 0.2,
                   child: const _RankName(),
                 ),
                 const Spacer(),
               ],
             ),
             const Spacer(),
+            Container(
+              height: context.height * 0.02,
+              child: Row(
+                children: [
+                  const Spacer(),
+                  Text(
+                    "Lv.1",
+                    style: TextStyle(
+                      fontSize: context.height * 0.015,
+                      color: context.mainColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Gap(context.width * 0.01),
+                  ProgressLineBar(
+                    height: context.height * 0.05,
+                    width: context.width * 0.75,
+                    score: 4,
+                    quizLength: 10,
+                    isUnit: false,
+                  ),
+                  Gap(context.width * 0.01),
+                  Text(
+                    "Lv.2",
+                    style: TextStyle(
+                      fontSize: context.height * 0.015,
+                      color: context.mainColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+            Gap(context.height * 0.02),
           ],
         ),
       ),
