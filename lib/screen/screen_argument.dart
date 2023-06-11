@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
-import 'package:kentei_quiz/screen/login_screen/login_screen.dart';
-import 'package:kentei_quiz/screen/profile_screen/profile_screen.dart';
+import 'package:kentei_quiz/screen/account_login_screen/account_login_screen.dart';
+import 'package:kentei_quiz/screen/account_profile_screen/account_profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 
 import '../resource/screen_argument_resource.dart';
-import 'create_account_screen/create_account_screen.dart';
+import 'account_create_screen/account_create_screen1.dart';
+import 'account_create_screen/account_create_screen2.dart';
 
 ///一問一答形式へ画面遷移
 class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
@@ -124,10 +125,11 @@ class ProfileScreenArguments with _NoParamsMixin implements IScreenArguments {
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            ProfileScreen(this),
+            AccountProfileScreen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => ProfileScreen(this)),
+              MaterialPageRoute(
+                  builder: (context) => AccountProfileScreen(this)),
               context,
               animation,
               secondaryAnimation,
@@ -137,8 +139,10 @@ class ProfileScreenArguments with _NoParamsMixin implements IScreenArguments {
 }
 
 ///ログイン画面
-class LoginScreenArguments with _NoParamsMixin implements IScreenArguments {
-  const LoginScreenArguments();
+class AccountLoginScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const AccountLoginScreenArguments();
 
   @override
   String get screenNameFormat => "/login";
@@ -146,10 +150,10 @@ class LoginScreenArguments with _NoParamsMixin implements IScreenArguments {
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            LoginScreen(this),
+            AccountLoginScreen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => LoginScreen(this)),
+              MaterialPageRoute(builder: (context) => AccountLoginScreen(this)),
               context,
               animation,
               secondaryAnimation,
@@ -158,23 +162,48 @@ class LoginScreenArguments with _NoParamsMixin implements IScreenArguments {
       );
 }
 
-///新規登録画面
-class CreateAccountScreenArguments
+///新規登録1
+class AccountCreateStep1ScreenArguments
     with _NoParamsMixin
     implements IScreenArguments {
-  const CreateAccountScreenArguments();
+  const AccountCreateStep1ScreenArguments();
 
   @override
-  String get screenNameFormat => "/create_account";
+  String get screenNameFormat => "/create_account1";
 
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            CreateAccountScreen(this),
+            AccountCreateStep1Screen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
               MaterialPageRoute(
-                  builder: (context) => CreateAccountScreen(this)),
+                  builder: (context) => AccountCreateStep1Screen(this)),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
+      );
+}
+
+///新規登録1
+class AccountCreateStep2ScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const AccountCreateStep2ScreenArguments();
+
+  @override
+  String get screenNameFormat => "/create_account2";
+
+  @override
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            AccountCreateStep2Screen(this),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const CupertinoPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(
+                  builder: (context) => AccountCreateStep2Screen(this)),
               context,
               animation,
               secondaryAnimation,

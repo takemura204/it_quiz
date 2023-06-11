@@ -148,40 +148,30 @@ class _RankBatch extends ConsumerWidget {
       onTap: () {
         ref.read(dashboardRankProvider.notifier).tap(rankIndex);
       },
-      child: Container(
-        width: context.width * 0.2,
-        height: context.width * 0.2,
+      child: Card(
+        elevation: 3,
+        color: context.backgroundColor,
+        // margin: EdgeInsets.symmetric(
+        //     horizontal: context.width * 0.03, vertical: context.width * 0.03),
+        shape: RoundedRectangleBorder(
+          // side: BorderSide(
+          //   color: context.mainColor,
+          //   width: 3,
+          // ),
+          borderRadius: BorderRadius.circular(0),
+        ),
         child: Stack(
           alignment: Alignment.center,
           children: [
             Icon(
-              Icons.workspace_premium_outlined, // 変更されたアイコン
-              size: context.width * 0.3,
+              Icons.circle_outlined, // 変更されたアイコン
+              size: context.width * 0.25,
               color: context.mainColor,
             ),
-            Container(
-              width: context.width * 0.2,
-              height: context.width * 0.2,
-              child: Column(
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Icon(
-                        Icons.circle, // 変更されたアイコン
-                        size: context.width * 0.15,
-                        color: context.backgroundColor,
-                      ),
-                      Icon(
-                        Icons.pets, // 変更されたアイコン
-                        size: context.width * 0.1,
-                        color: context.mainColor,
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                ],
-              ),
+            Icon(
+              Icons.pets, // 変更されたアイコン
+              size: context.width * 0.1,
+              color: context.mainColor,
             ),
           ],
         ),
@@ -200,6 +190,7 @@ class _RankName extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const Spacer(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -213,17 +204,56 @@ class _RankName extends ConsumerWidget {
             const Spacer(),
           ],
         ),
-        const Spacer(),
+
+        ///経験値
         Container(
           alignment: Alignment.centerRight,
           child: Text(
             "100,000pt",
             style: TextStyle(
-                fontSize: context.height * 0.045,
+                fontSize: context.height * 0.035,
                 color: context.mainColor,
                 fontWeight: FontWeight.bold),
           ),
         ),
+        const Spacer(),
+
+        ///インジケータ
+        Container(
+          height: context.height * 0.015,
+          child: Row(
+            children: [
+              const Spacer(),
+              Text(
+                "Lv.1",
+                style: TextStyle(
+                  fontSize: context.height * 0.015,
+                  color: context.mainColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Gap(context.width * 0.01),
+              ProgressLineBar(
+                height: context.height * 0.05,
+                width: context.width * 0.4,
+                score: 4,
+                quizLength: 10,
+                isUnit: false,
+              ),
+              Gap(context.width * 0.01),
+              Text(
+                "Lv.2",
+                style: TextStyle(
+                  fontSize: context.height * 0.015,
+                  color: context.mainColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Spacer(),
+            ],
+          ),
+        ),
+        const Spacer(),
       ],
     );
   }

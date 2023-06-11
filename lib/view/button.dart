@@ -2,6 +2,82 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
+class Default1Button extends ConsumerWidget {
+  const Default1Button({required this.text, required this.onPressed});
+  final String text;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.8,
+      height: context.height * 0.06,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          elevation: 4,
+          padding: const EdgeInsets.all(3.0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          side: BorderSide(
+            color: onPressed == null ? Colors.white10 : context.mainColor,
+            width: 1,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: onPressed == null ? Colors.black45 : context.mainColor,
+            fontWeight: FontWeight.bold,
+            fontSize: context.height * 0.02,
+          ),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+class Default2Button extends ConsumerWidget {
+  const Default2Button({required this.text, required this.onPressed});
+  final String text;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.8,
+      height: context.height * 0.06,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.mainColor,
+          elevation: 4,
+          padding: const EdgeInsets.all(3.0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+        ),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: context.height * 0.02,
+          ),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
 ///Backボタン
 class CustomBackButton extends ConsumerWidget {
   const CustomBackButton({required this.onPressed});
@@ -161,85 +237,6 @@ class EditProfileButton extends ConsumerWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-    );
-  }
-}
-
-///メールアドレスでログイン
-class LoginWithEmailButton extends ConsumerWidget {
-  const LoginWithEmailButton({required this.text, required this.onPressed});
-  final String text;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: context.width * 0.7,
-      height: context.height * 0.06,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: context.mainColor,
-          elevation: 4,
-          padding: const EdgeInsets.all(3.0),
-          alignment: Alignment.center,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
-        ),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: context.height * 0.02,
-          ),
-        ),
-        onPressed: onPressed,
-      ),
-    );
-  }
-}
-
-///メールアドレスで登録
-class CreateAccountWithEmailButton extends ConsumerWidget {
-  const CreateAccountWithEmailButton(
-      {required this.text, required this.onPressed});
-  final String text;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: context.width * 0.7,
-      height: context.height * 0.06,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          elevation: 4,
-          padding: const EdgeInsets.all(3.0),
-          alignment: Alignment.center,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
-          side: BorderSide(
-            color: onPressed == null ? Colors.black45 : context.mainColor,
-            width: 1,
-          ),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: onPressed == null ? Colors.black45 : context.mainColor,
-            fontWeight: FontWeight.bold,
-            fontSize: context.height * 0.02,
-          ),
-        ),
-        onPressed: onPressed,
       ),
     );
   }

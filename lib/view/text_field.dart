@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
@@ -16,24 +17,51 @@ class EmailTextField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: context.height * 0.1,
-      child: TextFormField(
-        controller: emailController,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) => isValidEmail ? null : '無効なメールアドレスです',
-        keyboardType: TextInputType.emailAddress,
-        onChanged: onChanged,
-        autocorrect: true, //予測変換
-        autofocus: true, //TextFieldに自動でfocusを当てる
-        enabled: true,
-        obscureText: false,
-        textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
-        maxLines: 1,
-        decoration: const InputDecoration(
-          hintMaxLines: null,
-          hintText: 'Email',
-          labelText: "メールアドレス",
-          prefixIcon: Icon(Icons.mail_outline),
-        ),
+      child: Column(
+        children: [
+          Container(
+            height: context.height * 0.023,
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.01),
+            child: Text(
+              "メールアドレス",
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: context.width * 0.035,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          TextFormField(
+            controller: emailController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.emailAddress,
+            onChanged: onChanged,
+            autocorrect: true, //予測変換
+            autofocus: true, //TextFieldに自動でfocusを当てる
+            enabled: true,
+            obscureText: false,
+            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            maxLines: 1,
+            // validator: (value) => isValidEmail ? null : '無効なメールアドレスです',
+            decoration: InputDecoration(
+              floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+              hintMaxLines: null,
+              hintText: 'Email',
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+              ),
+              // errorStyle: TextStyle(
+              //   fontSize: context.width * 0.03, // エラーメッセージのフォントサイズ
+              // ),
+              prefixIcon: const Icon(Icons.mail_outline),
+            ),
+          ),
+          const Spacer(),
+        ],
       ),
     );
   }
@@ -47,45 +75,83 @@ class PasswordTextField extends ConsumerWidget {
     required this.isSafetyPass,
     required this.isObscure,
     required this.onChanged,
+    required this.isLogin,
     required this.obscureIconButtonPressed,
   });
   final TextEditingController passwordController;
   final bool isValidEmail;
   final bool isSafetyPass;
   final bool isObscure;
+  final bool isLogin;
   final ValueChanged<String>? onChanged;
   final VoidCallback? obscureIconButtonPressed;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      // color: Colors.blue,
-      height: context.height * 0.1,
-      child: TextFormField(
-        controller: passwordController,
-        enabled: true,
-        keyboardType: TextInputType.visiblePassword,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) => isSafetyPass ? null : '無効なパスワードです',
-        onChanged: onChanged,
-        minLines: null,
-        maxLines: 1,
-        obscureText: isObscure, //入力非表示
-        decoration: InputDecoration(
-          hintMaxLines: null,
-          hintText: 'Password',
-          labelText: "パスワード(6文字以上)",
-          prefixIcon: const Icon(Icons.lock_outlined),
-          suffixIcon: ObscureIconButton(
-            onPressed: obscureIconButtonPressed,
-            isObscure: isObscure,
+      height: context.height * 0.12,
+      child: Column(
+        children: [
+          Container(
+            height: context.height * 0.023,
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.01),
+            child: Text(
+              "パスワード",
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: context.width * 0.035,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
+          TextFormField(
+            controller: passwordController,
+            enabled: true,
+            keyboardType: TextInputType.visiblePassword,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            // validator: (value) => isSafetyPass ? null : '無効なパスワードです',
+            onChanged: onChanged,
+            minLines: null,
+            maxLines: 1,
+            obscureText: isObscure, //入力非表示
+            decoration: InputDecoration(
+              hintMaxLines: null,
+              hintText: 'Password',
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.height * 0.0,
+              ),
+              // errorStyle: TextStyle(
+              //   fontSize: context.width * 0.03, // エラーメッセージのフォントサイズ
+              // ),
+              prefixIcon: const Icon(Icons.lock_outlined),
+              suffixIcon: ObscureIconButton(
+                onPressed: obscureIconButtonPressed,
+                isObscure: isObscure,
+              ),
+            ),
+          ),
+          Gap(context.height * 0.005),
+          Container(
+              height: context.height * 0.02,
+              alignment: isLogin ? Alignment.bottomRight : Alignment.bottomLeft,
+              margin: EdgeInsets.symmetric(
+                  horizontal: context.width * 0.02,
+                  vertical: context.width * 0.0),
+              child: Text(
+                isLogin ? "パスワードを忘れた場合" : "*8桁以上の半角英数字・記号のみ",
+                style: TextStyle(fontSize: context.width * 0.03),
+              )),
+        ],
       ),
     );
   }
 }
 
-///ユーザー名入力
+///ニックネーム入力
 class UserNameTextField extends ConsumerWidget {
   const UserNameTextField(
       {required this.userNameController,
@@ -98,51 +164,51 @@ class UserNameTextField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: context.height * 0.1,
-      child: TextFormField(
-        controller: userNameController,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
-        keyboardType: TextInputType.name,
-        onChanged: onChanged,
-        autocorrect: true, //予測変換
-        autofocus: true, //TextFieldに自動でfocusを当てる
-        enabled: true,
-        obscureText: false,
-        textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
-        maxLines: 1,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: const Color(0xffF8FAFA),
-          hintMaxLines: null,
-          hintText: 'Name',
-          labelText: "ユーザー名",
-          prefixIcon: const Icon(Icons.person_outline_outlined),
-          border: const OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Colors.black26,
+      child: Column(
+        children: [
+          Container(
+            height: context.height * 0.023,
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.01),
+            child: Text(
+              "ニックネーム",
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: context.width * 0.035,
+                  fontWeight: FontWeight.bold),
             ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: context.mainColor,
+          TextFormField(
+            controller: userNameController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.emailAddress,
+            onChanged: onChanged,
+            autocorrect: true, //予測変換
+            autofocus: true, //TextFieldに自動でfocusを当てる
+            enabled: true,
+            obscureText: false,
+            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            maxLines: 1,
+            // validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
+            decoration: InputDecoration(
+              floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+              hintMaxLines: null,
+              hintText: 'Name',
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+              ),
+              // errorStyle: TextStyle(
+              //   fontSize: context.width * 0.03, // エラーメッセージのフォントサイズ
+              // ),
+              prefixIcon: const Icon(Icons.person_outline_outlined),
             ),
           ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Colors.red,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Colors.red,
-            ),
-          ),
-        ),
+          const Spacer(),
+        ],
       ),
     );
   }

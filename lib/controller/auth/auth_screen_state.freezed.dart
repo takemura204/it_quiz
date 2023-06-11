@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthScreenState {
 //ユーザー情報
+  String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   File? get userImage => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -45,7 +46,8 @@ abstract class $AuthScreenStateCopyWith<$Res> {
       _$AuthScreenStateCopyWithImpl<$Res, AuthScreenState>;
   @useResult
   $Res call(
-      {String userName,
+      {String uid,
+      String userName,
       File? userImage,
       String email,
       String password,
@@ -75,6 +77,7 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uid = null,
     Object? userName = null,
     Object? userImage = freezed,
     Object? email = null,
@@ -92,6 +95,10 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
     Object? isNotTap = null,
   }) {
     return _then(_value.copyWith(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -164,7 +171,8 @@ abstract class _$$_CreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String userName,
+      {String uid,
+      String userName,
       File? userImage,
       String email,
       String password,
@@ -191,6 +199,7 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uid = null,
     Object? userName = null,
     Object? userImage = freezed,
     Object? email = null,
@@ -208,6 +217,10 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isNotTap = null,
   }) {
     return _then(_$_Create(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -276,7 +289,8 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create implements _Create {
   const _$_Create(
-      {this.userName = 'ゲスト',
+      {this.uid = '',
+      this.userName = 'ゲスト',
       this.userImage = null,
       this.email = '',
       this.password = '',
@@ -293,6 +307,9 @@ class _$_Create implements _Create {
       this.isNotTap = false});
 
 //ユーザー情報
+  @override
+  @JsonKey()
+  final String uid;
   @override
   @JsonKey()
   final String userName;
@@ -342,7 +359,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'AuthScreenState(userName: $userName, userImage: $userImage, email: $email, password: $password, birthDay: $birthDay, gender: $gender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
+    return 'AuthScreenState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, birthDay: $birthDay, gender: $gender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
   }
 
   @override
@@ -350,6 +367,7 @@ class _$_Create implements _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.userImage, userImage) ||
@@ -383,6 +401,7 @@ class _$_Create implements _Create {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      uid,
       userName,
       userImage,
       email,
@@ -408,7 +427,8 @@ class _$_Create implements _Create {
 
 abstract class _Create implements AuthScreenState {
   const factory _Create(
-      {final String userName,
+      {final String uid,
+      final String userName,
       final File? userImage,
       final String email,
       final String password,
@@ -425,6 +445,8 @@ abstract class _Create implements AuthScreenState {
       final bool isNotTap}) = _$_Create;
 
   @override //ユーザー情報
+  String get uid;
+  @override
   String get userName;
   @override
   File? get userImage;

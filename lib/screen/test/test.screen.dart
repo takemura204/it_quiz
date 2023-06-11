@@ -25,19 +25,19 @@ class TestScreen extends ConsumerWidget {
             child: Column(
               children: [
                 ///ログインボタン
-                LoginWithEmailButton(
+                Default2Button(
                   text: 'ログイン',
                   onPressed: () => context.showScreen(
-                    const LoginScreenArguments().generateRoute(),
+                    const AccountLoginScreenArguments().generateRoute(),
                   ),
                 ),
 
                 Gap(context.height * 0.012),
 
-                CreateAccountWithEmailButton(
+                Default1Button(
                   text: '新規会員登録',
                   onPressed: () => context.showScreen(
-                    const CreateAccountScreenArguments().generateRoute(),
+                    const AccountCreateStep1ScreenArguments().generateRoute(),
                   ),
                 ),
 

@@ -398,6 +398,8 @@ class DialogClose2 extends ConsumerWidget {
               child: Column(
                 children: [
                   const Spacer(),
+
+                  ///タイトル
                   Text(
                     title,
                     style: TextStyle(
@@ -411,6 +413,8 @@ class DialogClose2 extends ConsumerWidget {
               ),
             ),
             const Spacer(),
+
+            ///本文
             Container(
               height: context.height * 0.12,
               child: Column(

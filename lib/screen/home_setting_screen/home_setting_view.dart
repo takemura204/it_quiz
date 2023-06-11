@@ -33,7 +33,8 @@ class UserProfile extends ConsumerWidget {
                         cancelText: "キャンセル",
                         doneText: "新規登録",
                         onPressed: () {
-                          const CreateAccountScreenArguments().generateRoute();
+                          const AccountCreateStep1ScreenArguments()
+                              .generateRoute();
                         },
                       );
                     });

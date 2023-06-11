@@ -1,4 +1,4 @@
-part of 'login_screen.dart';
+part of 'account_login_screen.dart';
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar();

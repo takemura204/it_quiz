@@ -10,16 +10,15 @@ import '../../view/button.dart';
 import '../../view/dialog.dart';
 import '../../view/text_field.dart';
 
-part 'login_appbar.dart';
-part 'login_view.dart';
+part 'account_login_appbar.dart';
+part 'account_login_view.dart';
 
-class LoginScreen extends ConsumerWidget {
-  const LoginScreen(this.arguments);
-  final LoginScreenArguments arguments;
+class AccountLoginScreen extends ConsumerWidget {
+  const AccountLoginScreen(this.arguments);
+  final AccountLoginScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidEmail = ref.watch(authScreenControllerProvider).isValidEmail;
     final isSafetyPass = ref.watch(authScreenControllerProvider).isSafetyPass;
     final isObscure = ref.watch(authScreenControllerProvider).isObscure;
     final emailController =
@@ -39,7 +38,7 @@ class LoginScreen extends ConsumerWidget {
           resizeToAvoidBottomInset: false, //キーボードによって画面サイズを変更させないため
           appBar: const _AppBar(),
           body: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
             child: Column(
               children: [
                 const Spacer(),
@@ -50,45 +49,38 @@ class LoginScreen extends ConsumerWidget {
                       ///メールアドレス
                       EmailTextField(
                         emailController: emailController,
-                        isValidEmail: isValidEmail,
+                        isValidEmail: emailController.text.isNotEmpty,
                         onChanged: (email) => ref
                             .read(authScreenControllerProvider.notifier)
                             .setEmail(email),
                       ),
 
-                      const Gap(10),
-
                       ///パスワード
-                      Stack(
-                        children: [
-                          PasswordTextField(
-                            passwordController: passwordController,
-                            isValidEmail: isValidEmail,
-                            isSafetyPass: isSafetyPass,
-                            isObscure: isObscure,
-                            onChanged: (password) => ref
-                                .read(authScreenControllerProvider.notifier)
-                                .setPassword(password),
-                            obscureIconButtonPressed: () => ref
-                                .read(authScreenControllerProvider.notifier)
-                                .switchObscure(),
-                          ),
-                          Container(
-                              alignment: Alignment.bottomRight,
-                              height: context.height * 0.1,
-                              child: const Text("パスワードを忘れた場合")),
-                        ],
+                      PasswordTextField(
+                        passwordController: passwordController,
+                        isValidEmail: passwordController.text.isNotEmpty,
+                        isSafetyPass: isSafetyPass,
+                        isObscure: isObscure,
+                        isLogin: true,
+                        onChanged: (password) => ref
+                            .read(authScreenControllerProvider.notifier)
+                            .setPassword(password),
+                        obscureIconButtonPressed: () => ref
+                            .read(authScreenControllerProvider.notifier)
+                            .switchObscure(),
                       ),
                     ],
                   ),
                 ),
 
-                const Gap(20),
+                Gap(context.height * 0.02),
 
                 ///送信ボタン
-                LoginWithEmailButton(
+                Default1Button(
                   text: 'ログイン',
-                  onPressed: isValidEmail && isSafetyPass && !isNotTap
+                  onPressed: emailController.text.isNotEmpty &&
+                          passwordController.text.isNotEmpty &&
+                          !isNotTap
                       ? () {
                           ref
                               .read(authScreenControllerProvider.notifier)
@@ -108,11 +100,11 @@ class LoginScreen extends ConsumerWidget {
                                     title: "エラー",
                                     subWidget: Text(
                                       I18n().loginErrorText(value.errorText),
-                                      textAlign: TextAlign.center,
+                                      textAlign: TextAlign.start,
                                       style: TextStyle(
-                                          fontSize: context.width * 0.04,
-                                          color: Colors.black87),
-                                      maxLines: 2,
+                                        fontSize: context.width * 0.035,
+                                        color: Colors.black87,
+                                      ),
                                     ),
                                     doneText: "OK",
                                   ),
@@ -120,6 +112,7 @@ class LoginScreen extends ConsumerWidget {
                               }
                               //ログイン成功
                               else {
+                                Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                               }
                               ref
@@ -129,54 +122,36 @@ class LoginScreen extends ConsumerWidget {
                         }
                       : null,
                 ),
-                const Gap(20),
+
+                // ///ソーシャルログイン
+                // const _SocialLogin(),
+                Gap(context.height * 0.1),
 
                 ///区切り線
                 Row(
                   children: [
                     const Expanded(child: Divider()),
                     Text(
-                      "または",
+                      'アカウントをお持ちでない方はこちら',
                       style: TextStyle(
-                        fontSize: context.height * 0.02,
-                      ),
-                    ),
-                    const Expanded(child: Divider()),
-                  ],
-                ),
-                const Gap(10),
-
-                ///ソーシャルログイン
-                const _SocialLogin(),
-
-                const Gap(30),
-
-                ///区切り線
-                Row(
-                  children: [
-                    const Expanded(child: Divider()),
-                    Text(
-                      '会員登録をしていない方',
-                      style: TextStyle(
-                        fontSize: context.height * 0.02,
+                        fontSize: context.height * 0.017,
                       ),
                     ),
                     const Expanded(child: Divider()),
                   ],
                 ),
 
-                const Gap(20),
+                Gap(context.height * 0.025),
 
-                ///新規会員登録画面
-                CreateAccountWithEmailButton(
-                    text: '新規会員登録',
+                ///新規登録画面へ
+                Default2Button(
+                    text: '新規登録画面へ',
                     onPressed: () {
-                      context.showScreen(
-                        const CreateAccountScreenArguments().generateRoute(),
-                      );
+                      Navigator.pop(context);
                       ref.read(authScreenControllerProvider.notifier).reset();
                     }),
                 const Spacer(),
+                Gap(context.height * 0.05),
               ],
             ),
           ),

@@ -55,7 +55,8 @@ class HomeSettingScreen extends ConsumerWidget {
                       ],
                     );
                   }
-                  // User が null である、つまり未サインインのサインイン画面へ
+
+                  /// 未サインインのサインイン画面
                   return Container(
                     height: context.height * 0.2,
                     child: Column(
@@ -69,9 +70,10 @@ class HomeSettingScreen extends ConsumerWidget {
                         ///ログイン・会員登録ボタン
                         SetAccountButton(
                           onPressed: () => context.showScreen(
-                            const LoginScreenArguments().generateRoute(),
+                            const AccountCreateStep1ScreenArguments()
+                                .generateRoute(),
                           ),
-                          text: "ログイン・新規登録",
+                          text: "新規登録・ログイン",
                         ),
                       ],
                     ),

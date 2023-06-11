@@ -100,7 +100,7 @@ class _RankRate extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final rankColor = ref.watch(dashboardRankProvider.notifier).rankData;
     return Container(
-      height: context.height * 0.3,
+      height: context.height * 0.28,
       child: Card(
         elevation: 3,
         color: Colors.white,
@@ -130,60 +130,21 @@ class _RankRate extends ConsumerWidget {
                 Container(
                   width: context.width * 0.3,
                   height: context.width * 0.3,
-                  child: Card(
-                      elevation: 3,
-                      color: context.backgroundColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const _RankBatch()),
+                  child: const _RankBatch(),
                 ),
                 const Spacer(),
 
                 /// 称号
                 Container(
-                  width: context.width * 0.55,
-                  height: context.width * 0.2,
+                  width: context.width * 0.6,
+                  height: context.width * 0.3,
                   child: const _RankName(),
                 ),
                 const Spacer(),
               ],
             ),
             const Spacer(),
-            Container(
-              height: context.height * 0.02,
-              child: Row(
-                children: [
-                  const Spacer(),
-                  Text(
-                    "Lv.1",
-                    style: TextStyle(
-                      fontSize: context.height * 0.015,
-                      color: context.mainColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gap(context.width * 0.01),
-                  ProgressLineBar(
-                    height: context.height * 0.05,
-                    width: context.width * 0.75,
-                    score: 4,
-                    quizLength: 10,
-                    isUnit: false,
-                  ),
-                  Gap(context.width * 0.01),
-                  Text(
-                    "Lv.2",
-                    style: TextStyle(
-                      fontSize: context.height * 0.015,
-                      color: context.mainColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ),
+
             Gap(context.height * 0.02),
           ],
         ),

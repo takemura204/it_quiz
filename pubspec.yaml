@@ -116,6 +116,9 @@ dependencies:
   #CircularProgressIndicator をカスタムしたい
   syncfusion_flutter_gauges: ^21.2.4
 
+  #レビュー評価してもらいたい
+  in_app_review: ^2.0.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -8,6 +8,7 @@ part 'auth_screen_state.freezed.dart';
 class AuthScreenState with _$AuthScreenState {
   const factory AuthScreenState({
     //ユーザー情報
+    @Default('') final String uid,
     @Default('ゲスト') final String userName,
     @Default(null) final File? userImage,
     @Default('') final String email,

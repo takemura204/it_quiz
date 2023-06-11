@@ -10,22 +10,16 @@ import '../../view/button.dart';
 import '../../view/dialog.dart';
 import '../../view/text_field.dart';
 
-part 'create_account_view.dart';
+class AccountCreateStep2Screen extends ConsumerWidget {
+  const AccountCreateStep2Screen(this.arguments);
 
-class CreateAccountScreen extends ConsumerWidget {
-  const CreateAccountScreen(this.arguments);
-
-  final CreateAccountScreenArguments arguments;
+  final AccountCreateStep2ScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidUserName =
-        ref.watch(authScreenControllerProvider).isValidUserName;
     final isValidEmail = ref.watch(authScreenControllerProvider).isValidEmail;
     final isSafetyPass = ref.watch(authScreenControllerProvider).isSafetyPass;
     final isObscure = ref.watch(authScreenControllerProvider).isObscure;
-    final userNameController =
-        ref.watch(authScreenControllerProvider.notifier).userNameController;
     final emailController =
         ref.watch(authScreenControllerProvider.notifier).emailController;
     final passwordController =
@@ -54,7 +48,7 @@ class CreateAccountScreen extends ConsumerWidget {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
             child: Column(
               children: [
                 const Spacer(),
@@ -74,7 +68,7 @@ class CreateAccountScreen extends ConsumerWidget {
                       //   isLinkedEmail: true,
                       // ),
                       // const Gap(20),
-                      //
+
                       // ///ユーザー名入力
                       // UserNameTextField(
                       //   userNameController: userNameController,
@@ -93,14 +87,13 @@ class CreateAccountScreen extends ConsumerWidget {
                             .setEmail(email),
                       ),
 
-                      const Gap(10),
-
                       ///パスワード
                       PasswordTextField(
                         passwordController: passwordController,
                         isValidEmail: isValidEmail,
                         isSafetyPass: isSafetyPass,
                         isObscure: isObscure,
+                        isLogin: false,
                         onChanged: (password) => ref
                             .read(authScreenControllerProvider.notifier)
                             .setPassword(password),
@@ -108,7 +101,10 @@ class CreateAccountScreen extends ConsumerWidget {
                             .read(authScreenControllerProvider.notifier)
                             .switchObscure(),
                       ),
-                      CreateAccountWithEmailButton(
+                      Gap(context.height * 0.02),
+
+                      ///送信ボタン
+                      Default1Button(
                         text: '新規登録',
                         onPressed: (isValidEmail && isSafetyPass) && !isNotTap
                             ? () {
@@ -137,10 +133,10 @@ class CreateAccountScreen extends ConsumerWidget {
                                             subWidget: Text(
                                               I18n().loginErrorText(
                                                   value.errorText),
-                                              textAlign: TextAlign.center,
+                                              textAlign: TextAlign.start,
                                               style: TextStyle(
                                                   fontSize:
-                                                      context.width * 0.04,
+                                                      context.width * 0.035,
                                                   color: Colors.black87),
                                               maxLines: 2,
                                             ),
@@ -162,7 +158,7 @@ class CreateAccountScreen extends ConsumerWidget {
                             : null,
                       ),
 
-                      const Gap(20),
+                      Gap(context.height * 0.01),
 
                       Text(
                         "登録することで 利用規約 と プライバシーポリシー に同意することになります",
@@ -171,31 +167,35 @@ class CreateAccountScreen extends ConsumerWidget {
                         ),
                       ),
 
-                      const Gap(20),
+                      Gap(context.height * 0.1),
 
                       ///区切り線
                       Row(
                         children: [
                           const Expanded(child: Divider()),
                           Text(
-                            "または",
+                            'アカウントをお持ちの方はこちら',
                             style: TextStyle(
-                              fontSize: context.height * 0.02,
+                              fontSize: context.height * 0.017,
                             ),
                           ),
                           const Expanded(child: Divider()),
                         ],
                       ),
-                      const Gap(10),
 
-                      ///ソーシャルログイン
-                      const _SocialLogin(),
+                      Gap(context.height * 0.025),
 
-                      const Gap(30),
+                      ///ログイン画面
+                      Default2Button(
+                          text: 'ログイン画面へ',
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
                     ],
                   ),
                 ),
                 const Spacer(),
+                Gap(context.height * 0.05),
               ],
             ),
           ),

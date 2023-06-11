@@ -10,10 +10,10 @@ import '../../controller/auth/auth_screen_controller.dart';
 import '../../view/button.dart';
 import '../../view/text_field.dart';
 
-part 'profile_view.dart';
+part 'account_profile_view.dart';
 
-class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen(this.arguments);
+class AccountProfileScreen extends ConsumerWidget {
+  const AccountProfileScreen(this.arguments);
   final ProfileScreenArguments arguments;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

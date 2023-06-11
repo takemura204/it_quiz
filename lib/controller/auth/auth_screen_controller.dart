@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -66,7 +65,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
 
   ///パスワードの入力
   void setPassword(String password) {
-    final regExp = RegExp(r'^[a-zA-Z0-9]{6,}$');
+    final regExp = RegExp(r'^[a-zA-Z0-9]{8,}$');
     final isSafetyPass = regExp.hasMatch(password);
     state = state.copyWith(password: password, isSafetyPass: isSafetyPass);
   }
@@ -96,25 +95,29 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   ///新規登録
   Future<AuthScreenState> signUp() async {
     try {
-      ///FirebaseAuthに登録
+      //FirebaseAuthに登録
       final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      // final User? user = result.user;
-      // await user?.updateDisplayName(userNameController.text.trim());
+      final User? user = result.user;
 
-      ///FireStoreに登録
-      final users = FirebaseFirestore.instance.collection('users');
-      users.add({
-        'name': userNameController.text.trim(),
-        'email': emailController.text.trim(),
-        'password': passwordController.text.trim()
-      });
-
-      state = state.copyWith(
+      if (user != null) {
+        // //FireStoreに登録
+        // final users = FirebaseFirestore.instance.collection('users');
+        // users.add({
+        //   'uid':user.uid,
+        //   'name': userNameController.text.trim(),
+        //   'email': emailController.text.trim(),
+        //   'password': passwordController.text.trim()
+        // });
+        print("登録成功");
+        state = state.copyWith(
+          uid: user.uid,
           email: emailController.text.trim(),
-          userName: userNameController.text.trim());
+          userName: userNameController.text.trim(),
+        );
+      }
     } catch (e) {
       print(e);
       print("登録失敗");
@@ -131,6 +134,10 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
         password: passwordController.text.trim(),
       );
       final User? user = result.user;
+      if (user != null && !user.emailVerified) {
+        print("メール認証していません");
+        return state;
+      }
       await user?.updateDisplayName(userNameController.text.trim());
       state = state.copyWith(email: emailController.text.trim());
       print("ログイン成功");

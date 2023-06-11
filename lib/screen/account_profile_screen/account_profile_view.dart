@@ -1,4 +1,4 @@
-part of 'profile_screen.dart';
+part of 'account_profile_screen.dart';
 
 class _Tutorial extends ConsumerWidget {
   const _Tutorial();

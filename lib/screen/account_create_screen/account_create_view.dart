@@ -1,4 +1,4 @@
-part of 'create_account_screen.dart';
+part of 'account_create_screen1.dart';
 
 class _SocialLogin extends ConsumerWidget {
   const _SocialLogin();
