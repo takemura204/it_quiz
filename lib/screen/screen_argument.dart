@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/screen/account_login_screen/account_login_screen.dart';
@@ -197,18 +198,8 @@ class AccountCreateStep2ScreenArguments
   String get screenNameFormat => "/create_account2";
 
   @override
-  Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            AccountCreateStep2Screen(this),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return const CupertinoPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(
-                  builder: (context) => AccountCreateStep2Screen(this)),
-              context,
-              animation,
-              secondaryAnimation,
-              child);
-        },
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => AccountCreateStep2Screen(this),
       );
 }
 

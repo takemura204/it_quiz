@@ -16,7 +16,7 @@ class EmailTextField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.1,
+      height: context.height * 0.11,
       child: Column(
         children: [
           Container(
@@ -163,7 +163,7 @@ class UserNameTextField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.1,
+      height: context.height * 0.11,
       child: Column(
         children: [
           Container(
@@ -206,6 +206,140 @@ class UserNameTextField extends ConsumerWidget {
               // ),
               prefixIcon: const Icon(Icons.person_outline_outlined),
             ),
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+}
+
+///生年月日
+class BirthDayTextField extends ConsumerWidget {
+  const BirthDayTextField(
+      {required this.birthdayController, required this.onTap});
+  final TextEditingController birthdayController;
+
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.11,
+      child: Column(
+        children: [
+          Container(
+            height: context.height * 0.023,
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.01),
+            child: Text(
+              "生年月日",
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: context.width * 0.035,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          TextFormField(
+            controller: birthdayController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.emailAddress,
+            autocorrect: true, //予測変換
+            autofocus: true, //TextFieldに自動でfocusを当てる
+            enabled: true,
+            obscureText: false,
+            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            maxLines: 1,
+            onTap: onTap,
+            readOnly: true,
+            // validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
+            decoration: InputDecoration(
+              floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+              hintMaxLines: null,
+              hintText:
+                  '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+              ),
+              // errorStyle: TextStyle(
+              //   fontSize: context.width * 0.03, // エラーメッセージのフォントサイズ
+              // ),
+              prefixIcon: const Icon(Icons.celebration_outlined),
+            ),
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+}
+
+///性別
+class GenderTextField extends ConsumerWidget {
+  const GenderTextField({required this.genderController, required this.onTap});
+  final TextEditingController genderController;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.11,
+      child: Column(
+        children: [
+          Container(
+            height: context.height * 0.023,
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.01),
+            child: Text(
+              "性別",
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: context.width * 0.035,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          TextFormField(
+            controller: genderController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.emailAddress,
+            autocorrect: true, //予測変換
+            autofocus: false, //TextFieldに自動でfocusを当てる
+            enabled: true,
+            obscureText: false,
+            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            maxLines: 1,
+            onTap: onTap,
+            readOnly: true,
+            // validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
+            decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+                hintMaxLines: null,
+                hintText: 'Gender',
+                fillColor: Colors.white,
+                filled: true,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: context.width * 0.02,
+                ),
+                // errorStyle: TextStyle(
+                //   fontSize: context.width * 0.03, // エラーメッセージのフォントサイズ
+                // ),
+                prefixIcon: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: context.width * 0.02),
+                      child: const Icon(Icons.man_outlined),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: context.width * 0.02),
+                      child: const Icon(Icons.woman_outlined),
+                    ),
+                  ],
+                )),
           ),
           const Spacer(),
         ],

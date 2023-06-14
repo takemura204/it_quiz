@@ -19,17 +19,15 @@ class AccountLoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSafetyPass = ref.watch(authScreenControllerProvider).isSafetyPass;
-    final isObscure = ref.watch(authScreenControllerProvider).isObscure;
+    final isSafetyPass = ref.watch(authScreenProvider).isSafetyPass;
+    final isObscure = ref.watch(authScreenProvider).isObscure;
     final emailController =
-        ref.watch(authScreenControllerProvider.notifier).emailController;
+        ref.watch(authScreenProvider.notifier).emailController;
     final passwordController =
-        ref.watch(authScreenControllerProvider.notifier).passwordController;
-    final formKey =
-        ref.watch(authScreenControllerProvider.notifier).loginFormKey;
-    final focusNode =
-        ref.watch(authScreenControllerProvider.notifier).loginFocusNode;
-    final isNotTap = ref.watch(authScreenControllerProvider).isNotTap;
+        ref.watch(authScreenProvider.notifier).passwordController;
+    final formKey = ref.watch(authScreenProvider.notifier).loginFormKey;
+    final focusNode = ref.watch(authScreenProvider.notifier).loginFocusNode;
+    final isNotTap = ref.watch(authScreenProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -51,7 +49,7 @@ class AccountLoginScreen extends ConsumerWidget {
                         emailController: emailController,
                         isValidEmail: emailController.text.isNotEmpty,
                         onChanged: (email) => ref
-                            .read(authScreenControllerProvider.notifier)
+                            .read(authScreenProvider.notifier)
                             .setEmail(email),
                       ),
 
@@ -63,10 +61,10 @@ class AccountLoginScreen extends ConsumerWidget {
                         isObscure: isObscure,
                         isLogin: true,
                         onChanged: (password) => ref
-                            .read(authScreenControllerProvider.notifier)
+                            .read(authScreenProvider.notifier)
                             .setPassword(password),
                         obscureIconButtonPressed: () => ref
-                            .read(authScreenControllerProvider.notifier)
+                            .read(authScreenProvider.notifier)
                             .switchObscure(),
                       ),
                     ],
@@ -82,12 +80,8 @@ class AccountLoginScreen extends ConsumerWidget {
                           passwordController.text.isNotEmpty &&
                           !isNotTap
                       ? () {
-                          ref
-                              .read(authScreenControllerProvider.notifier)
-                              .switchTap();
-                          ref
-                              .read(authScreenControllerProvider.notifier)
-                              .signIn()
+                          ref.read(authScreenProvider.notifier).switchTap();
+                          ref.read(authScreenProvider.notifier).signIn()
                             ..then((value) {
                               //ログイン失敗
                               if (value.hasError) {
@@ -115,9 +109,7 @@ class AccountLoginScreen extends ConsumerWidget {
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                               }
-                              ref
-                                  .read(authScreenControllerProvider.notifier)
-                                  .switchTap();
+                              ref.read(authScreenProvider.notifier).switchTap();
                             });
                         }
                       : null,
@@ -148,7 +140,7 @@ class AccountLoginScreen extends ConsumerWidget {
                     text: '新規登録画面へ',
                     onPressed: () {
                       Navigator.pop(context);
-                      ref.read(authScreenControllerProvider.notifier).reset();
+                      // ref.read(authScreenProvider.notifier).reset();
                     }),
                 const Spacer(),
                 Gap(context.height * 0.05),

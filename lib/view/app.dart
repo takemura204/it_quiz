@@ -9,8 +9,8 @@ import 'package:kentei_quiz/resource/lang/initial_resource.dart';
 import '../controller/setting_color/setting_color_controller.dart';
 import '../screen/home_root_screen/home_root_screen.dart';
 
-class QuizApp extends StatelessWidget {
-  const QuizApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -29,7 +29,7 @@ class HomeSettingScreen extends ConsumerWidget {
             /// プロフィール
             Container(
               color: Colors.white,
-              height: context.height * 0.23,
+              height: context.height * 0.22,
               child: StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
@@ -38,7 +38,7 @@ class HomeSettingScreen extends ConsumerWidget {
                     return const SizedBox();
                   }
                   if (snapshot.hasData) {
-                    // User が null でなない、つまりサインイン済みのホーム画面へ
+                    // User が null でなない、サインイン済みのホーム画面へ
                     return Column(
                       children: [
                         const SettingTitleBar(
@@ -166,8 +166,7 @@ class HomeSettingScreen extends ConsumerWidget {
                               return DialogDefault1(
                                   onPressed: () {
                                     ref
-                                        .read(authScreenControllerProvider
-                                            .notifier)
+                                        .read(authScreenProvider.notifier)
                                         .signOut();
                                     Navigator.of(context).pop();
                                   },

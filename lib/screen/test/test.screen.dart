@@ -60,21 +60,18 @@ class TestScreen extends ConsumerWidget {
                 ///Googleから登録
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
-                  onPressed: () => ref
-                      .read(authScreenControllerProvider.notifier)
-                      .signInWithGoogle(),
+                  onPressed: () =>
+                      ref.read(authScreenProvider.notifier).signInWithGoogle(),
                 ),
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
-                  onPressed: () => ref
-                      .read(authScreenControllerProvider.notifier)
-                      .signInWithGoogle(),
+                  onPressed: () =>
+                      ref.read(authScreenProvider.notifier).signInWithGoogle(),
                 ),
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
-                  onPressed: () => ref
-                      .read(authScreenControllerProvider.notifier)
-                      .signInWithGoogle(),
+                  onPressed: () =>
+                      ref.read(authScreenProvider.notifier).signInWithGoogle(),
                 ),
 
                 Gap(context.height * 0.015),

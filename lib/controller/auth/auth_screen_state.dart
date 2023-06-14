@@ -13,9 +13,11 @@ class AuthScreenState with _$AuthScreenState {
     @Default(null) final File? userImage,
     @Default('') final String email,
     @Default('') final String password,
-    @Default('') final String birthDay,
     @Default('') final String gender,
+    final DateTime? birthDay,
     //その他
+    @Default('') final String selectGender,
+    DateTime? selectedBirthDay,
     @Default(0) final int currentImageIndex,
     @Default('') final String errorText,
     @Default(true) final bool isObscure,

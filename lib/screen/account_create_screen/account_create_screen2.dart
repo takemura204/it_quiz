@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
@@ -12,23 +14,21 @@ import '../../view/text_field.dart';
 
 class AccountCreateStep2Screen extends ConsumerWidget {
   const AccountCreateStep2Screen(this.arguments);
-
   final AccountCreateStep2ScreenArguments arguments;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidEmail = ref.watch(authScreenControllerProvider).isValidEmail;
-    final isSafetyPass = ref.watch(authScreenControllerProvider).isSafetyPass;
-    final isObscure = ref.watch(authScreenControllerProvider).isObscure;
-    final emailController =
-        ref.watch(authScreenControllerProvider.notifier).emailController;
-    final passwordController =
-        ref.watch(authScreenControllerProvider.notifier).passwordController;
-    final formKey =
-        ref.watch(authScreenControllerProvider.notifier).createAccountFormKey;
-    final focusNode =
-        ref.watch(authScreenControllerProvider.notifier).createAccountFocusNode;
-    final isNotTap = ref.watch(authScreenControllerProvider).isNotTap;
+    final controller = ref.watch(authScreenProvider.notifier);
+    final state = ref.watch(authScreenProvider);
+    final userNameController = controller.userNameController;
+    final genderController = controller.genderController;
+    final birthdayController = controller.birthdayController;
+    final formKey = controller.createAccountFormKey2;
+    final focusNode = controller.createFocusNode2;
+    final genders = controller.genders;
+    final isValidUserName = state.isValidUserName;
+    final selectedBirthDay = state.selectedBirthDay;
+
+    final isNotTap = state.isNotTap;
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -42,7 +42,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
             title: const Text("新規登録"),
             leading: CustomBackButton(
               onPressed: () {
-                ref.read(authScreenControllerProvider.notifier).reset();
+                // ref.read(authScreenProvider.notifier).reset();
                 Navigator.pop(context);
               },
             ),
@@ -56,64 +56,140 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      // ///ユーザアイコン
-                      // UserImage(
-                      //   onTap: () {
-                      //     //画像選択
-                      //     ref
-                      //         .read(authScreenControllerProvider.notifier)
-                      //         .pickImage();
-                      //   },
-                      //   height: context.height * 0.12,
-                      //   isLinkedEmail: true,
-                      // ),
-                      // const Gap(20),
-
-                      // ///ユーザー名入力
-                      // UserNameTextField(
-                      //   userNameController: userNameController,
-                      //   isValidUserName: isValidUserName,
-                      //   onChanged: (name) => ref
-                      //       .read(authScreenControllerProvider.notifier)
-                      //       .setUserName(name),
-                      // ),
-
-                      ///メールアドレス
-                      EmailTextField(
-                        emailController: emailController,
-                        isValidEmail: isValidEmail,
-                        onChanged: (email) => ref
-                            .read(authScreenControllerProvider.notifier)
-                            .setEmail(email),
+                      ///ユーザー名入力
+                      UserNameTextField(
+                        userNameController: userNameController,
+                        isValidUserName: isValidUserName,
+                        onChanged: (name) => ref
+                            .read(authScreenProvider.notifier)
+                            .setUserName(name),
                       ),
+                      Gap(context.height * 0.01),
 
-                      ///パスワード
-                      PasswordTextField(
-                        passwordController: passwordController,
-                        isValidEmail: isValidEmail,
-                        isSafetyPass: isSafetyPass,
-                        isObscure: isObscure,
-                        isLogin: false,
-                        onChanged: (password) => ref
-                            .read(authScreenControllerProvider.notifier)
-                            .setPassword(password),
-                        obscureIconButtonPressed: () => ref
-                            .read(authScreenControllerProvider.notifier)
-                            .switchObscure(),
+                      ///生年月日
+                      BirthDayTextField(
+                        birthdayController: birthdayController,
+                        onTap: () {
+                          ///ドラムロール表示
+                          DatePicker.showDatePicker(
+                            context,
+                            minTime: DateTime(1950, 1, 1),
+                            maxTime: DateTime(DateTime.now().year,
+                                DateTime.now().month, DateTime.now().day),
+                            onChanged: (date) {
+                              ref
+                                  .read(authScreenProvider.notifier)
+                                  .setBirthday(date);
+                            },
+                            onConfirm: (date) {
+                              ref
+                                  .read(authScreenProvider.notifier)
+                                  .setBirthday(date);
+                              birthdayController.value = TextEditingValue(
+                                  text:
+                                      '${date.year}/${date.month}/${date.day}');
+                            },
+                            currentTime: birthdayController.text.isEmpty
+                                ? DateTime(2000, 1, 1)
+                                : selectedBirthDay,
+                            locale: LocaleType.jp,
+                          );
+                        },
                       ),
-                      Gap(context.height * 0.02),
+                      Gap(context.height * 0.01),
+                      GenderTextField(
+                        genderController: genderController,
+                        onTap: () {
+                          var currentIndex = genders.indexOf(
+                              ref.read(authScreenProvider).selectGender);
+                          if (currentIndex == -1) {
+                            currentIndex = 0;
+                          }
+
+                          ref.read(authScreenProvider.notifier).setSelectGender(
+                              genders[currentIndex]); // Picker表示前に現在の選択状態を保存
+                          ///ドラムロール表示
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                height: MediaQuery.of(context).size.height / 3,
+                                child: Column(
+                                  children: [
+                                    // ボタン行を追加
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CupertinoButton(
+                                          child: const Text(
+                                            'キャンセル',
+                                            style: TextStyle(
+                                                color: Colors.black45),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(
+                                                context); // Pickerを閉じる
+                                          },
+                                        ),
+                                        CupertinoButton(
+                                          child: const Text(
+                                            '完了',
+                                            style: TextStyle(
+                                                color: Colors.blueAccent),
+                                          ),
+                                          onPressed: () {
+                                            ref
+                                                .read(
+                                                    authScreenProvider.notifier)
+                                                .setGender();
+                                            Navigator.pop(
+                                                context); // Pickerを閉じる
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    // Picker本体
+                                    Expanded(
+                                      child: CupertinoPicker(
+                                        itemExtent: 30,
+                                        scrollController:
+                                            FixedExtentScrollController(
+                                                initialItem: currentIndex),
+                                        onSelectedItemChanged: (index) {
+                                          ref
+                                              .read(authScreenProvider.notifier)
+                                              .setSelectGender(
+                                                  genders[index]); // 選択状態を一時保存
+                                        },
+                                        children: genders.map((String gender) {
+                                          return Text(gender);
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      Gap(context.height * 0.1),
 
                       ///送信ボタン
-                      Default1Button(
-                        text: '新規登録',
-                        onPressed: (isValidEmail && isSafetyPass) && !isNotTap
+                      Default2Button(
+                        text: '登録完了',
+                        onPressed: (userNameController.text.isNotEmpty &&
+                                    birthdayController.text.isNotEmpty &&
+                                    genderController.text.isNotEmpty) &&
+                                !isNotTap
                             ? () {
                                 ref
-                                    .read(authScreenControllerProvider.notifier)
+                                    .read(authScreenProvider.notifier)
                                     .switchTap();
                                 ref
-                                    .read(authScreenControllerProvider.notifier)
-                                    .signUp()
+                                    .read(authScreenProvider.notifier)
+                                    .saveAccountData()
                                   ..then(
                                     (value) {
                                       //ログイン失敗
@@ -123,9 +199,8 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                           builder: (_) => DialogClose2(
                                             onPressed: () {
                                               ref
-                                                  .read(
-                                                      authScreenControllerProvider
-                                                          .notifier)
+                                                  .read(authScreenProvider
+                                                      .notifier)
                                                   .switchHasError();
                                               Navigator.of(context).pop();
                                             },
@@ -146,11 +221,29 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                       }
                                       //ログイン成功
                                       else {
-                                        // Navigator.of(context).pop();
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => DialogClose2(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).pop();
+                                            },
+                                            title: "登録ありがとうございます",
+                                            subWidget: Text(
+                                              "さっそく試してみましょう！",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      context.width * 0.035,
+                                                  color: Colors.black87),
+                                              maxLines: 2,
+                                            ),
+                                            doneText: "OK",
+                                          ),
+                                        );
                                       }
                                       ref
-                                          .read(authScreenControllerProvider
-                                              .notifier)
+                                          .read(authScreenProvider.notifier)
                                           .switchTap();
                                     },
                                   );
@@ -166,31 +259,6 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                           fontSize: context.height * 0.01,
                         ),
                       ),
-
-                      Gap(context.height * 0.1),
-
-                      ///区切り線
-                      Row(
-                        children: [
-                          const Expanded(child: Divider()),
-                          Text(
-                            'アカウントをお持ちの方はこちら',
-                            style: TextStyle(
-                              fontSize: context.height * 0.017,
-                            ),
-                          ),
-                          const Expanded(child: Divider()),
-                        ],
-                      ),
-
-                      Gap(context.height * 0.025),
-
-                      ///ログイン画面
-                      Default2Button(
-                          text: 'ログイン画面へ',
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }),
                     ],
                   ),
                 ),

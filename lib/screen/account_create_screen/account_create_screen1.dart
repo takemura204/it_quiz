@@ -19,18 +19,17 @@ class AccountCreateStep1Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidEmail = ref.watch(authScreenControllerProvider).isValidEmail;
-    final isSafetyPass = ref.watch(authScreenControllerProvider).isSafetyPass;
-    final isObscure = ref.watch(authScreenControllerProvider).isObscure;
+    final isValidEmail = ref.watch(authScreenProvider).isValidEmail;
+    final isSafetyPass = ref.watch(authScreenProvider).isSafetyPass;
+    final isObscure = ref.watch(authScreenProvider).isObscure;
     final emailController =
-        ref.watch(authScreenControllerProvider.notifier).emailController;
+        ref.watch(authScreenProvider.notifier).emailController;
     final passwordController =
-        ref.watch(authScreenControllerProvider.notifier).passwordController;
+        ref.watch(authScreenProvider.notifier).passwordController;
     final formKey =
-        ref.watch(authScreenControllerProvider.notifier).createAccountFormKey;
-    final focusNode =
-        ref.watch(authScreenControllerProvider.notifier).createAccountFocusNode;
-    final isNotTap = ref.watch(authScreenControllerProvider).isNotTap;
+        ref.watch(authScreenProvider.notifier).createAccountFormKey1;
+    final focusNode = ref.watch(authScreenProvider.notifier).createFocusNode1;
+    final isNotTap = ref.watch(authScreenProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -44,7 +43,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
             title: const Text("新規登録"),
             leading: CustomBackButton(
               onPressed: () {
-                ref.read(authScreenControllerProvider.notifier).reset();
+                // ref.read(authScreenProvider.notifier).reset();
                 Navigator.pop(context);
               },
             ),
@@ -58,34 +57,12 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      // ///ユーザアイコン
-                      // UserImage(
-                      //   onTap: () {
-                      //     //画像選択
-                      //     ref
-                      //         .read(authScreenControllerProvider.notifier)
-                      //         .pickImage();
-                      //   },
-                      //   height: context.height * 0.12,
-                      //   isLinkedEmail: true,
-                      // ),
-                      // const Gap(20),
-
-                      // ///ユーザー名入力
-                      // UserNameTextField(
-                      //   userNameController: userNameController,
-                      //   isValidUserName: isValidUserName,
-                      //   onChanged: (name) => ref
-                      //       .read(authScreenControllerProvider.notifier)
-                      //       .setUserName(name),
-                      // ),
-
                       ///メールアドレス
                       EmailTextField(
                         emailController: emailController,
                         isValidEmail: isValidEmail,
                         onChanged: (email) => ref
-                            .read(authScreenControllerProvider.notifier)
+                            .read(authScreenProvider.notifier)
                             .setEmail(email),
                       ),
 
@@ -97,10 +74,10 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                         isObscure: isObscure,
                         isLogin: false,
                         onChanged: (password) => ref
-                            .read(authScreenControllerProvider.notifier)
+                            .read(authScreenProvider.notifier)
                             .setPassword(password),
                         obscureIconButtonPressed: () => ref
-                            .read(authScreenControllerProvider.notifier)
+                            .read(authScreenProvider.notifier)
                             .switchObscure(),
                       ),
                       Gap(context.height * 0.02),
@@ -111,11 +88,9 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                         onPressed: (isValidEmail && isSafetyPass) && !isNotTap
                             ? () {
                                 ref
-                                    .read(authScreenControllerProvider.notifier)
+                                    .read(authScreenProvider.notifier)
                                     .switchTap();
-                                ref
-                                    .read(authScreenControllerProvider.notifier)
-                                    .signUp()
+                                ref.read(authScreenProvider.notifier).signUp()
                                   ..then(
                                     (value) {
                                       //ログイン失敗
@@ -125,9 +100,8 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                           builder: (_) => DialogClose2(
                                             onPressed: () {
                                               ref
-                                                  .read(
-                                                      authScreenControllerProvider
-                                                          .notifier)
+                                                  .read(authScreenProvider
+                                                      .notifier)
                                                   .switchHasError();
                                               Navigator.of(context).pop();
                                             },
@@ -148,14 +122,14 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                       }
                                       //ログイン成功
                                       else {
+                                        Navigator.pop(context);
                                         context.showScreen(
-                                          const AccountLoginScreenArguments()
+                                          const AccountCreateStep2ScreenArguments()
                                               .generateRoute(),
                                         );
                                       }
                                       ref
-                                          .read(authScreenControllerProvider
-                                              .notifier)
+                                          .read(authScreenProvider.notifier)
                                           .switchTap();
                                     },
                                   );

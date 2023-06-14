@@ -11,9 +11,8 @@ class Tutorial extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentImageIndex =
-        ref.watch(authScreenControllerProvider).currentImageIndex;
-    final images = ref.watch(authScreenControllerProvider.notifier).images;
+    final currentImageIndex = ref.watch(authScreenProvider).currentImageIndex;
+    final images = ref.watch(authScreenProvider.notifier).images;
     return Column(
       children: [
         ///チュートリアル画面
@@ -32,9 +31,7 @@ class Tutorial extends ConsumerWidget {
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               onPageChanged: (index, reason) {
-                ref
-                    .read(authScreenControllerProvider.notifier)
-                    .changeImageIndex(index);
+                ref.read(authScreenProvider.notifier).setImageIndex(index);
               },
               scrollDirection: Axis.horizontal,
             ),

@@ -12,23 +12,20 @@ class _SocialLogin extends ConsumerWidget {
 
           ///Google
           GoogleIconButton(
-            onPressed: () => ref
-                .read(authScreenControllerProvider.notifier)
-                .signInWithGoogle(),
+            onPressed: () =>
+                ref.read(authScreenProvider.notifier).signInWithGoogle(),
           ),
 
           ///Twitter
           TwitterIconButton(
-            onPressed: () => ref
-                .read(authScreenControllerProvider.notifier)
-                .signInWithGoogle(),
+            onPressed: () =>
+                ref.read(authScreenProvider.notifier).signInWithGoogle(),
           ),
 
           ///LINE
           LineIconButton(
-            onPressed: () => ref
-                .read(authScreenControllerProvider.notifier)
-                .signInWithGoogle(),
+            onPressed: () =>
+                ref.read(authScreenProvider.notifier).signInWithGoogle(),
           ),
 
           const Spacer(),

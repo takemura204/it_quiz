@@ -64,6 +64,8 @@ class _BottomNavBar extends ConsumerWidget {
             await ref.read(homeReviewScreenProvider.notifier).initState();
           } else if (index == 2) {
             ref.read(dashboardAnalyticsScreenProvider.notifier).initState();
+          } else if (index == 3) {
+            ref.read(authScreenProvider.notifier).initState();
           }
         });
   }

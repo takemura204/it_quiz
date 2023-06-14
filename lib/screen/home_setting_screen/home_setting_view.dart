@@ -6,7 +6,7 @@ class UserProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final email = FirebaseAuth.instance.currentUser?.email ?? "ログインしていません";
-    final displayName = FirebaseAuth.instance.currentUser?.displayName ?? "ゲスト";
+    final userName = ref.watch(authScreenProvider).userName;
     return Container(
       height: context.height * 0.1,
       child: Row(
@@ -42,7 +42,7 @@ class UserProfile extends ConsumerWidget {
               //ログインしている時
               else {
                 //画像選択
-                ref.read(authScreenControllerProvider.notifier).pickImage();
+                ref.read(authScreenProvider.notifier).pickImage();
               }
             },
             height: context.height * 0.1,
@@ -62,7 +62,7 @@ class UserProfile extends ConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      displayName,
+                      userName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: context.height * 0.02,

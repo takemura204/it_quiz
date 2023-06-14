@@ -22,8 +22,10 @@ mixin _$AuthScreenState {
   File? get userImage => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  String get birthDay => throw _privateConstructorUsedError;
-  String get gender => throw _privateConstructorUsedError; //その他
+  String get gender => throw _privateConstructorUsedError;
+  DateTime? get birthDay => throw _privateConstructorUsedError; //その他
+  String get selectGender => throw _privateConstructorUsedError;
+  DateTime? get selectedBirthDay => throw _privateConstructorUsedError;
   int get currentImageIndex => throw _privateConstructorUsedError;
   String get errorText => throw _privateConstructorUsedError;
   bool get isObscure => throw _privateConstructorUsedError;
@@ -51,8 +53,10 @@ abstract class $AuthScreenStateCopyWith<$Res> {
       File? userImage,
       String email,
       String password,
-      String birthDay,
       String gender,
+      DateTime? birthDay,
+      String selectGender,
+      DateTime? selectedBirthDay,
       int currentImageIndex,
       String errorText,
       bool isObscure,
@@ -82,8 +86,10 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
     Object? userImage = freezed,
     Object? email = null,
     Object? password = null,
-    Object? birthDay = null,
     Object? gender = null,
+    Object? birthDay = freezed,
+    Object? selectGender = null,
+    Object? selectedBirthDay = freezed,
     Object? currentImageIndex = null,
     Object? errorText = null,
     Object? isObscure = null,
@@ -115,14 +121,22 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDay: null == birthDay
-          ? _value.birthDay
-          : birthDay // ignore: cast_nullable_to_non_nullable
-              as String,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String,
+      birthDay: freezed == birthDay
+          ? _value.birthDay
+          : birthDay // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      selectGender: null == selectGender
+          ? _value.selectGender
+          : selectGender // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedBirthDay: freezed == selectedBirthDay
+          ? _value.selectedBirthDay
+          : selectedBirthDay // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       currentImageIndex: null == currentImageIndex
           ? _value.currentImageIndex
           : currentImageIndex // ignore: cast_nullable_to_non_nullable
@@ -176,8 +190,10 @@ abstract class _$$_CreateCopyWith<$Res>
       File? userImage,
       String email,
       String password,
-      String birthDay,
       String gender,
+      DateTime? birthDay,
+      String selectGender,
+      DateTime? selectedBirthDay,
       int currentImageIndex,
       String errorText,
       bool isObscure,
@@ -204,8 +220,10 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? userImage = freezed,
     Object? email = null,
     Object? password = null,
-    Object? birthDay = null,
     Object? gender = null,
+    Object? birthDay = freezed,
+    Object? selectGender = null,
+    Object? selectedBirthDay = freezed,
     Object? currentImageIndex = null,
     Object? errorText = null,
     Object? isObscure = null,
@@ -237,14 +255,22 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDay: null == birthDay
-          ? _value.birthDay
-          : birthDay // ignore: cast_nullable_to_non_nullable
-              as String,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String,
+      birthDay: freezed == birthDay
+          ? _value.birthDay
+          : birthDay // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      selectGender: null == selectGender
+          ? _value.selectGender
+          : selectGender // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedBirthDay: freezed == selectedBirthDay
+          ? _value.selectedBirthDay
+          : selectedBirthDay // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       currentImageIndex: null == currentImageIndex
           ? _value.currentImageIndex
           : currentImageIndex // ignore: cast_nullable_to_non_nullable
@@ -294,8 +320,10 @@ class _$_Create implements _Create {
       this.userImage = null,
       this.email = '',
       this.password = '',
-      this.birthDay = '',
       this.gender = '',
+      this.birthDay,
+      this.selectGender = '',
+      this.selectedBirthDay,
       this.currentImageIndex = 0,
       this.errorText = '',
       this.isObscure = true,
@@ -324,11 +352,15 @@ class _$_Create implements _Create {
   final String password;
   @override
   @JsonKey()
-  final String birthDay;
+  final String gender;
+  @override
+  final DateTime? birthDay;
+//その他
   @override
   @JsonKey()
-  final String gender;
-//その他
+  final String selectGender;
+  @override
+  final DateTime? selectedBirthDay;
   @override
   @JsonKey()
   final int currentImageIndex;
@@ -359,7 +391,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'AuthScreenState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, birthDay: $birthDay, gender: $gender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
+    return 'AuthScreenState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, selectGender: $selectGender, selectedBirthDay: $selectedBirthDay, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
   }
 
   @override
@@ -375,9 +407,13 @@ class _$_Create implements _Create {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.birthDay, birthDay) ||
                 other.birthDay == birthDay) &&
-            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.selectGender, selectGender) ||
+                other.selectGender == selectGender) &&
+            (identical(other.selectedBirthDay, selectedBirthDay) ||
+                other.selectedBirthDay == selectedBirthDay) &&
             (identical(other.currentImageIndex, currentImageIndex) ||
                 other.currentImageIndex == currentImageIndex) &&
             (identical(other.errorText, errorText) ||
@@ -406,8 +442,10 @@ class _$_Create implements _Create {
       userImage,
       email,
       password,
-      birthDay,
       gender,
+      birthDay,
+      selectGender,
+      selectedBirthDay,
       currentImageIndex,
       errorText,
       isObscure,
@@ -432,8 +470,10 @@ abstract class _Create implements AuthScreenState {
       final File? userImage,
       final String email,
       final String password,
-      final String birthDay,
       final String gender,
+      final DateTime? birthDay,
+      final String selectGender,
+      final DateTime? selectedBirthDay,
       final int currentImageIndex,
       final String errorText,
       final bool isObscure,
@@ -455,10 +495,14 @@ abstract class _Create implements AuthScreenState {
   @override
   String get password;
   @override
-  String get birthDay;
-  @override
   String get gender;
+  @override
+  DateTime? get birthDay;
   @override //その他
+  String get selectGender;
+  @override
+  DateTime? get selectedBirthDay;
+  @override
   int get currentImageIndex;
   @override
   String get errorText;

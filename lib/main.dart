@@ -14,5 +14,5 @@ Future main() async {
   MobileAds.instance.initialize(); // AdMobの初期化
 
   //アプリ実行
-  runApp(const QuizApp());
+  runApp(const MyApp());
 }
