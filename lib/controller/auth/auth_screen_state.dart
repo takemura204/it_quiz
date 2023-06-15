@@ -14,10 +14,9 @@ class AuthScreenState with _$AuthScreenState {
     @Default('') final String email,
     @Default('') final String password,
     @Default('') final String gender,
-    final DateTime? birthDay,
+    @Default('') final String birthDay,
     //その他
     @Default('') final String selectGender,
-    DateTime? selectedBirthDay,
     @Default(0) final int currentImageIndex,
     @Default('') final String errorText,
     @Default(true) final bool isObscure,
@@ -27,5 +26,16 @@ class AuthScreenState with _$AuthScreenState {
     @Default(false) final bool isSucceeded,
     @Default(false) final bool hasError,
     @Default(false) final bool isNotTap,
+    @Default(false) final bool isNotSignUpCompleted,
+    @Default(AuthActiveType.signUp) final AuthActiveType activeType,
   }) = _Create;
+}
+
+enum AuthActiveType {
+  signUp,
+  signIn,
+  signOut,
+  delete,
+  changing,
+  update,
 }

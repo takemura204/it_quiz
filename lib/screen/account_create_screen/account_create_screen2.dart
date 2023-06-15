@@ -25,8 +25,8 @@ class AccountCreateStep2Screen extends ConsumerWidget {
     final formKey = controller.createAccountFormKey2;
     final focusNode = controller.createFocusNode2;
     final genders = controller.genders;
+    final birthDay = state.birthDay;
     final isValidUserName = state.isValidUserName;
-    final selectedBirthDay = state.selectedBirthDay;
 
     final isNotTap = state.isNotTap;
     return Focus(
@@ -91,7 +91,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                             },
                             currentTime: birthdayController.text.isEmpty
                                 ? DateTime(2000, 1, 1)
-                                : selectedBirthDay,
+                                : DateTime.parse(state.birthDay),
                             locale: LocaleType.jp,
                           );
                         },
@@ -189,7 +189,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                     .switchTap();
                                 ref
                                     .read(authScreenProvider.notifier)
-                                    .saveAccountData()
+                                    .changingProfile()
                                   ..then(
                                     (value) {
                                       //ログイン失敗

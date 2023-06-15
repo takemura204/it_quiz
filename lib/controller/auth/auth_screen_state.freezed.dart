@@ -23,9 +23,8 @@ mixin _$AuthScreenState {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
-  DateTime? get birthDay => throw _privateConstructorUsedError; //その他
+  String get birthDay => throw _privateConstructorUsedError; //その他
   String get selectGender => throw _privateConstructorUsedError;
-  DateTime? get selectedBirthDay => throw _privateConstructorUsedError;
   int get currentImageIndex => throw _privateConstructorUsedError;
   String get errorText => throw _privateConstructorUsedError;
   bool get isObscure => throw _privateConstructorUsedError;
@@ -35,6 +34,8 @@ mixin _$AuthScreenState {
   bool get isSucceeded => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
   bool get isNotTap => throw _privateConstructorUsedError;
+  bool get isNotSignUpCompleted => throw _privateConstructorUsedError;
+  AuthActiveType get activeType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthScreenStateCopyWith<AuthScreenState> get copyWith =>
@@ -54,9 +55,8 @@ abstract class $AuthScreenStateCopyWith<$Res> {
       String email,
       String password,
       String gender,
-      DateTime? birthDay,
+      String birthDay,
       String selectGender,
-      DateTime? selectedBirthDay,
       int currentImageIndex,
       String errorText,
       bool isObscure,
@@ -65,7 +65,9 @@ abstract class $AuthScreenStateCopyWith<$Res> {
       bool isSafetyPass,
       bool isSucceeded,
       bool hasError,
-      bool isNotTap});
+      bool isNotTap,
+      bool isNotSignUpCompleted,
+      AuthActiveType activeType});
 }
 
 /// @nodoc
@@ -87,9 +89,8 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
     Object? email = null,
     Object? password = null,
     Object? gender = null,
-    Object? birthDay = freezed,
+    Object? birthDay = null,
     Object? selectGender = null,
-    Object? selectedBirthDay = freezed,
     Object? currentImageIndex = null,
     Object? errorText = null,
     Object? isObscure = null,
@@ -99,6 +100,8 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
     Object? isSucceeded = null,
     Object? hasError = null,
     Object? isNotTap = null,
+    Object? isNotSignUpCompleted = null,
+    Object? activeType = null,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -125,18 +128,14 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDay: freezed == birthDay
+      birthDay: null == birthDay
           ? _value.birthDay
           : birthDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String,
       selectGender: null == selectGender
           ? _value.selectGender
           : selectGender // ignore: cast_nullable_to_non_nullable
               as String,
-      selectedBirthDay: freezed == selectedBirthDay
-          ? _value.selectedBirthDay
-          : selectedBirthDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       currentImageIndex: null == currentImageIndex
           ? _value.currentImageIndex
           : currentImageIndex // ignore: cast_nullable_to_non_nullable
@@ -173,6 +172,14 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
           ? _value.isNotTap
           : isNotTap // ignore: cast_nullable_to_non_nullable
               as bool,
+      isNotSignUpCompleted: null == isNotSignUpCompleted
+          ? _value.isNotSignUpCompleted
+          : isNotSignUpCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      activeType: null == activeType
+          ? _value.activeType
+          : activeType // ignore: cast_nullable_to_non_nullable
+              as AuthActiveType,
     ) as $Val);
   }
 }
@@ -191,9 +198,8 @@ abstract class _$$_CreateCopyWith<$Res>
       String email,
       String password,
       String gender,
-      DateTime? birthDay,
+      String birthDay,
       String selectGender,
-      DateTime? selectedBirthDay,
       int currentImageIndex,
       String errorText,
       bool isObscure,
@@ -202,7 +208,9 @@ abstract class _$$_CreateCopyWith<$Res>
       bool isSafetyPass,
       bool isSucceeded,
       bool hasError,
-      bool isNotTap});
+      bool isNotTap,
+      bool isNotSignUpCompleted,
+      AuthActiveType activeType});
 }
 
 /// @nodoc
@@ -221,9 +229,8 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
     Object? gender = null,
-    Object? birthDay = freezed,
+    Object? birthDay = null,
     Object? selectGender = null,
-    Object? selectedBirthDay = freezed,
     Object? currentImageIndex = null,
     Object? errorText = null,
     Object? isObscure = null,
@@ -233,6 +240,8 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isSucceeded = null,
     Object? hasError = null,
     Object? isNotTap = null,
+    Object? isNotSignUpCompleted = null,
+    Object? activeType = null,
   }) {
     return _then(_$_Create(
       uid: null == uid
@@ -259,18 +268,14 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDay: freezed == birthDay
+      birthDay: null == birthDay
           ? _value.birthDay
           : birthDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String,
       selectGender: null == selectGender
           ? _value.selectGender
           : selectGender // ignore: cast_nullable_to_non_nullable
               as String,
-      selectedBirthDay: freezed == selectedBirthDay
-          ? _value.selectedBirthDay
-          : selectedBirthDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       currentImageIndex: null == currentImageIndex
           ? _value.currentImageIndex
           : currentImageIndex // ignore: cast_nullable_to_non_nullable
@@ -307,6 +312,14 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.isNotTap
           : isNotTap // ignore: cast_nullable_to_non_nullable
               as bool,
+      isNotSignUpCompleted: null == isNotSignUpCompleted
+          ? _value.isNotSignUpCompleted
+          : isNotSignUpCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      activeType: null == activeType
+          ? _value.activeType
+          : activeType // ignore: cast_nullable_to_non_nullable
+              as AuthActiveType,
     ));
   }
 }
@@ -321,9 +334,8 @@ class _$_Create implements _Create {
       this.email = '',
       this.password = '',
       this.gender = '',
-      this.birthDay,
+      this.birthDay = '',
       this.selectGender = '',
-      this.selectedBirthDay,
       this.currentImageIndex = 0,
       this.errorText = '',
       this.isObscure = true,
@@ -332,7 +344,9 @@ class _$_Create implements _Create {
       this.isSafetyPass = false,
       this.isSucceeded = false,
       this.hasError = false,
-      this.isNotTap = false});
+      this.isNotTap = false,
+      this.isNotSignUpCompleted = false,
+      this.activeType = AuthActiveType.signUp});
 
 //ユーザー情報
   @override
@@ -354,13 +368,12 @@ class _$_Create implements _Create {
   @JsonKey()
   final String gender;
   @override
-  final DateTime? birthDay;
+  @JsonKey()
+  final String birthDay;
 //その他
   @override
   @JsonKey()
   final String selectGender;
-  @override
-  final DateTime? selectedBirthDay;
   @override
   @JsonKey()
   final int currentImageIndex;
@@ -388,10 +401,16 @@ class _$_Create implements _Create {
   @override
   @JsonKey()
   final bool isNotTap;
+  @override
+  @JsonKey()
+  final bool isNotSignUpCompleted;
+  @override
+  @JsonKey()
+  final AuthActiveType activeType;
 
   @override
   String toString() {
-    return 'AuthScreenState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, selectGender: $selectGender, selectedBirthDay: $selectedBirthDay, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap)';
+    return 'AuthScreenState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, selectGender: $selectGender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap, isNotSignUpCompleted: $isNotSignUpCompleted, activeType: $activeType)';
   }
 
   @override
@@ -412,8 +431,6 @@ class _$_Create implements _Create {
                 other.birthDay == birthDay) &&
             (identical(other.selectGender, selectGender) ||
                 other.selectGender == selectGender) &&
-            (identical(other.selectedBirthDay, selectedBirthDay) ||
-                other.selectedBirthDay == selectedBirthDay) &&
             (identical(other.currentImageIndex, currentImageIndex) ||
                 other.currentImageIndex == currentImageIndex) &&
             (identical(other.errorText, errorText) ||
@@ -431,30 +448,36 @@ class _$_Create implements _Create {
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             (identical(other.isNotTap, isNotTap) ||
-                other.isNotTap == isNotTap));
+                other.isNotTap == isNotTap) &&
+            (identical(other.isNotSignUpCompleted, isNotSignUpCompleted) ||
+                other.isNotSignUpCompleted == isNotSignUpCompleted) &&
+            (identical(other.activeType, activeType) ||
+                other.activeType == activeType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      uid,
-      userName,
-      userImage,
-      email,
-      password,
-      gender,
-      birthDay,
-      selectGender,
-      selectedBirthDay,
-      currentImageIndex,
-      errorText,
-      isObscure,
-      isValidUserName,
-      isValidEmail,
-      isSafetyPass,
-      isSucceeded,
-      hasError,
-      isNotTap);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        uid,
+        userName,
+        userImage,
+        email,
+        password,
+        gender,
+        birthDay,
+        selectGender,
+        currentImageIndex,
+        errorText,
+        isObscure,
+        isValidUserName,
+        isValidEmail,
+        isSafetyPass,
+        isSucceeded,
+        hasError,
+        isNotTap,
+        isNotSignUpCompleted,
+        activeType
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -471,9 +494,8 @@ abstract class _Create implements AuthScreenState {
       final String email,
       final String password,
       final String gender,
-      final DateTime? birthDay,
+      final String birthDay,
       final String selectGender,
-      final DateTime? selectedBirthDay,
       final int currentImageIndex,
       final String errorText,
       final bool isObscure,
@@ -482,7 +504,9 @@ abstract class _Create implements AuthScreenState {
       final bool isSafetyPass,
       final bool isSucceeded,
       final bool hasError,
-      final bool isNotTap}) = _$_Create;
+      final bool isNotTap,
+      final bool isNotSignUpCompleted,
+      final AuthActiveType activeType}) = _$_Create;
 
   @override //ユーザー情報
   String get uid;
@@ -497,11 +521,9 @@ abstract class _Create implements AuthScreenState {
   @override
   String get gender;
   @override
-  DateTime? get birthDay;
+  String get birthDay;
   @override //その他
   String get selectGender;
-  @override
-  DateTime? get selectedBirthDay;
   @override
   int get currentImageIndex;
   @override
@@ -520,6 +542,10 @@ abstract class _Create implements AuthScreenState {
   bool get hasError;
   @override
   bool get isNotTap;
+  @override
+  bool get isNotSignUpCompleted;
+  @override
+  AuthActiveType get activeType;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

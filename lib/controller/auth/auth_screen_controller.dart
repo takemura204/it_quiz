@@ -37,7 +37,6 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   final loginFocusNode = FocusNode();
   final createFocusNode1 = FocusNode();
   final createFocusNode2 = FocusNode();
-
   final genders = ["男性", "女性", "未回答"];
   final images = [
     "assets/image/sample_02.jpg",
@@ -51,93 +50,38 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   }
 
   /// 端末保存した情報を読み込み、その情報からFirestoreを参照してstateに反映
-  Future<void> loadAccountData() async {
-    //FirebaseAuthの読み込み
-    final auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
-    final uid = user?.uid;
-
-    if (uid != null) {
-      final docSnap =
-          await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      if (docSnap.exists) {
-        final data = docSnap.data();
-        state = state.copyWith(
-          uid: data?['uid'],
-          email: data?['email'],
-          userName: data?['userName'],
-          gender: data?['gender'],
-          selectGender: data?['gender'],
-          birthDay: DateTime.parse(data?['birthDay']),
-          selectedBirthDay: DateTime.parse(data?['birthDay']),
-        );
-        emailController.text = state.email;
-        userNameController.text = state.userName;
-        birthdayController.text =
-            DateFormat('yyyy/MM/dd').format(state.birthDay!);
-        genderController.text = state.gender;
-      }
-    }
-  }
-
-  ///アカウントデータを保存
-  Future saveAccountData() async {
-    final uid = state.uid;
-    final email = state.email;
-    final password = state.password;
-    final userName = state.userName;
-    final birthDay = DateFormat('yyyy-MM-dd').format(state.birthDay!);
-    final gender = state.gender;
+  Future loadAccountData() async {
     try {
-      //FireStoreに登録
-      final users = FirebaseFirestore.instance.collection('users');
-      final docRef = users.doc(uid);
-      // ドキュメントが存在するかどうかをチェック
-      final docSnap = await docRef.get();
-      if (docSnap.exists) {
-        // 既存のドキュメントを更新
-        await docRef.update({
-          'userName': userName,
-          'birthDay': birthDay,
-          'gender': gender,
-          'updatedAt': DateTime.now(),
-        });
-        print("アカウント更新");
+      //FirebaseAuthの読み込み
+      final user = auth.currentUser;
+      final uid = user?.uid;
+      if (uid != null) {
+        final docSnap =
+            await FirebaseFirestore.instance.collection('users').doc(uid).get();
+        if (docSnap.exists) {
+          final data = docSnap.data();
+          state = state.copyWith(
+            uid: data?['uid'] ?? state.uid,
+            email: data?['email'] ?? state.email,
+            userName: data?['userName'] ?? state.userName,
+            gender: data?['gender'] ?? state.gender,
+            selectGender: data?['gender'] ?? state.selectGender,
+            birthDay: data?['birthDay'] != null
+                ? DateFormat('yyyy-MM-dd')
+                    .format((data?['birthDay'] as Timestamp).toDate())
+                : '',
+          );
+          emailController.text = state.email;
+          userNameController.text = state.userName;
+          birthdayController.text = state.birthDay.replaceAll('-', '/');
+          genderController.text = state.gender;
+        }
       } else {
-        // 新規ドキュメントを作成
-        await docRef.set({
-          'uid': uid,
-          'email': email,
-          'password': password,
-          'userName': userName,
-          'birthDay': birthDay,
-          'gender': gender,
-          'createdAt': DateTime.now(),
-          'loginAt': DateTime.now(),
-          'updatedAt': DateTime.now(),
-        });
-        print("アカウント登録");
+        print("未ログイン");
       }
-      // 端末に情報を保存
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('uid', uid);
-      prefs.setString('email', email);
-      prefs.setString('password', password);
-      prefs.setString('userName', userName);
-      prefs.setString('birthDay', birthDay);
-      prefs.setString('gender', gender);
-
-      state = state.copyWith(
-        uid: uid,
-        email: email,
-        password: password,
-        userName: userName,
-        birthDay: DateTime.parse(birthDay),
-        gender: gender,
-      );
-    } catch (e) {
-      print(e);
-      print("登録失敗");
+    } catch (e, s) {
+      print({e, s});
+      print("Error：loadAccountData");
       state = state.copyWith(errorText: e.toString(), hasError: true);
     }
     return state;
@@ -145,24 +89,30 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
 
   ///新規登録
   Future signUp() async {
+    setAuthActiveType(AuthActiveType.signUp);
     try {
       //FirebaseAuthに登録
-      final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final result = await auth.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
       final User? user = result.user;
-
       if (user != null) {
+        //stateを更新
         state = state.copyWith(
           uid: user.uid,
           email: emailController.text.trim(),
+          password: passwordController.text.trim(),
           userName: userNameController.text.trim(),
         );
+        saveFirestore(); //Firestoreに保存
+        saveDevice(); //デバイスに保存
+        loadAccountData(); //データ更新
+        print("新規登録成功");
       }
-    } catch (e) {
-      print(e);
-      print("登録失敗");
+    } catch (e, s) {
+      print({e, s});
+      print("Error：signUp");
       state = state.copyWith(errorText: e.toString(), hasError: true);
     }
     return state;
@@ -170,21 +120,45 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
 
   ///ログイン
   Future<AuthScreenState> signIn() async {
+    setAuthActiveType(AuthActiveType.signIn);
     try {
+      //FirebaseAuthでログイン
       final result = await auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
       final User? user = result.user;
-      if (user != null && !user.emailVerified) {
-        print("メール認証していません");
-        return state;
+      if (user != null) {
+        //state更新
+        state = state.copyWith(
+          uid: user.uid,
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        saveFirestore(); //Firestoreに保存
+        saveDevice(); //デバイスに保存
+        loadAccountData(); //データ更新
+        print("ログイン成功");
       }
-      await user?.updateDisplayName(userNameController.text.trim());
-      state = state.copyWith(email: emailController.text.trim());
-      print("ログイン成功");
-    } catch (e) {
-      print(e);
+    } catch (e, s) {
+      print({e, s});
+      print("Error：signIn");
+      state = state.copyWith(errorText: e.toString(), hasError: true);
+    }
+
+    return state;
+  }
+
+  ///プロフィール更新
+  Future changingProfile() async {
+    setAuthActiveType(AuthActiveType.changing);
+    try {
+      saveFirestore(); //Firestoreに保存
+      saveDevice(); //デバイスに保存
+      loadAccountData(); //データ更新
+      print("プロフィール更新");
+    } catch (e, s) {
+      print({"Error：changingProfile", e, s});
       state = state.copyWith(errorText: e.toString(), hasError: true);
     }
     return state;
@@ -192,13 +166,103 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
 
   ///ログアウト
   Future signOut() async {
+    setAuthActiveType(AuthActiveType.signOut);
     try {
-      await FirebaseAuth.instance.signOut();
-
+      await auth.signOut();
+      reset();
+      saveFirestore(); //Firestoreに保存
+      saveDevice(); //デバイスに保存
+      loadAccountData(); //データ更新
       print("ログアウト成功");
-    } catch (e) {
-      print(e);
+    } catch (e, s) {
+      print({"Error：signOut", e, s});
+      state = state.copyWith(errorText: e.toString(), hasError: true);
     }
+    return state;
+  }
+
+  ///アカウント削除
+  Future deleteAccount() async {
+    setAuthActiveType(AuthActiveType.delete);
+    try {
+      await auth.currentUser?.delete();
+      reset();
+      saveFirestore(); //Firestoreに保存
+      saveDevice(); //デバイスに保存
+      loadAccountData(); //データ更新
+      print("アカウント削除成功");
+    } catch (e, s) {
+      print({"Error：deleteAccount", e, s});
+    }
+    return state;
+  }
+
+  ///ログイン状態更新
+  void setAuthActiveType(AuthActiveType activeType) {
+    state = state.copyWith(activeType: activeType);
+    print(activeType);
+  }
+
+  ///メールアドレスの入力
+  void setEmail(String email) {
+    final regExp = RegExp(
+        r'^[a-zA-Z0-9.!#$%&‘*+-/=?^_`{|}~]+@[a-zA-Z0-9.!#$%&‘*+-/=?^_`{|}~]+\.[a-zA-Z0-9-]+$');
+    final isValidEmail = regExp.hasMatch(email);
+    state = state.copyWith(email: email, isValidEmail: isValidEmail);
+  }
+
+  ///パスワードの入力
+  void setPassword(String password) {
+    final regExp = RegExp(r'^[a-zA-Z0-9]{8,}$');
+    final isSafetyPass = regExp.hasMatch(password);
+    state = state.copyWith(password: password, isSafetyPass: isSafetyPass);
+  }
+
+  ///ユーザー名入力
+  void setUserName(String name) {
+    if (name.length < 13) {
+      state = state.copyWith(userName: name, isValidUserName: false);
+    } else {
+      state = state.copyWith(isValidUserName: true);
+    }
+  }
+
+  ///生年月日の入力
+  void setBirthday(DateTime date) {
+    final birthDayStr = DateFormat('yyyy-MM-dd').format(date);
+    state = state.copyWith(birthDay: birthDayStr);
+  }
+
+  ///性別選択
+  void setGender() {
+    final selectGender = state.selectGender;
+    genderController.text = selectGender;
+    state = state.copyWith(gender: selectGender, selectGender: selectGender);
+  }
+
+  void setSelectGender(String selectGender) {
+    state = state.copyWith(selectGender: selectGender);
+  }
+
+  ///画像移動
+  void setImageIndex(int index) {
+    state = state.copyWith(currentImageIndex: index);
+  }
+
+  /// パスワードの表示
+  void switchObscure() {
+    state = state.copyWith(isObscure: !state.isObscure);
+  }
+
+  ///エラーの表示
+  void switchHasError() {
+    state = state.copyWith(hasError: false);
+  }
+
+  ///ボタンタップの可否
+  void switchTap() {
+    final isNotTap = state.isNotTap;
+    state = state.copyWith(isNotTap: !isNotTap);
   }
 
   ///Googleから登録
@@ -216,7 +280,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
         idToken: googleAuth?.idToken,
       );
       // サインインしたら、UserCredentialを返す
-      return FirebaseAuth.instance.signInWithCredential(credential);
+      return auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       print('FirebaseAuthException');
       print('${e.code}');
@@ -256,65 +320,125 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     }
   }
 
-  ///ユーザー名入力
-  void setUserName(String name) {
-    if (name.length < 13) {
-      state = state.copyWith(userName: name, isValidUserName: false);
-    } else {
-      state = state.copyWith(isValidUserName: true);
+  ///Firestoreに保存
+  Future saveFirestore() async {
+    try {
+      final activeType = state.activeType;
+      final user = auth.currentUser;
+      final uid = user?.uid;
+      //FireStoreのusersコレクションにドキュメントが存在するかどうかをチェック
+      final users = FirebaseFirestore.instance.collection('users');
+      final docRef = users.doc(uid);
+      final docSnap = await docRef.get();
+      switch (activeType) {
+        //新規登録
+        case AuthActiveType.signUp:
+          if (!docSnap.exists) {
+            await docRef.set({
+              'uid': state.uid,
+              'email': state.email,
+              'password': state.password,
+              'createdAt': DateTime.now(),
+              'loginAt': DateTime.now(),
+              'updatedAt': DateTime.now(),
+            });
+            print("Firestore Save SignUp");
+          }
+          return;
+        //ログイン
+        case AuthActiveType.signIn:
+          if (docSnap.exists) {
+            await docRef.update({
+              'uid': state.uid,
+              'email': state.email,
+              'password': state.password,
+              'userName': state.userName,
+              'birthDay': DateTime.parse(state.birthDay),
+              'gender': state.gender,
+              'loginAt': DateTime.now(),
+              'updatedAt': DateTime.now(),
+            });
+            print("Firestore Save SignIn");
+          }
+          return;
+        //プロフィール更新
+        case AuthActiveType.changing:
+          if (docSnap.exists) {
+            // 既存のドキュメントを更新
+            await docRef.set({
+              'userName': state.userName,
+              'birthDay': DateTime.parse(state.birthDay),
+              'gender': state.gender,
+              'updatedAt': DateTime.now(),
+            }, SetOptions(merge: true));
+            print("Firestore Save ProfileChanging");
+          }
+          return;
+        //アカウント更新
+        case AuthActiveType.update:
+          if (docSnap.exists) {
+            // 既存のドキュメントを更新
+            await docRef.update({
+              'email': state.email,
+              'password': state.password,
+              'updatedAt': DateTime.now(),
+            });
+            print("Firestore Save AccountUpdate");
+          }
+          return;
+        //ログアウト
+        case AuthActiveType.signOut:
+          if (docSnap.exists) {
+            // 既存のドキュメントを更新
+            await docRef.update({
+              'updatedAt': DateTime.now(),
+              'logoutAt': DateTime.now(),
+            });
+            print("Firestore Save SignOut");
+          }
+          return;
+        //アカウント削除
+        case AuthActiveType.delete:
+          if (docSnap.exists) {
+            // 既存のドキュメントを更新
+            await docRef.delete();
+            print("Firestore Save deleteAccount");
+          }
+          return;
+      }
+    } catch (e) {
+      print(e);
+      print("登録失敗");
+      state = state.copyWith(errorText: e.toString(), hasError: true);
     }
+    return state;
   }
 
-  ///メールアドレスの入力
-  void setEmail(String email) {
-    final regExp = RegExp(
-        r'^[a-zA-Z0-9.!#$%&‘*+-/=?^_`{|}~]+@[a-zA-Z0-9.!#$%&‘*+-/=?^_`{|}~]+\.[a-zA-Z0-9-]+$');
-    final isValidEmail = regExp.hasMatch(email);
-    state = state.copyWith(email: email, isValidEmail: isValidEmail);
-  }
+  /// 端末に保存
+  Future saveDevice() async {
+    final uid = state.uid;
+    final email = state.email;
+    final password = state.password;
+    final userName = state.userName;
+    final birthDay = state.birthDay;
+    final gender = state.gender;
 
-  ///パスワードの入力
-  void setPassword(String password) {
-    final regExp = RegExp(r'^[a-zA-Z0-9]{8,}$');
-    final isSafetyPass = regExp.hasMatch(password);
-    state = state.copyWith(password: password, isSafetyPass: isSafetyPass);
-  }
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('uid', uid);
+    prefs.setString('email', email);
+    prefs.setString('password', password);
+    prefs.setString('userName', userName);
+    prefs.setString('birthDay', birthDay);
+    prefs.setString('gender', gender);
 
-  ///生年月日の入力
-  void setBirthday(DateTime date) {
-    state = state.copyWith(birthDay: date, selectedBirthDay: date);
-  }
-
-  ///性別選択
-  void setGender() {
-    final selectGender = state.selectGender;
-    genderController.text = selectGender;
-    state = state.copyWith(gender: selectGender, selectGender: selectGender);
-  }
-
-  void setSelectGender(String selectGender) {
-    state = state.copyWith(selectGender: selectGender);
-  }
-
-  ///画像移動
-  void setImageIndex(int index) {
-    state = state.copyWith(currentImageIndex: index);
-  }
-
-  /// パスワードの表示
-  void switchObscure() {
-    state = state.copyWith(isObscure: !state.isObscure);
-  }
-
-  ///エラーの表示
-  void switchHasError() {
-    state = state.copyWith(hasError: false);
-  }
-
-  ///ボタンタップの可否
-  void switchTap() {
-    final isNotTap = state.isNotTap;
-    state = state.copyWith(isNotTap: !isNotTap);
+    state = state.copyWith(
+      uid: uid,
+      email: email,
+      password: password,
+      userName: userName,
+      birthDay: birthDay,
+      gender: gender,
+    );
   }
 
   ///リセット
@@ -322,6 +446,8 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     emailController.clear();
     passwordController.clear();
     userNameController.clear();
+    birthdayController.clear();
+    genderController.clear();
     createAccountFormKey1.currentState?.reset();
     createAccountFormKey2.currentState?.reset();
     loginFormKey.currentState?.reset();
@@ -329,6 +455,13 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     createFocusNode1.unfocus();
     createFocusNode2.unfocus();
     state = state.copyWith(
+      uid: "",
+      email: "",
+      password: "",
+      userName: "ゲスト",
+      birthDay: "",
+      gender: "",
+      selectGender: "",
       errorText: "",
       isObscure: true,
       isValidEmail: false,

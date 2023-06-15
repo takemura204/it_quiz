@@ -22,11 +22,11 @@ class AccountProfileScreen extends ConsumerWidget {
     final state = ref.watch(authScreenProvider);
     final controller = ref.watch(authScreenProvider.notifier);
     final isValidUserName = state.isValidUserName;
+    final birthDay = state.birthDay;
     final isNotTap = state.isNotTap;
     final userNameController = controller.userNameController;
     final genderController = controller.genderController;
     final birthdayController = controller.birthdayController;
-    final selectedBirthDay = state.selectedBirthDay;
     final genders = controller.genders;
 
     return Scaffold(
@@ -76,7 +76,7 @@ class AccountProfileScreen extends ConsumerWidget {
                   },
                   currentTime: birthdayController.text.isEmpty
                       ? DateTime(2000, 1, 1)
-                      : selectedBirthDay,
+                      : DateTime.parse(state.birthDay),
                   locale: LocaleType.jp,
                 );
               },
@@ -93,6 +93,7 @@ class AccountProfileScreen extends ConsumerWidget {
                   currentIndex = 0;
                 }
 
+                //selectGenderを消したい。
                 ref.read(authScreenProvider.notifier).setSelectGender(
                     genders[currentIndex]); // Picker表示前に現在の選択状態を保存
                 ///ドラムロール表示
@@ -166,7 +167,7 @@ class AccountProfileScreen extends ConsumerWidget {
                       !isNotTap
                   ? () {
                       ref.read(authScreenProvider.notifier).switchTap();
-                      ref.read(authScreenProvider.notifier).saveAccountData()
+                      ref.read(authScreenProvider.notifier).changingProfile()
                         ..then(
                           (value) {
                             //ログイン失敗
