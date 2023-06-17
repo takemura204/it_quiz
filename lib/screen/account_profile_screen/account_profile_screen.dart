@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
@@ -22,7 +23,6 @@ class AccountProfileScreen extends ConsumerWidget {
     final state = ref.watch(authScreenProvider);
     final controller = ref.watch(authScreenProvider.notifier);
     final isValidUserName = state.isValidUserName;
-    final birthDay = state.birthDay;
     final isNotTap = state.isNotTap;
     final userNameController = controller.userNameController;
     final genderController = controller.genderController;
@@ -72,7 +72,7 @@ class AccountProfileScreen extends ConsumerWidget {
                   onConfirm: (date) {
                     ref.read(authScreenProvider.notifier).setBirthday(date);
                     birthdayController.value = TextEditingValue(
-                        text: '${date.year}/${date.month}/${date.day}');
+                        text: DateFormat('yyyy/MM/dd').format(date));
                   },
                   currentTime: birthdayController.text.isEmpty
                       ? DateTime(2000, 1, 1)

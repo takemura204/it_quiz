@@ -348,16 +348,12 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
         //ログイン
         case AuthActiveType.signIn:
           if (docSnap.exists) {
-            await docRef.update({
-              'uid': state.uid,
+            await docRef.set({
               'email': state.email,
               'password': state.password,
-              'userName': state.userName,
-              'birthDay': DateTime.parse(state.birthDay),
-              'gender': state.gender,
               'loginAt': DateTime.now(),
               'updatedAt': DateTime.now(),
-            });
+            }, SetOptions(merge: true));
             print("Firestore Save SignIn");
           }
           return;
@@ -408,7 +404,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
       }
     } catch (e) {
       print(e);
-      print("登録失敗");
+      print("saveFirestore　Error");
       state = state.copyWith(errorText: e.toString(), hasError: true);
     }
     return state;

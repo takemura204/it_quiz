@@ -62,7 +62,7 @@ class UserProfile extends ConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      userName,
+                      email == "ログインしていません" ? "ゲスト" : userName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: context.height * 0.02,
