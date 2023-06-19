@@ -11,6 +11,7 @@ import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dar
 import '../resource/screen_argument_resource.dart';
 import 'account_create_screen/account_create_screen1.dart';
 import 'account_create_screen/account_create_screen2.dart';
+import 'account_update_screen/account_update_screen.dart';
 
 ///一問一答形式へ画面遷移
 class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
@@ -188,7 +189,7 @@ class AccountCreateStep1ScreenArguments
       );
 }
 
-///新規登録1
+///新規登録2
 class AccountCreateStep2ScreenArguments
     with _NoParamsMixin
     implements IScreenArguments {
@@ -200,6 +201,21 @@ class AccountCreateStep2ScreenArguments
   @override
   Route generateRoute() => CupertinoPageRoute(
         builder: (context) => AccountCreateStep2Screen(this),
+      );
+}
+
+///パスワード再設定
+class AccountUpdateScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const AccountUpdateScreenArguments();
+
+  @override
+  String get screenNameFormat => "/update_account";
+
+  @override
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => AccountUpdateScreen(this),
       );
 }
 

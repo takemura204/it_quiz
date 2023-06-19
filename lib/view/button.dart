@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
@@ -11,7 +12,7 @@ class Default1Button extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: context.width * 0.8,
-      height: context.height * 0.06,
+      height: context.height * 0.07,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
@@ -51,7 +52,7 @@ class Default2Button extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: context.width * 0.8,
-      height: context.height * 0.06,
+      height: context.height * 0.07,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: context.mainColor,
@@ -196,43 +197,6 @@ class SetAccountButton extends ConsumerWidget {
           text,
           style: TextStyle(
             color: Colors.white,
-            fontSize: context.height * 0.018,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-///プロフィール編集ボタン
-class EditProfileButton extends ConsumerWidget {
-  const EditProfileButton({required this.onPressed, required this.text});
-  final VoidCallback onPressed;
-  final String text;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: context.height * 0.05,
-      width: context.width * 1,
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.2),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          side: BorderSide(
-            color: context.mainColor,
-            width: 2,
-          ),
-        ),
-        onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: context.mainColor,
             fontSize: context.height * 0.018,
             fontWeight: FontWeight.bold,
           ),

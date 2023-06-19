@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
-import '../../controller/auth/auth_screen_controller.dart';
+import '../../controller/auth/auth_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
@@ -19,17 +19,15 @@ class AccountCreateStep1Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isValidEmail = ref.watch(authScreenProvider).isValidEmail;
-    final isSafetyPass = ref.watch(authScreenProvider).isSafetyPass;
-    final isObscure = ref.watch(authScreenProvider).isObscure;
-    final emailController =
-        ref.watch(authScreenProvider.notifier).emailController;
+    final isValidEmail = ref.watch(authProvider).isValidEmail;
+    final isSafetyPass = ref.watch(authProvider).isSafetyPass;
+    final isObscure = ref.watch(authProvider).isObscure;
+    final emailController = ref.watch(authProvider.notifier).emailController;
     final passwordController =
-        ref.watch(authScreenProvider.notifier).passwordController;
-    final formKey =
-        ref.watch(authScreenProvider.notifier).createAccountFormKey1;
-    final focusNode = ref.watch(authScreenProvider.notifier).createFocusNode1;
-    final isNotTap = ref.watch(authScreenProvider).isNotTap;
+        ref.watch(authProvider.notifier).passwordController;
+    final formKey = ref.watch(authProvider.notifier).createAccountFormKey1;
+    final focusNode = ref.watch(authProvider.notifier).createFocusNode1;
+    final isNotTap = ref.watch(authProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -61,9 +59,8 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                       EmailTextField(
                         emailController: emailController,
                         isValidEmail: isValidEmail,
-                        onChanged: (email) => ref
-                            .read(authScreenProvider.notifier)
-                            .setEmail(email),
+                        onChanged: (email) =>
+                            ref.read(authProvider.notifier).setEmail(email),
                       ),
 
                       ///パスワード
@@ -74,11 +71,10 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                         isObscure: isObscure,
                         isLogin: false,
                         onChanged: (password) => ref
-                            .read(authScreenProvider.notifier)
+                            .read(authProvider.notifier)
                             .setPassword(password),
-                        obscureIconButtonPressed: () => ref
-                            .read(authScreenProvider.notifier)
-                            .switchObscure(),
+                        obscureIconButtonPressed: () =>
+                            ref.read(authProvider.notifier).switchObscure(),
                       ),
                       Gap(context.height * 0.02),
 
@@ -87,10 +83,8 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                         text: '新規登録',
                         onPressed: (isValidEmail && isSafetyPass) && !isNotTap
                             ? () {
-                                ref
-                                    .read(authScreenProvider.notifier)
-                                    .switchTap();
-                                ref.read(authScreenProvider.notifier).signUp()
+                                ref.read(authProvider.notifier).switchTap();
+                                ref.read(authProvider.notifier).signUp()
                                   ..then(
                                     (value) {
                                       //ログイン失敗
@@ -100,8 +94,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                           builder: (_) => DialogClose2(
                                             onPressed: () {
                                               ref
-                                                  .read(authScreenProvider
-                                                      .notifier)
+                                                  .read(authProvider.notifier)
                                                   .switchHasError();
                                               Navigator.of(context).pop();
                                             },
@@ -129,7 +122,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                         );
                                       }
                                       ref
-                                          .read(authScreenProvider.notifier)
+                                          .read(authProvider.notifier)
                                           .switchTap();
                                     },
                                   );

@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
-import '../../controller/auth/auth_screen_controller.dart';
+import '../../controller/auth/auth_controller.dart';
 import '../../view/button.dart';
 
 class TestScreen extends ConsumerWidget {
@@ -61,17 +61,17 @@ class TestScreen extends ConsumerWidget {
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
                   onPressed: () =>
-                      ref.read(authScreenProvider.notifier).signInWithGoogle(),
+                      ref.read(authProvider.notifier).signInWithGoogle(),
                 ),
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
                   onPressed: () =>
-                      ref.read(authScreenProvider.notifier).signInWithGoogle(),
+                      ref.read(authProvider.notifier).signInWithGoogle(),
                 ),
                 SignInWithGoogleButton(
                   text: 'Googleアカウントで続ける',
                   onPressed: () =>
-                      ref.read(authScreenProvider.notifier).signInWithGoogle(),
+                      ref.read(authProvider.notifier).signInWithGoogle(),
                 ),
 
                 Gap(context.height * 0.015),

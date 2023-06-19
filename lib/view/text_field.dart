@@ -1,8 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
+
+import '../screen/screen_argument.dart';
 
 ///メールアドレス入力
 class EmailTextField extends ConsumerWidget {
@@ -88,7 +91,7 @@ class PasswordTextField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.12,
+      height: context.height * 0.135,
       child: Column(
         children: [
           Container(
@@ -136,15 +139,33 @@ class PasswordTextField extends ConsumerWidget {
           ),
           Gap(context.height * 0.005),
           Container(
-              height: context.height * 0.02,
-              alignment: isLogin ? Alignment.bottomRight : Alignment.bottomLeft,
-              margin: EdgeInsets.symmetric(
-                  horizontal: context.width * 0.02,
-                  vertical: context.width * 0.0),
-              child: Text(
-                isLogin ? "パスワードを忘れた場合" : "*8桁以上の半角英数字・記号のみ",
-                style: TextStyle(fontSize: context.width * 0.03),
-              )),
+            height: context.height * 0.02,
+            alignment: isLogin ? Alignment.bottomRight : Alignment.bottomLeft,
+            margin: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.0),
+            child: isLogin
+                ? RichText(
+                    text: TextSpan(children: [
+                    TextSpan(
+                      text: 'パスワードを忘れた場合',
+                      style: TextStyle(
+                        fontSize: context.width * 0.03,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black45,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => context.showScreen(
+                            const AccountUpdateScreenArguments()
+                                .generateRoute()),
+                    ),
+                  ]))
+                : Text(
+                    "*8桁以上の半角英数字・記号のみ",
+                    style: TextStyle(fontSize: context.width * 0.03),
+                  ),
+          ),
         ],
       ),
     );

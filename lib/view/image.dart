@@ -4,15 +4,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../controller/auth/auth_screen_controller.dart';
+import '../controller/auth/auth_controller.dart';
 
 class Tutorial extends ConsumerWidget {
   const Tutorial();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentImageIndex = ref.watch(authScreenProvider).currentImageIndex;
-    final images = ref.watch(authScreenProvider.notifier).images;
+    final currentImageIndex = ref.watch(authProvider).currentImageIndex;
+    final images = ref.watch(authProvider.notifier).images;
     return Column(
       children: [
         ///チュートリアル画面
@@ -31,7 +31,7 @@ class Tutorial extends ConsumerWidget {
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               onPageChanged: (index, reason) {
-                ref.read(authScreenProvider.notifier).setImageIndex(index);
+                ref.read(authProvider.notifier).setImageIndex(index);
               },
               scrollDirection: Axis.horizontal,
             ),

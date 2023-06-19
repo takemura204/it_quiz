@@ -35,7 +35,7 @@ class DialogDefault1 extends ConsumerWidget {
         ),
         child: Container(
           width: context.width * 1,
-          height: context.height * 0.26,
+          height: context.height * 0.3,
           padding: EdgeInsets.all(context.width * 0.02),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -62,7 +62,8 @@ class DialogDefault1 extends ConsumerWidget {
               ),
               const Spacer(),
               Container(
-                height: context.height * 0.12,
+                height: context.height * 0.13,
+                // color: Colors.red,
                 child: Column(
                   children: [
                     const Spacer(),
@@ -180,7 +181,7 @@ class DialogDefault2 extends ConsumerWidget {
         ),
         child: Container(
           width: context.width * 1,
-          height: context.height * 0.26,
+          height: context.height * 0.3,
           padding: EdgeInsets.all(context.width * 0.02),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -207,7 +208,7 @@ class DialogDefault2 extends ConsumerWidget {
               ),
               const Spacer(),
               Container(
-                height: context.height * 0.12,
+                height: context.height * 0.13,
                 child: Column(
                   children: [
                     const Spacer(),
@@ -325,7 +326,7 @@ class DialogClose1 extends ConsumerWidget {
         ),
         child: Container(
           width: context.width * 1,
-          height: context.height * 0.26,
+          height: context.height * 0.3,
           padding: EdgeInsets.all(context.width * 0.02),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -353,7 +354,7 @@ class DialogClose1 extends ConsumerWidget {
               ),
               const Spacer(),
               Container(
-                height: context.height * 0.12,
+                height: context.height * 0.13,
                 child: Column(
                   children: [
                     const Spacer(),
@@ -427,7 +428,7 @@ class DialogClose2 extends ConsumerWidget {
         ),
         child: Container(
           width: context.width * 1,
-          height: context.height * 0.26,
+          height: context.height * 0.3,
           padding: EdgeInsets.all(context.width * 0.02),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -459,7 +460,7 @@ class DialogClose2 extends ConsumerWidget {
 
               ///本文
               Container(
-                height: context.height * 0.12,
+                height: context.height * 0.13,
                 child: Column(
                   children: [
                     const Spacer(),

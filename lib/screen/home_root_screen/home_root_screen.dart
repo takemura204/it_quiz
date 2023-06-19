@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
-import '../../controller/auth/auth_screen_controller.dart';
+import '../../controller/auth/auth_controller.dart';
 import '../../controller/home_review/home_review_screen_controller.dart';
 import '../../controller/home_root/home_root_screen_controller.dart';
 import '../../controller/home_root/home_root_screen_state.dart';

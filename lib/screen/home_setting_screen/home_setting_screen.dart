@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/auth/auth_screen_controller.dart';
+import 'package:kentei_quiz/controller/auth/auth_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
@@ -133,18 +133,9 @@ class HomeSettingScreen extends ConsumerWidget {
                   title: "開発者",
                   onTap: null,
                 ),
-                const SettingTitleBar(
-                  title: "アカウント情報",
-                  onTap: null,
-                ),
-                const SettingListBar(
-                  title: "アプリを削除する",
-                  onTap: null,
-                ),
               ],
             ),
 
-            const Gap(30),
             Container(
               child: StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),
@@ -155,35 +146,50 @@ class HomeSettingScreen extends ConsumerWidget {
                   }
                   if (snapshot.hasData) {
                     // User が null でなない、つまりサインイン済みのホーム画面へ
-                    return
+                    return Column(
+                      children: [
+                        ///アカウント削除
+                        const SettingTitleBar(
+                          title: "アカウント情報",
+                          onTap: null,
+                        ),
+                        SettingListBar(
+                          title: "アプリを削除する",
+                          onTap: () {
+                            ref.read(authProvider.notifier).deleteAccount();
+                          },
+                        ),
+                        Gap(context.height * 0.025),
 
-                        ///ログイン・会員登録ボタン
+                        ///ログアウトボタン
                         SetAccountButton(
-                      onPressed: () async {
-                        await showDialog(
-                            context: context,
-                            builder: (context) {
-                              return DialogDefault1(
-                                  onPressed: () {
-                                    ref
-                                        .read(authScreenProvider.notifier)
-                                        .signOut();
-                                    Navigator.of(context).pop();
-                                  },
-                                  title: "ログアウトしますか？",
-                                  subWidget: Text(
-                                    "ログアウトすると\n一部の機能が制限されます。",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: context.width * 0.04,
-                                        color: Colors.black87),
-                                    maxLines: 2,
-                                  ),
-                                  cancelText: "キャンセル",
-                                  doneText: "ログアウト");
-                            });
-                      },
-                      text: "ログアウト",
+                          onPressed: () async {
+                            await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return DialogDefault1(
+                                      onPressed: () {
+                                        ref
+                                            .read(authProvider.notifier)
+                                            .signOut();
+                                        Navigator.of(context).pop();
+                                      },
+                                      title: "ログアウトしますか？",
+                                      subWidget: Text(
+                                        "ログアウトすると\n一部の機能が制限されます。",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: context.width * 0.04,
+                                            color: Colors.black87),
+                                        maxLines: 2,
+                                      ),
+                                      cancelText: "キャンセル",
+                                      doneText: "ログアウト");
+                                });
+                          },
+                          text: "ログアウト",
+                        ),
+                      ],
                     );
                   }
 
@@ -192,7 +198,7 @@ class HomeSettingScreen extends ConsumerWidget {
                 },
               ),
             ),
-            const Gap(30),
+            Gap(context.height * 0.025),
           ],
         ),
       ),

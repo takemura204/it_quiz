@@ -6,7 +6,7 @@ class UserProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final email = FirebaseAuth.instance.currentUser?.email ?? "ログインしていません";
-    final userName = ref.watch(authScreenProvider).userName;
+    final userName = ref.watch(authProvider).userName;
     return Container(
       height: context.height * 0.1,
       child: Row(
@@ -33,8 +33,9 @@ class UserProfile extends ConsumerWidget {
                         cancelText: "キャンセル",
                         doneText: "新規登録",
                         onPressed: () {
-                          const AccountCreateStep1ScreenArguments()
-                              .generateRoute();
+                          Navigator.of(context).pop();
+                          context.showScreen(
+                              const ProfileScreenArguments().generateRoute());
                         },
                       );
                     });
@@ -42,7 +43,7 @@ class UserProfile extends ConsumerWidget {
               //ログインしている時
               else {
                 //画像選択
-                ref.read(authScreenProvider.notifier).pickImage();
+                ref.read(authProvider.notifier).pickImage();
               }
             },
             height: context.height * 0.1,

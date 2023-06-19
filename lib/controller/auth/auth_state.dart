@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'auth_screen_state.freezed.dart';
+part 'auth_state.freezed.dart';
 
 @freezed
-class AuthScreenState with _$AuthScreenState {
-  const factory AuthScreenState({
+class AuthState with _$AuthState {
+  const factory AuthState({
     //ユーザー情報
     @Default('') final String uid,
     @Default('') final String userName,
@@ -15,6 +15,8 @@ class AuthScreenState with _$AuthScreenState {
     @Default('') final String password,
     @Default('') final String gender,
     @Default('') final String birthDay,
+    @Default(false) final bool isLogin,
+
     //その他
     @Default('') final String selectGender,
     @Default(0) final int currentImageIndex,

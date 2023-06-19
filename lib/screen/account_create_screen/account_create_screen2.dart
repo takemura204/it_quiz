@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
-import '../../controller/auth/auth_screen_controller.dart';
+import '../../controller/auth/auth_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
@@ -17,15 +18,14 @@ class AccountCreateStep2Screen extends ConsumerWidget {
   final AccountCreateStep2ScreenArguments arguments;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(authScreenProvider.notifier);
-    final state = ref.watch(authScreenProvider);
+    final controller = ref.watch(authProvider.notifier);
+    final state = ref.watch(authProvider);
     final userNameController = controller.userNameController;
     final genderController = controller.genderController;
     final birthdayController = controller.birthdayController;
     final formKey = controller.createAccountFormKey2;
     final focusNode = controller.createFocusNode2;
     final genders = controller.genders;
-    final birthDay = state.birthDay;
     final isValidUserName = state.isValidUserName;
 
     final isNotTap = state.isNotTap;
@@ -60,9 +60,8 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                       UserNameTextField(
                         userNameController: userNameController,
                         isValidUserName: isValidUserName,
-                        onChanged: (name) => ref
-                            .read(authScreenProvider.notifier)
-                            .setUserName(name),
+                        onChanged: (name) =>
+                            ref.read(authProvider.notifier).setUserName(name),
                       ),
                       Gap(context.height * 0.01),
 
@@ -77,17 +76,12 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                             maxTime: DateTime(DateTime.now().year,
                                 DateTime.now().month, DateTime.now().day),
                             onChanged: (date) {
-                              ref
-                                  .read(authScreenProvider.notifier)
-                                  .setBirthday(date);
+                              ref.read(authProvider.notifier).setBirthday(date);
                             },
                             onConfirm: (date) {
-                              ref
-                                  .read(authScreenProvider.notifier)
-                                  .setBirthday(date);
+                              ref.read(authProvider.notifier).setBirthday(date);
                               birthdayController.value = TextEditingValue(
-                                  text:
-                                      '${date.year}/${date.month}/${date.day}');
+                                  text: DateFormat('yyyy/MM/dd').format(date));
                             },
                             currentTime: birthdayController.text.isEmpty
                                 ? DateTime(2000, 1, 1)
@@ -100,13 +94,13 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                       GenderTextField(
                         genderController: genderController,
                         onTap: () {
-                          var currentIndex = genders.indexOf(
-                              ref.read(authScreenProvider).selectGender);
+                          var currentIndex = genders
+                              .indexOf(ref.read(authProvider).selectGender);
                           if (currentIndex == -1) {
                             currentIndex = 0;
                           }
 
-                          ref.read(authScreenProvider.notifier).setSelectGender(
+                          ref.read(authProvider.notifier).setSelectGender(
                               genders[currentIndex]); // Picker表示前に現在の選択状態を保存
                           ///ドラムロール表示
                           showModalBottomSheet(
@@ -140,8 +134,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                           ),
                                           onPressed: () {
                                             ref
-                                                .read(
-                                                    authScreenProvider.notifier)
+                                                .read(authProvider.notifier)
                                                 .setGender();
                                             Navigator.pop(
                                                 context); // Pickerを閉じる
@@ -158,7 +151,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                                 initialItem: currentIndex),
                                         onSelectedItemChanged: (index) {
                                           ref
-                                              .read(authScreenProvider.notifier)
+                                              .read(authProvider.notifier)
                                               .setSelectGender(
                                                   genders[index]); // 選択状態を一時保存
                                         },
@@ -184,11 +177,9 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                     genderController.text.isNotEmpty) &&
                                 !isNotTap
                             ? () {
+                                ref.read(authProvider.notifier).switchTap();
                                 ref
-                                    .read(authScreenProvider.notifier)
-                                    .switchTap();
-                                ref
-                                    .read(authScreenProvider.notifier)
+                                    .read(authProvider.notifier)
                                     .changingProfile()
                                   ..then(
                                     (value) {
@@ -199,8 +190,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                           builder: (_) => DialogClose2(
                                             onPressed: () {
                                               ref
-                                                  .read(authScreenProvider
-                                                      .notifier)
+                                                  .read(authProvider.notifier)
                                                   .switchHasError();
                                               Navigator.of(context).pop();
                                             },
@@ -228,22 +218,18 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                               Navigator.of(context).pop();
                                               Navigator.of(context).pop();
                                             },
-                                            title: "登録ありがとうございます",
-                                            subWidget: Text(
-                                              "さっそく試してみましょう！",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      context.width * 0.035,
-                                                  color: Colors.black87),
-                                              maxLines: 2,
+                                            title: "登録が完了しました！",
+                                            subWidget: Icon(
+                                              Icons.check_circle_outline,
+                                              size: context.height * 0.13,
+                                              color: context.mainColor,
                                             ),
                                             doneText: "OK",
                                           ),
                                         );
                                       }
                                       ref
-                                          .read(authScreenProvider.notifier)
+                                          .read(authProvider.notifier)
                                           .switchTap();
                                     },
                                   );

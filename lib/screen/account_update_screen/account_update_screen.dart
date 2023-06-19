@@ -10,22 +10,17 @@ import '../../view/button.dart';
 import '../../view/dialog.dart';
 import '../../view/text_field.dart';
 
-part 'account_login_appbar.dart';
-part 'account_login_view.dart';
-
-class AccountLoginScreen extends ConsumerWidget {
-  const AccountLoginScreen(this.arguments);
-  final AccountLoginScreenArguments arguments;
+class AccountUpdateScreen extends ConsumerWidget {
+  const AccountUpdateScreen(this.arguments);
+  final AccountUpdateScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSafetyPass = ref.watch(authProvider).isSafetyPass;
-    final isObscure = ref.watch(authProvider).isObscure;
     final emailController = ref.watch(authProvider.notifier).emailController;
     final passwordController =
         ref.watch(authProvider.notifier).passwordController;
-    final formKey = ref.watch(authProvider.notifier).loginFormKey;
-    final focusNode = ref.watch(authProvider.notifier).loginFocusNode;
+    final formKey = ref.watch(authProvider.notifier).updateFormKey;
+    final focusNode = ref.watch(authProvider.notifier).updateFocusNode;
     final isNotTap = ref.watch(authProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
@@ -33,7 +28,15 @@ class AccountLoginScreen extends ConsumerWidget {
         onTap: focusNode.requestFocus,
         child: Scaffold(
           resizeToAvoidBottomInset: false, //キーボードによって画面サイズを変更させないため
-          appBar: const _AppBar(),
+          appBar: AppBar(
+            titleSpacing: 0,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            title: const Text("パスワード再設定"),
+            leading: CustomBackButton(onPressed: () {
+              Navigator.pop(context);
+            }),
+          ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
             child: Column(
@@ -50,20 +53,6 @@ class AccountLoginScreen extends ConsumerWidget {
                         onChanged: (email) =>
                             ref.read(authProvider.notifier).setEmail(email),
                       ),
-
-                      ///パスワード
-                      PasswordTextField(
-                        passwordController: passwordController,
-                        isValidEmail: passwordController.text.isNotEmpty,
-                        isSafetyPass: isSafetyPass,
-                        isObscure: isObscure,
-                        isLogin: true,
-                        onChanged: (password) => ref
-                            .read(authProvider.notifier)
-                            .setPassword(password),
-                        obscureIconButtonPressed: () =>
-                            ref.read(authProvider.notifier).switchObscure(),
-                      ),
                     ],
                   ),
                 ),
@@ -72,7 +61,7 @@ class AccountLoginScreen extends ConsumerWidget {
 
                 ///送信ボタン
                 Default1Button(
-                  text: 'ログイン',
+                  text: '再設定する',
                   onPressed: emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty &&
                           !isNotTap

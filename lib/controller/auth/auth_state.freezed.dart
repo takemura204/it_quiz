@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AuthScreenState {
+mixin _$AuthState {
 //ユーザー情報
   String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
@@ -39,15 +39,14 @@ mixin _$AuthScreenState {
   AuthActiveType get activeType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AuthScreenStateCopyWith<AuthScreenState> get copyWith =>
+  $AuthStateCopyWith<AuthState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthScreenStateCopyWith<$Res> {
-  factory $AuthScreenStateCopyWith(
-          AuthScreenState value, $Res Function(AuthScreenState) then) =
-      _$AuthScreenStateCopyWithImpl<$Res, AuthScreenState>;
+abstract class $AuthStateCopyWith<$Res> {
+  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
+      _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call(
       {String uid,
@@ -73,9 +72,9 @@ abstract class $AuthScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
-    implements $AuthScreenStateCopyWith<$Res> {
-  _$AuthScreenStateCopyWithImpl(this._value, this._then);
+class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
+    implements $AuthStateCopyWith<$Res> {
+  _$AuthStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -192,8 +191,7 @@ class _$AuthScreenStateCopyWithImpl<$Res, $Val extends AuthScreenState>
 }
 
 /// @nodoc
-abstract class _$$_CreateCopyWith<$Res>
-    implements $AuthScreenStateCopyWith<$Res> {
+abstract class _$$_CreateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
       __$$_CreateCopyWithImpl<$Res>;
   @override
@@ -223,7 +221,7 @@ abstract class _$$_CreateCopyWith<$Res>
 
 /// @nodoc
 class __$$_CreateCopyWithImpl<$Res>
-    extends _$AuthScreenStateCopyWithImpl<$Res, _$_Create>
+    extends _$AuthStateCopyWithImpl<$Res, _$_Create>
     implements _$$_CreateCopyWith<$Res> {
   __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
       : super(_value, _then);
@@ -427,7 +425,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'AuthScreenState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, selectGender: $selectGender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap, isNotSignUpCompleted: $isNotSignUpCompleted, activeType: $activeType)';
+    return 'AuthState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, selectGender: $selectGender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap, isNotSignUpCompleted: $isNotSignUpCompleted, activeType: $activeType)';
   }
 
   @override
@@ -505,7 +503,7 @@ class _$_Create implements _Create {
       __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
-abstract class _Create implements AuthScreenState {
+abstract class _Create implements AuthState {
   const factory _Create(
       {final String uid,
       final String userName,

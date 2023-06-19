@@ -11,22 +11,21 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import 'auth_screen_state.dart';
+import 'auth_state.dart';
 
-final authScreenProvider =
-    StateNotifierProvider<AuthScreenController, AuthScreenState>(
-  (ref) => AuthScreenController(ref: ref),
+final authProvider = StateNotifierProvider<AuthController, AuthState>(
+  (ref) => AuthController(ref: ref),
 );
 
-class AuthScreenController extends StateNotifier<AuthScreenState>
-    with LocatorMixin {
-  AuthScreenController({required this.ref}) : super(const AuthScreenState()) {
+class AuthController extends StateNotifier<AuthState> with LocatorMixin {
+  AuthController({required this.ref}) : super(const AuthState()) {
     initState();
   }
 
   final Ref ref;
   final auth = FirebaseAuth.instance;
   final loginFormKey = GlobalKey<FormState>();
+  final updateFormKey = GlobalKey<FormState>();
   final createAccountFormKey1 = GlobalKey<FormState>();
   final createAccountFormKey2 = GlobalKey<FormState>();
   final userNameController = TextEditingController();
@@ -34,6 +33,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   final passwordController = TextEditingController();
   final genderController = TextEditingController();
   final birthdayController = TextEditingController();
+  final updateFocusNode = FocusNode();
   final loginFocusNode = FocusNode();
   final createFocusNode1 = FocusNode();
   final createFocusNode2 = FocusNode();
@@ -104,10 +104,12 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
           userName: userNameController.text.trim(),
+          isLogin: true,
         );
         saveFirestore(); //Firestoreに保存
         saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
+        await user.sendEmailVerification(); // 登録完了メールを送信
         print("新規登録成功");
       }
     } catch (e, s) {
@@ -119,7 +121,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   }
 
   ///ログイン
-  Future<AuthScreenState> signIn() async {
+  Future<AuthState> signIn() async {
     setAuthActiveType(AuthActiveType.signIn);
     try {
       //FirebaseAuthでログイン
@@ -134,6 +136,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
           uid: user.uid,
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
+          isLogin: true,
         );
         saveFirestore(); //Firestoreに保存
         saveDevice(); //デバイスに保存
@@ -149,10 +152,26 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     return state;
   }
 
+  /// パスワードを忘れた場合のリセットメールを送信
+  Future<void> sendPasswordResetEmail() async {
+    try {
+      await auth.sendPasswordResetEmail(email: emailController.text.trim());
+      print("Password reset email sent.");
+    } catch (e, s) {
+      print({e, s});
+      print("Error：sendPasswordResetEmail");
+      state = state.copyWith(errorText: e.toString(), hasError: true);
+    }
+  }
+
   ///プロフィール更新
   Future changingProfile() async {
     setAuthActiveType(AuthActiveType.changing);
     try {
+      final user = auth.currentUser;
+      if (user != null) {
+        await user.updateDisplayName(state.userName); //Authenticationに保存
+      }
       saveFirestore(); //Firestoreに保存
       saveDevice(); //デバイスに保存
       loadAccountData(); //データ更新
@@ -168,12 +187,15 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   Future signOut() async {
     setAuthActiveType(AuthActiveType.signOut);
     try {
-      await auth.signOut();
-      reset();
-      saveFirestore(); //Firestoreに保存
-      saveDevice(); //デバイスに保存
-      loadAccountData(); //データ更新
-      print("ログアウト成功");
+      final user = auth.currentUser;
+      if (user != null) {
+        reset();
+        saveFirestore(); //Firestoreに保存
+        await auth.signOut(); //ログアウト
+        saveDevice(); //デバイスに保存
+        loadAccountData(); //データ更新
+        print("ログアウト成功");
+      }
     } catch (e, s) {
       print({"Error：signOut", e, s});
       state = state.copyWith(errorText: e.toString(), hasError: true);
@@ -185,14 +207,22 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
   Future deleteAccount() async {
     setAuthActiveType(AuthActiveType.delete);
     try {
-      await auth.currentUser?.delete();
-      reset();
-      saveFirestore(); //Firestoreに保存
-      saveDevice(); //デバイスに保存
-      loadAccountData(); //データ更新
-      print("アカウント削除成功");
+      final user = auth.currentUser;
+      if (user != null) {
+        final credential = EmailAuthProvider.credential(
+            email: state.email, password: state.password);
+        await user.reauthenticateWithCredential(credential);
+        await auth.currentUser?.delete(); //アカウント削除
+        reset();
+        saveFirestore(); //Firestoreに保存
+        await auth.signOut(); //ログアウト
+        saveDevice(); //デバイスに保存
+        loadAccountData(); //データ更新
+        print("アカウント削除成功");
+      }
     } catch (e, s) {
       print({"Error：deleteAccount", e, s});
+      state = state.copyWith(errorText: e.toString(), hasError: true);
     }
     return state;
   }
@@ -341,6 +371,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
               'createdAt': DateTime.now(),
               'loginAt': DateTime.now(),
               'updatedAt': DateTime.now(),
+              'isLogin': true,
             });
             print("Firestore Save SignUp");
           }
@@ -353,6 +384,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
               'password': state.password,
               'loginAt': DateTime.now(),
               'updatedAt': DateTime.now(),
+              'isLogin': true,
             }, SetOptions(merge: true));
             print("Firestore Save SignIn");
           }
@@ -374,11 +406,11 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
         case AuthActiveType.update:
           if (docSnap.exists) {
             // 既存のドキュメントを更新
-            await docRef.update({
+            await docRef.set({
               'email': state.email,
               'password': state.password,
               'updatedAt': DateTime.now(),
-            });
+            }, SetOptions(merge: true));
             print("Firestore Save AccountUpdate");
           }
           return;
@@ -386,18 +418,23 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
         case AuthActiveType.signOut:
           if (docSnap.exists) {
             // 既存のドキュメントを更新
-            await docRef.update({
+            await docRef.set({
               'updatedAt': DateTime.now(),
               'logoutAt': DateTime.now(),
-            });
+              'isLogin': false,
+            }, SetOptions(merge: true));
             print("Firestore Save SignOut");
           }
           return;
         //アカウント削除
         case AuthActiveType.delete:
           if (docSnap.exists) {
-            // 既存のドキュメントを更新
-            await docRef.delete();
+            await docRef.set({
+              'updatedAt': DateTime.now(),
+              'logoutAt': DateTime.now(),
+              'isLogin': false,
+            }, SetOptions(merge: true));
+            // await docRef.delete();
             print("Firestore Save deleteAccount");
           }
           return;
@@ -418,6 +455,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     final userName = state.userName;
     final birthDay = state.birthDay;
     final gender = state.gender;
+    final isLogin = state.isLogin;
 
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('uid', uid);
@@ -426,6 +464,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
     prefs.setString('userName', userName);
     prefs.setString('birthDay', birthDay);
     prefs.setString('gender', gender);
+    prefs.setBool('isLogin', isLogin);
 
     state = state.copyWith(
       uid: uid,
@@ -434,6 +473,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
       userName: userName,
       birthDay: birthDay,
       gender: gender,
+      isLogin: isLogin,
     );
   }
 
@@ -457,6 +497,7 @@ class AuthScreenController extends StateNotifier<AuthScreenState>
       userName: "ゲスト",
       birthDay: "",
       gender: "",
+      isLogin: false,
       selectGender: "",
       errorText: "",
       isObscure: true,

@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
-import '../../controller/auth/auth_screen_controller.dart';
+import '../../controller/auth/auth_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
@@ -20,8 +20,8 @@ class AccountProfileScreen extends ConsumerWidget {
   final ProfileScreenArguments arguments;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(authScreenProvider);
-    final controller = ref.watch(authScreenProvider.notifier);
+    final state = ref.watch(authProvider);
+    final controller = ref.watch(authProvider.notifier);
     final isValidUserName = state.isValidUserName;
     final isNotTap = state.isNotTap;
     final userNameController = controller.userNameController;
@@ -52,7 +52,7 @@ class AccountProfileScreen extends ConsumerWidget {
               userNameController: userNameController,
               isValidUserName: isValidUserName,
               onChanged: (name) =>
-                  ref.read(authScreenProvider.notifier).setUserName(name),
+                  ref.read(authProvider.notifier).setUserName(name),
             ),
             Gap(context.height * 0.01),
 
@@ -67,10 +67,10 @@ class AccountProfileScreen extends ConsumerWidget {
                   maxTime: DateTime(DateTime.now().year, DateTime.now().month,
                       DateTime.now().day),
                   onChanged: (date) {
-                    ref.read(authScreenProvider.notifier).setBirthday(date);
+                    ref.read(authProvider.notifier).setBirthday(date);
                   },
                   onConfirm: (date) {
-                    ref.read(authScreenProvider.notifier).setBirthday(date);
+                    ref.read(authProvider.notifier).setBirthday(date);
                     birthdayController.value = TextEditingValue(
                         text: DateFormat('yyyy/MM/dd').format(date));
                   },
@@ -88,13 +88,13 @@ class AccountProfileScreen extends ConsumerWidget {
               genderController: genderController,
               onTap: () {
                 var currentIndex =
-                    genders.indexOf(ref.read(authScreenProvider).selectGender);
+                    genders.indexOf(ref.read(authProvider).selectGender);
                 if (currentIndex == -1) {
                   currentIndex = 0;
                 }
 
                 //selectGenderを消したい。
-                ref.read(authScreenProvider.notifier).setSelectGender(
+                ref.read(authProvider.notifier).setSelectGender(
                     genders[currentIndex]); // Picker表示前に現在の選択状態を保存
                 ///ドラムロール表示
                 showModalBottomSheet(
@@ -123,9 +123,7 @@ class AccountProfileScreen extends ConsumerWidget {
                                   style: TextStyle(color: Colors.blueAccent),
                                 ),
                                 onPressed: () {
-                                  ref
-                                      .read(authScreenProvider.notifier)
-                                      .setGender();
+                                  ref.read(authProvider.notifier).setGender();
                                   Navigator.pop(context); // Pickerを閉じる
                                 },
                               ),
@@ -138,10 +136,8 @@ class AccountProfileScreen extends ConsumerWidget {
                               scrollController: FixedExtentScrollController(
                                   initialItem: currentIndex),
                               onSelectedItemChanged: (index) {
-                                ref
-                                    .read(authScreenProvider.notifier)
-                                    .setSelectGender(
-                                        genders[index]); // 選択状態を一時保存
+                                ref.read(authProvider.notifier).setSelectGender(
+                                    genders[index]); // 選択状態を一時保存
                               },
                               children: genders.map((String gender) {
                                 return Text(gender);
@@ -166,8 +162,8 @@ class AccountProfileScreen extends ConsumerWidget {
                           genderController.text.isNotEmpty) &&
                       !isNotTap
                   ? () {
-                      ref.read(authScreenProvider.notifier).switchTap();
-                      ref.read(authScreenProvider.notifier).changingProfile()
+                      ref.read(authProvider.notifier).switchTap();
+                      ref.read(authProvider.notifier).changingProfile()
                         ..then(
                           (value) {
                             //ログイン失敗
@@ -177,7 +173,7 @@ class AccountProfileScreen extends ConsumerWidget {
                                 builder: (_) => DialogClose2(
                                   onPressed: () {
                                     ref
-                                        .read(authScreenProvider.notifier)
+                                        .read(authProvider.notifier)
                                         .switchHasError();
                                     Navigator.of(context).pop();
                                   },
@@ -203,20 +199,17 @@ class AccountProfileScreen extends ConsumerWidget {
                                     Navigator.of(context).pop();
                                     Navigator.of(context).pop();
                                   },
-                                  title: "登録ありがとうございます",
-                                  subWidget: Text(
-                                    "さっそく試してみましょう！",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: context.width * 0.035,
-                                        color: Colors.black87),
-                                    maxLines: 2,
+                                  title: "プロフィールが更新されました",
+                                  subWidget: Icon(
+                                    Icons.check_circle_outline,
+                                    size: context.height * 0.11,
+                                    color: context.mainColor,
                                   ),
                                   doneText: "OK",
                                 ),
                               );
                             }
-                            ref.read(authScreenProvider.notifier).switchTap();
+                            ref.read(authProvider.notifier).switchTap();
                           },
                         );
                     }
