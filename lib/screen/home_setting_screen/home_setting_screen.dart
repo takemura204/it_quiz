@@ -150,13 +150,15 @@ class HomeSettingScreen extends ConsumerWidget {
                       children: [
                         ///アカウント削除
                         const SettingTitleBar(
-                          title: "アカウント情報",
+                          title: "その他",
                           onTap: null,
                         ),
                         SettingListBar(
                           title: "アプリを削除する",
-                          onTap: () {
-                            ref.read(authProvider.notifier).deleteAccount();
+                          onTap: () async {
+                            context.showScreen(
+                                const AccountDeleteScreenArguments()
+                                    .generateRoute());
                           },
                         ),
                         Gap(context.height * 0.025),

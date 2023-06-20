@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
@@ -69,6 +68,46 @@ class Default2Button extends ConsumerWidget {
           text,
           textAlign: TextAlign.center,
           style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: context.height * 0.02,
+          ),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+class DeleteButton extends ConsumerWidget {
+  const DeleteButton({required this.text, required this.onPressed});
+  final String text;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.8,
+      height: context.height * 0.07,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          elevation: 4,
+          padding: const EdgeInsets.all(3.0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          side: BorderSide(
+            color: onPressed == null ? Colors.white10 : Colors.red,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: onPressed == null ? Colors.black45 : Colors.red,
             fontWeight: FontWeight.bold,
             fontSize: context.height * 0.02,
           ),

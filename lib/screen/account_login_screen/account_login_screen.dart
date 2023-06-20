@@ -54,7 +54,7 @@ class AccountLoginScreen extends ConsumerWidget {
                       ///パスワード
                       PasswordTextField(
                         passwordController: passwordController,
-                        isValidEmail: passwordController.text.isNotEmpty,
+                        isValid: passwordController.text.isNotEmpty,
                         isSafetyPass: isSafetyPass,
                         isObscure: isObscure,
                         isLogin: true,

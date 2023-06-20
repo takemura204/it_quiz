@@ -63,22 +63,27 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
           state = state.copyWith(
             uid: data?['uid'] ?? state.uid,
             email: data?['email'] ?? state.email,
+            password: '',
             userName: data?['userName'] ?? state.userName,
             gender: data?['gender'] ?? state.gender,
             selectGender: data?['gender'] ?? state.selectGender,
             birthDay: data?['birthDay'] != null
                 ? DateFormat('yyyy-MM-dd')
                     .format((data?['birthDay'] as Timestamp).toDate())
-                : '',
+                : state.birthDay,
           );
-          emailController.text = state.email;
-          userNameController.text = state.userName;
-          birthdayController.text = state.birthDay.replaceAll('-', '/');
-          genderController.text = state.gender;
         }
       } else {
-        print("未ログイン");
+        print("Null User");
       }
+      emailController.text = state.email;
+      passwordController.text = state.password;
+      userNameController.text = state.userName;
+      birthdayController.text = state.birthDay.contains('-')
+          ? state.birthDay.replaceAll('-', '/')
+          : state.birthDay;
+      genderController.text = state.gender;
+      print("loadAccountData");
     } catch (e, s) {
       print({e, s});
       print("Error：loadAccountData");
@@ -106,7 +111,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
           userName: userNameController.text.trim(),
           isLogin: true,
         );
-        saveFirestore(); //Firestoreに保存
+        await saveFirestore(); //Firestoreに保存
         saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
         await user.sendEmailVerification(); // 登録完了メールを送信
@@ -138,7 +143,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
           password: passwordController.text.trim(),
           isLogin: true,
         );
-        saveFirestore(); //Firestoreに保存
+        await saveFirestore(); //Firestoreに保存
         saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
         print("ログイン成功");
@@ -153,7 +158,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
   }
 
   /// パスワードを忘れた場合のリセットメールを送信
-  Future<void> sendPasswordResetEmail() async {
+  Future sendPasswordResetEmail() async {
     try {
       await auth.sendPasswordResetEmail(email: emailController.text.trim());
       print("Password reset email sent.");
@@ -162,6 +167,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       print("Error：sendPasswordResetEmail");
       state = state.copyWith(errorText: e.toString(), hasError: true);
     }
+    return state;
   }
 
   ///プロフィール更新
@@ -172,7 +178,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       if (user != null) {
         await user.updateDisplayName(state.userName); //Authenticationに保存
       }
-      saveFirestore(); //Firestoreに保存
+      await saveFirestore(); //Firestoreに保存
       saveDevice(); //デバイスに保存
       loadAccountData(); //データ更新
       print("プロフィール更新");
@@ -190,7 +196,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       final user = auth.currentUser;
       if (user != null) {
         reset();
-        saveFirestore(); //Firestoreに保存
+        await saveFirestore(); //Firestoreに保存
         await auth.signOut(); //ログアウト
         saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
@@ -214,7 +220,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
         await user.reauthenticateWithCredential(credential);
         await auth.currentUser?.delete(); //アカウント削除
         reset();
-        saveFirestore(); //Firestoreに保存
+        await saveFirestore(); //Firestoreに保存
         await auth.signOut(); //ログアウト
         saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
@@ -375,7 +381,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             });
             print("Firestore Save SignUp");
           }
-          return;
+          return state;
         //ログイン
         case AuthActiveType.signIn:
           if (docSnap.exists) {
@@ -388,7 +394,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             }, SetOptions(merge: true));
             print("Firestore Save SignIn");
           }
-          return;
+          return state;
         //プロフィール更新
         case AuthActiveType.changing:
           if (docSnap.exists) {
@@ -401,7 +407,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             }, SetOptions(merge: true));
             print("Firestore Save ProfileChanging");
           }
-          return;
+          return state;
         //アカウント更新
         case AuthActiveType.update:
           if (docSnap.exists) {
@@ -413,7 +419,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             }, SetOptions(merge: true));
             print("Firestore Save AccountUpdate");
           }
-          return;
+          return state;
         //ログアウト
         case AuthActiveType.signOut:
           if (docSnap.exists) {
@@ -425,7 +431,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             }, SetOptions(merge: true));
             print("Firestore Save SignOut");
           }
-          return;
+          return state;
         //アカウント削除
         case AuthActiveType.delete:
           if (docSnap.exists) {
@@ -437,7 +443,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             // await docRef.delete();
             print("Firestore Save deleteAccount");
           }
-          return;
+          return state;
       }
     } catch (e) {
       print(e);

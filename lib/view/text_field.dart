@@ -74,7 +74,7 @@ class EmailTextField extends ConsumerWidget {
 class PasswordTextField extends ConsumerWidget {
   const PasswordTextField({
     required this.passwordController,
-    required this.isValidEmail,
+    required this.isValid,
     required this.isSafetyPass,
     required this.isObscure,
     required this.onChanged,
@@ -82,7 +82,7 @@ class PasswordTextField extends ConsumerWidget {
     required this.obscureIconButtonPressed,
   });
   final TextEditingController passwordController;
-  final bool isValidEmail;
+  final bool isValid;
   final bool isSafetyPass;
   final bool isObscure;
   final bool isLogin;

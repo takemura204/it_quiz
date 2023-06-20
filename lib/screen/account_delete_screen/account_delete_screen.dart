@@ -5,20 +5,22 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_controller.dart';
-import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
 import '../../view/text_field.dart';
 
-class AccountUpdateScreen extends ConsumerWidget {
-  const AccountUpdateScreen(this.arguments);
-  final AccountUpdateScreenArguments arguments;
+class AccountDeleteScreen extends ConsumerWidget {
+  const AccountDeleteScreen(this.arguments);
+  final AccountDeleteScreenArguments arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final emailController = ref.watch(authProvider.notifier).emailController;
-    final formKey = ref.watch(authProvider.notifier).updateFormKey;
-    final focusNode = ref.watch(authProvider.notifier).updateFocusNode;
+    final isSafetyPass = ref.watch(authProvider).isSafetyPass;
+    final isObscure = ref.watch(authProvider).isObscure;
+    final passwordController =
+        ref.watch(authProvider.notifier).passwordController;
+    final formKey = ref.watch(authProvider.notifier).createAccountFormKey1;
+    final focusNode = ref.watch(authProvider.notifier).createFocusNode1;
     final isNotTap = ref.watch(authProvider).isNotTap;
     return Focus(
       focusNode: focusNode,
@@ -30,7 +32,7 @@ class AccountUpdateScreen extends ConsumerWidget {
             titleSpacing: 0,
             centerTitle: true,
             automaticallyImplyLeading: false,
-            title: const Text("パスワード再設定"),
+            title: const Text("アカウント削除"),
             leading: CustomBackButton(onPressed: () {
               Navigator.pop(context);
             }),
@@ -40,32 +42,59 @@ class AccountUpdateScreen extends ConsumerWidget {
             child: Column(
               children: [
                 Gap(context.height * 0.1),
+                Text(
+                  "アカウントを削除する場合は、下記に設定したパスワードを入力してください。",
+                  style: TextStyle(
+                      color: Colors.black87, fontSize: context.width * 0.035),
+                ),
+                Gap(context.height * 0.02),
                 Form(
                   key: formKey,
                   child: Column(
                     children: [
-                      ///メールアドレス
-                      EmailTextField(
-                        emailController: emailController,
-                        isValidEmail: emailController.text.isNotEmpty,
-                        onChanged: (email) =>
-                            ref.read(authProvider.notifier).setEmail(email),
+                      ///パスワード
+                      PasswordTextField(
+                        passwordController: passwordController,
+                        isValid: passwordController.text.isNotEmpty,
+                        isSafetyPass: isSafetyPass,
+                        isObscure: isObscure,
+                        isLogin: true,
+                        onChanged: (password) => ref
+                            .read(authProvider.notifier)
+                            .setPassword(password),
+                        obscureIconButtonPressed: () =>
+                            ref.read(authProvider.notifier).switchObscure(),
                       ),
                     ],
                   ),
                 ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "【ご注意事項】",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: context.width * 0.03),
+                    ),
+                    Text(
+                      "アカウントを削除すると、アカウントに紐づく全てのデータは削除され、元に戻すことができなくなります。\nまた、アカウント削除後に再度利用する場合、新しいアカウントを作成する必要があります。",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: context.width * 0.03),
+                    ),
+                  ],
+                ),
 
                 Gap(context.height * 0.03),
 
-                ///送信ボタン
-                Default1Button(
-                  text: '再設定する',
-                  onPressed: emailController.text.isNotEmpty && !isNotTap
+                ///削除ボタン
+                DeleteButton(
+                  text: 'アカウントを完全に削除',
+                  onPressed: passwordController.text.isNotEmpty && !isNotTap
                       ? () {
                           ref.read(authProvider.notifier).switchTap();
-                          ref
-                              .read(authProvider.notifier)
-                              .sendPasswordResetEmail()
+                          ref.read(authProvider.notifier).deleteAccount()
                             ..then((value) {
                               //ログイン失敗
                               if (value.hasError) {
@@ -77,8 +106,8 @@ class AccountUpdateScreen extends ConsumerWidget {
                                     },
                                     title: "エラー",
                                     subWidget: Text(
-                                      I18n().loginErrorText(value.errorText),
-                                      textAlign: TextAlign.start,
+                                      "入力したパスワードは正しくありません。\nご確認の上、もう一度お試しください。",
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: context.width * 0.035,
                                         color: Colors.black87,
@@ -95,12 +124,13 @@ class AccountUpdateScreen extends ConsumerWidget {
                                   builder: (_) => DialogClose2(
                                     onPressed: () {
                                       Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
                                     },
-                                    title: "メールを送信しました。",
+                                    title: "アカウントを削除いたしました。",
                                     subWidget: Column(
                                       children: [
                                         Text(
-                                          "届いたメールからパスワードを再設定して、\n新しいパスワードでログインしてください。",
+                                          "今までご利用頂き誠にありがとうございました。",
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                             fontSize: context.width * 0.035,
@@ -109,8 +139,8 @@ class AccountUpdateScreen extends ConsumerWidget {
                                         ),
                                         Gap(context.height * 0.01),
                                         Icon(
-                                          Icons.mail_outline,
-                                          size: context.height * 0.06,
+                                          Icons.check_circle_outline,
+                                          size: context.height * 0.09,
                                           color: context.mainColor,
                                         ),
                                       ],

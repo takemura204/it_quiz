@@ -66,7 +66,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                       ///パスワード
                       PasswordTextField(
                         passwordController: passwordController,
-                        isValidEmail: isValidEmail,
+                        isValid: isValidEmail,
                         isSafetyPass: isSafetyPass,
                         isObscure: isObscure,
                         isLogin: false,
