@@ -170,7 +170,7 @@ class AccountProfileScreen extends ConsumerWidget {
                             if (value.hasError) {
                               showDialog(
                                 context: context,
-                                builder: (_) => DialogClose2(
+                                builder: (_) => DialogError(
                                   onPressed: () {
                                     ref
                                         .read(authProvider.notifier)
@@ -194,17 +194,19 @@ class AccountProfileScreen extends ConsumerWidget {
                             else {
                               showDialog(
                                 context: context,
+                                barrierDismissible: false,
                                 builder: (_) => DialogClose2(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     Navigator.of(context).pop();
                                   },
-                                  title: "プロフィールが更新されました",
-                                  subWidget: Icon(
-                                    Icons.check_circle_outline,
-                                    size: context.height * 0.11,
+                                  iconWidget: Icon(
+                                    Icons.check_circle_outline_sharp,
+                                    size: context.height * 0.1,
                                     color: context.mainColor,
                                   ),
+                                  title: "プロフィールが更新されました",
+                                  subWidget: null,
                                   doneText: "OK",
                                 ),
                               );

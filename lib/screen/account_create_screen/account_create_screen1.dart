@@ -91,7 +91,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                       if (value.hasError) {
                                         showDialog(
                                           context: context,
-                                          builder: (_) => DialogClose2(
+                                          builder: (_) => DialogError(
                                             onPressed: () {
                                               ref
                                                   .read(authProvider.notifier)

@@ -187,7 +187,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                       if (value.hasError) {
                                         showDialog(
                                           context: context,
-                                          builder: (_) => DialogClose2(
+                                          builder: (_) => DialogError(
                                             onPressed: () {
                                               ref
                                                   .read(authProvider.notifier)
@@ -213,17 +213,20 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                                       else {
                                         showDialog(
                                           context: context,
+                                          barrierDismissible: false,
                                           builder: (_) => DialogClose2(
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                               Navigator.of(context).pop();
                                             },
-                                            title: "登録が完了しました！",
-                                            subWidget: Icon(
+                                            iconWidget: Icon(
                                               Icons.check_circle_outline,
-                                              size: context.height * 0.13,
+                                              size: context.height * 0.1,
                                               color: context.mainColor,
                                             ),
+                                            title: "登録が完了しました！",
+                                            subWidget: const Text(
+                                                "ご登録ありがとうございます。\nメールアドレスに確認メールを送信しました。"),
                                             doneText: "OK",
                                           ),
                                         );

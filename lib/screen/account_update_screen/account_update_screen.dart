@@ -71,7 +71,7 @@ class AccountUpdateScreen extends ConsumerWidget {
                               if (value.hasError) {
                                 showDialog(
                                   context: context,
-                                  builder: (_) => DialogClose2(
+                                  builder: (_) => DialogError(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
@@ -92,28 +92,24 @@ class AccountUpdateScreen extends ConsumerWidget {
                               else {
                                 showDialog(
                                   context: context,
+                                  barrierDismissible: false,
                                   builder: (_) => DialogClose2(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
+                                    iconWidget: Icon(
+                                      Icons.mail_outline,
+                                      size: context.height * 0.1,
+                                      color: context.mainColor,
+                                    ),
                                     title: "メールを送信しました。",
-                                    subWidget: Column(
-                                      children: [
-                                        Text(
-                                          "届いたメールからパスワードを再設定して、\n新しいパスワードでログインしてください。",
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                            fontSize: context.width * 0.035,
-                                            color: Colors.black87,
-                                          ),
-                                        ),
-                                        Gap(context.height * 0.01),
-                                        Icon(
-                                          Icons.mail_outline,
-                                          size: context.height * 0.06,
-                                          color: context.mainColor,
-                                        ),
-                                      ],
+                                    subWidget: Text(
+                                      "届いたメールからパスワードを再設定して、\n新しいパスワードでログインしてください。",
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: context.width * 0.035,
+                                        color: Colors.black87,
+                                      ),
                                     ),
                                     doneText: "OK",
                                   ),

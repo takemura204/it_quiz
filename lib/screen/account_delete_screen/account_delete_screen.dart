@@ -100,7 +100,8 @@ class AccountDeleteScreen extends ConsumerWidget {
                               if (value.hasError) {
                                 showDialog(
                                   context: context,
-                                  builder: (_) => DialogClose2(
+                                  barrierDismissible: false,
+                                  builder: (_) => DialogError(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
@@ -126,6 +127,11 @@ class AccountDeleteScreen extends ConsumerWidget {
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
                                     },
+                                    iconWidget: Icon(
+                                      Icons.check_circle_outline_sharp,
+                                      size: context.height * 0.1,
+                                      color: context.mainColor,
+                                    ),
                                     title: "アカウントを削除いたしました。",
                                     subWidget: Column(
                                       children: [
@@ -136,12 +142,6 @@ class AccountDeleteScreen extends ConsumerWidget {
                                             fontSize: context.width * 0.035,
                                             color: Colors.black87,
                                           ),
-                                        ),
-                                        Gap(context.height * 0.01),
-                                        Icon(
-                                          Icons.check_circle_outline,
-                                          size: context.height * 0.09,
-                                          color: context.mainColor,
                                         ),
                                       ],
                                     ),

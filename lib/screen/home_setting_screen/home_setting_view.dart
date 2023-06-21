@@ -19,6 +19,7 @@ class UserProfile extends ConsumerWidget {
                 //ログイン画面遷移
                 await showDialog(
                     context: context,
+                    barrierDismissible: false,
                     builder: (context) {
                       return DialogDefault2(
                         title: "アカウントを作成しましょう",
