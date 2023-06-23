@@ -151,13 +151,7 @@ class _RankBatch extends ConsumerWidget {
       child: Card(
         elevation: 3,
         color: context.backgroundColor,
-        // margin: EdgeInsets.symmetric(
-        //     horizontal: context.width * 0.03, vertical: context.width * 0.03),
         shape: RoundedRectangleBorder(
-          // side: BorderSide(
-          //   color: context.mainColor,
-          //   width: 3,
-          // ),
           borderRadius: BorderRadius.circular(0),
         ),
         child: Stack(
@@ -191,6 +185,8 @@ class _RankName extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Spacer(),
+
+        ///称号名
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -204,6 +200,7 @@ class _RankName extends ConsumerWidget {
             const Spacer(),
           ],
         ),
+        const Spacer(),
 
         ///経験値
         Container(
@@ -216,43 +213,19 @@ class _RankName extends ConsumerWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        const Spacer(),
 
-        ///インジケータ
         Container(
-          height: context.height * 0.015,
-          child: Row(
-            children: [
-              const Spacer(),
-              Text(
-                "Lv.1",
-                style: TextStyle(
-                  fontSize: context.height * 0.015,
-                  color: context.mainColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Gap(context.width * 0.01),
-              ProgressLineBar(
-                height: context.height * 0.05,
-                width: context.width * 0.4,
-                score: 4,
-                quizLength: 10,
-                isUnit: false,
-              ),
-              Gap(context.width * 0.01),
-              Text(
-                "Lv.2",
-                style: TextStyle(
-                  fontSize: context.height * 0.015,
-                  color: context.mainColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Spacer(),
-            ],
+          alignment: Alignment.centerRight,
+          child: Text(
+            "次のレベルまであと10pt",
+            style: TextStyle(
+              fontSize: context.width * 0.03,
+              fontWeight: FontWeight.normal,
+              color: Colors.black54,
+            ),
           ),
         ),
+
         const Spacer(),
       ],
     );

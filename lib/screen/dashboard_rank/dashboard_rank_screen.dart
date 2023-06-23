@@ -98,9 +98,8 @@ class _RankRate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rankColor = ref.watch(dashboardRankProvider.notifier).rankData;
     return Container(
-      height: context.height * 0.28,
+      height: context.height * 0.25,
       child: Card(
         elevation: 3,
         color: Colors.white,
@@ -126,26 +125,57 @@ class _RankRate extends ConsumerWidget {
               children: [
                 const Spacer(),
 
-                ///バッチアイコン
-                Container(
-                  width: context.width * 0.3,
-                  height: context.width * 0.3,
-                  child: const _RankBatch(),
+                ///レベル
+                ProgressRangeChart(
+                  width: context.height * 0.17,
+                  size: context.height * 0.17,
+                  length: 10,
+                  score: 4,
+                  widget: Column(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "Lv.",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: context.height * 0.025,
+                          color: context.mainColor,
+                          height: 1.0,
+                        ),
+                        textAlign: TextAlign.end,
+                      ),
+                      Text(
+                        "1",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: context.height * 0.05,
+                          color: context.mainColor,
+                        ),
+                        textAlign: TextAlign.end,
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
                 ),
                 const Spacer(),
+                // ///バッチアイコン
+                // Container(
+                //   width: context.width * 0.4,
+                //   height: context.width * 0.4,
+                //   child: const _RankBatch(),
+                // ),
+                // const Spacer(),
 
                 /// 称号
                 Container(
-                  width: context.width * 0.6,
-                  height: context.width * 0.3,
+                  width: context.width * 0.5,
+                  height: context.height * 0.17,
                   child: const _RankName(),
                 ),
                 const Spacer(),
               ],
             ),
             const Spacer(),
-
-            Gap(context.height * 0.02),
           ],
         ),
       ),

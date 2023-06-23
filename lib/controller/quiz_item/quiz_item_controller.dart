@@ -28,7 +28,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   @override
   void initState() {
     // _resetData();
-    _loadData();
+    _loadQuizData();
     super.initState();
   }
 
@@ -52,7 +52,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   }
 
   /// 端末に保存されているデータを読み込む
-  Future _loadData() async {
+  Future _loadQuizData() async {
     final prefs = await SharedPreferences.getInstance();
     final quizItemDataJson = prefs.getStringList('quiz_items');
     if (quizItemDataJson != null && quizItemDataJson.isNotEmpty) {
