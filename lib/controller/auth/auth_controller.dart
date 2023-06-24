@@ -362,7 +362,6 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       final activeType = state.activeType;
       final user = auth.currentUser;
       final uid = user?.uid;
-      //FireStoreのusersコレクションにドキュメントが存在するかどうかをチェック
       final users = FirebaseFirestore.instance.collection('users');
       final docRef = users.doc(uid);
       final docSnap = await docRef.get();
@@ -379,7 +378,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
               'updatedAt': DateTime.now(),
               'isLogin': true,
             });
-            print("Firestore Save SignUp");
+            print("Firestore Save ");
           }
           return state;
         //ログイン

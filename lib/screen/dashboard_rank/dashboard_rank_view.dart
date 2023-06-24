@@ -179,13 +179,11 @@ class _RankName extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rankData = ref.watch(dashboardRankProvider).rankData!;
-    final rankDataList =
-        ref.watch(dashboardRankProvider.notifier).initRankDataList;
+    final nextLevelUpScore =
+        rankData.levelUpScore - (rankData.score % rankData.levelUpScore);
 
     return GestureDetector(
-      onTap: () {
-        // ref.read(dashboardRankProvider.notifier).updatePoint(5);
-      },
+      onTap: () {},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -211,7 +209,7 @@ class _RankName extends ConsumerWidget {
           Container(
             alignment: Alignment.centerRight,
             child: Text(
-              "${rankData.levelScore}pt",
+              "${rankData.score}pt",
               style: TextStyle(
                   fontSize: context.height * 0.035,
                   color: context.mainColor,
@@ -222,7 +220,7 @@ class _RankName extends ConsumerWidget {
           Container(
             alignment: Alignment.centerRight,
             child: Text(
-              "次のレベルまであと${rankData.levelScore}pt",
+              "次のレベルまであと${nextLevelUpScore}pt",
               style: TextStyle(
                 fontSize: context.width * 0.03,
                 fontWeight: FontWeight.normal,

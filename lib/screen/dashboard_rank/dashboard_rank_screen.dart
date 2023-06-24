@@ -100,6 +100,15 @@ class _RankRate extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardRankProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.22,
+        ),
+      );
+    }
+    final rankData = state.rankData!;
 
     return Container(
       height: context.height * 0.25,
@@ -130,45 +139,43 @@ class _RankRate extends ConsumerWidget {
                   const Spacer(),
 
                   ///レベル
-                  ProgressRangeChart(
-                    width: context.height * 0.17,
-                    size: context.height * 0.17,
-                    length: 10,
-                    score: 4,
-                    widget: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "Lv.",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.025,
-                            color: context.mainColor,
-                            height: 1.0,
+                  GestureDetector(
+                    onTap: () {
+                      ref.read(dashboardRankProvider.notifier).updateScore(5);
+                    },
+                    child: ProgressRangeChart(
+                      width: context.height * 0.17,
+                      size: context.height * 0.17,
+                      length: rankData.levelUpScore,
+                      score: rankData.score % rankData.levelUpScore,
+                      widget: Column(
+                        children: [
+                          const Spacer(),
+                          Text(
+                            "Lv.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.025,
+                              color: context.mainColor,
+                              height: 1.0,
+                            ),
+                            textAlign: TextAlign.end,
                           ),
-                          textAlign: TextAlign.end,
-                        ),
-                        Text(
-                          "1",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.05,
-                            color: context.mainColor,
+                          Text(
+                            "${rankData.rankLevel}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.05,
+                              color: context.mainColor,
+                            ),
+                            textAlign: TextAlign.end,
                           ),
-                          textAlign: TextAlign.end,
-                        ),
-                        const Spacer(),
-                      ],
+                          const Spacer(),
+                        ],
+                      ),
                     ),
                   ),
                   const Spacer(),
-                  // ///バッチアイコン
-                  // Container(
-                  //   width: context.width * 0.4,
-                  //   height: context.width * 0.4,
-                  //   child: const _RankBatch(),
-                  // ),
-                  // const Spacer(),
 
                   /// 称号
                   Container(
@@ -183,7 +190,7 @@ class _RankRate extends ConsumerWidget {
               Center(
                 child: SpinKitFadingCircle(
                   color: context.mainColor,
-                  size: context.height * 0.25,
+                  size: context.height * 0.15,
                 ),
               ),
 
