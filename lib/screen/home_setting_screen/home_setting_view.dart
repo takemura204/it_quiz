@@ -162,7 +162,7 @@ class _SetGoalY extends ConsumerWidget {
   const _SetGoalY();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final goalScore = ref.watch(dashboardAnalyticsScreenProvider).goalScore;
+    final goalScore = ref.watch(dashboardAnalyticsProvider).goalScore;
     return Container(
       height: context.height * 0.12,
       child: Column(
@@ -187,7 +187,7 @@ class _SetGoalY extends ConsumerWidget {
                     ? null
                     : () {
                         ref
-                            .read(dashboardAnalyticsScreenProvider.notifier)
+                            .read(dashboardAnalyticsProvider.notifier)
                             .setGoalY(goalScore - 10);
                       },
                 icon: Icon(
@@ -218,7 +218,7 @@ class _SetGoalY extends ConsumerWidget {
                     ? null
                     : () {
                         ref
-                            .read(dashboardAnalyticsScreenProvider.notifier)
+                            .read(dashboardAnalyticsProvider.notifier)
                             .setGoalY(goalScore + 10);
                       },
                 icon: Icon(

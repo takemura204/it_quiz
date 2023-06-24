@@ -7,17 +7,17 @@ import 'package:state_notifier/state_notifier.dart';
 
 import '../dashboard_analytics/bar_data_state.dart';
 import '../quiz/quiz_state.dart';
-import 'dashboard_analytics_screen_state.dart';
+import 'dashboard_analytics_state.dart';
 
-final dashboardAnalyticsScreenProvider = StateNotifierProvider<
-    DashboardAnalyticsScreenController, DashboardAnalyticsScreenState>(
-  (ref) => DashboardAnalyticsScreenController(ref: ref),
+final dashboardAnalyticsProvider = StateNotifierProvider<
+    DashboardAnalyticsController, DashboardAnalyticsState>(
+  (ref) => DashboardAnalyticsController(ref: ref),
 );
 
-class DashboardAnalyticsScreenController
-    extends StateNotifier<DashboardAnalyticsScreenState> with LocatorMixin {
-  DashboardAnalyticsScreenController({required this.ref})
-      : super(DashboardAnalyticsScreenState()) {
+class DashboardAnalyticsController
+    extends StateNotifier<DashboardAnalyticsState> with LocatorMixin {
+  DashboardAnalyticsController({required this.ref})
+      : super(DashboardAnalyticsState()) {
     initState();
   }
   final Ref ref;

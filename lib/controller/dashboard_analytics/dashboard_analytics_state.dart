@@ -2,12 +2,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'bar_data_state.dart';
 
-part 'dashboard_analytics_screen_state.freezed.dart';
+part 'dashboard_analytics_state.freezed.dart';
 
 @freezed
-class DashboardAnalyticsScreenState with _$DashboardAnalyticsScreenState {
-  const DashboardAnalyticsScreenState._();
-  factory DashboardAnalyticsScreenState({
+class DashboardAnalyticsState with _$DashboardAnalyticsState {
+  const DashboardAnalyticsState._();
+  factory DashboardAnalyticsState({
     @Default(false) bool isLoading, // データのローディングステータス
     @Default(0) final int tabIndex, //タブ
     @Default(-1) final int selectedXIndex,
@@ -25,6 +25,6 @@ class DashboardAnalyticsScreenState with _$DashboardAnalyticsScreenState {
   }) = _Create;
 }
 
-extension DashboardAnalyticsScreenStateEX on DashboardAnalyticsScreenState {
+extension DashboardAnalyticsStateEX on DashboardAnalyticsState {
   int get totalScore => totalData.length;
 }

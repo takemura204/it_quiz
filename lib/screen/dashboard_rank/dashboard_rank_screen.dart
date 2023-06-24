@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/dashboard_rank/dahboard_rank_controller.dart';
@@ -98,6 +99,8 @@ class _RankRate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardRankProvider);
+
     return Container(
       height: context.height * 0.25,
       child: Card(
@@ -121,60 +124,69 @@ class _RankRate extends ConsumerWidget {
               icon: Icons.workspace_premium_outlined,
             ),
             const Spacer(),
-            Row(
-              children: [
-                const Spacer(),
+            if (!state.isLoading) ...[
+              Row(
+                children: [
+                  const Spacer(),
 
-                ///レベル
-                ProgressRangeChart(
-                  width: context.height * 0.17,
-                  size: context.height * 0.17,
-                  length: 10,
-                  score: 4,
-                  widget: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "Lv.",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.height * 0.025,
-                          color: context.mainColor,
-                          height: 1.0,
+                  ///レベル
+                  ProgressRangeChart(
+                    width: context.height * 0.17,
+                    size: context.height * 0.17,
+                    length: 10,
+                    score: 4,
+                    widget: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "Lv.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.025,
+                            color: context.mainColor,
+                            height: 1.0,
+                          ),
+                          textAlign: TextAlign.end,
                         ),
-                        textAlign: TextAlign.end,
-                      ),
-                      Text(
-                        "1",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.height * 0.05,
-                          color: context.mainColor,
+                        Text(
+                          "1",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.05,
+                            color: context.mainColor,
+                          ),
+                          textAlign: TextAlign.end,
                         ),
-                        textAlign: TextAlign.end,
-                      ),
-                      const Spacer(),
-                    ],
+                        const Spacer(),
+                      ],
+                    ),
                   ),
-                ),
-                const Spacer(),
-                // ///バッチアイコン
-                // Container(
-                //   width: context.width * 0.4,
-                //   height: context.width * 0.4,
-                //   child: const _RankBatch(),
-                // ),
-                // const Spacer(),
+                  const Spacer(),
+                  // ///バッチアイコン
+                  // Container(
+                  //   width: context.width * 0.4,
+                  //   height: context.width * 0.4,
+                  //   child: const _RankBatch(),
+                  // ),
+                  // const Spacer(),
 
-                /// 称号
-                Container(
-                  width: context.width * 0.5,
-                  height: context.height * 0.17,
-                  child: const _RankName(),
+                  /// 称号
+                  Container(
+                    width: context.width * 0.5,
+                    height: context.height * 0.17,
+                    child: const _RankName(),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ] else
+              Center(
+                child: SpinKitFadingCircle(
+                  color: context.mainColor,
+                  size: context.height * 0.25,
                 ),
-                const Spacer(),
-              ],
-            ),
+              ),
+
             const Spacer(),
           ],
         ),

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'dashboard_analytics_screen_state.dart';
+part of 'dashboard_analytics_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$DashboardAnalyticsScreenState {
+mixin _$DashboardAnalyticsState {
   bool get isLoading => throw _privateConstructorUsedError; // データのローディングステータス
   int get tabIndex => throw _privateConstructorUsedError; //タブ
   int get selectedXIndex => throw _privateConstructorUsedError;
@@ -35,17 +35,15 @@ mixin _$DashboardAnalyticsScreenState {
   BarData? get dailyData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DashboardAnalyticsScreenStateCopyWith<DashboardAnalyticsScreenState>
-      get copyWith => throw _privateConstructorUsedError;
+  $DashboardAnalyticsStateCopyWith<DashboardAnalyticsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DashboardAnalyticsScreenStateCopyWith<$Res> {
-  factory $DashboardAnalyticsScreenStateCopyWith(
-          DashboardAnalyticsScreenState value,
-          $Res Function(DashboardAnalyticsScreenState) then) =
-      _$DashboardAnalyticsScreenStateCopyWithImpl<$Res,
-          DashboardAnalyticsScreenState>;
+abstract class $DashboardAnalyticsStateCopyWith<$Res> {
+  factory $DashboardAnalyticsStateCopyWith(DashboardAnalyticsState value,
+          $Res Function(DashboardAnalyticsState) then) =
+      _$DashboardAnalyticsStateCopyWithImpl<$Res, DashboardAnalyticsState>;
   @useResult
   $Res call(
       {bool isLoading,
@@ -67,10 +65,10 @@ abstract class $DashboardAnalyticsScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DashboardAnalyticsScreenStateCopyWithImpl<$Res,
-        $Val extends DashboardAnalyticsScreenState>
-    implements $DashboardAnalyticsScreenStateCopyWith<$Res> {
-  _$DashboardAnalyticsScreenStateCopyWithImpl(this._value, this._then);
+class _$DashboardAnalyticsStateCopyWithImpl<$Res,
+        $Val extends DashboardAnalyticsState>
+    implements $DashboardAnalyticsStateCopyWith<$Res> {
+  _$DashboardAnalyticsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -170,7 +168,7 @@ class _$DashboardAnalyticsScreenStateCopyWithImpl<$Res,
 
 /// @nodoc
 abstract class _$$_CreateCopyWith<$Res>
-    implements $DashboardAnalyticsScreenStateCopyWith<$Res> {
+    implements $DashboardAnalyticsStateCopyWith<$Res> {
   factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
       __$$_CreateCopyWithImpl<$Res>;
   @override
@@ -197,7 +195,7 @@ abstract class _$$_CreateCopyWith<$Res>
 
 /// @nodoc
 class __$$_CreateCopyWithImpl<$Res>
-    extends _$DashboardAnalyticsScreenStateCopyWithImpl<$Res, _$_Create>
+    extends _$DashboardAnalyticsStateCopyWithImpl<$Res, _$_Create>
     implements _$$_CreateCopyWith<$Res> {
   __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
       : super(_value, _then);
@@ -381,7 +379,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'DashboardAnalyticsScreenState(isLoading: $isLoading, tabIndex: $tabIndex, selectedXIndex: $selectedXIndex, goalScore: $goalScore, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, dayRangeText: $dayRangeText, totalData: $totalData, weeklyData: $weeklyData, monthlyData: $monthlyData, dailyData: $dailyData)';
+    return 'DashboardAnalyticsState(isLoading: $isLoading, tabIndex: $tabIndex, selectedXIndex: $selectedXIndex, goalScore: $goalScore, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, dayRangeText: $dayRangeText, totalData: $totalData, weeklyData: $weeklyData, monthlyData: $monthlyData, dailyData: $dailyData)';
   }
 
   @override
@@ -444,7 +442,7 @@ class _$_Create extends _Create {
       __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
-abstract class _Create extends DashboardAnalyticsScreenState {
+abstract class _Create extends DashboardAnalyticsState {
   factory _Create(
       {final bool isLoading,
       final int tabIndex,

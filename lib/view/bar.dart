@@ -144,7 +144,7 @@ class ProgressLineBar extends ConsumerWidget {
             child: LinearProgressIndicator(
               value: (quizLength != 0) ? score / quizLength : 0.0,
               color: context.mainColor,
-              backgroundColor: Colors.grey.shade400,
+              backgroundColor: Colors.grey.shade300,
             ),
           ),
         ),

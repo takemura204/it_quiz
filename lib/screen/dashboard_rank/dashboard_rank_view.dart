@@ -142,11 +142,11 @@ class _RankBatch extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rankData = ref.watch(dashboardRankProvider.notifier).rankData;
-    final rankIndex = ref.watch(dashboardRankProvider).rankIndex;
+    // final rankData = ref.watch(dashboardRankProvider.notifier).rankData;
+    // final rankIndex = ref.watch(dashboardRankProvider).rankIndex;
     return GestureDetector(
       onTap: () {
-        ref.read(dashboardRankProvider.notifier).tap(rankIndex);
+        // ref.read(dashboardRankProvider.notifier).tap(rankIndex);
       },
       child: Card(
         elevation: 3,
@@ -178,56 +178,62 @@ class _RankName extends ConsumerWidget {
   const _RankName();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rankData = ref.watch(dashboardRankProvider.notifier).rankData;
-    final rankIndex = ref.watch(dashboardRankProvider).rankIndex;
+    final rankData = ref.watch(dashboardRankProvider).rankData!;
+    final rankDataList =
+        ref.watch(dashboardRankProvider.notifier).initRankDataList;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Spacer(),
+    return GestureDetector(
+      onTap: () {
+        // ref.read(dashboardRankProvider.notifier).updatePoint(5);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Spacer(),
 
-        ///称号名
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              rankData[rankIndex].rankName,
+          ///称号名
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                rankData.rankName,
+                style: TextStyle(
+                    fontSize: context.height * 0.03,
+                    color: context.mainColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              const Spacer(),
+            ],
+          ),
+          const Spacer(),
+
+          ///経験値
+          Container(
+            alignment: Alignment.centerRight,
+            child: Text(
+              "${rankData.levelScore}pt",
               style: TextStyle(
-                  fontSize: context.height * 0.025,
+                  fontSize: context.height * 0.035,
                   color: context.mainColor,
                   fontWeight: FontWeight.bold),
             ),
-            const Spacer(),
-          ],
-        ),
-        const Spacer(),
-
-        ///経験値
-        Container(
-          alignment: Alignment.centerRight,
-          child: Text(
-            "100,000pt",
-            style: TextStyle(
-                fontSize: context.height * 0.035,
-                color: context.mainColor,
-                fontWeight: FontWeight.bold),
           ),
-        ),
 
-        Container(
-          alignment: Alignment.centerRight,
-          child: Text(
-            "次のレベルまであと10pt",
-            style: TextStyle(
-              fontSize: context.width * 0.03,
-              fontWeight: FontWeight.normal,
-              color: Colors.black54,
+          Container(
+            alignment: Alignment.centerRight,
+            child: Text(
+              "次のレベルまであと${rankData.levelScore}pt",
+              style: TextStyle(
+                fontSize: context.width * 0.03,
+                fontWeight: FontWeight.normal,
+                color: Colors.black54,
+              ),
             ),
           ),
-        ),
 
-        const Spacer(),
-      ],
+          const Spacer(),
+        ],
+      ),
     );
   }
 }

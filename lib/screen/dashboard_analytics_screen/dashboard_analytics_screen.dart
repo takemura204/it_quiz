@@ -11,7 +11,7 @@ import 'package:kentei_quiz/view/bar.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../controller/dashboard_analytics/bar_data_state.dart';
-import '../../controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
+import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../controller/quiz_item/quiz_item_controller.dart';
 
 part 'dashboard_analytics_view.dart';
@@ -44,7 +44,7 @@ class _DailyDashBoard extends ConsumerWidget {
   const _DailyDashBoard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    final state = ref.watch(dashboardAnalyticsProvider);
     if (state.isLoading) {
       return Center(
         child: SpinKitFadingCircle(
@@ -132,7 +132,7 @@ class _WeekDashboard extends ConsumerWidget {
   const _WeekDashboard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    final state = ref.watch(dashboardAnalyticsProvider);
     if (state.isLoading) {
       return Center(
         child: SpinKitFadingCircle(
@@ -181,7 +181,7 @@ class _WeekDashboard extends ConsumerWidget {
 class _BarChartSample extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    final state = ref.watch(dashboardAnalyticsProvider);
     final selectedIndex = state.selectedXIndex;
     final weeklyIndex = state.weeklyIndex;
     final monthlyIndex = state.monthlyIndex;
@@ -258,7 +258,7 @@ class _BarChartSample extends ConsumerWidget {
                 showTitles: true,
                 reservedSize: context.height * 0.04,
                 getTitlesWidget: (value, meta) {
-                  final state = ref.watch(dashboardAnalyticsScreenProvider);
+                  final state = ref.watch(dashboardAnalyticsProvider);
                   switch (state.selectedDayRange) {
                     case 7:
                       return _BottomWeekTitles(meta: meta, value: value);
@@ -409,12 +409,10 @@ class _BarChartSample extends ConsumerWidget {
                   response != null &&
                   response.spot != null) {
                 ref
-                    .read(dashboardAnalyticsScreenProvider.notifier)
+                    .read(dashboardAnalyticsProvider.notifier)
                     .selectXIndex(response.spot!.touchedBarGroupIndex);
               } else {
-                ref
-                    .read(dashboardAnalyticsScreenProvider.notifier)
-                    .selectXIndex(-1);
+                ref.read(dashboardAnalyticsProvider.notifier).selectXIndex(-1);
               }
             },
           ),
@@ -431,7 +429,7 @@ class _BottomWeekTitles extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
+    final state = ref.watch(dashboardAnalyticsProvider);
     final selectedXIndex = state.selectedXIndex;
     final weeklyIndex = state.weeklyIndex;
     final weekData = state.weeklyData[weeklyIndex];

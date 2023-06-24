@@ -111,8 +111,8 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
           userName: userNameController.text.trim(),
           isLogin: true,
         );
-        await saveFirestore(); //Firestoreに保存
-        saveDevice(); //デバイスに保存
+        await _saveFirestore(); //Firestoreに保存
+        _saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
         await user.sendEmailVerification(); // 登録完了メールを送信
         print("新規登録成功");
@@ -143,8 +143,8 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
           password: passwordController.text.trim(),
           isLogin: true,
         );
-        await saveFirestore(); //Firestoreに保存
-        saveDevice(); //デバイスに保存
+        await _saveFirestore(); //Firestoreに保存
+        _saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
         print("ログイン成功");
       }
@@ -178,8 +178,8 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       if (user != null) {
         await user.updateDisplayName(state.userName); //Authenticationに保存
       }
-      await saveFirestore(); //Firestoreに保存
-      saveDevice(); //デバイスに保存
+      await _saveFirestore(); //Firestoreに保存
+      _saveDevice(); //デバイスに保存
       loadAccountData(); //データ更新
       print("プロフィール更新");
     } catch (e, s) {
@@ -196,9 +196,9 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       final user = auth.currentUser;
       if (user != null) {
         reset();
-        await saveFirestore(); //Firestoreに保存
+        await _saveFirestore(); //Firestoreに保存
         await auth.signOut(); //ログアウト
-        saveDevice(); //デバイスに保存
+        _saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
         print("ログアウト成功");
       }
@@ -220,9 +220,9 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
         await user.reauthenticateWithCredential(credential);
         await auth.currentUser?.delete(); //アカウント削除
         reset();
-        await saveFirestore(); //Firestoreに保存
+        await _saveFirestore(); //Firestoreに保存
         await auth.signOut(); //ログアウト
-        saveDevice(); //デバイスに保存
+        _saveDevice(); //デバイスに保存
         loadAccountData(); //データ更新
         print("アカウント削除成功");
       }
@@ -357,7 +357,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
   }
 
   ///Firestoreに保存
-  Future saveFirestore() async {
+  Future _saveFirestore() async {
     try {
       final activeType = state.activeType;
       final user = auth.currentUser;
@@ -454,7 +454,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
   }
 
   /// 端末に保存
-  Future saveDevice() async {
+  Future _saveDevice() async {
     final uid = state.uid;
     final email = state.email;
     final password = state.password;

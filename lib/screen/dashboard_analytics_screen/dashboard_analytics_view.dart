@@ -49,8 +49,8 @@ class _SelectDayLength extends ConsumerWidget {
   const _SelectDayLength();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsScreenProvider);
-    final controller = ref.watch(dashboardAnalyticsScreenProvider.notifier);
+    final state = ref.watch(dashboardAnalyticsProvider);
+    final controller = ref.watch(dashboardAnalyticsProvider.notifier);
     final tabs = controller.tabs;
     final initialIndex = tabs.indexOf(state.selectedDayRange);
     final tabIndex = state.tabIndex;
@@ -72,7 +72,7 @@ class _SelectDayLength extends ConsumerWidget {
                   padding: EdgeInsets.all(context.width * 0.01),
                   iconSize: context.width * 0.06,
                   onPressed: () => ref
-                      .read(dashboardAnalyticsScreenProvider.notifier)
+                      .read(dashboardAnalyticsProvider.notifier)
                       .tapPreButton(),
                   icon: Icon(
                     Icons.arrow_back_ios,
@@ -96,7 +96,7 @@ class _SelectDayLength extends ConsumerWidget {
                   padding: EdgeInsets.all(context.width * 0.01),
                   iconSize: context.width * 0.06,
                   onPressed: () => ref
-                      .read(dashboardAnalyticsScreenProvider.notifier)
+                      .read(dashboardAnalyticsProvider.notifier)
                       .tapNextButton(),
                   icon: Icon(
                     Icons.arrow_forward_ios,
@@ -123,7 +123,7 @@ class _SelectDayLength extends ConsumerWidget {
               initialIndex: initialIndex,
               child: TabBar(
                   onTap: (index) => ref
-                      .read(dashboardAnalyticsScreenProvider.notifier)
+                      .read(dashboardAnalyticsProvider.notifier)
                       .tapTabBar(index),
                   labelColor: Colors.white,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),

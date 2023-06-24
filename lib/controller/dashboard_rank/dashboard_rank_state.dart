@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../resource/dashboard/rank_data.dart';
 
 part 'dashboard_rank_state.freezed.dart';
 
@@ -7,16 +8,9 @@ part 'dashboard_rank_state.freezed.dart';
 class DashboardRankState with _$DashboardRankState {
   const DashboardRankState._();
   factory DashboardRankState({
-    @Default(0) final int rankIndex, //ランク階級
-    @Default(0) final int point,
+    @Default(false) final bool isLoading,
+    @Default([]) final List<RankData> rankDataList, //ランク一覧データ
+    RankData? rankData, //ユーザーのランクデータ
+    @Default(0) final int rankIndex, //現在のランク階級
   }) = _Create;
-}
-
-class RankData {
-  final String rankName;
-  final List<Color> colors;
-  final int score;
-  final IconData icon;
-
-  RankData(this.rankName, this.colors, this.score, this.icon);
 }

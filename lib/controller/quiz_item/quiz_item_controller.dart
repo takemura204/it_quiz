@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/dashboard_analytics/dashboard_analytics_screen_controller.dart';
+import 'package:kentei_quiz/controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/resource/quiz_item/study_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +32,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     super.initState();
   }
 
-  static List<QuizItemState> _initialValue() {
+  List<QuizItemState> _initialValue() {
     // groupListsByを使用してリストをグループ化
     final groupMap = quizStudyItems.groupListsBy((x) => x.group);
 
@@ -114,36 +114,28 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
       case QuizType.study:
         _updateStudyItem(quizList);
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
-        ref
-            .read(dashboardAnalyticsScreenProvider.notifier)
-            .updateScore(quizList);
+        ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizList);
         break;
 
       ///Dailyクイズ更新
       case QuizType.daily:
         ref.read(homeReviewScreenProvider.notifier).updateDailyItem(quizList);
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
-        ref
-            .read(dashboardAnalyticsScreenProvider.notifier)
-            .updateScore(quizList);
+        ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizList);
         break;
 
       ///　Reviewクイズ更新
       case QuizType.review:
         _updateWeakItems(quizList);
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
-        ref
-            .read(dashboardAnalyticsScreenProvider.notifier)
-            .updateScore(quizList);
+        ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizList);
         break;
 
       ///Testクイズ更新
       case QuizType.test:
         ref.read(homeReviewScreenProvider.notifier).updateTestItem(quizList);
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
-        ref
-            .read(dashboardAnalyticsScreenProvider.notifier)
-            .updateScore(quizList);
+        ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizList);
         break;
     }
   }
