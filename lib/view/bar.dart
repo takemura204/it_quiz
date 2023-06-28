@@ -176,14 +176,14 @@ class ProgressRangeChart extends ConsumerWidget {
   const ProgressRangeChart({
     required this.width,
     required this.size,
-    required this.length,
-    required this.score,
+    required this.maxScore,
+    required this.currentScore,
     required this.widget,
   });
   final double width;
   final double size;
-  final int length;
-  final int score;
+  final int maxScore;
+  final int currentScore;
   final Widget widget;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -196,7 +196,7 @@ class ProgressRangeChart extends ConsumerWidget {
             startAngle: 270,
             endAngle: 270,
             minimum: 0,
-            maximum: length.toDouble(),
+            maximum: maxScore.toDouble(),
             showLabels: false,
             showTicks: false,
             axisLineStyle: AxisLineStyle(
@@ -206,7 +206,7 @@ class ProgressRangeChart extends ConsumerWidget {
             ),
             pointers: [
               RangePointer(
-                value: score.toDouble(),
+                value: currentScore.toDouble(),
                 cornerStyle: CornerStyle.bothCurve,
                 width: 0.2,
                 sizeUnit: GaugeSizeUnit.factor,

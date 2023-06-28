@@ -27,7 +27,7 @@ class DashboardRankController extends StateNotifier<DashboardRankState>
 
   @override
   void initState() {
-    // _resetData();
+    _resetData();
     state = state.copyWith(isLoading: true);
     _loadDashboardRankData().then((_) {
       state = state.copyWith(isLoading: false);
@@ -85,14 +85,59 @@ class DashboardRankController extends StateNotifier<DashboardRankState>
   Future updateScore(int addScore) async {
     try {
       final rankData = state.rankData;
-      state = state.copyWith(
-          rankData: rankData!.copyWith(
-        rankId: rankData.rankId,
-        rankName: rankData.rankName,
-        rankLevel: rankData.rankLevel,
-        levelUpScore: rankData.levelUpScore,
-        score: rankData.score + addScore,
-      ));
+      final updateScore = rankData!.score + addScore;
+      final nextLevelScore = rankData.levelUpScore *
+          ((rankData.rankLevel + 1) - rankDataList[rankData.rankId].rankLevel);
+      final totalScore = updateScore + rankDataList[rankData.rankId].score;
+
+      // レベルアップ && ランクアップ
+      if (totalScore >= rankDataList[rankData.rankId + 1].score &&
+          rankData.rankLevel >=
+              rankDataList[rankData.rankId + 1].rankLevel - 1) {
+        final differenceScore =
+            totalScore - rankDataList[rankData.rankId + 1].score;
+        print("A");
+
+        state = state.copyWith(
+            rankData: rankData.copyWith(
+          rankId: rankDataList[rankData.rankId + 1].rankId,
+          rankName: rankDataList[rankData.rankId + 1].rankName,
+          rankLevel: rankData.rankLevel + 1,
+          levelUpScore: rankDataList[rankData.rankId + 1].levelUpScore,
+          score: differenceScore,
+        ));
+      }
+      // レベルアップ
+      else if (updateScore >= nextLevelScore &&
+          rankData.rankLevel <
+              rankDataList[rankData.rankId + 1].rankLevel - 1) {
+        print("B");
+
+        state = state.copyWith(
+            rankData: rankData.copyWith(
+          rankId: rankData.rankId,
+          rankName: rankData.rankName,
+          rankLevel: rankData.rankLevel + 1,
+          levelUpScore: rankData.levelUpScore,
+          score: updateScore,
+        ));
+      }
+      //ポイント加算
+      else {
+        print("C");
+
+        state = state.copyWith(
+            rankData: rankData.copyWith(
+          rankId: rankData.rankId,
+          rankName: rankData.rankName,
+          rankLevel: rankData.rankLevel,
+          levelUpScore: rankData.levelUpScore,
+          score: updateScore,
+        ));
+      }
+      print({"totalScore", totalScore});
+      print({"updateScore", updateScore});
+      print({"nextLevelScore", nextLevelScore});
       await _saveFirestore();
       await _saveDevice();
     } catch (e, s) {
@@ -118,7 +163,7 @@ class DashboardRankController extends StateNotifier<DashboardRankState>
         'score': rankData?.score,
         'updateAt': DateTime.now(),
       }, SetOptions(merge: true));
-      print({"_saveFirestore", state.rankData});
+      // print({"_saveFirestore", state.rankData});
       return state;
     } catch (e, s) {
       print("saveFirestore　Error");
@@ -142,32 +187,36 @@ class DashboardRankController extends StateNotifier<DashboardRankState>
   final rankDataList = [
     // 学習者の冒険者 (20×10)
     const RankData(
-        rankId: 0,
-        rankName: "学習の冒険者",
-        rankLevel: 0,
-        score: 0,
-        levelUpScore: 20),
+      rankId: 0,
+      rankName: "学習の冒険者",
+      rankLevel: 0,
+      score: 0,
+      levelUpScore: 20,
+    ),
     // 知識の騎士 (30×10)
     const RankData(
-        rankId: 1,
-        rankName: "知識の騎士",
-        rankLevel: 10,
-        score: 200,
-        levelUpScore: 30),
+      rankId: 1,
+      rankName: "知識の騎士",
+      rankLevel: 10,
+      score: 200,
+      levelUpScore: 30,
+    ),
     // 書籍の戦士 (40×10)
     const RankData(
-        rankId: 2,
-        rankName: "書籍の戦士",
-        rankLevel: 20,
-        score: 500,
-        levelUpScore: 40),
+      rankId: 2,
+      rankName: "書籍の戦士",
+      rankLevel: 20,
+      score: 500,
+      levelUpScore: 40,
+    ),
     // 学問の術士 (50×10)
     const RankData(
-        rankId: 3,
-        rankName: "学問の術士",
-        rankLevel: 30,
-        score: 900,
-        levelUpScore: 50),
+      rankId: 3,
+      rankName: "学問の術士",
+      rankLevel: 30,
+      score: 900,
+      levelUpScore: 50,
+    ),
     // 知恵の魔法使い (60×10)
     const RankData(
       rankId: 4,
@@ -210,8 +259,15 @@ class DashboardRankController extends StateNotifier<DashboardRankState>
     // 学問のレジェンド (110×10)
     const RankData(
       rankId: 9,
-      rankName: "学問のレジェンド",
+      rankName: "学習の神",
       rankLevel: 90,
+      score: 5300,
+      levelUpScore: 110,
+    ),
+    const RankData(
+      rankId: 10,
+      rankName: "学問の伝説",
+      rankLevel: 100,
       score: 5300,
       levelUpScore: 110,
     ),

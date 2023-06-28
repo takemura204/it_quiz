@@ -109,6 +109,9 @@ class _RankRate extends ConsumerWidget {
       );
     }
     final rankData = state.rankData!;
+    final rankDataList = ref.watch(dashboardRankProvider.notifier).rankDataList;
+    final maxScore = rankData.levelUpScore *
+        ((rankData.rankLevel + 1) - rankDataList[rankData.rankId].rankLevel);
 
     return Container(
       height: context.height * 0.25,
@@ -133,66 +136,59 @@ class _RankRate extends ConsumerWidget {
               icon: Icons.workspace_premium_outlined,
             ),
             const Spacer(),
-            if (!state.isLoading) ...[
-              Row(
-                children: [
-                  const Spacer(),
 
-                  ///レベル
-                  GestureDetector(
-                    onTap: () {
-                      ref.read(dashboardRankProvider.notifier).updateScore(5);
-                    },
-                    child: ProgressRangeChart(
-                      width: context.height * 0.17,
-                      size: context.height * 0.17,
-                      length: rankData.levelUpScore,
-                      score: rankData.score % rankData.levelUpScore,
-                      widget: Column(
-                        children: [
-                          const Spacer(),
-                          Text(
-                            "Lv.",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: context.height * 0.025,
-                              color: context.mainColor,
-                              height: 1.0,
-                            ),
-                            textAlign: TextAlign.end,
+            Row(
+              children: [
+                const Spacer(),
+
+                ///レベル
+                GestureDetector(
+                  onTap: () {
+                    ref.read(dashboardRankProvider.notifier).updateScore(30);
+                  },
+                  child: ProgressRangeChart(
+                    width: context.height * 0.17,
+                    size: context.height * 0.17,
+                    maxScore: rankData.levelUpScore,
+                    currentScore: rankData.score % rankData.levelUpScore,
+                    widget: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "Lv.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.025,
+                            color: context.mainColor,
+                            height: 1.0,
                           ),
-                          Text(
-                            "${rankData.rankLevel}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: context.height * 0.05,
-                              color: context.mainColor,
-                            ),
-                            textAlign: TextAlign.end,
+                          textAlign: TextAlign.end,
+                        ),
+                        Text(
+                          "${rankData.rankLevel}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.05,
+                            color: context.mainColor,
                           ),
-                          const Spacer(),
-                        ],
-                      ),
+                          textAlign: TextAlign.end,
+                        ),
+                        const Spacer(),
+                      ],
                     ),
                   ),
-                  const Spacer(),
-
-                  /// 称号
-                  Container(
-                    width: context.width * 0.5,
-                    height: context.height * 0.17,
-                    child: const _RankName(),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ] else
-              Center(
-                child: SpinKitFadingCircle(
-                  color: context.mainColor,
-                  size: context.height * 0.15,
                 ),
-              ),
+                const Spacer(),
+
+                /// 称号
+                Container(
+                  width: context.width * 0.5,
+                  height: context.height * 0.17,
+                  child: const _RankName(),
+                ),
+                const Spacer(),
+              ],
+            ),
 
             const Spacer(),
           ],

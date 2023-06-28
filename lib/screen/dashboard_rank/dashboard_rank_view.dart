@@ -181,7 +181,8 @@ class _RankName extends ConsumerWidget {
     final rankData = ref.watch(dashboardRankProvider).rankData!;
     final nextLevelUpScore =
         rankData.levelUpScore - (rankData.score % rankData.levelUpScore);
-
+    final rankDataList = ref.watch(dashboardRankProvider.notifier).rankDataList;
+    final totalScore = rankData.score + rankDataList[rankData.rankId].score;
     return GestureDetector(
       onTap: () {},
       child: Column(
@@ -209,7 +210,7 @@ class _RankName extends ConsumerWidget {
           Container(
             alignment: Alignment.centerRight,
             child: Text(
-              "${rankData.score}pt",
+              "${totalScore}pt",
               style: TextStyle(
                   fontSize: context.height * 0.035,
                   color: context.mainColor,

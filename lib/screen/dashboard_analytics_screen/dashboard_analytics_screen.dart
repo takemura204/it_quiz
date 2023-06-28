@@ -78,8 +78,8 @@ class _DailyDashBoard extends ConsumerWidget {
             ProgressRangeChart(
               width: context.height * 0.2,
               size: context.height * 0.2,
-              length: goalScore,
-              score: dailyScore,
+              maxScore: goalScore,
+              currentScore: dailyScore,
               widget: Column(
                 children: [
                   const Spacer(),
