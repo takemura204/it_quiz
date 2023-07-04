@@ -55,7 +55,7 @@ class _DailyDashBoard extends ConsumerWidget {
     }
     final dailyData = state.dailyData!;
     final dailyScore = dailyData.quizData.length;
-    final goalScore = state.goalScore;
+    final dailyGoal = state.dailyGoal;
     return Container(
       height: context.height * 0.22,
       child: Card(
@@ -78,7 +78,7 @@ class _DailyDashBoard extends ConsumerWidget {
             ProgressRangeChart(
               width: context.height * 0.2,
               size: context.height * 0.2,
-              maxScore: goalScore,
+              maxScore: dailyGoal,
               currentScore: dailyScore,
               widget: Column(
                 children: [
@@ -102,7 +102,7 @@ class _DailyDashBoard extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    "/$goalScore",
+                    "/$dailyGoal",
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -189,8 +189,8 @@ class _BarChartSample extends ConsumerWidget {
     final totalData = state.totalData;
     final weeklyData = state.weeklyData[weeklyIndex];
     final monthlyData = state.monthlyData[monthlyIndex];
-    final goalScore = state.goalScore;
-    final maxY = goalScore * 2;
+    final dailyGoal = state.dailyGoal;
+    final maxY = dailyGoal * 2;
 
     return Container(
       height: context.height * 0.25,
@@ -214,10 +214,10 @@ class _BarChartSample extends ConsumerWidget {
             drawVerticalLine: false,
             getDrawingHorizontalLine: (value) {
               final color =
-                  (value == goalScore) ? context.mainColor : Colors.grey;
+                  (value == dailyGoal) ? context.mainColor : Colors.grey;
               return FlLine(
                 color: color,
-                strokeWidth: (value == goalScore) ? 2 : 1,
+                strokeWidth: (value == dailyGoal) ? 2 : 1,
               );
             },
           ),
@@ -233,7 +233,7 @@ class _BarChartSample extends ConsumerWidget {
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
                   final color =
-                      (value == goalScore) ? context.mainColor : Colors.grey;
+                      (value == dailyGoal) ? context.mainColor : Colors.grey;
                   final fontSize = (value == 100)
                       ? context.width * 0.025
                       : context.width * 0.03;
@@ -243,7 +243,7 @@ class _BarChartSample extends ConsumerWidget {
                     style: TextStyle(
                       color: color,
                       fontSize: fontSize,
-                      fontWeight: (value == goalScore)
+                      fontWeight: (value == dailyGoal)
                           ? FontWeight.bold
                           : FontWeight.normal,
                     ),
@@ -285,7 +285,7 @@ class _BarChartSample extends ConsumerWidget {
                     .map((e) {
                       final index = e.key;
                       final data = e.value;
-                      final color = (data.score >= goalScore)
+                      final color = (data.score >= dailyGoal)
                           ? context.mainColor
                           : Colors.grey.shade400;
 
@@ -313,7 +313,7 @@ class _BarChartSample extends ConsumerWidget {
                     .map((e) {
                       final index = e.key;
                       final data = e.value;
-                      final color = (data.score >= goalScore)
+                      final color = (data.score >= dailyGoal)
                           ? context.mainColor
                           : Colors.grey.shade400;
 
@@ -341,7 +341,7 @@ class _BarChartSample extends ConsumerWidget {
                     .map((e) {
                       final index = e.key;
                       final data = e.value;
-                      final color = (data.score >= goalScore)
+                      final color = (data.score >= dailyGoal)
                           ? context.mainColor
                           : Colors.grey.shade400;
 

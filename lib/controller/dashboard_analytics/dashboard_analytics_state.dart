@@ -11,7 +11,7 @@ class DashboardAnalyticsState with _$DashboardAnalyticsState {
     @Default(false) bool isLoading, // データのローディングステータス
     @Default(0) final int tabIndex, //タブ
     @Default(-1) final int selectedXIndex,
-    @Default(10) final int goalScore, //毎日の目標
+    @Default(10) final int dailyGoal, //毎日の目標
     @Default(0) final int weeklyIndex, //1週間の単位
     @Default(0) final int monthlyIndex, //1ヶ月の単位
     @Default(7) final int selectedDayRange, //

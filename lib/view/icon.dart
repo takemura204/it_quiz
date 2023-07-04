@@ -8,8 +8,8 @@ class PtIcon extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: context.height * 0.04,
-      height: context.height * 0.04,
+      width: context.height * 0.05,
+      height: context.height * 0.05,
       child: Card(
         elevation: 2,
         color: context.backgroundColor,
@@ -21,8 +21,8 @@ class PtIcon extends ConsumerWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         child: Container(
-          width: context.height * 0.04,
-          height: context.height * 0.04,
+          width: context.height * 0.05,
+          height: context.height * 0.05,
           alignment: Alignment.center,
           child: Text(
             "pt",

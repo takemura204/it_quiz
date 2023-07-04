@@ -72,8 +72,8 @@ class _DailyQuiz extends ConsumerWidget {
           subWidget: ProgressLineBar(
             height: context.height * 0.01,
             width: context.width * 0.35,
-            score: score,
-            quizLength: quizLength,
+            currentScore: score,
+            goalScore: quizLength,
             isUnit: true,
           ),
           icon: Icons.help_center_outlined,

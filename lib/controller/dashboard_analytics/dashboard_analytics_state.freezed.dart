@@ -19,7 +19,7 @@ mixin _$DashboardAnalyticsState {
   bool get isLoading => throw _privateConstructorUsedError; // データのローディングステータス
   int get tabIndex => throw _privateConstructorUsedError; //タブ
   int get selectedXIndex => throw _privateConstructorUsedError;
-  int get goalScore => throw _privateConstructorUsedError; //毎日の目標
+  int get dailyGoal => throw _privateConstructorUsedError; //毎日の目標
   int get weeklyIndex => throw _privateConstructorUsedError; //1週間の単位
   int get monthlyIndex => throw _privateConstructorUsedError; //1ヶ月の単位
   int get selectedDayRange => throw _privateConstructorUsedError; //
@@ -49,7 +49,7 @@ abstract class $DashboardAnalyticsStateCopyWith<$Res> {
       {bool isLoading,
       int tabIndex,
       int selectedXIndex,
-      int goalScore,
+      int dailyGoal,
       int weeklyIndex,
       int monthlyIndex,
       int selectedDayRange,
@@ -81,7 +81,7 @@ class _$DashboardAnalyticsStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? tabIndex = null,
     Object? selectedXIndex = null,
-    Object? goalScore = null,
+    Object? dailyGoal = null,
     Object? weeklyIndex = null,
     Object? monthlyIndex = null,
     Object? selectedDayRange = null,
@@ -106,9 +106,9 @@ class _$DashboardAnalyticsStateCopyWithImpl<$Res,
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      goalScore: null == goalScore
-          ? _value.goalScore
-          : goalScore // ignore: cast_nullable_to_non_nullable
+      dailyGoal: null == dailyGoal
+          ? _value.dailyGoal
+          : dailyGoal // ignore: cast_nullable_to_non_nullable
               as int,
       weeklyIndex: null == weeklyIndex
           ? _value.weeklyIndex
@@ -177,7 +177,7 @@ abstract class _$$_CreateCopyWith<$Res>
       {bool isLoading,
       int tabIndex,
       int selectedXIndex,
-      int goalScore,
+      int dailyGoal,
       int weeklyIndex,
       int monthlyIndex,
       int selectedDayRange,
@@ -206,7 +206,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? tabIndex = null,
     Object? selectedXIndex = null,
-    Object? goalScore = null,
+    Object? dailyGoal = null,
     Object? weeklyIndex = null,
     Object? monthlyIndex = null,
     Object? selectedDayRange = null,
@@ -231,9 +231,9 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      goalScore: null == goalScore
-          ? _value.goalScore
-          : goalScore // ignore: cast_nullable_to_non_nullable
+      dailyGoal: null == dailyGoal
+          ? _value.dailyGoal
+          : dailyGoal // ignore: cast_nullable_to_non_nullable
               as int,
       weeklyIndex: null == weeklyIndex
           ? _value.weeklyIndex
@@ -286,7 +286,7 @@ class _$_Create extends _Create {
       {this.isLoading = false,
       this.tabIndex = 0,
       this.selectedXIndex = -1,
-      this.goalScore = 10,
+      this.dailyGoal = 10,
       this.weeklyIndex = 0,
       this.monthlyIndex = 0,
       this.selectedDayRange = 7,
@@ -315,7 +315,7 @@ class _$_Create extends _Create {
   final int selectedXIndex;
   @override
   @JsonKey()
-  final int goalScore;
+  final int dailyGoal;
 //毎日の目標
   @override
   @JsonKey()
@@ -379,7 +379,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'DashboardAnalyticsState(isLoading: $isLoading, tabIndex: $tabIndex, selectedXIndex: $selectedXIndex, goalScore: $goalScore, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, dayRangeText: $dayRangeText, totalData: $totalData, weeklyData: $weeklyData, monthlyData: $monthlyData, dailyData: $dailyData)';
+    return 'DashboardAnalyticsState(isLoading: $isLoading, tabIndex: $tabIndex, selectedXIndex: $selectedXIndex, dailyGoal: $dailyGoal, weeklyIndex: $weeklyIndex, monthlyIndex: $monthlyIndex, selectedDayRange: $selectedDayRange, weekOffset: $weekOffset, monthOffset: $monthOffset, dayRangeText: $dayRangeText, totalData: $totalData, weeklyData: $weeklyData, monthlyData: $monthlyData, dailyData: $dailyData)';
   }
 
   @override
@@ -393,8 +393,8 @@ class _$_Create extends _Create {
                 other.tabIndex == tabIndex) &&
             (identical(other.selectedXIndex, selectedXIndex) ||
                 other.selectedXIndex == selectedXIndex) &&
-            (identical(other.goalScore, goalScore) ||
-                other.goalScore == goalScore) &&
+            (identical(other.dailyGoal, dailyGoal) ||
+                other.dailyGoal == dailyGoal) &&
             (identical(other.weeklyIndex, weeklyIndex) ||
                 other.weeklyIndex == weeklyIndex) &&
             (identical(other.monthlyIndex, monthlyIndex) ||
@@ -423,7 +423,7 @@ class _$_Create extends _Create {
       isLoading,
       tabIndex,
       selectedXIndex,
-      goalScore,
+      dailyGoal,
       weeklyIndex,
       monthlyIndex,
       selectedDayRange,
@@ -447,7 +447,7 @@ abstract class _Create extends DashboardAnalyticsState {
       {final bool isLoading,
       final int tabIndex,
       final int selectedXIndex,
-      final int goalScore,
+      final int dailyGoal,
       final int weeklyIndex,
       final int monthlyIndex,
       final int selectedDayRange,
@@ -467,7 +467,7 @@ abstract class _Create extends DashboardAnalyticsState {
   @override //タブ
   int get selectedXIndex;
   @override
-  int get goalScore;
+  int get dailyGoal;
   @override //毎日の目標
   int get weeklyIndex;
   @override //1週間の単位

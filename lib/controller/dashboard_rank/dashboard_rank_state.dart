@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../resource/dashboard/rank_data.dart';
+import '../../resource/dashboard_rank/rank_data.dart';
 
 part 'dashboard_rank_state.freezed.dart';
 
@@ -13,4 +13,11 @@ class DashboardRankState with _$DashboardRankState {
     RankData? rankData, //ユーザーのランクデータ
     @Default(0) final int rankIndex, //現在のランク階級
   }) = _Create;
+}
+
+///ミッションの種類
+enum MissionType {
+  progress,
+  achieved,
+  received,
 }

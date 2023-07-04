@@ -118,6 +118,45 @@ class DeleteButton extends ConsumerWidget {
   }
 }
 
+class ReceivedButton extends ConsumerWidget {
+  const ReceivedButton({required this.text, required this.onPressed});
+  final String text;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.3,
+      height: context.height * 0.07,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.mainColor,
+          elevation: 2,
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          side: BorderSide(
+            color: onPressed == null ? Colors.white10 : context.mainColor,
+            width: 1,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: onPressed == null ? Colors.black45 : Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: context.height * 0.017,
+          ),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
 ///Backボタン
 class CustomBackButton extends ConsumerWidget {
   const CustomBackButton({required this.onPressed});
@@ -444,6 +483,36 @@ class SignOutButton extends ConsumerWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+      ),
+    );
+  }
+}
+
+///ランダムボタン
+class RandomIconButton extends ConsumerWidget {
+  const RandomIconButton({required this.onPressed, required this.isCheck});
+  final VoidCallback? onPressed;
+  final bool isCheck;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 0.06,
+      height: context.width * 0.06,
+      decoration: BoxDecoration(
+        // color: Colors.amber,
+        border: Border.all(
+          color: context.mainColor,
+          width: 1.5,
+        ),
+      ),
+      child: IconButton(
+        padding: const EdgeInsets.all(0.0),
+        onPressed: onPressed,
+        alignment: Alignment.center,
+        iconSize: context.width * 0.05,
+        // 表示アイコン
+        icon: const Icon(Icons.repeat_outlined),
+        color: isCheck ? context.mainColor : Colors.grey,
       ),
     );
   }

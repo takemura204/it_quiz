@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/dashboard_rank/dahboard_rank_controller.dart';
+import 'package:kentei_quiz/controller/dashboard_rank/dashboard_rank_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/view/bar.dart';
+import 'package:kentei_quiz/view/button.dart';
 
+import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../view/icon.dart';
 
 part 'dashboard_rank_view.dart';
@@ -33,9 +35,19 @@ class DashBoardRankScreen extends ConsumerWidget {
 ///　やることリスト
 class _DailyMission extends ConsumerWidget {
   const _DailyMission();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.22,
+        ),
+      );
+    }
+    final dailyScore = state.dailyData!.quizData.length;
+    final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
     return Container(
       height: context.height * 0.36,
       width: context.width * 1,
@@ -53,7 +65,6 @@ class _DailyMission extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            const Spacer(),
             const _Title(
               title: "デイリーミッション",
               subtitle: "あと〇〇時間",
@@ -61,27 +72,42 @@ class _DailyMission extends ConsumerWidget {
             ),
             const Spacer(),
             Container(
-              height: context.height * 0.27,
+              height: context.height * 0.3,
               margin: EdgeInsets.symmetric(
                   horizontal: context.width * 0.02,
-                  vertical: context.width * 0.01),
+                  vertical: context.width * 0.0),
               child: Column(
-                children: const [
-                  Spacer(),
+                children: [
+                  const Spacer(),
 
                   ///ミッション1
                   _DailyMissionCard(
-                      title: "クイズを10問解く", isDone: true, point: 10),
+                    title: "クイズを$dailyGoal問解く",
+                    isDone: dailyScore >= dailyGoal,
+                    point: dailyGoal,
+                    currentScore: dailyScore,
+                    goalScore: dailyGoal,
+                  ),
+                  Divider(color: context.mainColor, height: 1, thickness: 1),
 
                   ///ミッション2
-                  _DailyMissionCard(
-                      title: "今日のクイズに挑戦する", isDone: false, point: 10),
+                  const _DailyMissionCard(
+                      title: "今日のクイズに挑戦する",
+                      isDone: false,
+                      point: 10,
+                      currentScore: 1,
+                      goalScore: 10),
+                  Divider(color: context.mainColor, height: 1, thickness: 1),
 
                   ///ミッション3
-                  _DailyMissionCard(
-                      title: "クイズをコンプリートする", isDone: false, point: 15),
-
-                  Spacer(),
+                  const _DailyMissionCard(
+                    title: "クイズをコンプリートする",
+                    isDone: false,
+                    point: 15,
+                    currentScore: 1,
+                    goalScore: 10,
+                  ),
+                  const Spacer(),
                 ],
               ),
             ),
@@ -144,7 +170,7 @@ class _RankRate extends ConsumerWidget {
                 ///レベル
                 GestureDetector(
                   onTap: () {
-                    ref.read(dashboardRankProvider.notifier).updateScore(30);
+                    ref.read(dashboardRankProvider.notifier).updateScore(10);
                   },
                   child: ProgressRangeChart(
                     width: context.height * 0.17,

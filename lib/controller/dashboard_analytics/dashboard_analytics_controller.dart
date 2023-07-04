@@ -75,10 +75,15 @@ class DashboardAnalyticsController
 
       // 新規起動日（"今日"）がtotalDataに含まれていなければ追加する
       if (differenceInDays > 0) {
+        // totalDataを最新の日付順にソート
+        totalData.sort((a, b) => b.day.compareTo(a.day));
+
         for (int i = 0; i <= differenceInDays; i++) {
           final dateToAdd = nowDate.subtract(Duration(days: i));
           if (!totalData.any((barData) => _isSameDay(barData.day, dateToAdd))) {
             totalData.insert(0, _createBarData(dateToAdd));
+          } else {
+            print("Data already exists for ${dateToAdd.toString()}");
           }
         }
       }
@@ -235,7 +240,7 @@ class DashboardAnalyticsController
   ///目標設定
   void setGoalY(int index) {
     if (index >= 10 && index <= 50) {
-      state = state.copyWith(goalScore: index);
+      state = state.copyWith(dailyGoal: index);
     }
   }
 

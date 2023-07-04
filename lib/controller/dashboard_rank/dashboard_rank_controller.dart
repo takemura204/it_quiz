@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../resource/dashboard/rank_data.dart';
+import '../../resource/dashboard_rank/rank_data.dart';
 import 'dashboard_rank_state.dart';
 
 final dashboardRankProvider =

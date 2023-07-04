@@ -123,15 +123,15 @@ class ProgressLineBar extends ConsumerWidget {
   const ProgressLineBar({
     required this.height,
     required this.width,
-    required this.score,
-    required this.quizLength,
+    required this.currentScore,
+    required this.goalScore,
     required this.isUnit,
   });
   final double height;
   final double width;
   final bool isUnit;
-  final int score;
-  final int quizLength;
+  final int currentScore;
+  final int goalScore;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Row(
@@ -142,7 +142,7 @@ class ProgressLineBar extends ConsumerWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             child: LinearProgressIndicator(
-              value: (quizLength != 0) ? score / quizLength : 0.0,
+              value: (goalScore != 0) ? currentScore / goalScore : 0.0,
               color: context.mainColor,
               backgroundColor: Colors.grey.shade300,
             ),
@@ -153,14 +153,14 @@ class ProgressLineBar extends ConsumerWidget {
           Row(
             children: [
               Text(
-                "$score",
+                "$currentScore",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: context.width * 0.035,
                 ),
               ),
               Text(
-                "/$quizLength",
+                "/$goalScore",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: context.width * 0.03),
@@ -207,7 +207,9 @@ class ProgressRangeChart extends ConsumerWidget {
             pointers: [
               RangePointer(
                 value: currentScore.toDouble(),
-                cornerStyle: CornerStyle.bothCurve,
+                cornerStyle: currentScore >= maxScore
+                    ? CornerStyle.bothFlat
+                    : CornerStyle.bothCurve,
                 width: 0.2,
                 sizeUnit: GaugeSizeUnit.factor,
                 color: context.mainColor,

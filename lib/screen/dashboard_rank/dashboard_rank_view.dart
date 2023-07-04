@@ -11,9 +11,9 @@ class _Title extends ConsumerWidget {
     return Container(
       height: context.height * 0.04,
       margin: EdgeInsets.only(
-        left: context.width * 0.03,
-        top: context.width * 0.01,
-        right: context.width * 0.03,
+        left: context.width * 0.02,
+        top: context.width * 0.015,
+        right: context.width * 0.02,
         bottom: 0.005,
       ),
       decoration: BoxDecoration(
@@ -54,31 +54,30 @@ class _Title extends ConsumerWidget {
 ///　デイリーミッションCard
 class _DailyMissionCard extends ConsumerWidget {
   const _DailyMissionCard(
-      {required this.title, required this.isDone, required this.point});
+      {required this.title,
+      required this.isDone,
+      required this.point,
+      required this.currentScore,
+      required this.goalScore});
   final String title;
   final bool isDone;
   final int point;
+  final int currentScore;
+  final int goalScore;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: context.height * 0.09,
       child: Card(
-        elevation: 3,
+        elevation: 0,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
+            horizontal: context.width * 0.0, vertical: context.width * 0.0),
         child: Row(
           children: [
             ///ミッションアイコン
             Container(
-              width: context.width * 0.1,
+              width: context.height * 0.05,
               margin: EdgeInsets.symmetric(
                   horizontal: context.width * 0.02,
                   vertical: context.width * 0.01),
@@ -86,11 +85,11 @@ class _DailyMissionCard extends ConsumerWidget {
                 children: [
                   const Spacer(),
                   const PtIcon(),
-                  Gap(context.width * 0.005),
+                  Gap(context.width * 0.01),
                   Text(
                     "+${point}pt",
                     style: TextStyle(
-                      fontSize: context.height * 0.014,
+                      fontSize: context.height * 0.015,
                       fontWeight: FontWeight.bold,
                       color: context.mainColor,
                     ),
@@ -99,7 +98,7 @@ class _DailyMissionCard extends ConsumerWidget {
                 ],
               ),
             ),
-            Gap(context.width * 0.01),
+            Gap(context.width * 0.02),
 
             ///ミッション内容
             Column(
@@ -108,24 +107,46 @@ class _DailyMissionCard extends ConsumerWidget {
                 const Spacer(),
                 Container(
                   height: context.height * 0.04,
+                  width: context.width * 0.7,
                   alignment: Alignment.center,
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: context.width * 0.04,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black54,
-                    ),
+                  child: Row(
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: context.width * 0.035,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      const Spacer(),
+                      RandomIconButton(
+                        onPressed: () {},
+                        isCheck: true,
+                      ),
+                    ],
                   ),
                 ),
-                Gap(context.width * 0.005),
-                ProgressLineBar(
-                  height: context.height * 0.015,
-                  width: context.width * 0.6,
-                  score: 1,
-                  quizLength: 10,
-                  isUnit: true,
-                ),
+                Gap(context.width * 0.01),
+                if (!isDone)
+                  ProgressLineBar(
+                    height: context.height * 0.015,
+                    width: context.width * 0.64,
+                    currentScore: currentScore,
+                    goalScore: goalScore,
+                    isUnit: true,
+                  )
+                else
+                  Container(
+                    height: context.height * 0.035,
+                    width: context.width * 0.74,
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        ReceivedButton(text: "受け取る", onPressed: () {}),
+                      ],
+                    ),
+                  ),
                 const Spacer(),
               ],
             ),

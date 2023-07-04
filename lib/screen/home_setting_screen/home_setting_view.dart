@@ -162,7 +162,7 @@ class _SetGoalY extends ConsumerWidget {
   const _SetGoalY();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final goalScore = ref.watch(dashboardAnalyticsProvider).goalScore;
+    final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
     return Container(
       height: context.height * 0.12,
       child: Column(
@@ -183,23 +183,23 @@ class _SetGoalY extends ConsumerWidget {
               IconButton(
                 padding: EdgeInsets.all(context.width * 0.01),
                 iconSize: context.width * 0.1,
-                onPressed: goalScore <= 10
+                onPressed: dailyGoal <= 10
                     ? null
                     : () {
                         ref
                             .read(dashboardAnalyticsProvider.notifier)
-                            .setGoalY(goalScore - 10);
+                            .setGoalY(dailyGoal - 10);
                       },
                 icon: Icon(
                   Icons.remove_circle_outline,
-                  color: goalScore <= 10
+                  color: dailyGoal <= 10
                       ? Colors.grey.shade400
                       : context.mainColor,
                 ),
               ),
               Gap(context.width * 0.05),
               Text(
-                "$goalScore",
+                "$dailyGoal",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: context.width * 0.06),
@@ -214,16 +214,16 @@ class _SetGoalY extends ConsumerWidget {
               IconButton(
                 padding: EdgeInsets.all(context.width * 0.01),
                 iconSize: context.width * 0.1,
-                onPressed: goalScore >= 50
+                onPressed: dailyGoal >= 50
                     ? null
                     : () {
                         ref
                             .read(dashboardAnalyticsProvider.notifier)
-                            .setGoalY(goalScore + 10);
+                            .setGoalY(dailyGoal + 10);
                       },
                 icon: Icon(
                   Icons.add_circle_outline,
-                  color: goalScore >= 50
+                  color: dailyGoal >= 50
                       ? Colors.grey.shade400
                       : context.mainColor,
                 ),
