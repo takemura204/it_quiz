@@ -54,16 +54,15 @@ class _Title extends ConsumerWidget {
 ///　デイリーミッションCard
 class _DailyMissionCard extends ConsumerWidget {
   const _DailyMissionCard(
-      {required this.title,
-      required this.isDone,
-      required this.point,
+      {required this.mission,
       required this.currentScore,
-      required this.goalScore});
-  final String title;
-  final bool isDone;
-  final int point;
+      required this.goalScore,
+      required this.randomIconButtonTap});
+
+  final Mission mission;
   final int currentScore;
   final int goalScore;
+  final VoidCallback randomIconButtonTap;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -87,7 +86,7 @@ class _DailyMissionCard extends ConsumerWidget {
                   const PtIcon(),
                   Gap(context.width * 0.01),
                   Text(
-                    "+${point}pt",
+                    "+${mission.point}pt",
                     style: TextStyle(
                       fontSize: context.height * 0.015,
                       fontWeight: FontWeight.bold,
@@ -112,11 +111,11 @@ class _DailyMissionCard extends ConsumerWidget {
                   child: Row(
                     children: [
                       Text(
-                        title,
+                        mission.title,
                         style: TextStyle(
                           fontSize: context.width * 0.035,
                           fontWeight: FontWeight.normal,
-                          color: Colors.black54,
+                          color: Colors.black87,
                         ),
                       ),
                       const Spacer(),
@@ -128,7 +127,7 @@ class _DailyMissionCard extends ConsumerWidget {
                   ),
                 ),
                 Gap(context.width * 0.01),
-                if (!isDone)
+                if (mission.isDone)
                   ProgressLineBar(
                     height: context.height * 0.015,
                     width: context.width * 0.64,
@@ -136,7 +135,7 @@ class _DailyMissionCard extends ConsumerWidget {
                     goalScore: goalScore,
                     isUnit: true,
                   )
-                else
+                else if (!mission.isDone && !mission.isReceived)
                   Container(
                     height: context.height * 0.035,
                     width: context.width * 0.74,
@@ -146,7 +145,12 @@ class _DailyMissionCard extends ConsumerWidget {
                         ReceivedButton(text: "受け取る", onPressed: () {}),
                       ],
                     ),
-                  ),
+                  )
+                else if (!mission.isDone && mission.isReceived)
+                  Container(
+                      height: context.height * 0.035,
+                      width: context.width * 0.74,
+                      color: Colors.red),
                 const Spacer(),
               ],
             ),

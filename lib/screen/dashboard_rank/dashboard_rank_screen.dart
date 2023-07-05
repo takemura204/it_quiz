@@ -4,10 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/dashboard_rank/dashboard_rank_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/resource/mission/mission.dart';
 import 'package:kentei_quiz/view/bar.dart';
 import 'package:kentei_quiz/view/button.dart';
 
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
+import '../../resource/mission/mission_model.dart';
 import '../../view/icon.dart';
 
 part 'dashboard_rank_view.dart';
@@ -48,6 +50,7 @@ class _DailyMission extends ConsumerWidget {
     }
     final dailyScore = state.dailyData!.quizData.length;
     final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
+    final model = ref.watch(missionModelProvider.notifier);
     return Container(
       height: context.height * 0.36,
       width: context.width * 1,
@@ -82,30 +85,28 @@ class _DailyMission extends ConsumerWidget {
 
                   ///ミッション1
                   _DailyMissionCard(
-                    title: "クイズを$dailyGoal問解く",
-                    isDone: dailyScore >= dailyGoal,
-                    point: dailyGoal,
+                    mission: model.mission1[0],
                     currentScore: dailyScore,
                     goalScore: dailyGoal,
+                    randomIconButtonTap: () {},
                   ),
                   Divider(color: context.mainColor, height: 1, thickness: 1),
 
                   ///ミッション2
-                  const _DailyMissionCard(
-                      title: "今日のクイズに挑戦する",
-                      isDone: false,
-                      point: 10,
-                      currentScore: 1,
-                      goalScore: 10),
+                  _DailyMissionCard(
+                    mission: model.mission2[0],
+                    currentScore: dailyScore,
+                    goalScore: dailyGoal,
+                    randomIconButtonTap: () {},
+                  ),
                   Divider(color: context.mainColor, height: 1, thickness: 1),
 
                   ///ミッション3
-                  const _DailyMissionCard(
-                    title: "クイズをコンプリートする",
-                    isDone: false,
-                    point: 15,
-                    currentScore: 1,
-                    goalScore: 10,
+                  _DailyMissionCard(
+                    mission: model.mission3[0],
+                    currentScore: dailyScore,
+                    goalScore: dailyGoal,
+                    randomIconButtonTap: () {},
                   ),
                   const Spacer(),
                 ],

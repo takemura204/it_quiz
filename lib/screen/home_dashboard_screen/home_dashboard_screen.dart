@@ -40,7 +40,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
     final tabs = ref.watch(homeDashboardScreenProvider.notifier).tabs;
 
     return AppBar(
-      title: Text(I18n().titleScore),
+      title: Text(I18n().titleDashboard),
       bottom: TabBar(
           onTap: (index) =>
               ref.read(homeDashboardScreenProvider.notifier).tapTabBar(index),

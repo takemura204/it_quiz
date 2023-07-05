@@ -17,10 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DashboardRankState {
   bool get isLoading => throw _privateConstructorUsedError;
-  List<RankData> get rankDataList =>
-      throw _privateConstructorUsedError; //ランク一覧データ
   RankData? get rankData => throw _privateConstructorUsedError; //ユーザーのランクデータ
-  int get rankIndex => throw _privateConstructorUsedError;
+  int get rankIndex => throw _privateConstructorUsedError; //現在のランク階級
+  int get mission1Index => throw _privateConstructorUsedError;
+  int get mission2Index => throw _privateConstructorUsedError;
+  int get mission3Index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DashboardRankStateCopyWith<DashboardRankState> get copyWith =>
@@ -35,9 +36,11 @@ abstract class $DashboardRankStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      List<RankData> rankDataList,
       RankData? rankData,
-      int rankIndex});
+      int rankIndex,
+      int mission1Index,
+      int mission2Index,
+      int mission3Index});
 
   $RankDataCopyWith<$Res>? get rankData;
 }
@@ -56,19 +59,17 @@ class _$DashboardRankStateCopyWithImpl<$Res, $Val extends DashboardRankState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? rankDataList = null,
     Object? rankData = freezed,
     Object? rankIndex = null,
+    Object? mission1Index = null,
+    Object? mission2Index = null,
+    Object? mission3Index = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      rankDataList: null == rankDataList
-          ? _value.rankDataList
-          : rankDataList // ignore: cast_nullable_to_non_nullable
-              as List<RankData>,
       rankData: freezed == rankData
           ? _value.rankData
           : rankData // ignore: cast_nullable_to_non_nullable
@@ -76,6 +77,18 @@ class _$DashboardRankStateCopyWithImpl<$Res, $Val extends DashboardRankState>
       rankIndex: null == rankIndex
           ? _value.rankIndex
           : rankIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission1Index: null == mission1Index
+          ? _value.mission1Index
+          : mission1Index // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission2Index: null == mission2Index
+          ? _value.mission2Index
+          : mission2Index // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission3Index: null == mission3Index
+          ? _value.mission3Index
+          : mission3Index // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -102,9 +115,11 @@ abstract class _$$_CreateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      List<RankData> rankDataList,
       RankData? rankData,
-      int rankIndex});
+      int rankIndex,
+      int mission1Index,
+      int mission2Index,
+      int mission3Index});
 
   @override
   $RankDataCopyWith<$Res>? get rankData;
@@ -121,19 +136,17 @@ class __$$_CreateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? rankDataList = null,
     Object? rankData = freezed,
     Object? rankIndex = null,
+    Object? mission1Index = null,
+    Object? mission2Index = null,
+    Object? mission3Index = null,
   }) {
     return _then(_$_Create(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      rankDataList: null == rankDataList
-          ? _value._rankDataList
-          : rankDataList // ignore: cast_nullable_to_non_nullable
-              as List<RankData>,
       rankData: freezed == rankData
           ? _value.rankData
           : rankData // ignore: cast_nullable_to_non_nullable
@@ -141,6 +154,18 @@ class __$$_CreateCopyWithImpl<$Res>
       rankIndex: null == rankIndex
           ? _value.rankIndex
           : rankIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission1Index: null == mission1Index
+          ? _value.mission1Index
+          : mission1Index // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission2Index: null == mission2Index
+          ? _value.mission2Index
+          : mission2Index // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission3Index: null == mission3Index
+          ? _value.mission3Index
+          : mission3Index // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -151,35 +176,36 @@ class __$$_CreateCopyWithImpl<$Res>
 class _$_Create extends _Create {
   _$_Create(
       {this.isLoading = false,
-      final List<RankData> rankDataList = const [],
       this.rankData,
-      this.rankIndex = 0})
-      : _rankDataList = rankDataList,
-        super._();
+      this.rankIndex = 0,
+      this.mission1Index = 0,
+      this.mission2Index = 0,
+      this.mission3Index = 0})
+      : super._();
 
   @override
   @JsonKey()
   final bool isLoading;
-  final List<RankData> _rankDataList;
-  @override
-  @JsonKey()
-  List<RankData> get rankDataList {
-    if (_rankDataList is EqualUnmodifiableListView) return _rankDataList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_rankDataList);
-  }
-
-//ランク一覧データ
   @override
   final RankData? rankData;
 //ユーザーのランクデータ
   @override
   @JsonKey()
   final int rankIndex;
+//現在のランク階級
+  @override
+  @JsonKey()
+  final int mission1Index;
+  @override
+  @JsonKey()
+  final int mission2Index;
+  @override
+  @JsonKey()
+  final int mission3Index;
 
   @override
   String toString() {
-    return 'DashboardRankState(isLoading: $isLoading, rankDataList: $rankDataList, rankData: $rankData, rankIndex: $rankIndex)';
+    return 'DashboardRankState(isLoading: $isLoading, rankData: $rankData, rankIndex: $rankIndex, mission1Index: $mission1Index, mission2Index: $mission2Index, mission3Index: $mission3Index)';
   }
 
   @override
@@ -189,17 +215,21 @@ class _$_Create extends _Create {
             other is _$_Create &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality()
-                .equals(other._rankDataList, _rankDataList) &&
             (identical(other.rankData, rankData) ||
                 other.rankData == rankData) &&
             (identical(other.rankIndex, rankIndex) ||
-                other.rankIndex == rankIndex));
+                other.rankIndex == rankIndex) &&
+            (identical(other.mission1Index, mission1Index) ||
+                other.mission1Index == mission1Index) &&
+            (identical(other.mission2Index, mission2Index) ||
+                other.mission2Index == mission2Index) &&
+            (identical(other.mission3Index, mission3Index) ||
+                other.mission3Index == mission3Index));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading,
-      const DeepCollectionEquality().hash(_rankDataList), rankData, rankIndex);
+  int get hashCode => Object.hash(runtimeType, isLoading, rankData, rankIndex,
+      mission1Index, mission2Index, mission3Index);
 
   @JsonKey(ignore: true)
   @override
@@ -211,19 +241,25 @@ class _$_Create extends _Create {
 abstract class _Create extends DashboardRankState {
   factory _Create(
       {final bool isLoading,
-      final List<RankData> rankDataList,
       final RankData? rankData,
-      final int rankIndex}) = _$_Create;
+      final int rankIndex,
+      final int mission1Index,
+      final int mission2Index,
+      final int mission3Index}) = _$_Create;
   _Create._() : super._();
 
   @override
   bool get isLoading;
   @override
-  List<RankData> get rankDataList;
-  @override //ランク一覧データ
   RankData? get rankData;
   @override //ユーザーのランクデータ
   int get rankIndex;
+  @override //現在のランク階級
+  int get mission1Index;
+  @override
+  int get mission2Index;
+  @override
+  int get mission3Index;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

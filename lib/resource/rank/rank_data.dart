@@ -15,3 +15,5 @@ class RankData with _$RankData {
   factory RankData.fromJson(Map<String, dynamic> json) =>
       _$RankDataFromJson(json);
 }
+
+extension RankDataEx on RankData {}
