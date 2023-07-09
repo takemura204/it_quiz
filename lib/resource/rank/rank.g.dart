@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rank_data.dart';
+part of 'rank.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RankData _$$_RankDataFromJson(Map<String, dynamic> json) => _$_RankData(
+_$_Rank _$$_RankFromJson(Map<String, dynamic> json) => _$_Rank(
       rankId: json['rankId'] as int,
       rankName: json['rankName'] as String,
       levelUpScore: json['levelUpScore'] as int,
@@ -14,8 +14,7 @@ _$_RankData _$$_RankDataFromJson(Map<String, dynamic> json) => _$_RankData(
       score: json['score'] as int,
     );
 
-Map<String, dynamic> _$$_RankDataToJson(_$_RankData instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_RankToJson(_$_Rank instance) => <String, dynamic>{
       'rankId': instance.rankId,
       'rankName': instance.rankName,
       'levelUpScore': instance.levelUpScore,

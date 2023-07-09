@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/dashboard_rank/dashboard_rank_controller.dart';
+import 'package:kentei_quiz/controller/dashboard_achievement/dashboard_achievement_controller.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/resource/mission/mission.dart';
 import 'package:kentei_quiz/view/bar.dart';
@@ -12,10 +12,10 @@ import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart
 import '../../resource/mission/mission_model.dart';
 import '../../view/icon.dart';
 
-part 'dashboard_rank_view.dart';
+part 'dashboard_achievement_view.dart';
 
-class DashBoardRankScreen extends ConsumerWidget {
-  const DashBoardRankScreen();
+class DashBoardAchievementScreen extends ConsumerWidget {
+  const DashBoardAchievementScreen();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
@@ -126,7 +126,7 @@ class _RankRate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardRankProvider);
+    final state = ref.watch(dashboardAchievementProvider);
     if (state.isLoading) {
       return Center(
         child: SpinKitFadingCircle(
@@ -136,7 +136,8 @@ class _RankRate extends ConsumerWidget {
       );
     }
     final rankData = state.rankData!;
-    final rankDataList = ref.watch(dashboardRankProvider.notifier).rankDataList;
+    final rankDataList =
+        ref.watch(dashboardAchievementProvider.notifier).rankDataList;
     final maxScore = rankData.levelUpScore *
         ((rankData.rankLevel + 1) - rankDataList[rankData.rankId].rankLevel);
 
@@ -171,7 +172,9 @@ class _RankRate extends ConsumerWidget {
                 ///レベル
                 GestureDetector(
                   onTap: () {
-                    ref.read(dashboardRankProvider.notifier).updateScore(10);
+                    ref
+                        .read(dashboardAchievementProvider.notifier)
+                        .updateScore(10);
                   },
                   child: ProgressRangeChart(
                     width: context.height * 0.17,

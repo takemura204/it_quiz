@@ -5,7 +5,7 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
 import '../../resource/lang/initial_resource.dart';
-import '../dashboard_rank/dashboard_rank_screen.dart';
+import '../dashboard_achievement_screen/dashboard_achievement_screen.dart';
 
 part 'home_dashboard_view.dart';
 
@@ -23,7 +23,7 @@ class HomeDashboardScreen extends ConsumerWidget {
         appBar: _AppBar(),
         body: TabBarView(
           children: [
-            DashBoardRankScreen(),
+            DashBoardAchievementScreen(),
             DashBoardAnalyticsScreen(),
           ],
         ),

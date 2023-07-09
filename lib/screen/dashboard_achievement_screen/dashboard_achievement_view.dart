@@ -1,4 +1,4 @@
-part of 'dashboard_rank_screen.dart';
+part of 'dashboard_achievement_screen.dart';
 
 class _Title extends ConsumerWidget {
   const _Title(
@@ -203,10 +203,11 @@ class _RankName extends ConsumerWidget {
   const _RankName();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rankData = ref.watch(dashboardRankProvider).rankData!;
+    final rankData = ref.watch(dashboardAchievementProvider).rankData!;
     final nextLevelUpScore =
         rankData.levelUpScore - (rankData.score % rankData.levelUpScore);
-    final rankDataList = ref.watch(dashboardRankProvider.notifier).rankDataList;
+    final rankDataList =
+        ref.watch(dashboardAchievementProvider.notifier).rankDataList;
     final totalScore = rankData.score + rankDataList[rankData.rankId].score;
     return GestureDetector(
       onTap: () {},

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'rank_data.dart';
+part of 'rank.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-RankData _$RankDataFromJson(Map<String, dynamic> json) {
-  return _RankData.fromJson(json);
+Rank _$RankFromJson(Map<String, dynamic> json) {
+  return _Rank.fromJson(json);
 }
 
 /// @nodoc
-mixin _$RankData {
+mixin _$Rank {
   int get rankId => throw _privateConstructorUsedError; //ランクID
   String get rankName => throw _privateConstructorUsedError; //称号の名前
   int get levelUpScore => throw _privateConstructorUsedError; //レベルアップする時のスコア
@@ -28,14 +28,13 @@ mixin _$RankData {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RankDataCopyWith<RankData> get copyWith =>
-      throw _privateConstructorUsedError;
+  $RankCopyWith<Rank> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RankDataCopyWith<$Res> {
-  factory $RankDataCopyWith(RankData value, $Res Function(RankData) then) =
-      _$RankDataCopyWithImpl<$Res, RankData>;
+abstract class $RankCopyWith<$Res> {
+  factory $RankCopyWith(Rank value, $Res Function(Rank) then) =
+      _$RankCopyWithImpl<$Res, Rank>;
   @useResult
   $Res call(
       {int rankId,
@@ -46,9 +45,9 @@ abstract class $RankDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RankDataCopyWithImpl<$Res, $Val extends RankData>
-    implements $RankDataCopyWith<$Res> {
-  _$RankDataCopyWithImpl(this._value, this._then);
+class _$RankCopyWithImpl<$Res, $Val extends Rank>
+    implements $RankCopyWith<$Res> {
+  _$RankCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -90,10 +89,9 @@ class _$RankDataCopyWithImpl<$Res, $Val extends RankData>
 }
 
 /// @nodoc
-abstract class _$$_RankDataCopyWith<$Res> implements $RankDataCopyWith<$Res> {
-  factory _$$_RankDataCopyWith(
-          _$_RankData value, $Res Function(_$_RankData) then) =
-      __$$_RankDataCopyWithImpl<$Res>;
+abstract class _$$_RankCopyWith<$Res> implements $RankCopyWith<$Res> {
+  factory _$$_RankCopyWith(_$_Rank value, $Res Function(_$_Rank) then) =
+      __$$_RankCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,11 +103,9 @@ abstract class _$$_RankDataCopyWith<$Res> implements $RankDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RankDataCopyWithImpl<$Res>
-    extends _$RankDataCopyWithImpl<$Res, _$_RankData>
-    implements _$$_RankDataCopyWith<$Res> {
-  __$$_RankDataCopyWithImpl(
-      _$_RankData _value, $Res Function(_$_RankData) _then)
+class __$$_RankCopyWithImpl<$Res> extends _$RankCopyWithImpl<$Res, _$_Rank>
+    implements _$$_RankCopyWith<$Res> {
+  __$$_RankCopyWithImpl(_$_Rank _value, $Res Function(_$_Rank) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +117,7 @@ class __$$_RankDataCopyWithImpl<$Res>
     Object? rankLevel = null,
     Object? score = null,
   }) {
-    return _then(_$_RankData(
+    return _then(_$_Rank(
       rankId: null == rankId
           ? _value.rankId
           : rankId // ignore: cast_nullable_to_non_nullable
@@ -148,16 +144,15 @@ class __$$_RankDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RankData implements _RankData {
-  const _$_RankData(
+class _$_Rank implements _Rank {
+  const _$_Rank(
       {required this.rankId,
       required this.rankName,
       required this.levelUpScore,
       required this.rankLevel,
       required this.score});
 
-  factory _$_RankData.fromJson(Map<String, dynamic> json) =>
-      _$$_RankDataFromJson(json);
+  factory _$_Rank.fromJson(Map<String, dynamic> json) => _$$_RankFromJson(json);
 
   @override
   final int rankId;
@@ -176,14 +171,14 @@ class _$_RankData implements _RankData {
 
   @override
   String toString() {
-    return 'RankData(rankId: $rankId, rankName: $rankName, levelUpScore: $levelUpScore, rankLevel: $rankLevel, score: $score)';
+    return 'Rank(rankId: $rankId, rankName: $rankName, levelUpScore: $levelUpScore, rankLevel: $rankLevel, score: $score)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RankData &&
+            other is _$_Rank &&
             (identical(other.rankId, rankId) || other.rankId == rankId) &&
             (identical(other.rankName, rankName) ||
                 other.rankName == rankName) &&
@@ -202,26 +197,26 @@ class _$_RankData implements _RankData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RankDataCopyWith<_$_RankData> get copyWith =>
-      __$$_RankDataCopyWithImpl<_$_RankData>(this, _$identity);
+  _$$_RankCopyWith<_$_Rank> get copyWith =>
+      __$$_RankCopyWithImpl<_$_Rank>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RankDataToJson(
+    return _$$_RankToJson(
       this,
     );
   }
 }
 
-abstract class _RankData implements RankData {
-  const factory _RankData(
+abstract class _Rank implements Rank {
+  const factory _Rank(
       {required final int rankId,
       required final String rankName,
       required final int levelUpScore,
       required final int rankLevel,
-      required final int score}) = _$_RankData;
+      required final int score}) = _$_Rank;
 
-  factory _RankData.fromJson(Map<String, dynamic> json) = _$_RankData.fromJson;
+  factory _Rank.fromJson(Map<String, dynamic> json) = _$_Rank.fromJson;
 
   @override
   int get rankId;
@@ -235,6 +230,5 @@ abstract class _RankData implements RankData {
   int get score;
   @override
   @JsonKey(ignore: true)
-  _$$_RankDataCopyWith<_$_RankData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_RankCopyWith<_$_Rank> get copyWith => throw _privateConstructorUsedError;
 }

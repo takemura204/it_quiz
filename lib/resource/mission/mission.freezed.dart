@@ -185,8 +185,8 @@ class __$$_MissionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Mission implements _Mission {
-  const _$_Mission(
+class _$_Mission extends _Mission {
+  _$_Mission(
       {this.docId,
       required this.missionId,
       required this.title,
@@ -194,7 +194,8 @@ class _$_Mission implements _Mission {
       this.isDone = false,
       this.isReceived = false,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt})
+      : super._();
 
   factory _$_Mission.fromJson(Map<String, dynamic> json) =>
       _$$_MissionFromJson(json);
@@ -267,8 +268,8 @@ class _$_Mission implements _Mission {
   }
 }
 
-abstract class _Mission implements Mission {
-  const factory _Mission(
+abstract class _Mission extends Mission {
+  factory _Mission(
       {final String? docId,
       required final int missionId,
       required final String title,
@@ -277,6 +278,7 @@ abstract class _Mission implements Mission {
       final bool isReceived,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$_Mission;
+  _Mission._() : super._();
 
   factory _Mission.fromJson(Map<String, dynamic> json) = _$_Mission.fromJson;
 

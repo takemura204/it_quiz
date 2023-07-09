@@ -6,24 +6,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../resource/rank/rank_data.dart';
-import 'dashboard_rank_state.dart';
+import '../../resource/rank/rank.dart';
+import 'dashboard_achievement_state.dart';
 
-part 'dashboard_rank_resorce.dart';
+part 'dashboard_achievement_resorce.dart';
 
-final dashboardRankProvider =
-    StateNotifierProvider<DashboardRankController, DashboardRankState>(
-  (ref) => DashboardRankController(ref: ref),
+final dashboardAchievementProvider = StateNotifierProvider<
+    DashboardAchievementController, DashboardAchievementState>(
+  (ref) => DashboardAchievementController(ref: ref),
 );
 
-class DashboardRankController extends StateNotifier<DashboardRankState>
-    with LocatorMixin {
-  DashboardRankController({required this.ref}) : super(DashboardRankState()) {
+class DashboardAchievementController
+    extends StateNotifier<DashboardAchievementState> with LocatorMixin {
+  DashboardAchievementController({required this.ref})
+      : super(DashboardAchievementState()) {
     initState();
   }
 
   final Ref ref;
-
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
@@ -47,7 +47,7 @@ class DashboardRankController extends StateNotifier<DashboardRankState>
       if (rankDataJson != null && rankDataJson.isNotEmpty) {
         final user = _auth.currentUser;
         final uid = user?.uid;
-        final rankData = RankData.fromJson(json.decode(rankDataJson));
+        final rankData = Rank.fromJson(json.decode(rankDataJson));
         //アカウント登録している時
         if (uid != null) {
           final docSnap = await _firestore.collection('score').doc(uid).get();
