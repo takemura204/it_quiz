@@ -21,7 +21,7 @@ class UserProfile extends ConsumerWidget {
                     context: context,
                     barrierDismissible: false,
                     builder: (context) {
-                      return DialogDefault2(
+                      return DefaultDialog(
                         title: "アカウントを作成しましょう",
                         subWidget: Text(
                           "名前やプロフィール画像を設定するには\nアカウントの登録が必要です",
@@ -36,7 +36,8 @@ class UserProfile extends ConsumerWidget {
                         onPressed: () {
                           Navigator.of(context).pop();
                           context.showScreen(
-                              const ProfileScreenArguments().generateRoute());
+                              const AccountCreateStep1ScreenArguments()
+                                  .generateRoute());
                         },
                       );
                     });

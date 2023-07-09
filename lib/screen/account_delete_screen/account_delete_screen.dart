@@ -7,6 +7,7 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 import '../../controller/auth/auth_controller.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
+import '../../view/icon_button.dart';
 import '../../view/text_field.dart';
 
 class AccountDeleteScreen extends ConsumerWidget {
@@ -89,7 +90,9 @@ class AccountDeleteScreen extends ConsumerWidget {
                 Gap(context.height * 0.03),
 
                 ///削除ボタン
-                DeleteButton(
+                DangerButton(
+                  width: context.width * 0.8,
+                  height: context.height * 0.07,
                   text: 'アカウントを完全に削除',
                   onPressed: passwordController.text.isNotEmpty && !isNotTap
                       ? () {
@@ -101,7 +104,7 @@ class AccountDeleteScreen extends ConsumerWidget {
                                 showDialog(
                                   context: context,
                                   barrierDismissible: false,
-                                  builder: (_) => DialogError(
+                                  builder: (_) => SecondaryCloseDialog(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
@@ -122,7 +125,7 @@ class AccountDeleteScreen extends ConsumerWidget {
                               else {
                                 showDialog(
                                   context: context,
-                                  builder: (_) => DialogClose2(
+                                  builder: (_) => DefaultCloseDialog(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();

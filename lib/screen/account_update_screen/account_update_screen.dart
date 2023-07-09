@@ -8,6 +8,7 @@ import '../../controller/auth/auth_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
+import '../../view/icon_button.dart';
 import '../../view/text_field.dart';
 
 class AccountUpdateScreen extends ConsumerWidget {
@@ -58,7 +59,9 @@ class AccountUpdateScreen extends ConsumerWidget {
                 Gap(context.height * 0.03),
 
                 ///送信ボタン
-                Default1Button(
+                DefaultButton(
+                  width: context.width * 0.8,
+                  height: context.height * 0.07,
                   text: '再設定する',
                   onPressed: emailController.text.isNotEmpty && !isNotTap
                       ? () {
@@ -71,7 +74,7 @@ class AccountUpdateScreen extends ConsumerWidget {
                               if (value.hasError) {
                                 showDialog(
                                   context: context,
-                                  builder: (_) => DialogError(
+                                  builder: (_) => SecondaryCloseDialog(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
@@ -93,7 +96,7 @@ class AccountUpdateScreen extends ConsumerWidget {
                                 showDialog(
                                   context: context,
                                   barrierDismissible: false,
-                                  builder: (_) => DialogClose2(
+                                  builder: (_) => DefaultCloseDialog(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },

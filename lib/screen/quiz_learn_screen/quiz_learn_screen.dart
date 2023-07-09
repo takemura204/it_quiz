@@ -8,7 +8,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../view/admob.dart';
-import '../../view/button.dart';
+import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
 import '../quiz_learn_result_screen/quiz_learn_result_screen.dart';
 

@@ -11,6 +11,7 @@ import 'package:kentei_quiz/view/button.dart';
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../resource/mission/mission_model.dart';
 import '../../view/icon.dart';
+import '../../view/icon_button.dart';
 
 part 'dashboard_achievement_view.dart';
 

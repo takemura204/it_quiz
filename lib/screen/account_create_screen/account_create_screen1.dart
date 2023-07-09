@@ -8,6 +8,7 @@ import '../../controller/auth/auth_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
+import '../../view/icon_button.dart';
 import '../../view/text_field.dart';
 
 part 'account_create_view.dart';
@@ -79,7 +80,9 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                       Gap(context.height * 0.02),
 
                       ///送信ボタン
-                      Default2Button(
+                      PrimaryButton(
+                        width: context.width * 0.8,
+                        height: context.height * 0.07,
                         text: '新規登録',
                         onPressed: (isValidEmail && isSafetyPass) && !isNotTap
                             ? () {
@@ -91,7 +94,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                       if (value.hasError) {
                                         showDialog(
                                           context: context,
-                                          builder: (_) => DialogError(
+                                          builder: (_) => SecondaryCloseDialog(
                                             onPressed: () {
                                               ref
                                                   .read(authProvider.notifier)
@@ -158,7 +161,9 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                       Gap(context.height * 0.025),
 
                       ///ログイン画面
-                      Default1Button(
+                      DefaultButton(
+                          width: context.width * 0.8,
+                          height: context.height * 0.07,
                           text: 'ログイン画面へ',
                           onPressed: () {
                             context.showScreen(

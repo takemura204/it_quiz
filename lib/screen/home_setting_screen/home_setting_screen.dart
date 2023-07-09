@@ -102,7 +102,7 @@ class HomeSettingScreen extends ConsumerWidget {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return DialogClose1(
+                          return PrimaryCloseDialog(
                             title: "目標を設定",
                             subWidget: const _SetGoalY(),
                             doneText: "保存",
@@ -169,7 +169,7 @@ class HomeSettingScreen extends ConsumerWidget {
                             await showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return DialogDefault1(
+                                  return PrimaryDialog(
                                       onPressed: () {
                                         ref
                                             .read(authProvider.notifier)

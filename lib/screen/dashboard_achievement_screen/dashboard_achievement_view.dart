@@ -58,7 +58,6 @@ class _DailyMissionCard extends ConsumerWidget {
       required this.currentScore,
       required this.goalScore,
       required this.randomIconButtonTap});
-
   final Mission mission;
   final int currentScore;
   final int goalScore;
@@ -83,7 +82,7 @@ class _DailyMissionCard extends ConsumerWidget {
               child: Column(
                 children: [
                   const Spacer(),
-                  const PtIcon(),
+                  PointIcon(size: context.height * 0.05),
                   Gap(context.width * 0.01),
                   Text(
                     "+${mission.point}pt",
@@ -97,62 +96,81 @@ class _DailyMissionCard extends ConsumerWidget {
                 ],
               ),
             ),
-            Gap(context.width * 0.02),
+            Gap(context.width * 0.01),
 
             ///ミッション内容
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Spacer(),
-                Container(
-                  height: context.height * 0.04,
-                  width: context.width * 0.7,
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: [
-                      Text(
-                        mission.title,
-                        style: TextStyle(
-                          fontSize: context.width * 0.035,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      const Spacer(),
-                      RandomIconButton(
-                        onPressed: () {},
-                        isCheck: true,
-                      ),
-                    ],
+            Container(
+              width: context.width * 0.5,
+              alignment: Alignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(context.width * 0.01),
+                  const Spacer(),
+                  Text(
+                    mission.title,
+                    style: TextStyle(
+                      fontSize: context.width * 0.035,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87,
+                    ),
                   ),
-                ),
-                Gap(context.width * 0.01),
-                if (mission.isDone)
+
+                  const Spacer(),
+
+                  ///プログレスバー
                   ProgressLineBar(
-                    height: context.height * 0.015,
-                    width: context.width * 0.64,
+                    height: context.height * 0.02,
+                    width: context.width * 0.5,
                     currentScore: currentScore,
                     goalScore: goalScore,
                     isUnit: true,
-                  )
-                else if (!mission.isDone && !mission.isReceived)
-                  Container(
-                    height: context.height * 0.035,
-                    width: context.width * 0.74,
-                    child: Row(
-                      children: [
-                        const Spacer(),
-                        ReceivedButton(text: "受け取る", onPressed: () {}),
-                      ],
+                  ),
+
+                  const Spacer(),
+                ],
+              ),
+            ),
+
+            const Spacer(),
+
+            ///ボタン
+            Container(
+              width: context.width * 0.25,
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  Gap(context.width * 0.01),
+                  const Spacer(),
+                  if (!mission.isDone) ...[
+                    RandomIconButton(
+                      onPressed: () {},
+                      isCheck: true,
                     ),
-                  )
-                else if (!mission.isDone && mission.isReceived)
-                  Container(
-                      height: context.height * 0.035,
-                      width: context.width * 0.74,
-                      color: Colors.red),
-                const Spacer(),
-              ],
+                    const Spacer(),
+                    Gap(context.width * 0.01),
+                    DefaultButton(
+                        width: context.width * 0.2,
+                        height: context.height * 0.03,
+                        text: "挑戦",
+                        onPressed: () {}),
+                  ],
+                  if (mission.isDone && !mission.isReceived) ...[
+                    Gap(context.width * 0.06),
+                    const Spacer(),
+                    Gap(context.width * 0.01),
+                    PrimaryButton(
+                        width: context.width * 0.2,
+                        height: context.height * 0.03,
+                        text: "受取",
+                        onPressed: () {}),
+                  ],
+                  if (mission.isDone && mission.isReceived) ...[
+                    CompleteIcon(size: context.height * 0.075),
+                  ],
+                  const Spacer(),
+                ],
+              ),
             ),
             const Spacer(),
           ],

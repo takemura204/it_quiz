@@ -6,6 +6,7 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_controller.dart';
 import '../../view/button.dart';
+import '../../view/icon_button.dart';
 
 class TestScreen extends ConsumerWidget {
   const TestScreen();
@@ -25,7 +26,9 @@ class TestScreen extends ConsumerWidget {
             child: Column(
               children: [
                 ///ログインボタン
-                Default2Button(
+                PrimaryButton(
+                  width: context.width * 0.8,
+                  height: context.height * 0.07,
                   text: 'ログイン',
                   onPressed: () => context.showScreen(
                     const AccountLoginScreenArguments().generateRoute(),
@@ -34,7 +37,9 @@ class TestScreen extends ConsumerWidget {
 
                 Gap(context.height * 0.012),
 
-                Default1Button(
+                DefaultButton(
+                  width: context.width * 0.8,
+                  height: context.height * 0.07,
                   text: '新規会員登録',
                   onPressed: () => context.showScreen(
                     const AccountCreateStep1ScreenArguments().generateRoute(),

@@ -6,8 +6,8 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../resource/lang/initial_resource.dart';
-import '../../view/button.dart';
 import '../../view/dialog.dart';
+import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
 import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
 
@@ -66,7 +66,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         await showDialog(
             context: context,
             builder: (context) {
-              return DialogDefault1(
+              return PrimaryDialog(
                 onPressed: () {
                   ref.read(quizChoiceScreenProvider.notifier).resetScreen();
                   Navigator.of(context).pop();

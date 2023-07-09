@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -134,7 +133,7 @@ class ProgressLineBar extends ConsumerWidget {
   final int goalScore;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
+    return Stack(
       children: [
         Container(
           height: height,
@@ -148,24 +147,31 @@ class ProgressLineBar extends ConsumerWidget {
             ),
           ),
         ),
-        Gap(context.width * 0.01),
         if (isUnit)
-          Row(
-            children: [
-              Text(
-                "$currentScore",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: context.width * 0.035,
-                ),
+          Positioned(
+            right: 5,
+            child: Container(
+              height: height,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    "$currentScore",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.width * 0.035,
+                    ),
+                  ),
+                  Text(
+                    "/$goalScore",
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: context.width * 0.035),
+                  ),
+                ],
               ),
-              Text(
-                "/$goalScore",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.03),
-              ),
-            ],
+            ),
           ),
       ],
     );

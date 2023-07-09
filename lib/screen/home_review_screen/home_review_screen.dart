@@ -10,7 +10,7 @@ import '../../controller/quiz_item/quiz_item_controller.dart';
 import '../../controller/quiz_item/quiz_item_state.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/bar.dart';
-import '../../view/button.dart';
+import '../../view/icon_button.dart';
 import '../screen_argument.dart';
 
 part 'home_review_view.dart';
@@ -70,8 +70,8 @@ class _DailyQuiz extends ConsumerWidget {
         _QuizButton(
           title: "今日のクイズ",
           subWidget: ProgressLineBar(
-            height: context.height * 0.01,
-            width: context.width * 0.35,
+            height: context.height * 0.02,
+            width: context.width * 0.4,
             currentScore: score,
             goalScore: quizLength,
             isUnit: true,

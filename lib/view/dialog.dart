@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/view/button.dart';
 
-class DialogDefault1 extends ConsumerWidget {
-  const DialogDefault1({
+class PrimaryDialog extends ConsumerWidget {
+  const PrimaryDialog({
     required this.onPressed,
     required this.title,
     required this.subWidget,
@@ -78,66 +79,19 @@ class DialogDefault1 extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ///キャンセル
-                  Container(
-                    width: context.width * 0.4,
-                    height: context.height * 0.06,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        return Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 4,
-                        alignment: Alignment.center,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        side: const BorderSide(
-                            color: Colors.black54,
-                            width: 1,
-                            style: BorderStyle.solid),
-                      ),
-                      child: Text(
-                        cancelText,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.width * 0.04,
-                        ),
-                      ),
-                    ),
-                  ),
+                  SecondaryButton(
+                      width: context.width * 0.4,
+                      height: context.height * 0.06,
+                      text: cancelText,
+                      onPressed: onPressed),
                   Gap(context.width * 0.05),
 
-                  ///実行する
-                  Container(
-                    width: context.width * 0.4,
-                    height: context.height * 0.06,
-                    child: ElevatedButton(
-                      onPressed: onPressed,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: context.mainColor,
-                        elevation: 4,
-                        alignment: Alignment.center,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        doneText,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.width * 0.04,
-                        ),
-                      ),
-                    ),
-                  )
+                  ///実行ボタン
+                  PrimaryButton(
+                      width: context.width * 0.4,
+                      height: context.height * 0.06,
+                      text: doneText,
+                      onPressed: onPressed),
                 ],
               ),
               const Spacer(),
@@ -149,8 +103,8 @@ class DialogDefault1 extends ConsumerWidget {
   }
 }
 
-class DialogDefault2 extends ConsumerWidget {
-  const DialogDefault2({
+class DefaultDialog extends ConsumerWidget {
+  const DefaultDialog({
     required this.onPressed,
     required this.title,
     required this.subWidget,
@@ -223,70 +177,20 @@ class DialogDefault2 extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ///キャンセル
-                  Container(
-                    width: context.width * 0.4,
-                    height: context.height * 0.06,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        return Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 4,
-                        alignment: Alignment.center,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        side: const BorderSide(
-                            color: Colors.black54,
-                            width: 1,
-                            style: BorderStyle.solid),
-                      ),
-                      child: Text(
-                        cancelText,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.width * 0.04,
-                        ),
-                      ),
-                    ),
-                  ),
+                  SecondaryButton(
+                      width: context.width * 0.4,
+                      height: context.height * 0.06,
+                      text: cancelText,
+                      onPressed: onPressed),
                   Gap(context.width * 0.05),
 
                   ///実行する
-                  Container(
-                    width: context.width * 0.4,
-                    height: context.height * 0.06,
-                    child: ElevatedButton(
-                      onPressed: onPressed,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 4,
-                        alignment: Alignment.center,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        side: BorderSide(
-                          color: context.mainColor,
-                          width: 1.5,
-                        ),
-                      ),
-                      child: Text(
-                        doneText,
-                        style: TextStyle(
-                          color: context.mainColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.width * 0.04,
-                        ),
-                      ),
-                    ),
-                  )
+                  DefaultButton(
+                      width: context.width * 0.4,
+                      height: context.height * 0.06,
+                      text: doneText,
+                      onPressed: onPressed),
+                  const Spacer(),
                 ],
               ),
               const Spacer(),
@@ -298,8 +202,8 @@ class DialogDefault2 extends ConsumerWidget {
   }
 }
 
-class DialogClose1 extends ConsumerWidget {
-  const DialogClose1(
+class PrimaryCloseDialog extends ConsumerWidget {
+  const PrimaryCloseDialog(
       {required this.onPressed,
       required this.title,
       required this.subWidget,
@@ -365,32 +269,12 @@ class DialogClose1 extends ConsumerWidget {
               ),
               const Spacer(),
 
-              ///閉じるボタン
-              Container(
-                width: context.width * 0.8,
-                height: context.height * 0.06,
-                child: ElevatedButton(
-                  onPressed: onPressed,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: context.mainColor,
-                    elevation: 4,
-                    alignment: Alignment.center,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    doneText,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.04,
-                    ),
-                  ),
-                ),
-              ),
+              ///ボタン
+              PrimaryButton(
+                  width: context.width * 0.8,
+                  height: context.height * 0.06,
+                  text: doneText,
+                  onPressed: onPressed),
               const Spacer(),
             ],
           ),
@@ -400,8 +284,8 @@ class DialogClose1 extends ConsumerWidget {
   }
 }
 
-class DialogClose2 extends ConsumerWidget {
-  const DialogClose2(
+class DefaultCloseDialog extends ConsumerWidget {
+  const DefaultCloseDialog(
       {required this.onPressed,
       required this.title,
       required this.iconWidget,
@@ -480,35 +364,11 @@ class DialogClose2 extends ConsumerWidget {
               const Spacer(),
 
               ///ボタン
-              Container(
-                width: context.width * 0.8,
-                height: context.height * 0.06,
-                child: ElevatedButton(
-                  onPressed: onPressed,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    elevation: 4,
-                    alignment: Alignment.center,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    side: BorderSide(
-                      color: context.mainColor,
-                      width: 1,
-                    ),
-                  ),
-                  child: Text(
-                    doneText,
-                    style: TextStyle(
-                      color: context.mainColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.04,
-                    ),
-                  ),
-                ),
-              ),
+              DefaultButton(
+                  width: context.width * 0.8,
+                  height: context.height * 0.06,
+                  text: doneText,
+                  onPressed: onPressed),
               const Spacer(),
               Gap(context.height * 0.005),
             ],
@@ -519,8 +379,8 @@ class DialogClose2 extends ConsumerWidget {
   }
 }
 
-class DialogError extends ConsumerWidget {
-  const DialogError(
+class SecondaryCloseDialog extends ConsumerWidget {
+  const SecondaryCloseDialog(
       {required this.onPressed,
       required this.title,
       required this.subWidget,
@@ -589,35 +449,11 @@ class DialogError extends ConsumerWidget {
                 ),
               ),
               const Spacer(),
-              Container(
-                width: context.width * 0.8,
-                height: context.height * 0.06,
-                child: ElevatedButton(
-                  onPressed: onPressed,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    elevation: 4,
-                    alignment: Alignment.center,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    side: BorderSide(
-                      color: context.mainColor,
-                      width: 1,
-                    ),
-                  ),
-                  child: Text(
-                    doneText,
-                    style: TextStyle(
-                      color: context.mainColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.04,
-                    ),
-                  ),
-                ),
-              ),
+              SecondaryButton(
+                  width: context.width * 0.8,
+                  height: context.height * 0.06,
+                  text: doneText,
+                  onPressed: onPressed),
               const Spacer(),
               Gap(context.width * 0.01),
             ],

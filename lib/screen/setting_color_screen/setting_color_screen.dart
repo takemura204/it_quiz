@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/resource/extension_resource.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
-import '../../view/button.dart';
+import '../../view/icon_button.dart';
 
 ///カラーテーマ選択
 class SettingColorScreen extends ConsumerWidget {

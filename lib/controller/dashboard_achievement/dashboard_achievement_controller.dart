@@ -29,7 +29,7 @@ class DashboardAchievementController
 
   @override
   void initState() {
-    _resetData();
+    // _resetData();
     state = state.copyWith(isLoading: true);
     _loadDashboardRankData().then((_) {
       state = state.copyWith(isLoading: false);
@@ -100,7 +100,6 @@ class DashboardAchievementController
               rankDataList[rankData.rankId + 1].rankLevel - 1) {
         final differenceScore =
             totalScore - rankDataList[rankData.rankId + 1].score;
-        print("A");
 
         state = state.copyWith(
             rankData: rankData.copyWith(
@@ -115,8 +114,6 @@ class DashboardAchievementController
       else if (updateScore >= nextLevelScore &&
           rankData.rankLevel <
               rankDataList[rankData.rankId + 1].rankLevel - 1) {
-        print("B");
-
         state = state.copyWith(
             rankData: rankData.copyWith(
           rankId: rankData.rankId,
@@ -128,8 +125,6 @@ class DashboardAchievementController
       }
       //ポイント加算
       else {
-        print("C");
-
         state = state.copyWith(
             rankData: rankData.copyWith(
           rankId: rankData.rankId,
@@ -139,9 +134,6 @@ class DashboardAchievementController
           score: updateScore,
         ));
       }
-      print({"totalScore", totalScore});
-      print({"updateScore", updateScore});
-      print({"nextLevelScore", nextLevelScore});
       await _saveFirestore();
       await _saveDevice();
     } catch (e, s) {

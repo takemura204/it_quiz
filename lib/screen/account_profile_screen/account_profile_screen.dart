@@ -11,6 +11,7 @@ import '../../controller/auth/auth_controller.dart';
 import '../../resource/lang/initial_resource.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
+import '../../view/icon_button.dart';
 import '../../view/text_field.dart';
 
 part 'account_profile_view.dart';
@@ -155,7 +156,9 @@ class AccountProfileScreen extends ConsumerWidget {
             const Spacer(),
 
             ///更新ボタン
-            Default2Button(
+            PrimaryButton(
+              width: context.width * 0.8,
+              height: context.height * 0.07,
               text: '更新する',
               onPressed: (userNameController.text.isNotEmpty &&
                           birthdayController.text.isNotEmpty &&
@@ -170,7 +173,7 @@ class AccountProfileScreen extends ConsumerWidget {
                             if (value.hasError) {
                               showDialog(
                                 context: context,
-                                builder: (_) => DialogError(
+                                builder: (_) => SecondaryCloseDialog(
                                   onPressed: () {
                                     ref
                                         .read(authProvider.notifier)
@@ -195,7 +198,7 @@ class AccountProfileScreen extends ConsumerWidget {
                               showDialog(
                                 context: context,
                                 barrierDismissible: false,
-                                builder: (_) => DialogClose2(
+                                builder: (_) => DefaultCloseDialog(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     Navigator.of(context).pop();

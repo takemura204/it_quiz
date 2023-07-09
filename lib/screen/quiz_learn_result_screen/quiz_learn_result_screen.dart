@@ -6,7 +6,7 @@ import 'package:kentei_quiz/resource/extension_resource.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../../controller/quiz_learn/quiz_learn_screen_controller.dart';
-import '../../view/button.dart';
+import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
 
 part 'quiz_learn_result_view.dart';
