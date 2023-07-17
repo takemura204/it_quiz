@@ -3,13 +3,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/dashboard_achievement/dashboard_achievement_controller.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/mission/mission.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/mission/mission.dart';
 import 'package:kentei_quiz/view/bar.dart';
 import 'package:kentei_quiz/view/button.dart';
 
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
-import '../../resource/mission/mission_model.dart';
+import '../../model/mission/mission_model.dart';
 import '../../view/icon.dart';
 import '../../view/icon_button.dart';
 
@@ -24,18 +24,18 @@ class DashBoardAchievementScreen extends ConsumerWidget {
         children: const [
           Gap(5),
 
-          ///デイリーミッション
-          _DailyMission(),
-
           ///称号レベル
           _RankRate(),
+
+          ///デイリーミッション
+          _DailyMission(),
         ],
       ),
     );
   }
 }
 
-///　やることリスト
+///　デイリーミッション
 class _DailyMission extends ConsumerWidget {
   const _DailyMission();
   @override
@@ -49,11 +49,17 @@ class _DailyMission extends ConsumerWidget {
         ),
       );
     }
-    final dailyScore = state.dailyData!.quizData.length;
+    final dailyData = state.dailyData!;
+    final dailyScore = dailyData.quizData.length;
+    final correctScore =
+        dailyData.quizData.where((x) => x.isJudge == true).toList().length;
     final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
-    final model = ref.watch(missionModelProvider.notifier);
+    final timeLimit = ref.watch(dashboardAchievementProvider).timeLimit;
+
+    final missions = ref.watch(missionModelProvider).missions;
+
     return Container(
-      height: context.height * 0.36,
+      height: context.height * 0.52,
       width: context.width * 1,
       child: Card(
         elevation: 3,
@@ -69,45 +75,74 @@ class _DailyMission extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            const _Title(
+            _Title(
               title: "デイリーミッション",
-              subtitle: "あと〇〇時間",
+              subtitle: "あと $timeLimit",
               icon: Icons.pending_actions_outlined,
             ),
             const Spacer(),
             Container(
-              height: context.height * 0.3,
+              height: context.height * 0.455,
               margin: EdgeInsets.symmetric(
                   horizontal: context.width * 0.02,
                   vertical: context.width * 0.0),
               child: Column(
                 children: [
-                  const Spacer(),
-
-                  ///ミッション1
+                  ///ミッション1(ログイン)
                   _DailyMissionCard(
-                    mission: model.mission1[0],
-                    currentScore: dailyScore,
-                    goalScore: dailyGoal,
+                    mission: missions[0],
+                    currentValue: 1,
+                    goalValue: 1,
+                    isRandomIconButton: false,
                     randomIconButtonTap: () {},
                   ),
                   Divider(color: context.mainColor, height: 1, thickness: 1),
 
-                  ///ミッション2
+                  ///ミッション2(問題数)
                   _DailyMissionCard(
-                    mission: model.mission2[0],
-                    currentScore: dailyScore,
-                    goalScore: dailyGoal,
+                    mission: missions[1],
+                    currentValue: dailyScore,
+                    goalValue: 10,
+                    isRandomIconButton: false,
                     randomIconButtonTap: () {},
                   ),
                   Divider(color: context.mainColor, height: 1, thickness: 1),
 
-                  ///ミッション3
+                  ///ミッション3(目標を達成)
                   _DailyMissionCard(
-                    mission: model.mission3[0],
-                    currentScore: dailyScore,
-                    goalScore: dailyGoal,
+                    mission: missions[2],
+                    currentValue: dailyScore,
+                    goalValue: dailyGoal,
+                    isRandomIconButton: false,
                     randomIconButtonTap: () {},
+                  ),
+                  Divider(color: context.mainColor, height: 1, thickness: 1),
+
+                  ///ミッション4(正解数)
+                  _DailyMissionCard(
+                    mission: missions[3],
+                    currentValue: correctScore,
+                    goalValue: missions[3].point,
+                    isRandomIconButton: true,
+                    randomIconButtonTap: () {
+                      ref
+                          .read(missionModelProvider.notifier)
+                          .shuffleMission1Index();
+                    },
+                  ),
+                  Divider(color: context.mainColor, height: 1, thickness: 1),
+
+                  ///ミッション5(何かに挑戦)
+                  _DailyMissionCard(
+                    mission: missions[4],
+                    currentValue: dailyScore,
+                    goalValue: 1,
+                    isRandomIconButton: true,
+                    randomIconButtonTap: () {
+                      ref
+                          .read(missionModelProvider.notifier)
+                          .shuffleMission2Index();
+                    },
                   ),
                   const Spacer(),
                 ],

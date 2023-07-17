@@ -11,10 +11,8 @@ class Mission with _$Mission {
     required final int missionId, //ミッションID
     required final String title, //ミッションの名前
     required final int point, //獲得スコア
-    @Default(false) bool isDone, //達成したか
     @Default(false) bool isReceived, //達成したか
     DateTime? createdAt, //作成日
-    DateTime? updatedAt, //更新日
   }) = _Mission;
   Mission._();
 
@@ -29,7 +27,10 @@ class Mission with _$Mission {
   }
 
   Map<String, dynamic> toJsonWithoutUnnecessaryFields() {
-    return toJson()..remove('docId');
+    return toJson()
+      ..remove('docId')
+      ..remove('title')
+      ..remove('point');
   }
 
   @override

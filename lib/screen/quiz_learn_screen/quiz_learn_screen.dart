@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
-import 'package:kentei_quiz/resource/lang/initial_resource.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';

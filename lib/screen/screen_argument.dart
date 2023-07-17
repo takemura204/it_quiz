@@ -8,7 +8,7 @@ import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 
-import '../resource/screen_argument_resource.dart';
+import '../model/screen_argument_resource.dart';
 import 'account_create_screen/account_create_screen1.dart';
 import 'account_create_screen/account_create_screen2.dart';
 import 'account_delete_screen/account_delete_screen.dart';

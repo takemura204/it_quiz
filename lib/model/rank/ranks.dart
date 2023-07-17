@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kentei_quiz/resource/rank/rank.dart';
+import 'package:kentei_quiz/model/rank/rank.dart';
 
 part 'ranks.freezed.dart';
 

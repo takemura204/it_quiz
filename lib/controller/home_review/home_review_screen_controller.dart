@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../resource/quiz_item/review_resource.dart';
+import '../../model/quiz_item/review_resource.dart';
 import '../quiz/quiz_state.dart';
 import '../quiz_item/quiz_item_controller.dart';
 import '../quiz_item/quiz_item_state.dart';

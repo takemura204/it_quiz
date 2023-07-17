@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../screen/screen_argument.dart';
 import 'icon_button.dart';

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kentei_quiz/resource/quiz_item/review_resource.dart';
+import 'package:kentei_quiz/model/quiz_item/review_resource.dart';
 
 import '../quiz_item/quiz_item_state.dart';
 

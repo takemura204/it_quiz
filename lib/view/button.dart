@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
 
 class PrimaryButton extends ConsumerWidget {
   const PrimaryButton(
@@ -141,6 +141,53 @@ class SecondaryButton extends ConsumerWidget {
   }
 }
 
+class DisabledButton extends ConsumerWidget {
+  const DisabledButton({
+    required this.width,
+    required this.height,
+    required this.text,
+  });
+  final double width;
+  final double height;
+  final String text;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          elevation: 2,
+          padding: const EdgeInsets.all(3.0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          side: const BorderSide(
+            color: Colors.white10,
+            width: 1,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.black45,
+            fontWeight: FontWeight.bold,
+            fontSize: height < context.height * 0.05
+                ? context.height * 0.015
+                : context.height * 0.02,
+          ),
+        ),
+        onPressed: null,
+      ),
+    );
+  }
+}
+
 class DangerButton extends ConsumerWidget {
   const DangerButton({
     required this.width,
@@ -217,46 +264,6 @@ class SetAccountButton extends ConsumerWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-    );
-  }
-}
-
-///ミッション獲得
-class ReceivedButton extends ConsumerWidget {
-  const ReceivedButton({required this.text, required this.onPressed});
-  final String text;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: context.width * 0.3,
-      height: context.height * 0.07,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: context.mainColor,
-          elevation: 2,
-          alignment: Alignment.center,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
-          side: BorderSide(
-            color: onPressed == null ? Colors.white10 : context.mainColor,
-            width: 1,
-          ),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: onPressed == null ? Colors.black45 : Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: context.height * 0.017,
-          ),
-        ),
-        onPressed: onPressed,
       ),
     );
   }

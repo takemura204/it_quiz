@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/rank/rank.dart';
-import 'package:kentei_quiz/resource/rank/ranks.dart';
+import 'package:kentei_quiz/model/rank/rank.dart';
+import 'package:kentei_quiz/model/rank/ranks.dart';
 
 part 'rank_resorce.dart';
 

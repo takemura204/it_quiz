@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 ///ログインエラーBar
@@ -149,9 +149,10 @@ class ProgressLineBar extends ConsumerWidget {
         ),
         if (isUnit)
           Positioned(
-            right: 5,
+            right: 8,
             child: Container(
               height: height,
+              alignment: Alignment.center,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,

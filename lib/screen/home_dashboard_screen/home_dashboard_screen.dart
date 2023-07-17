@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
-import '../../resource/lang/initial_resource.dart';
+import '../../model/lang/initial_resource.dart';
 import '../dashboard_achievement_screen/dashboard_achievement_screen.dart';
 
 part 'home_dashboard_view.dart';

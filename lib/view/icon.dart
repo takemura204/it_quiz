@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
 
 /// ポイントアイコン
 class PointIcon extends ConsumerWidget {
@@ -19,7 +19,7 @@ class PointIcon extends ConsumerWidget {
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: context.mainColor,
-            width: 2.5,
+            width: 2,
           ),
           borderRadius: BorderRadius.circular(90),
         ),
@@ -28,11 +28,11 @@ class PointIcon extends ConsumerWidget {
           height: size,
           alignment: Alignment.center,
           child: Text(
-            "pt",
+            "P",
             style: TextStyle(
               color: context.mainColor,
               fontWeight: FontWeight.bold,
-              fontSize: context.height * 0.016,
+              fontSize: context.height * 0.02,
             ),
             overflow: TextOverflow.fade,
           ),
@@ -67,11 +67,11 @@ class CompleteIcon extends ConsumerWidget {
           child: Transform.rotate(
             angle: -15 * math.pi / 180,
             child: Text(
-              "獲得済",
+              "完了",
               style: TextStyle(
                 color: Colors.grey.shade400,
                 fontWeight: FontWeight.bold,
-                fontSize: context.height * 0.02,
+                fontSize: context.height * 0.015,
               ),
               overflow: TextOverflow.fade,
             ),

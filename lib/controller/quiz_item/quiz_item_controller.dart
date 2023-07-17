@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
-import 'package:kentei_quiz/resource/quiz_item/study_resource.dart';
+import 'package:kentei_quiz/model/quiz_item/study_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 

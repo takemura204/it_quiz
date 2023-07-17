@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:kentei_quiz/resource/extension_resource.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/home_review/home_review_screen_controller.dart';
 import '../../controller/quiz_item/quiz_item_controller.dart';
 import '../../controller/quiz_item/quiz_item_state.dart';
-import '../../resource/lang/initial_resource.dart';
+import '../../model/lang/initial_resource.dart';
 import '../../view/bar.dart';
 import '../../view/icon_button.dart';
 import '../screen_argument.dart';

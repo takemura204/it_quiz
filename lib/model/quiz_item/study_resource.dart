@@ -1,5 +1,5 @@
-import 'package:kentei_quiz/resource/lang/initial_resource.dart';
-import 'package:kentei_quiz/resource/quiz/quiz_resource.dart';
+import 'package:kentei_quiz/model/lang/initial_resource.dart';
+import 'package:kentei_quiz/model/quiz/quiz_resource.dart';
 
 import '../../controller/quiz_item/quiz_item_state.dart';
 

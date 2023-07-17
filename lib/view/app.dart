@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/lang/initial_resource.dart';
+import 'package:kentei_quiz/model/lang/initial_resource.dart';
 
 import '../controller/setting_color/setting_color_controller.dart';
 import '../screen/home_root_screen/home_root_screen.dart';

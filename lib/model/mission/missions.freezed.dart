@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Missions {
   List<Mission> get missions => throw _privateConstructorUsedError;
+  int get mission1Index => throw _privateConstructorUsedError;
+  int get mission2Index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MissionsCopyWith<Missions> get copyWith =>
@@ -28,7 +30,7 @@ abstract class $MissionsCopyWith<$Res> {
   factory $MissionsCopyWith(Missions value, $Res Function(Missions) then) =
       _$MissionsCopyWithImpl<$Res, Missions>;
   @useResult
-  $Res call({List<Mission> missions});
+  $Res call({List<Mission> missions, int mission1Index, int mission2Index});
 }
 
 /// @nodoc
@@ -45,12 +47,22 @@ class _$MissionsCopyWithImpl<$Res, $Val extends Missions>
   @override
   $Res call({
     Object? missions = null,
+    Object? mission1Index = null,
+    Object? mission2Index = null,
   }) {
     return _then(_value.copyWith(
       missions: null == missions
           ? _value.missions
           : missions // ignore: cast_nullable_to_non_nullable
               as List<Mission>,
+      mission1Index: null == mission1Index
+          ? _value.mission1Index
+          : mission1Index // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission2Index: null == mission2Index
+          ? _value.mission2Index
+          : mission2Index // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -62,7 +74,7 @@ abstract class _$$_MissionsCopyWith<$Res> implements $MissionsCopyWith<$Res> {
       __$$_MissionsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Mission> missions});
+  $Res call({List<Mission> missions, int mission1Index, int mission2Index});
 }
 
 /// @nodoc
@@ -77,12 +89,22 @@ class __$$_MissionsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? missions = null,
+    Object? mission1Index = null,
+    Object? mission2Index = null,
   }) {
     return _then(_$_Missions(
       missions: null == missions
           ? _value._missions
           : missions // ignore: cast_nullable_to_non_nullable
               as List<Mission>,
+      mission1Index: null == mission1Index
+          ? _value.mission1Index
+          : mission1Index // ignore: cast_nullable_to_non_nullable
+              as int,
+      mission2Index: null == mission2Index
+          ? _value.mission2Index
+          : mission2Index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -90,7 +112,10 @@ class __$$_MissionsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Missions extends _Missions {
-  _$_Missions({final List<Mission> missions = const []})
+  _$_Missions(
+      {final List<Mission> missions = const [],
+      this.mission1Index = 0,
+      this.mission2Index = 0})
       : _missions = missions,
         super._();
 
@@ -104,8 +129,15 @@ class _$_Missions extends _Missions {
   }
 
   @override
+  @JsonKey()
+  final int mission1Index;
+  @override
+  @JsonKey()
+  final int mission2Index;
+
+  @override
   String toString() {
-    return 'Missions(missions: $missions)';
+    return 'Missions(missions: $missions, mission1Index: $mission1Index, mission2Index: $mission2Index)';
   }
 
   @override
@@ -113,12 +145,19 @@ class _$_Missions extends _Missions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Missions &&
-            const DeepCollectionEquality().equals(other._missions, _missions));
+            const DeepCollectionEquality().equals(other._missions, _missions) &&
+            (identical(other.mission1Index, mission1Index) ||
+                other.mission1Index == mission1Index) &&
+            (identical(other.mission2Index, mission2Index) ||
+                other.mission2Index == mission2Index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_missions));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_missions),
+      mission1Index,
+      mission2Index);
 
   @JsonKey(ignore: true)
   @override
@@ -128,11 +167,18 @@ class _$_Missions extends _Missions {
 }
 
 abstract class _Missions extends Missions {
-  factory _Missions({final List<Mission> missions}) = _$_Missions;
+  factory _Missions(
+      {final List<Mission> missions,
+      final int mission1Index,
+      final int mission2Index}) = _$_Missions;
   _Missions._() : super._();
 
   @override
   List<Mission> get missions;
+  @override
+  int get mission1Index;
+  @override
+  int get mission2Index;
   @override
   @JsonKey(ignore: true)
   _$$_MissionsCopyWith<_$_Missions> get copyWith =>

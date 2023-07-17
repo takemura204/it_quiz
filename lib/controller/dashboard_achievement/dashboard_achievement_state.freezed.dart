@@ -22,6 +22,7 @@ mixin _$DashboardAchievementState {
   int get mission1Index => throw _privateConstructorUsedError;
   int get mission2Index => throw _privateConstructorUsedError;
   int get mission3Index => throw _privateConstructorUsedError;
+  String get timeLimit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DashboardAchievementStateCopyWith<DashboardAchievementState> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $DashboardAchievementStateCopyWith<$Res> {
       int rankIndex,
       int mission1Index,
       int mission2Index,
-      int mission3Index});
+      int mission3Index,
+      String timeLimit});
 
   $RankCopyWith<$Res>? get rankData;
 }
@@ -65,6 +67,7 @@ class _$DashboardAchievementStateCopyWithImpl<$Res,
     Object? mission1Index = null,
     Object? mission2Index = null,
     Object? mission3Index = null,
+    Object? timeLimit = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -91,6 +94,10 @@ class _$DashboardAchievementStateCopyWithImpl<$Res,
           ? _value.mission3Index
           : mission3Index // ignore: cast_nullable_to_non_nullable
               as int,
+      timeLimit: null == timeLimit
+          ? _value.timeLimit
+          : timeLimit // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -120,7 +127,8 @@ abstract class _$$_CreateCopyWith<$Res>
       int rankIndex,
       int mission1Index,
       int mission2Index,
-      int mission3Index});
+      int mission3Index,
+      String timeLimit});
 
   @override
   $RankCopyWith<$Res>? get rankData;
@@ -142,6 +150,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? mission1Index = null,
     Object? mission2Index = null,
     Object? mission3Index = null,
+    Object? timeLimit = null,
   }) {
     return _then(_$_Create(
       isLoading: null == isLoading
@@ -168,6 +177,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.mission3Index
           : mission3Index // ignore: cast_nullable_to_non_nullable
               as int,
+      timeLimit: null == timeLimit
+          ? _value.timeLimit
+          : timeLimit // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -181,7 +194,8 @@ class _$_Create extends _Create {
       this.rankIndex = 0,
       this.mission1Index = 0,
       this.mission2Index = 0,
-      this.mission3Index = 0})
+      this.mission3Index = 0,
+      this.timeLimit = ''})
       : super._();
 
   @override
@@ -203,10 +217,13 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final int mission3Index;
+  @override
+  @JsonKey()
+  final String timeLimit;
 
   @override
   String toString() {
-    return 'DashboardAchievementState(isLoading: $isLoading, rankData: $rankData, rankIndex: $rankIndex, mission1Index: $mission1Index, mission2Index: $mission2Index, mission3Index: $mission3Index)';
+    return 'DashboardAchievementState(isLoading: $isLoading, rankData: $rankData, rankIndex: $rankIndex, mission1Index: $mission1Index, mission2Index: $mission2Index, mission3Index: $mission3Index, timeLimit: $timeLimit)';
   }
 
   @override
@@ -225,12 +242,14 @@ class _$_Create extends _Create {
             (identical(other.mission2Index, mission2Index) ||
                 other.mission2Index == mission2Index) &&
             (identical(other.mission3Index, mission3Index) ||
-                other.mission3Index == mission3Index));
+                other.mission3Index == mission3Index) &&
+            (identical(other.timeLimit, timeLimit) ||
+                other.timeLimit == timeLimit));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, rankData, rankIndex,
-      mission1Index, mission2Index, mission3Index);
+      mission1Index, mission2Index, mission3Index, timeLimit);
 
   @JsonKey(ignore: true)
   @override
@@ -246,7 +265,8 @@ abstract class _Create extends DashboardAchievementState {
       final int rankIndex,
       final int mission1Index,
       final int mission2Index,
-      final int mission3Index}) = _$_Create;
+      final int mission3Index,
+      final String timeLimit}) = _$_Create;
   _Create._() : super._();
 
   @override
@@ -261,6 +281,8 @@ abstract class _Create extends DashboardAchievementState {
   int get mission2Index;
   @override
   int get mission3Index;
+  @override
+  String get timeLimit;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

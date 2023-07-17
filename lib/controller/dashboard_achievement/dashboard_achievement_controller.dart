@@ -1,12 +1,15 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/model/mission/mission.dart';
+import 'package:kentei_quiz/model/mission/mission_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../resource/rank/rank.dart';
+import '../../model/rank/rank.dart';
 import 'dashboard_achievement_state.dart';
 
 part 'dashboard_achievement_resorce.dart';
@@ -26,6 +29,7 @@ class DashboardAchievementController
   final Ref ref;
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -34,7 +38,37 @@ class DashboardAchievementController
     _loadDashboardRankData().then((_) {
       state = state.copyWith(isLoading: false);
     });
+    _startLimitTimer();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startLimitTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(
+        const Duration(minutes: 1), (timer) => _updateTimeLimit());
+    _updateTimeLimit();
+  }
+
+  void _updateTimeLimit() {
+    final now = DateTime.now();
+    final midnight = DateTime(now.year, now.month, now.day + 1);
+    final difference = midnight.difference(now);
+    final hours = difference.inHours;
+    final minutes = difference.inMinutes % 60;
+    final timeLimitText = hours > 0 ? '$hours 時間' : '$minutes 分';
+    state = state.copyWith(timeLimit: timeLimitText);
+  }
+
+  ///受け取るボタン
+  void tapMissionReceiveButton(Mission mission) {
+    updateScore(mission.point);
+    ref.read(missionModelProvider.notifier).updateMission(mission);
   }
 
   ///データ読み込み
