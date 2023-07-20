@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthState {
 //ユーザー情報
+  User? get user => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   File? get userImage => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $AuthStateCopyWith<$Res> {
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call(
-      {String uid,
+      {User? user,
+      String uid,
       String userName,
       File? userImage,
       String email,
@@ -69,6 +71,8 @@ abstract class $AuthStateCopyWith<$Res> {
       bool isNotTap,
       bool isNotSignUpCompleted,
       AuthActiveType activeType});
+
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -84,6 +88,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = freezed,
     Object? uid = null,
     Object? userName = null,
     Object? userImage = freezed,
@@ -106,6 +111,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? activeType = null,
   }) {
     return _then(_value.copyWith(
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -188,6 +197,18 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
               as AuthActiveType,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -197,7 +218,8 @@ abstract class _$$_CreateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String uid,
+      {User? user,
+      String uid,
       String userName,
       File? userImage,
       String email,
@@ -217,6 +239,9 @@ abstract class _$$_CreateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       bool isNotTap,
       bool isNotSignUpCompleted,
       AuthActiveType activeType});
+
+  @override
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -229,6 +254,7 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = freezed,
     Object? uid = null,
     Object? userName = null,
     Object? userImage = freezed,
@@ -251,6 +277,10 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? activeType = null,
   }) {
     return _then(_$_Create(
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -339,7 +369,8 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create implements _Create {
   const _$_Create(
-      {this.uid = '',
+      {this.user,
+      this.uid = '',
       this.userName = '',
       this.userImage = null,
       this.email = '',
@@ -361,6 +392,8 @@ class _$_Create implements _Create {
       this.activeType = AuthActiveType.signUp});
 
 //ユーザー情報
+  @override
+  final User? user;
   @override
   @JsonKey()
   final String uid;
@@ -425,7 +458,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'AuthState(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, selectGender: $selectGender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap, isNotSignUpCompleted: $isNotSignUpCompleted, activeType: $activeType)';
+    return 'AuthState(user: $user, uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, selectGender: $selectGender, currentImageIndex: $currentImageIndex, errorText: $errorText, isObscure: $isObscure, isValidUserName: $isValidUserName, isValidEmail: $isValidEmail, isSafetyPass: $isSafetyPass, isSucceeded: $isSucceeded, hasError: $hasError, isNotTap: $isNotTap, isNotSignUpCompleted: $isNotSignUpCompleted, activeType: $activeType)';
   }
 
   @override
@@ -433,6 +466,7 @@ class _$_Create implements _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
@@ -474,6 +508,7 @@ class _$_Create implements _Create {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        user,
         uid,
         userName,
         userImage,
@@ -505,7 +540,8 @@ class _$_Create implements _Create {
 
 abstract class _Create implements AuthState {
   const factory _Create(
-      {final String uid,
+      {final User? user,
+      final String uid,
       final String userName,
       final File? userImage,
       final String email,
@@ -527,6 +563,8 @@ abstract class _Create implements AuthState {
       final AuthActiveType activeType}) = _$_Create;
 
   @override //ユーザー情報
+  User? get user;
+  @override
   String get uid;
   @override
   String get userName;

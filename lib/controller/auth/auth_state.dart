@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../model/user/user.dart';
+
 part 'auth_state.freezed.dart';
 
 @freezed
 class AuthState with _$AuthState {
   const factory AuthState({
     //ユーザー情報
+    User? user,
     @Default('') final String uid,
     @Default('') final String userName,
     @Default(null) final File? userImage,

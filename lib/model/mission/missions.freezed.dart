@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Missions {
+  bool get isLoading => throw _privateConstructorUsedError;
   List<Mission> get missions => throw _privateConstructorUsedError;
   int get mission1Index => throw _privateConstructorUsedError;
   int get mission2Index => throw _privateConstructorUsedError;
@@ -30,7 +31,11 @@ abstract class $MissionsCopyWith<$Res> {
   factory $MissionsCopyWith(Missions value, $Res Function(Missions) then) =
       _$MissionsCopyWithImpl<$Res, Missions>;
   @useResult
-  $Res call({List<Mission> missions, int mission1Index, int mission2Index});
+  $Res call(
+      {bool isLoading,
+      List<Mission> missions,
+      int mission1Index,
+      int mission2Index});
 }
 
 /// @nodoc
@@ -46,11 +51,16 @@ class _$MissionsCopyWithImpl<$Res, $Val extends Missions>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? missions = null,
     Object? mission1Index = null,
     Object? mission2Index = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       missions: null == missions
           ? _value.missions
           : missions // ignore: cast_nullable_to_non_nullable
@@ -74,7 +84,11 @@ abstract class _$$_MissionsCopyWith<$Res> implements $MissionsCopyWith<$Res> {
       __$$_MissionsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Mission> missions, int mission1Index, int mission2Index});
+  $Res call(
+      {bool isLoading,
+      List<Mission> missions,
+      int mission1Index,
+      int mission2Index});
 }
 
 /// @nodoc
@@ -88,11 +102,16 @@ class __$$_MissionsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? missions = null,
     Object? mission1Index = null,
     Object? mission2Index = null,
   }) {
     return _then(_$_Missions(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       missions: null == missions
           ? _value._missions
           : missions // ignore: cast_nullable_to_non_nullable
@@ -113,12 +132,16 @@ class __$$_MissionsCopyWithImpl<$Res>
 
 class _$_Missions extends _Missions {
   _$_Missions(
-      {final List<Mission> missions = const [],
+      {this.isLoading = false,
+      final List<Mission> missions = const [],
       this.mission1Index = 0,
       this.mission2Index = 0})
       : _missions = missions,
         super._();
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   final List<Mission> _missions;
   @override
   @JsonKey()
@@ -137,7 +160,7 @@ class _$_Missions extends _Missions {
 
   @override
   String toString() {
-    return 'Missions(missions: $missions, mission1Index: $mission1Index, mission2Index: $mission2Index)';
+    return 'Missions(isLoading: $isLoading, missions: $missions, mission1Index: $mission1Index, mission2Index: $mission2Index)';
   }
 
   @override
@@ -145,6 +168,8 @@ class _$_Missions extends _Missions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Missions &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other._missions, _missions) &&
             (identical(other.mission1Index, mission1Index) ||
                 other.mission1Index == mission1Index) &&
@@ -155,6 +180,7 @@ class _$_Missions extends _Missions {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isLoading,
       const DeepCollectionEquality().hash(_missions),
       mission1Index,
       mission2Index);
@@ -168,11 +194,14 @@ class _$_Missions extends _Missions {
 
 abstract class _Missions extends Missions {
   factory _Missions(
-      {final List<Mission> missions,
+      {final bool isLoading,
+      final List<Mission> missions,
       final int mission1Index,
       final int mission2Index}) = _$_Missions;
   _Missions._() : super._();
 
+  @override
+  bool get isLoading;
   @override
   List<Mission> get missions;
   @override

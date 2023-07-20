@@ -9,8 +9,8 @@ class Mission with _$Mission {
   factory Mission({
     String? docId,
     required final int missionId, //ミッションID
-    required final String title, //ミッションの名前
-    required final int point, //獲得スコア
+    @Default("") final String title, //ミッションの名前
+    @Default(0) final int point, //獲得スコア
     @Default(false) bool isReceived, //達成したか
     DateTime? createdAt, //作成日
   }) = _Mission;

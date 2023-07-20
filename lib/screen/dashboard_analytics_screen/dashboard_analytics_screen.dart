@@ -16,32 +16,9 @@ import '../../controller/quiz_item/quiz_item_controller.dart';
 
 part 'dashboard_analytics_view.dart';
 
-class DashBoardAnalyticsScreen extends ConsumerWidget {
-  const DashBoardAnalyticsScreen();
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: Column(
-        children: const [
-          Gap(5),
-
-          ///今日のデータ
-          _DailyDashBoard(),
-
-          ///学習状況ダッシュボード
-          _WeekDashboard(),
-
-          ///グループごとの進捗
-          _GroupProgress(),
-        ],
-      ),
-    );
-  }
-}
-
 ///今日の学習問題数
-class _DailyDashBoard extends ConsumerWidget {
-  const _DailyDashBoard();
+class DailyDashBoard extends ConsumerWidget {
+  const DailyDashBoard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);
@@ -128,8 +105,8 @@ class _DailyDashBoard extends ConsumerWidget {
 }
 
 ///1週間のデータ
-class _WeekDashboard extends ConsumerWidget {
-  const _WeekDashboard();
+class WeekDashboard extends ConsumerWidget {
+  const WeekDashboard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);
@@ -168,7 +145,7 @@ class _WeekDashboard extends ConsumerWidget {
               const Spacer(),
 
               ///ダッシュボード
-              _BarChartSample(),
+              BarChartSample(),
             ],
           ),
         ),
@@ -178,7 +155,7 @@ class _WeekDashboard extends ConsumerWidget {
 }
 
 ///ダッシュボード
-class _BarChartSample extends ConsumerWidget {
+class BarChartSample extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);

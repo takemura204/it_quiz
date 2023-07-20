@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeDashboardScreenState {
+  bool get isLoading => throw _privateConstructorUsedError;
   int get tabIndex => throw _privateConstructorUsedError; //タブ
   int get selectedXIndex => throw _privateConstructorUsedError;
 
@@ -30,7 +31,7 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
           $Res Function(HomeDashboardScreenState) then) =
       _$HomeDashboardScreenStateCopyWithImpl<$Res, HomeDashboardScreenState>;
   @useResult
-  $Res call({int tabIndex, int selectedXIndex});
+  $Res call({bool isLoading, int tabIndex, int selectedXIndex});
 }
 
 /// @nodoc
@@ -47,10 +48,15 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? tabIndex = null,
     Object? selectedXIndex = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       tabIndex: null == tabIndex
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$_CreateCopyWith<$Res>
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int tabIndex, int selectedXIndex});
+  $Res call({bool isLoading, int tabIndex, int selectedXIndex});
 }
 
 /// @nodoc
@@ -83,10 +89,15 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? tabIndex = null,
     Object? selectedXIndex = null,
   }) {
     return _then(_$_Create(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       tabIndex: null == tabIndex
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
@@ -102,8 +113,13 @@ class __$$_CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create extends _Create {
-  _$_Create({this.tabIndex = 0, this.selectedXIndex = -1}) : super._();
+  _$_Create(
+      {this.isLoading = false, this.tabIndex = 0, this.selectedXIndex = -1})
+      : super._();
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   @JsonKey()
   final int tabIndex;
@@ -114,7 +130,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'HomeDashboardScreenState(tabIndex: $tabIndex, selectedXIndex: $selectedXIndex)';
+    return 'HomeDashboardScreenState(isLoading: $isLoading, tabIndex: $tabIndex, selectedXIndex: $selectedXIndex)';
   }
 
   @override
@@ -122,6 +138,8 @@ class _$_Create extends _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.tabIndex, tabIndex) ||
                 other.tabIndex == tabIndex) &&
             (identical(other.selectedXIndex, selectedXIndex) ||
@@ -129,7 +147,8 @@ class _$_Create extends _Create {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tabIndex, selectedXIndex);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, tabIndex, selectedXIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -139,9 +158,14 @@ class _$_Create extends _Create {
 }
 
 abstract class _Create extends HomeDashboardScreenState {
-  factory _Create({final int tabIndex, final int selectedXIndex}) = _$_Create;
+  factory _Create(
+      {final bool isLoading,
+      final int tabIndex,
+      final int selectedXIndex}) = _$_Create;
   _Create._() : super._();
 
+  @override
+  bool get isLoading;
   @override
   int get tabIndex;
   @override //タブ

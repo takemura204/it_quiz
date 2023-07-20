@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
 import '../../model/lang/initial_resource.dart';
+import '../../model/mission/mission_model.dart';
 import '../dashboard_achievement_screen/dashboard_achievement_screen.dart';
 
 part 'home_dashboard_view.dart';
@@ -15,7 +18,6 @@ class HomeDashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabs = ref.watch(homeDashboardScreenProvider.notifier).tabs;
-
     return DefaultTabController(
       initialIndex: 0, // 最初に表示するタブ
       length: tabs.length, // タブの数

@@ -198,8 +198,8 @@ class _Legend extends ConsumerWidget {
 }
 
 ///グループごとの進捗状況
-class _GroupProgress extends ConsumerWidget {
-  const _GroupProgress();
+class GroupProgress extends ConsumerWidget {
+  const GroupProgress();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

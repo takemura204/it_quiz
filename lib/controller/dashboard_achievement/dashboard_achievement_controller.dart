@@ -5,10 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/mission/mission.dart';
-import 'package:kentei_quiz/model/mission/mission_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/mission/mission_model.dart';
 import '../../model/rank/rank.dart';
 import 'dashboard_achievement_state.dart';
 
@@ -68,7 +68,7 @@ class DashboardAchievementController
   ///受け取るボタン
   void tapMissionReceiveButton(Mission mission) {
     updateScore(mission.point);
-    ref.read(missionModelProvider.notifier).updateMission(mission);
+    ref.read(missionModelProvider.notifier).receiveMission(mission);
   }
 
   ///データ読み込み

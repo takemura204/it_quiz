@@ -15,49 +15,34 @@ import '../../view/icon_button.dart';
 
 part 'dashboard_achievement_view.dart';
 
-class DashBoardAchievementScreen extends ConsumerWidget {
-  const DashBoardAchievementScreen();
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: Column(
-        children: const [
-          Gap(5),
-
-          ///称号レベル
-          _RankRate(),
-
-          ///デイリーミッション
-          _DailyMission(),
-        ],
-      ),
-    );
-  }
-}
-
 ///　デイリーミッション
-class _DailyMission extends ConsumerWidget {
-  const _DailyMission();
+class DailyMission extends ConsumerWidget {
+  const DailyMission();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    if (state.isLoading) {
+    final dashboardState = ref.watch(dashboardAnalyticsProvider);
+    final missionModel = ref.watch(missionModelProvider);
+    if (dashboardState.isLoading && missionModel.isLoading) {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
-          size: context.height * 0.22,
+          size: context.height * 0.1,
         ),
       );
     }
-    final dailyData = state.dailyData!;
+    final dailyData = dashboardState.dailyData!;
     final dailyScore = dailyData.quizData.length;
     final correctScore =
         dailyData.quizData.where((x) => x.isJudge == true).toList().length;
     final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
     final timeLimit = ref.watch(dashboardAchievementProvider).timeLimit;
 
-    final missions = ref.watch(missionModelProvider).missions;
-
+    final missions = ref.watch(missionModelProvider).sortedMissions;
+    if (missions.isEmpty) {
+      return const Center(
+        child: Text("No missions available"),
+      );
+    }
     return Container(
       height: context.height * 0.52,
       width: context.width * 1,
@@ -157,8 +142,8 @@ class _DailyMission extends ConsumerWidget {
 }
 
 ///　ランクレート
-class _RankRate extends ConsumerWidget {
-  const _RankRate();
+class RankRate extends ConsumerWidget {
+  const RankRate();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

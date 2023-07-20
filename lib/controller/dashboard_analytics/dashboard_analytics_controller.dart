@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../model/mission/mission_model.dart';
 import '../dashboard_analytics/bar_data_state.dart';
 import '../quiz/quiz_state.dart';
 import 'dashboard_analytics_state.dart';
@@ -30,7 +29,6 @@ class DashboardAnalyticsController
   void initState() {
     state = state.copyWith(isLoading: true); // データロード開始を反映
     Future.wait<void>([
-      ref.read(missionModelProvider.notifier).initState(),
       _initQuizData(),
     ]).then((_) {
       state = state.copyWith(isLoading: false); // データロード終了を反映

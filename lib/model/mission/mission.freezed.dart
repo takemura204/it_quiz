@@ -163,8 +163,8 @@ class _$_Mission extends _Mission {
   _$_Mission(
       {this.docId,
       required this.missionId,
-      required this.title,
-      required this.point,
+      this.title = "",
+      this.point = 0,
       this.isReceived = false,
       this.createdAt})
       : super._();
@@ -178,9 +178,11 @@ class _$_Mission extends _Mission {
   final int missionId;
 //ミッションID
   @override
+  @JsonKey()
   final String title;
 //ミッションの名前
   @override
+  @JsonKey()
   final int point;
 //獲得スコア
   @override
@@ -234,8 +236,8 @@ abstract class _Mission extends Mission {
   factory _Mission(
       {final String? docId,
       required final int missionId,
-      required final String title,
-      required final int point,
+      final String title,
+      final int point,
       final bool isReceived,
       final DateTime? createdAt}) = _$_Mission;
   _Mission._() : super._();
