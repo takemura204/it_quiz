@@ -53,18 +53,20 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
         randomMission1[state.mission1Index],
         randomMission2[state.mission2Index],
       ];
-
       final getMissions = await _getMissions(); //Firestoreから取得
 
-      // データが存在しない、存在していてもcreatedAtが今日でない場合
-      if (getMissions.isEmpty ||
-          !_isSameDay(getMissions[0].createdAt!, DateTime.now())) {
-        await _createMissions(defaultMissions); // defaultMissionsを保存
+      // データが存在しない、
+      if (getMissions.isEmpty) {
+        await _createMissions(defaultMissions);
         state = state.copyWith(missions: defaultMissions);
       }
-      //データが存在して、createdAtが今日の日付と同じ場合
+      //データが存在している場合、
       else {
         final updatedMissions = _updateMissions(defaultMissions, getMissions);
+        //createdAtが今日の日付でない場合
+        if (!_isSameDay(getMissions[0].createdAt!, DateTime.now())) {
+          _createMissions(updatedMissions);
+        }
         state = state.copyWith(missions: updatedMissions);
       }
       print({"Success：_loadMissions", state.missions.last.createdAt});
@@ -89,12 +91,12 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
   }
 
   ///ミッション作成
-  Future _createMissions(List<Mission> defaultMissions) async {
+  Future _createMissions(List<Mission> missions) async {
     try {
-      for (var mission in defaultMissions) {
+      for (var mission in missions) {
         final createMission =
             mission.copyWith(isReceived: false, createdAt: DateTime.now());
-        final doc = _missionsRef.doc();
+        final doc = _missionsRef.doc(mission.missionId.toString());
         await doc.set(createMission, SetOptions(merge: true));
       }
     } on Exception catch (e, s) {
@@ -105,21 +107,21 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
 
   ///ミッション更新
   List<Mission> _updateMissions(
-      List<Mission> defaultMissions, List<Mission> firestoreMissions) {
+      List<Mission> defaultMissions, List<Mission> missions) {
     final List<Mission> updatedMissions = [];
 
-    for (var firestoreMission in firestoreMissions) {
+    for (var mission in missions) {
       final matchMission = defaultMissions.firstWhere(
-          (mission) => mission.missionId == firestoreMission.missionId,
+          (defaultMission) => defaultMission.missionId == mission.missionId,
           orElse: () => defaultMission1);
 
       updatedMissions.add(Mission(
-        docId: firestoreMission.docId,
-        missionId: firestoreMission.missionId,
+        docId: mission.docId,
+        missionId: mission.missionId,
         title: matchMission.title,
         point: matchMission.point,
-        isReceived: firestoreMission.isReceived,
-        createdAt: firestoreMission.createdAt,
+        isReceived: mission.isReceived,
+        createdAt: DateTime.now(),
       ));
     }
     return updatedMissions;
