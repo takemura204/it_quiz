@@ -22,6 +22,14 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
 
   final Ref ref;
   final _auth = FirebaseAuth.instance;
+  //初期ミッション
+  List<Mission> get defaultMissions => [
+        defaultMission1,
+        defaultMission2,
+        defaultMission3,
+        randomMission1[state.mission1Index],
+        randomMission2[state.mission2Index],
+      ];
 
   CollectionReference<Mission> get _missionsRef => FirebaseFirestore.instance
       .collection('score')
@@ -36,7 +44,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
   @override
   Future initState() async {
     state = state.copyWith(isLoading: true);
-    await _loadMissions().then((_) {
+    _loadMissions().then((_) {
       state = state.copyWith(isLoading: false);
     });
     super.initState();
@@ -45,31 +53,23 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
   ///Missionデータ読み込み
   Future _loadMissions() async {
     try {
-      //初期ミッション
-      final defaultMissions = [
-        defaultMission1,
-        defaultMission2,
-        defaultMission3,
-        randomMission1[state.mission1Index],
-        randomMission2[state.mission2Index],
-      ];
       final getMissions = await _getMissions(); //Firestoreから取得
 
-      // データが存在しない、
+      // データが存在しない場合
       if (getMissions.isEmpty) {
-        await _createMissions(defaultMissions);
         state = state.copyWith(missions: defaultMissions);
+        _saveMissions(defaultMissions);
       }
-      //データが存在している場合、
+      //データが存在している場合
       else {
-        final updatedMissions = _updateMissions(defaultMissions, getMissions);
+        final updatedMissions = _updateMissions(getMissions);
         //createdAtが今日の日付でない場合
-        if (!_isSameDay(getMissions[0].createdAt!, DateTime.now())) {
-          _createMissions(updatedMissions);
-        }
         state = state.copyWith(missions: updatedMissions);
+        if (!_isSameDay(getMissions[0].updatedAt!, DateTime.now())) {
+          _saveMissions(updatedMissions);
+        }
       }
-      print({"Success：_loadMissions", state.missions.last.createdAt});
+      print({"Success：_loadMissions", state.missions.last.updatedAt});
     } catch (e, s) {
       print({e, s, "Error：_loadMissions"});
     }
@@ -91,23 +91,22 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
   }
 
   ///ミッション作成
-  Future _createMissions(List<Mission> missions) async {
+  Future _saveMissions(List<Mission> missions) async {
     try {
       for (var mission in missions) {
-        final createMission =
-            mission.copyWith(isReceived: false, createdAt: DateTime.now());
+        final saveMission =
+            mission.copyWith(isReceived: false, updatedAt: DateTime.now());
         final doc = _missionsRef.doc(mission.missionId.toString());
-        await doc.set(createMission, SetOptions(merge: true));
+        await doc.set(saveMission, SetOptions(merge: true));
       }
     } on Exception catch (e, s) {
-      print({'Error：_createMissions', e, s});
+      print({'Error：_saveMissions', e, s});
       rethrow;
     }
   }
 
   ///ミッション更新
-  List<Mission> _updateMissions(
-      List<Mission> defaultMissions, List<Mission> missions) {
+  List<Mission> _updateMissions(List<Mission> missions) {
     final List<Mission> updatedMissions = [];
 
     for (var mission in missions) {
@@ -121,7 +120,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
         title: matchMission.title,
         point: matchMission.point,
         isReceived: mission.isReceived,
-        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
       ));
     }
     return updatedMissions;
@@ -130,14 +129,12 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
   ///ミッション報酬受け取り
   Future receiveMission(Mission mission) async {
     try {
-      final receivedMission = mission.copyWith(isReceived: true);
-
-      await _missionsRef
-          .doc(mission.docId)
-          .update(receivedMission.toJsonWithoutUnnecessaryFields());
-
+      final receivedMission =
+          mission.copyWith(isReceived: true, updatedAt: DateTime.now());
+      final doc = _missionsRef.doc(mission.missionId.toString());
+      await doc.set(receivedMission, SetOptions(merge: true));
       final receivedMissions = state.missions.map((e) {
-        if (e.docId == mission.docId) {
+        if (e.missionId == mission.missionId) {
           return receivedMission;
         }
         return e;

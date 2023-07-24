@@ -7,7 +7,6 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
 import '../../model/lang/initial_resource.dart';
-import '../../model/mission/mission_model.dart';
 import '../dashboard_achievement_screen/dashboard_achievement_screen.dart';
 
 part 'home_dashboard_view.dart';

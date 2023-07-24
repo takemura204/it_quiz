@@ -242,17 +242,17 @@ class _RankBatch extends ConsumerWidget {
 }
 
 class _RankName extends ConsumerWidget {
-  const _RankName();
+  const _RankName({required this.rank});
+  final Rank rank;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rankData = ref.watch(dashboardAchievementProvider).rankData!;
     final nextLevelUpScore =
-        rankData.levelUpScore - (rankData.score % rankData.levelUpScore);
-    final rankDataList =
-        ref.watch(dashboardAchievementProvider.notifier).rankDataList;
-    final totalScore = rankData.score + rankDataList[rankData.rankId].score;
-    return GestureDetector(
-      onTap: () {},
+        rank.levelUpScore - (rank.score % rank.levelUpScore);
+    final defaultRanks = ref.watch(rankModelProvider.notifier).defaultRanks;
+    final totalScore = rank.score + defaultRanks[rank.rankId].score;
+    return Container(
+      width: context.width * 0.5,
+      height: context.height * 0.17,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -263,7 +263,7 @@ class _RankName extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                rankData.rankName,
+                rank.rankName,
                 style: TextStyle(
                     fontSize: context.height * 0.03,
                     color: context.mainColor,

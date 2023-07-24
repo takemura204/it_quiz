@@ -21,10 +21,12 @@ Rank _$RankFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Rank {
   int get rankId => throw _privateConstructorUsedError; //ランクID
+  int get level => throw _privateConstructorUsedError; //レベル
+  int get score => throw _privateConstructorUsedError; //スコア
   String get rankName => throw _privateConstructorUsedError; //称号の名前
   int get levelUpScore => throw _privateConstructorUsedError; //レベルアップする時のスコア
-  int get rankLevel => throw _privateConstructorUsedError; //称号を獲得する時レベル
-  int get score => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  DateTime? get updateAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,10 +40,12 @@ abstract class $RankCopyWith<$Res> {
   @useResult
   $Res call(
       {int rankId,
+      int level,
+      int score,
       String rankName,
       int levelUpScore,
-      int rankLevel,
-      int score});
+      String uid,
+      DateTime? updateAt});
 }
 
 /// @nodoc
@@ -58,15 +62,25 @@ class _$RankCopyWithImpl<$Res, $Val extends Rank>
   @override
   $Res call({
     Object? rankId = null,
+    Object? level = null,
+    Object? score = null,
     Object? rankName = null,
     Object? levelUpScore = null,
-    Object? rankLevel = null,
-    Object? score = null,
+    Object? uid = null,
+    Object? updateAt = freezed,
   }) {
     return _then(_value.copyWith(
       rankId: null == rankId
           ? _value.rankId
           : rankId // ignore: cast_nullable_to_non_nullable
+              as int,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       rankName: null == rankName
           ? _value.rankName
@@ -76,14 +90,14 @@ class _$RankCopyWithImpl<$Res, $Val extends Rank>
           ? _value.levelUpScore
           : levelUpScore // ignore: cast_nullable_to_non_nullable
               as int,
-      rankLevel: null == rankLevel
-          ? _value.rankLevel
-          : rankLevel // ignore: cast_nullable_to_non_nullable
-              as int,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      updateAt: freezed == updateAt
+          ? _value.updateAt
+          : updateAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -96,10 +110,12 @@ abstract class _$$_RankCopyWith<$Res> implements $RankCopyWith<$Res> {
   @useResult
   $Res call(
       {int rankId,
+      int level,
+      int score,
       String rankName,
       int levelUpScore,
-      int rankLevel,
-      int score});
+      String uid,
+      DateTime? updateAt});
 }
 
 /// @nodoc
@@ -112,15 +128,25 @@ class __$$_RankCopyWithImpl<$Res> extends _$RankCopyWithImpl<$Res, _$_Rank>
   @override
   $Res call({
     Object? rankId = null,
+    Object? level = null,
+    Object? score = null,
     Object? rankName = null,
     Object? levelUpScore = null,
-    Object? rankLevel = null,
-    Object? score = null,
+    Object? uid = null,
+    Object? updateAt = freezed,
   }) {
     return _then(_$_Rank(
       rankId: null == rankId
           ? _value.rankId
           : rankId // ignore: cast_nullable_to_non_nullable
+              as int,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       rankName: null == rankName
           ? _value.rankName
@@ -130,27 +156,30 @@ class __$$_RankCopyWithImpl<$Res> extends _$RankCopyWithImpl<$Res, _$_Rank>
           ? _value.levelUpScore
           : levelUpScore // ignore: cast_nullable_to_non_nullable
               as int,
-      rankLevel: null == rankLevel
-          ? _value.rankLevel
-          : rankLevel // ignore: cast_nullable_to_non_nullable
-              as int,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      updateAt: freezed == updateAt
+          ? _value.updateAt
+          : updateAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Rank implements _Rank {
-  const _$_Rank(
+class _$_Rank extends _Rank {
+  _$_Rank(
       {required this.rankId,
-      required this.rankName,
-      required this.levelUpScore,
-      required this.rankLevel,
-      required this.score});
+      required this.level,
+      required this.score,
+      this.rankName = "",
+      this.levelUpScore = 0,
+      this.uid = "",
+      this.updateAt})
+      : super._();
 
   factory _$_Rank.fromJson(Map<String, dynamic> json) => _$$_RankFromJson(json);
 
@@ -158,20 +187,28 @@ class _$_Rank implements _Rank {
   final int rankId;
 //ランクID
   @override
+  final int level;
+//レベル
+  @override
+  final int score;
+//スコア
+  @override
+  @JsonKey()
   final String rankName;
 //称号の名前
   @override
+  @JsonKey()
   final int levelUpScore;
 //レベルアップする時のスコア
   @override
-  final int rankLevel;
-//称号を獲得する時レベル
+  @JsonKey()
+  final String uid;
   @override
-  final int score;
+  final DateTime? updateAt;
 
   @override
   String toString() {
-    return 'Rank(rankId: $rankId, rankName: $rankName, levelUpScore: $levelUpScore, rankLevel: $rankLevel, score: $score)';
+    return 'Rank(rankId: $rankId, level: $level, score: $score, rankName: $rankName, levelUpScore: $levelUpScore, uid: $uid, updateAt: $updateAt)';
   }
 
   @override
@@ -180,19 +217,21 @@ class _$_Rank implements _Rank {
         (other.runtimeType == runtimeType &&
             other is _$_Rank &&
             (identical(other.rankId, rankId) || other.rankId == rankId) &&
+            (identical(other.level, level) || other.level == level) &&
+            (identical(other.score, score) || other.score == score) &&
             (identical(other.rankName, rankName) ||
                 other.rankName == rankName) &&
             (identical(other.levelUpScore, levelUpScore) ||
                 other.levelUpScore == levelUpScore) &&
-            (identical(other.rankLevel, rankLevel) ||
-                other.rankLevel == rankLevel) &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.updateAt, updateAt) ||
+                other.updateAt == updateAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, rankId, rankName, levelUpScore, rankLevel, score);
+      runtimeType, rankId, level, score, rankName, levelUpScore, uid, updateAt);
 
   @JsonKey(ignore: true)
   @override
@@ -208,26 +247,33 @@ class _$_Rank implements _Rank {
   }
 }
 
-abstract class _Rank implements Rank {
-  const factory _Rank(
+abstract class _Rank extends Rank {
+  factory _Rank(
       {required final int rankId,
-      required final String rankName,
-      required final int levelUpScore,
-      required final int rankLevel,
-      required final int score}) = _$_Rank;
+      required final int level,
+      required final int score,
+      final String rankName,
+      final int levelUpScore,
+      final String uid,
+      final DateTime? updateAt}) = _$_Rank;
+  _Rank._() : super._();
 
   factory _Rank.fromJson(Map<String, dynamic> json) = _$_Rank.fromJson;
 
   @override
   int get rankId;
   @override //ランクID
+  int get level;
+  @override //レベル
+  int get score;
+  @override //スコア
   String get rankName;
   @override //称号の名前
   int get levelUpScore;
   @override //レベルアップする時のスコア
-  int get rankLevel;
-  @override //称号を獲得する時レベル
-  int get score;
+  String get uid;
+  @override
+  DateTime? get updateAt;
   @override
   @JsonKey(ignore: true)
   _$$_RankCopyWith<_$_Rank> get copyWith => throw _privateConstructorUsedError;

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'rank.freezed.dart';
@@ -5,12 +6,33 @@ part 'rank.g.dart';
 
 @freezed
 class Rank with _$Rank {
-  const factory Rank({
+  factory Rank({
     required final int rankId, //ランクID
-    required final String rankName, //称号の名前
-    required final int levelUpScore, //レベルアップする時のスコア
-    required final int rankLevel, //称号を獲得する時レベル
-    required final int score, //累計スコア
+    required final int level, //レベル
+    required final int score, //スコア
+    @Default("") final String rankName, //称号の名前
+    @Default(0) final int levelUpScore, //レベルアップする時のスコア
+    @Default("") final String uid,
+    DateTime? updateAt, //更新日
   }) = _Rank;
+  Rank._();
+
   factory Rank.fromJson(Map<String, dynamic> json) => _$RankFromJson(json);
+
+  factory Rank.fromDocumentSnapshot(DocumentSnapshot doc) {
+    final json = doc.data()! as Map<String, dynamic>;
+    json['docId'] = doc.id;
+    return Rank.fromJson(json);
+  }
+
+  Map<String, dynamic> toJsonWithoutUnnecessaryFields() {
+    return toJson()
+      ..remove('rankName')
+      ..remove('levelUpScore');
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    return super.noSuchMethod(invocation);
+  }
 }

@@ -16,7 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Ranks {
-  List<Rank> get ranks => throw _privateConstructorUsedError;
+  Rank? get rank => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  int get rankIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RanksCopyWith<Ranks> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +29,9 @@ abstract class $RanksCopyWith<$Res> {
   factory $RanksCopyWith(Ranks value, $Res Function(Ranks) then) =
       _$RanksCopyWithImpl<$Res, Ranks>;
   @useResult
-  $Res call({List<Rank> ranks});
+  $Res call({Rank? rank, bool isLoading, int rankIndex});
+
+  $RankCopyWith<$Res>? get rank;
 }
 
 /// @nodoc
@@ -43,14 +47,36 @@ class _$RanksCopyWithImpl<$Res, $Val extends Ranks>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ranks = null,
+    Object? rank = freezed,
+    Object? isLoading = null,
+    Object? rankIndex = null,
   }) {
     return _then(_value.copyWith(
-      ranks: null == ranks
-          ? _value.ranks
-          : ranks // ignore: cast_nullable_to_non_nullable
-              as List<Rank>,
+      rank: freezed == rank
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
+              as Rank?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      rankIndex: null == rankIndex
+          ? _value.rankIndex
+          : rankIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RankCopyWith<$Res>? get rank {
+    if (_value.rank == null) {
+      return null;
+    }
+
+    return $RankCopyWith<$Res>(_value.rank!, (value) {
+      return _then(_value.copyWith(rank: value) as $Val);
+    });
   }
 }
 
@@ -60,7 +86,10 @@ abstract class _$$_RanksCopyWith<$Res> implements $RanksCopyWith<$Res> {
       __$$_RanksCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Rank> ranks});
+  $Res call({Rank? rank, bool isLoading, int rankIndex});
+
+  @override
+  $RankCopyWith<$Res>? get rank;
 }
 
 /// @nodoc
@@ -72,13 +101,23 @@ class __$$_RanksCopyWithImpl<$Res> extends _$RanksCopyWithImpl<$Res, _$_Ranks>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ranks = null,
+    Object? rank = freezed,
+    Object? isLoading = null,
+    Object? rankIndex = null,
   }) {
     return _then(_$_Ranks(
-      ranks: null == ranks
-          ? _value._ranks
-          : ranks // ignore: cast_nullable_to_non_nullable
-              as List<Rank>,
+      rank: freezed == rank
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
+              as Rank?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      rankIndex: null == rankIndex
+          ? _value.rankIndex
+          : rankIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -86,22 +125,20 @@ class __$$_RanksCopyWithImpl<$Res> extends _$RanksCopyWithImpl<$Res, _$_Ranks>
 /// @nodoc
 
 class _$_Ranks extends _Ranks {
-  _$_Ranks({final List<Rank> ranks = const []})
-      : _ranks = ranks,
-        super._();
+  _$_Ranks({this.rank, this.isLoading = false, this.rankIndex = 0}) : super._();
 
-  final List<Rank> _ranks;
+  @override
+  final Rank? rank;
   @override
   @JsonKey()
-  List<Rank> get ranks {
-    if (_ranks is EqualUnmodifiableListView) return _ranks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ranks);
-  }
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final int rankIndex;
 
   @override
   String toString() {
-    return 'Ranks(ranks: $ranks)';
+    return 'Ranks(rank: $rank, isLoading: $isLoading, rankIndex: $rankIndex)';
   }
 
   @override
@@ -109,12 +146,15 @@ class _$_Ranks extends _Ranks {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Ranks &&
-            const DeepCollectionEquality().equals(other._ranks, _ranks));
+            (identical(other.rank, rank) || other.rank == rank) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.rankIndex, rankIndex) ||
+                other.rankIndex == rankIndex));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_ranks));
+  int get hashCode => Object.hash(runtimeType, rank, isLoading, rankIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -124,11 +164,16 @@ class _$_Ranks extends _Ranks {
 }
 
 abstract class _Ranks extends Ranks {
-  factory _Ranks({final List<Rank> ranks}) = _$_Ranks;
+  factory _Ranks(
+      {final Rank? rank, final bool isLoading, final int rankIndex}) = _$_Ranks;
   _Ranks._() : super._();
 
   @override
-  List<Rank> get ranks;
+  Rank? get rank;
+  @override
+  bool get isLoading;
+  @override
+  int get rankIndex;
   @override
   @JsonKey(ignore: true)
   _$$_RanksCopyWith<_$_Ranks> get copyWith =>

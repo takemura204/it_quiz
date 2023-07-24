@@ -25,7 +25,7 @@ mixin _$Mission {
   String get title => throw _privateConstructorUsedError; //ミッションの名前
   int get point => throw _privateConstructorUsedError; //獲得スコア
   bool get isReceived => throw _privateConstructorUsedError; //達成したか
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +43,7 @@ abstract class $MissionCopyWith<$Res> {
       String title,
       int point,
       bool isReceived,
-      DateTime? createdAt});
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -64,7 +64,7 @@ class _$MissionCopyWithImpl<$Res, $Val extends Mission>
     Object? title = null,
     Object? point = null,
     Object? isReceived = null,
-    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       docId: freezed == docId
@@ -87,9 +87,9 @@ class _$MissionCopyWithImpl<$Res, $Val extends Mission>
           ? _value.isReceived
           : isReceived // ignore: cast_nullable_to_non_nullable
               as bool,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
   }
@@ -108,7 +108,7 @@ abstract class _$$_MissionCopyWith<$Res> implements $MissionCopyWith<$Res> {
       String title,
       int point,
       bool isReceived,
-      DateTime? createdAt});
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -126,7 +126,7 @@ class __$$_MissionCopyWithImpl<$Res>
     Object? title = null,
     Object? point = null,
     Object? isReceived = null,
-    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$_Mission(
       docId: freezed == docId
@@ -149,9 +149,9 @@ class __$$_MissionCopyWithImpl<$Res>
           ? _value.isReceived
           : isReceived // ignore: cast_nullable_to_non_nullable
               as bool,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -166,7 +166,7 @@ class _$_Mission extends _Mission {
       this.title = "",
       this.point = 0,
       this.isReceived = false,
-      this.createdAt})
+      this.updatedAt})
       : super._();
 
   factory _$_Mission.fromJson(Map<String, dynamic> json) =>
@@ -190,11 +190,11 @@ class _$_Mission extends _Mission {
   final bool isReceived;
 //達成したか
   @override
-  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'Mission(docId: $docId, missionId: $missionId, title: $title, point: $point, isReceived: $isReceived, createdAt: $createdAt)';
+    return 'Mission(docId: $docId, missionId: $missionId, title: $title, point: $point, isReceived: $isReceived, updatedAt: $updatedAt)';
   }
 
   @override
@@ -209,14 +209,14 @@ class _$_Mission extends _Mission {
             (identical(other.point, point) || other.point == point) &&
             (identical(other.isReceived, isReceived) ||
                 other.isReceived == isReceived) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, docId, missionId, title, point, isReceived, createdAt);
+      runtimeType, docId, missionId, title, point, isReceived, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -239,7 +239,7 @@ abstract class _Mission extends Mission {
       final String title,
       final int point,
       final bool isReceived,
-      final DateTime? createdAt}) = _$_Mission;
+      final DateTime? updatedAt}) = _$_Mission;
   _Mission._() : super._();
 
   factory _Mission.fromJson(Map<String, dynamic> json) = _$_Mission.fromJson;
@@ -255,7 +255,7 @@ abstract class _Mission extends Mission {
   @override //獲得スコア
   bool get isReceived;
   @override //達成したか
-  DateTime? get createdAt;
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_MissionCopyWith<_$_Mission> get copyWith =>

@@ -10,6 +10,8 @@ import 'package:kentei_quiz/view/button.dart';
 
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../model/mission/mission_model.dart';
+import '../../model/rank/rank.dart';
+import '../../model/rank/rank_model.dart';
 import '../../view/icon.dart';
 import '../../view/icon_button.dart';
 
@@ -36,13 +38,7 @@ class DailyMission extends ConsumerWidget {
         dailyData.quizData.where((x) => x.isJudge == true).toList().length;
     final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
     final timeLimit = ref.watch(dashboardAchievementProvider).timeLimit;
-
-    final missions = ref.watch(missionModelProvider).sortedMissions;
-    if (missions.isEmpty) {
-      return const Center(
-        child: Text("No missions available"),
-      );
-    }
+    final missions = missionModel.sortedMissions;
     return Container(
       height: context.height * 0.52,
       width: context.width * 1,
@@ -141,13 +137,13 @@ class DailyMission extends ConsumerWidget {
   }
 }
 
-///　ランクレート
-class RankRate extends ConsumerWidget {
-  const RankRate();
+///　ランクスコア
+class RankScore extends ConsumerWidget {
+  const RankScore();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAchievementProvider);
+    final state = ref.watch(rankModelProvider);
     if (state.isLoading) {
       return Center(
         child: SpinKitFadingCircle(
@@ -156,11 +152,10 @@ class RankRate extends ConsumerWidget {
         ),
       );
     }
-    final rankData = state.rankData!;
-    final rankDataList =
-        ref.watch(dashboardAchievementProvider.notifier).rankDataList;
-    final maxScore = rankData.levelUpScore *
-        ((rankData.rankLevel + 1) - rankDataList[rankData.rankId].rankLevel);
+    final rank = state.rank!;
+    final rankDataList = ref.watch(rankModelProvider.notifier).defaultRanks;
+    final maxScore = rank.levelUpScore *
+        ((rank.level + 1) - rankDataList[rank.rankId].level);
 
     return Container(
       height: context.height * 0.25,
@@ -180,7 +175,7 @@ class RankRate extends ConsumerWidget {
           children: [
             ///タイトル
             const _Title(
-              title: "称号レベル",
+              title: "スコア",
               subtitle: "",
               icon: Icons.workspace_premium_outlined,
             ),
@@ -193,15 +188,13 @@ class RankRate extends ConsumerWidget {
                 ///レベル
                 GestureDetector(
                   onTap: () {
-                    ref
-                        .read(dashboardAchievementProvider.notifier)
-                        .updateScore(10);
+                    ref.read(rankModelProvider.notifier).updateScore(10);
                   },
                   child: ProgressRangeChart(
                     width: context.height * 0.17,
                     size: context.height * 0.17,
-                    maxScore: rankData.levelUpScore,
-                    currentScore: rankData.score % rankData.levelUpScore,
+                    maxScore: rank.levelUpScore,
+                    currentScore: rank.score % rank.levelUpScore,
                     widget: Column(
                       children: [
                         const Spacer(),
@@ -216,7 +209,7 @@ class RankRate extends ConsumerWidget {
                           textAlign: TextAlign.end,
                         ),
                         Text(
-                          "${rankData.rankLevel}",
+                          "${rank.level}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: context.height * 0.05,
@@ -232,11 +225,7 @@ class RankRate extends ConsumerWidget {
                 const Spacer(),
 
                 /// 称号
-                Container(
-                  width: context.width * 0.5,
-                  height: context.height * 0.17,
-                  child: const _RankName(),
-                ),
+                _RankName(rank: rank),
                 const Spacer(),
               ],
             ),

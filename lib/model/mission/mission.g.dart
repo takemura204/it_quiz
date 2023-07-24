@@ -12,9 +12,9 @@ _$_Mission _$$_MissionFromJson(Map<String, dynamic> json) => _$_Mission(
       title: json['title'] as String? ?? "",
       point: json['point'] as int? ?? 0,
       isReceived: json['isReceived'] as bool? ?? false,
-      createdAt: json['createdAt'] == null
+      updatedAt: json['updatedAt'] == null
           ? null
-          : DateTime.parse(json['createdAt'] as String),
+          : DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_MissionToJson(_$_Mission instance) =>
@@ -24,5 +24,5 @@ Map<String, dynamic> _$$_MissionToJson(_$_Mission instance) =>
       'title': instance.title,
       'point': instance.point,
       'isReceived': instance.isReceived,
-      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
     };

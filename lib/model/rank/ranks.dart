@@ -6,10 +6,9 @@ part 'ranks.freezed.dart';
 @freezed
 class Ranks with _$Ranks {
   factory Ranks({
-    @Default([]) List<Rank> ranks,
+    Rank? rank,
+    @Default(false) final bool isLoading,
+    @Default(0) final int rankIndex, //現在のランク階級
   }) = _Ranks;
   Ranks._();
-
-  // Rank? fromDocId({required String? docId}) =>
-  //     ranks.firstWhereOrNull((e) => e.docId == docId);
 }

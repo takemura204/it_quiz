@@ -19,7 +19,7 @@ class DashBoardAchievementScreen extends ConsumerWidget {
           Gap(5),
 
           ///称号レベル
-          RankRate(),
+          RankScore(),
 
           ///デイリーミッション
           DailyMission(),
