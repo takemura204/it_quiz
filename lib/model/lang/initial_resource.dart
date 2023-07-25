@@ -21,7 +21,7 @@ class I18n {
   String get titleSetting => "マイページ";
 
   ///「学ぶ」形式
-  String get styleLeanQuiz => "一問一答で学習する";
+  String get styleLeanQuiz => "一問一答で覚える";
   String get styleChoiceQuiz => "クイズに挑戦する";
   String get styleTestQuiz => "力だめしに挑戦する";
 

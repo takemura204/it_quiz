@@ -153,9 +153,6 @@ class RankScore extends ConsumerWidget {
       );
     }
     final rank = state.rank!;
-    final rankDataList = ref.watch(rankModelProvider.notifier).defaultRanks;
-    final maxScore = rank.levelUpScore *
-        ((rank.level + 1) - rankDataList[rank.rankId].level);
 
     return Container(
       height: context.height * 0.25,
@@ -177,7 +174,7 @@ class RankScore extends ConsumerWidget {
             const _Title(
               title: "スコア",
               subtitle: "",
-              icon: Icons.workspace_premium_outlined,
+              icon: Icons.emoji_events_outlined,
             ),
             const Spacer(),
 

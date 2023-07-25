@@ -8,8 +8,8 @@ import 'package:kentei_quiz/model/quiz_item/study_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/quiz/quiz_state.dart';
 import '../home_review/home_review_screen_controller.dart';
-import '../quiz/quiz_state.dart';
 
 final quizItemProvider =
     StateNotifierProvider<QuizItemController, List<QuizItemState>>(

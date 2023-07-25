@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/quiz/quiz_state.dart';
 import '../dashboard_analytics/bar_data_state.dart';
-import '../quiz/quiz_state.dart';
 import 'dashboard_analytics_state.dart';
 
 final dashboardAnalyticsProvider = StateNotifierProvider<
@@ -26,9 +26,7 @@ class DashboardAnalyticsController
   @override
   void initState() {
     state = state.copyWith(isLoading: true); // データロード開始を反映
-    Future.wait<void>([
-      _initQuizData(),
-    ]).then((_) {
+    _initQuizData().then((_) {
       state = state.copyWith(isLoading: false); // データロード終了を反映
     });
     _initDayRangeText();
@@ -72,7 +70,7 @@ class DashboardAnalyticsController
             day1.day == day2.day;
       }
 
-      // 新規起動日（"今日"）がtotalDataに含まれていなければ追加する
+      // 新規起動日（今日）がtotalDataに含まれていなければ追加する
       if (differenceInDays > 0) {
         // totalDataを最新の日付順にソート
         totalData.sort((a, b) => b.day.compareTo(a.day));

@@ -48,10 +48,10 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
           Gap(5),
 
           ///今日の目標
-          DailyDashBoard(),
+          DailyGoal(),
 
           ///学習状況ダッシュボード
-          WeekDashboard(),
+          Dashboard(),
 
           ///グループごとの進捗
           GroupProgress(),

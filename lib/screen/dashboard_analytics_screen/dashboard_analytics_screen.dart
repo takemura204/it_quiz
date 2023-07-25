@@ -17,8 +17,8 @@ import '../../controller/quiz_item/quiz_item_controller.dart';
 part 'dashboard_analytics_view.dart';
 
 ///毎日の目標
-class DailyDashBoard extends ConsumerWidget {
-  const DailyDashBoard();
+class DailyGoal extends ConsumerWidget {
+  const DailyGoal();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);
@@ -113,9 +113,9 @@ class DailyDashBoard extends ConsumerWidget {
   }
 }
 
-///1週間のデータ
-class WeekDashboard extends ConsumerWidget {
-  const WeekDashboard();
+/// ダッシュボード(学習問題数)
+class Dashboard extends ConsumerWidget {
+  const Dashboard();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);
@@ -128,7 +128,6 @@ class WeekDashboard extends ConsumerWidget {
       );
     }
     return Container(
-      height: context.height * 0.35,
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
@@ -144,17 +143,21 @@ class WeekDashboard extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.width * 0.01, vertical: context.width * 0.01),
+          padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
           child: Column(
             children: [
-              ///X軸範囲
-              const _SelectDayLength(),
+              const _Title(
+                  title: "学習問題数", subtitle: "", icon: Icons.bar_chart_outlined),
 
-              const Spacer(),
+              Gap(context.height * 0.01),
+
+              ///期間選択
+              const _DashBoardSelectPeriod(),
+              Gap(context.height * 0.01),
 
               ///ダッシュボード
-              BarChartSample(),
+              DashboardBarChart(),
+              Gap(context.height * 0.005),
             ],
           ),
         ),
@@ -164,7 +167,7 @@ class WeekDashboard extends ConsumerWidget {
 }
 
 ///ダッシュボード
-class BarChartSample extends ConsumerWidget {
+class DashboardBarChart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);

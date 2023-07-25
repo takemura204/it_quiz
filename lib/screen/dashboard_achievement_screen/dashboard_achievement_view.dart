@@ -34,7 +34,7 @@ class _Title extends ConsumerWidget {
           Text(
             title,
             style: TextStyle(
-                fontSize: context.height * 0.022,
+                fontSize: context.height * 0.024,
                 color: context.mainColor,
                 fontWeight: FontWeight.bold),
           ),
@@ -42,7 +42,7 @@ class _Title extends ConsumerWidget {
           Text(
             subtitle,
             style: TextStyle(
-                fontSize: context.height * 0.015,
+                fontSize: context.height * 0.018,
                 fontWeight: FontWeight.normal),
           ),
         ],

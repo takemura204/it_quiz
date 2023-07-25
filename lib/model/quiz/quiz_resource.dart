@@ -1,4 +1,4 @@
-import '../../controller/quiz/quiz_state.dart';
+import 'quiz_state.dart';
 
 ///問題一覧
 final List<QuizState> quiz1 = [

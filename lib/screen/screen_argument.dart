@@ -5,7 +5,6 @@ import 'package:kentei_quiz/screen/account_login_screen/account_login_screen.dar
 import 'package:kentei_quiz/screen/account_profile_screen/account_profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
-import 'package:kentei_quiz/screen/quiz_true_false_screen/quiz_true_false_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 
 import '../model/screen_argument_resource.dart';
@@ -56,35 +55,6 @@ class QuizChoiceScreenArguments
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
               MaterialPageRoute(builder: (context) => QuizChoiceScreen(item)),
-              context,
-              animation,
-              secondaryAnimation,
-              child);
-        },
-      );
-}
-
-///○×クイズ
-class QuizTrueFalseScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
-  const QuizTrueFalseScreenArguments(
-      {required this.item, required this.quizStyle});
-
-  final QuizItemState item;
-  final String quizStyle;
-
-  @override
-  String get screenNameFormat => "/quiz_true_false";
-
-  @override
-  Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizTureFalseScreen(this),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(
-                  builder: (context) => QuizTureFalseScreen(this)),
               context,
               animation,
               secondaryAnimation,

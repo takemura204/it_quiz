@@ -1,8 +1,6 @@
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../quiz/quiz_state.dart';
+import '../../model/quiz/quiz_state.dart';
 
 part 'bar_data_state.freezed.dart';
 part 'bar_data_state.g.dart';
@@ -41,17 +39,4 @@ extension BarDataEX on BarData {
         return "";
     }
   }
-}
-
-class CustomBarChartRodData extends BarChartRodData {
-  CustomBarChartRodData({
-    required int toY,
-    required Color color,
-    required double width,
-    required BorderRadius borderRadius,
-  }) : super(
-            toY: toY.toDouble(),
-            color: color,
-            width: width,
-            borderRadius: borderRadius);
 }
