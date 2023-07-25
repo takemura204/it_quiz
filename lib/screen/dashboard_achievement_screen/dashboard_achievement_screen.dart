@@ -63,7 +63,7 @@ class DailyMission extends ConsumerWidget {
             ),
             const Spacer(),
             Container(
-              height: context.height * 0.455,
+              height: context.height * 0.46,
               margin: EdgeInsets.symmetric(
                   horizontal: context.width * 0.02,
                   vertical: context.width * 0.0),

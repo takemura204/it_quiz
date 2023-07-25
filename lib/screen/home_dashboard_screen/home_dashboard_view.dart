@@ -47,7 +47,7 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
         children: const [
           Gap(5),
 
-          ///今日のデータ
+          ///今日の目標
           DailyDashBoard(),
 
           ///学習状況ダッシュボード

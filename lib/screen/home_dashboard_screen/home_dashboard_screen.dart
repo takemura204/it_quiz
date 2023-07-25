@@ -35,11 +35,9 @@ class HomeDashboardScreen extends ConsumerWidget {
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabs = ref.watch(homeDashboardScreenProvider.notifier).tabs;
-
     return AppBar(
       title: Text(I18n().titleDashboard),
       bottom: TabBar(

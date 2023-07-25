@@ -16,7 +16,7 @@ import '../../controller/quiz_item/quiz_item_controller.dart';
 
 part 'dashboard_analytics_view.dart';
 
-///今日の学習問題数
+///毎日の目標
 class DailyDashBoard extends ConsumerWidget {
   const DailyDashBoard();
   @override
@@ -34,7 +34,7 @@ class DailyDashBoard extends ConsumerWidget {
     final dailyScore = dailyData.quizData.length;
     final dailyGoal = state.dailyGoal;
     return Container(
-      height: context.height * 0.22,
+      width: context.width * 1,
       child: Card(
         elevation: 3,
         color: Colors.white,
@@ -47,56 +47,65 @@ class DailyDashBoard extends ConsumerWidget {
           ),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Row(
+        child: Column(
           children: [
-            const Spacer(),
-
-            ///チャート
-            ProgressRangeChart(
-              width: context.height * 0.2,
-              size: context.height * 0.2,
-              maxScore: dailyGoal,
-              currentScore: dailyScore,
-              widget: Column(
+            const _Title(
+                title: "毎日の目標", subtitle: "", icon: Icons.flag_outlined),
+            Container(
+              height: context.height * 0.23,
+              child: Row(
                 children: [
                   const Spacer(),
-                  Text(
-                    "今日の\n学習問題数",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: context.height * 0.015,
-                      height: 1.2,
+
+                  ///チャート
+                  ProgressRangeChart(
+                    width: context.height * 0.2,
+                    size: context.height * 0.2,
+                    maxScore: dailyGoal,
+                    currentScore: dailyScore,
+                    widget: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "今日の\n学習問題数",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: context.height * 0.015,
+                            height: 1.2,
+                          ),
+                        ),
+                        Text(
+                          "$dailyScore",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.045,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        Text(
+                          "/$dailyGoal",
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.015,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
                     ),
                   ),
-                  Text(
-                    "$dailyScore",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.height * 0.045,
-                      color: context.mainColor,
-                    ),
-                  ),
-                  Text(
-                    "/$dailyGoal",
-                    textAlign: TextAlign.end,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.height * 0.015,
-                      color: context.mainColor,
-                    ),
-                  ),
+                  const Spacer(),
+
+                  ///今日の一言
+                  const _DailyMessage(),
+
                   const Spacer(),
                 ],
               ),
             ),
-            const Spacer(),
-
-            ///今日の一言
-            const _DailyMessage(),
-
-            const Spacer(),
           ],
         ),
       ),

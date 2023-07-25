@@ -1,34 +1,85 @@
 part of 'dashboard_analytics_screen.dart';
 
+class _Title extends ConsumerWidget {
+  const _Title(
+      {required this.title, required this.subtitle, required this.icon});
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.04,
+      margin: EdgeInsets.only(
+        left: context.width * 0.02,
+        top: context.width * 0.015,
+        right: context.width * 0.02,
+        bottom: 0.00,
+      ),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+              color: context.mainColor, width: context.width * 0.003),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Icon(
+            icon,
+            color: context.mainColor,
+            size: context.height * 0.04,
+          ),
+          Gap(context.width * 0.01),
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: context.height * 0.022,
+                color: context.mainColor,
+                fontWeight: FontWeight.bold),
+          ),
+          const Spacer(),
+          Text(
+            subtitle,
+            style: TextStyle(
+                fontSize: context.height * 0.015,
+                fontWeight: FontWeight.normal),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 ///今日のメッセージ
 class _DailyMessage extends ConsumerWidget {
   const _DailyMessage();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: context.width * 0.45,
+      width: context.width * 0.48,
       child: Column(
         children: [
           const Spacer(),
           Container(
-            height: context.height * 0.1,
+            height: context.height * 0.12,
             child: Column(
               children: [
                 const Spacer(),
                 Text(
-                  "千里の道も一歩から！\nコツコツ積み重ねていましょう!\n継続は今日からです！",
+                  "千里の道も一歩から！\nコツコツ積み重ねていましょう!継続は今日からです！\na",
                   style: TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.normal,
-                    fontSize: context.width * 0.03,
+                    color: Colors.black45,
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.width * 0.032,
                   ),
+                  textAlign: TextAlign.start,
                   maxLines: 3,
                 ),
                 const Spacer(),
               ],
             ),
           ),
-          const Spacer(),
           Container(
             width: context.height * 0.1,
             height: context.height * 0.1,
@@ -37,7 +88,7 @@ class _DailyMessage extends ConsumerWidget {
               fit: BoxFit.contain,
             ),
           ),
-          const Spacer(),
+          Gap(context.height * 0.01),
         ],
       ),
     );

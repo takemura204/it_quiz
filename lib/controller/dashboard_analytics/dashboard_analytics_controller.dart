@@ -22,8 +22,6 @@ class DashboardAnalyticsController
   }
   final Ref ref;
   final tabs = [7, 31];
-  // final now = DateTime.now();
-  // final days = DateTime.now().weekday - 1;
 
   @override
   void initState() {
