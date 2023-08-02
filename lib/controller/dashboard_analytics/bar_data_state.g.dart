@@ -8,7 +8,7 @@ part of 'bar_data_state.dart';
 
 _$_BarData _$$_BarDataFromJson(Map<String, dynamic> json) => _$_BarData(
       quizData: (json['quizData'] as List<dynamic>)
-          .map((e) => QuizState.fromJson(e as Map<String, dynamic>))
+          .map((e) => QuizItem.fromJson(e as Map<String, dynamic>))
           .toList(),
       day: DateTime.parse(json['day'] as String),
     );

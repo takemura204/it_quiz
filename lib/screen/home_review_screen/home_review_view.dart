@@ -165,7 +165,7 @@ class _QuizButton extends ConsumerWidget {
 
 class _DialogTitle extends ConsumerWidget {
   const _DialogTitle(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -198,7 +198,7 @@ class _QuizRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final group =
-        ref.read(quizItemProvider).map((item) => item.group).toSet().toList();
+        ref.read(quizModelProvider).map((item) => item.category).toSet().toList();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
       child: Column(
@@ -359,7 +359,7 @@ class _SimpleDialogOption extends ConsumerWidget {
     return SimpleDialogOption(
       onPressed: isGroup
           ? () {
-              ref.read(quizItemProvider.notifier).setQuizType(QuizType.test);
+              ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
               ref.read(homeReviewScreenProvider.notifier).updateTestQuiz();
               final testQuiz = ref.read(homeReviewScreenProvider).testQuiz;
               context.showScreen(

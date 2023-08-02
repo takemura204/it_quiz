@@ -4,11 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
-import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import '../../controller/quiz_item/quiz_item_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_model.dart';
+import '../../model/quiz/quizzes.dart';
 import '../../view/icon_button.dart';
 import '../screen_argument.dart';
 
@@ -35,14 +36,14 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizItemProvider);
+    final quizItemList = ref.watch(quizModelProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleStudy),
       ),
-      body: GroupedListView<QuizItemState, String>(
+      body: GroupedListView<Quiz, String>(
         elements: quizItemList,
-        groupBy: (QuizItemState item) => item.group,
+        groupBy: (Quiz item) => item.category,
         groupComparator: (value1, value2) =>
             value2.compareTo(value1), //グループのカスタムソートを定義
         itemComparator: (item1, item2) =>
@@ -61,8 +62,7 @@ class _Scaffold extends ConsumerWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        indexedItemBuilder:
-            (BuildContext context, QuizItemState item, int index) {
+        indexedItemBuilder: (BuildContext context, Quiz item, int index) {
           return _QuizItemBar(
             item: item,
             index: index,

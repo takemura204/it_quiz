@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../model/quiz/quiz_state.dart';
+import '../../model/quiz/quiz_item.dart';
 
 part 'bar_data_state.freezed.dart';
 part 'bar_data_state.g.dart';
@@ -8,7 +8,7 @@ part 'bar_data_state.g.dart';
 @freezed
 class BarData with _$BarData {
   const factory BarData({
-    required final List<QuizState> quizData,
+    required final List<QuizItem> quizData,
     required final DateTime day,
   }) = _BarData;
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/quiz/quiz.dart';
 import '../../view/dialog.dart';
 import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
@@ -15,14 +15,14 @@ part 'quiz_choice_view.dart';
 
 class QuizChoiceScreen extends ConsumerWidget {
   const QuizChoiceScreen(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
         quizChoiceScreenProvider.overrideWith(
-          (ref) => QuizChoiceScreenController(ref: ref, item: item),
+          (ref) => QuizChoiceScreenController(ref: ref, quiz: item),
         ),
       ],
       child: _Scaffold(item),
@@ -32,7 +32,7 @@ class QuizChoiceScreen extends ConsumerWidget {
 
 class _Scaffold extends ConsumerWidget {
   const _Scaffold(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,9 +51,9 @@ class _Scaffold extends ConsumerWidget {
 }
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _AppBar(this.item);
+  const _AppBar(this.quiz);
 
-  final QuizItemState item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -61,7 +61,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: Text(item.group),
+      title: Text(quiz.category),
       leading: CustomBackButton(onPressed: () async {
         await showDialog(
             context: context,
@@ -95,7 +95,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 class _Body extends ConsumerWidget {
   const _Body(this.item);
 
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

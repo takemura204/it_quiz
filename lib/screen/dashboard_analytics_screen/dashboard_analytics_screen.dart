@@ -12,7 +12,7 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../controller/dashboard_analytics/bar_data_state.dart';
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
-import '../../controller/quiz_item/quiz_item_controller.dart';
+import '../../model/quiz/quiz_model.dart';
 
 part 'dashboard_analytics_view.dart';
 

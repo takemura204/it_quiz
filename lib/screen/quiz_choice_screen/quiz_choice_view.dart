@@ -3,7 +3,7 @@ part of 'quiz_choice_screen.dart';
 ///問題文
 class _Question extends ConsumerWidget {
   const _Question(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +33,7 @@ class _Question extends ConsumerWidget {
 
 class _AnsQuestion extends ConsumerWidget {
   const _AnsQuestion(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -62,7 +62,7 @@ class _AnsQuestion extends ConsumerWidget {
 
 class _QuizQuestion extends ConsumerWidget {
   const _QuizQuestion(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -90,7 +90,7 @@ class _QuizQuestion extends ConsumerWidget {
 
 class _QuizProgress extends ConsumerWidget {
   const _QuizProgress(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -125,7 +125,7 @@ class _QuizProgress extends ConsumerWidget {
 
 class _SelectAnswer extends ConsumerWidget {
   const _SelectAnswer(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -213,7 +213,7 @@ class _SelectChoice extends ConsumerWidget {
 
 class _JudgeIcon extends ConsumerWidget {
   const _JudgeIcon(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

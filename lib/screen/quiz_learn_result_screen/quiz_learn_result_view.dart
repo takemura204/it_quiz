@@ -4,7 +4,7 @@ part of 'quiz_learn_result_screen.dart';
 class _QuizResultView extends ConsumerWidget {
   const _QuizResultView(this.item);
 
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

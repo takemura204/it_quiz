@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../model/quiz/quiz_state.dart';
+import '../../model/quiz/quiz_item.dart';
 
 part 'quiz_choice_screen_state.freezed.dart';
 
@@ -14,6 +14,6 @@ class QuizChoiceScreenState with _$QuizChoiceScreenState {
     @Default(0) final int quizIndex, //問題番号
     @Default(0) final int quizItemIndex, //クイズアイテム番号
     @Default([]) final List<String> choices, //選択肢
-    @Default([]) final List<QuizState> quizList, //問題
+    @Default([]) final List<QuizItem> quizList, //問題
   }) = _Create;
 }

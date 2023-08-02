@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import '../controller/quiz_item/quiz_item_state.dart';
+import '../model/quiz/quiz.dart';
 
 class QuizStyleTitle extends ConsumerWidget {
   const QuizStyleTitle(this.item);
 
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

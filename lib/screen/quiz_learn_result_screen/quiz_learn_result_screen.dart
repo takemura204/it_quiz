@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../../controller/quiz_learn/quiz_learn_screen_controller.dart';
+import '../../model/quiz/quiz.dart';
 import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
 
@@ -13,7 +13,7 @@ part 'quiz_learn_result_view.dart';
 
 class QuizLearnResultScreen extends StatelessWidget {
   const QuizLearnResultScreen(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class QuizLearnResultScreen extends StatelessWidget {
 }
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _AppBar(this.item);
+  const _AppBar(this.quiz);
 
-  final QuizItemState item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +35,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: Text(item.group),
+      title: Text(quiz.category),
       actions: [
         ClearButton(
           iconSize: 30,
@@ -53,7 +53,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 class _Body extends ConsumerWidget {
   const _Body(this.item);
 
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

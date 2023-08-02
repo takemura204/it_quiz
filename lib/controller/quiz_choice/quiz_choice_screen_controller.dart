@@ -1,11 +1,11 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart';
-import 'package:kentei_quiz/controller/quiz_item/quiz_item_controller.dart';
+import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../model/quiz/quiz_state.dart';
+import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_item.dart';
 import '../home_review/home_review_screen_controller.dart';
-import '../quiz_item/quiz_item_state.dart';
 
 final quizChoiceScreenProvider =
     StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
@@ -14,12 +14,12 @@ final quizChoiceScreenProvider =
 
 class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     with LocatorMixin {
-  QuizChoiceScreenController({required this.ref, required this.item})
+  QuizChoiceScreenController({required this.ref, required this.quiz})
       : super(const QuizChoiceScreenState()) {
     initState();
   }
   final Ref ref;
-  QuizItemState item;
+  Quiz quiz;
 
   @override
   void initState() {
@@ -32,14 +32,14 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void _addQuizList() {
     //クイズリスト更新
     final quizList = [...state.quizList];
-    quizList.addAll(item.quizList);
+    quizList.addAll(quiz.quizItemList);
     state = state.copyWith(quizList: quizList);
   }
 
   ///選択肢を混ぜる
   void _shuffleChoice() {
     final choices = [...state.choices]..clear();
-    final argumentsChoices = [...item.quizList[state.quizIndex].choices];
+    final argumentsChoices = [...quiz.quizItemList[state.quizIndex].choices];
     argumentsChoices.shuffle();
     choices.addAll(argumentsChoices);
     state = state.copyWith(choices: choices);
@@ -57,7 +57,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final quizIndex = state.quizIndex;
     //正解
     if (choice == quizList[quizIndex].ans) {
-      quizList[quizIndex] = QuizState(
+      quizList[quizIndex] = QuizItem(
         quizId: quizList[quizIndex].quizId,
         question: quizList[quizIndex].question,
         ans: quizList[quizIndex].ans,
@@ -70,7 +70,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     }
     //不正解
     else {
-      quizList[quizIndex] = QuizState(
+      quizList[quizIndex] = QuizItem(
         quizId: quizList[quizIndex].quizId,
         question: quizList[quizIndex].question,
         ans: quizList[quizIndex].ans,
@@ -97,7 +97,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void _nextQuiz() {
     final quizIndex = state.quizIndex;
     //問題が終わった時
-    if (quizIndex == item.quizList.length - 1) {
+    if (quizIndex == quiz.quizItemList.length - 1) {
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
       _updateItem();
     }
@@ -111,7 +111,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///チェックボックス切り替え
   void tapCheckBox(int index) {
     final quizList = [...state.quizList];
-    quizList[index] = QuizState(
+    quizList[index] = QuizItem(
       quizId: quizList[index].quizId,
       question: quizList[index].question,
       ans: quizList[index].ans,
@@ -137,6 +137,6 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///クイズ結果更新(端末保存)
   void _updateItem() {
     final quizList = state.quizList;
-    ref.read(quizItemProvider.notifier).updateItem(quizList);
+    ref.read(quizModelProvider.notifier).updateItem(quizList);
   }
 }

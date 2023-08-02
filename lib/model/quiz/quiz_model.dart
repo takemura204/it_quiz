@@ -3,22 +3,24 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/dashboard_analytics/dashboard_analytics_controller.dart';
-import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
-import 'package:kentei_quiz/model/quiz_item/study_resource.dart';
+import 'package:kentei_quiz/model/quiz/quiz.dart';
+import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../model/quiz/quiz_state.dart';
-import '../home_review/home_review_screen_controller.dart';
+import '../../controller/home_review/home_review_screen_controller.dart';
+import '../lang/initial_resource.dart';
+import 'quiz_item.dart';
 
-final quizItemProvider =
-    StateNotifierProvider<QuizItemController, List<QuizItemState>>(
-  (ref) => QuizItemController(ref),
+part 'quiz_resource.dart';
+part 'quizzes_resource.dart';
+
+final quizModelProvider = StateNotifierProvider<QuizModel, List<Quiz>>(
+  (ref) => QuizModel(ref),
 );
 
-class QuizItemController extends StateNotifier<List<QuizItemState>>
-    with LocatorMixin {
-  QuizItemController(this.ref) : super([]) {
+class QuizModel extends StateNotifier<List<Quiz>> with LocatorMixin {
+  QuizModel(this.ref) : super([]) {
     initState();
   }
   final Ref ref;
@@ -32,9 +34,9 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     super.initState();
   }
 
-  List<QuizItemState> _initialValue() {
+  List<Quiz> _initialValue() {
     // groupListsByを使用してリストをグループ化
-    final groupMap = quizStudyItems.groupListsBy((x) => x.group);
+    final groupMap = studyQuiz.groupListsBy((x) => x.category);
 
     // グループごとにリストをidでソート
     for (final group in groupMap.keys) {
@@ -43,7 +45,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     // グループの順にリストを並べ替え
     final sortedGroups = groupMap.keys.toList()..sort((a, b) => a.compareTo(b));
     // グループごとのリストを結合して結果のリストを作成
-    final result = <QuizItemState>[];
+    final result = <Quiz>[];
     for (final group in sortedGroups) {
       result.addAll(groupMap[group]!);
     }
@@ -56,28 +58,26 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
     final prefs = await SharedPreferences.getInstance();
     final quizItemDataJson = prefs.getStringList('quiz_items');
     if (quizItemDataJson != null && quizItemDataJson.isNotEmpty) {
-      state = quizItemDataJson
-          .map((e) => QuizItemState.fromJson(json.decode(e)))
-          .toList();
+      state =
+          quizItemDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
 
       // stateの各要素に対して、quizStudyItemsの更新を適用
-      state = state.map((item) {
+      state = state.map((quiz) {
         // quizStudyItemsから、対応するアイテムを探す
-        final updatedItem =
-            quizStudyItems.firstWhereOrNull((e) => e.id == item.id);
+        final updatedItem = studyQuiz.firstWhereOrNull((e) => e.id == quiz.id);
         // 対応するアイテムが見つかった場合
         if (updatedItem != null) {
           // 各クイズに対して、questionの更新を適用
-          return item.copyWith(
-            quizList: item.quizList.map((quiz) {
+          return quiz.copyWith(
+            quizItemList: quiz.quizItemList.map((quizItem) {
               // updatedItemのクイズリストから、対応するクイズを探す
-              final updatedQuiz = updatedItem.quizList
-                  .firstWhereOrNull((e) => e.quizId == quiz.quizId);
+              final updatedQuiz = updatedItem.quizItemList
+                  .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
 
               // 対応するクイズが見つかった場合
               if (updatedQuiz != null) {
                 // questionだけを更新
-                return quiz.copyWith(
+                return quizItem.copyWith(
                   question: updatedQuiz.question,
                   ans: updatedQuiz.ans,
                   choices: updatedQuiz.choices,
@@ -85,11 +85,11 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
                 );
               }
               // 対応するクイズが見つからなかった場合、変更なし
-              return quiz;
+              return quizItem;
             }).toList(),
           );
         }
-        return item;
+        return quiz;
       }).toList();
     } else {
       print("null or empty list");
@@ -108,7 +108,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   }
 
   ///クイズ更新
-  void updateItem(List<QuizState> quizList) {
+  void updateItem(List<QuizItem> quizList) {
     switch (quizType) {
       ///　Studyクイズ更新
       case QuizType.study:
@@ -125,7 +125,7 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
         break;
 
       ///　Reviewクイズ更新
-      case QuizType.review:
+      case QuizType.weak:
         _updateWeakItems(quizList);
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizList);
@@ -141,15 +141,15 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   }
 
   ///Studyクイズ更新・保存
-  void _updateStudyItem(List<QuizState> quizList) {
-    final score = quizList.where((x) => x.isJudge == true).toList().length;
-    final isCompleted = quizList.length == score;
+  void _updateStudyItem(List<QuizItem> quizItemList) {
+    final correctNum = quizItemList.where((x) => x.isJudge == true).toList().length;
+    final isCompleted = quizItemList.length == correctNum;
     state = state.map((item) {
       if (item.title == state[selectedIndex].title) {
         return state[selectedIndex].copyWith(
           isCompleted: isCompleted,
-          score: score,
-          quizList: quizList,
+          correctNum: correctNum,
+          quizItemList: quizItemList,
           timeStamp: DateTime.now(),
         );
       }
@@ -159,21 +159,21 @@ class QuizItemController extends StateNotifier<List<QuizItemState>>
   }
 
   ///Reviewクイズ更新・保存
-  void _updateWeakItems(List<QuizState> quizList) {
+  void _updateWeakItems(List<QuizItem> quizList) {
     // quizListからisWeakがfalseのクイズのリストを抽出
     final nonWeakQuizList = quizList.where((quiz) => !quiz.isWeak).toList();
     // stateの各QuizItemStateのquizListをループして、nonWeakQuizListに含まれる同じquestionを持つクイズがある場合、そのクイズのisWeakをfalseに更新
-    state = state.map((item) {
-      final updatedQuizList = item.quizList.map((quiz) {
+    state = state.map((quiz) {
+      final updatedQuizList = quiz.quizItemList.map((quizItem) {
         final updatedQuiz = nonWeakQuizList.firstWhereOrNull(
-            (nonWeakQuiz) => nonWeakQuiz.question == quiz.question);
+            (nonWeakQuiz) => nonWeakQuiz.question == quizItem.question);
         if (updatedQuiz != null) {
-          return quiz.copyWith(isWeak: false);
+          return quizItem.copyWith(isWeak: false);
         }
-        return quiz;
+        return quizItem;
       }).toList();
       // 更新されたquizListを含む新しいQuizItemStateを作成し、stateの対応する要素に置き換え
-      return item.copyWith(quizList: updatedQuizList);
+      return quiz.copyWith(quizItemList: updatedQuizList);
     }).toList();
 
     _saveData();

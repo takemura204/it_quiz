@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../model/quiz/quiz_state.dart';
+import '../../model/quiz/quiz_item.dart';
 import '../dashboard_analytics/bar_data_state.dart';
 import 'dashboard_analytics_state.dart';
 
@@ -174,7 +174,7 @@ class DashboardAnalyticsController
   }
 
   /// スコア更新
-  Future updateScore(List<QuizState> quizList) async {
+  Future updateScore(List<QuizItem> quizList) async {
     final totalData = [...state.totalData];
     // 当日のデータを更新
     final todayQuizData = [...totalData.first.quizData];

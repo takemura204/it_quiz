@@ -3,13 +3,13 @@ part of 'home_study_screen.dart';
 ///問題一覧Bar
 class _QuizItemBar extends ConsumerWidget {
   const _QuizItemBar({required this.item, required this.index});
-  final QuizItemState item;
+  final Quiz item;
   final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(quizItemProvider)[index];
-    final quizItemController = ref.read(quizItemProvider.notifier);
+    final item = ref.watch(quizModelProvider)[index];
+    final quizItemController = ref.read(quizModelProvider.notifier);
     return GestureDetector(
       onTap: () {
         quizItemController.tapQuizItemBar(index);
@@ -72,7 +72,7 @@ class _StudyQuizDialog extends ConsumerWidget {
   final int index;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(quizItemProvider)[index];
+    final item = ref.watch(quizModelProvider)[index];
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
@@ -130,7 +130,7 @@ class _StudyQuizDialog extends ConsumerWidget {
 
 class _Title extends ConsumerWidget {
   const _Title(this.item);
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -148,8 +148,8 @@ class _Title extends ConsumerWidget {
 }
 
 class _QuizResult extends ConsumerWidget {
-  const _QuizResult(this.item);
-  final QuizItemState item;
+  const _QuizResult(this.quiz);
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -177,7 +177,7 @@ class _QuizResult extends ConsumerWidget {
             children: [
               ///正解数
               Text(
-                "${item.score}",
+                "${quiz.correctNum}",
                 style: TextStyle(
                   fontSize: context.width * 0.05,
                   fontWeight: FontWeight.bold,
@@ -186,7 +186,7 @@ class _QuizResult extends ConsumerWidget {
 
               ///問題数
               Text(
-                "/" + item.quizList.length.toString(),
+                "/" + quiz.quizItemList.length.toString(),
                 style: TextStyle(
                   fontSize: context.width * 0.04,
                   fontWeight: FontWeight.bold,
@@ -203,7 +203,7 @@ class _QuizResult extends ConsumerWidget {
 ///クイズ選択ボタン1
 class _SimpleDialogOption1 extends ConsumerWidget {
   const _SimpleDialogOption1({required this.item, required this.text});
-  final QuizItemState item;
+  final Quiz item;
   final String text;
 
   @override
@@ -233,7 +233,7 @@ class _SimpleDialogOption1 extends ConsumerWidget {
           ),
         ),
         onPressed: () {
-          ref.read(quizItemProvider.notifier).setQuizType(QuizType.study);
+          ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
           context.showScreen(
             QuizLearnScreenArguments(
               item: item,
@@ -246,7 +246,7 @@ class _SimpleDialogOption1 extends ConsumerWidget {
 ///クイズ選択ボタン2
 class _SimpleDialogOption2 extends ConsumerWidget {
   const _SimpleDialogOption2({required this.item, required this.text});
-  final QuizItemState item;
+  final Quiz item;
   final String text;
 
   @override
@@ -276,7 +276,7 @@ class _SimpleDialogOption2 extends ConsumerWidget {
           ),
         ),
         onPressed: () {
-          ref.read(quizItemProvider.notifier).setQuizType(QuizType.study);
+          ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
           context.showScreen(
             QuizChoiceScreenArguments(
               item: item,

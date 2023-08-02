@@ -20,9 +20,9 @@ mixin _$QuizLearnScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
-  List<QuizState> get quizList => throw _privateConstructorUsedError;
-  List<QuizState> get knowQuizList => throw _privateConstructorUsedError;
-  List<QuizState> get unKnowQuizList => throw _privateConstructorUsedError;
+  List<QuizItem> get quizList => throw _privateConstructorUsedError;
+  List<QuizItem> get knowQuizList => throw _privateConstructorUsedError;
+  List<QuizItem> get unKnowQuizList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizLearnScreenStateCopyWith<QuizLearnScreenState> get copyWith =>
@@ -40,9 +40,9 @@ abstract class $QuizLearnScreenStateCopyWith<$Res> {
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<QuizState> quizList,
-      List<QuizState> knowQuizList,
-      List<QuizState> unKnowQuizList});
+      List<QuizItem> quizList,
+      List<QuizItem> knowQuizList,
+      List<QuizItem> unKnowQuizList});
 }
 
 /// @nodoc
@@ -87,15 +87,15 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
       quizList: null == quizList
           ? _value.quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
       knowQuizList: null == knowQuizList
           ? _value.knowQuizList
           : knowQuizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
       unKnowQuizList: null == unKnowQuizList
           ? _value.unKnowQuizList
           : unKnowQuizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
     ) as $Val);
   }
 }
@@ -112,9 +112,9 @@ abstract class _$$_CreateCopyWith<$Res>
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<QuizState> quizList,
-      List<QuizState> knowQuizList,
-      List<QuizState> unKnowQuizList});
+      List<QuizItem> quizList,
+      List<QuizItem> knowQuizList,
+      List<QuizItem> unKnowQuizList});
 }
 
 /// @nodoc
@@ -155,15 +155,15 @@ class __$$_CreateCopyWithImpl<$Res>
       quizList: null == quizList
           ? _value._quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
       knowQuizList: null == knowQuizList
           ? _value._knowQuizList
           : knowQuizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
       unKnowQuizList: null == unKnowQuizList
           ? _value._unKnowQuizList
           : unKnowQuizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
     ));
   }
 }
@@ -176,9 +176,9 @@ class _$_Create extends _Create {
       this.isResultScreen = false,
       this.quizIndex = 0,
       this.lapIndex = 0,
-      final List<QuizState> quizList = const [],
-      final List<QuizState> knowQuizList = const [],
-      final List<QuizState> unKnowQuizList = const []})
+      final List<QuizItem> quizList = const [],
+      final List<QuizItem> knowQuizList = const [],
+      final List<QuizItem> unKnowQuizList = const []})
       : _quizList = quizList,
         _knowQuizList = knowQuizList,
         _unKnowQuizList = unKnowQuizList,
@@ -200,29 +200,29 @@ class _$_Create extends _Create {
   @JsonKey()
   final int lapIndex;
 //何周目
-  final List<QuizState> _quizList;
+  final List<QuizItem> _quizList;
 //何周目
   @override
   @JsonKey()
-  List<QuizState> get quizList {
+  List<QuizItem> get quizList {
     if (_quizList is EqualUnmodifiableListView) return _quizList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_quizList);
   }
 
-  final List<QuizState> _knowQuizList;
+  final List<QuizItem> _knowQuizList;
   @override
   @JsonKey()
-  List<QuizState> get knowQuizList {
+  List<QuizItem> get knowQuizList {
     if (_knowQuizList is EqualUnmodifiableListView) return _knowQuizList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_knowQuizList);
   }
 
-  final List<QuizState> _unKnowQuizList;
+  final List<QuizItem> _unKnowQuizList;
   @override
   @JsonKey()
-  List<QuizState> get unKnowQuizList {
+  List<QuizItem> get unKnowQuizList {
     if (_unKnowQuizList is EqualUnmodifiableListView) return _unKnowQuizList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_unKnowQuizList);
@@ -277,9 +277,9 @@ abstract class _Create extends QuizLearnScreenState {
       final bool isResultScreen,
       final int quizIndex,
       final int lapIndex,
-      final List<QuizState> quizList,
-      final List<QuizState> knowQuizList,
-      final List<QuizState> unKnowQuizList}) = _$_Create;
+      final List<QuizItem> quizList,
+      final List<QuizItem> knowQuizList,
+      final List<QuizItem> unKnowQuizList}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -291,11 +291,11 @@ abstract class _Create extends QuizLearnScreenState {
   @override //問題番号
   int get lapIndex;
   @override //何周目
-  List<QuizState> get quizList;
+  List<QuizItem> get quizList;
   @override
-  List<QuizState> get knowQuizList;
+  List<QuizItem> get knowQuizList;
   @override
-  List<QuizState> get unKnowQuizList;
+  List<QuizItem> get unKnowQuizList;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

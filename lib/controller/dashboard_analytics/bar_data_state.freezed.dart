@@ -20,7 +20,7 @@ BarData _$BarDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BarData {
-  List<QuizState> get quizData => throw _privateConstructorUsedError;
+  List<QuizItem> get quizData => throw _privateConstructorUsedError;
   DateTime get day => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ abstract class $BarDataCopyWith<$Res> {
   factory $BarDataCopyWith(BarData value, $Res Function(BarData) then) =
       _$BarDataCopyWithImpl<$Res, BarData>;
   @useResult
-  $Res call({List<QuizState> quizData, DateTime day});
+  $Res call({List<QuizItem> quizData, DateTime day});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$BarDataCopyWithImpl<$Res, $Val extends BarData>
       quizData: null == quizData
           ? _value.quizData
           : quizData // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -72,7 +72,7 @@ abstract class _$$_BarDataCopyWith<$Res> implements $BarDataCopyWith<$Res> {
       __$$_BarDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<QuizState> quizData, DateTime day});
+  $Res call({List<QuizItem> quizData, DateTime day});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class __$$_BarDataCopyWithImpl<$Res>
       quizData: null == quizData
           ? _value._quizData
           : quizData // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -104,15 +104,15 @@ class __$$_BarDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BarData implements _BarData {
-  const _$_BarData({required final List<QuizState> quizData, required this.day})
+  const _$_BarData({required final List<QuizItem> quizData, required this.day})
       : _quizData = quizData;
 
   factory _$_BarData.fromJson(Map<String, dynamic> json) =>
       _$$_BarDataFromJson(json);
 
-  final List<QuizState> _quizData;
+  final List<QuizItem> _quizData;
   @override
-  List<QuizState> get quizData {
+  List<QuizItem> get quizData {
     if (_quizData is EqualUnmodifiableListView) return _quizData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_quizData);
@@ -156,13 +156,13 @@ class _$_BarData implements _BarData {
 
 abstract class _BarData implements BarData {
   const factory _BarData(
-      {required final List<QuizState> quizData,
+      {required final List<QuizItem> quizData,
       required final DateTime day}) = _$_BarData;
 
   factory _BarData.fromJson(Map<String, dynamic> json) = _$_BarData.fromJson;
 
   @override
-  List<QuizState> get quizData;
+  List<QuizItem> get quizData;
   @override
   DateTime get day;
   @override

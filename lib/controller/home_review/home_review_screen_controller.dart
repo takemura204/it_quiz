@@ -5,10 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../model/quiz/quiz_state.dart';
-import '../../model/quiz_item/review_resource.dart';
-import '../quiz_item/quiz_item_controller.dart';
-import '../quiz_item/quiz_item_state.dart';
+import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_item.dart';
+import '../../model/quiz/quiz_model.dart';
 import 'home_review_screen_state.dart';
 
 final homeReviewScreenProvider =
@@ -24,60 +23,53 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   final Ref ref;
+  bool _isSameDay(DateTime? date1, DateTime date2) {
+    if (date1 == null) {
+      return false;
+    }
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
 
   @override
   Future initState() async {
     // _resetData(); //データリセット
-    await loadData(); // データを読み込む
+    await loadQuizData(); // データを読み込む
     super.initState();
   }
 
   ///クイズ読み込み
-  Future loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final dailyData = prefs.getString('daily_quiz');
-    final dailyScoreData = prefs.getInt('daily_score');
-    final weakData = prefs.getString('weak_quiz');
-    final testData = prefs.getString('test_quiz');
-
-    // dailyQuiz読み込み
-    if (dailyData != null) {
-      final dailyQuiz = QuizItemState.fromJson(json.decode(dailyData));
-      state = state.copyWith(dailyQuiz: dailyQuiz);
-    }
-    // dailyScoreData読み込み
-    if (dailyScoreData != null) {
-      final dailyScore = dailyScoreData;
-      state = state.copyWith(dailyScore: dailyScore);
-    }
-    // weakQuizを読み込み
-    if (weakData != null) {
-      final weakQuiz = QuizItemState.fromJson(json.decode(weakData));
-      state = state.copyWith(weakQuiz: weakQuiz);
-    }
-    //testQuiz読み込み
-    if (testData != null) {
-      final testQuiz = QuizItemState.fromJson(json.decode(testData));
-      state = state.copyWith(testQuiz: testQuiz);
-    }
-    //更新
-    _loadDailyQuiz();
-    _loadWeakQuiz();
+  Future loadQuizData() async {
+    _getDailyQuiz();
+    _getWeakQuiz();
+    _getTestQuiz();
+    _getRunningDay();
     _saveData();
   }
 
   /// dailyQuiz追加
-  void _loadDailyQuiz() {
+  Future _getDailyQuiz() async {
     final now = DateTime.now();
-    final dailyQuiz = state.dailyQuiz;
+    final prefs = await SharedPreferences.getInstance();
+    final dailyQuizData = prefs.getString('daily_quiz');
+    // dailyQuiz読み込み
+    if (dailyQuizData != null) {
+      final dailyQuiz = Quiz.fromJson(json.decode(dailyQuizData));
+      state = state.copyWith(dailyQuiz: dailyQuiz);
+    } else {
+      final defaultDailyQuiz = ref.read(quizModelProvider.notifier).dailyQuiz;
+      state = state.copyWith(dailyQuiz: defaultDailyQuiz);
+    }
+    final dailyQuiz = state.dailyQuiz!;
     final timeStamp = dailyQuiz.timeStamp;
     final quizList = [
       ...ref
-          .read(quizItemProvider)
-          .expand((quizItem) => quizItem.quizList)
+          .read(quizModelProvider)
+          .expand((quiz) => quiz.quizItemList)
           .toList()
     ];
-    final pickedQuizList = <QuizState>[];
+    final pickedQuizList = <QuizItem>[];
     final random = Random();
 
     final saveDate = timeStamp != null
@@ -101,28 +93,53 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     }
   }
 
-  bool _isSameDay(DateTime? date1, DateTime date2) {
-    if (date1 == null) {
-      return false;
-    }
-    return date1.year == date2.year &&
-        date1.month == date2.month &&
-        date1.day == date2.day;
-  }
-
   /// weakQuiz追加
-  void _loadWeakQuiz() {
+  Future _getWeakQuiz() async {
+    final prefs = await SharedPreferences.getInstance();
+    final weakQuizData = prefs.getString('weak_quiz');
+    if (weakQuizData != null) {
+      final weakQuiz = Quiz.fromJson(json.decode(weakQuizData));
+      state = state.copyWith(weakQuiz: weakQuiz);
+    } else {
+      final defaultWeakQuiz = ref.read(quizModelProvider.notifier).weakQuiz;
+      state = state.copyWith(weakQuiz: defaultWeakQuiz);
+    }
     final weakAllList = ref
-        .read(quizItemProvider)
-        .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
+        .read(quizModelProvider)
+        .expand((quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
         .toList();
     // questionが同じものを重複しないようにまとめる
     final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
     final weakList = weakSetList.map((question) {
       return weakAllList.firstWhere((quiz) => quiz.question == question);
     }).toList();
-    final weakQuiz = weakItem.copyWith(quizList: weakList);
+    final weakQuiz = ref
+        .read(quizModelProvider.notifier)
+        .weakQuiz
+        .copyWith(quizItemList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
+  }
+
+  /// TestQuiz追加
+  Future _getTestQuiz() async {
+    final prefs = await SharedPreferences.getInstance();
+    final testData = prefs.getString('test_quiz');
+    if (testData != null) {
+      final testQuiz = Quiz.fromJson(json.decode(testData));
+      state = state.copyWith(testQuiz: testQuiz);
+    } else {
+      final defaultTestQuiz = ref.read(quizModelProvider.notifier).testQuiz;
+      state = state.copyWith(testQuiz: defaultTestQuiz);
+    }
+  }
+
+  Future _getRunningDay() async {
+    final prefs = await SharedPreferences.getInstance();
+    final runningDayData = prefs.getInt('running_day');
+    if (runningDayData != null) {
+      final runningDay = runningDayData;
+      state = state.copyWith(runningDay: runningDay);
+    }
   }
 
   /// testQuiz追加
@@ -131,13 +148,13 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final testLength = state.selectedTestLength;
     final filteredQuizList = [
       ...ref
-          .read(quizItemProvider)
-          .where((quizItem) => testGroup.contains(quizItem.group))
-          .expand((quizItem) => quizItem.quizList)
+          .read(quizModelProvider)
+          .where((quizItem) => testGroup.contains(quizItem.category))
+          .expand((quizItem) => quizItem.quizItemList)
           .toList()
     ];
     final random = Random();
-    final pickedQuizList = <QuizState>[];
+    final pickedQuizList = <QuizItem>[];
 
     for (int i = 0; i < testLength; i++) {
       if (filteredQuizList.isNotEmpty) {
@@ -148,35 +165,35 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
         break;
       }
     }
-    final testQuiz = testItem.copyWith(quizList: pickedQuizList);
+    final testQuiz = ref
+        .read(quizModelProvider.notifier)
+        .testQuiz
+        .copyWith(quizItemList: pickedQuizList);
     state = state.copyWith(testQuiz: testQuiz);
   }
 
   /// DailyItem
-  void updateDailyItem(List<QuizState> quizList) {
+  void updateDailyItem(List<QuizItem> quizList) {
     final now = DateTime.now();
-    final score = quizList.where((x) => x.isJudge == true).toList().length;
-    final dailyScore = state.dailyScore;
-    final dailyQuiz = state.dailyQuiz;
+    final correctNum = quizList.where((x) => x.isJudge == true).toList().length;
+    final runningDay = state.runningDay;
+    final dailyQuiz = state.dailyQuiz!;
     final timeStamp = dailyQuiz.timeStamp;
-    final saveDate = timeStamp != null
-        ? DateTime(timeStamp.year, timeStamp.month, timeStamp.day)
-        : null;
     final nowDate = DateTime(now.year, now.month, now.day);
-    int updatedDailyScore = dailyScore; // 初期値として現在のdailyScoreを設定
+    int updatedRunningDay = runningDay; // 初期値として現在のdailyScoreを設定
 
     //初回のみ or 違う日の時更新
     if (timeStamp == null || !_isSameDay(timeStamp, nowDate)) {
-      updatedDailyScore++; // タイムスタンプがnullまたは日付が違う場合、スコアをインクリメント
+      updatedRunningDay++; // タイムスタンプがnullまたは日付が違う場合、スコアをインクリメント
     }
     final updateDailyQuiz = dailyQuiz.copyWith(
-        score: score,
+        correctNum: correctNum,
         isCompleted: true,
         quizList: quizList,
         timeStamp: nowDate);
 
     state = state.copyWith(
-        dailyQuiz: updateDailyQuiz, dailyScore: updatedDailyScore);
+        dailyQuiz: updateDailyQuiz, runningDay: updatedRunningDay);
     _saveData(); // 保存
   }
 
@@ -184,27 +201,28 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   Future updateWeakItem() async {
     //全ての苦手クイズから同じ問題を絞り込み
     final weakAllList = ref
-        .read(quizItemProvider)
-        .expand((quizItem) => quizItem.quizList.where((quiz) => quiz.isWeak))
+        .read(quizModelProvider)
+        .expand((quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
         .toList();
     final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
     final weakList = weakSetList.map((question) {
       return weakAllList.firstWhere((quiz) => quiz.question == question);
     }).toList();
-    final weakQuiz = state.weakQuiz.copyWith(quizList: weakList);
+    final weakQuiz = state.weakQuiz.copyWith(quizItemList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
     _saveData(); // 保存
   }
 
   ///TestItem更新
-  void updateTestItem(List<QuizState> quizList) {
-    final score = (quizList.where((x) => x.isJudge == true).toList().length /
-            quizList.length *
-            100)
-        .toInt();
-    final isCompleted = quizList.length == score;
-    final testQuiz = state.testQuiz.copyWith(
-        score: score,
+  void updateTestItem(List<QuizItem> quizList) {
+    final correctNum =
+        (quizList.where((x) => x.isJudge == true).toList().length /
+                quizList.length *
+                100)
+            .toInt();
+    final isCompleted = quizList.length == correctNum;
+    final testQuiz = state.testQuiz!.copyWith(
+        correctNum: correctNum,
         isCompleted: isCompleted,
         quizList: quizList,
         timeStamp: DateTime.now());
@@ -215,15 +233,15 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   ///Quizを保存
   Future _saveData() async {
     final prefs = await SharedPreferences.getInstance();
-    final dailyData = json.encode(state.dailyQuiz.toJson());
-    final dailyScore = state.dailyScore;
+    final dailyData = json.encode(state.dailyQuiz!.toJson());
+    final runningDay = state.runningDay;
     final weakData = json.encode(state.weakQuiz.toJson());
     final testData = json.encode(state.testQuiz.toJson());
 
     await prefs.setString('daily_quiz', dailyData);
-    await prefs.setInt('daily_score', dailyScore);
     await prefs.setString('weak_quiz', weakData);
     await prefs.setString('test_quiz', testData);
+    await prefs.setInt('running_day', runningDay);
   }
 
   /// 端末に保存されているデータをリセットする

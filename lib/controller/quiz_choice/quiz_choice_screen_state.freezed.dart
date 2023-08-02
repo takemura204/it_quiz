@@ -22,7 +22,7 @@ mixin _$QuizChoiceScreenState {
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get quizItemIndex => throw _privateConstructorUsedError; //クイズアイテム番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
-  List<QuizState> get quizList => throw _privateConstructorUsedError;
+  List<QuizItem> get quizList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizChoiceScreenStateCopyWith<QuizChoiceScreenState> get copyWith =>
@@ -42,7 +42,7 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       int quizIndex,
       int quizItemIndex,
       List<String> choices,
-      List<QuizState> quizList});
+      List<QuizItem> quizList});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
       quizList: null == quizList
           ? _value.quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
     ) as $Val);
   }
 }
@@ -114,7 +114,7 @@ abstract class _$$_CreateCopyWith<$Res>
       int quizIndex,
       int quizItemIndex,
       List<String> choices,
-      List<QuizState> quizList});
+      List<QuizItem> quizList});
 }
 
 /// @nodoc
@@ -163,7 +163,7 @@ class __$$_CreateCopyWithImpl<$Res>
       quizList: null == quizList
           ? _value._quizList
           : quizList // ignore: cast_nullable_to_non_nullable
-              as List<QuizState>,
+              as List<QuizItem>,
     ));
   }
 }
@@ -178,7 +178,7 @@ class _$_Create extends _Create {
       this.quizIndex = 0,
       this.quizItemIndex = 0,
       final List<String> choices = const [],
-      final List<QuizState> quizList = const []})
+      final List<QuizItem> quizList = const []})
       : _choices = choices,
         _quizList = quizList,
         super._();
@@ -213,11 +213,11 @@ class _$_Create extends _Create {
   }
 
 //選択肢
-  final List<QuizState> _quizList;
+  final List<QuizItem> _quizList;
 //選択肢
   @override
   @JsonKey()
-  List<QuizState> get quizList {
+  List<QuizItem> get quizList {
     if (_quizList is EqualUnmodifiableListView) return _quizList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_quizList);
@@ -272,7 +272,7 @@ abstract class _Create extends QuizChoiceScreenState {
       final int quizIndex,
       final int quizItemIndex,
       final List<String> choices,
-      final List<QuizState> quizList}) = _$_Create;
+      final List<QuizItem> quizList}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -288,7 +288,7 @@ abstract class _Create extends QuizChoiceScreenState {
   @override //クイズアイテム番号
   List<String> get choices;
   @override //選択肢
-  List<QuizState> get quizList;
+  List<QuizItem> get quizList;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kentei_quiz/controller/quiz_item/quiz_item_state.dart';
 import 'package:kentei_quiz/screen/account_login_screen/account_login_screen.dart';
 import 'package:kentei_quiz/screen/account_profile_screen/account_profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 
+import '../model/quiz/quiz.dart';
 import '../model/screen_argument_resource.dart';
 import 'account_create_screen/account_create_screen1.dart';
 import 'account_create_screen/account_create_screen2.dart';
@@ -17,7 +17,7 @@ import 'account_update_screen/account_update_screen.dart';
 class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
   const QuizLearnScreenArguments({required this.item});
 
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   String get screenNameFormat => "/quiz_learn";
@@ -43,7 +43,7 @@ class QuizChoiceScreenArguments
     implements IScreenArguments {
   const QuizChoiceScreenArguments({required this.item});
 
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   String get screenNameFormat => "/quiz_choice";

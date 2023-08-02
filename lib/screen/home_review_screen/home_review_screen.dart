@@ -6,9 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/home_review/home_review_screen_controller.dart';
-import '../../controller/quiz_item/quiz_item_controller.dart';
-import '../../controller/quiz_item/quiz_item_state.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_model.dart';
+import '../../model/quiz/quizzes.dart';
 import '../../view/bar.dart';
 import '../../view/icon_button.dart';
 import '../screen_argument.dart';
@@ -60,10 +61,10 @@ class _DailyQuiz extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeReviewScreenProvider);
-    final dailyQuiz = state.dailyQuiz;
-    final dailyScore = state.dailyScore;
-    final score = dailyQuiz.score;
-    final quizLength = dailyQuiz.quizList.length;
+    final dailyQuiz = state.dailyQuiz!;
+    final dailyScore = 0;
+    final score = dailyQuiz.correctNum;
+    final quizLength = dailyQuiz.quizItemList.length;
 
     return Column(
       children: [
@@ -80,7 +81,7 @@ class _DailyQuiz extends ConsumerWidget {
           score: dailyScore,
           unit: "日目",
           onTap: () {
-            ref.read(quizItemProvider.notifier).setQuizType(QuizType.daily);
+            ref.read(quizModelProvider.notifier).setQuizType(QuizType.daily);
             context.showScreen(
               QuizChoiceScreenArguments(
                 item: dailyQuiz,
@@ -99,7 +100,7 @@ class _WeakQuiz extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weakQuiz = ref.watch(homeReviewScreenProvider).weakQuiz;
-    final weakList = weakQuiz.quizList;
+    final weakList = weakQuiz.quizItemList;
     return Column(
       children: [
         if (weakList.isEmpty)
@@ -114,9 +115,7 @@ class _WeakQuiz extends ConsumerWidget {
               score: weakList.length,
               unit: "問　",
               onTap: () {
-                ref
-                    .read(quizItemProvider.notifier)
-                    .setQuizType(QuizType.review);
+                ref.read(quizModelProvider.notifier).setQuizType(QuizType.weak);
                 context.showScreen(QuizChoiceScreenArguments(
                   item: weakQuiz,
                 ).generateRoute());
@@ -132,7 +131,7 @@ class _TestQuiz extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizItemProvider);
+    final quizItemList = ref.watch(quizModelProvider);
     final testQuiz = ref.watch(homeReviewScreenProvider).testQuiz;
     return Column(
       children: [
@@ -143,11 +142,11 @@ class _TestQuiz extends ConsumerWidget {
         else
           _QuizButton(
             title: "力だめし",
-            subWidget: Text((testQuiz.timeStamp != null)
+            subWidget: Text((testQuiz!.timeStamp != null)
                 ? '挑戦日:${DateFormat('yyyy-MM-dd').format(testQuiz.timeStamp!)}'
                 : "未挑戦"),
             icon: Icons.edit_note_outlined,
-            score: testQuiz.score,
+            score: testQuiz!.correctNum,
             unit: "点　",
             onTap: () {
               showDialog(
@@ -176,7 +175,7 @@ class _TestQuizDialog extends ConsumerWidget {
               ///タイトル
               Row(
                 children: [
-                  _DialogTitle(testQuiz),
+                  _DialogTitle(testQuiz!),
                   const Spacer(),
                   ClearButton(
                     iconSize: context.height * 0.04,

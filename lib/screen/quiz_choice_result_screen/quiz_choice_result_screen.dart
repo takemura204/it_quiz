@@ -5,7 +5,7 @@ import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_controller
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../controller/quiz_item/quiz_item_state.dart';
+import '../../model/quiz/quiz.dart';
 import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
 
@@ -13,7 +13,7 @@ part 'quiz_choice_result_view.dart';
 
 class QuizChoiceResultScreen extends StatelessWidget {
   const QuizChoiceResultScreen(this.arguments);
-  final QuizItemState arguments;
+  final Quiz arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class QuizChoiceResultScreen extends StatelessWidget {
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar(this.arguments);
 
-  final QuizItemState arguments;
+  final Quiz arguments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,7 +53,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 class _Body extends ConsumerWidget {
   const _Body(this.item);
 
-  final QuizItemState item;
+  final Quiz item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
