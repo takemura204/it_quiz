@@ -166,7 +166,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   ///クイズ結果更新(端末保存)
   void _updateItem() {
     final quizList = state.quizList;
-    ref.read(quizModelProvider.notifier).updateItem(quizList);
+    ref.read(quizModelProvider.notifier).updateQuiz(quizList);
   }
 
   ///クリアボタン

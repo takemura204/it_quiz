@@ -8,7 +8,7 @@ part 'quiz.g.dart';
 ///問題ジャンル
 @freezed
 class Quiz with _$Quiz {
-  const factory Quiz({
+  factory Quiz({
     required final int id, //問題ID
     required final String category, //問題のジャンル別に分ける
     required final String title, //問題タイトル

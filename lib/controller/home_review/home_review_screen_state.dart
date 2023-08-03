@@ -6,22 +6,23 @@ part 'home_review_screen_state.freezed.dart';
 
 @freezed
 class HomeReviewScreenState with _$HomeReviewScreenState {
-  const factory HomeReviewScreenState({
+   factory HomeReviewScreenState({
     @Default([]) final List<Quiz> reviewItem,
-    @Default(defaultWeakQuiz) final Quiz weakQuiz, //苦手克服
-    @Default(defaultDilyQuiz) dailyQuiz, //今日のクイズ
-    @Default(defaultTestQuiz)  testQuiz, //全てのクイズ
+    @Default([]) final List<Quiz> weakQuiz, //苦手克服
+    @Default([]) final List<Quiz> dailyQuiz, //今日のクイズ
+    @Default([])  final List<Quiz> testQuiz, //全てのクイズ
     @Default(0) final int testScore, //全てのクイズ
     @Default(false) bool isSelected,
     @Default([]) final List<String> testGroup,
     @Default(10) final int selectedTestLength,
     @Default(0) final int runningDay, //継続日数
   }) = _Create;
+  HomeReviewScreenState._();
 }
 
 
 ///今日のクイズ
-const defaultDilyQuiz =  Quiz(
+Quiz defaultDilyQuiz =  Quiz(
   id: 1,
   category: "review",
   title: "今日のクイズ",
@@ -32,7 +33,7 @@ const defaultDilyQuiz =  Quiz(
 );
 
 ///苦手克服
-const defaultWeakQuiz = Quiz(
+Quiz defaultWeakQuiz = Quiz(
   id: 2,
   category: "review",
   title: "苦手克服",
@@ -43,7 +44,7 @@ const defaultWeakQuiz = Quiz(
 );
 
 ///力だめし
-const defaultTestQuiz = Quiz(
+Quiz defaultTestQuiz = Quiz(
   id: 3,
   category: "review",
   title: "力だめし",

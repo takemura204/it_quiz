@@ -10,7 +10,7 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.16.2 <3.1.0"
   # 次の一行を記述するとビルドに使用する flutter sdk version を指定できる
   # Note: ビルドに使用する flutter sdk version は flutter version コマンドで選択できる
   # Warn: main.ymlも合わせて変えること！！！
@@ -21,13 +21,13 @@ dependencies:
   #  他言語対応したい
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl: ^0.18.0
   localization: ^2.1.0
 
   cupertino_icons: ^1.0.2
 
   # よりよいproviderを使いたい
-  hooks_riverpod: ^2.3.4
+  hooks_riverpod: ^2.3.7
   provider: ^6.0.2
 
   # StateNotifierを使って状態管理したい
@@ -87,7 +87,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
 
   #プロフィール画像を選択したい
-  image_picker: ^0.8.6+3
+  image_picker: ^1.0.1
 
   #生年月日をドラムロールしたい
   flutter_datetime_picker: ^1.5.1
@@ -119,6 +119,9 @@ dependencies:
   #レビュー評価してもらいたい
   in_app_review: ^2.0.6
 
+  flutter_hooks: ^0.18.6
+  flutter_gen: ^5.3.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -128,7 +131,7 @@ dev_dependencies:
   # freezed用
   json_serializable: ^6.6.2
   freezed: ^2.3.2
-  build_runner: ^2.3.2
+  build_runner: ^2.4.6
 
 flutter:
   uses-material-design: true

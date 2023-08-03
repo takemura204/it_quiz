@@ -8,11 +8,11 @@ class _QuizItemBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(quizModelProvider)[index];
-    final quizItemController = ref.read(quizModelProvider.notifier);
+    final quiz = ref.watch(quizModelProvider).quizList[index];
+    final quizController = ref.read(quizModelProvider.notifier);
     return GestureDetector(
       onTap: () {
-        quizItemController.tapQuizItemBar(index);
+        quizController.tapQuizItemBar(index);
         //ダイアログ表示
         showDialog(
             context: context, builder: (_) => _StudyQuizDialog(index: index));
@@ -29,7 +29,7 @@ class _QuizItemBar extends ConsumerWidget {
               right: context.width * 0.02),
           title: Container(
             child: Text(
-              item.title,
+              quiz.title,
               style: TextStyle(fontSize: context.width * 0.04),
             ),
           ),
@@ -40,17 +40,17 @@ class _QuizItemBar extends ConsumerWidget {
               children: [
                 const Spacer(),
                 Text(
-                  item.isCompleted ? "good!" : "",
+                  quiz.isCompleted ? "good!" : "",
                   style: TextStyle(
                     fontSize: context.width * 0.025,
                     fontWeight: FontWeight.bold,
                     color:
-                        item.isCompleted ? context.mainColor : Colors.black26,
+                        quiz.isCompleted ? context.mainColor : Colors.black26,
                   ),
                 ),
                 Icon(
                   Icons.pets,
-                  color: item.isCompleted ? context.mainColor : Colors.black26,
+                  color: quiz.isCompleted ? context.mainColor : Colors.black26,
                 ),
                 const Spacer(),
                 Gap(context.height * 0.01),
@@ -72,7 +72,7 @@ class _StudyQuizDialog extends ConsumerWidget {
   final int index;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(quizModelProvider)[index];
+    final quiz = ref.watch(quizModelProvider).quizList[index];
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
@@ -85,7 +85,7 @@ class _StudyQuizDialog extends ConsumerWidget {
               ///タイトル
               Row(
                 children: [
-                  _Title(item),
+                  _Title(quiz),
                   const Spacer(),
                   ClearButton(
                     iconSize: context.height * 0.04,
@@ -97,7 +97,7 @@ class _StudyQuizDialog extends ConsumerWidget {
               const Divider(height: 1),
 
               ///クイズ挑戦結果
-              _QuizResult(item),
+              _QuizResult(quiz),
 
               const Divider(height: 1),
 
@@ -112,11 +112,11 @@ class _StudyQuizDialog extends ConsumerWidget {
 
                     ///一問一答形式で学習する
                     _SimpleDialogOption1(
-                        item: item, text: I18n().styleLeanQuiz),
+                        item: quiz, text: I18n().styleLeanQuiz),
 
                     ///4択形式クイズに挑戦する
                     _SimpleDialogOption2(
-                        item: item, text: I18n().styleChoiceQuiz),
+                        item: quiz, text: I18n().styleChoiceQuiz),
                   ],
                 ),
               ),

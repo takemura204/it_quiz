@@ -18,7 +18,7 @@ final homeReviewScreenProvider =
 class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     with LocatorMixin {
   HomeReviewScreenController({required this.ref})
-      : super(const HomeReviewScreenState()) {
+      : super( HomeReviewScreenState()) {
     initState();
   }
 
@@ -65,7 +65,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final timeStamp = dailyQuiz.timeStamp;
     final quizList = [
       ...ref
-          .read(quizModelProvider)
+          .read(quizModelProvider).quizList
           .expand((quiz) => quiz.quizItemList)
           .toList()
     ];
@@ -105,7 +105,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
       state = state.copyWith(weakQuiz: defaultWeakQuiz);
     }
     final weakAllList = ref
-        .read(quizModelProvider)
+        .read(quizModelProvider).quizList
         .expand((quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
         .toList();
     // questionが同じものを重複しないようにまとめる
@@ -148,7 +148,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final testLength = state.selectedTestLength;
     final filteredQuizList = [
       ...ref
-          .read(quizModelProvider)
+          .read(quizModelProvider).quizList
           .where((quizItem) => testGroup.contains(quizItem.category))
           .expand((quizItem) => quizItem.quizItemList)
           .toList()
@@ -201,7 +201,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   Future updateWeakItem() async {
     //全ての苦手クイズから同じ問題を絞り込み
     final weakAllList = ref
-        .read(quizModelProvider)
+        .read(quizModelProvider).quizList
         .expand((quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
         .toList();
     final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();

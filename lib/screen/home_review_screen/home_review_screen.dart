@@ -131,11 +131,11 @@ class _TestQuiz extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizModelProvider);
+    final quizList = ref.watch(quizModelProvider).quizList;
     final testQuiz = ref.watch(homeReviewScreenProvider).testQuiz;
     return Column(
       children: [
-        if (quizItemList.isEmpty)
+        if (quizList.isEmpty)
           const _NullQuizButton(
             title: 'まだテストできません',
           )

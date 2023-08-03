@@ -36,13 +36,13 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizModelProvider);
+    final quizList = ref.watch(quizModelProvider).quizList;
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleStudy),
       ),
       body: GroupedListView<Quiz, String>(
-        elements: quizItemList,
+        elements: quizList,
         groupBy: (Quiz item) => item.category,
         groupComparator: (value1, value2) =>
             value2.compareTo(value1), //グループのカスタムソートを定義

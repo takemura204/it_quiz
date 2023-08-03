@@ -215,7 +215,7 @@ class GroupProgress extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final group =
-        ref.read(quizModelProvider).map((quiz) => quiz.category).toSet().toList();
+        ref.read(quizModelProvider).quizList.map((quiz) => quiz.category).toSet().toList();
     if (group.isEmpty) {
       return Center(
         child: SpinKitFadingCircle(
@@ -269,7 +269,7 @@ class _ProgressMeterCart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filterQuizList = ref
-        .read(quizModelProvider)
+        .read(quizModelProvider).quizList
         .where((x) => x.category == groupName)
         .expand((quiz) => quiz.quizItemList)
         .toList();

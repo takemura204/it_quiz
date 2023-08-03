@@ -198,7 +198,7 @@ class _QuizRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final group =
-        ref.read(quizModelProvider).map((item) => item.category).toSet().toList();
+        ref.read(quizModelProvider).quizList.map((item) => item.category).toSet().toList();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
       child: Column(

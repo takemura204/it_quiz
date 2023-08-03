@@ -105,7 +105,7 @@ extension QuizModelEx on QuizModel {
   ];
 
   ///今日のクイズ
-  Quiz get dailyQuiz => const Quiz(
+  Quiz get dailyQuiz =>  Quiz(
     id: 1,
     category: "review",
     title: "今日のクイズ",
@@ -116,7 +116,7 @@ extension QuizModelEx on QuizModel {
   );
 
   ///苦手克服
-  Quiz get weakQuiz  => const Quiz(
+  Quiz get weakQuiz  =>  Quiz(
     id: 2,
     category: "review",
     title: "苦手克服",
@@ -127,7 +127,7 @@ extension QuizModelEx on QuizModel {
   );
 
   ///力だめし
-  Quiz get testQuiz => const Quiz(
+  Quiz get testQuiz =>  Quiz(
     id: 3,
     category: "review",
     title: "力だめし",
