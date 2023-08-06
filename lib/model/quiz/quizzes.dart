@@ -8,7 +8,7 @@ part 'quizzes.g.dart';
 ///問題ジャンル
 @freezed
 class Quizzes with _$Quizzes {
-  const factory Quizzes({
+   factory Quizzes({
     @Default([]) final List<Quiz> quizList, //クイズ一覧
     @Default([]) final List<Quiz> userQuizList, //ユーザーが解いたクイズ一覧
     Quiz? weakQuiz, //苦手克服

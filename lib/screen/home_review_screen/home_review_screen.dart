@@ -99,7 +99,7 @@ class _WeakQuiz extends ConsumerWidget {
   const _WeakQuiz();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final weakQuiz = ref.watch(homeReviewScreenProvider).weakQuiz;
+    final weakQuiz = ref.watch(homeReviewScreenProvider).weakQuiz!;
     final weakList = weakQuiz.quizItemList;
     return Column(
       children: [
@@ -146,7 +146,7 @@ class _TestQuiz extends ConsumerWidget {
                 ? '挑戦日:${DateFormat('yyyy-MM-dd').format(testQuiz.timeStamp!)}'
                 : "未挑戦"),
             icon: Icons.edit_note_outlined,
-            score: testQuiz!.correctNum,
+            score: testQuiz.correctNum,
             unit: "点　",
             onTap: () {
               showDialog(

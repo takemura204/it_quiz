@@ -361,7 +361,7 @@ class _SimpleDialogOption extends ConsumerWidget {
           ? () {
               ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
               ref.read(homeReviewScreenProvider.notifier).updateTestQuiz();
-              final testQuiz = ref.read(homeReviewScreenProvider).testQuiz;
+              final testQuiz = ref.read(homeReviewScreenProvider).testQuiz!;
               context.showScreen(
                 QuizChoiceScreenArguments(
                   item: testQuiz,

@@ -88,7 +88,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
           break;
         }
       }
-      final updateDailyQuiz = dailyQuiz.copyWith(quizList: pickedQuizList);
+      final updateDailyQuiz = dailyQuiz.copyWith(quizItemList: pickedQuizList);
       state = state.copyWith(dailyQuiz: updateDailyQuiz);
     }
   }
@@ -173,9 +173,9 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   }
 
   /// DailyItem
-  void updateDailyItem(List<QuizItem> quizList) {
+  void updateDailyItem(List<QuizItem> quizItemList) {
     final now = DateTime.now();
-    final correctNum = quizList.where((x) => x.isJudge == true).toList().length;
+    final correctNum = quizItemList.where((x) => x.isJudge == true).toList().length;
     final runningDay = state.runningDay;
     final dailyQuiz = state.dailyQuiz!;
     final timeStamp = dailyQuiz.timeStamp;
@@ -189,7 +189,7 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final updateDailyQuiz = dailyQuiz.copyWith(
         correctNum: correctNum,
         isCompleted: true,
-        quizList: quizList,
+        quizItemList: quizItemList,
         timeStamp: nowDate);
 
     state = state.copyWith(
@@ -208,23 +208,23 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final weakList = weakSetList.map((question) {
       return weakAllList.firstWhere((quiz) => quiz.question == question);
     }).toList();
-    final weakQuiz = state.weakQuiz.copyWith(quizItemList: weakList);
+    final weakQuiz = state.weakQuiz?.copyWith(quizItemList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
     _saveData(); // 保存
   }
 
   ///TestItem更新
-  void updateTestItem(List<QuizItem> quizList) {
+  void updateTestItem(List<QuizItem> quizItemList) {
     final correctNum =
-        (quizList.where((x) => x.isJudge == true).toList().length /
-                quizList.length *
+        (quizItemList.where((x) => x.isJudge == true).toList().length /
+                quizItemList.length *
                 100)
             .toInt();
-    final isCompleted = quizList.length == correctNum;
+    final isCompleted = quizItemList.length == correctNum;
     final testQuiz = state.testQuiz!.copyWith(
         correctNum: correctNum,
         isCompleted: isCompleted,
-        quizList: quizList,
+        quizItemList: quizItemList,
         timeStamp: DateTime.now());
     state = state.copyWith(testQuiz: testQuiz);
     _saveData(); // 保存
@@ -235,8 +235,8 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final prefs = await SharedPreferences.getInstance();
     final dailyData = json.encode(state.dailyQuiz!.toJson());
     final runningDay = state.runningDay;
-    final weakData = json.encode(state.weakQuiz.toJson());
-    final testData = json.encode(state.testQuiz.toJson());
+    final weakData = json.encode(state.weakQuiz?.toJson());
+    final testData = json.encode(state.testQuiz?.toJson());
 
     await prefs.setString('daily_quiz', dailyData);
     await prefs.setString('weak_quiz', weakData);

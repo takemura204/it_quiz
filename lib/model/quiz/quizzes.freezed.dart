@@ -262,7 +262,7 @@ class __$$_QuizzesCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Quizzes extends _Quizzes {
-  const _$_Quizzes(
+  _$_Quizzes(
       {final List<Quiz> quizList = const [],
       final List<Quiz> userQuizList = const [],
       this.weakQuiz,
@@ -415,7 +415,7 @@ class _$_Quizzes extends _Quizzes {
 }
 
 abstract class _Quizzes extends Quizzes {
-  const factory _Quizzes(
+  factory _Quizzes(
       {final List<Quiz> quizList,
       final List<Quiz> userQuizList,
       final Quiz? weakQuiz,
@@ -426,7 +426,7 @@ abstract class _Quizzes extends Quizzes {
       final List<QuizItem> testQuizItem,
       final int selectQuizIndex,
       final QuizType quizType}) = _$_Quizzes;
-  const _Quizzes._() : super._();
+  _Quizzes._() : super._();
 
   factory _Quizzes.fromJson(Map<String, dynamic> json) = _$_Quizzes.fromJson;
 

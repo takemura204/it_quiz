@@ -20,7 +20,7 @@ final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
 );
 
 class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
-  QuizModel(this.ref) : super(const Quizzes()) {
+  QuizModel(this.ref) : super( Quizzes()) {
     initState();
   }
   final Ref ref;

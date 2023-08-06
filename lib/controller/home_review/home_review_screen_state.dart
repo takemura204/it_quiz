@@ -8,10 +8,9 @@ part 'home_review_screen_state.freezed.dart';
 class HomeReviewScreenState with _$HomeReviewScreenState {
    factory HomeReviewScreenState({
     @Default([]) final List<Quiz> reviewItem,
-    @Default([]) final List<Quiz> weakQuiz, //苦手克服
-    @Default([]) final List<Quiz> dailyQuiz, //今日のクイズ
-    @Default([])  final List<Quiz> testQuiz, //全てのクイズ
-    @Default(0) final int testScore, //全てのクイズ
+     Quiz? weakQuiz, //苦手克服
+     Quiz? dailyQuiz, //今日のクイズ
+     Quiz? testQuiz, //全てのクイズ
     @Default(false) bool isSelected,
     @Default([]) final List<String> testGroup,
     @Default(10) final int selectedTestLength,
@@ -22,7 +21,7 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
 
 
 ///今日のクイズ
-Quiz defaultDilyQuiz =  Quiz(
+final defaultDilyQuiz =  Quiz(
   id: 1,
   category: "review",
   title: "今日のクイズ",
@@ -33,7 +32,7 @@ Quiz defaultDilyQuiz =  Quiz(
 );
 
 ///苦手克服
-Quiz defaultWeakQuiz = Quiz(
+final defaultWeakQuiz = Quiz(
   id: 2,
   category: "review",
   title: "苦手克服",
@@ -44,7 +43,7 @@ Quiz defaultWeakQuiz = Quiz(
 );
 
 ///力だめし
-Quiz defaultTestQuiz = Quiz(
+final defaultTestQuiz = Quiz(
   id: 3,
   category: "review",
   title: "力だめし",
