@@ -3,7 +3,7 @@ import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
-import '../../model/quiz/quiz_item.dart';
+import '../../model/quiz_item/quiz_item.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../home_review/home_review_screen_controller.dart';
 

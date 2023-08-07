@@ -4,7 +4,7 @@ import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
-import '../../model/quiz/quiz_item.dart';
+import '../../model/quiz_item/quiz_item.dart';
 import '../home_review/home_review_screen_controller.dart';
 
 final quizChoiceScreenProvider =

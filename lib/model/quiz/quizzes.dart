@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kentei_quiz/model/quiz/quiz.dart';
-import 'package:kentei_quiz/model/quiz/quiz_item.dart';
+import 'package:kentei_quiz/model/quiz_item/quiz_item.dart';
 
 part 'quizzes.freezed.dart';
 part 'quizzes.g.dart';

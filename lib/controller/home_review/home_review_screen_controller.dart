@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
-import '../../model/quiz/quiz_item.dart';
 import '../../model/quiz/quiz_model.dart';
+import '../../model/quiz_item/quiz_item.dart';
 import 'home_review_screen_state.dart';
 
 final homeReviewScreenProvider =

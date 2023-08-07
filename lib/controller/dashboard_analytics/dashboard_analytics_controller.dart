@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../model/quiz/quiz_item.dart';
+import '../../model/quiz_item/quiz_item.dart';
 import '../dashboard_analytics/bar_data_state.dart';
 import 'dashboard_analytics_state.dart';
 

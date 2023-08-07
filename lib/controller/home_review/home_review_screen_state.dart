@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../model/quiz/quiz.dart';
 
 part 'home_review_screen_state.freezed.dart';
@@ -18,37 +17,3 @@ class HomeReviewScreenState with _$HomeReviewScreenState {
   }) = _Create;
   HomeReviewScreenState._();
 }
-
-
-///今日のクイズ
-final defaultDilyQuiz =  Quiz(
-  id: 1,
-  category: "review",
-  title: "今日のクイズ",
-  isCompleted: false,
-  quizItemList: [],
-  correctNum: 0,
-  timeStamp: null,
-);
-
-///苦手克服
-final defaultWeakQuiz = Quiz(
-  id: 2,
-  category: "review",
-  title: "苦手克服",
-  isCompleted: false,
-  quizItemList: [],
-  correctNum: 0,
-  timeStamp: null,
-);
-
-///力だめし
-final defaultTestQuiz = Quiz(
-  id: 3,
-  category: "review",
-  title: "力だめし",
-  isCompleted: false,
-  quizItemList: [],
-  correctNum: 0,
-  timeStamp: null,
-);

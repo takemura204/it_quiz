@@ -8,19 +8,19 @@ import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
-
 import '../../controller/home_review/home_review_screen_controller.dart';
 import '../lang/initial_resource.dart';
-import 'quiz_item.dart';
+import '../quiz_item/quiz_item.dart';
 
 part 'quiz_resource.dart';
 part 'quizzes_resource.dart';
+
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
-      (ref) => QuizModel(ref),
+  (ref) => QuizModel(ref),
 );
 
 class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
-  QuizModel(this.ref) : super( Quizzes()) {
+  QuizModel(this.ref) : super(Quizzes()) {
     initState();
   }
   final Ref ref;
@@ -43,8 +43,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   ///読み込み
   Future _loadQuizData() async {
     _getQuizListData();
-    // _getDailyQuiz();
-    // _getWeakQuiz();
+    _getDailyQuiz();
+    _getWeakQuiz();
     // _getTestQuiz();
     // _getRunningDay();
     // _saveData();
@@ -56,7 +56,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final quizListDataJson = prefs.getStringList('quiz_list');
     if (quizListDataJson != null && quizListDataJson.isNotEmpty) {
       final getQuizList =
-      quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
+          quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
       final updateQuizList = getQuizList.map((quiz) {
         // studyQuizから、対応するアイテムを探す
         final updatedItem = studyQuiz.firstWhereOrNull((e) => e.id == quiz.id);
@@ -137,12 +137,54 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     }
   }
 
+  Future _getWeakQuiz() async {
+    final prefs = await SharedPreferences.getInstance();
+    final weakQuizData = prefs.getString('weak_quiz');
+    if (weakQuizData != null) {
+      final weakQuiz = Quiz.fromJson(json.decode(weakQuizData));
+      state = state.copyWith(weakQuiz: weakQuiz);
+    } else {
+      final defaultWeakQuiz = ref.read(quizModelProvider.notifier).weakQuiz;
+      state = state.copyWith(weakQuiz: defaultWeakQuiz);
+    }
+    final weakAllList = ref
+        .read(quizModelProvider).quizList
+        .expand((quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
+        .toList();
+    // questionが同じものを重複しないようにまとめる
+    final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
+    final weakList = weakSetList.map((question) {
+      return weakAllList.firstWhere((quiz) => quiz.question == question);
+    }).toList();
+    final weakQuiz = ref
+        .read(quizModelProvider.notifier)
+        .weakQuiz
+        .copyWith(quizItemList: weakList);
+    state = state.copyWith(weakQuiz: weakQuiz);
+  }
+
+  /// TestQuiz追加
+  Future _getTestQuiz() async {
+    final prefs = await SharedPreferences.getInstance();
+    final testData = prefs.getString('test_quiz');
+    if (testData != null) {
+      final testQuiz = Quiz.fromJson(json.decode(testData));
+      state = state.copyWith(testQuiz: testQuiz);
+    } else {
+      final defaultTestQuiz = ref
+          .read(quizModelProvider.notifier)
+          .testQuiz;
+      state = state.copyWith(testQuiz: defaultTestQuiz);
+    }
+  }
+
+
   ///クイズ更新
   void updateQuiz(List<QuizItem> quiz) {
     final quizType = state.quizType;
     switch (quizType) {
       case QuizType.study:
-        _updateStudyQuiz(quiz);
+
         ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
@@ -195,7 +237,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final updateStudyQuiz = quizList.map((quiz) {
       final updatedQuizList = quiz.quizItemList.map((quizItem) {
         final updatedQuiz = nonWeakQuizList.firstWhereOrNull(
-                (nonWeakQuiz) => nonWeakQuiz.question == quizItem.question);
+            (nonWeakQuiz) => nonWeakQuiz.question == quizItem.question);
         if (updatedQuiz != null) {
           return quizItem.copyWith(isWeak: false);
         }
@@ -213,7 +255,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   Future _saveDevice() async {
     final prefs = await SharedPreferences.getInstance();
     final quizListData =
-    state.quizList.map((e) => json.encode(e.toJson())).toList();
+        state.quizList.map((e) => json.encode(e.toJson())).toList();
     await prefs.setStringList('quiz_list', quizListData);
   }
 

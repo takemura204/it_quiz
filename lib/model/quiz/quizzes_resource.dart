@@ -116,7 +116,7 @@ extension QuizModelEx on QuizModel {
   );
 
   ///苦手克服
-  Quiz get weakQuiz  =>  Quiz(
+  Quiz get weakQuiz =>  Quiz(
     id: 2,
     category: "review",
     title: "苦手克服",
