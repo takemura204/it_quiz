@@ -1,4 +1,4 @@
-part of 'home_study_screen.dart';
+part of 'home_quiz_screen.dart';
 
 ///問題一覧Bar
 class _QuizItemBar extends ConsumerWidget {

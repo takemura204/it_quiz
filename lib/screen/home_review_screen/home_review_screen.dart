@@ -39,14 +39,14 @@ class _Scaffold extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: const [
-            ///今日のクイズ
-            _DailyQuiz(),
-
-            ///苦手学習
-            _WeakQuiz(),
-
-            ///力試し
-            _TestQuiz(),
+            // ///今日のクイズ
+            // _DailyQuiz(),
+            //
+            // ///苦手学習
+            // _WeakQuiz(),
+            //
+            // ///力試し
+            // _TestQuiz(),
           ],
         ),
       ),

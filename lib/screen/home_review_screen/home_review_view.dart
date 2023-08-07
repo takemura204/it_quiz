@@ -356,11 +356,13 @@ class _SimpleDialogOption extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isGroup = ref.watch(homeReviewScreenProvider).testGroup.isNotEmpty;
+    final testGroup = ref.watch(homeReviewScreenProvider).testGroup;
+    final selectedTestLength = ref.watch(homeReviewScreenProvider).selectedTestLength;
     return SimpleDialogOption(
       onPressed: isGroup
           ? () {
               ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
-              ref.read(homeReviewScreenProvider.notifier).updateTestQuiz();
+              ref.read(quizModelProvider.notifier).updateTestQuiz(testGroup,selectedTestLength);
               final testQuiz = ref.read(homeReviewScreenProvider).testQuiz!;
               context.showScreen(
                 QuizChoiceScreenArguments(

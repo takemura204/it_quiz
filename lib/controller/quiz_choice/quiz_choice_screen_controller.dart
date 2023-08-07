@@ -5,7 +5,6 @@ import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz_item/quiz_item.dart';
-import '../home_review/home_review_screen_controller.dart';
 
 final quizChoiceScreenProvider =
     StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
@@ -121,7 +120,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);
-    ref.read(homeReviewScreenProvider.notifier).updateWeakItem();
+    ref.read(quizModelProvider.notifier).updateWeakItem();
   }
 
   ///クリアボタン

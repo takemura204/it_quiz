@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
+import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../model/lang/initial_resource.dart';
@@ -13,17 +13,17 @@ import '../../model/quiz/quizzes.dart';
 import '../../view/icon_button.dart';
 import '../screen_argument.dart';
 
-part 'home_study_view.dart';
+part 'home_quiz_view.dart';
 
-class HomeStudyScreen extends ConsumerWidget {
-  const HomeStudyScreen();
+class HomeQuizScreen extends ConsumerWidget {
+  const HomeQuizScreen();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
-        homeStudyScreenProvider.overrideWith(
-          (ref) => HomeStudyScreenController(ref: ref),
+        homeQuizScreenProvider.overrideWith(
+          (ref) => HomeQuizScreenController(ref: ref),
         ),
       ],
       child: const _Scaffold(),

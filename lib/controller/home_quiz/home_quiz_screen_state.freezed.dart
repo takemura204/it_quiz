@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_study_screen_state.dart';
+part of 'home_quiz_screen_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$HomeStudyScreenState {
+mixin _$HomeQuizScreenState {
   int get itemIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HomeStudyScreenStateCopyWith<HomeStudyScreenState> get copyWith =>
+  $HomeQuizScreenStateCopyWith<HomeQuizScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HomeStudyScreenStateCopyWith<$Res> {
-  factory $HomeStudyScreenStateCopyWith(HomeStudyScreenState value,
-          $Res Function(HomeStudyScreenState) then) =
-      _$HomeStudyScreenStateCopyWithImpl<$Res, HomeStudyScreenState>;
+abstract class $HomeQuizScreenStateCopyWith<$Res> {
+  factory $HomeQuizScreenStateCopyWith(
+          HomeQuizScreenState value, $Res Function(HomeQuizScreenState) then) =
+      _$HomeQuizScreenStateCopyWithImpl<$Res, HomeQuizScreenState>;
   @useResult
   $Res call({int itemIndex});
 }
 
 /// @nodoc
-class _$HomeStudyScreenStateCopyWithImpl<$Res,
-        $Val extends HomeStudyScreenState>
-    implements $HomeStudyScreenStateCopyWith<$Res> {
-  _$HomeStudyScreenStateCopyWithImpl(this._value, this._then);
+class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
+    implements $HomeQuizScreenStateCopyWith<$Res> {
+  _$HomeQuizScreenStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -59,7 +58,7 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
 
 /// @nodoc
 abstract class _$$_CreateCopyWith<$Res>
-    implements $HomeStudyScreenStateCopyWith<$Res> {
+    implements $HomeQuizScreenStateCopyWith<$Res> {
   factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
       __$$_CreateCopyWithImpl<$Res>;
   @override
@@ -69,7 +68,7 @@ abstract class _$$_CreateCopyWith<$Res>
 
 /// @nodoc
 class __$$_CreateCopyWithImpl<$Res>
-    extends _$HomeStudyScreenStateCopyWithImpl<$Res, _$_Create>
+    extends _$HomeQuizScreenStateCopyWithImpl<$Res, _$_Create>
     implements _$$_CreateCopyWith<$Res> {
   __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
       : super(_value, _then);
@@ -99,7 +98,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'HomeStudyScreenState(itemIndex: $itemIndex)';
+    return 'HomeQuizScreenState(itemIndex: $itemIndex)';
   }
 
   @override
@@ -121,7 +120,7 @@ class _$_Create implements _Create {
       __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
-abstract class _Create implements HomeStudyScreenState {
+abstract class _Create implements HomeQuizScreenState {
   const factory _Create({final int itemIndex}) = _$_Create;
 
   @override

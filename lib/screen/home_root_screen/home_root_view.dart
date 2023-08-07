@@ -12,7 +12,7 @@ class _Body extends ConsumerWidget {
       sizing: StackFit.expand,
       index: state.currentIndex,
       children: const [
-        HomeStudyScreen(),
+        HomeQuizScreen(),
         HomeReviewScreen(),
         HomeDashboardScreen(),
         HomeSettingScreen(),
