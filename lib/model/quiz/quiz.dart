@@ -8,7 +8,7 @@ part 'quiz.g.dart';
 ///問題ジャンル
 @freezed
 class Quiz with _$Quiz {
-  factory Quiz({
+  const factory Quiz({
     required final int id, //問題ID
     required final String category, //問題のジャンル別に分ける
     required final String title, //問題タイトル
@@ -17,6 +17,6 @@ class Quiz with _$Quiz {
     required final int correctNum, //正解数
     required final DateTime? timeStamp, //挑戦日
   }) = _Quiz;
-  Quiz._();
+
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
 }

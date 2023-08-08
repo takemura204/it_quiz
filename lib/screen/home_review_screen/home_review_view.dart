@@ -3,6 +3,7 @@ part of 'home_review_screen.dart';
 ///タップできないボタン
 class _NullQuizButton extends ConsumerWidget {
   const _NullQuizButton({required this.title});
+
   final String title;
 
   @override
@@ -48,12 +49,14 @@ class _QuizButton extends ConsumerWidget {
     required this.score,
     required this.unit,
   });
+
   final String title;
   final Widget subWidget;
   final int score;
   final String unit;
   final IconData? icon;
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
@@ -165,6 +168,7 @@ class _QuizButton extends ConsumerWidget {
 
 class _DialogTitle extends ConsumerWidget {
   const _DialogTitle(this.item);
+
   final Quiz item;
 
   @override
@@ -195,10 +199,15 @@ class _DialogTitle extends ConsumerWidget {
 
 class _QuizRange extends ConsumerWidget {
   const _QuizRange();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final group =
-        ref.read(quizModelProvider).quizList.map((item) => item.category).toSet().toList();
+    final group = ref
+        .read(quizModelProvider)
+        .quizList
+        .map((item) => item.category)
+        .toSet()
+        .toList();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
       child: Column(
@@ -224,6 +233,7 @@ class _QuizRange extends ConsumerWidget {
 ///出題数
 class _SelectRange extends ConsumerWidget {
   const _SelectRange(this.text);
+
   final String text;
 
   @override
@@ -275,6 +285,7 @@ class _SelectRange extends ConsumerWidget {
 ///問題数指定
 class _SelectLength extends ConsumerWidget {
   const _SelectLength();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<int> testLength = [10, 20, 50];
@@ -351,22 +362,22 @@ class _SelectLength extends ConsumerWidget {
 ///クイズ選択ボタン
 class _SimpleDialogOption extends ConsumerWidget {
   const _SimpleDialogOption({required this.text});
+
   final String text;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isGroup = ref.watch(homeReviewScreenProvider).testGroup.isNotEmpty;
-    final testGroup = ref.watch(homeReviewScreenProvider).testGroup;
-    final selectedTestLength = ref.watch(homeReviewScreenProvider).selectedTestLength;
     return SimpleDialogOption(
       onPressed: isGroup
           ? () {
-              ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
-              ref.read(quizModelProvider.notifier).updateTestQuiz(testGroup,selectedTestLength);
-              final testQuiz = ref.read(homeReviewScreenProvider).testQuiz!;
+              ref
+                  .read(homeReviewScreenProvider.notifier)
+                  .tapStartTestQuizButton();
+              final testQuiz = ref.read(quizModelProvider).testQuiz;
               context.showScreen(
                 QuizChoiceScreenArguments(
-                  item: testQuiz,
+                  quiz: testQuiz,
                 ).generateRoute(),
               );
             }

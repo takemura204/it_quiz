@@ -15,9 +15,9 @@ import 'account_update_screen/account_update_screen.dart';
 
 ///一問一答形式へ画面遷移
 class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
-  const QuizLearnScreenArguments({required this.item});
+  const QuizLearnScreenArguments({required this.quiz});
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   String get screenNameFormat => "/quiz_learn";
@@ -25,10 +25,10 @@ class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizLearnScreen(item),
+            QuizLearnScreen(quiz),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => QuizLearnScreen(item)),
+              MaterialPageRoute(builder: (context) => QuizLearnScreen(quiz)),
               context,
               animation,
               secondaryAnimation,
@@ -41,9 +41,9 @@ class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
 class QuizChoiceScreenArguments
     with _NoParamsMixin
     implements IScreenArguments {
-  const QuizChoiceScreenArguments({required this.item});
+  const QuizChoiceScreenArguments({required this.quiz});
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   String get screenNameFormat => "/quiz_choice";
@@ -51,10 +51,10 @@ class QuizChoiceScreenArguments
   @override
   Route generateRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizChoiceScreen(item),
+            QuizChoiceScreen(quiz),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => QuizChoiceScreen(item)),
+              MaterialPageRoute(builder: (context) => QuizChoiceScreen(quiz)),
               context,
               animation,
               secondaryAnimation,

@@ -1,5 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
+import '../../model/quiz/quiz_model.dart';
+import '../../model/quiz/quizzes.dart';
 import 'home_review_screen_state.dart';
 
 final homeReviewScreenProvider =
@@ -19,6 +21,14 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
   @override
   Future initState() async {
     super.initState();
+  }
+
+  ///TestQuiz開始
+  void tapStartTestQuizButton() {
+    final testGroup = state.testGroup;
+    final selectedTestLength = state.selectedTestLength;
+    ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
+    ref.read(quizModelProvider.notifier).createTestQuiz(testGroup,selectedTestLength);
   }
 
   ///問題範囲指定

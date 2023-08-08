@@ -2,17 +2,17 @@ part of 'home_quiz_screen.dart';
 
 ///問題一覧Bar
 class _QuizItemBar extends ConsumerWidget {
-  const _QuizItemBar({required this.item, required this.index});
-  final Quiz item;
+  const _QuizItemBar({required this.quiz, required this.index});
+
+  final Quiz quiz;
   final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quiz = ref.watch(quizModelProvider).quizList[index];
-    final quizController = ref.read(quizModelProvider.notifier);
     return GestureDetector(
       onTap: () {
-        quizController.tapQuizItemBar(index);
+        ref.read(quizModelProvider.notifier).tapQuizItemBar(index);
         //ダイアログ表示
         showDialog(
             context: context, builder: (_) => _StudyQuizDialog(index: index));
@@ -69,7 +69,9 @@ class _QuizItemBar extends ConsumerWidget {
 
 class _StudyQuizDialog extends ConsumerWidget {
   const _StudyQuizDialog({required this.index});
+
   final int index;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quiz = ref.watch(quizModelProvider).quizList[index];
@@ -130,6 +132,7 @@ class _StudyQuizDialog extends ConsumerWidget {
 
 class _Title extends ConsumerWidget {
   const _Title(this.item);
+
   final Quiz item;
 
   @override
@@ -149,6 +152,7 @@ class _Title extends ConsumerWidget {
 
 class _QuizResult extends ConsumerWidget {
   const _QuizResult(this.quiz);
+
   final Quiz quiz;
 
   @override
@@ -203,6 +207,7 @@ class _QuizResult extends ConsumerWidget {
 ///クイズ選択ボタン1
 class _SimpleDialogOption1 extends ConsumerWidget {
   const _SimpleDialogOption1({required this.item, required this.text});
+
   final Quiz item;
   final String text;
 
@@ -236,7 +241,7 @@ class _SimpleDialogOption1 extends ConsumerWidget {
           ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
           context.showScreen(
             QuizLearnScreenArguments(
-              item: item,
+              quiz: item,
             ).generateRoute(),
           );
         });
@@ -246,6 +251,7 @@ class _SimpleDialogOption1 extends ConsumerWidget {
 ///クイズ選択ボタン2
 class _SimpleDialogOption2 extends ConsumerWidget {
   const _SimpleDialogOption2({required this.item, required this.text});
+
   final Quiz item;
   final String text;
 
@@ -279,7 +285,7 @@ class _SimpleDialogOption2 extends ConsumerWidget {
           ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
           context.showScreen(
             QuizChoiceScreenArguments(
-              item: item,
+              quiz: item,
             ).generateRoute(),
           );
         });

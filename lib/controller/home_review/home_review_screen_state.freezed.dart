@@ -16,10 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeReviewScreenState {
-  List<Quiz> get reviewItem => throw _privateConstructorUsedError;
-  Quiz? get weakQuiz => throw _privateConstructorUsedError; //苦手克服
-  Quiz? get dailyQuiz => throw _privateConstructorUsedError; //今日のクイズ
-  Quiz? get testQuiz => throw _privateConstructorUsedError; //全てのクイズ
   bool get isSelected => throw _privateConstructorUsedError;
   List<String> get testGroup => throw _privateConstructorUsedError;
   int get selectedTestLength => throw _privateConstructorUsedError;
@@ -37,18 +33,10 @@ abstract class $HomeReviewScreenStateCopyWith<$Res> {
       _$HomeReviewScreenStateCopyWithImpl<$Res, HomeReviewScreenState>;
   @useResult
   $Res call(
-      {List<Quiz> reviewItem,
-      Quiz? weakQuiz,
-      Quiz? dailyQuiz,
-      Quiz? testQuiz,
-      bool isSelected,
+      {bool isSelected,
       List<String> testGroup,
       int selectedTestLength,
       int runningDay});
-
-  $QuizCopyWith<$Res>? get weakQuiz;
-  $QuizCopyWith<$Res>? get dailyQuiz;
-  $QuizCopyWith<$Res>? get testQuiz;
 }
 
 /// @nodoc
@@ -65,32 +53,12 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewItem = null,
-    Object? weakQuiz = freezed,
-    Object? dailyQuiz = freezed,
-    Object? testQuiz = freezed,
     Object? isSelected = null,
     Object? testGroup = null,
     Object? selectedTestLength = null,
     Object? runningDay = null,
   }) {
     return _then(_value.copyWith(
-      reviewItem: null == reviewItem
-          ? _value.reviewItem
-          : reviewItem // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-      weakQuiz: freezed == weakQuiz
-          ? _value.weakQuiz
-          : weakQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      dailyQuiz: freezed == dailyQuiz
-          ? _value.dailyQuiz
-          : dailyQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      testQuiz: freezed == testQuiz
-          ? _value.testQuiz
-          : testQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
@@ -109,42 +77,6 @@ class _$HomeReviewScreenStateCopyWithImpl<$Res,
               as int,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuizCopyWith<$Res>? get weakQuiz {
-    if (_value.weakQuiz == null) {
-      return null;
-    }
-
-    return $QuizCopyWith<$Res>(_value.weakQuiz!, (value) {
-      return _then(_value.copyWith(weakQuiz: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuizCopyWith<$Res>? get dailyQuiz {
-    if (_value.dailyQuiz == null) {
-      return null;
-    }
-
-    return $QuizCopyWith<$Res>(_value.dailyQuiz!, (value) {
-      return _then(_value.copyWith(dailyQuiz: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuizCopyWith<$Res>? get testQuiz {
-    if (_value.testQuiz == null) {
-      return null;
-    }
-
-    return $QuizCopyWith<$Res>(_value.testQuiz!, (value) {
-      return _then(_value.copyWith(testQuiz: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -155,21 +87,10 @@ abstract class _$$_CreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Quiz> reviewItem,
-      Quiz? weakQuiz,
-      Quiz? dailyQuiz,
-      Quiz? testQuiz,
-      bool isSelected,
+      {bool isSelected,
       List<String> testGroup,
       int selectedTestLength,
       int runningDay});
-
-  @override
-  $QuizCopyWith<$Res>? get weakQuiz;
-  @override
-  $QuizCopyWith<$Res>? get dailyQuiz;
-  @override
-  $QuizCopyWith<$Res>? get testQuiz;
 }
 
 /// @nodoc
@@ -182,32 +103,12 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewItem = null,
-    Object? weakQuiz = freezed,
-    Object? dailyQuiz = freezed,
-    Object? testQuiz = freezed,
     Object? isSelected = null,
     Object? testGroup = null,
     Object? selectedTestLength = null,
     Object? runningDay = null,
   }) {
     return _then(_$_Create(
-      reviewItem: null == reviewItem
-          ? _value._reviewItem
-          : reviewItem // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
-      weakQuiz: freezed == weakQuiz
-          ? _value.weakQuiz
-          : weakQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      dailyQuiz: freezed == dailyQuiz
-          ? _value.dailyQuiz
-          : dailyQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      testQuiz: freezed == testQuiz
-          ? _value.testQuiz
-          : testQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
@@ -232,36 +133,13 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create extends _Create {
   _$_Create(
-      {final List<Quiz> reviewItem = const [],
-      this.weakQuiz,
-      this.dailyQuiz,
-      this.testQuiz,
-      this.isSelected = false,
+      {this.isSelected = false,
       final List<String> testGroup = const [],
       this.selectedTestLength = 10,
       this.runningDay = 0})
-      : _reviewItem = reviewItem,
-        _testGroup = testGroup,
+      : _testGroup = testGroup,
         super._();
 
-  final List<Quiz> _reviewItem;
-  @override
-  @JsonKey()
-  List<Quiz> get reviewItem {
-    if (_reviewItem is EqualUnmodifiableListView) return _reviewItem;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reviewItem);
-  }
-
-  @override
-  final Quiz? weakQuiz;
-//苦手克服
-  @override
-  final Quiz? dailyQuiz;
-//今日のクイズ
-  @override
-  final Quiz? testQuiz;
-//全てのクイズ
   @override
   @JsonKey()
   final bool isSelected;
@@ -283,7 +161,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'HomeReviewScreenState(reviewItem: $reviewItem, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz, isSelected: $isSelected, testGroup: $testGroup, selectedTestLength: $selectedTestLength, runningDay: $runningDay)';
+    return 'HomeReviewScreenState(isSelected: $isSelected, testGroup: $testGroup, selectedTestLength: $selectedTestLength, runningDay: $runningDay)';
   }
 
   @override
@@ -291,14 +169,6 @@ class _$_Create extends _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
-            const DeepCollectionEquality()
-                .equals(other._reviewItem, _reviewItem) &&
-            (identical(other.weakQuiz, weakQuiz) ||
-                other.weakQuiz == weakQuiz) &&
-            (identical(other.dailyQuiz, dailyQuiz) ||
-                other.dailyQuiz == dailyQuiz) &&
-            (identical(other.testQuiz, testQuiz) ||
-                other.testQuiz == testQuiz) &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected) &&
             const DeepCollectionEquality()
@@ -312,10 +182,6 @@ class _$_Create extends _Create {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_reviewItem),
-      weakQuiz,
-      dailyQuiz,
-      testQuiz,
       isSelected,
       const DeepCollectionEquality().hash(_testGroup),
       selectedTestLength,
@@ -330,25 +196,13 @@ class _$_Create extends _Create {
 
 abstract class _Create extends HomeReviewScreenState {
   factory _Create(
-      {final List<Quiz> reviewItem,
-      final Quiz? weakQuiz,
-      final Quiz? dailyQuiz,
-      final Quiz? testQuiz,
-      final bool isSelected,
+      {final bool isSelected,
       final List<String> testGroup,
       final int selectedTestLength,
       final int runningDay}) = _$_Create;
   _Create._() : super._();
 
   @override
-  List<Quiz> get reviewItem;
-  @override
-  Quiz? get weakQuiz;
-  @override //苦手克服
-  Quiz? get dailyQuiz;
-  @override //今日のクイズ
-  Quiz? get testQuiz;
-  @override //全てのクイズ
   bool get isSelected;
   @override
   List<String> get testGroup;

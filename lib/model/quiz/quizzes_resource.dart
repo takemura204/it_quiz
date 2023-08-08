@@ -2,7 +2,7 @@ part of 'quiz_model.dart';
 
 extension QuizModelEx on QuizModel {
   ///問題ジャンル
-  List<Quiz> get studyQuiz => [
+  List<Quiz> get initQuizList => [
     Quiz(
       id: 1,
       category: I18n().group1,
@@ -105,7 +105,7 @@ extension QuizModelEx on QuizModel {
   ];
 
   ///今日のクイズ
-  Quiz get dailyQuiz =>  Quiz(
+  Quiz get initDailyQuiz =>  const Quiz(
     id: 1,
     category: "review",
     title: "今日のクイズ",
@@ -116,7 +116,7 @@ extension QuizModelEx on QuizModel {
   );
 
   ///苦手克服
-  Quiz get weakQuiz =>  Quiz(
+  Quiz get initWeakQuiz =>  const Quiz(
     id: 2,
     category: "review",
     title: "苦手克服",
@@ -127,7 +127,7 @@ extension QuizModelEx on QuizModel {
   );
 
   ///力だめし
-  Quiz get testQuiz =>  Quiz(
+  Quiz get initTestQuiz =>  const Quiz(
     id: 3,
     category: "review",
     title: "力だめし",

@@ -3,15 +3,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 class PrimaryButton extends ConsumerWidget {
-  const PrimaryButton(
-      {required this.width,
-      required this.height,
-      required this.text,
-      required this.onPressed});
+  const PrimaryButton({
+    required this.width,
+    required this.height,
+    required this.text,
+    required this.onPressed,
+    this.icon,
+  });
+
   final double width;
   final double height;
   final String text;
   final VoidCallback? onPressed;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,15 +34,22 @@ class PrimaryButton extends ConsumerWidget {
             ),
           ),
         ),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: height < context.height * 0.05
-                ? context.height * 0.015
-                : context.height * 0.02,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null) Icon(icon),
+            SizedBox(width: icon != null ? 8.0 : 0),
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: height < context.height * 0.05
+                    ? context.height * 0.015
+                    : context.height * 0.02,
+              ),
+            ),
+          ],
         ),
         onPressed: onPressed,
       ),
@@ -47,15 +58,19 @@ class PrimaryButton extends ConsumerWidget {
 }
 
 class DefaultButton extends ConsumerWidget {
-  const DefaultButton(
-      {required this.width,
-      required this.height,
-      required this.text,
-      required this.onPressed});
+  const DefaultButton({
+    required this.width,
+    required this.height,
+    required this.text,
+    required this.onPressed,
+    this.icon,
+  });
+
   final double width;
   final double height;
   final String text;
   final VoidCallback? onPressed;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -78,15 +93,27 @@ class DefaultButton extends ConsumerWidget {
             width: 1,
           ),
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: onPressed == null ? Colors.black45 : context.mainColor,
-            fontWeight: FontWeight.bold,
-            fontSize: height < context.height * 0.05
-                ? context.height * 0.015
-                : context.height * 0.02,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null)
+              Icon(
+                icon,
+                color: context.mainColor,
+              ),
+            SizedBox(width: icon != null ? 8.0 : 0),
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: context.mainColor,
+                fontWeight: FontWeight.bold,
+                fontSize: height < context.height * 0.05
+                    ? context.height * 0.015
+                    : context.height * 0.02,
+              ),
+            ),
+          ],
         ),
         onPressed: onPressed,
       ),
@@ -101,6 +128,7 @@ class SecondaryButton extends ConsumerWidget {
     required this.text,
     required this.onPressed,
   });
+
   final double width;
   final double height;
   final String text;
@@ -147,6 +175,7 @@ class DisabledButton extends ConsumerWidget {
     required this.height,
     required this.text,
   });
+
   final double width;
   final double height;
   final String text;
@@ -195,6 +224,7 @@ class DangerButton extends ConsumerWidget {
     required this.text,
     required this.onPressed,
   });
+
   final double width;
   final double height;
   final String text;
@@ -238,6 +268,7 @@ class DangerButton extends ConsumerWidget {
 ///ログイン・ログアウトボタン
 class SetAccountButton extends ConsumerWidget {
   const SetAccountButton({required this.onPressed, required this.text});
+
   final VoidCallback onPressed;
   final String text;
 

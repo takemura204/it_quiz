@@ -23,14 +23,9 @@ mixin _$Quizzes {
   List<Quiz> get quizList => throw _privateConstructorUsedError; //クイズ一覧
   List<Quiz> get userQuizList =>
       throw _privateConstructorUsedError; //ユーザーが解いたクイズ一覧
-  Quiz? get weakQuiz => throw _privateConstructorUsedError; //苦手克服
-  Quiz? get dailyQuiz => throw _privateConstructorUsedError; //今日のクイズ
-  Quiz? get testQuiz => throw _privateConstructorUsedError; //全てのクイズ
-  List<QuizItem> get dailyQuizItem =>
-      throw _privateConstructorUsedError; //デイリークイズ
-  List<QuizItem> get weakQuizItem => throw _privateConstructorUsedError; //苦手クイズ
-  List<QuizItem> get testQuizItem =>
-      throw _privateConstructorUsedError; //テストクイズ
+  Quiz get dailyQuiz => throw _privateConstructorUsedError; //今日のクイズ
+  Quiz get weakQuiz => throw _privateConstructorUsedError; //苦手克服
+  Quiz get testQuiz => throw _privateConstructorUsedError; //テストクイズ
   int get selectQuizIndex => throw _privateConstructorUsedError; //選択したクイズ
   QuizType get quizType => throw _privateConstructorUsedError;
 
@@ -47,18 +42,15 @@ abstract class $QuizzesCopyWith<$Res> {
   $Res call(
       {List<Quiz> quizList,
       List<Quiz> userQuizList,
-      Quiz? weakQuiz,
-      Quiz? dailyQuiz,
-      Quiz? testQuiz,
-      List<QuizItem> dailyQuizItem,
-      List<QuizItem> weakQuizItem,
-      List<QuizItem> testQuizItem,
+      Quiz dailyQuiz,
+      Quiz weakQuiz,
+      Quiz testQuiz,
       int selectQuizIndex,
       QuizType quizType});
 
-  $QuizCopyWith<$Res>? get weakQuiz;
-  $QuizCopyWith<$Res>? get dailyQuiz;
-  $QuizCopyWith<$Res>? get testQuiz;
+  $QuizCopyWith<$Res> get dailyQuiz;
+  $QuizCopyWith<$Res> get weakQuiz;
+  $QuizCopyWith<$Res> get testQuiz;
 }
 
 /// @nodoc
@@ -76,12 +68,9 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
   $Res call({
     Object? quizList = null,
     Object? userQuizList = null,
-    Object? weakQuiz = freezed,
-    Object? dailyQuiz = freezed,
-    Object? testQuiz = freezed,
-    Object? dailyQuizItem = null,
-    Object? weakQuizItem = null,
-    Object? testQuizItem = null,
+    Object? dailyQuiz = null,
+    Object? weakQuiz = null,
+    Object? testQuiz = null,
     Object? selectQuizIndex = null,
     Object? quizType = null,
   }) {
@@ -94,30 +83,18 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
           ? _value.userQuizList
           : userQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
-      weakQuiz: freezed == weakQuiz
-          ? _value.weakQuiz
-          : weakQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      dailyQuiz: freezed == dailyQuiz
+      dailyQuiz: null == dailyQuiz
           ? _value.dailyQuiz
           : dailyQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      testQuiz: freezed == testQuiz
+              as Quiz,
+      weakQuiz: null == weakQuiz
+          ? _value.weakQuiz
+          : weakQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz,
+      testQuiz: null == testQuiz
           ? _value.testQuiz
           : testQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      dailyQuizItem: null == dailyQuizItem
-          ? _value.dailyQuizItem
-          : dailyQuizItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      weakQuizItem: null == weakQuizItem
-          ? _value.weakQuizItem
-          : weakQuizItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      testQuizItem: null == testQuizItem
-          ? _value.testQuizItem
-          : testQuizItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
+              as Quiz,
       selectQuizIndex: null == selectQuizIndex
           ? _value.selectQuizIndex
           : selectQuizIndex // ignore: cast_nullable_to_non_nullable
@@ -131,36 +108,24 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
 
   @override
   @pragma('vm:prefer-inline')
-  $QuizCopyWith<$Res>? get weakQuiz {
-    if (_value.weakQuiz == null) {
-      return null;
-    }
-
-    return $QuizCopyWith<$Res>(_value.weakQuiz!, (value) {
-      return _then(_value.copyWith(weakQuiz: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuizCopyWith<$Res>? get dailyQuiz {
-    if (_value.dailyQuiz == null) {
-      return null;
-    }
-
-    return $QuizCopyWith<$Res>(_value.dailyQuiz!, (value) {
+  $QuizCopyWith<$Res> get dailyQuiz {
+    return $QuizCopyWith<$Res>(_value.dailyQuiz, (value) {
       return _then(_value.copyWith(dailyQuiz: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $QuizCopyWith<$Res>? get testQuiz {
-    if (_value.testQuiz == null) {
-      return null;
-    }
+  $QuizCopyWith<$Res> get weakQuiz {
+    return $QuizCopyWith<$Res>(_value.weakQuiz, (value) {
+      return _then(_value.copyWith(weakQuiz: value) as $Val);
+    });
+  }
 
-    return $QuizCopyWith<$Res>(_value.testQuiz!, (value) {
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizCopyWith<$Res> get testQuiz {
+    return $QuizCopyWith<$Res>(_value.testQuiz, (value) {
       return _then(_value.copyWith(testQuiz: value) as $Val);
     });
   }
@@ -176,21 +141,18 @@ abstract class _$$_QuizzesCopyWith<$Res> implements $QuizzesCopyWith<$Res> {
   $Res call(
       {List<Quiz> quizList,
       List<Quiz> userQuizList,
-      Quiz? weakQuiz,
-      Quiz? dailyQuiz,
-      Quiz? testQuiz,
-      List<QuizItem> dailyQuizItem,
-      List<QuizItem> weakQuizItem,
-      List<QuizItem> testQuizItem,
+      Quiz dailyQuiz,
+      Quiz weakQuiz,
+      Quiz testQuiz,
       int selectQuizIndex,
       QuizType quizType});
 
   @override
-  $QuizCopyWith<$Res>? get weakQuiz;
+  $QuizCopyWith<$Res> get dailyQuiz;
   @override
-  $QuizCopyWith<$Res>? get dailyQuiz;
+  $QuizCopyWith<$Res> get weakQuiz;
   @override
-  $QuizCopyWith<$Res>? get testQuiz;
+  $QuizCopyWith<$Res> get testQuiz;
 }
 
 /// @nodoc
@@ -205,12 +167,9 @@ class __$$_QuizzesCopyWithImpl<$Res>
   $Res call({
     Object? quizList = null,
     Object? userQuizList = null,
-    Object? weakQuiz = freezed,
-    Object? dailyQuiz = freezed,
-    Object? testQuiz = freezed,
-    Object? dailyQuizItem = null,
-    Object? weakQuizItem = null,
-    Object? testQuizItem = null,
+    Object? dailyQuiz = null,
+    Object? weakQuiz = null,
+    Object? testQuiz = null,
     Object? selectQuizIndex = null,
     Object? quizType = null,
   }) {
@@ -223,30 +182,18 @@ class __$$_QuizzesCopyWithImpl<$Res>
           ? _value._userQuizList
           : userQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
-      weakQuiz: freezed == weakQuiz
-          ? _value.weakQuiz
-          : weakQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      dailyQuiz: freezed == dailyQuiz
+      dailyQuiz: null == dailyQuiz
           ? _value.dailyQuiz
           : dailyQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      testQuiz: freezed == testQuiz
+              as Quiz,
+      weakQuiz: null == weakQuiz
+          ? _value.weakQuiz
+          : weakQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz,
+      testQuiz: null == testQuiz
           ? _value.testQuiz
           : testQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
-      dailyQuizItem: null == dailyQuizItem
-          ? _value._dailyQuizItem
-          : dailyQuizItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      weakQuizItem: null == weakQuizItem
-          ? _value._weakQuizItem
-          : weakQuizItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
-      testQuizItem: null == testQuizItem
-          ? _value._testQuizItem
-          : testQuizItem // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
+              as Quiz,
       selectQuizIndex: null == selectQuizIndex
           ? _value.selectQuizIndex
           : selectQuizIndex // ignore: cast_nullable_to_non_nullable
@@ -265,19 +212,13 @@ class _$_Quizzes extends _Quizzes {
   _$_Quizzes(
       {final List<Quiz> quizList = const [],
       final List<Quiz> userQuizList = const [],
-      this.weakQuiz,
-      this.dailyQuiz,
-      this.testQuiz,
-      final List<QuizItem> dailyQuizItem = const [],
-      final List<QuizItem> weakQuizItem = const [],
-      final List<QuizItem> testQuizItem = const [],
+      this.dailyQuiz = initDailyQuiz,
+      this.weakQuiz = initWeakQuiz,
+      this.testQuiz = initTestQuiz,
       this.selectQuizIndex = 0,
       this.quizType = QuizType.study})
       : _quizList = quizList,
         _userQuizList = userQuizList,
-        _dailyQuizItem = dailyQuizItem,
-        _weakQuizItem = weakQuizItem,
-        _testQuizItem = testQuizItem,
         super._();
 
   factory _$_Quizzes.fromJson(Map<String, dynamic> json) =>
@@ -305,46 +246,16 @@ class _$_Quizzes extends _Quizzes {
 
 //ユーザーが解いたクイズ一覧
   @override
-  final Quiz? weakQuiz;
-//苦手克服
-  @override
-  final Quiz? dailyQuiz;
+  @JsonKey()
+  final Quiz dailyQuiz;
 //今日のクイズ
   @override
-  final Quiz? testQuiz;
-//全てのクイズ
-  final List<QuizItem> _dailyQuizItem;
-//全てのクイズ
+  @JsonKey()
+  final Quiz weakQuiz;
+//苦手克服
   @override
   @JsonKey()
-  List<QuizItem> get dailyQuizItem {
-    if (_dailyQuizItem is EqualUnmodifiableListView) return _dailyQuizItem;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dailyQuizItem);
-  }
-
-//デイリークイズ
-  final List<QuizItem> _weakQuizItem;
-//デイリークイズ
-  @override
-  @JsonKey()
-  List<QuizItem> get weakQuizItem {
-    if (_weakQuizItem is EqualUnmodifiableListView) return _weakQuizItem;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_weakQuizItem);
-  }
-
-//苦手クイズ
-  final List<QuizItem> _testQuizItem;
-//苦手クイズ
-  @override
-  @JsonKey()
-  List<QuizItem> get testQuizItem {
-    if (_testQuizItem is EqualUnmodifiableListView) return _testQuizItem;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_testQuizItem);
-  }
-
+  final Quiz testQuiz;
 //テストクイズ
   @override
   @JsonKey()
@@ -356,7 +267,7 @@ class _$_Quizzes extends _Quizzes {
 
   @override
   String toString() {
-    return 'Quizzes(quizList: $quizList, userQuizList: $userQuizList, weakQuiz: $weakQuiz, dailyQuiz: $dailyQuiz, testQuiz: $testQuiz, dailyQuizItem: $dailyQuizItem, weakQuizItem: $weakQuizItem, testQuizItem: $testQuizItem, selectQuizIndex: $selectQuizIndex, quizType: $quizType)';
+    return 'Quizzes(quizList: $quizList, userQuizList: $userQuizList, dailyQuiz: $dailyQuiz, weakQuiz: $weakQuiz, testQuiz: $testQuiz, selectQuizIndex: $selectQuizIndex, quizType: $quizType)';
   }
 
   @override
@@ -367,18 +278,12 @@ class _$_Quizzes extends _Quizzes {
             const DeepCollectionEquality().equals(other._quizList, _quizList) &&
             const DeepCollectionEquality()
                 .equals(other._userQuizList, _userQuizList) &&
-            (identical(other.weakQuiz, weakQuiz) ||
-                other.weakQuiz == weakQuiz) &&
             (identical(other.dailyQuiz, dailyQuiz) ||
                 other.dailyQuiz == dailyQuiz) &&
+            (identical(other.weakQuiz, weakQuiz) ||
+                other.weakQuiz == weakQuiz) &&
             (identical(other.testQuiz, testQuiz) ||
                 other.testQuiz == testQuiz) &&
-            const DeepCollectionEquality()
-                .equals(other._dailyQuizItem, _dailyQuizItem) &&
-            const DeepCollectionEquality()
-                .equals(other._weakQuizItem, _weakQuizItem) &&
-            const DeepCollectionEquality()
-                .equals(other._testQuizItem, _testQuizItem) &&
             (identical(other.selectQuizIndex, selectQuizIndex) ||
                 other.selectQuizIndex == selectQuizIndex) &&
             (identical(other.quizType, quizType) ||
@@ -391,12 +296,9 @@ class _$_Quizzes extends _Quizzes {
       runtimeType,
       const DeepCollectionEquality().hash(_quizList),
       const DeepCollectionEquality().hash(_userQuizList),
-      weakQuiz,
       dailyQuiz,
+      weakQuiz,
       testQuiz,
-      const DeepCollectionEquality().hash(_dailyQuizItem),
-      const DeepCollectionEquality().hash(_weakQuizItem),
-      const DeepCollectionEquality().hash(_testQuizItem),
       selectQuizIndex,
       quizType);
 
@@ -418,12 +320,9 @@ abstract class _Quizzes extends Quizzes {
   factory _Quizzes(
       {final List<Quiz> quizList,
       final List<Quiz> userQuizList,
-      final Quiz? weakQuiz,
-      final Quiz? dailyQuiz,
-      final Quiz? testQuiz,
-      final List<QuizItem> dailyQuizItem,
-      final List<QuizItem> weakQuizItem,
-      final List<QuizItem> testQuizItem,
+      final Quiz dailyQuiz,
+      final Quiz weakQuiz,
+      final Quiz testQuiz,
       final int selectQuizIndex,
       final QuizType quizType}) = _$_Quizzes;
   _Quizzes._() : super._();
@@ -435,17 +334,11 @@ abstract class _Quizzes extends Quizzes {
   @override //クイズ一覧
   List<Quiz> get userQuizList;
   @override //ユーザーが解いたクイズ一覧
-  Quiz? get weakQuiz;
-  @override //苦手克服
-  Quiz? get dailyQuiz;
+  Quiz get dailyQuiz;
   @override //今日のクイズ
-  Quiz? get testQuiz;
-  @override //全てのクイズ
-  List<QuizItem> get dailyQuizItem;
-  @override //デイリークイズ
-  List<QuizItem> get weakQuizItem;
-  @override //苦手クイズ
-  List<QuizItem> get testQuizItem;
+  Quiz get weakQuiz;
+  @override //苦手克服
+  Quiz get testQuiz;
   @override //テストクイズ
   int get selectQuizIndex;
   @override //選択したクイズ

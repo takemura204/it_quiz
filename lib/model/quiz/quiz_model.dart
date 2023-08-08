@@ -8,6 +8,7 @@ import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
+
 import '../lang/initial_resource.dart';
 import '../quiz_item/quiz_item.dart';
 
@@ -22,7 +23,10 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   QuizModel(this.ref) : super(Quizzes()) {
     initState();
   }
+
   final Ref ref;
+  final now = DateTime.now();
+
   bool _isSameDay(DateTime? date1, DateTime date2) {
     if (date1 == null) {
       return false;
@@ -42,14 +46,15 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   ///読み込み
   Future _loadQuizData() async {
     _getQuizListData();
-    _getDailyQuiz();
-    _getWeakQuiz();
-    // _getTestQuiz();
-    // _getRunningDay();
-    // _saveData();
+    await Future.wait([
+      _getDailyQuiz(),
+      _getWeakQuiz(),
+      _getTestQuiz(),
+    ]);
+    _saveDevice();
   }
 
-  /// クイズデータ取得
+  /// 全クイズ取得
   Future _getQuizListData() async {
     final prefs = await SharedPreferences.getInstance();
     final quizListDataJson = prefs.getStringList('quiz_list');
@@ -58,7 +63,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
           quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
       final updateQuizList = getQuizList.map((quiz) {
         // studyQuizから、対応するアイテムを探す
-        final updatedItem = studyQuiz.firstWhereOrNull((e) => e.id == quiz.id);
+        final updatedItem =
+            initQuizList.firstWhereOrNull((e) => e.id == quiz.id);
         if (updatedItem != null) {
           // 各クイズに対して、questionの更新を適用
           return quiz.copyWith(
@@ -86,80 +92,64 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     }
     // 初回起動時
     else {
-      final initialQuizList = _initialQuizList();
-      state = state.copyWith(quizList: initialQuizList);
+      final _initialQuizList = _initQuizList();
+      state = state.copyWith(quizList: _initialQuizList);
     }
-    _saveDevice();
   }
 
-  /// dailyQuiz追加
+  /// DailyQuiz取得
   Future _getDailyQuiz() async {
-    final now = DateTime.now();
     final prefs = await SharedPreferences.getInstance();
     final dailyQuizData = prefs.getString('daily_quiz');
     if (dailyQuizData != null) {
       final dailyQuiz = Quiz.fromJson(json.decode(dailyQuizData));
-      state = state.copyWith(dailyQuiz: dailyQuiz);
-    } else {
-      final defaultDailyQuiz = ref.read(quizModelProvider.notifier).dailyQuiz;
-      state = state.copyWith(dailyQuiz: defaultDailyQuiz);
-    }
-    final dailyQuiz = state.dailyQuiz!;
-    final timeStamp = dailyQuiz.timeStamp;
-    final quizList = [
-      ...ref
-          .read(quizModelProvider).quizList
-          .expand((quizItem) => quizItem.quizItemList)
-          .toList()
-    ];
-    final pickedQuizList = <QuizItem>[];
-    final random = Random();
+      final quizItemList = [
+        ...state.quizList.expand((quiz) => quiz.quizItemList).toList()
+      ];
+      final pickedQuizList = <QuizItem>[];
+      final timeStamp = dailyQuiz.timeStamp;
+      final saveDate = timeStamp != null
+          ? DateTime(timeStamp.year, timeStamp.month, timeStamp.day)
+          : null;
+      final nowDate = DateTime(now.year, now.month, now.day);
 
-    final saveDate = timeStamp != null
-        ? DateTime(timeStamp.year, timeStamp.month, timeStamp.day)
-        : null;
-    final nowDate = DateTime(now.year, now.month, now.day);
-
-    //初回のみ or 違う日の時更新
-    if (timeStamp == null || !_isSameDay(saveDate, nowDate)) {
-      for (int i = 0; i < 5; i++) {
-        if (quizList.isNotEmpty) {
-          final randomIndex = random.nextInt(quizList.length);
-          pickedQuizList.add(quizList[randomIndex]);
-          quizList.removeAt(randomIndex);
-        } else {
-          break;
+      //初回 or 違う日の時新しく生成
+      if (timeStamp == null || !_isSameDay(saveDate, nowDate)) {
+        for (int i = 0; i < 5; i++) {
+          if (quizItemList.isNotEmpty) {
+            final random = Random();
+            final randomIndex = random.nextInt(quizItemList.length);
+            pickedQuizList.add(quizItemList[randomIndex]);
+            quizItemList.removeAt(randomIndex);
+          }
         }
+        final createDailyQuiz =
+            dailyQuiz.copyWith(quizItemList: pickedQuizList);
+        state = state.copyWith(dailyQuiz: createDailyQuiz);
       }
-      final updateDailyQuiz = dailyQuiz.copyWith(quizItemList: pickedQuizList);
-      state = state.copyWith(dailyQuiz: updateDailyQuiz);
+      //同じ日の場合
+      else {
+        state = state.copyWith(dailyQuiz: dailyQuiz);
+      }
+    }
+    //初回起動の場合
+    else {
+      state = state.copyWith(dailyQuiz: initDailyQuiz);
     }
   }
 
+  ///苦手リスト取得
   Future _getWeakQuiz() async {
     final prefs = await SharedPreferences.getInstance();
     final weakQuizData = prefs.getString('weak_quiz');
     if (weakQuizData != null) {
       final weakQuiz = Quiz.fromJson(json.decode(weakQuizData));
       state = state.copyWith(weakQuiz: weakQuiz);
-    } else {
-      final defaultWeakQuiz = ref.read(quizModelProvider.notifier).weakQuiz;
-      state = state.copyWith(weakQuiz: defaultWeakQuiz);
     }
-    final weakAllList = ref
-        .read(quizModelProvider).quizList
-        .expand((quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
-        .toList();
-    // questionが同じものを重複しないようにまとめる
-    final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
-    final weakList = weakSetList.map((question) {
-      return weakAllList.firstWhere((quiz) => quiz.question == question);
-    }).toList();
-    final weakQuiz = ref
-        .read(quizModelProvider.notifier)
-        .weakQuiz
-        .copyWith(quizItemList: weakList);
-    state = state.copyWith(weakQuiz: weakQuiz);
+    //初回起動時
+    else {
+      state = state.copyWith(weakQuiz: initWeakQuiz);
+    }
   }
 
   /// TestQuiz追加
@@ -170,19 +160,16 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
       final testQuiz = Quiz.fromJson(json.decode(testData));
       state = state.copyWith(testQuiz: testQuiz);
     } else {
-      final defaultTestQuiz = ref
-          .read(quizModelProvider.notifier)
-          .testQuiz;
-      state = state.copyWith(testQuiz: defaultTestQuiz);
+      state = state.copyWith(testQuiz: initTestQuiz);
     }
   }
-
 
   ///クイズ更新
   void updateQuiz(List<QuizItem> quiz) {
     final quizType = state.quizType;
     switch (quizType) {
       case QuizType.study:
+        _updateQuiz(quiz);
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
@@ -197,7 +184,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
       case QuizType.test:
-       updateTestItem(quiz);
+        updateTestItem(quiz);
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
@@ -205,7 +192,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   ///クイズ更新
-  void _updateStudyQuiz(List<QuizItem> quizItemList) {
+  void _updateQuiz(List<QuizItem> quizItemList) {
     final quizList = state.quizList;
     final selectQuizIndex = state.selectQuizIndex;
     final correctNum =
@@ -227,95 +214,13 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     _saveDevice();
   }
 
-  /// DailyItem
-  void updateDailyItem(List<QuizItem> quizItemList) {
-    final now = DateTime.now();
-    final correctNum = quizItemList.where((x) => x.isJudge == true).toList().length;
-    final dailyQuiz = state.dailyQuiz!;
-    final nowDate = DateTime(now.year, now.month, now.day);
-
-    final updateDailyQuiz = dailyQuiz.copyWith(
-        correctNum: correctNum,
-        isCompleted: true,
-        quizItemList: quizItemList,
-        timeStamp: nowDate);
-
-    state = state.copyWith(
-        dailyQuiz: updateDailyQuiz);
-    _saveDevice(); // 保存
-  }
-
-  ///WeakItem更新
-  Future updateWeakItem() async {
-    //全ての苦手クイズから同じ問題を絞り込み
-    final weakAllList = ref
-        .read(quizModelProvider).quizList
-        .expand((quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
-        .toList();
-    final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
-    final weakList = weakSetList.map((question) {
-      return weakAllList.firstWhere((quiz) => quiz.question == question);
-    }).toList();
-    final weakQuiz = state.weakQuiz?.copyWith(quizItemList: weakList);
-    state = state.copyWith(weakQuiz: weakQuiz);
-    _saveDevice();
-  }
-
-  ///TestItem更新
-  void updateTestItem(List<QuizItem> quizItemList) {
-    final correctNum =
-    (quizItemList.where((x) => x.isJudge == true).toList().length /
-        quizItemList.length *
-        100)
-        .toInt();
-    final isCompleted = quizItemList.length == correctNum;
-    final testQuiz = state.testQuiz!.copyWith(
-        correctNum: correctNum,
-        isCompleted: isCompleted,
-        quizItemList: quizItemList,
-        timeStamp: DateTime.now());
-    state = state.copyWith(testQuiz: testQuiz);
-    _saveDevice(); // 保存
-  }
-
-  /// testQuiz追加
-  void updateTestQuiz(List<String>testGroup,int testLength) {
-
-    final filteredQuizList = [
-      ...ref
-          .read(quizModelProvider).quizList
-          .where((quizItem) => testGroup.contains(quizItem.category))
-          .expand((quizItem) => quizItem.quizItemList)
-          .toList()
-    ];
-    final random = Random();
-    final pickedQuizList = <QuizItem>[];
-
-    for (int i = 0; i < testLength; i++) {
-      if (filteredQuizList.isNotEmpty) {
-        final randomIndex = random.nextInt(filteredQuizList.length);
-        pickedQuizList.add(filteredQuizList[randomIndex]);
-        filteredQuizList.removeAt(randomIndex);
-      } else {
-        break;
-      }
-    }
-    final testQuiz = ref
-        .read(quizModelProvider.notifier)
-        .testQuiz
-        .copyWith(quizItemList: pickedQuizList);
-    state = state.copyWith(testQuiz: testQuiz);
-  }
-
-
-
-
-  ///Reviewクイズ更新・保存
+  //苦手クイズ更新・保存
   void _updateWeakQuiz(List<QuizItem> quizItemList) {
     final quizList = state.quizList;
     final nonWeakQuizList = quizItemList.where((x) => !x.isWeak).toList();
-    // stateの各QuizItemStateのquizListをループして、nonWeakQuizListに含まれる同じquestionを持つクイズがある場合、そのクイズのisWeakをfalseに更新
-    final updateStudyQuiz = quizList.map((quiz) {
+
+    // quizListに、nonWeakQuizListと同じquestionが含まれる場合、isWeakをfalseに更新
+    final updateQuizList = quizList.map((quiz) {
       final updatedQuizList = quiz.quizItemList.map((quizItem) {
         final updatedQuiz = nonWeakQuizList.firstWhereOrNull(
             (nonWeakQuiz) => nonWeakQuiz.question == quizItem.question);
@@ -328,16 +233,79 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
       return quiz.copyWith(quizItemList: updatedQuizList);
     }).toList();
 
-    state = state.copyWith(quizList: updateStudyQuiz);
+    state = state.copyWith(quizList: updateQuizList);
     _saveDevice();
   }
 
-  /// 端末に保存する
-  Future _saveDevice() async {
-    final prefs = await SharedPreferences.getInstance();
-    final quizListData =
-        state.quizList.map((e) => json.encode(e.toJson())).toList();
-    await prefs.setStringList('quiz_list', quizListData);
+  /// DailyItem
+  void updateDailyItem(List<QuizItem> quizItemList) {
+    final correctNum =
+        quizItemList.where((x) => x.isJudge == true).toList().length;
+    final dailyQuiz = state.dailyQuiz;
+    final nowDate = DateTime(now.year, now.month, now.day);
+    final updateDailyQuiz = dailyQuiz.copyWith(
+        correctNum: correctNum,
+        isCompleted: true,
+        quizItemList: quizItemList,
+        timeStamp: nowDate);
+    state = state.copyWith(dailyQuiz: updateDailyQuiz);
+    _saveDevice(); // 保存
+  }
+
+  ///WeakItem更新
+  Future updateWeakItem() async {
+    //全ての苦手クイズから同じ問題を絞り込み
+    final weakAllList = state.quizList
+        .expand(
+            (quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
+        .toList();
+    final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
+    final weakList = weakSetList.map((question) {
+      return weakAllList.firstWhere((quiz) => quiz.question == question);
+    }).toList();
+    final weakQuiz = state.weakQuiz.copyWith(quizItemList: weakList);
+    state = state.copyWith(weakQuiz: weakQuiz);
+    _saveDevice();
+  }
+
+  ///TestItem更新
+  void updateTestItem(List<QuizItem> quizItemList) {
+    final correctNum =
+        (quizItemList.where((x) => x.isJudge == true).toList().length /
+                quizItemList.length *
+                100)
+            .toInt();
+    final isCompleted = quizItemList.length == correctNum;
+    final testQuiz = state.testQuiz.copyWith(
+        correctNum: correctNum,
+        isCompleted: isCompleted,
+        quizItemList: quizItemList,
+        timeStamp: DateTime.now());
+    state = state.copyWith(testQuiz: testQuiz);
+    _saveDevice(); // 保存
+  }
+
+  /// TestQuiz作成
+  void createTestQuiz(List<String> testGroup, int testLength) {
+    final filteredQuizList = [
+      ...state.quizList
+          .where((quizItem) => testGroup.contains(quizItem.category))
+          .expand((quizItem) => quizItem.quizItemList)
+          .toList()
+    ];
+    final random = Random();
+    final pickedQuizList = <QuizItem>[];
+    for (int i = 0; i < testLength; i++) {
+      if (filteredQuizList.isNotEmpty) {
+        final randomIndex = random.nextInt(filteredQuizList.length);
+        pickedQuizList.add(filteredQuizList[randomIndex]);
+        filteredQuizList.removeAt(randomIndex);
+      } else {
+        break;
+      }
+    }
+    final testQuiz = initTestQuiz.copyWith(quizItemList: pickedQuizList);
+    state = state.copyWith(testQuiz: testQuiz);
   }
 
   /// 現在のインデックスを取得し、更新
@@ -349,9 +317,9 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     state = state.copyWith(quizType: quizType);
   }
 
-  List<Quiz> _initialQuizList() {
+  List<Quiz> _initQuizList() {
     // groupListsByを使用してリストをグループ化
-    final groupMap = studyQuiz.groupListsBy((x) => x.category);
+    final groupMap = initQuizList.groupListsBy((x) => x.category);
     // グループごとにリストをidでソート
     for (final group in groupMap.keys) {
       groupMap[group]!.sort((a, b) => a.id.compareTo(b.id));
@@ -367,17 +335,27 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     return quizList;
   }
 
+  /// 端末に保存する
+  Future _saveDevice() async {
+    final prefs = await SharedPreferences.getInstance();
+    final quizListData =
+        state.quizList.map((e) => json.encode(e.toJson())).toList();
+    final dailyData = json.encode(state.dailyQuiz.toJson());
+    final weakData = json.encode(state.weakQuiz.toJson());
+    final testData = json.encode(state.testQuiz.toJson());
+
+    await prefs.setStringList('quiz_list', quizListData);
+    await prefs.setString('daily_quiz', dailyData);
+    await prefs.setString('weak_quiz', weakData);
+    await prefs.setString('test_quiz', testData);
+  }
+
   /// 現在のstateをリセット
   Future _resetData() async {
     final prefs = await SharedPreferences.getInstance();
-    final data = state.quizList.map((e) => json.encode(e.toJson())).toList();
     prefs.remove("quiz_list");
     prefs.remove("daily_quiz");
     prefs.remove("weak_quiz");
     prefs.remove("test_quiz");
-    await prefs.setStringList('quiz_list', data);
-    await prefs.setStringList('daily_quiz', data);
-    await prefs.setStringList('weak_quiz', data);
-    await prefs.setStringList('test_quiz', data);
   }
 }

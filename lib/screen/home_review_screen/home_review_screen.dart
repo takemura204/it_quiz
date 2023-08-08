@@ -36,17 +36,17 @@ class _Scaffold extends ConsumerWidget {
       appBar: AppBar(
         title: Text(I18n().titleReview),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
-          children: const [
-            // ///今日のクイズ
-            // _DailyQuiz(),
-            //
-            // ///苦手学習
-            // _WeakQuiz(),
-            //
-            // ///力試し
-            // _TestQuiz(),
+          children: [
+            ///今日のクイズ
+            _DailyQuiz(),
+
+            ///苦手学習
+            _WeakQuiz(),
+
+            ///力試し
+            _TestQuiz(),
           ],
         ),
       ),
@@ -60,9 +60,9 @@ class _DailyQuiz extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeReviewScreenProvider);
-    final dailyQuiz = state.dailyQuiz!;
-    final dailyScore = 0;
+    final quizModel = ref.watch(quizModelProvider);
+    final dailyQuiz = quizModel.dailyQuiz;
+    const dailyScore = 0;
     final score = dailyQuiz.correctNum;
     final quizLength = dailyQuiz.quizItemList.length;
 
@@ -84,7 +84,7 @@ class _DailyQuiz extends ConsumerWidget {
             ref.read(quizModelProvider.notifier).setQuizType(QuizType.daily);
             context.showScreen(
               QuizChoiceScreenArguments(
-                item: dailyQuiz,
+                quiz: dailyQuiz,
               ).generateRoute(),
             );
           },
@@ -97,9 +97,10 @@ class _DailyQuiz extends ConsumerWidget {
 ///苦手克服クイズ
 class _WeakQuiz extends ConsumerWidget {
   const _WeakQuiz();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final weakQuiz = ref.watch(homeReviewScreenProvider).weakQuiz!;
+    final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
     final weakList = weakQuiz.quizItemList;
     return Column(
       children: [
@@ -117,7 +118,7 @@ class _WeakQuiz extends ConsumerWidget {
               onTap: () {
                 ref.read(quizModelProvider.notifier).setQuizType(QuizType.weak);
                 context.showScreen(QuizChoiceScreenArguments(
-                  item: weakQuiz,
+                  quiz: weakQuiz,
                 ).generateRoute());
               }),
       ],
@@ -132,7 +133,7 @@ class _TestQuiz extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider).quizList;
-    final testQuiz = ref.watch(homeReviewScreenProvider).testQuiz;
+    final testQuiz = ref.watch(quizModelProvider).testQuiz;
     return Column(
       children: [
         if (quizList.isEmpty)
@@ -142,7 +143,7 @@ class _TestQuiz extends ConsumerWidget {
         else
           _QuizButton(
             title: "力だめし",
-            subWidget: Text((testQuiz!.timeStamp != null)
+            subWidget: Text((testQuiz.timeStamp != null)
                 ? '挑戦日:${DateFormat('yyyy-MM-dd').format(testQuiz.timeStamp!)}'
                 : "未挑戦"),
             icon: Icons.edit_note_outlined,
@@ -160,9 +161,10 @@ class _TestQuiz extends ConsumerWidget {
 
 class _TestQuizDialog extends ConsumerWidget {
   const _TestQuizDialog();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final testQuiz = ref.watch(homeReviewScreenProvider).testQuiz;
+    final testQuiz = ref.watch(quizModelProvider).testQuiz;
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
@@ -175,7 +177,7 @@ class _TestQuizDialog extends ConsumerWidget {
               ///タイトル
               Row(
                 children: [
-                  _DialogTitle(testQuiz!),
+                  _DialogTitle(testQuiz),
                   const Spacer(),
                   ClearButton(
                     iconSize: context.height * 0.04,
