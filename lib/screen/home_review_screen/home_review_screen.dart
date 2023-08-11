@@ -1,17 +1,14 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import '../../controller/home_review/home_review_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
-import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../view/bar.dart';
-import '../../view/icon_button.dart';
+import '../../view/modal.dart';
 import '../screen_argument.dart';
 
 part 'home_review_view.dart';
@@ -151,61 +148,9 @@ class _TestQuiz extends ConsumerWidget {
             unit: "点　",
             onTap: () {
               showDialog(
-                  context: context, builder: (_) => const _TestQuizDialog());
+                  context: context, builder: (_) => const TestQuizModal());
             },
           ),
-      ],
-    );
-  }
-}
-
-class _TestQuizDialog extends ConsumerWidget {
-  const _TestQuizDialog();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final testQuiz = ref.watch(quizModelProvider).testQuiz;
-    return SimpleDialog(
-      insetPadding: EdgeInsets.all(context.width * 0.01),
-      contentPadding: EdgeInsets.all(context.width * 0.01),
-      children: [
-        Container(
-          height: context.height * 0.5,
-          width: context.width * 0.8,
-          child: Column(
-            children: [
-              ///タイトル
-              Row(
-                children: [
-                  _DialogTitle(testQuiz),
-                  const Spacer(),
-                  ClearButton(
-                    iconSize: context.height * 0.04,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-
-              const Divider(height: 1),
-              const Spacer(),
-
-              ///選択範囲
-              const _QuizRange(),
-
-              const Gap(5),
-
-              ///問題数
-              const _SelectLength(),
-              const Spacer(),
-              const Divider(height: 1),
-              const Spacer(),
-
-              ///クイズに挑戦する
-              _SimpleDialogOption(text: I18n().styleTestQuiz),
-              const Spacer(),
-            ],
-          ),
-        ),
       ],
     );
   }

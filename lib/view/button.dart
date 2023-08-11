@@ -37,8 +37,13 @@ class PrimaryButton extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (icon != null) Icon(icon),
-            SizedBox(width: icon != null ? 8.0 : 0),
+            const Spacer(),
+            if (icon != null)
+              Icon(
+                icon,
+                size: height * 0.55,
+              ),
+            SizedBox(width: icon != null ? 6.0 : 0),
             Text(
               text,
               textAlign: TextAlign.center,
@@ -49,6 +54,7 @@ class PrimaryButton extends ConsumerWidget {
                     : context.height * 0.02,
               ),
             ),
+            const Spacer(),
           ],
         ),
         onPressed: onPressed,
@@ -99,14 +105,19 @@ class DefaultButton extends ConsumerWidget {
             if (icon != null)
               Icon(
                 icon,
-                color: context.mainColor,
+                color: onPressed == null
+                    ? Colors.grey.shade500
+                    : context.mainColor,
+                size: height * 0.55,
               ),
-            SizedBox(width: icon != null ? 8.0 : 0),
+            SizedBox(width: icon != null ? 6.0 : 0),
             Text(
               text,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: context.mainColor,
+                color: onPressed == null
+                    ? Colors.grey.shade500
+                    : context.mainColor,
                 fontWeight: FontWeight.bold,
                 fontSize: height < context.height * 0.05
                     ? context.height * 0.015

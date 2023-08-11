@@ -15,7 +15,7 @@ class _QuizItemBar extends ConsumerWidget {
         ref.read(quizModelProvider.notifier).tapQuizItemBar(index);
         //ダイアログ表示
         showDialog(
-            context: context, builder: (_) => _StudyQuizDialog(index: index));
+            context: context, builder: (_) => _StudyQuizDialog(quiz: quiz));
       },
       child: Card(
         elevation: 2,
@@ -68,13 +68,12 @@ class _QuizItemBar extends ConsumerWidget {
 }
 
 class _StudyQuizDialog extends ConsumerWidget {
-  const _StudyQuizDialog({required this.index});
+  const _StudyQuizDialog({required this.quiz});
 
-  final int index;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quiz = ref.watch(quizModelProvider).quizList[index];
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
@@ -217,7 +216,7 @@ class _SimpleDialogOption1 extends ConsumerWidget {
         padding: EdgeInsets.symmetric(
             horizontal: context.width * 0.02, vertical: context.width * 0.01),
         child: Card(
-          elevation: 3,
+          elevation: 1,
           margin: const EdgeInsets.all(0),
           child: Container(
             height: context.height * 0.06,
@@ -261,7 +260,7 @@ class _SimpleDialogOption2 extends ConsumerWidget {
         padding: EdgeInsets.symmetric(
             horizontal: context.width * 0.02, vertical: context.width * 0.01),
         child: Card(
-          elevation: 3,
+          elevation: 1,
           margin: const EdgeInsets.all(0),
           child: Container(
             height: context.height * 0.06,

@@ -12,6 +12,7 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../view/icon_button.dart';
+import '../../view/modal.dart';
 import '../screen_argument.dart';
 
 part 'home_quiz_view.dart';
@@ -38,6 +39,8 @@ class _Scaffold extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider).quizList;
+    final testQuiz = ref.watch(quizModelProvider).testQuiz;
+    final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleStudy),
@@ -70,9 +73,14 @@ class _Scaffold extends ConsumerWidget {
               ),
             ),
             indexedItemBuilder: (BuildContext context, Quiz quiz, int index) {
-              return _QuizItemBar(
-                quiz: quiz,
-                index: index,
+              return Column(
+                children: [
+                  _QuizItemBar(
+                    quiz: quiz,
+                    index: index,
+                  ),
+                  if (index == quizList.length - 1) Gap(context.height * 0.1),
+                ],
               );
             },
           ),
@@ -91,14 +99,25 @@ class _Scaffold extends ConsumerWidget {
                       height: context.height * 0.06,
                       text: "苦手克服",
                       icon: Icons.check_box_outlined,
-                      onPressed: () {}),
+                      onPressed: weakQuiz.quizItemList.isEmpty
+                          ? null
+                          : () {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) =>
+                                      _StudyQuizDialog(quiz: weakQuiz));
+                            }),
                   Gap(context.width * 0.02),
                   PrimaryButton(
                     width: context.width * 0.45,
                     height: context.height * 0.06,
-                    text: "総合演習",
-                    icon: Icons.rule,
-                    onPressed: () {},
+                    text: "${testQuiz.title}",
+                    icon: Icons.edit_note,
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => const TestQuizModal());
+                    },
                   ),
                   const Spacer(),
                 ],
