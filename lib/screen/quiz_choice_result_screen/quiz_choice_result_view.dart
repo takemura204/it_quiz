@@ -2,7 +2,9 @@ part of 'quiz_choice_result_screen.dart';
 
 class _QuizResultView extends ConsumerWidget {
   const _QuizResultView(this.item);
+
   final Quiz item;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizChoiceScreenProvider).quizList;
@@ -76,9 +78,11 @@ class _QuizResultView extends ConsumerWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => ref
-                                .read(quizChoiceScreenProvider.notifier)
-                                .tapCheckBox(index),
+                            onTap: () {
+                              ref
+                                  .read(quizChoiceScreenProvider.notifier)
+                                  .tapCheckBox(index);
+                            },
                             child: Container(
                               alignment: Alignment.center,
                               width: context.width * 0.1,

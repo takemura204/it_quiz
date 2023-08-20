@@ -38,7 +38,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   @override
   Future initState() async {
-    // _resetData();
+    _resetData();
     await _loadQuizData(); // データを読み込む
     super.initState();
   }
@@ -184,7 +184,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
       case QuizType.test:
-        updateTestItem(quiz);
+        _updateTestItem(quiz);
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
@@ -269,12 +269,31 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   ///TestItem更新
-  void updateTestItem(List<QuizItem> quizItemList) {
+  void _updateTestItem(List<QuizItem> quizItemList) {
+    final quizList = state.quizList;
+    final weakQuizList = quizItemList.where((x) => x.isWeak).toList();
+
+    final updateQuizList = quizList.map((quiz) {
+      final updateQuizItemList = quiz.quizItemList.map((quizItem) {
+        final updatedQuiz = weakQuizList.firstWhereOrNull(
+            (weakQuiz) => weakQuiz.question == quizItem.question);
+        if (updatedQuiz != null) {
+          return quizItem.copyWith(isWeak: true);
+        }
+        return quizItem;
+      }).toList();
+      // 更新されたquizListを含む新しいQuizItemStateを作成し、stateの対応する要素に置き換え
+      return quiz.copyWith(quizItemList: updateQuizItemList);
+    }).toList();
+
+    state = state.copyWith(quizList: updateQuizList);
+
     final correctNum =
         (quizItemList.where((x) => x.isJudge == true).toList().length /
                 quizItemList.length *
                 100)
             .toInt();
+    print(correctNum);
     final isCompleted = quizItemList.length == correctNum;
     final testQuiz = state.testQuiz.copyWith(
         correctNum: correctNum,

@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -11,9 +10,7 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
-import '../../view/icon_button.dart';
 import '../../view/modal.dart';
-import '../screen_argument.dart';
 
 part 'home_quiz_view.dart';
 
@@ -75,7 +72,7 @@ class _Scaffold extends ConsumerWidget {
             indexedItemBuilder: (BuildContext context, Quiz quiz, int index) {
               return Column(
                 children: [
-                  _QuizItemBar(
+                  _QuizStudyCard(
                     quiz: quiz,
                     index: index,
                   ),
@@ -94,6 +91,8 @@ class _Scaffold extends ConsumerWidget {
               child: Row(
                 children: [
                   const Spacer(),
+
+                  ///苦手克服ボタン
                   DefaultButton(
                       width: context.width * 0.45,
                       height: context.height * 0.06,
@@ -102,18 +101,26 @@ class _Scaffold extends ConsumerWidget {
                       onPressed: weakQuiz.quizItemList.isEmpty
                           ? null
                           : () {
+                              ref
+                                  .read(quizModelProvider.notifier)
+                                  .setQuizType(QuizType.weak);
                               showDialog(
                                   context: context,
                                   builder: (_) =>
-                                      _StudyQuizDialog(quiz: weakQuiz));
+                                      StudyQuizModal(quiz: weakQuiz));
                             }),
                   Gap(context.width * 0.02),
+
+                  ///苦手克服ボタン
                   PrimaryButton(
                     width: context.width * 0.45,
                     height: context.height * 0.06,
                     text: "${testQuiz.title}",
                     icon: Icons.edit_note,
                     onPressed: () {
+                      ref
+                          .read(quizModelProvider.notifier)
+                          .setQuizType(QuizType.test);
                       showDialog(
                           context: context,
                           builder: (_) => const TestQuizModal());

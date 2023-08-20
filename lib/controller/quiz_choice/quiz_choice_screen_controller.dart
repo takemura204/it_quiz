@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart';
-import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 
 final quizChoiceScreenProvider =
@@ -17,6 +17,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       : super(const QuizChoiceScreenState()) {
     initState();
   }
+
   final Ref ref;
   Quiz quiz;
 
@@ -62,7 +63,8 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizList[quizIndex].ans,
         choices: quizList[quizIndex].choices,
         comment: quizList[quizIndex].comment,
-        isJudge: true, //正解
+        isJudge: true,
+        //正解
         isWeak: false, //苦手リスト除外
       );
       state = state.copyWith(isJudge: true, quizList: quizList);
@@ -75,7 +77,8 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizList[quizIndex].ans,
         choices: quizList[quizIndex].choices,
         comment: quizList[quizIndex].comment,
-        isJudge: false, //不正解
+        isJudge: false,
+        //不正解
         isWeak: true, //苦手リスト追加
       );
       state = state.copyWith(isJudge: false, quizList: quizList);
@@ -87,8 +90,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     state = state.copyWith(isAnsView: true);
     Future.delayed(const Duration(milliseconds: 800), () {
       state = state.copyWith(isAnsView: false);
-      //次のクイズ
-      _nextQuiz();
+      _nextQuiz(); //次のクイズ
     });
   }
 
@@ -98,7 +100,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     //問題が終わった時
     if (quizIndex == quiz.quizItemList.length - 1) {
       state = state.copyWith(quizIndex: 0, isResultScreen: true);
-      _updateItem();
+      _updateQuizItem();
     }
     //問題がまだある時
     else {
@@ -120,7 +122,10 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);
-    ref.read(quizModelProvider.notifier).updateWeakItem();
+    print(state.quizList[index].isWeak);
+
+    _updateQuizItem();
+    // ref.read(quizModelProvider.notifier).updateWeakItem();
   }
 
   ///クリアボタン
@@ -134,7 +139,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   }
 
   ///クイズ結果更新(端末保存)
-  void _updateItem() {
+  void _updateQuizItem() {
     final quizList = state.quizList;
     ref.read(quizModelProvider.notifier).updateQuiz(quizList);
   }

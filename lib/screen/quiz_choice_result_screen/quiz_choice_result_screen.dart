@@ -13,6 +13,7 @@ part 'quiz_choice_result_view.dart';
 
 class QuizChoiceResultScreen extends StatelessWidget {
   const QuizChoiceResultScreen(this.arguments);
+
   final Quiz arguments;
 
   @override
@@ -39,8 +40,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       actions: [
         ClearButton(
           iconSize: 30,
-          onPressed: () => //問題リセット
-              ref.read(quizChoiceScreenProvider.notifier).resetScreen(),
+          onPressed: () {
+            //問題リセット
+            ref.read(quizChoiceScreenProvider.notifier).resetScreen();
+          },
         ),
       ],
     );
