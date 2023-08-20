@@ -83,7 +83,9 @@ class PrimaryDialog extends ConsumerWidget {
                       width: context.width * 0.4,
                       height: context.height * 0.06,
                       text: cancelText,
-                      onPressed: onPressed),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
                   Gap(context.width * 0.05),
 
                   ///実行ボタン
@@ -208,6 +210,7 @@ class PrimaryCloseDialog extends ConsumerWidget {
       required this.title,
       required this.subWidget,
       required this.doneText});
+
   final VoidCallback? onPressed;
   final String title;
   final Widget subWidget;
@@ -291,6 +294,7 @@ class DefaultCloseDialog extends ConsumerWidget {
       required this.iconWidget,
       required this.subWidget,
       required this.doneText});
+
   final VoidCallback? onPressed;
   final Widget? iconWidget;
   final String title;
@@ -385,6 +389,7 @@ class SecondaryCloseDialog extends ConsumerWidget {
       required this.title,
       required this.subWidget,
       required this.doneText});
+
   final VoidCallback? onPressed;
   final String title;
   final Widget subWidget;

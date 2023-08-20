@@ -293,7 +293,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
                 quizItemList.length *
                 100)
             .toInt();
-    print(correctNum);
     final isCompleted = quizItemList.length == correctNum;
     final testQuiz = state.testQuiz.copyWith(
         correctNum: correctNum,

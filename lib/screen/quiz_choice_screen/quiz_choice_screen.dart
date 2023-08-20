@@ -15,6 +15,7 @@ part 'quiz_choice_view.dart';
 
 class QuizChoiceScreen extends ConsumerWidget {
   const QuizChoiceScreen(this.item);
+
   final Quiz item;
 
   @override
@@ -31,8 +32,9 @@ class QuizChoiceScreen extends ConsumerWidget {
 }
 
 class _Scaffold extends ConsumerWidget {
-  const _Scaffold(this.item);
-  final Quiz item;
+  const _Scaffold(this.quiz);
+
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,12 +42,12 @@ class _Scaffold extends ConsumerWidget {
     return isResultScreen
 
         ///結果画面
-        ? QuizChoiceResultScreen(item)
+        ? QuizChoiceResultScreen(quiz)
 
         ///クイズ画面
         : Scaffold(
-            appBar: _AppBar(item),
-            body: _Body(item),
+            appBar: _AppBar(quiz),
+            body: _Body(quiz),
           );
   }
 }
