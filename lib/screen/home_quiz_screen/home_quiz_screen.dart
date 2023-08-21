@@ -30,8 +30,6 @@ class HomeQuizScreen extends ConsumerWidget {
   }
 }
 
-//Todo:クイズ結果画面に再挑戦とホームボタン追加、検索タブを追加
-
 class _Scaffold extends ConsumerWidget {
   const _Scaffold();
 
@@ -88,7 +86,7 @@ class _Scaffold extends ConsumerWidget {
             color: context.backgroundColor,
             child: Container(
               alignment: Alignment.center,
-              height: context.height * 0.08,
+              height: context.height * 0.1,
               width: context.width * 1,
               child: Row(
                 children: [

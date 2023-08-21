@@ -6,8 +6,11 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_model.dart';
+import '../../view/button.dart';
 import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
+import '../screen_argument.dart';
 
 part 'quiz_learn_result_view.dart';
 
@@ -59,15 +62,21 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CustomScrollView(
-      slivers: [
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              _QuizResultView(quiz),
-            ],
-          ),
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  _QuizResultView(quiz),
+                ],
+              ),
+            ),
+          ],
         ),
+        _NextActionCard(quiz),
       ],
     );
   }
