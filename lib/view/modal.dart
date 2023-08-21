@@ -1,18 +1,17 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
 
-import '../controller/home_review/home_review_screen_controller.dart';
+import '../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../model/lang/initial_resource.dart';
 import '../model/quiz/quiz.dart';
 import '../model/quiz/quiz_model.dart';
-import '../model/quiz/quizzes.dart';
 import '../screen/screen_argument.dart';
 import 'icon_button.dart';
 
+///クイズモーダル
 class StudyQuizModal extends ConsumerWidget {
   const StudyQuizModal({required this.quiz});
 
@@ -106,6 +105,84 @@ class StudyQuizModal extends ConsumerWidget {
   }
 }
 
+///テストモーダル
+class TestQuizModal extends ConsumerWidget {
+  const TestQuizModal();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final testQuiz = ref.watch(quizModelProvider).testQuiz;
+    final isGroup = ref.watch(homeQuizScreenProvider).testGroup.isNotEmpty;
+    return SimpleDialog(
+      insetPadding: EdgeInsets.all(context.width * 0.01),
+      contentPadding: EdgeInsets.all(context.width * 0.01),
+      children: [
+        Container(
+          height: context.height * 0.5,
+          width: context.width * 0.8,
+          child: Column(
+            children: [
+              ///タイトル
+              Row(
+                children: [
+                  _Title(testQuiz),
+                  const Spacer(),
+                  ClearButton(
+                    iconSize: context.height * 0.04,
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+
+              const Divider(height: 1),
+              const Spacer(),
+
+              ///選択範囲
+              const _QuizRange(),
+
+              const Gap(5),
+
+              ///問題数
+              const _SelectLength(),
+              const Spacer(),
+              const Divider(height: 1),
+              const Spacer(),
+
+              ///クイズに挑戦する
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+                child: isGroup
+                    ? PrimaryButton(
+                        width: context.width * 1,
+                        height: context.height * 0.06,
+                        text: I18n().styleTestQuiz,
+                        onPressed: () {
+                          ref
+                              .read(homeQuizScreenProvider.notifier)
+                              .tapStartTestQuizButton();
+                          final testQuiz = ref.read(quizModelProvider).testQuiz;
+                          context.showScreen(
+                            QuizChoiceScreenArguments(
+                              quiz: testQuiz,
+                            ).generateRoute(),
+                          );
+                        },
+                      )
+                    : DisabledButton(
+                        width: context.width * 1,
+                        height: context.height * 0.06,
+                        text: I18n().styleTestQuiz,
+                      ),
+              ),
+              const Spacer(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _Title extends ConsumerWidget {
   const _Title(this.quiz);
 
@@ -114,7 +191,7 @@ class _Title extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.05,
+      height: context.height * 0.045,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -180,186 +257,15 @@ class _QuizResult extends ConsumerWidget {
   }
 }
 
-///クイズ選択ボタン1
-class _SimpleDialogOption1 extends ConsumerWidget {
-  const _SimpleDialogOption1({required this.quiz, required this.text});
-
-  final Quiz quiz;
-  final String text;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SimpleDialogOption(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        child: Card(
-          elevation: 1,
-          margin: const EdgeInsets.all(0),
-          child: Container(
-            height: context.height * 0.06,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: context.mainColor),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: context.mainColor,
-                fontWeight: FontWeight.bold,
-                fontSize: context.width * 0.045,
-              ),
-            ),
-          ),
-        ),
-        onPressed: () {
-          ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
-          context.showScreen(
-            QuizLearnScreenArguments(
-              quiz: quiz,
-            ).generateRoute(),
-          );
-        });
-  }
-}
-
-///クイズ選択ボタン2
-class _SimpleDialogOption2 extends ConsumerWidget {
-  const _SimpleDialogOption2({required this.item, required this.text});
-
-  final Quiz item;
-  final String text;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SimpleDialogOption(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        child: Card(
-          elevation: 1,
-          margin: const EdgeInsets.all(0),
-          child: Container(
-            height: context.height * 0.06,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: context.mainColor,
-              border: Border.all(color: context.mainColor),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: AutoSizeText(
-              text,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: context.width * 0.045,
-              ),
-            ),
-          ),
-        ),
-        onPressed: () {
-          ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
-          context.showScreen(
-            QuizChoiceScreenArguments(
-              quiz: item,
-            ).generateRoute(),
-          );
-        });
-  }
-}
-
-class TestQuizModal extends ConsumerWidget {
-  const TestQuizModal();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final testQuiz = ref.watch(quizModelProvider).testQuiz;
-    return SimpleDialog(
-      insetPadding: EdgeInsets.all(context.width * 0.01),
-      contentPadding: EdgeInsets.all(context.width * 0.01),
-      children: [
-        Container(
-          height: context.height * 0.5,
-          width: context.width * 0.8,
-          child: Column(
-            children: [
-              ///タイトル
-              Row(
-                children: [
-                  _DialogTitle(testQuiz),
-                  const Spacer(),
-                  ClearButton(
-                    iconSize: context.height * 0.04,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-
-              const Divider(height: 1),
-              const Spacer(),
-
-              ///選択範囲
-              const _QuizRange(),
-
-              const Gap(5),
-
-              ///問題数
-              const _SelectLength(),
-              const Spacer(),
-              const Divider(height: 1),
-              const Spacer(),
-
-              ///クイズに挑戦する
-              _SimpleDialogOption(text: I18n().styleTestQuiz),
-              const Spacer(),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _DialogTitle extends ConsumerWidget {
-  const _DialogTitle(this.quiz);
-
-  final Quiz quiz;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: context.height * 0.07,
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Spacer(),
-          Text(quiz.title,
-              style: TextStyle(
-                fontSize: context.width * 0.05,
-                fontWeight: FontWeight.bold,
-              )),
-          Text(
-            '「${quiz.title}」では全ての問題からランダムに出題します',
-            style: TextStyle(
-                fontSize: context.width * 0.025, fontWeight: FontWeight.normal),
-          ),
-          const Spacer(),
-        ],
-      ),
-    );
-  }
-}
-
 class _QuizRange extends ConsumerWidget {
   const _QuizRange();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final group = ref
+    final category = ref
         .read(quizModelProvider)
         .quizList
-        .map((item) => item.category)
+        .map((quizItem) => quizItem.category)
         .toSet()
         .toList();
     return Container(
@@ -374,10 +280,10 @@ class _QuizRange extends ConsumerWidget {
             ),
           ),
           const Gap(5),
-          _SelectRange(group[0]),
-          _SelectRange(group[1]),
-          _SelectRange(group[2]),
-          _SelectRange(group[3]),
+          _SelectRange(category[0]),
+          _SelectRange(category[1]),
+          _SelectRange(category[2]),
+          _SelectRange(category[3]),
         ],
       ),
     );
@@ -393,10 +299,10 @@ class _SelectRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isSelected =
-        ref.watch(homeReviewScreenProvider).testGroup.contains(text);
+        ref.watch(homeQuizScreenProvider).testGroup.contains(text);
     return GestureDetector(
       onTap: () {
-        ref.read(homeReviewScreenProvider.notifier).selectGroup(text);
+        ref.read(homeQuizScreenProvider.notifier).selectGroup(text);
       },
       child: Container(
         width: context.width * 0.8,
@@ -444,7 +350,7 @@ class _SelectLength extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final List<int> testLength = [10, 20, 50];
     final selectedTestLength = ref.watch(
-      homeReviewScreenProvider.select((state) => state.selectedTestLength),
+      homeQuizScreenProvider.select((state) => state.selectedTestLength),
     );
     final initialIndex = testLength.indexOf(selectedTestLength);
     return Padding(
@@ -471,7 +377,7 @@ class _SelectLength extends ConsumerWidget {
               child: TabBar(
                   onTap: (index) {
                     ref
-                        .read(homeReviewScreenProvider.notifier)
+                        .read(homeQuizScreenProvider.notifier)
                         .selectTestLength(testLength[index]);
                   },
                   labelColor: Colors.white,
@@ -508,58 +414,6 @@ class _SelectLength extends ConsumerWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-///クイズ選択ボタン
-class _SimpleDialogOption extends ConsumerWidget {
-  const _SimpleDialogOption({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isGroup = ref.watch(homeReviewScreenProvider).testGroup.isNotEmpty;
-    return SimpleDialogOption(
-      onPressed: isGroup
-          ? () {
-              ref
-                  .read(homeReviewScreenProvider.notifier)
-                  .tapStartTestQuizButton();
-              final testQuiz = ref.read(quizModelProvider).testQuiz;
-              context.showScreen(
-                QuizChoiceScreenArguments(
-                  quiz: testQuiz,
-                ).generateRoute(),
-              );
-            }
-          : null,
-      padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.width * 0.01),
-      child: Card(
-        elevation: 1,
-        margin: const EdgeInsets.all(0),
-        child: Container(
-          height: context.height * 0.06,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: isGroup ? context.mainColor : Colors.black12,
-            border: Border.all(
-              color: isGroup ? context.mainColor : Colors.grey.withOpacity(0.1),
-            ),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: AutoSizeText(
-            text,
-            style: TextStyle(
-              color: isGroup ? Colors.white : Colors.grey,
-              fontWeight: FontWeight.bold,
-              fontSize: context.width * 0.05,
-            ),
-          ),
-        ),
       ),
     );
   }

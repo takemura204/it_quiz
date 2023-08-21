@@ -215,7 +215,7 @@ class DisabledButton extends ConsumerWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: Colors.black45,
+            color: Colors.grey.shade500,
             fontWeight: FontWeight.bold,
             fontSize: height < context.height * 0.05
                 ? context.height * 0.015

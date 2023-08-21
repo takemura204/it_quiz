@@ -2,9 +2,9 @@ part of 'quiz_learn_result_screen.dart';
 
 ///クイズ一覧
 class _QuizResultView extends ConsumerWidget {
-  const _QuizResultView(this.item);
+  const _QuizResultView(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -14,7 +14,7 @@ class _QuizResultView extends ConsumerWidget {
       children: quizList.isEmpty
           ? []
           : [
-              QuizStyleTitle(item),
+              QuizStyleTitle(quiz),
               const Gap(10),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),

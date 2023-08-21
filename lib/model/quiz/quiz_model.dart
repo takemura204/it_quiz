@@ -38,7 +38,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   @override
   Future initState() async {
-    _resetData();
+    // _resetData();
     await _loadQuizData(); // データを読み込む
     super.initState();
   }
@@ -173,13 +173,13 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
-      case QuizType.daily:
-        updateDailyItem(quiz);
+      case QuizType.weak:
+        _updateWeakQuiz(quiz);
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
-      case QuizType.weak:
-        _updateWeakQuiz(quiz);
+      case QuizType.daily:
+        updateDailyItem(quiz);
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;

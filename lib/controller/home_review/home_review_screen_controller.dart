@@ -12,7 +12,7 @@ final homeReviewScreenProvider =
 class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     with LocatorMixin {
   HomeReviewScreenController({required this.ref})
-      : super( HomeReviewScreenState()) {
+      : super(HomeReviewScreenState()) {
     initState();
   }
 
@@ -28,7 +28,9 @@ class HomeReviewScreenController extends StateNotifier<HomeReviewScreenState>
     final testGroup = state.testGroup;
     final selectedTestLength = state.selectedTestLength;
     ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
-    ref.read(quizModelProvider.notifier).createTestQuiz(testGroup,selectedTestLength);
+    ref
+        .read(quizModelProvider.notifier)
+        .createTestQuiz(testGroup, selectedTestLength);
   }
 
   ///問題範囲指定

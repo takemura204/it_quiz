@@ -144,8 +144,8 @@ class _Body extends ConsumerWidget {
             Container(
               height: context.height * 0.07,
               color: Colors.cyan,
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Spacer(),
                   Text(
                     "広告入れたい",

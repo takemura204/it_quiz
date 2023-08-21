@@ -78,11 +78,9 @@ class _QuizResultView extends ConsumerWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              ref
-                                  .read(quizChoiceScreenProvider.notifier)
-                                  .tapCheckBox(index);
-                            },
+                            onTap: () => ref
+                                .read(quizChoiceScreenProvider.notifier)
+                                .tapCheckBox(index),
                             child: Container(
                               alignment: Alignment.center,
                               width: context.width * 0.1,

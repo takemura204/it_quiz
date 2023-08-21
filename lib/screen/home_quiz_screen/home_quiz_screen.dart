@@ -30,6 +30,8 @@ class HomeQuizScreen extends ConsumerWidget {
   }
 }
 
+//Todo:クイズ結果画面に再挑戦とホームボタン追加、検索タブを追加
+
 class _Scaffold extends ConsumerWidget {
   const _Scaffold();
 
@@ -111,12 +113,12 @@ class _Scaffold extends ConsumerWidget {
                             }),
                   Gap(context.width * 0.02),
 
-                  ///苦手克服ボタン
+                  ///テストボタン
                   PrimaryButton(
                     width: context.width * 0.45,
                     height: context.height * 0.06,
                     text: "${testQuiz.title}",
-                    icon: Icons.edit_note,
+                    icon: Icons.drive_file_rename_outline,
                     onPressed: () {
                       ref
                           .read(quizModelProvider.notifier)

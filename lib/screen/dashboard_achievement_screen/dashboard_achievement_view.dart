@@ -3,9 +3,11 @@ part of 'dashboard_achievement_screen.dart';
 class _Title extends ConsumerWidget {
   const _Title(
       {required this.title, required this.subtitle, required this.icon});
+
   final String title;
   final String subtitle;
   final IconData icon;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -59,11 +61,13 @@ class _DailyMissionCard extends ConsumerWidget {
       required this.goalValue,
       required this.isRandomIconButton,
       required this.randomIconButtonTap});
+
   final Mission mission;
   final int currentValue;
   final int goalValue;
   final bool isRandomIconButton;
   final VoidCallback randomIconButtonTap;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDone = currentValue >= goalValue;
@@ -204,46 +208,11 @@ class _DailyMissionCard extends ConsumerWidget {
   }
 }
 
-class _RankBatch extends ConsumerWidget {
-  const _RankBatch();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final rankData = ref.watch(dashboardRankProvider.notifier).rankData;
-    // final rankIndex = ref.watch(dashboardRankProvider).rankIndex;
-    return GestureDetector(
-      onTap: () {
-        // ref.read(dashboardRankProvider.notifier).tap(rankIndex);
-      },
-      child: Card(
-        elevation: 3,
-        color: context.backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Icon(
-              Icons.circle_outlined, // 変更されたアイコン
-              size: context.width * 0.25,
-              color: context.mainColor,
-            ),
-            Icon(
-              Icons.pets, // 変更されたアイコン
-              size: context.width * 0.1,
-              color: context.mainColor,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _RankName extends ConsumerWidget {
   const _RankName({required this.rank});
+
   final Rank rank;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nextLevelUpScore =

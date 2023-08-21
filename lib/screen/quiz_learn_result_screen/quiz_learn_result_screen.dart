@@ -12,14 +12,15 @@ import '../../view/quiz_widget.dart';
 part 'quiz_learn_result_view.dart';
 
 class QuizLearnResultScreen extends StatelessWidget {
-  const QuizLearnResultScreen(this.item);
-  final Quiz item;
+  const QuizLearnResultScreen(this.quiz);
+
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _AppBar(item),
-      body: _Body(item),
+      appBar: _AppBar(quiz),
+      body: _Body(quiz),
     );
   }
 }
@@ -38,10 +39,11 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       title: Text(quiz.category),
       actions: [
         ClearButton(
-          iconSize: 30,
-          onPressed: () => //問題リセット
-              ref.read(quizLearnScreenProvider.notifier).tapClearButton(),
-        ),
+            iconSize: 30,
+            onPressed: () {
+              Navigator.of(context).pop();
+              ref.read(quizLearnScreenProvider.notifier).tapClearButton();
+            }),
       ],
     );
   }
@@ -51,9 +53,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body(this.item);
+  const _Body(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -62,7 +64,7 @@ class _Body extends ConsumerWidget {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              _QuizResultView(item),
+              _QuizResultView(quiz),
             ],
           ),
         ),

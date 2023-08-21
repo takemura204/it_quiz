@@ -38,7 +38,7 @@ class _App extends ConsumerWidget {
       //右上のdebugラベルを消す
       debugShowCheckedModeBanner: false,
       // DevicePreviewに必要
-      useInheritedMediaQuery: true,
+      // useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
 

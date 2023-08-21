@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeQuizScreenState {
-  int get itemIndex => throw _privateConstructorUsedError;
+  int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
+  bool get isSelected => throw _privateConstructorUsedError;
+  List<String> get testGroup => throw _privateConstructorUsedError;
+  int get selectedTestLength => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeQuizScreenStateCopyWith<HomeQuizScreenState> get copyWith =>
@@ -29,7 +32,11 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
           HomeQuizScreenState value, $Res Function(HomeQuizScreenState) then) =
       _$HomeQuizScreenStateCopyWithImpl<$Res, HomeQuizScreenState>;
   @useResult
-  $Res call({int itemIndex});
+  $Res call(
+      {int itemIndex,
+      bool isSelected,
+      List<String> testGroup,
+      int selectedTestLength});
 }
 
 /// @nodoc
@@ -46,11 +53,26 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
   @override
   $Res call({
     Object? itemIndex = null,
+    Object? isSelected = null,
+    Object? testGroup = null,
+    Object? selectedTestLength = null,
   }) {
     return _then(_value.copyWith(
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      testGroup: null == testGroup
+          ? _value.testGroup
+          : testGroup // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      selectedTestLength: null == selectedTestLength
+          ? _value.selectedTestLength
+          : selectedTestLength // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -63,7 +85,11 @@ abstract class _$$_CreateCopyWith<$Res>
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int itemIndex});
+  $Res call(
+      {int itemIndex,
+      bool isSelected,
+      List<String> testGroup,
+      int selectedTestLength});
 }
 
 /// @nodoc
@@ -77,11 +103,26 @@ class __$$_CreateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? itemIndex = null,
+    Object? isSelected = null,
+    Object? testGroup = null,
+    Object? selectedTestLength = null,
   }) {
     return _then(_$_Create(
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      testGroup: null == testGroup
+          ? _value._testGroup
+          : testGroup // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      selectedTestLength: null == selectedTestLength
+          ? _value.selectedTestLength
+          : selectedTestLength // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -90,15 +131,36 @@ class __$$_CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create implements _Create {
-  const _$_Create({this.itemIndex = 0});
+  const _$_Create(
+      {this.itemIndex = 0,
+      this.isSelected = false,
+      final List<String> testGroup = const [],
+      this.selectedTestLength = 10})
+      : _testGroup = testGroup;
 
   @override
   @JsonKey()
   final int itemIndex;
+//クイズ番号
+  @override
+  @JsonKey()
+  final bool isSelected;
+  final List<String> _testGroup;
+  @override
+  @JsonKey()
+  List<String> get testGroup {
+    if (_testGroup is EqualUnmodifiableListView) return _testGroup;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_testGroup);
+  }
+
+  @override
+  @JsonKey()
+  final int selectedTestLength;
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(itemIndex: $itemIndex)';
+    return 'HomeQuizScreenState(itemIndex: $itemIndex, isSelected: $isSelected, testGroup: $testGroup, selectedTestLength: $selectedTestLength)';
   }
 
   @override
@@ -107,11 +169,18 @@ class _$_Create implements _Create {
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
             (identical(other.itemIndex, itemIndex) ||
-                other.itemIndex == itemIndex));
+                other.itemIndex == itemIndex) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected) &&
+            const DeepCollectionEquality()
+                .equals(other._testGroup, _testGroup) &&
+            (identical(other.selectedTestLength, selectedTestLength) ||
+                other.selectedTestLength == selectedTestLength));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemIndex);
+  int get hashCode => Object.hash(runtimeType, itemIndex, isSelected,
+      const DeepCollectionEquality().hash(_testGroup), selectedTestLength);
 
   @JsonKey(ignore: true)
   @override
@@ -121,10 +190,20 @@ class _$_Create implements _Create {
 }
 
 abstract class _Create implements HomeQuizScreenState {
-  const factory _Create({final int itemIndex}) = _$_Create;
+  const factory _Create(
+      {final int itemIndex,
+      final bool isSelected,
+      final List<String> testGroup,
+      final int selectedTestLength}) = _$_Create;
 
   @override
   int get itemIndex;
+  @override //クイズ番号
+  bool get isSelected;
+  @override
+  List<String> get testGroup;
+  @override
+  int get selectedTestLength;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

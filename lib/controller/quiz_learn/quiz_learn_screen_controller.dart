@@ -58,7 +58,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       ans: quizList[index].ans,
       comment: quizList[index].comment,
       isWeak: quizList[index].isWeak,
-      isJudge: isJudge, //更新
+      isJudge: isJudge,
+      //更新
       choices: quizList[index].choices,
     );
   }
@@ -154,7 +155,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);
-    ref.read(quizModelProvider.notifier).updateWeakItem();
+
+    _updateItem();
   }
 
   ///正解画面に切り替え

@@ -17,6 +17,7 @@ class SettingColorController extends StateNotifier<SettingColorState>
       initState();
     }();
   }
+
   final Ref ref;
   final colors = [
     AppColor.main,
@@ -526,8 +527,8 @@ class SettingColorController extends StateNotifier<SettingColorState>
           themeId: themeId, themeData: themeData, mainColor: mainColor);
       state = state.copyWith(isLoading: false);
       // ignore: empty_catches
-    } on Exception catch (e) {
-      print("エラー:${e}");
+    } on Exception catch (e, s) {
+      print("エラー:$e,$s");
     }
   }
 
