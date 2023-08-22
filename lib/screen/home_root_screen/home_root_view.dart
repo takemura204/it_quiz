@@ -13,7 +13,7 @@ class _Body extends ConsumerWidget {
       index: state.currentIndex,
       children: const [
         HomeQuizScreen(),
-        HomeReviewScreen(),
+        HomeSearchScreen(),
         HomeDashboardScreen(),
         HomeSettingScreen(),
       ],
@@ -38,9 +38,9 @@ class _BottomNavBar extends ConsumerWidget {
             label: I18n().titleStudy,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.tips_and_updates_outlined),
-            activeIcon: const Icon(Icons.tips_and_updates_outlined),
-            label: I18n().titleReview,
+            icon: const Icon(Icons.search_outlined),
+            activeIcon: const Icon(Icons.search_outlined),
+            label: I18n().titleSearch,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.insights_outlined),

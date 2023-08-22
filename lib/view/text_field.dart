@@ -13,9 +13,11 @@ class EmailTextField extends ConsumerWidget {
       {required this.emailController,
       required this.isValidEmail,
       required this.onChanged});
+
   final TextEditingController emailController;
   final bool isValidEmail;
   final ValueChanged<String>? onChanged;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -41,15 +43,19 @@ class EmailTextField extends ConsumerWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.emailAddress,
             onChanged: onChanged,
-            autocorrect: true, //予測変換
-            autofocus: true, //TextFieldに自動でfocusを当てる
+            autocorrect: true,
+            //予測変換
+            autofocus: true,
+            //TextFieldに自動でfocusを当てる
             enabled: true,
             obscureText: false,
-            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            textInputAction: TextInputAction.next,
+            //次のTextFieldへ自動でfocusを移す
             maxLines: 1,
             // validator: (value) => isValidEmail ? null : '無効なメールアドレスです',
             decoration: InputDecoration(
-              floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              // 追加した部分
               hintMaxLines: null,
               hintText: 'Email',
               fillColor: Colors.white,
@@ -81,6 +87,7 @@ class PasswordTextField extends ConsumerWidget {
     required this.isLogin,
     required this.obscureIconButtonPressed,
   });
+
   final TextEditingController passwordController;
   final bool isValid;
   final bool isSafetyPass;
@@ -88,6 +95,7 @@ class PasswordTextField extends ConsumerWidget {
   final bool isLogin;
   final ValueChanged<String>? onChanged;
   final VoidCallback? obscureIconButtonPressed;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -117,7 +125,8 @@ class PasswordTextField extends ConsumerWidget {
             onChanged: onChanged,
             minLines: null,
             maxLines: 1,
-            obscureText: isObscure, //入力非表示
+            obscureText: isObscure,
+            //入力非表示
             decoration: InputDecoration(
               hintMaxLines: null,
               hintText: 'Password',
@@ -178,9 +187,11 @@ class UserNameTextField extends ConsumerWidget {
       {required this.userNameController,
       required this.isValidUserName,
       required this.onChanged});
+
   final TextEditingController userNameController;
   final bool isValidUserName;
   final ValueChanged<String>? onChanged;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -206,15 +217,19 @@ class UserNameTextField extends ConsumerWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.emailAddress,
             onChanged: onChanged,
-            autocorrect: true, //予測変換
-            autofocus: true, //TextFieldに自動でfocusを当てる
+            autocorrect: true,
+            //予測変換
+            autofocus: true,
+            //TextFieldに自動でfocusを当てる
             enabled: true,
             obscureText: false,
-            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            textInputAction: TextInputAction.next,
+            //次のTextFieldへ自動でfocusを移す
             maxLines: 1,
             // validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
             decoration: InputDecoration(
-              floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              // 追加した部分
               hintMaxLines: null,
               hintText: 'Name',
               fillColor: Colors.white,
@@ -239,9 +254,11 @@ class UserNameTextField extends ConsumerWidget {
 class BirthDayTextField extends ConsumerWidget {
   const BirthDayTextField(
       {required this.birthdayController, required this.onTap});
+
   final TextEditingController birthdayController;
 
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -266,17 +283,21 @@ class BirthDayTextField extends ConsumerWidget {
             controller: birthdayController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.emailAddress,
-            autocorrect: true, //予測変換
-            autofocus: true, //TextFieldに自動でfocusを当てる
+            autocorrect: true,
+            //予測変換
+            autofocus: true,
+            //TextFieldに自動でfocusを当てる
             enabled: true,
             obscureText: false,
-            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            textInputAction: TextInputAction.next,
+            //次のTextFieldへ自動でfocusを移す
             maxLines: 1,
             onTap: onTap,
             readOnly: true,
             // validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
             decoration: InputDecoration(
-              floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              // 追加した部分
               hintMaxLines: null,
               hintText:
                   '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
@@ -301,8 +322,10 @@ class BirthDayTextField extends ConsumerWidget {
 ///性別
 class GenderTextField extends ConsumerWidget {
   const GenderTextField({required this.genderController, required this.onTap});
+
   final TextEditingController genderController;
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -327,17 +350,21 @@ class GenderTextField extends ConsumerWidget {
             controller: genderController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.emailAddress,
-            autocorrect: true, //予測変換
-            autofocus: false, //TextFieldに自動でfocusを当てる
+            autocorrect: true,
+            //予測変換
+            autofocus: false,
+            //TextFieldに自動でfocusを当てる
             enabled: true,
             obscureText: false,
-            textInputAction: TextInputAction.next, //次のTextFieldへ自動でfocusを移す
+            textInputAction: TextInputAction.next,
+            //次のTextFieldへ自動でfocusを移す
             maxLines: 1,
             onTap: onTap,
             readOnly: true,
             // validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
             decoration: InputDecoration(
-                floatingLabelBehavior: FloatingLabelBehavior.never, // 追加した部分
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // 追加した部分
                 hintMaxLines: null,
                 hintText: 'Gender',
                 fillColor: Colors.white,
@@ -383,6 +410,7 @@ class EditTextField extends ConsumerWidget {
     required this.isObscure,
     required this.onTap,
   });
+
   final TextEditingController textController;
   final bool isValid;
   final ValueChanged<String>? onChanged;
@@ -393,6 +421,7 @@ class EditTextField extends ConsumerWidget {
   final bool isTap;
   final bool isObscure;
   final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -402,7 +431,8 @@ class EditTextField extends ConsumerWidget {
         keyboardType: TextInputType.name,
         textInputAction: TextInputAction.done,
         maxLines: 1,
-        obscureText: isObscure, //入力非表示
+        obscureText: isObscure,
+        //入力非表示
         decoration: InputDecoration(
           labelText: labelText,
           hintMaxLines: null,
@@ -424,8 +454,74 @@ class EditTextField extends ConsumerWidget {
         ),
         validator: (x) => isValid ? null : errorText,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        readOnly: isTap, //編集可能か
+        readOnly: isTap,
+        //編集可能か
         onTap: onTap,
+      ),
+    );
+  }
+}
+
+class SearchTextField extends ConsumerWidget {
+  const SearchTextField({
+    required this.searchController,
+    required this.isValidSearch,
+    required this.onChanged,
+    required this.isTextEmpty,
+  });
+
+  final TextEditingController searchController;
+  final bool isValidSearch;
+  final bool isTextEmpty;
+  final ValueChanged<String>? onChanged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: context.height * 0.075,
+      child: Column(
+        children: [
+          const Spacer(),
+          TextFormField(
+            controller: searchController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.text,
+            onChanged: onChanged,
+            autocorrect: true,
+            //予測変換
+            autofocus: false,
+            //TextFieldに自動でfocusを当てる
+            enabled: true,
+            obscureText: false,
+            textInputAction: TextInputAction.done,
+            //次のTextFieldへ自動でfocusを移す
+            maxLines: 1,
+            decoration: InputDecoration(
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              // 追加した部分
+              hintMaxLines: null,
+              hintText: '検索',
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+              ),
+              prefixIcon: const Icon(Icons.search_outlined),
+              suffixIcon: searchController.text.isNotEmpty
+                  ? IconButton(
+                      onPressed: () {
+                        searchController.clear();
+                      },
+                      icon: const Icon(
+                        Icons.highlight_off,
+                        color: Colors.black45,
+                      ),
+                    )
+                  : null,
+            ),
+          ),
+          const Spacer(),
+        ],
       ),
     );
   }
