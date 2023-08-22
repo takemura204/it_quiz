@@ -72,6 +72,9 @@ class _Body extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  QuizStyleTitle(quiz),
+                  const Gap(5),
+
                   ///正解した問題リスト
                   _QuizResultView(quiz),
                 ],

@@ -27,44 +27,20 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeSearchScreenProvider);
-    final searchText = state.searchText;
-    final isValidSearch = state.isValidSearch;
-    final isNotTextEmpty = state.isNotTextEmpty;
-    final searchController =
-        ref.watch(homeSearchScreenProvider.notifier).searchController;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSearch),
       ),
       body: CustomScrollView(
         slivers: [
-          ///検索機能
-          SliverToBoxAdapter(
-            child: Container(
-              color: Colors.grey.shade50,
-              child: Padding(
-                padding: EdgeInsets.all(context.width * 0.02),
-                child: SearchTextField(
-                  searchController: searchController,
-                  isValidSearch: isValidSearch,
-                  isTextEmpty: isNotTextEmpty,
-                  onChanged: (_) {
-                    ref
-                        .read(homeSearchScreenProvider.notifier)
-                        .setSearchText(searchController.text);
-                  },
-                ),
-              ),
-            ),
-          ),
-
-          ///検索結果一覧
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                _QuizResultView(searchText),
+                ///検索機能
+                const _SearchBar(),
+
+                ///検索結果一覧
+                const _QuizResultView(),
               ],
             ),
           ),

@@ -1,21 +1,45 @@
 part of 'home_search_screen.dart';
 
-class _QuizResultView extends ConsumerWidget {
-  final String searchText;
-
-  const _QuizResultView(this.searchText);
+class _SearchBar extends ConsumerWidget {
+  const _SearchBar();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeSearchScreenProvider);
+    final isValidSearch = state.isValidSearch;
+    final isNotTextEmpty = state.isNotTextEmpty;
+    final searchController =
+        ref.watch(homeSearchScreenProvider.notifier).searchController;
+    return Container(
+      color: Colors.grey.shade50,
+      child: Padding(
+        padding: EdgeInsets.all(context.width * 0.02),
+        child: SearchTextField(
+          searchController: searchController,
+          isValidSearch: isValidSearch,
+          isTextEmpty: isNotTextEmpty,
+          onChanged: (_) {
+            ref
+                .read(homeSearchScreenProvider.notifier)
+                .setSearchText(searchController.text);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _QuizResultView extends ConsumerWidget {
+  const _QuizResultView();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeSearchScreenProvider);
+    final searchText = state.searchText;
     final quizList = ref.watch(quizModelProvider).quizList;
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-    final filteredQuizzes = quizList
-        .where(
-          (quiz) => quiz.quizItemList.any(
-            (item) => item.question.contains(searchText),
-          ),
-        )
-        .toList();
+    final filteredQuizItemList =
+        quizItemList.any((item) => item.question.contains(searchText));
 
     return Column(
       children: quizList.isEmpty
@@ -30,10 +54,10 @@ class _QuizResultView extends ConsumerWidget {
                   return Container(
                     height: context.height * 0.15,
                     child: Card(
-                      elevation: 3,
+                      elevation: 1,
                       margin: EdgeInsets.symmetric(
                           horizontal: context.width * 0.02,
-                          vertical: context.width * 0.01),
+                          vertical: context.width * 0.005),
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
@@ -45,27 +69,29 @@ class _QuizResultView extends ConsumerWidget {
                       child: Row(
                         children: [
                           const Gap(5),
-                          Container(
-                            width: context.width * 0.745,
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.width * 0.02,
-                                vertical: context.width * 0.02),
-                            child: SubstringHighlight(
-                              text: quizItemList[index].question,
-                              term: quizItemList[index].ans,
-                              textStyle: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w500,
-                                fontSize: context.width * 0.04,
-                              ),
-                              overflow: TextOverflow.clip,
-                              textStyleHighlight: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: quizItemList[index].isJudge
-                                    ? Colors.green.withOpacity(0.7)
-                                    : Colors.red.withOpacity(0.7),
-                                decoration: TextDecoration.underline,
+                          Expanded(
+                            child: Container(
+                              color: Colors.red,
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: context.width * 0.02,
+                                  vertical: context.width * 0.02),
+                              child: SubstringHighlight(
+                                text: quizItemList[index].question,
+                                term: quizItemList[index].ans,
+                                textStyle: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: context.width * 0.04,
+                                ),
+                                overflow: TextOverflow.clip,
+                                textStyleHighlight: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: quizItemList[index].isJudge
+                                      ? Colors.green.withOpacity(0.7)
+                                      : Colors.red.withOpacity(0.7),
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
                           ),
@@ -105,7 +131,7 @@ class _QuizResultView extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          const Spacer(),
+                          const Gap(5),
                         ],
                       ),
                     ),

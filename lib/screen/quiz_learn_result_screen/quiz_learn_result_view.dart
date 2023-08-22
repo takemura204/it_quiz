@@ -49,25 +49,26 @@ class _QuizResultView extends ConsumerWidget {
                                 color: Colors.green.withOpacity(0.7)),
                           ),
                           const Spacer(),
-                          Container(
-                            width: context.width * 0.745,
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.width * 0.02,
-                                vertical: context.width * 0.02),
-                            child: SubstringHighlight(
-                              text: quizList[index].question,
-                              term: quizList[index].ans,
-                              textStyle: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w500,
-                                fontSize: context.width * 0.04,
-                              ),
-                              overflow: TextOverflow.clip,
-                              textStyleHighlight: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green.withOpacity(0.7),
-                                decoration: TextDecoration.underline,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: context.width * 0.02,
+                                  vertical: context.width * 0.02),
+                              child: SubstringHighlight(
+                                text: quizList[index].question,
+                                term: quizList[index].ans,
+                                textStyle: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: context.width * 0.04,
+                                ),
+                                overflow: TextOverflow.clip,
+                                textStyleHighlight: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green.withOpacity(0.7),
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
                           ),
@@ -110,6 +111,7 @@ class _QuizResultView extends ConsumerWidget {
                               ),
                             ),
                           ),
+                          const Gap(5),
                         ],
                       ),
                     ),
