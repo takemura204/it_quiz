@@ -137,13 +137,15 @@ class _QuizItemCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final searchKeywords = ref.watch(homeSearchScreenProvider).searchKeywords;
+    final termToHighlight = searchKeywords.join('|');
     return Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(
           horizontal: context.width * 0.02, vertical: context.height * 0.02),
       child: SubstringHighlight(
         text: quiz[index].question,
-        term: quiz[index].ans,
+        term: termToHighlight,
         textStyle: TextStyle(
           color: Colors.black54,
           fontWeight: FontWeight.w500,

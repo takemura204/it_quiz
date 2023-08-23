@@ -9,7 +9,6 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../view/button.dart';
 import '../../view/icon_button.dart';
-import '../../view/quiz_widget.dart';
 import '../screen_argument.dart';
 
 part 'quiz_learn_result_view.dart';
