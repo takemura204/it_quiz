@@ -21,6 +21,14 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     state = state.copyWith(searchText: text, isNotTextEmpty: text.isNotEmpty);
   }
 
+  void setSearchKeywords(String text) {
+    final keywords = splitBySpace(normalizeText(text));
+    state = state.copyWith(
+        searchKeywords: keywords,
+        searchText: text,
+        isNotTextEmpty: text.isNotEmpty);
+  }
+
   void clearSearchText() {
     searchController.clear();
     state = state.copyWith(
@@ -28,8 +36,16 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
         isNotTextEmpty: searchController.text.isNotEmpty);
   }
 
-  // 入力決定後の処理は特定の要件によって変わる可能性があります
-  void onSearchConfirmed(String text) {
-    // 具体的な処理をここに追加
+  void onSearchConfirmed(String text) {}
+
+  String normalizeText(String input) {
+    // ひらがな、カタカナ、漢字、半角全角の数字や英語を正規化する処理を書く
+    // この例では簡単に全角を半角に変換する処理のみを示す
+    // 実際の処理はもう少し複雑になる可能性がある
+    return input.replaceAll('　', ' '); // 全角スペースを半角スペースに変換
+  }
+
+  List<String> splitBySpace(String input) {
+    return input.split(' '); // 半角スペースで文字列を分割
   }
 }

@@ -10,22 +10,30 @@ class _SearchBar extends ConsumerWidget {
     final isNotTextEmpty = state.isNotTextEmpty;
     final searchController =
         ref.watch(homeSearchScreenProvider.notifier).searchController;
-    return Container(
-      color: Colors.grey.shade50,
-      child: Padding(
-        padding: EdgeInsets.all(context.width * 0.02),
-        child: SearchTextField(
-          searchController: searchController,
-          isValidSearch: isValidSearch,
-          isTextEmpty: isNotTextEmpty,
-          onClear: () {
-            ref.read(homeSearchScreenProvider.notifier).clearSearchText();
-          },
-          onChanged: (_) {
-            ref
-                .read(homeSearchScreenProvider.notifier)
-                .setSearchText(searchController.text);
-          },
+    return Card(
+      elevation: 1,
+      child: Container(
+        color: Colors.grey.shade200,
+        child: Padding(
+          padding: EdgeInsets.all(context.width * 0.02),
+          child: SearchTextField(
+            searchController: searchController,
+            isValidSearch: isValidSearch,
+            isTextEmpty: isNotTextEmpty,
+            onChanged: (_) {
+              ref
+                  .read(homeSearchScreenProvider.notifier)
+                  .setSearchText(searchController.text);
+            },
+            onFieldSubmitted: (_) {
+              ref
+                  .read(homeSearchScreenProvider.notifier)
+                  .setSearchKeywords(searchController.text);
+            },
+            onClear: () {
+              ref.read(homeSearchScreenProvider.notifier).clearSearchText();
+            },
+          ),
         ),
       ),
     );
@@ -38,77 +46,82 @@ class _QuizResultView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeSearchScreenProvider);
-    final searchText = state.searchText;
+    final searchKeywords = state.searchKeywords;
     final quizList = ref.watch(quizModelProvider).quizList;
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-    final filteredQuizItemList =
-        quizItemList.any((item) => item.question.contains(searchText));
 
+    final filteredQuizItemList = searchKeywords.isEmpty
+        ? quizItemList
+        : quizItemList.where((item) {
+            return searchKeywords.any((keyword) {
+              return item.question.contains(keyword);
+            });
+          }).toList();
+    if (filteredQuizItemList.isEmpty) {
+      return const _NotFindQuizItem();
+    }
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: quizList.length,
+      itemCount: filteredQuizItemList.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          child: Card(
-            elevation: 3,
-            margin: EdgeInsets.symmetric(
-                horizontal: context.width * 0.02,
-                vertical: context.width * 0.01),
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: context.mainColor,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(15),
+        return Card(
+          elevation: 1,
+          margin: EdgeInsets.symmetric(
+              horizontal: context.width * 0.02, vertical: context.width * 0.01),
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: context.mainColor,
+              width: 2,
             ),
-            child: Row(
-              children: [
-                const Gap(5),
-                Expanded(
-                  child: _QuizItemCard(index, quizItemList),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Row(
+            children: [
+              const Gap(5),
+              Expanded(
+                child: _QuizItemCard(index, filteredQuizItemList),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  alignment: Alignment.center,
+                  width: context.width * 0.1,
+                  height: context.height * 0.1,
+                  child: Align(
                     alignment: Alignment.center,
-                    width: context.width * 0.1,
-                    height: context.height * 0.1,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          const Spacer(),
-                          Text(
-                            "苦手",
-                            style: TextStyle(
-                              fontSize: context.width * 0.025,
-                              fontWeight: FontWeight.bold,
-                              color: quizItemList[index].isWeak
-                                  ? context.mainColor
-                                  : Colors.black26,
-                            ),
-                          ),
-                          Icon(
-                            quizItemList[index].isWeak
-                                ? Icons.check_box_outlined
-                                : Icons.check_box_outline_blank,
-                            size: context.width * 0.08,
-                            color: quizItemList[index].isWeak
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "苦手",
+                          style: TextStyle(
+                            fontSize: context.width * 0.025,
+                            fontWeight: FontWeight.bold,
+                            color: filteredQuizItemList[index].isWeak
                                 ? context.mainColor
                                 : Colors.black26,
                           ),
-                          Gap(context.height * 0.01),
-                          const Spacer(),
-                        ],
-                      ),
+                        ),
+                        Icon(
+                          filteredQuizItemList[index].isWeak
+                              ? Icons.check_box_outlined
+                              : Icons.check_box_outline_blank,
+                          size: context.width * 0.08,
+                          color: filteredQuizItemList[index].isWeak
+                              ? context.mainColor
+                              : Colors.black26,
+                        ),
+                        Gap(context.height * 0.01),
+                        const Spacer(),
+                      ],
                     ),
                   ),
                 ),
-                const Gap(5),
-              ],
-            ),
+              ),
+              const Gap(5),
+            ],
           ),
         );
       },
@@ -117,10 +130,10 @@ class _QuizResultView extends ConsumerWidget {
 }
 
 class _QuizItemCard extends HookConsumerWidget {
-  const _QuizItemCard(this.index, this.quizItemList);
+  const _QuizItemCard(this.index, this.quiz);
 
   final int index;
-  final List<QuizItem> quizItemList;
+  final List<QuizItem> quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -129,8 +142,8 @@ class _QuizItemCard extends HookConsumerWidget {
       padding: EdgeInsets.symmetric(
           horizontal: context.width * 0.02, vertical: context.height * 0.02),
       child: SubstringHighlight(
-        text: quizItemList[index].question,
-        term: quizItemList[index].ans,
+        text: quiz[index].question,
+        term: quiz[index].ans,
         textStyle: TextStyle(
           color: Colors.black54,
           fontWeight: FontWeight.w500,
@@ -139,12 +152,39 @@ class _QuizItemCard extends HookConsumerWidget {
         overflow: TextOverflow.clip,
         textStyleHighlight: TextStyle(
           fontWeight: FontWeight.bold,
-          color: quizItemList[index].isJudge
-              ? Colors.green.withOpacity(0.7)
-              : Colors.red.withOpacity(0.7),
+          color: context.mainColor,
           decoration: TextDecoration.underline,
         ),
       ),
     );
+  }
+}
+
+class _NotFindQuizItem extends HookConsumerWidget {
+  const _NotFindQuizItem();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Gap(context.height * 0.02),
+            Icon(
+              Icons.search_outlined,
+              size: context.height * 0.2,
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            Gap(context.height * 0.01),
+            Center(
+              child: Text("検索結果が見つかりませんでした",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.width * 0.04,
+                  )),
+            ),
+            Gap(context.height * 0.02),
+          ],
+        ));
   }
 }

@@ -40,6 +40,8 @@ class _Scaffold extends ConsumerWidget {
                 ///検索機能
                 const _SearchBar(),
 
+                Gap(context.height * 0.01),
+
                 ///検索結果一覧
                 const _QuizResultView(),
               ],

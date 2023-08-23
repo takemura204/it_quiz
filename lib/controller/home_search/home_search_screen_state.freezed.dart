@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeSearchScreenState {
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   String get searchText => throw _privateConstructorUsedError;
+  List<String> get searchKeywords => throw _privateConstructorUsedError;
   bool get isValidSearch => throw _privateConstructorUsedError;
   bool get isNotTextEmpty => throw _privateConstructorUsedError;
 
@@ -35,6 +36,7 @@ abstract class $HomeSearchScreenStateCopyWith<$Res> {
   $Res call(
       {List<QuizItem> quizItemList,
       String searchText,
+      List<String> searchKeywords,
       bool isValidSearch,
       bool isNotTextEmpty});
 }
@@ -55,6 +57,7 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
   $Res call({
     Object? quizItemList = null,
     Object? searchText = null,
+    Object? searchKeywords = null,
     Object? isValidSearch = null,
     Object? isNotTextEmpty = null,
   }) {
@@ -67,6 +70,10 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKeywords: null == searchKeywords
+          ? _value.searchKeywords
+          : searchKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       isValidSearch: null == isValidSearch
           ? _value.isValidSearch
           : isValidSearch // ignore: cast_nullable_to_non_nullable
@@ -89,6 +96,7 @@ abstract class _$$_CreateCopyWith<$Res>
   $Res call(
       {List<QuizItem> quizItemList,
       String searchText,
+      List<String> searchKeywords,
       bool isValidSearch,
       bool isNotTextEmpty});
 }
@@ -105,6 +113,7 @@ class __$$_CreateCopyWithImpl<$Res>
   $Res call({
     Object? quizItemList = null,
     Object? searchText = null,
+    Object? searchKeywords = null,
     Object? isValidSearch = null,
     Object? isNotTextEmpty = null,
   }) {
@@ -117,6 +126,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKeywords: null == searchKeywords
+          ? _value._searchKeywords
+          : searchKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       isValidSearch: null == isValidSearch
           ? _value.isValidSearch
           : isValidSearch // ignore: cast_nullable_to_non_nullable
@@ -134,10 +147,12 @@ class __$$_CreateCopyWithImpl<$Res>
 class _$_Create extends _Create {
   _$_Create(
       {final List<QuizItem> quizItemList = const [],
-      this.searchText = '',
+      this.searchText = "",
+      final List<String> searchKeywords = const [],
       this.isValidSearch = false,
       this.isNotTextEmpty = false})
       : _quizItemList = quizItemList,
+        _searchKeywords = searchKeywords,
         super._();
 
   final List<QuizItem> _quizItemList;
@@ -152,6 +167,15 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final String searchText;
+  final List<String> _searchKeywords;
+  @override
+  @JsonKey()
+  List<String> get searchKeywords {
+    if (_searchKeywords is EqualUnmodifiableListView) return _searchKeywords;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchKeywords);
+  }
+
   @override
   @JsonKey()
   final bool isValidSearch;
@@ -161,7 +185,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'HomeSearchScreenState(quizItemList: $quizItemList, searchText: $searchText, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty)';
+    return 'HomeSearchScreenState(quizItemList: $quizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty)';
   }
 
   @override
@@ -173,6 +197,8 @@ class _$_Create extends _Create {
                 .equals(other._quizItemList, _quizItemList) &&
             (identical(other.searchText, searchText) ||
                 other.searchText == searchText) &&
+            const DeepCollectionEquality()
+                .equals(other._searchKeywords, _searchKeywords) &&
             (identical(other.isValidSearch, isValidSearch) ||
                 other.isValidSearch == isValidSearch) &&
             (identical(other.isNotTextEmpty, isNotTextEmpty) ||
@@ -184,6 +210,7 @@ class _$_Create extends _Create {
       runtimeType,
       const DeepCollectionEquality().hash(_quizItemList),
       searchText,
+      const DeepCollectionEquality().hash(_searchKeywords),
       isValidSearch,
       isNotTextEmpty);
 
@@ -198,6 +225,7 @@ abstract class _Create extends HomeSearchScreenState {
   factory _Create(
       {final List<QuizItem> quizItemList,
       final String searchText,
+      final List<String> searchKeywords,
       final bool isValidSearch,
       final bool isNotTextEmpty}) = _$_Create;
   _Create._() : super._();
@@ -206,6 +234,8 @@ abstract class _Create extends HomeSearchScreenState {
   List<QuizItem> get quizItemList;
   @override
   String get searchText;
+  @override
+  List<String> get searchKeywords;
   @override
   bool get isValidSearch;
   @override

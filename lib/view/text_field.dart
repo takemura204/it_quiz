@@ -467,6 +467,7 @@ class SearchTextField extends ConsumerWidget {
     required this.searchController,
     required this.isValidSearch,
     required this.onChanged,
+    required this.onFieldSubmitted,
     required this.onClear,
     required this.isTextEmpty,
   });
@@ -475,6 +476,8 @@ class SearchTextField extends ConsumerWidget {
   final bool isValidSearch;
   final bool isTextEmpty;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
+
   final VoidCallback onClear;
 
   @override
@@ -489,6 +492,7 @@ class SearchTextField extends ConsumerWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.text,
             onChanged: onChanged,
+            onFieldSubmitted: onFieldSubmitted,
             autocorrect: true,
             //予測変換
             autofocus: false,
