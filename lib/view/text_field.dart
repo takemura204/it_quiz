@@ -467,6 +467,7 @@ class SearchTextField extends ConsumerWidget {
     required this.searchController,
     required this.isValidSearch,
     required this.onChanged,
+    required this.onClear,
     required this.isTextEmpty,
   });
 
@@ -474,6 +475,7 @@ class SearchTextField extends ConsumerWidget {
   final bool isValidSearch;
   final bool isTextEmpty;
   final ValueChanged<String>? onChanged;
+  final VoidCallback onClear;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -509,9 +511,7 @@ class SearchTextField extends ConsumerWidget {
               prefixIcon: const Icon(Icons.search_outlined),
               suffixIcon: searchController.text.isNotEmpty
                   ? IconButton(
-                      onPressed: () {
-                        searchController.clear();
-                      },
+                      onPressed: onClear,
                       icon: const Icon(
                         Icons.highlight_off,
                         color: Colors.black45,

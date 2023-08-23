@@ -21,6 +21,13 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     state = state.copyWith(searchText: text, isNotTextEmpty: text.isNotEmpty);
   }
 
+  void clearSearchText() {
+    searchController.clear();
+    state = state.copyWith(
+        searchText: searchController.text,
+        isNotTextEmpty: searchController.text.isNotEmpty);
+  }
+
   // 入力決定後の処理は特定の要件によって変わる可能性があります
   void onSearchConfirmed(String text) {
     // 具体的な処理をここに追加

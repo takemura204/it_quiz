@@ -14,7 +14,6 @@ class _QuizResultView extends ConsumerWidget {
       itemCount: quizList.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          height: context.height * 0.15,
           child: Card(
             elevation: 3,
             margin: EdgeInsets.symmetric(
@@ -33,6 +32,7 @@ class _QuizResultView extends ConsumerWidget {
                 const Gap(5),
                 Container(
                   width: context.width * 0.1,
+                  height: context.height * 0.1,
                   padding: EdgeInsets.symmetric(
                       horizontal: context.width * 0.01,
                       vertical: context.width * 0.02),
@@ -47,29 +47,7 @@ class _QuizResultView extends ConsumerWidget {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.width * 0.02,
-                        vertical: context.width * 0.02),
-                    child: SubstringHighlight(
-                      text: quizList[index].question,
-                      term: quizList[index].ans,
-                      textStyle: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                        fontSize: context.width * 0.04,
-                      ),
-                      overflow: TextOverflow.clip,
-                      textStyleHighlight: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: quizList[index].isJudge
-                            ? Colors.green.withOpacity(0.7)
-                            : Colors.red.withOpacity(0.7),
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
+                  child: _QuizItemCard(index),
                 ),
                 GestureDetector(
                   onTap: () => ref
@@ -78,6 +56,7 @@ class _QuizResultView extends ConsumerWidget {
                   child: Container(
                     alignment: Alignment.center,
                     width: context.width * 0.1,
+                    height: context.height * 0.1,
                     child: Align(
                       alignment: Alignment.center,
                       child: Column(
@@ -115,6 +94,39 @@ class _QuizResultView extends ConsumerWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _QuizItemCard extends HookConsumerWidget {
+  const _QuizItemCard(this.index);
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 0.02, vertical: context.height * 0.02),
+      child: SubstringHighlight(
+        text: quizList[index].question,
+        term: quizList[index].ans,
+        textStyle: TextStyle(
+          color: Colors.black54,
+          fontWeight: FontWeight.w500,
+          fontSize: context.width * 0.04,
+        ),
+        overflow: TextOverflow.clip,
+        textStyleHighlight: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: quizList[index].isJudge
+              ? Colors.green.withOpacity(0.7)
+              : Colors.red.withOpacity(0.7),
+          decoration: TextDecoration.underline,
+        ),
+      ),
     );
   }
 }

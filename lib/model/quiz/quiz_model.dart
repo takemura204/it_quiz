@@ -166,7 +166,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   ///クイズ更新
   void updateQuiz(List<QuizItem> quiz) {
-    print({"state.selectQuizIndex", state.selectQuizIndex});
     final quizType = state.quizType;
     switch (quizType) {
       case QuizType.study:
@@ -330,7 +329,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   /// 現在のインデックスを取得し、更新
   void tapQuizItemBar(int quizIndex) {
     state = state.copyWith(selectQuizIndex: quizIndex);
-    print({"state.selectQuizIndex", state.selectQuizIndex});
   }
 
   void setQuizType(QuizType quizType) {

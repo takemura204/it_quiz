@@ -8,6 +8,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/quiz_item/quiz_item.dart';
 
 part 'home_search_view.dart';
 
