@@ -49,7 +49,6 @@ class _QuizResultView extends ConsumerWidget {
     final searchKeywords = state.searchKeywords;
     final quizList = ref.watch(quizModelProvider).quizList;
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-
     final filteredQuizItemList = searchKeywords.isEmpty
         ? quizItemList
         : quizItemList.where((item) {
@@ -73,7 +72,7 @@ class _QuizResultView extends ConsumerWidget {
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: context.mainColor,
-              width: 2,
+              width: 1,
             ),
             borderRadius: BorderRadius.circular(15),
           ),
@@ -95,7 +94,7 @@ class _QuizResultView extends ConsumerWidget {
                       children: [
                         const Spacer(),
                         Text(
-                          "苦手",
+                          "保存",
                           style: TextStyle(
                             fontSize: context.width * 0.025,
                             fontWeight: FontWeight.bold,
@@ -106,8 +105,8 @@ class _QuizResultView extends ConsumerWidget {
                         ),
                         Icon(
                           filteredQuizItemList[index].isWeak
-                              ? Icons.check_box_outlined
-                              : Icons.check_box_outline_blank,
+                              ? Icons.bookmark_outlined
+                              : Icons.bookmark_border_outlined,
                           size: context.width * 0.08,
                           color: filteredQuizItemList[index].isWeak
                               ? context.mainColor
@@ -129,7 +128,7 @@ class _QuizResultView extends ConsumerWidget {
   }
 }
 
-class _QuizItemCard extends HookConsumerWidget {
+class _QuizItemCard extends ConsumerWidget {
   const _QuizItemCard(this.index, this.quiz);
 
   final int index;
@@ -141,22 +140,45 @@ class _QuizItemCard extends HookConsumerWidget {
     final termToHighlight = searchKeywords.join('|');
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.height * 0.02),
-      child: SubstringHighlight(
-        text: quiz[index].question,
-        term: termToHighlight,
-        textStyle: TextStyle(
-          color: Colors.black54,
-          fontWeight: FontWeight.w500,
-          fontSize: context.width * 0.04,
-        ),
-        overflow: TextOverflow.clip,
-        textStyleHighlight: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: context.mainColor,
-          decoration: TextDecoration.underline,
-        ),
+      padding: EdgeInsets.only(
+          left: context.width * 0.02,
+          right: context.width * 0,
+          top: context.height * 0.02,
+          bottom: context.height * 0.02),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SubstringHighlight(
+            text: quiz[index].ans,
+            term: termToHighlight,
+            textStyle: TextStyle(
+              color: Colors.black54,
+              fontWeight: FontWeight.bold,
+              fontSize: context.width * 0.045,
+            ),
+            overflow: TextOverflow.clip,
+            textStyleHighlight: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: context.mainColor,
+            ),
+          ),
+          const Gap(5),
+          SubstringHighlight(
+            text: quiz[index].question,
+            term: termToHighlight,
+            textStyle: TextStyle(
+              color: Colors.black54,
+              fontWeight: FontWeight.normal,
+              fontSize: context.width * 0.035,
+            ),
+            overflow: TextOverflow.clip,
+            textStyleHighlight: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: context.mainColor,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ],
       ),
     );
   }

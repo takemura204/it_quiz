@@ -20,11 +20,13 @@ class DashboardAnalyticsController
       : super(DashboardAnalyticsState()) {
     initState();
   }
+
   final Ref ref;
   final tabs = [7, 31];
 
   @override
   void initState() {
+    _resetData();
     state = state.copyWith(isLoading: true); // データロード開始を反映
     _initQuizData().then((_) {
       state = state.copyWith(isLoading: false); // データロード終了を反映

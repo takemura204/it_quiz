@@ -13,10 +13,23 @@ final homeSearchScreenProvider =
 class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     with LocatorMixin {
   HomeSearchScreenController({required this.ref})
-      : super(HomeSearchScreenState());
+      : super(HomeSearchScreenState()) {
+    initState();
+  }
 
   final Ref ref;
   final searchController = TextEditingController();
+
+  @override
+  void initState() {
+    final quizList = ref
+        .read(quizModelProvider)
+        .quizList
+        .expand((x) => x.quizItemList)
+        .toList();
+    state = state.copyWith(filteredQuizItemList: quizList);
+    super.initState();
+  }
 
   ///onChanged
   void setSearchText(String text) {
@@ -36,7 +49,8 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     final matchedKeywords = _matchedKeywords(allKeywords);
 
     state = state.copyWith(
-      searchKeywords: matchedKeywords,
+      searchKeywords:
+          matchedKeywords.isNotEmpty ? matchedKeywords : allKeywords,
       searchText: text,
       isNotTextEmpty: text.isNotEmpty,
     );

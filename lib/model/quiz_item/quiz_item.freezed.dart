@@ -26,6 +26,7 @@ mixin _$QuizItem {
   String get comment => throw _privateConstructorUsedError; //解説
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
   bool get isJudge => throw _privateConstructorUsedError; //正解したか?
+  bool get isSaved => throw _privateConstructorUsedError; //保存したか?
   List<String> get choices => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,6 +47,7 @@ abstract class $QuizItemCopyWith<$Res> {
       String comment,
       bool isWeak,
       bool isJudge,
+      bool isSaved,
       List<String> choices});
 }
 
@@ -68,6 +70,7 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
     Object? comment = null,
     Object? isWeak = null,
     Object? isJudge = null,
+    Object? isSaved = null,
     Object? choices = null,
   }) {
     return _then(_value.copyWith(
@@ -95,6 +98,10 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.isJudge
           : isJudge // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
       choices: null == choices
           ? _value.choices
           : choices // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$_QuizItemCopyWith<$Res> implements $QuizItemCopyWith<$Res> {
       String comment,
       bool isWeak,
       bool isJudge,
+      bool isSaved,
       List<String> choices});
 }
 
@@ -137,6 +145,7 @@ class __$$_QuizItemCopyWithImpl<$Res>
     Object? comment = null,
     Object? isWeak = null,
     Object? isJudge = null,
+    Object? isSaved = null,
     Object? choices = null,
   }) {
     return _then(_$_QuizItem(
@@ -164,6 +173,10 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.isJudge
           : isJudge // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
       choices: null == choices
           ? _value._choices
           : choices // ignore: cast_nullable_to_non_nullable
@@ -182,6 +195,7 @@ class _$_QuizItem extends _QuizItem {
       required this.comment,
       required this.isWeak,
       required this.isJudge,
+      required this.isSaved,
       required final List<String> choices})
       : _choices = choices,
         super._();
@@ -207,8 +221,11 @@ class _$_QuizItem extends _QuizItem {
   @override
   final bool isJudge;
 //正解したか?
+  @override
+  final bool isSaved;
+//保存したか?
   final List<String> _choices;
-//正解したか?
+//保存したか?
   @override
   List<String> get choices {
     if (_choices is EqualUnmodifiableListView) return _choices;
@@ -218,7 +235,7 @@ class _$_QuizItem extends _QuizItem {
 
   @override
   String toString() {
-    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, choices: $choices)';
+    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, isSaved: $isSaved, choices: $choices)';
   }
 
   @override
@@ -233,13 +250,14 @@ class _$_QuizItem extends _QuizItem {
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.isWeak, isWeak) || other.isWeak == isWeak) &&
             (identical(other.isJudge, isJudge) || other.isJudge == isJudge) &&
+            (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
             const DeepCollectionEquality().equals(other._choices, _choices));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, quizId, question, ans, comment,
-      isWeak, isJudge, const DeepCollectionEquality().hash(_choices));
+      isWeak, isJudge, isSaved, const DeepCollectionEquality().hash(_choices));
 
   @JsonKey(ignore: true)
   @override
@@ -263,6 +281,7 @@ abstract class _QuizItem extends QuizItem {
       required final String comment,
       required final bool isWeak,
       required final bool isJudge,
+      required final bool isSaved,
       required final List<String> choices}) = _$_QuizItem;
   _QuizItem._() : super._();
 
@@ -281,6 +300,8 @@ abstract class _QuizItem extends QuizItem {
   @override //苦手か？
   bool get isJudge;
   @override //正解したか?
+  bool get isSaved;
+  @override //保存したか?
   List<String> get choices;
   @override
   @JsonKey(ignore: true)

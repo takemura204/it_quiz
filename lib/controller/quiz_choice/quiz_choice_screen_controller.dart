@@ -63,8 +63,8 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizList[quizIndex].ans,
         choices: quizList[quizIndex].choices,
         comment: quizList[quizIndex].comment,
-        isJudge: true,
-        //正解
+        isJudge: true, //正解
+        isSaved: quizList[quizIndex].isSaved,
         isWeak: false, //苦手リスト除外
       );
       state = state.copyWith(isJudge: true, quizList: quizList);
@@ -77,8 +77,8 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizList[quizIndex].ans,
         choices: quizList[quizIndex].choices,
         comment: quizList[quizIndex].comment,
-        isJudge: false,
-        //不正解
+        isJudge: false, //不正解
+        isSaved: quizList[quizIndex].isSaved,
         isWeak: true, //苦手リスト追加
       );
       state = state.copyWith(isJudge: false, quizList: quizList);
@@ -119,6 +119,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       comment: quizList[index].comment,
       isWeak: !quizList[index].isWeak,
       isJudge: quizList[index].isJudge,
+      isSaved: quizList[index].isSaved,
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);

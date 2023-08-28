@@ -60,6 +60,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       isWeak: quizList[index].isWeak,
       isJudge: isJudge,
       //更新
+      isSaved: quizList[index].isSaved,
       choices: quizList[index].choices,
     );
   }
@@ -152,6 +153,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       comment: quizList[index].comment,
       isWeak: !quizList[index].isWeak,
       isJudge: quizList[index].isJudge,
+      isSaved: quizList[index].isSaved,
       choices: quizList[index].choices,
     );
     state = state.copyWith(quizList: quizList);

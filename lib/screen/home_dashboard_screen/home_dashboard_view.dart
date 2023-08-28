@@ -2,6 +2,7 @@ part of 'home_dashboard_screen.dart';
 
 class DashBoardAchievementScreen extends ConsumerWidget {
   const DashBoardAchievementScreen();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeDashboardScreenProvider);
@@ -13,9 +14,9 @@ class DashBoardAchievementScreen extends ConsumerWidget {
         ),
       );
     }
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
-        children: const [
+        children: [
           Gap(5),
 
           ///称号レベル
@@ -31,6 +32,7 @@ class DashBoardAchievementScreen extends ConsumerWidget {
 
 class DashBoardAnalyticsScreen extends ConsumerWidget {
   const DashBoardAnalyticsScreen();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeDashboardScreenProvider);
