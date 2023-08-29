@@ -44,9 +44,9 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
         ),
       );
     }
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
-        children: const [
+        children: [
           Gap(5),
 
           ///今日の目標

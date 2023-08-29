@@ -188,6 +188,9 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
         break;
+      case QuizType.search:
+        _updateQuiz(quiz);
+        break;
     }
   }
 

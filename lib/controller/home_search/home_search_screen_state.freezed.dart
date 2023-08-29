@@ -21,6 +21,7 @@ mixin _$HomeSearchScreenState {
   List<String> get searchKeywords => throw _privateConstructorUsedError;
   bool get isValidSearch => throw _privateConstructorUsedError;
   bool get isNotTextEmpty => throw _privateConstructorUsedError;
+  bool get isSavedFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeSearchScreenStateCopyWith<HomeSearchScreenState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $HomeSearchScreenStateCopyWith<$Res> {
       String searchText,
       List<String> searchKeywords,
       bool isValidSearch,
-      bool isNotTextEmpty});
+      bool isNotTextEmpty,
+      bool isSavedFilter});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
     Object? searchKeywords = null,
     Object? isValidSearch = null,
     Object? isNotTextEmpty = null,
+    Object? isSavedFilter = null,
   }) {
     return _then(_value.copyWith(
       filteredQuizItemList: null == filteredQuizItemList
@@ -82,6 +85,10 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
           ? _value.isNotTextEmpty
           : isNotTextEmpty // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSavedFilter: null == isSavedFilter
+          ? _value.isSavedFilter
+          : isSavedFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$_CreateCopyWith<$Res>
       String searchText,
       List<String> searchKeywords,
       bool isValidSearch,
-      bool isNotTextEmpty});
+      bool isNotTextEmpty,
+      bool isSavedFilter});
 }
 
 /// @nodoc
@@ -116,6 +124,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? searchKeywords = null,
     Object? isValidSearch = null,
     Object? isNotTextEmpty = null,
+    Object? isSavedFilter = null,
   }) {
     return _then(_$_Create(
       filteredQuizItemList: null == filteredQuizItemList
@@ -138,6 +147,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.isNotTextEmpty
           : isNotTextEmpty // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSavedFilter: null == isSavedFilter
+          ? _value.isSavedFilter
+          : isSavedFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -150,7 +163,8 @@ class _$_Create extends _Create {
       this.searchText = "",
       final List<String> searchKeywords = const [],
       this.isValidSearch = false,
-      this.isNotTextEmpty = false})
+      this.isNotTextEmpty = false,
+      this.isSavedFilter = false})
       : _filteredQuizItemList = filteredQuizItemList,
         _searchKeywords = searchKeywords,
         super._();
@@ -183,10 +197,13 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final bool isNotTextEmpty;
+  @override
+  @JsonKey()
+  final bool isSavedFilter;
 
   @override
   String toString() {
-    return 'HomeSearchScreenState(filteredQuizItemList: $filteredQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty)';
+    return 'HomeSearchScreenState(filteredQuizItemList: $filteredQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty, isSavedFilter: $isSavedFilter)';
   }
 
   @override
@@ -203,7 +220,9 @@ class _$_Create extends _Create {
             (identical(other.isValidSearch, isValidSearch) ||
                 other.isValidSearch == isValidSearch) &&
             (identical(other.isNotTextEmpty, isNotTextEmpty) ||
-                other.isNotTextEmpty == isNotTextEmpty));
+                other.isNotTextEmpty == isNotTextEmpty) &&
+            (identical(other.isSavedFilter, isSavedFilter) ||
+                other.isSavedFilter == isSavedFilter));
   }
 
   @override
@@ -213,7 +232,8 @@ class _$_Create extends _Create {
       searchText,
       const DeepCollectionEquality().hash(_searchKeywords),
       isValidSearch,
-      isNotTextEmpty);
+      isNotTextEmpty,
+      isSavedFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -228,7 +248,8 @@ abstract class _Create extends HomeSearchScreenState {
       final String searchText,
       final List<String> searchKeywords,
       final bool isValidSearch,
-      final bool isNotTextEmpty}) = _$_Create;
+      final bool isNotTextEmpty,
+      final bool isSavedFilter}) = _$_Create;
   _Create._() : super._();
 
   @override
@@ -241,6 +262,8 @@ abstract class _Create extends HomeSearchScreenState {
   bool get isValidSearch;
   @override
   bool get isNotTextEmpty;
+  @override
+  bool get isSavedFilter;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

@@ -11,6 +11,7 @@ class HomeSearchScreenState with _$HomeSearchScreenState {
     @Default([]) List<String> searchKeywords,
     @Default(false) bool isValidSearch,
     @Default(false) bool isNotTextEmpty,
+    @Default(false) bool isSavedFilter,
   }) = _Create;
 
   HomeSearchScreenState._();

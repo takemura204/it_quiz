@@ -46,16 +46,17 @@ class _QuizResultView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeSearchScreenProvider);
+    final quizItemList = ref
+        .read(quizModelProvider)
+        .quizList
+        .expand((x) => x.quizItemList)
+        .toList();
+
     final searchKeywords = state.searchKeywords;
-    final quizList = ref.watch(quizModelProvider).quizList;
-    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-    final filteredQuizItemList = searchKeywords.isEmpty
-        ? quizItemList
-        : quizItemList.where((item) {
-            return searchKeywords.any((keyword) {
-              return item.question.contains(keyword);
-            });
-          }).toList();
+
+    final filteredQuizItemList =
+        searchKeywords.isEmpty ? quizItemList : state.filteredQuizItemList;
+
     if (filteredQuizItemList.isEmpty) {
       return const _NotFindQuizItem();
     }
@@ -83,7 +84,9 @@ class _QuizResultView extends ConsumerWidget {
                 child: _QuizItemCard(index, filteredQuizItemList),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () => ref
+                    .read(homeSearchScreenProvider.notifier)
+                    .tapSavedButton(index),
                 child: Container(
                   alignment: Alignment.center,
                   width: context.width * 0.1,
@@ -98,17 +101,17 @@ class _QuizResultView extends ConsumerWidget {
                           style: TextStyle(
                             fontSize: context.width * 0.025,
                             fontWeight: FontWeight.bold,
-                            color: filteredQuizItemList[index].isWeak
+                            color: filteredQuizItemList[index].isSaved
                                 ? context.mainColor
                                 : Colors.black26,
                           ),
                         ),
                         Icon(
-                          filteredQuizItemList[index].isWeak
+                          filteredQuizItemList[index].isSaved
                               ? Icons.bookmark_outlined
                               : Icons.bookmark_border_outlined,
                           size: context.width * 0.08,
-                          color: filteredQuizItemList[index].isWeak
+                          color: filteredQuizItemList[index].isSaved
                               ? context.mainColor
                               : Colors.black26,
                         ),

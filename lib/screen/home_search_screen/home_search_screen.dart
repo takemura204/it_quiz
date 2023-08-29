@@ -28,9 +28,34 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isSavedFilter = ref.watch(homeSearchScreenProvider).isSavedFilter;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSearch),
+        centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                final quiz = ref
+                    .read(quizModelProvider)
+                    .quizList
+                    .expand((x) => x.quizItemList)
+                    .toList();
+                final filterQuiz = quiz.where((x) => x.isSaved).toList();
+                ref
+                    .read(homeSearchScreenProvider.notifier)
+                    .setFilterQuiz(filterQuiz);
+              },
+              icon: Icon(
+                isSavedFilter
+                    ? Icons.bookmark_outlined
+                    : Icons.bookmark_border_outlined,
+                size: context.width * 0.07,
+                color: isSavedFilter ? context.mainColor : Colors.black26,
+              )),
+          const Gap(5),
+        ],
       ),
       body: CustomScrollView(
         slivers: [

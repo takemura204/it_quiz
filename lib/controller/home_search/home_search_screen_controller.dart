@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
+import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/quiz_item/quiz_item.dart';
 import 'home_search_screen_state.dart';
 
 final homeSearchScreenProvider =
@@ -22,13 +24,45 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
 
   @override
   void initState() {
+    // _initFilterQuiz();
+    super.initState();
+  }
+
+  void _initFilterQuiz() {
+    final quizItemList = ref
+        .read(quizModelProvider)
+        .quizList
+        .expand((x) => x.quizItemList)
+        .toList();
+    setFilterQuiz(quizItemList);
+  }
+
+  void tapSavedButton(int index) {
+    ref.read(quizModelProvider.notifier).setQuizType(QuizType.search);
     final quizList = ref
         .read(quizModelProvider)
         .quizList
         .expand((x) => x.quizItemList)
         .toList();
-    state = state.copyWith(filteredQuizItemList: quizList);
-    super.initState();
+
+    quizList[index] = QuizItem(
+      quizId: quizList[index].quizId,
+      question: quizList[index].question,
+      ans: quizList[index].ans,
+      comment: quizList[index].comment,
+      isWeak: quizList[index].isWeak,
+      isJudge: quizList[index].isJudge,
+      isSaved: !quizList[index].isSaved,
+      choices: quizList[index].choices,
+    );
+
+    ref.read(quizModelProvider.notifier).updateQuiz(quizList);
+
+    print(quizList[index].isSaved);
+  }
+
+  void setFilterQuiz(List<QuizItem> quiz) {
+    state = state.copyWith(filteredQuizItemList: quiz);
   }
 
   ///onChanged
@@ -45,14 +79,25 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
       allKeywordsSet.addAll(_splitBySpace(normalizedText));
     }
 
-    final List<String> allKeywords = allKeywordsSet.toList();
+    final allKeywords = allKeywordsSet.toList();
     final matchedKeywords = _matchedKeywords(allKeywords);
+    final searchKeywords =
+        matchedKeywords.isNotEmpty ? matchedKeywords : allKeywords;
 
+    final quizList = ref.watch(quizModelProvider).quizList;
+    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
+    final filteredQuizItemList = searchKeywords.isEmpty
+        ? quizItemList
+        : quizItemList.where((item) {
+            return searchKeywords.any((keyword) {
+              return item.question.contains(keyword);
+            });
+          }).toList();
     state = state.copyWith(
-      searchKeywords:
-          matchedKeywords.isNotEmpty ? matchedKeywords : allKeywords,
+      searchKeywords: searchKeywords,
       searchText: text,
       isNotTextEmpty: text.isNotEmpty,
+      filteredQuizItemList: filteredQuizItemList,
     );
   }
 
@@ -142,12 +187,12 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
       // 他の漢字とひらがなの対応を追加
     };
 
-    String toCommonHiragana = processed;
+    String _toCommonHiragana = processed;
     kanjiToHiragana.forEach((kanji, hiragana) {
-      toCommonHiragana = toCommonHiragana.replaceAll(kanji, hiragana);
+      _toCommonHiragana = _toCommonHiragana.replaceAll(kanji, hiragana);
     });
 
-    normalizedTexts.add(toCommonHiragana);
+    normalizedTexts.add(_toCommonHiragana);
 
     return normalizedTexts;
   }

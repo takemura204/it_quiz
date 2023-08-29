@@ -26,7 +26,7 @@ class DashboardAnalyticsController
 
   @override
   void initState() {
-    _resetData();
+    // _resetData();
     state = state.copyWith(isLoading: true); // データロード開始を反映
     _initQuizData().then((_) {
       state = state.copyWith(isLoading: false); // データロード終了を反映
