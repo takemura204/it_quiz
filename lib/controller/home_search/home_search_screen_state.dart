@@ -6,12 +6,14 @@ part 'home_search_screen_state.freezed.dart';
 @freezed
 class HomeSearchScreenState with _$HomeSearchScreenState {
   factory HomeSearchScreenState({
+    @Default(false) bool isLoading,
     @Default([]) List<QuizItem> filteredQuizItemList,
     @Default("") String searchText,
     @Default([]) List<String> searchKeywords,
     @Default(false) bool isValidSearch,
     @Default(false) bool isNotTextEmpty,
     @Default(false) bool isSavedFilter,
+    @Default(5) int maxItemsToDisplay,
   }) = _Create;
 
   HomeSearchScreenState._();

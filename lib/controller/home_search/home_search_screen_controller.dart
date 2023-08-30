@@ -21,20 +21,42 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
 
   final Ref ref;
   final searchController = TextEditingController();
+  final scrollController = ScrollController();
 
   @override
-  void initState() {
-    // _initFilterQuiz();
+  Future initState() async {
+    scrollController.addListener(_scrollListener);
+    await _initFilterQuiz();
     super.initState();
   }
 
-  void _initFilterQuiz() {
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  Future _initFilterQuiz() async {
     final quizItemList = ref
         .read(quizModelProvider)
         .quizList
         .expand((x) => x.quizItemList)
         .toList();
     setFilterQuiz(quizItemList);
+  }
+
+  Future _scrollListener() async {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      // You are at the bottom
+      if (state.maxItemsToDisplay < state.filteredQuizItemList.length &&
+          !state.isLoading) {
+        state = state.copyWith(isLoading: true);
+        await Future.delayed(const Duration(milliseconds: 100));
+        setMaxItemsToDisplay();
+        state = state.copyWith(isLoading: false);
+      }
+    }
   }
 
   void tapSavedButton(int index) {
@@ -57,8 +79,15 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     );
 
     ref.read(quizModelProvider.notifier).updateQuiz(quizList);
+  }
 
-    print(quizList[index].isSaved);
+  void setMaxItemsToDisplay() {
+    if (state.maxItemsToDisplay < state.filteredQuizItemList.length) {
+      state = state.copyWith(
+        maxItemsToDisplay: state.maxItemsToDisplay + 10,
+        isLoading: true,
+      );
+    }
   }
 
   void setFilterQuiz(List<QuizItem> quiz) {

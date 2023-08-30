@@ -16,12 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeSearchScreenState {
+  bool get isLoading => throw _privateConstructorUsedError;
   List<QuizItem> get filteredQuizItemList => throw _privateConstructorUsedError;
   String get searchText => throw _privateConstructorUsedError;
   List<String> get searchKeywords => throw _privateConstructorUsedError;
   bool get isValidSearch => throw _privateConstructorUsedError;
   bool get isNotTextEmpty => throw _privateConstructorUsedError;
   bool get isSavedFilter => throw _privateConstructorUsedError;
+  int get maxItemsToDisplay => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeSearchScreenStateCopyWith<HomeSearchScreenState> get copyWith =>
@@ -35,12 +37,14 @@ abstract class $HomeSearchScreenStateCopyWith<$Res> {
       _$HomeSearchScreenStateCopyWithImpl<$Res, HomeSearchScreenState>;
   @useResult
   $Res call(
-      {List<QuizItem> filteredQuizItemList,
+      {bool isLoading,
+      List<QuizItem> filteredQuizItemList,
       String searchText,
       List<String> searchKeywords,
       bool isValidSearch,
       bool isNotTextEmpty,
-      bool isSavedFilter});
+      bool isSavedFilter,
+      int maxItemsToDisplay});
 }
 
 /// @nodoc
@@ -57,14 +61,20 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? filteredQuizItemList = null,
     Object? searchText = null,
     Object? searchKeywords = null,
     Object? isValidSearch = null,
     Object? isNotTextEmpty = null,
     Object? isSavedFilter = null,
+    Object? maxItemsToDisplay = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       filteredQuizItemList: null == filteredQuizItemList
           ? _value.filteredQuizItemList
           : filteredQuizItemList // ignore: cast_nullable_to_non_nullable
@@ -89,6 +99,10 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
           ? _value.isSavedFilter
           : isSavedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
+      maxItemsToDisplay: null == maxItemsToDisplay
+          ? _value.maxItemsToDisplay
+          : maxItemsToDisplay // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -101,12 +115,14 @@ abstract class _$$_CreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<QuizItem> filteredQuizItemList,
+      {bool isLoading,
+      List<QuizItem> filteredQuizItemList,
       String searchText,
       List<String> searchKeywords,
       bool isValidSearch,
       bool isNotTextEmpty,
-      bool isSavedFilter});
+      bool isSavedFilter,
+      int maxItemsToDisplay});
 }
 
 /// @nodoc
@@ -119,14 +135,20 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? filteredQuizItemList = null,
     Object? searchText = null,
     Object? searchKeywords = null,
     Object? isValidSearch = null,
     Object? isNotTextEmpty = null,
     Object? isSavedFilter = null,
+    Object? maxItemsToDisplay = null,
   }) {
     return _then(_$_Create(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       filteredQuizItemList: null == filteredQuizItemList
           ? _value._filteredQuizItemList
           : filteredQuizItemList // ignore: cast_nullable_to_non_nullable
@@ -151,6 +173,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.isSavedFilter
           : isSavedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
+      maxItemsToDisplay: null == maxItemsToDisplay
+          ? _value.maxItemsToDisplay
+          : maxItemsToDisplay // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -159,16 +185,21 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create extends _Create {
   _$_Create(
-      {final List<QuizItem> filteredQuizItemList = const [],
+      {this.isLoading = false,
+      final List<QuizItem> filteredQuizItemList = const [],
       this.searchText = "",
       final List<String> searchKeywords = const [],
       this.isValidSearch = false,
       this.isNotTextEmpty = false,
-      this.isSavedFilter = false})
+      this.isSavedFilter = false,
+      this.maxItemsToDisplay = 5})
       : _filteredQuizItemList = filteredQuizItemList,
         _searchKeywords = searchKeywords,
         super._();
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   final List<QuizItem> _filteredQuizItemList;
   @override
   @JsonKey()
@@ -200,10 +231,13 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final bool isSavedFilter;
+  @override
+  @JsonKey()
+  final int maxItemsToDisplay;
 
   @override
   String toString() {
-    return 'HomeSearchScreenState(filteredQuizItemList: $filteredQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty, isSavedFilter: $isSavedFilter)';
+    return 'HomeSearchScreenState(isLoading: $isLoading, filteredQuizItemList: $filteredQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty, isSavedFilter: $isSavedFilter, maxItemsToDisplay: $maxItemsToDisplay)';
   }
 
   @override
@@ -211,6 +245,8 @@ class _$_Create extends _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality()
                 .equals(other._filteredQuizItemList, _filteredQuizItemList) &&
             (identical(other.searchText, searchText) ||
@@ -222,18 +258,22 @@ class _$_Create extends _Create {
             (identical(other.isNotTextEmpty, isNotTextEmpty) ||
                 other.isNotTextEmpty == isNotTextEmpty) &&
             (identical(other.isSavedFilter, isSavedFilter) ||
-                other.isSavedFilter == isSavedFilter));
+                other.isSavedFilter == isSavedFilter) &&
+            (identical(other.maxItemsToDisplay, maxItemsToDisplay) ||
+                other.maxItemsToDisplay == maxItemsToDisplay));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isLoading,
       const DeepCollectionEquality().hash(_filteredQuizItemList),
       searchText,
       const DeepCollectionEquality().hash(_searchKeywords),
       isValidSearch,
       isNotTextEmpty,
-      isSavedFilter);
+      isSavedFilter,
+      maxItemsToDisplay);
 
   @JsonKey(ignore: true)
   @override
@@ -244,14 +284,18 @@ class _$_Create extends _Create {
 
 abstract class _Create extends HomeSearchScreenState {
   factory _Create(
-      {final List<QuizItem> filteredQuizItemList,
+      {final bool isLoading,
+      final List<QuizItem> filteredQuizItemList,
       final String searchText,
       final List<String> searchKeywords,
       final bool isValidSearch,
       final bool isNotTextEmpty,
-      final bool isSavedFilter}) = _$_Create;
+      final bool isSavedFilter,
+      final int maxItemsToDisplay}) = _$_Create;
   _Create._() : super._();
 
+  @override
+  bool get isLoading;
   @override
   List<QuizItem> get filteredQuizItemList;
   @override
@@ -264,6 +308,8 @@ abstract class _Create extends HomeSearchScreenState {
   bool get isNotTextEmpty;
   @override
   bool get isSavedFilter;
+  @override
+  int get maxItemsToDisplay;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

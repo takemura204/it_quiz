@@ -10,11 +10,12 @@ class _SearchBar extends ConsumerWidget {
     final isNotTextEmpty = state.isNotTextEmpty;
     final searchController =
         ref.watch(homeSearchScreenProvider.notifier).searchController;
-    return Card(
-      elevation: 1,
-      child: Container(
-        color: Colors.grey.shade200,
-        child: Padding(
+    return Padding(
+      padding: EdgeInsets.only(bottom: context.height * 0.01),
+      child: Card(
+        elevation: 1,
+        child: Container(
+          color: Colors.grey.shade200,
           padding: EdgeInsets.all(context.width * 0.02),
           child: SearchTextField(
             searchController: searchController,
@@ -46,87 +47,88 @@ class _QuizResultView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeSearchScreenProvider);
-    final quizItemList = ref
-        .read(quizModelProvider)
-        .quizList
-        .expand((x) => x.quizItemList)
-        .toList();
-
-    final searchKeywords = state.searchKeywords;
-
-    final filteredQuizItemList =
-        searchKeywords.isEmpty ? quizItemList : state.filteredQuizItemList;
-
+    final filteredQuizItemList = state.filteredQuizItemList;
+    final maxItemsToDisplay = state.maxItemsToDisplay;
+    final isLoading = state.isLoading;
     if (filteredQuizItemList.isEmpty) {
       return const _NotFindQuizItem();
     }
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: filteredQuizItemList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          elevation: 1,
-          margin: EdgeInsets.symmetric(
-              horizontal: context.width * 0.02, vertical: context.width * 0.01),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: context.mainColor,
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Row(
-            children: [
-              const Gap(5),
-              Expanded(
-                child: _QuizItemCard(index, filteredQuizItemList),
+
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          if (index == maxItemsToDisplay) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Card(
+            elevation: 1,
+            margin: EdgeInsets.symmetric(
+                horizontal: context.width * 0.015,
+                vertical: context.width * 0.0075),
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: context.mainColor,
+                width: 1,
               ),
-              GestureDetector(
-                onTap: () => ref
-                    .read(homeSearchScreenProvider.notifier)
-                    .tapSavedButton(index),
-                child: Container(
-                  alignment: Alignment.center,
-                  width: context.width * 0.1,
-                  height: context.height * 0.1,
-                  child: Align(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Row(
+              children: [
+                const Gap(5),
+                Expanded(
+                  child: _QuizItemCard(index, filteredQuizItemList),
+                ),
+                GestureDetector(
+                  onTap: () => ref
+                      .read(homeSearchScreenProvider.notifier)
+                      .tapSavedButton(index),
+                  child: Container(
                     alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "保存",
-                          style: TextStyle(
-                            fontSize: context.width * 0.025,
-                            fontWeight: FontWeight.bold,
+                    width: context.width * 0.1,
+                    height: context.height * 0.1,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          const Spacer(),
+                          Text(
+                            "保存",
+                            style: TextStyle(
+                              fontSize: context.width * 0.025,
+                              fontWeight: FontWeight.bold,
+                              color: filteredQuizItemList[index].isSaved
+                                  ? context.mainColor
+                                  : Colors.black26,
+                            ),
+                          ),
+                          Icon(
+                            filteredQuizItemList[index].isSaved
+                                ? Icons.bookmark_outlined
+                                : Icons.bookmark_border_outlined,
+                            size: context.width * 0.08,
                             color: filteredQuizItemList[index].isSaved
                                 ? context.mainColor
                                 : Colors.black26,
                           ),
-                        ),
-                        Icon(
-                          filteredQuizItemList[index].isSaved
-                              ? Icons.bookmark_outlined
-                              : Icons.bookmark_border_outlined,
-                          size: context.width * 0.08,
-                          color: filteredQuizItemList[index].isSaved
-                              ? context.mainColor
-                              : Colors.black26,
-                        ),
-                        Gap(context.height * 0.01),
-                        const Spacer(),
-                      ],
+                          Gap(context.height * 0.01),
+                          const Spacer(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const Gap(5),
-            ],
-          ),
-        );
-      },
+                const Gap(5),
+              ],
+            ),
+          );
+        },
+        childCount: isLoading
+            ? state.maxItemsToDisplay + 1
+            : min(state.maxItemsToDisplay + 1, filteredQuizItemList.length),
+      ),
     );
   }
 }
@@ -192,26 +194,28 @@ class _NotFindQuizItem extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Gap(context.height * 0.02),
-            Icon(
-              Icons.search_outlined,
-              size: context.height * 0.2,
-              color: Colors.grey.withOpacity(0.3),
-            ),
-            Gap(context.height * 0.01),
-            Center(
-              child: Text("検索結果が見つかりませんでした",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.04,
-                  )),
-            ),
-            Gap(context.height * 0.02),
-          ],
-        ));
+    return SliverToBoxAdapter(
+      child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              Gap(context.height * 0.02),
+              Icon(
+                Icons.search_outlined,
+                size: context.height * 0.2,
+                color: Colors.grey.withOpacity(0.3),
+              ),
+              Gap(context.height * 0.01),
+              Center(
+                child: Text("検索結果が見つかりませんでした",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.width * 0.04,
+                    )),
+              ),
+              Gap(context.height * 0.02),
+            ],
+          )),
+    );
   }
 }

@@ -45,13 +45,11 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   ///読み込み
   Future _loadQuizData() async {
-    _getQuizListData();
-    await Future.wait([
-      _getDailyQuiz(),
-      _getWeakQuiz(),
-      _getTestQuiz(),
-    ]);
-    _saveDevice();
+    await _getQuizListData();
+    await _getDailyQuiz();
+    await _getWeakQuiz();
+    await _getTestQuiz();
+    await _saveDevice();
   }
 
   /// 全クイズ取得

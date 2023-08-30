@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,52 +30,57 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSavedFilter = ref.watch(homeSearchScreenProvider).isSavedFilter;
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(I18n().titleSearch),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                final quiz = ref
-                    .read(quizModelProvider)
-                    .quizList
-                    .expand((x) => x.quizItemList)
-                    .toList();
-                final filterQuiz = quiz.where((x) => x.isSaved).toList();
-                ref
-                    .read(homeSearchScreenProvider.notifier)
-                    .setFilterQuiz(filterQuiz);
-              },
-              icon: Icon(
-                isSavedFilter
-                    ? Icons.bookmark_outlined
-                    : Icons.bookmark_border_outlined,
-                size: context.width * 0.07,
-                color: isSavedFilter ? context.mainColor : Colors.black26,
-              )),
-          const Gap(5),
-        ],
-      ),
+      appBar: const _AppBar(),
       body: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                ///検索機能
-                const _SearchBar(),
-
-                Gap(context.height * 0.01),
-
-                ///検索結果一覧
-                const _QuizResultView(),
-              ],
-            ),
+        controller:
+            ref.read(homeSearchScreenProvider.notifier).scrollController,
+        slivers: const [
+          SliverToBoxAdapter(
+            child: _SearchBar(),
           ),
+          _QuizResultView(),
         ],
       ),
     );
   }
+}
+
+class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const _AppBar();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isSavedFilter = ref.watch(homeSearchScreenProvider).isSavedFilter;
+
+    return AppBar(
+      title: Text(I18n().titleSearch),
+      centerTitle: true,
+      actions: [
+        IconButton(
+            onPressed: () {
+              final quiz = ref
+                  .read(quizModelProvider)
+                  .quizList
+                  .expand((x) => x.quizItemList)
+                  .toList();
+              final filterQuiz = quiz.where((x) => x.isSaved).toList();
+              ref
+                  .read(homeSearchScreenProvider.notifier)
+                  .setFilterQuiz(filterQuiz);
+            },
+            icon: Icon(
+              isSavedFilter
+                  ? Icons.bookmark_outlined
+                  : Icons.bookmark_border_outlined,
+              size: context.width * 0.07,
+              color: isSavedFilter ? context.mainColor : Colors.black26,
+            )),
+        const Gap(5),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
