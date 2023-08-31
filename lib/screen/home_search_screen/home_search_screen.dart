@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/quiz/quiz_model.dart';
+
 import 'package:kentei_quiz/view/text_field.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
@@ -59,15 +59,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
             onPressed: () {
-              final quiz = ref
-                  .read(quizModelProvider)
-                  .quizList
-                  .expand((x) => x.quizItemList)
-                  .toList();
-              final filterQuiz = quiz.where((x) => x.isSaved).toList();
               ref
                   .read(homeSearchScreenProvider.notifier)
-                  .setFilterQuiz(filterQuiz);
+                  .tapIsSavedFilterButton();
             },
             icon: Icon(
               isSavedFilter

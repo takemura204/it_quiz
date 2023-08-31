@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
-import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz_item/quiz_item.dart';
@@ -42,13 +41,13 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
         .quizList
         .expand((x) => x.quizItemList)
         .toList();
+
     setFilterQuiz(quizItemList);
   }
 
   Future _scrollListener() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      // You are at the bottom
       if (state.maxItemsToDisplay < state.filteredQuizItemList.length &&
           !state.isLoading) {
         state = state.copyWith(isLoading: true);
@@ -59,32 +58,10 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     }
   }
 
-  void tapSavedButton(int index) {
-    ref.read(quizModelProvider.notifier).setQuizType(QuizType.search);
-    final quizList = ref
-        .read(quizModelProvider)
-        .quizList
-        .expand((x) => x.quizItemList)
-        .toList();
-
-    quizList[index] = QuizItem(
-      quizId: quizList[index].quizId,
-      question: quizList[index].question,
-      ans: quizList[index].ans,
-      comment: quizList[index].comment,
-      isWeak: quizList[index].isWeak,
-      isJudge: quizList[index].isJudge,
-      isSaved: !quizList[index].isSaved,
-      choices: quizList[index].choices,
-    );
-
-    ref.read(quizModelProvider.notifier).updateQuiz(quizList);
-  }
-
   void setMaxItemsToDisplay() {
     if (state.maxItemsToDisplay < state.filteredQuizItemList.length) {
       state = state.copyWith(
-        maxItemsToDisplay: state.maxItemsToDisplay + 10,
+        maxItemsToDisplay: state.maxItemsToDisplay + 5,
         isLoading: true,
       );
     }
@@ -94,14 +71,60 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     state = state.copyWith(filteredQuizItemList: quiz);
   }
 
+  void tapIsSavedFilterButton() {
+    state = state.copyWith(isSavedFilter: !state.isSavedFilter);
+    final isSavedFilter = state.isSavedFilter;
+
+    if (isSavedFilter) {
+      final quizItemList = ref
+          .read(quizModelProvider)
+          .quizList
+          .expand((x) => x.quizItemList)
+          .toList();
+      final filteredQuizItemList =
+          quizItemList.where((x) => x.isSaved).toList();
+      setFilterQuiz(filteredQuizItemList);
+    } else {
+      setSearchKeywords(state.searchText);
+    }
+  }
+
+  void tapSavedButton(int index) {
+    final filteredQuizItemList = [...state.filteredQuizItemList];
+    filteredQuizItemList[index] = QuizItem(
+      quizId: filteredQuizItemList[index].quizId,
+      question: filteredQuizItemList[index].question,
+      ans: filteredQuizItemList[index].ans,
+      comment: filteredQuizItemList[index].comment,
+      isWeak: filteredQuizItemList[index].isWeak,
+      isJudge: filteredQuizItemList[index].isJudge,
+      isSaved: !filteredQuizItemList[index].isSaved,
+      choices: filteredQuizItemList[index].choices,
+    );
+    final quizItem = filteredQuizItemList[index];
+
+    ref.read(quizModelProvider.notifier).updateSavedQuiz(quizItem);
+    state = state.copyWith(filteredQuizItemList: filteredQuizItemList);
+  }
+
   ///onChanged
   void setSearchText(String text) {
     state = state.copyWith(searchText: text, isNotTextEmpty: text.isNotEmpty);
   }
 
   ///onFieldSubmitted
-  void setSearchKeywords(String text) {
+  Future setSearchKeywords(String text) async {
     final normalizedTexts = _normalizeText(text);
+    if (text.isEmpty) {
+      state = state.copyWith(
+        searchText: '',
+        searchKeywords: [],
+        isNotTextEmpty: false,
+        isSavedFilter: false,
+      );
+      await _initFilterQuiz();
+      return;
+    }
     final Set<String> allKeywordsSet = {};
 
     for (var normalizedText in normalizedTexts) {
@@ -113,7 +136,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     final searchKeywords =
         matchedKeywords.isNotEmpty ? matchedKeywords : allKeywords;
 
-    final quizList = ref.watch(quizModelProvider).quizList;
+    final quizList = ref.read(quizModelProvider).quizList;
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
     final filteredQuizItemList = searchKeywords.isEmpty
         ? quizItemList
@@ -123,6 +146,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
             });
           }).toList();
     state = state.copyWith(
+      isSavedFilter: false,
       searchKeywords: searchKeywords,
       searchText: text,
       isNotTextEmpty: text.isNotEmpty,
@@ -140,7 +164,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
 
   ///ヒットしたTextのみ抽出
   List<String> _matchedKeywords(List<String> keywords) {
-    final quizList = ref.watch(quizModelProvider).quizList;
+    final quizList = ref.read(quizModelProvider).quizList;
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
 
     final matchedKeywords = <String>{};

@@ -16,7 +16,9 @@ class Quizzes with _$Quizzes {
     @Default(0) final int selectQuizIndex, //選択したクイズ
     @Default(QuizType.study) final QuizType quizType, //クイズタイプ
   }) = _Quizzes;
+
   Quizzes._();
+
   factory Quizzes.fromJson(Map<String, dynamic> json) =>
       _$QuizzesFromJson(json);
 }
@@ -26,7 +28,6 @@ enum QuizType {
   weak,
   daily,
   test,
-  search,
 }
 
 const initDailyQuiz = Quiz(

@@ -3,6 +3,7 @@ part of 'quiz_choice_screen.dart';
 ///問題文
 class _Question extends ConsumerWidget {
   const _Question(this.item);
+
   final Quiz item;
 
   @override
@@ -33,6 +34,7 @@ class _Question extends ConsumerWidget {
 
 class _AnsQuestion extends ConsumerWidget {
   const _AnsQuestion(this.item);
+
   final Quiz item;
 
   @override
@@ -62,6 +64,7 @@ class _AnsQuestion extends ConsumerWidget {
 
 class _QuizQuestion extends ConsumerWidget {
   const _QuizQuestion(this.item);
+
   final Quiz item;
 
   @override
@@ -90,6 +93,7 @@ class _QuizQuestion extends ConsumerWidget {
 
 class _QuizProgress extends ConsumerWidget {
   const _QuizProgress(this.item);
+
   final Quiz item;
 
   @override
@@ -125,6 +129,7 @@ class _QuizProgress extends ConsumerWidget {
 
 class _SelectAnswer extends ConsumerWidget {
   const _SelectAnswer(this.item);
+
   final Quiz item;
 
   @override
@@ -133,10 +138,10 @@ class _SelectAnswer extends ConsumerWidget {
       width: context.width * 1.0,
       height: context.height * 0.2,
       alignment: Alignment.center,
-      child: Column(
+      child: const Column(
         children: [
           Row(
-            children: const [
+            children: [
               ///選択肢1
               _SelectChoice(0),
 
@@ -145,7 +150,7 @@ class _SelectAnswer extends ConsumerWidget {
             ],
           ),
           Row(
-            children: const [
+            children: [
               ///選択肢3
               _SelectChoice(2),
 
@@ -162,6 +167,7 @@ class _SelectAnswer extends ConsumerWidget {
 ///選択肢
 class _SelectChoice extends ConsumerWidget {
   const _SelectChoice(this.index);
+
   final int index;
 
   @override
@@ -213,6 +219,7 @@ class _SelectChoice extends ConsumerWidget {
 
 class _JudgeIcon extends ConsumerWidget {
   const _JudgeIcon(this.item);
+
   final Quiz item;
 
   @override

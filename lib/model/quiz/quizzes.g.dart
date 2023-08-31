@@ -45,5 +45,4 @@ const _$QuizTypeEnumMap = {
   QuizType.weak: 'weak',
   QuizType.daily: 'daily',
   QuizType.test: 'test',
-  QuizType.search: 'search',
 };

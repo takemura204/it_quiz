@@ -13,6 +13,7 @@ import '../lang/initial_resource.dart';
 import '../quiz_item/quiz_item.dart';
 
 part 'quiz_resource.dart';
+
 part 'quizzes_resource.dart';
 
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
@@ -165,6 +166,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   ///クイズ更新
   void updateQuiz(List<QuizItem> quiz) {
     final quizType = state.quizType;
+    print(quizType);
     switch (quizType) {
       case QuizType.study:
         _updateQuiz(quiz);
@@ -185,9 +187,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         _updateTestItem(quiz);
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quiz);
-        break;
-      case QuizType.search:
-        _updateQuiz(quiz);
         break;
     }
   }
@@ -224,7 +223,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final updateQuizList = quizList.map((quiz) {
       final updatedQuizList = quiz.quizItemList.map((quizItem) {
         final updatedQuiz = nonWeakQuizList.firstWhereOrNull(
-            (nonWeakQuiz) => nonWeakQuiz.question == quizItem.question);
+            (nonWeakQuiz) => nonWeakQuiz.quizId == quizItem.quizId);
         if (updatedQuiz != null) {
           return quizItem.copyWith(isWeak: false);
         }
@@ -260,9 +259,9 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         .expand(
             (quiz) => quiz.quizItemList.where((quizItem) => quizItem.isWeak))
         .toList();
-    final weakSetList = weakAllList.map((quiz) => quiz.question).toSet();
-    final weakList = weakSetList.map((question) {
-      return weakAllList.firstWhere((quiz) => quiz.question == question);
+    final weakSetList = weakAllList.map((quiz) => quiz.quizId).toSet();
+    final weakList = weakSetList.map((quizId) {
+      return weakAllList.firstWhere((quiz) => quiz.quizId == quizId);
     }).toList();
     final weakQuiz = state.weakQuiz.copyWith(quizItemList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
@@ -276,8 +275,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
     final updateQuizList = quizList.map((quiz) {
       final updateQuizItemList = quiz.quizItemList.map((quizItem) {
-        final updatedQuiz = weakQuizList.firstWhereOrNull(
-            (weakQuiz) => weakQuiz.question == quizItem.question);
+        final updatedQuiz = weakQuizList
+            .firstWhereOrNull((weakQuiz) => weakQuiz.quizId == quizItem.quizId);
         if (updatedQuiz != null) {
           return quizItem.copyWith(isWeak: true);
         }
@@ -301,6 +300,22 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         quizItemList: quizItemList,
         timeStamp: DateTime.now());
     state = state.copyWith(testQuiz: testQuiz);
+    _saveDevice(); // 保存
+  }
+
+  ///SavedQuiz更新
+  void updateSavedQuiz(QuizItem quizItem) {
+    final quizList = state.quizList;
+    final updatedQuizList = quizList.map((quiz) {
+      final updatedQuizItemList = quiz.quizItemList.map((item) {
+        if (item.quizId == quizItem.quizId) {
+          return quizItem;
+        }
+        return item;
+      }).toList();
+      return quiz.copyWith(quizItemList: updatedQuizItemList);
+    }).toList();
+    state = state.copyWith(quizList: updatedQuizList);
     _saveDevice(); // 保存
   }
 
