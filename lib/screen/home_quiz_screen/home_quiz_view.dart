@@ -1,8 +1,8 @@
 part of 'home_quiz_screen.dart';
 
 ///問題一覧
-class _QuizStudyCard extends ConsumerWidget {
-  const _QuizStudyCard({required this.quiz, required this.index});
+class _QuizCard extends ConsumerWidget {
+  const _QuizCard({required this.quiz, required this.index});
 
   final Quiz quiz;
   final int index;
@@ -19,8 +19,6 @@ class _QuizStudyCard extends ConsumerWidget {
       },
       child: Card(
         elevation: 2,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.01, vertical: context.height * 0.001),
         child: ListTile(
           contentPadding: EdgeInsets.only(
               left: context.width * 0.02,
@@ -61,6 +59,62 @@ class _QuizStudyCard extends ConsumerWidget {
             Icons.arrow_forward_ios,
             color: context.mainColor,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BottomQuizMenu extends ConsumerWidget {
+  const _BottomQuizMenu();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final testQuiz = ref.watch(quizModelProvider).testQuiz;
+    final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
+    return Card(
+      elevation: 2,
+      color: context.backgroundColor,
+      child: Container(
+        alignment: Alignment.center,
+        height: context.height * 0.1,
+        width: context.width * 1,
+        child: Row(
+          children: [
+            const Spacer(),
+
+            ///苦手克服ボタン
+            DefaultButton(
+                width: context.width * 0.45,
+                height: context.height * 0.06,
+                text: "苦手克服",
+                icon: Icons.check_box_outlined,
+                onPressed: weakQuiz.quizItemList.isEmpty
+                    ? null
+                    : () {
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .setQuizType(QuizType.weak);
+                        showDialog(
+                            context: context,
+                            builder: (_) => StudyQuizModal(quiz: weakQuiz));
+                      }),
+            Gap(context.width * 0.02),
+
+            ///テストボタン
+            PrimaryButton(
+              width: context.width * 0.45,
+              height: context.height * 0.06,
+              text: "${testQuiz.title}",
+              icon: Icons.drive_file_rename_outline,
+              onPressed: () {
+                ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
+                showDialog(
+                    context: context, builder: (_) => const TestQuizModal());
+              },
+            ),
+            const Spacer(),
+          ],
         ),
       ),
     );

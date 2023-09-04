@@ -4,12 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
 
-import '../controller/home_quiz/home_quiz_screen_controller.dart';
-import '../model/lang/initial_resource.dart';
-import '../model/quiz/quiz.dart';
-import '../model/quiz/quiz_model.dart';
-import '../screen/screen_argument.dart';
-import 'icon_button.dart';
+import '../../controller/home_quiz/home_quiz_screen_controller.dart';
+import '../../model/lang/initial_resource.dart';
+import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_model.dart';
+import '../../screen/screen_argument.dart';
+import '../icon_button.dart';
 
 ///クイズモーダル
 class StudyQuizModal extends ConsumerWidget {

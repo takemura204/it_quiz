@@ -5,12 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
+import 'package:kentei_quiz/view/modals/mission_modal.dart';
 
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
-import '../../view/modal.dart';
+import '../../view/modals/quiz_modal.dart';
 
 part 'home_quiz_view.dart';
 
@@ -36,11 +37,27 @@ class _Scaffold extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider).quizList;
-    final testQuiz = ref.watch(quizModelProvider).testQuiz;
-    final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleStudy),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
+            child: IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) => const DailyMissionModal());
+              },
+              icon: Icon(
+                Icons.pending_actions_outlined,
+                size: 35,
+                color: context.mainColor,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Stack(
         alignment: Alignment.bottomCenter,
@@ -72,65 +89,17 @@ class _Scaffold extends ConsumerWidget {
             indexedItemBuilder: (BuildContext context, Quiz quiz, int index) {
               return Column(
                 children: [
-                  _QuizStudyCard(
+                  _QuizCard(
                     quiz: quiz,
                     index: index,
                   ),
+                  Divider(height: 0.5, color: Colors.grey.shade500),
                   if (index == quizList.length - 1) Gap(context.height * 0.1),
                 ],
               );
             },
           ),
-          Card(
-            elevation: 2,
-            color: context.backgroundColor,
-            child: Container(
-              alignment: Alignment.center,
-              height: context.height * 0.1,
-              width: context.width * 1,
-              child: Row(
-                children: [
-                  const Spacer(),
-
-                  ///苦手克服ボタン
-                  DefaultButton(
-                      width: context.width * 0.45,
-                      height: context.height * 0.06,
-                      text: "苦手克服",
-                      icon: Icons.check_box_outlined,
-                      onPressed: weakQuiz.quizItemList.isEmpty
-                          ? null
-                          : () {
-                              ref
-                                  .read(quizModelProvider.notifier)
-                                  .setQuizType(QuizType.weak);
-                              showDialog(
-                                  context: context,
-                                  builder: (_) =>
-                                      StudyQuizModal(quiz: weakQuiz));
-                            }),
-                  Gap(context.width * 0.02),
-
-                  ///テストボタン
-                  PrimaryButton(
-                    width: context.width * 0.45,
-                    height: context.height * 0.06,
-                    text: "${testQuiz.title}",
-                    icon: Icons.drive_file_rename_outline,
-                    onPressed: () {
-                      ref
-                          .read(quizModelProvider.notifier)
-                          .setQuizType(QuizType.test);
-                      showDialog(
-                          context: context,
-                          builder: (_) => const TestQuizModal());
-                    },
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ),
-          ),
+          const _BottomQuizMenu(),
         ],
       ),
     );
