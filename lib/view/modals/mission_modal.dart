@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/mission/mission_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import '../../controller/dashboard_achievement/dashboard_achievement_controller.dart';
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../model/mission/mission.dart';
 import '../../model/mission/mission_model.dart';
@@ -19,9 +19,15 @@ class DailyMissionModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(missionControllerProvider);
+    final _timeLimit = state.timeLimit;
+
+    final model = ref.watch(missionModelProvider);
+    final missions = model.sortedMissions;
+
     final dashboardState = ref.watch(dashboardAnalyticsProvider);
-    final missionModel = ref.watch(missionModelProvider);
-    if (dashboardState.isLoading && missionModel.isLoading) {
+
+    if (dashboardState.isLoading && model.isLoading) {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
@@ -34,8 +40,7 @@ class DailyMissionModal extends ConsumerWidget {
     final correctScore =
         dailyData.quizData.where((x) => x.isJudge == true).toList().length;
     final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
-    final timeLimit = ref.watch(dashboardAchievementProvider).timeLimit;
-    final missions = missionModel.sortedMissions;
+
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.02),
       contentPadding: EdgeInsets.all(context.width * 0.02),
@@ -47,10 +52,9 @@ class DailyMissionModal extends ConsumerWidget {
             children: [
               _Title(
                 title: "デイリーミッション",
-                subtitle: "あと $timeLimit",
+                subtitle: "あと $_timeLimit",
                 icon: Icons.pending_actions_outlined,
               ),
-              const Spacer(),
               Container(
                 height: context.height * 0.46,
                 child: Column(
@@ -94,7 +98,7 @@ class DailyMissionModal extends ConsumerWidget {
                       randomIconButtonTap: () {
                         ref
                             .read(missionModelProvider.notifier)
-                            .shuffleMission1Index();
+                            .shuffleMissionIndex(3);
                       },
                     ),
                     Divider(color: context.mainColor, height: 1, thickness: 1),
@@ -108,14 +112,13 @@ class DailyMissionModal extends ConsumerWidget {
                       randomIconButtonTap: () {
                         ref
                             .read(missionModelProvider.notifier)
-                            .shuffleMission2Index();
+                            .shuffleMissionIndex(4);
                       },
                     ),
                     const Spacer(),
                   ],
                 ),
               ),
-              const Spacer(),
             ],
           ),
         ),
@@ -298,7 +301,7 @@ class _DailyMissionCard extends ConsumerWidget {
                             height: context.height * 0.035,
                             text: "受取",
                             onPressed: () => ref
-                                .read(dashboardAchievementProvider.notifier)
+                                .read(missionControllerProvider.notifier)
                                 .tapMissionReceiveButton(mission)),
                         Gap(context.width * 0.02),
                       ],

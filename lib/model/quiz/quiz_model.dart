@@ -13,7 +13,6 @@ import '../lang/initial_resource.dart';
 import '../quiz_item/quiz_item.dart';
 
 part 'quiz_resource.dart';
-
 part 'quizzes_resource.dart';
 
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
@@ -47,7 +46,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   ///読み込み
   Future _loadQuizData() async {
     await _getQuizListData();
-    await _getDailyQuiz();
+    // await _getDailyQuiz();
     await _getWeakQuiz();
     await _getTestQuiz();
     await _saveDevice();
@@ -87,12 +86,18 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         }
         return quiz;
       }).toList();
-      state = state.copyWith(quizList: updateQuizList);
+      final quizItemList =
+          updateQuizList.expand((x) => x.quizItemList).toList();
+      state =
+          state.copyWith(quizList: updateQuizList, quizItemList: quizItemList);
     }
     // 初回起動時
     else {
       final _initialQuizList = _initQuizList();
-      state = state.copyWith(quizList: _initialQuizList);
+      final quizItemList =
+          _initialQuizList.expand((x) => x.quizItemList).toList();
+      state = state.copyWith(
+          quizList: _initialQuizList, quizItemList: quizItemList);
     }
   }
 

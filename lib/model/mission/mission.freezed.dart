@@ -21,10 +21,10 @@ Mission _$MissionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Mission {
   String? get docId => throw _privateConstructorUsedError;
-  int get missionId => throw _privateConstructorUsedError; //ミッションID
+  String get missionId => throw _privateConstructorUsedError; //ミッションID
   String get title => throw _privateConstructorUsedError; //ミッションの名前
   int get point => throw _privateConstructorUsedError; //獲得スコア
-  bool get isReceived => throw _privateConstructorUsedError; //達成したか
+  bool get isReceived => throw _privateConstructorUsedError; //受け取ったか？
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $MissionCopyWith<$Res> {
   @useResult
   $Res call(
       {String? docId,
-      int missionId,
+      String missionId,
       String title,
       int point,
       bool isReceived,
@@ -74,7 +74,7 @@ class _$MissionCopyWithImpl<$Res, $Val extends Mission>
       missionId: null == missionId
           ? _value.missionId
           : missionId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -104,7 +104,7 @@ abstract class _$$_MissionCopyWith<$Res> implements $MissionCopyWith<$Res> {
   @useResult
   $Res call(
       {String? docId,
-      int missionId,
+      String missionId,
       String title,
       int point,
       bool isReceived,
@@ -136,7 +136,7 @@ class __$$_MissionCopyWithImpl<$Res>
       missionId: null == missionId
           ? _value.missionId
           : missionId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ class _$_Mission extends _Mission {
   @override
   final String? docId;
   @override
-  final int missionId;
+  final String missionId;
 //ミッションID
   @override
   @JsonKey()
@@ -188,7 +188,7 @@ class _$_Mission extends _Mission {
   @override
   @JsonKey()
   final bool isReceived;
-//達成したか
+//受け取ったか？
   @override
   final DateTime? updatedAt;
 
@@ -235,7 +235,7 @@ class _$_Mission extends _Mission {
 abstract class _Mission extends Mission {
   factory _Mission(
       {final String? docId,
-      required final int missionId,
+      required final String missionId,
       final String title,
       final int point,
       final bool isReceived,
@@ -247,14 +247,14 @@ abstract class _Mission extends Mission {
   @override
   String? get docId;
   @override
-  int get missionId;
+  String get missionId;
   @override //ミッションID
   String get title;
   @override //ミッションの名前
   int get point;
   @override //獲得スコア
   bool get isReceived;
-  @override //達成したか
+  @override //受け取ったか？
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)

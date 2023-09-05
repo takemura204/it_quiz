@@ -8,12 +8,13 @@ part 'mission.g.dart';
 class Mission with _$Mission {
   factory Mission({
     String? docId,
-    required final int missionId, //ミッションID
+    required final String missionId, //ミッションID
     @Default("") final String title, //ミッションの名前
     @Default(0) final int point, //獲得スコア
-    @Default(false) bool isReceived, //達成したか
+    @Default(false) bool isReceived, //受け取ったか？
     DateTime? updatedAt, //作成日
   }) = _Mission;
+
   Mission._();
 
   factory Mission.fromJson(Map<String, dynamic> json) =>

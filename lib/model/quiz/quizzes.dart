@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kentei_quiz/model/quiz/quiz.dart';
+import 'package:kentei_quiz/model/quiz_item/quiz_item.dart';
 
 part 'quizzes.freezed.dart';
 part 'quizzes.g.dart';
@@ -9,7 +10,7 @@ part 'quizzes.g.dart';
 class Quizzes with _$Quizzes {
   factory Quizzes({
     @Default([]) final List<Quiz> quizList, //クイズ一覧
-    @Default([]) final List<Quiz> userQuizList, //ユーザーが解いたクイズ一覧
+    @Default([]) final List<QuizItem> quizItemList,
     @Default(initDailyQuiz) Quiz dailyQuiz, //今日のクイズ
     @Default(initWeakQuiz) Quiz weakQuiz, //苦手克服
     @Default(initTestQuiz) Quiz testQuiz, //テストクイズ

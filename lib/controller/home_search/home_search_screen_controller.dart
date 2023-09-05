@@ -36,18 +36,16 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
   }
 
   Future _initFilterQuiz() async {
-    final quizItemList = ref
-        .read(quizModelProvider)
-        .quizList
-        .expand((x) => x.quizItemList)
-        .toList();
+    final quizItemList = ref.read(quizModelProvider).quizItemList;
+    // final quiz = ref.read(quizModelProvider.notifier).quiz1;
+    // final quizItemList = [...quiz + quiz + quiz + quiz];
 
     setFilterQuiz(quizItemList);
   }
 
   Future _scrollListener() async {
-    if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
+    if (scrollController.position.atEdge &&
+        scrollController.position.pixels != 0) {
       if (state.maxItemsToDisplay < state.filteredQuizItemList.length &&
           !state.isLoading) {
         state = state.copyWith(isLoading: true);
@@ -61,7 +59,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
   void setMaxItemsToDisplay() {
     if (state.maxItemsToDisplay < state.filteredQuizItemList.length) {
       state = state.copyWith(
-        maxItemsToDisplay: state.maxItemsToDisplay + 5,
+        maxItemsToDisplay: state.maxItemsToDisplay + 10,
         isLoading: true,
       );
     }

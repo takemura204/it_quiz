@@ -21,9 +21,6 @@ class DashBoardAchievementScreen extends ConsumerWidget {
 
           ///称号レベル
           RankScore(),
-
-          ///デイリーミッション
-          DailyMission(),
         ],
       ),
     );

@@ -48,18 +48,22 @@ class _QuizResultView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeSearchScreenProvider);
     final filteredQuizItemList = state.filteredQuizItemList;
+
     final maxItemsToDisplay = state.maxItemsToDisplay;
     final isLoading = state.isLoading;
+
     if (filteredQuizItemList.isEmpty) {
       return const _NotFindQuizItem();
     }
-
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           if (index == maxItemsToDisplay) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: SpinKitFadingCircle(
+                color: context.mainColor,
+                size: context.height * 0.07,
+              ),
             );
           }
           return Card(
@@ -81,45 +85,7 @@ class _QuizResultView extends ConsumerWidget {
                 Expanded(
                   child: _QuizItemCard(index, filteredQuizItemList),
                 ),
-                GestureDetector(
-                  onTap: () => ref
-                      .read(homeSearchScreenProvider.notifier)
-                      .tapSavedButton(index),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: context.width * 0.1,
-                    height: context.height * 0.1,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          const Spacer(),
-                          Text(
-                            "保存",
-                            style: TextStyle(
-                              fontSize: context.width * 0.025,
-                              fontWeight: FontWeight.bold,
-                              color: filteredQuizItemList[index].isSaved
-                                  ? context.mainColor
-                                  : Colors.black26,
-                            ),
-                          ),
-                          Icon(
-                            filteredQuizItemList[index].isSaved
-                                ? Icons.bookmark_outlined
-                                : Icons.bookmark_border_outlined,
-                            size: context.width * 0.08,
-                            color: filteredQuizItemList[index].isSaved
-                                ? context.mainColor
-                                : Colors.black26,
-                          ),
-                          Gap(context.height * 0.01),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                _SavedButton(index: index, quiz: filteredQuizItemList),
                 const Gap(5),
               ],
             ),
@@ -216,6 +182,52 @@ class _NotFindQuizItem extends HookConsumerWidget {
               Gap(context.height * 0.02),
             ],
           )),
+    );
+  }
+}
+
+class _SavedButton extends HookConsumerWidget {
+  const _SavedButton({required this.quiz, required this.index});
+
+  final List<QuizItem> quiz;
+  final int index;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: () =>
+          ref.read(homeSearchScreenProvider.notifier).tapSavedButton(index),
+      child: Container(
+        alignment: Alignment.center,
+        width: context.width * 0.1,
+        height: context.height * 0.1,
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              const Spacer(),
+              Text(
+                "保存",
+                style: TextStyle(
+                  fontSize: context.width * 0.025,
+                  fontWeight: FontWeight.bold,
+                  color:
+                      quiz[index].isSaved ? context.mainColor : Colors.black26,
+                ),
+              ),
+              Icon(
+                quiz[index].isSaved
+                    ? Icons.bookmark_outlined
+                    : Icons.bookmark_border_outlined,
+                size: context.width * 0.08,
+                color: quiz[index].isSaved ? context.mainColor : Colors.black26,
+              ),
+              Gap(context.height * 0.01),
+              const Spacer(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

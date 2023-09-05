@@ -21,8 +21,7 @@ Quizzes _$QuizzesFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Quizzes {
   List<Quiz> get quizList => throw _privateConstructorUsedError; //クイズ一覧
-  List<Quiz> get userQuizList =>
-      throw _privateConstructorUsedError; //ユーザーが解いたクイズ一覧
+  List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   Quiz get dailyQuiz => throw _privateConstructorUsedError; //今日のクイズ
   Quiz get weakQuiz => throw _privateConstructorUsedError; //苦手克服
   Quiz get testQuiz => throw _privateConstructorUsedError; //テストクイズ
@@ -41,7 +40,7 @@ abstract class $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Quiz> quizList,
-      List<Quiz> userQuizList,
+      List<QuizItem> quizItemList,
       Quiz dailyQuiz,
       Quiz weakQuiz,
       Quiz testQuiz,
@@ -67,7 +66,7 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
   @override
   $Res call({
     Object? quizList = null,
-    Object? userQuizList = null,
+    Object? quizItemList = null,
     Object? dailyQuiz = null,
     Object? weakQuiz = null,
     Object? testQuiz = null,
@@ -79,10 +78,10 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
           ? _value.quizList
           : quizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
-      userQuizList: null == userQuizList
-          ? _value.userQuizList
-          : userQuizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
+      quizItemList: null == quizItemList
+          ? _value.quizItemList
+          : quizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
       dailyQuiz: null == dailyQuiz
           ? _value.dailyQuiz
           : dailyQuiz // ignore: cast_nullable_to_non_nullable
@@ -140,7 +139,7 @@ abstract class _$$_QuizzesCopyWith<$Res> implements $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Quiz> quizList,
-      List<Quiz> userQuizList,
+      List<QuizItem> quizItemList,
       Quiz dailyQuiz,
       Quiz weakQuiz,
       Quiz testQuiz,
@@ -166,7 +165,7 @@ class __$$_QuizzesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? quizList = null,
-    Object? userQuizList = null,
+    Object? quizItemList = null,
     Object? dailyQuiz = null,
     Object? weakQuiz = null,
     Object? testQuiz = null,
@@ -178,10 +177,10 @@ class __$$_QuizzesCopyWithImpl<$Res>
           ? _value._quizList
           : quizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
-      userQuizList: null == userQuizList
-          ? _value._userQuizList
-          : userQuizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
+      quizItemList: null == quizItemList
+          ? _value._quizItemList
+          : quizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
       dailyQuiz: null == dailyQuiz
           ? _value.dailyQuiz
           : dailyQuiz // ignore: cast_nullable_to_non_nullable
@@ -211,14 +210,14 @@ class __$$_QuizzesCopyWithImpl<$Res>
 class _$_Quizzes extends _Quizzes {
   _$_Quizzes(
       {final List<Quiz> quizList = const [],
-      final List<Quiz> userQuizList = const [],
+      final List<QuizItem> quizItemList = const [],
       this.dailyQuiz = initDailyQuiz,
       this.weakQuiz = initWeakQuiz,
       this.testQuiz = initTestQuiz,
       this.selectQuizIndex = 0,
       this.quizType = QuizType.study})
       : _quizList = quizList,
-        _userQuizList = userQuizList,
+        _quizItemList = quizItemList,
         super._();
 
   factory _$_Quizzes.fromJson(Map<String, dynamic> json) =>
@@ -234,17 +233,16 @@ class _$_Quizzes extends _Quizzes {
   }
 
 //クイズ一覧
-  final List<Quiz> _userQuizList;
+  final List<QuizItem> _quizItemList;
 //クイズ一覧
   @override
   @JsonKey()
-  List<Quiz> get userQuizList {
-    if (_userQuizList is EqualUnmodifiableListView) return _userQuizList;
+  List<QuizItem> get quizItemList {
+    if (_quizItemList is EqualUnmodifiableListView) return _quizItemList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userQuizList);
+    return EqualUnmodifiableListView(_quizItemList);
   }
 
-//ユーザーが解いたクイズ一覧
   @override
   @JsonKey()
   final Quiz dailyQuiz;
@@ -267,7 +265,7 @@ class _$_Quizzes extends _Quizzes {
 
   @override
   String toString() {
-    return 'Quizzes(quizList: $quizList, userQuizList: $userQuizList, dailyQuiz: $dailyQuiz, weakQuiz: $weakQuiz, testQuiz: $testQuiz, selectQuizIndex: $selectQuizIndex, quizType: $quizType)';
+    return 'Quizzes(quizList: $quizList, quizItemList: $quizItemList, dailyQuiz: $dailyQuiz, weakQuiz: $weakQuiz, testQuiz: $testQuiz, selectQuizIndex: $selectQuizIndex, quizType: $quizType)';
   }
 
   @override
@@ -277,7 +275,7 @@ class _$_Quizzes extends _Quizzes {
             other is _$_Quizzes &&
             const DeepCollectionEquality().equals(other._quizList, _quizList) &&
             const DeepCollectionEquality()
-                .equals(other._userQuizList, _userQuizList) &&
+                .equals(other._quizItemList, _quizItemList) &&
             (identical(other.dailyQuiz, dailyQuiz) ||
                 other.dailyQuiz == dailyQuiz) &&
             (identical(other.weakQuiz, weakQuiz) ||
@@ -295,7 +293,7 @@ class _$_Quizzes extends _Quizzes {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_quizList),
-      const DeepCollectionEquality().hash(_userQuizList),
+      const DeepCollectionEquality().hash(_quizItemList),
       dailyQuiz,
       weakQuiz,
       testQuiz,
@@ -319,7 +317,7 @@ class _$_Quizzes extends _Quizzes {
 abstract class _Quizzes extends Quizzes {
   factory _Quizzes(
       {final List<Quiz> quizList,
-      final List<Quiz> userQuizList,
+      final List<QuizItem> quizItemList,
       final Quiz dailyQuiz,
       final Quiz weakQuiz,
       final Quiz testQuiz,
@@ -332,8 +330,8 @@ abstract class _Quizzes extends Quizzes {
   @override
   List<Quiz> get quizList;
   @override //クイズ一覧
-  List<Quiz> get userQuizList;
-  @override //ユーザーが解いたクイズ一覧
+  List<QuizItem> get quizItemList;
+  @override
   Quiz get dailyQuiz;
   @override //今日のクイズ
   Quiz get weakQuiz;

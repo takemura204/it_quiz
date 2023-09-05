@@ -11,8 +11,8 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
               ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      userQuizList: (json['userQuizList'] as List<dynamic>?)
-              ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
+      quizItemList: (json['quizItemList'] as List<dynamic>?)
+              ?.map((e) => QuizItem.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       dailyQuiz: json['dailyQuiz'] == null
@@ -32,7 +32,7 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
 Map<String, dynamic> _$$_QuizzesToJson(_$_Quizzes instance) =>
     <String, dynamic>{
       'quizList': instance.quizList,
-      'userQuizList': instance.userQuizList,
+      'quizItemList': instance.quizItemList,
       'dailyQuiz': instance.dailyQuiz,
       'weakQuiz': instance.weakQuiz,
       'testQuiz': instance.testQuiz,
