@@ -36,7 +36,10 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizModelProvider).quizList;
+    final state = ref.watch(quizModelProvider);
+    final quizList = state.quizList;
+    final testQuiz = state.testQuiz;
+    final weakQuiz = state.weakQuiz;
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleStudy),
@@ -64,11 +67,10 @@ class _Scaffold extends ConsumerWidget {
         children: [
           GroupedListView<Quiz, String>(
             elements: quizList,
-            groupBy: (Quiz item) => item.category,
+            groupBy: (Quiz quiz) => quiz.category,
             groupComparator: (value1, value2) => value2.compareTo(value1),
             //グループのカスタムソートを定義
-            itemComparator: (item1, item2) =>
-                item2.title.compareTo(item1.title),
+            itemComparator: (item1, item2) => item2.id.compareTo(item1.id),
             //各グループ内の要素のカスタムソートを定義
             order: GroupedListOrder.DESC,
             //グループの並べ替え
@@ -99,7 +101,10 @@ class _Scaffold extends ConsumerWidget {
               );
             },
           ),
-          const _BottomQuizMenu(),
+          _BottomQuizMenu(
+            weakQuiz: weakQuiz,
+            testQuiz: testQuiz,
+          ),
         ],
       ),
     );

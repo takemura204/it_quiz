@@ -465,7 +465,6 @@ class EditTextField extends ConsumerWidget {
 class SearchTextField extends ConsumerWidget {
   const SearchTextField({
     required this.searchController,
-    required this.isValidSearch,
     required this.onChanged,
     required this.onFieldSubmitted,
     required this.onClear,
@@ -473,7 +472,6 @@ class SearchTextField extends ConsumerWidget {
   });
 
   final TextEditingController searchController;
-  final bool isValidSearch;
   final bool isTextEmpty;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;

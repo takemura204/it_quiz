@@ -9,7 +9,6 @@ class _QuizCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quiz = ref.watch(quizModelProvider).quizList[index];
     return GestureDetector(
       onTap: () {
         ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
@@ -66,12 +65,13 @@ class _QuizCard extends ConsumerWidget {
 }
 
 class _BottomQuizMenu extends ConsumerWidget {
-  const _BottomQuizMenu();
+  const _BottomQuizMenu({required this.weakQuiz, required this.testQuiz});
+
+  final Quiz weakQuiz;
+  final Quiz testQuiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final testQuiz = ref.watch(quizModelProvider).testQuiz;
-    final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
     return Card(
       elevation: 2,
       color: context.backgroundColor,
@@ -110,7 +110,13 @@ class _BottomQuizMenu extends ConsumerWidget {
               onPressed: () {
                 ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
                 showDialog(
-                    context: context, builder: (_) => const TestQuizModal());
+                  context: context,
+                  builder: (_) {
+                    return TestQuizModal(
+                      testQuiz: testQuiz,
+                    );
+                  },
+                );
               },
             ),
             const Spacer(),

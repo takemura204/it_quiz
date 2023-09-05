@@ -21,6 +21,8 @@ class DashBoardAchievementScreen extends ConsumerWidget {
 
           ///称号レベル
           RankScore(),
+          Gap(10),
+          RankIcon(),
         ],
       ),
     );

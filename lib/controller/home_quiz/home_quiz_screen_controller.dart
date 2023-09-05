@@ -35,7 +35,6 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
         .toList();
     testGroup.addAll(categoryList);
     state = state.copyWith(testGroup: testGroup);
-    print(testGroup);
   }
 
   ///TestQuiz開始

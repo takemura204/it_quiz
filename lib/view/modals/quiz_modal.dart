@@ -107,11 +107,12 @@ class StudyQuizModal extends ConsumerWidget {
 
 ///テストモーダル
 class TestQuizModal extends ConsumerWidget {
-  const TestQuizModal();
+  const TestQuizModal({required this.testQuiz});
+
+  final Quiz testQuiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final testQuiz = ref.watch(quizModelProvider).testQuiz;
     final isGroup = ref.watch(homeQuizScreenProvider).testGroup.isNotEmpty;
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),

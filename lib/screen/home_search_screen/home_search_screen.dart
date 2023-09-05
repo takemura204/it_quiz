@@ -19,8 +19,13 @@ class HomeSearchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const ProviderScope(
-      child: _Scaffold(),
+    return ProviderScope(
+      overrides: [
+        homeSearchScreenProvider.overrideWith(
+          (ref) => HomeSearchScreenController(ref: ref),
+        ),
+      ],
+      child: const _Scaffold(),
     );
   }
 }
@@ -30,16 +35,32 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeSearchScreenProvider);
+    final controller = ref.watch(homeSearchScreenProvider.notifier);
+    final isSavedFilter = state.isSavedFilter;
+    final isNotTextEmpty = state.isNotTextEmpty;
+    final filteredQuizItemList = state.filteredQuizItemList;
+    final maxItemsToDisplay = state.maxItemsToDisplay;
+    final isLoading = state.isLoading;
+    final textEditingController = controller.textEditingController;
+    final scrollController = controller.scrollController;
+
     return Scaffold(
-      appBar: const _AppBar(),
+      appBar: _AppBar(isSavedFilter: isSavedFilter),
       body: CustomScrollView(
-        controller:
-            ref.read(homeSearchScreenProvider.notifier).scrollController,
-        slivers: const [
+        controller: scrollController,
+        slivers: [
           SliverToBoxAdapter(
-            child: _SearchBar(),
+            child: _SearchBar(
+              textEditingController: textEditingController,
+              isNotTextEmpty: isNotTextEmpty,
+            ),
           ),
-          _QuizResultView(),
+          _QuizResultView(
+            filteredQuizItemList: filteredQuizItemList,
+            isLoading: isLoading,
+            maxItemsToDisplay: maxItemsToDisplay,
+          ),
         ],
       ),
     );
@@ -47,12 +68,12 @@ class _Scaffold extends ConsumerWidget {
 }
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _AppBar();
+  const _AppBar({required this.isSavedFilter});
+
+  final bool isSavedFilter;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSavedFilter = ref.watch(homeSearchScreenProvider).isSavedFilter;
-
     return AppBar(
       title: Text(I18n().titleSearch),
       centerTitle: true,

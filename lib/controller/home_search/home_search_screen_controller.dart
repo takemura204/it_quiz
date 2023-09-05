@@ -19,7 +19,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
   }
 
   final Ref ref;
-  final searchController = TextEditingController();
+  final textEditingController = TextEditingController();
   final scrollController = ScrollController();
 
   @override
@@ -36,10 +36,11 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
   }
 
   Future _initFilterQuiz() async {
-    final quizItemList = ref.read(quizModelProvider).quizItemList;
-    // final quiz = ref.read(quizModelProvider.notifier).quiz1;
-    // final quizItemList = [...quiz + quiz + quiz + quiz];
-
+    final quizItemList = ref
+        .read(quizModelProvider)
+        .quizList
+        .expand((x) => x.quizItemList)
+        .toList();
     setFilterQuiz(quizItemList);
   }
 
@@ -154,10 +155,10 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
 
   ///onClear
   void clearSearchText() {
-    searchController.clear();
+    textEditingController.clear();
     state = state.copyWith(
-        searchText: searchController.text,
-        isNotTextEmpty: searchController.text.isNotEmpty);
+        searchText: textEditingController.text,
+        isNotTextEmpty: textEditingController.text.isNotEmpty);
   }
 
   ///ヒットしたTextのみ抽出

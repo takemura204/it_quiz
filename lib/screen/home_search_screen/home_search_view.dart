@@ -1,35 +1,33 @@
 part of 'home_search_screen.dart';
 
 class _SearchBar extends ConsumerWidget {
-  const _SearchBar();
+  const _SearchBar(
+      {required this.isNotTextEmpty, required this.textEditingController});
+
+  final bool isNotTextEmpty;
+  final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeSearchScreenProvider);
-    final isValidSearch = state.isValidSearch;
-    final isNotTextEmpty = state.isNotTextEmpty;
-    final searchController =
-        ref.watch(homeSearchScreenProvider.notifier).searchController;
     return Padding(
-      padding: EdgeInsets.only(bottom: context.height * 0.01),
+      padding: EdgeInsets.only(bottom: context.height * 0.005),
       child: Card(
         elevation: 1,
         child: Container(
           color: Colors.grey.shade200,
           padding: EdgeInsets.all(context.width * 0.02),
           child: SearchTextField(
-            searchController: searchController,
-            isValidSearch: isValidSearch,
+            searchController: textEditingController,
             isTextEmpty: isNotTextEmpty,
             onChanged: (_) {
               ref
                   .read(homeSearchScreenProvider.notifier)
-                  .setSearchText(searchController.text);
+                  .setSearchText(textEditingController.text);
             },
             onFieldSubmitted: (_) {
               ref
                   .read(homeSearchScreenProvider.notifier)
-                  .setSearchKeywords(searchController.text);
+                  .setSearchKeywords(textEditingController.text);
             },
             onClear: () {
               ref.read(homeSearchScreenProvider.notifier).clearSearchText();
@@ -42,16 +40,17 @@ class _SearchBar extends ConsumerWidget {
 }
 
 class _QuizResultView extends ConsumerWidget {
-  const _QuizResultView();
+  const _QuizResultView(
+      {required this.filteredQuizItemList,
+      required this.isLoading,
+      required this.maxItemsToDisplay});
+
+  final List<QuizItem> filteredQuizItemList;
+  final bool isLoading;
+  final int maxItemsToDisplay;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeSearchScreenProvider);
-    final filteredQuizItemList = state.filteredQuizItemList;
-
-    final maxItemsToDisplay = state.maxItemsToDisplay;
-    final isLoading = state.isLoading;
-
     if (filteredQuizItemList.isEmpty) {
       return const _NotFindQuizItem();
     }
@@ -69,8 +68,8 @@ class _QuizResultView extends ConsumerWidget {
           return Card(
             elevation: 1,
             margin: EdgeInsets.symmetric(
-                horizontal: context.width * 0.015,
-                vertical: context.width * 0.0075),
+                horizontal: context.width * 0.01,
+                vertical: context.width * 0.005),
             color: Colors.white,
             shape: RoundedRectangleBorder(
               side: BorderSide(
@@ -92,8 +91,8 @@ class _QuizResultView extends ConsumerWidget {
           );
         },
         childCount: isLoading
-            ? state.maxItemsToDisplay + 1
-            : min(state.maxItemsToDisplay + 1, filteredQuizItemList.length),
+            ? maxItemsToDisplay + 1
+            : min(maxItemsToDisplay + 1, filteredQuizItemList.length),
       ),
     );
   }
