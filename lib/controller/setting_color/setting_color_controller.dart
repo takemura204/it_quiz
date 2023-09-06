@@ -14,7 +14,7 @@ class SettingColorController extends StateNotifier<SettingColorState>
   SettingColorController({required this.ref})
       : super(const SettingColorState()) {
     () {
-      initState();
+      _initialize();
     }();
   }
 
@@ -38,10 +38,13 @@ class SettingColorController extends StateNotifier<SettingColorState>
     AppColor.black1,
   ];
 
-  @override
-  Future initState() async {
+  Future _initialize() async {
     await initTheme();
-    super.initState();
+  }
+
+  @override
+  Future dispose() async {
+    super.dispose();
   }
 
   ///初期テーマ設定
@@ -280,9 +283,12 @@ class SettingColorController extends StateNotifier<SettingColorState>
 
     final mainColor = getThemePrimaryColor(themeId);
 
-    state = state.copyWith(isLoading: true);
     state = state.copyWith(
-        themeId: themeId, themeData: themeData, mainColor: mainColor);
+      isLoading: true,
+      themeId: themeId,
+      themeData: themeData,
+      mainColor: mainColor,
+    );
     state = state.copyWith(isLoading: false);
   }
 
@@ -522,9 +528,12 @@ class SettingColorController extends StateNotifier<SettingColorState>
       );
       final mainColor = getThemePrimaryColor(themeId);
 
-      state = state.copyWith(isLoading: true);
       state = state.copyWith(
-          themeId: themeId, themeData: themeData, mainColor: mainColor);
+        isLoading: true,
+        themeId: themeId,
+        themeData: themeData,
+        mainColor: mainColor,
+      );
       state = state.copyWith(isLoading: false);
       // ignore: empty_catches
     } on Exception catch (e, s) {

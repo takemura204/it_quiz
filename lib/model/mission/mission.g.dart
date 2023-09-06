@@ -8,9 +8,9 @@ part of 'mission.dart';
 
 _$_Mission _$$_MissionFromJson(Map<String, dynamic> json) => _$_Mission(
       docId: json['docId'] as String?,
-      missionId: json['missionId'] as String,
+      missionId: json['missionId'] as int? ?? 0,
       title: json['title'] as String? ?? "",
-      point: json['point'] as int? ?? 0,
+      exp: json['exp'] as int? ?? 0,
       isReceived: json['isReceived'] as bool? ?? false,
       updatedAt: json['updatedAt'] == null
           ? null
@@ -22,7 +22,7 @@ Map<String, dynamic> _$$_MissionToJson(_$_Mission instance) =>
       'docId': instance.docId,
       'missionId': instance.missionId,
       'title': instance.title,
-      'point': instance.point,
+      'exp': instance.exp,
       'isReceived': instance.isReceived,
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };

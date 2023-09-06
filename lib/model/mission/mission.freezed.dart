@@ -21,9 +21,9 @@ Mission _$MissionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Mission {
   String? get docId => throw _privateConstructorUsedError;
-  String get missionId => throw _privateConstructorUsedError; //ミッションID
+  int get missionId => throw _privateConstructorUsedError; //ミッションID
   String get title => throw _privateConstructorUsedError; //ミッションの名前
-  int get point => throw _privateConstructorUsedError; //獲得スコア
+  int get exp => throw _privateConstructorUsedError; //獲得スコア
   bool get isReceived => throw _privateConstructorUsedError; //受け取ったか？
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -39,9 +39,9 @@ abstract class $MissionCopyWith<$Res> {
   @useResult
   $Res call(
       {String? docId,
-      String missionId,
+      int missionId,
       String title,
-      int point,
+      int exp,
       bool isReceived,
       DateTime? updatedAt});
 }
@@ -62,7 +62,7 @@ class _$MissionCopyWithImpl<$Res, $Val extends Mission>
     Object? docId = freezed,
     Object? missionId = null,
     Object? title = null,
-    Object? point = null,
+    Object? exp = null,
     Object? isReceived = null,
     Object? updatedAt = freezed,
   }) {
@@ -74,14 +74,14 @@ class _$MissionCopyWithImpl<$Res, $Val extends Mission>
       missionId: null == missionId
           ? _value.missionId
           : missionId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      point: null == point
-          ? _value.point
-          : point // ignore: cast_nullable_to_non_nullable
+      exp: null == exp
+          ? _value.exp
+          : exp // ignore: cast_nullable_to_non_nullable
               as int,
       isReceived: null == isReceived
           ? _value.isReceived
@@ -104,9 +104,9 @@ abstract class _$$_MissionCopyWith<$Res> implements $MissionCopyWith<$Res> {
   @useResult
   $Res call(
       {String? docId,
-      String missionId,
+      int missionId,
       String title,
-      int point,
+      int exp,
       bool isReceived,
       DateTime? updatedAt});
 }
@@ -124,7 +124,7 @@ class __$$_MissionCopyWithImpl<$Res>
     Object? docId = freezed,
     Object? missionId = null,
     Object? title = null,
-    Object? point = null,
+    Object? exp = null,
     Object? isReceived = null,
     Object? updatedAt = freezed,
   }) {
@@ -136,14 +136,14 @@ class __$$_MissionCopyWithImpl<$Res>
       missionId: null == missionId
           ? _value.missionId
           : missionId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      point: null == point
-          ? _value.point
-          : point // ignore: cast_nullable_to_non_nullable
+      exp: null == exp
+          ? _value.exp
+          : exp // ignore: cast_nullable_to_non_nullable
               as int,
       isReceived: null == isReceived
           ? _value.isReceived
@@ -162,9 +162,9 @@ class __$$_MissionCopyWithImpl<$Res>
 class _$_Mission extends _Mission {
   _$_Mission(
       {this.docId,
-      required this.missionId,
+      this.missionId = 0,
       this.title = "",
-      this.point = 0,
+      this.exp = 0,
       this.isReceived = false,
       this.updatedAt})
       : super._();
@@ -175,7 +175,8 @@ class _$_Mission extends _Mission {
   @override
   final String? docId;
   @override
-  final String missionId;
+  @JsonKey()
+  final int missionId;
 //ミッションID
   @override
   @JsonKey()
@@ -183,7 +184,7 @@ class _$_Mission extends _Mission {
 //ミッションの名前
   @override
   @JsonKey()
-  final int point;
+  final int exp;
 //獲得スコア
   @override
   @JsonKey()
@@ -194,7 +195,7 @@ class _$_Mission extends _Mission {
 
   @override
   String toString() {
-    return 'Mission(docId: $docId, missionId: $missionId, title: $title, point: $point, isReceived: $isReceived, updatedAt: $updatedAt)';
+    return 'Mission(docId: $docId, missionId: $missionId, title: $title, exp: $exp, isReceived: $isReceived, updatedAt: $updatedAt)';
   }
 
   @override
@@ -206,7 +207,7 @@ class _$_Mission extends _Mission {
             (identical(other.missionId, missionId) ||
                 other.missionId == missionId) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.point, point) || other.point == point) &&
+            (identical(other.exp, exp) || other.exp == exp) &&
             (identical(other.isReceived, isReceived) ||
                 other.isReceived == isReceived) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -216,7 +217,7 @@ class _$_Mission extends _Mission {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, docId, missionId, title, point, isReceived, updatedAt);
+      runtimeType, docId, missionId, title, exp, isReceived, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -235,9 +236,9 @@ class _$_Mission extends _Mission {
 abstract class _Mission extends Mission {
   factory _Mission(
       {final String? docId,
-      required final String missionId,
+      final int missionId,
       final String title,
-      final int point,
+      final int exp,
       final bool isReceived,
       final DateTime? updatedAt}) = _$_Mission;
   _Mission._() : super._();
@@ -247,11 +248,11 @@ abstract class _Mission extends Mission {
   @override
   String? get docId;
   @override
-  String get missionId;
+  int get missionId;
   @override //ミッションID
   String get title;
   @override //ミッションの名前
-  int get point;
+  int get exp;
   @override //獲得スコア
   bool get isReceived;
   @override //受け取ったか？

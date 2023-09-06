@@ -6,7 +6,9 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 ///ログインエラーBar
 class LoginErrorBar extends ConsumerWidget {
   const LoginErrorBar({required this.errorText});
+
   final String errorText;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -46,8 +48,10 @@ class LoginErrorBar extends ConsumerWidget {
 ///設定タイトルBar
 class SettingTitleBar extends ConsumerWidget {
   const SettingTitleBar({required this.title, required this.onTap});
+
   final String title;
   final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
@@ -81,8 +85,10 @@ class SettingTitleBar extends ConsumerWidget {
 
 class SettingListBar extends ConsumerWidget {
   const SettingListBar({required this.title, required this.onTap});
+
   final String title;
   final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
@@ -125,12 +131,16 @@ class ProgressLineBar extends ConsumerWidget {
     required this.currentScore,
     required this.goalScore,
     required this.isUnit,
+    required this.borderRadius,
   });
+
   final double height;
   final double width;
   final bool isUnit;
   final int currentScore;
   final int goalScore;
+  final double borderRadius;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
@@ -139,7 +149,7 @@ class ProgressLineBar extends ConsumerWidget {
           height: height,
           width: width,
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
             child: LinearProgressIndicator(
               value: (goalScore != 0) ? currentScore / goalScore : 0.0,
               color: context.mainColor,
@@ -149,26 +159,30 @@ class ProgressLineBar extends ConsumerWidget {
         ),
         if (isUnit)
           Positioned(
-            right: 8,
+            right: width > context.width * 0.3 ? 8 : 4,
             child: Container(
               height: height,
               alignment: Alignment.center,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     "$currentScore",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.035,
+                      fontSize: width > context.width * 0.3
+                          ? context.width * 0.035
+                          : context.width * 0.03,
                     ),
                   ),
                   Text(
                     "/$goalScore",
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
-                        fontSize: context.width * 0.035),
+                        fontSize: width > context.width * 0.3
+                            ? context.width * 0.035
+                            : context.width * 0.03),
                   ),
                 ],
               ),
@@ -187,11 +201,13 @@ class ProgressRangeChart extends ConsumerWidget {
     required this.currentScore,
     required this.widget,
   });
+
   final double width;
   final double size;
   final int maxScore;
   final int currentScore;
   final Widget widget;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(

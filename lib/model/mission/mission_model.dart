@@ -47,6 +47,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
       final updatedMissions = _updateMissions(getMissions);
       state = state.copyWith(missions: updatedMissions);
       _saveMissions(updatedMissions);
+      print(updatedMissions.length);
     } catch (e, s) {
       print({'Error:_loadMissions', e, s});
     }
@@ -78,7 +79,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
           docId: mission.docId,
           missionId: mission.missionId,
           title: matchMission.title,
-          point: matchMission.point,
+          exp: matchMission.exp,
           isReceived: matchMission.isReceived,
           updatedAt: DateTime.now(),
         );

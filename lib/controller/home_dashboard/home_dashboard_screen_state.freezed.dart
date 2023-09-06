@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeDashboardScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
-  int get tabIndex => throw _privateConstructorUsedError; //タブ
   int get selectedXIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +30,7 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
           $Res Function(HomeDashboardScreenState) then) =
       _$HomeDashboardScreenStateCopyWithImpl<$Res, HomeDashboardScreenState>;
   @useResult
-  $Res call({bool isLoading, int tabIndex, int selectedXIndex});
+  $Res call({bool isLoading, int selectedXIndex});
 }
 
 /// @nodoc
@@ -49,7 +48,6 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
-    Object? tabIndex = null,
     Object? selectedXIndex = null,
   }) {
     return _then(_value.copyWith(
@@ -57,10 +55,6 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      tabIndex: null == tabIndex
-          ? _value.tabIndex
-          : tabIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       selectedXIndex: null == selectedXIndex
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
@@ -76,7 +70,7 @@ abstract class _$$_CreateCopyWith<$Res>
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, int tabIndex, int selectedXIndex});
+  $Res call({bool isLoading, int selectedXIndex});
 }
 
 /// @nodoc
@@ -90,7 +84,6 @@ class __$$_CreateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? tabIndex = null,
     Object? selectedXIndex = null,
   }) {
     return _then(_$_Create(
@@ -98,10 +91,6 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      tabIndex: null == tabIndex
-          ? _value.tabIndex
-          : tabIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       selectedXIndex: null == selectedXIndex
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
@@ -113,24 +102,18 @@ class __$$_CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create extends _Create {
-  _$_Create(
-      {this.isLoading = false, this.tabIndex = 0, this.selectedXIndex = -1})
-      : super._();
+  _$_Create({this.isLoading = false, this.selectedXIndex = -1}) : super._();
 
   @override
   @JsonKey()
   final bool isLoading;
   @override
   @JsonKey()
-  final int tabIndex;
-//タブ
-  @override
-  @JsonKey()
   final int selectedXIndex;
 
   @override
   String toString() {
-    return 'HomeDashboardScreenState(isLoading: $isLoading, tabIndex: $tabIndex, selectedXIndex: $selectedXIndex)';
+    return 'HomeDashboardScreenState(isLoading: $isLoading, selectedXIndex: $selectedXIndex)';
   }
 
   @override
@@ -140,15 +123,12 @@ class _$_Create extends _Create {
             other is _$_Create &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.tabIndex, tabIndex) ||
-                other.tabIndex == tabIndex) &&
             (identical(other.selectedXIndex, selectedXIndex) ||
                 other.selectedXIndex == selectedXIndex));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, tabIndex, selectedXIndex);
+  int get hashCode => Object.hash(runtimeType, isLoading, selectedXIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -158,17 +138,12 @@ class _$_Create extends _Create {
 }
 
 abstract class _Create extends HomeDashboardScreenState {
-  factory _Create(
-      {final bool isLoading,
-      final int tabIndex,
-      final int selectedXIndex}) = _$_Create;
+  factory _Create({final bool isLoading, final int selectedXIndex}) = _$_Create;
   _Create._() : super._();
 
   @override
   bool get isLoading;
   @override
-  int get tabIndex;
-  @override //タブ
   int get selectedXIndex;
   @override
   @JsonKey(ignore: true)

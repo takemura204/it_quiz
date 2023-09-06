@@ -52,7 +52,7 @@ class MissionController extends StateNotifier<MissionState> with LocatorMixin {
 
   ///受け取るボタン
   void tapMissionReceiveButton(Mission mission) {
-    ref.read(rankModelProvider.notifier).updateScore(mission.point);
+    ref.read(rankModelProvider.notifier).updateScore(mission.exp);
     ref.read(missionModelProvider.notifier).updateReceiveMission(mission);
   }
 }

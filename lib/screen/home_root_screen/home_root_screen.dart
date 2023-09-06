@@ -6,7 +6,6 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import '../../controller/auth/auth_controller.dart';
 import '../../controller/home_root/home_root_screen_controller.dart';
 import '../../controller/home_root/home_root_screen_state.dart';
-import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';

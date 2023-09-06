@@ -5,12 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button.dart';
-import 'package:kentei_quiz/view/modals/mission_modal.dart';
 
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
+import '../../view/mission/mission_widget.dart';
 import '../../view/modals/quiz_modal.dart';
 
 part 'home_quiz_view.dart';
@@ -41,27 +41,7 @@ class _Scaffold extends ConsumerWidget {
     final testQuiz = state.testQuiz;
     final weakQuiz = state.weakQuiz;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(I18n().titleStudy),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
-            child: IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (_) => const DailyMissionModal());
-              },
-              icon: Icon(
-                Icons.pending_actions_outlined,
-                size: 35,
-                color: context.mainColor,
-              ),
-            ),
-          ),
-        ],
-      ),
+      appBar: const _AppBar(),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -109,4 +89,35 @@ class _Scaffold extends ConsumerWidget {
       ),
     );
   }
+}
+
+class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const _AppBar();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return AppBar(
+      title: Text(I18n().titleStudy),
+      centerTitle: true,
+      actions: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
+          child: IconButton(
+            onPressed: () {
+              showDialog(
+                  context: context, builder: (_) => const DailyMissionWidget());
+            },
+            icon: Icon(
+              Icons.pending_actions_outlined,
+              size: 35,
+              color: context.mainColor,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

@@ -7,7 +7,6 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
 import '../../model/lang/initial_resource.dart';
-import '../dashboard_achievement_screen/dashboard_achievement_screen.dart';
 
 part 'home_dashboard_view.dart';
 
@@ -16,19 +15,9 @@ class HomeDashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabs = ref.watch(homeDashboardScreenProvider.notifier).tabs;
-    return DefaultTabController(
-      initialIndex: 0, // 最初に表示するタブ
-      length: tabs.length, // タブの数
-      child: const Scaffold(
-        appBar: _AppBar(),
-        body: TabBarView(
-          children: [
-            DashBoardAchievementScreen(),
-            DashBoardAnalyticsScreen(),
-          ],
-        ),
-      ),
+    return const Scaffold(
+      appBar: _AppBar(),
+      body: DashBoardAnalyticsScreen(),
     );
   }
 }
@@ -38,47 +27,12 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabs = ref.watch(homeDashboardScreenProvider.notifier).tabs;
     return AppBar(
       title: Text(I18n().titleDashboard),
-      bottom: TabBar(
-          onTap: (index) =>
-              ref.read(homeDashboardScreenProvider.notifier).tapTabBar(index),
-          labelColor: context.mainColor,
-          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
-          unselectedLabelColor: Colors.black45.withOpacity(0.3),
-          tabs: [
-            Tab(
-              child: Container(
-                width: context.width * 0.5,
-                alignment: Alignment.center,
-                child: Text(
-                  "${tabs[0]}",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.04),
-                ),
-              ),
-            ),
-            Tab(
-              child: Container(
-                width: context.width * 0.5,
-                alignment: Alignment.center,
-                child: Text(
-                  "${tabs[1]}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.04,
-                  ),
-                ),
-              ),
-            ),
-          ]),
-      shape: Border(bottom: BorderSide(color: context.mainColor, width: 0)),
+      centerTitle: true,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

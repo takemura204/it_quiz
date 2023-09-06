@@ -16,12 +16,7 @@ class HomeDashboardScreenController
   }
 
   final Ref ref;
-  final tabs = ["学習状況", "実績"];
 
   @override
   void initState() {}
-
-  void tapTabBar(int index) {
-    state = state.copyWith(tabIndex: index);
-  }
 }
