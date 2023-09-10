@@ -72,7 +72,7 @@ class ExpIcon extends ConsumerWidget {
               children: [
                 Container(
                   width: context.height * 0.05,
-                  height: context.height * 0.05,
+                  height: context.height * 0.055,
                   alignment: Alignment.bottomRight,
                   child: Text(
                     "$exp",

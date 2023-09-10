@@ -29,8 +29,11 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
+      elevation: 0,
       title: Text(I18n().titleDashboard),
       centerTitle: true,
+      leading: const RankWidget(),
+      leadingWidth: 125,
     );
   }
 

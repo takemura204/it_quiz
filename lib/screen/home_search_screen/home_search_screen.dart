@@ -11,6 +11,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../view/rank/rank_widget.dart';
 
 part 'home_search_view.dart';
 
@@ -77,6 +78,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(I18n().titleSearch),
       centerTitle: true,
+      leading: const RankWidget(),
+      leadingWidth: 125,
+      elevation: 0,
       actions: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),

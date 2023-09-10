@@ -90,13 +90,15 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
 
   void updateReceiveMission(Mission mission) {
     final missionId = mission.missionId;
+    print(missionId);
     final updatedMissions = state.missions.map((mission) {
       if (mission.missionId == missionId) {
-        return mission.copyWith(isReceived: false); // isReceivedをfalseに更新
+        return mission.copyWith(isReceived: true); // isReceivedをfalseに更新
       }
       return mission;
     }).toList();
     state = state.copyWith(missions: updatedMissions);
+    print(updatedMissions.where((x) => x.isReceived).toList());
     _saveMissions(updatedMissions); // missionsを端末に保存
   }
 

@@ -10,8 +10,6 @@ class _RankIcon extends ConsumerWidget {
     return Container(
       height: 50,
       width: 45,
-      color: Colors.grey.shade100,
-      margin: const EdgeInsets.symmetric(horizontal: 3, vertical: 3),
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
@@ -55,7 +53,7 @@ class _RankIcon extends ConsumerWidget {
                   ),
                 ),
               ),
-              const Gap(3),
+              const Gap(5),
             ],
           ),
         ],
@@ -71,8 +69,6 @@ class _RankStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final defaultRanks = ref.watch(rankModelProvider.notifier).defaultRanks;
-    final totalScore = rank.score + defaultRanks[rank.rankId].score;
     return Container(
       height: 40,
       width: 70,
@@ -87,21 +83,20 @@ class _RankStatus extends ConsumerWidget {
             children: [
               const Gap(3),
               Text(
-                "${totalScore * 10}",
+                "${rank.score % rank.levelUpScore * 10}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
                 ),
               ),
               Gap(1),
               Text(
-                "pt",
+                "/${rank.levelUpScore * 10}",
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
             ],
           ),
-          const Gap(4),
+          const Gap(2),
           ProgressLineBar(
             height: 8,
             width: 100,
@@ -110,6 +105,7 @@ class _RankStatus extends ConsumerWidget {
             isUnit: false,
             borderRadius: 5,
           ),
+          const Gap(2),
         ],
       ),
     );

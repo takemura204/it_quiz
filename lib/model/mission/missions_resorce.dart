@@ -17,7 +17,6 @@ extension MissionModelEx on MissionModel {
         missionId: 3,
         title: "今日の目標を達成する",
         exp: 15,
-        isReceived: true,
       );
 
   ///累計ストックバッジ一覧

@@ -10,6 +10,7 @@ import '../../model/lang/initial_resource.dart';
 import '../../view/bar.dart';
 import '../../view/button.dart';
 import '../../view/dialog.dart';
+import '../../view/rank/rank_widget.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
@@ -22,6 +23,10 @@ class HomeSettingScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),
+        centerTitle: true,
+        elevation: 0,
+        leading: const RankWidget(),
+        leadingWidth: 125,
       ),
       body: SingleChildScrollView(
         child: Column(

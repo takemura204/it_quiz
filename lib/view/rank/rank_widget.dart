@@ -29,6 +29,7 @@ class RankWidget extends ConsumerWidget {
     return Card(
       elevation: 0,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _RankIcon(rank: rank),
           const Gap(3),

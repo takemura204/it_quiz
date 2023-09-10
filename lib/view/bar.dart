@@ -143,6 +143,7 @@ class ProgressLineBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDone = currentScore >= goalScore;
     return Stack(
       children: [
         Container(
@@ -170,6 +171,7 @@ class ProgressLineBar extends ConsumerWidget {
                   Text(
                     "$currentScore",
                     style: TextStyle(
+                      color: isDone ? Colors.white : Colors.black54,
                       fontWeight: FontWeight.bold,
                       fontSize: width > context.width * 0.3
                           ? context.width * 0.035
@@ -179,6 +181,7 @@ class ProgressLineBar extends ConsumerWidget {
                   Text(
                     "/$goalScore",
                     style: TextStyle(
+                        color: isDone ? Colors.white : Colors.black54,
                         fontWeight: FontWeight.normal,
                         fontSize: width > context.width * 0.3
                             ? context.width * 0.035
