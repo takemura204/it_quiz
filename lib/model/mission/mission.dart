@@ -7,7 +7,7 @@ part 'mission.g.dart';
 class Mission with _$Mission {
   factory Mission({
     String? docId,
-    @Default(0) int missionId, //ミッションID
+    required final int missionId, //ミッションID
     @Default("") final String title, //ミッションの名前
     @Default(0) final int exp, //獲得スコア
     @Default(false) bool isReceived, //受け取ったか？

@@ -25,7 +25,7 @@ class PrimaryButton extends ConsumerWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: context.mainColor,
-          elevation: 2,
+          elevation: 1,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
           shape: const RoundedRectangleBorder(
@@ -86,7 +86,7 @@ class DefaultButton extends ConsumerWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          elevation: 2,
+          elevation: 1,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
           shape: const RoundedRectangleBorder(
@@ -153,7 +153,7 @@ class SecondaryButton extends ConsumerWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          elevation: 2,
+          elevation: 1,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
           shape: const RoundedRectangleBorder(
@@ -199,7 +199,7 @@ class DisabledButton extends ConsumerWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          elevation: 2,
+          elevation: 1,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
           shape: const RoundedRectangleBorder(
@@ -249,7 +249,7 @@ class DangerButton extends ConsumerWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          elevation: 4,
+          elevation: 1,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
           shape: const RoundedRectangleBorder(

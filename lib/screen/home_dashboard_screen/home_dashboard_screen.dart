@@ -7,6 +7,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
 import '../../model/lang/initial_resource.dart';
+import '../../view/rank/rank_widget.dart';
 
 part 'home_dashboard_view.dart';
 

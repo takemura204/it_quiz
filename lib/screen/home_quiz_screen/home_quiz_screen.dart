@@ -12,6 +12,7 @@ import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../view/mission/mission_widget.dart';
 import '../../view/modals/quiz_modal.dart';
+import '../../view/rank/rank_widget.dart';
 
 part 'home_quiz_view.dart';
 
@@ -97,6 +98,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
+      leading: const RankWidget(),
+      leadingWidth: 125,
       title: Text(I18n().titleStudy),
       centerTitle: true,
       actions: [

@@ -9,6 +9,8 @@ import '../../model/rank/rank.dart';
 import '../../model/rank/rank_model.dart';
 import '../bar.dart';
 
+part 'rank_view.dart';
+
 class RankWidget extends ConsumerWidget {
   const RankWidget();
 
@@ -25,103 +27,12 @@ class RankWidget extends ConsumerWidget {
     }
     final rank = state.rank!;
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Row(
         children: [
-          Container(
-            height: 40,
-            width: 40,
-            // color: Colors.grey.shade100,
-            color: Colors.green,
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      child: Transform(
-                        transform: Matrix4.identity()..scale(1.8, 0.6),
-                        alignment: Alignment.center,
-                        child: FaIcon(
-                          FontAwesomeIcons.crown,
-                          color: context.mainColor,
-                          size: 10,
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 20,
-                      child: Text(
-                        "${rank.level}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: context.mainColor,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                    Container(
-                      height: 10,
-                      child: Text(
-                        "LEVEL",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 10,
-                          color: context.mainColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          _RankIcon(rank: rank),
           const Gap(3),
-          Container(
-            height: 40,
-            width: 70,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${rank.score % rank.levelUpScore * 10}",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      "/${rank.levelUpScore * 10}",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 14),
-                    ),
-                  ],
-                ),
-                const Gap(5),
-                ProgressLineBar(
-                  height: 10,
-                  width: 100,
-                  currentScore: rank.score % rank.levelUpScore,
-                  goalScore: rank.levelUpScore,
-                  isUnit: false,
-                  borderRadius: 5,
-                ),
-              ],
-            ),
-          ),
+          _RankStatus(rank: rank),
         ],
       ),
     );

@@ -27,6 +27,8 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
 
           ///グループごとの進捗
           GroupProgress(),
+
+          RankScore(),
         ],
       ),
     );

@@ -11,7 +11,6 @@ import '../../model/mission/mission_model.dart';
 import '../bar.dart';
 import '../button.dart';
 import '../icon.dart';
-import '../icon_button.dart';
 
 ///クイズモーダル
 class DailyMissionWidget extends ConsumerWidget {
@@ -40,7 +39,7 @@ class DailyMissionWidget extends ConsumerWidget {
     final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
 
     return SimpleDialog(
-      insetPadding: EdgeInsets.all(context.width * 0.02),
+      insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.02),
       children: [
         Column(
@@ -107,6 +106,7 @@ class DailyMissionWidget extends ConsumerWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 }),
+            Gap(context.height * 0.02),
           ],
         ),
       ],
@@ -190,90 +190,66 @@ class _DailyMissionCard extends ConsumerWidget {
       height: context.height * 0.1,
       child: Row(
         children: [
-          Text(mission.exp.toString()),
-
           ///ミッションアイコン
           ExpIcon(exp: mission.exp, isCompleted: isDone && mission.isReceived),
-          Gap(context.width * 0.01),
+          Gap(context.width * 0.02),
 
           ///ミッション状況
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gap(context.width * 0.01),
-                const Spacer(),
-                Row(
-                  children: [
-                    ///ミッション内容
-                    Text(
-                      mission.title,
-                      style: TextStyle(
-                        fontSize: context.width * 0.035,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black45,
-                      ),
-                    ),
-                    const Spacer(),
-
-                    ///ランダムボタン
-                    if (!isDone) ...[
-                      if (isRandomIconButton)
-                        RandomIconButton(
-                          onPressed: randomIconButtonTap,
-                          isCheck: true,
-                        ),
-                    ],
-
-                    Gap(context.width * 0.03),
-                  ],
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(context.width * 0.01),
+              Text(
+                mission.title,
+                style: TextStyle(
+                  fontSize: context.width * 0.035,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black45,
                 ),
-                Gap(context.height * 0.01),
-                if (!isDone) ...[
-                  ///プログレスバー
-                  ProgressLineBar(
-                    height: context.height * 0.025,
-                    width: context.width * 0.75,
-                    currentScore: currentValue,
-                    goalScore: goalValue,
-                    isUnit: true,
-                    borderRadius: 10,
-                  ),
-                ],
-                if (isDone && !mission.isReceived) ...[
-                  Row(
-                    children: [
-                      const Spacer(),
-                      PrimaryButton(
-                          width: context.width * 0.3,
-                          height: context.height * 0.035,
-                          text: "受取",
-                          onPressed: () => ref
-                              .read(missionControllerProvider.notifier)
-                              .tapMissionReceiveButton(mission)),
-                      Gap(context.width * 0.02),
-                    ],
-                  ),
-                ],
-                if (isDone && mission.isReceived) ...[
-                  Row(
-                    children: [
-                      const Spacer(),
-                      DisabledButton(
-                        width: context.width * 0.3,
-                        height: context.height * 0.035,
-                        text: "受取済み",
-                      ),
-                      Gap(context.width * 0.02),
-                    ],
-                  ),
-
-                  // CompleteIcon(size: context.height * 0.075),
-                ],
-                const Spacer(),
-              ],
-            ),
+              ),
+              Gap(context.height * 0.01),
+              ProgressLineBar(
+                height: context.height * 0.02,
+                width: context.width * 0.5,
+                currentScore: currentValue,
+                goalScore: goalValue,
+                isUnit: true,
+                borderRadius: 8,
+              ),
+            ],
           ),
+          Gap(context.width * 0.02),
+          const Spacer(),
+
+          if (!isDone) ...[
+            DefaultButton(
+              width: context.width * 0.2,
+              height: context.height * 0.045,
+              text: "挑戦する",
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+          if (isDone && !mission.isReceived) ...[
+            PrimaryButton(
+                width: context.width * 0.2,
+                height: context.height * 0.045,
+                text: "受取",
+                onPressed: () => ref
+                    .read(missionControllerProvider.notifier)
+                    .tapMissionReceiveButton(mission)),
+          ],
+          if (isDone && mission.isReceived) ...[
+            DisabledButton(
+              width: context.width * 0.2,
+              height: context.height * 0.045,
+              text: "受取済み",
+            ),
+          ],
+          const Spacer(),
+          Gap(context.width * 0.01),
         ],
       ),
     );

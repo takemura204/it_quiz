@@ -47,7 +47,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
       final updatedMissions = _updateMissions(getMissions);
       state = state.copyWith(missions: updatedMissions);
       _saveMissions(updatedMissions);
-      print(updatedMissions.length);
+      print(updatedMissions[0].exp);
     } catch (e, s) {
       print({'Error:_loadMissions', e, s});
     }

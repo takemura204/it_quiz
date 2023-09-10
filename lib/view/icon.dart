@@ -15,48 +15,89 @@ class ExpIcon extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: context.height * 0.06,
-      height: context.height * 0.06,
+      width: context.height * 0.062,
+      height: context.height * 0.062,
       margin: EdgeInsets.symmetric(
           horizontal: context.width * 0.01, vertical: context.width * 0.01),
       child: Card(
         elevation: 1,
         color: Colors.grey.shade100,
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: Colors.white70,
-            width: 2,
+            color: context.mainColor,
+            width: 1,
           ),
         ),
         child: Stack(
           alignment: Alignment.center,
           children: [
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(),
-                Text(
-                  "EXP",
-                  style: TextStyle(
-                    color: context.mainColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.height * 0.02,
+                SizedBox(
+                  height: context.height * 0.045,
+                  width: context.height * 0.045,
+                  child: Card(
+                    elevation: 1,
+                    color: context.backgroundColor,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: context.mainColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(90),
+                    ),
+                    child: Container(
+                      height: context.height * 0.04,
+                      width: context.height * 0.04,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "EXP",
+                          style: TextStyle(
+                            color: context.mainColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.013,
+                          ),
+                          overflow: TextOverflow.fade,
+                        ),
+                      ),
+                    ),
                   ),
-                  overflow: TextOverflow.fade,
                 ),
-                const Spacer(),
               ],
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(),
                 Container(
+                  width: context.height * 0.05,
+                  height: context.height * 0.05,
+                  alignment: Alignment.bottomRight,
                   child: Text(
                     "$exp",
                     style: TextStyle(
-                      fontSize: context.height * 0.015,
+                      fontSize: context.height * 0.018,
                       fontWeight: FontWeight.bold,
                       color: context.mainColor,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(-1.0, -1.0),
+                          color: Colors.grey.shade100,
+                        ),
+                        Shadow(
+                          offset: const Offset(1.0, -1.0),
+                          color: Colors.grey.shade100,
+                        ),
+                        Shadow(
+                          offset: const Offset(1.0, 1.0),
+                          color: Colors.grey.shade100,
+                        ),
+                        Shadow(
+                          offset: const Offset(-1.0, 1.0),
+                          color: Colors.grey.shade100,
+                        ),
+                      ],
                     ),
                   ),
                 ),
