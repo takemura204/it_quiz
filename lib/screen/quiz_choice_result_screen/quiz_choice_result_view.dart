@@ -49,45 +49,14 @@ class _QuizResultView extends ConsumerWidget {
                 Expanded(
                   child: _QuizItemCard(index),
                 ),
-                GestureDetector(
-                  onTap: () => ref
-                      .read(quizChoiceScreenProvider.notifier)
-                      .tapCheckBox(index),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: context.width * 0.1,
-                    height: context.height * 0.1,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          const Spacer(),
-                          Text(
-                            "苦手",
-                            style: TextStyle(
-                              fontSize: context.width * 0.025,
-                              fontWeight: FontWeight.bold,
-                              color: quizList[index].isWeak
-                                  ? context.mainColor
-                                  : Colors.black26,
-                            ),
-                          ),
-                          Icon(
-                            quizList[index].isWeak
-                                ? Icons.check_box_outlined
-                                : Icons.check_box_outline_blank,
-                            size: context.width * 0.08,
-                            color: quizList[index].isWeak
-                                ? context.mainColor
-                                : Colors.black26,
-                          ),
-                          Gap(context.height * 0.01),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                CheckBoxIconButton(
+                    isCheck: quizList[index].isWeak,
+                    size: context.width * 0.1,
+                    onPressed: () {
+                      ref
+                          .read(quizChoiceScreenProvider.notifier)
+                          .tapCheckBox(index);
+                    }),
                 const Gap(5),
               ],
             ),

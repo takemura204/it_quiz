@@ -309,10 +309,12 @@ class SettingColorController extends StateNotifier<SettingColorState>
           selectedLabelStyle: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,
+            fontFamily: "NotoSans",
           ),
           unselectedLabelStyle: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,
+            fontFamily: "NotoSans",
           ),
           elevation: 1,
         ),
@@ -439,6 +441,7 @@ class SettingColorController extends StateNotifier<SettingColorState>
             color: getThemePrimaryColor(themeId),
             fontSize: 20,
             fontWeight: FontWeight.bold,
+            fontFamily: "NotoSans",
           ),
           shape: Border(
               bottom:

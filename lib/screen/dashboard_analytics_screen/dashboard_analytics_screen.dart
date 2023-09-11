@@ -19,6 +19,7 @@ part 'dashboard_analytics_view.dart';
 ///毎日の目標
 class DailyGoal extends ConsumerWidget {
   const DailyGoal();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);
@@ -61,7 +62,7 @@ class DailyGoal extends ConsumerWidget {
                   ProgressRangeChart(
                     width: context.height * 0.2,
                     size: context.height * 0.2,
-                    maxScore: dailyGoal,
+                    goalScore: dailyGoal,
                     currentScore: dailyScore,
                     widget: Column(
                       children: [
@@ -113,9 +114,110 @@ class DailyGoal extends ConsumerWidget {
   }
 }
 
+class DailyDashBoard extends ConsumerWidget {
+  const DailyDashBoard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.22,
+        ),
+      );
+    }
+    final dailyData = state.dailyData!;
+    final dailyScore = dailyData.quizData.length;
+    final dailyGoal = state.dailyGoal;
+    return Container(
+      width: context.width * 1,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            const _Title(
+                title: "今日の記録", subtitle: "", icon: Icons.flag_outlined),
+            Gap(context.height * 0.01),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Icon(
+                      Icons.live_help_outlined,
+                      color: context.mainColor,
+                      size: context.width * 0.1,
+                    ),
+                    Text(
+                      '問題数',
+                      style: TextStyle(
+                        color: context.mainColor,
+                        fontSize: context.height * 0.015,
+                      ),
+                    ),
+                    Gap(context.height * 0.005),
+                    Text(
+                      '256',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.height * 0.035,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '問',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.height * 0.018,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Icon(
+                      Icons.quiz,
+                      color: context.mainColor,
+                      size: context.width * 0.1,
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Icon(
+                      Icons.quiz,
+                      color: context.mainColor,
+                      size: context.width * 0.1,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Gap(context.height * 0.01),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// ダッシュボード(学習問題数)
 class Dashboard extends ConsumerWidget {
   const Dashboard();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);
@@ -413,6 +515,7 @@ class DashboardBarChart extends ConsumerWidget {
 
 class _BottomWeekTitles extends ConsumerWidget {
   const _BottomWeekTitles({required this.meta, required this.value});
+
   final TitleMeta meta;
   final double value;
 
@@ -449,6 +552,7 @@ class _BottomWeekTitles extends ConsumerWidget {
 
 class _BottomMonthTitles extends ConsumerWidget {
   const _BottomMonthTitles({required this.meta, required this.value});
+
   final TitleMeta meta;
   final double value;
 

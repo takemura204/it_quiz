@@ -1,8 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../screen/screen_argument.dart';
 import 'icon_button.dart';
@@ -510,12 +513,16 @@ class SearchTextField extends ConsumerWidget {
               contentPadding: EdgeInsets.symmetric(
                 horizontal: context.width * 0.02,
               ),
-              prefixIcon: const Icon(Icons.search_outlined),
+              prefixIcon: Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()..rotateY(math.pi),
+                child: const Icon(LineIcons.search),
+              ),
               suffixIcon: searchController.text.isNotEmpty
                   ? IconButton(
                       onPressed: onClear,
                       icon: const Icon(
-                        Icons.highlight_off,
+                        LineIcons.timesCircleAlt,
                         color: Colors.black45,
                       ),
                     )

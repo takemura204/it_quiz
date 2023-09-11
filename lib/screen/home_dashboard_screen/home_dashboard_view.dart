@@ -22,6 +22,8 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
           ///今日の目標
           DailyGoal(),
 
+          DailyDashBoard(),
+
           ///学習状況ダッシュボード
           Dashboard(),
 

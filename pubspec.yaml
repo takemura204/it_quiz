@@ -123,6 +123,9 @@ dependencies:
   flutter_gen: ^5.3.1
   bordered_text: ^2.0.0
 
+  #おしゃれなアイコンを使いたい。
+  line_icons: ^2.0.3
+
 
 dev_dependencies:
   flutter_test:

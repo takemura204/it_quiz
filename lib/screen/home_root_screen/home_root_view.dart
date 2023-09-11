@@ -33,23 +33,31 @@ class _BottomNavBar extends ConsumerWidget {
         iconSize: 35,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.list_alt_outlined),
-            activeIcon: const Icon(Icons.list_alt_outlined),
+            icon: const Icon(LineIcons.list),
+            activeIcon: const Icon(LineIcons.list),
             label: I18n().titleStudy,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.search_outlined),
-            activeIcon: const Icon(Icons.search_outlined),
+            icon: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()..rotateY(math.pi),
+              child: const Icon(LineIcons.search),
+            ),
+            activeIcon: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()..rotateY(math.pi),
+              child: const Icon(LineIcons.search),
+            ),
             label: I18n().titleSearch,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.insights_outlined),
-            activeIcon: const Icon(Icons.insights_outlined),
+            icon: const Icon(LineIcons.barChartAlt),
+            activeIcon: const Icon(LineIcons.barChartAlt),
             label: I18n().titleDashboard,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outline),
-            activeIcon: const Icon(Icons.person_outline),
+            icon: const Icon(LineIcons.user),
+            activeIcon: const Icon(LineIcons.user),
             label: I18n().titleSetting,
           ),
         ],

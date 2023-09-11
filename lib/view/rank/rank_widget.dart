@@ -93,7 +93,7 @@ class RankScore extends ConsumerWidget {
                   child: ProgressRangeChart(
                     width: context.height * 0.17,
                     size: context.height * 0.17,
-                    maxScore: rank.levelUpScore,
+                    goalScore: rank.levelUpScore,
                     currentScore: rank.score % rank.levelUpScore,
                     widget: Column(
                       children: [

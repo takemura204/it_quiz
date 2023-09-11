@@ -42,8 +42,8 @@ class _Title extends ConsumerWidget {
           Text(
             subtitle,
             style: TextStyle(
-                fontSize: context.height * 0.018,
-                fontWeight: FontWeight.normal),
+              fontSize: context.height * 0.018,
+            ),
           ),
         ],
       ),
@@ -214,8 +214,12 @@ class GroupProgress extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final group =
-        ref.read(quizModelProvider).quizList.map((quiz) => quiz.category).toSet().toList();
+    final group = ref
+        .read(quizModelProvider)
+        .quizList
+        .map((quiz) => quiz.category)
+        .toSet()
+        .toList();
     if (group.isEmpty) {
       return Center(
         child: SpinKitFadingCircle(
@@ -269,7 +273,8 @@ class _ProgressMeterCart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filterQuizList = ref
-        .read(quizModelProvider).quizList
+        .read(quizModelProvider)
+        .quizList
         .where((x) => x.category == groupName)
         .expand((quiz) => quiz.quizItemList)
         .toList();

@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/mission/mission_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../model/mission/mission.dart';
@@ -140,7 +141,7 @@ class _Title extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Icon(
-            icon,
+            LineIcons.clipboardWithCheck,
             color: context.mainColor,
             size: context.height * 0.04,
           ),
@@ -204,8 +205,7 @@ class _DailyMissionCard extends ConsumerWidget {
                 mission.title,
                 style: TextStyle(
                   fontSize: context.width * 0.035,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black45,
+                  color: Colors.black87,
                 ),
               ),
               Gap(context.height * 0.01),

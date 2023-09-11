@@ -27,7 +27,11 @@ class _QuizCard extends ConsumerWidget {
           title: Container(
             child: Text(
               quiz.title,
-              style: TextStyle(fontSize: context.width * 0.04),
+              style: TextStyle(
+                fontSize: context.width * 0.04,
+                fontWeight: FontWeight.bold,
+                // color: Colors.black87,
+              ),
             ),
           ),
           leading: Container(
@@ -55,7 +59,7 @@ class _QuizCard extends ConsumerWidget {
             ),
           ),
           trailing: Icon(
-            Icons.arrow_forward_ios,
+            LineIcons.angleRight,
             color: context.mainColor,
           ),
         ),
@@ -88,7 +92,7 @@ class _BottomQuizMenu extends ConsumerWidget {
                 width: context.width * 0.45,
                 height: context.height * 0.06,
                 text: "苦手克服",
-                icon: Icons.check_box_outlined,
+                icon: LineIcons.checkSquareAlt,
                 onPressed: weakQuiz.quizItemList.isEmpty
                     ? null
                     : () {
@@ -106,7 +110,7 @@ class _BottomQuizMenu extends ConsumerWidget {
               width: context.width * 0.45,
               height: context.height * 0.06,
               text: "${testQuiz.title}",
-              icon: Icons.drive_file_rename_outline,
+              icon: LineIcons.editAlt,
               onPressed: () {
                 ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
                 showDialog(
