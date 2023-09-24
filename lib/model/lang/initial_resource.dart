@@ -22,7 +22,7 @@ class I18n {
 
   String get titleSearch => "検索";
 
-  String get titleDashboard => "レポート";
+  String get titleDashboard => "スコア";
 
   String get titleSetting => "マイページ";
 

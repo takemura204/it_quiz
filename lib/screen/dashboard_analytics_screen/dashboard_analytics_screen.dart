@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/bar.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../controller/dashboard_analytics/bar_data_state.dart';
@@ -19,6 +20,11 @@ part 'dashboard_analytics_view.dart';
 ///毎日の目標
 class DailyGoal extends ConsumerWidget {
   const DailyGoal();
+
+  //目標
+  //正解した数
+  //苦手の数
+  //新しく覚えた数
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -114,8 +120,8 @@ class DailyGoal extends ConsumerWidget {
   }
 }
 
-class DailyDashBoard extends ConsumerWidget {
-  const DailyDashBoard();
+class DailyStatus extends ConsumerWidget {
+  const DailyStatus();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -148,7 +154,10 @@ class DailyDashBoard extends ConsumerWidget {
         child: Column(
           children: [
             const _Title(
-                title: "今日の記録", subtitle: "", icon: Icons.flag_outlined),
+              title: "今日の学習",
+              subtitle: "",
+              icon: LineIcons.fontAwesomeFlag,
+            ),
             Gap(context.height * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -156,7 +165,7 @@ class DailyDashBoard extends ConsumerWidget {
                 Column(
                   children: [
                     Icon(
-                      Icons.live_help_outlined,
+                      LineIcons.book,
                       color: context.mainColor,
                       size: context.width * 0.1,
                     ),
@@ -165,6 +174,7 @@ class DailyDashBoard extends ConsumerWidget {
                       style: TextStyle(
                         color: context.mainColor,
                         fontSize: context.height * 0.015,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Gap(context.height * 0.005),
@@ -181,7 +191,7 @@ class DailyDashBoard extends ConsumerWidget {
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: context.height * 0.018,
-                        fontWeight: FontWeight.normal,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -189,18 +199,68 @@ class DailyDashBoard extends ConsumerWidget {
                 Column(
                   children: [
                     Icon(
-                      Icons.quiz,
+                      LineIcons.clock,
                       color: context.mainColor,
                       size: context.width * 0.1,
+                    ),
+                    Text(
+                      '学習時間',
+                      style: TextStyle(
+                        color: context.mainColor,
+                        fontSize: context.height * 0.015,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Gap(context.height * 0.005),
+                    Text(
+                      '120',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.height * 0.035,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '分',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.height * 0.018,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
                 Column(
                   children: [
                     Icon(
-                      Icons.quiz,
+                      LineIcons.alternateFire,
                       color: context.mainColor,
                       size: context.width * 0.1,
+                    ),
+                    Text(
+                      'スコア',
+                      style: TextStyle(
+                        color: context.mainColor,
+                        fontSize: context.height * 0.015,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Gap(context.height * 0.005),
+                    Text(
+                      '80',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.height * 0.035,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'exp',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.height * 0.018,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),

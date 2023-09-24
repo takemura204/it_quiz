@@ -31,7 +31,7 @@ class RankWidget extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          _RankIcon(rank: rank),
+          // _RankIcon(rank: rank),
           const Gap(3),
           _RankStatus(rank: rank),
         ],

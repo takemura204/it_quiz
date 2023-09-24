@@ -39,12 +39,12 @@ class _AnsQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
     final isJudge = ref.watch(quizChoiceScreenProvider).isJudge;
     return SubstringHighlight(
-      text: quizList[quizIndex].question,
-      term: quizList[quizIndex].ans,
+      text: quizItemList[quizIndex].question,
+      term: quizItemList[quizIndex].ans,
       textStyle: TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w500,
@@ -69,13 +69,14 @@ class _QuizQuestion extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
 
     return SubstringHighlight(
-      text: quizList[quizIndex].question.replaceAll(
-          quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
-      term: quizList[quizIndex].ans,
+      text: quizItemList[quizIndex].question.replaceAll(
+          quizItemList[quizIndex].ans,
+          I18n().hideText(quizItemList[quizIndex].ans)),
+      term: quizItemList[quizIndex].ans,
       textStyle: TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w500,
@@ -98,7 +99,7 @@ class _QuizProgress extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex + 1;
 
     return Container(
@@ -114,7 +115,7 @@ class _QuizProgress extends ConsumerWidget {
             ),
           ),
           Text(
-            "/" + quizList.length.toString(),
+            "/" + quizItemList.length.toString(),
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.normal,
@@ -172,7 +173,7 @@ class _SelectChoice extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizChoiceScreenProvider).quizList;
+    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final isAnsView = ref.watch(quizChoiceScreenProvider).isAnsView;
     final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
     final choices = ref.watch(quizChoiceScreenProvider).choices;
@@ -182,7 +183,7 @@ class _SelectChoice extends ConsumerWidget {
           ? null
           : () => ref
               .read(quizChoiceScreenProvider.notifier)
-              .tapChoiceButton(choices[index]),
+              .tapAnsButton(choices[index]),
       child: Card(
         elevation: 1,
         shape: RoundedRectangleBorder(
@@ -201,11 +202,11 @@ class _SelectChoice extends ConsumerWidget {
             choices[index],
             style: isAnsView
                 ? TextStyle(
-                    fontWeight: (choices[index] == quizList[quizIndex].ans)
+                    fontWeight: (choices[index] == quizItemList[quizIndex].ans)
                         ? FontWeight.bold
                         : FontWeight.normal,
                     fontSize: context.width * 0.05,
-                    color: (choices[index] == quizList[quizIndex].ans)
+                    color: (choices[index] == quizItemList[quizIndex].ans)
                         ? Colors.green.withOpacity(0.7)
                         : Colors.red.withOpacity(0.7),
                   )

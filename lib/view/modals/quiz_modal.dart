@@ -24,20 +24,24 @@ class StudyQuizModal extends ConsumerWidget {
       contentPadding: EdgeInsets.all(context.width * 0.01),
       children: [
         Container(
-          height: context.height * 0.26,
           width: context.width * 0.8,
           child: Column(
             children: [
+              Gap(context.height * 0.005),
+
               ///タイトル
-              Row(
-                children: [
-                  _Title(quiz),
-                  const Spacer(),
-                  ClearButton(
-                    iconSize: context.height * 0.04,
-                    onPressed: () {},
-                  ),
-                ],
+              Container(
+                height: context.height * 0.05,
+                child: Row(
+                  children: [
+                    _Title(quiz),
+                    const Spacer(),
+                    ClearButton(
+                      iconSize: context.height * 0.04,
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
               ),
 
               const Divider(height: 1),
@@ -49,7 +53,6 @@ class StudyQuizModal extends ConsumerWidget {
 
               ///クイズ形式選択
               Container(
-                // color: Colors.redAccent,
                 height: context.height * 0.15,
                 alignment: Alignment.center,
                 child: Column(
@@ -97,6 +100,7 @@ class StudyQuizModal extends ConsumerWidget {
                   ],
                 ),
               ),
+              Gap(context.height * 0.005),
             ],
           ),
         ),
@@ -224,7 +228,7 @@ class _QuizResult extends ConsumerWidget {
               Text(
                 "前回のクイズ挑戦結果",
                 style: TextStyle(
-                    fontSize: context.width * 0.04,
+                    fontSize: context.width * 0.045,
                     fontWeight: FontWeight.bold),
               ),
               const Spacer(),
@@ -237,7 +241,7 @@ class _QuizResult extends ConsumerWidget {
               Text(
                 "${quiz.correctNum}",
                 style: TextStyle(
-                  fontSize: context.width * 0.05,
+                  fontSize: context.width * 0.045,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -246,7 +250,7 @@ class _QuizResult extends ConsumerWidget {
               Text(
                 "/" + quiz.quizItemList.length.toString(),
                 style: TextStyle(
-                  fontSize: context.width * 0.04,
+                  fontSize: context.width * 0.045,
                   fontWeight: FontWeight.bold,
                 ),
               ),

@@ -41,7 +41,7 @@ class PrimaryButton extends ConsumerWidget {
             if (icon != null)
               Icon(
                 icon,
-                size: height * 0.55,
+                size: height * 0.58,
               ),
             SizedBox(width: icon != null ? 6.0 : 0),
             Text(
@@ -108,7 +108,7 @@ class DefaultButton extends ConsumerWidget {
                 color: onPressed == null
                     ? Colors.grey.shade500
                     : context.mainColor,
-                size: height * 0.55,
+                size: height * 0.58,
               ),
             SizedBox(width: icon != null ? 6.0 : 0),
             Text(

@@ -160,7 +160,7 @@ class ProgressLineBar extends ConsumerWidget {
         ),
         if (isUnit)
           Positioned(
-            right: width > context.width * 0.3 ? 8 : 4,
+            right: width > context.width * 0.3 ? 8 : 3,
             child: Container(
               height: height,
               alignment: Alignment.center,
@@ -175,7 +175,7 @@ class ProgressLineBar extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: width > context.width * 0.3
                           ? context.width * 0.035
-                          : context.width * 0.03,
+                          : 10,
                     ),
                   ),
                   Text(
@@ -185,7 +185,7 @@ class ProgressLineBar extends ConsumerWidget {
                         fontWeight: FontWeight.normal,
                         fontSize: width > context.width * 0.3
                             ? context.width * 0.035
-                            : context.width * 0.03),
+                            : 10),
                   ),
                 ],
               ),

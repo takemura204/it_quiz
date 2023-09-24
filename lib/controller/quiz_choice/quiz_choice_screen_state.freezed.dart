@@ -22,7 +22,8 @@ mixin _$QuizChoiceScreenState {
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get quizItemIndex => throw _privateConstructorUsedError; //クイズアイテム番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
-  List<QuizItem> get quizList => throw _privateConstructorUsedError;
+  List<QuizItem> get quizItemList => throw _privateConstructorUsedError; //問題
+  Duration get duration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizChoiceScreenStateCopyWith<QuizChoiceScreenState> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       int quizIndex,
       int quizItemIndex,
       List<String> choices,
-      List<QuizItem> quizList});
+      List<QuizItem> quizItemList,
+      Duration duration});
 }
 
 /// @nodoc
@@ -65,7 +67,8 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
     Object? quizIndex = null,
     Object? quizItemIndex = null,
     Object? choices = null,
-    Object? quizList = null,
+    Object? quizItemList = null,
+    Object? duration = null,
   }) {
     return _then(_value.copyWith(
       isAnsView: null == isAnsView
@@ -92,10 +95,14 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
           ? _value.choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      quizList: null == quizList
-          ? _value.quizList
-          : quizList // ignore: cast_nullable_to_non_nullable
+      quizItemList: null == quizItemList
+          ? _value.quizItemList
+          : quizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItem>,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$_CreateCopyWith<$Res>
       int quizIndex,
       int quizItemIndex,
       List<String> choices,
-      List<QuizItem> quizList});
+      List<QuizItem> quizItemList,
+      Duration duration});
 }
 
 /// @nodoc
@@ -133,7 +141,8 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? quizIndex = null,
     Object? quizItemIndex = null,
     Object? choices = null,
-    Object? quizList = null,
+    Object? quizItemList = null,
+    Object? duration = null,
   }) {
     return _then(_$_Create(
       isAnsView: null == isAnsView
@@ -160,10 +169,14 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value._choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      quizList: null == quizList
-          ? _value._quizList
-          : quizList // ignore: cast_nullable_to_non_nullable
+      quizItemList: null == quizItemList
+          ? _value._quizItemList
+          : quizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItem>,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ));
   }
 }
@@ -178,9 +191,10 @@ class _$_Create extends _Create {
       this.quizIndex = 0,
       this.quizItemIndex = 0,
       final List<String> choices = const [],
-      final List<QuizItem> quizList = const []})
+      final List<QuizItem> quizItemList = const [],
+      this.duration = Duration.zero})
       : _choices = choices,
-        _quizList = quizList,
+        _quizItemList = quizItemList,
         super._();
 
   @override
@@ -213,19 +227,24 @@ class _$_Create extends _Create {
   }
 
 //選択肢
-  final List<QuizItem> _quizList;
+  final List<QuizItem> _quizItemList;
 //選択肢
   @override
   @JsonKey()
-  List<QuizItem> get quizList {
-    if (_quizList is EqualUnmodifiableListView) return _quizList;
+  List<QuizItem> get quizItemList {
+    if (_quizItemList is EqualUnmodifiableListView) return _quizItemList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_quizList);
+    return EqualUnmodifiableListView(_quizItemList);
   }
+
+//問題
+  @override
+  @JsonKey()
+  final Duration duration;
 
   @override
   String toString() {
-    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, choices: $choices, quizList: $quizList)';
+    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, choices: $choices, quizItemList: $quizItemList, duration: $duration)';
   }
 
   @override
@@ -243,7 +262,10 @@ class _$_Create extends _Create {
             (identical(other.quizItemIndex, quizItemIndex) ||
                 other.quizItemIndex == quizItemIndex) &&
             const DeepCollectionEquality().equals(other._choices, _choices) &&
-            const DeepCollectionEquality().equals(other._quizList, _quizList));
+            const DeepCollectionEquality()
+                .equals(other._quizItemList, _quizItemList) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @override
@@ -255,7 +277,8 @@ class _$_Create extends _Create {
       quizIndex,
       quizItemIndex,
       const DeepCollectionEquality().hash(_choices),
-      const DeepCollectionEquality().hash(_quizList));
+      const DeepCollectionEquality().hash(_quizItemList),
+      duration);
 
   @JsonKey(ignore: true)
   @override
@@ -272,7 +295,8 @@ abstract class _Create extends QuizChoiceScreenState {
       final int quizIndex,
       final int quizItemIndex,
       final List<String> choices,
-      final List<QuizItem> quizList}) = _$_Create;
+      final List<QuizItem> quizItemList,
+      final Duration duration}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -288,7 +312,9 @@ abstract class _Create extends QuizChoiceScreenState {
   @override //クイズアイテム番号
   List<String> get choices;
   @override //選択肢
-  List<QuizItem> get quizList;
+  List<QuizItem> get quizItemList;
+  @override //問題
+  Duration get duration;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

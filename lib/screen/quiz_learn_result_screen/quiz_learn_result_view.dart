@@ -8,11 +8,11 @@ class _QuizResultView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizLearnScreenProvider).quizList;
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: quizList.length,
+      itemCount: quizItemList.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
           child: Card(
@@ -47,7 +47,7 @@ class _QuizResultView extends ConsumerWidget {
                   child: _QuizItemCard(index),
                 ),
                 CheckBoxIconButton(
-                    isCheck: quizList[index].isWeak,
+                    isCheck: quizItemList[index].isWeak,
                     size: context.width * 0.1,
                     onPressed: () {
                       ref
@@ -71,14 +71,14 @@ class _QuizItemCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizLearnScreenProvider).quizList;
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(
           horizontal: context.width * 0.02, vertical: context.height * 0.02),
       child: SubstringHighlight(
-        text: quizList[index].question,
-        term: quizList[index].ans,
+        text: quizItemList[index].question,
+        term: quizItemList[index].ans,
         textStyle: TextStyle(
           color: Colors.black54,
           fontWeight: FontWeight.w500,

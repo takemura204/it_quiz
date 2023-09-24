@@ -69,9 +69,11 @@ class _RankStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final defaultRanks = ref.read(rankModelProvider.notifier).defaultRanks;
+    final totalScore = rank.score + defaultRanks[rank.rankId].score;
     return Container(
-      height: 40,
-      width: 70,
+      height: 50,
+      width: 110,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -81,31 +83,35 @@ class _RankStatus extends ConsumerWidget {
             textBaseline: TextBaseline.alphabetic,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Gap(3),
+              const Gap(2),
               Text(
-                "${rank.score % rank.levelUpScore * 10}",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Gap(1),
-              Text(
-                "/${rank.levelUpScore * 10}",
+                "Lv.${rank.level}",
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              const Spacer(),
+              Text(
+                "$totalScore",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              const Gap(1),
+              const Text(
+                "pt",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
               ),
             ],
           ),
           const Gap(2),
           ProgressLineBar(
-            height: 8,
-            width: 100,
+            height: 10,
+            width: 120,
             currentScore: rank.score % rank.levelUpScore,
             goalScore: rank.levelUpScore,
             isUnit: false,
             borderRadius: 5,
           ),
-          const Gap(2),
+          const Gap(6),
         ],
       ),
     );

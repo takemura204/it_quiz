@@ -162,7 +162,7 @@ class __$$_MissionCopyWithImpl<$Res>
 class _$_Mission extends _Mission {
   _$_Mission(
       {this.docId,
-      this.missionId = 0,
+      required this.missionId,
       this.title = "",
       this.exp = 0,
       this.isReceived = false,
@@ -175,7 +175,6 @@ class _$_Mission extends _Mission {
   @override
   final String? docId;
   @override
-  @JsonKey()
   final int missionId;
 //ミッションID
   @override
@@ -236,7 +235,7 @@ class _$_Mission extends _Mission {
 abstract class _Mission extends Mission {
   factory _Mission(
       {final String? docId,
-      final int missionId,
+      required final int missionId,
       final String title,
       final int exp,
       final bool isReceived,

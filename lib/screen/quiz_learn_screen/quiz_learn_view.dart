@@ -38,11 +38,11 @@ class _AnsQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex;
-    final quizList = ref.watch(quizLearnScreenProvider).quizList;
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
 
     return SubstringHighlight(
-      text: quizList[quizIndex].question,
-      term: quizList[quizIndex].ans,
+      text: quizItemList[quizIndex].question,
+      term: quizItemList[quizIndex].ans,
       textStyle: TextStyle(
         fontSize: context.width * 0.06,
         color: Colors.black54,
@@ -66,11 +66,12 @@ class _ConfirmQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex;
-    final quizList = ref.watch(quizLearnScreenProvider).quizList;
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return SubstringHighlight(
-      text: quizList[quizIndex].question.replaceAll(
-          quizList[quizIndex].ans, I18n().hideText(quizList[quizIndex].ans)),
-      term: quizList[quizIndex].ans,
+      text: quizItemList[quizIndex].question.replaceAll(
+          quizItemList[quizIndex].ans,
+          I18n().hideText(quizItemList[quizIndex].ans)),
+      term: quizItemList[quizIndex].ans,
       textStyle: TextStyle(
         fontSize: context.width * 0.06,
         color: Colors.black54,
@@ -93,7 +94,7 @@ class _QuizProgress extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex + 1;
-    final quizList = ref.watch(quizLearnScreenProvider).quizList;
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return Container(
       height: context.height * 0.05,
       child: Row(
@@ -107,7 +108,7 @@ class _QuizProgress extends ConsumerWidget {
             ),
           ),
           Text(
-            "/" + quizList.length.toString(),
+            "/" + quizItemList.length.toString(),
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.normal,
@@ -230,8 +231,8 @@ class _LapInfoBar extends ConsumerWidget {
                 ),
               ],
             ),
-            Row(
-              children: const [
+            const Row(
+              children: [
                 VerticalDivider(),
               ],
             ),
@@ -247,7 +248,7 @@ class _LapInfoBar extends ConsumerWidget {
                   child: AutoSizeText(
                     ref
                         .watch(quizLearnScreenProvider)
-                        .knowQuizList
+                        .knowQuizItemList
                         .length
                         .toString(),
                     style: context.texts.titleMedium
@@ -268,7 +269,7 @@ class _LapInfoBar extends ConsumerWidget {
                   child: AutoSizeText(
                     ref
                         .watch(quizLearnScreenProvider)
-                        .unKnowQuizList
+                        .unKnowQuizItemList
                         .length
                         .toString(),
                     style: context.texts.titleMedium

@@ -18,6 +18,7 @@ _$_Quiz _$$_QuizFromJson(Map<String, dynamic> json) => _$_Quiz(
       timeStamp: json['timeStamp'] == null
           ? null
           : DateTime.parse(json['timeStamp'] as String),
+      duration: Duration(microseconds: json['duration'] as int),
     );
 
 Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
       'quizItemList': instance.quizItemList,
       'correctNum': instance.correctNum,
       'timeStamp': instance.timeStamp?.toIso8601String(),
+      'duration': instance.duration.inMicroseconds,
     };

@@ -14,19 +14,19 @@ import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
 part 'quiz_choice_view.dart';
 
 class QuizChoiceScreen extends ConsumerWidget {
-  const QuizChoiceScreen(this.item);
+  const QuizChoiceScreen(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
         quizChoiceScreenProvider.overrideWith(
-          (ref) => QuizChoiceScreenController(ref: ref, quiz: item),
+          (ref) => QuizChoiceScreenController(ref: ref, quiz: quiz),
         ),
       ],
-      child: _Scaffold(item),
+      child: _Scaffold(quiz),
     );
   }
 }
@@ -95,9 +95,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body(this.item);
+  const _Body(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -106,7 +106,7 @@ class _Body extends ConsumerWidget {
         Column(
           children: [
             ///問題形式タイトル
-            QuizStyleTitle(item),
+            QuizStyleTitle(quiz),
             const Spacer(),
 
             ///問題画面
@@ -127,10 +127,10 @@ class _Body extends ConsumerWidget {
                 child: Column(
                   children: [
                     ///問題文
-                    _Question(item),
+                    _Question(quiz),
 
                     ///進捗状況
-                    _QuizProgress(item),
+                    _QuizProgress(quiz),
                   ],
                 ),
               ),
@@ -138,7 +138,7 @@ class _Body extends ConsumerWidget {
             const Spacer(),
 
             ///選択肢
-            _SelectAnswer(item),
+            _SelectAnswer(quiz),
 
             ///広告
             Container(
@@ -157,7 +157,7 @@ class _Body extends ConsumerWidget {
             )
           ],
         ),
-        _JudgeIcon(item),
+        _JudgeIcon(quiz),
       ],
     );
   }

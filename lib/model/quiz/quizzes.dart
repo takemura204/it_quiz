@@ -39,6 +39,7 @@ const initDailyQuiz = Quiz(
   quizItemList: [],
   correctNum: 0,
   timeStamp: null,
+  duration: Duration.zero,
 );
 
 ///苦手克服
@@ -50,6 +51,7 @@ const initWeakQuiz = Quiz(
   quizItemList: [],
   correctNum: 0,
   timeStamp: null,
+  duration: Duration.zero,
 );
 
 ///力だめし
@@ -61,4 +63,5 @@ const initTestQuiz = Quiz(
   quizItemList: [],
   correctNum: 0,
   timeStamp: null,
+  duration: Duration.zero,
 );

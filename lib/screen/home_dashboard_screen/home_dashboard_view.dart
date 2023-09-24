@@ -1,7 +1,7 @@
 part of 'home_dashboard_screen.dart';
 
-class DashBoardAnalyticsScreen extends ConsumerWidget {
-  const DashBoardAnalyticsScreen();
+class _Body extends ConsumerWidget {
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,13 +19,14 @@ class DashBoardAnalyticsScreen extends ConsumerWidget {
         children: [
           Gap(5),
 
-          ///今日の目標
-          DailyGoal(),
-
-          DailyDashBoard(),
+          ///
+          DailyStatus(),
 
           ///学習状況ダッシュボード
           Dashboard(),
+
+          ///今日の目標
+          DailyGoal(),
 
           ///グループごとの進捗
           GroupProgress(),

@@ -15,6 +15,7 @@ class QuizChoiceScreenState with _$QuizChoiceScreenState {
     @Default(0) final int quizIndex, //問題番号
     @Default(0) final int quizItemIndex, //クイズアイテム番号
     @Default([]) final List<String> choices, //選択肢
-    @Default([]) final List<QuizItem> quizList, //問題
+    @Default([]) final List<QuizItem> quizItemList, //問題
+    @Default(Duration.zero) final Duration duration, // 所要時間
   }) = _Create;
 }

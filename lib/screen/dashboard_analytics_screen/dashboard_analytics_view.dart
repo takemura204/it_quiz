@@ -3,9 +3,11 @@ part of 'dashboard_analytics_screen.dart';
 class _Title extends ConsumerWidget {
   const _Title(
       {required this.title, required this.subtitle, required this.icon});
+
   final String title;
   final String subtitle;
   final IconData icon;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -25,16 +27,16 @@ class _Title extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Icon(
-            icon,
-            color: context.mainColor,
-            size: context.height * 0.04,
-          ),
+          // Icon(
+          //   icon,
+          //   color: context.mainColor,
+          //   size: context.height * 0.04,
+          // ),
           Gap(context.width * 0.01),
           Text(
             title,
             style: TextStyle(
-                fontSize: context.height * 0.024,
+                fontSize: context.height * 0.023,
                 color: context.mainColor,
                 fontWeight: FontWeight.bold),
           ),
@@ -54,6 +56,7 @@ class _Title extends ConsumerWidget {
 ///今日のメッセージ
 class _DailyMessage extends ConsumerWidget {
   const _DailyMessage();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -98,6 +101,7 @@ class _DailyMessage extends ConsumerWidget {
 ///[週/月]の選択
 class _DashBoardSelectPeriod extends ConsumerWidget {
   const _DashBoardSelectPeriod();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardAnalyticsProvider);
@@ -269,7 +273,9 @@ class GroupProgress extends ConsumerWidget {
 ///グループごとの進捗状況
 class _ProgressMeterCart extends ConsumerWidget {
   const _ProgressMeterCart({required this.groupName});
+
   final String groupName;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filterQuizList = ref

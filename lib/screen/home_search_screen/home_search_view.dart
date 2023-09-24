@@ -165,10 +165,14 @@ class _NotFindQuizItem extends HookConsumerWidget {
           child: Column(
             children: [
               Gap(context.height * 0.02),
-              Icon(
-                Icons.search_outlined,
-                size: context.height * 0.2,
-                color: Colors.grey.withOpacity(0.3),
+              Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()..rotateY(math.pi),
+                child: Icon(
+                  LineIcons.search,
+                  size: context.height * 0.2,
+                  color: Colors.grey.withOpacity(0.3),
+                ),
               ),
               Gap(context.height * 0.01),
               Center(
@@ -216,8 +220,8 @@ class _SavedButton extends HookConsumerWidget {
               ),
               Icon(
                 quiz[index].isSaved
-                    ? Icons.bookmark_outlined
-                    : Icons.bookmark_border_outlined,
+                    ? Icons.bookmark_sharp
+                    : Icons.bookmark_border_sharp,
                 size: context.width * 0.08,
                 color: quiz[index].isSaved ? context.mainColor : Colors.black26,
               ),

@@ -11,6 +11,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz1,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 2,
@@ -20,6 +21,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz2,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 3,
@@ -29,6 +31,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz3,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 4,
@@ -38,6 +41,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz1,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 5,
@@ -47,6 +51,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz2,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 6,
@@ -56,6 +61,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz3,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 7,
@@ -65,6 +71,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz1,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 8,
@@ -74,6 +81,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz2,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 9,
@@ -83,6 +91,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz3,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 10,
@@ -92,6 +101,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz1,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
         Quiz(
           id: 11,
@@ -101,6 +111,7 @@ extension QuizModelEx on QuizModel {
           quizItemList: quiz2,
           correctNum: 0,
           timeStamp: null,
+          duration: Duration.zero,
         ),
       ];
 
@@ -113,6 +124,7 @@ extension QuizModelEx on QuizModel {
         quizItemList: [],
         correctNum: 0,
         timeStamp: null,
+        duration: Duration.zero,
       );
 
   ///苦手克服
@@ -124,6 +136,7 @@ extension QuizModelEx on QuizModel {
         quizItemList: [],
         correctNum: 0,
         timeStamp: null,
+        duration: Duration.zero,
       );
 
   ///力だめし
@@ -135,5 +148,6 @@ extension QuizModelEx on QuizModel {
         quizItemList: [],
         correctNum: 0,
         timeStamp: null,
+        duration: Duration.zero,
       );
 }
