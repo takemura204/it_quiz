@@ -11,8 +11,9 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
-import '../../view/mission/mission_widget.dart';
-import '../../view/modals/quiz_modal.dart';
+import '../../view/modals/study_modal.dart';
+import '../../view/modals/test_modal.dart';
+import '../screen_argument.dart';
 
 part 'home_quiz_view.dart';
 
@@ -108,8 +109,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
           child: IconButton(
             onPressed: () {
-              showDialog(
-                  context: context, builder: (_) => const DailyMissionWidget());
+              context.showScreen(
+                const QuizHistoryScreenArguments().generateRoute(),
+              );
             },
             icon: Icon(
               LineIcons.history,

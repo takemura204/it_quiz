@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
@@ -164,6 +162,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         quizItemList: quizItemList,
       );
       _updateQuiz();
+      _updateHistoryQuiz();
     }
     //まだ問題が続蹴られる時
     else {
@@ -185,7 +184,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       choices: quizItemList[index].choices,
     );
     state = state.copyWith(quizItemList: quizItemList);
-
     _updateQuiz();
   }
 
@@ -198,12 +196,32 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   void _updateQuiz() {
     final quizItemList = state.quizItemList;
     final duration = state.duration;
+    final studyType = ref.read(quizModelProvider).studyType;
     final updateQuiz = quiz.copyWith(
       duration: duration,
       quizItemList: quizItemList,
       timeStamp: DateTime.now(),
+      studyType: studyType,
     );
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
+  }
+
+  void _updateHistoryQuiz() {
+    final quizItemList = state.quizItemList;
+    final duration = state.duration;
+    final studyType = ref.read(quizModelProvider).studyType;
+    final correctNum =
+        quizItemList.where((x) => x.isJudge == true).toList().length;
+    final isCompleted = quizItemList.length == correctNum;
+    final updateQuiz = quiz.copyWith(
+      duration: duration,
+      quizItemList: quizItemList,
+      correctNum: correctNum,
+      isCompleted: isCompleted,
+      timeStamp: DateTime.now(),
+      studyType: studyType,
+    );
+    ref.read(quizModelProvider.notifier).updateHistoryQuiz(updateQuiz);
   }
 
   ///クリアボタン

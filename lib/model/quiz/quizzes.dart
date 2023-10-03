@@ -10,12 +10,14 @@ part 'quizzes.g.dart';
 class Quizzes with _$Quizzes {
   factory Quizzes({
     @Default([]) final List<Quiz> quizList, //クイズ一覧
+    @Default([]) final List<Quiz> historyQuizList, //学習したクイズリスト一覧
     @Default([]) final List<QuizItem> quizItemList,
     @Default(initDailyQuiz) Quiz dailyQuiz, //今日のクイズ
     @Default(initWeakQuiz) Quiz weakQuiz, //苦手克服
     @Default(initTestQuiz) Quiz testQuiz, //テストクイズ
     @Default(0) final int selectQuizIndex, //選択したクイズ
     @Default(QuizType.study) final QuizType quizType, //クイズタイプ
+    @Default(StudyType.learn) final StudyType studyType, //クイズタイプ
   }) = _Quizzes;
 
   Quizzes._();
@@ -40,6 +42,7 @@ const initDailyQuiz = Quiz(
   correctNum: 0,
   timeStamp: null,
   duration: Duration.zero,
+  studyType: StudyType.learn,
 );
 
 ///苦手克服
@@ -52,6 +55,7 @@ const initWeakQuiz = Quiz(
   correctNum: 0,
   timeStamp: null,
   duration: Duration.zero,
+  studyType: StudyType.learn,
 );
 
 ///力だめし
@@ -64,4 +68,5 @@ const initTestQuiz = Quiz(
   correctNum: 0,
   timeStamp: null,
   duration: Duration.zero,
+  studyType: StudyType.learn,
 );

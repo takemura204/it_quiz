@@ -12,6 +12,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 2,
@@ -22,6 +23,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 3,
@@ -32,6 +34,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 4,
@@ -42,6 +45,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 5,
@@ -52,6 +56,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 6,
@@ -62,6 +67,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 7,
@@ -72,6 +78,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 8,
@@ -82,6 +89,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 9,
@@ -92,6 +100,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 10,
@@ -102,6 +111,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
         Quiz(
           id: 11,
@@ -112,6 +122,7 @@ extension QuizModelEx on QuizModel {
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
+          studyType: StudyType.learn,
         ),
       ];
 
@@ -125,6 +136,7 @@ extension QuizModelEx on QuizModel {
         correctNum: 0,
         timeStamp: null,
         duration: Duration.zero,
+        studyType: StudyType.learn,
       );
 
   ///苦手克服
@@ -137,6 +149,7 @@ extension QuizModelEx on QuizModel {
         correctNum: 0,
         timeStamp: null,
         duration: Duration.zero,
+        studyType: StudyType.learn,
       );
 
   ///力だめし
@@ -149,5 +162,6 @@ extension QuizModelEx on QuizModel {
         correctNum: 0,
         timeStamp: null,
         duration: Duration.zero,
+        studyType: StudyType.learn,
       );
 }

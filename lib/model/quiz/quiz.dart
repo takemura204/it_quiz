@@ -17,7 +17,13 @@ class Quiz with _$Quiz {
     required final int correctNum, //正解数
     required final DateTime? timeStamp, //挑戦日
     required final Duration duration, // 所要時間
+    required final StudyType studyType,
   }) = _Quiz;
 
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
+}
+
+enum StudyType {
+  learn,
+  choice,
 }

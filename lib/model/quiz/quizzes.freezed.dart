@@ -21,12 +21,15 @@ Quizzes _$QuizzesFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Quizzes {
   List<Quiz> get quizList => throw _privateConstructorUsedError; //クイズ一覧
+  List<Quiz> get historyQuizList =>
+      throw _privateConstructorUsedError; //学習したクイズリスト一覧
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   Quiz get dailyQuiz => throw _privateConstructorUsedError; //今日のクイズ
   Quiz get weakQuiz => throw _privateConstructorUsedError; //苦手克服
   Quiz get testQuiz => throw _privateConstructorUsedError; //テストクイズ
   int get selectQuizIndex => throw _privateConstructorUsedError; //選択したクイズ
-  QuizType get quizType => throw _privateConstructorUsedError;
+  QuizType get quizType => throw _privateConstructorUsedError; //クイズタイプ
+  StudyType get studyType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,12 +43,14 @@ abstract class $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Quiz> quizList,
+      List<Quiz> historyQuizList,
       List<QuizItem> quizItemList,
       Quiz dailyQuiz,
       Quiz weakQuiz,
       Quiz testQuiz,
       int selectQuizIndex,
-      QuizType quizType});
+      QuizType quizType,
+      StudyType studyType});
 
   $QuizCopyWith<$Res> get dailyQuiz;
   $QuizCopyWith<$Res> get weakQuiz;
@@ -66,17 +71,23 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
   @override
   $Res call({
     Object? quizList = null,
+    Object? historyQuizList = null,
     Object? quizItemList = null,
     Object? dailyQuiz = null,
     Object? weakQuiz = null,
     Object? testQuiz = null,
     Object? selectQuizIndex = null,
     Object? quizType = null,
+    Object? studyType = null,
   }) {
     return _then(_value.copyWith(
       quizList: null == quizList
           ? _value.quizList
           : quizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      historyQuizList: null == historyQuizList
+          ? _value.historyQuizList
+          : historyQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
       quizItemList: null == quizItemList
           ? _value.quizItemList
@@ -102,6 +113,10 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
           ? _value.quizType
           : quizType // ignore: cast_nullable_to_non_nullable
               as QuizType,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
     ) as $Val);
   }
 
@@ -139,12 +154,14 @@ abstract class _$$_QuizzesCopyWith<$Res> implements $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Quiz> quizList,
+      List<Quiz> historyQuizList,
       List<QuizItem> quizItemList,
       Quiz dailyQuiz,
       Quiz weakQuiz,
       Quiz testQuiz,
       int selectQuizIndex,
-      QuizType quizType});
+      QuizType quizType,
+      StudyType studyType});
 
   @override
   $QuizCopyWith<$Res> get dailyQuiz;
@@ -165,17 +182,23 @@ class __$$_QuizzesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? quizList = null,
+    Object? historyQuizList = null,
     Object? quizItemList = null,
     Object? dailyQuiz = null,
     Object? weakQuiz = null,
     Object? testQuiz = null,
     Object? selectQuizIndex = null,
     Object? quizType = null,
+    Object? studyType = null,
   }) {
     return _then(_$_Quizzes(
       quizList: null == quizList
           ? _value._quizList
           : quizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      historyQuizList: null == historyQuizList
+          ? _value._historyQuizList
+          : historyQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
       quizItemList: null == quizItemList
           ? _value._quizItemList
@@ -201,6 +224,10 @@ class __$$_QuizzesCopyWithImpl<$Res>
           ? _value.quizType
           : quizType // ignore: cast_nullable_to_non_nullable
               as QuizType,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
     ));
   }
 }
@@ -210,13 +237,16 @@ class __$$_QuizzesCopyWithImpl<$Res>
 class _$_Quizzes extends _Quizzes {
   _$_Quizzes(
       {final List<Quiz> quizList = const [],
+      final List<Quiz> historyQuizList = const [],
       final List<QuizItem> quizItemList = const [],
       this.dailyQuiz = initDailyQuiz,
       this.weakQuiz = initWeakQuiz,
       this.testQuiz = initTestQuiz,
       this.selectQuizIndex = 0,
-      this.quizType = QuizType.study})
+      this.quizType = QuizType.study,
+      this.studyType = StudyType.learn})
       : _quizList = quizList,
+        _historyQuizList = historyQuizList,
         _quizItemList = quizItemList,
         super._();
 
@@ -233,8 +263,19 @@ class _$_Quizzes extends _Quizzes {
   }
 
 //クイズ一覧
-  final List<QuizItem> _quizItemList;
+  final List<Quiz> _historyQuizList;
 //クイズ一覧
+  @override
+  @JsonKey()
+  List<Quiz> get historyQuizList {
+    if (_historyQuizList is EqualUnmodifiableListView) return _historyQuizList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_historyQuizList);
+  }
+
+//学習したクイズリスト一覧
+  final List<QuizItem> _quizItemList;
+//学習したクイズリスト一覧
   @override
   @JsonKey()
   List<QuizItem> get quizItemList {
@@ -262,10 +303,14 @@ class _$_Quizzes extends _Quizzes {
   @override
   @JsonKey()
   final QuizType quizType;
+//クイズタイプ
+  @override
+  @JsonKey()
+  final StudyType studyType;
 
   @override
   String toString() {
-    return 'Quizzes(quizList: $quizList, quizItemList: $quizItemList, dailyQuiz: $dailyQuiz, weakQuiz: $weakQuiz, testQuiz: $testQuiz, selectQuizIndex: $selectQuizIndex, quizType: $quizType)';
+    return 'Quizzes(quizList: $quizList, historyQuizList: $historyQuizList, quizItemList: $quizItemList, dailyQuiz: $dailyQuiz, weakQuiz: $weakQuiz, testQuiz: $testQuiz, selectQuizIndex: $selectQuizIndex, quizType: $quizType, studyType: $studyType)';
   }
 
   @override
@@ -274,6 +319,8 @@ class _$_Quizzes extends _Quizzes {
         (other.runtimeType == runtimeType &&
             other is _$_Quizzes &&
             const DeepCollectionEquality().equals(other._quizList, _quizList) &&
+            const DeepCollectionEquality()
+                .equals(other._historyQuizList, _historyQuizList) &&
             const DeepCollectionEquality()
                 .equals(other._quizItemList, _quizItemList) &&
             (identical(other.dailyQuiz, dailyQuiz) ||
@@ -285,7 +332,9 @@ class _$_Quizzes extends _Quizzes {
             (identical(other.selectQuizIndex, selectQuizIndex) ||
                 other.selectQuizIndex == selectQuizIndex) &&
             (identical(other.quizType, quizType) ||
-                other.quizType == quizType));
+                other.quizType == quizType) &&
+            (identical(other.studyType, studyType) ||
+                other.studyType == studyType));
   }
 
   @JsonKey(ignore: true)
@@ -293,12 +342,14 @@ class _$_Quizzes extends _Quizzes {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_quizList),
+      const DeepCollectionEquality().hash(_historyQuizList),
       const DeepCollectionEquality().hash(_quizItemList),
       dailyQuiz,
       weakQuiz,
       testQuiz,
       selectQuizIndex,
-      quizType);
+      quizType,
+      studyType);
 
   @JsonKey(ignore: true)
   @override
@@ -317,12 +368,14 @@ class _$_Quizzes extends _Quizzes {
 abstract class _Quizzes extends Quizzes {
   factory _Quizzes(
       {final List<Quiz> quizList,
+      final List<Quiz> historyQuizList,
       final List<QuizItem> quizItemList,
       final Quiz dailyQuiz,
       final Quiz weakQuiz,
       final Quiz testQuiz,
       final int selectQuizIndex,
-      final QuizType quizType}) = _$_Quizzes;
+      final QuizType quizType,
+      final StudyType studyType}) = _$_Quizzes;
   _Quizzes._() : super._();
 
   factory _Quizzes.fromJson(Map<String, dynamic> json) = _$_Quizzes.fromJson;
@@ -330,6 +383,8 @@ abstract class _Quizzes extends Quizzes {
   @override
   List<Quiz> get quizList;
   @override //クイズ一覧
+  List<Quiz> get historyQuizList;
+  @override //学習したクイズリスト一覧
   List<QuizItem> get quizItemList;
   @override
   Quiz get dailyQuiz;
@@ -341,6 +396,8 @@ abstract class _Quizzes extends Quizzes {
   int get selectQuizIndex;
   @override //選択したクイズ
   QuizType get quizType;
+  @override //クイズタイプ
+  StudyType get studyType;
   @override
   @JsonKey(ignore: true)
   _$$_QuizzesCopyWith<_$_Quizzes> get copyWith =>

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kentei_quiz/screen/account_login_screen/account_login_screen.dart';
 import 'package:kentei_quiz/screen/account_profile_screen/account_profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
+import 'package:kentei_quiz/screen/quiz_history_screen/quiz_history_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 
@@ -60,6 +61,20 @@ class QuizChoiceScreenArguments
               secondaryAnimation,
               child);
         },
+      );
+}
+
+class QuizHistoryScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const QuizHistoryScreenArguments();
+
+  @override
+  String get screenNameFormat => "/quiz_history";
+
+  @override
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => const QuizHistoryScreen(),
       );
 }
 

@@ -23,7 +23,8 @@ mixin _$QuizChoiceScreenState {
   int get quizItemIndex => throw _privateConstructorUsedError; //クイズアイテム番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError; //問題
-  Duration get duration => throw _privateConstructorUsedError;
+  Duration get duration => throw _privateConstructorUsedError; // 所要時間
+  StudyType get studyType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizChoiceScreenStateCopyWith<QuizChoiceScreenState> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       int quizItemIndex,
       List<String> choices,
       List<QuizItem> quizItemList,
-      Duration duration});
+      Duration duration,
+      StudyType studyType});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
     Object? choices = null,
     Object? quizItemList = null,
     Object? duration = null,
+    Object? studyType = null,
   }) {
     return _then(_value.copyWith(
       isAnsView: null == isAnsView
@@ -103,6 +106,10 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$_CreateCopyWith<$Res>
       int quizItemIndex,
       List<String> choices,
       List<QuizItem> quizItemList,
-      Duration duration});
+      Duration duration,
+      StudyType studyType});
 }
 
 /// @nodoc
@@ -143,6 +151,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? choices = null,
     Object? quizItemList = null,
     Object? duration = null,
+    Object? studyType = null,
   }) {
     return _then(_$_Create(
       isAnsView: null == isAnsView
@@ -177,6 +186,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
     ));
   }
 }
@@ -192,7 +205,8 @@ class _$_Create extends _Create {
       this.quizItemIndex = 0,
       final List<String> choices = const [],
       final List<QuizItem> quizItemList = const [],
-      this.duration = Duration.zero})
+      this.duration = Duration.zero,
+      this.studyType = StudyType.learn})
       : _choices = choices,
         _quizItemList = quizItemList,
         super._();
@@ -241,10 +255,14 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final Duration duration;
+// 所要時間
+  @override
+  @JsonKey()
+  final StudyType studyType;
 
   @override
   String toString() {
-    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, choices: $choices, quizItemList: $quizItemList, duration: $duration)';
+    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, choices: $choices, quizItemList: $quizItemList, duration: $duration, studyType: $studyType)';
   }
 
   @override
@@ -265,7 +283,9 @@ class _$_Create extends _Create {
             const DeepCollectionEquality()
                 .equals(other._quizItemList, _quizItemList) &&
             (identical(other.duration, duration) ||
-                other.duration == duration));
+                other.duration == duration) &&
+            (identical(other.studyType, studyType) ||
+                other.studyType == studyType));
   }
 
   @override
@@ -278,7 +298,8 @@ class _$_Create extends _Create {
       quizItemIndex,
       const DeepCollectionEquality().hash(_choices),
       const DeepCollectionEquality().hash(_quizItemList),
-      duration);
+      duration,
+      studyType);
 
   @JsonKey(ignore: true)
   @override
@@ -296,7 +317,8 @@ abstract class _Create extends QuizChoiceScreenState {
       final int quizItemIndex,
       final List<String> choices,
       final List<QuizItem> quizItemList,
-      final Duration duration}) = _$_Create;
+      final Duration duration,
+      final StudyType studyType}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -315,6 +337,8 @@ abstract class _Create extends QuizChoiceScreenState {
   List<QuizItem> get quizItemList;
   @override //問題
   Duration get duration;
+  @override // 所要時間
+  StudyType get studyType;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

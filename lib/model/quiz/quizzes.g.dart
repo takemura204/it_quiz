@@ -11,6 +11,10 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
               ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      historyQuizList: (json['historyQuizList'] as List<dynamic>?)
+              ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       quizItemList: (json['quizItemList'] as List<dynamic>?)
               ?.map((e) => QuizItem.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -27,17 +31,21 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
       selectQuizIndex: json['selectQuizIndex'] as int? ?? 0,
       quizType: $enumDecodeNullable(_$QuizTypeEnumMap, json['quizType']) ??
           QuizType.study,
+      studyType: $enumDecodeNullable(_$StudyTypeEnumMap, json['studyType']) ??
+          StudyType.learn,
     );
 
 Map<String, dynamic> _$$_QuizzesToJson(_$_Quizzes instance) =>
     <String, dynamic>{
       'quizList': instance.quizList,
+      'historyQuizList': instance.historyQuizList,
       'quizItemList': instance.quizItemList,
       'dailyQuiz': instance.dailyQuiz,
       'weakQuiz': instance.weakQuiz,
       'testQuiz': instance.testQuiz,
       'selectQuizIndex': instance.selectQuizIndex,
       'quizType': _$QuizTypeEnumMap[instance.quizType]!,
+      'studyType': _$StudyTypeEnumMap[instance.studyType]!,
     };
 
 const _$QuizTypeEnumMap = {
@@ -45,4 +53,9 @@ const _$QuizTypeEnumMap = {
   QuizType.weak: 'weak',
   QuizType.daily: 'daily',
   QuizType.test: 'test',
+};
+
+const _$StudyTypeEnumMap = {
+  StudyType.learn: 'learn',
+  StudyType.choice: 'choice',
 };

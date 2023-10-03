@@ -1,3 +1,5 @@
+import 'package:kentei_quiz/model/quiz/quiz.dart';
+
 class I18n {
   static I18n? _instance;
 
@@ -27,7 +29,7 @@ class I18n {
   String get titleSetting => "マイページ";
 
   ///「学ぶ」形式
-  String get styleLeanQuiz => "一問一答で覚える";
+  String get styleLeanQuiz => "用語を覚える";
 
   String get styleChoiceQuiz => "クイズに挑戦する";
 
@@ -39,6 +41,17 @@ class I18n {
   String get buttonKnow => "知ってる";
 
   String get buttonUnKnow => "知らない";
+
+  String studyTypeText(StudyType studyType) {
+    switch (studyType) {
+      case StudyType.learn:
+        return styleLeanQuiz;
+      case StudyType.choice:
+        return styleChoiceQuiz;
+      default:
+        return caseHideText9;
+    }
+  }
 
   /// 問題画面
   String hideText(String ans) {

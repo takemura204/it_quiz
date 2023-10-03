@@ -6,10 +6,10 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
-import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../view/button.dart';
+import '../../view/card/quiz_card.dart';
 import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
 
@@ -40,7 +40,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: const Text("クイズ結果"),
+      title: const Text("結果"),
       actions: [
         ClearButton(
           iconSize: context.width * 0.1,
@@ -76,7 +76,7 @@ class _Body extends ConsumerWidget {
                   const Gap(5),
 
                   ///正解した問題リスト
-                  _QuizResultView(quiz),
+                  const _QuizResultView(),
                 ],
               ),
             ),

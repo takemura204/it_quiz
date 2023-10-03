@@ -122,6 +122,10 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     });
   }
 
+  void setStudyType(StudyType studyType) {
+    state = state.copyWith(studyType: studyType);
+  }
+
   ///次の問題
   void _nextQuiz() {
     final quizIndex = state.quizIndex;
@@ -131,6 +135,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       state = state.copyWith(
           duration: _stopwatch.elapsed, quizIndex: 0, isResultScreen: true);
       _updateQuiz();
+      _updateHistoryQuiz();
     }
     //問題がまだある時
     else {
@@ -172,6 +177,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void _updateQuiz() {
     final quizItemList = state.quizItemList;
     final duration = state.duration;
+    final studyType = ref.read(quizModelProvider).studyType;
     final correctNum =
         quizItemList.where((x) => x.isJudge == true).toList().length;
     final isCompleted = quizItemList.length == correctNum;
@@ -181,7 +187,26 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       correctNum: correctNum,
       isCompleted: isCompleted,
       timeStamp: DateTime.now(),
+      studyType: studyType,
     );
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
+  }
+
+  void _updateHistoryQuiz() {
+    final quizItemList = state.quizItemList;
+    final duration = state.duration;
+    final studyType = ref.read(quizModelProvider).studyType;
+    final correctNum =
+        quizItemList.where((x) => x.isJudge == true).toList().length;
+    final isCompleted = quizItemList.length == correctNum;
+    final updateQuiz = quiz.copyWith(
+      duration: duration,
+      quizItemList: quizItemList,
+      correctNum: correctNum,
+      isCompleted: isCompleted,
+      timeStamp: DateTime.now(),
+      studyType: studyType,
+    );
+    ref.read(quizModelProvider.notifier).updateHistoryQuiz(updateQuiz);
   }
 }

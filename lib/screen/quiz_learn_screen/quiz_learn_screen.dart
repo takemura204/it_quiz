@@ -7,7 +7,6 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
-import '../../view/admob.dart';
 import '../../view/icon_button.dart';
 import '../../view/quiz_widget.dart';
 import '../quiz_learn_result_screen/quiz_learn_result_screen.dart';
@@ -16,6 +15,7 @@ part 'quiz_learn_view.dart';
 
 class QuizLearnScreen extends ConsumerWidget {
   const QuizLearnScreen(this.item);
+
   final Quiz item;
 
   @override
@@ -33,6 +33,7 @@ class QuizLearnScreen extends ConsumerWidget {
 
 class _Scaffold extends ConsumerWidget {
   const _Scaffold(this.item);
+
   final Quiz item;
 
   @override
@@ -127,7 +128,7 @@ class _Body extends ConsumerWidget {
         _LapInfoBar(item),
 
         ///広告
-        AdBanner(),
+        // AdBanner(),
       ],
     );
   }

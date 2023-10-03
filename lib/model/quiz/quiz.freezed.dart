@@ -27,7 +27,8 @@ mixin _$Quiz {
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError; //クイズ一覧
   int get correctNum => throw _privateConstructorUsedError; //正解数
   DateTime? get timeStamp => throw _privateConstructorUsedError; //挑戦日
-  Duration get duration => throw _privateConstructorUsedError;
+  Duration get duration => throw _privateConstructorUsedError; // 所要時間
+  StudyType get studyType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,8 @@ abstract class $QuizCopyWith<$Res> {
       List<QuizItem> quizItemList,
       int correctNum,
       DateTime? timeStamp,
-      Duration duration});
+      Duration duration,
+      StudyType studyType});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
     Object? correctNum = null,
     Object? timeStamp = freezed,
     Object? duration = null,
+    Object? studyType = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -105,6 +108,10 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
     ) as $Val);
   }
 }
@@ -123,7 +130,8 @@ abstract class _$$_QuizCopyWith<$Res> implements $QuizCopyWith<$Res> {
       List<QuizItem> quizItemList,
       int correctNum,
       DateTime? timeStamp,
-      Duration duration});
+      Duration duration,
+      StudyType studyType});
 }
 
 /// @nodoc
@@ -143,6 +151,7 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
     Object? correctNum = null,
     Object? timeStamp = freezed,
     Object? duration = null,
+    Object? studyType = null,
   }) {
     return _then(_$_Quiz(
       id: null == id
@@ -177,6 +186,10 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
     ));
   }
 }
@@ -192,7 +205,8 @@ class _$_Quiz implements _Quiz {
       required final List<QuizItem> quizItemList,
       required this.correctNum,
       required this.timeStamp,
-      required this.duration})
+      required this.duration,
+      required this.studyType})
       : _quizItemList = quizItemList;
 
   factory _$_Quiz.fromJson(Map<String, dynamic> json) => _$$_QuizFromJson(json);
@@ -227,10 +241,13 @@ class _$_Quiz implements _Quiz {
 //挑戦日
   @override
   final Duration duration;
+// 所要時間
+  @override
+  final StudyType studyType;
 
   @override
   String toString() {
-    return 'Quiz(id: $id, category: $category, title: $title, isCompleted: $isCompleted, quizItemList: $quizItemList, correctNum: $correctNum, timeStamp: $timeStamp, duration: $duration)';
+    return 'Quiz(id: $id, category: $category, title: $title, isCompleted: $isCompleted, quizItemList: $quizItemList, correctNum: $correctNum, timeStamp: $timeStamp, duration: $duration, studyType: $studyType)';
   }
 
   @override
@@ -251,7 +268,9 @@ class _$_Quiz implements _Quiz {
             (identical(other.timeStamp, timeStamp) ||
                 other.timeStamp == timeStamp) &&
             (identical(other.duration, duration) ||
-                other.duration == duration));
+                other.duration == duration) &&
+            (identical(other.studyType, studyType) ||
+                other.studyType == studyType));
   }
 
   @JsonKey(ignore: true)
@@ -265,7 +284,8 @@ class _$_Quiz implements _Quiz {
       const DeepCollectionEquality().hash(_quizItemList),
       correctNum,
       timeStamp,
-      duration);
+      duration,
+      studyType);
 
   @JsonKey(ignore: true)
   @override
@@ -290,7 +310,8 @@ abstract class _Quiz implements Quiz {
       required final List<QuizItem> quizItemList,
       required final int correctNum,
       required final DateTime? timeStamp,
-      required final Duration duration}) = _$_Quiz;
+      required final Duration duration,
+      required final StudyType studyType}) = _$_Quiz;
 
   factory _Quiz.fromJson(Map<String, dynamic> json) = _$_Quiz.fromJson;
 
@@ -310,6 +331,8 @@ abstract class _Quiz implements Quiz {
   DateTime? get timeStamp;
   @override //挑戦日
   Duration get duration;
+  @override // 所要時間
+  StudyType get studyType;
   @override
   @JsonKey(ignore: true)
   _$$_QuizCopyWith<_$_Quiz> get copyWith => throw _privateConstructorUsedError;

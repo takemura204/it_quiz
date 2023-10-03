@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:substring_highlight/substring_highlight.dart';
+import 'package:kentei_quiz/view/card/quiz_card.dart';
 
 import '../../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
@@ -21,16 +21,14 @@ class QuizLearnResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _AppBar(quiz),
+      appBar: const _AppBar(),
       body: _Body(quiz),
     );
   }
 }
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _AppBar(this.quiz);
-
-  final Quiz quiz;
+  const _AppBar();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,7 +36,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: Text(quiz.category),
+      title: const Text("結果"),
       actions: [
         ClearButton(
             iconSize: 30,
@@ -69,7 +67,7 @@ class _Body extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  _QuizResultView(quiz),
+                  const _QuizResultView(),
                 ],
               ),
             ),
