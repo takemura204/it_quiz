@@ -162,7 +162,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         quizItemList: quizItemList,
       );
       _updateQuiz();
-      _updateHistoryQuiz();
     }
     //まだ問題が続蹴られる時
     else {
@@ -206,7 +205,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
   }
 
-  void _updateHistoryQuiz() {
+  void updateHistoryQuiz() {
     final quizItemList = state.quizItemList;
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
@@ -221,7 +220,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       timeStamp: DateTime.now(),
       studyType: studyType,
     );
-    ref.read(quizModelProvider.notifier).updateHistoryQuiz(updateQuiz);
+    ref.read(quizModelProvider.notifier).addHistoryQuiz(updateQuiz);
   }
 
   ///クリアボタン

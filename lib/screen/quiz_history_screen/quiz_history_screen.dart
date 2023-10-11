@@ -139,6 +139,8 @@ class _Body extends ConsumerWidget {
                   for (var quizItemIndex = 0;
                       quizItemIndex < quizList[index].quizItemList.length;
                       quizItemIndex++)
+
+                    ///チェックボックスがすぐに反映されない。
                     QuizItemCard(
                       item: quizList[index].quizItemList[quizItemIndex],
                       studyType: quizList[index].studyType,

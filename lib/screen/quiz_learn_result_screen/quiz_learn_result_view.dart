@@ -48,6 +48,9 @@ class _NextActionCard extends HookConsumerWidget {
                 height: context.height * 0.06,
                 text: "再挑戦",
                 onPressed: () {
+                  ref
+                      .read(quizLearnScreenProvider.notifier)
+                      .updateHistoryQuiz();
                   Navigator.of(context).pop();
                   context.showScreen(QuizLearnScreenArguments(
                     quiz: quiz,
@@ -61,8 +64,9 @@ class _NextActionCard extends HookConsumerWidget {
               onPressed: (quizIndex >= lastIndex)
                   ? null
                   : () {
-                      print({"quizList.length", quizList.length});
-                      print({"lastIndex", lastIndex});
+                      ref
+                          .read(quizLearnScreenProvider.notifier)
+                          .updateHistoryQuiz();
                       Navigator.of(context).pop();
                       context.showScreen(
                         QuizChoiceScreenArguments(

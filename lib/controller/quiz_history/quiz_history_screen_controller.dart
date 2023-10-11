@@ -8,7 +8,7 @@ import '../../model/quiz_item/quiz_item.dart';
 
 final quizHistoryScreenProvider =
     StateNotifierProvider<QuizHistoryScreenController, QuizHistoryScreenState>(
-  (ref) => throw UnimplementedError(),
+  (ref) => QuizHistoryScreenController(ref: ref),
 );
 
 class QuizHistoryScreenController extends StateNotifier<QuizHistoryScreenState>
@@ -43,17 +43,15 @@ class QuizHistoryScreenController extends StateNotifier<QuizHistoryScreenState>
   void tapCheckBox(int index, int quizItemIndex) {
     final quizList = [...state.quizList];
     final quizItemList = [...quizList[index].quizItemList];
-    quizItemList[index] = QuizItem(
-      quizId: quizItemList[index].quizId,
-      question: quizItemList[index].question,
-      ans: quizItemList[index].ans,
-      comment: quizItemList[index].comment,
-      isWeak: !quizItemList[index].isWeak,
-      isJudge: quizItemList[index].isJudge,
-      isSaved: quizItemList[index].isSaved,
-      choices: quizItemList[index].choices,
-    );
-    final updateQuiz = quizList[index].copyWith(quizItemList: quizItemList);
-    ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
+
+    final targetQuizItem = quizItemList[quizItemIndex];
+    quizItemList[quizItemIndex] =
+        targetQuizItem.copyWith(isWeak: !targetQuizItem.isWeak);
+
+    final updatedQuiz = quizList[index].copyWith(quizItemList: quizItemList);
+    quizList[index] = updatedQuiz;
+
+    state = state.copyWith(quizList: quizList);
+    ref.read(quizModelProvider.notifier).updateHistoryQuiz(updatedQuiz);
   }
 }

@@ -135,7 +135,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       state = state.copyWith(
           duration: _stopwatch.elapsed, quizIndex: 0, isResultScreen: true);
       _updateQuiz();
-      _updateHistoryQuiz();
+      updateHistoryQuiz();
     }
     //問題がまだある時
     else {
@@ -192,7 +192,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
   }
 
-  void _updateHistoryQuiz() {
+  void updateHistoryQuiz() {
     final quizItemList = state.quizItemList;
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
@@ -207,6 +207,6 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       timeStamp: DateTime.now(),
       studyType: studyType,
     );
-    ref.read(quizModelProvider.notifier).updateHistoryQuiz(updateQuiz);
+    ref.read(quizModelProvider.notifier).addHistoryQuiz(updateQuiz);
   }
 }

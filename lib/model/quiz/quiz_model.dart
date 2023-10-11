@@ -217,7 +217,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         _updateStudyQuiz(quiz);
         updateWeakItem();
         ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizItemList);
-
         break;
       case QuizType.weak:
         _updateWeakQuiz(quiz);
@@ -298,10 +297,67 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     _saveDevice(); // 保存
   }
 
-  Future updateHistoryQuiz(Quiz updateQuz) async {
+  /// HistoryQuiz更新
+  Future addHistoryQuiz(Quiz updateQuiz) async {
+    // 1. 現在のhistoryQuizListをコピー
     final historyQuizList = [...state.historyQuizList];
-    historyQuizList.add(updateQuz);
+
+    // 2. updateQuizをhistoryQuizListに追加
+    historyQuizList.add(updateQuiz);
+
+    // 3. historyQuizList内の同じidのQuizのquizItemListを更新
+    for (var i = 0; i < historyQuizList.length; i++) {
+      if (historyQuizList[i].id == updateQuiz.id) {
+        final updatedQuizItemList =
+            historyQuizList[i].quizItemList.map((quizItem) {
+          // updateQuizの中から対応するquizItemを見つける
+          final updatedItem = updateQuiz.quizItemList
+              .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
+          if (updatedItem != null) {
+            // isWeakだけを更新
+            return quizItem.copyWith(isWeak: updatedItem.isWeak);
+          }
+          return quizItem;
+        }).toList();
+        historyQuizList[i] =
+            historyQuizList[i].copyWith(quizItemList: updatedQuizItemList);
+      }
+    }
+
+    // 4. 更新したhistoryQuizListでstateを更新
     state = state.copyWith(historyQuizList: historyQuizList);
+
+    // 5. デバイスに保存
+    _saveDevice();
+  }
+
+  Future updateHistoryQuiz(Quiz updateQuiz) async {
+    // 1. 現在のhistoryQuizListをコピー
+    final historyQuizList = [...state.historyQuizList];
+
+    // 3. historyQuizList内の同じidのQuizのquizItemListを更新
+    for (var i = 0; i < historyQuizList.length; i++) {
+      if (historyQuizList[i].id == updateQuiz.id) {
+        final updatedQuizItemList =
+            historyQuizList[i].quizItemList.map((quizItem) {
+          // updateQuizの中から対応するquizItemを見つける
+          final updatedItem = updateQuiz.quizItemList
+              .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
+          if (updatedItem != null) {
+            // isWeakだけを更新
+            return quizItem.copyWith(isWeak: updatedItem.isWeak);
+          }
+          return quizItem;
+        }).toList();
+        historyQuizList[i] =
+            historyQuizList[i].copyWith(quizItemList: updatedQuizItemList);
+      }
+    }
+
+    // 4. 更新したhistoryQuizListでstateを更新
+    state = state.copyWith(historyQuizList: historyQuizList);
+
+    // 5. デバイスに保存
     _saveDevice();
   }
 
