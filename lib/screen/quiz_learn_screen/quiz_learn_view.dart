@@ -2,6 +2,7 @@ part of 'quiz_learn_screen.dart';
 
 class _Question extends ConsumerWidget {
   const _Question(this.item);
+
   final Quiz item;
 
   @override
@@ -33,6 +34,7 @@ class _Question extends ConsumerWidget {
 ///穴埋め問題(答え)
 class _AnsQuestion extends ConsumerWidget {
   const _AnsQuestion(this.item);
+
   final Quiz item;
 
   @override
@@ -61,6 +63,7 @@ class _AnsQuestion extends ConsumerWidget {
 ///穴埋め問題
 class _ConfirmQuestion extends ConsumerWidget {
   const _ConfirmQuestion(this.item);
+
   final Quiz item;
 
   @override
@@ -89,6 +92,7 @@ class _ConfirmQuestion extends ConsumerWidget {
 
 class _QuizProgress extends ConsumerWidget {
   const _QuizProgress(this.item);
+
   final Quiz item;
 
   @override
@@ -200,6 +204,7 @@ class _ConfirmButton extends ConsumerWidget {
 
 class _LapInfoBar extends ConsumerWidget {
   const _LapInfoBar(this.item);
+
   final Quiz item;
 
   @override
@@ -239,6 +244,27 @@ class _LapInfoBar extends ConsumerWidget {
             const Spacer(),
             Row(
               children: [
+                const Text("知らない", style: TextStyle(fontSize: 14)),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: AutoSizeText(
+                    ref
+                        .watch(quizLearnScreenProvider)
+                        .unKnowQuizItemList
+                        .length
+                        .toString(),
+                    style: context.texts.titleMedium
+                        ?.copyWith(color: Colors.redAccent.shade100),
+                    minFontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            const VerticalDivider(),
+            const Spacer(),
+            Row(
+              children: [
                 const Text(
                   "知っている",
                   style: TextStyle(fontSize: 14),
@@ -253,27 +279,6 @@ class _LapInfoBar extends ConsumerWidget {
                         .toString(),
                     style: context.texts.titleMedium
                         ?.copyWith(color: Colors.green.shade400),
-                    minFontSize: 20,
-                  ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            const VerticalDivider(),
-            const Spacer(),
-            Row(
-              children: [
-                const Text("知らない", style: TextStyle(fontSize: 14)),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: AutoSizeText(
-                    ref
-                        .watch(quizLearnScreenProvider)
-                        .unKnowQuizItemList
-                        .length
-                        .toString(),
-                    style: context.texts.titleMedium
-                        ?.copyWith(color: Colors.redAccent.shade100),
                     minFontSize: 20,
                   ),
                 ),

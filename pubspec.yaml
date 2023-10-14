@@ -126,6 +126,8 @@ dependencies:
   #おしゃれなアイコンを使いたい。
   line_icons: ^2.0.3
 
+  #urlを遷移したい。
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
