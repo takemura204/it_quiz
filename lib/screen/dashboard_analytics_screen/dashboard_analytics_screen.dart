@@ -6,7 +6,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
+import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:kentei_quiz/view/bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -120,23 +122,20 @@ class DailyGoal extends ConsumerWidget {
   }
 }
 
+/// 今日の学習
 class DailyStatus extends ConsumerWidget {
   const DailyStatus();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    if (state.isLoading) {
-      return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.22,
-        ),
-      );
-    }
-    final dailyData = state.dailyData!;
-    final dailyScore = dailyData.quizData.length;
-    final dailyGoal = state.dailyGoal;
+    final dashboardModel = ref.watch(dashboardModelProvider);
+    final todayDuration = dashboardModel.todayDuration.inMinutes;
+    final todayQuizCount = dashboardModel.todayQuizCount;
+
+    final userModel = ref.watch(userModelProvider);
+    final dailyQuizCountGoal = userModel.userCustom.dailyQuizCountGoal;
+    final dailyDurationGoal = userModel.userCustom.dailyDurationGoal.inMinutes;
+
     return Container(
       width: context.width * 1,
       child: Card(
@@ -178,13 +177,27 @@ class DailyStatus extends ConsumerWidget {
                       ),
                     ),
                     Gap(context.height * 0.005),
-                    Text(
-                      '256',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: context.height * 0.035,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          "$todayQuizCount",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: context.height * 0.035,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "/$dailyQuizCountGoal",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: context.height * 0.027,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       '問',
@@ -212,13 +225,27 @@ class DailyStatus extends ConsumerWidget {
                       ),
                     ),
                     Gap(context.height * 0.005),
-                    Text(
-                      '120',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: context.height * 0.035,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          '$todayDuration',
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: context.height * 0.035,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "/$dailyDurationGoal",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: context.height * 0.027,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       '分',
@@ -246,13 +273,28 @@ class DailyStatus extends ConsumerWidget {
                       ),
                     ),
                     Gap(context.height * 0.005),
-                    Text(
-                      '80',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: context.height * 0.035,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          '80',
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: context.height * 0.035,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Gap(3),
+                        Text(
+                          'up↑',
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: context.height * 0.023,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       'exp',
@@ -275,8 +317,8 @@ class DailyStatus extends ConsumerWidget {
 }
 
 /// ダッシュボード(学習問題数)
-class Dashboard extends ConsumerWidget {
-  const Dashboard();
+class DashboardQuizLength extends ConsumerWidget {
+  const DashboardQuizLength();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -19,11 +19,11 @@ class _Body extends ConsumerWidget {
         children: [
           Gap(5),
 
-          ///
+          ///今日の学習
           DailyStatus(),
 
           ///学習状況ダッシュボード
-          Dashboard(),
+          DashboardQuizLength(),
 
           ///今日の目標
           DailyGoal(),

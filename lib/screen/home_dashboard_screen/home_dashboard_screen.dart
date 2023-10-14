@@ -18,9 +18,16 @@ class HomeDashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(
-      appBar: _AppBar(),
-      body: _Body(),
+    return ProviderScope(
+      overrides: [
+        // dashboardModelProvider.overrideWith(
+        //   (ref) => DashboardModel(ref),
+        // ),
+      ],
+      child: const Scaffold(
+        appBar: _AppBar(),
+        body: _Body(),
+      ),
     );
   }
 }

@@ -25,6 +25,7 @@ mixin _$User {
   String get gender => throw _privateConstructorUsedError;
   String get birthDay => throw _privateConstructorUsedError;
   bool get isLogin => throw _privateConstructorUsedError;
+  UserCustom get userCustom => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -43,7 +44,10 @@ abstract class $UserCopyWith<$Res> {
       String password,
       String gender,
       String birthDay,
-      bool isLogin});
+      bool isLogin,
+      UserCustom userCustom});
+
+  $UserCustomCopyWith<$Res> get userCustom;
 }
 
 /// @nodoc
@@ -67,6 +71,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? gender = null,
     Object? birthDay = null,
     Object? isLogin = null,
+    Object? userCustom = null,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -101,7 +106,19 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.isLogin
           : isLogin // ignore: cast_nullable_to_non_nullable
               as bool,
+      userCustom: null == userCustom
+          ? _value.userCustom
+          : userCustom // ignore: cast_nullable_to_non_nullable
+              as UserCustom,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCustomCopyWith<$Res> get userCustom {
+    return $UserCustomCopyWith<$Res>(_value.userCustom, (value) {
+      return _then(_value.copyWith(userCustom: value) as $Val);
+    });
   }
 }
 
@@ -119,7 +136,11 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String password,
       String gender,
       String birthDay,
-      bool isLogin});
+      bool isLogin,
+      UserCustom userCustom});
+
+  @override
+  $UserCustomCopyWith<$Res> get userCustom;
 }
 
 /// @nodoc
@@ -139,6 +160,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? gender = null,
     Object? birthDay = null,
     Object? isLogin = null,
+    Object? userCustom = null,
   }) {
     return _then(_$_User(
       uid: null == uid
@@ -173,6 +195,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.isLogin
           : isLogin // ignore: cast_nullable_to_non_nullable
               as bool,
+      userCustom: null == userCustom
+          ? _value.userCustom
+          : userCustom // ignore: cast_nullable_to_non_nullable
+              as UserCustom,
     ));
   }
 }
@@ -188,7 +214,8 @@ class _$_User implements _User {
       this.password = '',
       this.gender = '',
       this.birthDay = '',
-      this.isLogin = false});
+      this.isLogin = false,
+      this.userCustom = const UserCustom()});
 
 //ユーザー情報
   @override
@@ -215,10 +242,13 @@ class _$_User implements _User {
   @override
   @JsonKey()
   final bool isLogin;
+  @override
+  @JsonKey()
+  final UserCustom userCustom;
 
   @override
   String toString() {
-    return 'User(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin)';
+    return 'User(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, userCustom: $userCustom)';
   }
 
   @override
@@ -237,12 +267,14 @@ class _$_User implements _User {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.birthDay, birthDay) ||
                 other.birthDay == birthDay) &&
-            (identical(other.isLogin, isLogin) || other.isLogin == isLogin));
+            (identical(other.isLogin, isLogin) || other.isLogin == isLogin) &&
+            (identical(other.userCustom, userCustom) ||
+                other.userCustom == userCustom));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, uid, userName, userImage, email,
-      password, gender, birthDay, isLogin);
+      password, gender, birthDay, isLogin, userCustom);
 
   @JsonKey(ignore: true)
   @override
@@ -260,7 +292,8 @@ abstract class _User implements User {
       final String password,
       final String gender,
       final String birthDay,
-      final bool isLogin}) = _$_User;
+      final bool isLogin,
+      final UserCustom userCustom}) = _$_User;
 
   @override //ユーザー情報
   String get uid;
@@ -278,6 +311,8 @@ abstract class _User implements User {
   String get birthDay;
   @override
   bool get isLogin;
+  @override
+  UserCustom get userCustom;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

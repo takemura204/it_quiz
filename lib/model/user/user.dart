@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kentei_quiz/model/user_custom/user_custom.dart';
 
 part 'user.freezed.dart';
 
@@ -16,5 +17,6 @@ class User with _$User {
     @Default('') final String gender,
     @Default('') final String birthDay,
     @Default(false) final bool isLogin,
+    @Default(UserCustom()) final UserCustom userCustom,
   }) = _User;
 }

@@ -3,6 +3,7 @@ part of 'home_setting_screen.dart';
 ///プロフィール
 class UserProfile extends ConsumerWidget {
   const UserProfile();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final email = FirebaseAuth.instance.currentUser?.email ?? "ログインしていません";
@@ -104,6 +105,7 @@ class UserProfile extends ConsumerWidget {
 class UserImage extends ConsumerWidget {
   const UserImage(
       {required this.onTap, required this.height, required this.isLinkedEmail});
+
   final VoidCallback onTap;
   final double height;
   final bool isLinkedEmail;
@@ -159,82 +161,116 @@ class UserImage extends ConsumerWidget {
 }
 
 ///毎日の目標設定
-class _SetGoalY extends ConsumerWidget {
-  const _SetGoalY();
+class _SetDailyQuizCountGoal extends ConsumerWidget {
+  const _SetDailyQuizCountGoal();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
-    return Container(
-      height: context.height * 0.12,
-      child: Column(
-        children: [
-          const Spacer(),
-          Text(
-            "毎日何問解きたいですか？",
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: context.width * 0.04,
-            ),
-            maxLines: 1,
+    final userCustom = ref.watch(userModelProvider).userCustom;
+    final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
+    return Row(
+      children: [
+        IconButton(
+          iconSize: context.height * 0.03,
+          onPressed: dailyQuizCountGoal <= 10
+              ? null
+              : () {
+                  ref
+                      .read(userModelProvider.notifier)
+                      .updateDailyQuizCountGoal(dailyQuizCountGoal - 10);
+                },
+          icon: Icon(
+            Icons.remove_circle_outline,
+            color: dailyQuizCountGoal <= 10
+                ? Colors.grey.shade400
+                : context.mainColor,
           ),
-          const Spacer(),
-          Row(
-            children: [
-              const Spacer(),
-              IconButton(
-                padding: EdgeInsets.all(context.width * 0.01),
-                iconSize: context.width * 0.1,
-                onPressed: dailyGoal <= 10
-                    ? null
-                    : () {
-                        ref
-                            .read(dashboardAnalyticsProvider.notifier)
-                            .setGoalY(dailyGoal - 10);
-                      },
-                icon: Icon(
-                  Icons.remove_circle_outline,
-                  color: dailyGoal <= 10
-                      ? Colors.grey.shade400
-                      : context.mainColor,
-                ),
-              ),
-              Gap(context.width * 0.05),
-              Text(
-                "$dailyGoal",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.06),
-              ),
-              Text(
-                "問",
-                style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: context.width * 0.055),
-              ),
-              Gap(context.width * 0.05),
-              IconButton(
-                padding: EdgeInsets.all(context.width * 0.01),
-                iconSize: context.width * 0.1,
-                onPressed: dailyGoal >= 50
-                    ? null
-                    : () {
-                        ref
-                            .read(dashboardAnalyticsProvider.notifier)
-                            .setGoalY(dailyGoal + 10);
-                      },
-                icon: Icon(
-                  Icons.add_circle_outline,
-                  color: dailyGoal >= 50
-                      ? Colors.grey.shade400
-                      : context.mainColor,
-                ),
-              ),
-              const Spacer(),
-            ],
+        ),
+        Gap(context.width * 0.01),
+        Text(
+          "$dailyQuizCountGoal",
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
+        ),
+        Text(
+          "問",
+          style: TextStyle(
+              fontWeight: FontWeight.normal, fontSize: context.width * 0.04),
+        ),
+        Gap(context.width * 0.01),
+        IconButton(
+          iconSize: context.height * 0.03,
+          onPressed: dailyQuizCountGoal >= 50
+              ? null
+              : () {
+                  ref
+                      .read(userModelProvider.notifier)
+                      .updateDailyQuizCountGoal(dailyQuizCountGoal + 10);
+                },
+          icon: Icon(
+            Icons.add_circle_outline,
+            color: dailyQuizCountGoal >= 50
+                ? Colors.grey.shade400
+                : context.mainColor,
           ),
-          const Spacer(),
-        ],
-      ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SetDailyDurationGoal extends ConsumerWidget {
+  const _SetDailyDurationGoal();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userCustom = ref.watch(userModelProvider).userCustom;
+    final dailyDurationGoal = userCustom.dailyDurationGoal.inMinutes;
+    return Row(
+      children: [
+        IconButton(
+          iconSize: context.height * 0.03,
+          onPressed: dailyDurationGoal <= 5
+              ? null
+              : () {
+                  ref.read(userModelProvider.notifier).updateDailyDurationGoal(
+                      Duration(minutes: dailyDurationGoal - 5));
+                },
+          icon: Icon(
+            Icons.remove_circle_outline,
+            color: dailyDurationGoal <= 5
+                ? Colors.grey.shade400
+                : context.mainColor,
+          ),
+        ),
+        Gap(context.width * 0.01),
+        Text(
+          "$dailyDurationGoal",
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
+        ),
+        Text(
+          "分",
+          style: TextStyle(
+              fontWeight: FontWeight.normal, fontSize: context.width * 0.04),
+        ),
+        Gap(context.width * 0.01),
+        IconButton(
+          iconSize: context.height * 0.03,
+          onPressed: dailyDurationGoal >= 60
+              ? null
+              : () {
+                  ref.read(userModelProvider.notifier).updateDailyDurationGoal(
+                      Duration(minutes: dailyDurationGoal + 5));
+                },
+          icon: Icon(
+            Icons.add_circle_outline,
+            color: dailyDurationGoal >= 60
+                ? Colors.grey.shade400
+                : context.mainColor,
+          ),
+        ),
+      ],
     );
   }
 }

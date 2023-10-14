@@ -4,7 +4,6 @@ import 'package:kentei_quiz/controller/quiz_history/quiz_history_screen_state.da
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz_model.dart';
-import '../../model/quiz_item/quiz_item.dart';
 
 final quizHistoryScreenProvider =
     StateNotifierProvider<QuizHistoryScreenController, QuizHistoryScreenState>(

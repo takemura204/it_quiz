@@ -83,8 +83,8 @@ class SettingTitleBar extends ConsumerWidget {
   }
 }
 
-class SettingListBar extends ConsumerWidget {
-  const SettingListBar({required this.title, required this.onTap});
+class DefaltSettingBar extends ConsumerWidget {
+  const DefaltSettingBar({required this.title, required this.onTap});
 
   final String title;
   final VoidCallback? onTap;
@@ -115,6 +115,45 @@ class SettingListBar extends ConsumerWidget {
                   size: context.height * 0.025,
                   color: context.mainColor,
                 ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomSettingBar extends ConsumerWidget {
+  const CustomSettingBar(
+      {required this.title, required this.customWidget, required this.onTap});
+
+  final String title;
+  final VoidCallback? onTap;
+  final Widget customWidget;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 1.0,
+        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        child: Container(
+          height: context.height * 0.05,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.height * 0.015,
+                  ),
+                ),
+                const Spacer(),
+                customWidget,
               ],
             ),
           ),

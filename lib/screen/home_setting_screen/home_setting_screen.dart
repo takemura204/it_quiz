@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
 
-import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../view/bar.dart';
 import '../../view/button.dart';
@@ -50,7 +50,7 @@ class HomeSettingScreen extends ConsumerWidget {
                           onTap: null,
                         ),
                         const UserProfile(),
-                        SettingListBar(
+                        DefaltSettingBar(
                           title: "プロフィール編集",
                           onTap: () => context.showScreen(
                             const ProfileScreenArguments().generateRoute(),
@@ -92,7 +92,7 @@ class HomeSettingScreen extends ConsumerWidget {
                   title: "設定",
                   onTap: null,
                 ),
-                SettingListBar(
+                DefaltSettingBar(
                   title: "カラーテーマ",
                   onTap: () {
                     context.showScreen(
@@ -100,7 +100,17 @@ class HomeSettingScreen extends ConsumerWidget {
                     );
                   },
                 ),
-                SettingListBar(
+                const CustomSettingBar(
+                    title: "毎日の目標",
+                    customWidget: _SetDailyQuizCountGoal(),
+                    // customWidget: Container(),
+                    onTap: null),
+                const CustomSettingBar(
+                    title: "毎日の目標",
+                    customWidget: _SetDailyDurationGoal(),
+                    // customWidget: Container(),
+                    onTap: null),
+                DefaltSettingBar(
                   title: "毎日の目標",
                   onTap: () {
                     showDialog(
@@ -108,7 +118,7 @@ class HomeSettingScreen extends ConsumerWidget {
                         builder: (context) {
                           return PrimaryCloseDialog(
                             title: "目標を設定",
-                            subWidget: const _SetGoalY(),
+                            subWidget: const _SetDailyQuizCountGoal(),
                             doneText: "保存",
                             onPressed: () {
                               Navigator.pop(context);
@@ -117,7 +127,7 @@ class HomeSettingScreen extends ConsumerWidget {
                         });
                   },
                 ),
-                const SettingListBar(
+                const DefaltSettingBar(
                   title: "通知",
                   onTap: null,
                 ),
@@ -125,15 +135,15 @@ class HomeSettingScreen extends ConsumerWidget {
                   title: "アプリについて",
                   onTap: null,
                 ),
-                const SettingListBar(
+                const DefaltSettingBar(
                   title: "お問合せ",
                   onTap: null,
                 ),
-                const SettingListBar(
+                const DefaltSettingBar(
                   title: "シェア",
                   onTap: null,
                 ),
-                const SettingListBar(
+                const DefaltSettingBar(
                   title: "開発者",
                   onTap: null,
                 ),
@@ -157,7 +167,7 @@ class HomeSettingScreen extends ConsumerWidget {
                           title: "その他",
                           onTap: null,
                         ),
-                        SettingListBar(
+                        DefaltSettingBar(
                           title: "アプリを削除する",
                           onTap: () async {
                             context.showScreen(
