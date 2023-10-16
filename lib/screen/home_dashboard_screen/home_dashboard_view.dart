@@ -22,11 +22,14 @@ class _Body extends ConsumerWidget {
           ///今日の学習
           DailyStatus(),
 
+          ///学習状況ダッシュボード(New)
+          WeeklyDashboard(),
+
           ///学習状況ダッシュボード
           DashboardQuizLength(),
 
           ///今日の目標
-          DailyGoal(),
+          // DailyGoal(),
 
           ///グループごとの進捗
           GroupProgress(),

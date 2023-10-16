@@ -8,6 +8,7 @@ import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytic
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/lang/initial_resource.dart';
+import '../../view/chart/weekly_chart.dart';
 import '../../view/mission/mission_widget.dart';
 import '../../view/rank/rank_widget.dart';
 

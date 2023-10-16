@@ -19,109 +19,6 @@ import '../../model/quiz/quiz_model.dart';
 
 part 'dashboard_analytics_view.dart';
 
-///毎日の目標
-class DailyGoal extends ConsumerWidget {
-  const DailyGoal();
-
-  //目標
-  //正解した数
-  //苦手の数
-  //新しく覚えた数
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    if (state.isLoading) {
-      return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.22,
-        ),
-      );
-    }
-    final dailyData = state.dailyData!;
-    final dailyScore = dailyData.quizData.length;
-    final dailyGoal = state.dailyGoal;
-    return Container(
-      width: context.width * 1,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            const _Title(
-                title: "毎日の目標", subtitle: "", icon: Icons.flag_outlined),
-            Container(
-              height: context.height * 0.23,
-              child: Row(
-                children: [
-                  const Spacer(),
-
-                  ///チャート
-                  ProgressRangeChart(
-                    width: context.height * 0.2,
-                    size: context.height * 0.2,
-                    goalScore: dailyGoal,
-                    currentScore: dailyScore,
-                    widget: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "今日の\n学習問題数",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: context.height * 0.015,
-                            height: 1.2,
-                          ),
-                        ),
-                        Text(
-                          "$dailyScore",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.045,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        Text(
-                          "/$dailyGoal",
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.015,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-
-                  ///今日の一言
-                  const _DailyMessage(),
-
-                  const Spacer(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 /// 今日の学習
 class DailyStatus extends ConsumerWidget {
   const DailyStatus();
@@ -129,8 +26,8 @@ class DailyStatus extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardModel = ref.watch(dashboardModelProvider);
-    final todayDuration = dashboardModel.todayDuration.inMinutes;
-    final todayQuizCount = dashboardModel.todayQuizCount;
+    final dailyDuration = dashboardModel.dailyDuration.inMinutes;
+    final dailyQuizCount = dashboardModel.dailyQuizCount;
 
     final userModel = ref.watch(userModelProvider);
     final dailyQuizCountGoal = userModel.userCustom.dailyQuizCountGoal;
@@ -152,9 +49,14 @@ class DailyStatus extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            const _Title(
+            _Title(
               title: "今日の学習",
-              subtitle: "",
+              subWidget: Text(
+                "",
+                style: TextStyle(
+                  fontSize: context.height * 0.018,
+                ),
+              ),
               icon: LineIcons.fontAwesomeFlag,
             ),
             Gap(context.height * 0.01),
@@ -182,7 +84,7 @@ class DailyStatus extends ConsumerWidget {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          "$todayQuizCount",
+                          "$dailyQuizCount",
                           style: TextStyle(
                             color: Colors.black54,
                             fontSize: context.height * 0.035,
@@ -230,7 +132,7 @@ class DailyStatus extends ConsumerWidget {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          '$todayDuration',
+                          '$dailyDuration',
                           style: TextStyle(
                             color: Colors.black54,
                             fontSize: context.height * 0.035,
@@ -317,6 +219,53 @@ class DailyStatus extends ConsumerWidget {
 }
 
 /// ダッシュボード(学習問題数)
+class WeeklyOrMonthlyDashboard extends ConsumerWidget {
+  const WeeklyOrMonthlyDashboard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width * 1,
+      alignment: Alignment.center,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
+          child: Column(
+            children: [
+              const _Title(
+                title: "学習記録",
+                subWidget: _SelectPeriodTab(),
+                icon: Icons.bar_chart_outlined,
+              ),
+
+              Gap(context.height * 0.01),
+
+              ///期間選択
+              const _DashBoardSelectPeriod(),
+              Gap(context.height * 0.01),
+
+              ///ダッシュボード
+              DashboardBarChart(),
+              Gap(context.height * 0.005),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class DashboardQuizLength extends ConsumerWidget {
   const DashboardQuizLength();
 
@@ -351,7 +300,10 @@ class DashboardQuizLength extends ConsumerWidget {
           child: Column(
             children: [
               const _Title(
-                  title: "学習問題数", subtitle: "", icon: Icons.bar_chart_outlined),
+                title: "学習記録",
+                subWidget: _SelectPeriodTab(),
+                icon: Icons.bar_chart_outlined,
+              ),
 
               Gap(context.height * 0.01),
 
@@ -681,6 +633,111 @@ class _BottomMonthTitles extends ConsumerWidget {
               : FontWeight.normal,
         ),
         textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+///毎日の目標
+class DailyGoal extends ConsumerWidget {
+  const DailyGoal();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.22,
+        ),
+      );
+    }
+    final dailyData = state.dailyData!;
+    final dailyScore = dailyData.quizData.length;
+    final dailyGoal = state.dailyGoal;
+    return Container(
+      width: context.width * 1,
+      child: Card(
+        elevation: 3,
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.mainColor,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            _Title(
+                title: "毎日の目標",
+                subWidget: Text(
+                  "",
+                  style: TextStyle(
+                    fontSize: context.height * 0.018,
+                  ),
+                ),
+                icon: Icons.flag_outlined),
+            Container(
+              height: context.height * 0.23,
+              child: Row(
+                children: [
+                  const Spacer(),
+
+                  ///チャート
+                  ProgressRangeChart(
+                    width: context.height * 0.2,
+                    size: context.height * 0.2,
+                    goalScore: dailyGoal,
+                    currentScore: dailyScore,
+                    widget: Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          "今日の\n学習問題数",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: context.height * 0.015,
+                            height: 1.2,
+                          ),
+                        ),
+                        Text(
+                          "$dailyScore",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.045,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        Text(
+                          "/$dailyGoal",
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.height * 0.015,
+                            color: context.mainColor,
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+
+                  ///今日の一言
+                  const _DailyMessage(),
+
+                  const Spacer(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

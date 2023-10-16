@@ -20,11 +20,20 @@ Dashboard _$DashboardFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Dashboard {
-  List<Quiz> get quizList => throw _privateConstructorUsedError; //クイズ一覧
-  Duration get todayDuration => throw _privateConstructorUsedError;
+  List<Quiz> get totalQuizList => throw _privateConstructorUsedError;
+  Duration get dailyDuration => throw _privateConstructorUsedError;
   Duration get allDuration => throw _privateConstructorUsedError;
-  int get todayQuizCount => throw _privateConstructorUsedError;
+  int get dailyQuizCount => throw _privateConstructorUsedError;
   int get allQuizCount => throw _privateConstructorUsedError;
+  List<Quiz> get weeklyQuizList =>
+      throw _privateConstructorUsedError; //今週のクイズ一覧
+  DateTime? get startWeekRange =>
+      throw _privateConstructorUsedError; // 今週の月曜日の日付
+  DateTime? get endWeekRange => throw _privateConstructorUsedError; // 今週の日曜日の日付
+  List<DateTime> get weekDays => throw _privateConstructorUsedError; //今週の日にち一覧
+  List<int> get weeklyQuizCounts =>
+      throw _privateConstructorUsedError; //今週のデータ一覧
+  int get selectedXIndex => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,11 +47,17 @@ abstract class $DashboardCopyWith<$Res> {
       _$DashboardCopyWithImpl<$Res, Dashboard>;
   @useResult
   $Res call(
-      {List<Quiz> quizList,
-      Duration todayDuration,
+      {List<Quiz> totalQuizList,
+      Duration dailyDuration,
       Duration allDuration,
-      int todayQuizCount,
-      int allQuizCount});
+      int dailyQuizCount,
+      int allQuizCount,
+      List<Quiz> weeklyQuizList,
+      DateTime? startWeekRange,
+      DateTime? endWeekRange,
+      List<DateTime> weekDays,
+      List<int> weeklyQuizCounts,
+      int selectedXIndex});
 }
 
 /// @nodoc
@@ -58,32 +73,62 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quizList = null,
-    Object? todayDuration = null,
+    Object? totalQuizList = null,
+    Object? dailyDuration = null,
     Object? allDuration = null,
-    Object? todayQuizCount = null,
+    Object? dailyQuizCount = null,
     Object? allQuizCount = null,
+    Object? weeklyQuizList = null,
+    Object? startWeekRange = freezed,
+    Object? endWeekRange = freezed,
+    Object? weekDays = null,
+    Object? weeklyQuizCounts = null,
+    Object? selectedXIndex = null,
   }) {
     return _then(_value.copyWith(
-      quizList: null == quizList
-          ? _value.quizList
-          : quizList // ignore: cast_nullable_to_non_nullable
+      totalQuizList: null == totalQuizList
+          ? _value.totalQuizList
+          : totalQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
-      todayDuration: null == todayDuration
-          ? _value.todayDuration
-          : todayDuration // ignore: cast_nullable_to_non_nullable
+      dailyDuration: null == dailyDuration
+          ? _value.dailyDuration
+          : dailyDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
       allDuration: null == allDuration
           ? _value.allDuration
           : allDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
-      todayQuizCount: null == todayQuizCount
-          ? _value.todayQuizCount
-          : todayQuizCount // ignore: cast_nullable_to_non_nullable
+      dailyQuizCount: null == dailyQuizCount
+          ? _value.dailyQuizCount
+          : dailyQuizCount // ignore: cast_nullable_to_non_nullable
               as int,
       allQuizCount: null == allQuizCount
           ? _value.allQuizCount
           : allQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      weeklyQuizList: null == weeklyQuizList
+          ? _value.weeklyQuizList
+          : weeklyQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      startWeekRange: freezed == startWeekRange
+          ? _value.startWeekRange
+          : startWeekRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endWeekRange: freezed == endWeekRange
+          ? _value.endWeekRange
+          : endWeekRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      weekDays: null == weekDays
+          ? _value.weekDays
+          : weekDays // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      weeklyQuizCounts: null == weeklyQuizCounts
+          ? _value.weeklyQuizCounts
+          : weeklyQuizCounts // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      selectedXIndex: null == selectedXIndex
+          ? _value.selectedXIndex
+          : selectedXIndex // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -97,11 +142,17 @@ abstract class _$$_DashboardCopyWith<$Res> implements $DashboardCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<Quiz> quizList,
-      Duration todayDuration,
+      {List<Quiz> totalQuizList,
+      Duration dailyDuration,
       Duration allDuration,
-      int todayQuizCount,
-      int allQuizCount});
+      int dailyQuizCount,
+      int allQuizCount,
+      List<Quiz> weeklyQuizList,
+      DateTime? startWeekRange,
+      DateTime? endWeekRange,
+      List<DateTime> weekDays,
+      List<int> weeklyQuizCounts,
+      int selectedXIndex});
 }
 
 /// @nodoc
@@ -115,32 +166,62 @@ class __$$_DashboardCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quizList = null,
-    Object? todayDuration = null,
+    Object? totalQuizList = null,
+    Object? dailyDuration = null,
     Object? allDuration = null,
-    Object? todayQuizCount = null,
+    Object? dailyQuizCount = null,
     Object? allQuizCount = null,
+    Object? weeklyQuizList = null,
+    Object? startWeekRange = freezed,
+    Object? endWeekRange = freezed,
+    Object? weekDays = null,
+    Object? weeklyQuizCounts = null,
+    Object? selectedXIndex = null,
   }) {
     return _then(_$_Dashboard(
-      quizList: null == quizList
-          ? _value._quizList
-          : quizList // ignore: cast_nullable_to_non_nullable
+      totalQuizList: null == totalQuizList
+          ? _value._totalQuizList
+          : totalQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
-      todayDuration: null == todayDuration
-          ? _value.todayDuration
-          : todayDuration // ignore: cast_nullable_to_non_nullable
+      dailyDuration: null == dailyDuration
+          ? _value.dailyDuration
+          : dailyDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
       allDuration: null == allDuration
           ? _value.allDuration
           : allDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
-      todayQuizCount: null == todayQuizCount
-          ? _value.todayQuizCount
-          : todayQuizCount // ignore: cast_nullable_to_non_nullable
+      dailyQuizCount: null == dailyQuizCount
+          ? _value.dailyQuizCount
+          : dailyQuizCount // ignore: cast_nullable_to_non_nullable
               as int,
       allQuizCount: null == allQuizCount
           ? _value.allQuizCount
           : allQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      weeklyQuizList: null == weeklyQuizList
+          ? _value._weeklyQuizList
+          : weeklyQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      startWeekRange: freezed == startWeekRange
+          ? _value.startWeekRange
+          : startWeekRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endWeekRange: freezed == endWeekRange
+          ? _value.endWeekRange
+          : endWeekRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      weekDays: null == weekDays
+          ? _value._weekDays
+          : weekDays // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      weeklyQuizCounts: null == weeklyQuizCounts
+          ? _value._weeklyQuizCounts
+          : weeklyQuizCounts // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      selectedXIndex: null == selectedXIndex
+          ? _value.selectedXIndex
+          : selectedXIndex // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -150,43 +231,93 @@ class __$$_DashboardCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Dashboard extends _Dashboard {
   _$_Dashboard(
-      {final List<Quiz> quizList = const [],
-      this.todayDuration = Duration.zero,
+      {final List<Quiz> totalQuizList = const [],
+      this.dailyDuration = Duration.zero,
       this.allDuration = Duration.zero,
-      this.todayQuizCount = 0,
-      this.allQuizCount = 0})
-      : _quizList = quizList,
+      this.dailyQuizCount = 0,
+      this.allQuizCount = 0,
+      final List<Quiz> weeklyQuizList = const [],
+      this.startWeekRange,
+      this.endWeekRange,
+      final List<DateTime> weekDays = const [],
+      final List<int> weeklyQuizCounts = const [],
+      this.selectedXIndex = -1})
+      : _totalQuizList = totalQuizList,
+        _weeklyQuizList = weeklyQuizList,
+        _weekDays = weekDays,
+        _weeklyQuizCounts = weeklyQuizCounts,
         super._();
 
   factory _$_Dashboard.fromJson(Map<String, dynamic> json) =>
       _$$_DashboardFromJson(json);
 
-  final List<Quiz> _quizList;
+  final List<Quiz> _totalQuizList;
   @override
   @JsonKey()
-  List<Quiz> get quizList {
-    if (_quizList is EqualUnmodifiableListView) return _quizList;
+  List<Quiz> get totalQuizList {
+    if (_totalQuizList is EqualUnmodifiableListView) return _totalQuizList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_quizList);
+    return EqualUnmodifiableListView(_totalQuizList);
   }
 
-//クイズ一覧
   @override
   @JsonKey()
-  final Duration todayDuration;
+  final Duration dailyDuration;
   @override
   @JsonKey()
   final Duration allDuration;
   @override
   @JsonKey()
-  final int todayQuizCount;
+  final int dailyQuizCount;
   @override
   @JsonKey()
   final int allQuizCount;
+  final List<Quiz> _weeklyQuizList;
+  @override
+  @JsonKey()
+  List<Quiz> get weeklyQuizList {
+    if (_weeklyQuizList is EqualUnmodifiableListView) return _weeklyQuizList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_weeklyQuizList);
+  }
+
+//今週のクイズ一覧
+  @override
+  final DateTime? startWeekRange;
+// 今週の月曜日の日付
+  @override
+  final DateTime? endWeekRange;
+// 今週の日曜日の日付
+  final List<DateTime> _weekDays;
+// 今週の日曜日の日付
+  @override
+  @JsonKey()
+  List<DateTime> get weekDays {
+    if (_weekDays is EqualUnmodifiableListView) return _weekDays;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_weekDays);
+  }
+
+//今週の日にち一覧
+  final List<int> _weeklyQuizCounts;
+//今週の日にち一覧
+  @override
+  @JsonKey()
+  List<int> get weeklyQuizCounts {
+    if (_weeklyQuizCounts is EqualUnmodifiableListView)
+      return _weeklyQuizCounts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_weeklyQuizCounts);
+  }
+
+//今週のデータ一覧
+  @override
+  @JsonKey()
+  final int selectedXIndex;
 
   @override
   String toString() {
-    return 'Dashboard(quizList: $quizList, todayDuration: $todayDuration, allDuration: $allDuration, todayQuizCount: $todayQuizCount, allQuizCount: $allQuizCount)';
+    return 'Dashboard(totalQuizList: $totalQuizList, dailyDuration: $dailyDuration, allDuration: $allDuration, dailyQuizCount: $dailyQuizCount, allQuizCount: $allQuizCount, weeklyQuizList: $weeklyQuizList, startWeekRange: $startWeekRange, endWeekRange: $endWeekRange, weekDays: $weekDays, weeklyQuizCounts: $weeklyQuizCounts, selectedXIndex: $selectedXIndex)';
   }
 
   @override
@@ -194,26 +325,44 @@ class _$_Dashboard extends _Dashboard {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Dashboard &&
-            const DeepCollectionEquality().equals(other._quizList, _quizList) &&
-            (identical(other.todayDuration, todayDuration) ||
-                other.todayDuration == todayDuration) &&
+            const DeepCollectionEquality()
+                .equals(other._totalQuizList, _totalQuizList) &&
+            (identical(other.dailyDuration, dailyDuration) ||
+                other.dailyDuration == dailyDuration) &&
             (identical(other.allDuration, allDuration) ||
                 other.allDuration == allDuration) &&
-            (identical(other.todayQuizCount, todayQuizCount) ||
-                other.todayQuizCount == todayQuizCount) &&
+            (identical(other.dailyQuizCount, dailyQuizCount) ||
+                other.dailyQuizCount == dailyQuizCount) &&
             (identical(other.allQuizCount, allQuizCount) ||
-                other.allQuizCount == allQuizCount));
+                other.allQuizCount == allQuizCount) &&
+            const DeepCollectionEquality()
+                .equals(other._weeklyQuizList, _weeklyQuizList) &&
+            (identical(other.startWeekRange, startWeekRange) ||
+                other.startWeekRange == startWeekRange) &&
+            (identical(other.endWeekRange, endWeekRange) ||
+                other.endWeekRange == endWeekRange) &&
+            const DeepCollectionEquality().equals(other._weekDays, _weekDays) &&
+            const DeepCollectionEquality()
+                .equals(other._weeklyQuizCounts, _weeklyQuizCounts) &&
+            (identical(other.selectedXIndex, selectedXIndex) ||
+                other.selectedXIndex == selectedXIndex));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_quizList),
-      todayDuration,
+      const DeepCollectionEquality().hash(_totalQuizList),
+      dailyDuration,
       allDuration,
-      todayQuizCount,
-      allQuizCount);
+      dailyQuizCount,
+      allQuizCount,
+      const DeepCollectionEquality().hash(_weeklyQuizList),
+      startWeekRange,
+      endWeekRange,
+      const DeepCollectionEquality().hash(_weekDays),
+      const DeepCollectionEquality().hash(_weeklyQuizCounts),
+      selectedXIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -231,26 +380,44 @@ class _$_Dashboard extends _Dashboard {
 
 abstract class _Dashboard extends Dashboard {
   factory _Dashboard(
-      {final List<Quiz> quizList,
-      final Duration todayDuration,
+      {final List<Quiz> totalQuizList,
+      final Duration dailyDuration,
       final Duration allDuration,
-      final int todayQuizCount,
-      final int allQuizCount}) = _$_Dashboard;
+      final int dailyQuizCount,
+      final int allQuizCount,
+      final List<Quiz> weeklyQuizList,
+      final DateTime? startWeekRange,
+      final DateTime? endWeekRange,
+      final List<DateTime> weekDays,
+      final List<int> weeklyQuizCounts,
+      final int selectedXIndex}) = _$_Dashboard;
   _Dashboard._() : super._();
 
   factory _Dashboard.fromJson(Map<String, dynamic> json) =
       _$_Dashboard.fromJson;
 
   @override
-  List<Quiz> get quizList;
-  @override //クイズ一覧
-  Duration get todayDuration;
+  List<Quiz> get totalQuizList;
+  @override
+  Duration get dailyDuration;
   @override
   Duration get allDuration;
   @override
-  int get todayQuizCount;
+  int get dailyQuizCount;
   @override
   int get allQuizCount;
+  @override
+  List<Quiz> get weeklyQuizList;
+  @override //今週のクイズ一覧
+  DateTime? get startWeekRange;
+  @override // 今週の月曜日の日付
+  DateTime? get endWeekRange;
+  @override // 今週の日曜日の日付
+  List<DateTime> get weekDays;
+  @override //今週の日にち一覧
+  List<int> get weeklyQuizCounts;
+  @override //今週のデータ一覧
+  int get selectedXIndex;
   @override
   @JsonKey(ignore: true)
   _$$_DashboardCopyWith<_$_Dashboard> get copyWith =>

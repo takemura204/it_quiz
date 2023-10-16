@@ -8,11 +8,17 @@ part 'dashboard.g.dart';
 @freezed
 class Dashboard with _$Dashboard {
   factory Dashboard({
-    @Default([]) final List<Quiz> quizList, //クイズ一覧
-    @Default(Duration.zero) final Duration todayDuration,
+    @Default([]) final List<Quiz> totalQuizList,
+    @Default(Duration.zero) final Duration dailyDuration,
     @Default(Duration.zero) final Duration allDuration,
-    @Default(0) final int todayQuizCount,
+    @Default(0) final int dailyQuizCount,
     @Default(0) final int allQuizCount,
+    @Default([]) final List<Quiz> weeklyQuizList, //今週のクイズ一覧
+    DateTime? startWeekRange, // 今週の月曜日の日付
+    DateTime? endWeekRange, // 今週の日曜日の日付
+    @Default([]) final List<DateTime> weekDays, //今週の日にち一覧
+    @Default([]) final List<int> weeklyQuizCounts, //今週のデータ一覧
+    @Default(-1) final int selectedXIndex,
   }) = _Dashboard;
 
   Dashboard._();

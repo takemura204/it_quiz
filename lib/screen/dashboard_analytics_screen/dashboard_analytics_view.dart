@@ -2,10 +2,10 @@ part of 'dashboard_analytics_screen.dart';
 
 class _Title extends ConsumerWidget {
   const _Title(
-      {required this.title, required this.subtitle, required this.icon});
+      {required this.title, required this.subWidget, required this.icon});
 
   final String title;
-  final String subtitle;
+  final Widget subWidget;
   final IconData icon;
 
   @override
@@ -27,11 +27,6 @@ class _Title extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          // Icon(
-          //   icon,
-          //   color: context.mainColor,
-          //   size: context.height * 0.04,
-          // ),
           Gap(context.width * 0.01),
           Text(
             title,
@@ -41,12 +36,7 @@ class _Title extends ConsumerWidget {
                 fontWeight: FontWeight.bold),
           ),
           const Spacer(),
-          Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: context.height * 0.018,
-            ),
-          ),
+          subWidget,
         ],
       ),
     );
@@ -99,8 +89,8 @@ class _DailyMessage extends ConsumerWidget {
 }
 
 ///[週/月]の選択
-class _DashBoardSelectPeriod extends ConsumerWidget {
-  const _DashBoardSelectPeriod();
+class _SelectPeriodTab extends ConsumerWidget {
+  const _SelectPeriodTab();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -108,6 +98,59 @@ class _DashBoardSelectPeriod extends ConsumerWidget {
     final controller = ref.watch(dashboardAnalyticsProvider.notifier);
     final tabs = controller.tabs;
     final initialIndex = tabs.indexOf(state.selectedDayRange);
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: context.height * 0.002),
+      child: Container(
+        width: context.width * 0.35,
+        height: context.height * 0.035,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: context.mainColor),
+        ),
+        child: DefaultTabController(
+          length: tabs.length,
+          initialIndex: initialIndex,
+          child: TabBar(
+              onTap: (index) => ref
+                  .read(dashboardAnalyticsProvider.notifier)
+                  .tapTabBar(index),
+              labelColor: Colors.white,
+              labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+              unselectedLabelStyle:
+                  const TextStyle(fontWeight: FontWeight.normal),
+              unselectedLabelColor: context.mainColor,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: context.mainColor),
+              tabs: [
+                Tab(
+                  child: Text(
+                    "週",
+                    style: TextStyle(fontSize: context.width * 0.03),
+                  ),
+                ),
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text("月",
+                        style: TextStyle(fontSize: context.width * 0.03)),
+                  ),
+                ),
+              ]),
+        ),
+      ),
+    );
+  }
+}
+
+class _DashBoardSelectPeriod extends ConsumerWidget {
+  const _DashBoardSelectPeriod();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardAnalyticsProvider);
     final tabIndex = state.tabIndex;
     final dayRangeText = state.dayRangeText;
     final weekOffset = state.weekOffset;
@@ -122,6 +165,8 @@ class _DashBoardSelectPeriod extends ConsumerWidget {
           Container(
             width: context.width * 0.55,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
                   padding: EdgeInsets.all(context.width * 0.01),
@@ -165,47 +210,6 @@ class _DashBoardSelectPeriod extends ConsumerWidget {
             ),
           ),
           const Spacer(),
-          Container(
-            width: context.width * 0.35,
-            alignment: Alignment.center,
-            // color: Colors.blue,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: context.mainColor),
-            ),
-            child: DefaultTabController(
-              length: tabs.length,
-              initialIndex: initialIndex,
-              child: TabBar(
-                  onTap: (index) => ref
-                      .read(dashboardAnalyticsProvider.notifier)
-                      .tapTabBar(index),
-                  labelColor: Colors.white,
-                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                  unselectedLabelStyle:
-                      const TextStyle(fontWeight: FontWeight.normal),
-                  unselectedLabelColor: context.mainColor,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: context.mainColor),
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        "週",
-                        style: TextStyle(fontSize: context.width * 0.03),
-                      ),
-                    ),
-                    Tab(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text("月",
-                            style: TextStyle(fontSize: context.width * 0.03)),
-                      ),
-                    ),
-                  ]),
-            ),
-          ),
         ],
       ),
     );
