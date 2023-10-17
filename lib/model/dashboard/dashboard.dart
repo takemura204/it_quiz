@@ -18,7 +18,10 @@ class Dashboard with _$Dashboard {
     DateTime? endWeekRange, // 今週の日曜日の日付
     @Default([]) final List<DateTime> weekDays, //今週の日にち一覧
     @Default([]) final List<int> weeklyQuizCounts, //今週のデータ一覧
+    @Default(0) final int weeklyQuizTotal, //今週のデータ一覧
     @Default(-1) final int selectedXIndex,
+    @Default(0) final int weekOffset, //週の期間選択
+    @Default(0) final int monthOffset,
   }) = _Dashboard;
 
   Dashboard._();

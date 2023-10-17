@@ -1,15 +1,10 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/dashboard_analytics/bar_data_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
 
-import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
-import '../../controller/home_dashboard/home_dashboard_screen_controller.dart';
 import '../../model/dashboard/dashboard_model.dart';
 
 class WeeklyDashboard extends ConsumerWidget {
@@ -43,7 +38,9 @@ class WeeklyDashboard extends ConsumerWidget {
               ),
 
               Gap(context.height * 0.01),
-              const _DashBoardSelectPeriod(),
+
+              ///期間
+              const _SelectPeriod(),
 
               Gap(context.height * 0.01),
 
@@ -230,59 +227,33 @@ class WeeklyChart extends ConsumerWidget {
   }
 }
 
-class _BottomWeekTitles extends ConsumerWidget {
-  const _BottomWeekTitles({required this.meta, required this.value});
-
-  final TitleMeta meta;
-  final double value;
+class _SelectPeriod extends ConsumerWidget {
+  const _SelectPeriod();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    final selectedXIndex = state.selectedXIndex;
-    final weeklyIndex = state.weeklyIndex;
-    final weekData = state.weeklyData[weeklyIndex];
-    final adjustedIndex = min(max(0, value.toInt()), weekData.length - 1);
-    final barData = weekData[adjustedIndex];
-    final isToday = DateTime.now().day == barData.day.day &&
-        DateTime.now().weekday == barData.day.weekday;
-    final displayText =
-        "${barData.day.month}/${barData.day.day}\n${barData.weekDay}";
+    final model = ref.watch(dashboardModelProvider);
+    final weekOffset = model.weekOffset;
+    final weekDays = model.weekDays;
+    final weeklyQuizTotal = model.weeklyQuizTotal;
 
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 2,
-      child: Text(
-        displayText,
-        style: TextStyle(
-          color: isToday ? context.mainColor : Colors.grey,
-          fontWeight: (isToday || selectedXIndex == adjustedIndex)
-              ? FontWeight.bold
-              : FontWeight.normal,
-          fontSize: context.width * 0.03,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
-
-class _DashBoardSelectPeriod extends ConsumerWidget {
-  const _DashBoardSelectPeriod();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    final tabIndex = state.tabIndex;
-    final dayRangeText = state.dayRangeText;
-    final weekOffset = state.weekOffset;
-    final monthOffset = state.monthOffset;
     return Container(
       height: context.height * 0.04,
       margin: EdgeInsets.symmetric(
           horizontal: context.width * 0.02, vertical: context.width * 0.01),
       child: Row(
         children: [
+          Gap(context.width * 0.02),
+
+          ///アイコン欲しい
+          Text(
+            "計${weeklyQuizTotal}問",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: context.width * 0.05),
+          ),
+
+          const Spacer(),
+
           ///期間
           Container(
             width: context.width * 0.55,
@@ -293,13 +264,15 @@ class _DashBoardSelectPeriod extends ConsumerWidget {
                 IconButton(
                   padding: EdgeInsets.all(context.width * 0.01),
                   iconSize: context.width * 0.06,
-                  onPressed: () => ref
-                      .read(dashboardAnalyticsProvider.notifier)
-                      .tapPreButton(),
+                  onPressed: () {
+                    if (weekOffset >= -3)
+                      ref
+                          .read(dashboardModelProvider.notifier)
+                          .updateWeeklyData(-1); // 前の週に移動
+                  },
                   icon: Icon(
                     Icons.arrow_back_ios,
-                    color: ((tabIndex == 0 && weekOffset == -3) ||
-                            (tabIndex == 1 && monthOffset == -2))
+                    color: (weekOffset == -3)
                         ? Colors.grey.shade400
                         : context.mainColor,
                   ),
@@ -308,7 +281,7 @@ class _DashBoardSelectPeriod extends ConsumerWidget {
 
                 ///選択期間のスコア
                 Text(
-                  dayRangeText,
+                  "${weekDays.first.month}/${weekDays.first.day}〜${weekDays.last.month}/${weekDays.last.day}",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: context.width * 0.04),
@@ -317,13 +290,15 @@ class _DashBoardSelectPeriod extends ConsumerWidget {
                 IconButton(
                   padding: EdgeInsets.all(context.width * 0.01),
                   iconSize: context.width * 0.06,
-                  onPressed: () => ref
-                      .read(dashboardAnalyticsProvider.notifier)
-                      .tapNextButton(),
+                  onPressed: () {
+                    if (weekOffset <= 0)
+                      ref
+                          .read(dashboardModelProvider.notifier)
+                          .updateWeeklyData(1);
+                  },
                   icon: Icon(
                     Icons.arrow_forward_ios,
-                    color: ((tabIndex == 0 && weekOffset == 0) ||
-                            (tabIndex == 1 && monthOffset == 0))
+                    color: (weekOffset == 0)
                         ? Colors.grey.shade400
                         : context.mainColor,
                   ),
@@ -331,42 +306,7 @@ class _DashBoardSelectPeriod extends ConsumerWidget {
               ],
             ),
           ),
-          const Spacer(),
         ],
-      ),
-    );
-  }
-}
-
-class _BottomMonthTitles extends ConsumerWidget {
-  const _BottomMonthTitles({required this.meta, required this.value});
-
-  final TitleMeta meta;
-  final double value;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
-    final valueIndex = value.toInt();
-    final monthDay = '$valueIndex';
-
-    if (valueIndex % 5 != 1) {
-      return const SizedBox.shrink();
-    }
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 2,
-      child: Text(
-        monthDay,
-        style: TextStyle(
-          color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
-          fontSize: context.width * 0.03,
-          fontWeight: (selectedIndex == valueIndex)
-              ? FontWeight.bold
-              : FontWeight.normal,
-        ),
-        textAlign: TextAlign.center,
       ),
     );
   }

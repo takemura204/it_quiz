@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -20,13 +19,13 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
   @override
   Future initState() async {
     // _resetData();
-    await _loadQuizData(); // データを読み込む
-    setWeeklyData();
+    await _loadDailyData(); // データを読み込む
+    loadWeeklyData();
     super.initState();
   }
 
-  ///読み込み
-  Future _loadQuizData() async {
+  ///DailyData読み込み
+  Future _loadDailyData() async {
     final List<Quiz> totalQuizList =
         ref.read(quizModelProvider).historyQuizList;
     final today = DateTime.now();
@@ -57,7 +56,8 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
     );
   }
 
-  void setWeeklyData() {
+  ///WeeklyData読み込み
+  void loadWeeklyData() {
     final now = DateTime.now();
     final startOfWeek =
         DateTime(now.year, now.month, now.day - (now.weekday - 1)); // 月曜日の00:00
@@ -67,7 +67,25 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
         minutes: 59,
         seconds: 59,
         milliseconds: 999)); // 日曜日の23:59:59.999
+    setWeeklyData(startOfWeek, endOfWeek);
+  }
 
+  void updateWeeklyData(int offset) {
+    final weekOffset = state.weekOffset + offset;
+    state = state.copyWith(weekOffset: weekOffset);
+    final now = DateTime.now().add(Duration(days: weekOffset * 7));
+    final startOfWeek =
+        DateTime(now.year, now.month, now.day - (now.weekday - 1)); // 月曜日の00:00
+    final endOfWeek = startOfWeek.add(const Duration(
+        days: 6,
+        hours: 23,
+        minutes: 59,
+        seconds: 59,
+        milliseconds: 999)); // 日曜日の23:59:59.999
+    setWeeklyData(startOfWeek, endOfWeek);
+  }
+
+  void setWeeklyData(DateTime startOfWeek, DateTime endOfWeek) {
     final totalQuizList = state.totalQuizList;
     final weeklyQuizList = totalQuizList
         .where((x) =>
@@ -94,18 +112,17 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
           0, (prev, quiz) => prev + quiz.quizItemList.length);
       weeklyQuizCounts.add(quizCount);
     }
+    // weeklyQuizCounts の合計を求める
+    final int weeklyQuizTotal = weeklyQuizCounts.fold(0, (a, b) => a + b);
 
     state = state.copyWith(
       startWeekRange: startOfWeek,
       endWeekRange: endOfWeek,
       weekDays: weekDays,
       weeklyQuizCounts: weeklyQuizCounts,
+      weeklyQuizTotal: weeklyQuizTotal,
       weeklyQuizList: weeklyQuizList,
     );
-
-    final weekRange = DateTimeRange(start: startOfWeek, end: endOfWeek);
-
-    print({"weekRange", weekRange});
   }
 
   void selectXIndex(int selectedXIndex) {

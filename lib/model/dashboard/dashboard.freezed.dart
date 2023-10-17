@@ -33,7 +33,10 @@ mixin _$Dashboard {
   List<DateTime> get weekDays => throw _privateConstructorUsedError; //今週の日にち一覧
   List<int> get weeklyQuizCounts =>
       throw _privateConstructorUsedError; //今週のデータ一覧
+  int get weeklyQuizTotal => throw _privateConstructorUsedError; //今週のデータ一覧
   int get selectedXIndex => throw _privateConstructorUsedError;
+  int get weekOffset => throw _privateConstructorUsedError; //週の期間選択
+  int get monthOffset => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +60,10 @@ abstract class $DashboardCopyWith<$Res> {
       DateTime? endWeekRange,
       List<DateTime> weekDays,
       List<int> weeklyQuizCounts,
-      int selectedXIndex});
+      int weeklyQuizTotal,
+      int selectedXIndex,
+      int weekOffset,
+      int monthOffset});
 }
 
 /// @nodoc
@@ -83,7 +89,10 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
     Object? endWeekRange = freezed,
     Object? weekDays = null,
     Object? weeklyQuizCounts = null,
+    Object? weeklyQuizTotal = null,
     Object? selectedXIndex = null,
+    Object? weekOffset = null,
+    Object? monthOffset = null,
   }) {
     return _then(_value.copyWith(
       totalQuizList: null == totalQuizList
@@ -126,9 +135,21 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
           ? _value.weeklyQuizCounts
           : weeklyQuizCounts // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      weeklyQuizTotal: null == weeklyQuizTotal
+          ? _value.weeklyQuizTotal
+          : weeklyQuizTotal // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedXIndex: null == selectedXIndex
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      weekOffset: null == weekOffset
+          ? _value.weekOffset
+          : weekOffset // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthOffset: null == monthOffset
+          ? _value.monthOffset
+          : monthOffset // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -152,7 +173,10 @@ abstract class _$$_DashboardCopyWith<$Res> implements $DashboardCopyWith<$Res> {
       DateTime? endWeekRange,
       List<DateTime> weekDays,
       List<int> weeklyQuizCounts,
-      int selectedXIndex});
+      int weeklyQuizTotal,
+      int selectedXIndex,
+      int weekOffset,
+      int monthOffset});
 }
 
 /// @nodoc
@@ -176,7 +200,10 @@ class __$$_DashboardCopyWithImpl<$Res>
     Object? endWeekRange = freezed,
     Object? weekDays = null,
     Object? weeklyQuizCounts = null,
+    Object? weeklyQuizTotal = null,
     Object? selectedXIndex = null,
+    Object? weekOffset = null,
+    Object? monthOffset = null,
   }) {
     return _then(_$_Dashboard(
       totalQuizList: null == totalQuizList
@@ -219,9 +246,21 @@ class __$$_DashboardCopyWithImpl<$Res>
           ? _value._weeklyQuizCounts
           : weeklyQuizCounts // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      weeklyQuizTotal: null == weeklyQuizTotal
+          ? _value.weeklyQuizTotal
+          : weeklyQuizTotal // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedXIndex: null == selectedXIndex
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      weekOffset: null == weekOffset
+          ? _value.weekOffset
+          : weekOffset // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthOffset: null == monthOffset
+          ? _value.monthOffset
+          : monthOffset // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -241,7 +280,10 @@ class _$_Dashboard extends _Dashboard {
       this.endWeekRange,
       final List<DateTime> weekDays = const [],
       final List<int> weeklyQuizCounts = const [],
-      this.selectedXIndex = -1})
+      this.weeklyQuizTotal = 0,
+      this.selectedXIndex = -1,
+      this.weekOffset = 0,
+      this.monthOffset = 0})
       : _totalQuizList = totalQuizList,
         _weeklyQuizList = weeklyQuizList,
         _weekDays = weekDays,
@@ -313,11 +355,22 @@ class _$_Dashboard extends _Dashboard {
 //今週のデータ一覧
   @override
   @JsonKey()
+  final int weeklyQuizTotal;
+//今週のデータ一覧
+  @override
+  @JsonKey()
   final int selectedXIndex;
+  @override
+  @JsonKey()
+  final int weekOffset;
+//週の期間選択
+  @override
+  @JsonKey()
+  final int monthOffset;
 
   @override
   String toString() {
-    return 'Dashboard(totalQuizList: $totalQuizList, dailyDuration: $dailyDuration, allDuration: $allDuration, dailyQuizCount: $dailyQuizCount, allQuizCount: $allQuizCount, weeklyQuizList: $weeklyQuizList, startWeekRange: $startWeekRange, endWeekRange: $endWeekRange, weekDays: $weekDays, weeklyQuizCounts: $weeklyQuizCounts, selectedXIndex: $selectedXIndex)';
+    return 'Dashboard(totalQuizList: $totalQuizList, dailyDuration: $dailyDuration, allDuration: $allDuration, dailyQuizCount: $dailyQuizCount, allQuizCount: $allQuizCount, weeklyQuizList: $weeklyQuizList, startWeekRange: $startWeekRange, endWeekRange: $endWeekRange, weekDays: $weekDays, weeklyQuizCounts: $weeklyQuizCounts, weeklyQuizTotal: $weeklyQuizTotal, selectedXIndex: $selectedXIndex, weekOffset: $weekOffset, monthOffset: $monthOffset)';
   }
 
   @override
@@ -344,8 +397,14 @@ class _$_Dashboard extends _Dashboard {
             const DeepCollectionEquality().equals(other._weekDays, _weekDays) &&
             const DeepCollectionEquality()
                 .equals(other._weeklyQuizCounts, _weeklyQuizCounts) &&
+            (identical(other.weeklyQuizTotal, weeklyQuizTotal) ||
+                other.weeklyQuizTotal == weeklyQuizTotal) &&
             (identical(other.selectedXIndex, selectedXIndex) ||
-                other.selectedXIndex == selectedXIndex));
+                other.selectedXIndex == selectedXIndex) &&
+            (identical(other.weekOffset, weekOffset) ||
+                other.weekOffset == weekOffset) &&
+            (identical(other.monthOffset, monthOffset) ||
+                other.monthOffset == monthOffset));
   }
 
   @JsonKey(ignore: true)
@@ -362,7 +421,10 @@ class _$_Dashboard extends _Dashboard {
       endWeekRange,
       const DeepCollectionEquality().hash(_weekDays),
       const DeepCollectionEquality().hash(_weeklyQuizCounts),
-      selectedXIndex);
+      weeklyQuizTotal,
+      selectedXIndex,
+      weekOffset,
+      monthOffset);
 
   @JsonKey(ignore: true)
   @override
@@ -390,7 +452,10 @@ abstract class _Dashboard extends Dashboard {
       final DateTime? endWeekRange,
       final List<DateTime> weekDays,
       final List<int> weeklyQuizCounts,
-      final int selectedXIndex}) = _$_Dashboard;
+      final int weeklyQuizTotal,
+      final int selectedXIndex,
+      final int weekOffset,
+      final int monthOffset}) = _$_Dashboard;
   _Dashboard._() : super._();
 
   factory _Dashboard.fromJson(Map<String, dynamic> json) =
@@ -417,7 +482,13 @@ abstract class _Dashboard extends Dashboard {
   @override //今週の日にち一覧
   List<int> get weeklyQuizCounts;
   @override //今週のデータ一覧
+  int get weeklyQuizTotal;
+  @override //今週のデータ一覧
   int get selectedXIndex;
+  @override
+  int get weekOffset;
+  @override //週の期間選択
+  int get monthOffset;
   @override
   @JsonKey(ignore: true)
   _$$_DashboardCopyWith<_$_Dashboard> get copyWith =>

@@ -37,7 +37,10 @@ _$_Dashboard _$$_DashboardFromJson(Map<String, dynamic> json) => _$_Dashboard(
               ?.map((e) => e as int)
               .toList() ??
           const [],
+      weeklyQuizTotal: json['weeklyQuizTotal'] as int? ?? 0,
       selectedXIndex: json['selectedXIndex'] as int? ?? -1,
+      weekOffset: json['weekOffset'] as int? ?? 0,
+      monthOffset: json['monthOffset'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_DashboardToJson(_$_Dashboard instance) =>
@@ -52,5 +55,8 @@ Map<String, dynamic> _$$_DashboardToJson(_$_Dashboard instance) =>
       'endWeekRange': instance.endWeekRange?.toIso8601String(),
       'weekDays': instance.weekDays.map((e) => e.toIso8601String()).toList(),
       'weeklyQuizCounts': instance.weeklyQuizCounts,
+      'weeklyQuizTotal': instance.weeklyQuizTotal,
       'selectedXIndex': instance.selectedXIndex,
+      'weekOffset': instance.weekOffset,
+      'monthOffset': instance.monthOffset,
     };
