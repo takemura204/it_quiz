@@ -90,8 +90,7 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
     final weeklyQuizList = totalQuizList
         .where((x) =>
             x.timeStamp!.isAfter(startOfWeek) &&
-            x.timeStamp!.isBefore(
-                endOfWeek.add(const Duration(days: 1)))) // 日曜日の終わりまでを含むために1日追加
+            x.timeStamp!.isBefore(endOfWeek.add(const Duration(days: 1))))
         .toList();
 
     final List<DateTime> weekDays = [];
@@ -99,8 +98,9 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
       weekDays.add(startOfWeek.add(Duration(days: i)));
     }
 
+    //1週間の問題数を追加
     final List<int> weeklyQuizCounts = [];
-
+    final List<Duration> weeklyDuration = [];
     for (DateTime day in weekDays) {
       final quizzesForTheDay = weeklyQuizList
           .where((quiz) =>
@@ -110,22 +110,27 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
           .toList();
       final quizCount = quizzesForTheDay.fold<int>(
           0, (prev, quiz) => prev + quiz.quizItemList.length);
+      final duration = quizzesForTheDay.fold<Duration>(
+          Duration.zero, (prev, quiz) => prev + quiz.duration);
       weeklyQuizCounts.add(quizCount);
+      weeklyDuration.add(duration);
     }
-    // weeklyQuizCounts の合計を求める
+    //  合計
     final int weeklyQuizTotal = weeklyQuizCounts.fold(0, (a, b) => a + b);
+    final Duration weeklyDurationTotal =
+        weeklyDuration.fold(Duration.zero, (a, b) => a + b);
+    final runningDays = weeklyQuizCounts.where((x) => x > 0).toList().length;
 
     state = state.copyWith(
+      weeklyQuizList: weeklyQuizList,
       startWeekRange: startOfWeek,
       endWeekRange: endOfWeek,
       weekDays: weekDays,
       weeklyQuizCounts: weeklyQuizCounts,
       weeklyQuizTotal: weeklyQuizTotal,
-      weeklyQuizList: weeklyQuizList,
+      weeklyDuration: weeklyDuration,
+      runningDays: runningDays,
+      weeklyDurationTotal: weeklyDurationTotal,
     );
-  }
-
-  void selectXIndex(int selectedXIndex) {
-    state = state.copyWith(selectedXIndex: selectedXIndex);
   }
 }
