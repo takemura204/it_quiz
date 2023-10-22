@@ -15,6 +15,7 @@ class HomeDashboardScreenState with _$HomeDashboardScreenState {
     @Default(0) final int valueY,
     @Default([]) final List<DateTime> days,
     @Default("") final String unit,
+    @Default(0) final int tabIndex,
   }) = _Create;
 }
 

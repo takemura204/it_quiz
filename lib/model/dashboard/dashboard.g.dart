@@ -34,7 +34,6 @@ _$_Dashboard _$$_DashboardFromJson(Map<String, dynamic> json) => _$_Dashboard(
               ?.map((e) => DateTime.parse(e as String))
               .toList() ??
           const [],
-      weekOffset: json['weekOffset'] as int? ?? 0,
       weeklyQuizCounts: (json['weeklyQuizCounts'] as List<dynamic>?)
               ?.map((e) => e as int)
               .toList() ??
@@ -45,25 +44,7 @@ _$_Dashboard _$$_DashboardFromJson(Map<String, dynamic> json) => _$_Dashboard(
               .toList() ??
           const [],
       weeklyDurationTotal: json['weeklyDurationTotal'] as int? ?? 0,
-      monthlyQuizList: (json['monthlyQuizList'] as List<dynamic>?)
-              ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      startMonthRange: json['startMonthRange'] == null
-          ? null
-          : DateTime.parse(json['startMonthRange'] as String),
-      endMonthRange: json['endMonthRange'] == null
-          ? null
-          : DateTime.parse(json['endMonthRange'] as String),
-      monthDays: (json['monthDays'] as List<dynamic>?)
-              ?.map((e) => DateTime.parse(e as String))
-              .toList() ??
-          const [],
-      monthQuizCounts: (json['monthQuizCounts'] as List<dynamic>?)
-              ?.map((e) => e as int)
-              .toList() ??
-          const [],
-      monthQuizTotal: json['monthQuizTotal'] as int? ?? 0,
+      weekOffset: json['weekOffset'] as int? ?? 0,
       monthOffset: json['monthOffset'] as int? ?? 0,
     );
 
@@ -79,16 +60,10 @@ Map<String, dynamic> _$$_DashboardToJson(_$_Dashboard instance) =>
       'startWeekRange': instance.startWeekRange?.toIso8601String(),
       'endWeekRange': instance.endWeekRange?.toIso8601String(),
       'weekDays': instance.weekDays.map((e) => e.toIso8601String()).toList(),
-      'weekOffset': instance.weekOffset,
       'weeklyQuizCounts': instance.weeklyQuizCounts,
       'weeklyQuizTotal': instance.weeklyQuizTotal,
       'weeklyDuration': instance.weeklyDuration,
       'weeklyDurationTotal': instance.weeklyDurationTotal,
-      'monthlyQuizList': instance.monthlyQuizList,
-      'startMonthRange': instance.startMonthRange?.toIso8601String(),
-      'endMonthRange': instance.endMonthRange?.toIso8601String(),
-      'monthDays': instance.monthDays.map((e) => e.toIso8601String()).toList(),
-      'monthQuizCounts': instance.monthQuizCounts,
-      'monthQuizTotal': instance.monthQuizTotal,
+      'weekOffset': instance.weekOffset,
       'monthOffset': instance.monthOffset,
     };

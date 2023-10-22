@@ -7,12 +7,14 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../model/dashboard/dashboard_model.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/user/user.model.dart';
 import '../../view/chart/weekly_chart.dart';
 import '../../view/mission/mission_widget.dart';
 import '../../view/rank/rank_widget.dart';
 
-part 'home_dashboard_view.dart';
+part 'home_dashboard_daily.dart';
 
 class HomeDashboardScreen extends ConsumerWidget {
   const HomeDashboardScreen();
@@ -28,6 +30,46 @@ class HomeDashboardScreen extends ConsumerWidget {
       child: const Scaffold(
         appBar: _AppBar(),
         body: _Body(),
+      ),
+    );
+  }
+}
+
+class _Body extends ConsumerWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeDashboardScreenProvider);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.1,
+        ),
+      );
+    }
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Gap(5),
+
+          ///今日の学習
+          DailyDashboard(),
+
+          ///週&月の学習データ
+          WeeklyDashboard(),
+
+          DashboardQuizLength(),
+
+          ///今日の目標
+          // DailyGoal(),
+
+          ///グループごとの進捗
+          GroupProgress(),
+
+          RankScore(),
+        ],
       ),
     );
   }

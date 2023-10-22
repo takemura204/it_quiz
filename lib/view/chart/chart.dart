@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
+import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 class QuizChart extends ConsumerWidget {
@@ -14,6 +15,7 @@ class QuizChart extends ConsumerWidget {
     final valueY = state.valueY;
     final maxValue = valueY * 2; //最大表示メモリ
     final days = state.days;
+    final selectedPeriodType = state.selectedPeriodType;
 
     return Container(
       height: context.height * 0.25,
@@ -85,20 +87,41 @@ class QuizChart extends ConsumerWidget {
                   final date = days[value.toInt()];
                   final isToday = DateTime.now().day == date.day &&
                       DateTime.now().weekday == date.weekday;
-                  final formattedDate = "${date.month}/${date.day}";
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 3),
-                    child: Text(
-                      formattedDate,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color:
-                            isToday ? context.mainColor : Colors.grey.shade400,
-                        fontSize: context.width * 0.03,
-                      ),
-                    ),
-                  );
+                  final weeklyDateText = "${date.month}/${date.day}";
+                  final monthlyDateText =
+                      (date.day % 5 != 1) ? "" : "${date.day}";
+                  switch (selectedPeriodType) {
+                    case PeriodType.weekly:
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: Text(
+                          weeklyDateText,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: isToday
+                                ? context.mainColor
+                                : Colors.grey.shade400,
+                            fontSize: context.width * 0.03,
+                          ),
+                        ),
+                      );
+                    case PeriodType.monthly:
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: Text(
+                          monthlyDateText,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: isToday
+                                ? context.mainColor
+                                : Colors.grey.shade400,
+                            fontSize: context.width * 0.03,
+                          ),
+                        ),
+                      );
+                  }
                 },
               ),
             ),
@@ -133,46 +156,77 @@ class QuizChart extends ConsumerWidget {
               drawBehindEverything: true,
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: context.width * 0.15,
+                reservedSize: context.width * 0.12,
                 getTitlesWidget: (value, meta) {
                   final date = days[value.toInt()];
                   final isQuizCountPositive = valueX[value.toInt()] > 0;
                   final dayOfWeek = DateFormat('E', 'ja_JP')
                       .format(date)
                       .substring(0, 1); // 曜日の略称を取得
-                  return Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: context.width * 0.1,
-                          height: context.width * 0.1,
-                          decoration: BoxDecoration(
-                            border: isQuizCountPositive
-                                ? Border.all(color: context.mainColor, width: 3)
-                                : Border.all(
-                                    color: Colors.grey.shade400, width: 2),
-                            shape: BoxShape.circle,
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            dayOfWeek,
-                            textAlign: TextAlign.center,
-                            style: isQuizCountPositive
-                                ? TextStyle(
-                                    color: context.mainColor,
-                                    fontSize: context.width * 0.03,
-                                    fontWeight: FontWeight.bold,
-                                  )
-                                : TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontSize: context.width * 0.03,
-                                  ),
-                          ),
+
+                  switch (selectedPeriodType) {
+                    case PeriodType.weekly:
+                      return Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: context.width * 0.08,
+                              height: context.width * 0.08,
+                              decoration: BoxDecoration(
+                                border: isQuizCountPositive
+                                    ? Border.all(
+                                        color: context.mainColor, width: 3)
+                                    : Border.all(
+                                        color: Colors.grey.shade400, width: 2),
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                dayOfWeek,
+                                textAlign: TextAlign.center,
+                                style: isQuizCountPositive
+                                    ? TextStyle(
+                                        color: context.mainColor,
+                                        fontSize: context.width * 0.03,
+                                        fontWeight: FontWeight.bold,
+                                      )
+                                    : TextStyle(
+                                        color: Colors.grey.shade400,
+                                        fontSize: context.width * 0.03,
+                                      ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
+                      );
+
+                    case PeriodType.monthly:
+                      return Container(
+                        // color: Colors.green,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: context.width * 0.02,
+                              height: context.width * 0.02,
+                              decoration: BoxDecoration(
+                                  border: isQuizCountPositive
+                                      ? Border.all(
+                                          color: context.mainColor, width: 1)
+                                      : Border.all(
+                                          color: Colors.grey.shade400,
+                                          width: 1),
+                                  shape: BoxShape.circle,
+                                  color: isQuizCountPositive
+                                      ? context.mainColor
+                                      : Colors.grey.shade400),
+                              alignment: Alignment.center,
+                            ),
+                          ],
+                        ),
+                      );
+                  }
                 },
               ),
             ),
@@ -185,21 +239,40 @@ class QuizChart extends ConsumerWidget {
                 ? context.mainColor
                 : Colors.grey.shade400;
 
-            return BarChartGroupData(
-              x: days.indexOf(day),
-              barsSpace: 1,
-              barRods: [
-                CustomBarChartRodData(
-                  toY: quizCount > maxValue
-                      ? maxValue + 0.5
-                      : quizCount.toDouble(),
-                  color: color,
-                  width: 30,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ],
-              showingTooltipIndicators: [],
-            );
+            switch (selectedPeriodType) {
+              case PeriodType.weekly:
+                return BarChartGroupData(
+                  x: days.indexOf(day),
+                  barsSpace: 1,
+                  barRods: [
+                    CustomBarChartRodData(
+                      toY: quizCount > maxValue
+                          ? maxValue + 0.5
+                          : quizCount.toDouble(),
+                      color: color,
+                      width: 30,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ],
+                  showingTooltipIndicators: [],
+                );
+              case PeriodType.monthly:
+                return BarChartGroupData(
+                  x: days.indexOf(day),
+                  barsSpace: 1,
+                  barRods: [
+                    CustomBarChartRodData(
+                      toY: quizCount > maxValue
+                          ? maxValue + 0.5
+                          : quizCount.toDouble(),
+                      color: color,
+                      width: 10,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ],
+                  showingTooltipIndicators: [],
+                );
+            }
           }).toList(),
           maxY: maxValue.toDouble(),
           barTouchData: BarTouchData(
@@ -223,7 +296,7 @@ class QuizChart extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                     color: rod.color,
                     backgroundColor: Colors.transparent,
-                    fontSize: context.width * 0.04,
+                    fontSize: context.width * 0.03,
                   ),
                   textAlign: TextAlign.center,
                 );

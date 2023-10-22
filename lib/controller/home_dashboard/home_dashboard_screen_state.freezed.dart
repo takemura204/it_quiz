@@ -24,6 +24,7 @@ mixin _$HomeDashboardScreenState {
   int get valueY => throw _privateConstructorUsedError;
   List<DateTime> get days => throw _privateConstructorUsedError;
   String get unit => throw _privateConstructorUsedError;
+  int get tabIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeDashboardScreenStateCopyWith<HomeDashboardScreenState> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
       List<int> valueX,
       int valueY,
       List<DateTime> days,
-      String unit});
+      String unit,
+      int tabIndex});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
     Object? valueY = null,
     Object? days = null,
     Object? unit = null,
+    Object? tabIndex = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -103,6 +106,10 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as String,
+      tabIndex: null == tabIndex
+          ? _value.tabIndex
+          : tabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$_CreateCopyWith<$Res>
       List<int> valueX,
       int valueY,
       List<DateTime> days,
-      String unit});
+      String unit,
+      int tabIndex});
 }
 
 /// @nodoc
@@ -143,6 +151,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? valueY = null,
     Object? days = null,
     Object? unit = null,
+    Object? tabIndex = null,
   }) {
     return _then(_$_Create(
       isLoading: null == isLoading
@@ -177,6 +186,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as String,
+      tabIndex: null == tabIndex
+          ? _value.tabIndex
+          : tabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -192,7 +205,8 @@ class _$_Create extends _Create {
       final List<int> valueX = const [],
       this.valueY = 0,
       final List<DateTime> days = const [],
-      this.unit = ""})
+      this.unit = "",
+      this.tabIndex = 0})
       : _valueX = valueX,
         _days = days,
         super._();
@@ -233,10 +247,13 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final String unit;
+  @override
+  @JsonKey()
+  final int tabIndex;
 
   @override
   String toString() {
-    return 'HomeDashboardScreenState(isLoading: $isLoading, selectedXIndex: $selectedXIndex, selectedPeriodType: $selectedPeriodType, selectedChartType: $selectedChartType, valueX: $valueX, valueY: $valueY, days: $days, unit: $unit)';
+    return 'HomeDashboardScreenState(isLoading: $isLoading, selectedXIndex: $selectedXIndex, selectedPeriodType: $selectedPeriodType, selectedChartType: $selectedChartType, valueX: $valueX, valueY: $valueY, days: $days, unit: $unit, tabIndex: $tabIndex)';
   }
 
   @override
@@ -255,7 +272,9 @@ class _$_Create extends _Create {
             const DeepCollectionEquality().equals(other._valueX, _valueX) &&
             (identical(other.valueY, valueY) || other.valueY == valueY) &&
             const DeepCollectionEquality().equals(other._days, _days) &&
-            (identical(other.unit, unit) || other.unit == unit));
+            (identical(other.unit, unit) || other.unit == unit) &&
+            (identical(other.tabIndex, tabIndex) ||
+                other.tabIndex == tabIndex));
   }
 
   @override
@@ -268,7 +287,8 @@ class _$_Create extends _Create {
       const DeepCollectionEquality().hash(_valueX),
       valueY,
       const DeepCollectionEquality().hash(_days),
-      unit);
+      unit,
+      tabIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -286,7 +306,8 @@ abstract class _Create extends HomeDashboardScreenState {
       final List<int> valueX,
       final int valueY,
       final List<DateTime> days,
-      final String unit}) = _$_Create;
+      final String unit,
+      final int tabIndex}) = _$_Create;
   _Create._() : super._();
 
   @override
@@ -305,6 +326,8 @@ abstract class _Create extends HomeDashboardScreenState {
   List<DateTime> get days;
   @override
   String get unit;
+  @override
+  int get tabIndex;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

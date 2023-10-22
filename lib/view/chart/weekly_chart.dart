@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:line_icons/line_icons.dart';
 
-import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../model/dashboard/dashboard_model.dart';
 import 'chart.dart';
 
@@ -51,9 +51,6 @@ class WeeklyDashboard extends ConsumerWidget {
                   children: [
                     /// 選択期間
                     const _SelectPeriod(),
-                    // const Spacer(),
-
-                    /// 選択期間タブ
                   ],
                 ),
               ),
@@ -138,8 +135,9 @@ class _TotalData extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _StatusCard(
-            text: "合計問題数",
+            text: "問題数",
             value: weeklyQuizTotal,
+            icon: LineIcons.book,
             unit: "問",
             isSeleted: selectedChartType == ChartType.quizCount,
             onTap: () {
@@ -149,8 +147,9 @@ class _TotalData extends ConsumerWidget {
             },
           ),
           _StatusCard(
-            text: "合計時間",
+            text: "学習時間",
             value: weeklyDurationTotal,
+            icon: LineIcons.clock,
             unit: "分",
             isSeleted: selectedChartType == ChartType.duration,
             onTap: () {
@@ -169,18 +168,21 @@ class _StatusCard extends ConsumerWidget {
   const _StatusCard(
       {required this.value,
       required this.text,
+      required this.icon,
       required this.unit,
       required this.isSeleted,
       required this.onTap});
 
   final int value;
   final String text;
+  final IconData icon;
   final String unit;
   final bool isSeleted;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final color = isSeleted ? context.mainColor : Colors.black54;
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -209,11 +211,21 @@ class _StatusCard extends ConsumerWidget {
                   Padding(
                     padding: EdgeInsets.all(context.width * 0.02),
                     child: Container(
-                      child: Text(
-                        "$text",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.width * 0.035),
+                      child: Row(
+                        children: [
+                          Icon(
+                            icon,
+                            color: color,
+                            size: context.width * 0.06,
+                          ),
+                          Text(
+                            "$text",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: color,
+                                fontSize: context.width * 0.035),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -259,7 +271,11 @@ class _SelectPeriod extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(dashboardModelProvider);
     final weekOffset = model.weekOffset;
+    final monthOffset = model.monthOffset;
     final weekDays = model.weekDays;
+
+    final state = ref.watch(homeDashboardScreenProvider);
+    final selectedPeriodType = state.selectedPeriodType;
 
     return Expanded(
       child: Container(
@@ -272,23 +288,35 @@ class _SelectPeriod extends ConsumerWidget {
               padding: EdgeInsets.all(context.width * 0.01),
               iconSize: context.width * 0.06,
               onPressed: () {
-                if (weekOffset >= -3)
+                if (selectedPeriodType == PeriodType.weekly &&
+                    weekOffset > -2) {
                   ref
                       .read(dashboardModelProvider.notifier)
-                      .updateWeeklyData(-1); // 前の週に移動
+                      .updateWeeklyData(-1);
+                } else if (selectedPeriodType == PeriodType.monthly &&
+                    monthOffset > -2) {
+                  ref
+                      .read(dashboardModelProvider.notifier)
+                      .updateWeeklyData(-1);
+                }
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: (weekOffset == -3)
-                    ? Colors.grey.shade400
-                    : context.mainColor,
+                color: (((selectedPeriodType == PeriodType.weekly) &&
+                            weekOffset > -2) ||
+                        ((selectedPeriodType == PeriodType.monthly) &&
+                            monthOffset > -2))
+                    ? context.mainColor
+                    : Colors.grey.shade400,
               ),
             ),
             const Spacer(),
 
             ///選択期間のスコア
             Text(
-              "${weekDays.first.month}/${weekDays.first.day} 〜 ${weekDays.last.month}/${weekDays.last.day}",
+              (selectedPeriodType == PeriodType.weekly)
+                  ? "${weekDays.first.month}/${weekDays.first.day} 〜 ${weekDays.last.month}/${weekDays.last.day}"
+                  : "${weekDays.first.year}/${weekDays.first.month}/${weekDays.first.day} 〜 ${weekDays.first.year}/${weekDays.last.month}/${weekDays.last.day}",
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
             ),
@@ -297,14 +325,21 @@ class _SelectPeriod extends ConsumerWidget {
               padding: EdgeInsets.all(context.width * 0.01),
               iconSize: context.width * 0.06,
               onPressed: () {
-                if (weekOffset < 0)
+                if (selectedPeriodType == PeriodType.weekly && weekOffset < 0) {
                   ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
+                } else if (selectedPeriodType == PeriodType.monthly &&
+                    monthOffset < 0) {
+                  ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
+                }
               },
               icon: Icon(
                 Icons.arrow_forward_ios,
-                color: (weekOffset == 0)
-                    ? Colors.grey.shade400
-                    : context.mainColor,
+                color: ((selectedPeriodType == PeriodType.weekly &&
+                            weekOffset < 0) ||
+                        (selectedPeriodType == PeriodType.monthly &&
+                            monthOffset < 0))
+                    ? context.mainColor
+                    : Colors.grey.shade400,
               ),
             ),
           ],
@@ -319,10 +354,7 @@ class _SelectPeriodTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    final controller = ref.watch(dashboardAnalyticsProvider.notifier);
-    final tabs = controller.tabs;
-    final initialIndex = tabs.indexOf(state.selectedDayRange);
+    final tabIndex = ref.watch(homeDashboardScreenProvider).tabIndex;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: context.height * 0.002),
       child: Container(
@@ -334,12 +366,14 @@ class _SelectPeriodTab extends ConsumerWidget {
           border: Border.all(color: context.mainColor),
         ),
         child: DefaultTabController(
-          length: tabs.length,
-          initialIndex: initialIndex,
+          length: 2,
+          initialIndex: tabIndex,
           child: TabBar(
-              onTap: (index) => ref
-                  .read(dashboardAnalyticsProvider.notifier)
-                  .tapTabBar(index),
+              onTap: (index) {
+                ref
+                    .read(homeDashboardScreenProvider.notifier)
+                    .setSelectedPeriodType(index);
+              },
               labelColor: Colors.white,
               labelStyle: const TextStyle(fontWeight: FontWeight.bold),
               unselectedLabelStyle:

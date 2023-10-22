@@ -5,266 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
-import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
+import 'package:kentei_quiz/controller/dashboard_analytics/bar_data_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
-import 'package:kentei_quiz/view/bar.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-import '../../controller/dashboard_analytics/bar_data_state.dart';
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
+import '../../controller/home_dashboard/home_dashboard_screen_controller.dart';
 import '../../model/quiz/quiz_model.dart';
+import '../../view/bar.dart';
+import '../../view/chart/chart.dart';
 
 part 'dashboard_analytics_view.dart';
 
 /// 今日の学習
-class DailyStatus extends ConsumerWidget {
-  const DailyStatus();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final dashboardModel = ref.watch(dashboardModelProvider);
-    final dailyDuration = dashboardModel.dailyDuration.inMinutes;
-    final dailyQuizCount = dashboardModel.dailyQuizCount;
-
-    final userModel = ref.watch(userModelProvider);
-    final dailyQuizCountGoal = userModel.userCustom.dailyQuizCountGoal;
-    final dailyDurationGoal = userModel.userCustom.dailyDurationGoal;
-
-    return Container(
-      width: context.width * 1,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            _Title(
-              title: "今日の学習",
-              subWidget: Text(
-                "",
-                style: TextStyle(
-                  fontSize: context.height * 0.018,
-                ),
-              ),
-              icon: LineIcons.fontAwesomeFlag,
-            ),
-            Gap(context.height * 0.01),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  children: [
-                    Icon(
-                      LineIcons.book,
-                      color: context.mainColor,
-                      size: context.width * 0.1,
-                    ),
-                    Text(
-                      '問題数',
-                      style: TextStyle(
-                        color: context.mainColor,
-                        fontSize: context.height * 0.015,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Gap(context.height * 0.005),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          "$dailyQuizCount",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: context.height * 0.035,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "/$dailyQuizCountGoal",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: context.height * 0.027,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      '問',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: context.height * 0.018,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(
-                      LineIcons.clock,
-                      color: context.mainColor,
-                      size: context.width * 0.1,
-                    ),
-                    Text(
-                      '学習時間',
-                      style: TextStyle(
-                        color: context.mainColor,
-                        fontSize: context.height * 0.015,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Gap(context.height * 0.005),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          '$dailyDuration',
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: context.height * 0.035,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "/$dailyDurationGoal",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: context.height * 0.027,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      '分',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: context.height * 0.018,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(
-                      LineIcons.alternateFire,
-                      color: context.mainColor,
-                      size: context.width * 0.1,
-                    ),
-                    Text(
-                      'スコア',
-                      style: TextStyle(
-                        color: context.mainColor,
-                        fontSize: context.height * 0.015,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Gap(context.height * 0.005),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          '80',
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: context.height * 0.035,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Gap(3),
-                        Text(
-                          'up↑',
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: context.height * 0.023,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'exp',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: context.height * 0.018,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Gap(context.height * 0.01),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// ダッシュボード(学習問題数)
-class WeeklyOrMonthlyDashboard extends ConsumerWidget {
-  const WeeklyOrMonthlyDashboard();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: context.width * 1,
-      alignment: Alignment.center,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
-          child: Column(
-            children: [
-              const _Title(
-                title: "学習記録",
-                subWidget: _SelectPeriodTab(),
-                icon: Icons.bar_chart_outlined,
-              ),
-
-              Gap(context.height * 0.01),
-
-              ///期間選択
-              const _DashBoardSelectPeriod(),
-              Gap(context.height * 0.01),
-
-              ///ダッシュボード
-              DashboardBarChart(),
-              Gap(context.height * 0.005),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class DashboardQuizLength extends ConsumerWidget {
   const DashboardQuizLength();
@@ -299,16 +52,9 @@ class DashboardQuizLength extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
           child: Column(
             children: [
-              const _Title(
-                title: "学習記録",
-                subWidget: _SelectPeriodTab(),
-                icon: Icons.bar_chart_outlined,
-              ),
-
               Gap(context.height * 0.01),
 
               ///期間選択
-              const _DashBoardSelectPeriod(),
               Gap(context.height * 0.01),
 
               ///ダッシュボード
@@ -405,9 +151,9 @@ class DashboardBarChart extends ConsumerWidget {
                 getTitlesWidget: (value, meta) {
                   final state = ref.watch(dashboardAnalyticsProvider);
                   switch (state.selectedDayRange) {
-                    case 7:
-                      return _BottomWeekTitles(meta: meta, value: value);
                     case 31:
+                      return _BottomWeekTitles(meta: meta, value: value);
+                    case 7:
                       return _BottomMonthTitles(meta: meta, value: value + 1);
 
                     default:
@@ -423,7 +169,7 @@ class DashboardBarChart extends ConsumerWidget {
           /// グラフ本体
           barGroups: (() {
             switch (selectedDayRange) {
-              case 7:
+              case 31:
                 return weeklyData
                     .asMap()
                     .entries
@@ -439,7 +185,9 @@ class DashboardBarChart extends ConsumerWidget {
                         barsSpace: 1,
                         barRods: [
                           CustomBarChartRodData(
-                            toY: data.score > maxY ? maxY + 1 : data.score,
+                            toY: data.score > maxY
+                                ? maxY + 0.5
+                                : data.score.toDouble(),
                             color: color,
                             width: 30,
                             borderRadius: BorderRadius.circular(5),
@@ -451,7 +199,7 @@ class DashboardBarChart extends ConsumerWidget {
                     })
                     .whereType<BarChartGroupData>()
                     .toList();
-              case 31:
+              case 7:
                 return monthlyData
                     .asMap()
                     .entries
@@ -467,7 +215,9 @@ class DashboardBarChart extends ConsumerWidget {
                         barsSpace: 1,
                         barRods: [
                           CustomBarChartRodData(
-                            toY: data.score > maxY ? maxY + 1 : data.score,
+                            toY: data.score > maxY
+                                ? maxY + 0.5
+                                : data.score.toDouble(),
                             color: color,
                             width: 10, // 月間データのときは棒グラフの幅を10にする
                             borderRadius: BorderRadius.circular(5),
@@ -495,7 +245,9 @@ class DashboardBarChart extends ConsumerWidget {
                         barsSpace: 1,
                         barRods: [
                           CustomBarChartRodData(
-                            toY: data.score > maxY ? maxY + 1 : data.score,
+                            toY: data.score > maxY
+                                ? maxY + 0.5
+                                : data.score.toDouble(),
                             color: color,
                             width: 30, // すべてのデータを表示するように変更
                             borderRadius: BorderRadius.circular(5),
@@ -672,15 +424,6 @@ class DailyGoal extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            _Title(
-                title: "毎日の目標",
-                subWidget: Text(
-                  "",
-                  style: TextStyle(
-                    fontSize: context.height * 0.018,
-                  ),
-                ),
-                icon: Icons.flag_outlined),
             Container(
               height: context.height * 0.23,
               child: Row(

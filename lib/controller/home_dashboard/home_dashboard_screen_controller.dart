@@ -65,4 +65,19 @@ class HomeDashboardScreenController
     state = state.copyWith(selectedChartType: type);
     setData();
   }
+
+  void setSelectedPeriodType(int tabIndex) {
+    if (tabIndex == 0) {
+      state = state.copyWith(
+          selectedPeriodType: PeriodType.weekly, tabIndex: tabIndex);
+    } else if (tabIndex == 1) {
+      state = state.copyWith(
+          selectedPeriodType: PeriodType.monthly, tabIndex: tabIndex);
+    } else {
+      state = state.copyWith(
+          selectedPeriodType: PeriodType.weekly, tabIndex: tabIndex);
+    }
+    ref.read(dashboardModelProvider.notifier).loadWeeklyAndMontylyData();
+    setData();
+  }
 }
