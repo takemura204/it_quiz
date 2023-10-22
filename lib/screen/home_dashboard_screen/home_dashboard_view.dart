@@ -14,7 +14,7 @@ class _Body extends ConsumerWidget {
         ),
       );
     }
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         children: [
           Gap(5),
@@ -22,7 +22,6 @@ class _Body extends ConsumerWidget {
           ///今日の学習
           DailyStatus(),
 
-          ///学習状況ダッシュボード(New)
           WeeklyDashboard(),
 
           ///学習状況ダッシュボード

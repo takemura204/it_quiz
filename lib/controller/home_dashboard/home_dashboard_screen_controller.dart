@@ -1,6 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/dashboard/dashboard_model.dart';
+import '../../model/user/user.model.dart';
 import 'home_dashboard_screen_state.dart';
 
 final homeDashboardScreenProvider = StateNotifierProvider<
@@ -19,4 +21,48 @@ class HomeDashboardScreenController
 
   @override
   void initState() {}
+
+  void setData() {
+    final selectedChartType = state.selectedChartType;
+    final userModel = ref.read(userModelProvider).userCustom;
+    final model = ref.read(dashboardModelProvider);
+    switch (selectedChartType) {
+      case ChartType.quizCount:
+        final weeklyQuizCounts = model.weeklyQuizCounts;
+        final weekDays = model.weekDays;
+        final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
+
+        state = state.copyWith(
+            unit: "問",
+            valueX: weeklyQuizCounts,
+            valueY: dailyQuizCountGoal,
+            days: weekDays);
+        break;
+      case ChartType.duration:
+        final weeklyDuration = model.weeklyDuration;
+        final weekDays = model.weekDays;
+        final dailyDurationGoal = userModel.dailyDurationGoal;
+        state = state.copyWith(
+          unit: "分",
+          valueX: weeklyDuration,
+          valueY: dailyDurationGoal,
+          days: weekDays,
+        );
+        break;
+      default:
+        final weeklyQuizCounts = model.weeklyQuizCounts;
+        final weekDays = model.weekDays;
+        final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
+        state = state.copyWith(
+            unit: "問",
+            valueX: weeklyQuizCounts,
+            valueY: dailyQuizCountGoal,
+            days: weekDays);
+    }
+  }
+
+  void setSelectedChartType(ChartType type) {
+    state = state.copyWith(selectedChartType: type);
+    setData();
+  }
 }

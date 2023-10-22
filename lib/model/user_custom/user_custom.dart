@@ -7,6 +7,6 @@ class UserCustom with _$UserCustom {
   const factory UserCustom({
     @Default(0) final int skinId,
     @Default(10) final int dailyQuizCountGoal,
-    @Default(Duration(minutes: 10)) final Duration dailyDurationGoal,
+    @Default(10) final int dailyDurationGoal,
   }) = _UserCustom;
 }

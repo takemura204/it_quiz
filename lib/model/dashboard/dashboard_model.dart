@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../quiz/quiz.dart';
@@ -100,7 +101,7 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
 
     //1週間の問題数を追加
     final List<int> weeklyQuizCounts = [];
-    final List<Duration> weeklyDuration = [];
+    final List<int> weeklyDuration = [];
     for (DateTime day in weekDays) {
       final quizzesForTheDay = weeklyQuizList
           .where((quiz) =>
@@ -113,12 +114,11 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
       final duration = quizzesForTheDay.fold<Duration>(
           Duration.zero, (prev, quiz) => prev + quiz.duration);
       weeklyQuizCounts.add(quizCount);
-      weeklyDuration.add(duration);
+      weeklyDuration.add(duration.inMinutes);
     }
     //  合計
     final int weeklyQuizTotal = weeklyQuizCounts.fold(0, (a, b) => a + b);
-    final Duration weeklyDurationTotal =
-        weeklyDuration.fold(Duration.zero, (a, b) => a + b);
+    final int weeklyDurationTotal = weeklyDuration.fold(0, (a, b) => a + b);
     final runningDays = weeklyQuizCounts.where((x) => x > 0).toList().length;
 
     state = state.copyWith(
@@ -132,5 +132,7 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
       runningDays: runningDays,
       weeklyDurationTotal: weeklyDurationTotal,
     );
+
+    ref.read(homeDashboardScreenProvider.notifier).setData();
   }
 }

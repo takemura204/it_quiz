@@ -31,7 +31,7 @@ class DailyStatus extends ConsumerWidget {
 
     final userModel = ref.watch(userModelProvider);
     final dailyQuizCountGoal = userModel.userCustom.dailyQuizCountGoal;
-    final dailyDurationGoal = userModel.userCustom.dailyDurationGoal.inMinutes;
+    final dailyDurationGoal = userModel.userCustom.dailyDurationGoal;
 
     return Container(
       width: context.width * 1,

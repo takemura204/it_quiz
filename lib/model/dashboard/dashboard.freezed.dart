@@ -42,10 +42,8 @@ mixin _$Dashboard {
   List<int> get weeklyQuizCounts =>
       throw _privateConstructorUsedError; //今週の問題数一覧
   int get weeklyQuizTotal => throw _privateConstructorUsedError; //今週のデータ一覧
-  List<Duration> get weeklyDuration =>
-      throw _privateConstructorUsedError; //今週の学習時間
-  Duration get weeklyDurationTotal =>
-      throw _privateConstructorUsedError; //今週のデータ一覧
+  List<int> get weeklyDuration => throw _privateConstructorUsedError; //今週の学習時間
+  int get weeklyDurationTotal => throw _privateConstructorUsedError; //今週のデータ一覧
   ///Monthly
   List<Quiz> get monthlyQuizList =>
       throw _privateConstructorUsedError; //今週のクイズ一覧
@@ -83,8 +81,8 @@ abstract class $DashboardCopyWith<$Res> {
       int weekOffset,
       List<int> weeklyQuizCounts,
       int weeklyQuizTotal,
-      List<Duration> weeklyDuration,
-      Duration weeklyDurationTotal,
+      List<int> weeklyDuration,
+      int weeklyDurationTotal,
       List<Quiz> monthlyQuizList,
       DateTime? startMonthRange,
       DateTime? endMonthRange,
@@ -186,11 +184,11 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
       weeklyDuration: null == weeklyDuration
           ? _value.weeklyDuration
           : weeklyDuration // ignore: cast_nullable_to_non_nullable
-              as List<Duration>,
+              as List<int>,
       weeklyDurationTotal: null == weeklyDurationTotal
           ? _value.weeklyDurationTotal
           : weeklyDurationTotal // ignore: cast_nullable_to_non_nullable
-              as Duration,
+              as int,
       monthlyQuizList: null == monthlyQuizList
           ? _value.monthlyQuizList
           : monthlyQuizList // ignore: cast_nullable_to_non_nullable
@@ -244,8 +242,8 @@ abstract class _$$_DashboardCopyWith<$Res> implements $DashboardCopyWith<$Res> {
       int weekOffset,
       List<int> weeklyQuizCounts,
       int weeklyQuizTotal,
-      List<Duration> weeklyDuration,
-      Duration weeklyDurationTotal,
+      List<int> weeklyDuration,
+      int weeklyDurationTotal,
       List<Quiz> monthlyQuizList,
       DateTime? startMonthRange,
       DateTime? endMonthRange,
@@ -345,11 +343,11 @@ class __$$_DashboardCopyWithImpl<$Res>
       weeklyDuration: null == weeklyDuration
           ? _value._weeklyDuration
           : weeklyDuration // ignore: cast_nullable_to_non_nullable
-              as List<Duration>,
+              as List<int>,
       weeklyDurationTotal: null == weeklyDurationTotal
           ? _value.weeklyDurationTotal
           : weeklyDurationTotal // ignore: cast_nullable_to_non_nullable
-              as Duration,
+              as int,
       monthlyQuizList: null == monthlyQuizList
           ? _value._monthlyQuizList
           : monthlyQuizList // ignore: cast_nullable_to_non_nullable
@@ -399,8 +397,8 @@ class _$_Dashboard extends _Dashboard {
       this.weekOffset = 0,
       final List<int> weeklyQuizCounts = const [],
       this.weeklyQuizTotal = 0,
-      final List<Duration> weeklyDuration = const [],
-      this.weeklyDurationTotal = Duration.zero,
+      final List<int> weeklyDuration = const [],
+      this.weeklyDurationTotal = 0,
       final List<Quiz> monthlyQuizList = const [],
       this.startMonthRange,
       this.endMonthRange,
@@ -501,11 +499,11 @@ class _$_Dashboard extends _Dashboard {
   @JsonKey()
   final int weeklyQuizTotal;
 //今週のデータ一覧
-  final List<Duration> _weeklyDuration;
+  final List<int> _weeklyDuration;
 //今週のデータ一覧
   @override
   @JsonKey()
-  List<Duration> get weeklyDuration {
+  List<int> get weeklyDuration {
     if (_weeklyDuration is EqualUnmodifiableListView) return _weeklyDuration;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_weeklyDuration);
@@ -514,7 +512,7 @@ class _$_Dashboard extends _Dashboard {
 //今週の学習時間
   @override
   @JsonKey()
-  final Duration weeklyDurationTotal;
+  final int weeklyDurationTotal;
 //今週のデータ一覧
   ///Monthly
   final List<Quiz> _monthlyQuizList;
@@ -677,8 +675,8 @@ abstract class _Dashboard extends Dashboard {
       final int weekOffset,
       final List<int> weeklyQuizCounts,
       final int weeklyQuizTotal,
-      final List<Duration> weeklyDuration,
-      final Duration weeklyDurationTotal,
+      final List<int> weeklyDuration,
+      final int weeklyDurationTotal,
       final List<Quiz> monthlyQuizList,
       final DateTime? startMonthRange,
       final DateTime? endMonthRange,
@@ -724,9 +722,9 @@ abstract class _Dashboard extends Dashboard {
   @override //今週の問題数一覧
   int get weeklyQuizTotal;
   @override //今週のデータ一覧
-  List<Duration> get weeklyDuration;
+  List<int> get weeklyDuration;
   @override //今週の学習時間
-  Duration get weeklyDurationTotal;
+  int get weeklyDurationTotal;
   @override //今週のデータ一覧
   ///Monthly
   List<Quiz> get monthlyQuizList;

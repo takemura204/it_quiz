@@ -225,7 +225,7 @@ class _SetDailyDurationGoal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userCustom = ref.watch(userModelProvider).userCustom;
-    final dailyDurationGoal = userCustom.dailyDurationGoal.inMinutes;
+    final dailyDurationGoal = userCustom.dailyDurationGoal;
     return Row(
       children: [
         IconButton(
@@ -233,8 +233,9 @@ class _SetDailyDurationGoal extends ConsumerWidget {
           onPressed: dailyDurationGoal <= 5
               ? null
               : () {
-                  ref.read(userModelProvider.notifier).updateDailyDurationGoal(
-                      Duration(minutes: dailyDurationGoal - 5));
+                  ref
+                      .read(userModelProvider.notifier)
+                      .updateDailyDurationGoal(dailyDurationGoal - 5);
                 },
           icon: Icon(
             Icons.remove_circle_outline,
@@ -260,8 +261,9 @@ class _SetDailyDurationGoal extends ConsumerWidget {
           onPressed: dailyDurationGoal >= 60
               ? null
               : () {
-                  ref.read(userModelProvider.notifier).updateDailyDurationGoal(
-                      Duration(minutes: dailyDurationGoal + 5));
+                  ref
+                      .read(userModelProvider.notifier)
+                      .updateDailyDurationGoal(dailyDurationGoal + 5);
                 },
           icon: Icon(
             Icons.add_circle_outline,

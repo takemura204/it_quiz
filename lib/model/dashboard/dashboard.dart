@@ -26,8 +26,8 @@ class Dashboard with _$Dashboard {
     @Default(0) final int weekOffset, //週の期間選択
     @Default([]) final List<int> weeklyQuizCounts, //今週の問題数一覧
     @Default(0) final int weeklyQuizTotal, //今週のデータ一覧
-    @Default([]) final List<Duration> weeklyDuration, //今週の学習時間
-    @Default(Duration.zero) final Duration weeklyDurationTotal, //今週のデータ一覧
+    @Default([]) final List<int> weeklyDuration, //今週の学習時間
+    @Default(0) final int weeklyDurationTotal, //今週のデータ一覧
 
     ///Monthly
     @Default([]) final List<Quiz> monthlyQuizList, //今週のクイズ一覧

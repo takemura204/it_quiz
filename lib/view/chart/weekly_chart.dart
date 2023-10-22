@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
+import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/view/chart/weekly_duration_chart.dart';
-import 'package:kentei_quiz/view/chart/weekly_quiz_chart.dart';
 
 import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import '../../model/dashboard/dashboard_model.dart';
+import 'chart.dart';
 
 class WeeklyDashboard extends ConsumerWidget {
   const WeeklyDashboard();
@@ -34,7 +35,7 @@ class WeeklyDashboard extends ConsumerWidget {
             children: [
               const _Title(
                 title: "アクティビティ",
-                subWidget: null,
+                subWidget: _SelectPeriodTab(),
                 icon: Icons.bar_chart_outlined,
               ),
 
@@ -50,10 +51,9 @@ class WeeklyDashboard extends ConsumerWidget {
                   children: [
                     /// 選択期間
                     const _SelectPeriod(),
-                    const Spacer(),
+                    // const Spacer(),
 
                     /// 選択期間タブ
-                    const _SelectPeriodTab(),
                   ],
                 ),
               ),
@@ -65,10 +65,8 @@ class WeeklyDashboard extends ConsumerWidget {
               Gap(context.height * 0.01),
 
               ///ダッシュボード
-              WeeklyQuizChart(),
-              Gap(context.height * 0.03),
+              QuizChart(),
 
-              const WeeklyDurationChart(),
               Gap(context.height * 0.005),
             ],
           ),
@@ -128,8 +126,10 @@ class _TotalData extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(dashboardModelProvider);
     final weeklyQuizTotal = model.weeklyQuizTotal;
-    final weeklyDurationTotal = model.weeklyDurationTotal.inMinutes;
-    final runningDays = model.runningDays;
+    final weeklyDurationTotal = model.weeklyDurationTotal;
+    final state = ref.watch(homeDashboardScreenProvider);
+    final selectedChartType = state.selectedChartType;
+
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: context.width * 0.02, vertical: context.width * 0.01),
@@ -137,9 +137,28 @@ class _TotalData extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _StatusCard(text: "連続日数", value: runningDays, unit: "日"),
-          _StatusCard(text: "合計問題数", value: weeklyQuizTotal, unit: "問"),
-          _StatusCard(text: "合計時間", value: weeklyDurationTotal, unit: "分"),
+          _StatusCard(
+            text: "合計問題数",
+            value: weeklyQuizTotal,
+            unit: "問",
+            isSeleted: selectedChartType == ChartType.quizCount,
+            onTap: () {
+              ref
+                  .read(homeDashboardScreenProvider.notifier)
+                  .setSelectedChartType(ChartType.quizCount);
+            },
+          ),
+          _StatusCard(
+            text: "合計時間",
+            value: weeklyDurationTotal,
+            unit: "分",
+            isSeleted: selectedChartType == ChartType.duration,
+            onTap: () {
+              ref
+                  .read(homeDashboardScreenProvider.notifier)
+                  .setSelectedChartType(ChartType.duration);
+            },
+          ),
         ],
       ),
     );
@@ -148,67 +167,85 @@ class _TotalData extends ConsumerWidget {
 
 class _StatusCard extends ConsumerWidget {
   const _StatusCard(
-      {required this.value, required this.text, required this.unit});
+      {required this.value,
+      required this.text,
+      required this.unit,
+      required this.isSeleted,
+      required this.onTap});
 
   final int value;
   final String text;
   final String unit;
+  final bool isSeleted;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: context.width * 0.27,
-      child: Card(
-        elevation: 0,
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(context.width * 0.01),
-              child: Container(
-                child: Text(
-                  "$text",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.035),
-                ),
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: EdgeInsets.all(context.width * 0.01),
+          child: Container(
+            width: context.width * 0.27,
+            child: Card(
+              elevation: 0,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                side: isSeleted
+                    ? BorderSide(
+                        color: context.mainColor,
+                        width: 1.5,
+                      )
+                    : BorderSide(
+                        color: Colors.grey.shade200,
+                        width: 1,
+                      ),
+                borderRadius: BorderRadius.circular(10),
               ),
-            ),
-            Gap(context.height * 0.01),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "$value",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.width * 0.06,
+                  Padding(
+                    padding: EdgeInsets.all(context.width * 0.02),
+                    child: Container(
+                      child: Text(
+                        "$text",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.width * 0.035),
+                      ),
                     ),
                   ),
-                  Gap(context.width * 0.02),
-                  Text(
-                    "$unit",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: context.width * 0.035),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          "$value",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: context.width * 0.06,
+                          ),
+                        ),
+                        Gap(context.width * 0.02),
+                        Text(
+                          "$unit",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.width * 0.035),
+                        ),
+                        Gap(context.width * 0.02),
+                      ],
+                    ),
                   ),
-                  Gap(context.width * 0.02),
+                  Gap(context.width * 0.01),
                 ],
               ),
             ),
-            Gap(context.width * 0.01),
-          ],
+          ),
         ),
       ),
     );
@@ -224,50 +261,54 @@ class _SelectPeriod extends ConsumerWidget {
     final weekOffset = model.weekOffset;
     final weekDays = model.weekDays;
 
-    return Container(
-      width: context.width * 0.55,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            padding: EdgeInsets.all(context.width * 0.01),
-            iconSize: context.width * 0.06,
-            onPressed: () {
-              if (weekOffset >= -3)
-                ref
-                    .read(dashboardModelProvider.notifier)
-                    .updateWeeklyData(-1); // 前の週に移動
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color:
-                  (weekOffset == -3) ? Colors.grey.shade400 : context.mainColor,
+    return Expanded(
+      child: Container(
+        width: context.width * 0.55,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              padding: EdgeInsets.all(context.width * 0.01),
+              iconSize: context.width * 0.06,
+              onPressed: () {
+                if (weekOffset >= -3)
+                  ref
+                      .read(dashboardModelProvider.notifier)
+                      .updateWeeklyData(-1); // 前の週に移動
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: (weekOffset == -3)
+                    ? Colors.grey.shade400
+                    : context.mainColor,
+              ),
             ),
-          ),
-          const Spacer(),
+            const Spacer(),
 
-          ///選択期間のスコア
-          Text(
-            "${weekDays.first.month}/${weekDays.first.day}〜${weekDays.last.month}/${weekDays.last.day}",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
-          ),
-          const Spacer(),
-          IconButton(
-            padding: EdgeInsets.all(context.width * 0.01),
-            iconSize: context.width * 0.06,
-            onPressed: () {
-              if (weekOffset < 0)
-                ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
-            },
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              color:
-                  (weekOffset == 0) ? Colors.grey.shade400 : context.mainColor,
+            ///選択期間のスコア
+            Text(
+              "${weekDays.first.month}/${weekDays.first.day} 〜 ${weekDays.last.month}/${weekDays.last.day}",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
             ),
-          ),
-        ],
+            const Spacer(),
+            IconButton(
+              padding: EdgeInsets.all(context.width * 0.01),
+              iconSize: context.width * 0.06,
+              onPressed: () {
+                if (weekOffset < 0)
+                  ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                color: (weekOffset == 0)
+                    ? Colors.grey.shade400
+                    : context.mainColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -26,7 +26,7 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
     print(state.userCustom.dailyQuizCountGoal);
   }
 
-  void updateDailyDurationGoal(Duration value) {
+  void updateDailyDurationGoal(int value) {
     state = state.copyWith(
       userCustom: state.userCustom.copyWith(dailyDurationGoal: value),
     );

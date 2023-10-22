@@ -9,5 +9,21 @@ class HomeDashboardScreenState with _$HomeDashboardScreenState {
   factory HomeDashboardScreenState({
     @Default(false) bool isLoading,
     @Default(-1) final int selectedXIndex,
+    @Default(PeriodType.weekly) final PeriodType selectedPeriodType,
+    @Default(ChartType.quizCount) final ChartType selectedChartType,
+    @Default([]) final List<int> valueX,
+    @Default(0) final int valueY,
+    @Default([]) final List<DateTime> days,
+    @Default("") final String unit,
   }) = _Create;
+}
+
+enum PeriodType {
+  weekly,
+  monthly,
+}
+
+enum ChartType {
+  quizCount,
+  duration,
 }

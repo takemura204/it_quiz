@@ -41,12 +41,10 @@ _$_Dashboard _$$_DashboardFromJson(Map<String, dynamic> json) => _$_Dashboard(
           const [],
       weeklyQuizTotal: json['weeklyQuizTotal'] as int? ?? 0,
       weeklyDuration: (json['weeklyDuration'] as List<dynamic>?)
-              ?.map((e) => Duration(microseconds: e as int))
+              ?.map((e) => e as int)
               .toList() ??
           const [],
-      weeklyDurationTotal: json['weeklyDurationTotal'] == null
-          ? Duration.zero
-          : Duration(microseconds: json['weeklyDurationTotal'] as int),
+      weeklyDurationTotal: json['weeklyDurationTotal'] as int? ?? 0,
       monthlyQuizList: (json['monthlyQuizList'] as List<dynamic>?)
               ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -84,9 +82,8 @@ Map<String, dynamic> _$$_DashboardToJson(_$_Dashboard instance) =>
       'weekOffset': instance.weekOffset,
       'weeklyQuizCounts': instance.weeklyQuizCounts,
       'weeklyQuizTotal': instance.weeklyQuizTotal,
-      'weeklyDuration':
-          instance.weeklyDuration.map((e) => e.inMicroseconds).toList(),
-      'weeklyDurationTotal': instance.weeklyDurationTotal.inMicroseconds,
+      'weeklyDuration': instance.weeklyDuration,
+      'weeklyDurationTotal': instance.weeklyDurationTotal,
       'monthlyQuizList': instance.monthlyQuizList,
       'startMonthRange': instance.startMonthRange?.toIso8601String(),
       'endMonthRange': instance.endMonthRange?.toIso8601String(),

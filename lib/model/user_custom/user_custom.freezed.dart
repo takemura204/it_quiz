@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserCustom {
   int get skinId => throw _privateConstructorUsedError;
   int get dailyQuizCountGoal => throw _privateConstructorUsedError;
-  Duration get dailyDurationGoal => throw _privateConstructorUsedError;
+  int get dailyDurationGoal => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCustomCopyWith<UserCustom> get copyWith =>
@@ -31,7 +31,7 @@ abstract class $UserCustomCopyWith<$Res> {
           UserCustom value, $Res Function(UserCustom) then) =
       _$UserCustomCopyWithImpl<$Res, UserCustom>;
   @useResult
-  $Res call({int skinId, int dailyQuizCountGoal, Duration dailyDurationGoal});
+  $Res call({int skinId, int dailyQuizCountGoal, int dailyDurationGoal});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$UserCustomCopyWithImpl<$Res, $Val extends UserCustom>
       dailyDurationGoal: null == dailyDurationGoal
           ? _value.dailyDurationGoal
           : dailyDurationGoal // ignore: cast_nullable_to_non_nullable
-              as Duration,
+              as int,
     ) as $Val);
   }
 }
@@ -76,7 +76,7 @@ abstract class _$$_UserCustomCopyWith<$Res>
       __$$_UserCustomCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int skinId, int dailyQuizCountGoal, Duration dailyDurationGoal});
+  $Res call({int skinId, int dailyQuizCountGoal, int dailyDurationGoal});
 }
 
 /// @nodoc
@@ -106,7 +106,7 @@ class __$$_UserCustomCopyWithImpl<$Res>
       dailyDurationGoal: null == dailyDurationGoal
           ? _value.dailyDurationGoal
           : dailyDurationGoal // ignore: cast_nullable_to_non_nullable
-              as Duration,
+              as int,
     ));
   }
 }
@@ -117,7 +117,7 @@ class _$_UserCustom implements _UserCustom {
   const _$_UserCustom(
       {this.skinId = 0,
       this.dailyQuizCountGoal = 10,
-      this.dailyDurationGoal = const Duration(minutes: 10)});
+      this.dailyDurationGoal = 10});
 
   @override
   @JsonKey()
@@ -127,7 +127,7 @@ class _$_UserCustom implements _UserCustom {
   final int dailyQuizCountGoal;
   @override
   @JsonKey()
-  final Duration dailyDurationGoal;
+  final int dailyDurationGoal;
 
   @override
   String toString() {
@@ -161,14 +161,14 @@ abstract class _UserCustom implements UserCustom {
   const factory _UserCustom(
       {final int skinId,
       final int dailyQuizCountGoal,
-      final Duration dailyDurationGoal}) = _$_UserCustom;
+      final int dailyDurationGoal}) = _$_UserCustom;
 
   @override
   int get skinId;
   @override
   int get dailyQuizCountGoal;
   @override
-  Duration get dailyDurationGoal;
+  int get dailyDurationGoal;
   @override
   @JsonKey(ignore: true)
   _$$_UserCustomCopyWith<_$_UserCustom> get copyWith =>

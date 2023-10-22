@@ -18,6 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeDashboardScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
   int get selectedXIndex => throw _privateConstructorUsedError;
+  PeriodType get selectedPeriodType => throw _privateConstructorUsedError;
+  ChartType get selectedChartType => throw _privateConstructorUsedError;
+  List<int> get valueX => throw _privateConstructorUsedError;
+  int get valueY => throw _privateConstructorUsedError;
+  List<DateTime> get days => throw _privateConstructorUsedError;
+  String get unit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeDashboardScreenStateCopyWith<HomeDashboardScreenState> get copyWith =>
@@ -30,7 +36,15 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
           $Res Function(HomeDashboardScreenState) then) =
       _$HomeDashboardScreenStateCopyWithImpl<$Res, HomeDashboardScreenState>;
   @useResult
-  $Res call({bool isLoading, int selectedXIndex});
+  $Res call(
+      {bool isLoading,
+      int selectedXIndex,
+      PeriodType selectedPeriodType,
+      ChartType selectedChartType,
+      List<int> valueX,
+      int valueY,
+      List<DateTime> days,
+      String unit});
 }
 
 /// @nodoc
@@ -49,6 +63,12 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
   $Res call({
     Object? isLoading = null,
     Object? selectedXIndex = null,
+    Object? selectedPeriodType = null,
+    Object? selectedChartType = null,
+    Object? valueX = null,
+    Object? valueY = null,
+    Object? days = null,
+    Object? unit = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -59,6 +79,30 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedPeriodType: null == selectedPeriodType
+          ? _value.selectedPeriodType
+          : selectedPeriodType // ignore: cast_nullable_to_non_nullable
+              as PeriodType,
+      selectedChartType: null == selectedChartType
+          ? _value.selectedChartType
+          : selectedChartType // ignore: cast_nullable_to_non_nullable
+              as ChartType,
+      valueX: null == valueX
+          ? _value.valueX
+          : valueX // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      valueY: null == valueY
+          ? _value.valueY
+          : valueY // ignore: cast_nullable_to_non_nullable
+              as int,
+      days: null == days
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -70,7 +114,15 @@ abstract class _$$_CreateCopyWith<$Res>
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, int selectedXIndex});
+  $Res call(
+      {bool isLoading,
+      int selectedXIndex,
+      PeriodType selectedPeriodType,
+      ChartType selectedChartType,
+      List<int> valueX,
+      int valueY,
+      List<DateTime> days,
+      String unit});
 }
 
 /// @nodoc
@@ -85,6 +137,12 @@ class __$$_CreateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? selectedXIndex = null,
+    Object? selectedPeriodType = null,
+    Object? selectedChartType = null,
+    Object? valueX = null,
+    Object? valueY = null,
+    Object? days = null,
+    Object? unit = null,
   }) {
     return _then(_$_Create(
       isLoading: null == isLoading
@@ -95,6 +153,30 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.selectedXIndex
           : selectedXIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedPeriodType: null == selectedPeriodType
+          ? _value.selectedPeriodType
+          : selectedPeriodType // ignore: cast_nullable_to_non_nullable
+              as PeriodType,
+      selectedChartType: null == selectedChartType
+          ? _value.selectedChartType
+          : selectedChartType // ignore: cast_nullable_to_non_nullable
+              as ChartType,
+      valueX: null == valueX
+          ? _value._valueX
+          : valueX // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      valueY: null == valueY
+          ? _value.valueY
+          : valueY // ignore: cast_nullable_to_non_nullable
+              as int,
+      days: null == days
+          ? _value._days
+          : days // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -102,7 +184,18 @@ class __$$_CreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Create extends _Create {
-  _$_Create({this.isLoading = false, this.selectedXIndex = -1}) : super._();
+  _$_Create(
+      {this.isLoading = false,
+      this.selectedXIndex = -1,
+      this.selectedPeriodType = PeriodType.weekly,
+      this.selectedChartType = ChartType.quizCount,
+      final List<int> valueX = const [],
+      this.valueY = 0,
+      final List<DateTime> days = const [],
+      this.unit = ""})
+      : _valueX = valueX,
+        _days = days,
+        super._();
 
   @override
   @JsonKey()
@@ -110,10 +203,40 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final int selectedXIndex;
+  @override
+  @JsonKey()
+  final PeriodType selectedPeriodType;
+  @override
+  @JsonKey()
+  final ChartType selectedChartType;
+  final List<int> _valueX;
+  @override
+  @JsonKey()
+  List<int> get valueX {
+    if (_valueX is EqualUnmodifiableListView) return _valueX;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_valueX);
+  }
+
+  @override
+  @JsonKey()
+  final int valueY;
+  final List<DateTime> _days;
+  @override
+  @JsonKey()
+  List<DateTime> get days {
+    if (_days is EqualUnmodifiableListView) return _days;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_days);
+  }
+
+  @override
+  @JsonKey()
+  final String unit;
 
   @override
   String toString() {
-    return 'HomeDashboardScreenState(isLoading: $isLoading, selectedXIndex: $selectedXIndex)';
+    return 'HomeDashboardScreenState(isLoading: $isLoading, selectedXIndex: $selectedXIndex, selectedPeriodType: $selectedPeriodType, selectedChartType: $selectedChartType, valueX: $valueX, valueY: $valueY, days: $days, unit: $unit)';
   }
 
   @override
@@ -124,11 +247,28 @@ class _$_Create extends _Create {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.selectedXIndex, selectedXIndex) ||
-                other.selectedXIndex == selectedXIndex));
+                other.selectedXIndex == selectedXIndex) &&
+            (identical(other.selectedPeriodType, selectedPeriodType) ||
+                other.selectedPeriodType == selectedPeriodType) &&
+            (identical(other.selectedChartType, selectedChartType) ||
+                other.selectedChartType == selectedChartType) &&
+            const DeepCollectionEquality().equals(other._valueX, _valueX) &&
+            (identical(other.valueY, valueY) || other.valueY == valueY) &&
+            const DeepCollectionEquality().equals(other._days, _days) &&
+            (identical(other.unit, unit) || other.unit == unit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, selectedXIndex);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      selectedXIndex,
+      selectedPeriodType,
+      selectedChartType,
+      const DeepCollectionEquality().hash(_valueX),
+      valueY,
+      const DeepCollectionEquality().hash(_days),
+      unit);
 
   @JsonKey(ignore: true)
   @override
@@ -138,13 +278,33 @@ class _$_Create extends _Create {
 }
 
 abstract class _Create extends HomeDashboardScreenState {
-  factory _Create({final bool isLoading, final int selectedXIndex}) = _$_Create;
+  factory _Create(
+      {final bool isLoading,
+      final int selectedXIndex,
+      final PeriodType selectedPeriodType,
+      final ChartType selectedChartType,
+      final List<int> valueX,
+      final int valueY,
+      final List<DateTime> days,
+      final String unit}) = _$_Create;
   _Create._() : super._();
 
   @override
   bool get isLoading;
   @override
   int get selectedXIndex;
+  @override
+  PeriodType get selectedPeriodType;
+  @override
+  ChartType get selectedChartType;
+  @override
+  List<int> get valueX;
+  @override
+  int get valueY;
+  @override
+  List<DateTime> get days;
+  @override
+  String get unit;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>
