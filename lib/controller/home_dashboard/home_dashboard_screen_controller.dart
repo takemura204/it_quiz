@@ -28,36 +28,36 @@ class HomeDashboardScreenController
     final model = ref.read(dashboardModelProvider);
     switch (selectedChartType) {
       case ChartType.quizCount:
-        final weeklyQuizCounts = model.weeklyQuizCounts;
-        final weekDays = model.weekDays;
+        final periodQuizCounts = model.periodQuizCounts;
+        final periodDays = model.periodDays;
         final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
 
         state = state.copyWith(
             unit: "問",
-            valueX: weeklyQuizCounts,
+            valueX: periodQuizCounts,
             valueY: dailyQuizCountGoal,
-            days: weekDays);
+            days: periodDays);
         break;
       case ChartType.duration:
-        final weeklyDuration = model.weeklyDuration;
-        final weekDays = model.weekDays;
+        final periodDuration = model.periodDuration;
+        final periodDays = model.periodDays;
         final dailyDurationGoal = userModel.dailyDurationGoal;
         state = state.copyWith(
           unit: "分",
-          valueX: weeklyDuration,
+          valueX: periodDuration,
           valueY: dailyDurationGoal,
-          days: weekDays,
+          days: periodDays,
         );
         break;
       default:
-        final weeklyQuizCounts = model.weeklyQuizCounts;
-        final weekDays = model.weekDays;
+        final periodQuizCounts = model.periodQuizCounts;
+        final periodDays = model.periodDays;
         final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
         state = state.copyWith(
             unit: "問",
-            valueX: weeklyQuizCounts,
+            valueX: periodQuizCounts,
             valueY: dailyQuizCountGoal,
-            days: weekDays);
+            days: periodDays);
     }
   }
 

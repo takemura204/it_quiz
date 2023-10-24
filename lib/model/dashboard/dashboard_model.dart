@@ -81,7 +81,7 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
           minutes: 59,
           seconds: 59,
           milliseconds: 999)); // 日曜日の23:59:59.999
-      setWeeklyData(startOfWeek, endOfWeek);
+      setPeriodData(startOfWeek, endOfWeek);
     }
     //月
     else if (selectedPeriodType == PeriodType.monthly) {
@@ -89,7 +89,7 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
       final startOfMonth = DateTime(now.year, now.month, 1); // 月の初めの00:00
       final endOfMonth = DateTime(
           now.year, now.month + 1, 0, 23, 59, 59, 999); // 月末の23:59:59.999
-      setWeeklyData(startOfMonth, endOfMonth);
+      setPeriodData(startOfMonth, endOfMonth);
     }
   }
 
@@ -110,7 +110,7 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
           minutes: 59,
           seconds: 59,
           milliseconds: 999)); // 日曜日の23:59:59.999
-      setWeeklyData(startOfWeek, endOfWeek);
+      setPeriodData(startOfWeek, endOfWeek);
     }
     //月
     else if (selectedPeriodType == PeriodType.monthly) {
@@ -124,27 +124,27 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
       final startOfMonth = DateTime(newYear, adjustedMonth, 1); // 月の初めの00:00
       final endOfMonth = DateTime(
           newYear, adjustedMonth + 1, 0, 23, 59, 59, 999); // 月末の23:59:59.999
-      setWeeklyData(startOfMonth, endOfMonth);
+      setPeriodData(startOfMonth, endOfMonth);
     }
   }
 
-  void setWeeklyData(DateTime startOfWeek, DateTime endOfWeek) {
+  void setPeriodData(DateTime startOfPeriod, DateTime endOfPeriod) {
     final totalQuizList = state.totalQuizList;
     final weeklyQuizList = totalQuizList
         .where((x) =>
-            x.timeStamp!.isAfter(startOfWeek) &&
-            x.timeStamp!.isBefore(endOfWeek.add(const Duration(days: 1))))
+            x.timeStamp!.isAfter(startOfPeriod) &&
+            x.timeStamp!.isBefore(endOfPeriod.add(const Duration(days: 1))))
         .toList();
 
-    final List<DateTime> weekDays = [];
-    for (int i = 0; i <= endOfWeek.difference(startOfWeek).inDays; i++) {
-      weekDays.add(startOfWeek.add(Duration(days: i)));
+    final List<DateTime> periodDays = [];
+    for (int i = 0; i <= endOfPeriod.difference(startOfPeriod).inDays; i++) {
+      periodDays.add(startOfPeriod.add(Duration(days: i)));
     }
 
     //1週間の問題数を追加
-    final List<int> weeklyQuizCounts = [];
-    final List<int> weeklyDuration = [];
-    for (DateTime day in weekDays) {
+    final List<int> periodQuizCounts = [];
+    final List<int> periodDuration = [];
+    for (DateTime day in periodDays) {
       final quizzesForTheDay = weeklyQuizList
           .where((quiz) =>
               quiz.timeStamp?.day == day.day &&
@@ -155,24 +155,24 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
           0, (prev, quiz) => prev + quiz.quizItemList.length);
       final duration = quizzesForTheDay.fold<Duration>(
           Duration.zero, (prev, quiz) => prev + quiz.duration);
-      weeklyQuizCounts.add(quizCount);
-      weeklyDuration.add(duration.inMinutes);
+      periodQuizCounts.add(quizCount);
+      periodDuration.add(duration.inMinutes);
     }
     //  合計
-    final int weeklyQuizTotal = weeklyQuizCounts.fold(0, (a, b) => a + b);
-    final int weeklyDurationTotal = weeklyDuration.fold(0, (a, b) => a + b);
-    final runningDays = weeklyQuizCounts.where((x) => x > 0).toList().length;
+    final int periodQuizTotal = periodQuizCounts.fold(0, (a, b) => a + b);
+    final int periodDurationTotal = periodDuration.fold(0, (a, b) => a + b);
+    final runningDays = periodQuizCounts.where((x) => x > 0).toList().length;
 
     state = state.copyWith(
-      weeklyQuizList: weeklyQuizList,
-      startWeekRange: startOfWeek,
-      endWeekRange: endOfWeek,
-      weekDays: weekDays,
-      weeklyQuizCounts: weeklyQuizCounts,
-      weeklyQuizTotal: weeklyQuizTotal,
-      weeklyDuration: weeklyDuration,
+      periodQuizList: weeklyQuizList,
+      startPeriodRange: startOfPeriod,
+      endPeriodRange: endOfPeriod,
+      periodDays: periodDays,
+      periodQuizCounts: periodQuizCounts,
+      periodQuizTotal: periodQuizTotal,
+      periodDuration: periodDuration,
       runningDays: runningDays,
-      weeklyDurationTotal: weeklyDurationTotal,
+      periodDurationTotal: periodDurationTotal,
     );
 
     ref.read(homeDashboardScreenProvider.notifier).setData();
