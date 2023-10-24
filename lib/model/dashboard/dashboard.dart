@@ -12,11 +12,13 @@ class Dashboard with _$Dashboard {
     @Default([]) final List<Quiz> totalQuizList,
     @Default(Duration.zero) final Duration allDuration,
     @Default(0) final int allQuizCount,
+    @Default(0) final int allQuizCorrectCount,
     @Default(0) final int runningDays,
 
     ///Daily
     @Default(Duration.zero) final Duration dailyDuration,
     @Default(0) final int dailyQuizCount,
+    @Default(0) final int dailyQuizCorrectCount,
 
     ///Weekly
     @Default([]) final List<Quiz> weeklyQuizList, //今週のクイズ一覧

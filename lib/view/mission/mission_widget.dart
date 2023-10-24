@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/mission/mission_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
+import '../../model/dashboard/dashboard_model.dart';
 import '../../model/mission/mission.dart';
 import '../../model/mission/mission_model.dart';
 import '../bar.dart';
@@ -22,22 +22,12 @@ class DailyMissionWidget extends ConsumerWidget {
     final state = ref.watch(missionControllerProvider);
     final _timeLimit = state.timeLimit;
     final model = ref.watch(missionModelProvider);
-    final dashboardState = ref.watch(dashboardAnalyticsProvider);
     final missions = model.sortedMissions;
-    if (dashboardState.isLoading || missions.isEmpty) {
-      return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.1,
-        ),
-      );
-    }
-
-    final dailyData = dashboardState.dailyData!;
-    final dailyScore = dailyData.quizData.length;
-    final correctScore =
-        dailyData.quizData.where((x) => x.isJudge == true).toList().length;
-    final dailyGoal = ref.watch(dashboardAnalyticsProvider).dailyGoal;
+    final userCustom = ref.watch(userModelProvider).userCustom;
+    final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
+    final dashboardModel = ref.watch(dashboardModelProvider);
+    final dailyQuizCount = dashboardModel.dailyQuizCount;
+    final dailyQuizCorrectCount = dashboardModel.dailyQuizCorrectCount;
 
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),
@@ -62,7 +52,7 @@ class DailyMissionWidget extends ConsumerWidget {
             ///ミッション2(問題数)
             _DailyMissionCard(
               mission: missions[1],
-              currentValue: dailyScore,
+              currentValue: dailyQuizCount,
               goalValue: 10,
             ),
             Divider(color: context.mainColor, height: 1, thickness: 1),
@@ -70,15 +60,15 @@ class DailyMissionWidget extends ConsumerWidget {
             ///ミッション3(目標を達成)
             _DailyMissionCard(
               mission: missions[2],
-              currentValue: dailyScore,
-              goalValue: dailyGoal,
+              currentValue: dailyQuizCount,
+              goalValue: dailyQuizCountGoal,
             ),
             Divider(color: context.mainColor, height: 1, thickness: 1),
 
             ///ミッション4(正解数)
             _DailyMissionCard(
               mission: missions[3],
-              currentValue: correctScore,
+              currentValue: dailyQuizCorrectCount,
               goalValue: missions[3].exp,
               isRandomIconButton: true,
               randomIconButtonTap: () {
@@ -90,7 +80,7 @@ class DailyMissionWidget extends ConsumerWidget {
             ///ミッション5(何かに挑戦)
             _DailyMissionCard(
               mission: missions[4],
-              currentValue: dailyScore,
+              currentValue: dailyQuizCount,
               goalValue: 1,
               isRandomIconButton: true,
               randomIconButtonTap: () {

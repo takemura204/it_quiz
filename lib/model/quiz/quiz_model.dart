@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/dashboard_analytics/dashboard_analytics_controller.dart';
 import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -211,27 +210,25 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   ///クイズ更新
   void updateQuiz(Quiz quiz) {
     final quizType = state.quizType;
-    final quizItemList = quiz.quizItemList;
     switch (quizType) {
       case QuizType.study:
         _updateStudyQuiz(quiz);
         updateWeakItem();
-        ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizItemList);
+
         break;
       case QuizType.weak:
         _updateWeakQuiz(quiz);
         updateWeakItem();
-        ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizItemList);
         break;
       case QuizType.daily:
         // updateDailyItem(quizItemList);
         // updateWeakItem();
-        // ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizItemList);
+
         break;
       case QuizType.test:
         _updateTestQuiz(quiz);
         updateWeakItem();
-        ref.read(dashboardAnalyticsProvider.notifier).updateScore(quizItemList);
+
         break;
     }
   }

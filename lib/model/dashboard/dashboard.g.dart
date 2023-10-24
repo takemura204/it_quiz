@@ -15,11 +15,13 @@ _$_Dashboard _$$_DashboardFromJson(Map<String, dynamic> json) => _$_Dashboard(
           ? Duration.zero
           : Duration(microseconds: json['allDuration'] as int),
       allQuizCount: json['allQuizCount'] as int? ?? 0,
+      allQuizCorrectCount: json['allQuizCorrectCount'] as int? ?? 0,
       runningDays: json['runningDays'] as int? ?? 0,
       dailyDuration: json['dailyDuration'] == null
           ? Duration.zero
           : Duration(microseconds: json['dailyDuration'] as int),
       dailyQuizCount: json['dailyQuizCount'] as int? ?? 0,
+      dailyQuizCorrectCount: json['dailyQuizCorrectCount'] as int? ?? 0,
       weeklyQuizList: (json['weeklyQuizList'] as List<dynamic>?)
               ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -53,9 +55,11 @@ Map<String, dynamic> _$$_DashboardToJson(_$_Dashboard instance) =>
       'totalQuizList': instance.totalQuizList,
       'allDuration': instance.allDuration.inMicroseconds,
       'allQuizCount': instance.allQuizCount,
+      'allQuizCorrectCount': instance.allQuizCorrectCount,
       'runningDays': instance.runningDays,
       'dailyDuration': instance.dailyDuration.inMicroseconds,
       'dailyQuizCount': instance.dailyQuizCount,
+      'dailyQuizCorrectCount': instance.dailyQuizCorrectCount,
       'weeklyQuizList': instance.weeklyQuizList,
       'startWeekRange': instance.startWeekRange?.toIso8601String(),
       'endWeekRange': instance.endWeekRange?.toIso8601String(),

@@ -24,11 +24,13 @@ mixin _$Dashboard {
   List<Quiz> get totalQuizList => throw _privateConstructorUsedError;
   Duration get allDuration => throw _privateConstructorUsedError;
   int get allQuizCount => throw _privateConstructorUsedError;
+  int get allQuizCorrectCount => throw _privateConstructorUsedError;
   int get runningDays => throw _privateConstructorUsedError;
 
   ///Daily
   Duration get dailyDuration => throw _privateConstructorUsedError;
   int get dailyQuizCount => throw _privateConstructorUsedError;
+  int get dailyQuizCorrectCount => throw _privateConstructorUsedError;
 
   ///Weekly
   List<Quiz> get weeklyQuizList =>
@@ -61,9 +63,11 @@ abstract class $DashboardCopyWith<$Res> {
       {List<Quiz> totalQuizList,
       Duration allDuration,
       int allQuizCount,
+      int allQuizCorrectCount,
       int runningDays,
       Duration dailyDuration,
       int dailyQuizCount,
+      int dailyQuizCorrectCount,
       List<Quiz> weeklyQuizList,
       DateTime? startWeekRange,
       DateTime? endWeekRange,
@@ -92,9 +96,11 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
     Object? totalQuizList = null,
     Object? allDuration = null,
     Object? allQuizCount = null,
+    Object? allQuizCorrectCount = null,
     Object? runningDays = null,
     Object? dailyDuration = null,
     Object? dailyQuizCount = null,
+    Object? dailyQuizCorrectCount = null,
     Object? weeklyQuizList = null,
     Object? startWeekRange = freezed,
     Object? endWeekRange = freezed,
@@ -119,6 +125,10 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
           ? _value.allQuizCount
           : allQuizCount // ignore: cast_nullable_to_non_nullable
               as int,
+      allQuizCorrectCount: null == allQuizCorrectCount
+          ? _value.allQuizCorrectCount
+          : allQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
       runningDays: null == runningDays
           ? _value.runningDays
           : runningDays // ignore: cast_nullable_to_non_nullable
@@ -130,6 +140,10 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
       dailyQuizCount: null == dailyQuizCount
           ? _value.dailyQuizCount
           : dailyQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      dailyQuizCorrectCount: null == dailyQuizCorrectCount
+          ? _value.dailyQuizCorrectCount
+          : dailyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
               as int,
       weeklyQuizList: null == weeklyQuizList
           ? _value.weeklyQuizList
@@ -186,9 +200,11 @@ abstract class _$$_DashboardCopyWith<$Res> implements $DashboardCopyWith<$Res> {
       {List<Quiz> totalQuizList,
       Duration allDuration,
       int allQuizCount,
+      int allQuizCorrectCount,
       int runningDays,
       Duration dailyDuration,
       int dailyQuizCount,
+      int dailyQuizCorrectCount,
       List<Quiz> weeklyQuizList,
       DateTime? startWeekRange,
       DateTime? endWeekRange,
@@ -215,9 +231,11 @@ class __$$_DashboardCopyWithImpl<$Res>
     Object? totalQuizList = null,
     Object? allDuration = null,
     Object? allQuizCount = null,
+    Object? allQuizCorrectCount = null,
     Object? runningDays = null,
     Object? dailyDuration = null,
     Object? dailyQuizCount = null,
+    Object? dailyQuizCorrectCount = null,
     Object? weeklyQuizList = null,
     Object? startWeekRange = freezed,
     Object? endWeekRange = freezed,
@@ -242,6 +260,10 @@ class __$$_DashboardCopyWithImpl<$Res>
           ? _value.allQuizCount
           : allQuizCount // ignore: cast_nullable_to_non_nullable
               as int,
+      allQuizCorrectCount: null == allQuizCorrectCount
+          ? _value.allQuizCorrectCount
+          : allQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
       runningDays: null == runningDays
           ? _value.runningDays
           : runningDays // ignore: cast_nullable_to_non_nullable
@@ -253,6 +275,10 @@ class __$$_DashboardCopyWithImpl<$Res>
       dailyQuizCount: null == dailyQuizCount
           ? _value.dailyQuizCount
           : dailyQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      dailyQuizCorrectCount: null == dailyQuizCorrectCount
+          ? _value.dailyQuizCorrectCount
+          : dailyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
               as int,
       weeklyQuizList: null == weeklyQuizList
           ? _value._weeklyQuizList
@@ -305,9 +331,11 @@ class _$_Dashboard extends _Dashboard {
       {final List<Quiz> totalQuizList = const [],
       this.allDuration = Duration.zero,
       this.allQuizCount = 0,
+      this.allQuizCorrectCount = 0,
       this.runningDays = 0,
       this.dailyDuration = Duration.zero,
       this.dailyQuizCount = 0,
+      this.dailyQuizCorrectCount = 0,
       final List<Quiz> weeklyQuizList = const [],
       this.startWeekRange,
       this.endWeekRange,
@@ -348,6 +376,9 @@ class _$_Dashboard extends _Dashboard {
   final int allQuizCount;
   @override
   @JsonKey()
+  final int allQuizCorrectCount;
+  @override
+  @JsonKey()
   final int runningDays;
 
   ///Daily
@@ -357,6 +388,9 @@ class _$_Dashboard extends _Dashboard {
   @override
   @JsonKey()
   final int dailyQuizCount;
+  @override
+  @JsonKey()
+  final int dailyQuizCorrectCount;
 
   ///Weekly
   final List<Quiz> _weeklyQuizList;
@@ -429,7 +463,7 @@ class _$_Dashboard extends _Dashboard {
 
   @override
   String toString() {
-    return 'Dashboard(totalQuizList: $totalQuizList, allDuration: $allDuration, allQuizCount: $allQuizCount, runningDays: $runningDays, dailyDuration: $dailyDuration, dailyQuizCount: $dailyQuizCount, weeklyQuizList: $weeklyQuizList, startWeekRange: $startWeekRange, endWeekRange: $endWeekRange, weekDays: $weekDays, weeklyQuizCounts: $weeklyQuizCounts, weeklyQuizTotal: $weeklyQuizTotal, weeklyDuration: $weeklyDuration, weeklyDurationTotal: $weeklyDurationTotal, weekOffset: $weekOffset, monthOffset: $monthOffset)';
+    return 'Dashboard(totalQuizList: $totalQuizList, allDuration: $allDuration, allQuizCount: $allQuizCount, allQuizCorrectCount: $allQuizCorrectCount, runningDays: $runningDays, dailyDuration: $dailyDuration, dailyQuizCount: $dailyQuizCount, dailyQuizCorrectCount: $dailyQuizCorrectCount, weeklyQuizList: $weeklyQuizList, startWeekRange: $startWeekRange, endWeekRange: $endWeekRange, weekDays: $weekDays, weeklyQuizCounts: $weeklyQuizCounts, weeklyQuizTotal: $weeklyQuizTotal, weeklyDuration: $weeklyDuration, weeklyDurationTotal: $weeklyDurationTotal, weekOffset: $weekOffset, monthOffset: $monthOffset)';
   }
 
   @override
@@ -443,12 +477,16 @@ class _$_Dashboard extends _Dashboard {
                 other.allDuration == allDuration) &&
             (identical(other.allQuizCount, allQuizCount) ||
                 other.allQuizCount == allQuizCount) &&
+            (identical(other.allQuizCorrectCount, allQuizCorrectCount) ||
+                other.allQuizCorrectCount == allQuizCorrectCount) &&
             (identical(other.runningDays, runningDays) ||
                 other.runningDays == runningDays) &&
             (identical(other.dailyDuration, dailyDuration) ||
                 other.dailyDuration == dailyDuration) &&
             (identical(other.dailyQuizCount, dailyQuizCount) ||
                 other.dailyQuizCount == dailyQuizCount) &&
+            (identical(other.dailyQuizCorrectCount, dailyQuizCorrectCount) ||
+                other.dailyQuizCorrectCount == dailyQuizCorrectCount) &&
             const DeepCollectionEquality()
                 .equals(other._weeklyQuizList, _weeklyQuizList) &&
             (identical(other.startWeekRange, startWeekRange) ||
@@ -477,9 +515,11 @@ class _$_Dashboard extends _Dashboard {
       const DeepCollectionEquality().hash(_totalQuizList),
       allDuration,
       allQuizCount,
+      allQuizCorrectCount,
       runningDays,
       dailyDuration,
       dailyQuizCount,
+      dailyQuizCorrectCount,
       const DeepCollectionEquality().hash(_weeklyQuizList),
       startWeekRange,
       endWeekRange,
@@ -510,9 +550,11 @@ abstract class _Dashboard extends Dashboard {
       {final List<Quiz> totalQuizList,
       final Duration allDuration,
       final int allQuizCount,
+      final int allQuizCorrectCount,
       final int runningDays,
       final Duration dailyDuration,
       final int dailyQuizCount,
+      final int dailyQuizCorrectCount,
       final List<Quiz> weeklyQuizList,
       final DateTime? startWeekRange,
       final DateTime? endWeekRange,
@@ -537,6 +579,8 @@ abstract class _Dashboard extends Dashboard {
   @override
   int get allQuizCount;
   @override
+  int get allQuizCorrectCount;
+  @override
   int get runningDays;
   @override
 
@@ -544,6 +588,8 @@ abstract class _Dashboard extends Dashboard {
   Duration get dailyDuration;
   @override
   int get dailyQuizCount;
+  @override
+  int get dailyQuizCorrectCount;
   @override
 
   ///Weekly

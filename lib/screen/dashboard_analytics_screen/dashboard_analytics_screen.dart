@@ -1,415 +1,80 @@
-import 'dart:math';
-
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/dashboard_analytics/bar_data_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-import '../../controller/dashboard_analytics/dashboard_analytics_controller.dart';
-import '../../controller/home_dashboard/home_dashboard_screen_controller.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../view/bar.dart';
-import '../../view/chart/chart.dart';
-
 part 'dashboard_analytics_view.dart';
 
-/// 今日の学習
-
-class DashboardQuizLength extends ConsumerWidget {
-  const DashboardQuizLength();
+///今日のメッセージ
+class _DailyMessage extends ConsumerWidget {
+  const _DailyMessage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    if (state.isLoading) {
-      return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.35,
-        ),
-      );
-    }
     return Container(
-      width: context.width * 1,
-      alignment: Alignment.center,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
-          child: Column(
-            children: [
-              Gap(context.height * 0.01),
-
-              ///期間選択
-              Gap(context.height * 0.01),
-
-              ///ダッシュボード
-              DashboardBarChart(),
-              Gap(context.height * 0.005),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-///ダッシュボード
-class DashboardBarChart extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    final selectedIndex = state.selectedXIndex;
-    final weeklyIndex = state.weeklyIndex;
-    final monthlyIndex = state.monthlyIndex;
-    final selectedDayRange = state.selectedDayRange;
-    final totalData = state.totalData;
-    final weeklyData = state.weeklyData[weeklyIndex];
-    final monthlyData = state.monthlyData[monthlyIndex];
-    final dailyGoal = state.dailyGoal;
-    final maxY = dailyGoal * 2;
-
-    return Container(
-      height: context.height * 0.25,
-      child: BarChart(
-        BarChartData(
-          alignment: BarChartAlignment.spaceAround,
-
-          ///ボーダー
-          borderData: FlBorderData(
-            show: true,
-            border: const Border.symmetric(
-              horizontal: BorderSide(
-                color: Colors.grey,
-              ),
-            ),
-          ),
-
-          ///グリッド線
-          gridData: FlGridData(
-            show: true,
-            drawVerticalLine: false,
-            getDrawingHorizontalLine: (value) {
-              final color =
-                  (value == dailyGoal) ? context.mainColor : Colors.grey;
-              return FlLine(
-                color: color,
-                strokeWidth: (value == dailyGoal) ? 2 : 1,
-              );
-            },
-          ),
-
-          ///タイトル
-          titlesData: FlTitlesData(
-            show: true,
-
-            ///Y軸
-            leftTitles: AxisTitles(
-              drawBehindEverything: true,
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: (value, meta) {
-                  final color =
-                      (value == dailyGoal) ? context.mainColor : Colors.grey;
-                  final fontSize = (value == 100)
-                      ? context.width * 0.025
-                      : context.width * 0.03;
-                  return Text(
-                    value.toInt().toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: color,
-                      fontSize: fontSize,
-                      fontWeight: (value == dailyGoal)
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                    ),
-                  );
-                },
-              ),
-            ),
-
-            /// X軸
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: context.height * 0.04,
-                getTitlesWidget: (value, meta) {
-                  final state = ref.watch(dashboardAnalyticsProvider);
-                  switch (state.selectedDayRange) {
-                    case 31:
-                      return _BottomWeekTitles(meta: meta, value: value);
-                    case 7:
-                      return _BottomMonthTitles(meta: meta, value: value + 1);
-
-                    default:
-                      return _BottomWeekTitles(meta: meta, value: value);
-                  }
-                },
-              ),
-            ),
-            rightTitles: AxisTitles(),
-            topTitles: AxisTitles(),
-          ),
-
-          /// グラフ本体
-          barGroups: (() {
-            switch (selectedDayRange) {
-              case 31:
-                return weeklyData
-                    .asMap()
-                    .entries
-                    .map((e) {
-                      final index = e.key;
-                      final data = e.value;
-                      final color = (data.score >= dailyGoal)
-                          ? context.mainColor
-                          : Colors.grey.shade400;
-
-                      return BarChartGroupData(
-                        x: index,
-                        barsSpace: 1,
-                        barRods: [
-                          CustomBarChartRodData(
-                            toY: data.score > maxY
-                                ? maxY + 0.5
-                                : data.score.toDouble(),
-                            color: color,
-                            width: 30,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ],
-                        showingTooltipIndicators:
-                            selectedIndex == index ? [0] : [],
-                      );
-                    })
-                    .whereType<BarChartGroupData>()
-                    .toList();
-              case 7:
-                return monthlyData
-                    .asMap()
-                    .entries
-                    .map((e) {
-                      final index = e.key;
-                      final data = e.value;
-                      final color = (data.score >= dailyGoal)
-                          ? context.mainColor
-                          : Colors.grey.shade400;
-
-                      return BarChartGroupData(
-                        x: index,
-                        barsSpace: 1,
-                        barRods: [
-                          CustomBarChartRodData(
-                            toY: data.score > maxY
-                                ? maxY + 0.5
-                                : data.score.toDouble(),
-                            color: color,
-                            width: 10, // 月間データのときは棒グラフの幅を10にする
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ],
-                        showingTooltipIndicators:
-                            selectedIndex == index ? [0] : [],
-                      );
-                    })
-                    .whereType<BarChartGroupData>()
-                    .toList();
-              default:
-                return totalData
-                    .asMap()
-                    .entries
-                    .map((e) {
-                      final index = e.key;
-                      final data = e.value;
-                      final color = (data.score >= dailyGoal)
-                          ? context.mainColor
-                          : Colors.grey.shade400;
-
-                      return BarChartGroupData(
-                        x: index,
-                        barsSpace: 1,
-                        barRods: [
-                          CustomBarChartRodData(
-                            toY: data.score > maxY
-                                ? maxY + 0.5
-                                : data.score.toDouble(),
-                            color: color,
-                            width: 30, // すべてのデータを表示するように変更
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ],
-                        showingTooltipIndicators:
-                            selectedIndex == index ? [0] : [],
-                      );
-                    })
-                    .whereType<BarChartGroupData>()
-                    .toList();
-            }
-          })(),
-
-          maxY: maxY.toDouble(),
-          barTouchData: BarTouchData(
-            enabled: true,
-            handleBuiltInTouches: false,
-            touchTooltipData: BarTouchTooltipData(
-              tooltipBgColor: Colors.white10,
-              tooltipMargin: -5,
-              tooltipPadding: const EdgeInsets.all(0),
-              tooltipRoundedRadius: 0,
-              getTooltipItem: (
-                BarChartGroupData group,
-                int groupIndex,
-                BarChartRodData rod,
-                int rodIndex,
-              ) {
-                int dataValue;
-                switch (state.selectedDayRange) {
-                  case 7:
-                    dataValue = weeklyData[groupIndex].score.toInt();
-                    break;
-                  case 31:
-                    dataValue = monthlyData[groupIndex].score.toInt();
-                    break;
-                  default:
-                    dataValue = totalData[groupIndex].score.toInt();
-                    break;
-                }
-                return BarTooltipItem(
-                  "$dataValue",
-                  TextStyle(
+      width: context.width * 0.48,
+      child: Column(
+        children: [
+          const Spacer(),
+          Container(
+            height: context.height * 0.12,
+            child: Column(
+              children: [
+                const Spacer(),
+                Text(
+                  "千里の道も一歩から！\nコツコツ積み重ねていましょう!継続は今日からです！\na",
+                  style: TextStyle(
+                    color: Colors.black45,
                     fontWeight: FontWeight.bold,
-                    color: rod.color,
-                    backgroundColor: Colors.transparent,
-                    fontSize: context.width * 0.04,
+                    fontSize: context.width * 0.032,
                   ),
-                  textAlign: TextAlign.center,
-                );
-              },
+                  textAlign: TextAlign.start,
+                  maxLines: 3,
+                ),
+                const Spacer(),
+              ],
             ),
-            touchCallback: (event, response) {
-              if (event.isInterestedForInteractions &&
-                  response != null &&
-                  response.spot != null) {
-                ref
-                    .read(dashboardAnalyticsProvider.notifier)
-                    .selectXIndex(response.spot!.touchedBarGroupIndex);
-              } else {
-                ref.read(dashboardAnalyticsProvider.notifier).selectXIndex(-1);
-              }
-            },
           ),
-        ),
+          Container(
+            width: context.height * 0.1,
+            height: context.height * 0.1,
+            child: Image.asset(
+              'assets/image/cat_grey.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+          Gap(context.height * 0.01),
+        ],
       ),
     );
   }
 }
 
-class _BottomWeekTitles extends ConsumerWidget {
-  const _BottomWeekTitles({required this.meta, required this.value});
-
-  final TitleMeta meta;
-  final double value;
+///グループごとの進捗状況
+class GroupProgress extends ConsumerWidget {
+  const GroupProgress();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    final selectedXIndex = state.selectedXIndex;
-    final weeklyIndex = state.weeklyIndex;
-    final weekData = state.weeklyData[weeklyIndex];
-    final adjustedIndex = min(max(0, value.toInt()), weekData.length - 1);
-    final barData = weekData[adjustedIndex];
-    final isToday = DateTime.now().day == barData.day.day &&
-        DateTime.now().weekday == barData.day.weekday;
-    final displayText =
-        "${barData.day.month}/${barData.day.day}\n${barData.weekDay}";
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 2,
-      child: Text(
-        displayText,
-        style: TextStyle(
-          color: isToday ? context.mainColor : Colors.grey,
-          fontWeight: (isToday || selectedXIndex == adjustedIndex)
-              ? FontWeight.bold
-              : FontWeight.normal,
-          fontSize: context.width * 0.03,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
-
-class _BottomMonthTitles extends ConsumerWidget {
-  const _BottomMonthTitles({required this.meta, required this.value});
-
-  final TitleMeta meta;
-  final double value;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final selectedIndex = ref.watch(homeDashboardScreenProvider).selectedXIndex;
-    final valueIndex = value.toInt();
-    final monthDay = '$valueIndex';
-
-    if (valueIndex % 5 != 1) {
-      return const SizedBox.shrink();
-    }
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 2,
-      child: Text(
-        monthDay,
-        style: TextStyle(
-          color: (selectedIndex == valueIndex) ? Colors.black54 : Colors.grey,
-          fontSize: context.width * 0.03,
-          fontWeight: (selectedIndex == valueIndex)
-              ? FontWeight.bold
-              : FontWeight.normal,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
-
-///毎日の目標
-class DailyGoal extends ConsumerWidget {
-  const DailyGoal();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardAnalyticsProvider);
-    if (state.isLoading) {
+    final group = ref
+        .read(quizModelProvider)
+        .quizList
+        .map((quiz) => quiz.category)
+        .toSet()
+        .toList();
+    if (group.isEmpty) {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
-          size: context.height * 0.22,
+          size: context.height * 0.15,
         ),
       );
     }
-    final dailyData = state.dailyData!;
-    final dailyScore = dailyData.quizData.length;
-    final dailyGoal = state.dailyGoal;
     return Container(
-      width: context.width * 1,
+      height: context.height * 0.15,
       child: Card(
         elevation: 3,
         color: Colors.white,
@@ -424,63 +89,127 @@ class DailyGoal extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            Container(
-              height: context.height * 0.23,
-              child: Row(
-                children: [
-                  const Spacer(),
-
-                  ///チャート
-                  ProgressRangeChart(
-                    width: context.height * 0.2,
-                    size: context.height * 0.2,
-                    goalScore: dailyGoal,
-                    currentScore: dailyScore,
-                    widget: Column(
-                      children: [
-                        const Spacer(),
-                        Text(
-                          "今日の\n学習問題数",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: context.height * 0.015,
-                            height: 1.2,
-                          ),
-                        ),
-                        Text(
-                          "$dailyScore",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.045,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        Text(
-                          "/$dailyGoal",
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.height * 0.015,
-                            color: context.mainColor,
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-
-                  ///今日の一言
-                  const _DailyMessage(),
-
-                  const Spacer(),
-                ],
-              ),
+            const Spacer(),
+            Row(
+              children: [
+                const Spacer(),
+                _ProgressMeterCart(groupName: group[0]),
+                const Spacer(),
+                _ProgressMeterCart(groupName: group[1]),
+                const Spacer(),
+                _ProgressMeterCart(groupName: group[2]),
+                const Spacer(),
+                _ProgressMeterCart(groupName: group[3]),
+                const Spacer(),
+              ],
             ),
+            const Spacer(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+///グループごとの進捗状況
+class _ProgressMeterCart extends ConsumerWidget {
+  const _ProgressMeterCart({required this.groupName});
+
+  final String groupName;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final filterQuizList = ref
+        .read(quizModelProvider)
+        .quizList
+        .where((x) => x.category == groupName)
+        .expand((quiz) => quiz.quizItemList)
+        .toList();
+    final quizLength = filterQuizList.length;
+    final score =
+        filterQuizList.where((x) => x.isJudge == true).toList().length;
+    final scoreRatio = ((score / quizLength) * 100).toStringAsFixed(0);
+    return Container(
+      width: context.width * 0.2,
+      height: context.height * 0.13,
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          const Spacer(),
+          Container(
+            width: context.width * 0.2,
+            height: context.width * 0.2,
+            child: SfRadialGauge(axes: [
+              RadialAxis(
+                  minimum: 0,
+                  maximum: quizLength.toDouble(),
+                  showLabels: false,
+                  showTicks: false,
+                  axisLineStyle: AxisLineStyle(
+                    thickness: 0.2,
+                    cornerStyle: CornerStyle.bothCurve,
+                    color: Colors.grey.shade300,
+                    thicknessUnit: GaugeSizeUnit.factor,
+                  ),
+                  pointers: [
+                    RangePointer(
+                      value: score.toDouble(),
+                      cornerStyle: CornerStyle.bothCurve,
+                      width: 0.2,
+                      sizeUnit: GaugeSizeUnit.factor,
+                      color: context.mainColor,
+                    )
+                  ],
+                  annotations: <GaugeAnnotation>[
+                    GaugeAnnotation(
+                      positionFactor: 0.1,
+                      angle: 90,
+                      widget: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          const Spacer(),
+                          Text(
+                            "$scoreRatio",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.03,
+                              color: context.mainColor,
+                            ),
+                          ),
+                          Text(
+                            "%",
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.015,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
+                    ),
+                    GaugeAnnotation(
+                      positionFactor: 1.1,
+                      angle: 90,
+                      widget: Text(
+                        groupName,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: context.height * 0.015,
+                          color: context.mainColor,
+                        ),
+                        maxLines: 1,
+                      ),
+                    ),
+                  ]),
+            ]),
+          ),
+          const Spacer(),
+        ],
       ),
     );
   }

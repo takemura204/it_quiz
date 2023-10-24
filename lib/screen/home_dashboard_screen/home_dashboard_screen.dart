@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/screen/dashboard_analytics_screen/dashboard_analytics_screen.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
@@ -13,6 +12,7 @@ import '../../model/user/user.model.dart';
 import '../../view/chart/weekly_chart.dart';
 import '../../view/mission/mission_widget.dart';
 import '../../view/rank/rank_widget.dart';
+import '../dashboard_analytics_screen/dashboard_analytics_screen.dart';
 
 part 'home_dashboard_daily.dart';
 
@@ -59,11 +59,6 @@ class _Body extends ConsumerWidget {
 
           ///週&月の学習データ
           WeeklyDashboard(),
-
-          DashboardQuizLength(),
-
-          ///今日の目標
-          // DailyGoal(),
 
           ///グループごとの進捗
           GroupProgress(),

@@ -33,9 +33,11 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
     final today = DateTime.now();
     Duration dailyDuration = Duration.zero;
     int dailyQuizCount = 0;
+    int dailyQuizCorrectCount = 0;
 
     Duration allDuration = Duration.zero;
     int allQuizCount = 0;
+    int allCorrectQuizCount = 0;
 
     for (var quiz in totalQuizList) {
       if (quiz.timeStamp?.day == today.day &&
@@ -43,10 +45,14 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
           quiz.timeStamp?.year == today.year) {
         dailyDuration += quiz.duration;
         dailyQuizCount += quiz.quizItemList.length;
+        dailyQuizCorrectCount +=
+            quiz.quizItemList.where((x) => x.isJudge).toList().length;
       }
 
       allDuration += quiz.duration;
       allQuizCount += quiz.quizItemList.length;
+      allCorrectQuizCount =
+          quiz.quizItemList.where((x) => x.isJudge).toList().length;
     }
 
     state = state.copyWith(
@@ -54,7 +60,9 @@ class DashboardModel extends StateNotifier<Dashboard> with LocatorMixin {
       dailyDuration: dailyDuration,
       allDuration: allDuration,
       dailyQuizCount: dailyQuizCount,
+      dailyQuizCorrectCount: dailyQuizCorrectCount,
       allQuizCount: allQuizCount,
+      allQuizCorrectCount: allCorrectQuizCount,
     );
   }
 
