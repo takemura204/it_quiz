@@ -1,10 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
-import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
-import 'package:kentei_quiz/model/extension_resource.dart';
+part of 'dashboard_period_screen.dart';
 
 class QuizChart extends ConsumerWidget {
   @override

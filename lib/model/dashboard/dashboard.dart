@@ -20,15 +20,15 @@ class Dashboard with _$Dashboard {
     @Default(0) final int dailyQuizCount,
     @Default(0) final int dailyQuizCorrectCount,
 
-    ///Weekly
-    @Default([]) final List<Quiz> weeklyQuizList, //今週のクイズ一覧
-    DateTime? startWeekRange, // 今週の月曜日の日付
-    DateTime? endWeekRange, // 今週の日曜日の日付
-    @Default([]) final List<DateTime> weekDays, //今週の「月/日」一覧
-    @Default([]) final List<int> weeklyQuizCounts, //今週の問題数一覧
-    @Default(0) final int weeklyQuizTotal, //今週のデータ一覧
-    @Default([]) final List<int> weeklyDuration, //今週の学習時間
-    @Default(0) final int weeklyDurationTotal, //今週のデータ一覧
+    ///Weekly・Monthly
+    @Default([]) final List<Quiz> periodQuizList, //今週/今月のクイズ一覧
+    DateTime? startPeriodRange, // 今週の月曜日の日付
+    DateTime? endPeriodRange, // 今週の日曜日の日付
+    @Default([]) final List<DateTime> periodDays, //今週の「月/日」一覧
+    @Default([]) final List<int> periodQuizCounts, //今週の問題数一覧
+    @Default(0) final int periodQuizTotal, //今週のデータ一覧
+    @Default([]) final List<int> periodDuration, //今週の学習時間
+    @Default(0) final int periodDurationTotal, //今週のデータ一覧
     @Default(0) final int weekOffset, //週の期間選択
     @Default(0) final int monthOffset, //月の期間選択
   }) = _Dashboard;

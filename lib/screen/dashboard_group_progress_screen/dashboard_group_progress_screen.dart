@@ -6,7 +6,6 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../model/quiz/quiz_model.dart';
-part 'dashboard_analytics_view.dart';
 
 ///今日のメッセージ
 class _DailyMessage extends ConsumerWidget {
@@ -54,8 +53,8 @@ class _DailyMessage extends ConsumerWidget {
 }
 
 ///グループごとの進捗状況
-class GroupProgress extends ConsumerWidget {
-  const GroupProgress();
+class GroupProgressDashboard extends ConsumerWidget {
+  const GroupProgressDashboard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -93,13 +92,13 @@ class GroupProgress extends ConsumerWidget {
             Row(
               children: [
                 const Spacer(),
-                _ProgressMeterCart(groupName: group[0]),
+                _GroupProgressCart(groupName: group[0]),
                 const Spacer(),
-                _ProgressMeterCart(groupName: group[1]),
+                _GroupProgressCart(groupName: group[1]),
                 const Spacer(),
-                _ProgressMeterCart(groupName: group[2]),
+                _GroupProgressCart(groupName: group[2]),
                 const Spacer(),
-                _ProgressMeterCart(groupName: group[3]),
+                _GroupProgressCart(groupName: group[3]),
                 const Spacer(),
               ],
             ),
@@ -112,8 +111,8 @@ class GroupProgress extends ConsumerWidget {
 }
 
 ///グループごとの進捗状況
-class _ProgressMeterCart extends ConsumerWidget {
-  const _ProgressMeterCart({required this.groupName});
+class _GroupProgressCart extends ConsumerWidget {
+  const _GroupProgressCart({required this.groupName});
 
   final String groupName;
 

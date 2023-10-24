@@ -1,16 +1,19 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
-import 'chart.dart';
 
-class WeeklyDashboard extends ConsumerWidget {
-  const WeeklyDashboard();
+part 'dashboard_chart.dart';
+
+class PeriodDashboard extends ConsumerWidget {
+  const PeriodDashboard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,12 +50,7 @@ class WeeklyDashboard extends ConsumerWidget {
                 margin: EdgeInsets.symmetric(
                     horizontal: context.width * 0.02,
                     vertical: context.width * 0.01),
-                child: Row(
-                  children: [
-                    /// 選択期間
-                    const _SelectPeriod(),
-                  ],
-                ),
+                child: const _SelectPeriod(),
               ),
 
               Gap(context.height * 0.01),
@@ -122,8 +120,8 @@ class _TotalData extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(dashboardModelProvider);
-    final weeklyQuizTotal = model.weeklyQuizTotal;
-    final weeklyDurationTotal = model.weeklyDurationTotal;
+    final periodQuizTotal = model.periodQuizTotal;
+    final periodDurationTotal = model.periodDurationTotal;
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedChartType = state.selectedChartType;
 
@@ -136,7 +134,7 @@ class _TotalData extends ConsumerWidget {
         children: [
           _StatusCard(
             text: "問題数",
-            value: weeklyQuizTotal,
+            value: periodQuizTotal,
             icon: LineIcons.book,
             unit: "問",
             isSeleted: selectedChartType == ChartType.quizCount,
@@ -148,7 +146,7 @@ class _TotalData extends ConsumerWidget {
           ),
           _StatusCard(
             text: "学習時間",
-            value: weeklyDurationTotal,
+            value: periodDurationTotal,
             icon: LineIcons.clock,
             unit: "分",
             isSeleted: selectedChartType == ChartType.duration,
@@ -272,7 +270,7 @@ class _SelectPeriod extends ConsumerWidget {
     final model = ref.watch(dashboardModelProvider);
     final weekOffset = model.weekOffset;
     final monthOffset = model.monthOffset;
-    final weekDays = model.weekDays;
+    final periodDays = model.periodDays;
 
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedPeriodType = state.selectedPeriodType;
@@ -315,8 +313,8 @@ class _SelectPeriod extends ConsumerWidget {
             ///選択期間のスコア
             Text(
               (selectedPeriodType == PeriodType.weekly)
-                  ? "${weekDays.first.month}/${weekDays.first.day} 〜 ${weekDays.last.month}/${weekDays.last.day}"
-                  : "${weekDays.first.year}/${weekDays.first.month}/${weekDays.first.day} 〜 ${weekDays.first.year}/${weekDays.last.month}/${weekDays.last.day}",
+                  ? "${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.last.month}/${periodDays.last.day}"
+                  : "${periodDays.first.year}/${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.first.year}/${periodDays.last.month}/${periodDays.last.day}",
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
             ),
