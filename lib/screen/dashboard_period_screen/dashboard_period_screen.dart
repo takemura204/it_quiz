@@ -45,13 +45,7 @@ class PeriodDashboard extends ConsumerWidget {
               Gap(context.height * 0.01),
 
               ///期間
-              Container(
-                height: context.height * 0.04,
-                margin: EdgeInsets.symmetric(
-                    horizontal: context.width * 0.02,
-                    vertical: context.width * 0.01),
-                child: const _SelectPeriod(),
-              ),
+              const _SelectPeriod(),
 
               Gap(context.height * 0.01),
 
@@ -275,73 +269,67 @@ class _SelectPeriod extends ConsumerWidget {
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedPeriodType = state.selectedPeriodType;
 
-    return Expanded(
-      child: Container(
-        width: context.width * 0.55,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              padding: EdgeInsets.all(context.width * 0.01),
-              iconSize: context.width * 0.06,
-              onPressed: () {
-                if (selectedPeriodType == PeriodType.weekly &&
-                    weekOffset > -2) {
-                  ref
-                      .read(dashboardModelProvider.notifier)
-                      .updateWeeklyData(-1);
-                } else if (selectedPeriodType == PeriodType.monthly &&
-                    monthOffset > -2) {
-                  ref
-                      .read(dashboardModelProvider.notifier)
-                      .updateWeeklyData(-1);
-                }
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: (((selectedPeriodType == PeriodType.weekly) &&
-                            weekOffset > -2) ||
-                        ((selectedPeriodType == PeriodType.monthly) &&
-                            monthOffset > -2))
-                    ? context.mainColor
-                    : Colors.grey.shade400,
-              ),
+    return Container(
+      height: context.height * 0.04,
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            padding: EdgeInsets.all(context.width * 0.01),
+            iconSize: context.width * 0.06,
+            onPressed: () {
+              if (selectedPeriodType == PeriodType.weekly && weekOffset > -2) {
+                ref.read(dashboardModelProvider.notifier).updateWeeklyData(-1);
+              } else if (selectedPeriodType == PeriodType.monthly &&
+                  monthOffset > -2) {
+                ref.read(dashboardModelProvider.notifier).updateWeeklyData(-1);
+              }
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: (((selectedPeriodType == PeriodType.weekly) &&
+                          weekOffset > -2) ||
+                      ((selectedPeriodType == PeriodType.monthly) &&
+                          monthOffset > -2))
+                  ? context.mainColor
+                  : Colors.grey.shade400,
             ),
-            const Spacer(),
+          ),
+          const Spacer(),
 
-            ///選択期間のスコア
-            Text(
-              (selectedPeriodType == PeriodType.weekly)
-                  ? "${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.last.month}/${periodDays.last.day}"
-                  : "${periodDays.first.year}/${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.first.year}/${periodDays.last.month}/${periodDays.last.day}",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
+          ///選択期間のスコア
+          Text(
+            (selectedPeriodType == PeriodType.weekly)
+                ? "${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.last.month}/${periodDays.last.day}"
+                : "${periodDays.first.year}/${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.first.year}/${periodDays.last.month}/${periodDays.last.day}",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
+          ),
+          const Spacer(),
+          IconButton(
+            padding: EdgeInsets.all(context.width * 0.01),
+            iconSize: context.width * 0.06,
+            onPressed: () {
+              if (selectedPeriodType == PeriodType.weekly && weekOffset < 0) {
+                ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
+              } else if (selectedPeriodType == PeriodType.monthly &&
+                  monthOffset < 0) {
+                ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
+              }
+            },
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: ((selectedPeriodType == PeriodType.weekly &&
+                          weekOffset < 0) ||
+                      (selectedPeriodType == PeriodType.monthly &&
+                          monthOffset < 0))
+                  ? context.mainColor
+                  : Colors.grey.shade400,
             ),
-            const Spacer(),
-            IconButton(
-              padding: EdgeInsets.all(context.width * 0.01),
-              iconSize: context.width * 0.06,
-              onPressed: () {
-                if (selectedPeriodType == PeriodType.weekly && weekOffset < 0) {
-                  ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
-                } else if (selectedPeriodType == PeriodType.monthly &&
-                    monthOffset < 0) {
-                  ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
-                }
-              },
-              icon: Icon(
-                Icons.arrow_forward_ios,
-                color: ((selectedPeriodType == PeriodType.weekly &&
-                            weekOffset < 0) ||
-                        (selectedPeriodType == PeriodType.monthly &&
-                            monthOffset < 0))
-                    ? context.mainColor
-                    : Colors.grey.shade400,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

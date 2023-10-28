@@ -7,50 +7,7 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../model/quiz/quiz_model.dart';
 
-///今日のメッセージ
-class _DailyMessage extends ConsumerWidget {
-  const _DailyMessage();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: context.width * 0.48,
-      child: Column(
-        children: [
-          const Spacer(),
-          Container(
-            height: context.height * 0.12,
-            child: Column(
-              children: [
-                const Spacer(),
-                Text(
-                  "千里の道も一歩から！\nコツコツ積み重ねていましょう!継続は今日からです！\na",
-                  style: TextStyle(
-                    color: Colors.black45,
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.032,
-                  ),
-                  textAlign: TextAlign.start,
-                  maxLines: 3,
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
-          Container(
-            width: context.height * 0.1,
-            height: context.height * 0.1,
-            child: Image.asset(
-              'assets/image/cat_grey.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-          Gap(context.height * 0.01),
-        ],
-      ),
-    );
-  }
-}
+part 'dashboard_group_progress_view.dart';
 
 ///グループごとの進捗状況
 class GroupProgressDashboard extends ConsumerWidget {
@@ -73,7 +30,7 @@ class GroupProgressDashboard extends ConsumerWidget {
       );
     }
     return Container(
-      height: context.height * 0.15,
+      // height: context.height * 0.15,
       child: Card(
         elevation: 3,
         color: Colors.white,
@@ -88,21 +45,21 @@ class GroupProgressDashboard extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            const Spacer(),
+            const _Title(
+              title: "学習状況",
+              subWidget: null,
+              icon: Icons.speaker_group_sharp,
+            ),
+            // Gap(context.height * 0.01),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Spacer(),
                 _GroupProgressCart(groupName: group[0]),
-                const Spacer(),
                 _GroupProgressCart(groupName: group[1]),
-                const Spacer(),
                 _GroupProgressCart(groupName: group[2]),
-                const Spacer(),
                 _GroupProgressCart(groupName: group[3]),
-                const Spacer(),
               ],
             ),
-            const Spacer(),
           ],
         ),
       ),
@@ -125,9 +82,9 @@ class _GroupProgressCart extends ConsumerWidget {
         .expand((quiz) => quiz.quizItemList)
         .toList();
     final quizLength = filterQuizList.length;
-    final score =
+    final correctCount =
         filterQuizList.where((x) => x.isJudge == true).toList().length;
-    final scoreRatio = ((score / quizLength) * 100).toStringAsFixed(0);
+    final scoreRatio = ((correctCount / quizLength) * 100).toStringAsFixed(0);
     return Container(
       width: context.width * 0.2,
       height: context.height * 0.13,
@@ -152,7 +109,7 @@ class _GroupProgressCart extends ConsumerWidget {
                   ),
                   pointers: [
                     RangePointer(
-                      value: score.toDouble(),
+                      value: correctCount.toDouble(),
                       cornerStyle: CornerStyle.bothCurve,
                       width: 0.2,
                       sizeUnit: GaugeSizeUnit.factor,

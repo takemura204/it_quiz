@@ -6,15 +6,12 @@ import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_cont
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../model/dashboard/dashboard_model.dart';
 import '../../model/lang/initial_resource.dart';
-import '../../model/user/user.model.dart';
 import '../../view/mission/mission_widget.dart';
 import '../../view/rank/rank_widget.dart';
+import '../dashboard_daily_screen/dashboard_daily_screen.dart';
 import '../dashboard_group_progress_screen/dashboard_group_progress_screen.dart';
 import '../dashboard_period_screen/dashboard_period_screen.dart';
-
-part 'home_dashboard_daily.dart';
 
 class HomeDashboardScreen extends ConsumerWidget {
   const HomeDashboardScreen();

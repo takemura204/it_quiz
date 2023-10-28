@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -297,5 +299,93 @@ class ProgressRangeChart extends ConsumerWidget {
             ]),
       ]),
     );
+  }
+}
+
+class HalfCircleProgressBar extends StatelessWidget {
+  final double size;
+  final int currentScore;
+  final int goalScore;
+  final Widget subWidget;
+
+  const HalfCircleProgressBar({
+    required this.size,
+    required this.currentScore,
+    required this.goalScore,
+    required this.subWidget,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Container(
+          width: size,
+          height: size / 2,
+          margin: EdgeInsets.symmetric(
+              horizontal: context.width * 0.01, vertical: context.width * 0.01),
+          child: CustomPaint(
+            painter: HalfCircleProgressPainter(
+              progress: goalScore != 0 ? currentScore / goalScore : 0.0,
+              progressColor: context.mainColor,
+              backgroundColor: Colors.grey.shade300,
+            ),
+          ),
+        ),
+        subWidget,
+      ],
+    );
+  }
+}
+
+class HalfCircleProgressPainter extends CustomPainter {
+  final double progress;
+  final Color progressColor;
+  final Color backgroundColor;
+
+  HalfCircleProgressPainter({
+    required this.progress,
+    required this.progressColor,
+    required this.backgroundColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint backgroundPaint = Paint()
+      ..color = backgroundColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 15.0
+      ..strokeCap = StrokeCap.round;
+
+    final Paint progressPaint = Paint()
+      ..color = progressColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 15.0
+      ..strokeCap = StrokeCap.round;
+
+    final double radius = size.width / 2;
+    final double center = size.width / 2;
+
+    canvas.drawArc(
+      Rect.fromCircle(center: Offset(center, size.height), radius: radius),
+      pi,
+      pi,
+      false,
+      backgroundPaint,
+    );
+
+    canvas.drawArc(
+      Rect.fromCircle(center: Offset(center, size.height), radius: radius),
+      pi,
+      pi * progress,
+      false,
+      progressPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
