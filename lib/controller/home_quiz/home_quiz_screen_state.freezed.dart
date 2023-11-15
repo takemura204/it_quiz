@@ -16,9 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeQuizScreenState {
+  List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
+  List<String> get categoryList => throw _privateConstructorUsedError;
+  String get selectCategory => throw _privateConstructorUsedError;
+  List<String> get selectedTestCategory => throw _privateConstructorUsedError;
   int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
+  int get tabIndex => throw _privateConstructorUsedError; //クイズ番号
   bool get isSelected => throw _privateConstructorUsedError;
-  List<String> get testGroup => throw _privateConstructorUsedError;
+  List<String> get selectedFilterGroup => throw _privateConstructorUsedError;
   int get selectedTestLength => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,9 +38,14 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       _$HomeQuizScreenStateCopyWithImpl<$Res, HomeQuizScreenState>;
   @useResult
   $Res call(
-      {int itemIndex,
+      {List<Quiz> filterQuizList,
+      List<String> categoryList,
+      String selectCategory,
+      List<String> selectedTestCategory,
+      int itemIndex,
+      int tabIndex,
       bool isSelected,
-      List<String> testGroup,
+      List<String> selectedFilterGroup,
       int selectedTestLength});
 }
 
@@ -52,23 +62,48 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? filterQuizList = null,
+    Object? categoryList = null,
+    Object? selectCategory = null,
+    Object? selectedTestCategory = null,
     Object? itemIndex = null,
+    Object? tabIndex = null,
     Object? isSelected = null,
-    Object? testGroup = null,
+    Object? selectedFilterGroup = null,
     Object? selectedTestLength = null,
   }) {
     return _then(_value.copyWith(
+      filterQuizList: null == filterQuizList
+          ? _value.filterQuizList
+          : filterQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      categoryList: null == categoryList
+          ? _value.categoryList
+          : categoryList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      selectCategory: null == selectCategory
+          ? _value.selectCategory
+          : selectCategory // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedTestCategory: null == selectedTestCategory
+          ? _value.selectedTestCategory
+          : selectedTestCategory // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabIndex: null == tabIndex
+          ? _value.tabIndex
+          : tabIndex // ignore: cast_nullable_to_non_nullable
               as int,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      testGroup: null == testGroup
-          ? _value.testGroup
-          : testGroup // ignore: cast_nullable_to_non_nullable
+      selectedFilterGroup: null == selectedFilterGroup
+          ? _value.selectedFilterGroup
+          : selectedFilterGroup // ignore: cast_nullable_to_non_nullable
               as List<String>,
       selectedTestLength: null == selectedTestLength
           ? _value.selectedTestLength
@@ -86,9 +121,14 @@ abstract class _$$_CreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int itemIndex,
+      {List<Quiz> filterQuizList,
+      List<String> categoryList,
+      String selectCategory,
+      List<String> selectedTestCategory,
+      int itemIndex,
+      int tabIndex,
       bool isSelected,
-      List<String> testGroup,
+      List<String> selectedFilterGroup,
       int selectedTestLength});
 }
 
@@ -102,23 +142,48 @@ class __$$_CreateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? filterQuizList = null,
+    Object? categoryList = null,
+    Object? selectCategory = null,
+    Object? selectedTestCategory = null,
     Object? itemIndex = null,
+    Object? tabIndex = null,
     Object? isSelected = null,
-    Object? testGroup = null,
+    Object? selectedFilterGroup = null,
     Object? selectedTestLength = null,
   }) {
     return _then(_$_Create(
+      filterQuizList: null == filterQuizList
+          ? _value._filterQuizList
+          : filterQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      categoryList: null == categoryList
+          ? _value._categoryList
+          : categoryList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      selectCategory: null == selectCategory
+          ? _value.selectCategory
+          : selectCategory // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedTestCategory: null == selectedTestCategory
+          ? _value._selectedTestCategory
+          : selectedTestCategory // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabIndex: null == tabIndex
+          ? _value.tabIndex
+          : tabIndex // ignore: cast_nullable_to_non_nullable
               as int,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      testGroup: null == testGroup
-          ? _value._testGroup
-          : testGroup // ignore: cast_nullable_to_non_nullable
+      selectedFilterGroup: null == selectedFilterGroup
+          ? _value._selectedFilterGroup
+          : selectedFilterGroup // ignore: cast_nullable_to_non_nullable
               as List<String>,
       selectedTestLength: null == selectedTestLength
           ? _value.selectedTestLength
@@ -132,11 +197,50 @@ class __$$_CreateCopyWithImpl<$Res>
 
 class _$_Create implements _Create {
   const _$_Create(
-      {this.itemIndex = 0,
+      {final List<Quiz> filterQuizList = const [],
+      final List<String> categoryList = const [],
+      this.selectCategory = "",
+      final List<String> selectedTestCategory = const [],
+      this.itemIndex = 0,
+      this.tabIndex = 0,
       this.isSelected = false,
-      final List<String> testGroup = const [],
+      final List<String> selectedFilterGroup = const [],
       this.selectedTestLength = 10})
-      : _testGroup = testGroup;
+      : _filterQuizList = filterQuizList,
+        _categoryList = categoryList,
+        _selectedTestCategory = selectedTestCategory,
+        _selectedFilterGroup = selectedFilterGroup;
+
+  final List<Quiz> _filterQuizList;
+  @override
+  @JsonKey()
+  List<Quiz> get filterQuizList {
+    if (_filterQuizList is EqualUnmodifiableListView) return _filterQuizList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filterQuizList);
+  }
+
+  final List<String> _categoryList;
+  @override
+  @JsonKey()
+  List<String> get categoryList {
+    if (_categoryList is EqualUnmodifiableListView) return _categoryList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categoryList);
+  }
+
+  @override
+  @JsonKey()
+  final String selectCategory;
+  final List<String> _selectedTestCategory;
+  @override
+  @JsonKey()
+  List<String> get selectedTestCategory {
+    if (_selectedTestCategory is EqualUnmodifiableListView)
+      return _selectedTestCategory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedTestCategory);
+  }
 
   @override
   @JsonKey()
@@ -144,14 +248,19 @@ class _$_Create implements _Create {
 //クイズ番号
   @override
   @JsonKey()
-  final bool isSelected;
-  final List<String> _testGroup;
+  final int tabIndex;
+//クイズ番号
   @override
   @JsonKey()
-  List<String> get testGroup {
-    if (_testGroup is EqualUnmodifiableListView) return _testGroup;
+  final bool isSelected;
+  final List<String> _selectedFilterGroup;
+  @override
+  @JsonKey()
+  List<String> get selectedFilterGroup {
+    if (_selectedFilterGroup is EqualUnmodifiableListView)
+      return _selectedFilterGroup;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_testGroup);
+    return EqualUnmodifiableListView(_selectedFilterGroup);
   }
 
   @override
@@ -160,7 +269,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(itemIndex: $itemIndex, isSelected: $isSelected, testGroup: $testGroup, selectedTestLength: $selectedTestLength)';
+    return 'HomeQuizScreenState(filterQuizList: $filterQuizList, categoryList: $categoryList, selectCategory: $selectCategory, selectedTestCategory: $selectedTestCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength)';
   }
 
   @override
@@ -168,19 +277,38 @@ class _$_Create implements _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Create &&
+            const DeepCollectionEquality()
+                .equals(other._filterQuizList, _filterQuizList) &&
+            const DeepCollectionEquality()
+                .equals(other._categoryList, _categoryList) &&
+            (identical(other.selectCategory, selectCategory) ||
+                other.selectCategory == selectCategory) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedTestCategory, _selectedTestCategory) &&
             (identical(other.itemIndex, itemIndex) ||
                 other.itemIndex == itemIndex) &&
+            (identical(other.tabIndex, tabIndex) ||
+                other.tabIndex == tabIndex) &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected) &&
             const DeepCollectionEquality()
-                .equals(other._testGroup, _testGroup) &&
+                .equals(other._selectedFilterGroup, _selectedFilterGroup) &&
             (identical(other.selectedTestLength, selectedTestLength) ||
                 other.selectedTestLength == selectedTestLength));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemIndex, isSelected,
-      const DeepCollectionEquality().hash(_testGroup), selectedTestLength);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_filterQuizList),
+      const DeepCollectionEquality().hash(_categoryList),
+      selectCategory,
+      const DeepCollectionEquality().hash(_selectedTestCategory),
+      itemIndex,
+      tabIndex,
+      isSelected,
+      const DeepCollectionEquality().hash(_selectedFilterGroup),
+      selectedTestLength);
 
   @JsonKey(ignore: true)
   @override
@@ -191,17 +319,32 @@ class _$_Create implements _Create {
 
 abstract class _Create implements HomeQuizScreenState {
   const factory _Create(
-      {final int itemIndex,
+      {final List<Quiz> filterQuizList,
+      final List<String> categoryList,
+      final String selectCategory,
+      final List<String> selectedTestCategory,
+      final int itemIndex,
+      final int tabIndex,
       final bool isSelected,
-      final List<String> testGroup,
+      final List<String> selectedFilterGroup,
       final int selectedTestLength}) = _$_Create;
 
   @override
+  List<Quiz> get filterQuizList;
+  @override
+  List<String> get categoryList;
+  @override
+  String get selectCategory;
+  @override
+  List<String> get selectedTestCategory;
+  @override
   int get itemIndex;
+  @override //クイズ番号
+  int get tabIndex;
   @override //クイズ番号
   bool get isSelected;
   @override
-  List<String> get testGroup;
+  List<String> get selectedFilterGroup;
   @override
   int get selectedTestLength;
   @override

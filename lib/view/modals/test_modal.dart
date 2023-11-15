@@ -19,7 +19,7 @@ class TestQuizModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isGroup = ref.watch(homeQuizScreenProvider).testGroup.isNotEmpty;
+    final isGroup = ref.watch(homeQuizScreenProvider).selectCategory.isNotEmpty;
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
@@ -152,10 +152,10 @@ class _SelectRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isSelected =
-        ref.watch(homeQuizScreenProvider).testGroup.contains(text);
+        ref.watch(homeQuizScreenProvider).selectCategory.contains(text);
     return GestureDetector(
       onTap: () {
-        ref.read(homeQuizScreenProvider.notifier).selectGroup(text);
+        ref.read(homeQuizScreenProvider.notifier).selectTestGroup(text);
       },
       child: Container(
         width: context.width * 0.8,

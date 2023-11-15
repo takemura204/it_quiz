@@ -66,12 +66,13 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         if (updatedItem != null) {
           // 各クイズに対して、questionの更新を適用
           return quiz.copyWith(
+            title: updatedItem.title,
+            category: updatedItem.category,
             quizItemList: quiz.quizItemList.map((quizItem) {
               // updatedItemのクイズリストから、対応するクイズを探す
               final updatedQuiz = updatedItem.quizItemList
                   .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
               if (updatedQuiz != null) {
-                // questionだけを更新
                 return quizItem.copyWith(
                   question: updatedQuiz.question,
                   ans: updatedQuiz.ans,

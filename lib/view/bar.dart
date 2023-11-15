@@ -237,12 +237,13 @@ class ProgressLineBar extends ConsumerWidget {
   }
 }
 
-class ProgressRangeChart extends ConsumerWidget {
-  const ProgressRangeChart({
+class ProgressCrilcleChart extends ConsumerWidget {
+  const ProgressCrilcleChart({
     required this.width,
     required this.size,
     required this.goalScore,
     required this.currentScore,
+    required this.thickness,
     required this.widget,
   });
 
@@ -250,6 +251,7 @@ class ProgressRangeChart extends ConsumerWidget {
   final double size;
   final int goalScore;
   final int currentScore;
+  final double thickness;
   final Widget widget;
 
   @override
@@ -258,46 +260,38 @@ class ProgressRangeChart extends ConsumerWidget {
       width: size,
       height: size,
       alignment: Alignment.center,
-      child: SfRadialGauge(axes: [
-        RadialAxis(
-            startAngle: 270,
-            endAngle: 270,
-            minimum: 0,
-            maximum: goalScore.toDouble(),
-            showLabels: false,
-            showTicks: false,
-            axisLineStyle: AxisLineStyle(
-              thickness: 0.2,
-              color: Colors.grey.shade300,
-              thicknessUnit: GaugeSizeUnit.factor,
-            ),
-            pointers: [
-              RangePointer(
-                value: currentScore.toDouble(),
-                cornerStyle: currentScore >= goalScore
-                    ? CornerStyle.bothFlat
-                    : CornerStyle.bothCurve,
-                width: 0.2,
-                sizeUnit: GaugeSizeUnit.factor,
-                color: context.mainColor,
-              )
-            ],
-            annotations: [
-              GaugeAnnotation(
-                positionFactor: 0.1,
-                angle: 90,
-                widget: Container(
-                  width: width,
-                  height: size,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.height * 0.02,
-                      vertical: context.height * 0.02),
-                  child: widget,
-                ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          widget,
+          SfRadialGauge(axes: [
+            RadialAxis(
+              startAngle: 270,
+              endAngle: 270,
+              minimum: 0,
+              maximum: goalScore.toDouble(),
+              showLabels: false,
+              showTicks: false,
+              axisLineStyle: AxisLineStyle(
+                thickness: thickness,
+                color: Colors.grey.shade300,
+                thicknessUnit: GaugeSizeUnit.factor,
               ),
-            ]),
-      ]),
+              pointers: [
+                RangePointer(
+                  value: currentScore.toDouble(),
+                  cornerStyle: currentScore >= goalScore
+                      ? CornerStyle.bothFlat
+                      : CornerStyle.bothCurve,
+                  width: thickness,
+                  sizeUnit: GaugeSizeUnit.factor,
+                  color: context.mainColor,
+                )
+              ],
+            ),
+          ]),
+        ],
+      ),
     );
   }
 }

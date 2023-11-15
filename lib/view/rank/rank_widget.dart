@@ -90,11 +90,12 @@ class RankScore extends ConsumerWidget {
                   onTap: () {
                     ref.read(rankModelProvider.notifier).updateScore(10);
                   },
-                  child: ProgressRangeChart(
+                  child: ProgressCrilcleChart(
                     width: context.height * 0.17,
                     size: context.height * 0.17,
                     goalScore: rank.levelUpScore,
                     currentScore: rank.score % rank.levelUpScore,
+                    thickness: 0.2,
                     widget: Column(
                       children: [
                         const Spacer(),

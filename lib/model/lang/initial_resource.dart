@@ -11,13 +11,13 @@ class I18n {
   String get appName => "Kentei Quiz";
 
   ///Group
-  String get group1 => "TeamA";
+  String get group1 => "特性";
 
-  String get group2 => "TeamB";
+  String get group2 => "健康";
 
-  String get group3 => "TeamC";
+  String get group3 => "生活";
 
-  String get group4 => "TeamD";
+  String get group4 => "雑学";
 
   ///title
   String get titleStudy => "クイズ";

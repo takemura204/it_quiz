@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -18,42 +19,66 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
   }
 
   final Ref ref;
+  TabController? _tabController;
 
   @override
-  void initState() {
+  Future initState() async {
     super.initState();
-    addCategory();
+    await loadQuizList();
+    await loadCategoryList();
   }
 
-  void addCategory() {
-    final testGroup = [...state.testGroup];
+  @override
+  void dispose() {
+    _tabController?.dispose();
+    super.dispose();
+  }
+
+  /// CategoryList取得
+  Future loadCategoryList() async {
     final categoryList = ref
         .read(quizModelProvider)
         .quizList
         .map((quizItem) => quizItem.category)
         .toSet()
         .toList();
-    testGroup.addAll(categoryList);
-    state = state.copyWith(testGroup: testGroup);
+    state = state.copyWith(categoryList: categoryList);
+  }
+
+  ///QuizList取得
+  Future loadQuizList() async {
+    final quizList = ref.read(quizModelProvider).quizList;
+    state = state.copyWith(filterQuizList: quizList);
   }
 
   ///TestQuiz開始
   void tapStartTestQuizButton() {
-    final testGroup = state.testGroup;
+    final selectedTestGroup = state.selectedTestCategory;
     final selectedTestLength = state.selectedTestLength;
     ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
     ref
         .read(quizModelProvider.notifier)
-        .createTestQuiz(testGroup, selectedTestLength);
+        .createTestQuiz(selectedTestGroup, selectedTestLength);
+  }
+
+  void setSelectCategory(String category) {
+    state = state.copyWith();
+  }
+
+  void setTabIndex(int index) {
+    final category = state.categoryList[index];
+    state = state.copyWith(tabIndex: index, selectCategory: category);
   }
 
   ///問題範囲指定
-  void selectGroup(String group) {
-    final testGroup = [...state.testGroup];
-    if (testGroup.contains(group)) {
-      state = state.copyWith(testGroup: testGroup..remove(group));
+  void selectTestGroup(String group) {
+    final selectedTestCategory = [...state.selectedTestCategory];
+    if (selectedTestCategory.contains(group)) {
+      state = state.copyWith(
+          selectedTestCategory: selectedTestCategory..remove(group));
     } else {
-      state = state.copyWith(testGroup: testGroup..add(group));
+      state = state.copyWith(
+          selectedTestCategory: selectedTestCategory..add(group));
     }
   }
 
