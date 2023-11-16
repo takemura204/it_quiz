@@ -6,9 +6,9 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
+import '../../view/admob.dart';
 import '../../view/dialog.dart';
 import '../../view/icon_button.dart';
-import '../../view/quiz_widget.dart';
 import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
 
 part 'quiz_choice_view.dart';
@@ -105,8 +105,6 @@ class _Body extends ConsumerWidget {
       children: [
         Column(
           children: [
-            ///問題形式タイトル
-            QuizStyleTitle(quiz),
             const Spacer(),
 
             ///問題画面
@@ -141,20 +139,7 @@ class _Body extends ConsumerWidget {
             _SelectAnswer(quiz),
 
             ///広告
-            Container(
-              height: context.height * 0.07,
-              color: Colors.cyan,
-              child: const Row(
-                children: [
-                  Spacer(),
-                  Text(
-                    "広告入れたい",
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Spacer(),
-                ],
-              ),
-            )
+            AdBanner(),
           ],
         ),
         _JudgeIcon(quiz),

@@ -62,7 +62,7 @@ class TestQuizModal extends ConsumerWidget {
                     ? PrimaryButton(
                         width: context.width * 1,
                         height: context.height * 0.06,
-                        text: I18n().styleTestQuiz,
+                        text: I18n().challengeQuiz(testQuiz.title),
                         onPressed: () {
                           ref
                               .read(homeQuizScreenProvider.notifier)
@@ -78,7 +78,7 @@ class TestQuizModal extends ConsumerWidget {
                     : DisabledButton(
                         width: context.width * 1,
                         height: context.height * 0.06,
-                        text: I18n().styleTestQuiz,
+                        text: I18n().challengeQuiz(testQuiz.title),
                       ),
               ),
               const Spacer(),
@@ -115,12 +115,7 @@ class _QuizRange extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final category = ref
-        .read(quizModelProvider)
-        .quizList
-        .map((quizItem) => quizItem.category)
-        .toSet()
-        .toList();
+    final categoryList = ref.read(homeQuizScreenProvider).categoryList;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
       child: Column(
@@ -133,10 +128,10 @@ class _QuizRange extends ConsumerWidget {
             ),
           ),
           const Gap(5),
-          _SelectRange(category[0]),
-          _SelectRange(category[1]),
-          _SelectRange(category[2]),
-          _SelectRange(category[3]),
+          _SelectRange(text: categoryList[0], isSelected: true),
+          _SelectRange(text: categoryList[1], isSelected: true),
+          _SelectRange(text: categoryList[2], isSelected: true),
+          _SelectRange(text: categoryList[3], isSelected: true),
         ],
       ),
     );
@@ -145,17 +140,16 @@ class _QuizRange extends ConsumerWidget {
 
 ///出題数
 class _SelectRange extends ConsumerWidget {
-  const _SelectRange(this.text);
+  const _SelectRange({required this.text, required this.isSelected});
 
   final String text;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSelected =
-        ref.watch(homeQuizScreenProvider).selectCategory.contains(text);
     return GestureDetector(
       onTap: () {
-        ref.read(homeQuizScreenProvider.notifier).selectTestGroup(text);
+        ref.read(homeQuizScreenProvider.notifier).selectTestCategory(text);
       },
       child: Container(
         width: context.width * 0.8,

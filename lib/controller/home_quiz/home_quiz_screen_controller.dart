@@ -53,16 +53,12 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
 
   ///TestQuiz開始
   void tapStartTestQuizButton() {
-    final selectedTestGroup = state.selectedTestCategory;
+    final selectedTestCategory = state.selectedTestCategory;
     final selectedTestLength = state.selectedTestLength;
     ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
     ref
         .read(quizModelProvider.notifier)
-        .createTestQuiz(selectedTestGroup, selectedTestLength);
-  }
-
-  void setSelectCategory(String category) {
-    state = state.copyWith();
+        .createTestQuiz(selectedTestCategory, selectedTestLength);
   }
 
   void setTabIndex(int index) {
@@ -71,7 +67,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
   }
 
   ///問題範囲指定
-  void selectTestGroup(String group) {
+  void selectTestCategory(String group) {
     final selectedTestCategory = [...state.selectedTestCategory];
     if (selectedTestCategory.contains(group)) {
       state = state.copyWith(
@@ -80,6 +76,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
       state = state.copyWith(
           selectedTestCategory: selectedTestCategory..add(group));
     }
+    print(state.selectedTestCategory);
   }
 
   ///問題数指定

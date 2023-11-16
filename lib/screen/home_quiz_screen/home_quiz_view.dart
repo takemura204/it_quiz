@@ -23,7 +23,7 @@ class _BottomQuizMenu extends ConsumerWidget {
             DefaultButton(
                 width: context.width * 0.45,
                 height: context.height * 0.06,
-                text: "苦手克服",
+                text: weakQuiz.title,
                 icon: LineIcons.checkSquareAlt,
                 onPressed: weakQuiz.quizItemList.isEmpty
                     ? null

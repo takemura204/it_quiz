@@ -41,7 +41,7 @@ class _QuizCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
-        ref.read(quizModelProvider.notifier).tapQuizItemBar(index);
+        ref.read(quizModelProvider.notifier).tapQuizCard(index);
         showDialog(
             context: context, builder: (_) => StudyQuizModal(quiz: quiz));
       },
@@ -131,7 +131,7 @@ class _Title extends ConsumerWidget {
         ),
         Gap(context.height * 0.002),
         Text(
-          "正解率:$correctRate％",
+          I18n().quizCorrectRate(correctRate),
           style: TextStyle(
             fontSize: context.width * 0.03,
           ),

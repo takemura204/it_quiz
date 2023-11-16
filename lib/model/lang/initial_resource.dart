@@ -33,7 +33,20 @@ class I18n {
 
   String get styleChoiceQuiz => "クイズに挑戦する";
 
-  String get styleTestQuiz => "力だめしに挑戦する";
+  String get styleWeakQuiz => "苦手克服";
+
+  String get styleTestQuiz => "力だめし";
+
+  String challengeQuiz(String quizStyle) {
+    return "$quizStyleに挑戦する";
+  }
+
+  ///HomeQuiz
+  String quizCorrectRate(int correctRate) {
+    return "正解率:$correctRate％";
+  }
+
+  String get lastQuizResult => "前回の挑戦結果";
 
   ///Button
   String get buttonConfirm => "確認する";

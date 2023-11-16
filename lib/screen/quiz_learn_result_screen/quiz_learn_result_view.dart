@@ -75,7 +75,7 @@ class _NextActionCard extends HookConsumerWidget {
                       );
                       ref
                           .read(quizModelProvider.notifier)
-                          .tapQuizItemBar(quizIndex + 1);
+                          .tapQuizCard(quizIndex + 1);
                     },
             ),
             const Spacer(),

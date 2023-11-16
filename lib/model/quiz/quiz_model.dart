@@ -430,7 +430,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   /// 現在のインデックスを取得し、更新
-  void tapQuizItemBar(int quizIndex) {
+  void tapQuizCard(int quizIndex) {
     state = state.copyWith(selectQuizIndex: quizIndex);
   }
 

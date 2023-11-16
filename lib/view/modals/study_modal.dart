@@ -152,7 +152,7 @@ class _QuizResult extends ConsumerWidget {
             children: [
               const Spacer(),
               Text(
-                "前回のクイズ挑戦結果",
+                I18n().lastQuizResult,
                 style: TextStyle(
                     fontSize: context.width * 0.045,
                     fontWeight: FontWeight.bold),

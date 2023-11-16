@@ -96,7 +96,7 @@ dependencies:
   json_annotation: ^4.8.1
 
   #広告を入れたい
-  google_mobile_ads: ^3.0.0
+  google_mobile_ads: ^3.1.0
 
   #スプラッシュ画面を簡単に作成したい
   flutter_native_splash: ^2.2.19
@@ -128,6 +128,9 @@ dependencies:
 
   #urlを遷移したい。
   url_launcher: ^6.1.14
+
+  #スケルトンローディングを表示したい。
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

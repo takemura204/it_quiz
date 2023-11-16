@@ -2,32 +2,31 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:state_notifier/state_notifier.dart';
 
-final adMobProvider =
-    StateNotifierProvider<AdMobController, bool>((ref) => AdMobController());
+import 'admob_state.dart';
 
-class AdMobController extends StateNotifier<bool> {
-  AdMobController() : super(false) {
-    initialize();
+final adMobProvider = StateNotifierProvider<AdMobController, AdMobState>(
+  (ref) => AdMobController(),
+);
+
+class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
+  AdMobController() : super(const AdMobState()) {
+    initBannerData();
   }
 
   late BannerAd _bannerAd;
-  bool _isInitialized = false;
 
-  BannerAd get bannerAd {
-    assert(_isInitialized, 'AdMobController is not initialized.');
-    return _bannerAd;
-  }
+  BannerAd get bannerAd => _bannerAd;
 
-  Future<void> initialize() async {
+  Future<void> initBannerData() async {
+    state = state.copyWith(isLoading: true);
     await MobileAds.instance.initialize();
-
     _bannerAd = BannerAd(
       ///本番用
       // adUnitId: Platform.isAndroid
-      //     ? 'ca-app-pub-5053471763020307/2204949130'//Android
-      //     : 'ca-app-pub-5053471763020307/7628666206',//iOS
-      ///テスト用
+      //     ? 'ca-app-pub-5053471763020307~7242186229'//Android
+      //     : 'ca-app-pub-5053471763020307/3260224205',//iOS
       adUnitId: Platform.isAndroid
           ? 'ca-app-pub-3940256099942544/6300978111' //Android
           : 'ca-app-pub-3940256099942544/2934735716', //iOS
@@ -36,17 +35,17 @@ class AdMobController extends StateNotifier<bool> {
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           print('Ad loaded: ${ad.adUnitId}.');
-          state = true;
+          state = state.copyWith(isLoading: false);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           print('Ad failed to load: ${ad.adUnitId}, $error');
           ad.dispose();
+          state = state.copyWith(isLoading: false);
         },
       ),
     );
 
     await _bannerAd.load();
-    _isInitialized = true;
   }
 
   @override
@@ -55,7 +54,8 @@ class AdMobController extends StateNotifier<bool> {
     super.dispose();
   }
 }
-//以下は、AdMobの公式テスト広告ユニットIDです。
+
+///以下は、AdMobの公式テスト広告ユニットID
 // Android:
 // バナー: ca-app-pub-3940256099942544/6300978111
 // インタースティシャル: ca-app-pub-3940256099942544/1033173712

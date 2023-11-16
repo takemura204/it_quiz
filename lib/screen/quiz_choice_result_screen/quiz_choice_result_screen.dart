@@ -11,7 +11,6 @@ import '../../model/quiz/quiz.dart';
 import '../../view/button.dart';
 import '../../view/card/quiz_card.dart';
 import '../../view/icon_button.dart';
-import '../../view/quiz_widget.dart';
 
 part 'quiz_choice_result_view.dart';
 
@@ -72,7 +71,6 @@ class _Body extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  QuizStyleTitle(quiz),
                   const Gap(5),
 
                   ///正解した問題リスト

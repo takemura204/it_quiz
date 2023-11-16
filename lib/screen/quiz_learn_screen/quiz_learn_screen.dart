@@ -7,48 +7,47 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
+import '../../view/admob.dart';
 import '../../view/icon_button.dart';
-import '../../view/quiz_widget.dart';
 import '../quiz_learn_result_screen/quiz_learn_result_screen.dart';
 
 part 'quiz_learn_view.dart';
 
 class QuizLearnScreen extends ConsumerWidget {
-  const QuizLearnScreen(this.item);
+  const QuizLearnScreen(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
         quizLearnScreenProvider.overrideWith(
-          (ref) => QuizLearnScreenController(ref: ref, quiz: item),
+          (ref) => QuizLearnScreenController(ref: ref, quiz: quiz),
         ),
       ],
-      child: _Scaffold(item),
+      child: _Scaffold(quiz),
     );
   }
 }
 
 class _Scaffold extends ConsumerWidget {
-  const _Scaffold(this.item);
+  const _Scaffold(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isResultScreen = ref.watch(quizLearnScreenProvider).isResultScreen;
-
     return isResultScreen
 
         ///結果画面
-        ? QuizLearnResultScreen(item)
+        ? QuizLearnResultScreen(quiz)
 
         ///クイズ画面
         : Scaffold(
-            appBar: _AppBar(item),
-            body: _Body(item),
+            appBar: _AppBar(quiz),
+            body: _Body(quiz),
           );
   }
 }
@@ -64,7 +63,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: Text(quiz.category),
+      title: Text(quiz.title),
       leading: CustomBackButton(onPressed: () {
         ref.read(quizLearnScreenProvider.notifier).tapClearButton();
         Navigator.pop(context);
@@ -77,16 +76,14 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body(this.item);
+  const _Body(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        ///問題形式表示
-        QuizStyleTitle(item),
         const Spacer(),
 
         ///問題
@@ -108,16 +105,16 @@ class _Body extends ConsumerWidget {
                 Column(
                   children: [
                     ///問題文
-                    _Question(item),
+                    _Question(quiz),
 
                     ///問題進捗状況
-                    _QuizProgress(item),
+                    _QuizProgress(quiz),
                   ],
                 ),
                 Divider(thickness: 1.5, height: 1, color: context.mainColor),
 
                 ///確認ボタン
-                _ConfirmButton(item),
+                _ConfirmButton(quiz),
               ],
             ),
           ),
@@ -125,10 +122,10 @@ class _Body extends ConsumerWidget {
         const Spacer(),
 
         ///何周目か確認
-        _LapInfoBar(item),
+        _LapInfoBar(quiz),
 
         ///広告
-        // AdBanner(),
+        AdBanner(),
       ],
     );
   }
