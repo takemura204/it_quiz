@@ -131,8 +131,8 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(quizModelProvider);
-    final testQuiz = state.testQuiz;
-    final weakQuiz = state.weakQuiz;
+    final testQuiz = state.testQuiz ?? initTestQuiz;
+    final weakQuiz = state.weakQuiz ?? initWeakQuiz;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [

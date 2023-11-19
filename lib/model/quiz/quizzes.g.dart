@@ -7,6 +7,7 @@ part of 'quizzes.dart';
 // **************************************************************************
 
 _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
+      selectQuizId: json['selectQuizId'] as int? ?? 0,
       quizList: (json['quizList'] as List<dynamic>?)
               ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -19,16 +20,12 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
               ?.map((e) => QuizItem.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      dailyQuiz: json['dailyQuiz'] == null
-          ? initDailyQuiz
-          : Quiz.fromJson(json['dailyQuiz'] as Map<String, dynamic>),
       weakQuiz: json['weakQuiz'] == null
-          ? initWeakQuiz
+          ? null
           : Quiz.fromJson(json['weakQuiz'] as Map<String, dynamic>),
       testQuiz: json['testQuiz'] == null
-          ? initTestQuiz
+          ? null
           : Quiz.fromJson(json['testQuiz'] as Map<String, dynamic>),
-      selectQuizIndex: json['selectQuizIndex'] as int? ?? 0,
       quizType: $enumDecodeNullable(_$QuizTypeEnumMap, json['quizType']) ??
           QuizType.study,
       studyType: $enumDecodeNullable(_$StudyTypeEnumMap, json['studyType']) ??
@@ -37,13 +34,12 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
 
 Map<String, dynamic> _$$_QuizzesToJson(_$_Quizzes instance) =>
     <String, dynamic>{
+      'selectQuizId': instance.selectQuizId,
       'quizList': instance.quizList,
       'historyQuizList': instance.historyQuizList,
       'quizItemList': instance.quizItemList,
-      'dailyQuiz': instance.dailyQuiz,
       'weakQuiz': instance.weakQuiz,
       'testQuiz': instance.testQuiz,
-      'selectQuizIndex': instance.selectQuizIndex,
       'quizType': _$QuizTypeEnumMap[instance.quizType]!,
       'studyType': _$StudyTypeEnumMap[instance.studyType]!,
     };

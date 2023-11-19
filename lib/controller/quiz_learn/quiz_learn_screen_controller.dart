@@ -1,3 +1,4 @@
+import 'package:appinio_swiper/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
@@ -24,8 +25,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   final Stopwatch _stopwatch = Stopwatch();
 
   @override
-  void initState() {
-    _startStopwatch(); //学習時間計測
+  Future initState() async {
+    await _startStopwatch(); //学習時間計測
     _loadQuizList();
     super.initState();
   }
@@ -54,9 +55,27 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///学習時間計測
-  void _startStopwatch() {
+  Future _startStopwatch() async {
     WidgetsBinding.instance.addObserver(this);
     _stopwatch.start(); //学習時間記録
+  }
+
+  // スワイプ時の処理
+  Future<void> swipeOnCard(
+    AppinioSwiperDirection direction,
+  ) async {
+    switch (direction) {
+      case AppinioSwiperDirection.left: // 左方向
+        tapIsKnowButton(false);
+        break;
+
+      case AppinioSwiperDirection.right: // 右方向
+        tapIsKnowButton(true);
+        break;
+
+      default:
+        tapIsKnowButton(false);
+    }
   }
 
   ///確認ボタンを押した時

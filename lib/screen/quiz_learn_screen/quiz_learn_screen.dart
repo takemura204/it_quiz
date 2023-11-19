@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
@@ -86,39 +87,14 @@ class _Body extends ConsumerWidget {
       children: [
         const Spacer(),
 
-        ///問題
-        Card(
-          elevation: 3,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: context.mainColor,
-              width: 1.5,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Container(
-            width: context.width * 0.85,
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    ///問題文
-                    _Question(quiz),
+        ///クイズカード
+        _QuizCard(quiz),
 
-                    ///問題進捗状況
-                    _QuizProgress(quiz),
-                  ],
-                ),
-                Divider(thickness: 1.5, height: 1, color: context.mainColor),
+        Gap(context.height * 0.02),
 
-                ///確認ボタン
-                _ConfirmButton(quiz),
-              ],
-            ),
-          ),
-        ),
+        ///確認ボタン
+        _ConfirmButton(quiz),
+
         const Spacer(),
 
         ///何周目か確認

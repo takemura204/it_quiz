@@ -41,7 +41,9 @@ class _QuizCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
-        ref.read(quizModelProvider.notifier).tapQuizCard(index);
+        print(quiz.id);
+        ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
+
         showDialog(
             context: context, builder: (_) => StudyQuizModal(quiz: quiz));
       },
@@ -52,7 +54,7 @@ class _QuizCard extends ConsumerWidget {
         child: Row(
           children: [
             ///進捗アイコン
-            _ProgressIcon(quiz: quiz, index: index),
+            _ProgressIcon(quiz: quiz),
             Gap(context.width * 0.03),
 
             ///タイトル
@@ -72,10 +74,9 @@ class _QuizCard extends ConsumerWidget {
 
 ///進捗アイコン
 class _ProgressIcon extends ConsumerWidget {
-  const _ProgressIcon({required this.quiz, required this.index});
+  const _ProgressIcon({required this.quiz});
 
   final Quiz quiz;
-  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

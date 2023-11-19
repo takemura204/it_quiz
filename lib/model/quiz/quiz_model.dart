@@ -37,7 +37,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   @override
   Future initState() async {
-    // _resetData();
+    _resetData();
     await _loadQuizData(); // データを読み込む
     super.initState();
   }
@@ -45,7 +45,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   ///読み込み
   Future _loadQuizData() async {
     await _getQuizListData();
-    // await _getDailyQuiz();
     await _getWeakQuiz();
     await _getTestQuiz();
     await _getHistoryQuiz();
@@ -99,47 +98,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
           _initialQuizList.expand((x) => x.quizItemList).toList();
       state = state.copyWith(
           quizList: _initialQuizList, quizItemList: quizItemList);
-    }
-  }
-
-  /// DailyQuiz取得
-  Future _getDailyQuiz() async {
-    final prefs = await SharedPreferences.getInstance();
-    final dailyQuizData = prefs.getString('daily_quiz');
-    if (dailyQuizData != null) {
-      final dailyQuiz = Quiz.fromJson(json.decode(dailyQuizData));
-      final quizItemList = [
-        ...state.quizList.expand((quiz) => quiz.quizItemList).toList()
-      ];
-      final pickedQuizList = <QuizItem>[];
-      final timeStamp = dailyQuiz.timeStamp;
-      final saveDate = timeStamp != null
-          ? DateTime(timeStamp.year, timeStamp.month, timeStamp.day)
-          : null;
-      final nowDate = DateTime(now.year, now.month, now.day);
-
-      //初回 or 違う日の時新しく生成
-      if (timeStamp == null || !_isSameDay(saveDate, nowDate)) {
-        for (int i = 0; i < 5; i++) {
-          if (quizItemList.isNotEmpty) {
-            final random = Random();
-            final randomIndex = random.nextInt(quizItemList.length);
-            pickedQuizList.add(quizItemList[randomIndex]);
-            quizItemList.removeAt(randomIndex);
-          }
-        }
-        final createDailyQuiz =
-            dailyQuiz.copyWith(quizItemList: pickedQuizList);
-        state = state.copyWith(dailyQuiz: createDailyQuiz);
-      }
-      //同じ日の場合
-      else {
-        state = state.copyWith(dailyQuiz: dailyQuiz);
-      }
-    }
-    //初回起動の場合
-    else {
-      state = state.copyWith(dailyQuiz: initDailyQuiz);
     }
   }
 
@@ -237,9 +195,9 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   ///クイズ更新
   void _updateStudyQuiz(Quiz updateQuiz) {
     final quizList = state.quizList;
-    final selectQuizIndex = state.selectQuizIndex;
+    final selectQuizId = state.selectQuizId;
     final updateStudyQuiz = quizList.map((quiz) {
-      if (quiz.id == quizList[selectQuizIndex].id) {
+      if (quiz.id == selectQuizId) {
         return updateQuiz;
       }
       return quiz;
@@ -359,21 +317,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     _saveDevice();
   }
 
-  /// DailyItem
-  void updateDailyItem(List<QuizItem> quizItemList) {
-    final correctNum =
-        quizItemList.where((x) => x.isJudge == true).toList().length;
-    final dailyQuiz = state.dailyQuiz;
-    final nowDate = DateTime(now.year, now.month, now.day);
-    final updateDailyQuiz = dailyQuiz.copyWith(
-        correctNum: correctNum,
-        isCompleted: true,
-        quizItemList: quizItemList,
-        timeStamp: nowDate);
-    state = state.copyWith(dailyQuiz: updateDailyQuiz);
-    _saveDevice(); // 保存
-  }
-
   ///WeakItem更新
   Future updateWeakItem() async {
     //全ての苦手クイズから同じ問題を絞り込み
@@ -385,7 +328,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final weakList = weakSetList.map((quizId) {
       return weakAllList.firstWhere((quiz) => quiz.quizId == quizId);
     }).toList();
-    final weakQuiz = state.weakQuiz.copyWith(quizItemList: weakList);
+    final weakQuiz = state.weakQuiz?.copyWith(quizItemList: weakList);
     state = state.copyWith(weakQuiz: weakQuiz);
     _saveDevice();
   }
@@ -430,8 +373,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   /// 現在のインデックスを取得し、更新
-  void tapQuizCard(int quizIndex) {
-    state = state.copyWith(selectQuizIndex: quizIndex);
+  void tapQuizCard(int quizId) {
+    state = state.copyWith(selectQuizId: quizId);
   }
 
   void setQuizType(QuizType quizType) {
@@ -467,13 +410,11 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         state.quizList.map((e) => json.encode(e.toJson())).toList();
     final historyListData =
         state.historyQuizList.map((e) => json.encode(e.toJson())).toList();
-    final dailyData = json.encode(state.dailyQuiz.toJson());
-    final weakData = json.encode(state.weakQuiz.toJson());
-    final testData = json.encode(state.testQuiz.toJson());
+    final weakData = json.encode(state.weakQuiz?.toJson());
+    final testData = json.encode(state.testQuiz?.toJson());
 
     await prefs.setStringList('quiz_list', quizListData);
     await prefs.setStringList('history_list', historyListData);
-    await prefs.setString('daily_quiz', dailyData);
     await prefs.setString('weak_quiz', weakData);
     await prefs.setString('test_quiz', testData);
   }
@@ -483,7 +424,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("quiz_list");
     prefs.remove("history_list");
-    prefs.remove("daily_quiz");
     prefs.remove("weak_quiz");
     prefs.remove("test_quiz");
   }

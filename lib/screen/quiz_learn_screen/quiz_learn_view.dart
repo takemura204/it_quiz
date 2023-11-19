@@ -1,5 +1,43 @@
 part of 'quiz_learn_screen.dart';
 
+class _QuizCard extends ConsumerWidget {
+  const _QuizCard(this.quiz);
+
+  final Quiz quiz;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Card(
+      elevation: 2,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.grey.shade300,
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        width: context.width * 0.9,
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Column(
+              children: [
+                ///問題文
+                _Question(quiz),
+
+                ///問題進捗状況
+                _QuizProgress(quiz),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _Question extends ConsumerWidget {
   const _Question(this.item);
 
@@ -135,6 +173,8 @@ class _ConfirmButton extends ConsumerWidget {
     final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
     return isAns
         ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+
             ///知らない
             children: [
               GestureDetector(
@@ -144,7 +184,7 @@ class _ConfirmButton extends ConsumerWidget {
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: Colors.orange.shade50.withOpacity(0.1),
+                  color: Colors.white,
                   alignment: Alignment.center,
                   child: Text(
                     I18n().buttonUnKnow,
@@ -168,7 +208,7 @@ class _ConfirmButton extends ConsumerWidget {
                 child: Container(
                   width: context.width * 0.42,
                   height: context.height * 0.1,
-                  color: Colors.orange.shade50.withOpacity(0.1),
+                  color: Colors.white,
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     I18n().buttonKnow,
@@ -190,7 +230,7 @@ class _ConfirmButton extends ConsumerWidget {
             child: Container(
               width: context.height * 0.85,
               height: context.height * 0.1,
-              color: Colors.orange.shade50.withOpacity(0.1),
+              color: Colors.white,
               alignment: Alignment.center,
               child: Text(
                 I18n().buttonConfirm,

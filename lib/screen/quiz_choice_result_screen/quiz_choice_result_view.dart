@@ -31,7 +31,7 @@ class _NextActionCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider).quizList;
     final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
-    final quizIndex = ref.watch(quizModelProvider).selectQuizIndex;
+    final selectQuizId = ref.watch(quizModelProvider).selectQuizId;
     final lastIndex = quizList.length - 1;
     final quizType = ref.watch(quizModelProvider).quizType;
     return Card(
@@ -48,22 +48,22 @@ class _NextActionCard extends HookConsumerWidget {
                 width: context.width * 0.45,
                 height: context.height * 0.06,
                 text: "再挑戦",
-                onPressed:
-                    (quizType == QuizType.weak && weakQuiz.quizItemList.isEmpty)
-                        ? null
-                        : () {
-                            Navigator.of(context).pop();
-                            context.showScreen(QuizChoiceScreenArguments(
-                              quiz: quiz,
-                            ).generateRoute());
-                          }),
+                onPressed: (quizType == QuizType.weak &&
+                        weakQuiz!.quizItemList.isEmpty)
+                    ? null
+                    : () {
+                        Navigator.of(context).pop();
+                        context.showScreen(QuizChoiceScreenArguments(
+                          quiz: quiz,
+                        ).generateRoute());
+                      }),
             Gap(context.width * 0.02),
             if (quizType == QuizType.weak || quizType == QuizType.test) ...[
               PrimaryButton(
                 width: context.width * 0.45,
                 height: context.height * 0.06,
                 text: "完了",
-                onPressed: (quizIndex >= lastIndex)
+                onPressed: (selectQuizId >= lastIndex)
                     ? null
                     : () {
                         Navigator.of(context).pop();
@@ -74,18 +74,18 @@ class _NextActionCard extends HookConsumerWidget {
                 width: context.width * 0.45,
                 height: context.height * 0.06,
                 text: "次のクイズに挑戦",
-                onPressed: (quizIndex >= lastIndex)
+                onPressed: (selectQuizId >= lastIndex)
                     ? null
                     : () {
                         Navigator.of(context).pop();
                         context.showScreen(
                           QuizChoiceScreenArguments(
-                            quiz: quizList[quizIndex + 1],
+                            quiz: quizList[selectQuizId + 1],
                           ).generateRoute(),
                         );
                         ref
                             .read(quizModelProvider.notifier)
-                            .tapQuizCard(quizIndex + 1);
+                            .tapQuizCard(selectQuizId + 1);
                       },
               ),
             const Spacer(),

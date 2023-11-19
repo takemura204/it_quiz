@@ -31,7 +31,7 @@ class _NextActionCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider).quizList;
-    final quizIndex = ref.watch(quizModelProvider).selectQuizIndex;
+    final selectQuizId = ref.watch(quizModelProvider).selectQuizId;
     final lastIndex = quizList.length - 1;
     return Card(
       elevation: 2,
@@ -61,7 +61,7 @@ class _NextActionCard extends HookConsumerWidget {
               width: context.width * 0.45,
               height: context.height * 0.06,
               text: "クイズに挑戦",
-              onPressed: (quizIndex >= lastIndex)
+              onPressed: (selectQuizId >= lastIndex)
                   ? null
                   : () {
                       ref
@@ -75,7 +75,7 @@ class _NextActionCard extends HookConsumerWidget {
                       );
                       ref
                           .read(quizModelProvider.notifier)
-                          .tapQuizCard(quizIndex + 1);
+                          .tapQuizCard(selectQuizId + 1);
                     },
             ),
             const Spacer(),

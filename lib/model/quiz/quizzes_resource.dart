@@ -5,7 +5,8 @@ extension QuizModelEx on QuizModel {
   List<Quiz> get initQuizList => [
         Quiz(
           id: 1,
-          category: I18n().group1,
+          categoryId: 1,
+          category: I18n().setCategory(1),
           title: "問題A-1",
           isCompleted: false,
           quizItemList: quiz1,
@@ -16,7 +17,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 2,
-          category: I18n().group1,
+          categoryId: 1,
+          category: I18n().setCategory(1),
           title: "問題A-2",
           isCompleted: false,
           quizItemList: quiz2,
@@ -27,7 +29,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 3,
-          category: I18n().group2,
+          categoryId: 2,
+          category: I18n().setCategory(2),
           title: "問題B-1",
           isCompleted: false,
           quizItemList: quiz3,
@@ -38,7 +41,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 4,
-          category: I18n().group2,
+          categoryId: 2,
+          category: I18n().setCategory(2),
           title: "問題B-2",
           isCompleted: false,
           quizItemList: quiz1,
@@ -49,7 +53,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 5,
-          category: I18n().group3,
+          categoryId: 3,
+          category: I18n().setCategory(3),
           title: "問題C-1",
           isCompleted: false,
           quizItemList: quiz2,
@@ -60,7 +65,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 6,
-          category: I18n().group3,
+          categoryId: 3,
+          category: I18n().setCategory(3),
           title: "問題C-2",
           isCompleted: false,
           quizItemList: quiz3,
@@ -71,7 +77,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 7,
-          category: I18n().group1,
+          categoryId: 1,
+          category: I18n().setCategory(1),
           title: "問題A-3",
           isCompleted: false,
           quizItemList: quiz1,
@@ -82,7 +89,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 8,
-          category: I18n().group2,
+          categoryId: 2,
+          category: I18n().setCategory(2),
           title: "問題B-3",
           isCompleted: false,
           quizItemList: quiz2,
@@ -93,7 +101,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 9,
-          category: I18n().group3,
+          categoryId: 3,
+          category: I18n().setCategory(3),
           title: "問題C-3",
           isCompleted: false,
           quizItemList: quiz3,
@@ -104,7 +113,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 10,
-          category: I18n().group4,
+          categoryId: 4,
+          category: I18n().setCategory(4),
           title: "問題D-1",
           isCompleted: false,
           quizItemList: quiz1,
@@ -115,7 +125,8 @@ extension QuizModelEx on QuizModel {
         ),
         Quiz(
           id: 11,
-          category: I18n().group4,
+          categoryId: 4,
+          category: I18n().setCategory(4),
           title: "問題D-2",
           isCompleted: false,
           quizItemList: quiz2,
@@ -126,23 +137,11 @@ extension QuizModelEx on QuizModel {
         ),
       ];
 
-  ///今日のクイズ
-  Quiz get initDailyQuiz => const Quiz(
-        id: 1,
-        category: "daily",
-        title: "今日のクイズ",
-        isCompleted: false,
-        quizItemList: [],
-        correctNum: 0,
-        timeStamp: null,
-        duration: Duration.zero,
-        studyType: StudyType.learn,
-      );
-
   ///苦手克服
-  Quiz get initWeakQuiz => const Quiz(
+  Quiz get initWeakQuiz => Quiz(
         id: 2,
-        category: "weak",
+        categoryId: 5,
+        category: I18n().setCategory(5),
         title: "苦手克服",
         isCompleted: false,
         quizItemList: [],
@@ -153,9 +152,10 @@ extension QuizModelEx on QuizModel {
       );
 
   ///力だめし
-  Quiz get initTestQuiz => const Quiz(
+  Quiz get initTestQuiz => Quiz(
         id: 3,
-        category: "test",
+        categoryId: 4,
+        category: I18n().setCategory(4),
         title: "力だめし",
         isCompleted: false,
         quizItemList: [],

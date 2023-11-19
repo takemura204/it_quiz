@@ -21,6 +21,7 @@ Quiz _$QuizFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Quiz {
   int get id => throw _privateConstructorUsedError; //問題ID
+  int get categoryId => throw _privateConstructorUsedError; //問題ID
   String get category => throw _privateConstructorUsedError; //問題のジャンル別に分ける
   String get title => throw _privateConstructorUsedError; //問題タイトル
   bool get isCompleted => throw _privateConstructorUsedError; //全て問題を解いたか
@@ -42,6 +43,7 @@ abstract class $QuizCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      int categoryId,
       String category,
       String title,
       bool isCompleted,
@@ -66,6 +68,7 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
   @override
   $Res call({
     Object? id = null,
+    Object? categoryId = null,
     Object? category = null,
     Object? title = null,
     Object? isCompleted = null,
@@ -79,6 +82,10 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
               as int,
       category: null == category
           ? _value.category
@@ -124,6 +131,7 @@ abstract class _$$_QuizCopyWith<$Res> implements $QuizCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      int categoryId,
       String category,
       String title,
       bool isCompleted,
@@ -144,6 +152,7 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
   @override
   $Res call({
     Object? id = null,
+    Object? categoryId = null,
     Object? category = null,
     Object? title = null,
     Object? isCompleted = null,
@@ -157,6 +166,10 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
               as int,
       category: null == category
           ? _value.category
@@ -199,6 +212,7 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
 class _$_Quiz implements _Quiz {
   const _$_Quiz(
       {required this.id,
+      required this.categoryId,
       required this.category,
       required this.title,
       required this.isCompleted,
@@ -213,6 +227,9 @@ class _$_Quiz implements _Quiz {
 
   @override
   final int id;
+//問題ID
+  @override
+  final int categoryId;
 //問題ID
   @override
   final String category;
@@ -247,7 +264,7 @@ class _$_Quiz implements _Quiz {
 
   @override
   String toString() {
-    return 'Quiz(id: $id, category: $category, title: $title, isCompleted: $isCompleted, quizItemList: $quizItemList, correctNum: $correctNum, timeStamp: $timeStamp, duration: $duration, studyType: $studyType)';
+    return 'Quiz(id: $id, categoryId: $categoryId, category: $category, title: $title, isCompleted: $isCompleted, quizItemList: $quizItemList, correctNum: $correctNum, timeStamp: $timeStamp, duration: $duration, studyType: $studyType)';
   }
 
   @override
@@ -256,6 +273,8 @@ class _$_Quiz implements _Quiz {
         (other.runtimeType == runtimeType &&
             other is _$_Quiz &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.title, title) || other.title == title) &&
@@ -278,6 +297,7 @@ class _$_Quiz implements _Quiz {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      categoryId,
       category,
       title,
       isCompleted,
@@ -304,6 +324,7 @@ class _$_Quiz implements _Quiz {
 abstract class _Quiz implements Quiz {
   const factory _Quiz(
       {required final int id,
+      required final int categoryId,
       required final String category,
       required final String title,
       required final bool isCompleted,
@@ -317,6 +338,8 @@ abstract class _Quiz implements Quiz {
 
   @override
   int get id;
+  @override //問題ID
+  int get categoryId;
   @override //問題ID
   String get category;
   @override //問題のジャンル別に分ける

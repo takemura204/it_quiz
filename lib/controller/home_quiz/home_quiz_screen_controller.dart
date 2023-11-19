@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import 'home_quiz_screen_state.dart';
@@ -36,12 +37,16 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
 
   /// CategoryList取得
   Future loadCategoryList() async {
-    final categoryList = ref
-        .read(quizModelProvider)
-        .quizList
-        .map((quizItem) => quizItem.category)
-        .toSet()
-        .toList();
+    // quizListを取得
+    final List<Quiz> quizList = [...ref.read(quizModelProvider).quizList];
+
+    // quizListをcategoryIdに基づいてインプレースでソート
+    quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
+
+    // ソートされたリストからカテゴリー名を取り出して重複を削除
+    final categoryList =
+        quizList.map((quizItem) => quizItem.category).toSet().toList();
+
     state = state.copyWith(categoryList: categoryList);
   }
 

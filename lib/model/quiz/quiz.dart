@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../quiz_item/quiz_item.dart';
 
 part 'quiz.freezed.dart';
+
 part 'quiz.g.dart';
 
 ///問題ジャンル
@@ -10,6 +11,7 @@ part 'quiz.g.dart';
 class Quiz with _$Quiz {
   const factory Quiz({
     required final int id, //問題ID
+    required final int categoryId, //問題ID
     required final String category, //問題のジャンル別に分ける
     required final String title, //問題タイトル
     required final bool isCompleted, //全て問題を解いたか
