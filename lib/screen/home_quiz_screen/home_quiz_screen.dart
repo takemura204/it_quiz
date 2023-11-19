@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/view/button.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/lang/initial_resource.dart';
@@ -12,6 +11,8 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../view/bar.dart';
+import '../../view/button/defalut_button.dart';
+import '../../view/button/primary_button.dart';
 import '../../view/modals/study_modal.dart';
 import '../../view/modals/test_modal.dart';
 import '../screen_argument.dart';

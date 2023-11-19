@@ -3,11 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
-import 'package:kentei_quiz/view/button.dart';
 
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../screen/screen_argument.dart';
+import '../button/defalut_button.dart';
+import '../button/primary_button.dart';
 import '../icon_button.dart';
 
 ///クイズモーダル

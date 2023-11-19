@@ -7,7 +7,8 @@ import 'package:kentei_quiz/view/card/quiz_card.dart';
 import '../../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../view/button.dart';
+import '../../view/button/defalut_button.dart';
+import '../../view/button/primary_button.dart';
 import '../../view/icon_button.dart';
 import '../screen_argument.dart';
 

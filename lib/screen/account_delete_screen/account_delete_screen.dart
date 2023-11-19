@@ -5,13 +5,14 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_controller.dart';
-import '../../view/button.dart';
+import '../../view/button/danger_button.dart';
 import '../../view/dialog.dart';
 import '../../view/icon_button.dart';
 import '../../view/text_field.dart';
 
 class AccountDeleteScreen extends ConsumerWidget {
   const AccountDeleteScreen(this.arguments);
+
   final AccountDeleteScreenArguments arguments;
 
   @override

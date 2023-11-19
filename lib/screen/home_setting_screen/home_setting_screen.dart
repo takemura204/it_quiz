@@ -8,7 +8,7 @@ import 'package:kentei_quiz/model/user/user.model.dart';
 
 import '../../model/lang/initial_resource.dart';
 import '../../view/bar.dart';
-import '../../view/button.dart';
+import '../../view/button/primary_button.dart';
 import '../../view/dialog.dart';
 import '../screen_argument.dart';
 

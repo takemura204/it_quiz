@@ -7,33 +7,42 @@ class _QuizCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Card(
-      elevation: 2,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: Colors.grey.shade300,
-          width: 1.5,
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Container(
-        width: context.width * 0.9,
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Column(
-              children: [
-                ///問題文
-                _Question(quiz),
+    final swiperController =
+        ref.watch(quizLearnScreenProvider.notifier).swiperController;
+    return Expanded(
+      child: AppinioSwiper(
+          controller: swiperController, // スワイプを制御するコントローラー
+          cardsCount: quiz.quizItemList.length, // カードの数
+          onSwiping: ref
+              .read(quizLearnScreenProvider.notifier)
+              .swipeOnCard, // スワイプ中の処理
+          cardsBuilder: (BuildContext context, int index) {
+            return Card(
+              elevation: 2,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Colors.grey.shade300,
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Container(
+                width: context.width * 0.9,
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    _Question(quiz),
 
-                ///問題進捗状況
-                _QuizProgress(quiz),
-              ],
-            ),
-          ],
-        ),
-      ),
+                    const Spacer(),
+
+                    ///問題進捗状況
+                    _QuizProgress(quiz),
+                  ],
+                ),
+              ),
+            );
+          }),
     );
   }
 }
@@ -163,82 +172,71 @@ class _QuizProgress extends ConsumerWidget {
   }
 }
 
-class _ConfirmButton extends ConsumerWidget {
-  const _ConfirmButton(this.item);
+class _ActionButtons extends ConsumerWidget {
+  const _ActionButtons(this.quiz);
 
-  final Quiz item;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
-    return isAns
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
 
-            ///知らない
-            children: [
-              GestureDetector(
-                onTap: () => ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .tapIsKnowButton(false),
-                child: Container(
-                  width: context.width * 0.42,
-                  height: context.height * 0.1,
-                  color: Colors.white,
-                  alignment: Alignment.center,
-                  child: Text(
-                    I18n().buttonUnKnow,
-                    style: TextStyle(fontSize: 20, color: Colors.red.shade400),
-                  ),
-                ),
-              ),
-
-              ///境界線
-              Container(
-                height: context.height * 0.1,
-                width: 1.5,
-                color: context.mainColor,
-              ),
-
-              ///知ってる
-              GestureDetector(
-                onTap: () => ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .tapIsKnowButton(true),
-                child: Container(
-                  width: context.width * 0.42,
-                  height: context.height * 0.1,
-                  color: Colors.white,
-                  alignment: Alignment.center,
-                  child: AutoSizeText(
-                    I18n().buttonKnow,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.green.shade400),
-                    minFontSize: 16,
-                  ),
-                ),
-              ),
-            ],
-          )
+      ///知らない
+      children: [
+        GestureDetector(
+          onTap: () =>
+              ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(false),
+          child: Container(
+            width: context.width * 0.3,
+            height: context.width * 0.3,
+            color: Colors.white,
+            alignment: Alignment.center,
+            child: Text(
+              I18n().buttonUnKnow,
+              style: TextStyle(fontSize: 20, color: Colors.red.shade400),
+            ),
+          ),
+        ),
 
         ///確認する
-        : GestureDetector(
-            onTap: () =>
-                ref.read(quizLearnScreenProvider.notifier).tapConfirmButton(),
-            child: Container(
-              width: context.height * 0.85,
-              height: context.height * 0.1,
-              color: Colors.white,
-              alignment: Alignment.center,
-              child: Text(
-                I18n().buttonConfirm,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
+        GestureDetector(
+          onTap: () =>
+              ref.read(quizLearnScreenProvider.notifier).tapConfirmButton(),
+          child: Container(
+            width: context.width * 0.3,
+            height: context.width * 0.3,
+            color: Colors.white,
+            alignment: Alignment.center,
+            child: Text(
+              I18n().buttonConfirm,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-          );
+          ),
+        ),
+
+        ///知ってる
+        GestureDetector(
+          onTap: () =>
+              ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(true),
+          child: Container(
+            width: context.width * 0.3,
+            height: context.width * 0.3,
+            color: Colors.white,
+            alignment: Alignment.center,
+            child: AutoSizeText(
+              I18n().buttonKnow,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.green.shade400),
+              minFontSize: 16,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 

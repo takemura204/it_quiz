@@ -9,7 +9,7 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_controller.dart';
 import '../../model/lang/initial_resource.dart';
-import '../../view/button.dart';
+import '../../view/button/primary_button.dart';
 import '../../view/dialog.dart';
 import '../../view/icon_button.dart';
 import '../../view/text_field.dart';
@@ -18,7 +18,9 @@ part 'account_profile_view.dart';
 
 class AccountProfileScreen extends ConsumerWidget {
   const AccountProfileScreen(this.arguments);
+
   final ProfileScreenArguments arguments;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(authProvider);

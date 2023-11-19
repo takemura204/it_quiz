@@ -6,7 +6,8 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_controller.dart';
 import '../../model/lang/initial_resource.dart';
-import '../../view/button.dart';
+import '../../view/button/defalut_button.dart';
+import '../../view/button/primary_button.dart';
 import '../../view/dialog.dart';
 import '../../view/icon_button.dart';
 import '../../view/text_field.dart';

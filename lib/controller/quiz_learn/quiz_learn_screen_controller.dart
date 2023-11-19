@@ -1,3 +1,4 @@
+import 'package:appinio_swiper/controllers.dart';
 import 'package:appinio_swiper/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,9 +24,11 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   final Ref ref;
   Quiz quiz;
   final Stopwatch _stopwatch = Stopwatch();
+  late AppinioSwiperController swiperController;
 
   @override
   Future initState() async {
+    swiperController = AppinioSwiperController();
     await _startStopwatch(); //学習時間計測
     _loadQuizList();
     super.initState();
@@ -34,6 +37,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    swiperController.dispose();
     super.dispose();
   }
 
@@ -66,13 +70,18 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   ) async {
     switch (direction) {
       case AppinioSwiperDirection.left: // 左方向
-        tapIsKnowButton(false);
+        print('legt');
+        // tapIsKnowButton(false);
         break;
 
       case AppinioSwiperDirection.right: // 右方向
-        tapIsKnowButton(true);
+        print('right');
+        // tapIsKnowButton(true);
         break;
-
+      case AppinioSwiperDirection.top: // 上方向
+        break;
+      case AppinioSwiperDirection.bottom: // 下方向
+        break;
       default:
         tapIsKnowButton(false);
     }

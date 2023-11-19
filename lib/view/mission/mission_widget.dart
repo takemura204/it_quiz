@@ -10,7 +10,10 @@ import '../../model/dashboard/dashboard_model.dart';
 import '../../model/mission/mission.dart';
 import '../../model/mission/mission_model.dart';
 import '../bar.dart';
-import '../button.dart';
+import '../button/defalut_button.dart';
+import '../button/disabled_button.dart';
+import '../button/primary_button.dart';
+import '../button/secondory_button.dart';
 import '../icon.dart';
 
 ///クイズモーダル

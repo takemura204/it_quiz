@@ -5,7 +5,8 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_controller.dart';
-import '../../view/button.dart';
+import '../../view/button/defalut_button.dart';
+import '../../view/button/primary_button.dart';
 import '../../view/icon_button.dart';
 
 class TestScreen extends ConsumerWidget {

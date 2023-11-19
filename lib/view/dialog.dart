@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/view/button.dart';
+
+import 'button/defalut_button.dart';
+import 'button/primary_button.dart';
+import 'button/secondory_button.dart';
 
 class PrimaryDialog extends ConsumerWidget {
   const PrimaryDialog({

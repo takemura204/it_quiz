@@ -1,3 +1,4 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -84,18 +85,17 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const Spacer(),
-
         ///クイズカード
         _QuizCard(quiz),
 
         Gap(context.height * 0.02),
 
         ///確認ボタン
-        _ConfirmButton(quiz),
+        _ActionButtons(quiz),
 
-        const Spacer(),
+        Gap(context.height * 0.01),
 
         ///何周目か確認
         _LapInfoBar(quiz),
