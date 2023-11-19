@@ -67,7 +67,8 @@ class TestQuizModal extends ConsumerWidget {
                           ref
                               .read(homeQuizScreenProvider.notifier)
                               .tapStartTestQuizButton();
-                          final testQuiz = ref.read(quizModelProvider).testQuiz;
+                          final testQuiz =
+                              ref.read(quizModelProvider).testQuiz!;
                           context.showScreen(
                             QuizChoiceScreenArguments(
                               quiz: testQuiz,

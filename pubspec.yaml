@@ -10,7 +10,7 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.1.0"
+  sdk: ">=2.16.2 <3.2.0"
   # 次の一行を記述するとビルドに使用する flutter sdk version を指定できる
   # Note: ビルドに使用する flutter sdk version は flutter version コマンドで選択できる
   # Warn: main.ymlも合わせて変えること！！！
@@ -108,7 +108,7 @@ dependencies:
   fl_chart: ^0.62.0
 
   #アプリのバージョンを確認したい
-  package_info_plus: ^4.0.2
+  #  package_info_plus: ^4.2.0
 
   #ローディング画面をおしゃれにしたい
   flutter_spinkit: ^5.2.0
@@ -131,6 +131,9 @@ dependencies:
 
   #スケルトンローディングを表示したい。
   shimmer: ^3.0.0
+
+  #Tider風スイワイプをしたい
+  appinio_swiper: ^2.0.3
 
 dev_dependencies:
   flutter_test:

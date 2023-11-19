@@ -10,14 +10,33 @@ class I18n {
   ///アプリ全体
   String get appName => "Kentei Quiz";
 
-  ///Group
-  String get group1 => "特性";
+  ///category
+  String setCategory(int categoryId) {
+    switch (categoryId) {
+      case 1:
+        return category1;
+      case 2:
+        return category2;
+      case 3:
+        return category3;
+      case 4:
+        return category4;
+      case 5:
+        return styleWeakQuiz;
+      case 6:
+        return styleTestQuiz;
+      default:
+        return 'その他';
+    }
+  }
 
-  String get group2 => "健康";
+  String get category1 => "特性";
 
-  String get group3 => "生活";
+  String get category2 => "健康";
 
-  String get group4 => "雑学";
+  String get category3 => "生活";
+
+  String get category4 => "雑学";
 
   ///title
   String get titleStudy => "クイズ";
