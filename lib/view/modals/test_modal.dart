@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -19,7 +20,8 @@ class TestQuizModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isGroup = ref.watch(homeQuizScreenProvider).selectCategory.isNotEmpty;
+    final isGroup =
+        ref.watch(homeQuizScreenProvider).selectedTestCategory.isNotEmpty;
     return SimpleDialog(
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
@@ -116,7 +118,17 @@ class _QuizRange extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoryList = ref.read(homeQuizScreenProvider).categoryList;
+    final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
+    final selectedTestCategory =
+        ref.watch(homeQuizScreenProvider).selectedTestCategory;
+    if (categoryList.isEmpty) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.1,
+        ),
+      );
+    }
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
       child: Column(
@@ -129,10 +141,18 @@ class _QuizRange extends ConsumerWidget {
             ),
           ),
           const Gap(5),
-          _SelectRange(text: categoryList[0], isSelected: true),
-          _SelectRange(text: categoryList[1], isSelected: true),
-          _SelectRange(text: categoryList[2], isSelected: true),
-          _SelectRange(text: categoryList[3], isSelected: true),
+          _SelectRange(
+              text: categoryList[0],
+              isSelected: selectedTestCategory.contains(categoryList[0])),
+          _SelectRange(
+              text: categoryList[1],
+              isSelected: selectedTestCategory.contains(categoryList[1])),
+          _SelectRange(
+              text: categoryList[2],
+              isSelected: selectedTestCategory.contains(categoryList[2])),
+          _SelectRange(
+              text: categoryList[3],
+              isSelected: selectedTestCategory.contains(categoryList[3])),
         ],
       ),
     );

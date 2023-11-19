@@ -37,7 +37,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   @override
   Future initState() async {
-    _resetData();
+    // _resetData();
     await _loadQuizData(); // データを読み込む
     super.initState();
   }
@@ -48,7 +48,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     await _getWeakQuiz();
     await _getTestQuiz();
     await _getHistoryQuiz();
-    await _saveDevice();
+    _saveDevice();
   }
 
   /// 全クイズ取得
@@ -111,8 +111,10 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     }
     //初回起動時
     else {
+      print('a');
       state = state.copyWith(weakQuiz: initWeakQuiz);
     }
+    print(state.weakQuiz?.quizItemList);
   }
 
   /// TestQuiz追加

@@ -9,8 +9,8 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
   const factory HomeQuizScreenState({
     @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList,
-    @Default("") final String selectCategory,
     @Default([]) final List<String> selectedTestCategory,
+    @Default("") final String selectCategory,
     @Default(0) final int itemIndex, //クイズ番号
     @Default(0) final int tabIndex, //クイズ番号
     @Default(false) bool isSelected,

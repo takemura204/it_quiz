@@ -47,7 +47,8 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
     final categoryList =
         quizList.map((quizItem) => quizItem.category).toSet().toList();
 
-    state = state.copyWith(categoryList: categoryList);
+    state = state.copyWith(
+        categoryList: categoryList, selectedTestCategory: categoryList);
   }
 
   ///QuizList取得
@@ -72,14 +73,14 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
   }
 
   ///問題範囲指定
-  void selectTestCategory(String group) {
+  void selectTestCategory(String category) {
     final selectedTestCategory = [...state.selectedTestCategory];
-    if (selectedTestCategory.contains(group)) {
+    if (selectedTestCategory.contains(category)) {
       state = state.copyWith(
-          selectedTestCategory: selectedTestCategory..remove(group));
+          selectedTestCategory: selectedTestCategory..remove(category));
     } else {
       state = state.copyWith(
-          selectedTestCategory: selectedTestCategory..add(group));
+          selectedTestCategory: selectedTestCategory..add(category));
     }
     print(state.selectedTestCategory);
   }
