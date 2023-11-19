@@ -8,7 +8,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../screen/screen_argument.dart';
-import 'icon_button.dart';
+import 'button_icon/password_button.dart';
 
 ///メールアドレス入力
 class EmailTextField extends ConsumerWidget {
@@ -143,7 +143,7 @@ class PasswordTextField extends ConsumerWidget {
               //   fontSize: context.width * 0.03, // エラーメッセージのフォントサイズ
               // ),
               prefixIcon: const Icon(Icons.lock_outlined),
-              suffixIcon: ObscureIconButton(
+              suffixIcon: PasswordIconButton(
                 onPressed: obscureIconButtonPressed,
                 isObscure: isObscure,
               ),

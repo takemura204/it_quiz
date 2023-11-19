@@ -4,11 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
-import '../../view/icon_button.dart';
+import '../../view/button_icon/cutom_back_button.dart';
 
 ///カラーテーマ選択
 class SettingColorScreen extends ConsumerWidget {
   const SettingColorScreen();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(

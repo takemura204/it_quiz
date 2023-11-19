@@ -9,7 +9,7 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
-import '../../view/icon_button.dart';
+import '../../view/button_icon/clear_button.dart';
 import '../screen_argument.dart';
 
 part 'quiz_learn_result_view.dart';

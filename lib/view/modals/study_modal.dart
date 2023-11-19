@@ -9,7 +9,7 @@ import '../../model/quiz/quiz.dart';
 import '../../screen/screen_argument.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
-import '../icon_button.dart';
+import '../button_icon/clear_button.dart';
 
 ///クイズモーダル
 class StudyQuizModal extends ConsumerWidget {

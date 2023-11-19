@@ -7,8 +7,8 @@ import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../view/admob.dart';
+import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/dialog.dart';
-import '../../view/icon_button.dart';
 import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
 
 part 'quiz_choice_view.dart';

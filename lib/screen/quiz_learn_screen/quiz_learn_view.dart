@@ -185,19 +185,17 @@ class _ActionButtons extends ConsumerWidget {
 
       ///知らない
       children: [
-        GestureDetector(
-          onTap: () =>
-              ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(false),
-          child: Container(
-            width: context.width * 0.3,
-            height: context.width * 0.3,
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Text(
-              I18n().buttonUnKnow,
-              style: TextStyle(fontSize: 20, color: Colors.red.shade400),
-            ),
-          ),
+        CustomCircleButton(
+          iconData: Icons.question_mark_outlined,
+          iconSize: context.width * 0.1,
+          containerWidth: context.width * 0.25,
+          containerHeight: context.width * 0.25,
+          backgroundColor: Colors.red.shade400,
+          textColor: Colors.white,
+          text: '知らない',
+          onPressed: () {
+            ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(false);
+          },
         ),
 
         ///確認する
@@ -205,8 +203,8 @@ class _ActionButtons extends ConsumerWidget {
           onTap: () =>
               ref.read(quizLearnScreenProvider.notifier).tapConfirmButton(),
           child: Container(
-            width: context.width * 0.3,
-            height: context.width * 0.3,
+            width: context.width * 0.35,
+            height: context.width * 0.25,
             color: Colors.white,
             alignment: Alignment.center,
             child: Text(
@@ -217,23 +215,17 @@ class _ActionButtons extends ConsumerWidget {
         ),
 
         ///知ってる
-        GestureDetector(
-          onTap: () =>
-              ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(true),
-          child: Container(
-            width: context.width * 0.3,
-            height: context.width * 0.3,
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: AutoSizeText(
-              I18n().buttonKnow,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.green.shade400),
-              minFontSize: 16,
-            ),
-          ),
+        CustomCircleButton(
+          iconData: Icons.thumb_up,
+          iconSize: context.width * 0.1,
+          containerWidth: context.width * 0.25,
+          containerHeight: context.width * 0.25,
+          backgroundColor: Colors.green.shade400,
+          textColor: Colors.white,
+          text: I18n().buttonKnow,
+          onPressed: () {
+            ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(true);
+          },
         ),
       ],
     );

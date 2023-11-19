@@ -6,8 +6,8 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/quiz_history/quiz_history_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/card/quiz_card.dart';
-import '../../view/icon_button.dart';
 
 part 'quiz_history_view.dart';
 

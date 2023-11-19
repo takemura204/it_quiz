@@ -6,7 +6,7 @@ import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../model/quiz_item/quiz_item.dart';
-import '../icon_button.dart';
+import '../button_icon/check_buton.dart';
 
 class QuizItemCard extends ConsumerWidget {
   const QuizItemCard(

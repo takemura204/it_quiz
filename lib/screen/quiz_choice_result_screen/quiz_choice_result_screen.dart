@@ -10,8 +10,8 @@ import 'package:kentei_quiz/screen/screen_argument.dart';
 import '../../model/quiz/quiz.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
+import '../../view/button_icon/clear_button.dart';
 import '../../view/card/quiz_card.dart';
-import '../../view/icon_button.dart';
 
 part 'quiz_choice_result_view.dart';
 
