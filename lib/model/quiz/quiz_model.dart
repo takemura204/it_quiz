@@ -114,7 +114,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
       print('a');
       state = state.copyWith(weakQuiz: initWeakQuiz);
     }
-    print(state.weakQuiz?.quizItemList);
   }
 
   /// TestQuiz追加

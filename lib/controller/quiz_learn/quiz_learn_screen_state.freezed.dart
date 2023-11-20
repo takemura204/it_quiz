@@ -24,7 +24,8 @@ mixin _$QuizLearnScreenState {
   List<QuizItem> get knowQuizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get unKnowQuizItemList => throw _privateConstructorUsedError;
   Duration get duration => throw _privateConstructorUsedError; // 所要時間
-  StudyType get studyType => throw _privateConstructorUsedError;
+  StudyType get studyType => throw _privateConstructorUsedError; //クイズタイプ
+  AppinioSwiperDirection? get direction => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizLearnScreenStateCopyWith<QuizLearnScreenState> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $QuizLearnScreenStateCopyWith<$Res> {
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
       Duration duration,
-      StudyType studyType});
+      StudyType studyType,
+      AppinioSwiperDirection? direction});
 }
 
 /// @nodoc
@@ -72,6 +74,7 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
     Object? unKnowQuizItemList = null,
     Object? duration = null,
     Object? studyType = null,
+    Object? direction = freezed,
   }) {
     return _then(_value.copyWith(
       isAnsView: null == isAnsView
@@ -110,6 +113,10 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
               as StudyType,
+      direction: freezed == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as AppinioSwiperDirection?,
     ) as $Val);
   }
 }
@@ -130,7 +137,8 @@ abstract class _$$_CreateCopyWith<$Res>
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
       Duration duration,
-      StudyType studyType});
+      StudyType studyType,
+      AppinioSwiperDirection? direction});
 }
 
 /// @nodoc
@@ -152,6 +160,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? unKnowQuizItemList = null,
     Object? duration = null,
     Object? studyType = null,
+    Object? direction = freezed,
   }) {
     return _then(_$_Create(
       isAnsView: null == isAnsView
@@ -190,6 +199,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
               as StudyType,
+      direction: freezed == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as AppinioSwiperDirection?,
     ));
   }
 }
@@ -206,7 +219,8 @@ class _$_Create extends _Create {
       final List<QuizItem> knowQuizItemList = const [],
       final List<QuizItem> unKnowQuizItemList = const [],
       this.duration = Duration.zero,
-      this.studyType = StudyType.learn})
+      this.studyType = StudyType.learn,
+      this.direction})
       : _quizItemList = quizItemList,
         _knowQuizItemList = knowQuizItemList,
         _unKnowQuizItemList = unKnowQuizItemList,
@@ -265,10 +279,13 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final StudyType studyType;
+//クイズタイプ
+  @override
+  final AppinioSwiperDirection? direction;
 
   @override
   String toString() {
-    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, duration: $duration, studyType: $studyType)';
+    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, duration: $duration, studyType: $studyType, direction: $direction)';
   }
 
   @override
@@ -293,7 +310,9 @@ class _$_Create extends _Create {
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.studyType, studyType) ||
-                other.studyType == studyType));
+                other.studyType == studyType) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction));
   }
 
   @override
@@ -307,7 +326,8 @@ class _$_Create extends _Create {
       const DeepCollectionEquality().hash(_knowQuizItemList),
       const DeepCollectionEquality().hash(_unKnowQuizItemList),
       duration,
-      studyType);
+      studyType,
+      direction);
 
   @JsonKey(ignore: true)
   @override
@@ -326,7 +346,8 @@ abstract class _Create extends QuizLearnScreenState {
       final List<QuizItem> knowQuizItemList,
       final List<QuizItem> unKnowQuizItemList,
       final Duration duration,
-      final StudyType studyType}) = _$_Create;
+      final StudyType studyType,
+      final AppinioSwiperDirection? direction}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -347,6 +368,8 @@ abstract class _Create extends QuizLearnScreenState {
   Duration get duration;
   @override // 所要時間
   StudyType get studyType;
+  @override //クイズタイプ
+  AppinioSwiperDirection? get direction;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

@@ -8,21 +8,63 @@ class _QuizCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final swiperController =
-        ref.watch(quizLearnScreenProvider.notifier).swiperController;
+        ref
+            .watch(quizLearnScreenProvider.notifier)
+            .swiperController;
+    final direction = ref
+        .watch(quizLearnScreenProvider)
+        .direction;
+
     return Expanded(
       child: AppinioSwiper(
-          controller: swiperController, // スワイプを制御するコントローラー
-          cardsCount: quiz.quizItemList.length, // カードの数
-          onSwiping: ref
-              .read(quizLearnScreenProvider.notifier)
-              .swipeOnCard, // スワイプ中の処理
-          cardsBuilder: (BuildContext context, int index) {
-            return Card(
+        controller: swiperController,
+        cardsCount: quiz.quizItemList.length,
+        loop: false,
+        backgroundCardsCount: 1,
+        cardsSpacing: 0,
+        maxAngle: 90,
+        swipeOptions: const AppinioSwipeOptions.symmetric(
+            horizontal: true, vertical: false),
+        onSwipe: (index, direction) {
+          // スワイプが完全に終了した時の処理
+          if (direction == AppinioSwiperDirection.left) {
+            ref
+                .read(quizLearnScreenProvider.notifier)
+                .tapActionButton(false, quiz.quizItemList[index]);
+          } else if (direction == AppinioSwiperDirection.right) {
+            ref
+                .read(quizLearnScreenProvider.notifier)
+                .tapActionButton(true, quiz.quizItemList[index]);
+          }
+        },
+        onSwiping: (direction) {
+          ref.read(quizLearnScreenProvider.notifier).setDirection(direction);
+        },
+        onEnd: () {
+          print("All cards swiped");
+        },
+        onSwipeCancelled: () {
+          ref.read(quizLearnScreenProvider.notifier).setDirection(null);
+          return;
+        },
+        cardsBuilder: (BuildContext context, int index) {
+          final quizItem = quiz.quizItemList[index];
+          return GestureDetector(
+            onTap: () {
+              ref
+                  .read(quizLearnScreenProvider.notifier)
+                  .setIsAnsView(true); // 画面切り替え
+            },
+            child: Card(
               elevation: 2,
               color: Colors.white,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  color: Colors.grey.shade300,
+                  color: direction != null
+                      ? direction != AppinioSwiperDirection.right
+                      ? Colors.red.withOpacity(0.7)
+                      : Colors.green.withOpacity(0.7)
+                      : Colors.grey.shade300,
                   width: 1.5,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -30,38 +72,99 @@ class _QuizCard extends ConsumerWidget {
               child: Container(
                 width: context.width * 0.9,
                 alignment: Alignment.center,
+                // quizItemを使ってカードの内容を構築
                 child: Column(
                   children: [
-                    _Question(quiz),
+                    const Spacer(),
 
+                    ///問題文
+                    _Question(quizItem),
                     const Spacer(),
 
                     ///問題進捗状況
-                    _QuizProgress(quiz),
+                    _QuizProgress(quiz, index + 1),
+                    Gap(context.height * 0.01),
                   ],
                 ),
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _ActionButtons extends ConsumerWidget {
+  const _ActionButtons(this.quiz);
+
+  final Quiz quiz;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final index = ref
+        .watch(quizLearnScreenProvider)
+        .quizIndex;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+
+      ///知らない
+      children: [
+        CustomCircleButton(
+          iconData: Icons.question_mark_outlined,
+          iconSize: context.width * 0.1,
+          containerWidth: context.width * 0.25,
+          containerHeight: context.width * 0.25,
+          backgroundColor: Colors.red.withOpacity(0.7),
+          textColor: Colors.white,
+          text: I18n().buttonUnKnow,
+          onPressed: () {
+            ref
+                .read(quizLearnScreenProvider.notifier)
+                .swiperController
+                .swipeLeft();
+          },
+        ),
+
+        Gap(context.width * 0.1),
+
+        ///知ってる
+        CustomCircleButton(
+          iconData: Icons.thumb_up,
+          iconSize: context.width * 0.1,
+          containerWidth: context.width * 0.25,
+          containerHeight: context.width * 0.25,
+          backgroundColor: Colors.green.withOpacity(0.7),
+          textColor: Colors.white,
+          text: I18n().buttonKnow,
+          onPressed: () {
+            ref
+                .read(quizLearnScreenProvider.notifier)
+                .swiperController
+                .swipeRight();
+          },
+        ),
+      ],
     );
   }
 }
 
 class _Question extends ConsumerWidget {
-  const _Question(this.item);
+  const _Question(this.quizItem);
 
-  final Quiz item;
+  final QuizItem quizItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
+    final isAns = ref
+        .watch(quizLearnScreenProvider)
+        .isAnsView;
 
     return Container(
-      height: context.height * 0.45,
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.04),
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Spacer(),
           AnimatedSwitcher(
             // アニメーションがおかしい
             duration: const Duration(milliseconds: 0),
@@ -69,9 +172,8 @@ class _Question extends ConsumerWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
             },
-            child: isAns ? _AnsQuestion(item) : _ConfirmQuestion(item),
+            child: isAns ? _AnsQuestion(quizItem) : _ConfirmQuestion(quizItem),
           ),
-          const Spacer(),
         ],
       ),
     );
@@ -80,18 +182,15 @@ class _Question extends ConsumerWidget {
 
 ///穴埋め問題(答え)
 class _AnsQuestion extends ConsumerWidget {
-  const _AnsQuestion(this.item);
+  const _AnsQuestion(this.quizItem);
 
-  final Quiz item;
+  final QuizItem quizItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex;
-    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
-
     return SubstringHighlight(
-      text: quizItemList[quizIndex].question,
-      term: quizItemList[quizIndex].ans,
+      text: quizItem.question,
+      term: quizItem.ans,
       textStyle: TextStyle(
         fontSize: context.width * 0.06,
         color: Colors.black54,
@@ -100,7 +199,7 @@ class _AnsQuestion extends ConsumerWidget {
       textStyleHighlight: TextStyle(
         fontSize: context.width * 0.06,
         fontWeight: FontWeight.bold,
-        color: Colors.green.withOpacity(0.7),
+        color: context.mainColor,
         decoration: TextDecoration.underline,
       ),
     );
@@ -109,19 +208,16 @@ class _AnsQuestion extends ConsumerWidget {
 
 ///穴埋め問題
 class _ConfirmQuestion extends ConsumerWidget {
-  const _ConfirmQuestion(this.item);
+  const _ConfirmQuestion(this.quizItem);
 
-  final Quiz item;
+  final QuizItem quizItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex;
-    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return SubstringHighlight(
-      text: quizItemList[quizIndex].question.replaceAll(
-          quizItemList[quizIndex].ans,
-          I18n().hideText(quizItemList[quizIndex].ans)),
-      term: quizItemList[quizIndex].ans,
+      text: quizItem.question
+          .replaceAll(quizItem.ans, I18n().hideText(quizItem.ans)),
+      term: quizItem.ans,
       textStyle: TextStyle(
         fontSize: context.width * 0.06,
         color: Colors.black54,
@@ -138,96 +234,33 @@ class _ConfirmQuestion extends ConsumerWidget {
 }
 
 class _QuizProgress extends ConsumerWidget {
-  const _QuizProgress(this.item);
+  const _QuizProgress(this.quiz, this.index);
 
-  final Quiz item;
+  final Quiz quiz;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex + 1;
-    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return Container(
-      height: context.height * 0.05,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Spacer(),
           Text(
-            quizIndex.toString(),
+            index.toString(),
             style: TextStyle(
-              fontSize: context.width * 0.06,
+              fontSize: context.width * 0.05,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            "/" + quizItemList.length.toString(),
+            "/" + quiz.quizItemList.length.toString(),
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.normal,
             ),
           ),
-          const Spacer(),
         ],
       ),
-    );
-  }
-}
-
-class _ActionButtons extends ConsumerWidget {
-  const _ActionButtons(this.quiz);
-
-  final Quiz quiz;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-      ///知らない
-      children: [
-        CustomCircleButton(
-          iconData: Icons.question_mark_outlined,
-          iconSize: context.width * 0.1,
-          containerWidth: context.width * 0.25,
-          containerHeight: context.width * 0.25,
-          backgroundColor: Colors.red.shade400,
-          textColor: Colors.white,
-          text: '知らない',
-          onPressed: () {
-            ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(false);
-          },
-        ),
-
-        ///確認する
-        GestureDetector(
-          onTap: () =>
-              ref.read(quizLearnScreenProvider.notifier).tapConfirmButton(),
-          child: Container(
-            width: context.width * 0.35,
-            height: context.width * 0.25,
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Text(
-              I18n().buttonConfirm,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ),
-        ),
-
-        ///知ってる
-        CustomCircleButton(
-          iconData: Icons.thumb_up,
-          iconSize: context.width * 0.1,
-          containerWidth: context.width * 0.25,
-          containerHeight: context.width * 0.25,
-          backgroundColor: Colors.green.shade400,
-          textColor: Colors.white,
-          text: I18n().buttonKnow,
-          onPressed: () {
-            ref.read(quizLearnScreenProvider.notifier).tapIsKnowButton(true);
-          },
-        ),
-      ],
     );
   }
 }
@@ -239,7 +272,9 @@ class _LapInfoBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lapIndex = ref.watch(quizLearnScreenProvider).lapIndex;
+    final lapIndex = ref
+        .watch(quizLearnScreenProvider)
+        .lapIndex;
 
     return Card(
       elevation: 3,

@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeQuizScreenState {
   List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
   List<String> get categoryList => throw _privateConstructorUsedError;
-  String get selectCategory => throw _privateConstructorUsedError;
   List<String> get selectedTestCategory => throw _privateConstructorUsedError;
+  String get selectCategory => throw _privateConstructorUsedError;
   int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
   int get tabIndex => throw _privateConstructorUsedError; //クイズ番号
   bool get isSelected => throw _privateConstructorUsedError;
@@ -40,8 +40,8 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
   $Res call(
       {List<Quiz> filterQuizList,
       List<String> categoryList,
-      String selectCategory,
       List<String> selectedTestCategory,
+      String selectCategory,
       int itemIndex,
       int tabIndex,
       bool isSelected,
@@ -64,8 +64,8 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
   $Res call({
     Object? filterQuizList = null,
     Object? categoryList = null,
-    Object? selectCategory = null,
     Object? selectedTestCategory = null,
+    Object? selectCategory = null,
     Object? itemIndex = null,
     Object? tabIndex = null,
     Object? isSelected = null,
@@ -81,14 +81,14 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      selectCategory: null == selectCategory
-          ? _value.selectCategory
-          : selectCategory // ignore: cast_nullable_to_non_nullable
-              as String,
       selectedTestCategory: null == selectedTestCategory
           ? _value.selectedTestCategory
           : selectedTestCategory // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      selectCategory: null == selectCategory
+          ? _value.selectCategory
+          : selectCategory // ignore: cast_nullable_to_non_nullable
+              as String,
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
@@ -123,8 +123,8 @@ abstract class _$$_CreateCopyWith<$Res>
   $Res call(
       {List<Quiz> filterQuizList,
       List<String> categoryList,
-      String selectCategory,
       List<String> selectedTestCategory,
+      String selectCategory,
       int itemIndex,
       int tabIndex,
       bool isSelected,
@@ -144,8 +144,8 @@ class __$$_CreateCopyWithImpl<$Res>
   $Res call({
     Object? filterQuizList = null,
     Object? categoryList = null,
-    Object? selectCategory = null,
     Object? selectedTestCategory = null,
+    Object? selectCategory = null,
     Object? itemIndex = null,
     Object? tabIndex = null,
     Object? isSelected = null,
@@ -161,14 +161,14 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value._categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      selectCategory: null == selectCategory
-          ? _value.selectCategory
-          : selectCategory // ignore: cast_nullable_to_non_nullable
-              as String,
       selectedTestCategory: null == selectedTestCategory
           ? _value._selectedTestCategory
           : selectedTestCategory // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      selectCategory: null == selectCategory
+          ? _value.selectCategory
+          : selectCategory // ignore: cast_nullable_to_non_nullable
+              as String,
       itemIndex: null == itemIndex
           ? _value.itemIndex
           : itemIndex // ignore: cast_nullable_to_non_nullable
@@ -199,8 +199,8 @@ class _$_Create implements _Create {
   const _$_Create(
       {final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
-      this.selectCategory = "",
       final List<String> selectedTestCategory = const [],
+      this.selectCategory = "",
       this.itemIndex = 0,
       this.tabIndex = 0,
       this.isSelected = false,
@@ -229,9 +229,6 @@ class _$_Create implements _Create {
     return EqualUnmodifiableListView(_categoryList);
   }
 
-  @override
-  @JsonKey()
-  final String selectCategory;
   final List<String> _selectedTestCategory;
   @override
   @JsonKey()
@@ -242,6 +239,9 @@ class _$_Create implements _Create {
     return EqualUnmodifiableListView(_selectedTestCategory);
   }
 
+  @override
+  @JsonKey()
+  final String selectCategory;
   @override
   @JsonKey()
   final int itemIndex;
@@ -269,7 +269,7 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(filterQuizList: $filterQuizList, categoryList: $categoryList, selectCategory: $selectCategory, selectedTestCategory: $selectedTestCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength)';
+    return 'HomeQuizScreenState(filterQuizList: $filterQuizList, categoryList: $categoryList, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength)';
   }
 
   @override
@@ -281,10 +281,10 @@ class _$_Create implements _Create {
                 .equals(other._filterQuizList, _filterQuizList) &&
             const DeepCollectionEquality()
                 .equals(other._categoryList, _categoryList) &&
-            (identical(other.selectCategory, selectCategory) ||
-                other.selectCategory == selectCategory) &&
             const DeepCollectionEquality()
                 .equals(other._selectedTestCategory, _selectedTestCategory) &&
+            (identical(other.selectCategory, selectCategory) ||
+                other.selectCategory == selectCategory) &&
             (identical(other.itemIndex, itemIndex) ||
                 other.itemIndex == itemIndex) &&
             (identical(other.tabIndex, tabIndex) ||
@@ -302,8 +302,8 @@ class _$_Create implements _Create {
       runtimeType,
       const DeepCollectionEquality().hash(_filterQuizList),
       const DeepCollectionEquality().hash(_categoryList),
-      selectCategory,
       const DeepCollectionEquality().hash(_selectedTestCategory),
+      selectCategory,
       itemIndex,
       tabIndex,
       isSelected,
@@ -321,8 +321,8 @@ abstract class _Create implements HomeQuizScreenState {
   const factory _Create(
       {final List<Quiz> filterQuizList,
       final List<String> categoryList,
-      final String selectCategory,
       final List<String> selectedTestCategory,
+      final String selectCategory,
       final int itemIndex,
       final int tabIndex,
       final bool isSelected,
@@ -334,9 +334,9 @@ abstract class _Create implements HomeQuizScreenState {
   @override
   List<String> get categoryList;
   @override
-  String get selectCategory;
-  @override
   List<String> get selectedTestCategory;
+  @override
+  String get selectCategory;
   @override
   int get itemIndex;
   @override //クイズ番号

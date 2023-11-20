@@ -26,34 +26,39 @@ class CustomCircleButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: containerWidth,
-      height: containerHeight,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        shape: BoxShape.circle,
+    return Card(
+      elevation: 2,
+      margin: EdgeInsets.symmetric(
+          horizontal: context.width * 0.02, vertical: context.width * 0.01),
+      color: backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(90),
       ),
-      child: IconButton(
-        icon: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              iconData,
-              color: textColor,
-              size: iconSize,
-            ),
+      child: Container(
+        width: containerWidth,
+        height: containerHeight,
+        child: IconButton(
+          icon: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                iconData,
+                color: textColor,
+                size: iconSize,
+              ),
 
-            const Gap(5), // アイコンとテキストの間隔
-            Text(
-              text,
-              style: TextStyle(
-                  color: textColor,
-                  fontSize: context.width * 0.04,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
+              const Gap(5), // アイコンとテキストの間隔
+              Text(
+                text,
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: context.width * 0.04,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          onPressed: onPressed,
         ),
-        onPressed: onPressed,
       ),
     );
   }

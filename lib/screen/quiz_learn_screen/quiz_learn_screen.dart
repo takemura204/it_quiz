@@ -9,6 +9,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
+import '../../model/quiz_item/quiz_item.dart';
 import '../../view/admob.dart';
 import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
@@ -91,9 +92,9 @@ class _Body extends ConsumerWidget {
         ///クイズカード
         _QuizCard(quiz),
 
-        Gap(context.height * 0.02),
+        Gap(context.height * 0.01),
 
-        ///確認ボタン
+        ///知っている・知らないボタン
         _ActionButtons(quiz),
 
         Gap(context.height * 0.01),

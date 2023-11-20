@@ -41,7 +41,6 @@ class _QuizCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
-        print(quiz.id);
         ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
 
         showDialog(

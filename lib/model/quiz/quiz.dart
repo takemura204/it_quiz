@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../quiz_item/quiz_item.dart';
 
 part 'quiz.freezed.dart';
-
 part 'quiz.g.dart';
 
 ///問題ジャンル

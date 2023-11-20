@@ -1,3 +1,4 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../model/quiz/quiz.dart';
@@ -19,5 +20,6 @@ class QuizLearnScreenState with _$QuizLearnScreenState {
     @Default([]) final List<QuizItem> unKnowQuizItemList,
     @Default(Duration.zero) final Duration duration, // 所要時間
     @Default(StudyType.learn) final StudyType studyType, //クイズタイプ
+    AppinioSwiperDirection? direction,
   }) = _Create;
 }

@@ -64,57 +64,29 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     _stopwatch.start(); //学習時間記録
   }
 
-  // スワイプ時の処理
-  Future<void> swipeOnCard(
-    AppinioSwiperDirection direction,
-  ) async {
-    switch (direction) {
-      case AppinioSwiperDirection.left: // 左方向
-        print('legt');
-        // tapIsKnowButton(false);
-        break;
-
-      case AppinioSwiperDirection.right: // 右方向
-        print('right');
-        // tapIsKnowButton(true);
-        break;
-      case AppinioSwiperDirection.top: // 上方向
-        break;
-      case AppinioSwiperDirection.bottom: // 下方向
-        break;
-      default:
-        tapIsKnowButton(false);
-    }
-  }
-
-  ///確認ボタンを押した時
-  void tapConfirmButton() {
-    _switchAnsView(); //画面切り替え
-  }
-
   ///「知っている・知らない」ボタンを押した時
-  void tapIsKnowButton(bool isKnow) {
-    _setQuiz(isKnow); //更新
-    _addQuiz(isKnow); //追加
-    _nextQuiz(); //次の問題
-    _switchAnsView(); // 画面切り替え
-  }
-
-  ///クイズ更新
-  void _setQuiz(bool isJudge) {
+  void tapActionButton(bool isKnow, QuizItem quizItem) {
     final quizItemList = [...state.quizItemList];
-    final index = state.quizIndex;
-    quizItemList[index] = QuizItem(
-      quizId: quizItemList[index].quizId,
-      question: quizItemList[index].question,
-      ans: quizItemList[index].ans,
-      comment: quizItemList[index].comment,
-      isWeak: quizItemList[index].isWeak,
-      isJudge: isJudge,
-      //更新
-      isSaved: quizItemList[index].isSaved,
-      choices: quizItemList[index].choices,
-    );
+    final index =
+        quizItemList.indexWhere((item) => item.quizId == quizItem.quizId);
+
+    print({'index', index, 'quizIndex', state.quizIndex});
+    if (index != -1) {
+      quizItemList[index] = QuizItem(
+        quizId: quizItemList[index].quizId,
+        question: quizItemList[index].question,
+        ans: quizItemList[index].ans,
+        comment: quizItemList[index].comment,
+        isWeak: quizItemList[index].isWeak,
+        isJudge: isKnow,
+        isSaved: quizItemList[index].isSaved,
+        choices: quizItemList[index].choices,
+      );
+    }
+
+    _addQuiz(isKnow);
+    _nextQuiz();
+    setIsAnsView(false);
   }
 
   ///「知っている・知らない」リストに追加
@@ -215,8 +187,12 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///正解画面に切り替え
-  void _switchAnsView() {
-    state = state.copyWith(isAnsView: !state.isAnsView);
+  void setIsAnsView(bool value) {
+    state = state.copyWith(isAnsView: value);
+  }
+
+  void setDirection(AppinioSwiperDirection? direction) {
+    state = state.copyWith(direction: direction);
   }
 
   ///クイズ結果更新(端末保存)
