@@ -1,4 +1,4 @@
-part of 'quiz_learn_result_screen.dart';
+part of '../quiz_learn_screen.dart';
 
 ///クイズ一覧
 class _QuizResultView extends ConsumerWidget {

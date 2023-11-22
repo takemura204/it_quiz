@@ -1,4 +1,4 @@
-part of 'quiz_learn_screen.dart';
+part of '../quiz_learn_screen.dart';
 
 class _QuizCard extends ConsumerWidget {
   const _QuizCard();
