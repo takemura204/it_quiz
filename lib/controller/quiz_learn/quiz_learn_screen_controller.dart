@@ -65,84 +65,60 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///「知っている・知らない」ボタンを押した時
-  void tapActionButton(bool isKnow, QuizItem quizItem) {
+  Future tapActionButton(bool isKnow) async {
+    await setIsAnsView(false);
+    await setDirection(null);
+
     final quizItemList = [...state.quizItemList];
-    final index =
-        quizItemList.indexWhere((item) => item.quizId == quizItem.quizId);
+    final index = state.quizIndex;
+    final quizId = quizItemList[index].quizId;
 
-    print({'index', index, 'quizIndex', state.quizIndex});
-    if (index != -1) {
-      quizItemList[index] = QuizItem(
-        quizId: quizItemList[index].quizId,
-        question: quizItemList[index].question,
-        ans: quizItemList[index].ans,
-        comment: quizItemList[index].comment,
-        isWeak: quizItemList[index].isWeak,
-        isJudge: isKnow,
-        isSaved: quizItemList[index].isSaved,
-        choices: quizItemList[index].choices,
-      );
-    }
+    // QuizItemを更新
+    quizItemList[index] = quizItemList[index].copyWith(isJudge: isKnow);
 
-    _addQuiz(isKnow);
-    _nextQuiz();
-    setIsAnsView(false);
-  }
-
-  ///「知っている・知らない」リストに追加
-  void _addQuiz(bool isJudge) {
-    final quizItemList = [...state.quizItemList];
+    // リストの更新
     final knowQuizItemList = [...state.knowQuizItemList];
     final unKnowQuizItemList = [...state.unKnowQuizItemList];
-    final quizIndex = state.quizIndex;
 
-    ///知っている
-    if (isJudge) {
-      //すでに知ってるリストに含まれているとき
-      if (knowQuizItemList.contains(quizItemList[quizIndex])) {
+    final isAlreadyKnown = knowQuizItemList.any((x) => x.quizId == quizId);
+    final isAlreadyUnknown = unKnowQuizItemList.any((x) => x.quizId == quizId);
+    if (isKnow) {
+      //knowQuizItemListに含まれていない時
+      if (!isAlreadyKnown) {
+        //unKnowQuizItemListに含まれている時
+        if (isAlreadyUnknown) {
+          unKnowQuizItemList.removeWhere((item) => item.quizId == quizId);
+        }
+        knowQuizItemList.add(state.quizItemList[index]);
       }
-      //、知らないリストに含まれている場合
-      else if (unKnowQuizItemList.contains(quizItemList[quizIndex])) {
-        knowQuizItemList.add(quizItemList[quizIndex]);
-        unKnowQuizItemList.remove(quizItemList[quizIndex]);
-      }
-      //それ以外
-      else {
-        knowQuizItemList.add(quizItemList[quizIndex]);
+    } else {
+      if (!isAlreadyUnknown) {
+        if (isAlreadyKnown) {
+          knowQuizItemList.removeWhere((item) => item.quizId == quizId);
+        }
+        unKnowQuizItemList.add(state.quizItemList[index]);
       }
     }
 
-    ///知らない
-    else {
-      //すでに含まれている場合
-      if (unKnowQuizItemList.contains(quizItemList[state.quizIndex])) {
-      }
-      //知ってるリストに含まれている場合
-      else if (knowQuizItemList.contains(quizItemList[state.quizIndex])) {
-        knowQuizItemList.remove(quizItemList[state.quizIndex]);
-        unKnowQuizItemList.add(quizItemList[state.quizIndex]);
-      }
-      //それ以外
-      else {
-        unKnowQuizItemList.add(quizItemList[state.quizIndex]);
-      }
-    }
+    // 状態の更新
     state = state.copyWith(
       knowQuizItemList: knowQuizItemList,
       unKnowQuizItemList: unKnowQuizItemList,
       quizItemList: quizItemList,
     );
+
+    _nextQuiz();
   }
 
   ///次の問題に進む
   void _nextQuiz() {
-    final quizIndex = state.quizIndex;
+    final index = state.quizIndex;
     final lapIndex = state.lapIndex;
     final quizItemList = [...state.quizItemList];
     final knowQuizList = [...state.knowQuizItemList];
     final unKnowQuizList = [...state.unKnowQuizItemList];
     //問題が終わったが,「知ってる」リストに全て含まれていない場合
-    if (quizIndex == quizItemList.length - 1 &&
+    if (index == quizItemList.length - 1 &&
         knowQuizList.length != quiz.quizItemList.length) {
       quizItemList.clear();
       quizItemList.addAll(unKnowQuizList);
@@ -165,7 +141,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     }
     //まだ問題が続蹴られる時
     else {
-      state = state.copyWith(quizIndex: quizIndex + 1);
+      state = state.copyWith(quizIndex: index + 1);
     }
   }
 
@@ -187,11 +163,11 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///正解画面に切り替え
-  void setIsAnsView(bool value) {
+  Future setIsAnsView(bool value) async {
     state = state.copyWith(isAnsView: value);
   }
 
-  void setDirection(AppinioSwiperDirection? direction) {
+  Future setDirection(AppinioSwiperDirection? direction) async {
     state = state.copyWith(direction: direction);
   }
 

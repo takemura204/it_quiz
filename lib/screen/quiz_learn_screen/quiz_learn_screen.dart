@@ -1,6 +1,7 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -90,7 +91,7 @@ class _Body extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         ///クイズカード
-        _QuizCard(quiz),
+        const _QuizCard(),
 
         Gap(context.height * 0.01),
 

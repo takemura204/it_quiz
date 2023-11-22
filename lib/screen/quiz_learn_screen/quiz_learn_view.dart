@@ -1,26 +1,32 @@
 part of 'quiz_learn_screen.dart';
 
 class _QuizCard extends ConsumerWidget {
-  const _QuizCard(this.quiz);
-
-  final Quiz quiz;
+  const _QuizCard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final swiperController =
-        ref
-            .watch(quizLearnScreenProvider.notifier)
-            .swiperController;
-    final direction = ref
-        .watch(quizLearnScreenProvider)
-        .direction;
+        ref.watch(quizLearnScreenProvider.notifier).swiperController;
+    final direction = ref.watch(quizLearnScreenProvider).direction;
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
+    final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
+    final quizIndex = ref.watch(quizLearnScreenProvider).quizIndex;
+
+    if (quizItemList.isEmpty) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.1,
+        ),
+      );
+    }
 
     return Expanded(
       child: AppinioSwiper(
         controller: swiperController,
-        cardsCount: quiz.quizItemList.length,
-        loop: false,
-        backgroundCardsCount: 1,
+        cardsCount: quizItemList.length,
+        loop: true,
+        backgroundCardsCount: (quizIndex + 1 == quizItemList.length) ? 0 : 1,
         cardsSpacing: 0,
         maxAngle: 90,
         swipeOptions: const AppinioSwipeOptions.symmetric(
@@ -28,13 +34,9 @@ class _QuizCard extends ConsumerWidget {
         onSwipe: (index, direction) {
           // スワイプが完全に終了した時の処理
           if (direction == AppinioSwiperDirection.left) {
-            ref
-                .read(quizLearnScreenProvider.notifier)
-                .tapActionButton(false, quiz.quizItemList[index]);
+            ref.read(quizLearnScreenProvider.notifier).tapActionButton(false);
           } else if (direction == AppinioSwiperDirection.right) {
-            ref
-                .read(quizLearnScreenProvider.notifier)
-                .tapActionButton(true, quiz.quizItemList[index]);
+            ref.read(quizLearnScreenProvider.notifier).tapActionButton(true);
           }
         },
         onSwiping: (direction) {
@@ -48,7 +50,7 @@ class _QuizCard extends ConsumerWidget {
           return;
         },
         cardsBuilder: (BuildContext context, int index) {
-          final quizItem = quiz.quizItemList[index];
+          final quizItem = quizItemList[index];
           return GestureDetector(
             onTap: () {
               ref
@@ -62,8 +64,8 @@ class _QuizCard extends ConsumerWidget {
                 side: BorderSide(
                   color: direction != null
                       ? direction != AppinioSwiperDirection.right
-                      ? Colors.red.withOpacity(0.7)
-                      : Colors.green.withOpacity(0.7)
+                          ? Colors.red.withOpacity(0.7)
+                          : Colors.green.withOpacity(0.7)
                       : Colors.grey.shade300,
                   width: 1.5,
                 ),
@@ -78,11 +80,11 @@ class _QuizCard extends ConsumerWidget {
                     const Spacer(),
 
                     ///問題文
-                    _Question(quizItem),
+                    _Question(quizItem, isAns && quizIndex == index),
                     const Spacer(),
 
                     ///問題進捗状況
-                    _QuizProgress(quiz, index + 1),
+                    _QuizProgress(quizItemList.length, index + 1),
                     Gap(context.height * 0.01),
                   ],
                 ),
@@ -102,9 +104,6 @@ class _ActionButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref
-        .watch(quizLearnScreenProvider)
-        .quizIndex;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
 
@@ -150,16 +149,13 @@ class _ActionButtons extends ConsumerWidget {
 }
 
 class _Question extends ConsumerWidget {
-  const _Question(this.quizItem);
+  const _Question(this.quizItem, this.isAnsView);
 
   final QuizItem quizItem;
+  final bool isAnsView;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAns = ref
-        .watch(quizLearnScreenProvider)
-        .isAnsView;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
       child: Column(
@@ -172,7 +168,8 @@ class _Question extends ConsumerWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
             },
-            child: isAns ? _AnsQuestion(quizItem) : _ConfirmQuestion(quizItem),
+            child:
+                isAnsView ? _AnsQuestion(quizItem) : _ConfirmQuestion(quizItem),
           ),
         ],
       ),
@@ -234,9 +231,9 @@ class _ConfirmQuestion extends ConsumerWidget {
 }
 
 class _QuizProgress extends ConsumerWidget {
-  const _QuizProgress(this.quiz, this.index);
+  const _QuizProgress(this.quizItemLength, this.index);
 
-  final Quiz quiz;
+  final int quizItemLength;
   final int index;
 
   @override
@@ -246,14 +243,14 @@ class _QuizProgress extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            index.toString(),
+            "$index",
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            "/" + quiz.quizItemList.length.toString(),
+            "/$quizItemLength",
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.normal,
@@ -272,9 +269,7 @@ class _LapInfoBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lapIndex = ref
-        .watch(quizLearnScreenProvider)
-        .lapIndex;
+    final lapIndex = ref.watch(quizLearnScreenProvider).lapIndex;
 
     return Card(
       elevation: 3,
