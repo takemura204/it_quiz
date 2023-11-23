@@ -12,7 +12,7 @@ class _QuizResultView extends ConsumerWidget {
       itemCount: quizItemList.length,
       itemBuilder: (BuildContext context, int index) {
         return QuizItemCard(
-          item: quizItemList[index],
+          quizitem: quizItemList[index],
           studyType: StudyType.choice,
           onPressed: () =>
               ref.read(quizChoiceScreenProvider.notifier).tapCheckBox(index),

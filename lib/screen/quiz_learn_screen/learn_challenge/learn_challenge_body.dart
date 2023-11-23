@@ -22,7 +22,9 @@ class _LearnChallengeBody extends ConsumerWidget {
 
         ///何周目か確認
         _LapInfoBar(quiz),
-        Gap(context.height * 0.05),
+
+        ///広告
+        AdBanner(),
       ],
     );
   }

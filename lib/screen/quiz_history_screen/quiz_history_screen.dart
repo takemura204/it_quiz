@@ -142,7 +142,7 @@ class _Body extends ConsumerWidget {
 
                     ///チェックボックスがすぐに反映されない。
                     QuizItemCard(
-                      item: quizList[index].quizItemList[quizItemIndex],
+                      quizitem: quizList[index].quizItemList[quizItemIndex],
                       studyType: quizList[index].studyType,
                       onPressed: () => ref
                           .read(quizHistoryScreenProvider.notifier)

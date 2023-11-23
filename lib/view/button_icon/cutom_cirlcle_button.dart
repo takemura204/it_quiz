@@ -33,6 +33,9 @@ class CustomCircleButton extends ConsumerWidget {
       color: backgroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(90),
+        side: backgroundColor == Colors.white
+            ? BorderSide(color: textColor, width: 1.5)
+            : BorderSide(color: backgroundColor, width: 0),
       ),
       child: Container(
         width: containerWidth,

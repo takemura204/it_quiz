@@ -10,26 +10,27 @@ import '../button_icon/check_buton.dart';
 
 class QuizItemCard extends ConsumerWidget {
   const QuizItemCard(
-      {required this.item, required this.studyType, required this.onPressed});
+      {required this.quizitem,
+      required this.studyType,
+      required this.onPressed});
 
-  final QuizItem item;
+  final QuizItem quizitem;
   final StudyType studyType;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      child: Card(
-        elevation: 1,
-        margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 2,
+    return Card(
+      elevation: 1,
+      color: Colors.white,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey.shade300,
+              width: 1.0, // ここで線の太さを設定
+            ),
           ),
-          borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
           children: [
@@ -44,9 +45,9 @@ class QuizItemCard extends ConsumerWidget {
                     horizontal: context.width * 0.01,
                     vertical: context.width * 0.02),
                 child: Icon(
-                  item.isJudge ? Icons.circle_outlined : Icons.clear,
+                  quizitem.isJudge ? Icons.circle_outlined : Icons.clear,
                   size: context.width * 0.1,
-                  color: item.isJudge
+                  color: quizitem.isJudge
                       ? Colors.green.withOpacity(0.7)
                       : Colors.red.withOpacity(0.7),
                 ),
@@ -60,8 +61,8 @@ class QuizItemCard extends ConsumerWidget {
                     horizontal: context.width * 0.02,
                     vertical: context.height * 0.03),
                 child: SubstringHighlight(
-                  text: item.question,
-                  term: item.ans,
+                  text: quizitem.question,
+                  term: quizitem.ans,
                   textStyle: TextStyle(
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,
@@ -70,7 +71,7 @@ class QuizItemCard extends ConsumerWidget {
                   overflow: TextOverflow.clip,
                   textStyleHighlight: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: item.isJudge
+                    color: quizitem.isJudge
                         ? Colors.green.withOpacity(0.7)
                         : Colors.red.withOpacity(0.7),
                     decoration: TextDecoration.underline,
@@ -81,7 +82,7 @@ class QuizItemCard extends ConsumerWidget {
 
             ///苦手ボタン
             CheckBoxIconButton(
-                isCheck: item.isWeak,
+                isCheck: quizitem.isWeak,
                 size: context.width * 0.1,
                 onPressed: onPressed),
             const Gap(5),

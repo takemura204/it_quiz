@@ -104,11 +104,11 @@ class _ActionButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isAnsView = ref.watch(quizLearnScreenProvider).isAnsView;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-
-      ///知らない
       children: [
+        ///知らない
         CustomCircleButton(
           iconData: Icons.question_mark_outlined,
           iconSize: context.width * 0.1,
@@ -125,7 +125,19 @@ class _ActionButtons extends ConsumerWidget {
           },
         ),
 
-        Gap(context.width * 0.1),
+        ///確認する
+        CustomCircleButton(
+          iconData: Icons.cached_outlined,
+          iconSize: context.width * 0.1,
+          containerWidth: context.width * 0.25,
+          containerHeight: context.width * 0.25,
+          backgroundColor: Colors.white,
+          textColor: isAnsView ? Colors.grey.shade400 : context.mainColor,
+          text: I18n().buttonConfirm,
+          onPressed: () {
+            ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
+          },
+        ),
 
         ///知ってる
         CustomCircleButton(

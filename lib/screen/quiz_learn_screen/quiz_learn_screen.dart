@@ -12,7 +12,8 @@ import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
-import '../../view/admob.dart';
+import '../../view/admob/admob_banner.dart';
+import '../../view/admob/admob_native_advance.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/clear_button.dart';
@@ -116,10 +117,7 @@ class _Body extends ConsumerWidget {
         else
           _LearnChallengeBody(quiz),
 
-        // _LearnResultBody(quiz),
-
         ///広告
-        AdBanner(),
       ],
     );
   }

@@ -6,7 +6,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
-import '../../view/admob.dart';
+import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/dialog.dart';
 import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
