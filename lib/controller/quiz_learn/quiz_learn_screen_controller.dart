@@ -157,6 +157,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       isJudge: quizItemList[index].isJudge,
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
     );
     state = state.copyWith(quizItemList: quizItemList);
     _updateQuiz();

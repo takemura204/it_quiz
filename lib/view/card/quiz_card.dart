@@ -71,10 +71,12 @@ class QuizItemCard extends ConsumerWidget {
                   overflow: TextOverflow.clip,
                   textStyleHighlight: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: quizitem.isJudge
-                        ? Colors.green.withOpacity(0.7)
-                        : Colors.red.withOpacity(0.7),
-                    decoration: TextDecoration.underline,
+                    color: studyType == StudyType.learn
+                        ? context.mainColor
+                        : quizitem.isJudge
+                            ? Colors.green.withOpacity(0.7)
+                            : Colors.red.withOpacity(0.7),
+                    decoration: TextDecoration.none,
                   ),
                 ),
               ),

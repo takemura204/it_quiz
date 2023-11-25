@@ -7,18 +7,47 @@ class _QuizResultView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: quizItemList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return QuizItemCard(
-          quizitem: quizItemList[index],
-          studyType: StudyType.learn,
-          onPressed: () =>
-              ref.read(quizLearnScreenProvider.notifier).tapCheckBox(index),
-        );
-      },
+    return Column(
+      children: [
+        Card(
+          elevation: 1,
+          color: Colors.white,
+          child: Container(
+            width: context.width * 1,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey.shade300,
+                  width: 1.0, // ここで線の太さを設定
+                ),
+              ),
+            ),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.02),
+            child: Text(
+              'クイズ一覧',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: context.width * 0.05,
+              ),
+            ),
+          ),
+        ),
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: quizItemList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return QuizItemCard(
+              quizitem: quizItemList[index],
+              studyType: StudyType.learn,
+              onPressed: () =>
+                  ref.read(quizLearnScreenProvider.notifier).tapCheckBox(index),
+            );
+          },
+        ),
+      ],
     );
   }
 }

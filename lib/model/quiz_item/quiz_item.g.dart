@@ -14,6 +14,7 @@ _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
       isWeak: json['isWeak'] as bool,
       isJudge: json['isJudge'] as bool,
       isSaved: json['isSaved'] as bool,
+      lapIndex: json['lapIndex'] as int,
       choices:
           (json['choices'] as List<dynamic>).map((e) => e as String).toList(),
     );
@@ -27,5 +28,6 @@ Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
       'isWeak': instance.isWeak,
       'isJudge': instance.isJudge,
       'isSaved': instance.isSaved,
+      'lapIndex': instance.lapIndex,
       'choices': instance.choices,
     };

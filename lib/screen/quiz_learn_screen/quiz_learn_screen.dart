@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
+import 'package:kentei_quiz/view/card/result_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
@@ -20,6 +21,7 @@ import '../../view/button_icon/clear_button.dart';
 import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/card/quiz_card.dart';
+import '../../view/card/result_dashboard_card.dart';
 import '../screen_argument.dart';
 
 part 'learn_challenge/learn_challenge_body.dart';

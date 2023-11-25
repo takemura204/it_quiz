@@ -15,44 +15,20 @@ class _LearnResultBody extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Gap(20),
-                  Card(
-                    elevation: 1,
-                    color: Colors.grey.shade200,
-                    child: Container(
-                      height: context.height * 0.1,
-                      alignment: Alignment.center,
-                      child: Text('Clear！'),
-                    ),
-                  ),
+                  Gap(context.height * 0.01),
 
-                  Gap(20),
-                  Card(
-                    elevation: 1,
-                    color: Colors.white,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey.shade300,
-                            width: 1.0, // ここで線の太さを設定
-                          ),
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.width * 0.02,
-                          vertical: context.width * 0.02),
-                      child: Text(
-                        '結果詳細',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.width * 0.05,
-                        ),
-                      ),
-                    ),
-                  ),
+                  ///結果カード
+                  const ResultCard(),
+                  ResultDashboardCard(quiz),
+                  Gap(context.height * 0.01),
+
+
+                  Gap(context.height * 0.01),
+
+                  ///クイズ結果一覧
                   const _QuizResultView(),
-                  Gap(20),
+
+                  ///広告
                   AdNative(),
                   Gap(context.height * 0.15),
                 ],

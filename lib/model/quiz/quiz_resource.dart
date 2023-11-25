@@ -12,6 +12,7 @@ extension QuizModelEx1 on QuizModel {
           isWeak: false,
           isSaved: false,
           isJudge: false,
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 2,
@@ -22,6 +23,7 @@ extension QuizModelEx1 on QuizModel {
           isWeak: false,
           isSaved: false,
           isJudge: false,
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 3,
@@ -37,6 +39,7 @@ extension QuizModelEx1 on QuizModel {
             "キャッツアイ",
           ],
           comment: "タンペムです",
+          lapIndex: 0,
         ),
       ];
 
@@ -50,6 +53,7 @@ extension QuizModelEx1 on QuizModel {
           isJudge: false,
           choices: ["1", "2", "3", "4"],
           comment: "3です",
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 5,
@@ -60,6 +64,7 @@ extension QuizModelEx1 on QuizModel {
           isJudge: false,
           choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
           comment: "氷河時代です",
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 6,
@@ -75,6 +80,7 @@ extension QuizModelEx1 on QuizModel {
             "キャッツアイ",
           ],
           comment: "氷河時代です",
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 7,
@@ -85,6 +91,7 @@ extension QuizModelEx1 on QuizModel {
           isJudge: false,
           choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
           comment: "氷河時代です",
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 8,
@@ -100,6 +107,7 @@ extension QuizModelEx1 on QuizModel {
           isWeak: false,
           isSaved: false,
           isJudge: false,
+          lapIndex: 0,
         ),
       ];
 
@@ -113,6 +121,7 @@ extension QuizModelEx1 on QuizModel {
           isWeak: false,
           isSaved: false,
           isJudge: false,
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 10,
@@ -123,6 +132,7 @@ extension QuizModelEx1 on QuizModel {
           isWeak: false,
           isSaved: false,
           isJudge: false,
+          lapIndex: 0,
         ),
         QuizItem(
           quizId: 11,
@@ -139,6 +149,7 @@ extension QuizModelEx1 on QuizModel {
             "キャッツアイ",
           ],
           comment: "タンペムです",
+          lapIndex: 0,
         ),
       ];
 }
