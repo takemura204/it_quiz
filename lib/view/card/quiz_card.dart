@@ -34,24 +34,7 @@ class QuizItemCard extends ConsumerWidget {
         ),
         child: Row(
           children: [
-            const Gap(5),
-            if (studyType != StudyType.learn)
-
-              ///⚪︎×アイコン
-              Container(
-                width: context.width * 0.1,
-                height: context.height * 0.1,
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.width * 0.01,
-                    vertical: context.width * 0.02),
-                child: Icon(
-                  quizitem.isJudge ? Icons.circle_outlined : Icons.clear,
-                  size: context.width * 0.1,
-                  color: quizitem.isJudge
-                      ? Colors.green.withOpacity(0.7)
-                      : Colors.red.withOpacity(0.7),
-                ),
-              ),
+            Gap(context.width * 0.01),
 
             ///問題文
             Expanded(
@@ -82,12 +65,62 @@ class QuizItemCard extends ConsumerWidget {
               ),
             ),
 
+            ///⚪︎×アイコン
+            if (studyType != StudyType.learn)
+              Container(
+                width: context.width * 0.1,
+                height: context.height * 0.1,
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.width * 0.01,
+                    vertical: context.width * 0.02),
+                child: Icon(
+                  quizitem.isJudge ? Icons.circle_outlined : Icons.clear,
+                  size: context.width * 0.1,
+                  color: quizitem.isJudge
+                      ? Colors.green.withOpacity(0.7)
+                      : Colors.red.withOpacity(0.7),
+                ),
+              )
+
+            ///何周目
+            else
+              Container(
+                alignment: Alignment.center,
+                width: context.width * 0.1,
+                height: context.height * 0.1,
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.width * 0.01,
+                    vertical: context.width * 0.02),
+                child: Row(
+                  children: [
+                    Text(
+                      "${quizitem.lapIndex}",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold,
+                        fontSize: context.width * 0.05,
+                      ),
+                    ),
+                    Text(
+                      "周",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold,
+                        fontSize: context.width * 0.03,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            Gap(context.width * 0.02),
+
             ///苦手ボタン
             CheckBoxIconButton(
                 isCheck: quizitem.isWeak,
                 size: context.width * 0.1,
                 onPressed: onPressed),
-            const Gap(5),
+            Gap(context.width * 0.01),
           ],
         ),
       ),

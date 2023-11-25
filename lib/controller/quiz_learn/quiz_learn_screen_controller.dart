@@ -69,12 +69,24 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     await setIsAnsView(false);
     await setDirection(null);
 
+    final lapIndex = state.lapIndex;
     final quizItemList = [...state.quizItemList];
     final index = state.quizIndex;
     final quizId = quizItemList[index].quizId;
 
     // QuizItemを更新
-    quizItemList[index] = quizItemList[index].copyWith(isJudge: isKnow);
+
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: !quizItemList[index].isWeak,
+      isJudge: isKnow,
+      isSaved: quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: lapIndex,
+    );
 
     // リストの更新
     final knowQuizItemList = [...state.knowQuizItemList];
@@ -89,7 +101,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         if (isAlreadyUnknown) {
           unKnowQuizItemList.removeWhere((item) => item.quizId == quizId);
         }
-        knowQuizItemList.add(state.quizItemList[index]);
+        knowQuizItemList.add(quizItemList[index]);
       }
     } else {
       if (!isAlreadyUnknown) {
@@ -127,8 +139,10 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     }
     //問題が終わり,「知ってる」リストに全て含まれている場合
     else if (state.knowQuizItemList.length == quiz.quizItemList.length) {
-      quizItemList.clear();
-      quizItemList.addAll(quiz.quizItemList);
+      quizItemList.clear(); // クイズアイテムリストをクリア
+      // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
+      quizItemList.addAll([...knowQuizList, ...unKnowQuizList]
+        ..sort((a, b) => a.quizId.compareTo(b.quizId)));
       _stopwatch.stop();
       state = state.copyWith(
         duration: _stopwatch.elapsed,
@@ -139,6 +153,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       );
       _updateQuiz();
     }
+
     //まだ問題が続蹴られる時
     else {
       state = state.copyWith(quizIndex: index + 1);

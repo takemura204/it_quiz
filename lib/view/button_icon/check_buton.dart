@@ -48,6 +48,14 @@ class CheckBoxIconButton extends ConsumerWidget {
                 color: isCheck ? context.mainColor : Colors.grey,
               ),
             ),
+            Text(
+              "",
+              style: TextStyle(
+                fontSize: context.width * 0.025,
+                fontWeight: FontWeight.bold,
+                color: isCheck ? context.mainColor : Colors.grey,
+              ),
+            ),
           ],
         ),
       ),
