@@ -10,11 +10,11 @@ import '../button_icon/check_buton.dart';
 
 class QuizItemCard extends ConsumerWidget {
   const QuizItemCard(
-      {required this.quizitem,
+      {required this.quizItem,
       required this.studyType,
       required this.onPressed});
 
-  final QuizItem quizitem;
+  final QuizItem quizItem;
   final StudyType studyType;
   final VoidCallback? onPressed;
 
@@ -44,8 +44,8 @@ class QuizItemCard extends ConsumerWidget {
                     horizontal: context.width * 0.02,
                     vertical: context.height * 0.03),
                 child: SubstringHighlight(
-                  text: quizitem.question,
-                  term: quizitem.ans,
+                  text: quizItem.question,
+                  term: quizItem.ans,
                   textStyle: TextStyle(
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,
@@ -56,7 +56,7 @@ class QuizItemCard extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                     color: studyType == StudyType.learn
                         ? context.mainColor
-                        : quizitem.isJudge
+                        : quizItem.isJudge
                             ? Colors.green.withOpacity(0.7)
                             : Colors.red.withOpacity(0.7),
                     decoration: TextDecoration.none,
@@ -74,9 +74,9 @@ class QuizItemCard extends ConsumerWidget {
                     horizontal: context.width * 0.01,
                     vertical: context.width * 0.02),
                 child: Icon(
-                  quizitem.isJudge ? Icons.circle_outlined : Icons.clear,
+                  quizItem.isJudge ? Icons.circle_outlined : Icons.clear,
                   size: context.width * 0.1,
-                  color: quizitem.isJudge
+                  color: quizItem.isJudge
                       ? Colors.green.withOpacity(0.7)
                       : Colors.red.withOpacity(0.7),
                 ),
@@ -94,7 +94,7 @@ class QuizItemCard extends ConsumerWidget {
                 child: Row(
                   children: [
                     Text(
-                      "${quizitem.lapIndex}",
+                      "${quizItem.lapIndex}",
                       style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class QuizItemCard extends ConsumerWidget {
 
             ///苦手ボタン
             CheckBoxIconButton(
-                isCheck: quizitem.isWeak,
+                isCheck: quizItem.isWeak,
                 size: context.width * 0.1,
                 onPressed: onPressed),
             Gap(context.width * 0.01),

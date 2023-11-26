@@ -18,10 +18,9 @@ class _LearnResultBody extends ConsumerWidget {
                   Gap(context.height * 0.01),
 
                   ///結果カード
-                  const ResultCard(),
+                  const LearnResultCard(),
                   ResultDashboardCard(quiz),
                   Gap(context.height * 0.01),
-
 
                   Gap(context.height * 0.01),
 

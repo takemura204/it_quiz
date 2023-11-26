@@ -15,6 +15,7 @@ class QuizChoiceScreenState with _$QuizChoiceScreenState {
     @Default(false) final bool isResultScreen,
     @Default(0) final int quizIndex, //問題番号
     @Default(0) final int quizItemIndex, //クイズアイテム番号
+    @Default('') final String selectAns, //選択した番号
     @Default([]) final List<String> choices, //選択肢
     @Default([]) final List<QuizItem> quizItemList, //問題
     @Default(Duration.zero) final Duration duration, // 所要時間

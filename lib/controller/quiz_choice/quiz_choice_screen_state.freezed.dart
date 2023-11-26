@@ -21,6 +21,7 @@ mixin _$QuizChoiceScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get quizItemIndex => throw _privateConstructorUsedError; //クイズアイテム番号
+  String get selectAns => throw _privateConstructorUsedError; //選択した番号
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError; //問題
   Duration get duration => throw _privateConstructorUsedError; // 所要時間
@@ -43,6 +44,7 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       bool isResultScreen,
       int quizIndex,
       int quizItemIndex,
+      String selectAns,
       List<String> choices,
       List<QuizItem> quizItemList,
       Duration duration,
@@ -68,6 +70,7 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
     Object? isResultScreen = null,
     Object? quizIndex = null,
     Object? quizItemIndex = null,
+    Object? selectAns = null,
     Object? choices = null,
     Object? quizItemList = null,
     Object? duration = null,
@@ -94,6 +97,10 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
           ? _value.quizItemIndex
           : quizItemIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectAns: null == selectAns
+          ? _value.selectAns
+          : selectAns // ignore: cast_nullable_to_non_nullable
+              as String,
       choices: null == choices
           ? _value.choices
           : choices // ignore: cast_nullable_to_non_nullable
@@ -127,6 +134,7 @@ abstract class _$$_CreateCopyWith<$Res>
       bool isResultScreen,
       int quizIndex,
       int quizItemIndex,
+      String selectAns,
       List<String> choices,
       List<QuizItem> quizItemList,
       Duration duration,
@@ -148,6 +156,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isResultScreen = null,
     Object? quizIndex = null,
     Object? quizItemIndex = null,
+    Object? selectAns = null,
     Object? choices = null,
     Object? quizItemList = null,
     Object? duration = null,
@@ -174,6 +183,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.quizItemIndex
           : quizItemIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectAns: null == selectAns
+          ? _value.selectAns
+          : selectAns // ignore: cast_nullable_to_non_nullable
+              as String,
       choices: null == choices
           ? _value._choices
           : choices // ignore: cast_nullable_to_non_nullable
@@ -203,6 +216,7 @@ class _$_Create extends _Create {
       this.isResultScreen = false,
       this.quizIndex = 0,
       this.quizItemIndex = 0,
+      this.selectAns = '',
       final List<String> choices = const [],
       final List<QuizItem> quizItemList = const [],
       this.duration = Duration.zero,
@@ -230,8 +244,12 @@ class _$_Create extends _Create {
   @JsonKey()
   final int quizItemIndex;
 //クイズアイテム番号
+  @override
+  @JsonKey()
+  final String selectAns;
+//選択した番号
   final List<String> _choices;
-//クイズアイテム番号
+//選択した番号
   @override
   @JsonKey()
   List<String> get choices {
@@ -262,7 +280,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, choices: $choices, quizItemList: $quizItemList, duration: $duration, studyType: $studyType)';
+    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, selectAns: $selectAns, choices: $choices, quizItemList: $quizItemList, duration: $duration, studyType: $studyType)';
   }
 
   @override
@@ -279,6 +297,8 @@ class _$_Create extends _Create {
                 other.quizIndex == quizIndex) &&
             (identical(other.quizItemIndex, quizItemIndex) ||
                 other.quizItemIndex == quizItemIndex) &&
+            (identical(other.selectAns, selectAns) ||
+                other.selectAns == selectAns) &&
             const DeepCollectionEquality().equals(other._choices, _choices) &&
             const DeepCollectionEquality()
                 .equals(other._quizItemList, _quizItemList) &&
@@ -296,6 +316,7 @@ class _$_Create extends _Create {
       isResultScreen,
       quizIndex,
       quizItemIndex,
+      selectAns,
       const DeepCollectionEquality().hash(_choices),
       const DeepCollectionEquality().hash(_quizItemList),
       duration,
@@ -315,6 +336,7 @@ abstract class _Create extends QuizChoiceScreenState {
       final bool isResultScreen,
       final int quizIndex,
       final int quizItemIndex,
+      final String selectAns,
       final List<String> choices,
       final List<QuizItem> quizItemList,
       final Duration duration,
@@ -332,6 +354,8 @@ abstract class _Create extends QuizChoiceScreenState {
   @override //問題番号
   int get quizItemIndex;
   @override //クイズアイテム番号
+  String get selectAns;
+  @override //選択した番号
   List<String> get choices;
   @override //選択肢
   List<QuizItem> get quizItemList;

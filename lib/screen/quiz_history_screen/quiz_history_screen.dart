@@ -7,7 +7,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import '../../controller/quiz_history/quiz_history_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/card/quiz_card.dart';
+import '../../view/card/quiz_item_card.dart';
 
 part 'quiz_history_view.dart';
 
@@ -142,7 +142,7 @@ class _Body extends ConsumerWidget {
 
                     ///チェックボックスがすぐに反映されない。
                     QuizItemCard(
-                      quizitem: quizList[index].quizItemList[quizItemIndex],
+                      quizItem: quizList[index].quizItemList[quizItemIndex],
                       studyType: quizList[index].studyType,
                       onPressed: () => ref
                           .read(quizHistoryScreenProvider.notifier)

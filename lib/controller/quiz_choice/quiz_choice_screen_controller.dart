@@ -73,12 +73,18 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///選択肢を押した時
   void tapAnsButton(String ans) {
-    _judgeQuiz(ans); //正誤判定,スコア判定
+    _setSelectAns(ans);
+    _judgeQuiz(); //正誤判定,スコア判定
     _switchAnsView(); //答え表示,次の問題
   }
 
+  void _setSelectAns(String ans) {
+    state = state.copyWith(selectAns: ans);
+  }
+
   ///クイズ判定
-  void _judgeQuiz(String ans) {
+  void _judgeQuiz() {
+    final ans = state.selectAns;
     final quizItemList = [...state.quizItemList];
     final quizIndex = state.quizIndex;
     //正解
@@ -121,7 +127,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void _switchAnsView() {
     state = state.copyWith(isAnsView: true);
     Future.delayed(const Duration(milliseconds: 600), () {
-      state = state.copyWith(isAnsView: false);
+      state = state.copyWith(isAnsView: false, selectAns: '');
       _nextQuiz(); //次のクイズ
     });
   }

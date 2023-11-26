@@ -3,8 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-class ResultCard extends ConsumerWidget {
-  const ResultCard();
+class LearnResultCard extends ConsumerWidget {
+  const LearnResultCard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

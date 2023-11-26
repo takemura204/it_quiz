@@ -7,48 +7,57 @@ class ChoiceChallengeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Stack(
+    return Column(
       children: [
-        Column(
-          children: [
-            const Spacer(),
+        Gap(context.height * 0.01),
 
-            ///問題画面
-            Card(
-              elevation: 3,
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: context.mainColor,
-                  width: 1.5,
+        ///問題画面
+        Expanded(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Card(
+                elevation: 3,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: context.mainColor,
+                    width: 1.5,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Container(
-                width: context.width * 0.85,
-                height: context.height * 0.5,
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    ///問題文
-                    _Question(quiz),
+                child: Container(
+                  width: context.width * 0.9,
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Spacer(),
 
-                    ///進捗状況
-                    _QuizProgress(quiz),
-                  ],
+                      ///問題文
+                      _Question(quiz),
+
+                      const Spacer(),
+
+                      ///進捗状況
+                      _QuizProgress(quiz),
+                      Gap(context.height * 0.01),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const Spacer(),
-
-            ///選択肢
-            _SelectAnswer(quiz),
-
-            ///広告
-            AdBanner(),
-          ],
+              _JudgeIcon(quiz),
+            ],
+          ),
         ),
-        _JudgeIcon(quiz),
+
+        Gap(context.height * 0.01),
+
+        ///選択肢
+        _SelectAnswer(quiz),
+
+        ///広告
+        AdBanner(),
       ],
     );
   }

@@ -14,7 +14,9 @@ import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/clear_button.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/card/quiz_card.dart';
+import '../../view/card/learn_result_card.dart';
+import '../../view/card/quiz_item_card.dart';
+import '../../view/card/result_dashboard_card.dart';
 import '../../view/dialog.dart';
 import '../screen_argument.dart';
 
