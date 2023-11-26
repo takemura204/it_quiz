@@ -1,4 +1,4 @@
-part of 'quiz_choice_result_screen.dart';
+part of '../quiz_choice_screen.dart';
 
 class _QuizResultView extends ConsumerWidget {
   const _QuizResultView();

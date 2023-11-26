@@ -1,4 +1,4 @@
-part of 'quiz_choice_screen.dart';
+part of '../quiz_choice_screen.dart';
 
 ///問題文
 class _Question extends ConsumerWidget {

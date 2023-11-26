@@ -31,75 +31,56 @@ class PrimaryDialog extends ConsumerWidget {
         elevation: 4,
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 3,
-          ),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Container(
           width: context.width * 1,
-          height: context.height * 0.3,
           padding: EdgeInsets.all(context.width * 0.02),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const Spacer(),
+              Gap(context.height * 0.01),
               Container(
                 height: context.height * 0.05,
-                child: Column(
-                  children: [
-                    const Spacer(),
-                    Text(
-                      title,
-                      style: TextStyle(
-                          fontSize: context.width * 0.05,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87),
-                    ),
-                    const Spacer(),
-                  ],
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: context.width * 0.05,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87),
                 ),
               ),
-              const Spacer(),
-              Container(
-                height: context.height * 0.13,
-                // color: Colors.red,
-                child: Column(
-                  children: [
-                    const Spacer(),
-                    subWidget,
-                    const Spacer(),
-                  ],
-                ),
-              ),
-              const Spacer(),
+              Gap(context.height * 0.01),
+              subWidget,
+              Gap(context.height * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ///キャンセル
                   SecondaryButton(
-                      width: context.width * 0.4,
-                      height: context.height * 0.06,
-                      text: cancelText,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
+                    width: context.width * 0.4,
+                    height: context.height * 0.06,
+                    text: doneText,
+                    onPressed: onPressed,
+                  ),
                   Gap(context.width * 0.05),
 
                   ///実行ボタン
                   PrimaryButton(
                       width: context.width * 0.4,
                       height: context.height * 0.06,
-                      text: doneText,
-                      onPressed: onPressed),
+                      text: cancelText,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
                 ],
               ),
-              const Spacer(),
+              Gap(context.height * 0.01),
             ],
           ),
         ),
