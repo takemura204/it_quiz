@@ -164,6 +164,8 @@ class _QuizResult extends ConsumerWidget {
           const Spacer(),
           Row(
             children: [
+
+              
               ///正解数
               Text(
                 "${quiz.correctNum}",

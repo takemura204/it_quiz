@@ -253,6 +253,8 @@ class _QuizProgress extends ConsumerWidget {
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        textBaseline: TextBaseline.alphabetic,
         children: [
           Text(
             "$index",
@@ -262,7 +264,14 @@ class _QuizProgress extends ConsumerWidget {
             ),
           ),
           Text(
-            "/$quizItemLength",
+            " / ",
+            style: TextStyle(
+              fontSize: context.width * 0.04,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          Text(
+            "$quizItemLength",
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.normal,

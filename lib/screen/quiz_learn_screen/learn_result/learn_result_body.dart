@@ -7,6 +7,9 @@ class _LearnResultBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
+    final controller = ref.watch(quizLearnScreenProvider);
+    final duration = controller.duration;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -18,8 +21,8 @@ class _LearnResultBody extends ConsumerWidget {
                   Gap(context.height * 0.01),
 
                   ///結果カード
-                  const LearnResultCard(),
-                  ResultDashboardCard(quiz),
+                  const ResultClearCard(),
+                  ResultDashboardCard(quizItemList, duration),
                   Gap(context.height * 0.01),
 
                   Gap(context.height * 0.01),

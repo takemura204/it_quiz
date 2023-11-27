@@ -3,8 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-class LearnResultCard extends ConsumerWidget {
-  const LearnResultCard();
+class ResultGoodCard extends ConsumerWidget {
+  const ResultGoodCard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -14,7 +14,7 @@ class LearnResultCard extends ConsumerWidget {
         border: Border(
           bottom: BorderSide(
             color: Colors.grey.shade300,
-            width: 1.0, // ここで線の太さを設定
+            width: 1.0,
           ),
         ),
       ),
@@ -28,15 +28,16 @@ class LearnResultCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Clear!!',
+                  'GOOD!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: context.width * 0.1,
                     color: Colors.white,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
                 Text(
-                  '毎日の１歩が大きな成長につながってます',
+                  'いい感じです！引き続き挑戦していきましょう！',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: context.width * 0.03,
@@ -49,9 +50,9 @@ class LearnResultCard extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
-              Icons.check_circle_outline,
+              Icons.circle_outlined,
               color: Colors.white,
-              size: context.height * 0.1,
+              size: context.height * 0.085,
             ),
           ),
           Gap(context.width * 0.05),

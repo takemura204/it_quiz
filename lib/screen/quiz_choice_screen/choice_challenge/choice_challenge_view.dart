@@ -98,16 +98,24 @@ class _QuizProgress extends ConsumerWidget {
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        textBaseline: TextBaseline.alphabetic,
         children: [
           Text(
-            quizIndex.toString(),
+            "$quizIndex",
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            "/" + quizItemList.length.toString(),
+            " / ",
+            style: TextStyle(
+              fontSize: context.width * 0.04,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          Text(
+            "${quizItemList.length}",
             style: TextStyle(
               fontSize: context.width * 0.05,
               fontWeight: FontWeight.normal,
