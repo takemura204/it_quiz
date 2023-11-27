@@ -378,6 +378,11 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     state = state.copyWith(selectQuizId: quizId);
   }
 
+  void tapQuizIndex(int index) {
+    state = state.copyWith(quizIndex: index);
+    print(index);
+  }
+
   void setQuizType(QuizType quizType) {
     state = state.copyWith(quizType: quizType);
   }

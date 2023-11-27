@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -59,8 +61,11 @@ class _Body extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(quizHistoryScreenProvider);
     final quizList = state.quizList;
+
+    final displayedItemCount = min(quizList.length, 20);
+
     return ListView.builder(
-      itemCount: quizList.length,
+      itemCount: displayedItemCount, // ここを修正
       itemBuilder: (context, index) {
         return Column(
           children: [

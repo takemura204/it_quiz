@@ -29,9 +29,14 @@ class _NextActionCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizModelProvider).quizList;
+    final quizList = ref
+        .watch(quizModelProvider)
+        .quizList
+        .where((x) => x.category == quiz.category)
+        .toList();
     final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
     final selectQuizId = ref.watch(quizModelProvider).selectQuizId;
+    final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
     final quizType = ref.watch(quizModelProvider).quizType;
     return Card(
@@ -74,18 +79,18 @@ class _NextActionCard extends HookConsumerWidget {
                 width: context.width * 0.45,
                 height: context.height * 0.06,
                 text: "次のクイズに挑戦",
-                onPressed: (selectQuizId >= lastIndex)
+                onPressed: (quizIndex >= lastIndex)
                     ? null
                     : () {
                         Navigator.of(context).pop();
                         context.showScreen(
                           QuizChoiceScreenArguments(
-                            quiz: quizList[selectQuizId + 1],
+                            quiz: quizList[quizIndex + 1],
                           ).generateRoute(),
                         );
                         ref
                             .read(quizModelProvider.notifier)
-                            .tapQuizCard(selectQuizId + 1);
+                            .tapQuizIndex(quizIndex + 1);
                       },
               ),
             const Spacer(),

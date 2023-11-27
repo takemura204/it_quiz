@@ -20,7 +20,8 @@ Quizzes _$QuizzesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Quizzes {
-  int get selectQuizId => throw _privateConstructorUsedError; //選択したクイズ
+  int get selectQuizId => throw _privateConstructorUsedError; //選択したクイズID
+  int get quizIndex => throw _privateConstructorUsedError; //選択したクイズインデックス
   List<Quiz> get quizList => throw _privateConstructorUsedError; //クイズ一覧
   List<Quiz> get historyQuizList =>
       throw _privateConstructorUsedError; //学習したクイズリスト一覧
@@ -42,6 +43,7 @@ abstract class $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {int selectQuizId,
+      int quizIndex,
       List<Quiz> quizList,
       List<Quiz> historyQuizList,
       List<QuizItem> quizItemList,
@@ -68,6 +70,7 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
   @override
   $Res call({
     Object? selectQuizId = null,
+    Object? quizIndex = null,
     Object? quizList = null,
     Object? historyQuizList = null,
     Object? quizItemList = null,
@@ -80,6 +83,10 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
       selectQuizId: null == selectQuizId
           ? _value.selectQuizId
           : selectQuizId // ignore: cast_nullable_to_non_nullable
+              as int,
+      quizIndex: null == quizIndex
+          ? _value.quizIndex
+          : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
       quizList: null == quizList
           ? _value.quizList
@@ -146,6 +153,7 @@ abstract class _$$_QuizzesCopyWith<$Res> implements $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {int selectQuizId,
+      int quizIndex,
       List<Quiz> quizList,
       List<Quiz> historyQuizList,
       List<QuizItem> quizItemList,
@@ -171,6 +179,7 @@ class __$$_QuizzesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectQuizId = null,
+    Object? quizIndex = null,
     Object? quizList = null,
     Object? historyQuizList = null,
     Object? quizItemList = null,
@@ -183,6 +192,10 @@ class __$$_QuizzesCopyWithImpl<$Res>
       selectQuizId: null == selectQuizId
           ? _value.selectQuizId
           : selectQuizId // ignore: cast_nullable_to_non_nullable
+              as int,
+      quizIndex: null == quizIndex
+          ? _value.quizIndex
+          : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
       quizList: null == quizList
           ? _value._quizList
@@ -221,6 +234,7 @@ class __$$_QuizzesCopyWithImpl<$Res>
 class _$_Quizzes extends _Quizzes {
   _$_Quizzes(
       {this.selectQuizId = 0,
+      this.quizIndex = 0,
       final List<Quiz> quizList = const [],
       final List<Quiz> historyQuizList = const [],
       final List<QuizItem> quizItemList = const [],
@@ -239,9 +253,13 @@ class _$_Quizzes extends _Quizzes {
   @override
   @JsonKey()
   final int selectQuizId;
-//選択したクイズ
+//選択したクイズID
+  @override
+  @JsonKey()
+  final int quizIndex;
+//選択したクイズインデックス
   final List<Quiz> _quizList;
-//選択したクイズ
+//選択したクイズインデックス
   @override
   @JsonKey()
   List<Quiz> get quizList {
@@ -288,7 +306,7 @@ class _$_Quizzes extends _Quizzes {
 
   @override
   String toString() {
-    return 'Quizzes(selectQuizId: $selectQuizId, quizList: $quizList, historyQuizList: $historyQuizList, quizItemList: $quizItemList, weakQuiz: $weakQuiz, testQuiz: $testQuiz, quizType: $quizType, studyType: $studyType)';
+    return 'Quizzes(selectQuizId: $selectQuizId, quizIndex: $quizIndex, quizList: $quizList, historyQuizList: $historyQuizList, quizItemList: $quizItemList, weakQuiz: $weakQuiz, testQuiz: $testQuiz, quizType: $quizType, studyType: $studyType)';
   }
 
   @override
@@ -298,6 +316,8 @@ class _$_Quizzes extends _Quizzes {
             other is _$_Quizzes &&
             (identical(other.selectQuizId, selectQuizId) ||
                 other.selectQuizId == selectQuizId) &&
+            (identical(other.quizIndex, quizIndex) ||
+                other.quizIndex == quizIndex) &&
             const DeepCollectionEquality().equals(other._quizList, _quizList) &&
             const DeepCollectionEquality()
                 .equals(other._historyQuizList, _historyQuizList) &&
@@ -318,6 +338,7 @@ class _$_Quizzes extends _Quizzes {
   int get hashCode => Object.hash(
       runtimeType,
       selectQuizId,
+      quizIndex,
       const DeepCollectionEquality().hash(_quizList),
       const DeepCollectionEquality().hash(_historyQuizList),
       const DeepCollectionEquality().hash(_quizItemList),
@@ -343,6 +364,7 @@ class _$_Quizzes extends _Quizzes {
 abstract class _Quizzes extends Quizzes {
   factory _Quizzes(
       {final int selectQuizId,
+      final int quizIndex,
       final List<Quiz> quizList,
       final List<Quiz> historyQuizList,
       final List<QuizItem> quizItemList,
@@ -356,7 +378,9 @@ abstract class _Quizzes extends Quizzes {
 
   @override
   int get selectQuizId;
-  @override //選択したクイズ
+  @override //選択したクイズID
+  int get quizIndex;
+  @override //選択したクイズインデックス
   List<Quiz> get quizList;
   @override //クイズ一覧
   List<Quiz> get historyQuizList;
