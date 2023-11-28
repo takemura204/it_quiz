@@ -203,6 +203,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
       }
       return quiz;
     }).toList();
+
     state = state.copyWith(quizList: updateStudyQuiz);
     _saveDevice();
   }
@@ -380,7 +381,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   void tapQuizIndex(int index) {
     state = state.copyWith(quizIndex: index);
-    print(index);
   }
 
   void setQuizType(QuizType quizType) {

@@ -5,7 +5,9 @@ class _QuizResultView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
+    final quizItemList = ref
+        .watch(quizChoiceScreenProvider)
+        .quizItemList;
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -34,11 +36,17 @@ class _NextActionCard extends HookConsumerWidget {
         .quizList
         .where((x) => x.category == quiz.category)
         .toList();
-    final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
-    final selectQuizId = ref.watch(quizModelProvider).selectQuizId;
-    final quizIndex = ref.watch(quizModelProvider).quizIndex;
+    final weakQuiz = ref
+        .watch(quizModelProvider)
+        .weakQuiz;
+    final quizIndex = ref
+        .watch(quizModelProvider)
+        .quizIndex;
     final lastIndex = quizList.length - 1;
-    final quizType = ref.watch(quizModelProvider).quizType;
+    final quizType = ref
+        .watch(quizModelProvider)
+        .quizType;
+
     return Card(
       elevation: 2,
       color: Colors.white,
@@ -54,25 +62,25 @@ class _NextActionCard extends HookConsumerWidget {
                 height: context.height * 0.06,
                 text: "再挑戦",
                 onPressed: (quizType == QuizType.weak &&
-                        weakQuiz!.quizItemList.isEmpty)
+                    weakQuiz!.quizItemList.isEmpty)
                     ? null
                     : () {
-                        Navigator.of(context).pop();
-                        context.showScreen(QuizChoiceScreenArguments(
-                          quiz: quiz,
-                        ).generateRoute());
-                      }),
+                  Navigator.of(context).pop();
+                  context.showScreen(QuizChoiceScreenArguments(
+                    quiz: quiz,
+                  ).generateRoute());
+                }),
             Gap(context.width * 0.02),
             if (quizType == QuizType.weak || quizType == QuizType.test) ...[
               PrimaryButton(
                 width: context.width * 0.45,
                 height: context.height * 0.06,
                 text: "完了",
-                onPressed: (selectQuizId >= lastIndex)
+                onPressed: (quizIndex >= lastIndex)
                     ? null
                     : () {
-                        Navigator.of(context).pop();
-                      },
+                  Navigator.of(context).pop();
+                },
               ),
             ] else
               PrimaryButton(
@@ -82,16 +90,19 @@ class _NextActionCard extends HookConsumerWidget {
                 onPressed: (quizIndex >= lastIndex)
                     ? null
                     : () {
-                        Navigator.of(context).pop();
-                        context.showScreen(
-                          QuizChoiceScreenArguments(
-                            quiz: quizList[quizIndex + 1],
-                          ).generateRoute(),
-                        );
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .tapQuizIndex(quizIndex + 1);
-                      },
+                  Navigator.of(context).pop();
+                  context.showScreen(
+                    QuizChoiceScreenArguments(
+                      quiz: quizList[quizIndex + 1],
+                    ).generateRoute(),
+                  );
+                  ref
+                      .read(quizModelProvider.notifier)
+                      .tapQuizIndex(quizIndex + 1);
+                  ref
+                      .read(quizModelProvider.notifier)
+                      .tapQuizCard(quizList[quizIndex + 1].id);
+                },
               ),
             const Spacer(),
           ],

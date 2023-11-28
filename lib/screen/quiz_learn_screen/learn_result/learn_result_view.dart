@@ -6,7 +6,9 @@ class _QuizResultView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
+    final quizItemList = ref
+        .watch(quizLearnScreenProvider)
+        .quizItemList;
     return Column(
       children: [
         Card(
@@ -59,8 +61,12 @@ class _NextActionCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizModelProvider).quizList;
-    final selectQuizId = ref.watch(quizModelProvider).selectQuizId;
+    final quizList = ref
+        .watch(quizModelProvider)
+        .quizList;
+    final quizIndex = ref
+        .watch(quizModelProvider)
+        .quizIndex;
     final lastIndex = quizList.length - 1;
     return Card(
       elevation: 2,
@@ -90,22 +96,24 @@ class _NextActionCard extends HookConsumerWidget {
               width: context.width * 0.45,
               height: context.height * 0.06,
               text: "クイズに挑戦",
-              onPressed: (selectQuizId >= lastIndex)
+              onPressed: (quizIndex >= lastIndex)
                   ? null
                   : () {
-                      ref
-                          .read(quizLearnScreenProvider.notifier)
-                          .updateHistoryQuiz();
-                      Navigator.of(context).pop();
-                      context.showScreen(
-                        QuizChoiceScreenArguments(
-                          quiz: quiz,
-                        ).generateRoute(),
-                      );
-                      ref
-                          .read(quizModelProvider.notifier)
-                          .tapQuizCard(selectQuizId + 1);
-                    },
+                ref
+                    .read(quizLearnScreenProvider.notifier)
+                    .updateHistoryQuiz();
+                Navigator.of(context).pop();
+                context.showScreen(
+                  QuizChoiceScreenArguments(
+                    quiz: quiz,
+                  ).generateRoute(),
+                );
+
+                Future.delayed(const Duration(milliseconds: 600), () {
+                  ref.read(quizModelProvider.notifier).setStudyType(
+                      StudyType.choice);
+                });
+              },
             ),
             const Spacer(),
           ],
