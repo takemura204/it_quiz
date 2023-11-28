@@ -69,14 +69,15 @@ class StudyQuizModal extends ConsumerWidget {
                         height: context.height * 0.06,
                         text: I18n().styleLeanQuiz,
                         onPressed: () {
+                          Navigator.of(context).pop();
+                          ref
+                              .read(quizModelProvider.notifier)
+                              .setStudyType(StudyType.learn);
                           context.showScreen(
                             QuizLearnScreenArguments(
                               quiz: quiz,
                             ).generateRoute(),
                           );
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .setStudyType(StudyType.learn);
                         },
                       ),
                     ),
@@ -165,7 +166,6 @@ class _QuizResult extends ConsumerWidget {
           Row(
             children: [
 
-              
               ///正解数
               Text(
                 "${quiz.correctNum}",

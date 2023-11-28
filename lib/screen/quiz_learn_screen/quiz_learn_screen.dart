@@ -6,7 +6,6 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
-import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:kentei_quiz/view/card/result_clear_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
@@ -26,11 +25,8 @@ import '../../view/card/result_dashboard_card.dart';
 import '../screen_argument.dart';
 
 part 'learn_challenge/learn_challenge_body.dart';
-
 part 'learn_challenge/learn_challenge_view.dart';
-
 part 'learn_result/learn_result_body.dart';
-
 part 'learn_result/learn_result_view.dart';
 
 class QuizLearnScreen extends ConsumerWidget {
@@ -86,7 +82,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                     ref
                         .read(quizLearnScreenProvider.notifier)
                         .updateHistoryQuiz();
-                    Navigator.of(context).pop();
+
                     ref.read(quizLearnScreenProvider.notifier).tapClearButton();
                   }),
             ],
