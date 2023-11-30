@@ -33,7 +33,7 @@ class _BottomQuizMenu extends ConsumerWidget {
                             .setQuizType(QuizType.weak);
                         showDialog(
                             context: context,
-                            builder: (_) => StudyQuizModal(quiz: weakQuiz));
+                            builder: (_) => WeakQuizModal(quiz: weakQuiz));
                       }),
             Gap(context.width * 0.02),
 

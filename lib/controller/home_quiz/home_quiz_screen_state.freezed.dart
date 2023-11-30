@@ -25,6 +25,8 @@ mixin _$HomeQuizScreenState {
   bool get isSelected => throw _privateConstructorUsedError;
   List<String> get selectedFilterGroup => throw _privateConstructorUsedError;
   int get selectedTestLength => throw _privateConstructorUsedError;
+  int get selectedWeakLength => throw _privateConstructorUsedError;
+  Quiz? get selectWeakQuiz => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeQuizScreenStateCopyWith<HomeQuizScreenState> get copyWith =>
@@ -46,7 +48,11 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       int tabIndex,
       bool isSelected,
       List<String> selectedFilterGroup,
-      int selectedTestLength});
+      int selectedTestLength,
+      int selectedWeakLength,
+      Quiz? selectWeakQuiz});
+
+  $QuizCopyWith<$Res>? get selectWeakQuiz;
 }
 
 /// @nodoc
@@ -71,6 +77,8 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? isSelected = null,
     Object? selectedFilterGroup = null,
     Object? selectedTestLength = null,
+    Object? selectedWeakLength = null,
+    Object? selectWeakQuiz = freezed,
   }) {
     return _then(_value.copyWith(
       filterQuizList: null == filterQuizList
@@ -109,7 +117,27 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.selectedTestLength
           : selectedTestLength // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedWeakLength: null == selectedWeakLength
+          ? _value.selectedWeakLength
+          : selectedWeakLength // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectWeakQuiz: freezed == selectWeakQuiz
+          ? _value.selectWeakQuiz
+          : selectWeakQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizCopyWith<$Res>? get selectWeakQuiz {
+    if (_value.selectWeakQuiz == null) {
+      return null;
+    }
+
+    return $QuizCopyWith<$Res>(_value.selectWeakQuiz!, (value) {
+      return _then(_value.copyWith(selectWeakQuiz: value) as $Val);
+    });
   }
 }
 
@@ -129,7 +157,12 @@ abstract class _$$_CreateCopyWith<$Res>
       int tabIndex,
       bool isSelected,
       List<String> selectedFilterGroup,
-      int selectedTestLength});
+      int selectedTestLength,
+      int selectedWeakLength,
+      Quiz? selectWeakQuiz});
+
+  @override
+  $QuizCopyWith<$Res>? get selectWeakQuiz;
 }
 
 /// @nodoc
@@ -151,6 +184,8 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isSelected = null,
     Object? selectedFilterGroup = null,
     Object? selectedTestLength = null,
+    Object? selectedWeakLength = null,
+    Object? selectWeakQuiz = freezed,
   }) {
     return _then(_$_Create(
       filterQuizList: null == filterQuizList
@@ -189,6 +224,14 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.selectedTestLength
           : selectedTestLength // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedWeakLength: null == selectedWeakLength
+          ? _value.selectedWeakLength
+          : selectedWeakLength // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectWeakQuiz: freezed == selectWeakQuiz
+          ? _value.selectWeakQuiz
+          : selectWeakQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
     ));
   }
 }
@@ -205,7 +248,9 @@ class _$_Create implements _Create {
       this.tabIndex = 0,
       this.isSelected = false,
       final List<String> selectedFilterGroup = const [],
-      this.selectedTestLength = 10})
+      this.selectedTestLength = 10,
+      this.selectedWeakLength = 10,
+      this.selectWeakQuiz})
       : _filterQuizList = filterQuizList,
         _categoryList = categoryList,
         _selectedTestCategory = selectedTestCategory,
@@ -266,10 +311,15 @@ class _$_Create implements _Create {
   @override
   @JsonKey()
   final int selectedTestLength;
+  @override
+  @JsonKey()
+  final int selectedWeakLength;
+  @override
+  final Quiz? selectWeakQuiz;
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(filterQuizList: $filterQuizList, categoryList: $categoryList, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength)';
+    return 'HomeQuizScreenState(filterQuizList: $filterQuizList, categoryList: $categoryList, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
@@ -294,7 +344,11 @@ class _$_Create implements _Create {
             const DeepCollectionEquality()
                 .equals(other._selectedFilterGroup, _selectedFilterGroup) &&
             (identical(other.selectedTestLength, selectedTestLength) ||
-                other.selectedTestLength == selectedTestLength));
+                other.selectedTestLength == selectedTestLength) &&
+            (identical(other.selectedWeakLength, selectedWeakLength) ||
+                other.selectedWeakLength == selectedWeakLength) &&
+            (identical(other.selectWeakQuiz, selectWeakQuiz) ||
+                other.selectWeakQuiz == selectWeakQuiz));
   }
 
   @override
@@ -308,7 +362,9 @@ class _$_Create implements _Create {
       tabIndex,
       isSelected,
       const DeepCollectionEquality().hash(_selectedFilterGroup),
-      selectedTestLength);
+      selectedTestLength,
+      selectedWeakLength,
+      selectWeakQuiz);
 
   @JsonKey(ignore: true)
   @override
@@ -327,7 +383,9 @@ abstract class _Create implements HomeQuizScreenState {
       final int tabIndex,
       final bool isSelected,
       final List<String> selectedFilterGroup,
-      final int selectedTestLength}) = _$_Create;
+      final int selectedTestLength,
+      final int selectedWeakLength,
+      final Quiz? selectWeakQuiz}) = _$_Create;
 
   @override
   List<Quiz> get filterQuizList;
@@ -347,6 +405,10 @@ abstract class _Create implements HomeQuizScreenState {
   List<String> get selectedFilterGroup;
   @override
   int get selectedTestLength;
+  @override
+  int get selectedWeakLength;
+  @override
+  Quiz? get selectWeakQuiz;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

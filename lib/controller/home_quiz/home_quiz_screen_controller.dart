@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -5,6 +7,7 @@ import 'package:state_notifier/state_notifier.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
+import '../../model/quiz_item/quiz_item.dart';
 import 'home_quiz_screen_state.dart';
 
 final homeQuizScreenProvider =
@@ -57,6 +60,30 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
     state = state.copyWith(filterQuizList: quizList);
   }
 
+  ///WeakQuiz開始
+  void tapStartWeakQuizButton() {
+    final weakQuiz = ref.read(quizModelProvider).weakQuiz!;
+    final weakItemList = [...weakQuiz.quizItemList];
+    state = state.copyWith(selectWeakQuiz: weakQuiz);
+
+    final selectedWeakLength = state.selectedWeakLength;
+    final random = Random();
+    final pickedQuizList = <QuizItem>[];
+    for (int i = 0; i < selectedWeakLength; i++) {
+      if (weakItemList.isNotEmpty) {
+        final randomIndex = random.nextInt(weakItemList.length);
+        pickedQuizList.add(weakItemList[randomIndex]);
+        weakItemList.removeAt(randomIndex);
+      } else {
+        break;
+      }
+    }
+    final selectWeakQuiz =
+        state.selectWeakQuiz!.copyWith(quizItemList: pickedQuizList);
+
+    state = state.copyWith(selectWeakQuiz: selectWeakQuiz);
+  }
+
   ///TestQuiz開始
   void tapStartTestQuizButton() {
     final selectedTestCategory = state.selectedTestCategory;
@@ -86,6 +113,11 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
   }
 
   ///問題数指定
+  void selectWeakLength(int length) {
+    state = state.copyWith(selectedWeakLength: length);
+    print(state.selectedWeakLength);
+  }
+
   void selectTestLength(int length) {
     state = state.copyWith(selectedTestLength: length);
   }

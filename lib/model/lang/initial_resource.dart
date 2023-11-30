@@ -67,6 +67,8 @@ class I18n {
 
   String get lastQuizResult => "前回の挑戦結果";
 
+  String get lastWeakResult => "現在の苦手問題数";
+
   ///Button
   String get buttonConfirm => "確認する";
 
