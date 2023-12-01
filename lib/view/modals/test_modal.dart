@@ -68,6 +68,9 @@ class TestQuizModal extends ConsumerWidget {
                         text: I18n().challengeQuiz(testQuiz.title),
                         onPressed: () {
                           ref
+                              .read(quizModelProvider.notifier)
+                              .setStudyType(StudyType.choice);
+                          ref
                               .read(homeQuizScreenProvider.notifier)
                               .tapStartTestQuizButton();
                           final testQuiz =

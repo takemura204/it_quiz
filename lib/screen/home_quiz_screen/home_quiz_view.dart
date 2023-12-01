@@ -42,7 +42,7 @@ class _BottomQuizMenu extends ConsumerWidget {
               width: context.width * 0.45,
               height: context.height * 0.06,
               text: "${testQuiz.title}",
-              icon: LineIcons.dumbbell,
+              icon: LineIcons.edit,
               onPressed: () {
                 ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
                 showDialog(

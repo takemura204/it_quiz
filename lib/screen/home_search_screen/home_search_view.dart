@@ -65,22 +65,19 @@ class _QuizResultView extends ConsumerWidget {
               ),
             );
           }
-          return Card(
-            elevation: 1,
-            margin: EdgeInsets.symmetric(
-                horizontal: context.width * 0.01,
-                vertical: context.width * 0.005),
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: context.mainColor,
-                width: 1,
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                bottom: BorderSide(
+                  color: context.mainColor,
+                  width: 1,
+                ),
               ),
-              borderRadius: BorderRadius.circular(15),
             ),
             child: Row(
               children: [
-                const Gap(5),
+                const Gap(7),
                 Expanded(
                   child: _QuizItemCard(index, filteredQuizItemList),
                 ),
