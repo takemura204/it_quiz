@@ -7,6 +7,7 @@ part 'home_search_screen_state.freezed.dart';
 class HomeSearchScreenState with _$HomeSearchScreenState {
   factory HomeSearchScreenState({
     @Default(false) bool isLoading,
+    @Default(false) bool isScrollLoading,
     @Default([]) List<QuizItem> filteredQuizItemList,
     @Default("") String searchText,
     @Default([]) List<String> searchKeywords,

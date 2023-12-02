@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeSearchScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isScrollLoading => throw _privateConstructorUsedError;
   List<QuizItem> get filteredQuizItemList => throw _privateConstructorUsedError;
   String get searchText => throw _privateConstructorUsedError;
   List<String> get searchKeywords => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $HomeSearchScreenStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isScrollLoading,
       List<QuizItem> filteredQuizItemList,
       String searchText,
       List<String> searchKeywords,
@@ -62,6 +64,7 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isScrollLoading = null,
     Object? filteredQuizItemList = null,
     Object? searchText = null,
     Object? searchKeywords = null,
@@ -74,6 +77,10 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isScrollLoading: null == isScrollLoading
+          ? _value.isScrollLoading
+          : isScrollLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       filteredQuizItemList: null == filteredQuizItemList
           ? _value.filteredQuizItemList
@@ -116,6 +123,7 @@ abstract class _$$_CreateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isScrollLoading,
       List<QuizItem> filteredQuizItemList,
       String searchText,
       List<String> searchKeywords,
@@ -136,6 +144,7 @@ class __$$_CreateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isScrollLoading = null,
     Object? filteredQuizItemList = null,
     Object? searchText = null,
     Object? searchKeywords = null,
@@ -148,6 +157,10 @@ class __$$_CreateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isScrollLoading: null == isScrollLoading
+          ? _value.isScrollLoading
+          : isScrollLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       filteredQuizItemList: null == filteredQuizItemList
           ? _value._filteredQuizItemList
@@ -186,6 +199,7 @@ class __$$_CreateCopyWithImpl<$Res>
 class _$_Create extends _Create {
   _$_Create(
       {this.isLoading = false,
+      this.isScrollLoading = false,
       final List<QuizItem> filteredQuizItemList = const [],
       this.searchText = "",
       final List<String> searchKeywords = const [],
@@ -200,6 +214,9 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isScrollLoading;
   final List<QuizItem> _filteredQuizItemList;
   @override
   @JsonKey()
@@ -237,7 +254,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'HomeSearchScreenState(isLoading: $isLoading, filteredQuizItemList: $filteredQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty, isSavedFilter: $isSavedFilter, maxItemsToDisplay: $maxItemsToDisplay)';
+    return 'HomeSearchScreenState(isLoading: $isLoading, isScrollLoading: $isScrollLoading, filteredQuizItemList: $filteredQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty, isSavedFilter: $isSavedFilter, maxItemsToDisplay: $maxItemsToDisplay)';
   }
 
   @override
@@ -247,6 +264,8 @@ class _$_Create extends _Create {
             other is _$_Create &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isScrollLoading, isScrollLoading) ||
+                other.isScrollLoading == isScrollLoading) &&
             const DeepCollectionEquality()
                 .equals(other._filteredQuizItemList, _filteredQuizItemList) &&
             (identical(other.searchText, searchText) ||
@@ -267,6 +286,7 @@ class _$_Create extends _Create {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isScrollLoading,
       const DeepCollectionEquality().hash(_filteredQuizItemList),
       searchText,
       const DeepCollectionEquality().hash(_searchKeywords),
@@ -285,6 +305,7 @@ class _$_Create extends _Create {
 abstract class _Create extends HomeSearchScreenState {
   factory _Create(
       {final bool isLoading,
+      final bool isScrollLoading,
       final List<QuizItem> filteredQuizItemList,
       final String searchText,
       final List<String> searchKeywords,
@@ -296,6 +317,8 @@ abstract class _Create extends HomeSearchScreenState {
 
   @override
   bool get isLoading;
+  @override
+  bool get isScrollLoading;
   @override
   List<QuizItem> get filteredQuizItemList;
   @override

@@ -1,32 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
-import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import 'home_search_screen_state.dart';
 
 final homeSearchScreenProvider =
     StateNotifierProvider<HomeSearchScreenController, HomeSearchScreenState>(
   (ref) => HomeSearchScreenController(ref: ref),
+  dependencies: [quizModelProvider],
 );
 
-class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
-    with LocatorMixin {
+class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
   HomeSearchScreenController({required this.ref})
       : super(HomeSearchScreenState()) {
-    initState();
+    _initState();
   }
 
   final Ref ref;
   final textEditingController = TextEditingController();
   final scrollController = ScrollController();
 
-  @override
-  Future initState() async {
+  Future _initState() async {
+    setIsLoading(true);
+    ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
+      if (quizzes.isLoading) {
+        await Future.wait([
+          _initFilterQuiz(),
+        ]);
+        setIsLoading(false);
+      }
+    });
     scrollController.addListener(_scrollListener);
-    await _initFilterQuiz();
-    super.initState();
   }
 
   @override
@@ -48,11 +54,11 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     if (scrollController.position.atEdge &&
         scrollController.position.pixels != 0) {
       if (state.maxItemsToDisplay < state.filteredQuizItemList.length &&
-          !state.isLoading) {
-        state = state.copyWith(isLoading: true);
+          !state.isScrollLoading) {
+        state = state.copyWith(isScrollLoading: true);
         await Future.delayed(const Duration(milliseconds: 100));
         setMaxItemsToDisplay();
-        state = state.copyWith(isLoading: false);
+        state = state.copyWith(isScrollLoading: false);
       }
     }
   }
@@ -61,7 +67,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     if (state.maxItemsToDisplay < state.filteredQuizItemList.length) {
       state = state.copyWith(
         maxItemsToDisplay: state.maxItemsToDisplay + 10,
-        isLoading: true,
+        isScrollLoading: true,
       );
     }
   }
@@ -248,5 +254,9 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState>
     normalizedTexts.add(_toCommonHiragana);
 
     return normalizedTexts;
+  }
+
+  void setIsLoading(bool value) {
+    state = state.copyWith(isLoading: value);
   }
 }

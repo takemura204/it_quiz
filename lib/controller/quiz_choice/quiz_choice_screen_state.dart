@@ -10,7 +10,6 @@ class QuizChoiceScreenState with _$QuizChoiceScreenState {
   const QuizChoiceScreenState._();
 
   const factory QuizChoiceScreenState({
-
     @Default(false) final bool isAnsView, //答え表示
     @Default(false) final bool isJudge, //正解判定
     @Default(false) final bool isResultScreen,

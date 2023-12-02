@@ -26,25 +26,8 @@ class HomeQuizScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ProviderScope(
-      overrides: [
-        homeQuizScreenProvider.overrideWith(
-          (ref) => HomeQuizScreenController(ref: ref),
-        ),
-      ],
-      child: const _Scaffold(),
-    );
-  }
-}
-
-class _Scaffold extends ConsumerWidget {
-  const _Scaffold();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
-
-    if (categoryList.isEmpty) {
+    final isLoading = ref.watch(homeQuizScreenProvider).isLoading;
+    if (isLoading) {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
@@ -52,6 +35,8 @@ class _Scaffold extends ConsumerWidget {
         ),
       );
     }
+
+    final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
 
     return DefaultTabController(
       initialIndex: 0, // 最初に表示するタブ

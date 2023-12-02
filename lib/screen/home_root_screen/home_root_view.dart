@@ -5,8 +5,7 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state =
-        ref.watch<HomeRootScreenState>(homeRootScreenControllerProvider);
+    final state = ref.watch(homeRootScreenControllerProvider);
 
     return IndexedStack(
       sizing: StackFit.expand,
@@ -68,12 +67,7 @@ class _BottomNavBar extends ConsumerWidget {
               .watch(homeRootScreenControllerProvider.notifier)
               .changeTabIndex(index);
 
-          if (index == 1) {
-            // ref.read(homeSearchScreenProvider.notifier).initState();
-          } else if (index == 2) {
-            ref.read(dashboardModelProvider.notifier).initState();
-            ref.read(homeDashboardScreenProvider.notifier).initState();
-          } else if (index == 3) {
+          if (index == 3) {
             ref.read(authProvider.notifier).initState();
           }
         });

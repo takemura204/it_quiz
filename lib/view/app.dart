@@ -50,20 +50,21 @@ class _App extends ConsumerWidget {
       //デフォルト設定
       theme: themeData,
       darkTheme: themeData,
-
+      // home: const HomeRootScreen(),
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // スプラッシュ画面などに書き換えても良い
-            return const SizedBox();
+            // ローディング画面を表示
+            return const CircularProgressIndicator();
           }
           if (snapshot.hasData) {
-            // User が null でなない、つまりサインイン済みのホーム画面へ
+            // ユーザーがサインインしている場合の画面
+            return const HomeRootScreen();
+          } else {
+            // ユーザーがサインインしていない場合の画面
             return const HomeRootScreen();
           }
-          // User が null である、つまり未サインインのサインイン画面へ
-          return const HomeRootScreen();
         },
       ),
     );

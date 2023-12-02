@@ -7,6 +7,7 @@ part 'home_quiz_screen_state.freezed.dart';
 @freezed
 class HomeQuizScreenState with _$HomeQuizScreenState {
   const factory HomeQuizScreenState({
+    @Default(false) bool isLoading,
     @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList,
     @Default([]) final List<String> selectedTestCategory,
@@ -18,5 +19,5 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
     @Default(10) final int selectedTestLength,
     @Default(10) final int selectedWeakLength,
     Quiz? selectWeakQuiz, //苦手克服
-  }) = _Create;
+  }) = _HomeQuizScreenState;
 }

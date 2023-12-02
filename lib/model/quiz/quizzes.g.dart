@@ -7,6 +7,7 @@ part of 'quizzes.dart';
 // **************************************************************************
 
 _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
+      isLoading: json['isLoading'] as bool? ?? false,
       selectQuizId: json['selectQuizId'] as int? ?? 0,
       quizIndex: json['quizIndex'] as int? ?? 0,
       quizList: (json['quizList'] as List<dynamic>?)
@@ -35,6 +36,7 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
 
 Map<String, dynamic> _$$_QuizzesToJson(_$_Quizzes instance) =>
     <String, dynamic>{
+      'isLoading': instance.isLoading,
       'selectQuizId': instance.selectQuizId,
       'quizIndex': instance.quizIndex,
       'quizList': instance.quizList,

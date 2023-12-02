@@ -42,11 +42,11 @@ class _SearchBar extends ConsumerWidget {
 class _QuizResultView extends ConsumerWidget {
   const _QuizResultView(
       {required this.filteredQuizItemList,
-      required this.isLoading,
+      required this.isScrollLoading,
       required this.maxItemsToDisplay});
 
   final List<QuizItem> filteredQuizItemList;
-  final bool isLoading;
+  final bool isScrollLoading;
   final int maxItemsToDisplay;
 
   @override
@@ -87,7 +87,7 @@ class _QuizResultView extends ConsumerWidget {
             ),
           );
         },
-        childCount: isLoading
+        childCount: isScrollLoading
             ? maxItemsToDisplay + 1
             : min(maxItemsToDisplay + 1, filteredQuizItemList.length),
       ),

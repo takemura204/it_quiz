@@ -26,29 +26,24 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   final Ref ref;
   final now = DateTime.now();
 
-  bool _isSameDay(DateTime? date1, DateTime date2) {
-    if (date1 == null) {
-      return false;
-    }
-    return date1.year == date2.year &&
-        date1.month == date2.month &&
-        date1.day == date2.day;
-  }
-
   @override
   Future initState() async {
     // _resetData();
-    await _loadQuizData(); // データを読み込む
+    await _loadQuizData();
     super.initState();
   }
 
   ///読み込み
   Future _loadQuizData() async {
-    await _getQuizListData();
-    await _getWeakQuiz();
-    await _getTestQuiz();
-    await _getHistoryQuiz();
+    await _getQuizListData(); // このメソッドが完了するのを待つ
+    await Future.wait([
+      _getWeakQuiz(),
+      _getTestQuiz(),
+      _getHistoryQuiz(),
+    ]);
     _saveDevice();
+    setIsLoading(true);
+    setIsLoading(false);
   }
 
   /// 全クイズ取得
@@ -111,7 +106,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     }
     //初回起動時
     else {
-      print('a');
       state = state.copyWith(weakQuiz: initWeakQuiz);
     }
   }
@@ -423,6 +417,10 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     await prefs.setStringList('history_list', historyListData);
     await prefs.setString('weak_quiz', weakData);
     await prefs.setString('test_quiz', testData);
+  }
+
+  void setIsLoading(bool value) {
+    state = state.copyWith(isLoading: value);
   }
 
   /// 現在のstateをリセット

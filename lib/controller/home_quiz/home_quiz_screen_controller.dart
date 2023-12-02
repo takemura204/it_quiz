@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
@@ -13,23 +12,29 @@ import 'home_quiz_screen_state.dart';
 final homeQuizScreenProvider =
     StateNotifierProvider<HomeQuizScreenController, HomeQuizScreenState>(
   (ref) => HomeQuizScreenController(ref: ref),
+  dependencies: [quizModelProvider],
 );
 
-class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
-    with LocatorMixin {
+class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   HomeQuizScreenController({required this.ref})
       : super(const HomeQuizScreenState()) {
-    initState();
+    _initState();
   }
 
   final Ref ref;
   TabController? _tabController;
 
-  @override
-  Future initState() async {
-    super.initState();
-    await loadQuizList();
-    await loadCategoryList();
+  Future _initState() async {
+    setIsLoading(true);
+    ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
+      if (quizzes.isLoading) {
+        await Future.wait([
+          loadQuizList(),
+          loadCategoryList(),
+        ]);
+      }
+      setIsLoading(false);
+    });
   }
 
   @override
@@ -42,7 +47,6 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
   Future loadCategoryList() async {
     // quizListを取得
     final List<Quiz> quizList = [...ref.read(quizModelProvider).quizList];
-
     // quizListをcategoryIdに基づいてインプレースでソート
     quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
 
@@ -109,16 +113,18 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState>
       state = state.copyWith(
           selectedTestCategory: selectedTestCategory..add(category));
     }
-    print(state.selectedTestCategory);
   }
 
   ///問題数指定
   void selectWeakLength(int length) {
     state = state.copyWith(selectedWeakLength: length);
-    print(state.selectedWeakLength);
   }
 
   void selectTestLength(int length) {
     state = state.copyWith(selectedTestLength: length);
+  }
+
+  void setIsLoading(bool value) {
+    state = state.copyWith(isLoading: value);
   }
 }

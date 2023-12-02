@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeQuizScreenState {
+  bool get isLoading => throw _privateConstructorUsedError;
   List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
   List<String> get categoryList => throw _privateConstructorUsedError;
   List<String> get selectedTestCategory => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       _$HomeQuizScreenStateCopyWithImpl<$Res, HomeQuizScreenState>;
   @useResult
   $Res call(
-      {List<Quiz> filterQuizList,
+      {bool isLoading,
+      List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> selectedTestCategory,
       String selectCategory,
@@ -68,6 +70,7 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
     Object? selectedTestCategory = null,
@@ -81,6 +84,10 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? selectWeakQuiz = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       filterQuizList: null == filterQuizList
           ? _value.filterQuizList
           : filterQuizList // ignore: cast_nullable_to_non_nullable
@@ -142,14 +149,16 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
 }
 
 /// @nodoc
-abstract class _$$_CreateCopyWith<$Res>
+abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
     implements $HomeQuizScreenStateCopyWith<$Res> {
-  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
-      __$$_CreateCopyWithImpl<$Res>;
+  factory _$$_HomeQuizScreenStateCopyWith(_$_HomeQuizScreenState value,
+          $Res Function(_$_HomeQuizScreenState) then) =
+      __$$_HomeQuizScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {List<Quiz> filterQuizList,
+      {bool isLoading,
+      List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> selectedTestCategory,
       String selectCategory,
@@ -166,15 +175,17 @@ abstract class _$$_CreateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateCopyWithImpl<$Res>
-    extends _$HomeQuizScreenStateCopyWithImpl<$Res, _$_Create>
-    implements _$$_CreateCopyWith<$Res> {
-  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
+    extends _$HomeQuizScreenStateCopyWithImpl<$Res, _$_HomeQuizScreenState>
+    implements _$$_HomeQuizScreenStateCopyWith<$Res> {
+  __$$_HomeQuizScreenStateCopyWithImpl(_$_HomeQuizScreenState _value,
+      $Res Function(_$_HomeQuizScreenState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
     Object? selectedTestCategory = null,
@@ -187,7 +198,11 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? selectedWeakLength = null,
     Object? selectWeakQuiz = freezed,
   }) {
-    return _then(_$_Create(
+    return _then(_$_HomeQuizScreenState(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       filterQuizList: null == filterQuizList
           ? _value._filterQuizList
           : filterQuizList // ignore: cast_nullable_to_non_nullable
@@ -238,9 +253,10 @@ class __$$_CreateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Create implements _Create {
-  const _$_Create(
-      {final List<Quiz> filterQuizList = const [],
+class _$_HomeQuizScreenState implements _HomeQuizScreenState {
+  const _$_HomeQuizScreenState(
+      {this.isLoading = false,
+      final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
       final List<String> selectedTestCategory = const [],
       this.selectCategory = "",
@@ -256,6 +272,9 @@ class _$_Create implements _Create {
         _selectedTestCategory = selectedTestCategory,
         _selectedFilterGroup = selectedFilterGroup;
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   final List<Quiz> _filterQuizList;
   @override
   @JsonKey()
@@ -319,14 +338,16 @@ class _$_Create implements _Create {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(filterQuizList: $filterQuizList, categoryList: $categoryList, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Create &&
+            other is _$_HomeQuizScreenState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality()
                 .equals(other._filterQuizList, _filterQuizList) &&
             const DeepCollectionEquality()
@@ -354,6 +375,7 @@ class _$_Create implements _Create {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isLoading,
       const DeepCollectionEquality().hash(_filterQuizList),
       const DeepCollectionEquality().hash(_categoryList),
       const DeepCollectionEquality().hash(_selectedTestCategory),
@@ -369,13 +391,15 @@ class _$_Create implements _Create {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
-      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
+  _$$_HomeQuizScreenStateCopyWith<_$_HomeQuizScreenState> get copyWith =>
+      __$$_HomeQuizScreenStateCopyWithImpl<_$_HomeQuizScreenState>(
+          this, _$identity);
 }
 
-abstract class _Create implements HomeQuizScreenState {
-  const factory _Create(
-      {final List<Quiz> filterQuizList,
+abstract class _HomeQuizScreenState implements HomeQuizScreenState {
+  const factory _HomeQuizScreenState(
+      {final bool isLoading,
+      final List<Quiz> filterQuizList,
       final List<String> categoryList,
       final List<String> selectedTestCategory,
       final String selectCategory,
@@ -385,8 +409,10 @@ abstract class _Create implements HomeQuizScreenState {
       final List<String> selectedFilterGroup,
       final int selectedTestLength,
       final int selectedWeakLength,
-      final Quiz? selectWeakQuiz}) = _$_Create;
+      final Quiz? selectWeakQuiz}) = _$_HomeQuizScreenState;
 
+  @override
+  bool get isLoading;
   @override
   List<Quiz> get filterQuizList;
   @override
@@ -411,6 +437,6 @@ abstract class _Create implements HomeQuizScreenState {
   Quiz? get selectWeakQuiz;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
+  _$$_HomeQuizScreenStateCopyWith<_$_HomeQuizScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -10,6 +10,7 @@ part 'quizzes.g.dart';
 @freezed
 class Quizzes with _$Quizzes {
   factory Quizzes({
+    @Default(false) bool isLoading,
     @Default(0) final int selectQuizId, //選択したクイズID
     @Default(0) final int quizIndex, //選択したクイズインデックス
     @Default([]) final List<Quiz> quizList, //クイズ一覧

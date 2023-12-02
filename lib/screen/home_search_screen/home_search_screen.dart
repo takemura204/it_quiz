@@ -21,29 +21,21 @@ class HomeSearchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ProviderScope(
-      overrides: [
-        homeSearchScreenProvider.overrideWith(
-          (ref) => HomeSearchScreenController(ref: ref),
-        ),
-      ],
-      child: const _Scaffold(),
-    );
-  }
-}
-
-class _Scaffold extends ConsumerWidget {
-  const _Scaffold();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeSearchScreenProvider);
     final controller = ref.watch(homeSearchScreenProvider.notifier);
+    if (state.isLoading) {
+      return Center(
+        child: SpinKitFadingCircle(
+          color: context.mainColor,
+          size: context.height * 0.1,
+        ),
+      );
+    }
     final isSavedFilter = state.isSavedFilter;
     final isNotTextEmpty = state.isNotTextEmpty;
     final filteredQuizItemList = state.filteredQuizItemList;
     final maxItemsToDisplay = state.maxItemsToDisplay;
-    final isLoading = state.isLoading;
+    final isScrollLoading = state.isScrollLoading;
     final textEditingController = controller.textEditingController;
     final scrollController = controller.scrollController;
 
@@ -60,7 +52,7 @@ class _Scaffold extends ConsumerWidget {
           ),
           _QuizResultView(
             filteredQuizItemList: filteredQuizItemList,
-            isLoading: isLoading,
+            isScrollLoading: isScrollLoading,
             maxItemsToDisplay: maxItemsToDisplay,
           ),
         ],

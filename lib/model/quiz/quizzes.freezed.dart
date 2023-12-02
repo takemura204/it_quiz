@@ -20,6 +20,7 @@ Quizzes _$QuizzesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Quizzes {
+  bool get isLoading => throw _privateConstructorUsedError;
   int get selectQuizId => throw _privateConstructorUsedError; //選択したクイズID
   int get quizIndex => throw _privateConstructorUsedError; //選択したクイズインデックス
   List<Quiz> get quizList => throw _privateConstructorUsedError; //クイズ一覧
@@ -42,7 +43,8 @@ abstract class $QuizzesCopyWith<$Res> {
       _$QuizzesCopyWithImpl<$Res, Quizzes>;
   @useResult
   $Res call(
-      {int selectQuizId,
+      {bool isLoading,
+      int selectQuizId,
       int quizIndex,
       List<Quiz> quizList,
       List<Quiz> historyQuizList,
@@ -69,6 +71,7 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? selectQuizId = null,
     Object? quizIndex = null,
     Object? quizList = null,
@@ -80,6 +83,10 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
     Object? studyType = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectQuizId: null == selectQuizId
           ? _value.selectQuizId
           : selectQuizId // ignore: cast_nullable_to_non_nullable
@@ -152,7 +159,8 @@ abstract class _$$_QuizzesCopyWith<$Res> implements $QuizzesCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int selectQuizId,
+      {bool isLoading,
+      int selectQuizId,
       int quizIndex,
       List<Quiz> quizList,
       List<Quiz> historyQuizList,
@@ -178,6 +186,7 @@ class __$$_QuizzesCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? selectQuizId = null,
     Object? quizIndex = null,
     Object? quizList = null,
@@ -189,6 +198,10 @@ class __$$_QuizzesCopyWithImpl<$Res>
     Object? studyType = null,
   }) {
     return _then(_$_Quizzes(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectQuizId: null == selectQuizId
           ? _value.selectQuizId
           : selectQuizId // ignore: cast_nullable_to_non_nullable
@@ -233,7 +246,8 @@ class __$$_QuizzesCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Quizzes extends _Quizzes {
   _$_Quizzes(
-      {this.selectQuizId = 0,
+      {this.isLoading = false,
+      this.selectQuizId = 0,
       this.quizIndex = 0,
       final List<Quiz> quizList = const [],
       final List<Quiz> historyQuizList = const [],
@@ -250,6 +264,9 @@ class _$_Quizzes extends _Quizzes {
   factory _$_Quizzes.fromJson(Map<String, dynamic> json) =>
       _$$_QuizzesFromJson(json);
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   @JsonKey()
   final int selectQuizId;
@@ -306,7 +323,7 @@ class _$_Quizzes extends _Quizzes {
 
   @override
   String toString() {
-    return 'Quizzes(selectQuizId: $selectQuizId, quizIndex: $quizIndex, quizList: $quizList, historyQuizList: $historyQuizList, quizItemList: $quizItemList, weakQuiz: $weakQuiz, testQuiz: $testQuiz, quizType: $quizType, studyType: $studyType)';
+    return 'Quizzes(isLoading: $isLoading, selectQuizId: $selectQuizId, quizIndex: $quizIndex, quizList: $quizList, historyQuizList: $historyQuizList, quizItemList: $quizItemList, weakQuiz: $weakQuiz, testQuiz: $testQuiz, quizType: $quizType, studyType: $studyType)';
   }
 
   @override
@@ -314,6 +331,8 @@ class _$_Quizzes extends _Quizzes {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Quizzes &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.selectQuizId, selectQuizId) ||
                 other.selectQuizId == selectQuizId) &&
             (identical(other.quizIndex, quizIndex) ||
@@ -337,6 +356,7 @@ class _$_Quizzes extends _Quizzes {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isLoading,
       selectQuizId,
       quizIndex,
       const DeepCollectionEquality().hash(_quizList),
@@ -363,7 +383,8 @@ class _$_Quizzes extends _Quizzes {
 
 abstract class _Quizzes extends Quizzes {
   factory _Quizzes(
-      {final int selectQuizId,
+      {final bool isLoading,
+      final int selectQuizId,
       final int quizIndex,
       final List<Quiz> quizList,
       final List<Quiz> historyQuizList,
@@ -376,6 +397,8 @@ abstract class _Quizzes extends Quizzes {
 
   factory _Quizzes.fromJson(Map<String, dynamic> json) = _$_Quizzes.fromJson;
 
+  @override
+  bool get isLoading;
   @override
   int get selectQuizId;
   @override //選択したクイズID
