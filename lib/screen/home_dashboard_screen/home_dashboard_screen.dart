@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
+import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -20,9 +21,9 @@ class HomeDashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
-        // dashboardModelProvider.overrideWith(
-        //   (ref) => DashboardModel(ref),
-        // ),
+        homeDashboardScreenProvider.overrideWith(
+          (ref) => HomeDashboardScreenController(ref: ref),
+        ),
       ],
       child: const Scaffold(
         appBar: _AppBar(),
@@ -37,8 +38,8 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeDashboardScreenProvider);
-    if (state.isLoading) {
+    final model = ref.watch(dashboardModelProvider);
+    if (model.isLoading) {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
@@ -46,7 +47,7 @@ class _Body extends ConsumerWidget {
         ),
       );
     }
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
         children: [
           Gap(5),

@@ -4,7 +4,7 @@ class QuizChart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeDashboardScreenProvider);
-    final unit = state.unit;
+    final unitY = state.unitY;
     final valueX = state.valueX;
     final valueY = state.valueY;
     final maxValue = valueY * 2; //最大表示メモリ
@@ -59,7 +59,7 @@ class QuizChart extends ConsumerWidget {
                       ? context.width * 0.021
                       : context.width * 0.025;
                   return Text(
-                    "${value.toInt()}$unit",
+                    "${value.toInt()}$unitY",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: color,

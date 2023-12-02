@@ -37,7 +37,7 @@ class PeriodDashboard extends ConsumerWidget {
           child: Column(
             children: [
               const _Title(
-                title: "アクティビティ",
+                title: "学習状況",
                 subWidget: _SelectPeriodTab(),
                 icon: Icons.bar_chart_outlined,
               ),
@@ -114,8 +114,8 @@ class _TotalData extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(dashboardModelProvider);
-    final periodQuizTotal = model.periodQuizTotal;
-    final periodDurationTotal = model.periodDurationTotal;
+    final periodQuizCount = model.periodQuizCount;
+    final periodDuration = model.periodDuration;
     final state = ref.watch(homeDashboardScreenProvider);
     final selectedChartType = state.selectedChartType;
 
@@ -128,7 +128,7 @@ class _TotalData extends ConsumerWidget {
         children: [
           _StatusCard(
             text: "問題数",
-            value: periodQuizTotal,
+            value: periodQuizCount,
             icon: LineIcons.book,
             unit: "問",
             isSeleted: selectedChartType == ChartType.quizCount,
@@ -140,7 +140,7 @@ class _TotalData extends ConsumerWidget {
           ),
           _StatusCard(
             text: "学習時間",
-            value: periodDurationTotal,
+            value: periodDuration.inMinutes,
             icon: LineIcons.clock,
             unit: "分",
             isSeleted: selectedChartType == ChartType.duration,
@@ -281,10 +281,10 @@ class _SelectPeriod extends ConsumerWidget {
             iconSize: context.width * 0.06,
             onPressed: () {
               if (selectedPeriodType == PeriodType.weekly && weekOffset > -2) {
-                ref.read(dashboardModelProvider.notifier).updateWeeklyData(-1);
+                ref.read(dashboardModelProvider.notifier).updatePeriodData(-1);
               } else if (selectedPeriodType == PeriodType.monthly &&
                   monthOffset > -2) {
-                ref.read(dashboardModelProvider.notifier).updateWeeklyData(-1);
+                ref.read(dashboardModelProvider.notifier).updatePeriodData(-1);
               }
             },
             icon: Icon(
@@ -313,10 +313,10 @@ class _SelectPeriod extends ConsumerWidget {
             iconSize: context.width * 0.06,
             onPressed: () {
               if (selectedPeriodType == PeriodType.weekly && weekOffset < 0) {
-                ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
+                ref.read(dashboardModelProvider.notifier).updatePeriodData(1);
               } else if (selectedPeriodType == PeriodType.monthly &&
                   monthOffset < 0) {
-                ref.read(dashboardModelProvider.notifier).updateWeeklyData(1);
+                ref.read(dashboardModelProvider.notifier).updatePeriodData(1);
               }
             },
             icon: Icon(

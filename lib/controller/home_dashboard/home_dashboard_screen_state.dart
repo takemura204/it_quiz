@@ -8,14 +8,15 @@ class HomeDashboardScreenState with _$HomeDashboardScreenState {
 
   factory HomeDashboardScreenState({
     @Default(false) bool isLoading,
-    @Default(-1) final int selectedXIndex,
+    @Default(0) final int tabIndex,
     @Default(PeriodType.weekly) final PeriodType selectedPeriodType,
     @Default(ChartType.quizCount) final ChartType selectedChartType,
+    @Default(0) final int weekOffset, //週の期間選択
+    @Default(0) final int monthOffset, //月の期間選択
     @Default([]) final List<int> valueX,
     @Default(0) final int valueY,
     @Default([]) final List<DateTime> days,
-    @Default("") final String unit,
-    @Default(0) final int tabIndex,
+    @Default("") final String unitY,
   }) = _Create;
 }
 

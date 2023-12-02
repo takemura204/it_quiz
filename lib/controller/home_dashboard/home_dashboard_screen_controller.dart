@@ -1,60 +1,62 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
 import '../../model/user/user.model.dart';
 import 'home_dashboard_screen_state.dart';
 
-final homeDashboardScreenProvider = StateNotifierProvider<
+final homeDashboardScreenProvider = StateNotifierProvider.autoDispose<
     HomeDashboardScreenController, HomeDashboardScreenState>(
   (ref) => HomeDashboardScreenController(ref: ref),
 );
 
 class HomeDashboardScreenController
-    extends StateNotifier<HomeDashboardScreenState> with LocatorMixin {
+    extends StateNotifier<HomeDashboardScreenState> {
   HomeDashboardScreenController({required this.ref})
       : super(HomeDashboardScreenState()) {
-    initState();
+    _initState();
   }
 
   final Ref ref;
 
-  @override
-  void initState() {}
+  Future _initState() async {
+    state = state.copyWith(isLoading: true);
+    setChartData();
+    state = state.copyWith(isLoading: false);
+  }
 
-  void setData() {
+  void setChartData() {
     final selectedChartType = state.selectedChartType;
     final userModel = ref.read(userModelProvider).userCustom;
     final model = ref.read(dashboardModelProvider);
     switch (selectedChartType) {
       case ChartType.quizCount:
-        final periodQuizCounts = model.periodQuizCounts;
+        final periodQuizCounts = model.periodQuizCountList;
         final periodDays = model.periodDays;
         final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
 
         state = state.copyWith(
-            unit: "問",
+            unitY: "問",
             valueX: periodQuizCounts,
             valueY: dailyQuizCountGoal,
             days: periodDays);
         break;
       case ChartType.duration:
-        final periodDuration = model.periodDuration;
+        final periodDuration = model.periodDurationList;
         final periodDays = model.periodDays;
         final dailyDurationGoal = userModel.dailyDurationGoal;
         state = state.copyWith(
-          unit: "分",
+          unitY: "分",
           valueX: periodDuration,
           valueY: dailyDurationGoal,
           days: periodDays,
         );
         break;
       default:
-        final periodQuizCounts = model.periodQuizCounts;
+        final periodQuizCounts = model.periodQuizCountList;
         final periodDays = model.periodDays;
         final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
         state = state.copyWith(
-            unit: "問",
+            unitY: "問",
             valueX: periodQuizCounts,
             valueY: dailyQuizCountGoal,
             days: periodDays);
@@ -63,7 +65,7 @@ class HomeDashboardScreenController
 
   void setSelectedChartType(ChartType type) {
     state = state.copyWith(selectedChartType: type);
-    setData();
+    setChartData();
   }
 
   void setSelectedPeriodType(int tabIndex) {
@@ -78,6 +80,6 @@ class HomeDashboardScreenController
           selectedPeriodType: PeriodType.weekly, tabIndex: tabIndex);
     }
     ref.read(dashboardModelProvider.notifier).loadWeeklyAndMontylyData();
-    setData();
+    setChartData();
   }
 }

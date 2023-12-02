@@ -20,6 +20,8 @@ Dashboard _$DashboardFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Dashboard {
+  bool get isLoading => throw _privateConstructorUsedError;
+
   ///Total
   List<Quiz> get totalQuizList => throw _privateConstructorUsedError;
   Duration get allDuration => throw _privateConstructorUsedError;
@@ -32,20 +34,30 @@ mixin _$Dashboard {
   int get dailyQuizCount => throw _privateConstructorUsedError;
   int get dailyQuizCorrectCount => throw _privateConstructorUsedError;
 
-  ///Weekly・Monthly
-  List<Quiz> get periodQuizList =>
-      throw _privateConstructorUsedError; //今週/今月のクイズ一覧
+  ///Weekly
+  Duration get weeklyDuration => throw _privateConstructorUsedError;
+  int get weeklyQuizCount => throw _privateConstructorUsedError;
+  int get weeklyQuizCorrectCount => throw _privateConstructorUsedError;
+
+  ///Monthly
+  Duration get monthlyDuration => throw _privateConstructorUsedError;
+  int get monthlyQuizCount => throw _privateConstructorUsedError;
+  int get monthlyQuizCorrectCount => throw _privateConstructorUsedError;
+
+  ///Piriod
+  List<Quiz> get periodQuizList => throw _privateConstructorUsedError;
+  List<int> get periodDurationList => throw _privateConstructorUsedError;
+  List<int> get periodQuizCountList => throw _privateConstructorUsedError;
+  List<DateTime> get periodDays => throw _privateConstructorUsedError;
+  Duration get periodDuration => throw _privateConstructorUsedError;
+  int get periodQuizCount => throw _privateConstructorUsedError;
+  int get periodQuizCorrectCount => throw _privateConstructorUsedError;
+
+  ///期間
   DateTime? get startPeriodRange =>
       throw _privateConstructorUsedError; // 今週の月曜日の日付
   DateTime? get endPeriodRange =>
       throw _privateConstructorUsedError; // 今週の日曜日の日付
-  List<DateTime> get periodDays =>
-      throw _privateConstructorUsedError; //今週の「月/日」一覧
-  List<int> get periodQuizCounts =>
-      throw _privateConstructorUsedError; //今週の問題数一覧
-  int get periodQuizTotal => throw _privateConstructorUsedError; //今週のデータ一覧
-  List<int> get periodDuration => throw _privateConstructorUsedError; //今週の学習時間
-  int get periodDurationTotal => throw _privateConstructorUsedError; //今週のデータ一覧
   int get weekOffset => throw _privateConstructorUsedError; //週の期間選択
   int get monthOffset => throw _privateConstructorUsedError;
 
@@ -61,7 +73,8 @@ abstract class $DashboardCopyWith<$Res> {
       _$DashboardCopyWithImpl<$Res, Dashboard>;
   @useResult
   $Res call(
-      {List<Quiz> totalQuizList,
+      {bool isLoading,
+      List<Quiz> totalQuizList,
       Duration allDuration,
       int allQuizCount,
       int allQuizCorrectCount,
@@ -69,14 +82,21 @@ abstract class $DashboardCopyWith<$Res> {
       Duration dailyDuration,
       int dailyQuizCount,
       int dailyQuizCorrectCount,
+      Duration weeklyDuration,
+      int weeklyQuizCount,
+      int weeklyQuizCorrectCount,
+      Duration monthlyDuration,
+      int monthlyQuizCount,
+      int monthlyQuizCorrectCount,
       List<Quiz> periodQuizList,
+      List<int> periodDurationList,
+      List<int> periodQuizCountList,
+      List<DateTime> periodDays,
+      Duration periodDuration,
+      int periodQuizCount,
+      int periodQuizCorrectCount,
       DateTime? startPeriodRange,
       DateTime? endPeriodRange,
-      List<DateTime> periodDays,
-      List<int> periodQuizCounts,
-      int periodQuizTotal,
-      List<int> periodDuration,
-      int periodDurationTotal,
       int weekOffset,
       int monthOffset});
 }
@@ -94,6 +114,7 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? totalQuizList = null,
     Object? allDuration = null,
     Object? allQuizCount = null,
@@ -102,18 +123,29 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
     Object? dailyDuration = null,
     Object? dailyQuizCount = null,
     Object? dailyQuizCorrectCount = null,
+    Object? weeklyDuration = null,
+    Object? weeklyQuizCount = null,
+    Object? weeklyQuizCorrectCount = null,
+    Object? monthlyDuration = null,
+    Object? monthlyQuizCount = null,
+    Object? monthlyQuizCorrectCount = null,
     Object? periodQuizList = null,
+    Object? periodDurationList = null,
+    Object? periodQuizCountList = null,
+    Object? periodDays = null,
+    Object? periodDuration = null,
+    Object? periodQuizCount = null,
+    Object? periodQuizCorrectCount = null,
     Object? startPeriodRange = freezed,
     Object? endPeriodRange = freezed,
-    Object? periodDays = null,
-    Object? periodQuizCounts = null,
-    Object? periodQuizTotal = null,
-    Object? periodDuration = null,
-    Object? periodDurationTotal = null,
     Object? weekOffset = null,
     Object? monthOffset = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       totalQuizList: null == totalQuizList
           ? _value.totalQuizList
           : totalQuizList // ignore: cast_nullable_to_non_nullable
@@ -146,10 +178,58 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
           ? _value.dailyQuizCorrectCount
           : dailyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
               as int,
+      weeklyDuration: null == weeklyDuration
+          ? _value.weeklyDuration
+          : weeklyDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      weeklyQuizCount: null == weeklyQuizCount
+          ? _value.weeklyQuizCount
+          : weeklyQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      weeklyQuizCorrectCount: null == weeklyQuizCorrectCount
+          ? _value.weeklyQuizCorrectCount
+          : weeklyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthlyDuration: null == monthlyDuration
+          ? _value.monthlyDuration
+          : monthlyDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      monthlyQuizCount: null == monthlyQuizCount
+          ? _value.monthlyQuizCount
+          : monthlyQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthlyQuizCorrectCount: null == monthlyQuizCorrectCount
+          ? _value.monthlyQuizCorrectCount
+          : monthlyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
       periodQuizList: null == periodQuizList
           ? _value.periodQuizList
           : periodQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
+      periodDurationList: null == periodDurationList
+          ? _value.periodDurationList
+          : periodDurationList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodQuizCountList: null == periodQuizCountList
+          ? _value.periodQuizCountList
+          : periodQuizCountList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodDays: null == periodDays
+          ? _value.periodDays
+          : periodDays // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      periodDuration: null == periodDuration
+          ? _value.periodDuration
+          : periodDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      periodQuizCount: null == periodQuizCount
+          ? _value.periodQuizCount
+          : periodQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      periodQuizCorrectCount: null == periodQuizCorrectCount
+          ? _value.periodQuizCorrectCount
+          : periodQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
       startPeriodRange: freezed == startPeriodRange
           ? _value.startPeriodRange
           : startPeriodRange // ignore: cast_nullable_to_non_nullable
@@ -158,26 +238,6 @@ class _$DashboardCopyWithImpl<$Res, $Val extends Dashboard>
           ? _value.endPeriodRange
           : endPeriodRange // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      periodDays: null == periodDays
-          ? _value.periodDays
-          : periodDays // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
-      periodQuizCounts: null == periodQuizCounts
-          ? _value.periodQuizCounts
-          : periodQuizCounts // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      periodQuizTotal: null == periodQuizTotal
-          ? _value.periodQuizTotal
-          : periodQuizTotal // ignore: cast_nullable_to_non_nullable
-              as int,
-      periodDuration: null == periodDuration
-          ? _value.periodDuration
-          : periodDuration // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      periodDurationTotal: null == periodDurationTotal
-          ? _value.periodDurationTotal
-          : periodDurationTotal // ignore: cast_nullable_to_non_nullable
-              as int,
       weekOffset: null == weekOffset
           ? _value.weekOffset
           : weekOffset // ignore: cast_nullable_to_non_nullable
@@ -198,7 +258,8 @@ abstract class _$$_DashboardCopyWith<$Res> implements $DashboardCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<Quiz> totalQuizList,
+      {bool isLoading,
+      List<Quiz> totalQuizList,
       Duration allDuration,
       int allQuizCount,
       int allQuizCorrectCount,
@@ -206,14 +267,21 @@ abstract class _$$_DashboardCopyWith<$Res> implements $DashboardCopyWith<$Res> {
       Duration dailyDuration,
       int dailyQuizCount,
       int dailyQuizCorrectCount,
+      Duration weeklyDuration,
+      int weeklyQuizCount,
+      int weeklyQuizCorrectCount,
+      Duration monthlyDuration,
+      int monthlyQuizCount,
+      int monthlyQuizCorrectCount,
       List<Quiz> periodQuizList,
+      List<int> periodDurationList,
+      List<int> periodQuizCountList,
+      List<DateTime> periodDays,
+      Duration periodDuration,
+      int periodQuizCount,
+      int periodQuizCorrectCount,
       DateTime? startPeriodRange,
       DateTime? endPeriodRange,
-      List<DateTime> periodDays,
-      List<int> periodQuizCounts,
-      int periodQuizTotal,
-      List<int> periodDuration,
-      int periodDurationTotal,
       int weekOffset,
       int monthOffset});
 }
@@ -229,6 +297,7 @@ class __$$_DashboardCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? totalQuizList = null,
     Object? allDuration = null,
     Object? allQuizCount = null,
@@ -237,18 +306,29 @@ class __$$_DashboardCopyWithImpl<$Res>
     Object? dailyDuration = null,
     Object? dailyQuizCount = null,
     Object? dailyQuizCorrectCount = null,
+    Object? weeklyDuration = null,
+    Object? weeklyQuizCount = null,
+    Object? weeklyQuizCorrectCount = null,
+    Object? monthlyDuration = null,
+    Object? monthlyQuizCount = null,
+    Object? monthlyQuizCorrectCount = null,
     Object? periodQuizList = null,
+    Object? periodDurationList = null,
+    Object? periodQuizCountList = null,
+    Object? periodDays = null,
+    Object? periodDuration = null,
+    Object? periodQuizCount = null,
+    Object? periodQuizCorrectCount = null,
     Object? startPeriodRange = freezed,
     Object? endPeriodRange = freezed,
-    Object? periodDays = null,
-    Object? periodQuizCounts = null,
-    Object? periodQuizTotal = null,
-    Object? periodDuration = null,
-    Object? periodDurationTotal = null,
     Object? weekOffset = null,
     Object? monthOffset = null,
   }) {
     return _then(_$_Dashboard(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       totalQuizList: null == totalQuizList
           ? _value._totalQuizList
           : totalQuizList // ignore: cast_nullable_to_non_nullable
@@ -281,10 +361,58 @@ class __$$_DashboardCopyWithImpl<$Res>
           ? _value.dailyQuizCorrectCount
           : dailyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
               as int,
+      weeklyDuration: null == weeklyDuration
+          ? _value.weeklyDuration
+          : weeklyDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      weeklyQuizCount: null == weeklyQuizCount
+          ? _value.weeklyQuizCount
+          : weeklyQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      weeklyQuizCorrectCount: null == weeklyQuizCorrectCount
+          ? _value.weeklyQuizCorrectCount
+          : weeklyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthlyDuration: null == monthlyDuration
+          ? _value.monthlyDuration
+          : monthlyDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      monthlyQuizCount: null == monthlyQuizCount
+          ? _value.monthlyQuizCount
+          : monthlyQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthlyQuizCorrectCount: null == monthlyQuizCorrectCount
+          ? _value.monthlyQuizCorrectCount
+          : monthlyQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
       periodQuizList: null == periodQuizList
           ? _value._periodQuizList
           : periodQuizList // ignore: cast_nullable_to_non_nullable
               as List<Quiz>,
+      periodDurationList: null == periodDurationList
+          ? _value._periodDurationList
+          : periodDurationList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodQuizCountList: null == periodQuizCountList
+          ? _value._periodQuizCountList
+          : periodQuizCountList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodDays: null == periodDays
+          ? _value._periodDays
+          : periodDays // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      periodDuration: null == periodDuration
+          ? _value.periodDuration
+          : periodDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      periodQuizCount: null == periodQuizCount
+          ? _value.periodQuizCount
+          : periodQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      periodQuizCorrectCount: null == periodQuizCorrectCount
+          ? _value.periodQuizCorrectCount
+          : periodQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
       startPeriodRange: freezed == startPeriodRange
           ? _value.startPeriodRange
           : startPeriodRange // ignore: cast_nullable_to_non_nullable
@@ -293,26 +421,6 @@ class __$$_DashboardCopyWithImpl<$Res>
           ? _value.endPeriodRange
           : endPeriodRange // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      periodDays: null == periodDays
-          ? _value._periodDays
-          : periodDays // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
-      periodQuizCounts: null == periodQuizCounts
-          ? _value._periodQuizCounts
-          : periodQuizCounts // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      periodQuizTotal: null == periodQuizTotal
-          ? _value.periodQuizTotal
-          : periodQuizTotal // ignore: cast_nullable_to_non_nullable
-              as int,
-      periodDuration: null == periodDuration
-          ? _value._periodDuration
-          : periodDuration // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      periodDurationTotal: null == periodDurationTotal
-          ? _value.periodDurationTotal
-          : periodDurationTotal // ignore: cast_nullable_to_non_nullable
-              as int,
       weekOffset: null == weekOffset
           ? _value.weekOffset
           : weekOffset // ignore: cast_nullable_to_non_nullable
@@ -329,7 +437,8 @@ class __$$_DashboardCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Dashboard extends _Dashboard {
   _$_Dashboard(
-      {final List<Quiz> totalQuizList = const [],
+      {this.isLoading = false,
+      final List<Quiz> totalQuizList = const [],
       this.allDuration = Duration.zero,
       this.allQuizCount = 0,
       this.allQuizCorrectCount = 0,
@@ -337,25 +446,36 @@ class _$_Dashboard extends _Dashboard {
       this.dailyDuration = Duration.zero,
       this.dailyQuizCount = 0,
       this.dailyQuizCorrectCount = 0,
+      this.weeklyDuration = Duration.zero,
+      this.weeklyQuizCount = 0,
+      this.weeklyQuizCorrectCount = 0,
+      this.monthlyDuration = Duration.zero,
+      this.monthlyQuizCount = 0,
+      this.monthlyQuizCorrectCount = 0,
       final List<Quiz> periodQuizList = const [],
+      final List<int> periodDurationList = const [],
+      final List<int> periodQuizCountList = const [],
+      final List<DateTime> periodDays = const [],
+      this.periodDuration = Duration.zero,
+      this.periodQuizCount = 0,
+      this.periodQuizCorrectCount = 0,
       this.startPeriodRange,
       this.endPeriodRange,
-      final List<DateTime> periodDays = const [],
-      final List<int> periodQuizCounts = const [],
-      this.periodQuizTotal = 0,
-      final List<int> periodDuration = const [],
-      this.periodDurationTotal = 0,
       this.weekOffset = 0,
       this.monthOffset = 0})
       : _totalQuizList = totalQuizList,
         _periodQuizList = periodQuizList,
+        _periodDurationList = periodDurationList,
+        _periodQuizCountList = periodQuizCountList,
         _periodDays = periodDays,
-        _periodQuizCounts = periodQuizCounts,
-        _periodDuration = periodDuration,
         super._();
 
   factory _$_Dashboard.fromJson(Map<String, dynamic> json) =>
       _$$_DashboardFromJson(json);
+
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   ///Total
   final List<Quiz> _totalQuizList;
@@ -393,10 +513,32 @@ class _$_Dashboard extends _Dashboard {
   @JsonKey()
   final int dailyQuizCorrectCount;
 
-  ///Weekly・Monthly
+  ///Weekly
+  @override
+  @JsonKey()
+  final Duration weeklyDuration;
+  @override
+  @JsonKey()
+  final int weeklyQuizCount;
+  @override
+  @JsonKey()
+  final int weeklyQuizCorrectCount;
+
+  ///Monthly
+  @override
+  @JsonKey()
+  final Duration monthlyDuration;
+  @override
+  @JsonKey()
+  final int monthlyQuizCount;
+  @override
+  @JsonKey()
+  final int monthlyQuizCorrectCount;
+
+  ///Piriod
   final List<Quiz> _periodQuizList;
 
-  ///Weekly・Monthly
+  ///Piriod
   @override
   @JsonKey()
   List<Quiz> get periodQuizList {
@@ -405,15 +547,27 @@ class _$_Dashboard extends _Dashboard {
     return EqualUnmodifiableListView(_periodQuizList);
   }
 
-//今週/今月のクイズ一覧
+  final List<int> _periodDurationList;
   @override
-  final DateTime? startPeriodRange;
-// 今週の月曜日の日付
+  @JsonKey()
+  List<int> get periodDurationList {
+    if (_periodDurationList is EqualUnmodifiableListView)
+      return _periodDurationList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_periodDurationList);
+  }
+
+  final List<int> _periodQuizCountList;
   @override
-  final DateTime? endPeriodRange;
-// 今週の日曜日の日付
+  @JsonKey()
+  List<int> get periodQuizCountList {
+    if (_periodQuizCountList is EqualUnmodifiableListView)
+      return _periodQuizCountList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_periodQuizCountList);
+  }
+
   final List<DateTime> _periodDays;
-// 今週の日曜日の日付
   @override
   @JsonKey()
   List<DateTime> get periodDays {
@@ -422,38 +576,23 @@ class _$_Dashboard extends _Dashboard {
     return EqualUnmodifiableListView(_periodDays);
   }
 
-//今週の「月/日」一覧
-  final List<int> _periodQuizCounts;
-//今週の「月/日」一覧
   @override
   @JsonKey()
-  List<int> get periodQuizCounts {
-    if (_periodQuizCounts is EqualUnmodifiableListView)
-      return _periodQuizCounts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_periodQuizCounts);
-  }
+  final Duration periodDuration;
+  @override
+  @JsonKey()
+  final int periodQuizCount;
+  @override
+  @JsonKey()
+  final int periodQuizCorrectCount;
 
-//今週の問題数一覧
+  ///期間
   @override
-  @JsonKey()
-  final int periodQuizTotal;
-//今週のデータ一覧
-  final List<int> _periodDuration;
-//今週のデータ一覧
+  final DateTime? startPeriodRange;
+// 今週の月曜日の日付
   @override
-  @JsonKey()
-  List<int> get periodDuration {
-    if (_periodDuration is EqualUnmodifiableListView) return _periodDuration;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_periodDuration);
-  }
-
-//今週の学習時間
-  @override
-  @JsonKey()
-  final int periodDurationTotal;
-//今週のデータ一覧
+  final DateTime? endPeriodRange;
+// 今週の日曜日の日付
   @override
   @JsonKey()
   final int weekOffset;
@@ -464,7 +603,7 @@ class _$_Dashboard extends _Dashboard {
 
   @override
   String toString() {
-    return 'Dashboard(totalQuizList: $totalQuizList, allDuration: $allDuration, allQuizCount: $allQuizCount, allQuizCorrectCount: $allQuizCorrectCount, runningDays: $runningDays, dailyDuration: $dailyDuration, dailyQuizCount: $dailyQuizCount, dailyQuizCorrectCount: $dailyQuizCorrectCount, periodQuizList: $periodQuizList, startPeriodRange: $startPeriodRange, endPeriodRange: $endPeriodRange, periodDays: $periodDays, periodQuizCounts: $periodQuizCounts, periodQuizTotal: $periodQuizTotal, periodDuration: $periodDuration, periodDurationTotal: $periodDurationTotal, weekOffset: $weekOffset, monthOffset: $monthOffset)';
+    return 'Dashboard(isLoading: $isLoading, totalQuizList: $totalQuizList, allDuration: $allDuration, allQuizCount: $allQuizCount, allQuizCorrectCount: $allQuizCorrectCount, runningDays: $runningDays, dailyDuration: $dailyDuration, dailyQuizCount: $dailyQuizCount, dailyQuizCorrectCount: $dailyQuizCorrectCount, weeklyDuration: $weeklyDuration, weeklyQuizCount: $weeklyQuizCount, weeklyQuizCorrectCount: $weeklyQuizCorrectCount, monthlyDuration: $monthlyDuration, monthlyQuizCount: $monthlyQuizCount, monthlyQuizCorrectCount: $monthlyQuizCorrectCount, periodQuizList: $periodQuizList, periodDurationList: $periodDurationList, periodQuizCountList: $periodQuizCountList, periodDays: $periodDays, periodDuration: $periodDuration, periodQuizCount: $periodQuizCount, periodQuizCorrectCount: $periodQuizCorrectCount, startPeriodRange: $startPeriodRange, endPeriodRange: $endPeriodRange, weekOffset: $weekOffset, monthOffset: $monthOffset)';
   }
 
   @override
@@ -472,6 +611,8 @@ class _$_Dashboard extends _Dashboard {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Dashboard &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality()
                 .equals(other._totalQuizList, _totalQuizList) &&
             (identical(other.allDuration, allDuration) ||
@@ -488,22 +629,37 @@ class _$_Dashboard extends _Dashboard {
                 other.dailyQuizCount == dailyQuizCount) &&
             (identical(other.dailyQuizCorrectCount, dailyQuizCorrectCount) ||
                 other.dailyQuizCorrectCount == dailyQuizCorrectCount) &&
+            (identical(other.weeklyDuration, weeklyDuration) ||
+                other.weeklyDuration == weeklyDuration) &&
+            (identical(other.weeklyQuizCount, weeklyQuizCount) ||
+                other.weeklyQuizCount == weeklyQuizCount) &&
+            (identical(other.weeklyQuizCorrectCount, weeklyQuizCorrectCount) ||
+                other.weeklyQuizCorrectCount == weeklyQuizCorrectCount) &&
+            (identical(other.monthlyDuration, monthlyDuration) ||
+                other.monthlyDuration == monthlyDuration) &&
+            (identical(other.monthlyQuizCount, monthlyQuizCount) ||
+                other.monthlyQuizCount == monthlyQuizCount) &&
+            (identical(
+                    other.monthlyQuizCorrectCount, monthlyQuizCorrectCount) ||
+                other.monthlyQuizCorrectCount == monthlyQuizCorrectCount) &&
             const DeepCollectionEquality()
                 .equals(other._periodQuizList, _periodQuizList) &&
+            const DeepCollectionEquality()
+                .equals(other._periodDurationList, _periodDurationList) &&
+            const DeepCollectionEquality()
+                .equals(other._periodQuizCountList, _periodQuizCountList) &&
+            const DeepCollectionEquality()
+                .equals(other._periodDays, _periodDays) &&
+            (identical(other.periodDuration, periodDuration) ||
+                other.periodDuration == periodDuration) &&
+            (identical(other.periodQuizCount, periodQuizCount) ||
+                other.periodQuizCount == periodQuizCount) &&
+            (identical(other.periodQuizCorrectCount, periodQuizCorrectCount) ||
+                other.periodQuizCorrectCount == periodQuizCorrectCount) &&
             (identical(other.startPeriodRange, startPeriodRange) ||
                 other.startPeriodRange == startPeriodRange) &&
             (identical(other.endPeriodRange, endPeriodRange) ||
                 other.endPeriodRange == endPeriodRange) &&
-            const DeepCollectionEquality()
-                .equals(other._periodDays, _periodDays) &&
-            const DeepCollectionEquality()
-                .equals(other._periodQuizCounts, _periodQuizCounts) &&
-            (identical(other.periodQuizTotal, periodQuizTotal) ||
-                other.periodQuizTotal == periodQuizTotal) &&
-            const DeepCollectionEquality()
-                .equals(other._periodDuration, _periodDuration) &&
-            (identical(other.periodDurationTotal, periodDurationTotal) ||
-                other.periodDurationTotal == periodDurationTotal) &&
             (identical(other.weekOffset, weekOffset) ||
                 other.weekOffset == weekOffset) &&
             (identical(other.monthOffset, monthOffset) ||
@@ -512,26 +668,35 @@ class _$_Dashboard extends _Dashboard {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_totalQuizList),
-      allDuration,
-      allQuizCount,
-      allQuizCorrectCount,
-      runningDays,
-      dailyDuration,
-      dailyQuizCount,
-      dailyQuizCorrectCount,
-      const DeepCollectionEquality().hash(_periodQuizList),
-      startPeriodRange,
-      endPeriodRange,
-      const DeepCollectionEquality().hash(_periodDays),
-      const DeepCollectionEquality().hash(_periodQuizCounts),
-      periodQuizTotal,
-      const DeepCollectionEquality().hash(_periodDuration),
-      periodDurationTotal,
-      weekOffset,
-      monthOffset);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        isLoading,
+        const DeepCollectionEquality().hash(_totalQuizList),
+        allDuration,
+        allQuizCount,
+        allQuizCorrectCount,
+        runningDays,
+        dailyDuration,
+        dailyQuizCount,
+        dailyQuizCorrectCount,
+        weeklyDuration,
+        weeklyQuizCount,
+        weeklyQuizCorrectCount,
+        monthlyDuration,
+        monthlyQuizCount,
+        monthlyQuizCorrectCount,
+        const DeepCollectionEquality().hash(_periodQuizList),
+        const DeepCollectionEquality().hash(_periodDurationList),
+        const DeepCollectionEquality().hash(_periodQuizCountList),
+        const DeepCollectionEquality().hash(_periodDays),
+        periodDuration,
+        periodQuizCount,
+        periodQuizCorrectCount,
+        startPeriodRange,
+        endPeriodRange,
+        weekOffset,
+        monthOffset
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -549,7 +714,8 @@ class _$_Dashboard extends _Dashboard {
 
 abstract class _Dashboard extends Dashboard {
   factory _Dashboard(
-      {final List<Quiz> totalQuizList,
+      {final bool isLoading,
+      final List<Quiz> totalQuizList,
       final Duration allDuration,
       final int allQuizCount,
       final int allQuizCorrectCount,
@@ -557,14 +723,21 @@ abstract class _Dashboard extends Dashboard {
       final Duration dailyDuration,
       final int dailyQuizCount,
       final int dailyQuizCorrectCount,
+      final Duration weeklyDuration,
+      final int weeklyQuizCount,
+      final int weeklyQuizCorrectCount,
+      final Duration monthlyDuration,
+      final int monthlyQuizCount,
+      final int monthlyQuizCorrectCount,
       final List<Quiz> periodQuizList,
+      final List<int> periodDurationList,
+      final List<int> periodQuizCountList,
+      final List<DateTime> periodDays,
+      final Duration periodDuration,
+      final int periodQuizCount,
+      final int periodQuizCorrectCount,
       final DateTime? startPeriodRange,
       final DateTime? endPeriodRange,
-      final List<DateTime> periodDays,
-      final List<int> periodQuizCounts,
-      final int periodQuizTotal,
-      final List<int> periodDuration,
-      final int periodDurationTotal,
       final int weekOffset,
       final int monthOffset}) = _$_Dashboard;
   _Dashboard._() : super._();
@@ -572,6 +745,8 @@ abstract class _Dashboard extends Dashboard {
   factory _Dashboard.fromJson(Map<String, dynamic> json) =
       _$_Dashboard.fromJson;
 
+  @override
+  bool get isLoading;
   @override
 
   ///Total
@@ -594,23 +769,43 @@ abstract class _Dashboard extends Dashboard {
   int get dailyQuizCorrectCount;
   @override
 
-  ///Weekly・Monthly
+  ///Weekly
+  Duration get weeklyDuration;
+  @override
+  int get weeklyQuizCount;
+  @override
+  int get weeklyQuizCorrectCount;
+  @override
+
+  ///Monthly
+  Duration get monthlyDuration;
+  @override
+  int get monthlyQuizCount;
+  @override
+  int get monthlyQuizCorrectCount;
+  @override
+
+  ///Piriod
   List<Quiz> get periodQuizList;
-  @override //今週/今月のクイズ一覧
+  @override
+  List<int> get periodDurationList;
+  @override
+  List<int> get periodQuizCountList;
+  @override
+  List<DateTime> get periodDays;
+  @override
+  Duration get periodDuration;
+  @override
+  int get periodQuizCount;
+  @override
+  int get periodQuizCorrectCount;
+  @override
+
+  ///期間
   DateTime? get startPeriodRange;
   @override // 今週の月曜日の日付
   DateTime? get endPeriodRange;
   @override // 今週の日曜日の日付
-  List<DateTime> get periodDays;
-  @override //今週の「月/日」一覧
-  List<int> get periodQuizCounts;
-  @override //今週の問題数一覧
-  int get periodQuizTotal;
-  @override //今週のデータ一覧
-  List<int> get periodDuration;
-  @override //今週の学習時間
-  int get periodDurationTotal;
-  @override //今週のデータ一覧
   int get weekOffset;
   @override //週の期間選択
   int get monthOffset;
