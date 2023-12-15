@@ -20,12 +20,27 @@ mixin _$HomeDashboardScreenState {
   int get tabIndex => throw _privateConstructorUsedError;
   PeriodType get selectedPeriodType => throw _privateConstructorUsedError;
   ChartType get selectedChartType => throw _privateConstructorUsedError;
-  int get weekOffset => throw _privateConstructorUsedError; //週の期間選択
-  int get monthOffset => throw _privateConstructorUsedError; //月の期間選択
   List<int> get valueX => throw _privateConstructorUsedError;
   int get valueY => throw _privateConstructorUsedError;
   List<DateTime> get days => throw _privateConstructorUsedError;
   String get unitY => throw _privateConstructorUsedError;
+
+  ///Piriod
+  List<Quiz> get periodQuizList => throw _privateConstructorUsedError;
+  List<int> get periodDurationList => throw _privateConstructorUsedError;
+  List<int> get periodQuizCountList => throw _privateConstructorUsedError;
+  List<DateTime> get periodDays => throw _privateConstructorUsedError;
+  int get periodDuration => throw _privateConstructorUsedError;
+  int get periodQuizCount => throw _privateConstructorUsedError;
+  int get periodQuizCorrectCount => throw _privateConstructorUsedError;
+
+  ///期間
+  DateTime? get startPeriodRange =>
+      throw _privateConstructorUsedError; // 今週の月曜日の日付
+  DateTime? get endPeriodRange =>
+      throw _privateConstructorUsedError; // 今週の日曜日の日付
+  int get weekOffset => throw _privateConstructorUsedError; //週の期間選択
+  int get monthOffset => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeDashboardScreenStateCopyWith<HomeDashboardScreenState> get copyWith =>
@@ -43,12 +58,21 @@ abstract class $HomeDashboardScreenStateCopyWith<$Res> {
       int tabIndex,
       PeriodType selectedPeriodType,
       ChartType selectedChartType,
-      int weekOffset,
-      int monthOffset,
       List<int> valueX,
       int valueY,
       List<DateTime> days,
-      String unitY});
+      String unitY,
+      List<Quiz> periodQuizList,
+      List<int> periodDurationList,
+      List<int> periodQuizCountList,
+      List<DateTime> periodDays,
+      int periodDuration,
+      int periodQuizCount,
+      int periodQuizCorrectCount,
+      DateTime? startPeriodRange,
+      DateTime? endPeriodRange,
+      int weekOffset,
+      int monthOffset});
 }
 
 /// @nodoc
@@ -69,12 +93,21 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
     Object? tabIndex = null,
     Object? selectedPeriodType = null,
     Object? selectedChartType = null,
-    Object? weekOffset = null,
-    Object? monthOffset = null,
     Object? valueX = null,
     Object? valueY = null,
     Object? days = null,
     Object? unitY = null,
+    Object? periodQuizList = null,
+    Object? periodDurationList = null,
+    Object? periodQuizCountList = null,
+    Object? periodDays = null,
+    Object? periodDuration = null,
+    Object? periodQuizCount = null,
+    Object? periodQuizCorrectCount = null,
+    Object? startPeriodRange = freezed,
+    Object? endPeriodRange = freezed,
+    Object? weekOffset = null,
+    Object? monthOffset = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -93,14 +126,6 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
           ? _value.selectedChartType
           : selectedChartType // ignore: cast_nullable_to_non_nullable
               as ChartType,
-      weekOffset: null == weekOffset
-          ? _value.weekOffset
-          : weekOffset // ignore: cast_nullable_to_non_nullable
-              as int,
-      monthOffset: null == monthOffset
-          ? _value.monthOffset
-          : monthOffset // ignore: cast_nullable_to_non_nullable
-              as int,
       valueX: null == valueX
           ? _value.valueX
           : valueX // ignore: cast_nullable_to_non_nullable
@@ -117,6 +142,50 @@ class _$HomeDashboardScreenStateCopyWithImpl<$Res,
           ? _value.unitY
           : unitY // ignore: cast_nullable_to_non_nullable
               as String,
+      periodQuizList: null == periodQuizList
+          ? _value.periodQuizList
+          : periodQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      periodDurationList: null == periodDurationList
+          ? _value.periodDurationList
+          : periodDurationList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodQuizCountList: null == periodQuizCountList
+          ? _value.periodQuizCountList
+          : periodQuizCountList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodDays: null == periodDays
+          ? _value.periodDays
+          : periodDays // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      periodDuration: null == periodDuration
+          ? _value.periodDuration
+          : periodDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      periodQuizCount: null == periodQuizCount
+          ? _value.periodQuizCount
+          : periodQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      periodQuizCorrectCount: null == periodQuizCorrectCount
+          ? _value.periodQuizCorrectCount
+          : periodQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      startPeriodRange: freezed == startPeriodRange
+          ? _value.startPeriodRange
+          : startPeriodRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endPeriodRange: freezed == endPeriodRange
+          ? _value.endPeriodRange
+          : endPeriodRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      weekOffset: null == weekOffset
+          ? _value.weekOffset
+          : weekOffset // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthOffset: null == monthOffset
+          ? _value.monthOffset
+          : monthOffset // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -133,12 +202,21 @@ abstract class _$$_CreateCopyWith<$Res>
       int tabIndex,
       PeriodType selectedPeriodType,
       ChartType selectedChartType,
-      int weekOffset,
-      int monthOffset,
       List<int> valueX,
       int valueY,
       List<DateTime> days,
-      String unitY});
+      String unitY,
+      List<Quiz> periodQuizList,
+      List<int> periodDurationList,
+      List<int> periodQuizCountList,
+      List<DateTime> periodDays,
+      int periodDuration,
+      int periodQuizCount,
+      int periodQuizCorrectCount,
+      DateTime? startPeriodRange,
+      DateTime? endPeriodRange,
+      int weekOffset,
+      int monthOffset});
 }
 
 /// @nodoc
@@ -155,12 +233,21 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? tabIndex = null,
     Object? selectedPeriodType = null,
     Object? selectedChartType = null,
-    Object? weekOffset = null,
-    Object? monthOffset = null,
     Object? valueX = null,
     Object? valueY = null,
     Object? days = null,
     Object? unitY = null,
+    Object? periodQuizList = null,
+    Object? periodDurationList = null,
+    Object? periodQuizCountList = null,
+    Object? periodDays = null,
+    Object? periodDuration = null,
+    Object? periodQuizCount = null,
+    Object? periodQuizCorrectCount = null,
+    Object? startPeriodRange = freezed,
+    Object? endPeriodRange = freezed,
+    Object? weekOffset = null,
+    Object? monthOffset = null,
   }) {
     return _then(_$_Create(
       isLoading: null == isLoading
@@ -179,14 +266,6 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.selectedChartType
           : selectedChartType // ignore: cast_nullable_to_non_nullable
               as ChartType,
-      weekOffset: null == weekOffset
-          ? _value.weekOffset
-          : weekOffset // ignore: cast_nullable_to_non_nullable
-              as int,
-      monthOffset: null == monthOffset
-          ? _value.monthOffset
-          : monthOffset // ignore: cast_nullable_to_non_nullable
-              as int,
       valueX: null == valueX
           ? _value._valueX
           : valueX // ignore: cast_nullable_to_non_nullable
@@ -203,6 +282,50 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.unitY
           : unitY // ignore: cast_nullable_to_non_nullable
               as String,
+      periodQuizList: null == periodQuizList
+          ? _value._periodQuizList
+          : periodQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
+      periodDurationList: null == periodDurationList
+          ? _value._periodDurationList
+          : periodDurationList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodQuizCountList: null == periodQuizCountList
+          ? _value._periodQuizCountList
+          : periodQuizCountList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      periodDays: null == periodDays
+          ? _value._periodDays
+          : periodDays // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
+      periodDuration: null == periodDuration
+          ? _value.periodDuration
+          : periodDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      periodQuizCount: null == periodQuizCount
+          ? _value.periodQuizCount
+          : periodQuizCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      periodQuizCorrectCount: null == periodQuizCorrectCount
+          ? _value.periodQuizCorrectCount
+          : periodQuizCorrectCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      startPeriodRange: freezed == startPeriodRange
+          ? _value.startPeriodRange
+          : startPeriodRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endPeriodRange: freezed == endPeriodRange
+          ? _value.endPeriodRange
+          : endPeriodRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      weekOffset: null == weekOffset
+          ? _value.weekOffset
+          : weekOffset // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthOffset: null == monthOffset
+          ? _value.monthOffset
+          : monthOffset // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -215,14 +338,27 @@ class _$_Create extends _Create {
       this.tabIndex = 0,
       this.selectedPeriodType = PeriodType.weekly,
       this.selectedChartType = ChartType.quizCount,
-      this.weekOffset = 0,
-      this.monthOffset = 0,
       final List<int> valueX = const [],
       this.valueY = 0,
       final List<DateTime> days = const [],
-      this.unitY = ""})
+      this.unitY = "",
+      final List<Quiz> periodQuizList = const [],
+      final List<int> periodDurationList = const [],
+      final List<int> periodQuizCountList = const [],
+      final List<DateTime> periodDays = const [],
+      this.periodDuration = 0,
+      this.periodQuizCount = 0,
+      this.periodQuizCorrectCount = 0,
+      this.startPeriodRange,
+      this.endPeriodRange,
+      this.weekOffset = 0,
+      this.monthOffset = 0})
       : _valueX = valueX,
         _days = days,
+        _periodQuizList = periodQuizList,
+        _periodDurationList = periodDurationList,
+        _periodQuizCountList = periodQuizCountList,
+        _periodDays = periodDays,
         super._();
 
   @override
@@ -237,16 +373,7 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final ChartType selectedChartType;
-  @override
-  @JsonKey()
-  final int weekOffset;
-//週の期間選択
-  @override
-  @JsonKey()
-  final int monthOffset;
-//月の期間選択
   final List<int> _valueX;
-//月の期間選択
   @override
   @JsonKey()
   List<int> get valueX {
@@ -271,9 +398,75 @@ class _$_Create extends _Create {
   @JsonKey()
   final String unitY;
 
+  ///Piriod
+  final List<Quiz> _periodQuizList;
+
+  ///Piriod
+  @override
+  @JsonKey()
+  List<Quiz> get periodQuizList {
+    if (_periodQuizList is EqualUnmodifiableListView) return _periodQuizList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_periodQuizList);
+  }
+
+  final List<int> _periodDurationList;
+  @override
+  @JsonKey()
+  List<int> get periodDurationList {
+    if (_periodDurationList is EqualUnmodifiableListView)
+      return _periodDurationList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_periodDurationList);
+  }
+
+  final List<int> _periodQuizCountList;
+  @override
+  @JsonKey()
+  List<int> get periodQuizCountList {
+    if (_periodQuizCountList is EqualUnmodifiableListView)
+      return _periodQuizCountList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_periodQuizCountList);
+  }
+
+  final List<DateTime> _periodDays;
+  @override
+  @JsonKey()
+  List<DateTime> get periodDays {
+    if (_periodDays is EqualUnmodifiableListView) return _periodDays;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_periodDays);
+  }
+
+  @override
+  @JsonKey()
+  final int periodDuration;
+  @override
+  @JsonKey()
+  final int periodQuizCount;
+  @override
+  @JsonKey()
+  final int periodQuizCorrectCount;
+
+  ///期間
+  @override
+  final DateTime? startPeriodRange;
+// 今週の月曜日の日付
+  @override
+  final DateTime? endPeriodRange;
+// 今週の日曜日の日付
+  @override
+  @JsonKey()
+  final int weekOffset;
+//週の期間選択
+  @override
+  @JsonKey()
+  final int monthOffset;
+
   @override
   String toString() {
-    return 'HomeDashboardScreenState(isLoading: $isLoading, tabIndex: $tabIndex, selectedPeriodType: $selectedPeriodType, selectedChartType: $selectedChartType, weekOffset: $weekOffset, monthOffset: $monthOffset, valueX: $valueX, valueY: $valueY, days: $days, unitY: $unitY)';
+    return 'HomeDashboardScreenState(isLoading: $isLoading, tabIndex: $tabIndex, selectedPeriodType: $selectedPeriodType, selectedChartType: $selectedChartType, valueX: $valueX, valueY: $valueY, days: $days, unitY: $unitY, periodQuizList: $periodQuizList, periodDurationList: $periodDurationList, periodQuizCountList: $periodQuizCountList, periodDays: $periodDays, periodDuration: $periodDuration, periodQuizCount: $periodQuizCount, periodQuizCorrectCount: $periodQuizCorrectCount, startPeriodRange: $startPeriodRange, endPeriodRange: $endPeriodRange, weekOffset: $weekOffset, monthOffset: $monthOffset)';
   }
 
   @override
@@ -289,29 +482,57 @@ class _$_Create extends _Create {
                 other.selectedPeriodType == selectedPeriodType) &&
             (identical(other.selectedChartType, selectedChartType) ||
                 other.selectedChartType == selectedChartType) &&
-            (identical(other.weekOffset, weekOffset) ||
-                other.weekOffset == weekOffset) &&
-            (identical(other.monthOffset, monthOffset) ||
-                other.monthOffset == monthOffset) &&
             const DeepCollectionEquality().equals(other._valueX, _valueX) &&
             (identical(other.valueY, valueY) || other.valueY == valueY) &&
             const DeepCollectionEquality().equals(other._days, _days) &&
-            (identical(other.unitY, unitY) || other.unitY == unitY));
+            (identical(other.unitY, unitY) || other.unitY == unitY) &&
+            const DeepCollectionEquality()
+                .equals(other._periodQuizList, _periodQuizList) &&
+            const DeepCollectionEquality()
+                .equals(other._periodDurationList, _periodDurationList) &&
+            const DeepCollectionEquality()
+                .equals(other._periodQuizCountList, _periodQuizCountList) &&
+            const DeepCollectionEquality()
+                .equals(other._periodDays, _periodDays) &&
+            (identical(other.periodDuration, periodDuration) ||
+                other.periodDuration == periodDuration) &&
+            (identical(other.periodQuizCount, periodQuizCount) ||
+                other.periodQuizCount == periodQuizCount) &&
+            (identical(other.periodQuizCorrectCount, periodQuizCorrectCount) ||
+                other.periodQuizCorrectCount == periodQuizCorrectCount) &&
+            (identical(other.startPeriodRange, startPeriodRange) ||
+                other.startPeriodRange == startPeriodRange) &&
+            (identical(other.endPeriodRange, endPeriodRange) ||
+                other.endPeriodRange == endPeriodRange) &&
+            (identical(other.weekOffset, weekOffset) ||
+                other.weekOffset == weekOffset) &&
+            (identical(other.monthOffset, monthOffset) ||
+                other.monthOffset == monthOffset));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isLoading,
-      tabIndex,
-      selectedPeriodType,
-      selectedChartType,
-      weekOffset,
-      monthOffset,
-      const DeepCollectionEquality().hash(_valueX),
-      valueY,
-      const DeepCollectionEquality().hash(_days),
-      unitY);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        isLoading,
+        tabIndex,
+        selectedPeriodType,
+        selectedChartType,
+        const DeepCollectionEquality().hash(_valueX),
+        valueY,
+        const DeepCollectionEquality().hash(_days),
+        unitY,
+        const DeepCollectionEquality().hash(_periodQuizList),
+        const DeepCollectionEquality().hash(_periodDurationList),
+        const DeepCollectionEquality().hash(_periodQuizCountList),
+        const DeepCollectionEquality().hash(_periodDays),
+        periodDuration,
+        periodQuizCount,
+        periodQuizCorrectCount,
+        startPeriodRange,
+        endPeriodRange,
+        weekOffset,
+        monthOffset
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -326,12 +547,21 @@ abstract class _Create extends HomeDashboardScreenState {
       final int tabIndex,
       final PeriodType selectedPeriodType,
       final ChartType selectedChartType,
-      final int weekOffset,
-      final int monthOffset,
       final List<int> valueX,
       final int valueY,
       final List<DateTime> days,
-      final String unitY}) = _$_Create;
+      final String unitY,
+      final List<Quiz> periodQuizList,
+      final List<int> periodDurationList,
+      final List<int> periodQuizCountList,
+      final List<DateTime> periodDays,
+      final int periodDuration,
+      final int periodQuizCount,
+      final int periodQuizCorrectCount,
+      final DateTime? startPeriodRange,
+      final DateTime? endPeriodRange,
+      final int weekOffset,
+      final int monthOffset}) = _$_Create;
   _Create._() : super._();
 
   @override
@@ -343,10 +573,6 @@ abstract class _Create extends HomeDashboardScreenState {
   @override
   ChartType get selectedChartType;
   @override
-  int get weekOffset;
-  @override //週の期間選択
-  int get monthOffset;
-  @override //月の期間選択
   List<int> get valueX;
   @override
   int get valueY;
@@ -354,6 +580,32 @@ abstract class _Create extends HomeDashboardScreenState {
   List<DateTime> get days;
   @override
   String get unitY;
+  @override
+
+  ///Piriod
+  List<Quiz> get periodQuizList;
+  @override
+  List<int> get periodDurationList;
+  @override
+  List<int> get periodQuizCountList;
+  @override
+  List<DateTime> get periodDays;
+  @override
+  int get periodDuration;
+  @override
+  int get periodQuizCount;
+  @override
+  int get periodQuizCorrectCount;
+  @override
+
+  ///期間
+  DateTime? get startPeriodRange;
+  @override // 今週の月曜日の日付
+  DateTime? get endPeriodRange;
+  @override // 今週の日曜日の日付
+  int get weekOffset;
+  @override //週の期間選択
+  int get monthOffset;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCopyWith<_$_Create> get copyWith =>

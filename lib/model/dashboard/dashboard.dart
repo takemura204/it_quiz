@@ -31,21 +31,6 @@ class Dashboard with _$Dashboard {
     @Default(Duration.zero) final Duration monthlyDuration,
     @Default(0) final int monthlyQuizCount,
     @Default(0) final int monthlyQuizCorrectCount,
-
-    ///Piriod
-    @Default([]) final List<Quiz> periodQuizList,
-    @Default([]) final List<int> periodDurationList,
-    @Default([]) final List<int> periodQuizCountList,
-    @Default([]) final List<DateTime> periodDays,
-    @Default(Duration.zero) final Duration periodDuration,
-    @Default(0) final int periodQuizCount,
-    @Default(0) final int periodQuizCorrectCount,
-
-    ///期間
-    DateTime? startPeriodRange, // 今週の月曜日の日付
-    DateTime? endPeriodRange, // 今週の日曜日の日付
-    @Default(0) final int weekOffset, //週の期間選択
-    @Default(0) final int monthOffset, //月の期間選択
   }) = _Dashboard;
 
   Dashboard._();

@@ -8,8 +8,6 @@ import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_stat
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../model/dashboard/dashboard_model.dart';
-
 part 'dashboard_chart.dart';
 
 class PeriodDashboard extends ConsumerWidget {
@@ -113,10 +111,9 @@ class _TotalData extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(dashboardModelProvider);
-    final periodQuizCount = model.periodQuizCount;
-    final periodDuration = model.periodDuration;
     final state = ref.watch(homeDashboardScreenProvider);
+    final periodQuizCount = state.periodQuizCount;
+    final periodDuration = state.periodDuration;
     final selectedChartType = state.selectedChartType;
 
     return Container(
@@ -140,7 +137,7 @@ class _TotalData extends ConsumerWidget {
           ),
           _StatusCard(
             text: "学習時間",
-            value: periodDuration.inMinutes,
+            value: periodDuration,
             icon: LineIcons.clock,
             unit: "分",
             isSeleted: selectedChartType == ChartType.duration,
@@ -261,12 +258,10 @@ class _SelectPeriod extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(dashboardModelProvider);
-    final weekOffset = model.weekOffset;
-    final monthOffset = model.monthOffset;
-    final periodDays = model.periodDays;
-
     final state = ref.watch(homeDashboardScreenProvider);
+    final weekOffset = state.weekOffset;
+    final monthOffset = state.monthOffset;
+    final periodDays = state.periodDays;
     final selectedPeriodType = state.selectedPeriodType;
 
     return Container(
@@ -281,10 +276,14 @@ class _SelectPeriod extends ConsumerWidget {
             iconSize: context.width * 0.06,
             onPressed: () {
               if (selectedPeriodType == PeriodType.weekly && weekOffset > -2) {
-                ref.read(dashboardModelProvider.notifier).updatePeriodData(-1);
+                ref
+                    .read(homeDashboardScreenProvider.notifier)
+                    .updatePeriodData(-1);
               } else if (selectedPeriodType == PeriodType.monthly &&
                   monthOffset > -2) {
-                ref.read(dashboardModelProvider.notifier).updatePeriodData(-1);
+                ref
+                    .read(homeDashboardScreenProvider.notifier)
+                    .updatePeriodData(-1);
               }
             },
             icon: Icon(
@@ -313,10 +312,14 @@ class _SelectPeriod extends ConsumerWidget {
             iconSize: context.width * 0.06,
             onPressed: () {
               if (selectedPeriodType == PeriodType.weekly && weekOffset < 0) {
-                ref.read(dashboardModelProvider.notifier).updatePeriodData(1);
+                ref
+                    .read(homeDashboardScreenProvider.notifier)
+                    .updatePeriodData(1);
               } else if (selectedPeriodType == PeriodType.monthly &&
                   monthOffset < 0) {
-                ref.read(dashboardModelProvider.notifier).updatePeriodData(1);
+                ref
+                    .read(homeDashboardScreenProvider.notifier)
+                    .updatePeriodData(1);
               }
             },
             icon: Icon(

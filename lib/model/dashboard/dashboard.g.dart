@@ -33,35 +33,6 @@ _$_Dashboard _$$_DashboardFromJson(Map<String, dynamic> json) => _$_Dashboard(
           : Duration(microseconds: json['monthlyDuration'] as int),
       monthlyQuizCount: json['monthlyQuizCount'] as int? ?? 0,
       monthlyQuizCorrectCount: json['monthlyQuizCorrectCount'] as int? ?? 0,
-      periodQuizList: (json['periodQuizList'] as List<dynamic>?)
-              ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      periodDurationList: (json['periodDurationList'] as List<dynamic>?)
-              ?.map((e) => e as int)
-              .toList() ??
-          const [],
-      periodQuizCountList: (json['periodQuizCountList'] as List<dynamic>?)
-              ?.map((e) => e as int)
-              .toList() ??
-          const [],
-      periodDays: (json['periodDays'] as List<dynamic>?)
-              ?.map((e) => DateTime.parse(e as String))
-              .toList() ??
-          const [],
-      periodDuration: json['periodDuration'] == null
-          ? Duration.zero
-          : Duration(microseconds: json['periodDuration'] as int),
-      periodQuizCount: json['periodQuizCount'] as int? ?? 0,
-      periodQuizCorrectCount: json['periodQuizCorrectCount'] as int? ?? 0,
-      startPeriodRange: json['startPeriodRange'] == null
-          ? null
-          : DateTime.parse(json['startPeriodRange'] as String),
-      endPeriodRange: json['endPeriodRange'] == null
-          ? null
-          : DateTime.parse(json['endPeriodRange'] as String),
-      weekOffset: json['weekOffset'] as int? ?? 0,
-      monthOffset: json['monthOffset'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_DashboardToJson(_$_Dashboard instance) =>
@@ -81,16 +52,4 @@ Map<String, dynamic> _$$_DashboardToJson(_$_Dashboard instance) =>
       'monthlyDuration': instance.monthlyDuration.inMicroseconds,
       'monthlyQuizCount': instance.monthlyQuizCount,
       'monthlyQuizCorrectCount': instance.monthlyQuizCorrectCount,
-      'periodQuizList': instance.periodQuizList,
-      'periodDurationList': instance.periodDurationList,
-      'periodQuizCountList': instance.periodQuizCountList,
-      'periodDays':
-          instance.periodDays.map((e) => e.toIso8601String()).toList(),
-      'periodDuration': instance.periodDuration.inMicroseconds,
-      'periodQuizCount': instance.periodQuizCount,
-      'periodQuizCorrectCount': instance.periodQuizCorrectCount,
-      'startPeriodRange': instance.startPeriodRange?.toIso8601String(),
-      'endPeriodRange': instance.endPeriodRange?.toIso8601String(),
-      'weekOffset': instance.weekOffset,
-      'monthOffset': instance.monthOffset,
     };
