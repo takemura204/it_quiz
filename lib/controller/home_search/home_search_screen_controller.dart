@@ -66,7 +66,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
   void setMaxItemsToDisplay() {
     if (state.maxItemsToDisplay < state.filteredQuizItemList.length) {
       state = state.copyWith(
-        maxItemsToDisplay: state.maxItemsToDisplay + 10,
+        maxItemsToDisplay: state.maxItemsToDisplay + 20,
         isScrollLoading: true,
       );
     }

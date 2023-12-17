@@ -192,11 +192,11 @@ class SettingColorController extends StateNotifier<SettingColorState>
       appBarTheme: AppBarTheme(
         titleTextStyle: TextStyle(
           color: getThemePrimaryColor(themeId),
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
         shape: Border(
-            bottom: BorderSide(color: getThemePrimaryColor(themeId), width: 3)),
+            bottom: BorderSide(color: getThemePrimaryColor(themeId), width: 2)),
         color: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(

@@ -6,6 +6,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
 import '../../model/user/user.model.dart';
+import '../../view/bar.dart';
 
 part 'dashboard_daily_view.dart';
 
@@ -18,23 +19,27 @@ class DailyDashboard extends ConsumerWidget {
     final dashboardModel = ref.watch(dashboardModelProvider);
     final dailyDuration = dashboardModel.dailyDuration.inMinutes;
     final dailyQuizCount = dashboardModel.dailyQuizCount;
+    final runningDays = dashboardModel.runningDays;
     final userModel = ref.watch(userModelProvider);
     final dailyQuizCountGoal = userModel.userCustom.dailyQuizCountGoal;
-    final dailyDurationGoal = userModel.userCustom.dailyDurationGoal;
+    final dailyRate = (dailyQuizCount / dailyQuizCountGoal * 100)
+        .clamp(0, 100)
+        .toStringAsFixed(1);
 
     return Card(
-      elevation: 3,
+      elevation: 2,
       color: Colors.white,
       margin: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.width * 0.01),
+          horizontal: context.width * 0.01, vertical: context.width * 0.01),
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: context.mainColor,
+          color: Colors.grey.shade300,
           width: 1,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ///タイトル
           const _Title(
@@ -42,157 +47,89 @@ class DailyDashboard extends ConsumerWidget {
             subWidget: null,
             icon: LineIcons.fontAwesomeFlag,
           ),
-          Gap(context.height * 0.02),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Icon(
-                    LineIcons.book,
-                    color: context.mainColor,
-                    size: context.width * 0.1,
-                  ),
-                  Text(
-                    '問題数',
-                    style: TextStyle(
-                      color: context.mainColor,
-                      fontSize: context.height * 0.015,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gap(context.height * 0.005),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
+          Gap(context.height * 0.01),
+          Container(
+            // color: Colors.red,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(context.height * 0.005),
+                    _DailyQuizCount(score: dailyQuizCount),
+                    Gap(context.height * 0.005),
+                    _DailyDuration(score: dailyDuration),
+                    Gap(context.height * 0.005),
+                    _DailyLogin(score: runningDays),
+                    Gap(context.height * 0.005),
+                  ],
+                ),
+                Gap(context.height * 0.02),
+                const Spacer(),
+                ProgressCrilcleChart(
+                  width: context.height * 0.4,
+                  size: context.width * 0.45,
+                  goalScore: dailyQuizCountGoal,
+                  currentScore: dailyQuizCount,
+                  thickness: 0.15,
+                  widget: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "$dailyQuizCount",
+                        "今日の目標",
                         style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: context.height * 0.035,
                           fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "/$dailyQuizCountGoal",
-                        style: TextStyle(
+                          fontSize: context.height * 0.018,
                           color: Colors.black54,
-                          fontSize: context.height * 0.027,
-                          fontWeight: FontWeight.normal,
                         ),
+                        textAlign: TextAlign.end,
+                      ),
+                      Gap(context.height * 0.01),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            "$dailyRate",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.035,
+                              color: context.mainColor,
+                            ),
+                            textAlign: TextAlign.end,
+                          ),
+                          Text(
+                            "%",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: context.height * 0.025,
+                              color: context.mainColor,
+                              height: 1.0,
+                            ),
+                            textAlign: TextAlign.end,
+                          ),
+                        ],
+                      ),
+                      Gap(context.height * 0.01),
+                      Text(
+                        "$dailyQuizCount/$dailyQuizCountGoal",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: context.height * 0.018,
+                          color: Colors.black45,
+                        ),
+                        textAlign: TextAlign.end,
                       ),
                     ],
                   ),
-                  Text(
-                    '問',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: context.height * 0.018,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Icon(
-                    LineIcons.clock,
-                    color: context.mainColor,
-                    size: context.width * 0.1,
-                  ),
-                  Text(
-                    '学習時間',
-                    style: TextStyle(
-                      color: context.mainColor,
-                      fontSize: context.height * 0.015,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gap(context.height * 0.005),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        '$dailyDuration',
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: context.height * 0.035,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "/$dailyDurationGoal",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: context.height * 0.027,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    '分',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: context.height * 0.018,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Icon(
-                    LineIcons.alternateFire,
-                    color: context.mainColor,
-                    size: context.width * 0.1,
-                  ),
-                  Text(
-                    'スコア',
-                    style: TextStyle(
-                      color: context.mainColor,
-                      fontSize: context.height * 0.015,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gap(context.height * 0.005),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        '80',
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: context.height * 0.035,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Gap(3),
-                      Text(
-                        'up↑',
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: context.height * 0.023,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    'exp',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: context.height * 0.018,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                ),
+                const Spacer(),
+              ],
+            ),
           ),
           Gap(context.height * 0.01),
         ],

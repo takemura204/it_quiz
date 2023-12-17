@@ -19,6 +19,7 @@ mixin _$HomeQuizScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
   List<String> get categoryList => throw _privateConstructorUsedError;
+  List<double> get correctRatios => throw _privateConstructorUsedError;
   List<String> get selectedTestCategory => throw _privateConstructorUsedError;
   String get selectCategory => throw _privateConstructorUsedError;
   int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
@@ -44,6 +45,7 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       {bool isLoading,
       List<Quiz> filterQuizList,
       List<String> categoryList,
+      List<double> correctRatios,
       List<String> selectedTestCategory,
       String selectCategory,
       int itemIndex,
@@ -73,6 +75,7 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? isLoading = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
+    Object? correctRatios = null,
     Object? selectedTestCategory = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
@@ -96,6 +99,10 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      correctRatios: null == correctRatios
+          ? _value.correctRatios
+          : correctRatios // ignore: cast_nullable_to_non_nullable
+              as List<double>,
       selectedTestCategory: null == selectedTestCategory
           ? _value.selectedTestCategory
           : selectedTestCategory // ignore: cast_nullable_to_non_nullable
@@ -160,6 +167,7 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       {bool isLoading,
       List<Quiz> filterQuizList,
       List<String> categoryList,
+      List<double> correctRatios,
       List<String> selectedTestCategory,
       String selectCategory,
       int itemIndex,
@@ -188,6 +196,7 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
+    Object? correctRatios = null,
     Object? selectedTestCategory = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
@@ -211,6 +220,10 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
           ? _value._categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      correctRatios: null == correctRatios
+          ? _value._correctRatios
+          : correctRatios // ignore: cast_nullable_to_non_nullable
+              as List<double>,
       selectedTestCategory: null == selectedTestCategory
           ? _value._selectedTestCategory
           : selectedTestCategory // ignore: cast_nullable_to_non_nullable
@@ -258,6 +271,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       {this.isLoading = false,
       final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
+      final List<double> correctRatios = const [],
       final List<String> selectedTestCategory = const [],
       this.selectCategory = "",
       this.itemIndex = 0,
@@ -269,6 +283,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       this.selectWeakQuiz})
       : _filterQuizList = filterQuizList,
         _categoryList = categoryList,
+        _correctRatios = correctRatios,
         _selectedTestCategory = selectedTestCategory,
         _selectedFilterGroup = selectedFilterGroup;
 
@@ -291,6 +306,15 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
     if (_categoryList is EqualUnmodifiableListView) return _categoryList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_categoryList);
+  }
+
+  final List<double> _correctRatios;
+  @override
+  @JsonKey()
+  List<double> get correctRatios {
+    if (_correctRatios is EqualUnmodifiableListView) return _correctRatios;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_correctRatios);
   }
 
   final List<String> _selectedTestCategory;
@@ -338,7 +362,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, correctRatios: $correctRatios, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
@@ -352,6 +376,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
                 .equals(other._filterQuizList, _filterQuizList) &&
             const DeepCollectionEquality()
                 .equals(other._categoryList, _categoryList) &&
+            const DeepCollectionEquality()
+                .equals(other._correctRatios, _correctRatios) &&
             const DeepCollectionEquality()
                 .equals(other._selectedTestCategory, _selectedTestCategory) &&
             (identical(other.selectCategory, selectCategory) ||
@@ -378,6 +404,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       isLoading,
       const DeepCollectionEquality().hash(_filterQuizList),
       const DeepCollectionEquality().hash(_categoryList),
+      const DeepCollectionEquality().hash(_correctRatios),
       const DeepCollectionEquality().hash(_selectedTestCategory),
       selectCategory,
       itemIndex,
@@ -401,6 +428,7 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       {final bool isLoading,
       final List<Quiz> filterQuizList,
       final List<String> categoryList,
+      final List<double> correctRatios,
       final List<String> selectedTestCategory,
       final String selectCategory,
       final int itemIndex,
@@ -417,6 +445,8 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   List<Quiz> get filterQuizList;
   @override
   List<String> get categoryList;
+  @override
+  List<double> get correctRatios;
   @override
   List<String> get selectedTestCategory;
   @override

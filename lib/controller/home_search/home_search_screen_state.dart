@@ -14,7 +14,7 @@ class HomeSearchScreenState with _$HomeSearchScreenState {
     @Default(false) bool isValidSearch,
     @Default(false) bool isNotTextEmpty,
     @Default(false) bool isSavedFilter,
-    @Default(10) int maxItemsToDisplay,
+    @Default(20) int maxItemsToDisplay,
   }) = _Create;
 
   HomeSearchScreenState._();

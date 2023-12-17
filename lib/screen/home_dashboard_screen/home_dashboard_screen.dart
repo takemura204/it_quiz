@@ -8,10 +8,9 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../model/lang/initial_resource.dart';
 import '../../view/mission/mission_widget.dart';
-import '../../view/rank/rank_widget.dart';
 import '../dashboard_daily_screen/dashboard_daily_screen.dart';
-import '../dashboard_group_progress_screen/dashboard_group_progress_screen.dart';
 import '../dashboard_period_screen/dashboard_period_screen.dart';
+import '../dashboard_progress_screen/dashboard_group_screen.dart';
 
 class HomeDashboardScreen extends ConsumerWidget {
   const HomeDashboardScreen();
@@ -47,13 +46,15 @@ class _Body extends ConsumerWidget {
           ///今日の学習
           DailyDashboard(),
 
-          ///週&月の学習データ
+          ///学習状況
           PeriodDashboard(),
 
-          ///グループごとの進捗
+          ///進捗状況
           GroupProgressDashboard(),
 
-          RankScore(),
+          Gap(5),
+
+          // RankScore(),
         ],
       ),
     );

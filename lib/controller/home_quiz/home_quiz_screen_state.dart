@@ -10,6 +10,7 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
     @Default(false) bool isLoading,
     @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList,
+    @Default([]) final List<double> correctRatios,
     @Default([]) final List<String> selectedTestCategory,
     @Default("") final String selectCategory,
     @Default(0) final int itemIndex, //クイズ番号

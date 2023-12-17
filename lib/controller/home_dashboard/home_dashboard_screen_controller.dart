@@ -53,7 +53,7 @@ class HomeDashboardScreenController
   }
 
   void setPeriodData(DateTime startOfPeriod, DateTime endOfPeriod) {
-    final totalQuizList = ref.read(quizModelProvider).historyQuizList;
+    final totalQuizList = ref.read(dashboardModelProvider).totalQuizList;
     final periodQuizList = totalQuizList
         .where((x) =>
             x.timeStamp!.isAfter(startOfPeriod) &&
@@ -85,7 +85,6 @@ class HomeDashboardScreenController
     //  合計
     final int periodQuizCount = periodQuizCountList.fold(0, (a, b) => a + b);
     final int periodDuration = periodDurationList.fold(0, (a, b) => a + b);
-    final runningDays = periodQuizCountList.where((x) => x > 0).toList().length;
 
     state = state.copyWith(
       periodQuizList: periodQuizList,

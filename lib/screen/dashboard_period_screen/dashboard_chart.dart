@@ -12,7 +12,7 @@ class QuizChart extends ConsumerWidget {
     final selectedPeriodType = state.selectedPeriodType;
 
     return Container(
-      height: context.height * 0.25,
+      height: context.height * 0.3,
       child: BarChart(
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
@@ -157,7 +157,6 @@ class QuizChart extends ConsumerWidget {
                   final dayOfWeek = DateFormat('E', 'ja_JP')
                       .format(date)
                       .substring(0, 1); // 曜日の略称を取得
-
                   switch (selectedPeriodType) {
                     case PeriodType.weekly:
                       return Container(

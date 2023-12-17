@@ -54,8 +54,29 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     final categoryList =
         quizList.map((quizItem) => quizItem.category).toSet().toList();
 
+    final correctRatios = categoryList.map((category) {
+      final correctNum = ref
+          .read(quizModelProvider)
+          .quizList
+          .where((quiz) => quiz.category == category)
+          .fold<int>(
+            0,
+            (sum, quiz) => sum + quiz.correctNum,
+          );
+      final quizLength = ref
+          .read(quizModelProvider)
+          .quizList
+          .where((quiz) => quiz.category == category)
+          .expand((quiz) => quiz.quizItemList)
+          .toList()
+          .length;
+      return (quizLength > 0) ? (correctNum / quizLength) * 100 : 0.0;
+    }).toList();
+
     state = state.copyWith(
-        categoryList: categoryList, selectedTestCategory: categoryList);
+        categoryList: categoryList,
+        selectedTestCategory: categoryList,
+        correctRatios: correctRatios);
   }
 
   ///QuizList取得

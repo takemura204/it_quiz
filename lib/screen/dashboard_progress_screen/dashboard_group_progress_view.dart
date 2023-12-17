@@ -1,4 +1,4 @@
-part of 'dashboard_group_progress_screen.dart';
+part of 'dashboard_group_screen.dart';
 
 class _Title extends ConsumerWidget {
   const _Title(

@@ -19,16 +19,16 @@ class PeriodDashboard extends ConsumerWidget {
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
-        elevation: 3,
+        elevation: 2,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+            horizontal: context.width * 0.01, vertical: context.width * 0.01),
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: context.mainColor,
+            color: Colors.grey.shade300,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
