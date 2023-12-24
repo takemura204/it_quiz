@@ -74,7 +74,7 @@ class GroupProgressDashboard extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  color: context.backgroundColor.withOpacity(0.5),
+                  color: context.backgroundColor.withOpacity(0.3),
                   height: context.width * 0.45,
                   width: context.width * 0.45,
                   padding: EdgeInsets.symmetric(

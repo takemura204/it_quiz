@@ -209,11 +209,7 @@ class PrimaryCloseDialog extends ConsumerWidget {
         elevation: 4,
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: context.mainColor,
-            width: 3,
-          ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Container(
           width: context.width * 1,
@@ -229,17 +225,16 @@ class PrimaryCloseDialog extends ConsumerWidget {
               Container(
                 height: context.height * 0.05,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Spacer(),
                     Text(
                       title,
                       style: TextStyle(
                         fontSize: context.width * 0.05,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         color: Colors.black87,
                       ),
                     ),
-                    const Spacer(),
                   ],
                 ),
               ),

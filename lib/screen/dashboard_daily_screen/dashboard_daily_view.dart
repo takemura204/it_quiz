@@ -83,7 +83,7 @@ class _DailyQuizCount extends ConsumerWidget {
                   color: context.mainColor,
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                 ),
-                height: context.height * 0.008,
+                height: context.height * 0.007,
                 width: ('$score'.length.toDouble()) * context.height * 0.022 +
                     context.height * 0.02,
               ),
@@ -103,7 +103,7 @@ class _DailyQuizCount extends ConsumerWidget {
                   Text(
                     '問',
                     style: TextStyle(
-                      color: Colors.black45,
+                      color: Colors.black54,
                       fontSize: context.height * 0.02,
                       fontWeight: FontWeight.bold,
                     ),
@@ -156,7 +156,7 @@ class _DailyDuration extends ConsumerWidget {
                   color: context.mainColor,
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                 ),
-                height: context.height * 0.008,
+                height: context.height * 0.007,
                 width: ('$score'.length.toDouble()) * context.height * 0.022 +
                     context.height * 0.02,
               ),
@@ -231,7 +231,7 @@ class _DailyLogin extends ConsumerWidget {
                   color: context.mainColor,
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                 ),
-                height: context.height * 0.008,
+                height: context.height * 0.007,
                 width: ('$score'.length.toDouble()) * context.height * 0.022 +
                     context.height * 0.02,
               ),

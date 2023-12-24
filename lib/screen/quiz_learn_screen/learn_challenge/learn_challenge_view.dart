@@ -114,7 +114,7 @@ class _ActionButtons extends ConsumerWidget {
           iconSize: context.width * 0.1,
           containerWidth: context.width * 0.25,
           containerHeight: context.width * 0.25,
-          backgroundColor: Colors.red.withOpacity(0.7),
+          backgroundColor: const Color(0xFFFF7777),
           textColor: Colors.white,
           text: I18n().buttonUnKnow,
           onPressed: () {
@@ -145,7 +145,7 @@ class _ActionButtons extends ConsumerWidget {
           iconSize: context.width * 0.1,
           containerWidth: context.width * 0.25,
           containerHeight: context.width * 0.25,
-          backgroundColor: Colors.green.withOpacity(0.7),
+          backgroundColor: const Color(0xFF44B571),
           textColor: Colors.white,
           text: I18n().buttonKnow,
           onPressed: () {

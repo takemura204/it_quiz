@@ -74,7 +74,7 @@ class DailyDashboard extends ConsumerWidget {
                   size: context.width * 0.45,
                   goalScore: dailyQuizCountGoal,
                   currentScore: dailyQuizCount,
-                  thickness: 0.15,
+                  thickness: 0.13,
                   widget: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -98,7 +98,7 @@ class DailyDashboard extends ConsumerWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: context.height * 0.035,
-                              color: context.mainColor,
+                              color: Colors.black54,
                             ),
                             textAlign: TextAlign.end,
                           ),
@@ -107,7 +107,7 @@ class DailyDashboard extends ConsumerWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: context.height * 0.025,
-                              color: context.mainColor,
+                              color: Colors.black54,
                               height: 1.0,
                             ),
                             textAlign: TextAlign.end,
@@ -118,7 +118,7 @@ class DailyDashboard extends ConsumerWidget {
                       Text(
                         "$dailyQuizCount/$dailyQuizCountGoal",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.normal,
                           fontSize: context.height * 0.018,
                           color: Colors.black45,
                         ),

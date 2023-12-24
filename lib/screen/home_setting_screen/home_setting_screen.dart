@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../model/lang/initial_resource.dart';
 import '../../view/bar.dart';
@@ -19,13 +20,13 @@ class HomeSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userCustom = ref.watch(userModelProvider).userCustom;
+    final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),
         centerTitle: true,
         elevation: 0,
-        // leading: const RankWidget(),
-        // leadingWidth: 125,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -50,7 +51,7 @@ class HomeSettingScreen extends ConsumerWidget {
                           onTap: null,
                         ),
                         const UserProfile(),
-                        DefaltSettingBar(
+                        DefaultSettingBar(
                           title: "プロフィール編集",
                           onTap: () => context.showScreen(
                             const ProfileScreenArguments().generateRoute(),
@@ -92,26 +93,45 @@ class HomeSettingScreen extends ConsumerWidget {
                   title: "設定",
                   onTap: null,
                 ),
-                DefaltSettingBar(
+                CustomSettingBar(
                   title: "カラーテーマ",
+                  customWidget: Container(
+                    height: context.width * 0.05,
+                    width: context.width * 0.05,
+                    margin: EdgeInsets.all(context.width * 0.01),
+                    decoration: ShapeDecoration(
+                      shape: const CircleBorder(),
+                      color: context.mainColor,
+                    ),
+                  ),
                   onTap: () {
                     context.showScreen(
-                      const SettingColorScreenArguments().generateRoute(),
-                    );
+                        const SettingColorScreenArguments().generateRoute());
                   },
                 ),
-                const CustomSettingBar(
-                    title: "毎日の目標",
-                    customWidget: _SetDailyQuizCountGoal(),
-                    // customWidget: Container(),
-                    onTap: null),
-                const CustomSettingBar(
-                    title: "毎日の目標",
-                    customWidget: _SetDailyDurationGoal(),
-                    // customWidget: Container(),
-                    onTap: null),
-                DefaltSettingBar(
+                _Divider(),
+                CustomSettingBar(
                   title: "毎日の目標",
+                  customWidget: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "$dailyQuizCountGoal",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: context.width * 0.04,
+                        ),
+                      ),
+                      Text(
+                        "問",
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: context.width * 0.04,
+                        ),
+                      ),
+                    ],
+                  ),
                   onTap: () {
                     showDialog(
                         context: context,
@@ -127,23 +147,25 @@ class HomeSettingScreen extends ConsumerWidget {
                         });
                   },
                 ),
-                const DefaltSettingBar(
+                _Divider(),
+                const DefaultSettingBar(
                   title: "通知",
                   onTap: null,
                 ),
+                _Divider(),
                 const SettingTitleBar(
                   title: "アプリについて",
                   onTap: null,
                 ),
-                const DefaltSettingBar(
+                const DefaultSettingBar(
                   title: "お問合せ",
                   onTap: null,
                 ),
-                const DefaltSettingBar(
+                const DefaultSettingBar(
                   title: "シェア",
                   onTap: null,
                 ),
-                const DefaltSettingBar(
+                const DefaultSettingBar(
                   title: "開発者",
                   onTap: null,
                 ),
@@ -167,7 +189,7 @@ class HomeSettingScreen extends ConsumerWidget {
                           title: "その他",
                           onTap: null,
                         ),
-                        DefaltSettingBar(
+                        DefaultSettingBar(
                           title: "アプリを削除する",
                           onTap: () async {
                             context.showScreen(
@@ -218,6 +240,17 @@ class HomeSettingScreen extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _Divider extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      child: const Divider(height: 1),
     );
   }
 }

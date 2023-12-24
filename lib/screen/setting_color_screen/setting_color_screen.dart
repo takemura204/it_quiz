@@ -39,13 +39,13 @@ class _ColorCards extends ConsumerWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.width * 0.02),
+          horizontal: context.width * 0.01, vertical: context.width * 0.01),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: colors.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           childAspectRatio: 1 / 1,
         ),
         itemBuilder: (context, index) {
@@ -59,17 +59,78 @@ class _ColorCards extends ConsumerWidget {
             child: Card(
               elevation: 3,
               margin: EdgeInsets.symmetric(
-                  horizontal: context.width * 0.02,
-                  vertical: context.width * 0.02),
+                  horizontal: context.width * 0.01,
+                  vertical: context.width * 0.01),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 side: BorderSide(
                   color: _isSelected ? colors[index] : Colors.transparent,
                   width: 2,
                 ),
               ),
-              child: Column(
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
+                  ///背景カラー
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Spacer(),
+
+                      Text(
+                        '',
+                        style: TextStyle(
+                          color: _isSelected ? Colors.black54 : Colors.black54,
+                          fontSize: context.width * 0.03,
+                        ),
+                      ),
+
+                      Container(
+                        width: context.width * 0.15,
+                        height: context.width * 0.15,
+                        alignment: Alignment.bottomRight,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: colors[index].shade50,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 0,
+                              offset: Offset(7, 7),
+                            ),
+                          ],
+                        ),
+
+                        ///ボタンカラー
+                        child: Container(
+                          height: context.width * 0.05,
+                          width: context.width * 0.05,
+                          margin: EdgeInsets.all(context.width * 0.01),
+                          decoration: ShapeDecoration(
+                            shape: const CircleBorder(),
+                            color: colors[index],
+                          ),
+                        ),
+                      ),
+
+                      const Spacer(),
+
+                      ///テキスト
+                      Text(
+                        ref
+                            .watch(settingColorProvider.notifier)
+                            .colorName(index),
+                        style: TextStyle(
+                          color: _isSelected ? colors[index] : Colors.black54,
+                          fontSize: context.width * 0.03,
+                          fontWeight:
+                              _isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      ),
+                      Gap(context.height * 0.01),
+                    ],
+                  ),
+
                   ///チェックアイコン
                   Container(
                     padding: EdgeInsets.all(context.width * 0.01),
@@ -78,53 +139,9 @@ class _ColorCards extends ConsumerWidget {
                       // 選択している時、Icons.check_circle、選択していない時、circle_outlinedに変更
                       _isSelected ? Icons.check_circle : Icons.circle_outlined,
                       color: _isSelected ? colors[index] : Colors.grey,
-                      size: context.width * 0.08,
+                      size: context.width * 0.06,
                     ),
                   ),
-
-                  ///背景カラー
-                  Container(
-                    width: context.width * 0.21,
-                    height: context.width * 0.21,
-                    alignment: Alignment.bottomRight,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: colors[index].shade50,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 0, //ぼかし
-                          offset: Offset(13, 13), // 1
-                        ),
-                      ],
-                    ),
-
-                    ///ボタンカラー
-                    child: Container(
-                      height: context.width * 0.07,
-                      width: context.width * 0.07,
-                      margin: EdgeInsets.all(context.width * 0.02),
-                      decoration: ShapeDecoration(
-                        shape: const CircleBorder(),
-                        color: colors[index].shade600,
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  const Gap(10),
-
-                  ///テキスト
-                  Container(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      ref.watch(settingColorProvider.notifier).colorName(index),
-                      style: TextStyle(
-                        color: _isSelected ? Colors.black54 : Colors.grey,
-                        fontSize: context.width * 0.04,
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
                 ],
               ),
             ),

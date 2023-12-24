@@ -21,21 +21,15 @@ class SettingColorController extends StateNotifier<SettingColorState>
   final Ref ref;
   final colors = [
     AppColor.main,
-    AppColor.red1,
-    AppColor.red2,
-    AppColor.yellow1,
-    AppColor.yellow2,
-    AppColor.green1,
-    AppColor.green2,
-    AppColor.green3,
-    AppColor.blue1,
-    AppColor.blue2,
-    AppColor.purple1,
-    AppColor.purple2,
-    AppColor.pink1,
-    AppColor.brown1,
-    AppColor.brown2,
-    AppColor.black1,
+    AppColor.peach,
+    AppColor.red,
+    AppColor.mint,
+    AppColor.green,
+    AppColor.cyan,
+    AppColor.blue,
+    AppColor.purple,
+    AppColor.brown,
+    AppColor.black,
   ];
 
   Future _initialize() async {
@@ -438,8 +432,9 @@ class SettingColorController extends StateNotifier<SettingColorState>
         ///AppBar
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
+            // color: Colors.black54,
             color: getThemePrimaryColor(themeId),
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
             fontFamily: "NotoSans",
           ),
@@ -549,35 +544,23 @@ class SettingColorController extends StateNotifier<SettingColorState>
       case 0:
         return AppColor.main;
       case 1:
-        return AppColor.red1;
+        return AppColor.peach;
       case 2:
-        return AppColor.red2;
+        return AppColor.red;
       case 3:
-        return AppColor.yellow1;
+        return AppColor.mint;
       case 4:
-        return AppColor.yellow2;
+        return AppColor.green;
       case 5:
-        return AppColor.green1;
+        return AppColor.cyan;
       case 6:
-        return AppColor.green2;
+        return AppColor.blue;
       case 7:
-        return AppColor.green3;
+        return AppColor.purple;
       case 8:
-        return AppColor.blue1;
+        return AppColor.brown;
       case 9:
-        return AppColor.blue2;
-      case 10:
-        return AppColor.purple1;
-      case 11:
-        return AppColor.purple2;
-      case 12:
-        return AppColor.pink1;
-      case 13:
-        return AppColor.brown1;
-      case 14:
-        return AppColor.brown2;
-      case 15:
-        return AppColor.black1;
+        return AppColor.black;
       default:
         return AppColor.main;
     }
@@ -586,39 +569,27 @@ class SettingColorController extends StateNotifier<SettingColorState>
   String colorName(int themeId) {
     switch (themeId) {
       case 0:
-        return "default";
+        return "マスタード";
       case 1:
-        return "red1";
+        return "ピーチ";
       case 2:
-        return "red2";
+        return "フラミンゴ";
       case 3:
-        return "yellow1";
+        return "ミント";
       case 4:
-        return "yellow2";
+        return "フォレスト";
       case 5:
-        return "green1";
+        return "スカイ";
       case 6:
-        return "green2";
+        return "インディゴ";
       case 7:
-        return "green3";
+        return "ラベンダー";
       case 8:
-        return "blue1";
+        return "チョコ";
       case 9:
-        return "blue2";
-      case 10:
-        return "purple1";
-      case 11:
-        return "purple2";
-      case 12:
-        return "pink1";
-      case 13:
-        return "brown1";
-      case 14:
-        return "brown2";
-      case 15:
-        return "black1";
+        return "モノトーン";
       default:
-        return '';
+        return 'デフォルト';
     }
   }
 

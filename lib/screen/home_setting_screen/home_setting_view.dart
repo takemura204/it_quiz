@@ -168,51 +168,75 @@ class _SetDailyQuizCountGoal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userCustom = ref.watch(userModelProvider).userCustom;
     final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
-    return Row(
+    return Column(
       children: [
-        IconButton(
-          iconSize: context.height * 0.03,
-          onPressed: dailyQuizCountGoal <= 10
-              ? null
-              : () {
-                  ref
-                      .read(userModelProvider.notifier)
-                      .updateDailyQuizCountGoal(dailyQuizCountGoal - 10);
-                },
-          icon: Icon(
-            Icons.remove_circle_outline,
-            color: dailyQuizCountGoal <= 10
-                ? Colors.grey.shade400
-                : context.mainColor,
-          ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              LineIcons.book,
+              color: Colors.black54,
+              size: context.height * 0.03,
+            ),
+            Text(
+              '問題数',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: context.height * 0.02,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
-        Gap(context.width * 0.01),
-        Text(
-          "$dailyQuizCountGoal",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
-        ),
-        Text(
-          "問",
-          style: TextStyle(
-              fontWeight: FontWeight.normal, fontSize: context.width * 0.04),
-        ),
-        Gap(context.width * 0.01),
-        IconButton(
-          iconSize: context.height * 0.03,
-          onPressed: dailyQuizCountGoal >= 50
-              ? null
-              : () {
-                  ref
-                      .read(userModelProvider.notifier)
-                      .updateDailyQuizCountGoal(dailyQuizCountGoal + 10);
-                },
-          icon: Icon(
-            Icons.add_circle_outline,
-            color: dailyQuizCountGoal >= 50
-                ? Colors.grey.shade400
-                : context.mainColor,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              iconSize: context.height * 0.03,
+              onPressed: dailyQuizCountGoal <= 10
+                  ? null
+                  : () {
+                      ref
+                          .read(userModelProvider.notifier)
+                          .updateDailyQuizCountGoal(dailyQuizCountGoal - 10);
+                    },
+              icon: Icon(
+                Icons.remove_circle_outline,
+                color: dailyQuizCountGoal <= 10
+                    ? Colors.grey.shade400
+                    : context.mainColor,
+              ),
+            ),
+            Gap(context.width * 0.01),
+            Text(
+              "$dailyQuizCountGoal",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: context.width * 0.05),
+            ),
+            Text(
+              "問",
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: context.width * 0.05),
+            ),
+            Gap(context.width * 0.01),
+            IconButton(
+              iconSize: context.height * 0.03,
+              onPressed: dailyQuizCountGoal >= 50
+                  ? null
+                  : () {
+                      ref
+                          .read(userModelProvider.notifier)
+                          .updateDailyQuizCountGoal(dailyQuizCountGoal + 10);
+                    },
+              icon: Icon(
+                Icons.add_circle_outline,
+                color: dailyQuizCountGoal >= 50
+                    ? Colors.grey.shade400
+                    : context.mainColor,
+              ),
+            ),
+          ],
         ),
       ],
     );

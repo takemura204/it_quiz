@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 ///ログインエラーBar
@@ -58,35 +60,30 @@ class SettingTitleBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-        elevation: 1.0,
-        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-        child: Container(
-          child: Container(
-            height: context.height * 0.05,
-            color: Colors.grey.withOpacity(0.3),
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const Spacer(),
-                ],
-              ),
+      child: Container(
+        height: context.height * 0.05,
+        color: Colors.white,
+        alignment: Alignment.bottomCenter,
+        padding: const EdgeInsets.only(left: 10, right: 20, bottom: 0),
+        child: Row(
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.normal,
+                  fontSize: context.height * 0.015),
             ),
-          ),
+            const Spacer(),
+          ],
         ),
       ),
     );
   }
 }
 
-class DefaltSettingBar extends ConsumerWidget {
-  const DefaltSettingBar({required this.title, required this.onTap});
+class DefaultSettingBar extends ConsumerWidget {
+  const DefaultSettingBar({required this.title, required this.onTap});
 
   final String title;
   final VoidCallback? onTap;
@@ -95,31 +92,27 @@ class DefaltSettingBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-        elevation: 1.0,
-        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-        child: Container(
-          height: context.height * 0.05,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.height * 0.015,
-                  ),
-                ),
-                const Spacer(),
-                Icon(
-                  Icons.arrow_forward_ios_sharp,
-                  size: context.height * 0.025,
-                  color: context.mainColor,
-                ),
-              ],
+      child: Container(
+        color: Colors.white,
+        height: context.height * 0.05,
+        padding: const EdgeInsets.only(left: 15, right: 20),
+        child: Row(
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.normal,
+                fontSize: context.height * 0.015,
+              ),
             ),
-          ),
+            const Spacer(),
+            Icon(
+              LineIcons.angleRight,
+              color: context.mainColor,
+              size: context.height * 0.02,
+            ),
+          ],
         ),
       ),
     );
@@ -139,25 +132,30 @@ class CustomSettingBar extends ConsumerWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        elevation: 1.0,
-        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        elevation: 0,
+        // margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         child: Container(
           height: context.height * 0.05,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: context.height * 0.015,
-                  ),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Row(
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.normal,
+                  fontSize: context.height * 0.015,
                 ),
-                const Spacer(),
-                customWidget,
-              ],
-            ),
+              ),
+              const Spacer(),
+              customWidget,
+              Gap(context.width * 0.01),
+              Icon(
+                LineIcons.angleRight,
+                color: context.mainColor,
+                size: context.height * 0.02,
+              ),
+            ],
           ),
         ),
       ),
