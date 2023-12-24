@@ -104,7 +104,7 @@ class AccountProfileScreen extends ConsumerWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return Container(
-                      height: MediaQuery.of(context).size.height / 3,
+                      height: context.height / 3,
                       child: Column(
                         children: [
                           // ボタン行を追加

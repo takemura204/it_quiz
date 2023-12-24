@@ -79,10 +79,11 @@ class _$SettingColorStateCopyWithImpl<$Res, $Val extends SettingColorState>
 }
 
 /// @nodoc
-abstract class _$$_CreateCopyWith<$Res>
+abstract class _$$_SettingColorStateCopyWith<$Res>
     implements $SettingColorStateCopyWith<$Res> {
-  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
-      __$$_CreateCopyWithImpl<$Res>;
+  factory _$$_SettingColorStateCopyWith(_$_SettingColorState value,
+          $Res Function(_$_SettingColorState) then) =
+      __$$_SettingColorStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,10 +94,11 @@ abstract class _$$_CreateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateCopyWithImpl<$Res>
-    extends _$SettingColorStateCopyWithImpl<$Res, _$_Create>
-    implements _$$_CreateCopyWith<$Res> {
-  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+class __$$_SettingColorStateCopyWithImpl<$Res>
+    extends _$SettingColorStateCopyWithImpl<$Res, _$_SettingColorState>
+    implements _$$_SettingColorStateCopyWith<$Res> {
+  __$$_SettingColorStateCopyWithImpl(
+      _$_SettingColorState _value, $Res Function(_$_SettingColorState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +109,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? themeId = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_Create(
+    return _then(_$_SettingColorState(
       themeData: freezed == themeData
           ? _value.themeData
           : themeData // ignore: cast_nullable_to_non_nullable
@@ -130,8 +132,8 @@ class __$$_CreateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Create extends _Create {
-  const _$_Create(
+class _$_SettingColorState extends _SettingColorState {
+  const _$_SettingColorState(
       {this.themeData,
       this.mainColor,
       this.themeId = 0,
@@ -158,7 +160,7 @@ class _$_Create extends _Create {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Create &&
+            other is _$_SettingColorState &&
             (identical(other.themeData, themeData) ||
                 other.themeData == themeData) &&
             (identical(other.mainColor, mainColor) ||
@@ -175,17 +177,18 @@ class _$_Create extends _Create {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
-      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
+  _$$_SettingColorStateCopyWith<_$_SettingColorState> get copyWith =>
+      __$$_SettingColorStateCopyWithImpl<_$_SettingColorState>(
+          this, _$identity);
 }
 
-abstract class _Create extends SettingColorState {
-  const factory _Create(
+abstract class _SettingColorState extends SettingColorState {
+  const factory _SettingColorState(
       {final ThemeData? themeData,
       final MaterialColor? mainColor,
       final int themeId,
-      final bool isLoading}) = _$_Create;
-  const _Create._() : super._();
+      final bool isLoading}) = _$_SettingColorState;
+  const _SettingColorState._() : super._();
 
   @override
   ThemeData? get themeData;
@@ -197,6 +200,6 @@ abstract class _Create extends SettingColorState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
+  _$$_SettingColorStateCopyWith<_$_SettingColorState> get copyWith =>
       throw _privateConstructorUsedError;
 }

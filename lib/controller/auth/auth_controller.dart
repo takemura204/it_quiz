@@ -38,10 +38,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
   final createFocusNode1 = FocusNode();
   final createFocusNode2 = FocusNode();
   final genders = ["男性", "女性", "未回答"];
-  final images = [
-    "assets/image/sample_02.jpg",
-    "assets/image/sample_01.jpg",
-  ];
+  final images = ["assets/image/sample_02.jpg", "assets/image/sample_01.jpg"];
 
   @override
   void initState() {

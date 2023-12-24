@@ -95,7 +95,7 @@ class DefaultSettingBar extends ConsumerWidget {
       child: Container(
         color: Colors.white,
         height: context.height * 0.05,
-        padding: const EdgeInsets.only(left: 15, right: 20),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         child: Row(
           children: [
             Text(
@@ -121,9 +121,13 @@ class DefaultSettingBar extends ConsumerWidget {
 
 class CustomSettingBar extends ConsumerWidget {
   const CustomSettingBar(
-      {required this.title, required this.customWidget, required this.onTap});
+      {required this.title,
+      required this.icon,
+      required this.customWidget,
+      required this.onTap});
 
   final String title;
+  final IconData icon;
   final VoidCallback? onTap;
   final Widget customWidget;
 
@@ -133,12 +137,17 @@ class CustomSettingBar extends ConsumerWidget {
       onTap: onTap,
       child: Card(
         elevation: 0,
-        // margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         child: Container(
           height: context.height * 0.05,
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Row(
             children: [
+              Icon(
+                icon,
+                color: Colors.black54,
+                size: context.height * 0.03,
+              ),
+              Gap(context.width * 0.01),
               Text(
                 title,
                 style: TextStyle(

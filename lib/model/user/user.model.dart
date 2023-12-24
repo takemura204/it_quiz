@@ -7,7 +7,7 @@ final userModelProvider = StateNotifierProvider<UserModel, User>(
 );
 
 class UserModel extends StateNotifier<User> with LocatorMixin {
-  UserModel(this.ref) : super(User()) {
+  UserModel(this.ref) : super(const User()) {
     initState();
   }
 
@@ -23,7 +23,6 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
     state = state.copyWith(
       userCustom: state.userCustom.copyWith(dailyQuizCountGoal: value),
     );
-    print(state.userCustom.dailyQuizCountGoal);
   }
 
   void updateDailyDurationGoal(int value) {
