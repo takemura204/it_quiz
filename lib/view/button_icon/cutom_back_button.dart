@@ -20,9 +20,9 @@ class CustomBackButton extends ConsumerWidget {
         onPressed: () {
           onPressed();
         },
-        icon: Icon(
+        icon: const Icon(
           LineIcons.angleLeft,
-          color: context.mainColor,
+          color: Colors.black54,
           size: 25,
         ),
       ),

@@ -10,7 +10,10 @@ import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/lang/initial_resource.dart';
+import '../../model/notification_time/notification_time.dart';
 import '../../view/bar.dart';
+import '../../view/bottom_sheet/daily_goal_picker.dart';
+import '../../view/bottom_sheet/time_picker.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/dialog.dart';
 import '../screen_argument.dart';
@@ -22,10 +25,6 @@ class HomeSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCustom = ref.watch(userModelProvider).userCustom;
-    final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
-    final quizCount = ref.watch(homeSettingProvider.notifier).quizCount;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),
@@ -92,131 +91,12 @@ class HomeSettingScreen extends ConsumerWidget {
             ),
             Column(
               children: [
-                const SettingTitleBar(
-                  title: "設定",
-                  onTap: null,
-                ),
-                CustomSettingBar(
-                  title: "毎日の目標",
-                  icon: LineIcons.flag,
-                  customWidget: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "$dailyQuizCountGoal",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.bold,
-                          fontSize: context.width * 0.04,
-                        ),
-                      ),
-                      Text(
-                        "問",
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: context.width * 0.03,
-                        ),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    final currentIndex = quizCount.indexOf(dailyQuizCountGoal);
-
-                    ///ドラムロール表示
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Container(
-                          height: context.height / 3,
-                          child: Column(
-                            children: [
-                              // ボタン行を追加
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CupertinoButton(
-                                    child: const Text(
-                                      'キャンセル',
-                                      style: TextStyle(color: Colors.black45),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                  CupertinoButton(
-                                    child: const Text(
-                                      '完了',
-                                      style:
-                                          TextStyle(color: Colors.blueAccent),
-                                    ),
-                                    onPressed: () {
-                                      final selectedQuizCountGoal = ref
-                                          .read(homeSettingProvider)
-                                          .selectedQuizCountGoal;
-
-                                      ref
-                                          .read(userModelProvider.notifier)
-                                          .updateDailyQuizCountGoal(
-                                              selectedQuizCountGoal);
-                                      Navigator.pop(context); // Pickerを閉じる
-                                    },
-                                  ),
-                                ],
-                              ),
-                              // Picker本体
-                              Expanded(
-                                child: CupertinoPicker(
-                                  itemExtent: 35,
-                                  scrollController: FixedExtentScrollController(
-                                      initialItem: currentIndex),
-                                  onSelectedItemChanged: (index) {
-                                    ref
-                                        .read(homeSettingProvider.notifier)
-                                        .setSelectedQuizCountGoal(
-                                            quizCount[index]);
-                                  },
-                                  children: quizCount.map((int count) {
-                                    return Text('$count問');
-                                  }).toList(),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                const SettingTitleBar(title: "設定", onTap: null),
+                const _SettingDailyGoal(),
                 _Divider(),
-                CustomSettingBar(
-                  title: "カラーテーマ",
-                  icon: LineIcons.palette,
-                  customWidget: Container(
-                    height: context.width * 0.05,
-                    width: context.width * 0.05,
-                    margin: EdgeInsets.all(context.width * 0.01),
-                    decoration: ShapeDecoration(
-                      shape: const CircleBorder(),
-                      color: context.mainColor,
-                    ),
-                  ),
-                  onTap: () {
-                    context.showScreen(
-                        const SettingColorScreenArguments().generateRoute());
-                  },
-                ),
+                const _SettingThemeColor(),
                 _Divider(),
-                CustomSettingBar(
-                  title: "リマインダー",
-                  icon: LineIcons.stopwatch,
-                  customWidget: const Text('許可しない'),
-                  onTap: () {
-                    context.showScreen(
-                        const SettingNotificationScreenArguments()
-                            .generateRoute());
-                  },
-                ),
+                const _SettingNotification(),
                 _Divider(),
                 const SettingTitleBar(
                   title: "アプリについて",

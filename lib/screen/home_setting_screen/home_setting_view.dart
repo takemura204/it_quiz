@@ -160,143 +160,115 @@ class UserImage extends ConsumerWidget {
   }
 }
 
-///毎日の目標設定
-class _SetDailyQuizCountGoal extends ConsumerWidget {
-  const _SetDailyQuizCountGoal();
+///目標設定
+class _SettingDailyGoal extends ConsumerWidget {
+  const _SettingDailyGoal();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userCustom = ref.watch(userModelProvider).userCustom;
     final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              LineIcons.book,
+
+    return CustomSettingBar(
+      title: "毎日の目標",
+      icon: LineIcons.flag,
+      customWidget: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "$dailyQuizCountGoal",
+            style: TextStyle(
               color: Colors.black54,
-              size: context.height * 0.03,
+              fontWeight: FontWeight.normal,
+              fontSize: context.width * 0.035,
             ),
-            Text(
-              '問題数',
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: context.height * 0.02,
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          Text(
+            "問",
+            style: TextStyle(
+              color: Colors.black54,
+              fontWeight: FontWeight.normal,
+              fontSize: context.width * 0.03,
             ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              iconSize: context.height * 0.03,
-              onPressed: dailyQuizCountGoal <= 10
-                  ? null
-                  : () {
-                      ref
-                          .read(userModelProvider.notifier)
-                          .updateDailyQuizCountGoal(dailyQuizCountGoal - 10);
-                    },
-              icon: Icon(
-                Icons.remove_circle_outline,
-                color: dailyQuizCountGoal <= 10
-                    ? Colors.grey.shade400
-                    : context.mainColor,
-              ),
-            ),
-            Gap(context.width * 0.01),
-            Text(
-              "$dailyQuizCountGoal",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: context.width * 0.05),
-            ),
-            Text(
-              "問",
-              style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: context.width * 0.05),
-            ),
-            Gap(context.width * 0.01),
-            IconButton(
-              iconSize: context.height * 0.03,
-              onPressed: dailyQuizCountGoal >= 50
-                  ? null
-                  : () {
-                      ref
-                          .read(userModelProvider.notifier)
-                          .updateDailyQuizCountGoal(dailyQuizCountGoal + 10);
-                    },
-              icon: Icon(
-                Icons.add_circle_outline,
-                color: dailyQuizCountGoal >= 50
-                    ? Colors.grey.shade400
-                    : context.mainColor,
-              ),
-            ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
+      onTap: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return const DailyGoalPicker();
+            });
+      },
     );
   }
 }
 
-class _SetDailyDurationGoal extends ConsumerWidget {
-  const _SetDailyDurationGoal();
+///カラーテーマ
+class _SettingThemeColor extends ConsumerWidget {
+  const _SettingThemeColor();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return CustomSettingBar(
+      title: "カラーテーマ",
+      icon: LineIcons.palette,
+      customWidget: Container(
+        height: context.width * 0.05,
+        width: context.width * 0.05,
+        margin: EdgeInsets.all(context.width * 0.01),
+        decoration: ShapeDecoration(
+          shape: const CircleBorder(),
+          color: context.mainColor,
+        ),
+      ),
+      onTap: () {
+        context.showScreen(const SettingColorScreenArguments().generateRoute());
+      },
+    );
+  }
+}
+
+///リマインダー
+class _SettingNotification extends ConsumerWidget {
+  const _SettingNotification();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userCustom = ref.watch(userModelProvider).userCustom;
-    final dailyDurationGoal = userCustom.dailyDurationGoal;
-    return Row(
-      children: [
-        IconButton(
-          iconSize: context.height * 0.03,
-          onPressed: dailyDurationGoal <= 5
-              ? null
-              : () {
-                  ref
-                      .read(userModelProvider.notifier)
-                      .updateDailyDurationGoal(dailyDurationGoal - 5);
+    final defaultHour = NotificationTime.defaultTime().hour;
+    final defaultMinute = NotificationTime.defaultTime().minute;
+    final selectedHour = userCustom.selectNotificationTime?.hour ?? defaultHour;
+    final selectedMinute =
+        userCustom.selectNotificationTime?.minute ?? defaultMinute;
+    return CustomSettingBar(
+      title: "リマインダー",
+      icon: LineIcons.stopwatch,
+      customWidget: Text(
+        '$selectedHour:${selectedMinute.toString().padLeft(2, '0')}',
+        style: TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: context.width * 0.035,
+        ),
+      ),
+      onTap: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomTimePicker(
+                initialTime:
+                    TimeOfDay(hour: selectedHour!, minute: selectedMinute!),
+                recommendedHour: 9,
+                recommendedMinute: 0,
+                onTimeChanged: (selectedTime) async {
+                  ref.read(userModelProvider.notifier).updateNotificationTime(
+                      value: NotificationTime(
+                          hour: selectedTime.hour,
+                          minute: selectedTime.minute));
                 },
-          icon: Icon(
-            Icons.remove_circle_outline,
-            color: dailyDurationGoal <= 5
-                ? Colors.grey.shade400
-                : context.mainColor,
-          ),
-        ),
-        Gap(context.width * 0.01),
-        Text(
-          "$dailyDurationGoal",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
-        ),
-        Text(
-          "分",
-          style: TextStyle(
-              fontWeight: FontWeight.normal, fontSize: context.width * 0.04),
-        ),
-        Gap(context.width * 0.01),
-        IconButton(
-          iconSize: context.height * 0.03,
-          onPressed: dailyDurationGoal >= 60
-              ? null
-              : () {
-                  ref
-                      .read(userModelProvider.notifier)
-                      .updateDailyDurationGoal(dailyDurationGoal + 5);
-                },
-          icon: Icon(
-            Icons.add_circle_outline,
-            color: dailyDurationGoal >= 60
-                ? Colors.grey.shade400
-                : context.mainColor,
-          ),
-        ),
-      ],
+              );
+            });
+      },
     );
   }
 }

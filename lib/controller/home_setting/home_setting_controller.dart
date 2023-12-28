@@ -31,6 +31,5 @@ class HomeSettingController extends StateNotifier<HomeSettingState>
 
   void setSelectedQuizCountGoal(int value) {
     state = state.copyWith(selectedQuizCountGoal: value);
-    print(state.selectedQuizCountGoal);
   }
 }
