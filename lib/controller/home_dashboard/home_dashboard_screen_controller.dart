@@ -180,12 +180,22 @@ class HomeDashboardScreenController
       final monthOffset = state.monthOffset + offset;
       state = state.copyWith(monthOffset: monthOffset);
       final now = DateTime.now();
-      final newMonth = now.month + monthOffset;
-      final newYear = now.year + ((newMonth - 1) ~/ 12);
-      final adjustedMonth = ((newMonth - 1) % 12) + 1;
-      final startOfMonth = DateTime(newYear, adjustedMonth, 1); // 月の初めの00:00
+      int newYear = now.year;
+      int newMonth = now.month + monthOffset;
+
+      // 月と年の調整
+      while (newMonth < 1) {
+        newMonth += 12;
+        newYear--;
+      }
+      while (newMonth > 12) {
+        newMonth -= 12;
+        newYear++;
+      }
+
+      final startOfMonth = DateTime(newYear, newMonth, 1); // 月の初めの00:00
       final endOfMonth = DateTime(
-          newYear, adjustedMonth + 1, 0, 23, 59, 59, 999); // 月末の23:59:59.999
+          newYear, newMonth + 1, 0, 23, 59, 59, 999); // 月末の23:59:59.999
 
       setPeriodData(startOfMonth, endOfMonth);
     }

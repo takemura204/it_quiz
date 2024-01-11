@@ -10,7 +10,6 @@
             <key>SKAdNetworkIdentifier</key>
             <string>cstr6suwn9.skadnetwork</string>
         </dict>
-        <!-- 他のSKAdNetwork識別子もここに追加できます。 -->
     </array>
    <key>UIBackgroundModes</key>
    <array>
@@ -30,6 +29,8 @@
     <string>This app requires to add file to your camera</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>This app requires to add file to your photo library your microphone</string>
+    <key>NSUserNotificationUsageDescription</key>
+    <string>このアプリでは通知を送るために許可が必要です</string>
 	<key>CFBundleDisplayName</key>
 	<string>Kentei Quiz</string>
 	<key>CFBundleExecutable</key>

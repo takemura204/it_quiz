@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_controller.dart';
-import 'package:kentei_quiz/controller/home_setting/home_setting_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/notification_time/notification_time.dart';
 import '../../view/bar.dart';

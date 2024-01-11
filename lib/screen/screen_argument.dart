@@ -6,7 +6,6 @@ import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_history_screen/quiz_history_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
-import 'package:kentei_quiz/screen/setting_notification_screen/setting_notification_screen.dart';
 
 import '../model/quiz/quiz.dart';
 import '../model/screen_argument_resource.dart';
@@ -91,21 +90,6 @@ class SettingColorScreenArguments
   @override
   Route generateRoute() => CupertinoPageRoute(
         builder: (context) => const SettingColorScreen(),
-      );
-}
-
-///リマインダー画面
-class SettingNotificationScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
-  const SettingNotificationScreenArguments();
-
-  @override
-  String get screenNameFormat => "/setting_notification";
-
-  @override
-  Route generateRoute() => CupertinoPageRoute(
-        builder: (context) => const SettingNotificationScreen(),
       );
 }
 

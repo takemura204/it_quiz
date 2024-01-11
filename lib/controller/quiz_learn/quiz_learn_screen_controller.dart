@@ -81,7 +81,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       question: quizItemList[index].question,
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
-      isWeak: !quizItemList[index].isWeak,
+      isWeak: quizItemList[index].isWeak,
       isJudge: isKnow,
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,

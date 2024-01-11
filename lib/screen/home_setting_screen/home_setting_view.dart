@@ -241,34 +241,58 @@ class _SettingNotification extends ConsumerWidget {
     final selectedHour = userCustom.selectNotificationTime?.hour ?? defaultHour;
     final selectedMinute =
         userCustom.selectNotificationTime?.minute ?? defaultMinute;
-    return CustomSettingBar(
-      title: "リマインダー",
-      icon: LineIcons.stopwatch,
-      customWidget: Text(
-        '$selectedHour:${selectedMinute.toString().padLeft(2, '0')}',
-        style: TextStyle(
-          fontWeight: FontWeight.normal,
-          fontSize: context.width * 0.035,
-        ),
-      ),
-      onTap: () {
-        showModalBottomSheet(
-            context: context,
-            builder: (BuildContext context) {
-              return CustomTimePicker(
-                initialTime:
-                    TimeOfDay(hour: selectedHour!, minute: selectedMinute!),
-                recommendedHour: 9,
-                recommendedMinute: 0,
-                onTimeChanged: (selectedTime) async {
-                  ref.read(userModelProvider.notifier).updateNotificationTime(
-                      value: NotificationTime(
-                          hour: selectedTime.hour,
-                          minute: selectedTime.minute));
-                },
-              );
+    final isNotification =
+        ref.watch(settingNotificationProvider.select((s) => s.isNotification));
+    return Stack(
+      children: [
+        CustomSettingBar(
+          title: "リマインダー",
+          icon: LineIcons.stopwatch,
+          customWidget: Text(
+            isNotification
+                ? '$selectedHour:${selectedMinute.toString().padLeft(2, '0')}'
+                : '許可しない',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: context.width * 0.035,
+            ),
+          ),
+          onTap: () async {
+            await ref
+                .read(settingNotificationProvider.notifier)
+                .checkNotificationPermission()
+                .then((value) {
+              if (!isNotification) {
+                openAppSettings();
+              } else {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CustomTimePicker(
+                        initialTime: TimeOfDay(
+                            hour: selectedHour!, minute: selectedMinute!),
+                        recommendedHour: 9,
+                        recommendedMinute: 0,
+                        onTimeChanged: (selectedTime) async {
+                          ref
+                              .read(userModelProvider.notifier)
+                              .updateNotificationTime(
+                                  value: NotificationTime(
+                                      hour: selectedTime.hour,
+                                      minute: selectedTime.minute));
+                        },
+                      );
+                    });
+              }
             });
-      },
+          },
+        ),
+        Container(
+          width: 50,
+          height: 50,
+          color: Colors.red,
+        ),
+      ],
     );
   }
 }

@@ -50,7 +50,7 @@ class AppColor {
   );
 
   ///ミント
-  static const MaterialColor mint = MaterialColor(0xFF93D1CD, {
+  static const MaterialColor mint = MaterialColor(0xFF75C4BF, {
     50: Color(0xFFECF8F7),
     100: Color(0xFFCFEBE9),
     200: Color(0xFFB1DEDB),

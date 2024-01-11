@@ -1,105 +1,63 @@
-import 'dart:io';
+import 'dart:async';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/setting_notification/setting_notification_state.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
-import 'package:timezone/timezone.dart' as tz;
 
 final settingNotificationProvider = StateNotifierProvider<
     SettingNotificationController,
     SettingNotificationState>((ref) => SettingNotificationController(ref: ref));
 
 class SettingNotificationController
-    extends StateNotifier<SettingNotificationState>
-    with LocatorMixin {
+    extends StateNotifier<SettingNotificationState> with LocatorMixin {
   SettingNotificationController({required this.ref})
       : super(const SettingNotificationState()) {
-        () {
-      _initialize();
+    () {
+      _initState();
     }();
   }
 
   final Ref ref;
+  StreamSubscription? _permissionStreamSubscription;
 
-  Future _initialize() async {
+  Future _initState() async {
     await checkNotificationPermission();
+    _notificationPermissionStream();
   }
 
   @override
   Future dispose() async {
+    _permissionStreamSubscription?.cancel();
     super.dispose();
   }
 
-  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-
-  Future<bool> checkNotificationPermission() async {
-    final NotificationAppLaunchDetails? notificationAppLaunchDetails =
-    await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    final bool didNotificationLaunchApp =
-        notificationAppLaunchDetails?.didNotificationLaunchApp ?? false;
-    state = state.copyWith(isNotification: didNotificationLaunchApp);
-    return didNotificationLaunchApp;
-  }
-
-
-  Future<void> requestPermissions() async {
-    if (Platform.isIOS || Platform.isMacOS) {
-      await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-      await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-          MacOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-    } else if (Platform.isAndroid) {
-      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
-      flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>();
-      await androidImplementation?.requestNotificationsPermission();
+  Future checkNotificationPermission() async {
+    //既に許可を求めているか確認
+    final prefs = await SharedPreferences.getInstance();
+    final askedBefore = prefs.getBool('askedNotificationPermission') ?? false;
+    if (!askedBefore) {
+      var permissionStatus = await Permission.notification.status;
+      permissionStatus = await Permission.notification.request();
+      state = state.copyWith(isNotification: permissionStatus.isGranted);
+      await prefs.setBool('askedNotificationPermission', true);
+    } else {
+      var permissionStatus = await Permission.notification.status;
+      permissionStatus = await Permission.notification.request();
+      state = state.copyWith(isNotification: permissionStatus.isGranted);
+      print(permissionStatus);
+      await prefs.setBool('askedNotificationPermission', true);
     }
   }
 
-  Future<void> _scheduleDaily8AMNotification() async {
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      0,
-      'OB-1',
-      '本日の顔を撮影をしましょう',
-      _nextInstanceOf8AM(),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'ob-1-face-daily',
-          'ob-1-face-daily',
-          channelDescription: 'Face photo notification',
-        ),
-        iOS: DarwinNotificationDetails(
-          badgeNumber: 1,
-        ),
-      ),
-      uiLocalNotificationDateInterpretation:
-      UILocalNotificationDateInterpretation.absoluteTime,
-      androidAllowWhileIdle: true,
-    );
-  }
-
-  // 1回目に通知を飛ばす時間の作成
-  tz.TZDateTime _nextInstanceOf8AM() {
-    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, now.year, now.month, now.day, 8);
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
-    }
-    return scheduledDate;
+  void _notificationPermissionStream() {
+    _permissionStreamSubscription =
+        Stream.periodic(const Duration(milliseconds: 1500))
+            .asyncMap((_) => Permission.notification.status)
+            .distinct()
+            .listen((status) {
+      state = state.copyWith(isNotification: status.isGranted);
+    });
   }
 }
