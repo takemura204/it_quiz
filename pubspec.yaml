@@ -139,6 +139,9 @@ dependencies:
   flutter_local_notifications: ^16.3.0
   permission_handler: ^11.0.1
 
+  #アイコン管理を簡単にしたい
+  flutter_launcher_icons: ^0.13.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -159,4 +162,14 @@ flutter:
   assets:
     - assets/icon/
     - assets/image/
+    - assets/launcher/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  #  image_path: 'assets/launcher/icon.png'
+  image_path_android: 'assets/launcher/icon_android.png'
+  image_path_ios: 'assets/launcher/icon_ios.png'
+  adaptive_icon_background: '#ffffff'
+  adaptive_icon_foreground: 'assets/launcher/icon_foreground.png'
 
