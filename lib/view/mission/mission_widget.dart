@@ -26,8 +26,8 @@ class DailyMissionWidget extends ConsumerWidget {
     final _timeLimit = state.timeLimit;
     final model = ref.watch(missionModelProvider);
     final missions = model.sortedMissions;
-    final userCustom = ref.watch(userModelProvider).userCustom;
-    final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
+    final userCustom = ref.watch(userModelProvider);
+    final dailyGoal = userCustom.dailyGoal;
     final dashboardModel = ref.watch(dashboardModelProvider);
     final dailyQuizCount = dashboardModel.dailyQuizCount;
     final dailyQuizCorrectCount = dashboardModel.dailyQuizCorrectCount;
@@ -64,7 +64,7 @@ class DailyMissionWidget extends ConsumerWidget {
             _DailyMissionCard(
               mission: missions[2],
               currentValue: dailyQuizCount,
-              goalValue: dailyQuizCountGoal,
+              goalValue: dailyGoal,
             ),
             Divider(color: context.mainColor, height: 1, thickness: 1),
 

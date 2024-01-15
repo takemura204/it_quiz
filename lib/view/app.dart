@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
 
 import '../controller/setting_color/setting_color_controller.dart';
 import '../screen/home_root_screen/home_root_screen.dart';
@@ -33,7 +34,9 @@ class _App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeData = ref.watch(settingColorProvider).themeData;
+    final themeId = ref.watch(userModelProvider).themeId;
+    final themeData =
+        ref.read(settingColorProvider.notifier).loadTheme(themeId);
     return MaterialApp(
       //右上のdebugラベルを消す
       debugShowCheckedModeBanner: false,

@@ -102,37 +102,41 @@ class HomeDashboardScreenController
 
   Future setChartData() async {
     final selectedChartType = state.selectedChartType;
-    final userModel = ref.read(userModelProvider).userCustom;
+    final userModel = ref.read(userModelProvider);
     switch (selectedChartType) {
       case ChartType.quizCount:
         final periodQuizCounts = state.periodQuizCountList;
         final periodDays = state.periodDays;
-        final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
+        final dailyGoal = userModel.dailyGoal;
         state = state.copyWith(
             unitY: "問",
             valueX: periodQuizCounts,
-            valueY: dailyQuizCountGoal,
+            valueY: dailyGoal,
             days: periodDays);
         break;
       case ChartType.duration:
         final periodDuration = state.periodDurationList;
         final periodDays = state.periodDays;
-        final dailyDurationGoal = userModel.dailyDurationGoal;
+
+        final maxDuration =
+            periodDuration.reduce((curr, next) => curr > next ? curr : next);
+        final dailyDurationGoal = maxDuration > 20 ? maxDuration / 2 : 10;
+
         state = state.copyWith(
           unitY: "分",
           valueX: periodDuration,
-          valueY: dailyDurationGoal,
+          valueY: dailyDurationGoal.toInt(),
           days: periodDays,
         );
         break;
       default:
         final periodQuizCounts = state.periodQuizCountList;
         final periodDays = state.periodDays;
-        final dailyQuizCountGoal = userModel.dailyQuizCountGoal;
+        final dailyGoal = userModel.dailyGoal;
         state = state.copyWith(
             unitY: "問",
             valueX: periodQuizCounts,
-            valueY: dailyQuizCountGoal,
+            valueY: dailyGoal,
             days: periodDays);
     }
   }

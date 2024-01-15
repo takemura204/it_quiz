@@ -9,8 +9,5 @@ class SettingColorState with _$SettingColorState {
 
   const factory SettingColorState({
     ThemeData? themeData,
-    MaterialColor? mainColor,
-    @Default(0) final int themeId,
-    @Default(false) final bool isLoading,
   }) = _SettingColorState;
 }

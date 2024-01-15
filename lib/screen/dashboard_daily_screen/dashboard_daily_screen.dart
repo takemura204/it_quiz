@@ -21,10 +21,9 @@ class DailyDashboard extends ConsumerWidget {
     final dailyQuizCount = dashboardModel.dailyQuizCount;
     final runningDays = dashboardModel.runningDays;
     final userModel = ref.watch(userModelProvider);
-    final dailyQuizCountGoal = userModel.userCustom.dailyQuizCountGoal;
-    final dailyRate = (dailyQuizCount / dailyQuizCountGoal * 100)
-        .clamp(0, 100)
-        .toStringAsFixed(1);
+    final dailyGoal = userModel.dailyGoal;
+    final dailyRate =
+        (dailyQuizCount / dailyGoal * 100).clamp(0, 100).toStringAsFixed(1);
 
     return Card(
       elevation: 2,
@@ -72,7 +71,7 @@ class DailyDashboard extends ConsumerWidget {
                 ProgressCrilcleChart(
                   width: context.height * 0.4,
                   size: context.width * 0.45,
-                  goalScore: dailyQuizCountGoal,
+                  goalScore: dailyGoal,
                   currentScore: dailyQuizCount,
                   thickness: 0.13,
                   widget: Column(
@@ -116,7 +115,7 @@ class DailyDashboard extends ConsumerWidget {
                       ),
                       Gap(context.height * 0.01),
                       Text(
-                        "$dailyQuizCount/$dailyQuizCountGoal",
+                        "$dailyQuizCount/$dailyGoal",
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: context.height * 0.018,

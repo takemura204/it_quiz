@@ -1,7 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/auth/auth_controller.dart';
-import 'package:kentei_quiz/controller/setting_color/setting_color_controller.dart';
-import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import 'main_state.dart';
@@ -19,10 +16,6 @@ class MainController extends StateNotifier<MainState> with LocatorMixin {
 
   @override
   void initState() {
-    ref.read(authProvider.notifier).initState();
-    ref.read(quizModelProvider.notifier).initState();
-    ref.read(settingColorProvider.notifier).initState();
-    print("initMainProvider");
     super.initState();
   }
 }

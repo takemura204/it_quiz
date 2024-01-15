@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../../view/button_icon/cutom_back_button.dart';
@@ -35,7 +36,7 @@ class _ColorCards extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = ref.watch(settingColorProvider.notifier).colors;
-    final themeId = ref.watch(settingColorProvider).themeId;
+    final themeId = ref.watch(userModelProvider).themeId;
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -53,8 +54,7 @@ class _ColorCards extends ConsumerWidget {
 
           return GestureDetector(
             onTap: () async {
-              await ref.read(settingColorProvider.notifier).setTheme(index);
-              await ref.read(settingColorProvider.notifier).setThemeId(index);
+              ref.read(userModelProvider.notifier).updateThemeId(index);
             },
             child: Card(
               elevation: 3,

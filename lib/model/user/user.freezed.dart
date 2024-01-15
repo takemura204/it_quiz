@@ -14,19 +14,26 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+User _$UserFromJson(Map<String, dynamic> json) {
+  return _User.fromJson(json);
+}
+
 /// @nodoc
 mixin _$User {
-//ユーザー情報
+//ユーザー基本情報
   String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  File? get userImage => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get birthDay => throw _privateConstructorUsedError;
-  bool get isLogin => throw _privateConstructorUsedError;
-  UserCustom get userCustom => throw _privateConstructorUsedError;
+  bool get isLogin => throw _privateConstructorUsedError; //ユーザーのカスタム設定
+  int get themeId => throw _privateConstructorUsedError;
+  int get dailyGoal => throw _privateConstructorUsedError;
+  NotificationTime? get selectNotificationTime =>
+      throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
@@ -39,15 +46,16 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String uid,
       String userName,
-      File? userImage,
       String email,
       String password,
       String gender,
       String birthDay,
       bool isLogin,
-      UserCustom userCustom});
+      int themeId,
+      int dailyGoal,
+      NotificationTime? selectNotificationTime});
 
-  $UserCustomCopyWith<$Res> get userCustom;
+  $NotificationTimeCopyWith<$Res>? get selectNotificationTime;
 }
 
 /// @nodoc
@@ -65,13 +73,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? uid = null,
     Object? userName = null,
-    Object? userImage = freezed,
     Object? email = null,
     Object? password = null,
     Object? gender = null,
     Object? birthDay = null,
     Object? isLogin = null,
-    Object? userCustom = null,
+    Object? themeId = null,
+    Object? dailyGoal = null,
+    Object? selectNotificationTime = freezed,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -82,10 +91,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      userImage: freezed == userImage
-          ? _value.userImage
-          : userImage // ignore: cast_nullable_to_non_nullable
-              as File?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -106,18 +111,31 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.isLogin
           : isLogin // ignore: cast_nullable_to_non_nullable
               as bool,
-      userCustom: null == userCustom
-          ? _value.userCustom
-          : userCustom // ignore: cast_nullable_to_non_nullable
-              as UserCustom,
+      themeId: null == themeId
+          ? _value.themeId
+          : themeId // ignore: cast_nullable_to_non_nullable
+              as int,
+      dailyGoal: null == dailyGoal
+          ? _value.dailyGoal
+          : dailyGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectNotificationTime: freezed == selectNotificationTime
+          ? _value.selectNotificationTime
+          : selectNotificationTime // ignore: cast_nullable_to_non_nullable
+              as NotificationTime?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCustomCopyWith<$Res> get userCustom {
-    return $UserCustomCopyWith<$Res>(_value.userCustom, (value) {
-      return _then(_value.copyWith(userCustom: value) as $Val);
+  $NotificationTimeCopyWith<$Res>? get selectNotificationTime {
+    if (_value.selectNotificationTime == null) {
+      return null;
+    }
+
+    return $NotificationTimeCopyWith<$Res>(_value.selectNotificationTime!,
+        (value) {
+      return _then(_value.copyWith(selectNotificationTime: value) as $Val);
     });
   }
 }
@@ -131,16 +149,17 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String uid,
       String userName,
-      File? userImage,
       String email,
       String password,
       String gender,
       String birthDay,
       bool isLogin,
-      UserCustom userCustom});
+      int themeId,
+      int dailyGoal,
+      NotificationTime? selectNotificationTime});
 
   @override
-  $UserCustomCopyWith<$Res> get userCustom;
+  $NotificationTimeCopyWith<$Res>? get selectNotificationTime;
 }
 
 /// @nodoc
@@ -154,13 +173,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   $Res call({
     Object? uid = null,
     Object? userName = null,
-    Object? userImage = freezed,
     Object? email = null,
     Object? password = null,
     Object? gender = null,
     Object? birthDay = null,
     Object? isLogin = null,
-    Object? userCustom = null,
+    Object? themeId = null,
+    Object? dailyGoal = null,
+    Object? selectNotificationTime = freezed,
   }) {
     return _then(_$_User(
       uid: null == uid
@@ -171,10 +191,6 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      userImage: freezed == userImage
-          ? _value.userImage
-          : userImage // ignore: cast_nullable_to_non_nullable
-              as File?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -195,38 +211,46 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.isLogin
           : isLogin // ignore: cast_nullable_to_non_nullable
               as bool,
-      userCustom: null == userCustom
-          ? _value.userCustom
-          : userCustom // ignore: cast_nullable_to_non_nullable
-              as UserCustom,
+      themeId: null == themeId
+          ? _value.themeId
+          : themeId // ignore: cast_nullable_to_non_nullable
+              as int,
+      dailyGoal: null == dailyGoal
+          ? _value.dailyGoal
+          : dailyGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectNotificationTime: freezed == selectNotificationTime
+          ? _value.selectNotificationTime
+          : selectNotificationTime // ignore: cast_nullable_to_non_nullable
+              as NotificationTime?,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_User implements _User {
   const _$_User(
       {this.uid = '',
       this.userName = '',
-      this.userImage = null,
       this.email = '',
       this.password = '',
       this.gender = '',
       this.birthDay = '',
       this.isLogin = false,
-      this.userCustom = const UserCustom()});
+      this.themeId = 0,
+      this.dailyGoal = 10,
+      this.selectNotificationTime});
 
-//ユーザー情報
+  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
+
+//ユーザー基本情報
   @override
   @JsonKey()
   final String uid;
   @override
   @JsonKey()
   final String userName;
-  @override
-  @JsonKey()
-  final File? userImage;
   @override
   @JsonKey()
   final String email;
@@ -242,13 +266,19 @@ class _$_User implements _User {
   @override
   @JsonKey()
   final bool isLogin;
+//ユーザーのカスタム設定
   @override
   @JsonKey()
-  final UserCustom userCustom;
+  final int themeId;
+  @override
+  @JsonKey()
+  final int dailyGoal;
+  @override
+  final NotificationTime? selectNotificationTime;
 
   @override
   String toString() {
-    return 'User(uid: $uid, userName: $userName, userImage: $userImage, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, userCustom: $userCustom)';
+    return 'User(uid: $uid, userName: $userName, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, themeId: $themeId, dailyGoal: $dailyGoal, selectNotificationTime: $selectNotificationTime)';
   }
 
   @override
@@ -259,8 +289,6 @@ class _$_User implements _User {
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
-            (identical(other.userImage, userImage) ||
-                other.userImage == userImage) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
@@ -268,39 +296,51 @@ class _$_User implements _User {
             (identical(other.birthDay, birthDay) ||
                 other.birthDay == birthDay) &&
             (identical(other.isLogin, isLogin) || other.isLogin == isLogin) &&
-            (identical(other.userCustom, userCustom) ||
-                other.userCustom == userCustom));
+            (identical(other.themeId, themeId) || other.themeId == themeId) &&
+            (identical(other.dailyGoal, dailyGoal) ||
+                other.dailyGoal == dailyGoal) &&
+            (identical(other.selectNotificationTime, selectNotificationTime) ||
+                other.selectNotificationTime == selectNotificationTime));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, userName, userImage, email,
-      password, gender, birthDay, isLogin, userCustom);
+  int get hashCode => Object.hash(runtimeType, uid, userName, email, password,
+      gender, birthDay, isLogin, themeId, dailyGoal, selectNotificationTime);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserToJson(
+      this,
+    );
+  }
 }
 
 abstract class _User implements User {
   const factory _User(
       {final String uid,
       final String userName,
-      final File? userImage,
       final String email,
       final String password,
       final String gender,
       final String birthDay,
       final bool isLogin,
-      final UserCustom userCustom}) = _$_User;
+      final int themeId,
+      final int dailyGoal,
+      final NotificationTime? selectNotificationTime}) = _$_User;
 
-  @override //ユーザー情報
+  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
+
+  @override //ユーザー基本情報
   String get uid;
   @override
   String get userName;
-  @override
-  File? get userImage;
   @override
   String get email;
   @override
@@ -311,8 +351,12 @@ abstract class _User implements User {
   String get birthDay;
   @override
   bool get isLogin;
+  @override //ユーザーのカスタム設定
+  int get themeId;
   @override
-  UserCustom get userCustom;
+  int get dailyGoal;
+  @override
+  NotificationTime? get selectNotificationTime;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

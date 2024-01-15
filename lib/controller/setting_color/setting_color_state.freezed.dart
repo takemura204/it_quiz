@@ -17,9 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingColorState {
   ThemeData? get themeData => throw _privateConstructorUsedError;
-  MaterialColor? get mainColor => throw _privateConstructorUsedError;
-  int get themeId => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingColorStateCopyWith<SettingColorState> get copyWith =>
@@ -32,11 +29,7 @@ abstract class $SettingColorStateCopyWith<$Res> {
           SettingColorState value, $Res Function(SettingColorState) then) =
       _$SettingColorStateCopyWithImpl<$Res, SettingColorState>;
   @useResult
-  $Res call(
-      {ThemeData? themeData,
-      MaterialColor? mainColor,
-      int themeId,
-      bool isLoading});
+  $Res call({ThemeData? themeData});
 }
 
 /// @nodoc
@@ -53,27 +46,12 @@ class _$SettingColorStateCopyWithImpl<$Res, $Val extends SettingColorState>
   @override
   $Res call({
     Object? themeData = freezed,
-    Object? mainColor = freezed,
-    Object? themeId = null,
-    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       themeData: freezed == themeData
           ? _value.themeData
           : themeData // ignore: cast_nullable_to_non_nullable
               as ThemeData?,
-      mainColor: freezed == mainColor
-          ? _value.mainColor
-          : mainColor // ignore: cast_nullable_to_non_nullable
-              as MaterialColor?,
-      themeId: null == themeId
-          ? _value.themeId
-          : themeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -86,11 +64,7 @@ abstract class _$$_SettingColorStateCopyWith<$Res>
       __$$_SettingColorStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {ThemeData? themeData,
-      MaterialColor? mainColor,
-      int themeId,
-      bool isLoading});
+  $Res call({ThemeData? themeData});
 }
 
 /// @nodoc
@@ -105,27 +79,12 @@ class __$$_SettingColorStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? themeData = freezed,
-    Object? mainColor = freezed,
-    Object? themeId = null,
-    Object? isLoading = null,
   }) {
     return _then(_$_SettingColorState(
       themeData: freezed == themeData
           ? _value.themeData
           : themeData // ignore: cast_nullable_to_non_nullable
               as ThemeData?,
-      mainColor: freezed == mainColor
-          ? _value.mainColor
-          : mainColor // ignore: cast_nullable_to_non_nullable
-              as MaterialColor?,
-      themeId: null == themeId
-          ? _value.themeId
-          : themeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -133,27 +92,14 @@ class __$$_SettingColorStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SettingColorState extends _SettingColorState {
-  const _$_SettingColorState(
-      {this.themeData,
-      this.mainColor,
-      this.themeId = 0,
-      this.isLoading = false})
-      : super._();
+  const _$_SettingColorState({this.themeData}) : super._();
 
   @override
   final ThemeData? themeData;
-  @override
-  final MaterialColor? mainColor;
-  @override
-  @JsonKey()
-  final int themeId;
-  @override
-  @JsonKey()
-  final bool isLoading;
 
   @override
   String toString() {
-    return 'SettingColorState(themeData: $themeData, mainColor: $mainColor, themeId: $themeId, isLoading: $isLoading)';
+    return 'SettingColorState(themeData: $themeData)';
   }
 
   @override
@@ -162,17 +108,11 @@ class _$_SettingColorState extends _SettingColorState {
         (other.runtimeType == runtimeType &&
             other is _$_SettingColorState &&
             (identical(other.themeData, themeData) ||
-                other.themeData == themeData) &&
-            (identical(other.mainColor, mainColor) ||
-                other.mainColor == mainColor) &&
-            (identical(other.themeId, themeId) || other.themeId == themeId) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.themeData == themeData));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, themeData, mainColor, themeId, isLoading);
+  int get hashCode => Object.hash(runtimeType, themeData);
 
   @JsonKey(ignore: true)
   @override
@@ -183,21 +123,12 @@ class _$_SettingColorState extends _SettingColorState {
 }
 
 abstract class _SettingColorState extends SettingColorState {
-  const factory _SettingColorState(
-      {final ThemeData? themeData,
-      final MaterialColor? mainColor,
-      final int themeId,
-      final bool isLoading}) = _$_SettingColorState;
+  const factory _SettingColorState({final ThemeData? themeData}) =
+      _$_SettingColorState;
   const _SettingColorState._() : super._();
 
   @override
   ThemeData? get themeData;
-  @override
-  MaterialColor? get mainColor;
-  @override
-  int get themeId;
-  @override
-  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_SettingColorStateCopyWith<_$_SettingColorState> get copyWith =>

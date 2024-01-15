@@ -166,8 +166,8 @@ class _SettingDailyGoal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCustom = ref.watch(userModelProvider).userCustom;
-    final dailyQuizCountGoal = userCustom.dailyQuizCountGoal;
+    final userCustom = ref.watch(userModelProvider);
+    final dailyGoal = userCustom.dailyGoal;
 
     return CustomSettingBar(
       title: "毎日の目標",
@@ -176,7 +176,7 @@ class _SettingDailyGoal extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "$dailyQuizCountGoal",
+            "$dailyGoal",
             style: TextStyle(
               color: Colors.black54,
               fontWeight: FontWeight.normal,
@@ -235,7 +235,7 @@ class _SettingNotification extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCustom = ref.watch(userModelProvider).userCustom;
+    final userCustom = ref.watch(userModelProvider);
     final defaultHour = NotificationTime.defaultTime().hour;
     final defaultMinute = NotificationTime.defaultTime().minute;
     final selectedHour = userCustom.selectNotificationTime?.hour ?? defaultHour;
@@ -243,7 +243,7 @@ class _SettingNotification extends ConsumerWidget {
         userCustom.selectNotificationTime?.minute ?? defaultMinute;
     final isNotification =
         ref.watch(settingNotificationProvider.select((s) => s.isNotification));
-    return Stack(
+    return Column(
       children: [
         CustomSettingBar(
           title: "リマインダー",
@@ -287,10 +287,35 @@ class _SettingNotification extends ConsumerWidget {
             });
           },
         ),
-        Container(
-          width: 50,
-          height: 50,
-          color: Colors.red,
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () async {
+                await ref
+                    .read(settingNotificationProvider.notifier)
+                    .sendNotificationNow();
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.red,
+              ),
+            ),
+            GestureDetector(
+              onTap: () async {
+                await ref
+                    .read(settingNotificationProvider.notifier)
+                    // .sendNotificationNow();
+                    .scheduleNotifications(
+                        DateTime.now().add(const Duration(seconds: 3)));
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.blue,
+              ),
+            ),
+          ],
         ),
       ],
     );
