@@ -19,6 +19,10 @@ import '../../view/dialog.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
+part 'setting_color.dart';
+part 'setting_contact.dart';
+part 'setting_daily_goal.dart';
+part 'setting_notification.dart';
 
 class HomeSettingScreen extends ConsumerWidget {
   const HomeSettingScreen();
@@ -98,14 +102,9 @@ class HomeSettingScreen extends ConsumerWidget {
                 _Divider(),
                 const _SettingNotification(),
                 _Divider(),
-                const SettingTitleBar(
-                  title: "アプリについて",
-                  onTap: null,
-                ),
-                const DefaultSettingBar(
-                  title: "お問合せ",
-                  onTap: null,
-                ),
+                const SettingTitleBar(title: "サポート", onTap: null),
+                const _SettingContact(),
+                _Divider(),
                 const DefaultSettingBar(
                   title: "シェア",
                   onTap: null,

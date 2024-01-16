@@ -143,6 +143,9 @@ dependencies:
   #アイコン管理を簡単にしたい
   flutter_launcher_icons: ^0.13.1
 
+  #webviewを使用したい
+  webview_flutter: ^4.4.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

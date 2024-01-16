@@ -29,9 +29,16 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
     final prefs = await SharedPreferences.getInstance();
     final dailyGoal = prefs.getInt('daily_goal') ?? state.dailyGoal;
     final themeId = prefs.getInt('theme_id') ?? state.themeId;
-    state = state.copyWith(dailyGoal: dailyGoal, themeId: themeId);
+    final hour = prefs.getInt('notification_hour');
+    final minute = prefs.getInt('notification_minute');
+    final notificationTime = (hour != null && minute != null)
+        ? NotificationTime(hour: hour, minute: minute)
+        : NotificationTime.defaultTime();
+    state = state.copyWith(
+        dailyGoal: dailyGoal,
+        themeId: themeId,
+        selectNotificationTime: notificationTime);
     _saveDevice();
-    print({'_loadUserData', state.themeId});
   }
 
   void updateDailyGoal(int value) {
@@ -43,12 +50,12 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
     state = state.copyWith(themeId: value);
     _saveDevice();
     ref.read(settingColorProvider.notifier).loadTheme(state.themeId);
-    print(state.themeId);
   }
 
   Future updateNotificationTime({required NotificationTime value}) async {
     try {
       state = state.copyWith(selectNotificationTime: value);
+      await _saveDevice();
     } on Exception catch (e, s) {
       print({e, s});
     }
@@ -58,7 +65,12 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
     final prefs = await SharedPreferences.getInstance();
     final dailyGoal = state.dailyGoal;
     final themeId = state.themeId;
+    final notificationTime = state.selectNotificationTime;
     await prefs.setInt('daily_goal', dailyGoal);
     await prefs.setInt('theme_id', themeId);
+    if (notificationTime != null) {
+      await prefs.setInt('notification_hour', notificationTime.hour ?? 0);
+      await prefs.setInt('notification_minute', notificationTime.minute ?? 0);
+    }
   }
 }

@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/setting_notification/setting_notification_state.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -83,7 +85,6 @@ class SettingNotificationController
       var permissionStatus = await Permission.notification.status;
       permissionStatus = await Permission.notification.request();
       state = state.copyWith(isNotification: permissionStatus.isGranted);
-      print(permissionStatus);
       await prefs.setBool('askedNotificationPermission', true);
     }
   }
@@ -99,13 +100,24 @@ class SettingNotificationController
   }
 
   Future<void> scheduleNotifications(DateTime dateTime,
-      {DateTimeComponents? dateTimeComponents}) async {
+      {required TimeOfDay selectNotificationTime,
+      DateTimeComponents? dateTimeComponents}) async {
     try {
-      await _cancelNotification();
-      print('scheduleNotifications Start');
+      final notificationTime =
+          ref.read(userModelProvider).selectNotificationTime;
+      if (notificationTime == null) {
+        print('Notification time is not set');
+        return;
+      }
+
       // 日時をTimeZoneを考慮した日時に変換する
-      final scheduleTime = tz.TZDateTime.from(dateTime, tz.local);
-      print(scheduleTime);
+      final scheduleTime = tz.TZDateTime(
+          tz.local,
+          dateTime.year,
+          dateTime.month,
+          dateTime.day,
+          selectNotificationTime.hour,
+          selectNotificationTime.minute);
 
       const NotificationDetails platformChannelSpecifics = NotificationDetails(
         android: AndroidNotificationDetails(
@@ -119,8 +131,7 @@ class SettingNotificationController
 
       // 通知をスケジュールする
       final flnp = FlutterLocalNotificationsPlugin();
-      await flnp
-          .zonedSchedule(
+      await flnp.zonedSchedule(
         1,
         'スケジュール通知',
         'あなたがスケジュールした時間になりました',
@@ -130,41 +141,9 @@ class SettingNotificationController
             UILocalNotificationDateInterpretation.absoluteTime,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         matchDateTimeComponents: DateTimeComponents.time,
-      )
-          .then((value) {
-        print('scheduleNotifications Finish');
-      });
+      );
     } catch (e) {
       print('scheduleNotifications Error: $e');
     }
-  }
-
-  ///手動通知
-  Future<void> sendNotificationNow() async {
-    try {
-      print('sendNotificationNow');
-      const NotificationDetails platformChannelSpecifics = NotificationDetails(
-        android: AndroidNotificationDetails(
-          'sendNotificationNow_id', // チャンネルID
-          'sendNotificationNow_name', // チャンネル名
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(categoryIdentifier: 'plainCategory'),
-      );
-
-      await flutterLocalNotificationsPlugin.show(
-        0,
-        '手動通知',
-        'あなたがボタンをタップしました',
-        platformChannelSpecifics,
-      );
-    } catch (e) {
-      print('sendNotificationNow Error: $e');
-    }
-  }
-
-  Future<void> _cancelNotification() async {
-    await flutterLocalNotificationsPlugin.cancelAll();
   }
 }
