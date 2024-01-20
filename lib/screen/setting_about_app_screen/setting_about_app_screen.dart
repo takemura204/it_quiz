@@ -26,33 +26,71 @@ class SettingAboutAppScreen extends ConsumerWidget {
       body: Container(
         color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: [
-            const Gap(30),
-            SvgPicture.asset(
-              'assets/image/about_app.svg',
-              fit: BoxFit.fitWidth,
-              width: context.width * 0.9,
-            ),
-            const Gap(150),
-            SecondaryButton(
-                width: context.width,
-                height: 50,
-                text: '利用規約',
-                onPressed: () {
-                  context.showScreen(
-                      const SettingUserPolicyScreenArguments().generateRoute());
-                }),
-            const Gap(10),
-            SecondaryButton(
-                width: context.width,
-                height: 50,
-                text: 'プライバシーポリシー',
-                onPressed: () {
-                  context.showScreen(const SettingPrivacyPolicyScreenArguments()
-                      .generateRoute());
-                }),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Gap(30),
+              SvgPicture.asset(
+                'assets/image/about_app.svg',
+                fit: BoxFit.fitWidth,
+                width: context.width * 0.9,
+              ),
+              const Gap(30),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        'あなたの「好き」を、\nもっと豊かで素敵な日常に。',
+                        style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const Gap(20),
+              const Text(
+                'Thanks to all who installed our app. Your support drives our improvement.\nWe value you in our community. Your experience matters to us. \nThanks for joining our journey.',
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal),
+              ),
+              const Gap(100),
+              SecondaryButton(
+                  width: context.width,
+                  height: 50,
+                  text: '利用規約',
+                  onPressed: () {
+                    context.showScreen(const SettingUserPolicyScreenArguments()
+                        .generateRoute());
+                  }),
+              const Gap(10),
+              SecondaryButton(
+                  width: context.width,
+                  height: 50,
+                  text: 'プライバシーポリシー',
+                  onPressed: () {
+                    context.showScreen(
+                        const SettingPrivacyPolicyScreenArguments()
+                            .generateRoute());
+                  }),
+              const Gap(10),
+              SecondaryButton(
+                  width: context.width,
+                  height: 50,
+                  text: 'バージョン・ライセンス',
+                  onPressed: () {
+                    context.showScreen(
+                        const SettingLicenseScreenArguments().generateRoute());
+                  }),
+              const Gap(100),
+            ],
+          ),
         ),
       ),
     );

@@ -6,6 +6,7 @@ import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_history_screen/quiz_history_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
 import 'package:kentei_quiz/screen/setting_about_app_screen/setting_about_app_screen.dart';
+import 'package:kentei_quiz/screen/setting_about_app_screen/setting_license_screen.dart';
 import 'package:kentei_quiz/screen/setting_about_app_screen/setting_privacy_policy_screen.dart';
 import 'package:kentei_quiz/screen/setting_about_app_screen/setting_user_policy_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
@@ -264,9 +265,19 @@ class AccountDeleteScreenArguments
       );
 }
 
-mixin _NoParamsMixin<T> implements IScreenArguments<T> {
+///プライバシーポリシー
+class SettingLicenseScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const SettingLicenseScreenArguments();
+
   @override
-  String get screenName => screenNameFormat;
+  String get screenNameFormat => "/license";
+
+  @override
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => const SettingLicenseScreen(),
+      );
 }
 
 ///利用規約
@@ -297,4 +308,9 @@ class SettingPrivacyPolicyScreenArguments
   Route generateRoute() => CupertinoPageRoute(
         builder: (context) => const SettingPrivacyPolicyScreen(),
       );
+}
+
+mixin _NoParamsMixin<T> implements IScreenArguments<T> {
+  @override
+  String get screenName => screenNameFormat;
 }
