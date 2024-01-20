@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/model/extension_resource.dart';
 
 class SecondaryButton extends ConsumerWidget {
   const SecondaryButton({
@@ -28,7 +27,7 @@ class SecondaryButton extends ConsumerWidget {
           alignment: Alignment.center,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
-              Radius.circular(10),
+              Radius.circular(8),
             ),
           ),
           side: const BorderSide(
@@ -38,10 +37,10 @@ class SecondaryButton extends ConsumerWidget {
         ),
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black45,
             fontWeight: FontWeight.bold,
-            fontSize: context.height * 0.02,
+            fontSize: 16,
           ),
         ),
         onPressed: onPressed,

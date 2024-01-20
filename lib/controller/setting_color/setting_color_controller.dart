@@ -4,13 +4,13 @@ import 'package:kentei_quiz/controller/setting_color/setting_color_state.dart';
 import 'package:kentei_quiz/model/color_resource.dart';
 
 final settingColorProvider =
-StateNotifierProvider<SettingColorController, SettingColorState>(
+    StateNotifierProvider<SettingColorController, SettingColorState>(
         (ref) => SettingColorController(ref: ref));
 
 class SettingColorController extends StateNotifier<SettingColorState> {
   SettingColorController({required this.ref})
       : super(const SettingColorState()) {
-        () {
+    () {
       initState();
     }();
   }
@@ -29,9 +29,7 @@ class SettingColorController extends StateNotifier<SettingColorState> {
     AppColor.black,
   ];
 
-  Future initState() async {
-
-  }
+  Future initState() async {}
 
   @override
   Future dispose() async {
@@ -42,7 +40,6 @@ class SettingColorController extends StateNotifier<SettingColorState> {
   ThemeData loadTheme(int themeId) {
     try {
       final themeData = ThemeData(
-
         ///Card
         cardTheme: const CardTheme(
           margin: EdgeInsets.all(0),
@@ -82,7 +79,7 @@ class SettingColorController extends StateNotifier<SettingColorState> {
           fillColor: const Color(0xffF8FAFA),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding:
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           hintStyle: original.black.bodySmall?.apply(
             color: Colors.black26,
           ),
@@ -186,17 +183,16 @@ class SettingColorController extends StateNotifier<SettingColorState> {
         ///AppBar
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
-            // color: Colors.black54,
-            color: getThemePrimaryColor(themeId),
-            fontSize: 18,
+            color: Colors.black54,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             fontFamily: "NotoSans",
           ),
           shape: Border(
               bottom:
-              BorderSide(color: getThemePrimaryColor(themeId), width: 3)),
+                  BorderSide(color: getThemePrimaryColor(themeId), width: 1.5)),
           color: Colors.white,
-          elevation: 2,
+          elevation: 0,
           iconTheme: const IconThemeData(
             color: Colors.black87,
           ),
@@ -229,53 +225,53 @@ class SettingColorController extends StateNotifier<SettingColorState> {
         ///CheckboxButton
         checkboxTheme: CheckboxThemeData(
           fillColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return null;
-                }
-                if (states.contains(MaterialState.selected)) {
-                  return getThemePrimaryColor(themeId);
-                }
-                return null;
-              }),
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return getThemePrimaryColor(themeId);
+            }
+            return null;
+          }),
         ),
 
         /// RadioButton
         radioTheme: RadioThemeData(
           fillColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return null;
-                }
-                if (states.contains(MaterialState.selected)) {
-                  return getThemePrimaryColor(themeId);
-                }
-                return null;
-              }),
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return getThemePrimaryColor(themeId);
+            }
+            return null;
+          }),
         ),
 
         ///SwietchButton
         switchTheme: SwitchThemeData(
           thumbColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return null;
-                }
-                if (states.contains(MaterialState.selected)) {
-                  return getThemePrimaryColor(themeId);
-                }
-                return null;
-              }),
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return getThemePrimaryColor(themeId);
+            }
+            return null;
+          }),
           trackColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return null;
-                }
-                if (states.contains(MaterialState.selected)) {
-                  return getThemePrimaryColor(themeId);
-                }
-                return null;
-              }),
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return getThemePrimaryColor(themeId);
+            }
+            return null;
+          }),
         ),
       );
       return themeData;
@@ -415,25 +411,10 @@ class SettingColorController extends StateNotifier<SettingColorState> {
   );
 
   final original = Typography.material2018(
-    black: Typography
-        .material2018()
-        .black
-        .merge(customize),
-    white: Typography
-        .material2018()
-        .white
-        .merge(customize),
-    englishLike: Typography
-        .material2018()
-        .englishLike
-        .merge(customize),
-    dense: Typography
-        .material2018()
-        .dense
-        .merge(customize),
-    tall: Typography
-        .material2018()
-        .tall
-        .merge(customize),
+    black: Typography.material2018().black.merge(customize),
+    white: Typography.material2018().white.merge(customize),
+    englishLike: Typography.material2018().englishLike.merge(customize),
+    dense: Typography.material2018().dense.merge(customize),
+    tall: Typography.material2018().tall.merge(customize),
   );
 }

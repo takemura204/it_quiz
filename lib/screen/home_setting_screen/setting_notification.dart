@@ -21,9 +21,9 @@ class _SettingNotification extends ConsumerWidget {
         isNotification
             ? '$selectedHour:${selectedMinute.toString().padLeft(2, '0')}'
             : '許可しない',
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.normal,
-          fontSize: context.width * 0.035,
+          fontSize: 16,
         ),
       ),
       onTap: () async {

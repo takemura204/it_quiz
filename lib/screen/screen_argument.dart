@@ -5,6 +5,9 @@ import 'package:kentei_quiz/screen/account_profile_screen/account_profile_screen
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_history_screen/quiz_history_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
+import 'package:kentei_quiz/screen/setting_about_app_screen/setting_about_app_screen.dart';
+import 'package:kentei_quiz/screen/setting_about_app_screen/setting_privacy_policy_screen.dart';
+import 'package:kentei_quiz/screen/setting_about_app_screen/setting_user_policy_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 import 'package:kentei_quiz/screen/setting_contact_screen/setting_contact_screen.dart';
 
@@ -106,6 +109,21 @@ class SettingContactScreenArguments
   @override
   Route generateRoute() => CupertinoPageRoute(
         builder: (context) => const SettingContactScreen(),
+      );
+}
+
+///このアプリについて
+class SettingAboutAppScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const SettingAboutAppScreenArguments();
+
+  @override
+  String get screenNameFormat => "/setting_about_app";
+
+  @override
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => const SettingAboutAppScreen(),
       );
 }
 
@@ -249,4 +267,34 @@ class AccountDeleteScreenArguments
 mixin _NoParamsMixin<T> implements IScreenArguments<T> {
   @override
   String get screenName => screenNameFormat;
+}
+
+///利用規約
+class SettingUserPolicyScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const SettingUserPolicyScreenArguments();
+
+  @override
+  String get screenNameFormat => "/user_policy";
+
+  @override
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => const SettingUserPolicyScreen(),
+      );
+}
+
+///プライバシーポリシー
+class SettingPrivacyPolicyScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const SettingPrivacyPolicyScreenArguments();
+
+  @override
+  String get screenNameFormat => "/privacy_policy";
+
+  @override
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => const SettingPrivacyPolicyScreen(),
+      );
 }

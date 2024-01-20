@@ -14,7 +14,6 @@ class SettingContactController extends StateNotifier<SettingContactState> {
 
   final webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    // ..setBackgroundColor(const Color(0x00000000))
     ..loadRequest(Uri.parse('https://forms.gle/zeFBMygChGeuL8Fc7'));
 
   Future setLoading(bool value) async {

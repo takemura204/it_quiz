@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:kentei_quiz/controller/setting_about_app/setting_abaout_app_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../controller/setting_contact/setting_contact_controller.dart';
 import '../../view/button_icon/cutom_back_button.dart';
 
-part 'setting_contact_view.dart';
-
-class SettingContactScreen extends ConsumerWidget {
-  const SettingContactScreen();
+///利用規約
+class SettingPrivacyPolicyScreen extends ConsumerWidget {
+  const SettingPrivacyPolicyScreen();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref
-        .read(settingNotificationProvider.notifier)
-        .webViewController
+        .read(settingAboutAppProvider.notifier)
+        .privacyPolicyWebViewController
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
             //進行状況の更新（例えばプログレスバーの更新）に使用
           },
           onPageStarted: (String url) {
-            ref.read(settingNotificationProvider.notifier).setLoading(true);
+            ref.read(settingAboutAppProvider.notifier).setLoading(true);
           },
           onPageFinished: (String url) {
-            ref.read(settingNotificationProvider.notifier).setLoading(false);
+            ref.read(settingAboutAppProvider.notifier).setLoading(false);
           },
           onWebResourceError: (WebResourceError error) {
             // ウェブリソースの読み込み中にエラーが発生した場
@@ -40,14 +39,14 @@ class SettingContactScreen extends ConsumerWidget {
           },
         ),
       );
-    final isLoading = ref.watch(settingNotificationProvider).isLoading;
+    final isLoading = ref.watch(settingAboutAppProvider).isLoading;
 
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: const Text("お問い合わせ"),
+        title: const Text("プライバシーポリシー"),
         leading: CustomBackButton(onPressed: () {
           Navigator.pop(context);
         }),

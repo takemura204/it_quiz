@@ -10,9 +10,8 @@ class _SettingThemeColor extends ConsumerWidget {
       title: "カラーテーマ",
       icon: LineIcons.palette,
       customWidget: Container(
-        height: context.width * 0.05,
-        width: context.width * 0.05,
-        margin: EdgeInsets.all(context.width * 0.01),
+        height: 23,
+        width: 23,
         decoration: ShapeDecoration(
           shape: const CircleBorder(),
           color: context.mainColor,

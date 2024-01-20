@@ -43,10 +43,6 @@ dependencies:
   # アプリのローカルストレージに値を保存したい
   shared_preferences: ^2.1.0
 
-  #様々なデバイス上でのレイアウトを確認したい
-  device_preview: ^1.0.0
-  device_preview_screenshot: ^1.0.0
-
   #  Listをグループ化したい
   grouped_list: ^5.1.2
 
@@ -146,6 +142,12 @@ dependencies:
   #webviewを使用したい
   webview_flutter: ^4.4.4
 
+  #アプリ外に共有したい
+  share_plus: ^7.2.1
+
+  #SVGの画像を使用したい
+  flutter_svg: ^2.0.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -156,6 +158,10 @@ dev_dependencies:
   json_serializable: ^6.6.2
   freezed: ^2.3.2
   build_runner: ^2.4.6
+
+  #様々なデバイス上でのレイアウトを確認したい
+  device_preview: ^1.0.0
+  device_preview_screenshot: ^1.0.0
 
 flutter:
   uses-material-design: true

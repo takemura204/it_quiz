@@ -17,18 +17,18 @@ class _SettingDailyGoal extends ConsumerWidget {
         children: [
           Text(
             "$dailyGoal",
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black54,
               fontWeight: FontWeight.normal,
-              fontSize: context.width * 0.035,
+              fontSize: 16,
             ),
           ),
-          Text(
+          const Text(
             "問",
             style: TextStyle(
               color: Colors.black54,
               fontWeight: FontWeight.normal,
-              fontSize: context.width * 0.03,
+              fontSize: 14,
             ),
           ),
         ],

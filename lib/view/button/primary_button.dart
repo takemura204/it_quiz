@@ -41,7 +41,7 @@ class PrimaryButton extends ConsumerWidget {
             if (icon != null)
               Icon(
                 icon,
-                size: height * 0.58,
+                size: height * 0.6,
               ),
             SizedBox(width: icon != null ? 6.0 : 0),
             Text(
@@ -49,9 +49,7 @@ class PrimaryButton extends ConsumerWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: height < context.height * 0.05
-                    ? context.height * 0.015
-                    : context.height * 0.02,
+                fontSize: height <= 5 ? 14 : 16,
               ),
             ),
             const Spacer(),
@@ -87,9 +85,9 @@ class SetAccountButton extends ConsumerWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
-            fontSize: context.height * 0.018,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),

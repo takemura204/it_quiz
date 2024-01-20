@@ -8,7 +8,7 @@ class SettingNotificationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isNotification = true;
+    const isNotification = true;
     // ref.watch(settingNotificationProvider).isNotification;
     return Scaffold(
       appBar: AppBar(

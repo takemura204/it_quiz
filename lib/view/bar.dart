@@ -69,10 +69,10 @@ class SettingTitleBar extends ConsumerWidget {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black54,
                   fontWeight: FontWeight.normal,
-                  fontSize: context.height * 0.015),
+                  fontSize: 14),
             ),
             const Spacer(),
           ],
@@ -138,31 +138,31 @@ class CustomSettingBar extends ConsumerWidget {
       child: Card(
         elevation: 0,
         child: Container(
-          height: context.height * 0.05,
+          height: 50,
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Row(
             children: [
               Icon(
                 icon,
                 color: Colors.black54,
-                size: context.height * 0.03,
+                size: 28,
               ),
-              Gap(context.width * 0.01),
+              const Gap(10),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black87,
                   fontWeight: FontWeight.normal,
-                  fontSize: context.height * 0.015,
+                  fontSize: 16,
                 ),
               ),
               const Spacer(),
               customWidget,
-              Gap(context.width * 0.01),
+              const Gap(5),
               Icon(
                 LineIcons.angleRight,
                 color: context.mainColor,
-                size: context.height * 0.02,
+                size: 20,
               ),
             ],
           ),

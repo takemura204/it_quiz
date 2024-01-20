@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:state_notifier/state_notifier.dart';
-
 import 'home_setting_state.dart';
 
 final homeSettingProvider =
@@ -31,5 +31,28 @@ class HomeSettingController extends StateNotifier<HomeSettingState>
 
   void setSelectedQuizCountGoal(int value) {
     state = state.copyWith(selectedQuizCountGoal: value);
+  }
+
+  Future sendAppReview() async {
+    final inAppReview = InAppReview.instance;
+    final isAvailable = await inAppReview.isAvailable();
+    if (isAvailable) {
+      inAppReview.requestReview();
+    } else {
+      ///アプリストアに遷移
+      // if (Platform.isAndroid) {
+      //   final googlePlayUri = Uri.parse(
+      //       'https://play.google.com/store/apps/details?id=jp.bldt.stockr');
+      //   if (await canLaunchUrl(googlePlayUri)) {
+      //     await launchUrl(googlePlayUri);
+      //   }
+      // } else if (Platform.isIOS) {
+      //   final appStoreUri = Uri.parse(
+      //       'itms-apps://itunes.apple.com/app/1532371630?action=write-review');
+      //   if (await canLaunchUrl(appStoreUri)) {
+      //     await launchUrl(appStoreUri);
+      //   }
+      // }
+    }
   }
 }

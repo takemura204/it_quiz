@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_controller.dart';
+import 'package:kentei_quiz/controller/home_setting/home_setting_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:line_icons/line_icons.dart';
@@ -19,10 +20,12 @@ import '../../view/dialog.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
+part 'setting_about_app.dart';
 part 'setting_color.dart';
 part 'setting_contact.dart';
 part 'setting_daily_goal.dart';
 part 'setting_notification.dart';
+part 'setting_review.dart';
 
 class HomeSettingScreen extends ConsumerWidget {
   const HomeSettingScreen();
@@ -105,14 +108,16 @@ class HomeSettingScreen extends ConsumerWidget {
                 const SettingTitleBar(title: "サポート", onTap: null),
                 const _SettingContact(),
                 _Divider(),
-                const DefaultSettingBar(
-                  title: "シェア",
-                  onTap: null,
-                ),
-                const DefaultSettingBar(
-                  title: "開発者",
-                  onTap: null,
-                ),
+                const _SettingReview(),
+                _Divider(),
+
+                ///シェア
+                // const DefaultSettingBar(
+                //   title: "このアプリを教える",
+                //   onTap: null,
+                // ),
+                const _SettingAboutApp(),
+                _Divider(),
               ],
             ),
 
