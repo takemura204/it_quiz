@@ -61,7 +61,7 @@ class SettingTitleBar extends ConsumerWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 50,
+        height: 45,
         color: Colors.white,
         alignment: Alignment.bottomCenter,
         padding: const EdgeInsets.only(left: 10, right: 20, bottom: 0),

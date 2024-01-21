@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/setting_notification/setting_notification_state.dart';
+import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,11 +21,10 @@ final settingNotificationProvider = StateNotifierProvider<
     SettingNotificationState>((ref) => SettingNotificationController(ref: ref));
 
 class SettingNotificationController
-    extends StateNotifier<SettingNotificationState>
-    with LocatorMixin {
+    extends StateNotifier<SettingNotificationState> with LocatorMixin {
   SettingNotificationController({required this.ref})
       : super(const SettingNotificationState()) {
-        () {
+    () {
       _initState();
     }();
   }
@@ -32,7 +33,7 @@ class SettingNotificationController
   StreamSubscription? _permissionStreamSubscription;
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   Future _initState() async {
     _notificationPermissionStream();
@@ -51,17 +52,17 @@ class SettingNotificationController
   /// flutter_local_notificationsの初期化
   Future _initLocalNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('icon_notification'); // アプリのアイコンを設定
+        AndroidInitializationSettings('icon_notification'); // アプリのアイコンを設定
 
     const DarwinInitializationSettings initializationSettingsIOS =
-    DarwinInitializationSettings(
+        DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
 
     const InitializationSettings initializationSettings =
-    InitializationSettings(
+        InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
@@ -83,14 +84,15 @@ class SettingNotificationController
 
     // Android 13 (API level 33) 以降の場合、新しい通知許可プロンプトを使用
     if (Platform.isAndroid) {
-      final AndroidDeviceInfo androidInfo = await DeviceInfoPlugin()
-          .androidInfo;
+      final AndroidDeviceInfo androidInfo =
+          await DeviceInfoPlugin().androidInfo;
       if (androidInfo.version.sdkInt >= 33) {
         // Android 13 以降の通知許可チェック
         bool isNotificationEnabled = await flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-            ?.areNotificationsEnabled() ?? false;
+                .resolvePlatformSpecificImplementation<
+                    AndroidFlutterLocalNotificationsPlugin>()
+                ?.areNotificationsEnabled() ??
+            false;
         permissionStatus = isNotificationEnabled
             ? PermissionStatus.granted
             : PermissionStatus.denied;
@@ -112,18 +114,16 @@ class SettingNotificationController
             .asyncMap((_) => Permission.notification.status)
             .distinct()
             .listen((status) {
-          state = state.copyWith(isNotification: status.isGranted);
-        });
+      state = state.copyWith(isNotification: status.isGranted);
+    });
   }
 
   Future<void> scheduleNotifications(DateTime dateTime,
       {required TimeOfDay selectNotificationTime,
-        DateTimeComponents? dateTimeComponents}) async {
+      DateTimeComponents? dateTimeComponents}) async {
     try {
       final notificationTime =
-          ref
-              .read(userModelProvider)
-              .selectNotificationTime;
+          ref.read(userModelProvider).selectNotificationTime;
       if (notificationTime == null) {
         print('Notification time is not set');
         return;
@@ -150,14 +150,20 @@ class SettingNotificationController
 
       // 通知をスケジュールする
       final flnp = FlutterLocalNotificationsPlugin();
+
+      final randomIndex = Random().nextInt(9);
+
+      // 通知テキストを取得
+      final notificationTitle = I18n().notificationTitle(randomIndex);
+      final notificationText = I18n().notificationText(randomIndex);
       await flnp.zonedSchedule(
         1,
-        'スケジュール通知',
-        'あなたがスケジュールした時間になりました',
+        '$notificationTitle',
+        '$notificationText',
         scheduleTime,
         platformChannelSpecifics,
         uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime,
+            UILocalNotificationDateInterpretation.absoluteTime,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         matchDateTimeComponents: DateTimeComponents.time,
       );
