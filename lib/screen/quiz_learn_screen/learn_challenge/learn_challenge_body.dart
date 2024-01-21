@@ -8,17 +8,14 @@ class _LearnChallengeBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         ///クイズカード
         const _QuizCard(),
 
-        Gap(context.height * 0.01),
-
         ///知っている・知らないボタン
         _ActionButtons(quiz),
 
-        Gap(context.height * 0.01),
+        const Gap(10),
 
         ///何周目か確認
         _LapInfoBar(quiz),

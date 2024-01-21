@@ -7,7 +7,9 @@ class PeriodChart extends ConsumerWidget {
     final unitY = state.unitY;
     final valueX = state.valueX;
     final valueY = state.valueY;
-    final maxValue = valueY * 2; //最大表示メモリ
+    final maxValue =
+        valueY * 2 % 5 == 0 ? valueY * 2 : (valueY * 2 ~/ 5 + 1) * 5;
+
     final days = state.days;
     final selectedPeriodType = state.selectedPeriodType;
 

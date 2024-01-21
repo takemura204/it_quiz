@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/model/extension_resource.dart';
 
 class CustomCircleButton extends ConsumerWidget {
   const CustomCircleButton({
@@ -27,12 +26,10 @@ class CustomCircleButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      elevation: 2,
-      margin: EdgeInsets.symmetric(
-          horizontal: context.width * 0.02, vertical: context.width * 0.01),
+      elevation: 1,
       color: backgroundColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(90),
+        borderRadius: BorderRadius.circular(8),
         side: backgroundColor == Colors.white
             ? BorderSide(color: textColor, width: 1.5)
             : BorderSide(color: backgroundColor, width: 0),
@@ -55,7 +52,7 @@ class CustomCircleButton extends ConsumerWidget {
                 text,
                 style: TextStyle(
                     color: textColor,
-                    fontSize: context.width * 0.04,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
             ],

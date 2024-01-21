@@ -105,58 +105,58 @@ class _ActionButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAnsView = ref.watch(quizLearnScreenProvider).isAnsView;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ///知らない
-        CustomCircleButton(
-          iconData: Icons.question_mark_outlined,
-          iconSize: context.width * 0.1,
-          containerWidth: context.width * 0.25,
-          containerHeight: context.width * 0.25,
-          backgroundColor: const Color(0xFFFF7777),
-          textColor: Colors.white,
-          text: I18n().buttonUnKnow,
-          onPressed: () {
-            ref
-                .read(quizLearnScreenProvider.notifier)
-                .swiperController
-                .swipeLeft();
-          },
-        ),
+    return isAnsView
+        ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            ///知らない
+            CustomCircleButton(
+              iconData: Icons.question_mark_outlined,
+              iconSize: 40,
+              containerWidth: context.width * 0.45,
+              containerHeight: 100,
+              backgroundColor: const Color(0xFFFF7777),
+              textColor: Colors.white,
+              text: I18n().buttonUnKnow,
+              onPressed: () {
+                ref
+                    .read(quizLearnScreenProvider.notifier)
+                    .swiperController
+                    .swipeLeft();
+              },
+            ),
+            Gap(context.width * 0.02),
+
+            ///知ってる
+            CustomCircleButton(
+              iconData: Icons.thumb_up,
+              iconSize: 45,
+              containerWidth: context.width * 0.45,
+              containerHeight: 100,
+              backgroundColor: const Color(0xFF44B571),
+              textColor: Colors.white,
+              text: I18n().buttonKnow,
+              onPressed: () {
+                ref
+                    .read(quizLearnScreenProvider.notifier)
+                    .swiperController
+                    .swipeRight();
+              },
+            ),
+          ])
+        :
 
         ///確認する
         CustomCircleButton(
-          iconData: Icons.cached_outlined,
-          iconSize: context.width * 0.1,
-          containerWidth: context.width * 0.25,
-          containerHeight: context.width * 0.25,
-          backgroundColor: Colors.white,
-          textColor: isAnsView ? Colors.grey.shade400 : context.mainColor,
-          text: I18n().buttonConfirm,
-          onPressed: () {
-            ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
-          },
-        ),
-
-        ///知ってる
-        CustomCircleButton(
-          iconData: Icons.thumb_up,
-          iconSize: context.width * 0.1,
-          containerWidth: context.width * 0.25,
-          containerHeight: context.width * 0.25,
-          backgroundColor: const Color(0xFF44B571),
-          textColor: Colors.white,
-          text: I18n().buttonKnow,
-          onPressed: () {
-            ref
-                .read(quizLearnScreenProvider.notifier)
-                .swiperController
-                .swipeRight();
-          },
-        ),
-      ],
-    );
+            iconData: Icons.cached_outlined,
+            iconSize: context.width * 0.1,
+            containerWidth: context.width * 0.9,
+            containerHeight: 100,
+            backgroundColor: Colors.white,
+            textColor: isAnsView ? Colors.grey.shade400 : context.mainColor,
+            text: I18n().buttonConfirm,
+            onPressed: () {
+              ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
+            },
+          );
   }
 }
 
@@ -200,13 +200,13 @@ class _AnsQuestion extends ConsumerWidget {
     return SubstringHighlight(
       text: quizItem.question,
       term: quizItem.ans,
-      textStyle: TextStyle(
-        fontSize: context.width * 0.06,
+      textStyle: const TextStyle(
+        fontSize: 21,
         color: Colors.black54,
         fontWeight: FontWeight.w500,
       ),
       textStyleHighlight: TextStyle(
-        fontSize: context.width * 0.06,
+        fontSize: 21,
         fontWeight: FontWeight.bold,
         color: context.mainColor,
         decoration: TextDecoration.underline,
@@ -227,13 +227,13 @@ class _ConfirmQuestion extends ConsumerWidget {
       text: quizItem.question
           .replaceAll(quizItem.ans, I18n().hideText(quizItem.ans)),
       term: quizItem.ans,
-      textStyle: TextStyle(
-        fontSize: context.width * 0.06,
+      textStyle: const TextStyle(
+        fontSize: 21,
         color: Colors.black54,
         fontWeight: FontWeight.w500,
       ),
       textStyleHighlight: TextStyle(
-        fontSize: context.width * 0.06,
+        fontSize: 21,
         fontWeight: FontWeight.bold,
         color: context.mainColor,
         decoration: TextDecoration.underline,
@@ -258,22 +258,22 @@ class _QuizProgress extends ConsumerWidget {
         children: [
           Text(
             "$index",
-            style: TextStyle(
-              fontSize: context.width * 0.05,
+            style: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
+          const Text(
             " / ",
             style: TextStyle(
-              fontSize: context.width * 0.04,
+              fontSize: 16,
               fontWeight: FontWeight.normal,
             ),
           ),
           Text(
             "$quizItemLength",
-            style: TextStyle(
-              fontSize: context.width * 0.05,
+            style: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.normal,
             ),
           ),
