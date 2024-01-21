@@ -28,24 +28,24 @@ class TestQuizModal extends ConsumerWidget {
       contentPadding: EdgeInsets.all(context.width * 0.01),
       children: [
         Container(
-          height: context.height * 0.5,
           width: context.width * 0.8,
           child: Column(
             children: [
               ///タイトル
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _Title(testQuiz),
                   const Spacer(),
                   ClearButton(
-                    iconSize: context.height * 0.04,
+                    iconSize: 35,
                     onPressed: () {},
                   ),
                 ],
               ),
 
               const Divider(height: 1),
-              const Spacer(),
+              const Gap(5),
 
               ///選択範囲
               const _QuizRange(),
@@ -54,9 +54,10 @@ class TestQuizModal extends ConsumerWidget {
 
               ///問題数
               const _SelectLength(),
-              const Spacer(),
+              const Gap(5),
+
               const Divider(height: 1),
-              const Spacer(),
+              const Gap(5),
 
               ///クイズに挑戦する
               Padding(
@@ -64,7 +65,7 @@ class TestQuizModal extends ConsumerWidget {
                 child: isGroup
                     ? PrimaryButton(
                         width: context.width * 1,
-                        height: context.height * 0.06,
+                        height: 50,
                         text: I18n().challengeQuiz(testQuiz.title),
                         onPressed: () {
                           ref
@@ -84,11 +85,11 @@ class TestQuizModal extends ConsumerWidget {
                       )
                     : DisabledButton(
                         width: context.width * 1,
-                        height: context.height * 0.06,
+                        height: 50,
                         text: I18n().challengeQuiz(testQuiz.title),
                       ),
               ),
-              const Spacer(),
+              const Gap(5),
             ],
           ),
         ),
@@ -105,13 +106,12 @@ class _Title extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.045,
+      height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       alignment: Alignment.centerLeft,
       child: Text(
         quiz.title,
-        style: TextStyle(
-            fontSize: context.width * 0.05, fontWeight: FontWeight.bold),
+        style: context.texts.titleLarge,
       ),
     );
   }
@@ -138,10 +138,10 @@ class _QuizRange extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             '問題範囲を選択してください。',
             style: TextStyle(
-              fontSize: context.width * 0.03,
+              fontSize: 14,
             ),
           ),
           const Gap(5),
@@ -178,11 +178,11 @@ class _SelectRange extends ConsumerWidget {
       },
       child: Container(
         width: context.width * 0.8,
-        height: context.height * 0.05,
+        height: 45,
         padding: EdgeInsets.symmetric(
             horizontal: context.width * 0.02, vertical: context.width * 0.01),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2),
+          borderRadius: BorderRadius.circular(0),
           border: Border.all(
             width: isSelected ? 1 : 0.5,
             color: isSelected ? context.mainColor : Colors.black45,
@@ -202,7 +202,7 @@ class _SelectRange extends ConsumerWidget {
             Text(
               text,
               style: TextStyle(
-                fontSize: context.width * 0.04,
+                fontSize: 16,
                 color: isSelected ? context.mainColor : Colors.grey,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
               ),
@@ -231,13 +231,13 @@ class _SelectLength extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             '問題数を選択してください。',
-            style: TextStyle(fontSize: context.width * 0.03),
+            style: TextStyle(fontSize: 14),
           ),
           const Gap(5),
           Container(
-            height: context.height * 0.05,
+            height: 40,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),

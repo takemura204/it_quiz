@@ -9,20 +9,19 @@ class _BottomQuizMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      elevation: 2,
+      elevation: 1,
       color: context.backgroundColor,
       child: Container(
         alignment: Alignment.center,
-        height: context.height * 0.1,
+        height: 70,
         width: context.width * 1,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
-
             ///苦手克服ボタン
             DefaultButton(
-                width: context.width * 0.45,
-                height: context.height * 0.06,
+                width: context.width * 0.46,
+                height: 50,
                 text: weakQuiz.title,
                 icon: LineIcons.checkSquareAlt,
                 onPressed: weakQuiz.quizItemList.isEmpty
@@ -35,12 +34,12 @@ class _BottomQuizMenu extends ConsumerWidget {
                             context: context,
                             builder: (_) => WeakQuizModal(quiz: weakQuiz));
                       }),
-            Gap(context.width * 0.02),
+            const Gap(10),
 
             ///テストボタン
             PrimaryButton(
-              width: context.width * 0.45,
-              height: context.height * 0.06,
+              width: context.width * 0.46,
+              height: 50,
               text: "${testQuiz.title}",
               icon: LineIcons.edit,
               onPressed: () {
@@ -55,7 +54,6 @@ class _BottomQuizMenu extends ConsumerWidget {
                 );
               },
             ),
-            const Spacer(),
           ],
         ),
       ),

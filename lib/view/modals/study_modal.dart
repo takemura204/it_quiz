@@ -27,17 +27,19 @@ class StudyQuizModal extends ConsumerWidget {
           width: context.width * 0.8,
           child: Column(
             children: [
-              Gap(context.height * 0.005),
+              const Gap(5),
 
               ///タイトル
               Container(
-                height: context.height * 0.05,
+                height: 45,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     _Title(quiz),
                     const Spacer(),
                     ClearButton(
-                      iconSize: context.height * 0.04,
+                      iconSize: 35,
                       onPressed: () {},
                     ),
                   ],
@@ -50,64 +52,54 @@ class StudyQuizModal extends ConsumerWidget {
               _QuizResult(quiz),
 
               const Divider(height: 1),
+              const Gap(10),
 
               ///クイズ形式選択
-              Container(
-                height: context.height * 0.15,
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    const Spacer(),
-
-                    ///一問一答
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.width * 0.02,
-                          vertical: context.width * 0.01),
-                      child: DefaultButton(
-                        width: context.width * 1,
-                        height: context.height * 0.06,
-                        text: I18n().styleLeanQuiz,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .setStudyType(StudyType.learn);
-                          context.showScreen(
-                            QuizLearnScreenArguments(
-                              quiz: quiz,
-                            ).generateRoute(),
-                          );
-                        },
-                      ),
-                    ),
-
-                    ///4択形式クイズに挑戦する
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.width * 0.02,
-                          vertical: context.width * 0.01),
-                      child: PrimaryButton(
-                        width: context.width * 1,
-                        height: context.height * 0.06,
-                        text: I18n().styleChoiceQuiz,
-                        onPressed: () {
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .setStudyType(StudyType.choice);
-                          Navigator.of(context).pop();
-                          context.showScreen(
-                            QuizChoiceScreenArguments(
-                              quiz: quiz,
-                            ).generateRoute(),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.width * 0.02,
+                    vertical: context.width * 0.01),
+                child: DefaultButton(
+                  width: context.width * 1,
+                  height: 50,
+                  text: I18n().styleLeanQuiz,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    ref
+                        .read(quizModelProvider.notifier)
+                        .setStudyType(StudyType.learn);
+                    context.showScreen(
+                      QuizLearnScreenArguments(
+                        quiz: quiz,
+                      ).generateRoute(),
+                    );
+                  },
                 ),
               ),
-              Gap(context.height * 0.005),
+
+              ///4択形式クイズに挑戦する
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.width * 0.02,
+                    vertical: context.width * 0.01),
+                child: PrimaryButton(
+                  width: context.width * 1,
+                  height: 50,
+                  text: I18n().styleChoiceQuiz,
+                  onPressed: () {
+                    ref
+                        .read(quizModelProvider.notifier)
+                        .setStudyType(StudyType.choice);
+                    Navigator.of(context).pop();
+                    context.showScreen(
+                      QuizChoiceScreenArguments(
+                        quiz: quiz,
+                      ).generateRoute(),
+                    );
+                  },
+                ),
+              ),
+              const Gap(5),
             ],
           ),
         ),
@@ -124,13 +116,12 @@ class _Title extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.045,
+      height: 45,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       alignment: Alignment.centerLeft,
       child: Text(
         quiz.title,
-        style: TextStyle(
-            fontSize: context.width * 0.05, fontWeight: FontWeight.bold),
+        style: context.texts.titleLarge,
       ),
     );
   }
@@ -155,9 +146,7 @@ class _QuizResult extends ConsumerWidget {
               const Spacer(),
               Text(
                 I18n().lastQuizResult,
-                style: TextStyle(
-                    fontSize: context.width * 0.045,
-                    fontWeight: FontWeight.bold),
+                style: context.texts.titleMedium,
               ),
               const Spacer(),
             ],
@@ -165,23 +154,16 @@ class _QuizResult extends ConsumerWidget {
           const Spacer(),
           Row(
             children: [
-
               ///正解数
               Text(
                 "${quiz.correctNum}",
-                style: TextStyle(
-                  fontSize: context.width * 0.045,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: context.texts.titleMedium,
               ),
 
               ///問題数
               Text(
                 "/" + quiz.quizItemList.length.toString(),
-                style: TextStyle(
-                  fontSize: context.width * 0.045,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: context.texts.titleMedium,
               ),
             ],
           ),

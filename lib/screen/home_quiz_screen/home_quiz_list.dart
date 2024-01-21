@@ -49,12 +49,12 @@ class _QuizCard extends ConsumerWidget {
       child: Container(
         color: Colors.white,
         padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
-        height: context.height * 0.1,
+        height: 90,
         child: Row(
           children: [
             ///進捗アイコン
             _ProgressIcon(quiz: quiz),
-            Gap(context.width * 0.03),
+            const Gap(10),
 
             ///タイトル
             _Title(quiz: quiz, correctRate: correctRate),
@@ -63,7 +63,7 @@ class _QuizCard extends ConsumerWidget {
               LineIcons.angleRight,
               color: context.mainColor,
             ),
-            Gap(context.width * 0.02),
+            const Gap(5),
           ],
         ),
       ),
@@ -89,14 +89,15 @@ class _ProgressIcon extends ConsumerWidget {
           ),
         ),
         ProgressCrilcleChart(
-          width: context.height * 0.06,
-          size: context.height * 0.06,
+          width: 50,
+          size: 50,
           goalScore: quiz.quizItemList.length,
           currentScore: quiz.correctNum,
           thickness: 0.1,
           widget: Icon(
             Icons.pets,
             color: quiz.isCompleted ? context.mainColor : Colors.black26,
+            size: 25,
           ),
         ),
         Expanded(
@@ -124,17 +125,12 @@ class _Title extends ConsumerWidget {
       children: [
         Text(
           quiz.title,
-          style: TextStyle(
-            fontSize: context.width * 0.04,
-            fontWeight: FontWeight.bold,
-          ),
+          style: context.texts.titleMedium,
         ),
-        Gap(context.height * 0.002),
+        const Gap(3),
         Text(
           I18n().quizCorrectRate(correctRate),
-          style: TextStyle(
-            fontSize: context.width * 0.03,
-          ),
+          style: context.texts.bodyMedium,
         ),
       ],
     );

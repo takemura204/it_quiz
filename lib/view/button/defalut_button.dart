@@ -58,9 +58,7 @@ class DefaultButton extends ConsumerWidget {
                     ? Colors.grey.shade500
                     : context.mainColor,
                 fontWeight: FontWeight.bold,
-                fontSize: height < context.height * 0.05
-                    ? context.height * 0.015
-                    : context.height * 0.02,
+                fontSize: height < context.height * 0.05 ? 14 : 16,
               ),
             ),
           ],
