@@ -118,11 +118,7 @@ class _QuizItemCard extends ConsumerWidget {
           SubstringHighlight(
             text: quiz[index].ans,
             term: termToHighlight,
-            textStyle: TextStyle(
-              color: Colors.black54,
-              fontWeight: FontWeight.bold,
-              fontSize: context.width * 0.045,
-            ),
+            textStyle: context.texts.titleLarge!,
             overflow: TextOverflow.clip,
             textStyleHighlight: TextStyle(
               fontWeight: FontWeight.bold,
@@ -133,11 +129,7 @@ class _QuizItemCard extends ConsumerWidget {
           SubstringHighlight(
             text: quiz[index].question,
             term: termToHighlight,
-            textStyle: TextStyle(
-              color: Colors.black54,
-              fontWeight: FontWeight.normal,
-              fontSize: context.width * 0.035,
-            ),
+            textStyle: context.texts.bodyMedium!,
             overflow: TextOverflow.clip,
             textStyleHighlight: TextStyle(
               fontWeight: FontWeight.bold,
@@ -209,7 +201,7 @@ class _SavedButton extends HookConsumerWidget {
               Text(
                 "保存",
                 style: TextStyle(
-                  fontSize: context.width * 0.025,
+                  fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color:
                       quiz[index].isSaved ? context.mainColor : Colors.black26,
@@ -219,7 +211,7 @@ class _SavedButton extends HookConsumerWidget {
                 quiz[index].isSaved
                     ? Icons.bookmark_sharp
                     : Icons.bookmark_border_sharp,
-                size: context.width * 0.08,
+                size: 30,
                 color: quiz[index].isSaved ? context.mainColor : Colors.black26,
               ),
               Gap(context.height * 0.01),

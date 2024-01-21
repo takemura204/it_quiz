@@ -71,8 +71,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(I18n().titleSearch),
       centerTitle: true,
-      // leading: const RankWidget(),
-      // leadingWidth: 125,
       elevation: 0,
       actions: [
         IconButton(

@@ -484,7 +484,7 @@ class SearchTextField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.075,
+      height: 70,
       child: Column(
         children: [
           const Spacer(),
