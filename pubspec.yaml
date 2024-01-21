@@ -131,7 +131,7 @@ dependencies:
   appinio_swiper: ^2.0.3
 
   #通知を実装したい
-  flutter_local_notifications: ^16.3.0
+  flutter_local_notifications: ^16.3.1+1
   permission_handler: ^11.0.1
   flutter_native_timezone_updated_gradle: ^2.0.3
 
@@ -149,6 +149,9 @@ dependencies:
 
   #アプリのバージョンを確認したい
   package_info_plus: ^4.2.0
+
+  #デバイスの情報を確認したい
+  device_info_plus: ^9.1.1
 
 dev_dependencies:
   flutter_test:

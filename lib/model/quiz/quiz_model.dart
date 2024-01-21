@@ -424,7 +424,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   /// 現在のstateをリセット
-  Future _resetData() async {
+  Future resetData() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("quiz_list");
     prefs.remove("history_list");

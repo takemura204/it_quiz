@@ -4,7 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_controller.dart';
 import 'package:kentei_quiz/controller/home_setting/home_setting_controller.dart';
+import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -24,6 +26,7 @@ part 'setting_about_app.dart';
 part 'setting_color.dart';
 part 'setting_contact.dart';
 part 'setting_daily_goal.dart';
+part 'setting_delete_data.dart';
 part 'setting_notification.dart';
 part 'setting_review.dart';
 
@@ -96,29 +99,30 @@ class HomeSettingScreen extends ConsumerWidget {
                 },
               ),
             ),
-            Column(
-              children: [
-                const SettingTitleBar(title: "設定", onTap: null),
-                const _SettingDailyGoal(),
-                _Divider(),
-                const _SettingThemeColor(),
-                _Divider(),
-                const _SettingNotification(),
-                _Divider(),
-                const SettingTitleBar(title: "サポート", onTap: null),
-                const _SettingContact(),
-                _Divider(),
-                const _SettingReview(),
-                _Divider(),
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  const SettingTitleBar(title: "設定", onTap: null),
+                  const _SettingDailyGoal(),
+                  _Divider(),
+                  const _SettingThemeColor(),
+                  _Divider(),
+                  const _SettingNotification(),
+                  _Divider(),
+                  const SettingTitleBar(title: "サポート", onTap: null),
+                  const _SettingContact(),
+                  _Divider(),
+                  const _SettingReview(),
+                  _Divider(),
+                  const _SettingAboutApp(),
+                  _Divider(),
+                  const SettingTitleBar(title: "その他", onTap: null),
+                  const _SettingDeleteData(),
 
-                ///シェア
-                // const DefaultSettingBar(
-                //   title: "このアプリを教える",
-                //   onTap: null,
-                // ),
-                const _SettingAboutApp(),
-                _Divider(),
-              ],
+                  ///シェア機能も追加したい。
+                ],
+              ),
             ),
 
             Container(
@@ -185,7 +189,6 @@ class HomeSettingScreen extends ConsumerWidget {
                 },
               ),
             ),
-            Gap(context.height * 0.025),
           ],
         ),
       ),

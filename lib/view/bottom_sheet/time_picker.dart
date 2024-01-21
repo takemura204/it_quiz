@@ -25,7 +25,7 @@ class CustomTimePicker extends HookWidget {
     final hourController =
         FixedExtentScrollController(initialItem: selectedHour);
     final minuteController =
-        FixedExtentScrollController(initialItem: selectedMinute ~/ 15);
+        FixedExtentScrollController(initialItem: selectedMinute ~/ 5);
 
     return Container(
       height: 380,
@@ -65,7 +65,7 @@ class CustomTimePicker extends HookWidget {
                         curve: Curves.easeInOut,
                       );
                       minuteController.animateToItem(
-                        recommendedMinute ~/ 15,
+                        recommendedMinute ~/ 5,
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeInOut,
                       );
@@ -130,7 +130,7 @@ class CustomTimePicker extends HookWidget {
                       ListWheelScrollView(
                         controller: minuteController,
                         onSelectedItemChanged: (value) {
-                          selectedMinute = value * 15;
+                          selectedMinute = value * 5;
                         },
                         itemExtent: 42,
                         physics: const FixedExtentScrollPhysics(),
@@ -138,9 +138,9 @@ class CustomTimePicker extends HookWidget {
                         magnification: 1.1,
                         diameterRatio: 1.5,
                         children: [
-                          for (var i = 0; i < 4; i++)
+                          for (var i = 0; i < 12; i++)
                             Center(
-                                child: Text('${i * 15}'.padLeft(2, '0'),
+                                child: Text('${i * 5}'.padLeft(2, '0'),
                                     style: const TextStyle(fontSize: 16))),
                         ],
                       ),

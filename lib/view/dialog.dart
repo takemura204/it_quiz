@@ -61,23 +61,27 @@ class PrimaryDialog extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+
                   ///キャンセル
                   SecondaryButton(
-                    width: context.width * 0.4,
-                    height: context.height * 0.06,
-                    text: doneText,
-                    onPressed: onPressed,
-                  ),
-                  Gap(context.width * 0.05),
-
-                  ///実行ボタン
-                  PrimaryButton(
                       width: context.width * 0.4,
                       height: context.height * 0.06,
                       text: cancelText,
                       onPressed: () {
                         Navigator.of(context).pop();
                       }),
+                  Gap(context.width * 0.05),
+
+                  ///実行ボタン
+
+                  PrimaryButton(
+                    width: context.width * 0.4,
+                    height: context.height * 0.06,
+                    text: doneText,
+                    onPressed: onPressed,
+                  ),
+
+
                 ],
               ),
               Gap(context.height * 0.01),
@@ -162,6 +166,7 @@ class DefaultDialog extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+
                   ///キャンセル
                   SecondaryButton(
                       width: context.width * 0.4,
@@ -189,11 +194,10 @@ class DefaultDialog extends ConsumerWidget {
 }
 
 class PrimaryCloseDialog extends ConsumerWidget {
-  const PrimaryCloseDialog(
-      {required this.onPressed,
-      required this.title,
-      required this.subWidget,
-      required this.doneText});
+  const PrimaryCloseDialog({required this.onPressed,
+    required this.title,
+    required this.subWidget,
+    required this.doneText});
 
   final VoidCallback? onPressed;
   final String title;
@@ -267,12 +271,11 @@ class PrimaryCloseDialog extends ConsumerWidget {
 }
 
 class DefaultCloseDialog extends ConsumerWidget {
-  const DefaultCloseDialog(
-      {required this.onPressed,
-      required this.title,
-      required this.iconWidget,
-      required this.subWidget,
-      required this.doneText});
+  const DefaultCloseDialog({required this.onPressed,
+    required this.title,
+    required this.iconWidget,
+    required this.subWidget,
+    required this.doneText});
 
   final VoidCallback? onPressed;
   final Widget? iconWidget;
@@ -363,11 +366,10 @@ class DefaultCloseDialog extends ConsumerWidget {
 }
 
 class SecondaryCloseDialog extends ConsumerWidget {
-  const SecondaryCloseDialog(
-      {required this.onPressed,
-      required this.title,
-      required this.subWidget,
-      required this.doneText});
+  const SecondaryCloseDialog({required this.onPressed,
+    required this.title,
+    required this.subWidget,
+    required this.doneText});
 
   final VoidCallback? onPressed;
   final String title;
