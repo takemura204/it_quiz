@@ -19,7 +19,7 @@ class PeriodDashboard extends ConsumerWidget {
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
-        elevation: 2,
+        elevation: 1,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: context.width * 0.01, vertical: context.width * 0.01),
@@ -28,7 +28,7 @@ class PeriodDashboard extends ConsumerWidget {
             color: Colors.grey.shade300,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
@@ -39,22 +39,20 @@ class PeriodDashboard extends ConsumerWidget {
                 subWidget: _SelectPeriodTab(),
                 icon: Icons.bar_chart_outlined,
               ),
-
-              Gap(context.height * 0.01),
+              const Gap(10),
 
               ///期間
               const _SelectPeriod(),
+              const Gap(10),
 
-              Gap(context.height * 0.01),
+              const _PeriodData(),
 
-              const _TotalData(),
-
-              Gap(context.height * 0.01),
+              const Gap(10),
 
               ///ダッシュボード
-              QuizChart(),
+              PeriodChart(),
 
-              Gap(context.height * 0.005),
+              const Gap(5),
             ],
           ),
         ),
@@ -74,29 +72,25 @@ class _Title extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.04,
+      height: 40,
       margin: EdgeInsets.only(
         left: context.width * 0.02,
         top: context.width * 0.015,
         right: context.width * 0.02,
         bottom: 0.00,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
-          bottom: BorderSide(
-              color: context.mainColor, width: context.width * 0.003),
+          bottom: BorderSide(color: Colors.grey, width: 1),
         ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Gap(context.width * 0.01),
+          const Gap(5),
           Text(
             title,
-            style: TextStyle(
-                fontSize: context.height * 0.023,
-                color: context.mainColor,
-                fontWeight: FontWeight.bold),
+            style: context.texts.titleMedium,
           ),
           const Spacer(),
           if (subWidget != null) ...[subWidget!],
@@ -106,8 +100,8 @@ class _Title extends ConsumerWidget {
   }
 }
 
-class _TotalData extends ConsumerWidget {
-  const _TotalData();
+class _PeriodData extends ConsumerWidget {
+  const _PeriodData();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -171,80 +165,75 @@ class _StatusCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final color = isSeleted ? context.mainColor : Colors.black54;
+    final color =
+        isSeleted ? context.backgroundColor.withOpacity(0.2) : Colors.white;
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
         child: Padding(
           padding: EdgeInsets.all(context.width * 0.01),
-          child: Container(
-            width: context.width * 0.27,
-            child: Card(
-              elevation: 0,
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                side: isSeleted
-                    ? BorderSide(
-                        color: context.mainColor,
-                        width: 1.5,
-                      )
-                    : BorderSide(
-                        color: Colors.grey.shade200,
-                        width: 1,
-                      ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(context.width * 0.02),
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            icon,
-                            color: color,
-                            size: context.width * 0.06,
-                          ),
-                          Text(
-                            "$text",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: color,
-                                fontSize: context.width * 0.035),
-                          ),
-                        ],
-                      ),
+          child: Card(
+            elevation: 0,
+            color: color,
+            shape: RoundedRectangleBorder(
+              side: isSeleted
+                  ? BorderSide(
+                      color: context.mainColor,
+                      width: 1.5,
+                    )
+                  : BorderSide(
+                      color: Colors.grey.shade200,
+                      width: 1,
                     ),
-                  ),
-                  Container(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(context.width * 0.02),
+                  child: Container(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
                       children: [
-                        Text(
-                          "$value",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: context.width * 0.06,
-                          ),
+                        Icon(
+                          icon,
+                          size: 25,
                         ),
-                        Gap(context.width * 0.02),
                         Text(
-                          "$unit",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: context.width * 0.035),
+                          "$text",
+                          style: context.texts.titleSmall,
                         ),
-                        Gap(context.width * 0.02),
                       ],
                     ),
                   ),
-                  Gap(context.width * 0.01),
-                ],
-              ),
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        "$value",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
+                      ),
+                      const Gap(5),
+                      Text(
+                        "$unit",
+                        style: const TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                      Gap(context.width * 0.02),
+                    ],
+                  ),
+                ),
+                Gap(context.width * 0.01),
+              ],
             ),
           ),
         ),
@@ -265,7 +254,7 @@ class _SelectPeriod extends ConsumerWidget {
     final selectedPeriodType = state.selectedPeriodType;
 
     return Container(
-      height: context.height * 0.04,
+      height: 40,
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -273,7 +262,7 @@ class _SelectPeriod extends ConsumerWidget {
         children: [
           IconButton(
             padding: EdgeInsets.all(context.width * 0.01),
-            iconSize: context.width * 0.06,
+            iconSize: 21,
             onPressed: () {
               if (selectedPeriodType == PeriodType.weekly && weekOffset > -2) {
                 ref
@@ -303,13 +292,12 @@ class _SelectPeriod extends ConsumerWidget {
             (selectedPeriodType == PeriodType.weekly)
                 ? "${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.last.month}/${periodDays.last.day}"
                 : "${periodDays.first.year}/${periodDays.first.month}/${periodDays.first.day} 〜 ${periodDays.first.year}/${periodDays.last.month}/${periodDays.last.day}",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: context.width * 0.04),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const Spacer(),
           IconButton(
             padding: EdgeInsets.all(context.width * 0.01),
-            iconSize: context.width * 0.06,
+            iconSize: 21,
             onPressed: () {
               if (selectedPeriodType == PeriodType.weekly && weekOffset < 0) {
                 ref
@@ -347,8 +335,8 @@ class _SelectPeriodTab extends ConsumerWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: context.height * 0.002),
       child: Container(
-        width: context.width * 0.35,
-        height: context.height * 0.035,
+        width: 150,
+        height: 30,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -372,18 +360,17 @@ class _SelectPeriodTab extends ConsumerWidget {
               indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: context.mainColor),
-              tabs: [
+              tabs: const [
                 Tab(
                   child: Text(
                     "週",
-                    style: TextStyle(fontSize: context.width * 0.03),
+                    style: TextStyle(fontSize: 14),
                   ),
                 ),
                 Tab(
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text("月",
-                        style: TextStyle(fontSize: context.width * 0.03)),
+                    child: Text("月", style: TextStyle(fontSize: 14)),
                   ),
                 ),
               ]),

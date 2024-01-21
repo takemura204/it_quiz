@@ -4,10 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:line_icons/line_icons.dart';
 
 import '../../model/lang/initial_resource.dart';
-import '../../view/mission/mission_widget.dart';
 import '../dashboard_daily_screen/dashboard_daily_screen.dart';
 import '../dashboard_period_screen/dashboard_period_screen.dart';
 import '../dashboard_progress_screen/dashboard_group_screen.dart';
@@ -51,10 +49,7 @@ class _Body extends ConsumerWidget {
 
           ///進捗状況
           GroupProgressDashboard(),
-
           Gap(5),
-
-          // RankScore(),
         ],
       ),
     );
@@ -70,21 +65,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       elevation: 0,
       title: Text(I18n().titleDashboard),
       centerTitle: true,
-      // leading: const RankWidget(),
-      // leadingWidth: 125,
-      actions: [
-        IconButton(
-          onPressed: () {
-            showDialog(
-                context: context, builder: (_) => const DailyMissionWidget());
-          },
-          icon: Icon(
-            LineIcons.clipboardWithCheck,
-            size: 32,
-            color: context.mainColor,
-          ),
-        ),
-      ],
     );
   }
 

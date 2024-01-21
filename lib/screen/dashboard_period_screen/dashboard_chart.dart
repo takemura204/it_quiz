@@ -1,6 +1,6 @@
 part of 'dashboard_period_screen.dart';
 
-class QuizChart extends ConsumerWidget {
+class PeriodChart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeDashboardScreenProvider);
@@ -12,7 +12,7 @@ class QuizChart extends ConsumerWidget {
     final selectedPeriodType = state.selectedPeriodType;
 
     return Container(
-      height: context.height * 0.3,
+      height: 270,
       child: BarChart(
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
@@ -50,14 +50,12 @@ class QuizChart extends ConsumerWidget {
               drawBehindEverything: true,
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: context.width * 0.07,
+                reservedSize: 30,
                 getTitlesWidget: (value, meta) {
                   final color = (value == valueY.toDouble())
                       ? context.mainColor
                       : Colors.grey;
-                  final fontSize = (value >= 100)
-                      ? context.width * 0.021
-                      : context.width * 0.025;
+                  final fontSize = (value >= 100) ? 10.0 : 12.0;
                   return Text(
                     "${value.toInt()}$unitY",
                     textAlign: TextAlign.center,
@@ -96,7 +94,7 @@ class QuizChart extends ConsumerWidget {
                             color: isToday
                                 ? context.mainColor
                                 : Colors.grey.shade400,
-                            fontSize: context.width * 0.03,
+                            fontSize: 14,
                           ),
                         ),
                       );
@@ -111,7 +109,7 @@ class QuizChart extends ConsumerWidget {
                             color: isToday
                                 ? context.mainColor
                                 : Colors.grey.shade400,
-                            fontSize: context.width * 0.03,
+                            fontSize: 14,
                           ),
                         ),
                       );
@@ -128,9 +126,7 @@ class QuizChart extends ConsumerWidget {
                   final color = (value == valueY.toDouble())
                       ? context.mainColor
                       : Colors.grey;
-                  final fontSize = (value == 100)
-                      ? context.width * 0.025
-                      : context.width * 0.03;
+                  final fontSize = (value == 100) ? 12.0 : 10.0;
                   return Text(
                     "",
                     textAlign: TextAlign.center,

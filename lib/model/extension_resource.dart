@@ -6,6 +6,10 @@ extension BuildContextEx on BuildContext {
 
   Color get backgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
+  Color get titleColor => Colors.black54;
+
+  Color get textColor => Colors.black87;
+
   /// Theme.of(context).textTheme への convenience method です
   TextTheme get texts => Theme.of(this).textTheme;
 

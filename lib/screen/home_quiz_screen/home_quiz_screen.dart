@@ -60,6 +60,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
     return AppBar(
       title: Text(I18n().titleStudy),
+      centerTitle: true,
       actions: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),

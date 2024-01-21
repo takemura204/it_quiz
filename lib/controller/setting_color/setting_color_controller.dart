@@ -182,7 +182,7 @@ class SettingColorController extends StateNotifier<SettingColorState> {
 
         ///AppBar
         appBarTheme: AppBarTheme(
-          titleTextStyle: TextStyle(
+          titleTextStyle: const TextStyle(
             color: Colors.black54,
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -373,13 +373,13 @@ class SettingColorController extends StateNotifier<SettingColorState> {
         fontWeight: FontWeight.w600,
         letterSpacing: 0.15),
     titleMedium: TextStyle(
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.15),
     titleSmall: TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,

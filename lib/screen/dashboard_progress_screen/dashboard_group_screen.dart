@@ -30,7 +30,7 @@ class GroupProgressDashboard extends ConsumerWidget {
 
     return Container(
       child: Card(
-        elevation: 2,
+        elevation: 1,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: context.width * 0.01, vertical: context.width * 0.01),
@@ -39,7 +39,7 @@ class GroupProgressDashboard extends ConsumerWidget {
             color: Colors.grey.shade300,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           children: [
@@ -48,7 +48,7 @@ class GroupProgressDashboard extends ConsumerWidget {
               subWidget: null,
               icon: Icons.speaker_group_sharp,
             ),
-            Gap(context.height * 0.01),
+            const Gap(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -62,21 +62,25 @@ class GroupProgressDashboard extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         for (var i = 0; i < categoryList.length; i++) ...[
-                          if (i != 0) SizedBox(height: context.height * 0.01),
+                          if (i != 0) const Gap(10),
                           _GroupProgressCount(group: categoryList[i]),
                         ],
-                        Gap(context.height * 0.01),
-                        const Divider(color: Colors.grey),
+                        const Gap(10),
+                        const Divider(
+                          color: Colors.grey,
+                          height: 1,
+                        ),
+                        const Gap(10),
                         const _TotalProgressCount(),
-                        Gap(context.height * 0.01),
+                        const Gap(10),
                       ],
                     ),
                   ),
                 ),
                 Container(
                   color: context.backgroundColor.withOpacity(0.3),
-                  height: context.width * 0.45,
-                  width: context.width * 0.45,
+                  height: context.width * 0.5,
+                  width: context.width * 0.5,
                   padding: EdgeInsets.symmetric(
                       vertical: context.width * 0.02,
                       horizontal: context.width * 0.04),
@@ -133,20 +137,12 @@ class _GroupProgressCount extends ConsumerWidget {
                 children: [
                   Text(
                     "$group:",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: context.width * 0.04,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.texts.titleMedium,
                   ),
                   const Spacer(),
                   Text(
-                    ' $correctNum / $quizLength',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: context.width * 0.04,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    ' $correctNum /$quizLength',
+                    style: context.texts.titleMedium,
                   ),
                 ],
               ),
@@ -186,20 +182,12 @@ class _TotalProgressCount extends ConsumerWidget {
                 children: [
                   Text(
                     "総合:",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: context.width * 0.04,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.texts.titleMedium,
                   ),
                   const Spacer(),
                   Text(
-                    ' $correctNum / $quizLength',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: context.width * 0.04,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    ' $correctNum/$quizLength',
+                    style: context.texts.titleMedium,
                   ),
                 ],
               ),
@@ -261,7 +249,7 @@ class _ProgressRadarChart extends StatelessWidget {
         ),
         titleTextStyle: TextStyle(
             color: context.mainColor,
-            fontSize: context.height * 0.015,
+            fontSize: 14,
             fontWeight: FontWeight.bold),
         titlePositionPercentageOffset: 0.07,
         tickCount: 4,

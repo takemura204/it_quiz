@@ -20,20 +20,16 @@ class _Title extends ConsumerWidget {
       ),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(
-              color: context.mainColor, width: context.width * 0.003),
+          bottom: BorderSide(color: Colors.grey, width: context.width * 0.003),
         ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Gap(context.width * 0.01),
+          const Gap(5),
           Text(
             title,
-            style: TextStyle(
-                fontSize: context.height * 0.023,
-                color: context.mainColor,
-                fontWeight: FontWeight.bold),
+            style: context.texts.titleMedium,
           ),
           const Spacer(),
           if (subWidget != null) ...[
