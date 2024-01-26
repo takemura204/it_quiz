@@ -19,8 +19,6 @@ class _ChoiceResultBody extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  const Gap(5),
-
                   if (correctNum == quizItemList.length)
                     const ResultPerfectCard()
                   else if (correctNum >= quizItemList.length * 0.6)
@@ -30,14 +28,14 @@ class _ChoiceResultBody extends ConsumerWidget {
 
                   ResultDashboardCard(quizItemList, duration),
 
-                  Gap(context.height * 0.01),
+                  const Gap(15),
 
                   ///正解した問題リスト
                   const _QuizResultView(),
 
                   ///広告
                   AdNative(),
-                  Gap(context.height * 0.2),
+                  const Gap(200),
                 ],
               ),
             ),

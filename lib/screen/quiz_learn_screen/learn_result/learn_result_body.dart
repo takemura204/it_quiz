@@ -18,21 +18,17 @@ class _LearnResultBody extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Gap(context.height * 0.01),
-
                   ///結果カード
                   const ResultClearCard(),
                   ResultDashboardCard(quizItemList, duration),
-                  Gap(context.height * 0.01),
-
-                  Gap(context.height * 0.01),
+                  const Gap(15),
 
                   ///クイズ結果一覧
                   const _QuizResultView(),
 
                   ///広告
                   AdNative(),
-                  Gap(context.height * 0.15),
+                  const Gap(180),
                 ],
               ),
             ),

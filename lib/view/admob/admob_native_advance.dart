@@ -17,7 +17,7 @@ class AdNative extends ConsumerWidget {
         if (snapshot.hasData) {
           return Container(
             width: context.width * 1.0,
-            height: context.height * 0.3,
+            height: 300,
             child: AdWidget(ad: snapshot.data!),
           );
         } else {
@@ -26,7 +26,7 @@ class AdNative extends ConsumerWidget {
             highlightColor: Colors.grey.shade100,
             child: Container(
               width: context.width * 1.0,
-              height: context.height * 0.4,
+              height: 300,
               color: Colors.grey.shade300,
             ),
           );

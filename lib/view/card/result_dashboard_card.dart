@@ -32,153 +32,210 @@ class ResultDashboardCard extends ConsumerWidget {
             ///覚えた問題数
             Column(
               children: [
-                Gap(context.height * 0.01),
-                Row(
+                const Gap(10),
+                const Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Icon(
                       LineIcons.book,
                       color: Colors.black54,
-                      size: context.width * 0.06,
+                      size: 28,
                     ),
                     Text(
                       '覚えた問題数',
                       style: TextStyle(
                         color: Colors.black54,
-                        fontSize: context.width * 0.04,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                Gap(context.height * 0.005),
+                const Gap(5),
                 if (isChoiceType)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: context.mainColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                            ),
+                            height: 8,
+                            width: ('${quizItemList.length}'.length.toDouble() +
+                                        '${quizItemList.where((x) => x.isJudge).toList().length}'
+                                            .length
+                                            .toDouble()) *
+                                    35 +
+                                16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                "${quizItemList.where((x) => x.isJudge).toList().length}",
+                                style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Gap(3),
+                              const Text(
+                                "/",
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              Text(
+                                "${quizItemList.length}",
+                                style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              const Text(
+                                '問',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const Gap(10),
+                    ],
+                  )
+                else
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: context.mainColor,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                        ),
+                        height: 8,
+                        width:
+                            ('${quizItemList.length}'.length.toDouble()) * 35 +
+                                16,
+                      ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
-                            "${quizItemList.where((x) => x.isJudge).toList().length}",
-                            style: TextStyle(
-                              color: context.mainColor,
-                              fontSize: context.width * 0.08,
+                            "${quizItemList.length}",
+                            style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 35,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const Gap(3),
-                          Text(
-                            "/",
+                          const Text(
+                            '問',
                             style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: context.width * 0.06,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          Text(
-                            "${quizItemList.length}",
-                            style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: context.width * 0.08,
-                              fontWeight: FontWeight.normal,
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
                       ),
-                      const Gap(3),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 2),
-                        child: Text(
-                          '問',
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: context.width * 0.04,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
-                    ],
-                  )
-                else
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        "${quizItemList.length}",
-                        style: TextStyle(
-                          color: context.mainColor,
-                          fontSize: context.width * 0.08,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Gap(3),
-                      Text(
-                        '問',
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: context.width * 0.04,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                     ],
                   ),
+                const Gap(10),
               ],
             ),
 
-            Gap(context.width * 0.1),
+            const Gap(30),
 
             ///学習時間
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Gap(context.height * 0.01),
-                Row(
+                const Row(
                   children: [
                     Icon(
                       LineIcons.clock,
                       color: Colors.black54,
-                      size: context.width * 0.06,
+                      size: 28,
                     ),
                     Text(
                       '学習時間',
                       style: TextStyle(
                         color: Colors.black54,
-                        fontSize: context.width * 0.04,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                Gap(context.height * 0.005),
+                const Gap(5),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
                   children: [
-                    Gap(context.width * 0.05),
-                    Text(
-                      "$displayDuration",
-                      style: TextStyle(
-                        color: context.mainColor,
-                        fontSize: context.width * 0.08,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Gap(3),
-                    Text(
-                      '分',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: context.width * 0.04,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: context.mainColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                          ),
+                          height: 8,
+                          width:
+                              ('$displayDuration'.length.toDouble() - 1) * 35 +
+                                  16,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              "$displayDuration",
+                              style: const TextStyle(
+                                color: Colors.black54,
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Gap(3),
+                            const Text(
+                              '分',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
+            const Gap(10),
           ],
         ),
       ),

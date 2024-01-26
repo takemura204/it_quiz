@@ -15,7 +15,7 @@ class _LearnChallengeBody extends ConsumerWidget {
         ///知っている・知らないボタン
         _ActionButtons(quiz),
 
-        const Gap(10),
+        const Gap(15),
 
         ///何周目か確認
         _LapInfoBar(quiz),

@@ -19,10 +19,10 @@ class ResultGoodCard extends ConsumerWidget {
         ),
       ),
       alignment: Alignment.center,
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Gap(context.width * 0.05),
+          Gap(10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,16 +31,16 @@ class ResultGoodCard extends ConsumerWidget {
                   'GOOD!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.1,
+                    fontSize: 50,
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
                 Text(
-                  'いい感じです！引き続き挑戦していきましょう！',
+                  'いい感じですね！その調子です！',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.03,
+                    fontSize: 14,
                     color: Colors.white,
                   ),
                 ),
@@ -48,14 +48,14 @@ class ResultGoodCard extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Icon(
               Icons.circle_outlined,
               color: Colors.white,
-              size: context.height * 0.085,
+              size: 100,
             ),
           ),
-          Gap(context.width * 0.05),
+          Gap(10),
         ],
       ),
     );

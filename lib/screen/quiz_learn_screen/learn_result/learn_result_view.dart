@@ -6,9 +6,7 @@ class _QuizResultView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref
-        .watch(quizLearnScreenProvider)
-        .quizItemList;
+    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return Column(
       children: [
         Card(
@@ -27,11 +25,11 @@ class _QuizResultView extends ConsumerWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: context.width * 0.02,
                 vertical: context.width * 0.02),
-            child: Text(
+            child: const Text(
               'クイズ一覧',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: context.width * 0.05,
+                fontSize: 16,
               ),
             ),
           ),
@@ -61,26 +59,22 @@ class _NextActionCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref
-        .watch(quizModelProvider)
-        .quizList;
-    final quizIndex = ref
-        .watch(quizModelProvider)
-        .quizIndex;
+    final quizList = ref.watch(quizModelProvider).quizList;
+    final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
     return Card(
       elevation: 2,
       color: Colors.white,
       child: Container(
         alignment: Alignment.center,
-        height: context.height * 0.1,
+        height: 100,
         width: context.width * 1,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
             DefaultButton(
                 width: context.width * 0.45,
-                height: context.height * 0.06,
+                height: 55,
                 text: "再挑戦",
                 onPressed: () {
                   ref
@@ -91,31 +85,31 @@ class _NextActionCard extends HookConsumerWidget {
                     quiz: quiz,
                   ).generateRoute());
                 }),
-            Gap(context.width * 0.02),
+            const Gap(10),
             PrimaryButton(
               width: context.width * 0.45,
-              height: context.height * 0.06,
+              height: 55,
               text: "クイズに挑戦",
               onPressed: (quizIndex >= lastIndex)
                   ? null
                   : () {
-                ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .updateHistoryQuiz();
-                Navigator.of(context).pop();
-                context.showScreen(
-                  QuizChoiceScreenArguments(
-                    quiz: quiz,
-                  ).generateRoute(),
-                );
+                      ref
+                          .read(quizLearnScreenProvider.notifier)
+                          .updateHistoryQuiz();
+                      Navigator.of(context).pop();
+                      context.showScreen(
+                        QuizChoiceScreenArguments(
+                          quiz: quiz,
+                        ).generateRoute(),
+                      );
 
-                Future.delayed(const Duration(milliseconds: 600), () {
-                  ref.read(quizModelProvider.notifier).setStudyType(
-                      StudyType.choice);
-                });
-              },
+                      Future.delayed(const Duration(milliseconds: 600), () {
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .setStudyType(StudyType.choice);
+                      });
+                    },
             ),
-            const Spacer(),
           ],
         ),
       ),

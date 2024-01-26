@@ -5,9 +5,7 @@ class _QuizResultView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref
-        .watch(quizChoiceScreenProvider)
-        .quizItemList;
+    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -36,75 +34,69 @@ class _NextActionCard extends HookConsumerWidget {
         .quizList
         .where((x) => x.category == quiz.category)
         .toList();
-    final weakQuiz = ref
-        .watch(quizModelProvider)
-        .weakQuiz;
-    final quizIndex = ref
-        .watch(quizModelProvider)
-        .quizIndex;
+    final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
+    final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
-    final quizType = ref
-        .watch(quizModelProvider)
-        .quizType;
+    final quizType = ref.watch(quizModelProvider).quizType;
 
     return Card(
       elevation: 2,
       color: Colors.white,
       child: Container(
         alignment: Alignment.center,
-        height: context.height * 0.1,
+        height: 100,
         width: context.width * 1,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Spacer(),
             DefaultButton(
                 width: context.width * 0.45,
-                height: context.height * 0.06,
+                height: 55,
                 text: "再挑戦",
                 onPressed: (quizType == QuizType.weak &&
-                    weakQuiz!.quizItemList.isEmpty)
+                        weakQuiz!.quizItemList.isEmpty)
                     ? null
                     : () {
-                  Navigator.of(context).pop();
-                  context.showScreen(QuizChoiceScreenArguments(
-                    quiz: quiz,
-                  ).generateRoute());
-                }),
-            Gap(context.width * 0.02),
+                        Navigator.of(context).pop();
+                        context.showScreen(QuizChoiceScreenArguments(
+                          quiz: quiz,
+                        ).generateRoute());
+                      }),
+            Gap(20),
             if (quizType == QuizType.weak || quizType == QuizType.test) ...[
               PrimaryButton(
                 width: context.width * 0.45,
-                height: context.height * 0.06,
+                height: 55,
                 text: "完了",
                 onPressed: (quizIndex >= lastIndex)
                     ? null
                     : () {
-                  Navigator.of(context).pop();
-                },
+                        Navigator.of(context).pop();
+                      },
               ),
             ] else
               PrimaryButton(
                 width: context.width * 0.45,
-                height: context.height * 0.06,
+                height: 55,
                 text: "次のクイズに挑戦",
                 onPressed: (quizIndex >= lastIndex)
                     ? null
                     : () {
-                  Navigator.of(context).pop();
-                  context.showScreen(
-                    QuizChoiceScreenArguments(
-                      quiz: quizList[quizIndex + 1],
-                    ).generateRoute(),
-                  );
-                  ref
-                      .read(quizModelProvider.notifier)
-                      .tapQuizIndex(quizIndex + 1);
-                  ref
-                      .read(quizModelProvider.notifier)
-                      .tapQuizCard(quizList[quizIndex + 1].id);
-                },
+                        Navigator.of(context).pop();
+                        context.showScreen(
+                          QuizChoiceScreenArguments(
+                            quiz: quizList[quizIndex + 1],
+                          ).generateRoute(),
+                        );
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .tapQuizIndex(quizIndex + 1);
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .tapQuizCard(quizList[quizIndex + 1].id);
+                      },
               ),
-            const Spacer(),
           ],
         ),
       ),

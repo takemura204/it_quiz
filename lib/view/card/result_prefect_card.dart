@@ -19,10 +19,10 @@ class ResultPerfectCard extends ConsumerWidget {
         ),
       ),
       alignment: Alignment.center,
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Gap(context.width * 0.05),
+          Gap(10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class ResultPerfectCard extends ConsumerWidget {
                   'PREFECT!!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.1,
+                    fontSize: 50,
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
                   ),
@@ -40,7 +40,7 @@ class ResultPerfectCard extends ConsumerWidget {
                   '完璧です！全問正解で満点を達成しました！',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.03,
+                    fontSize: 14,
                     color: Colors.white,
                   ),
                 ),
@@ -48,24 +48,24 @@ class ResultPerfectCard extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Icon(
                   Icons.circle_outlined,
                   color: Colors.white,
-                  size: context.height * 0.09,
+                  size: 100,
                 ),
                 Icon(
                   Icons.circle_outlined,
                   color: Colors.white,
-                  size: context.height * 0.05,
+                  size: 50,
                 ),
               ],
             ),
           ),
-          Gap(context.width * 0.05),
+          Gap(5),
         ],
       ),
     );

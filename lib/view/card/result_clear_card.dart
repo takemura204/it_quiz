@@ -19,10 +19,10 @@ class ResultClearCard extends ConsumerWidget {
         ),
       ),
       alignment: Alignment.center,
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Gap(context.width * 0.05),
+          Gap(10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,16 +31,16 @@ class ResultClearCard extends ConsumerWidget {
                   'CLEAR!!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.1,
+                    fontSize: 50,
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
                 Text(
-                  '毎日の１歩が大きな成長につながってます',
+                  '毎日の１歩が成長につながっています',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: context.width * 0.03,
+                    fontSize: 14,
                     color: Colors.white,
                   ),
                 ),
@@ -48,14 +48,14 @@ class ResultClearCard extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Icon(
               Icons.check_circle_outline,
               color: Colors.white,
-              size: context.height * 0.1,
+              size: 100,
             ),
           ),
-          Gap(context.width * 0.05),
+          Gap(5),
         ],
       ),
     );

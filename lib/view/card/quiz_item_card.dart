@@ -34,7 +34,7 @@ class QuizItemCard extends ConsumerWidget {
         ),
         child: Row(
           children: [
-            Gap(context.width * 0.01),
+            const Gap(5),
 
             ///問題文
             Expanded(
@@ -46,10 +46,10 @@ class QuizItemCard extends ConsumerWidget {
                 child: SubstringHighlight(
                   text: quizItem.question,
                   term: quizItem.ans,
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,
-                    fontSize: context.width * 0.04,
+                    fontSize: 18,
                   ),
                   overflow: TextOverflow.clip,
                   textStyleHighlight: TextStyle(
@@ -75,7 +75,7 @@ class QuizItemCard extends ConsumerWidget {
                     vertical: context.width * 0.02),
                 child: Icon(
                   quizItem.isJudge ? Icons.circle_outlined : Icons.clear,
-                  size: context.width * 0.1,
+                  size: 45,
                   color: quizItem.isJudge
                       ? Colors.green.withOpacity(0.7)
                       : Colors.red.withOpacity(0.7),
@@ -86,41 +86,40 @@ class QuizItemCard extends ConsumerWidget {
             else
               Container(
                 alignment: Alignment.center,
-                width: context.width * 0.1,
-                height: context.height * 0.1,
+                height: 100,
                 padding: EdgeInsets.symmetric(
                     horizontal: context.width * 0.01,
                     vertical: context.width * 0.02),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
                       "${quizItem.lapIndex}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
-                        fontSize: context.width * 0.05,
+                        fontSize: 25,
                       ),
                     ),
-                    Text(
+                    const Text(
                       "周",
                       style: TextStyle(
                         color: Colors.black54,
-                        fontWeight: FontWeight.bold,
-                        fontSize: context.width * 0.03,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
                       ),
                     ),
                   ],
                 ),
               ),
 
-            Gap(context.width * 0.02),
+            const Gap(10),
 
             ///苦手ボタン
             CheckBoxIconButton(
-                isCheck: quizItem.isWeak,
-                size: context.width * 0.1,
-                onPressed: onPressed),
-            Gap(context.width * 0.01),
+                isCheck: quizItem.isWeak, size: 40, onPressed: onPressed),
+            const Gap(5),
           ],
         ),
       ),

@@ -147,11 +147,11 @@ class _ActionButtons extends ConsumerWidget {
         ///確認する
         CustomCircleButton(
             iconData: Icons.cached_outlined,
-            iconSize: context.width * 0.1,
+            iconSize: 50,
             containerWidth: context.width * 0.9,
             containerHeight: 100,
-            backgroundColor: Colors.white,
-            textColor: isAnsView ? Colors.grey.shade400 : context.mainColor,
+            backgroundColor: context.mainColor,
+            textColor: isAnsView ? Colors.grey.shade400 : Colors.white,
             text: I18n().buttonConfirm,
             onPressed: () {
               ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
@@ -293,7 +293,7 @@ class _LapInfoBar extends ConsumerWidget {
     final lapIndex = ref.watch(quizLearnScreenProvider).lapIndex;
 
     return Card(
-      elevation: 3,
+      elevation: 1,
       margin: const EdgeInsets.all(0),
       child: Container(
         height: context.height * 0.05,
