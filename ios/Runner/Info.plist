@@ -12,16 +12,6 @@
             <string>cstr6suwn9.skadnetwork</string>
         </dict>
     </array>
-    <key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-5053471763020307/9828691859</string>
-    <key>SKAdNetworkItems</key>
-    <array>
-        <dict>
-            <key>SKAdNetworkIdentifier</key>
-            <string>cstr6suwn9.skadnetwork</string>
-        </dict>
-        ...
-    </array>
    <key>UIBackgroundModes</key>
    <array>
      <string>fetch</string>

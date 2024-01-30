@@ -19,7 +19,7 @@ class AdBanner extends ConsumerWidget {
         if (snapshot.hasData) {
           return Container(
             width: context.width * 1.0,
-            color: context.backgroundColor,
+            // color: context.backgroundColor,
             height: 50,
             child: AdWidget(ad: snapshot.data!),
           );

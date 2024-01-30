@@ -7,5 +7,6 @@ class AdMobState with _$AdMobState {
   const factory AdMobState({
     @Default(false) final bool isBannerLoading,
     @Default(false) final bool isNativeLoading,
+    @Default(0) final int adShowCount,
   }) = _Create;
 }

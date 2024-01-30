@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.kentei_quiz">
 
     <!-- 通知を送信するためのパーミッション -->
@@ -23,10 +24,6 @@
         <meta-data
             android:name="com.google.android.gms.ads.ca-app-pub-5053471763020307~7242186229"
             android:value="ca-app-pub-5053471763020307/2204949130" />
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5053471763020307/1757742090" />
-
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -36,7 +33,8 @@
             android:showWhenLocked="true"
             android:theme="@style/LaunchTheme"
             android:turnScreenOn="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            tools:targetApi="o_mr1">
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />

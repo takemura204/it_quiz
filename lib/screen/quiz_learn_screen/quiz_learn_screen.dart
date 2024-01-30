@@ -9,11 +9,13 @@ import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:kentei_quiz/view/card/result_clear_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
+import '../../controller/admob/admob_controller.dart';
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../view/admob/admob_banner.dart';
+import '../../view/admob/admob_interstitial.dart';
 import '../../view/admob/admob_native_advance.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
@@ -54,9 +56,13 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: _AppBar(quiz),
-      body: _Body(quiz),
+    final isResultScreen = ref.watch(quizLearnScreenProvider).isResultScreen;
+    final adShowCount = ref.watch(adMobProvider).adShowCount;
+    return Stack(
+      children: [
+        Scaffold(appBar: _AppBar(quiz), body: _Body(quiz)),
+        if (isResultScreen) AdInterstitial(),
+      ],
     );
   }
 }
