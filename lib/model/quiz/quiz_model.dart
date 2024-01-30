@@ -5,14 +5,11 @@ import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz/quizzes.dart';
+import 'package:kentei_quiz/resource/quizzes_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../lang/initial_resource.dart';
 import '../quiz_item/quiz_item.dart';
-
-part 'quiz_resource.dart';
-part 'quizzes_resource.dart';
 
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
   (ref) => QuizModel(ref),

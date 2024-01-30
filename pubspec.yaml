@@ -153,6 +153,9 @@ dependencies:
   #デバイスの情報を確認したい
   device_info_plus: ^9.1.1
 
+  #アプリ内課金を実装したい
+  in_app_purchase: ^3.1.13
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

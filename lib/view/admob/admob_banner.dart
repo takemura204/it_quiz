@@ -19,7 +19,8 @@ class AdBanner extends ConsumerWidget {
         if (snapshot.hasData) {
           return Container(
             width: context.width * 1.0,
-            height: context.height * 0.05,
+            color: context.backgroundColor,
+            height: 50,
             child: AdWidget(ad: snapshot.data!),
           );
         } else {
@@ -28,7 +29,7 @@ class AdBanner extends ConsumerWidget {
             highlightColor: Colors.grey.shade100,
             child: Container(
               width: context.width * 1.0,
-              height: context.height * 0.05,
+              height: 50,
               color: Colors.grey.shade300,
             ),
           );

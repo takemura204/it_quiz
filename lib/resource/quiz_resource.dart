@@ -1,4 +1,5 @@
-part of 'quiz_model.dart';
+import '../model/quiz/quiz_model.dart';
+import '../model/quiz_item/quiz_item.dart';
 
 extension QuizModelEx1 on QuizModel {
   ///問題一覧

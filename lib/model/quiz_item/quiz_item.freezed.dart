@@ -23,12 +23,12 @@ mixin _$QuizItem {
   int get quizId => throw _privateConstructorUsedError; //問題番号
   String get question => throw _privateConstructorUsedError; //問題文
   String get ans => throw _privateConstructorUsedError; //答え
+  List<String> get choices => throw _privateConstructorUsedError; //選択肢
   String get comment => throw _privateConstructorUsedError; //解説
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
   bool get isJudge => throw _privateConstructorUsedError; //正解したか?
   bool get isSaved => throw _privateConstructorUsedError; //保存したか?
-  int get lapIndex => throw _privateConstructorUsedError; //何周目か？
-  List<String> get choices => throw _privateConstructorUsedError;
+  int get lapIndex => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,12 +45,12 @@ abstract class $QuizItemCopyWith<$Res> {
       {int quizId,
       String question,
       String ans,
+      List<String> choices,
       String comment,
       bool isWeak,
       bool isJudge,
       bool isSaved,
-      int lapIndex,
-      List<String> choices});
+      int lapIndex});
 }
 
 /// @nodoc
@@ -69,12 +69,12 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
     Object? quizId = null,
     Object? question = null,
     Object? ans = null,
+    Object? choices = null,
     Object? comment = null,
     Object? isWeak = null,
     Object? isJudge = null,
     Object? isSaved = null,
     Object? lapIndex = null,
-    Object? choices = null,
   }) {
     return _then(_value.copyWith(
       quizId: null == quizId
@@ -89,6 +89,10 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.ans
           : ans // ignore: cast_nullable_to_non_nullable
               as String,
+      choices: null == choices
+          ? _value.choices
+          : choices // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -109,10 +113,6 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      choices: null == choices
-          ? _value.choices
-          : choices // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ) as $Val);
   }
 }
@@ -128,12 +128,12 @@ abstract class _$$_QuizItemCopyWith<$Res> implements $QuizItemCopyWith<$Res> {
       {int quizId,
       String question,
       String ans,
+      List<String> choices,
       String comment,
       bool isWeak,
       bool isJudge,
       bool isSaved,
-      int lapIndex,
-      List<String> choices});
+      int lapIndex});
 }
 
 /// @nodoc
@@ -150,12 +150,12 @@ class __$$_QuizItemCopyWithImpl<$Res>
     Object? quizId = null,
     Object? question = null,
     Object? ans = null,
+    Object? choices = null,
     Object? comment = null,
     Object? isWeak = null,
     Object? isJudge = null,
     Object? isSaved = null,
     Object? lapIndex = null,
-    Object? choices = null,
   }) {
     return _then(_$_QuizItem(
       quizId: null == quizId
@@ -170,6 +170,10 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.ans
           : ans // ignore: cast_nullable_to_non_nullable
               as String,
+      choices: null == choices
+          ? _value._choices
+          : choices // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -190,10 +194,6 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      choices: null == choices
-          ? _value._choices
-          : choices // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ));
   }
 }
@@ -205,12 +205,12 @@ class _$_QuizItem extends _QuizItem {
       {required this.quizId,
       required this.question,
       required this.ans,
+      required final List<String> choices,
       required this.comment,
-      required this.isWeak,
-      required this.isJudge,
-      required this.isSaved,
-      required this.lapIndex,
-      required final List<String> choices})
+      this.isWeak = false,
+      this.isJudge = false,
+      this.isSaved = false,
+      this.lapIndex = 0})
       : _choices = choices,
         super._();
 
@@ -226,23 +226,8 @@ class _$_QuizItem extends _QuizItem {
   @override
   final String ans;
 //答え
-  @override
-  final String comment;
-//解説
-  @override
-  final bool isWeak;
-//苦手か？
-  @override
-  final bool isJudge;
-//正解したか?
-  @override
-  final bool isSaved;
-//保存したか?
-  @override
-  final int lapIndex;
-//何周目か？
   final List<String> _choices;
-//何周目か？
+//答え
   @override
   List<String> get choices {
     if (_choices is EqualUnmodifiableListView) return _choices;
@@ -250,9 +235,29 @@ class _$_QuizItem extends _QuizItem {
     return EqualUnmodifiableListView(_choices);
   }
 
+//選択肢
+  @override
+  final String comment;
+//解説
+  @override
+  @JsonKey()
+  final bool isWeak;
+//苦手か？
+  @override
+  @JsonKey()
+  final bool isJudge;
+//正解したか?
+  @override
+  @JsonKey()
+  final bool isSaved;
+//保存したか?
+  @override
+  @JsonKey()
+  final int lapIndex;
+
   @override
   String toString() {
-    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, isSaved: $isSaved, lapIndex: $lapIndex, choices: $choices)';
+    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, choices: $choices, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, isSaved: $isSaved, lapIndex: $lapIndex)';
   }
 
   @override
@@ -264,13 +269,13 @@ class _$_QuizItem extends _QuizItem {
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.ans, ans) || other.ans == ans) &&
+            const DeepCollectionEquality().equals(other._choices, _choices) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.isWeak, isWeak) || other.isWeak == isWeak) &&
             (identical(other.isJudge, isJudge) || other.isJudge == isJudge) &&
             (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
             (identical(other.lapIndex, lapIndex) ||
-                other.lapIndex == lapIndex) &&
-            const DeepCollectionEquality().equals(other._choices, _choices));
+                other.lapIndex == lapIndex));
   }
 
   @JsonKey(ignore: true)
@@ -280,12 +285,12 @@ class _$_QuizItem extends _QuizItem {
       quizId,
       question,
       ans,
+      const DeepCollectionEquality().hash(_choices),
       comment,
       isWeak,
       isJudge,
       isSaved,
-      lapIndex,
-      const DeepCollectionEquality().hash(_choices));
+      lapIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -306,12 +311,12 @@ abstract class _QuizItem extends QuizItem {
       {required final int quizId,
       required final String question,
       required final String ans,
+      required final List<String> choices,
       required final String comment,
-      required final bool isWeak,
-      required final bool isJudge,
-      required final bool isSaved,
-      required final int lapIndex,
-      required final List<String> choices}) = _$_QuizItem;
+      final bool isWeak,
+      final bool isJudge,
+      final bool isSaved,
+      final int lapIndex}) = _$_QuizItem;
   _QuizItem._() : super._();
 
   factory _QuizItem.fromJson(Map<String, dynamic> json) = _$_QuizItem.fromJson;
@@ -323,6 +328,8 @@ abstract class _QuizItem extends QuizItem {
   @override //問題文
   String get ans;
   @override //答え
+  List<String> get choices;
+  @override //選択肢
   String get comment;
   @override //解説
   bool get isWeak;
@@ -332,8 +339,6 @@ abstract class _QuizItem extends QuizItem {
   bool get isSaved;
   @override //保存したか?
   int get lapIndex;
-  @override //何周目か？
-  List<String> get choices;
   @override
   @JsonKey(ignore: true)
   _$$_QuizItemCopyWith<_$_QuizItem> get copyWith =>

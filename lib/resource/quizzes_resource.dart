@@ -1,8 +1,17 @@
-part of 'quiz_model.dart';
+import 'package:kentei_quiz/resource/quiz_resource.dart';
+
+import '../model/lang/initial_resource.dart';
+import '../model/quiz/quiz.dart';
+import '../model/quiz/quiz_model.dart';
+import '../model/quiz_item/quiz_item.dart';
+
+part 'category1/category1_1.dart';
+part 'category1_resource.dart';
 
 extension QuizModelEx on QuizModel {
   ///問題ジャンル
   List<Quiz> get initQuizList => [
+        ...category1QuizList,
         Quiz(
           id: 1,
           categoryId: 1,

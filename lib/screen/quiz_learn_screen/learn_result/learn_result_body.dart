@@ -25,6 +25,7 @@ class _LearnResultBody extends ConsumerWidget {
 
                   ///クイズ結果一覧
                   const _QuizResultView(),
+                  const Gap(15),
 
                   ///広告
                   AdNative(),

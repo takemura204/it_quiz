@@ -2,6 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!--　AdMob広告 -->
     <key>GADApplicationIdentifier</key>
     <string>ca-app-pub-5053471763020307~1414649631</string>
     <key>SKAdNetworkItems</key>
@@ -10,6 +11,16 @@
             <key>SKAdNetworkIdentifier</key>
             <string>cstr6suwn9.skadnetwork</string>
         </dict>
+    </array>
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-5053471763020307/9828691859</string>
+    <key>SKAdNetworkItems</key>
+    <array>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>cstr6suwn9.skadnetwork</string>
+        </dict>
+        ...
     </array>
    <key>UIBackgroundModes</key>
    <array>
@@ -86,5 +97,11 @@
     </array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<!--　課金実装 -->
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
 </dict>
 </plist>

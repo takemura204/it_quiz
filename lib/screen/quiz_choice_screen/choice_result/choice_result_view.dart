@@ -6,18 +6,48 @@ class _QuizResultView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: quizItemList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return QuizItemCard(
-          quizItem: quizItemList[index],
-          studyType: StudyType.choice,
-          onPressed: () =>
-              ref.read(quizChoiceScreenProvider.notifier).tapCheckBox(index),
-        );
-      },
+    return Column(
+      children: [
+        Card(
+          elevation: 1,
+          color: Colors.white,
+          child: Container(
+            width: context.width * 1,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey.shade300,
+                  width: 1.0, // ここで線の太さを設定
+                ),
+              ),
+            ),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.02),
+            child: const Text(
+              'クイズ一覧',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: quizItemList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return QuizItemCard(
+              quizItem: quizItemList[index],
+              studyType: StudyType.choice,
+              onPressed: () => ref
+                  .read(quizChoiceScreenProvider.notifier)
+                  .tapCheckBox(index),
+            );
+          },
+        ),
+      ],
     );
   }
 }
@@ -63,7 +93,7 @@ class _NextActionCard extends HookConsumerWidget {
                           quiz: quiz,
                         ).generateRoute());
                       }),
-            Gap(20),
+            const Gap(20),
             if (quizType == QuizType.weak || quizType == QuizType.test) ...[
               PrimaryButton(
                 width: context.width * 0.45,

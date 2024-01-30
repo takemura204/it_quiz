@@ -36,8 +36,9 @@ class ResultClearCard extends ConsumerWidget {
                     fontStyle: FontStyle.italic,
                   ),
                 ),
+                Gap(3),
                 Text(
-                  '毎日の１歩が成長につながっています',
+                  '毎日の１歩づつ成長しています！',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,

@@ -10,13 +10,13 @@ _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
       quizId: json['quizId'] as int,
       question: json['question'] as String,
       ans: json['ans'] as String,
-      comment: json['comment'] as String,
-      isWeak: json['isWeak'] as bool,
-      isJudge: json['isJudge'] as bool,
-      isSaved: json['isSaved'] as bool,
-      lapIndex: json['lapIndex'] as int,
       choices:
           (json['choices'] as List<dynamic>).map((e) => e as String).toList(),
+      comment: json['comment'] as String,
+      isWeak: json['isWeak'] as bool? ?? false,
+      isJudge: json['isJudge'] as bool? ?? false,
+      isSaved: json['isSaved'] as bool? ?? false,
+      lapIndex: json['lapIndex'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
@@ -24,10 +24,10 @@ Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
       'quizId': instance.quizId,
       'question': instance.question,
       'ans': instance.ans,
+      'choices': instance.choices,
       'comment': instance.comment,
       'isWeak': instance.isWeak,
       'isJudge': instance.isJudge,
       'isSaved': instance.isSaved,
       'lapIndex': instance.lapIndex,
-      'choices': instance.choices,
     };
