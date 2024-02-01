@@ -81,7 +81,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       bottom: TabBar(
         onTap: (index) =>
             ref.read(homeQuizScreenProvider.notifier).setTabIndex(index),
-        isScrollable: false,
+        isScrollable: true,
+        // タブをスクロール可能に設定
         labelColor: context.mainColor,
         labelStyle: const TextStyle(fontWeight: FontWeight.bold),
         unselectedLabelColor: Colors.grey,
@@ -98,6 +99,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                       index == tabIndex ? FontWeight.bold : FontWeight.normal,
                   fontSize: 16,
                 ),
+                maxLines: 2, // テキストが多い場合に 2 行まで表示を許可
+                overflow: TextOverflow.ellipsis, // 2 行を超えるテキストは省略記号で表示
               ),
             ),
           ),
@@ -108,7 +111,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize =>
+      const Size.fromHeight(kToolbarHeight + kTextTabBarHeight); // 高さを適切に設定
 }
 
 class _Body extends ConsumerWidget {

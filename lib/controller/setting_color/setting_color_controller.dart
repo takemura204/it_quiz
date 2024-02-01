@@ -17,17 +17,66 @@ class SettingColorController extends StateNotifier<SettingColorState> {
 
   final Ref ref;
   final colors = [
-    AppColor.main,
-    AppColor.peach,
-    AppColor.red,
     AppColor.mint,
-    AppColor.green,
+    AppColor.red,
+    AppColor.yellow,
     AppColor.cyan,
+    AppColor.green,
     AppColor.blue,
     AppColor.purple,
     AppColor.brown,
     AppColor.black,
   ];
+
+  MaterialColor getThemePrimaryColor(int themeId) {
+    switch (themeId) {
+      case 0:
+        return AppColor.mint;
+      case 1:
+        return AppColor.red;
+      case 2:
+        return AppColor.yellow;
+      case 3:
+        return AppColor.cyan;
+      case 4:
+        return AppColor.green;
+      case 5:
+        return AppColor.blue;
+      case 6:
+        return AppColor.purple;
+      case 7:
+        return AppColor.brown;
+      case 8:
+        return AppColor.black;
+      default:
+        return AppColor.yellow;
+    }
+  }
+
+  String colorName(int themeId) {
+    switch (themeId) {
+      case 0:
+        return "ミント";
+      case 1:
+        return "フラミンゴ";
+      case 2:
+        return "マスタード";
+      case 3:
+        return "フォレストスカイ";
+      case 4:
+        return "スカイ";
+      case 5:
+        return "インディゴ";
+      case 6:
+        return "ラベンダー";
+      case 7:
+        return "チョコ";
+      case 8:
+        return "モノトーン";
+      default:
+        return 'デフォルト';
+    }
+  }
 
   Future initState() async {}
 
@@ -278,60 +327,6 @@ class SettingColorController extends StateNotifier<SettingColorState> {
     } on Exception catch (e, s) {
       print("Error:$e,$s");
       rethrow;
-    }
-  }
-
-  MaterialColor getThemePrimaryColor(int themeId) {
-    switch (themeId) {
-      case 0:
-        return AppColor.main;
-      case 1:
-        return AppColor.peach;
-      case 2:
-        return AppColor.red;
-      case 3:
-        return AppColor.mint;
-      case 4:
-        return AppColor.green;
-      case 5:
-        return AppColor.cyan;
-      case 6:
-        return AppColor.blue;
-      case 7:
-        return AppColor.purple;
-      case 8:
-        return AppColor.brown;
-      case 9:
-        return AppColor.black;
-      default:
-        return AppColor.main;
-    }
-  }
-
-  String colorName(int themeId) {
-    switch (themeId) {
-      case 0:
-        return "マスタード";
-      case 1:
-        return "ピーチ";
-      case 2:
-        return "フラミンゴ";
-      case 3:
-        return "ミント";
-      case 4:
-        return "フォレスト";
-      case 5:
-        return "スカイ";
-      case 6:
-        return "インディゴ";
-      case 7:
-        return "ラベンダー";
-      case 8:
-        return "チョコ";
-      case 9:
-        return "モノトーン";
-      default:
-        return 'デフォルト';
     }
   }
 

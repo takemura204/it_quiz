@@ -138,12 +138,51 @@ class _GroupProgressCount extends ConsumerWidget {
             ],
           ),
           const Gap(5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          Stack(
+            alignment: Alignment.bottomRight,
             children: [
-              Text(
-                ' $correctNum /$quizLength',
-                style: context.texts.titleMedium,
+              Container(
+                decoration: BoxDecoration(
+                  color: context.mainColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                ),
+                height: 8,
+                width: (('$correctNum'.length.toDouble()) +
+                            ('$correctNum'.length.toDouble())) *
+                        20 +
+                    12,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    "$correctNum",
+                    style: const TextStyle(
+                      color: Colors.black54,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Gap(1),
+                  const Text(
+                    '/',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  Text(
+                    "$quizLength",
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -185,14 +224,51 @@ class _TotalProgressCount extends ConsumerWidget {
                 ],
               ),
               const Gap(5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
+              Stack(
+                alignment: Alignment.bottomRight,
                 children: [
-                  Text(
-                    ' $correctNum/$quizLength',
-                    style: context.texts.titleMedium,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: context.mainColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    ),
+                    height: 8,
+                    width: (('$correctNum'.length.toDouble()) +
+                                ('$correctNum'.length.toDouble())) *
+                            20 +
+                        12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        "$correctNum",
+                        style: const TextStyle(
+                          color: Colors.black54,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Gap(1),
+                      const Text(
+                        '/',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Text(
+                        "$quizLength",
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -258,10 +334,8 @@ class _ProgressRadarChart extends StatelessWidget {
           angle: 0,
         ),
         titleTextStyle: TextStyle(
-            color: context.mainColor,
-            fontSize: 12,
-            fontWeight: FontWeight.bold),
-        titlePositionPercentageOffset: 0.15,
+            color: context.mainColor, fontSize: 9, fontWeight: FontWeight.bold),
+        titlePositionPercentageOffset: 0.2,
         tickCount: categories.length,
         ticksTextStyle: const TextStyle(color: Colors.grey, fontSize: 0),
         tickBorderData: BorderSide(color: Colors.grey.shade300, width: 1),

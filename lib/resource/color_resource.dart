@@ -2,21 +2,6 @@ import 'package:flutter/material.dart';
 
 class AppColor {
   ///デフォルト
-  static const MaterialColor main = MaterialColor(
-    0xFFEBBB7F,
-    <int, Color>{
-      50: Color(0xFFFFF7EB),
-      100: Color(0xFFFFEFD7),
-      200: Color(0xFFFFE7C3),
-      300: Color(0xFFFFDEAF),
-      400: Color(0xFFFFD69E),
-      500: Color(0xFFFED991),
-      600: Color(0xFFF5C988),
-      700: Color(0xFFEBBB7F),
-      800: Color(0xFFE0AD76),
-      900: Color(0xFFD69F6C),
-    },
-  );
 
   /// レッド
   static const MaterialColor red = MaterialColor(0xFFFF9090, {
@@ -46,6 +31,22 @@ class AppColor {
       700: Color(0xFFFAB391),
       800: Color(0xFFF9A687),
       900: Color(0xFFF89377),
+    },
+  );
+
+  static const MaterialColor yellow = MaterialColor(
+    0xFFEBBB7F,
+    <int, Color>{
+      50: Color(0xFFFFF7EB),
+      100: Color(0xFFFFEFD7),
+      200: Color(0xFFFFE7C3),
+      300: Color(0xFFFFDEAF),
+      400: Color(0xFFFFD69E),
+      500: Color(0xFFFED991),
+      600: Color(0xFFF5C988),
+      700: Color(0xFFEBBB7F),
+      800: Color(0xFFE0AD76),
+      900: Color(0xFFD69F6C),
     },
   );
 
