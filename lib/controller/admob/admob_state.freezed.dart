@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AdMobState {
   bool get isBannerLoading => throw _privateConstructorUsedError;
   bool get isNativeLoading => throw _privateConstructorUsedError;
+  bool get isInterstitialLoading => throw _privateConstructorUsedError;
   int get adShowCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +32,11 @@ abstract class $AdMobStateCopyWith<$Res> {
           AdMobState value, $Res Function(AdMobState) then) =
       _$AdMobStateCopyWithImpl<$Res, AdMobState>;
   @useResult
-  $Res call({bool isBannerLoading, bool isNativeLoading, int adShowCount});
+  $Res call(
+      {bool isBannerLoading,
+      bool isNativeLoading,
+      bool isInterstitialLoading,
+      int adShowCount});
 }
 
 /// @nodoc
@@ -49,6 +54,7 @@ class _$AdMobStateCopyWithImpl<$Res, $Val extends AdMobState>
   $Res call({
     Object? isBannerLoading = null,
     Object? isNativeLoading = null,
+    Object? isInterstitialLoading = null,
     Object? adShowCount = null,
   }) {
     return _then(_value.copyWith(
@@ -59,6 +65,10 @@ class _$AdMobStateCopyWithImpl<$Res, $Val extends AdMobState>
       isNativeLoading: null == isNativeLoading
           ? _value.isNativeLoading
           : isNativeLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isInterstitialLoading: null == isInterstitialLoading
+          ? _value.isInterstitialLoading
+          : isInterstitialLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       adShowCount: null == adShowCount
           ? _value.adShowCount
@@ -74,7 +84,11 @@ abstract class _$$_CreateCopyWith<$Res> implements $AdMobStateCopyWith<$Res> {
       __$$_CreateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isBannerLoading, bool isNativeLoading, int adShowCount});
+  $Res call(
+      {bool isBannerLoading,
+      bool isNativeLoading,
+      bool isInterstitialLoading,
+      int adShowCount});
 }
 
 /// @nodoc
@@ -89,6 +103,7 @@ class __$$_CreateCopyWithImpl<$Res>
   $Res call({
     Object? isBannerLoading = null,
     Object? isNativeLoading = null,
+    Object? isInterstitialLoading = null,
     Object? adShowCount = null,
   }) {
     return _then(_$_Create(
@@ -99,6 +114,10 @@ class __$$_CreateCopyWithImpl<$Res>
       isNativeLoading: null == isNativeLoading
           ? _value.isNativeLoading
           : isNativeLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isInterstitialLoading: null == isInterstitialLoading
+          ? _value.isInterstitialLoading
+          : isInterstitialLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       adShowCount: null == adShowCount
           ? _value.adShowCount
@@ -114,6 +133,7 @@ class _$_Create implements _Create {
   const _$_Create(
       {this.isBannerLoading = false,
       this.isNativeLoading = false,
+      this.isInterstitialLoading = false,
       this.adShowCount = 0});
 
   @override
@@ -124,11 +144,14 @@ class _$_Create implements _Create {
   final bool isNativeLoading;
   @override
   @JsonKey()
+  final bool isInterstitialLoading;
+  @override
+  @JsonKey()
   final int adShowCount;
 
   @override
   String toString() {
-    return 'AdMobState(isBannerLoading: $isBannerLoading, isNativeLoading: $isNativeLoading, adShowCount: $adShowCount)';
+    return 'AdMobState(isBannerLoading: $isBannerLoading, isNativeLoading: $isNativeLoading, isInterstitialLoading: $isInterstitialLoading, adShowCount: $adShowCount)';
   }
 
   @override
@@ -140,13 +163,15 @@ class _$_Create implements _Create {
                 other.isBannerLoading == isBannerLoading) &&
             (identical(other.isNativeLoading, isNativeLoading) ||
                 other.isNativeLoading == isNativeLoading) &&
+            (identical(other.isInterstitialLoading, isInterstitialLoading) ||
+                other.isInterstitialLoading == isInterstitialLoading) &&
             (identical(other.adShowCount, adShowCount) ||
                 other.adShowCount == adShowCount));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isBannerLoading, isNativeLoading, adShowCount);
+  int get hashCode => Object.hash(runtimeType, isBannerLoading, isNativeLoading,
+      isInterstitialLoading, adShowCount);
 
   @JsonKey(ignore: true)
   @override
@@ -159,12 +184,15 @@ abstract class _Create implements AdMobState {
   const factory _Create(
       {final bool isBannerLoading,
       final bool isNativeLoading,
+      final bool isInterstitialLoading,
       final int adShowCount}) = _$_Create;
 
   @override
   bool get isBannerLoading;
   @override
   bool get isNativeLoading;
+  @override
+  bool get isInterstitialLoading;
   @override
   int get adShowCount;
   @override

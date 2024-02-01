@@ -8,6 +8,7 @@ import 'package:state_notifier/state_notifier.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../admob/admob_controller.dart';
 
 final quizLearnScreenProvider =
     StateNotifierProvider<QuizLearnScreenController, QuizLearnScreenState>(
@@ -151,6 +152,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         isResultScreen: true,
         quizItemList: quizItemList,
       );
+      ref.read(adMobProvider.notifier).showAdInterstitial();
       _updateQuiz();
     }
 

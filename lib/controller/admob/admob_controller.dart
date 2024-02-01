@@ -73,45 +73,49 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
 
     InterstitialAd.load(
       adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/1033173712' // Androidのテスト広告ID
-          : 'ca-app-pub-3940256099942544/4411468910', // iOSのテスト広告ID
+          ? 'ca-app-pub-3940256099942544/1033173712'
+          : 'ca-app-pub-3940256099942544/4411468910',
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
+          completer.complete(ad);
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdDismissedFullScreenContent: (InterstitialAd ad) {
               ad.dispose();
-              completer.complete(null);
-              incrementCout(); // 広告が閉じられた時にカウントをインクリメント
             },
             onAdFailedToShowFullScreenContent:
                 (InterstitialAd ad, AdError error) {
-              print('InterstitialAd failed to show: $error');
               ad.dispose();
-              completer.completeError(error); // 表示に失敗したら、Completerにエラーをセット
             },
-            // 必要に応じて他のコールバックもここに追加
           );
-          completer.complete(ad);
         },
         onAdFailedToLoad: (LoadAdError error) {
-          print('InterstitialAd failed to load: $error');
-          completer.completeError(error); // ロードに失敗したら、Completerにエラーをセット
+          completer.completeError(error);
         },
       ),
     );
 
-    return completer.future; // Futureを返す
+    return completer.future;
   }
 
-  void incrementCout() {
+  ///インターステシャル広告表示
+  Future showAdInterstitial() async {
     final adShowCount = state.adShowCount;
-    if (adShowCount < 3) {
+    if (adShowCount == 0) {
       state = state.copyWith(adShowCount: adShowCount + 1);
-    } else {
+      final interstitialAd = await createNewInterstitialAd();
+      if (interstitialAd != null) {
+        interstitialAd.show();
+      }
+    } else if (adShowCount == 3) {
       state = state.copyWith(adShowCount: 0);
+      final interstitialAd = await createNewInterstitialAd();
+      if (interstitialAd != null) {
+        interstitialAd.show();
+      }
+    } else {
+      state = state.copyWith(adShowCount: adShowCount + 1);
     }
-    print({'adShowCount', state.adShowCount});
   }
 }
 
