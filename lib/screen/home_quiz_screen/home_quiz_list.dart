@@ -95,7 +95,7 @@ class _ProgressIcon extends ConsumerWidget {
           currentScore: quiz.correctNum,
           thickness: 0.1,
           widget: Icon(
-            Icons.pets,
+            Icons.check,
             color: quiz.isCompleted ? context.mainColor : Colors.black26,
             size: 25,
           ),

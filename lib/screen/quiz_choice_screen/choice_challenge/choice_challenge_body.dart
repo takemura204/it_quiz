@@ -21,10 +21,10 @@ class ChoiceChallengeBody extends ConsumerWidget {
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
-                    color: context.mainColor,
-                    width: 1.5,
+                    color: context.secondColor,
+                    width: 1,
                   ),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Container(
                   width: context.width * 0.9,

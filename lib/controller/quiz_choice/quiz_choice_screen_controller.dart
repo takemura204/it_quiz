@@ -8,6 +8,7 @@ import 'package:state_notifier/state_notifier.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../admob/admob_controller.dart';
 
 final quizChoiceScreenProvider =
     StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
@@ -144,6 +145,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       _stopwatch.stop();
       state = state.copyWith(
           duration: _stopwatch.elapsed, quizIndex: 0, isResultScreen: true);
+      ref.read(adMobProvider.notifier).showAdInterstitial();
       _updateQuiz();
       updateHistoryQuiz();
     }

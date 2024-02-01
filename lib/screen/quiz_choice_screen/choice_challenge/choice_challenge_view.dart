@@ -189,7 +189,7 @@ class _SelectChoice extends ConsumerWidget {
         elevation: 1,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: context.mainColor,
+            color: context.secondColor,
             width: 1,
           ),
         ),
