@@ -7,9 +7,9 @@ extension Category1Quiz on QuizModel {
           id: 1,
           categoryId: 1,
           category: I18n().setCategory(1),
-          title: "犬の種類",
+          title: "経営・組織論①",
           isCompleted: false,
-          quizItemList: quiz1,
+          quizItemList: category1_1,
           correctNum: 0,
           timeStamp: null,
           duration: Duration.zero,
@@ -114,7 +114,7 @@ extension Category1Quiz on QuizModel {
         Quiz(
           id: 10,
           categoryId: 4,
-          category: I18n().setCategory(4),
+          category: I18n().setCategory(3),
           title: "問題D-1",
           isCompleted: false,
           quizItemList: quiz1,
@@ -126,7 +126,7 @@ extension Category1Quiz on QuizModel {
         Quiz(
           id: 11,
           categoryId: 4,
-          category: I18n().setCategory(4),
+          category: I18n().setCategory(3),
           title: "問題D-2",
           isCompleted: false,
           quizItemList: quiz2,
@@ -155,7 +155,7 @@ extension Category1Quiz on QuizModel {
   Quiz get initTestQuiz => Quiz(
         id: 3,
         categoryId: 4,
-        category: I18n().setCategory(4),
+        category: I18n().setCategory(6),
         title: "力だめし",
         isCompleted: false,
         quizItemList: [],

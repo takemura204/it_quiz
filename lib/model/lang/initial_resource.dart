@@ -30,11 +30,11 @@ class I18n {
     }
   }
 
-  String get category1 => "特性";
+  String get category1 => "ストラテジ系";
 
-  String get category2 => "健康";
+  String get category2 => "マネジメント系";
 
-  String get category3 => "生活";
+  String get category3 => "テクノロジ系";
 
   String get category4 => "雑学";
 

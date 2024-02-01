@@ -66,10 +66,7 @@ class GroupProgressDashboard extends ConsumerWidget {
                           _GroupProgressCount(group: categoryList[i]),
                         ],
                         const Gap(10),
-                        const Divider(
-                          color: Colors.grey,
-                          height: 1,
-                        ),
+                        const Divider(color: Colors.grey, height: 1),
                         const Gap(10),
                         const _TotalProgressCount(),
                         const Gap(10),
@@ -77,6 +74,7 @@ class GroupProgressDashboard extends ConsumerWidget {
                     ),
                   ),
                 ),
+                const Gap(10),
                 Container(
                   color: context.backgroundColor.withOpacity(0.3),
                   height: context.width * 0.5,
@@ -126,25 +124,26 @@ class _GroupProgressCount extends ConsumerWidget {
         .length;
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    "$group:",
-                    style: context.texts.titleMedium,
-                  ),
-                  const Spacer(),
-                  Text(
-                    ' $correctNum /$quizLength',
-                    style: context.texts.titleMedium,
-                  ),
-                ],
+              Text(
+                "$group:",
+                style: context.texts.titleSmall,
+              ),
+            ],
+          ),
+          const Gap(5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                ' $correctNum /$quizLength',
+                style: context.texts.titleMedium,
               ),
             ],
           ),
@@ -173,18 +172,24 @@ class _TotalProgressCount extends ConsumerWidget {
       child: Column(
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     "総合:",
-                    style: context.texts.titleMedium,
+                    style: context.texts.titleSmall,
                   ),
-                  const Spacer(),
+                ],
+              ),
+              const Gap(5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
                   Text(
                     ' $correctNum/$quizLength',
                     style: context.texts.titleMedium,
@@ -210,11 +215,14 @@ class _ProgressRadarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const List<double> maxValue = [100, 100, 100, 100]; //最大値
-    const List<double> minValue = [0, 0, 0, 0]; //最小値
+    // categoriesの長さに基づいて最大値と最小値のリストを動的に生成
+    final List<double> maxValue = List.filled(categories.length, 100); // 最大値
+    final List<double> minValue = List.filled(categories.length, 0); // 最小値
+
     return RadarChart(
       RadarChartData(
         dataSets: [
+          // 最大値のデータセット
           RadarDataSet(
             dataEntries:
                 maxValue.map((score) => RadarEntry(value: score)).toList(),
@@ -223,6 +231,7 @@ class _ProgressRadarChart extends StatelessWidget {
             borderWidth: 1,
             entryRadius: 1,
           ),
+          // 最小値のデータセット
           RadarDataSet(
             dataEntries:
                 minValue.map((score) => RadarEntry(value: score)).toList(),
@@ -231,6 +240,7 @@ class _ProgressRadarChart extends StatelessWidget {
             borderWidth: 1,
             entryRadius: 1,
           ),
+          // スコアのデータセット
           RadarDataSet(
             dataEntries:
                 scoreRatios.map((score) => RadarEntry(value: score)).toList(),
@@ -249,10 +259,10 @@ class _ProgressRadarChart extends StatelessWidget {
         ),
         titleTextStyle: TextStyle(
             color: context.mainColor,
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: FontWeight.bold),
-        titlePositionPercentageOffset: 0.07,
-        tickCount: 4,
+        titlePositionPercentageOffset: 0.15,
+        tickCount: categories.length,
         ticksTextStyle: const TextStyle(color: Colors.grey, fontSize: 0),
         tickBorderData: BorderSide(color: Colors.grey.shade300, width: 1),
         gridBorderData: BorderSide(color: Colors.grey.shade300, width: 1.5),

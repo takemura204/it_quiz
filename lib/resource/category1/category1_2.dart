@@ -1,6 +1,6 @@
 part of '../quizzes_resource.dart';
 
-List<QuizItem> get category1_1 => [
+List<QuizItem> get category1_2 => [
       QuizItem(
         quizId: 1,
         question: '企業の基本的な価値観や信念を示すものを何というか？',

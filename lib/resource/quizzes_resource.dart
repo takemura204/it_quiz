@@ -6,6 +6,7 @@ import '../model/quiz/quiz_model.dart';
 import '../model/quiz_item/quiz_item.dart';
 
 part 'category1/category1_1.dart';
+part 'category1/category1_2.dart';
 part 'category1_resource.dart';
 
 extension QuizModelEx on QuizModel {

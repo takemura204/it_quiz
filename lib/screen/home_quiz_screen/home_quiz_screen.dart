@@ -96,7 +96,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                 style: TextStyle(
                   fontWeight:
                       index == tabIndex ? FontWeight.bold : FontWeight.normal,
-                  fontSize: context.width * 0.04,
+                  fontSize: 16,
                 ),
               ),
             ),
