@@ -7,10 +7,6 @@ List<QuizItem> get category1_1 => [
         ans: '経営理念',
         choices: ["経営戦略", "経営理念", "企業倫理", "組織文化"],
         comment: "経営理念は、企業がどのような価値を提供し、どのような存在でありたいかを示す基本的な信念や考え方。",
-        isWeak: false,
-        isSaved: false,
-        isJudge: false,
-        lapIndex: 0,
       ),
       // QuizItem(
       //   quizId: 2,

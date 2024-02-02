@@ -51,7 +51,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
       final getQuizList =
           quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
       final updateQuizList = getQuizList.map((quiz) {
-        // studyQuizから、対応するアイテムを探す
         final updatedQuiz =
             initQuizList.firstWhereOrNull((e) => e.id == quiz.id);
         if (updatedQuiz != null) {
@@ -59,7 +58,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
           return quiz.copyWith(
             title: updatedQuiz.title,
             category: updatedQuiz.category,
-            quizItemList: updatedQuiz.quizItemList.map((quizItem) {
+            quizItemList: quiz.quizItemList.map((quizItem) {
               // updatedItemのクイズリストから、対応するクイズを探す
               final updatedQuizItem = updatedQuiz.quizItemList
                   .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
@@ -343,10 +342,11 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   ///SavedQuiz更新
   void updateSavedQuiz(QuizItem updateQuizItem) {
+    print({'updateQuizItem.isSaved', updateQuizItem.isSaved});
     final quizList = state.quizList;
     final updatedQuizList = quizList.map((quiz) {
       final updatedQuizItemList = quiz.quizItemList.map((quizItem) {
-        if (quizItem.ans == updateQuizItem.ans) {
+        if (quizItem.quizId == updateQuizItem.quizId) {
           print('updateQuizItem');
           return updateQuizItem;
         }
@@ -426,7 +426,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         state.historyQuizList.map((e) => json.encode(e.toJson())).toList();
     final weakData = json.encode(state.weakQuiz?.toJson());
     final testData = json.encode(state.testQuiz?.toJson());
-
     await prefs.setStringList('quiz_list', quizListData);
     await prefs.setStringList('history_list', historyListData);
     await prefs.setString('weak_quiz', weakData);

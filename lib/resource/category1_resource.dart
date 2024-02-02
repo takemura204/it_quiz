@@ -59,28 +59,6 @@ extension Category1Quiz on QuizModel {
           title: "分析・データ活用③",
           quizItemList: category1_8,
         ),
-        Quiz(
-          id: 9,
-          categoryId: 3,
-          category: I18n().setCategory(3),
-          title: "問題C-3",
-          quizItemList: quiz3,
-        ),
-        Quiz(
-          id: 10,
-          categoryId: 4,
-          category: I18n().setCategory(3),
-          title: "問題D-1",
-          quizItemList: quiz1,
-        ),
-        Quiz(
-          id: 11,
-          categoryId: 4,
-          category: I18n().setCategory(2),
-          title: "問題D-2",
-          quizItemList: quiz2,
-          correctNum: 0,
-        ),
       ];
 
   ///苦手克服

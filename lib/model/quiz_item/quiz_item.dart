@@ -11,10 +11,10 @@ class QuizItem with _$QuizItem {
     required final String ans, //答え
     required final List<String> choices, //選択肢
     required final String comment, //解説
-    required final bool isWeak, //苦手か？
-    required final bool isJudge, //正解したか?
-    required final bool isSaved, //保存したか?
-    required final int lapIndex, //何周目か？
+    @Default(false) final bool isWeak, //苦手か？
+    @Default(false) final bool isJudge, //正解したか?
+    @Default(false) final bool isSaved, //保存したか?
+    @Default(0) final int lapIndex, //何周目か？
   }) = _QuizItem;
 
   QuizItem._();

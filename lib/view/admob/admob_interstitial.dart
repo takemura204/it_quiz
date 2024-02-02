@@ -9,13 +9,6 @@ class AdInterstitial extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final adMobController = ref.read(adMobProvider.notifier);
-    final isInterstitialLoading =
-    ref.watch(adMobProvider.select((state) => state.isInterstitialLoading));
-
-    // // 広告がロード中、または既にロード済みの場合は何も表示しない
-    // if (isInterstitialLoading) {
-    //   return Container();
-    // }
 
     return FutureBuilder<InterstitialAd?>(
       future: adMobController.createNewInterstitialAd(),
@@ -28,10 +21,7 @@ class AdInterstitial extends ConsumerWidget {
         } else {
           // 広告がロード中の場合
           return Container(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
+              height: MediaQuery.of(context).size.height,
               color: context.backgroundColor,
               alignment: Alignment.center,
               child: Column(
@@ -41,10 +31,7 @@ class AdInterstitial extends ConsumerWidget {
                   const SizedBox(height: 15),
                   Text(
                     '読み込み中...',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ));

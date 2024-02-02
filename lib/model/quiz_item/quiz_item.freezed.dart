@@ -207,10 +207,10 @@ class _$_QuizItem extends _QuizItem {
       required this.ans,
       required final List<String> choices,
       required this.comment,
-      required this.isWeak,
-      required this.isJudge,
-      required this.isSaved,
-      required this.lapIndex})
+      this.isWeak = false,
+      this.isJudge = false,
+      this.isSaved = false,
+      this.lapIndex = 0})
       : _choices = choices,
         super._();
 
@@ -240,15 +240,19 @@ class _$_QuizItem extends _QuizItem {
   final String comment;
 //解説
   @override
+  @JsonKey()
   final bool isWeak;
 //苦手か？
   @override
+  @JsonKey()
   final bool isJudge;
 //正解したか?
   @override
+  @JsonKey()
   final bool isSaved;
 //保存したか?
   @override
+  @JsonKey()
   final int lapIndex;
 
   @override
@@ -309,10 +313,10 @@ abstract class _QuizItem extends QuizItem {
       required final String ans,
       required final List<String> choices,
       required final String comment,
-      required final bool isWeak,
-      required final bool isJudge,
-      required final bool isSaved,
-      required final int lapIndex}) = _$_QuizItem;
+      final bool isWeak,
+      final bool isJudge,
+      final bool isSaved,
+      final int lapIndex}) = _$_QuizItem;
   _QuizItem._() : super._();
 
   factory _QuizItem.fromJson(Map<String, dynamic> json) = _$_QuizItem.fromJson;

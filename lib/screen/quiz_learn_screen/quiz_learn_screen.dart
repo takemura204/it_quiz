@@ -9,7 +9,6 @@ import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:kentei_quiz/view/card/result_clear_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../controller/admob/admob_controller.dart';
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
@@ -55,9 +54,6 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isResultScreen = ref.watch(quizLearnScreenProvider).isResultScreen;
-    final isInterstitialLoading =
-        ref.watch(adMobProvider).isInterstitialLoading;
     return Stack(
       children: [
         Scaffold(appBar: _AppBar(quiz), body: _Body(quiz)),
