@@ -18,13 +18,13 @@ extension QuizModelEx on QuizModel {
   ///問題ジャンル
   List<Quiz> get initQuizList => [
         ...category1QuizList,
-        Quiz(
-          id: 100,
-          categoryId: 1,
-          category: I18n().setCategory(1),
-          title: "問題A-1",
-          quizItemList: quiz1,
-        ),
+        // Quiz(
+        //   id: 100,
+        //   categoryId: 1,
+        //   category: I18n().setCategory(1),
+        //   title: "問題A-1",
+        //   quizItemList: quiz1,
+        // ),
         Quiz(
           id: 1000,
           categoryId: 2,
