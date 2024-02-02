@@ -201,6 +201,7 @@ class _SelectChoice extends ConsumerWidget {
           width: context.width * 0.5,
           height: context.height * 0.1,
           alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
           child: Text(
             choices[index],
             style: isAnsView
@@ -208,12 +209,12 @@ class _SelectChoice extends ConsumerWidget {
                     fontWeight: (choices[index] == quizItemList[quizIndex].ans)
                         ? FontWeight.bold
                         : FontWeight.normal,
-                    fontSize: context.width * 0.05,
+                    fontSize: 18,
                     color: (choices[index] == quizItemList[quizIndex].ans)
                         ? Colors.green.withOpacity(0.7)
                         : Colors.red.withOpacity(0.7),
                   )
-                : TextStyle(fontSize: context.width * 0.05),
+                : const TextStyle(fontSize: 18),
           ),
         ),
       ),

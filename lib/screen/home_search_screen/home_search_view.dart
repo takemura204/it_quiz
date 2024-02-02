@@ -127,7 +127,7 @@ class _QuizItemCard extends ConsumerWidget {
           ),
           const Gap(5),
           SubstringHighlight(
-            text: quiz[index].question,
+            text: quiz[index].comment,
             term: termToHighlight,
             textStyle: context.texts.bodyMedium!,
             overflow: TextOverflow.clip,

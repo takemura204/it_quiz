@@ -52,23 +52,23 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
           quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
       final updateQuizList = getQuizList.map((quiz) {
         // studyQuizから、対応するアイテムを探す
-        final updatedItem =
+        final updatedQuiz =
             initQuizList.firstWhereOrNull((e) => e.id == quiz.id);
-        if (updatedItem != null) {
+        if (updatedQuiz != null) {
           // 各クイズに対して、questionの更新を適用
           return quiz.copyWith(
-            title: updatedItem.title,
-            category: updatedItem.category,
-            quizItemList: quiz.quizItemList.map((quizItem) {
+            title: updatedQuiz.title,
+            category: updatedQuiz.category,
+            quizItemList: updatedQuiz.quizItemList.map((quizItem) {
               // updatedItemのクイズリストから、対応するクイズを探す
-              final updatedQuiz = updatedItem.quizItemList
+              final updatedQuizItem = updatedQuiz.quizItemList
                   .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
-              if (updatedQuiz != null) {
+              if (updatedQuizItem != null) {
                 return quizItem.copyWith(
-                  question: updatedQuiz.question,
-                  ans: updatedQuiz.ans,
-                  choices: updatedQuiz.choices,
-                  comment: updatedQuiz.comment,
+                  question: updatedQuizItem.question,
+                  ans: updatedQuizItem.ans,
+                  choices: updatedQuizItem.choices,
+                  comment: updatedQuizItem.comment,
                 );
               }
               // 対応するクイズが見つからなかった場合、変更なし
@@ -78,6 +78,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         }
         return quiz;
       }).toList();
+      updateQuizList.sort((a, b) => a.id.compareTo(b.id));
       final quizItemList =
           updateQuizList.expand((x) => x.quizItemList).toList();
       state =
@@ -326,15 +327,31 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     _saveDevice();
   }
 
+  void _updateStudyQuiza(Quiz updateQuiz) {
+    final quizList = state.quizList;
+    final selectQuizId = state.selectQuizId;
+    final updateStudyQuiz = quizList.map((quiz) {
+      if (quiz.id == selectQuizId) {
+        return updateQuiz;
+      }
+      return quiz;
+    }).toList();
+
+    state = state.copyWith(quizList: updateStudyQuiz);
+    _saveDevice();
+  }
+
   ///SavedQuiz更新
-  void updateSavedQuiz(QuizItem quizItem) {
+  void updateSavedQuiz(QuizItem updateQuizItem) {
     final quizList = state.quizList;
     final updatedQuizList = quizList.map((quiz) {
-      final updatedQuizItemList = quiz.quizItemList.map((item) {
-        if (item.quizId == quizItem.quizId) {
-          return quizItem;
+      final updatedQuizItemList = quiz.quizItemList.map((quizItem) {
+        if (quizItem.ans == updateQuizItem.ans) {
+          print('updateQuizItem');
+          return updateQuizItem;
         }
-        return item;
+        print('quizItem');
+        return quizItem;
       }).toList();
       return quiz.copyWith(quizItemList: updatedQuizItemList);
     }).toList();

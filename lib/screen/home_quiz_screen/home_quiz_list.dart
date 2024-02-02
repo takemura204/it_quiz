@@ -22,6 +22,9 @@ class _QuizList extends ConsumerWidget {
             childCount: quizList.length,
           ),
         ),
+        const SliverToBoxAdapter(
+          child: Gap(80),
+        ),
       ],
     );
   }

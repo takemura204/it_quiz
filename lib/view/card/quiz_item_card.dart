@@ -43,24 +43,53 @@ class QuizItemCard extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: context.width * 0.02,
                     vertical: context.height * 0.03),
-                child: SubstringHighlight(
-                  text: quizItem.question,
-                  term: quizItem.ans,
-                  textStyle: const TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                  ),
-                  overflow: TextOverflow.clip,
-                  textStyleHighlight: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: studyType == StudyType.learn
-                        ? context.mainColor
-                        : quizItem.isJudge
-                            ? Colors.green.withOpacity(0.7)
-                            : Colors.red.withOpacity(0.7),
-                    decoration: TextDecoration.none,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SubstringHighlight(
+                      text: studyType == StudyType.learn
+                          ? quizItem.comment
+                          : quizItem.question,
+                      term: quizItem.ans,
+                      textStyle: const TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                      ),
+                      overflow: TextOverflow.clip,
+                      textStyleHighlight: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: studyType == StudyType.learn
+                            ? context.mainColor
+                            : quizItem.isJudge
+                                ? Colors.green.withOpacity(0.7)
+                                : Colors.red.withOpacity(0.7),
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    if (studyType == StudyType.choice) ...[
+                      const Gap(10),
+                      SubstringHighlight(
+                        text: '【正解】${quizItem.ans}',
+                        term: quizItem.ans,
+                        textStyle: const TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                        ),
+                        overflow: TextOverflow.clip,
+                        textStyleHighlight: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: studyType == StudyType.learn
+                              ? context.mainColor
+                              : quizItem.isJudge
+                                  ? Colors.green.withOpacity(0.7)
+                                  : Colors.red.withOpacity(0.7),
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),

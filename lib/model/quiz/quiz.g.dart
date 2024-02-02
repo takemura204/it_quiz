@@ -11,16 +11,19 @@ _$_Quiz _$$_QuizFromJson(Map<String, dynamic> json) => _$_Quiz(
       categoryId: json['categoryId'] as int,
       category: json['category'] as String,
       title: json['title'] as String,
-      isCompleted: json['isCompleted'] as bool,
       quizItemList: (json['quizItemList'] as List<dynamic>)
           .map((e) => QuizItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      correctNum: json['correctNum'] as int,
       timeStamp: json['timeStamp'] == null
           ? null
           : DateTime.parse(json['timeStamp'] as String),
-      duration: Duration(microseconds: json['duration'] as int),
-      studyType: $enumDecode(_$StudyTypeEnumMap, json['studyType']),
+      isCompleted: json['isCompleted'] as bool? ?? false,
+      correctNum: json['correctNum'] as int? ?? 0,
+      duration: json['duration'] == null
+          ? Duration.zero
+          : Duration(microseconds: json['duration'] as int),
+      studyType: $enumDecodeNullable(_$StudyTypeEnumMap, json['studyType']) ??
+          StudyType.learn,
     );
 
 Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
@@ -28,10 +31,10 @@ Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
       'categoryId': instance.categoryId,
       'category': instance.category,
       'title': instance.title,
-      'isCompleted': instance.isCompleted,
       'quizItemList': instance.quizItemList,
-      'correctNum': instance.correctNum,
       'timeStamp': instance.timeStamp?.toIso8601String(),
+      'isCompleted': instance.isCompleted,
+      'correctNum': instance.correctNum,
       'duration': instance.duration.inMicroseconds,
       'studyType': _$StudyTypeEnumMap[instance.studyType]!,
     };

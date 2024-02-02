@@ -5,7 +5,7 @@ extension QuizModelEx1 on QuizModel {
   ///問題一覧
   List<QuizItem> get quiz1 => [
         QuizItem(
-          quizId: 1,
+          quizId: 01,
           question: '1 + 1 = 2',
           ans: '2',
           choices: ["1", "2", "3", "4"],
@@ -16,7 +16,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 2,
+          quizId: 02,
           question: '更新世は氷河時代とも呼ばれる',
           ans: '氷河時代',
           choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
@@ -27,7 +27,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 3,
+          quizId: 03,
           question: '猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.',
           ans: 'タンペム',
           isWeak: false,
@@ -46,7 +46,7 @@ extension QuizModelEx1 on QuizModel {
 
   List<QuizItem> get quiz2 => [
         QuizItem(
-          quizId: 4,
+          quizId: 04,
           question: '1 + 2 = 3',
           ans: '3',
           isWeak: false,
@@ -57,7 +57,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 5,
+          quizId: 05,
           question: '(1)更新世は氷河時代とも呼ばれる',
           ans: '氷河時代',
           isWeak: false,
@@ -68,7 +68,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 6,
+          quizId: 06,
           question: '(1)猫の目には、タンペムという反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる。',
           ans: 'タンペム',
           isWeak: false,
@@ -84,7 +84,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 7,
+          quizId: 07,
           question: '(2)更新世は氷河時代とも呼ばれる',
           ans: '氷河時代',
           isWeak: false,
@@ -95,7 +95,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 8,
+          quizId: 08,
           question: '(2)猫の目には、タンペムという反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.',
           ans: 'タンペム',
           choices: [
@@ -114,7 +114,7 @@ extension QuizModelEx1 on QuizModel {
 
   List<QuizItem> get quiz3 => [
         QuizItem(
-          quizId: 9,
+          quizId: 09,
           question: '2 + 3 = 5',
           ans: '5',
           choices: ["4", "5", "6", "8"],
@@ -125,7 +125,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 10,
+          quizId: 010,
           question: '(3)更新世は氷河時代とも呼ばれる',
           ans: '氷河時代',
           choices: ["氷河時代", "地質時代", "縄文時代", "旧石器時代"],
@@ -136,7 +136,7 @@ extension QuizModelEx1 on QuizModel {
           lapIndex: 0,
         ),
         QuizItem(
-          quizId: 11,
+          quizId: 011,
           question:
               ' (3)猫の目には、 タンペム という反射板が網膜の裏側にあり、光の乏しい暗闇でもしっかりとものを見ることができる.',
           ans: 'タンペム',

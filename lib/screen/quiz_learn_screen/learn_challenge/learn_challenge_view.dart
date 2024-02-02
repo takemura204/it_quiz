@@ -198,7 +198,7 @@ class _AnsQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SubstringHighlight(
-      text: quizItem.question,
+      text: quizItem.comment,
       term: quizItem.ans,
       textStyle: const TextStyle(
         fontSize: 21,
@@ -224,7 +224,7 @@ class _ConfirmQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SubstringHighlight(
-      text: quizItem.question
+      text: quizItem.comment
           .replaceAll(quizItem.ans, I18n().hideText(quizItem.ans)),
       term: quizItem.ans,
       textStyle: const TextStyle(

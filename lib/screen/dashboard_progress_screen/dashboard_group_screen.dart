@@ -147,10 +147,9 @@ class _GroupProgressCount extends ConsumerWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                 ),
                 height: 8,
-                width: (('$correctNum'.length.toDouble()) +
-                            ('$correctNum'.length.toDouble())) *
-                        20 +
-                    12,
+                width: ('$correctNum'.length.toDouble()) * 20 +
+                    ('$quizLength'.length.toDouble()) * 10 +
+                    10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -233,10 +232,9 @@ class _TotalProgressCount extends ConsumerWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
                     height: 8,
-                    width: (('$correctNum'.length.toDouble()) +
-                                ('$correctNum'.length.toDouble())) *
-                            20 +
-                        12,
+                    width: ('$correctNum'.length.toDouble()) * 20 +
+                        ('$quizLength'.length.toDouble()) * 10 +
+                        10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

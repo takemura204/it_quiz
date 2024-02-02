@@ -107,9 +107,9 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
       choices: filteredQuizItemList[index].choices,
       lapIndex: filteredQuizItemList[index].lapIndex,
     );
-    final quizItem = filteredQuizItemList[index];
+    final updateQuizItem = filteredQuizItemList[index];
 
-    ref.read(quizModelProvider.notifier).updateSavedQuiz(quizItem);
+    ref.read(quizModelProvider.notifier).updateSavedQuiz(updateQuizItem);
     state = state.copyWith(filteredQuizItemList: filteredQuizItemList);
   }
 
@@ -148,7 +148,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
         ? quizItemList
         : quizItemList.where((item) {
             return searchKeywords.any((keyword) {
-              return item.question.contains(keyword);
+              return item.comment.contains(keyword);
             });
           }).toList();
     state = state.copyWith(
@@ -202,23 +202,6 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
 
     // 1. 全角スペースを半角スペースに変換
     processed = processed.replaceAll('　', ' ');
-
-    // 2. 全角の英数字を半角に変換
-    processed = processed.replaceAllMapped(RegExp(r'[０-９ａ-ｚＡ-Ｚ]'), (match) {
-      final code = match.group(0)!.codeUnitAt(0);
-      return String.fromCharCode(code - 0xFEE0);
-    });
-
-    normalizedTexts.add(processed);
-
-    // 3. 半角の英数字を全角に変換
-    final String toFullWidth =
-        processed.replaceAllMapped(RegExp(r'[0-9a-zA-Z]'), (match) {
-      final code = match.group(0)!.codeUnitAt(0);
-      return String.fromCharCode(code + 0xFEE0);
-    });
-
-    normalizedTexts.add(toFullWidth);
 
     // 4. カタカナをひらがなに変換
     final String toHiragana =

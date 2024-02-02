@@ -24,10 +24,10 @@ mixin _$Quiz {
   int get categoryId => throw _privateConstructorUsedError; //問題ID
   String get category => throw _privateConstructorUsedError; //問題のジャンル別に分ける
   String get title => throw _privateConstructorUsedError; //問題タイトル
-  bool get isCompleted => throw _privateConstructorUsedError; //全て問題を解いたか
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError; //クイズ一覧
-  int get correctNum => throw _privateConstructorUsedError; //正解数
   DateTime? get timeStamp => throw _privateConstructorUsedError; //挑戦日
+  bool get isCompleted => throw _privateConstructorUsedError; //全て問題を解いたか
+  int get correctNum => throw _privateConstructorUsedError; //正解数
   Duration get duration => throw _privateConstructorUsedError; // 所要時間
   StudyType get studyType => throw _privateConstructorUsedError;
 
@@ -46,10 +46,10 @@ abstract class $QuizCopyWith<$Res> {
       int categoryId,
       String category,
       String title,
-      bool isCompleted,
       List<QuizItem> quizItemList,
-      int correctNum,
       DateTime? timeStamp,
+      bool isCompleted,
+      int correctNum,
       Duration duration,
       StudyType studyType});
 }
@@ -71,10 +71,10 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
     Object? categoryId = null,
     Object? category = null,
     Object? title = null,
-    Object? isCompleted = null,
     Object? quizItemList = null,
-    Object? correctNum = null,
     Object? timeStamp = freezed,
+    Object? isCompleted = null,
+    Object? correctNum = null,
     Object? duration = null,
     Object? studyType = null,
   }) {
@@ -95,22 +95,22 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
       quizItemList: null == quizItemList
           ? _value.quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItem>,
-      correctNum: null == correctNum
-          ? _value.correctNum
-          : correctNum // ignore: cast_nullable_to_non_nullable
-              as int,
       timeStamp: freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      correctNum: null == correctNum
+          ? _value.correctNum
+          : correctNum // ignore: cast_nullable_to_non_nullable
+              as int,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -134,10 +134,10 @@ abstract class _$$_QuizCopyWith<$Res> implements $QuizCopyWith<$Res> {
       int categoryId,
       String category,
       String title,
-      bool isCompleted,
       List<QuizItem> quizItemList,
-      int correctNum,
       DateTime? timeStamp,
+      bool isCompleted,
+      int correctNum,
       Duration duration,
       StudyType studyType});
 }
@@ -155,10 +155,10 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
     Object? categoryId = null,
     Object? category = null,
     Object? title = null,
-    Object? isCompleted = null,
     Object? quizItemList = null,
-    Object? correctNum = null,
     Object? timeStamp = freezed,
+    Object? isCompleted = null,
+    Object? correctNum = null,
     Object? duration = null,
     Object? studyType = null,
   }) {
@@ -179,22 +179,22 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
       quizItemList: null == quizItemList
           ? _value._quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItem>,
-      correctNum: null == correctNum
-          ? _value.correctNum
-          : correctNum // ignore: cast_nullable_to_non_nullable
-              as int,
       timeStamp: freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      correctNum: null == correctNum
+          ? _value.correctNum
+          : correctNum // ignore: cast_nullable_to_non_nullable
+              as int,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -215,12 +215,12 @@ class _$_Quiz implements _Quiz {
       required this.categoryId,
       required this.category,
       required this.title,
-      required this.isCompleted,
       required final List<QuizItem> quizItemList,
-      required this.correctNum,
-      required this.timeStamp,
-      required this.duration,
-      required this.studyType})
+      this.timeStamp = null,
+      this.isCompleted = false,
+      this.correctNum = 0,
+      this.duration = Duration.zero,
+      this.studyType = StudyType.learn})
       : _quizItemList = quizItemList;
 
   factory _$_Quiz.fromJson(Map<String, dynamic> json) => _$$_QuizFromJson(json);
@@ -237,11 +237,8 @@ class _$_Quiz implements _Quiz {
   @override
   final String title;
 //問題タイトル
-  @override
-  final bool isCompleted;
-//全て問題を解いたか
   final List<QuizItem> _quizItemList;
-//全て問題を解いたか
+//問題タイトル
   @override
   List<QuizItem> get quizItemList {
     if (_quizItemList is EqualUnmodifiableListView) return _quizItemList;
@@ -251,20 +248,28 @@ class _$_Quiz implements _Quiz {
 
 //クイズ一覧
   @override
-  final int correctNum;
-//正解数
-  @override
+  @JsonKey()
   final DateTime? timeStamp;
 //挑戦日
   @override
+  @JsonKey()
+  final bool isCompleted;
+//全て問題を解いたか
+  @override
+  @JsonKey()
+  final int correctNum;
+//正解数
+  @override
+  @JsonKey()
   final Duration duration;
 // 所要時間
   @override
+  @JsonKey()
   final StudyType studyType;
 
   @override
   String toString() {
-    return 'Quiz(id: $id, categoryId: $categoryId, category: $category, title: $title, isCompleted: $isCompleted, quizItemList: $quizItemList, correctNum: $correctNum, timeStamp: $timeStamp, duration: $duration, studyType: $studyType)';
+    return 'Quiz(id: $id, categoryId: $categoryId, category: $category, title: $title, quizItemList: $quizItemList, timeStamp: $timeStamp, isCompleted: $isCompleted, correctNum: $correctNum, duration: $duration, studyType: $studyType)';
   }
 
   @override
@@ -278,14 +283,14 @@ class _$_Quiz implements _Quiz {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted) &&
             const DeepCollectionEquality()
                 .equals(other._quizItemList, _quizItemList) &&
-            (identical(other.correctNum, correctNum) ||
-                other.correctNum == correctNum) &&
             (identical(other.timeStamp, timeStamp) ||
                 other.timeStamp == timeStamp) &&
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted) &&
+            (identical(other.correctNum, correctNum) ||
+                other.correctNum == correctNum) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.studyType, studyType) ||
@@ -300,10 +305,10 @@ class _$_Quiz implements _Quiz {
       categoryId,
       category,
       title,
-      isCompleted,
       const DeepCollectionEquality().hash(_quizItemList),
-      correctNum,
       timeStamp,
+      isCompleted,
+      correctNum,
       duration,
       studyType);
 
@@ -327,12 +332,12 @@ abstract class _Quiz implements Quiz {
       required final int categoryId,
       required final String category,
       required final String title,
-      required final bool isCompleted,
       required final List<QuizItem> quizItemList,
-      required final int correctNum,
-      required final DateTime? timeStamp,
-      required final Duration duration,
-      required final StudyType studyType}) = _$_Quiz;
+      final DateTime? timeStamp,
+      final bool isCompleted,
+      final int correctNum,
+      final Duration duration,
+      final StudyType studyType}) = _$_Quiz;
 
   factory _Quiz.fromJson(Map<String, dynamic> json) = _$_Quiz.fromJson;
 
@@ -345,14 +350,14 @@ abstract class _Quiz implements Quiz {
   @override //問題のジャンル別に分ける
   String get title;
   @override //問題タイトル
-  bool get isCompleted;
-  @override //全て問題を解いたか
   List<QuizItem> get quizItemList;
   @override //クイズ一覧
-  int get correctNum;
-  @override //正解数
   DateTime? get timeStamp;
   @override //挑戦日
+  bool get isCompleted;
+  @override //全て問題を解いたか
+  int get correctNum;
+  @override //正解数
   Duration get duration;
   @override // 所要時間
   StudyType get studyType;
