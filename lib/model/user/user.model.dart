@@ -25,7 +25,6 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
   }
 
   Future _loadUserData() async {
-    print('_loadUserData');
     final prefs = await SharedPreferences.getInstance();
     final dailyGoal = prefs.getInt('daily_goal') ?? state.dailyGoal;
     final themeId = prefs.getInt('theme_id') ?? state.themeId;

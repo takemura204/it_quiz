@@ -47,60 +47,61 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   Future _getQuizListData() async {
     final prefs = await SharedPreferences.getInstance();
     final quizListDataJson = prefs.getStringList('quiz_list');
-    List<Quiz> updateQuizList;
+    List<Quiz> updatedQuizList = [];
 
     if (quizListDataJson != null && quizListDataJson.isNotEmpty) {
-      final getQuizList =
+      final localQuizList =
           quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
 
-      // initQuizList に含まれるクイズの ID のセットを作成
-      final initQuizIds = initQuizList.map((quiz) => quiz.id).toSet();
+      for (var localQuiz in localQuizList) {
+        final matchedQuiz =
+            initQuizList.firstWhereOrNull((q) => q.id == localQuiz.id);
 
-      // ローカルストレージのクイズリストを更新
-      updateQuizList = getQuizList
-          .map((quiz) {
-            final updatedQuiz =
-                initQuizList.firstWhereOrNull((e) => e.id == quiz.id);
-            if (updatedQuiz != null) {
-              // 各クイズに対して、questionの更新を適用
-              return quiz.copyWith(
-                title: updatedQuiz.title,
-                category: updatedQuiz.category,
-                quizItemList: quiz.quizItemList.map((quizItem) {
-                  // updatedItemのクイズリストから、対応するクイズを探す
-                  final updatedQuizItem = updatedQuiz.quizItemList
-                      .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
-                  if (updatedQuizItem != null) {
-                    return quizItem.copyWith(
-                      question: updatedQuizItem.question,
-                      ans: updatedQuizItem.ans,
-                      choices: updatedQuizItem.choices,
-                      comment: updatedQuizItem.comment,
-                    );
-                  }
-                  // 対応するクイズが見つからなかった場合、変更なし
-                  return quizItem;
-                }).toList(),
-              );
+        if (matchedQuiz != null) {
+          // 更新されたクイズアイテムリストを作成
+          List<QuizItem> updatedQuizItems = [];
+
+          // initQuizList に存在し、ローカルにも存在するクイズアイテムを更新
+          for (var localQuizItem in localQuiz.quizItemList) {
+            final matchedQuizItem = matchedQuiz.quizItemList.firstWhereOrNull(
+                (item) => item.quizId == localQuizItem.quizId);
+            if (matchedQuizItem != null) {
+              updatedQuizItems.add(localQuizItem.copyWith(
+                question: matchedQuizItem.question,
+                ans: matchedQuizItem.ans,
+                choices: matchedQuizItem.choices,
+                comment: matchedQuizItem.comment,
+              ));
             }
-            return quiz;
-          })
-          .where((quiz) => initQuizIds.contains(quiz.id))
-          .toList(); // initQuizList にないクイズをフィルタリング
+          }
+
+          // initQuizList に存在し、ローカルにはないクイズアイテムを追加
+          for (var initQuizItem in matchedQuiz.quizItemList) {
+            if (!localQuiz.quizItemList
+                .any((localItem) => localItem.quizId == initQuizItem.quizId)) {
+              updatedQuizItems.add(initQuizItem);
+            }
+          }
+
+          updatedQuizList
+              .add(localQuiz.copyWith(quizItemList: updatedQuizItems));
+        }
+      }
 
       // initQuizList にしか存在しないクイズを追加
-      final ids = updateQuizList.map((quiz) => quiz.id).toSet();
-      updateQuizList
-          .addAll(initQuizList.where((quiz) => !ids.contains(quiz.id)));
+      final localQuizIds = localQuizList.map((quiz) => quiz.id).toSet();
+      updatedQuizList.addAll(
+          initQuizList.where((quiz) => !localQuizIds.contains(quiz.id)));
     } else {
       // 初回起動時は initQuizList をそのまま使用
-      updateQuizList = _initQuizList();
+      updatedQuizList = _initQuizList();
     }
 
-    updateQuizList.sort((a, b) => a.id.compareTo(b.id));
-    final quizItemList = updateQuizList.expand((x) => x.quizItemList).toList();
+    updatedQuizList.sort((a, b) => a.id.compareTo(b.id));
+    final quizItemList =
+        updatedQuizList.expand((quiz) => quiz.quizItemList).toList();
     state =
-        state.copyWith(quizList: updateQuizList, quizItemList: quizItemList);
+        state.copyWith(quizList: updatedQuizList, quizItemList: quizItemList);
   }
 
   ///苦手リスト取得
@@ -352,15 +353,12 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   ///SavedQuiz更新
   void updateSavedQuiz(QuizItem updateQuizItem) {
-    print({'updateQuizItem.isSaved', updateQuizItem.isSaved});
     final quizList = state.quizList;
     final updatedQuizList = quizList.map((quiz) {
       final updatedQuizItemList = quiz.quizItemList.map((quizItem) {
         if (quizItem.quizId == updateQuizItem.quizId) {
-          print('updateQuizItem');
           return updateQuizItem;
         }
-        print('quizItem');
         return quizItem;
       }).toList();
       return quiz.copyWith(quizItemList: updatedQuizItemList);

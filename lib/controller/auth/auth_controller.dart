@@ -71,7 +71,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
           );
         }
       } else {
-        print("Null User");
+        // print("Null User");
       }
       emailController.text = state.email;
       passwordController.text = state.password;
@@ -80,7 +80,6 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
           ? state.birthDay.replaceAll('-', '/')
           : state.birthDay;
       genderController.text = state.gender;
-      print("loadAccountData");
     } catch (e, s) {
       print({e, s});
       print("Error：loadAccountData");

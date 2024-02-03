@@ -5,12 +5,22 @@ import '../model/lang/initial_resource.dart';
 import '../model/quiz/quiz.dart';
 import '../model/quiz/quiz_model.dart';
 import 'category1/category1_1.dart';
+import 'category1/category1_10.dart';
+import 'category1/category1_11.dart';
+import 'category1/category1_12.dart';
+import 'category1/category1_13.dart';
+import 'category1/category1_14.dart';
+import 'category1/category1_15.dart';
+import 'category1/category1_16.dart';
+import 'category1/category1_17.dart';
+import 'category1/category1_18.dart';
 import 'category1/category1_2.dart';
 import 'category1/category1_3.dart';
 import 'category1/category1_5.dart';
 import 'category1/category1_6.dart';
 import 'category1/category1_7.dart';
 import 'category1/category1_8.dart';
+import 'category1/category1_9.dart';
 
 part 'category1_resource.dart';
 
@@ -18,13 +28,13 @@ extension QuizModelEx on QuizModel {
   ///問題ジャンル
   List<Quiz> get initQuizList => [
         ...category1QuizList,
-        Quiz(
-          id: 1001,
-          categoryId: 1,
-          category: I18n().setCategory(1),
-          title: "問題A-1",
-          quizItemList: quiz1,
-        ),
+        // Quiz(
+        //   id: 1001,
+        //   categoryId: 1,
+        //   category: I18n().setCategory(1),
+        //   title: "問題A-1",
+        //   quizItemList: quiz1,
+        // ),
         Quiz(
           id: 1002,
           categoryId: 2,
