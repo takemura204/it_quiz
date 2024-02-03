@@ -7,7 +7,7 @@ part of 'quiz_item.dart';
 // **************************************************************************
 
 _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
-      quizId: json['quizId'] as int,
+      quizId: json['quizId'] as int? ?? 0,
       question: json['question'] as String,
       ans: json['ans'] as String,
       choices:

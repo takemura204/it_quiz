@@ -145,18 +145,12 @@ class _QuizRange extends ConsumerWidget {
             ),
           ),
           const Gap(5),
-          _SelectRange(
-              text: categoryList[0],
-              isSelected: selectedTestCategory.contains(categoryList[0])),
-          _SelectRange(
-              text: categoryList[1],
-              isSelected: selectedTestCategory.contains(categoryList[1])),
-          _SelectRange(
-              text: categoryList[2],
-              isSelected: selectedTestCategory.contains(categoryList[2])),
-          _SelectRange(
-              text: categoryList[3],
-              isSelected: selectedTestCategory.contains(categoryList[3])),
+          ...categoryList
+              .map((category) => _SelectRange(
+                    text: category,
+                    isSelected: selectedTestCategory.contains(category),
+                  ))
+              .toList(),
         ],
       ),
     );

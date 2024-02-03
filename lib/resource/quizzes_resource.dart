@@ -18,15 +18,15 @@ extension QuizModelEx on QuizModel {
   ///問題ジャンル
   List<Quiz> get initQuizList => [
         ...category1QuizList,
-        // Quiz(
-        //   id: 100,
-        //   categoryId: 1,
-        //   category: I18n().setCategory(1),
-        //   title: "問題A-1",
-        //   quizItemList: quiz1,
-        // ),
         Quiz(
-          id: 1000,
+          id: 1001,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "問題A-1",
+          quizItemList: quiz1,
+        ),
+        Quiz(
+          id: 1002,
           categoryId: 2,
           category: I18n().setCategory(2),
           title: "問題B-1",

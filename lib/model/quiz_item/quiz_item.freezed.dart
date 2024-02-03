@@ -202,7 +202,7 @@ class __$$_QuizItemCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_QuizItem extends _QuizItem {
   _$_QuizItem(
-      {required this.quizId,
+      {this.quizId = 0,
       required this.question,
       required this.ans,
       required final List<String> choices,
@@ -218,6 +218,7 @@ class _$_QuizItem extends _QuizItem {
       _$$_QuizItemFromJson(json);
 
   @override
+  @JsonKey()
   final int quizId;
 //問題番号
   @override
@@ -308,7 +309,7 @@ class _$_QuizItem extends _QuizItem {
 
 abstract class _QuizItem extends QuizItem {
   factory _QuizItem(
-      {required final int quizId,
+      {final int quizId,
       required final String question,
       required final String ans,
       required final List<String> choices,

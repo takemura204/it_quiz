@@ -6,7 +6,7 @@ part 'quiz_item.g.dart';
 @freezed
 class QuizItem with _$QuizItem {
   factory QuizItem({
-    required final int quizId, //問題番号
+    @Default(0) final int quizId, //問題番号
     required final String question, //問題文
     required final String ans, //答え
     required final List<String> choices, //選択肢
