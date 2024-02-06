@@ -129,6 +129,41 @@ extension Category1Quiz on QuizModel {
           title: "ガイドライン",
           quizItemList: category1_18,
         ),
+        Quiz(
+          id: 19,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "標準化関連①",
+          quizItemList: category1_19,
+        ),
+        Quiz(
+          id: 20,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "標準化関連②",
+          quizItemList: category1_20,
+        ),
+        Quiz(
+          id: 21,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "経営戦略手法①",
+          quizItemList: category1_21,
+        ),
+        Quiz(
+          id: 22,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "経営戦略手法②",
+          quizItemList: category1_22,
+        ),
+        Quiz(
+          id: 23,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "経営戦略手法③",
+          quizItemList: category1_23,
+        ),
       ];
 
   ///苦手克服

@@ -48,7 +48,7 @@ class _Body extends ConsumerWidget {
           PeriodDashboard(),
 
           ///進捗状況
-          GroupProgressDashboard(),
+          GroupProgressDashboards(),
           Gap(5),
         ],
       ),
