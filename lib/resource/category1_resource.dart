@@ -164,23 +164,103 @@ extension Category1Quiz on QuizModel {
           title: "経営戦略手法③",
           quizItemList: category1_23,
         ),
+        Quiz(
+          id: 24,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "マーケティング①",
+          quizItemList: category1_24,
+        ),
+        Quiz(
+          id: 25,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "マーケティング②",
+          quizItemList: category1_25,
+        ),
+        Quiz(
+          id: 26,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "マーケティング③",
+          quizItemList: category1_26,
+        ),
+        Quiz(
+          id: 27,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "マーケティング④",
+          quizItemList: category1_27,
+        ),
+        Quiz(
+          id: 28,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "経営管理システム",
+          quizItemList: category1_28,
+        ),
+        Quiz(
+          id: 29,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "技術戦略マネジメント①",
+          quizItemList: category1_29,
+        ),
+        Quiz(
+          id: 30,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "技術戦略マネジメント②",
+          quizItemList: category1_30,
+        ),
+        Quiz(
+          id: 31,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "エンジニアリングシステム",
+          quizItemList: category1_31,
+        ),
+        Quiz(
+          id: 32,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "e-ビジネス①",
+          quizItemList: category1_32,
+        ),
+        Quiz(
+          id: 33,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "e-ビジネス②",
+          quizItemList: category1_33,
+        ),
+        Quiz(
+          id: 34,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "IoTシステム・組込みシステム①",
+          quizItemList: category1_34,
+        ),
+        Quiz(
+          id: 35,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "IoTシステム・組込みシステム②",
+          quizItemList: category1_35,
+        ),
+        Quiz(
+          id: 36,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "業務プロセス①",
+          quizItemList: category1_36,
+        ),
+        Quiz(
+          id: 37,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "業務プロセス②",
+          quizItemList: category1_37,
+        ),
       ];
-
-  ///苦手克服
-  Quiz get initWeakQuiz => Quiz(
-        id: 2,
-        categoryId: 5,
-        category: I18n().setCategory(5),
-        title: "苦手克服",
-        quizItemList: [],
-      );
-
-  ///力だめし
-  Quiz get initTestQuiz => Quiz(
-        id: 3,
-        categoryId: 4,
-        category: I18n().setCategory(6),
-        title: "力だめし",
-        quizItemList: [],
-      );
 }
