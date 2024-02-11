@@ -206,7 +206,7 @@ class _$_Create extends _Create {
       this.isValidSearch = false,
       this.isNotTextEmpty = false,
       this.isSavedFilter = false,
-      this.maxItemsToDisplay = 20})
+      this.maxItemsToDisplay = 50})
       : _filteredQuizItemList = filteredQuizItemList,
         _searchKeywords = searchKeywords,
         super._();

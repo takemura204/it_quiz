@@ -46,7 +46,7 @@ List<QuizItem> get category1_3 {
     ),
     QuizItem(
       question: '社会的責任を重視した投資を何というか？',
-      ans: 'SRI (Socially Responsible Investment)',
+      ans: 'SRI',
       choices: ["ベンチャーキャピタル", "ヘッジファンド", "SRI", "プライベートエクイティ"],
       comment: "SRIは、投資対象となる企業の社会的責任や環境配慮などの要素を考慮に入れた投資活動。",
     ),

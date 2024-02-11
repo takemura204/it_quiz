@@ -262,5 +262,26 @@ extension Category1Quiz on QuizModel {
           title: "業務プロセス②",
           quizItemList: category1_37,
         ),
+        Quiz(
+          id: 38,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "ソリューションビジネス",
+          quizItemList: category1_38,
+        ),
+        Quiz(
+          id: 39,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "システム活用促進・評価",
+          quizItemList: category1_39,
+        ),
+        Quiz(
+          id: 40,
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          title: "システム企画",
+          quizItemList: category1_40,
+        ),
       ];
 }

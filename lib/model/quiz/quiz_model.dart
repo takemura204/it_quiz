@@ -83,8 +83,12 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
             }
           }
 
-          updatedQuizList
-              .add(localQuiz.copyWith(quizItemList: updatedQuizItems));
+          updatedQuizList.add(localQuiz.copyWith(
+            title: matchedQuiz.title,
+            categoryId: matchedQuiz.categoryId,
+            category: matchedQuiz.category,
+            quizItemList: updatedQuizItems,
+          ));
         }
       }
 
