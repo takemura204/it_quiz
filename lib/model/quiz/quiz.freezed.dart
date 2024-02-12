@@ -211,7 +211,7 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
 @JsonSerializable()
 class _$_Quiz implements _Quiz {
   const _$_Quiz(
-      {required this.id,
+      {this.id = 0,
       required this.categoryId,
       required this.category,
       required this.title,
@@ -226,6 +226,7 @@ class _$_Quiz implements _Quiz {
   factory _$_Quiz.fromJson(Map<String, dynamic> json) => _$$_QuizFromJson(json);
 
   @override
+  @JsonKey()
   final int id;
 //問題ID
   @override
@@ -328,7 +329,7 @@ class _$_Quiz implements _Quiz {
 
 abstract class _Quiz implements Quiz {
   const factory _Quiz(
-      {required final int id,
+      {final int id,
       required final int categoryId,
       required final String category,
       required final String title,

@@ -57,31 +57,29 @@ part 'category1/category1_resource.dart';
 part 'category2/category2_resource.dart';
 
 extension QuizModelEx on QuizModel {
-  List<Quiz> get initQuizList => [
-        ...category1QuizList,
-        // Quiz(
-        //   id: 1001,
-        //   categoryId: 1,
-        //   category: I18n().setCategory(1),
-        //   title: "問題A-1",
-        //   quizItemList: quiz1,
-        // ),
-        Quiz(
-          id: 1002,
-          categoryId: 2,
-          category: I18n().setCategory(2),
-          title: "問題B-1",
-          quizItemList: quiz2,
-        ),
-        Quiz(
-          id: 1111,
-          categoryId: 3,
-          category: I18n().setCategory(3),
-          title: "問題D-1",
-          quizItemList: quiz3,
-          correctNum: 0,
-        ),
-      ];
+  List<Quiz> get initQuizList {
+    final testQuizList = [
+      Quiz(
+        id: 2000,
+        categoryId: 2,
+        category: I18n().setCategory(2),
+        title: "問題B-1",
+        quizItemList: quiz2,
+      ),
+      Quiz(
+        id: 3000,
+        categoryId: 3,
+        category: I18n().setCategory(3),
+        title: "問題D-1",
+        quizItemList: quiz3,
+      ),
+    ];
+    final quizList = category1QuizList + category2QuizList + testQuizList;
+
+    print({'quizList', quizList.length});
+
+    return quizList;
+  }
 
   ///苦手克服
   Quiz get initWeakQuiz => Quiz(
