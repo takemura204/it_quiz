@@ -213,7 +213,7 @@ class ProgressLineBar extends ConsumerWidget {
               height: height,
               alignment: Alignment.center,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
@@ -221,9 +221,7 @@ class ProgressLineBar extends ConsumerWidget {
                     style: TextStyle(
                       color: isDone ? Colors.white : Colors.black54,
                       fontWeight: FontWeight.bold,
-                      fontSize: width > context.width * 0.3
-                          ? context.width * 0.035
-                          : 10,
+                      fontSize: width > context.width * 0.3 ? 14 : 10,
                     ),
                   ),
                   Text(
@@ -231,9 +229,7 @@ class ProgressLineBar extends ConsumerWidget {
                     style: TextStyle(
                         color: isDone ? Colors.white : Colors.black54,
                         fontWeight: FontWeight.normal,
-                        fontSize: width > context.width * 0.3
-                            ? context.width * 0.035
-                            : 10),
+                        fontSize: width > context.width * 0.3 ? 14 : 10),
                   ),
                 ],
               ),

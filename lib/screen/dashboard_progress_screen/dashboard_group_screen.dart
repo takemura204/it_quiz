@@ -55,15 +55,13 @@ class GroupProgressDashboard extends ConsumerWidget {
               children: [
                 ///レーダーチャート
                 Container(
-                  // color: context.backgroundColor.withOpacity(0.2),
                   height: context.width * 0.6,
                   width: context.width,
                   padding: EdgeInsets.symmetric(
                       vertical: context.width * 0.02,
                       horizontal: context.width * 0.04),
-                  margin: EdgeInsets.symmetric(
-                      vertical: context.width * 0.02,
-                      horizontal: context.width * 0.02),
+                  margin:
+                      EdgeInsets.symmetric(horizontal: context.width * 0.02),
                   child: _ProgressRadarChart(
                     categories: categoryList,
                     scoreRatios: correctRatios,
