@@ -41,6 +41,7 @@ class PrimaryButton extends ConsumerWidget {
             if (icon != null)
               Icon(
                 icon,
+                color: Colors.white,
                 size: height * 0.6,
               ),
             SizedBox(width: icon != null ? 6.0 : 0),
@@ -49,6 +50,7 @@ class PrimaryButton extends ConsumerWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
                 fontSize: height <= 5 ? 14 : 16,
               ),
             ),

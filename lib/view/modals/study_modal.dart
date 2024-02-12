@@ -24,6 +24,7 @@ class StudyQuizModal extends ConsumerWidget {
       contentPadding: EdgeInsets.all(context.width * 0.01),
       children: [
         Container(
+          color: Colors.white,
           width: context.width * 0.8,
           child: Column(
             children: [

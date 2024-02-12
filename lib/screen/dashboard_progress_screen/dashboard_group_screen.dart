@@ -7,6 +7,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/quiz/quiz_model.dart';
+import '../../view/bar.dart';
 
 part 'dashboard_group_progress_view.dart';
 
@@ -49,36 +50,14 @@ class GroupProgressDashboard extends ConsumerWidget {
               icon: Icons.speaker_group_sharp,
             ),
             const Gap(10),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: context.width * 0.04,
-                      right: context.width * 0.02,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        for (var i = 0; i < categoryList.length; i++) ...[
-                          if (i != 0) const Gap(10),
-                          _GroupProgressCount(group: categoryList[i]),
-                        ],
-                        const Gap(10),
-                        const Divider(color: Colors.grey, height: 1),
-                        const Gap(10),
-                        const _TotalProgressCount(),
-                        const Gap(10),
-                      ],
-                    ),
-                  ),
-                ),
-                const Gap(10),
+                ///レーダーチャート
                 Container(
-                  color: context.backgroundColor.withOpacity(0.3),
-                  height: context.width * 0.5,
-                  width: context.width * 0.5,
+                  // color: context.backgroundColor.withOpacity(0.2),
+                  height: context.width * 0.6,
+                  width: context.width,
                   padding: EdgeInsets.symmetric(
                       vertical: context.width * 0.02,
                       horizontal: context.width * 0.04),
@@ -90,6 +69,28 @@ class GroupProgressDashboard extends ConsumerWidget {
                     scoreRatios: correctRatios,
                   ),
                 ),
+
+                Container(
+                  padding: EdgeInsets.only(
+                    left: context.width * 0.04,
+                    right: context.width * 0.02,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (var i = 0; i < categoryList.length; i++) ...[
+                        if (i != 0) const Gap(10),
+                        _GroupProgressCount(group: categoryList[i]),
+                      ],
+                      const Gap(10),
+                      const Divider(color: Colors.grey, height: 1),
+                      const Gap(10),
+                      const _TotalProgressCount(),
+                      const Gap(10),
+                    ],
+                  ),
+                ),
+                const Gap(10),
               ],
             ),
           ],
@@ -122,6 +123,7 @@ class _GroupProgressCount extends ConsumerWidget {
         .expand((quiz) => quiz.quizItemList)
         .toList()
         .length;
+    final rate = (correctNum / quizLength * 100).round();
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,57 +133,22 @@ class _GroupProgressCount extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(
-                "$group:",
-                style: context.texts.titleSmall,
-              ),
-            ],
-          ),
-          const Gap(5),
-          Stack(
-            alignment: Alignment.bottomRight,
-            children: [
               Container(
-                decoration: BoxDecoration(
-                  color: context.mainColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                width: 130,
+                child: Text(
+                  "$group：",
+                  style: context.texts.titleSmall,
                 ),
-                height: 8,
-                width: ('$correctNum'.length.toDouble()) * 20 +
-                    ('$quizLength'.length.toDouble()) * 10 +
-                    10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    "$correctNum",
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Gap(1),
-                  const Text(
-                    '/',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  Text(
-                    "$quizLength",
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
+              Expanded(
+                child: ProgressLineBar(
+                  height: 20,
+                  width: context.width,
+                  currentScore: correctNum,
+                  goalScore: quizLength,
+                  isUnit: true,
+                  borderRadius: 3,
+                ),
               ),
             ],
           ),
@@ -216,57 +183,22 @@ class _TotalProgressCount extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
-                  Text(
-                    "総合:",
-                    style: context.texts.titleSmall,
-                  ),
-                ],
-              ),
-              const Gap(5),
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
                   Container(
-                    decoration: BoxDecoration(
-                      color: context.mainColor,
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    width: 130,
+                    child: Text(
+                      "総合：",
+                      style: context.texts.titleSmall,
                     ),
-                    height: 8,
-                    width: ('$correctNum'.length.toDouble()) * 20 +
-                        ('$quizLength'.length.toDouble()) * 10 +
-                        10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        "$correctNum",
-                        style: const TextStyle(
-                          color: Colors.black54,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Gap(1),
-                      const Text(
-                        '/',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      Text(
-                        "$quizLength",
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
+                  Expanded(
+                    child: ProgressLineBar(
+                      height: 20,
+                      width: context.width,
+                      currentScore: correctNum,
+                      goalScore: quizLength,
+                      isUnit: true,
+                      borderRadius: 3,
+                    ),
                   ),
                 ],
               ),
@@ -330,10 +262,12 @@ class _ProgressRadarChart extends StatelessWidget {
         getTitle: (index, angle) => RadarChartTitle(
           text: categories[index],
           angle: 0,
+          positionPercentageOffset: index == 0 ? 0.05 : 0.2,
         ),
         titleTextStyle: TextStyle(
-            color: context.mainColor, fontSize: 9, fontWeight: FontWeight.bold),
-        titlePositionPercentageOffset: 0.2,
+            color: context.mainColor,
+            fontSize: 14,
+            fontWeight: FontWeight.bold),
         tickCount: categories.length,
         ticksTextStyle: const TextStyle(color: Colors.grey, fontSize: 0),
         tickBorderData: BorderSide(color: Colors.grey.shade300, width: 1),
