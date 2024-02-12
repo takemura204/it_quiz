@@ -51,9 +51,10 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ更新
   void _loadQuizList() {
-    //クイズリスト更新
     final quizItemList = [...state.quizItemList];
-    quizItemList.addAll(quiz.quizItemList);
+    final newQuizItems = [...quiz.quizItemList];
+    newQuizItems.shuffle();
+    quizItemList.addAll(newQuizItems);
     state = state.copyWith(quizItemList: quizItemList);
   }
 
@@ -66,7 +67,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///選択肢を混ぜる
   void _shuffleChoice() {
     final choices = [...state.choices]..clear();
-    final argumentsChoices = [...quiz.quizItemList[state.quizIndex].choices];
+    final argumentsChoices = [...state.quizItemList[state.quizIndex].choices];
     argumentsChoices.shuffle();
     choices.addAll(argumentsChoices);
     state = state.copyWith(choices: choices);
@@ -141,7 +142,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void _nextQuiz() {
     final quizIndex = state.quizIndex;
     //問題が終わった時
-    if (quizIndex == quiz.quizItemList.length - 1) {
+    if (quizIndex == state.quizItemList.length - 1) {
       _stopwatch.stop();
       state = state.copyWith(
           duration: _stopwatch.elapsed, quizIndex: 0, isResultScreen: true);
@@ -188,11 +189,16 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ結果更新(端末保存)
   void _updateQuiz() {
-    final quizItemList = state.quizItemList;
+    // state.quizItemList を変更可能なリストにコピー
+    final quizItemList = List<QuizItem>.from(state.quizItemList);
+
+    // コピーしたリストを並べ替える
+    quizItemList.sort((a, b) => a.quizId.compareTo(b.quizId));
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
     final correctNum =
         quizItemList.where((x) => x.isJudge == true).toList().length;
+
     final isCompleted = quizItemList.length == correctNum;
     final updateQuiz = quiz.copyWith(
       duration: duration,

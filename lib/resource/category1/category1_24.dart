@@ -10,26 +10,25 @@ List<QuizItem> get category1_24 {
           "UX（User Experience）は、ユーザーが製品やサービスを使用する際の経験全般を指し、使いやすさや満足度などが含まれる。",
     ),
     QuizItem(
-      question:
-          'マーケティングの基本的なフレームワークで、Product（製品）、Price（価格）、Place（流通）、Promotion（プロモーション）の4つの要素を何というか？',
+      question: 'マーケティングの基本的なフレームワークで、製品、価格、流通、プロモーションの4つの要素を何というか？',
       ans: '4P',
       choices: ["UX", "4P", "4C", "RFM分析"],
-      comment: "4Pは、マーケティング戦略を立てる際の基本的なフレームワークで、製品、価格、流通、プロモーションの4つの要素を指す。",
+      comment:
+          "4Pは、マーケティング戦略を立てる際の基本的なフレームワークで、Product（製品）、Price（価格）、Place（流通）、Promotion（プロモーション）の4つの要素を指す。",
     ),
     QuizItem(
-      question:
-          '顧客の視点からマーケティングの4つの要素を捉え直したもので、Customer value（顧客価値）、Cost（コスト）、Convenience（利便性）、Communication（コミュニケーション）を指す言葉は何か？',
+      question: '顧客の視点からマーケティングの4つの要素を捉え直したもので、顧客価値、コスト、利便性、コミュニケーションを指す言葉は何か？',
       ans: '4C',
       choices: ["4P", "4C", "RFM分析", "アンゾフの成長マトリクス"],
       comment:
-          "4Cは、顧客中心のマーケティング戦略を立てるためのフレームワークで、顧客価値、コスト、利便性、コミュニケーションの4つの要素を指す。",
+          "4Cは、顧客中心のマーケティング戦略を立てるためのフレームワークで、Customer value（顧客価値）、Cost（コスト）、Convenience（利便性）、Communication（コミュニケーション）の4つの要素を指す。",
     ),
     QuizItem(
-      question:
-          '顧客の過去の購買行動をRecency（最近性）、Frequency（頻度）、Monetary（金額）の3つの観点から分析する手法は何か？',
+      question: '顧客の過去の購買行動を最近性、頻度、金額の3つの観点から分析する手法は何か？',
       ans: 'RFM分析',
       choices: ["4C", "RFM分析", "アンゾフの成長マトリクス", "オピニオンリーダー"],
-      comment: "RFM分析は、顧客の購買行動を最近性、頻度、金額の3つの観点から分析し、顧客の価値を評価する手法。",
+      comment:
+          "RFM分析は、顧客の購買行動をRecency（最近性）、Frequency（頻度）、Monetary（金額）の3つの観点から分析し、顧客の価値を評価する手法。",
     ),
     QuizItem(
       question: '市場の拡大と製品の開発に焦点を当てた成長戦略を体系的に示したマトリクスを何というか？',
@@ -72,6 +71,6 @@ List<QuizItem> get category1_24 {
     ),
   ];
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + 231);
+    return quizItems[index].copyWith(quizId: index + 231 + 1000);
   });
 }

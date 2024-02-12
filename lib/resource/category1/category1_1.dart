@@ -66,6 +66,6 @@ List<QuizItem> get category1_1 {
 
   // quizId を自動的に割り当て
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + 1);
+    return quizItems[index].copyWith(quizId: index + 1 + 1000);
   });
 }

@@ -1,4 +1,4 @@
-part of 'quizzes_resource.dart';
+part of '../quizzes_resource.dart';
 
 extension Category1Quiz on QuizModel {
   ///問題ジャンル

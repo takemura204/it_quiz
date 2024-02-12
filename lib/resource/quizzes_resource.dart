@@ -43,11 +43,20 @@ import 'category1/category1_6.dart';
 import 'category1/category1_7.dart';
 import 'category1/category1_8.dart';
 import 'category1/category1_9.dart';
+import 'category2/category2_1.dart';
+import 'category2/category2_2.dart';
+import 'category2/category2_3.dart';
+import 'category2/category2_4.dart';
+import 'category2/category2_5.dart';
+import 'category2/category2_6.dart';
+import 'category2/category2_7.dart';
+import 'category2/category2_8.dart';
+import 'category2/category2_9.dart';
 
-part 'category1_resource.dart';
+part 'category1/category1_resource.dart';
+part 'category2/category2_resource.dart';
 
 extension QuizModelEx on QuizModel {
-  ///問題ジャンル
   List<Quiz> get initQuizList => [
         ...category1QuizList,
         // Quiz(
