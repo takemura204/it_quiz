@@ -16,4 +16,3 @@ assignees: takemura204
 ## 【ゴール・着地点】
 
 ## 参考・引用
-#### [画像・URL・Issue・Wikiなど]
