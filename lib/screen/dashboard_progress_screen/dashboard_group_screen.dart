@@ -121,7 +121,6 @@ class _GroupProgressCount extends ConsumerWidget {
         .expand((quiz) => quiz.quizItemList)
         .toList()
         .length;
-    final rate = (correctNum / quizLength * 100).round();
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

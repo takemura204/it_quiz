@@ -1,5 +1,4 @@
 import 'package:kentei_quiz/resource/category1/category1_4.dart';
-import 'package:kentei_quiz/resource/quiz_resource.dart';
 
 import '../model/lang/initial_resource.dart';
 import '../model/quiz/quiz.dart';
@@ -52,31 +51,47 @@ import 'category2/category2_6.dart';
 import 'category2/category2_7.dart';
 import 'category2/category2_8.dart';
 import 'category2/category2_9.dart';
+import 'category3/category3_1.dart';
+import 'category3/category3_10.dart';
+import 'category3/category3_11.dart';
+import 'category3/category3_12.dart';
+import 'category3/category3_13.dart';
+import 'category3/category3_14.dart';
+import 'category3/category3_15.dart';
+import 'category3/category3_16.dart';
+import 'category3/category3_17.dart';
+import 'category3/category3_18.dart';
+import 'category3/category3_19.dart';
+import 'category3/category3_2.dart';
+import 'category3/category3_20.dart';
+import 'category3/category3_21.dart';
+import 'category3/category3_22.dart';
+import 'category3/category3_23.dart';
+import 'category3/category3_24.dart';
+import 'category3/category3_25.dart';
+import 'category3/category3_26.dart';
+import 'category3/category3_27.dart';
+import 'category3/category3_28.dart';
+import 'category3/category3_29.dart';
+import 'category3/category3_3.dart';
+import 'category3/category3_30.dart';
+import 'category3/category3_31.dart';
+import 'category3/category3_4.dart';
+import 'category3/category3_5.dart';
+import 'category3/category3_6.dart';
+import 'category3/category3_7.dart';
+import 'category3/category3_8.dart';
+import 'category3/category3_9.dart';
 
 part 'category1/category1_resource.dart';
+
 part 'category2/category2_resource.dart';
+
+part 'category3/category3_resource.dart';
 
 extension QuizModelEx on QuizModel {
   List<Quiz> get initQuizList {
-    final testQuizList = [
-      Quiz(
-        id: 2000,
-        categoryId: 2,
-        category: I18n().setCategory(2),
-        title: "問題B-1",
-        quizItemList: quiz2,
-      ),
-      Quiz(
-        id: 3000,
-        categoryId: 3,
-        category: I18n().setCategory(3),
-        title: "問題D-1",
-        quizItemList: quiz3,
-      ),
-    ];
-    final quizList = category1QuizList + category2QuizList + testQuizList;
-
-    print({'quizList', quizList.length});
+    final quizList = category1QuizList + category2QuizList + category3QuizList;
 
     return quizList;
   }

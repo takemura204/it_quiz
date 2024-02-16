@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/screen/account_login_screen/account_login_screen.dart';
-import 'package:kentei_quiz/screen/account_profile_screen/account_profile_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_history_screen/quiz_history_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
@@ -11,6 +10,7 @@ import 'package:kentei_quiz/screen/setting_about_app_screen/setting_privacy_poli
 import 'package:kentei_quiz/screen/setting_about_app_screen/setting_user_policy_screen.dart';
 import 'package:kentei_quiz/screen/setting_color_screen/setting_color_screen.dart';
 import 'package:kentei_quiz/screen/setting_contact_screen/setting_contact_screen.dart';
+import 'package:kentei_quiz/screen/setting_profile_screen/setting_profile_screen.dart';
 
 import '../model/quiz/quiz.dart';
 import '../model/screen_argument_resource.dart';
@@ -129,25 +129,17 @@ class SettingAboutAppScreenArguments
 }
 
 ///プロフィール画面
-class ProfileScreenArguments with _NoParamsMixin implements IScreenArguments {
-  const ProfileScreenArguments();
+class SettingProfileScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const SettingProfileScreenArguments();
 
   @override
-  String get screenNameFormat => "/profile";
+  String get screenNameFormat => "/setting_profile";
 
   @override
-  Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            AccountProfileScreen(this),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(
-                  builder: (context) => AccountProfileScreen(this)),
-              context,
-              animation,
-              secondaryAnimation,
-              child);
-        },
+  Route generateRoute() => CupertinoPageRoute(
+        builder: (context) => SettingProfileScreen(this),
       );
 }
 

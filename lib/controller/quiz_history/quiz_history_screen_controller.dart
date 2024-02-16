@@ -28,6 +28,7 @@ class QuizHistoryScreenController extends StateNotifier<QuizHistoryScreenState>
 
   @override
   void dispose() {
+    scrollController.dispose();
     super.dispose();
   }
 

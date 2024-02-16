@@ -212,8 +212,8 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
 class _$_Quiz implements _Quiz {
   const _$_Quiz(
       {this.id = 0,
-      required this.categoryId,
-      required this.category,
+      this.categoryId = 0,
+      this.category = '',
       required this.title,
       required final List<QuizItem> quizItemList,
       this.timeStamp = null,
@@ -230,9 +230,11 @@ class _$_Quiz implements _Quiz {
   final int id;
 //問題ID
   @override
+  @JsonKey()
   final int categoryId;
 //問題ID
   @override
+  @JsonKey()
   final String category;
 //問題のジャンル別に分ける
   @override
@@ -330,8 +332,8 @@ class _$_Quiz implements _Quiz {
 abstract class _Quiz implements Quiz {
   const factory _Quiz(
       {final int id,
-      required final int categoryId,
-      required final String category,
+      final int categoryId,
+      final String category,
       required final String title,
       required final List<QuizItem> quizItemList,
       final DateTime? timeStamp,

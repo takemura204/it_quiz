@@ -55,8 +55,8 @@ class _BottomNavBar extends ConsumerWidget {
             label: I18n().titleDashboard,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(LineIcons.user),
-            activeIcon: const Icon(LineIcons.user),
+            icon: const Icon(LineIcons.cog),
+            activeIcon: const Icon(LineIcons.cog),
             label: I18n().titleSetting,
           ),
         ],

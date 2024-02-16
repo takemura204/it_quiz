@@ -198,7 +198,7 @@ class UserNameTextField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.11,
+      height: 90,
       child: Column(
         children: [
           Container(
@@ -218,7 +218,7 @@ class UserNameTextField extends ConsumerWidget {
           TextFormField(
             controller: userNameController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             onChanged: onChanged,
             autocorrect: true,
             //予測変換
@@ -226,7 +226,7 @@ class UserNameTextField extends ConsumerWidget {
             //TextFieldに自動でfocusを当てる
             enabled: true,
             obscureText: false,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
             //次のTextFieldへ自動でfocusを移す
             maxLines: 1,
             // validator: (value) => isValidUserName ? null : 'ユーザー名は15文字以内にしてください',
@@ -246,7 +246,6 @@ class UserNameTextField extends ConsumerWidget {
               prefixIcon: const Icon(Icons.person_outline_outlined),
             ),
           ),
-          const Spacer(),
         ],
       ),
     );

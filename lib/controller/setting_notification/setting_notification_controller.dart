@@ -88,7 +88,7 @@ class SettingNotificationController
           await DeviceInfoPlugin().androidInfo;
       if (androidInfo.version.sdkInt >= 33) {
         // Android 13 以降の通知許可チェック
-        bool isNotificationEnabled = await flutterLocalNotificationsPlugin
+        final bool isNotificationEnabled = await flutterLocalNotificationsPlugin
                 .resolvePlatformSpecificImplementation<
                     AndroidFlutterLocalNotificationsPlugin>()
                 ?.areNotificationsEnabled() ??

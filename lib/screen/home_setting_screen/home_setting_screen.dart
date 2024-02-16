@@ -27,6 +27,7 @@ part 'setting_contact.dart';
 part 'setting_daily_goal.dart';
 part 'setting_delete_data.dart';
 part 'setting_notification.dart';
+part 'setting_profile.dart';
 part 'setting_review.dart';
 
 class HomeSettingScreen extends ConsumerWidget {
@@ -45,14 +46,14 @@ class HomeSettingScreen extends ConsumerWidget {
           color: Colors.white,
           child: Column(
             children: [
-              const SettingTitleBar(title: "購入情報", onTap: null),
-
-              /// プロフィール
+              const SettingTitleBar(title: "アカウント", onTap: null),
+              const _SettingProfile(),
+              _Divider(),
               Container(
                 color: Colors.cyan,
                 height: 200,
               ),
-              const SettingTitleBar(title: "設定", onTap: null),
+              const SettingTitleBar(title: "カスタム", onTap: null),
               const _SettingDailyGoal(),
               _Divider(),
               const _SettingThemeColor(),

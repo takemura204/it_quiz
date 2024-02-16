@@ -45,7 +45,7 @@ class I18n {
 
   String get titleDashboard => "スコア";
 
-  String get titleSetting => "マイページ";
+  String get titleSetting => "設定";
 
   ///「学ぶ」形式
   String get styleLeanQuiz => "用語を覚える";

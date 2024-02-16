@@ -25,42 +25,34 @@ class SettingAboutAppScreen extends ConsumerWidget {
       ),
       body: Container(
         color: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Gap(30),
               SvgPicture.asset(
                 'assets/image/about_app.svg',
                 fit: BoxFit.fitWidth,
-                width: context.width * 0.9,
+                width: context.width,
               ),
               const Gap(30),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        'あなたの「好き」を、\nもっと豊かで素敵な日常に。',
-                        style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ],
+              const Text(
+                'あなたの「好き」をもっと豊かに。\nあなたの「知識」を素敵な日常に。',
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
               const Gap(20),
               const Text(
                 'Thanks to all who installed our app. Your support drives our improvement.\nWe value you in our community. Your experience matters to us. \nThanks for joining our journey.',
                 style: TextStyle(
                     color: Colors.black87,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.normal),
               ),
-              const Gap(100),
+              const Gap(80),
               SecondaryButton(
                   width: context.width,
                   height: 50,
