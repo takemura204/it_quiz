@@ -132,6 +132,54 @@ extension Category3Quiz on QuizModel {
         title: "ネットワーク応用③",
         quizItemList: category3_31,
       ),
+      Quiz(
+        title: "情報セキュリティ①",
+        quizItemList: category3_32,
+      ),
+      Quiz(
+        title: "情報セキュリティ②",
+        quizItemList: category3_33,
+      ),
+      Quiz(
+        title: "情報セキュリティ③",
+        quizItemList: category3_34,
+      ),
+      Quiz(
+        title: "情報セキュリティ④",
+        quizItemList: category3_35,
+      ),
+      Quiz(
+        title: "情報セキュリティ⑤",
+        quizItemList: category3_36,
+      ),
+      Quiz(
+        title: "情報セキュリティ管理①",
+        quizItemList: category3_37,
+      ),
+      Quiz(
+        title: "情報セキュリティ管理②",
+        quizItemList: category3_38,
+      ),
+      Quiz(
+        title: "実装技術①",
+        quizItemList: category3_39,
+      ),
+      Quiz(
+        title: "実装技術②",
+        quizItemList: category3_40,
+      ),
+      Quiz(
+        title: "実装技術③",
+        quizItemList: category3_41,
+      ),
+      Quiz(
+        title: "実装技術④",
+        quizItemList: category3_42,
+      ),
+      Quiz(
+        title: "実装技術⑤",
+        quizItemList: category3_43,
+      ),
     ];
     return List.generate(quizList.length, (index) {
       return quizList[index].copyWith(

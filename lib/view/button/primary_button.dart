@@ -64,19 +64,24 @@ class PrimaryButton extends ConsumerWidget {
 }
 
 ///ログイン・ログアウトボタン
-class SetAccountButton extends ConsumerWidget {
-  const SetAccountButton({required this.onPressed, required this.text});
+class PrimaryRoundButton extends ConsumerWidget {
+  const PrimaryRoundButton({
+    required this.text,
+    required this.height,
+    required this.width,
+    required this.onPressed,
+  });
 
-  final VoidCallback onPressed;
+  final double height;
+  final double width;
   final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: context.height * 0.06,
-      width: context.width * 1,
-      padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.2, vertical: context.width * 0.01),
+      height: height,
+      width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: context.mainColor,
