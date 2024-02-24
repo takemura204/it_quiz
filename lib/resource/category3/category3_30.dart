@@ -3,70 +3,61 @@ import '../../model/quiz_item/quiz_item.dart';
 List<QuizItem> get category3_30 {
   final quizItems = [
     QuizItem(
-      question: 'ウェブサイトがユーザーのブラウザに保存する小さなデータファイルは何か？',
-      ans: 'cookie',
-      choices: ["cookie", "CGI", "CMS", "MIME"],
+      question: 'インターネット上のデバイスを一意に識別するために使用される数値のラベルは何か？',
+      ans: 'IPアドレス',
+      choices: ["IPアドレス", "サブネットマスク", "IPv6", "DNS"],
       comment:
-          "cookieは、ウェブサイトがユーザーのブラウザに保存する小さなデータファイルで、ユーザーの設定やログイン情報などを記憶するために使用される。",
+          "IPアドレス（Internet Protocol Address）は、インターネット上のデバイスを一意に識別するために使用される数値のラベル。",
     ),
     QuizItem(
-      question: 'ウェブサーバーが動的なコンテンツを生成するために使用するプログラムやスクリプトは何か？',
-      ans: 'CGI',
-      choices: ["CGI", "cookie", "CMS", "MIME"],
+      question: 'IPアドレスのネットワーク部分とホスト部分を区別するために使用される数値は何か？',
+      ans: 'サブネットマスク',
+      choices: ["サブネットマスク", "IPアドレス", "IPv6", "DNS"],
+      comment: "サブネットマスクは、IPアドレスのネットワーク部分とホスト部分を区別するために使用される数値。",
+    ),
+    QuizItem(
+      question: 'より多くのデバイスをインターネットに接続するために設計された新しいIPアドレス体系は何か？',
+      ans: 'IPv6',
+      choices: ["IPv6", "IPアドレス", "サブネットマスク", "DNS"],
       comment:
-          "CGI（Common Gateway Interface）は、ウェブサーバーが動的なコンテンツを生成するために使用するプログラムやスクリプト。",
+          "IPv6（Internet Protocol version 6）は、より多くのデバイスをインターネットに接続するために設計された新しいIPアドレス体系。",
     ),
     QuizItem(
-      question: 'ウェブサイトのコンテンツを効率的に管理・公開するためのソフトウェアシステムは何か？',
-      ans: 'CMS',
-      choices: ["CMS", "CGI", "cookie", "MIME"],
+      question: 'ドメイン名をIPアドレスに変換するためのシステムは何か？',
+      ans: 'DNS',
+      choices: ["DNS", "IPv6", "IPアドレス", "サブネットマスク"],
+      comment: "DNS（Domain Name System）は、ドメイン名をIPアドレスに変換するためのシステム。",
+    ),
+    QuizItem(
+      question: 'インターネット上のリソースを特定するために使用されるアドレスは何か？',
+      ans: 'URL',
+      choices: ["URL", "DNS", "IPv6", "IPアドレス"],
+      comment: "URL（Uniform Resource Locator）は、インターネット上のリソースを特定するために使用されるアドレス。",
+    ),
+    QuizItem(
+      question: '同じメッセージを複数の受信者に送信する電子メールの形式は何か？',
+      ans: '同報メール',
+      choices: ["同報メール", "メーリングリスト", "cc", "bcc"],
+      comment: "同報メールは、同じメッセージを複数の受信者に送信する電子メールの形式。",
+    ),
+    QuizItem(
+      question: '特定のトピックに関心がある人々のグループにメールを配布するために使用されるシステムは何か？',
+      ans: 'メーリングリスト',
+      choices: ["メーリングリスト", "同報メール", "cc", "bcc"],
+      comment: "メーリングリストは、特定のトピックに関心がある人々のグループにメールを配布するために使用されるシステム。",
+    ),
+    QuizItem(
+      question: '電子メールで、メッセージのコピーを受信者に送ることを示す略語は何か？',
+      ans: 'cc',
+      choices: ["cc", "bcc", "同報メール", "メーリングリスト"],
+      comment: "cc（carbon copy）は、電子メールで、メッセージのコピーを受信者に送ることを示す略語。",
+    ),
+    QuizItem(
+      question: '電子メールで、他の受信者には見えない形でメッセージのコピーを送ることを示す略語は何か？',
+      ans: 'bcc',
+      choices: ["bcc", "cc", "同報メール", "メーリングリスト"],
       comment:
-          "CMS（Content Management System）は、ウェブサイトのコンテンツを効率的に管理・公開するためのソフトウェアシステム。",
-    ),
-    QuizItem(
-      question: '電子メールで、異なる種類のデータ（テキスト、画像、音声など）を扱うための規格は何か？',
-      ans: 'MIME',
-      choices: ["MIME", "CMS", "CGI", "cookie"],
-      comment:
-          "MIME（Multipurpose Internet Mail Extensions）は、電子メールで、異なる種類のデータ（テキスト、画像、音声など）を扱うための規格。",
-    ),
-    QuizItem(
-      question: 'ウェブフィードを使用して、ウェブサイトの更新情報を自動的に配信するためのフォーマットは何か？',
-      ans: 'RSS',
-      choices: ["RSS", "MIME", "CMS", "CGI"],
-      comment:
-          "RSS（Really Simple Syndication）は、ウェブフィードを使用して、ウェブサイトの更新情報を自動的に配信するためのフォーマット。",
-    ),
-    QuizItem(
-      question: 'インターネット上でファイルを保存し、アクセスするためのサービスは何か？',
-      ans: 'オンラインストレージ',
-      choices: ["オンラインストレージ", "クローラ", "MVNO", "ISP"],
-      comment: "オンラインストレージは、インターネット上でファイルを保存し、どこからでもアクセスするためのサービス。",
-    ),
-    QuizItem(
-      question: 'ウェブページを自動的に巡回し、情報を収集するプログラムは何か？',
-      ans: 'クローラ',
-      choices: ["クローラ", "オンラインストレージ", "RSS", "MIME"],
-      comment: "クローラ（またはスパイダー、ボット）は、ウェブページを自動的に巡回し、情報を収集するプログラム。",
-    ),
-    QuizItem(
-      question: '自社の通信設備を持たずに、大手キャリアのネットワークを借りてサービスを提供する通信事業者は何か？',
-      ans: 'MVNO',
-      choices: ["MVNO", "ISP", "クローラ", "オンラインストレージ"],
-      comment:
-          "MVNO（Mobile Virtual Network Operator）は、自社の通信設備を持たずに、大手キャリアのネットワークを借りてサービスを提供する通信事業者。",
-    ),
-    QuizItem(
-      question: 'インターネット接続サービスを提供する事業者は何か？',
-      ans: 'ISP',
-      choices: ["ISP", "MVNO", "クローラ", "オンラインストレージ"],
-      comment: "ISP（Internet Service Provider）は、インターネット接続サービスを提供する事業者。",
-    ),
-    QuizItem(
-      question: 'インターネットプロトコルを利用して音声通信を行うサービスは何か？',
-      ans: 'IP電話',
-      choices: ["IP電話", "ISP", "MVNO", "クローラ"],
-      comment: "IP電話（Internet Protocol Phone）は、インターネットプロトコルを利用して音声通信を行うサービス。",
+          "bcc（blind carbon copy）は、電子メールで、他の受信者には見えない形でメッセージのコピーを送ることを示す略語。",
     ),
   ];
 

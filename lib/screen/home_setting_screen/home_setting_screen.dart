@@ -8,7 +8,6 @@ import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
-import 'package:kentei_quiz/view/button/primary_button.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -22,23 +21,14 @@ import '../../view/dialog.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
-
 part 'setting_about_app.dart';
-
 part 'setting_color.dart';
-
 part 'setting_contact.dart';
-
 part 'setting_daily_goal.dart';
-
 part 'setting_delete_data.dart';
-
 part 'setting_notification.dart';
-
 part 'setting_premium.dart';
-
 part 'setting_profile.dart';
-
 part 'setting_review.dart';
 
 class HomeSettingScreen extends ConsumerWidget {

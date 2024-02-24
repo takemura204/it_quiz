@@ -13,6 +13,8 @@ class I18n {
   ///category
   String setCategory(int categoryId) {
     switch (categoryId) {
+      case 0:
+        return category0;
       case 1:
         return category1;
       case 2:
@@ -29,6 +31,8 @@ class I18n {
         return 'その他';
     }
   }
+
+  String get category0 => "重要単語";
 
   String get category1 => "ストラテジ系";
 

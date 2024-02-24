@@ -79,7 +79,7 @@ class _Body extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Gap(context.height * 0.005),
+                    const Gap(5),
                     Row(
                       children: [
                         Container(
@@ -93,14 +93,14 @@ class _Body extends ConsumerWidget {
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
                               quizList[index].category,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black54,
-                                  fontSize: context.width * 0.03,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
-                        Gap(context.width * 0.01),
+                        const Gap(10),
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -112,16 +112,16 @@ class _Body extends ConsumerWidget {
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
                               I18n().studyTypeText(quizList[index].studyType),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black54,
-                                  fontSize: context.width * 0.03,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    Gap(context.height * 0.005),
+                    const Gap(5),
                     Text(
                       quizList[index].title,
                       style: TextStyle(
@@ -129,7 +129,7 @@ class _Body extends ConsumerWidget {
                           fontSize: context.width * 0.045,
                           fontWeight: FontWeight.bold),
                     ),
-                    Gap(context.height * 0.005),
+                    const Gap(5),
                     Text(
                       _formatDateGroup(quizList[index].timeStamp!),
                       style: TextStyle(
@@ -137,7 +137,7 @@ class _Body extends ConsumerWidget {
                           fontSize: context.width * 0.03,
                           fontWeight: FontWeight.normal),
                     ),
-                    Gap(context.height * 0.005),
+                    const Gap(5),
                   ],
                 ),
                 children: [

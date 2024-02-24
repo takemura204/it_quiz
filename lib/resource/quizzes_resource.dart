@@ -3,6 +3,15 @@ import 'package:kentei_quiz/resource/category1/category1_4.dart';
 import '../model/lang/initial_resource.dart';
 import '../model/quiz/quiz.dart';
 import '../model/quiz/quiz_model.dart';
+import 'category0/category0_1.dart';
+import 'category0/category0_2.dart';
+import 'category0/category0_3.dart';
+import 'category0/category0_4.dart';
+import 'category0/category0_5.dart';
+import 'category0/category0_6.dart';
+import 'category0/category0_7.dart';
+import 'category0/category0_8.dart';
+import 'category0/category0_9.dart';
 import 'category1/category1_1.dart';
 import 'category1/category1_10.dart';
 import 'category1/category1_11.dart';
@@ -89,21 +98,24 @@ import 'category3/category3_40.dart';
 import 'category3/category3_41.dart';
 import 'category3/category3_42.dart';
 import 'category3/category3_43.dart';
+import 'category3/category3_44.dart';
 import 'category3/category3_5.dart';
 import 'category3/category3_6.dart';
 import 'category3/category3_7.dart';
 import 'category3/category3_8.dart';
 import 'category3/category3_9.dart';
 
+part 'category0/category0_resource.dart';
 part 'category1/category1_resource.dart';
-
 part 'category2/category2_resource.dart';
-
 part 'category3/category3_resource.dart';
 
 extension QuizModelEx on QuizModel {
   List<Quiz> get initQuizList {
-    final quizList = category1QuizList + category2QuizList + category3QuizList;
+    final quizList = category0QuizList +
+        category1QuizList +
+        category2QuizList +
+        category3QuizList;
 
     return quizList;
   }

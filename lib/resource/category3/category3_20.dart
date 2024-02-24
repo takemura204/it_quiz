@@ -3,71 +3,37 @@ import '../../model/quiz_item/quiz_item.dart';
 List<QuizItem> get category3_20 {
   final quizItems = [
     QuizItem(
-      question: 'ウェブページの構造を定義するためのマークアップ言語の最新規格は何か？',
-      ans: 'HTML5',
-      choices: ["HTML5", "JPEG", "PDF", "ZIP"],
-      comment: "HTML5は、ウェブページの構造を定義するためのマークアップ言語の最新規格で、多くの新しい機能とAPIをサポートしている。",
+      question: '障害を持つ人を含むすべての人が製品やサービスを利用しやすいようにするための設計のことは何か？',
+      ans: 'アクセシビリティ',
+      choices: ["アクセシビリティ", "ユーザビリティ", "人間中心設計", "モバイルファースト"],
+      comment: "アクセシビリティは、障害を持つ人を含むすべての人が製品やサービスを利用しやすいようにするための設計を指す。",
     ),
     QuizItem(
-      question: '音声ファイルを圧縮するために広く使用されるフォーマットは何か？',
-      ans: 'MP3',
-      choices: ["MP3", "MIDI", "WAV", "AAC"],
-      comment: "MP3は、音声ファイルを圧縮するために広く使用されるフォーマットで、音楽ファイルの配信や共有によく用いられる。",
-    ),
-    QuizItem(
-      question: '音楽の演奏情報をコンピュータで扱うための規格は何か？',
-      ans: 'MIDI',
-      choices: ["MIDI", "MP3", "WAV", "AAC"],
+      question: '小さな画像で、より大きな画像や情報のプレビューとして機能するものは何か？',
+      ans: 'サムネイル',
+      choices: ["サムネイル", "アイコン", "ピクトグラム", "インフォグラフィックス"],
       comment:
-          "MIDI（Musical Instrument Digital Interface）は、音楽の演奏情報をコンピュータで扱うための規格で、電子楽器間の通信や制御に用いられる。",
+          "サムネイルは、小さな画像で、より大きな画像や情報のプレビューとして機能するもの。ウェブページやデジタルアルバムでよく使用される。",
     ),
     QuizItem(
-      question: 'デジタル画像を保存するための一般的なファイルフォーマットは何か？',
-      ans: 'JPEG',
-      choices: ["JPEG", "GIF", "PNG", "BMP"],
-      comment: "JPEGは、デジタル画像を保存するための一般的なファイルフォーマットで、特に写真の保存やウェブでの使用に適している。",
-    ),
-    QuizItem(
-      question: 'アニメーションや透明度をサポートする画像フォーマットは何か？',
-      ans: 'GIF',
-      choices: ["GIF", "JPEG", "PNG", "BMP"],
+      question: 'ウェブページのスタイルやレイアウトを定義するために使用されるスタイルシート言語は何か？',
+      ans: 'CSS',
+      choices: ["CSS", "HTML", "JavaScript", "XML"],
       comment:
-          "GIF（Graphics Interchange Format）は、アニメーションや透明度をサポートする画像フォーマットで、ウェブで広く使用されている。",
+          "CSS（Cascading Style Sheets）は、ウェブページのスタイルやレイアウトを定義するために使用されるスタイルシート言語。",
     ),
     QuizItem(
-      question: '画像の品質を落とさずに効率的に圧縮できるファイルフォーマットは何か？',
-      ans: 'PNG',
-      choices: ["PNG", "JPEG", "GIF", "BMP"],
+      question: 'デザインや開発のプロセスにおいて、モバイルデバイスでの使用を最優先に考えるアプローチは何か？',
+      ans: 'モバイルファースト',
+      choices: ["モバイルファースト", "レスポンシブデザイン", "アダプティブデザイン", "クロスプラットフォーム"],
       comment:
-          "PNG（Portable Network Graphics）は、画像の品質を落とさずに効率的に圧縮できるファイルフォーマットで、透明度のサポートやロスレス圧縮が特徴。",
+          "モバイルファーストは、デザインや開発のプロセスにおいてモバイルデバイスでの使用を最優先に考え、それに基づいて設計するアプローチ。",
     ),
     QuizItem(
-      question: 'Windows環境で広く使用されるビットマップ画像フォーマットは何か？',
-      ans: 'BMP',
-      choices: ["BMP", "JPEG", "PNG", "GIF"],
-      comment:
-          "BMP（Bitmap Image File）は、Windows環境で広く使用されるビットマップ画像フォーマットで、非圧縮のためファイルサイズが大きくなる傾向がある。",
-    ),
-    QuizItem(
-      question: '動画や音声の圧縮に用いられる標準的なフォーマットは何か？',
-      ans: 'MPEG',
-      choices: ["MPEG", "MP3", "AVI", "MOV"],
-      comment:
-          "MPEG（Moving Picture Experts Group）は、動画や音声の圧縮に用いられる標準的なフォーマットで、複数の規格がある。",
-    ),
-    QuizItem(
-      question: '電子文書を保存するために用いられるファイルフォーマットで、元のレイアウトを保持できるものは何か？',
-      ans: 'PDF',
-      choices: ["PDF", "DOC", "XLS", "PPT"],
-      comment:
-          "PDF（Portable Document Format）は、電子文書を保存するために用いられるファイルフォーマットで、元のレイアウトを保持しながら様々なプラットフォームで表示できる。",
-    ),
-    QuizItem(
-      question: '複数のファイルやフォルダを一つのファイルに圧縮してまとめるファイルフォーマットは何か？',
-      ans: 'ZIP',
-      choices: ["ZIP", "RAR", "7z", "TAR"],
-      comment:
-          "ZIPは、複数のファイルやフォルダを一つのファイルに圧縮してまとめるファイルフォーマットで、データの圧縮とアーカイブに広く使用されている。",
+      question: '製品やサービスの設計において、最終的なユーザーのニーズや体験を中心に考慮する設計思想は何か？',
+      ans: '人間中心設計',
+      choices: ["人間中心設計", "UXデザイン", "ユーザビリティ", "アクセシビリティ"],
+      comment: "人間中心設計は、製品やサービスの設計において、最終的なユーザーのニーズや体験を中心に考慮する設計思想。",
     ),
   ];
 

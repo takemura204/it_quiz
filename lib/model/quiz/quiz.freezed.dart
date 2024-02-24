@@ -30,6 +30,7 @@ mixin _$Quiz {
   int get correctNum => throw _privateConstructorUsedError; //正解数
   Duration get duration => throw _privateConstructorUsedError; // 所要時間
   StudyType get studyType => throw _privateConstructorUsedError;
+  bool get isPremium => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +52,8 @@ abstract class $QuizCopyWith<$Res> {
       bool isCompleted,
       int correctNum,
       Duration duration,
-      StudyType studyType});
+      StudyType studyType,
+      bool isPremium});
 }
 
 /// @nodoc
@@ -77,6 +79,7 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
     Object? correctNum = null,
     Object? duration = null,
     Object? studyType = null,
+    Object? isPremium = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -119,6 +122,10 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
               as StudyType,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -139,7 +146,8 @@ abstract class _$$_QuizCopyWith<$Res> implements $QuizCopyWith<$Res> {
       bool isCompleted,
       int correctNum,
       Duration duration,
-      StudyType studyType});
+      StudyType studyType,
+      bool isPremium});
 }
 
 /// @nodoc
@@ -161,6 +169,7 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
     Object? correctNum = null,
     Object? duration = null,
     Object? studyType = null,
+    Object? isPremium = null,
   }) {
     return _then(_$_Quiz(
       id: null == id
@@ -203,6 +212,10 @@ class __$$_QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res, _$_Quiz>
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
               as StudyType,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -220,7 +233,8 @@ class _$_Quiz implements _Quiz {
       this.isCompleted = false,
       this.correctNum = 0,
       this.duration = Duration.zero,
-      this.studyType = StudyType.learn})
+      this.studyType = StudyType.learn,
+      this.isPremium = true})
       : _quizItemList = quizItemList;
 
   factory _$_Quiz.fromJson(Map<String, dynamic> json) => _$$_QuizFromJson(json);
@@ -269,10 +283,13 @@ class _$_Quiz implements _Quiz {
   @override
   @JsonKey()
   final StudyType studyType;
+  @override
+  @JsonKey()
+  final bool isPremium;
 
   @override
   String toString() {
-    return 'Quiz(id: $id, categoryId: $categoryId, category: $category, title: $title, quizItemList: $quizItemList, timeStamp: $timeStamp, isCompleted: $isCompleted, correctNum: $correctNum, duration: $duration, studyType: $studyType)';
+    return 'Quiz(id: $id, categoryId: $categoryId, category: $category, title: $title, quizItemList: $quizItemList, timeStamp: $timeStamp, isCompleted: $isCompleted, correctNum: $correctNum, duration: $duration, studyType: $studyType, isPremium: $isPremium)';
   }
 
   @override
@@ -297,7 +314,9 @@ class _$_Quiz implements _Quiz {
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.studyType, studyType) ||
-                other.studyType == studyType));
+                other.studyType == studyType) &&
+            (identical(other.isPremium, isPremium) ||
+                other.isPremium == isPremium));
   }
 
   @JsonKey(ignore: true)
@@ -313,7 +332,8 @@ class _$_Quiz implements _Quiz {
       isCompleted,
       correctNum,
       duration,
-      studyType);
+      studyType,
+      isPremium);
 
   @JsonKey(ignore: true)
   @override
@@ -340,7 +360,8 @@ abstract class _Quiz implements Quiz {
       final bool isCompleted,
       final int correctNum,
       final Duration duration,
-      final StudyType studyType}) = _$_Quiz;
+      final StudyType studyType,
+      final bool isPremium}) = _$_Quiz;
 
   factory _Quiz.fromJson(Map<String, dynamic> json) = _$_Quiz.fromJson;
 
@@ -364,6 +385,8 @@ abstract class _Quiz implements Quiz {
   Duration get duration;
   @override // 所要時間
   StudyType get studyType;
+  @override
+  bool get isPremium;
   @override
   @JsonKey(ignore: true)
   _$$_QuizCopyWith<_$_Quiz> get copyWith => throw _privateConstructorUsedError;

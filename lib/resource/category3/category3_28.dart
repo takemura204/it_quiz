@@ -3,74 +3,78 @@ import '../../model/quiz_item/quiz_item.dart';
 List<QuizItem> get category3_28 {
   final quizItems = [
     QuizItem(
-      question: 'ネットワークの通信プロトコルとインターフェースを7つの階層で定義する国際標準モデルは何か？',
-      ans: 'OSI基本参照モデル',
-      choices: ["OSI基本参照モデル", "TCP/IP", "HTTP", "DHCP"],
+      question: 'ネットワークデバイスやコンピュータ間の接続を可能にするために使用されるデバイスは何か？',
+      ans: 'アダプタ',
+      choices: ["アダプタ", "モデム", "ターミナル", "ルータ"],
       comment:
-          "OSI基本参照モデルは、ネットワーク内の通信を7つの階層（レイヤー）で定義する国際標準モデルで、各レイヤーが独立した機能を持つことで、通信プロセスを理解しやすくする。",
+          "アダプタは、ネットワークデバイスやコンピュータ間の接続を可能にするために使用されるデバイスで、物理的な接続やプロトコル変換などの機能を提供する。",
     ),
     QuizItem(
-      question: 'インターネットでのデータ伝送に広く用いられるプロトコルスイートは何か？',
-      ans: 'TCP/IP',
-      choices: ["TCP/IP", "OSI基本参照モデル", "HTTP", "SMTP"],
+      question: '電話線やネットワークケーブルを接続するための標準化された端子は何か？',
+      ans: 'モジュラージャック',
+      choices: ["モジュラージャック", "アダプタ", "モデム", "ターミナル"],
       comment:
-          "TCP/IP（Transmission Control Protocol/Internet Protocol）は、インターネットでのデータ伝送に広く用いられるプロトコルスイートで、データの分割、転送、再構築などを管理する。",
+          "モジュラージャックは、電話線やネットワークケーブルを接続するための標準化された端子で、RJ-11やRJ-45などの規格がある。",
     ),
     QuizItem(
-      question: 'ウェブページのデータ転送に使用されるプロトコルは何か？',
-      ans: 'HTTP',
-      choices: ["HTTP", "HTTPS", "TCP/IP", "FTP"],
+      question: '長距離の高速モバイル通信を実現するための通信規格は何か？',
+      ans: 'LTE',
+      choices: ["LTE", "5G", "Wi-Fi", "NAT"],
       comment:
-          "HTTP（HyperText Transfer Protocol）は、ウェブページのデータ転送に使用されるプロトコルで、ウェブサーバーとクライアント間でHTMLなどのドキュメントをやり取りする。",
+          "LTE（Long Term Evolution）は、長距離の高速モバイル通信を実現するための通信規格で、第4世代（4G）モバイル通信技術の一つ。",
     ),
     QuizItem(
-      question: 'HTTPにセキュリティ機能を追加した、暗号化されたウェブページのデータ転送プロトコルは何か？',
-      ans: 'HTTPS',
-      choices: ["HTTPS", "HTTP", "SMTP", "POP"],
-      comment:
-          "HTTPS（HyperText Transfer Protocol Secure）は、HTTPにセキュリティ機能を追加したプロトコルで、通信内容を暗号化してより安全なデータ転送を実現する。",
+      question: '高速で大容量のデータ通信を可能にする次世代モバイル通信技術は何か？',
+      ans: '5G',
+      choices: ["5G", "LTE", "Wi-Fi", "SDN"],
+      comment: "5Gは、高速で大容量のデータ通信を可能にする次世代モバイル通信技術で、第5世代モバイル通信システムを指す。",
     ),
     QuizItem(
-      question: '電子メールの送信に使用されるプロトコルは何か？',
-      ans: 'SMTP',
-      choices: ["SMTP", "POP", "HTTP", "FTP"],
+      question: 'ネットワークの設定や管理をソフトウェアで制御する技術は何か？',
+      ans: 'SDN',
+      choices: ["SDN", "LTE", "5G", "NAT"],
       comment:
-          "SMTP（Simple Mail Transfer Protocol）は、電子メールの送信に使用されるプロトコルで、メールサーバー間やメールクライアントからメールサーバーへのメール送信を担う。",
+          "SDN（Software Defined Networking）は、ネットワークの設定や管理をソフトウェアで制御し、柔軟性と効率性を高める技術。",
     ),
     QuizItem(
-      question: '電子メールをメールサーバーからクライアントに受信するためのプロトコルは何か？',
-      ans: 'POP',
-      choices: ["POP", "SMTP", "HTTP", "IMAP"],
+      question: '特定の位置情報を提供するために使用される小型の無線送信機は何か？',
+      ans: 'ビーコン',
+      choices: ["ビーコン", "SDN", "LTE", "BLE"],
       comment:
-          "POP（Post Office Protocol）は、電子メールをメールサーバーからクライアントに受信するためのプロトコルで、主にメールのダウンロードと削除を行う。",
+          "ビーコンは、特定の位置情報を提供するために使用される小型の無線送信機で、Bluetooth Low Energy（BLE）などの技術を使用して情報を発信する。",
     ),
     QuizItem(
-      question: 'ファイルの転送に特化したプロトコルは何か？',
-      ans: 'FTP',
-      choices: ["FTP", "HTTP", "SMTP", "POP"],
+      question: '低消費電力で広範囲をカバーするワイヤレス通信技術は何か？',
+      ans: 'LPWA',
+      choices: ["LPWA", "LTE", "Wi-Fi", "BLE"],
       comment:
-          "FTP（File Transfer Protocol）は、ファイルの転送に特化したプロトコルで、ネットワークを通じてファイルをやり取りする際に使用される。",
+          "LPWA（Low Power Wide Area）は、低消費電力で広範囲をカバーするワイヤレス通信技術で、IoTデバイスなどの接続に適している。",
     ),
     QuizItem(
-      question: 'コンピュータの時刻を同期させるために使用されるプロトコルは何か？',
-      ans: 'NTP',
-      choices: ["NTP", "HTTP", "SMTP", "FTP"],
-      comment:
-          "NTP（Network Time Protocol）は、コンピュータの時刻を同期させるために使用されるプロトコルで、正確な時刻情報をネットワークを通じて提供する。",
+      question: 'データ処理をネットワークの端に近い場所で行うことでレイテンシを低減する技術は何か？',
+      ans: 'エッジコンピューティング',
+      choices: ["エッジコンピューティング", "SDN", "LPWA", "BLE"],
+      comment: "エッジコンピューティングは、データ処理をネットワークの端に近い場所で行うことでレイテンシを低減し、効率性を高める技術。",
     ),
     QuizItem(
-      question: 'ネットワーク上のデバイスに動的にIPアドレスを割り当てるプロトコルは何か？',
-      ans: 'DHCP',
-      choices: ["DHCP", "NTP", "TCP/IP", "HTTP"],
+      question: '低エネルギーで短距離通信を実現するワイヤレス技術は何か？',
+      ans: 'BLE',
+      choices: ["BLE", "Wi-Fi", "LTE", "LPWA"],
       comment:
-          "DHCP（Dynamic Host Configuration Protocol）は、ネットワーク上のデバイスに動的にIPアドレスを割り当てるプロトコルで、IPアドレスの管理を効率化する。",
+          "BLE（Bluetooth Low Energy）は、低エネルギーで短距離通信を実現するワイヤレス技術で、ビーコンや健康機器などに使用される。",
     ),
     QuizItem(
-      question: 'ネットワーク上の特定のサービスやアプリケーションにデータを送信する際に使用される識別子は何か？',
-      ans: 'ポート番号',
-      choices: ["ポート番号", "IPアドレス", "MACアドレス", "SSID"],
+      question: 'IoTデバイスが相互に通信するためのネットワークは何と呼ばれるか？',
+      ans: 'IoTエリアネットワーク',
+      choices: ["IoTエリアネットワーク", "LAN", "WAN", "VLAN"],
+      comment: "IoTエリアネットワークは、IoTデバイスが相互に通信するために構築される特定のエリアをカバーするネットワーク。",
+    ),
+    QuizItem(
+      question: 'プライベートIPアドレスをインターネット上のパブリックIPアドレスに変換する技術は何か？',
+      ans: 'NAT',
+      choices: ["NAT", "SDN", "LPWA", "BLE"],
       comment:
-          "ポート番号は、ネットワーク上の特定のサービスやアプリケーションにデータを送信する際に使用される識別子で、IPアドレスと組み合わせて通信先を特定する。",
+          "NAT（Network Address Translation）は、プライベートIPアドレスをインターネット上のパブリックIPアドレスに変換し、インターネット接続を可能にする技術。",
     ),
   ];
 

@@ -6,9 +6,6 @@ class _SettingPremium extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCustom = ref.watch(userModelProvider);
-    final userName = userCustom.userName;
-
     return CustomSettingBar(
       title: "追加購入",
       icon: LineIcons.shoppingCart,

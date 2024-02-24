@@ -3,61 +3,74 @@ import '../../model/quiz_item/quiz_item.dart';
 List<QuizItem> get category3_29 {
   final quizItems = [
     QuizItem(
-      question: 'インターネット上のデバイスを一意に識別するために使用される数値のラベルは何か？',
-      ans: 'IPアドレス',
-      choices: ["IPアドレス", "サブネットマスク", "IPv6", "DNS"],
+      question: 'ネットワークの通信プロトコルとインターフェースを7つの階層で定義する国際標準モデルは何か？',
+      ans: 'OSI基本参照モデル',
+      choices: ["OSI基本参照モデル", "TCP/IP", "HTTP", "DHCP"],
       comment:
-          "IPアドレス（Internet Protocol Address）は、インターネット上のデバイスを一意に識別するために使用される数値のラベル。",
+          "OSI基本参照モデルは、ネットワーク内の通信を7つの階層（レイヤー）で定義する国際標準モデルで、各レイヤーが独立した機能を持つことで、通信プロセスを理解しやすくする。",
     ),
     QuizItem(
-      question: 'IPアドレスのネットワーク部分とホスト部分を区別するために使用される数値は何か？',
-      ans: 'サブネットマスク',
-      choices: ["サブネットマスク", "IPアドレス", "IPv6", "DNS"],
-      comment: "サブネットマスクは、IPアドレスのネットワーク部分とホスト部分を区別するために使用される数値。",
-    ),
-    QuizItem(
-      question: 'より多くのデバイスをインターネットに接続するために設計された新しいIPアドレス体系は何か？',
-      ans: 'IPv6',
-      choices: ["IPv6", "IPアドレス", "サブネットマスク", "DNS"],
+      question: 'インターネットでのデータ伝送に広く用いられるプロトコルスイートは何か？',
+      ans: 'TCP/IP',
+      choices: ["TCP/IP", "OSI基本参照モデル", "HTTP", "SMTP"],
       comment:
-          "IPv6（Internet Protocol version 6）は、より多くのデバイスをインターネットに接続するために設計された新しいIPアドレス体系。",
+          "TCP/IP（Transmission Control Protocol/Internet Protocol）は、インターネットでのデータ伝送に広く用いられるプロトコルスイートで、データの分割、転送、再構築などを管理する。",
     ),
     QuizItem(
-      question: 'ドメイン名をIPアドレスに変換するためのシステムは何か？',
-      ans: 'DNS',
-      choices: ["DNS", "IPv6", "IPアドレス", "サブネットマスク"],
-      comment: "DNS（Domain Name System）は、ドメイン名をIPアドレスに変換するためのシステム。",
-    ),
-    QuizItem(
-      question: 'インターネット上のリソースを特定するために使用されるアドレスは何か？',
-      ans: 'URL',
-      choices: ["URL", "DNS", "IPv6", "IPアドレス"],
-      comment: "URL（Uniform Resource Locator）は、インターネット上のリソースを特定するために使用されるアドレス。",
-    ),
-    QuizItem(
-      question: '同じメッセージを複数の受信者に送信する電子メールの形式は何か？',
-      ans: '同報メール',
-      choices: ["同報メール", "メーリングリスト", "cc", "bcc"],
-      comment: "同報メールは、同じメッセージを複数の受信者に送信する電子メールの形式。",
-    ),
-    QuizItem(
-      question: '特定のトピックに関心がある人々のグループにメールを配布するために使用されるシステムは何か？',
-      ans: 'メーリングリスト',
-      choices: ["メーリングリスト", "同報メール", "cc", "bcc"],
-      comment: "メーリングリストは、特定のトピックに関心がある人々のグループにメールを配布するために使用されるシステム。",
-    ),
-    QuizItem(
-      question: '電子メールで、メッセージのコピーを受信者に送ることを示す略語は何か？',
-      ans: 'cc',
-      choices: ["cc", "bcc", "同報メール", "メーリングリスト"],
-      comment: "cc（carbon copy）は、電子メールで、メッセージのコピーを受信者に送ることを示す略語。",
-    ),
-    QuizItem(
-      question: '電子メールで、他の受信者には見えない形でメッセージのコピーを送ることを示す略語は何か？',
-      ans: 'bcc',
-      choices: ["bcc", "cc", "同報メール", "メーリングリスト"],
+      question: 'ウェブページのデータ転送に使用されるプロトコルは何か？',
+      ans: 'HTTP',
+      choices: ["HTTP", "HTTPS", "TCP/IP", "FTP"],
       comment:
-          "bcc（blind carbon copy）は、電子メールで、他の受信者には見えない形でメッセージのコピーを送ることを示す略語。",
+          "HTTP（HyperText Transfer Protocol）は、ウェブページのデータ転送に使用されるプロトコルで、ウェブサーバーとクライアント間でHTMLなどのドキュメントをやり取りする。",
+    ),
+    QuizItem(
+      question: 'HTTPにセキュリティ機能を追加した、暗号化されたウェブページのデータ転送プロトコルは何か？',
+      ans: 'HTTPS',
+      choices: ["HTTPS", "HTTP", "SMTP", "POP"],
+      comment:
+          "HTTPS（HyperText Transfer Protocol Secure）は、HTTPにセキュリティ機能を追加したプロトコルで、通信内容を暗号化してより安全なデータ転送を実現する。",
+    ),
+    QuizItem(
+      question: '電子メールの送信に使用されるプロトコルは何か？',
+      ans: 'SMTP',
+      choices: ["SMTP", "POP", "HTTP", "FTP"],
+      comment:
+          "SMTP（Simple Mail Transfer Protocol）は、電子メールの送信に使用されるプロトコルで、メールサーバー間やメールクライアントからメールサーバーへのメール送信を担う。",
+    ),
+    QuizItem(
+      question: '電子メールをメールサーバーからクライアントに受信するためのプロトコルは何か？',
+      ans: 'POP',
+      choices: ["POP", "SMTP", "HTTP", "IMAP"],
+      comment:
+          "POP（Post Office Protocol）は、電子メールをメールサーバーからクライアントに受信するためのプロトコルで、主にメールのダウンロードと削除を行う。",
+    ),
+    QuizItem(
+      question: 'ファイルの転送に特化したプロトコルは何か？',
+      ans: 'FTP',
+      choices: ["FTP", "HTTP", "SMTP", "POP"],
+      comment:
+          "FTP（File Transfer Protocol）は、ファイルの転送に特化したプロトコルで、ネットワークを通じてファイルをやり取りする際に使用される。",
+    ),
+    QuizItem(
+      question: 'コンピュータの時刻を同期させるために使用されるプロトコルは何か？',
+      ans: 'NTP',
+      choices: ["NTP", "HTTP", "SMTP", "FTP"],
+      comment:
+          "NTP（Network Time Protocol）は、コンピュータの時刻を同期させるために使用されるプロトコルで、正確な時刻情報をネットワークを通じて提供する。",
+    ),
+    QuizItem(
+      question: 'ネットワーク上のデバイスに動的にIPアドレスを割り当てるプロトコルは何か？',
+      ans: 'DHCP',
+      choices: ["DHCP", "NTP", "TCP/IP", "HTTP"],
+      comment:
+          "DHCP（Dynamic Host Configuration Protocol）は、ネットワーク上のデバイスに動的にIPアドレスを割り当てるプロトコルで、IPアドレスの管理を効率化する。",
+    ),
+    QuizItem(
+      question: 'ネットワーク上の特定のサービスやアプリケーションにデータを送信する際に使用される識別子は何か？',
+      ans: 'ポート番号',
+      choices: ["ポート番号", "IPアドレス", "MACアドレス", "SSID"],
+      comment:
+          "ポート番号は、ネットワーク上の特定のサービスやアプリケーションにデータを送信する際に使用される識別子で、IPアドレスと組み合わせて通信先を特定する。",
     ),
   ];
 

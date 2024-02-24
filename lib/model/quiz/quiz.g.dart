@@ -24,6 +24,7 @@ _$_Quiz _$$_QuizFromJson(Map<String, dynamic> json) => _$_Quiz(
           : Duration(microseconds: json['duration'] as int),
       studyType: $enumDecodeNullable(_$StudyTypeEnumMap, json['studyType']) ??
           StudyType.learn,
+      isPremium: json['isPremium'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
@@ -37,6 +38,7 @@ Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
       'correctNum': instance.correctNum,
       'duration': instance.duration.inMicroseconds,
       'studyType': _$StudyTypeEnumMap[instance.studyType]!,
+      'isPremium': instance.isPremium,
     };
 
 const _$StudyTypeEnumMap = {

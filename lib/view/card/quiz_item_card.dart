@@ -28,7 +28,7 @@ class QuizItemCard extends ConsumerWidget {
           border: Border(
             bottom: BorderSide(
               color: Colors.grey.shade300,
-              width: 1.0, // ここで線の太さを設定
+              width: 1.0,
             ),
           ),
         ),

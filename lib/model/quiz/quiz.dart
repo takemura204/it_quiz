@@ -19,6 +19,7 @@ class Quiz with _$Quiz {
     @Default(0) final int correctNum, //正解数
     @Default(Duration.zero) final Duration duration, // 所要時間
     @Default(StudyType.learn) final StudyType studyType,
+    @Default(true) final bool isPremium, //プレミアム機能か
   }) = _Quiz;
 
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
