@@ -24,7 +24,7 @@ class _SettingPremium extends ConsumerWidget {
       ),
       onTap: () {
         context
-            .showScreen(const SettingProfileScreenArguments().generateRoute());
+            .showScreen(const PremiumDetailScreenArguments().generateRoute());
       },
     );
   }

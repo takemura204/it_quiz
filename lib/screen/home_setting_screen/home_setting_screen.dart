@@ -8,6 +8,7 @@ import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/view/card/premium_card.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -52,16 +53,13 @@ class HomeSettingScreen extends ConsumerWidget {
               _Divider(),
               const _SettingPremium(),
               _Divider(),
-              Container(
-                color: Colors.cyan,
-                height: 200,
-              ),
+              const PremiumCard(),
               const SettingTitleBar(title: "カスタム", onTap: null),
               const _SettingDailyGoal(),
               _Divider(),
-              const _SettingThemeColor(),
-              _Divider(),
               const _SettingNotification(),
+              _Divider(),
+              const _SettingThemeColor(),
               _Divider(),
               const SettingTitleBar(title: "サポート", onTap: null),
               const _SettingContact(),

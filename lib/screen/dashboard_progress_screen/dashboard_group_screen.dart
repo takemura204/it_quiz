@@ -222,6 +222,8 @@ class _ProgressRadarChart extends StatelessWidget {
     final List<double> maxValue = List.filled(categories.length, 100); // 最大値
     final List<double> minValue = List.filled(categories.length, 0); // 最小値
 
+    // final testData = [40.0, 25.0, 55.0, 65.0];
+
     return RadarChart(
       RadarChartData(
         dataSets: [
@@ -247,6 +249,7 @@ class _ProgressRadarChart extends StatelessWidget {
           RadarDataSet(
             dataEntries:
                 scoreRatios.map((score) => RadarEntry(value: score)).toList(),
+            // testData.map((score) => RadarEntry(value: score)).toList(),
             fillColor: context.mainColor.withOpacity(0.7),
             borderColor: context.mainColor,
             borderWidth: 2,
@@ -259,7 +262,7 @@ class _ProgressRadarChart extends StatelessWidget {
         getTitle: (index, angle) => RadarChartTitle(
           text: categories[index],
           angle: 0,
-          positionPercentageOffset: index == 0 ? 0.05 : 0.2,
+          positionPercentageOffset: index.isEven ? 0.05 : 0.45,
         ),
         titleTextStyle: TextStyle(
             color: context.mainColor,

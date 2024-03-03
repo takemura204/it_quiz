@@ -62,9 +62,9 @@ class SettingColorController extends StateNotifier<SettingColorState> {
       case 2:
         return "マスタード";
       case 3:
-        return "フォレストスカイ";
-      case 4:
         return "スカイ";
+      case 4:
+        return "フォレスト";
       case 5:
         return "インディゴ";
       case 6:

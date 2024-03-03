@@ -70,7 +70,7 @@ class _DailyData extends ConsumerWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: context.mainColor,
+                  color: context.mainColor.withOpacity(0.75),
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                 ),
                 height: 8,

@@ -16,7 +16,7 @@ class DailyGoalPicker extends ConsumerWidget {
     final quizCount = ref.watch(homeSettingProvider.notifier).quizCount;
     final dailyGoal = ref.watch(userModelProvider).dailyGoal;
     final initialItem = quizCount.indexOf(dailyGoal);
-    final recommendItem = quizCount.indexOf(10);
+    final recommendItem = quizCount.indexOf(20);
     final dailyGoalController =
         FixedExtentScrollController(initialItem: initialItem);
 

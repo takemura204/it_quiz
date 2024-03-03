@@ -38,7 +38,7 @@ class SettingAboutAppScreen extends ConsumerWidget {
               ),
               const Gap(30),
               const Text(
-                'あなたの「好き」をもっと豊かに。\nあなたの「知識」を素敵な日常に。',
+                'あなたの「好き」をもっと豊かに。',
                 style: TextStyle(
                     color: Colors.black87,
                     fontSize: 20,

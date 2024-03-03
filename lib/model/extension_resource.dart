@@ -12,6 +12,8 @@ extension BuildContextEx on BuildContext {
 
   Color get textColor => Colors.black87;
 
+  Color get accentColor => const Color(0xFFF87951);
+
   /// Theme.of(context).textTheme への convenience method です
   TextTheme get texts => Theme.of(this).textTheme;
 

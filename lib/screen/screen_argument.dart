@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kentei_quiz/screen/account_login_screen/account_login_screen.dart';
+import 'package:kentei_quiz/screen/premium_detail_screen/premium_detail_screen.dart';
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_history_screen/quiz_history_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
@@ -125,6 +126,30 @@ class SettingAboutAppScreenArguments
   @override
   Route generateRoute() => CupertinoPageRoute(
         builder: (context) => const SettingAboutAppScreen(),
+      );
+}
+
+class PremiumDetailScreenArguments
+    with _NoParamsMixin
+    implements IScreenArguments {
+  const PremiumDetailScreenArguments();
+
+  @override
+  String get screenNameFormat => "/premium_detail";
+
+  @override
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const PremiumDetailScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(
+                  builder: (context) => const PremiumDetailScreen()),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
       );
 }
 

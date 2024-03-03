@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:state_notifier/state_notifier.dart';
+
 import 'home_setting_state.dart';
 
 final homeSettingProvider =
@@ -18,7 +19,7 @@ class HomeSettingController extends StateNotifier<HomeSettingState>
 
   final Ref ref;
   final quizCountController = TextEditingController();
-  final quizCount = [5, 10, 20, 30, 40, 50];
+  final quizCount = [10, 20, 30, 40, 50];
 
   Future _initialize() async {
     // await initTheme();
