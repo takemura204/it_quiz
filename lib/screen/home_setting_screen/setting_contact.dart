@@ -8,7 +8,7 @@ class _SettingContact extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomSettingBar(
       title: "お問い合わせ",
-      icon: LineIcons.envelope,
+      icon: LineIcons.telegramPlane,
       customWidget: Text(
         '',
         style: TextStyle(

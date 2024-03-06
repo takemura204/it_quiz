@@ -1,4 +1,4 @@
-part of 'premium_detail_screen.dart';
+part of '../premium_detail_screen.dart';
 
 ///スライド画面
 class _PremiumContent extends StatelessWidget {
@@ -42,7 +42,7 @@ class _PremiumContent extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: context.mainColor.withOpacity(0.5),
+                        color: context.mainColor.withOpacity(0.6),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8)),
                       ),
@@ -138,7 +138,7 @@ class _PremiumContent2 extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: context.mainColor.withOpacity(0.5),
+                        color: context.mainColor.withOpacity(0.6),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8)),
                       ),
@@ -207,7 +207,7 @@ class _PremiumContent2 extends StatelessWidget {
                           ),
                           Gap(5),
                           Text(
-                            '苦手な用語や保存したい用語をすぐ見返したい時などに探しやすくなります。',
+                            '苦手な用語や保存したい用語をすぐ見返したい時に探しやすくなります。',
                             style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 13,
@@ -242,7 +242,7 @@ class _PremiumContent2 extends StatelessWidget {
                           ),
                           Gap(5),
                           Text(
-                            'カラーテーマが変更できることで、自分好みにカスタマイズができます。',
+                            '９種類のテーマを変更できることで、自分好みにカスタマイズが可能です。',
                             style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 13,
@@ -282,6 +282,55 @@ class _PremiumContent2 extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _PremiumContentSoon extends StatelessWidget {
+  const _PremiumContentSoon();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      child: Container(
+        width: context.width,
+        margin: const EdgeInsets.only(top: 24, bottom: 5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: context.mainColor, width: 1),
+        ),
+        padding: const EdgeInsets.only(right: 20, left: 20),
+        child: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Gap(15),
+
+            ///タイトル
+            Text(
+              'Coming soon...',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.black87),
+            ),
+
+            Gap(10),
+
+            Text(
+              '今後も様々なプレミアム機能を追加予定です！',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                  color: Colors.black87),
+            ),
+
+            Gap(15),
+          ],
+        ),
       ),
     );
   }

@@ -99,7 +99,7 @@ class PremiumCard extends ConsumerWidget {
                             ),
                             const Gap(5),
                             const Text(
-                              '問題数の増加',
+                              '用語・クイズの増加',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 12,
