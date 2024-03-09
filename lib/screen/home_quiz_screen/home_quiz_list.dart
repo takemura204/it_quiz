@@ -41,16 +41,44 @@ class _QuizCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final correctRate =
         ((quiz.correctNum / quiz.quizItemList.length) * 100).round();
+    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium)) ||
+        !quiz.isPremium;
     return GestureDetector(
       onTap: () {
-        ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
-        ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
-        ref.read(quizModelProvider.notifier).tapQuizIndex(index);
-        showDialog(
-            context: context, builder: (_) => StudyQuizModal(quiz: quiz));
+        if (isPremium) {
+          ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
+          ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
+          ref.read(quizModelProvider.notifier).tapQuizIndex(index);
+          showDialog(
+              context: context, builder: (_) => StudyQuizModal(quiz: quiz));
+        } else {
+          showDialog(
+              context: context,
+              builder: (_) => PrimaryDialog(
+                    title: '全てのクイズを解放しますか？',
+                    subWidget: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '支払いは一度きり。プレミアムに登録すると、\n全ての用語・クイズを解放できます。',
+                            style: TextStyle(color: Colors.black87),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    cancelText: 'キャンセル',
+                    doneText: 'プレミアム画面へ',
+                    onPressed: () {
+                      context.showScreen(
+                          const PremiumDetailScreenArguments().generateRoute());
+                    },
+                  ));
+        }
       },
       child: Container(
-        color: Colors.white,
+        color: isPremium ? Colors.white : Colors.grey.shade200,
         padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
         height: 90,
         child: Row(
@@ -62,10 +90,8 @@ class _QuizCard extends ConsumerWidget {
             ///タイトル
             _Title(quiz: quiz, correctRate: correctRate),
             const Spacer(),
-            Icon(
-              LineIcons.angleRight,
-              color: context.mainColor,
-            ),
+            Icon(LineIcons.angleRight,
+                color: isPremium ? context.mainColor : Colors.black26),
             const Gap(5),
           ],
         ),
@@ -82,6 +108,8 @@ class _ProgressIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium)) ||
+        !quiz.isPremium;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -98,7 +126,7 @@ class _ProgressIcon extends ConsumerWidget {
           currentScore: quiz.correctNum,
           thickness: 0.1,
           widget: Icon(
-            Icons.check,
+            isPremium ? Icons.check : LineIcons.lock,
             color: quiz.isCompleted ? context.mainColor : Colors.black26,
             size: 25,
           ),
