@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeSettingState {
   int get selectedQuizCountGoal => throw _privateConstructorUsedError;
+  int get premiumCardIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeSettingStateCopyWith<HomeSettingState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $HomeSettingStateCopyWith<$Res> {
           HomeSettingState value, $Res Function(HomeSettingState) then) =
       _$HomeSettingStateCopyWithImpl<$Res, HomeSettingState>;
   @useResult
-  $Res call({int selectedQuizCountGoal});
+  $Res call({int selectedQuizCountGoal, int premiumCardIndex});
 }
 
 /// @nodoc
@@ -46,11 +47,16 @@ class _$HomeSettingStateCopyWithImpl<$Res, $Val extends HomeSettingState>
   @override
   $Res call({
     Object? selectedQuizCountGoal = null,
+    Object? premiumCardIndex = null,
   }) {
     return _then(_value.copyWith(
       selectedQuizCountGoal: null == selectedQuizCountGoal
           ? _value.selectedQuizCountGoal
           : selectedQuizCountGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+      premiumCardIndex: null == premiumCardIndex
+          ? _value.premiumCardIndex
+          : premiumCardIndex // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -64,7 +70,7 @@ abstract class _$$_HomeSettingStateCopyWith<$Res>
       __$$_HomeSettingStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int selectedQuizCountGoal});
+  $Res call({int selectedQuizCountGoal, int premiumCardIndex});
 }
 
 /// @nodoc
@@ -79,11 +85,16 @@ class __$$_HomeSettingStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedQuizCountGoal = null,
+    Object? premiumCardIndex = null,
   }) {
     return _then(_$_HomeSettingState(
       selectedQuizCountGoal: null == selectedQuizCountGoal
           ? _value.selectedQuizCountGoal
           : selectedQuizCountGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+      premiumCardIndex: null == premiumCardIndex
+          ? _value.premiumCardIndex
+          : premiumCardIndex // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -92,15 +103,19 @@ class __$$_HomeSettingStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomeSettingState implements _HomeSettingState {
-  const _$_HomeSettingState({this.selectedQuizCountGoal = 10});
+  const _$_HomeSettingState(
+      {this.selectedQuizCountGoal = 10, this.premiumCardIndex = 0});
 
   @override
   @JsonKey()
   final int selectedQuizCountGoal;
+  @override
+  @JsonKey()
+  final int premiumCardIndex;
 
   @override
   String toString() {
-    return 'HomeSettingState(selectedQuizCountGoal: $selectedQuizCountGoal)';
+    return 'HomeSettingState(selectedQuizCountGoal: $selectedQuizCountGoal, premiumCardIndex: $premiumCardIndex)';
   }
 
   @override
@@ -109,11 +124,14 @@ class _$_HomeSettingState implements _HomeSettingState {
         (other.runtimeType == runtimeType &&
             other is _$_HomeSettingState &&
             (identical(other.selectedQuizCountGoal, selectedQuizCountGoal) ||
-                other.selectedQuizCountGoal == selectedQuizCountGoal));
+                other.selectedQuizCountGoal == selectedQuizCountGoal) &&
+            (identical(other.premiumCardIndex, premiumCardIndex) ||
+                other.premiumCardIndex == premiumCardIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedQuizCountGoal);
+  int get hashCode =>
+      Object.hash(runtimeType, selectedQuizCountGoal, premiumCardIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +141,14 @@ class _$_HomeSettingState implements _HomeSettingState {
 }
 
 abstract class _HomeSettingState implements HomeSettingState {
-  const factory _HomeSettingState({final int selectedQuizCountGoal}) =
-      _$_HomeSettingState;
+  const factory _HomeSettingState(
+      {final int selectedQuizCountGoal,
+      final int premiumCardIndex}) = _$_HomeSettingState;
 
   @override
   int get selectedQuizCountGoal;
+  @override
+  int get premiumCardIndex;
   @override
   @JsonKey(ignore: true)
   _$$_HomeSettingStateCopyWith<_$_HomeSettingState> get copyWith =>

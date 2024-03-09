@@ -20,6 +20,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           ? null
           : NotificationTime.fromJson(
               json['selectNotificationTime'] as Map<String, dynamic>),
+      isPremium: json['isPremium'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -33,4 +34,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'themeId': instance.themeId,
       'dailyGoal': instance.dailyGoal,
       'selectNotificationTime': instance.selectNotificationTime,
+      'isPremium': instance.isPremium,
     };

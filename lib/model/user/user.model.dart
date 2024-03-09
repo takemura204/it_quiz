@@ -33,14 +33,17 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
     final themeId = prefs.getInt('theme_id') ?? state.themeId;
     final hour = prefs.getInt('notification_hour');
     final minute = prefs.getInt('notification_minute');
+    final isPremium = prefs.getBool('is_Premium') ?? state.isPremium;
     final notificationTime = (hour != null && minute != null)
         ? NotificationTime(hour: hour, minute: minute)
         : NotificationTime.defaultTime();
     state = state.copyWith(
-        userName: userName,
-        dailyGoal: dailyGoal,
-        themeId: themeId,
-        selectNotificationTime: notificationTime);
+      userName: userName,
+      dailyGoal: dailyGoal,
+      themeId: themeId,
+      selectNotificationTime: notificationTime,
+      isPremium: isPremium,
+    );
     userNameController.text = state.userName;
     _saveDevice();
   }
@@ -52,6 +55,11 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
 
   void updateDailyGoal(int value) {
     state = state.copyWith(dailyGoal: value);
+    _saveDevice();
+  }
+
+  void updateIsPremium(bool value) {
+    state = state.copyWith(isPremium: value);
     _saveDevice();
   }
 
@@ -75,6 +83,7 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
     final dailyGoal = state.dailyGoal;
     final themeId = state.themeId;
     final userName = state.userName;
+    final isPremium = state.isPremium;
     final notificationTime = state.selectNotificationTime;
     await prefs.setInt('daily_goal', dailyGoal);
     await prefs.setInt('theme_id', themeId);
@@ -83,5 +92,6 @@ class UserModel extends StateNotifier<User> with LocatorMixin {
       await prefs.setInt('notification_hour', notificationTime.hour ?? 0);
       await prefs.setInt('notification_minute', notificationTime.minute ?? 0);
     }
+    await prefs.setBool('is_Premium', isPremium);
   }
 }

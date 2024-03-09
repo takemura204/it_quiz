@@ -17,7 +17,7 @@ class _QuizResultView extends ConsumerWidget {
               border: Border(
                 bottom: BorderSide(
                   color: Colors.grey.shade300,
-                  width: 1.0, // ここで線の太さを設定
+                  width: 1.0,
                 ),
               ),
             ),
@@ -125,6 +125,9 @@ class _NextActionCard extends HookConsumerWidget {
                         ref
                             .read(quizModelProvider.notifier)
                             .tapQuizCard(quizList[quizIndex + 1].id);
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .setStudyType(StudyType.choice);
                       },
               ),
           ],

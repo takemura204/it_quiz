@@ -4,6 +4,8 @@ extension BuildContextEx on BuildContext {
   /// Theme.of(context).color への convenience method です
   Color get mainColor => Theme.of(this).primaryColor;
 
+  Color get defaultColor => const Color(0xFF75C4BF);
+
   Color get backgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
   Color get secondColor => Colors.grey.shade300;

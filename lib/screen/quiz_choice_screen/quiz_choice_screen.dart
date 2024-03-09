@@ -20,7 +20,7 @@ import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/card/quiz_item_card.dart';
 import '../../view/card/result_good_card.dart';
 import '../../view/card/result_try_card.dart';
-import '../../view/dialog.dart';
+import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'choice_challenge/choice_challenge_body.dart';

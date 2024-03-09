@@ -3,9 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import 'button/defalut_button.dart';
-import 'button/primary_button.dart';
-import 'button/secondory_button.dart';
+import '../button/defalut_button.dart';
+import '../button/primary_button.dart';
+import '../button/secondory_button.dart';
 
 class PrimaryDialog extends ConsumerWidget {
   const PrimaryDialog({
@@ -43,29 +43,25 @@ class PrimaryDialog extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Gap(context.height * 0.01),
-              Container(
-                height: context.height * 0.05,
-                child: Text(
-                  title,
-                  style: TextStyle(
-                      fontSize: context.width * 0.05,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87),
-                ),
+              const Gap(15),
+              Text(
+                title,
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87),
               ),
-              Gap(context.height * 0.01),
+              const Gap(15),
               subWidget,
-              Gap(context.height * 0.02),
+              const Gap(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-
                   ///キャンセル
                   SecondaryButton(
                       width: context.width * 0.4,
-                      height: context.height * 0.06,
+                      height: 50,
                       text: cancelText,
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -73,18 +69,15 @@ class PrimaryDialog extends ConsumerWidget {
                   Gap(context.width * 0.05),
 
                   ///実行ボタン
-
                   PrimaryButton(
                     width: context.width * 0.4,
-                    height: context.height * 0.06,
+                    height: 50,
                     text: doneText,
                     onPressed: onPressed,
                   ),
-
-
                 ],
               ),
-              Gap(context.height * 0.01),
+              const Gap(15),
             ],
           ),
         ),
@@ -166,7 +159,6 @@ class DefaultDialog extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-
                   ///キャンセル
                   SecondaryButton(
                       width: context.width * 0.4,
@@ -194,10 +186,11 @@ class DefaultDialog extends ConsumerWidget {
 }
 
 class PrimaryCloseDialog extends ConsumerWidget {
-  const PrimaryCloseDialog({required this.onPressed,
-    required this.title,
-    required this.subWidget,
-    required this.doneText});
+  const PrimaryCloseDialog(
+      {required this.onPressed,
+      required this.title,
+      required this.subWidget,
+      required this.doneText});
 
   final VoidCallback? onPressed;
   final String title;
@@ -271,11 +264,12 @@ class PrimaryCloseDialog extends ConsumerWidget {
 }
 
 class DefaultCloseDialog extends ConsumerWidget {
-  const DefaultCloseDialog({required this.onPressed,
-    required this.title,
-    required this.iconWidget,
-    required this.subWidget,
-    required this.doneText});
+  const DefaultCloseDialog(
+      {required this.onPressed,
+      required this.title,
+      required this.iconWidget,
+      required this.subWidget,
+      required this.doneText});
 
   final VoidCallback? onPressed;
   final Widget? iconWidget;
@@ -366,10 +360,11 @@ class DefaultCloseDialog extends ConsumerWidget {
 }
 
 class SecondaryCloseDialog extends ConsumerWidget {
-  const SecondaryCloseDialog({required this.onPressed,
-    required this.title,
-    required this.subWidget,
-    required this.doneText});
+  const SecondaryCloseDialog(
+      {required this.onPressed,
+      required this.title,
+      required this.subWidget,
+      required this.doneText});
 
   final VoidCallback? onPressed;
   final String title;

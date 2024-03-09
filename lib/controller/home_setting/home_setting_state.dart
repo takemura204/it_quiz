@@ -6,5 +6,6 @@ part 'home_setting_state.freezed.dart';
 class HomeSettingState with _$HomeSettingState {
   const factory HomeSettingState({
     @Default(10) final int selectedQuizCountGoal,
+    @Default(0) final int premiumCardIndex,
   }) = _HomeSettingState;
 }

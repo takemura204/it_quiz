@@ -6,7 +6,11 @@ import 'package:intl/intl.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/view/button/primary_button.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../../model/user/user.model.dart';
+import '../screen_argument.dart';
 
 part 'dashboard_chart.dart';
 
@@ -15,6 +19,7 @@ class PeriodDashboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
     return Container(
       width: context.width * 1,
       alignment: Alignment.center,
@@ -34,25 +39,81 @@ class PeriodDashboard extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
           child: Column(
             children: [
-              const _Title(
+              _Title(
                 title: "学習状況",
-                subWidget: _SelectPeriodTab(),
+                subWidget: isPremium ? const _SelectPeriodTab() : const Gap(5),
                 icon: Icons.bar_chart_outlined,
               ),
               const Gap(10),
+              if (isPremium)
+                Column(
+                  children: [
+                    ///期間
+                    const _SelectPeriod(),
+                    const Gap(10),
 
-              ///期間
-              const _SelectPeriod(),
-              const Gap(10),
+                    const _PeriodData(),
 
-              const _PeriodData(),
+                    const Gap(10),
 
-              const Gap(10),
+                    ///ダッシュボード
+                    PeriodChart(),
 
-              ///ダッシュボード
-              PeriodChart(),
-
-              const Gap(5),
+                    const Gap(5),
+                  ],
+                )
+              else
+                GestureDetector(
+                  onTap: () {
+                    context.showScreen(
+                        const PremiumDetailScreenArguments().generateRoute());
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/image/dashboard_period_sample.png',
+                        color: Colors.white.withOpacity(0.1),
+                        colorBlendMode: BlendMode.modulate,
+                      ),
+                      Container(
+                        width: context.width * 0.8,
+                        child: Column(
+                          children: [
+                            const Gap(45),
+                            Icon(
+                              LineIcons.lock,
+                              size: 35,
+                              color: context.accentColor,
+                            ),
+                            const Gap(10),
+                            Text(
+                              'プレミアムを購入すると\nご利用いただけます',
+                              style: TextStyle(
+                                color: context.accentColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const Gap(30),
+                            PrimaryRoundButton(
+                              width: 180,
+                              height: 45,
+                              text: '購入する',
+                              fontSize: 16,
+                              onPressed: () {
+                                context.showScreen(
+                                    const PremiumDetailScreenArguments()
+                                        .generateRoute());
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),

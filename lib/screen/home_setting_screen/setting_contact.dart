@@ -7,7 +7,7 @@ class _SettingContact extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomSettingBar(
-      title: "お問い合わせ",
+      title: "ご意見・お問い合わせ",
       icon: LineIcons.telegramPlane,
       customWidget: Text(
         '',

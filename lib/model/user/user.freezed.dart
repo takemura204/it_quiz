@@ -32,6 +32,7 @@ mixin _$User {
   int get dailyGoal => throw _privateConstructorUsedError;
   NotificationTime? get selectNotificationTime =>
       throw _privateConstructorUsedError;
+  bool get isPremium => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +54,8 @@ abstract class $UserCopyWith<$Res> {
       bool isLogin,
       int themeId,
       int dailyGoal,
-      NotificationTime? selectNotificationTime});
+      NotificationTime? selectNotificationTime,
+      bool isPremium});
 
   $NotificationTimeCopyWith<$Res>? get selectNotificationTime;
 }
@@ -81,6 +83,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? themeId = null,
     Object? dailyGoal = null,
     Object? selectNotificationTime = freezed,
+    Object? isPremium = null,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -123,6 +126,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.selectNotificationTime
           : selectNotificationTime // ignore: cast_nullable_to_non_nullable
               as NotificationTime?,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -156,7 +163,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool isLogin,
       int themeId,
       int dailyGoal,
-      NotificationTime? selectNotificationTime});
+      NotificationTime? selectNotificationTime,
+      bool isPremium});
 
   @override
   $NotificationTimeCopyWith<$Res>? get selectNotificationTime;
@@ -181,6 +189,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? themeId = null,
     Object? dailyGoal = null,
     Object? selectNotificationTime = freezed,
+    Object? isPremium = null,
   }) {
     return _then(_$_User(
       uid: null == uid
@@ -223,6 +232,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.selectNotificationTime
           : selectNotificationTime // ignore: cast_nullable_to_non_nullable
               as NotificationTime?,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -240,7 +253,8 @@ class _$_User implements _User {
       this.isLogin = false,
       this.themeId = 0,
       this.dailyGoal = 10,
-      this.selectNotificationTime});
+      this.selectNotificationTime,
+      this.isPremium = false});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -275,10 +289,13 @@ class _$_User implements _User {
   final int dailyGoal;
   @override
   final NotificationTime? selectNotificationTime;
+  @override
+  @JsonKey()
+  final bool isPremium;
 
   @override
   String toString() {
-    return 'User(uid: $uid, userName: $userName, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, themeId: $themeId, dailyGoal: $dailyGoal, selectNotificationTime: $selectNotificationTime)';
+    return 'User(uid: $uid, userName: $userName, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, themeId: $themeId, dailyGoal: $dailyGoal, selectNotificationTime: $selectNotificationTime, isPremium: $isPremium)';
   }
 
   @override
@@ -300,13 +317,26 @@ class _$_User implements _User {
             (identical(other.dailyGoal, dailyGoal) ||
                 other.dailyGoal == dailyGoal) &&
             (identical(other.selectNotificationTime, selectNotificationTime) ||
-                other.selectNotificationTime == selectNotificationTime));
+                other.selectNotificationTime == selectNotificationTime) &&
+            (identical(other.isPremium, isPremium) ||
+                other.isPremium == isPremium));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, userName, email, password,
-      gender, birthDay, isLogin, themeId, dailyGoal, selectNotificationTime);
+  int get hashCode => Object.hash(
+      runtimeType,
+      uid,
+      userName,
+      email,
+      password,
+      gender,
+      birthDay,
+      isLogin,
+      themeId,
+      dailyGoal,
+      selectNotificationTime,
+      isPremium);
 
   @JsonKey(ignore: true)
   @override
@@ -333,7 +363,8 @@ abstract class _User implements User {
       final bool isLogin,
       final int themeId,
       final int dailyGoal,
-      final NotificationTime? selectNotificationTime}) = _$_User;
+      final NotificationTime? selectNotificationTime,
+      final bool isPremium}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -357,6 +388,8 @@ abstract class _User implements User {
   int get dailyGoal;
   @override
   NotificationTime? get selectNotificationTime;
+  @override
+  bool get isPremium;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

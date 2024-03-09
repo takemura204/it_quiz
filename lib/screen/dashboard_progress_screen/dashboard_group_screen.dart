@@ -4,10 +4,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../view/bar.dart';
+import '../../view/button/primary_button.dart';
+import '../screen_argument.dart';
 
 part 'dashboard_group_progress_view.dart';
 
@@ -28,6 +32,7 @@ class GroupProgressDashboard extends ConsumerWidget {
     }
     final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
     final correctRatios = ref.watch(homeQuizScreenProvider).correctRatios;
+    final isPremium = ref.watch(userModelProvider).isPremium;
 
     return Container(
       child: Card(
@@ -50,47 +55,99 @@ class GroupProgressDashboard extends ConsumerWidget {
               icon: Icons.speaker_group_sharp,
             ),
             const Gap(10),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ///レーダーチャート
-                Container(
-                  height: context.width * 0.6,
-                  width: context.width,
-                  padding: EdgeInsets.symmetric(
-                      vertical: context.width * 0.02,
-                      horizontal: context.width * 0.04),
-                  margin:
-                      EdgeInsets.symmetric(horizontal: context.width * 0.02),
-                  child: _ProgressRadarChart(
-                    categories: categoryList,
-                    scoreRatios: correctRatios,
+            if (isPremium)
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ///レーダーチャート
+                  Container(
+                    height: context.width * 0.6,
+                    width: context.width,
+                    padding: EdgeInsets.symmetric(
+                        vertical: context.width * 0.02,
+                        horizontal: context.width * 0.04),
+                    margin:
+                        EdgeInsets.symmetric(horizontal: context.width * 0.02),
+                    child: _ProgressRadarChart(
+                      categories: categoryList,
+                      scoreRatios: correctRatios,
+                    ),
                   ),
-                ),
 
-                Container(
-                  padding: EdgeInsets.only(
-                    left: context.width * 0.04,
-                    right: context.width * 0.02,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      for (var i = 0; i < categoryList.length; i++) ...[
-                        if (i != 0) const Gap(10),
-                        _GroupProgressCount(group: categoryList[i]),
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: context.width * 0.04,
+                      right: context.width * 0.02,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var i = 0; i < categoryList.length; i++) ...[
+                          if (i != 0) const Gap(10),
+                          _GroupProgressCount(group: categoryList[i]),
+                        ],
+                        const Gap(10),
+                        const Divider(color: Colors.grey, height: 1),
+                        const Gap(10),
+                        const _TotalProgressCount(),
+                        const Gap(10),
                       ],
-                      const Gap(10),
-                      const Divider(color: Colors.grey, height: 1),
-                      const Gap(10),
-                      const _TotalProgressCount(),
-                      const Gap(10),
-                    ],
+                    ),
                   ),
+                  const Gap(10),
+                ],
+              )
+            else
+              GestureDetector(
+                onTap: () {
+                  context.showScreen(
+                      const PremiumDetailScreenArguments().generateRoute());
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/image/dashboard_progress_sample.png',
+                      color: Colors.white.withOpacity(0.1),
+                      colorBlendMode: BlendMode.modulate,
+                    ),
+                    Container(
+                      width: context.width * 0.8,
+                      child: Column(
+                        children: [
+                          const Gap(45),
+                          Icon(
+                            LineIcons.lock,
+                            size: 35,
+                            color: context.accentColor,
+                          ),
+                          const Gap(10),
+                          Text(
+                            'プレミアムを購入すると\nご利用いただけます',
+                            style: TextStyle(
+                              color: context.accentColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const Gap(30),
+                          PrimaryRoundButton(
+                              width: 180,
+                              height: 45,
+                              text: '購入する',
+                              fontSize: 16,
+                              onPressed: () {
+                                context.showScreen(
+                                    const PremiumDetailScreenArguments()
+                                        .generateRoute());
+                              })
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                const Gap(10),
-              ],
-            ),
+              ),
           ],
         ),
       ),

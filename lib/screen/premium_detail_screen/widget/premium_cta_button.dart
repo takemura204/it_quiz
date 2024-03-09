@@ -1,16 +1,17 @@
 part of '../premium_detail_screen.dart';
 
 ///注意事項
-class _CtaButton extends StatelessWidget {
+class _CtaButton extends HookConsumerWidget {
   const _CtaButton();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final platformStoreName = kIsWeb
         ? 'ウェブストア'
         : Platform.isIOS
             ? 'Apple ID'
             : 'Google Playアカウント';
+    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -22,10 +23,13 @@ class _CtaButton extends StatelessWidget {
           child: PrimaryButton(
             width: context.width,
             height: 60,
-            text: 'いますぐ購入 ¥980(税込)',
-            onPressed: () {
-              print('購入モーダル表示');
-            },
+            text: isPremium ? '購入済み' : 'いますぐ購入 ¥980(税込)',
+            onPressed: isPremium
+                ? null
+                : () {
+                    ref.read(userModelProvider.notifier).updateIsPremium(true);
+                    print('購入モーダル表示');
+                  },
           ),
         ),
       ],

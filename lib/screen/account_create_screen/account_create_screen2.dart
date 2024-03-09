@@ -11,7 +11,7 @@ import '../../controller/auth/auth_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/dialog.dart';
+import '../../view/modals/dialog.dart';
 import '../../view/text_field.dart';
 
 class AccountCreateStep2Screen extends ConsumerWidget {

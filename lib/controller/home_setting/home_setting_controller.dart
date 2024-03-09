@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -13,7 +15,7 @@ class HomeSettingController extends StateNotifier<HomeSettingState>
     with LocatorMixin {
   HomeSettingController({required this.ref}) : super(const HomeSettingState()) {
     () {
-      _initialize();
+      _initState();
     }();
   }
 
@@ -21,8 +23,8 @@ class HomeSettingController extends StateNotifier<HomeSettingState>
   final quizCountController = TextEditingController();
   final quizCount = [10, 20, 30, 40, 50];
 
-  Future _initialize() async {
-    // await initTheme();
+  Future _initState() async {
+    setPremiumCardIndex();
   }
 
   @override
@@ -32,6 +34,11 @@ class HomeSettingController extends StateNotifier<HomeSettingState>
 
   void setSelectedQuizCountGoal(int value) {
     state = state.copyWith(selectedQuizCountGoal: value);
+  }
+
+  void setPremiumCardIndex() {
+    final randomIndex = Random().nextInt(9) + 1; // 1 から 9 のランダムな数値を生成
+    state = state.copyWith(premiumCardIndex: randomIndex);
   }
 
   Future sendAppReview() async {

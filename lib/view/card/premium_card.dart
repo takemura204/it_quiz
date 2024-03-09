@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
+import '../../controller/home_setting/home_setting_controller.dart';
 import '../../screen/screen_argument.dart';
 
 class PremiumCard extends ConsumerWidget {
@@ -11,6 +12,10 @@ class PremiumCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final premiumCardIndex = ref
+        .watch(homeSettingProvider.select((state) => state.premiumCardIndex));
+    final imagePath = 'assets/image/premium_$premiumCardIndex.svg';
+
     return GestureDetector(
       onTap: () {
         context
@@ -130,10 +135,11 @@ class PremiumCard extends ConsumerWidget {
                     ),
                   ),
                   SvgPicture.asset(
-                    'assets/image/premium_1.svg',
-                    height: context.width * 0.25,
+                    imagePath,
+                    width: context.width * 0.3,
                     fit: BoxFit.cover,
                   ),
+                  const Gap(10),
                 ],
               ),
             ),

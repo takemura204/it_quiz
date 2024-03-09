@@ -6,15 +6,16 @@ class _SettingPremium extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
     return CustomSettingBar(
       title: "追加購入",
       icon: LineIcons.shoppingCart,
-      customWidget: const Row(
+      customWidget: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "未購入",
-            style: TextStyle(
+            isPremium ? '購入済み' : "未購入",
+            style: const TextStyle(
               color: Colors.black54,
               fontWeight: FontWeight.normal,
               fontSize: 16,

@@ -69,12 +69,14 @@ class PrimaryRoundButton extends ConsumerWidget {
     required this.text,
     required this.height,
     required this.width,
+    required this.fontSize,
     required this.onPressed,
   });
 
   final double height;
   final double width;
   final String text;
+  final double fontSize;
   final VoidCallback onPressed;
 
   @override
@@ -92,9 +94,9 @@ class PrimaryRoundButton extends ConsumerWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: fontSize,
             fontWeight: FontWeight.bold,
           ),
         ),

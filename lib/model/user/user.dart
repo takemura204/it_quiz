@@ -20,6 +20,7 @@ class User with _$User {
     @Default(0) final int themeId,
     @Default(10) final int dailyGoal,
     NotificationTime? selectNotificationTime,
+    @Default(false) final bool isPremium,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

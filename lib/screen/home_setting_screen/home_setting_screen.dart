@@ -18,7 +18,7 @@ import '../../model/notification_time/notification_time.dart';
 import '../../view/bar.dart';
 import '../../view/bottom_sheet/daily_goal_picker.dart';
 import '../../view/bottom_sheet/time_picker.dart';
-import '../../view/dialog.dart';
+import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
@@ -37,6 +37,7 @@ class HomeSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),
@@ -53,7 +54,7 @@ class HomeSettingScreen extends ConsumerWidget {
               _Divider(),
               const _SettingPremium(),
               _Divider(),
-              const PremiumCard(),
+              if (!isPremium) const PremiumCard(),
               const SettingTitleBar(title: "カスタム", onTap: null),
               const _SettingDailyGoal(),
               _Divider(),
@@ -70,6 +71,16 @@ class HomeSettingScreen extends ConsumerWidget {
               _Divider(),
               const SettingTitleBar(title: "その他", onTap: null),
               const _SettingDeleteData(),
+
+              GestureDetector(
+                onTap: () {
+                  ref.read(userModelProvider.notifier).updateIsPremium(false);
+                },
+                child: Container(
+                  height: 100,
+                  color: Colors.red,
+                ),
+              ),
 
               ///シェア機能も追加したい。
             ],

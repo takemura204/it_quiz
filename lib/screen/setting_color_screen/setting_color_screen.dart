@@ -3,9 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../../view/button_icon/cutom_back_button.dart';
+import '../../view/modals/dialog.dart';
+import '../screen_argument.dart';
 
 ///カラーテーマ選択
 class SettingColorScreen extends ConsumerWidget {
@@ -36,7 +39,8 @@ class _ColorCards extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = ref.watch(settingColorProvider.notifier).colors;
-    final themeId = ref.watch(userModelProvider).themeId;
+    final themeId = ref.watch(userModelProvider.select((s) => s.themeId));
+    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -53,11 +57,46 @@ class _ColorCards extends ConsumerWidget {
           final _isSelected = index == themeId;
 
           return GestureDetector(
-            onTap: () async {
-              ref.read(userModelProvider.notifier).updateThemeId(index);
-            },
+            onTap: isPremium
+                ? () async {
+                    ref.read(userModelProvider.notifier).updateThemeId(index);
+                  }
+                : index == 0
+                    ? null
+                    : () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => PrimaryDialog(
+                                  title: 'テーマを入手しますか？',
+                                  subWidget: const Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          '支払いは一度きり。プレミアムに登録すると、\n全てテーマを、自分好みに変更できます。',
+                                          style:
+                                              TextStyle(color: Colors.black87),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  cancelText: 'キャンセル',
+                                  doneText: 'プレミアム画面へ',
+                                  onPressed: () {
+                                    context.showScreen(
+                                        const PremiumDetailScreenArguments()
+                                            .generateRoute());
+                                  },
+                                ));
+                      },
             child: Card(
-              elevation: 3,
+              color: isPremium
+                  ? Colors.white
+                  : index == 0
+                      ? Colors.white
+                      : Colors.grey.shade200,
+              elevation: 1,
               margin: EdgeInsets.symmetric(
                   horizontal: context.width * 0.01,
                   vertical: context.width * 0.01),
@@ -137,7 +176,13 @@ class _ColorCards extends ConsumerWidget {
                     alignment: Alignment.topRight,
                     child: Icon(
                       // 選択している時、Icons.check_circle、選択していない時、circle_outlinedに変更
-                      _isSelected ? Icons.check_circle : Icons.circle_outlined,
+                      isPremium
+                          ? _isSelected
+                              ? Icons.check_circle
+                              : Icons.circle_outlined
+                          : index == 0
+                              ? Icons.check_circle
+                              : LineIcons.lock,
                       color: _isSelected ? colors[index] : Colors.grey,
                       size: context.width * 0.06,
                     ),
