@@ -73,7 +73,7 @@ class _ColorCards extends ConsumerWidget {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          '支払いは一度きり。プレミアムに登録すると、\n全てテーマを、自分好みに変更できます。',
+                                          '支払いは一度きり。プレミアムに登録すると、\n全てのテーマを、自分好みに変更できます。',
                                           style:
                                               TextStyle(color: Colors.black87),
                                           textAlign: TextAlign.center,

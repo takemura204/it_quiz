@@ -15,6 +15,7 @@ class QuizItem with _$QuizItem {
     @Default(false) final bool isJudge, //正解したか?
     @Default(false) final bool isSaved, //保存したか?
     @Default(0) final int lapIndex, //何周目か？
+    @Default(true) final bool isPremium, //プレミアムか？
   }) = _QuizItem;
 
   QuizItem._();

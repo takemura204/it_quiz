@@ -103,6 +103,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         isWeak: false,
         //苦手リストから除外
         lapIndex: quizItemList[quizIndex].lapIndex,
+        isPremium: quizItemList[quizIndex].isPremium,
       );
       state = state.copyWith(isJudge: true, quizItemList: quizItemList);
     }
@@ -120,6 +121,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         isWeak: true,
         //苦手リスト追加
         lapIndex: quizItemList[quizIndex].lapIndex,
+        isPremium: quizItemList[quizIndex].isPremium,
       );
       state = state.copyWith(isJudge: false, quizItemList: quizItemList);
     }
@@ -170,6 +172,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
     );
     state = state.copyWith(quizItemList: quizItemList);
 

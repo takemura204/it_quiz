@@ -56,7 +56,9 @@ class _Precautions extends StatelessWidget {
                 TextSpan(
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(Uri.parse('https://bldt.jp/privacy-policy/'));
+                      context.showScreen(
+                          const SettingUserPolicyScreenArguments()
+                              .generateRoute());
                     },
                   text: '利用規約',
                   style: TextStyle(
@@ -71,7 +73,9 @@ class _Precautions extends StatelessWidget {
                 TextSpan(
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(Uri.parse('https://bldt.jp/privacy-policy/'));
+                      context.showScreen(
+                          const SettingPrivacyPolicyScreenArguments()
+                              .generateRoute());
                     },
                   text: 'プライバシーポリシー',
                   style: TextStyle(

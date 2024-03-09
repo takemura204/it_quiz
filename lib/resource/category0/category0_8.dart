@@ -73,11 +73,11 @@ List<QuizItem> get category0_8 {
       ans: 'フィッシング',
       choices: ["フィッシング", "やり取り型攻撃", "水飲み場型攻撃", "ワンクリック詐欺"],
       comment:
-      "フィッシングは、正規のウェブサイトや電子メールを偽装し、ユーザーにログイン情報やクレジットカード情報などの個人情報の入力を促して盗み出そうとする詐欺。",
+          "フィッシングは、正規のウェブサイトや電子メールを偽装し、ユーザーにログイン情報やクレジットカード情報などの個人情報の入力を促して盗み出そうとする詐欺。",
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + 71);
+    return quizItems[index].copyWith(quizId: index + 71, isPremium: false);
   });
 }

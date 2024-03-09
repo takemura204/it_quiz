@@ -87,6 +87,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: lapIndex,
+      isPremium: quizItemList[index].isPremium,
     );
 
     // リストの更新
@@ -175,6 +176,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
     );
     state = state.copyWith(quizItemList: quizItemList);
     _updateQuiz();

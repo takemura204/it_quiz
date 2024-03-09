@@ -6,11 +6,6 @@ class _CtaButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final platformStoreName = kIsWeb
-        ? 'ウェブストア'
-        : Platform.isIOS
-            ? 'Apple ID'
-            : 'Google Playアカウント';
     final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
 
     return Column(

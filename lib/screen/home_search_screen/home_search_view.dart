@@ -65,27 +65,8 @@ class _QuizResultView extends ConsumerWidget {
               ),
             );
           }
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                bottom: BorderSide(
-                  color: context.mainColor,
-                  width: 1,
-                ),
-              ),
-            ),
-            child: Row(
-              children: [
-                const Gap(7),
-                Expanded(
-                  child: _QuizItemCard(index, filteredQuizItemList),
-                ),
-                _SavedButton(index: index, quiz: filteredQuizItemList),
-                const Gap(5),
-              ],
-            ),
-          );
+          return _QuizItemCard(
+              index: index, quizItemList: filteredQuizItemList);
         },
         childCount: isScrollLoading
             ? maxItemsToDisplay + 1
@@ -96,48 +77,121 @@ class _QuizResultView extends ConsumerWidget {
 }
 
 class _QuizItemCard extends ConsumerWidget {
-  const _QuizItemCard(this.index, this.quiz);
+  const _QuizItemCard({required this.quizItemList, required this.index});
 
+  final List<QuizItem> quizItemList;
   final int index;
-  final List<QuizItem> quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchKeywords = ref.watch(homeSearchScreenProvider).searchKeywords;
     final termToHighlight = searchKeywords.join('|');
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(
-          left: context.width * 0.02,
-          right: context.width * 0,
-          top: context.height * 0.02,
-          bottom: context.height * 0.02),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SubstringHighlight(
-            text: quiz[index].ans,
-            term: termToHighlight,
-            textStyle: context.texts.titleLarge!,
-            overflow: TextOverflow.clip,
-            textStyleHighlight: TextStyle(
-              fontWeight: FontWeight.bold,
+    final isPremium = ref.watch(userModelProvider).isPremium ||
+        !quizItemList[index].isPremium;
+    return GestureDetector(
+      onTap: () {
+        if (!isPremium) {
+          showDialog(
+              context: context,
+              builder: (_) => PrimaryDialog(
+                    title: '検索用語を閲覧しますか？',
+                    subWidget: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '支払いは一度きり。プレミアムに登録すると、\n全ての検索用語をを閲覧・保存できます。',
+                            style: TextStyle(color: Colors.black87),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    cancelText: 'キャンセル',
+                    doneText: 'プレミアム画面へ',
+                    onPressed: () {
+                      context.showScreen(
+                          const PremiumDetailScreenArguments().generateRoute());
+                    },
+                  ));
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: isPremium ? Colors.white : Colors.grey.shade200,
+          border: Border(
+            bottom: BorderSide(
               color: context.mainColor,
+              width: 1,
             ),
           ),
-          const Gap(5),
-          SubstringHighlight(
-            text: quiz[index].comment,
-            term: termToHighlight,
-            textStyle: context.texts.bodyMedium!,
-            overflow: TextOverflow.clip,
-            textStyleHighlight: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: context.mainColor,
-              decoration: TextDecoration.underline,
+        ),
+        child: Row(
+          children: [
+            const Gap(7),
+            Expanded(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(
+                    left: context.width * 0.02,
+                    right: context.width * 0,
+                    top: context.height * 0.02,
+                    bottom: context.height * 0.02),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SubstringHighlight(
+                      text: quizItemList[index].ans,
+                      term: termToHighlight,
+                      textStyle: context.texts.titleLarge!,
+                      overflow: TextOverflow.clip,
+                      textStyleHighlight: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: context.mainColor,
+                      ),
+                    ),
+                    const Gap(5),
+                    if (isPremium)
+                      SubstringHighlight(
+                        text: quizItemList[index].comment,
+                        term: termToHighlight,
+                        textStyle: context.texts.bodyMedium!,
+                        overflow: TextOverflow.clip,
+                        textStyleHighlight: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: context.mainColor,
+                          decoration: TextDecoration.underline,
+                        ),
+                      )
+                    else
+                      const Text(
+                        'プレミアムで閲覧可能',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black54,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+            if (isPremium)
+              _SavedButton(index: index, quizItemList: quizItemList)
+            else
+              Container(
+                alignment: Alignment.center,
+                width: context.width * 0.1,
+                height: context.height * 0.1,
+                child: const Icon(
+                  LineIcons.lock,
+                  color: Colors.grey,
+                  size: 30,
+                ),
+              ),
+            const Gap(5),
+          ],
+        ),
       ),
     );
   }
@@ -179,9 +233,9 @@ class _NotFindQuizItem extends HookConsumerWidget {
 }
 
 class _SavedButton extends HookConsumerWidget {
-  const _SavedButton({required this.quiz, required this.index});
+  const _SavedButton({required this.quizItemList, required this.index});
 
-  final List<QuizItem> quiz;
+  final List<QuizItem> quizItemList;
   final int index;
 
   @override
@@ -203,16 +257,19 @@ class _SavedButton extends HookConsumerWidget {
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
-                  color:
-                      quiz[index].isSaved ? context.mainColor : Colors.black26,
+                  color: quizItemList[index].isSaved
+                      ? context.mainColor
+                      : Colors.black26,
                 ),
               ),
               Icon(
-                quiz[index].isSaved
+                quizItemList[index].isSaved
                     ? Icons.bookmark_sharp
-                    : Icons.bookmark_border_sharp,
+                    : LineIcons.bookmark,
                 size: 30,
-                color: quiz[index].isSaved ? context.mainColor : Colors.black26,
+                color: quizItemList[index].isSaved
+                    ? context.mainColor
+                    : Colors.black26,
               ),
               Gap(context.height * 0.01),
               const Spacer(),

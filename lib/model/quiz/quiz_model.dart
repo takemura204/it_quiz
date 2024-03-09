@@ -71,6 +71,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
                 ans: matchedQuizItem.ans,
                 choices: matchedQuizItem.choices,
                 comment: matchedQuizItem.comment,
+                isPremium: matchedQuiz.isPremium,
               ));
             }
           }
@@ -88,6 +89,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
             categoryId: matchedQuiz.categoryId,
             category: matchedQuiz.category,
             quizItemList: updatedQuizItems,
+            isPremium: matchedQuiz.isPremium,
           ));
         }
       }

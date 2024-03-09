@@ -28,7 +28,8 @@ mixin _$QuizItem {
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
   bool get isJudge => throw _privateConstructorUsedError; //正解したか?
   bool get isSaved => throw _privateConstructorUsedError; //保存したか?
-  int get lapIndex => throw _privateConstructorUsedError;
+  int get lapIndex => throw _privateConstructorUsedError; //何周目か？
+  bool get isPremium => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +51,8 @@ abstract class $QuizItemCopyWith<$Res> {
       bool isWeak,
       bool isJudge,
       bool isSaved,
-      int lapIndex});
+      int lapIndex,
+      bool isPremium});
 }
 
 /// @nodoc
@@ -75,6 +77,7 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
     Object? isJudge = null,
     Object? isSaved = null,
     Object? lapIndex = null,
+    Object? isPremium = null,
   }) {
     return _then(_value.copyWith(
       quizId: null == quizId
@@ -113,6 +116,10 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -133,7 +140,8 @@ abstract class _$$_QuizItemCopyWith<$Res> implements $QuizItemCopyWith<$Res> {
       bool isWeak,
       bool isJudge,
       bool isSaved,
-      int lapIndex});
+      int lapIndex,
+      bool isPremium});
 }
 
 /// @nodoc
@@ -156,6 +164,7 @@ class __$$_QuizItemCopyWithImpl<$Res>
     Object? isJudge = null,
     Object? isSaved = null,
     Object? lapIndex = null,
+    Object? isPremium = null,
   }) {
     return _then(_$_QuizItem(
       quizId: null == quizId
@@ -194,6 +203,10 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -210,7 +223,8 @@ class _$_QuizItem extends _QuizItem {
       this.isWeak = false,
       this.isJudge = false,
       this.isSaved = false,
-      this.lapIndex = 0})
+      this.lapIndex = 0,
+      this.isPremium = true})
       : _choices = choices,
         super._();
 
@@ -255,10 +269,14 @@ class _$_QuizItem extends _QuizItem {
   @override
   @JsonKey()
   final int lapIndex;
+//何周目か？
+  @override
+  @JsonKey()
+  final bool isPremium;
 
   @override
   String toString() {
-    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, choices: $choices, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, isSaved: $isSaved, lapIndex: $lapIndex)';
+    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, choices: $choices, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, isSaved: $isSaved, lapIndex: $lapIndex, isPremium: $isPremium)';
   }
 
   @override
@@ -276,7 +294,9 @@ class _$_QuizItem extends _QuizItem {
             (identical(other.isJudge, isJudge) || other.isJudge == isJudge) &&
             (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
             (identical(other.lapIndex, lapIndex) ||
-                other.lapIndex == lapIndex));
+                other.lapIndex == lapIndex) &&
+            (identical(other.isPremium, isPremium) ||
+                other.isPremium == isPremium));
   }
 
   @JsonKey(ignore: true)
@@ -291,7 +311,8 @@ class _$_QuizItem extends _QuizItem {
       isWeak,
       isJudge,
       isSaved,
-      lapIndex);
+      lapIndex,
+      isPremium);
 
   @JsonKey(ignore: true)
   @override
@@ -317,7 +338,8 @@ abstract class _QuizItem extends QuizItem {
       final bool isWeak,
       final bool isJudge,
       final bool isSaved,
-      final int lapIndex}) = _$_QuizItem;
+      final int lapIndex,
+      final bool isPremium}) = _$_QuizItem;
   _QuizItem._() : super._();
 
   factory _QuizItem.fromJson(Map<String, dynamic> json) = _$_QuizItem.fromJson;
@@ -340,6 +362,8 @@ abstract class _QuizItem extends QuizItem {
   bool get isSaved;
   @override //保存したか?
   int get lapIndex;
+  @override //何周目か？
+  bool get isPremium;
   @override
   @JsonKey(ignore: true)
   _$$_QuizItemCopyWith<_$_QuizItem> get copyWith =>

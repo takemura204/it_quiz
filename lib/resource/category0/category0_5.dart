@@ -70,6 +70,6 @@ List<QuizItem> get category0_5 {
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + 41);
+    return quizItems[index].copyWith(quizId: index + 41, isPremium: false);
   });
 }

@@ -42,6 +42,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
   }
 
   Future _initFilterQuiz() async {
+    ///プレミアム枠の単語をロックできない。
     final quizItemList = ref
         .read(quizModelProvider)
         .quizList
@@ -106,6 +107,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
       isSaved: !filteredQuizItemList[index].isSaved,
       choices: filteredQuizItemList[index].choices,
       lapIndex: filteredQuizItemList[index].lapIndex,
+      isPremium: filteredQuizItemList[index].isPremium,
     );
     final updateQuizItem = filteredQuizItemList[index];
 
@@ -202,6 +204,14 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
 
     // 1. 全角スペースを半角スペースに変換
     processed = processed.replaceAll('　', ' ');
+
+    // // 2. 大文字を小文字に変換
+    // final String toLowercase = processed.toLowerCase();
+    // normalizedTexts.add(toLowercase);
+    //
+    // // 3. 小文字を大文字に変換
+    // final String toUppercase = processed.toUpperCase();
+    // normalizedTexts.add(toUppercase);
 
     // 4. カタカナをひらがなに変換
     final String toHiragana =

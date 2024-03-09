@@ -62,11 +62,11 @@ List<QuizItem> get category0_2 {
       ans: 'ISO 9000',
       choices: ["ISO 9000", "ISO 14000", "ISO 26000", "ISO/IEC 27000"],
       comment:
-      "ISO 9000シリーズは、組織が顧客満足を達成し、製品やサービスの品質を継続的に向上させるための品質マネジメントシステムの要求事項を定めた国際標準。",
+          "ISO 9000シリーズは、組織が顧客満足を達成し、製品やサービスの品質を継続的に向上させるための品質マネジメントシステムの要求事項を定めた国際標準。",
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + 11);
+    return quizItems[index].copyWith(quizId: index + 11, isPremium: false);
   });
 }

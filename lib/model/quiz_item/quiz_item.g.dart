@@ -17,6 +17,7 @@ _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
       isJudge: json['isJudge'] as bool? ?? false,
       isSaved: json['isSaved'] as bool? ?? false,
       lapIndex: json['lapIndex'] as int? ?? 0,
+      isPremium: json['isPremium'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
@@ -30,4 +31,5 @@ Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
       'isJudge': instance.isJudge,
       'isSaved': instance.isSaved,
       'lapIndex': instance.lapIndex,
+      'isPremium': instance.isPremium,
     };
