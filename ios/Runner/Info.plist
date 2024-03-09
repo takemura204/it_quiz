@@ -33,7 +33,7 @@
     <key>NSUserNotificationUsageDescription</key>
     <string>このアプリでは通知を送るために許可が必要です</string>
 	<key>CFBundleDisplayName</key>
-	<string>Kentei Quiz</string>
+	<string>IT用語クイズ</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

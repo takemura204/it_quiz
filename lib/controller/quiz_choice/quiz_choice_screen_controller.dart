@@ -8,6 +8,7 @@ import 'package:state_notifier/state_notifier.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../model/user/user.model.dart';
 import '../admob/admob_controller.dart';
 
 final quizChoiceScreenProvider =
@@ -142,13 +143,16 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///次の問題
   void _nextQuiz() {
+    final isPremium = ref.read(userModelProvider).isPremium;
     final quizIndex = state.quizIndex;
     //問題が終わった時
     if (quizIndex == state.quizItemList.length - 1) {
       _stopwatch.stop();
       state = state.copyWith(
           duration: _stopwatch.elapsed, quizIndex: 0, isResultScreen: true);
-      ref.read(adMobProvider.notifier).showAdInterstitial();
+      if (!isPremium) {
+        ref.read(adMobProvider.notifier).showAdInterstitial();
+      }
       _updateQuiz();
       updateHistoryQuiz();
     }

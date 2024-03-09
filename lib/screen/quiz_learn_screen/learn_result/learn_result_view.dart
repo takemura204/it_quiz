@@ -69,48 +69,51 @@ class _NextActionCard extends HookConsumerWidget {
         alignment: Alignment.center,
         height: 100,
         width: context.width * 1,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DefaultButton(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DefaultButton(
+                  width: context.width * 0.45,
+                  height: 55,
+                  text: "再挑戦",
+                  onPressed: () {
+                    ref
+                        .read(quizLearnScreenProvider.notifier)
+                        .updateHistoryQuiz();
+                    Navigator.of(context).pop();
+                    context.showScreen(QuizLearnScreenArguments(
+                      quiz: quiz,
+                    ).generateRoute());
+                  }),
+              const Gap(10),
+              PrimaryButton(
                 width: context.width * 0.45,
                 height: 55,
-                text: "再挑戦",
-                onPressed: () {
-                  ref
-                      .read(quizLearnScreenProvider.notifier)
-                      .updateHistoryQuiz();
-                  Navigator.of(context).pop();
-                  context.showScreen(QuizLearnScreenArguments(
-                    quiz: quiz,
-                  ).generateRoute());
-                }),
-            const Gap(10),
-            PrimaryButton(
-              width: context.width * 0.45,
-              height: 55,
-              text: "クイズに挑戦",
-              onPressed: (quizIndex >= lastIndex)
-                  ? null
-                  : () {
-                      ref
-                          .read(quizLearnScreenProvider.notifier)
-                          .updateHistoryQuiz();
-                      Navigator.of(context).pop();
-                      context.showScreen(
-                        QuizChoiceScreenArguments(
-                          quiz: quiz,
-                        ).generateRoute(),
-                      );
-
-                      Future.delayed(const Duration(milliseconds: 600), () {
+                text: "クイズに挑戦",
+                onPressed: (quizIndex >= lastIndex)
+                    ? null
+                    : () {
                         ref
-                            .read(quizModelProvider.notifier)
-                            .setStudyType(StudyType.choice);
-                      });
-                    },
-            ),
-          ],
+                            .read(quizLearnScreenProvider.notifier)
+                            .updateHistoryQuiz();
+                        Navigator.of(context).pop();
+                        context.showScreen(
+                          QuizChoiceScreenArguments(
+                            quiz: quiz,
+                          ).generateRoute(),
+                        );
+
+                        Future.delayed(const Duration(milliseconds: 600), () {
+                          ref
+                              .read(quizModelProvider.notifier)
+                              .setStudyType(StudyType.choice);
+                        });
+                      },
+              ),
+            ],
+          ),
         ),
       ),
     );

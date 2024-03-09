@@ -134,13 +134,13 @@ class _SelectAnswer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
     return Container(
-      width: context.width * 1.0,
-      height: context.height * 0.2,
+      width: context.width,
       alignment: Alignment.center,
-      child: const Column(
+      child: Column(
         children: [
-          Row(
+          const Row(
             children: [
               ///選択肢1
               _SelectChoice(0),
@@ -149,7 +149,7 @@ class _SelectAnswer extends ConsumerWidget {
               _SelectChoice(1),
             ],
           ),
-          Row(
+          const Row(
             children: [
               ///選択肢3
               _SelectChoice(2),
@@ -158,6 +158,7 @@ class _SelectAnswer extends ConsumerWidget {
               _SelectChoice(3),
             ],
           ),
+          if (isPremium) const _SkipChoice(),
         ],
       ),
     );
@@ -211,6 +212,61 @@ class _SelectChoice extends ConsumerWidget {
                         : FontWeight.normal,
                     fontSize: 18,
                     color: (choices[index] == quizItemList[quizIndex].ans)
+                        ? Colors.green.withOpacity(0.7)
+                        : Colors.red.withOpacity(0.7),
+                  )
+                : const TextStyle(fontSize: 18),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+///わかならい
+class _SkipChoice extends ConsumerWidget {
+  const _SkipChoice();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
+    final isAnsView = ref.watch(quizChoiceScreenProvider).isAnsView;
+    final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
+    const choices = 'わからない';
+    final selectAns = ref.watch(quizChoiceScreenProvider).selectAns;
+    final isTap = selectAns == choices;
+
+    return GestureDetector(
+      onTap: isAnsView
+          ? null
+          : () =>
+              ref.read(quizChoiceScreenProvider.notifier).tapAnsButton(choices),
+      child: Card(
+        elevation: 1,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.secondColor,
+            width: 1,
+          ),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(width: 0.5, color: Colors.black45),
+            color: isTap ? context.backgroundColor : Colors.white,
+          ),
+          width: context.width,
+          height: context.height * 0.09,
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+          child: Text(
+            choices,
+            style: isAnsView
+                ? TextStyle(
+                    fontWeight: (choices == quizItemList[quizIndex].ans)
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontSize: 18,
+                    color: (choices == quizItemList[quizIndex].ans)
                         ? Colors.green.withOpacity(0.7)
                         : Colors.red.withOpacity(0.7),
                   )

@@ -6,6 +6,8 @@ import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_cont
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../model/lang/initial_resource.dart';
+import '../../model/user/user.model.dart';
+import '../../view/admob/admob_banner.dart';
 import '../dashboard_daily_screen/dashboard_daily_screen.dart';
 import '../dashboard_period_screen/dashboard_period_screen.dart';
 import '../dashboard_progress_screen/dashboard_group_screen.dart';
@@ -36,22 +38,29 @@ class _Body extends ConsumerWidget {
         ),
       );
     }
-    return const SingleChildScrollView(
-      child: Column(
-        children: [
-          Gap(5),
+    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        const SingleChildScrollView(
+          child: Column(
+            children: [
+              Gap(5),
 
-          ///今日の学習
-          DailyDashboard(),
+              ///今日の学習
+              DailyDashboard(),
 
-          ///学習状況
-          PeriodDashboard(),
+              ///学習状況
+              PeriodDashboard(),
 
-          ///進捗状況
-          GroupProgressDashboard(),
-          Gap(5),
-        ],
-      ),
+              ///進捗状況
+              GroupProgressDashboard(),
+              Gap(5),
+            ],
+          ),
+        ),
+        if (!isPremium) AdBanner(),
+      ],
     );
   }
 }

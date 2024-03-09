@@ -19,7 +19,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="kentei_quiz">
+        android:label="IT用語クイズ">
 
         <meta-data
             android:name="com.google.android.gms.ads.ca-app-pub-5053471763020307~7242186229"

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/model/user/user.model.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
@@ -45,6 +46,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
 
   /// CategoryList取得
   Future loadCategoryList() async {
+    final isPremium = ref.read(userModelProvider).isPremium;
     // quizListを取得
     final List<Quiz> quizList = [...ref.read(quizModelProvider).quizList];
     // quizListをcategoryIdに基づいてインプレースでソート
@@ -53,6 +55,12 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     // ソートされたリストからカテゴリー名を取り出して重複を削除
     final categoryList =
         quizList.map((quizItem) => quizItem.category).toSet().toList();
+
+    final selectedTestCategory = quizList
+        .where((x) => !x.isPremium)
+        .map((quizItem) => quizItem.category)
+        .toSet()
+        .toList();
 
     final correctRatios = categoryList.map((category) {
       final correctNum = ref
@@ -75,7 +83,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
 
     state = state.copyWith(
         categoryList: categoryList,
-        selectedTestCategory: categoryList,
+        selectedTestCategory: isPremium ? categoryList : selectedTestCategory,
         correctRatios: correctRatios);
   }
 

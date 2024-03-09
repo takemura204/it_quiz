@@ -3,11 +3,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
+import '../../model/user/user.model.dart';
 import '../../screen/screen_argument.dart';
 import '../button/disabled_button.dart';
 import '../button/primary_button.dart';
@@ -168,10 +170,17 @@ class _SelectRange extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
+    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium)) ||
+        text == categoryList.first;
     return GestureDetector(
-      onTap: () {
-        ref.read(homeQuizScreenProvider.notifier).selectTestCategory(text);
-      },
+      onTap: isPremium
+          ? () {
+              ref
+                  .read(homeQuizScreenProvider.notifier)
+                  .selectTestCategory(text);
+            }
+          : null,
       child: Container(
         width: context.width * 0.8,
         height: 45,
@@ -180,10 +189,10 @@ class _SelectRange extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
           border: Border.all(
-            width: isSelected ? 1 : 0.5,
-            color: isSelected ? context.mainColor : Colors.black45,
+            width: isPremium && isSelected ? 1 : 0.5,
+            color: isPremium && isSelected ? context.mainColor : Colors.black45,
           ),
-          color: isSelected
+          color: isPremium && isSelected
               ? context.backgroundColor.withOpacity(0.2)
               : Colors.grey.shade400.withOpacity(0.1),
         ),
@@ -191,16 +200,22 @@ class _SelectRange extends ConsumerWidget {
         child: Row(
           children: [
             Icon(
-              isSelected ? Icons.task_alt : Icons.circle_outlined,
-              color: isSelected ? context.mainColor : Colors.grey,
+              isPremium
+                  ? isSelected
+                      ? Icons.task_alt
+                      : Icons.circle_outlined
+                  : LineIcons.lock,
+              color: isPremium && isSelected ? context.mainColor : Colors.grey,
             ),
             const Gap(5),
             Text(
               text,
               style: TextStyle(
                 fontSize: 16,
-                color: isSelected ? context.mainColor : Colors.grey,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                color:
+                    isPremium && isSelected ? context.mainColor : Colors.grey,
+                fontWeight:
+                    isPremium && isSelected ? FontWeight.bold : FontWeight.w500,
               ),
             ),
           ],

@@ -12,10 +12,12 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
+import '../../model/user/user.model.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/clear_button.dart';
+import '../../view/button_icon/contact_button.dart';
 import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/card/quiz_item_card.dart';
 import '../../view/card/result_good_card.dart';
@@ -116,6 +118,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                     );
                   });
             }),
+            actions: const [
+              ContactIconButton(),
+            ],
           );
   }
 

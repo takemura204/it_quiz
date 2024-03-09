@@ -76,61 +76,64 @@ class _NextActionCard extends HookConsumerWidget {
         alignment: Alignment.center,
         height: 100,
         width: context.width * 1,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            DefaultButton(
-                width: context.width * 0.45,
-                height: 55,
-                text: "再挑戦",
-                onPressed: (quizType == QuizType.weak &&
-                        weakQuiz!.quizItemList.isEmpty)
-                    ? null
-                    : () {
-                        Navigator.of(context).pop();
-                        context.showScreen(QuizChoiceScreenArguments(
-                          quiz: quiz,
-                        ).generateRoute());
-                      }),
-            const Gap(20),
-            if (quizType == QuizType.weak || quizType == QuizType.test) ...[
-              PrimaryButton(
-                width: context.width * 0.45,
-                height: 55,
-                text: "完了",
-                onPressed: (quizIndex >= lastIndex)
-                    ? null
-                    : () {
-                        Navigator.of(context).pop();
-                      },
-              ),
-            ] else
-              PrimaryButton(
-                width: context.width * 0.45,
-                height: 55,
-                text: "次のクイズに挑戦",
-                onPressed: (quizIndex >= lastIndex)
-                    ? null
-                    : () {
-                        Navigator.of(context).pop();
-                        context.showScreen(
-                          QuizChoiceScreenArguments(
-                            quiz: quizList[quizIndex + 1],
-                          ).generateRoute(),
-                        );
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .tapQuizIndex(quizIndex + 1);
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .tapQuizCard(quizList[quizIndex + 1].id);
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .setStudyType(StudyType.choice);
-                      },
-              ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DefaultButton(
+                  width: context.width * 0.45,
+                  height: 55,
+                  text: "再挑戦",
+                  onPressed: (quizType == QuizType.weak &&
+                          weakQuiz!.quizItemList.isEmpty)
+                      ? null
+                      : () {
+                          Navigator.of(context).pop();
+                          context.showScreen(QuizChoiceScreenArguments(
+                            quiz: quiz,
+                          ).generateRoute());
+                        }),
+              const Gap(20),
+              if (quizType == QuizType.weak || quizType == QuizType.test) ...[
+                PrimaryButton(
+                  width: context.width * 0.45,
+                  height: 55,
+                  text: "完了",
+                  onPressed: (quizIndex >= lastIndex)
+                      ? null
+                      : () {
+                          Navigator.of(context).pop();
+                        },
+                ),
+              ] else
+                PrimaryButton(
+                  width: context.width * 0.45,
+                  height: 55,
+                  text: "次のクイズに挑戦",
+                  onPressed: (quizIndex >= lastIndex)
+                      ? null
+                      : () {
+                          Navigator.of(context).pop();
+                          context.showScreen(
+                            QuizChoiceScreenArguments(
+                              quiz: quizList[quizIndex + 1],
+                            ).generateRoute(),
+                          );
+                          ref
+                              .read(quizModelProvider.notifier)
+                              .tapQuizIndex(quizIndex + 1);
+                          ref
+                              .read(quizModelProvider.notifier)
+                              .tapQuizCard(quizList[quizIndex + 1].id);
+                          ref
+                              .read(quizModelProvider.notifier)
+                              .setStudyType(StudyType.choice);
+                        },
+                ),
+            ],
+          ),
         ),
       ),
     );

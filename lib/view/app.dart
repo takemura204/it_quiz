@@ -1,6 +1,5 @@
 import 'package:device_preview_screenshot/device_preview_screenshot.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,16 +14,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //デバイスのレイアウトを確認
-    return DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const ProviderScope(
-        child: _App(),
-      ),
-      tools: const [
-        ...DevicePreview.defaultTools,
-        DevicePreviewScreenshot(),
-      ],
+    ///開発環境
+    // return DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) => const ProviderScope(
+    //     child: _App(),
+    //   ),
+    //   tools: const [
+    //     ...DevicePreview.defaultTools,
+    //     DevicePreviewScreenshot(),
+    //   ],
+    // );
+    ///リリース環境
+    return const ProviderScope(
+      child: _App(),
     );
   }
 }

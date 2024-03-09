@@ -14,6 +14,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../view/admob/admob_banner.dart';
 import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
@@ -41,24 +42,31 @@ class HomeSearchScreen extends ConsumerWidget {
     final isScrollLoading = state.isScrollLoading;
     final textEditingController = controller.textEditingController;
     final scrollController = controller.scrollController;
+    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
 
     return Scaffold(
       appBar: _AppBar(isSavedFilter: isSavedFilter),
-      body: CustomScrollView(
-        controller: scrollController,
-        slivers: [
-          SliverToBoxAdapter(
-            child: _SearchBar(
-              textEditingController: textEditingController,
-              isNotTextEmpty: isNotTextEmpty,
-            ),
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SliverToBoxAdapter(
+                child: _SearchBar(
+                  textEditingController: textEditingController,
+                  isNotTextEmpty: isNotTextEmpty,
+                ),
+              ),
+              // SliverToBoxAdapter(child: Text('${filteredQuizItemList.length}')),
+              _QuizResultView(
+                filteredQuizItemList: filteredQuizItemList,
+                isScrollLoading: isScrollLoading,
+                maxItemsToDisplay: maxItemsToDisplay,
+              ),
+            ],
           ),
-          // SliverToBoxAdapter(child: Text('${filteredQuizItemList.length}')),
-          _QuizResultView(
-            filteredQuizItemList: filteredQuizItemList,
-            isScrollLoading: isScrollLoading,
-            maxItemsToDisplay: maxItemsToDisplay,
-          ),
+          if (!isPremium) AdBanner(),
         ],
       ),
     );

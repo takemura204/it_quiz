@@ -23,7 +23,7 @@ class DailyDashboard extends ConsumerWidget {
     final userModel = ref.watch(userModelProvider);
     final dailyGoal = userModel.dailyGoal;
     final dailyRate =
-        (dailyQuizCount / dailyGoal * 100).clamp(0, 100).toStringAsFixed(1);
+        (dailyQuizCount / dailyGoal * 100).clamp(0, 100).toStringAsFixed(0);
 
     return Card(
       elevation: 1,
@@ -101,15 +101,27 @@ class DailyDashboard extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
+                          const Text(
+                            "",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.grey,
+                              height: 1.0,
+                            ),
+                            textAlign: TextAlign.end,
+                          ),
+                          const Gap(3),
                           Text(
                             "$dailyRate",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 28,
+                              fontSize: 30,
                               color: Colors.black54,
                             ),
                             textAlign: TextAlign.end,
                           ),
+                          const Gap(3),
                           const Text(
                             "%",
                             style: TextStyle(

@@ -8,6 +8,7 @@ import 'package:state_notifier/state_notifier.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../model/user/user.model.dart';
 import '../admob/admob_controller.dart';
 
 final quizLearnScreenProvider =
@@ -141,8 +142,10 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     }
     //問題が終わり,「知ってる」リストに全て含まれている場合
     else if (state.knowQuizItemList.length == quiz.quizItemList.length) {
+      final isPremium = ref.read(userModelProvider).isPremium;
       quizItemList.clear(); // クイズアイテムリストをクリア
       // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
+
       quizItemList.addAll([...knowQuizList, ...unKnowQuizList]
         ..sort((a, b) => a.quizId.compareTo(b.quizId)));
       _stopwatch.stop();
@@ -153,7 +156,10 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
         isResultScreen: true,
         quizItemList: quizItemList,
       );
-      ref.read(adMobProvider.notifier).showAdInterstitial();
+
+      if (!isPremium) {
+        ref.read(adMobProvider.notifier).showAdInterstitial();
+      }
       _updateQuiz();
     }
 
