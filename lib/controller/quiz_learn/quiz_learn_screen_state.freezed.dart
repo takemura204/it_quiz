@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'quiz_learn_screen_state.dart';
 
@@ -12,32 +12,7 @@ part of 'quiz_learn_screen_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$QuizLearnScreenStateTearOff {
-  const _$QuizLearnScreenStateTearOff();
-
-  _Create call(
-      {bool isAnsView = false,
-      bool isResultScreen = false,
-      int quizIndex = 0,
-      int lapIndex = 0,
-      List<LearnQuiz> knowRememberQuestions = const [],
-      List<LearnQuiz> unKnowRememberQuestions = const []}) {
-    return _Create(
-      isAnsView: isAnsView,
-      isResultScreen: isResultScreen,
-      quizIndex: quizIndex,
-      lapIndex: lapIndex,
-      knowRememberQuestions: knowRememberQuestions,
-      unKnowRememberQuestions: unKnowRememberQuestions,
-    );
-  }
-}
-
-/// @nodoc
-const $QuizLearnScreenState = _$QuizLearnScreenStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$QuizLearnScreenState {
@@ -45,10 +20,12 @@ mixin _$QuizLearnScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
-  List<LearnQuiz> get knowRememberQuestions =>
-      throw _privateConstructorUsedError;
-  List<LearnQuiz> get unKnowRememberQuestions =>
-      throw _privateConstructorUsedError;
+  List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
+  List<QuizItem> get knowQuizItemList => throw _privateConstructorUsedError;
+  List<QuizItem> get unKnowQuizItemList => throw _privateConstructorUsedError;
+  Duration get duration => throw _privateConstructorUsedError; // 所要時間
+  StudyType get studyType => throw _privateConstructorUsedError; //クイズタイプ
+  AppinioSwiperDirection? get direction => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuizLearnScreenStateCopyWith<QuizLearnScreenState> get copyWith =>
@@ -59,122 +36,173 @@ mixin _$QuizLearnScreenState {
 abstract class $QuizLearnScreenStateCopyWith<$Res> {
   factory $QuizLearnScreenStateCopyWith(QuizLearnScreenState value,
           $Res Function(QuizLearnScreenState) then) =
-      _$QuizLearnScreenStateCopyWithImpl<$Res>;
+      _$QuizLearnScreenStateCopyWithImpl<$Res, QuizLearnScreenState>;
+  @useResult
   $Res call(
       {bool isAnsView,
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<LearnQuiz> knowRememberQuestions,
-      List<LearnQuiz> unKnowRememberQuestions});
+      List<QuizItem> quizItemList,
+      List<QuizItem> knowQuizItemList,
+      List<QuizItem> unKnowQuizItemList,
+      Duration duration,
+      StudyType studyType,
+      AppinioSwiperDirection? direction});
 }
 
 /// @nodoc
-class _$QuizLearnScreenStateCopyWithImpl<$Res>
+class _$QuizLearnScreenStateCopyWithImpl<$Res,
+        $Val extends QuizLearnScreenState>
     implements $QuizLearnScreenStateCopyWith<$Res> {
   _$QuizLearnScreenStateCopyWithImpl(this._value, this._then);
 
-  final QuizLearnScreenState _value;
   // ignore: unused_field
-  final $Res Function(QuizLearnScreenState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAnsView = freezed,
-    Object? isResultScreen = freezed,
-    Object? quizIndex = freezed,
-    Object? lapIndex = freezed,
-    Object? knowRememberQuestions = freezed,
-    Object? unKnowRememberQuestions = freezed,
+    Object? isAnsView = null,
+    Object? isResultScreen = null,
+    Object? quizIndex = null,
+    Object? lapIndex = null,
+    Object? quizItemList = null,
+    Object? knowQuizItemList = null,
+    Object? unKnowQuizItemList = null,
+    Object? duration = null,
+    Object? studyType = null,
+    Object? direction = freezed,
   }) {
     return _then(_value.copyWith(
-      isAnsView: isAnsView == freezed
+      isAnsView: null == isAnsView
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
               as bool,
-      isResultScreen: isResultScreen == freezed
+      isResultScreen: null == isResultScreen
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
-      quizIndex: quizIndex == freezed
+      quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      lapIndex: lapIndex == freezed
+      lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      knowRememberQuestions: knowRememberQuestions == freezed
-          ? _value.knowRememberQuestions
-          : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
-      unKnowRememberQuestions: unKnowRememberQuestions == freezed
-          ? _value.unKnowRememberQuestions
-          : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
-    ));
+      quizItemList: null == quizItemList
+          ? _value.quizItemList
+          : quizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
+      knowQuizItemList: null == knowQuizItemList
+          ? _value.knowQuizItemList
+          : knowQuizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
+      unKnowQuizItemList: null == unKnowQuizItemList
+          ? _value.unKnowQuizItemList
+          : unKnowQuizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
+      direction: freezed == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as AppinioSwiperDirection?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CreateCopyWith<$Res>
+abstract class _$$_CreateCopyWith<$Res>
     implements $QuizLearnScreenStateCopyWith<$Res> {
-  factory _$CreateCopyWith(_Create value, $Res Function(_Create) then) =
-      __$CreateCopyWithImpl<$Res>;
+  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
+      __$$_CreateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isAnsView,
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
-      List<LearnQuiz> knowRememberQuestions,
-      List<LearnQuiz> unKnowRememberQuestions});
+      List<QuizItem> quizItemList,
+      List<QuizItem> knowQuizItemList,
+      List<QuizItem> unKnowQuizItemList,
+      Duration duration,
+      StudyType studyType,
+      AppinioSwiperDirection? direction});
 }
 
 /// @nodoc
-class __$CreateCopyWithImpl<$Res>
-    extends _$QuizLearnScreenStateCopyWithImpl<$Res>
-    implements _$CreateCopyWith<$Res> {
-  __$CreateCopyWithImpl(_Create _value, $Res Function(_Create) _then)
-      : super(_value, (v) => _then(v as _Create));
+class __$$_CreateCopyWithImpl<$Res>
+    extends _$QuizLearnScreenStateCopyWithImpl<$Res, _$_Create>
+    implements _$$_CreateCopyWith<$Res> {
+  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+      : super(_value, _then);
 
-  @override
-  _Create get _value => super._value as _Create;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAnsView = freezed,
-    Object? isResultScreen = freezed,
-    Object? quizIndex = freezed,
-    Object? lapIndex = freezed,
-    Object? knowRememberQuestions = freezed,
-    Object? unKnowRememberQuestions = freezed,
+    Object? isAnsView = null,
+    Object? isResultScreen = null,
+    Object? quizIndex = null,
+    Object? lapIndex = null,
+    Object? quizItemList = null,
+    Object? knowQuizItemList = null,
+    Object? unKnowQuizItemList = null,
+    Object? duration = null,
+    Object? studyType = null,
+    Object? direction = freezed,
   }) {
-    return _then(_Create(
-      isAnsView: isAnsView == freezed
+    return _then(_$_Create(
+      isAnsView: null == isAnsView
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
               as bool,
-      isResultScreen: isResultScreen == freezed
+      isResultScreen: null == isResultScreen
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
-      quizIndex: quizIndex == freezed
+      quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      lapIndex: lapIndex == freezed
+      lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      knowRememberQuestions: knowRememberQuestions == freezed
-          ? _value.knowRememberQuestions
-          : knowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
-      unKnowRememberQuestions: unKnowRememberQuestions == freezed
-          ? _value.unKnowRememberQuestions
-          : unKnowRememberQuestions // ignore: cast_nullable_to_non_nullable
-              as List<LearnQuiz>,
+      quizItemList: null == quizItemList
+          ? _value._quizItemList
+          : quizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
+      knowQuizItemList: null == knowQuizItemList
+          ? _value._knowQuizItemList
+          : knowQuizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
+      unKnowQuizItemList: null == unKnowQuizItemList
+          ? _value._unKnowQuizItemList
+          : unKnowQuizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      studyType: null == studyType
+          ? _value.studyType
+          : studyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
+      direction: freezed == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as AppinioSwiperDirection?,
     ));
   }
 }
@@ -187,74 +215,139 @@ class _$_Create extends _Create {
       this.isResultScreen = false,
       this.quizIndex = 0,
       this.lapIndex = 0,
-      this.knowRememberQuestions = const [],
-      this.unKnowRememberQuestions = const []})
-      : super._();
+      final List<QuizItem> quizItemList = const [],
+      final List<QuizItem> knowQuizItemList = const [],
+      final List<QuizItem> unKnowQuizItemList = const [],
+      this.duration = Duration.zero,
+      this.studyType = StudyType.learn,
+      this.direction})
+      : _quizItemList = quizItemList,
+        _knowQuizItemList = knowQuizItemList,
+        _unKnowQuizItemList = unKnowQuizItemList,
+        super._();
 
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isAnsView;
-  @JsonKey()
-  @override //正解画面切り替え
-  final bool isResultScreen;
-  @JsonKey()
-  @override //結果画面切り替え
-  final int quizIndex;
-  @JsonKey()
-  @override //問題番号
-  final int lapIndex;
-  @JsonKey()
-  @override //何周目
-  final List<LearnQuiz> knowRememberQuestions;
-  @JsonKey()
+//正解画面切り替え
   @override
-  final List<LearnQuiz> unKnowRememberQuestions;
+  @JsonKey()
+  final bool isResultScreen;
+//結果画面切り替え
+  @override
+  @JsonKey()
+  final int quizIndex;
+//問題番号
+  @override
+  @JsonKey()
+  final int lapIndex;
+//何周目
+  final List<QuizItem> _quizItemList;
+//何周目
+  @override
+  @JsonKey()
+  List<QuizItem> get quizItemList {
+    if (_quizItemList is EqualUnmodifiableListView) return _quizItemList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quizItemList);
+  }
+
+  final List<QuizItem> _knowQuizItemList;
+  @override
+  @JsonKey()
+  List<QuizItem> get knowQuizItemList {
+    if (_knowQuizItemList is EqualUnmodifiableListView)
+      return _knowQuizItemList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_knowQuizItemList);
+  }
+
+  final List<QuizItem> _unKnowQuizItemList;
+  @override
+  @JsonKey()
+  List<QuizItem> get unKnowQuizItemList {
+    if (_unKnowQuizItemList is EqualUnmodifiableListView)
+      return _unKnowQuizItemList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_unKnowQuizItemList);
+  }
+
+  @override
+  @JsonKey()
+  final Duration duration;
+// 所要時間
+  @override
+  @JsonKey()
+  final StudyType studyType;
+//クイズタイプ
+  @override
+  final AppinioSwiperDirection? direction;
 
   @override
   String toString() {
-    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, knowRememberQuestions: $knowRememberQuestions, unKnowRememberQuestions: $unKnowRememberQuestions)';
+    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, duration: $duration, studyType: $studyType, direction: $direction)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Create &&
-            const DeepCollectionEquality().equals(other.isAnsView, isAnsView) &&
+            other is _$_Create &&
+            (identical(other.isAnsView, isAnsView) ||
+                other.isAnsView == isAnsView) &&
+            (identical(other.isResultScreen, isResultScreen) ||
+                other.isResultScreen == isResultScreen) &&
+            (identical(other.quizIndex, quizIndex) ||
+                other.quizIndex == quizIndex) &&
+            (identical(other.lapIndex, lapIndex) ||
+                other.lapIndex == lapIndex) &&
             const DeepCollectionEquality()
-                .equals(other.isResultScreen, isResultScreen) &&
-            const DeepCollectionEquality().equals(other.quizIndex, quizIndex) &&
-            const DeepCollectionEquality().equals(other.lapIndex, lapIndex) &&
+                .equals(other._quizItemList, _quizItemList) &&
             const DeepCollectionEquality()
-                .equals(other.knowRememberQuestions, knowRememberQuestions) &&
-            const DeepCollectionEquality().equals(
-                other.unKnowRememberQuestions, unKnowRememberQuestions));
+                .equals(other._knowQuizItemList, _knowQuizItemList) &&
+            const DeepCollectionEquality()
+                .equals(other._unKnowQuizItemList, _unKnowQuizItemList) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.studyType, studyType) ||
+                other.studyType == studyType) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isAnsView),
-      const DeepCollectionEquality().hash(isResultScreen),
-      const DeepCollectionEquality().hash(quizIndex),
-      const DeepCollectionEquality().hash(lapIndex),
-      const DeepCollectionEquality().hash(knowRememberQuestions),
-      const DeepCollectionEquality().hash(unKnowRememberQuestions));
+      isAnsView,
+      isResultScreen,
+      quizIndex,
+      lapIndex,
+      const DeepCollectionEquality().hash(_quizItemList),
+      const DeepCollectionEquality().hash(_knowQuizItemList),
+      const DeepCollectionEquality().hash(_unKnowQuizItemList),
+      duration,
+      studyType,
+      direction);
 
   @JsonKey(ignore: true)
   @override
-  _$CreateCopyWith<_Create> get copyWith =>
-      __$CreateCopyWithImpl<_Create>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
 }
 
 abstract class _Create extends QuizLearnScreenState {
   const factory _Create(
-      {bool isAnsView,
-      bool isResultScreen,
-      int quizIndex,
-      int lapIndex,
-      List<LearnQuiz> knowRememberQuestions,
-      List<LearnQuiz> unKnowRememberQuestions}) = _$_Create;
+      {final bool isAnsView,
+      final bool isResultScreen,
+      final int quizIndex,
+      final int lapIndex,
+      final List<QuizItem> quizItemList,
+      final List<QuizItem> knowQuizItemList,
+      final List<QuizItem> unKnowQuizItemList,
+      final Duration duration,
+      final StudyType studyType,
+      final AppinioSwiperDirection? direction}) = _$_Create;
   const _Create._() : super._();
 
   @override
@@ -266,10 +359,19 @@ abstract class _Create extends QuizLearnScreenState {
   @override //問題番号
   int get lapIndex;
   @override //何周目
-  List<LearnQuiz> get knowRememberQuestions;
+  List<QuizItem> get quizItemList;
   @override
-  List<LearnQuiz> get unKnowRememberQuestions;
+  List<QuizItem> get knowQuizItemList;
+  @override
+  List<QuizItem> get unKnowQuizItemList;
+  @override
+  Duration get duration;
+  @override // 所要時間
+  StudyType get studyType;
+  @override //クイズタイプ
+  AppinioSwiperDirection? get direction;
   @override
   @JsonKey(ignore: true)
-  _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
+  _$$_CreateCopyWith<_$_Create> get copyWith =>
+      throw _privateConstructorUsedError;
 }

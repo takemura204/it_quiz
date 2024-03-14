@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../resource/controller/screen_argument_resource.dart';
+import '../../model/screen_argument_resource.dart';
 import 'app_state.dart';
 
 /// アプリ全体に関するもろもろを詰め込む
@@ -15,11 +15,6 @@ class AppController extends StateNotifier<AppState> with LocatorMixin {
   AppController({required this.ref}) : super(AppState());
 
   final Ref ref;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   Future<T?> showScreen<T>(IScreenArguments<T> arguments) async {
     final navigator = state.navigator;

@@ -1,59 +1,232 @@
+import 'package:appinio_swiper/controllers.dart';
+import 'package:appinio_swiper/enums.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../entity/quiz_item.dart';
-import '../../screen/screen_argument.dart';
-import '../home_review/home_review_screen_controller.dart';
+import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_model.dart';
+import '../../model/quiz_item/quiz_item.dart';
+import '../../model/user/user.model.dart';
+import '../admob/admob_controller.dart';
 
-final quizLearnScreenControllerProvider =
+final quizLearnScreenProvider =
     StateNotifierProvider<QuizLearnScreenController, QuizLearnScreenState>(
   (ref) => throw UnimplementedError(),
 );
 
 class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
-    with LocatorMixin {
-  QuizLearnScreenController({required this.ref, required this.arguments})
+    with LocatorMixin, WidgetsBindingObserver {
+  QuizLearnScreenController({required this.ref, required this.quiz})
       : super(const QuizLearnScreenState()) {
     initState();
   }
 
   final Ref ref;
-  QuizLearnScreenArguments arguments;
+  Quiz quiz;
+  final Stopwatch _stopwatch = Stopwatch();
+  late AppinioSwiperController swiperController;
+
+  @override
+  Future initState() async {
+    swiperController = AppinioSwiperController();
+    await _startStopwatch(); //学習時間計測
+    _loadQuizList();
+    super.initState();
+  }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    swiperController.dispose();
     super.dispose();
   }
 
-  ///確認ボタンを押した時
-  void tapConfirmButton() {
-    //画面切り替え
-    switchAnsView();
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _stopwatch.start(); // アプリが前面に戻ったときにタイマーを再開
+    } else if (state == AppLifecycleState.paused) {
+      _stopwatch.stop(); // アプリが背景に移動したときにタイマーを停止
+    }
   }
 
-  ///知ってるボタンを押したとき
-  void tapKnownButton() {
-    //知ってるリストに追加
-    addKnownQuestion();
-    //次の問題
-    nextQuiz();
-    // 答え画面切り替え
-    switchAnsView();
-    //「知ってる」にScore切り替え
-    switchKnowState();
+  ///クイズ更新
+  void _loadQuizList() {
+    //クイズリスト更新
+    final quizItemList = [...state.quizItemList];
+    quizItemList.addAll(quiz.quizItemList);
+    state = state.copyWith(quizItemList: quizItemList);
   }
 
-  ///知らないボタンを押した時
-  void tapUnKnownButton() {
-    //知らないリストに追加
-    addUnKnownQuestion();
-    //次の問題
-    nextQuiz();
-    //画面切り替え
-    switchAnsView();
-    //「知らない」に切り替え
-    switchUnKnowState();
+  ///学習時間計測
+  Future _startStopwatch() async {
+    WidgetsBinding.instance.addObserver(this);
+    _stopwatch.start(); //学習時間記録
+  }
+
+  ///「知っている・知らない」ボタンを押した時
+  Future tapActionButton(bool isKnow) async {
+    await setIsAnsView(false);
+    await setDirection(null);
+
+    final lapIndex = state.lapIndex;
+    final quizItemList = [...state.quizItemList];
+    final index = state.quizIndex;
+    final quizId = quizItemList[index].quizId;
+
+    // QuizItemを更新
+
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: quizItemList[index].isWeak,
+      isJudge: isKnow,
+      isSaved: quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: lapIndex,
+      isPremium: quizItemList[index].isPremium,
+    );
+
+    // リストの更新
+    final knowQuizItemList = [...state.knowQuizItemList];
+    final unKnowQuizItemList = [...state.unKnowQuizItemList];
+
+    final isAlreadyKnown = knowQuizItemList.any((x) => x.quizId == quizId);
+    final isAlreadyUnknown = unKnowQuizItemList.any((x) => x.quizId == quizId);
+    if (isKnow) {
+      //knowQuizItemListに含まれていない時
+      if (!isAlreadyKnown) {
+        //unKnowQuizItemListに含まれている時
+        if (isAlreadyUnknown) {
+          unKnowQuizItemList.removeWhere((item) => item.quizId == quizId);
+        }
+        knowQuizItemList.add(quizItemList[index]);
+      }
+    } else {
+      if (!isAlreadyUnknown) {
+        if (isAlreadyKnown) {
+          knowQuizItemList.removeWhere((item) => item.quizId == quizId);
+        }
+        unKnowQuizItemList.add(state.quizItemList[index]);
+      }
+    }
+
+    // 状態の更新
+    state = state.copyWith(
+      knowQuizItemList: knowQuizItemList,
+      unKnowQuizItemList: unKnowQuizItemList,
+      quizItemList: quizItemList,
+    );
+
+    _nextQuiz();
+  }
+
+  ///次の問題に進む
+  void _nextQuiz() {
+    final index = state.quizIndex;
+    final lapIndex = state.lapIndex;
+    final quizItemList = [...state.quizItemList];
+    final knowQuizList = [...state.knowQuizItemList];
+    final unKnowQuizList = [...state.unKnowQuizItemList];
+    //問題が終わったが,「知ってる」リストに全て含まれていない場合
+    if (index == quizItemList.length - 1 &&
+        knowQuizList.length != quiz.quizItemList.length) {
+      quizItemList.clear();
+      quizItemList.addAll(unKnowQuizList);
+      state = state.copyWith(
+          quizIndex: 0, lapIndex: lapIndex + 1, quizItemList: quizItemList);
+    }
+    //問題が終わり,「知ってる」リストに全て含まれている場合
+    else if (state.knowQuizItemList.length == quiz.quizItemList.length) {
+      final isPremium = ref.read(userModelProvider).isPremium;
+      quizItemList.clear(); // クイズアイテムリストをクリア
+      // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
+
+      quizItemList.addAll([...knowQuizList, ...unKnowQuizList]
+        ..sort((a, b) => a.quizId.compareTo(b.quizId)));
+      _stopwatch.stop();
+      state = state.copyWith(
+        duration: _stopwatch.elapsed,
+        quizIndex: 0,
+        lapIndex: lapIndex + 1,
+        isResultScreen: true,
+        quizItemList: quizItemList,
+      );
+
+      if (!isPremium) {
+        ref.read(adMobProvider.notifier).showAdInterstitial();
+      }
+      _updateQuiz();
+    }
+
+    //まだ問題が続蹴られる時
+    else {
+      state = state.copyWith(quizIndex: index + 1);
+    }
+  }
+
+  ///チェックボックス切り替え
+  void tapCheckBox(int index) {
+    final quizItemList = [...state.quizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: !quizItemList[index].isWeak,
+      isJudge: quizItemList[index].isJudge,
+      isSaved: quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+    );
+    state = state.copyWith(quizItemList: quizItemList);
+    _updateQuiz();
+  }
+
+  ///正解画面に切り替え
+  Future setIsAnsView(bool value) async {
+    state = state.copyWith(isAnsView: value);
+  }
+
+  Future setDirection(AppinioSwiperDirection? direction) async {
+    state = state.copyWith(direction: direction);
+  }
+
+  ///クイズ結果更新(端末保存)
+  void _updateQuiz() {
+    final quizItemList = state.quizItemList;
+    final duration = state.duration;
+    final studyType = ref.read(quizModelProvider).studyType;
+    final updateQuiz = quiz.copyWith(
+      duration: duration,
+      quizItemList: quizItemList,
+      timeStamp: DateTime.now(),
+      studyType: studyType,
+    );
+    ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
+  }
+
+  void updateHistoryQuiz() {
+    final quizItemList = state.quizItemList;
+    final duration = state.duration;
+    final studyType = ref.read(quizModelProvider).studyType;
+    final correctNum =
+        quizItemList.where((x) => x.isJudge == true).toList().length;
+    final isCompleted = quizItemList.length == correctNum;
+    final updateQuiz = quiz.copyWith(
+      duration: duration,
+      quizItemList: quizItemList,
+      correctNum: correctNum,
+      isCompleted: isCompleted,
+      timeStamp: DateTime.now(),
+      studyType: studyType,
+    );
+    ref.read(quizModelProvider.notifier).addHistoryQuiz(updateQuiz);
   }
 
   ///クリアボタン
@@ -63,174 +236,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       lapIndex: 0,
       isAnsView: false,
       isResultScreen: false,
-      knowRememberQuestions: [],
-      unKnowRememberQuestions: [],
+      knowQuizItemList: [],
+      unKnowQuizItemList: [],
     );
-  }
-
-  ///正解画面に切り替え
-  void switchAnsView() {
-    state = state.copyWith(isAnsView: !state.isAnsView);
-  }
-
-  ///結果画面に切り替え
-  void switchResultScreen() {
-    state = state.copyWith(isResultScreen: !state.isResultScreen);
-  }
-
-  ///次の問題に進む
-  void nextQuiz() {
-    final quizIndex = state.quizIndex;
-    final lapIndex = state.lapIndex;
-    //問題が終わったが,「知ってる」リストに全て含まれていない場合
-    if (quizIndex == arguments.item.learnQuiz.length - 1 &&
-        state.knowRememberQuestions.length != arguments.item.learnQuiz.length) {
-      state = state.copyWith(quizIndex: 0, lapIndex: lapIndex + 1);
-    }
-    //問題が終わり,「知ってる」リストに全て含まれている場合
-    else if (state.knowRememberQuestions.length ==
-        arguments.item.learnQuiz.length) {
-      state = state.copyWith(
-          quizIndex: 0, lapIndex: lapIndex + 1, isResultScreen: true);
-    }
-    //まだ問題が続蹴られる時
-    else {
-      state = state.copyWith(quizIndex: quizIndex + 1);
-    }
-  }
-
-  ///知らないボタンを押した時の苦手リストに追加
-  void switchUnKnowState() {
-    final rememberQuestions = [...arguments.item.learnQuiz];
-    if (!rememberQuestions[state.quizIndex].isWeak) {
-      rememberQuestions[state.quizIndex] = LearnQuiz(
-        quizId: rememberQuestions[state.quizIndex].quizId,
-        question: rememberQuestions[state.quizIndex].question,
-        ans: rememberQuestions[state.quizIndex].ans,
-        isWeak: true,
-      );
-    } else {
-      return;
-    }
-  }
-
-  ///知らないボタンを押した時の苦手リストから解除
-  void switchKnowState() {
-    final rememberQuestions = [...arguments.item.learnQuiz];
-    if (!rememberQuestions[state.quizIndex].isWeak) {
-      rememberQuestions[state.quizIndex] = LearnQuiz(
-        quizId: rememberQuestions[state.quizIndex].quizId,
-        question: rememberQuestions[state.quizIndex].question,
-        ans: rememberQuestions[state.quizIndex].ans,
-        isWeak: false,
-      );
-    } else {
-      return;
-    }
-  }
-
-  ///知ってるリストに追加
-  void addKnownQuestion() {
-    final knowRememberQuestions = [...state.knowRememberQuestions];
-    final unKnowRememberQuestions = [...state.unKnowRememberQuestions];
-
-    //すでに知ってるリストに含まれているとき
-    if (knowRememberQuestions
-        .contains(arguments.item.learnQuiz[state.quizIndex])) {
-    }
-    //、知らないリストに含まれている場合
-    else if (unKnowRememberQuestions
-        .contains(arguments.item.learnQuiz[state.quizIndex])) {
-      knowRememberQuestions.add(arguments.item.learnQuiz[state.quizIndex]);
-      unKnowRememberQuestions.remove(arguments.item.learnQuiz[state.quizIndex]);
-    }
-    //それ以外
-    else {
-      knowRememberQuestions.add(arguments.item.learnQuiz[state.quizIndex]);
-    }
-    state = state.copyWith(
-      knowRememberQuestions: knowRememberQuestions,
-      unKnowRememberQuestions: unKnowRememberQuestions,
-    );
-  }
-
-  ///知らないリストに追加
-  void addUnKnownQuestion() {
-    final knowRememberQuestions = [...state.knowRememberQuestions];
-    final unKnowRememberQuestions = [...state.unKnowRememberQuestions];
-
-    //すでに含まれている場合
-    if (unKnowRememberQuestions
-        .contains(arguments.item.learnQuiz[state.quizIndex])) {
-    }
-    //知ってるリストに含まれている場合
-    else if (knowRememberQuestions
-        .contains(arguments.item.learnQuiz[state.quizIndex])) {
-      knowRememberQuestions.remove(arguments.item.learnQuiz[state.quizIndex]);
-      unKnowRememberQuestions.add(arguments.item.learnQuiz[state.quizIndex]);
-    }
-    //それ以外
-    else {
-      unKnowRememberQuestions.add(arguments.item.learnQuiz[state.quizIndex]);
-    }
-    state = state.copyWith(
-      knowRememberQuestions: knowRememberQuestions,
-      unKnowRememberQuestions: unKnowRememberQuestions,
-    );
-  }
-
-  ///知っている問題のチェックボックス切り替え
-  void switchKnowCheckBox(int index) {
-    final knowRememberQuestions = [...state.knowRememberQuestions];
-    //チェックした時
-    if (!knowRememberQuestions[index].isWeak) {
-      knowRememberQuestions[index] = LearnQuiz(
-        quizId: knowRememberQuestions[index].quizId,
-        question: knowRememberQuestions[index].question,
-        ans: knowRememberQuestions[index].ans,
-        isWeak: true,
-      );
-      //復習リストに追加
-      ref
-          .read(homeReviewScreenControllerProvider.notifier)
-          .addLearnQuiz(knowRememberQuestions[index]);
-    }
-    //チェックしてない時
-    else {
-      knowRememberQuestions[index] = LearnQuiz(
-        quizId: knowRememberQuestions[index].quizId,
-        question: knowRememberQuestions[index].question,
-        ans: knowRememberQuestions[index].ans,
-        isWeak: false,
-      );
-      //復習リストから除外
-      ref
-          .read(homeReviewScreenControllerProvider.notifier)
-          .removeLearnQuiz(knowRememberQuestions[index]);
-    }
-    state = state.copyWith(knowRememberQuestions: knowRememberQuestions);
-  }
-
-  ///知らない問題のチェックボックス切り替え
-  void switchUnKnowCheckBox(int index) {
-    final unknowRememberQuestions = [...state.unKnowRememberQuestions];
-    if (!unknowRememberQuestions[index].isWeak) {
-      unknowRememberQuestions[index] = LearnQuiz(
-        quizId: unknowRememberQuestions[index].quizId,
-        question: unknowRememberQuestions[index].question,
-        ans: unknowRememberQuestions[index].ans,
-        isWeak: true,
-      );
-    } else if (unknowRememberQuestions[index].isWeak) {
-      unknowRememberQuestions[index] = LearnQuiz(
-        quizId: unknowRememberQuestions[index].quizId,
-        question: unknowRememberQuestions[index].question,
-        ans: unknowRememberQuestions[index].ans,
-        isWeak: false,
-      );
-    } else {
-      return;
-    }
-    state = state.copyWith(unKnowRememberQuestions: unknowRememberQuestions);
   }
 }

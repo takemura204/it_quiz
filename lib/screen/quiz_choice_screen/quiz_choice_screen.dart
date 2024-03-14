@@ -1,56 +1,141 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/resource/controller/extension_resource.dart';
-import 'package:kentei_quiz/resource/widget/color_resource.dart';
-import 'package:kentei_quiz/screen/screen_argument.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/view/admob/admob_native_advance.dart';
+import 'package:kentei_quiz/view/card/result_dashboard_card.dart';
+import 'package:kentei_quiz/view/card/result_prefect_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
-import '../../controller/quiz_choice/quiz_choice_screen_state.dart';
-import '../../resource/lang/initial_resource.dart';
-import '../quiz_choice_result_screen/quiz_choice_result_screen.dart';
+import '../../model/lang/initial_resource.dart';
+import '../../model/quiz/quiz.dart';
+import '../../model/quiz/quiz_model.dart';
+import '../../model/quiz/quizzes.dart';
+import '../../model/user/user.model.dart';
+import '../../view/admob/admob_banner.dart';
+import '../../view/button/defalut_button.dart';
+import '../../view/button/primary_button.dart';
+import '../../view/button_icon/clear_button.dart';
+import '../../view/button_icon/contact_button.dart';
+import '../../view/button_icon/cutom_back_button.dart';
+import '../../view/card/quiz_item_card.dart';
+import '../../view/card/result_good_card.dart';
+import '../../view/card/result_try_card.dart';
+import '../../view/modals/dialog.dart';
+import '../screen_argument.dart';
 
-part 'quiz_choice_appbar.dart';
-part 'quiz_choice_body.dart';
-part 'quiz_choice_view.dart';
+part 'choice_challenge/choice_challenge_body.dart';
+part 'choice_challenge/choice_challenge_view.dart';
+part 'choice_result/choice_result_body.dart';
+part 'choice_result/choice_result_view.dart';
 
 class QuizChoiceScreen extends ConsumerWidget {
-  const QuizChoiceScreen(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const QuizChoiceScreen(this.quiz);
+
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ProviderScope(
       overrides: [
-        quizChoiceScreenControllerProvider.overrideWithProvider(
-            StateNotifierProvider<QuizChoiceScreenController,
-                QuizChoiceScreenState>(
-          (ref) => QuizChoiceScreenController(ref: ref, arguments: arguments),
-        )),
+        quizChoiceScreenProvider.overrideWith(
+          (ref) => QuizChoiceScreenController(ref: ref, quiz: quiz),
+        ),
       ],
-      child: _Scaffold(arguments),
+      child: _Scaffold(quiz),
     );
   }
 }
 
 class _Scaffold extends ConsumerWidget {
-  const _Scaffold(this.arguments);
-  final QuizChoiceScreenArguments arguments;
+  const _Scaffold(this.quiz);
+
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isResultScreen =
-        ref.watch(quizChoiceScreenControllerProvider).isResultScreen;
+    ///クイズ画面
+    return Scaffold(
+      appBar: _AppBar(quiz),
+      body: _Body(quiz),
+    );
+  }
+}
+
+class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const _AppBar(this.quiz);
+
+  final Quiz quiz;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isResultScreen = ref.watch(quizChoiceScreenProvider).isResultScreen;
     return isResultScreen
-
-        ///結果画面
-        ? QuizChoiceResultScreen(arguments)
-
-        ///クイズ画面
-        : Scaffold(
-            appBar: _AppBar(arguments),
-            body: _Body(arguments),
+        ? AppBar(
+            titleSpacing: 0,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            title: const Text("結果"),
+            actions: [
+              ClearButton(
+                iconSize: context.width * 0.1,
+                onPressed: () {
+                  //問題リセット
+                  ref.read(quizChoiceScreenProvider.notifier).resetScreen();
+                },
+              ),
+            ],
+          )
+        : AppBar(
+            titleSpacing: 0,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            title: Text(quiz.title),
+            leading: CustomBackButton(onPressed: () async {
+              await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return PrimaryDialog(
+                      onPressed: () {
+                        ref
+                            .read(quizChoiceScreenProvider.notifier)
+                            .resetScreen();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                      title: "学習を中断しますか？",
+                      subWidget: Text(
+                        "学習を中断すると\nこれまでの内容は保存されません。",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: context.width * 0.04,
+                            color: Colors.black87),
+                        maxLines: 2,
+                      ),
+                      cancelText: "続ける",
+                      doneText: "中断する",
+                    );
+                  });
+            }),
+            actions: const [
+              ContactIconButton(),
+            ],
           );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _Body extends ConsumerWidget {
+  const _Body(this.quiz);
+
+  final Quiz quiz;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isResultScreen = ref.watch(quizChoiceScreenProvider).isResultScreen;
+    return isResultScreen ? _ChoiceResultBody(quiz) : ChoiceChallengeBody(quiz);
   }
 }
