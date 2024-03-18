@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.kentei_quiz">
+    package="jp.quiz.it">
 
     <!-- 通知を送信するためのパーミッション -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -22,8 +22,8 @@
         android:label="IT用語クイズ">
 
         <meta-data
-            android:name="com.google.android.gms.ads.ca-app-pub-5053471763020307~7242186229"
-            android:value="ca-app-pub-5053471763020307/2204949130" />
+            android:name="com.google.android.gms.ads.ca-app-pub-6280947803421936~1537261539"
+            android:value="ca-app-pub-6280947803421936/3698614341" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
