@@ -1,6 +1,6 @@
 part of '../premium_detail_screen.dart';
 
-///注意事項
+///購入ボタン
 class _CtaButton extends HookConsumerWidget {
   const _CtaButton();
 
