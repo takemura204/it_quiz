@@ -84,6 +84,7 @@ class _ColorCards extends ConsumerWidget {
                                   cancelText: 'キャンセル',
                                   doneText: 'プレミアム画面へ',
                                   onPressed: () {
+                                    Navigator.pop(context);
                                     context.showScreen(
                                         const PremiumDetailScreenArguments()
                                             .generateRoute());

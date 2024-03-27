@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,7 +24,7 @@ import '../screen_argument.dart';
 part 'home_quiz_list.dart';
 part 'home_quiz_view.dart';
 
-class HomeQuizScreen extends ConsumerWidget {
+class HomeQuizScreen extends HookConsumerWidget {
   const HomeQuizScreen();
 
   @override
@@ -39,29 +40,47 @@ class HomeQuizScreen extends ConsumerWidget {
     }
 
     final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
+    final tabController = useTabController(initialLength: categoryList.length);
+
+    useEffect(() {
+      void handleTabChange() {
+        ref
+            .read(homeQuizScreenProvider.notifier)
+            .setTabIndex(tabController.index);
+      }
+
+      tabController.addListener(handleTabChange);
+      return () => tabController.removeListener(handleTabChange);
+    }, [tabController]);
 
     return DefaultTabController(
       initialIndex: 0, // 最初に表示するタブ
       length: categoryList.length, // タブの数
       child: Scaffold(
-        appBar: _AppBar(categoryList: categoryList),
-        body: _Body(categoryList: categoryList),
+        appBar: _AppBar(
+          categoryList: categoryList,
+          tabController: tabController,
+        ),
+        body: _Body(
+          categoryList: categoryList,
+          tabController: tabController,
+        ),
       ),
     );
   }
 }
 
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _AppBar({required this.categoryList});
+  const _AppBar({required this.categoryList, required this.tabController});
 
   final List<String> categoryList;
+  final TabController tabController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabIndex = ref.watch(homeQuizScreenProvider).tabIndex;
-
     return AppBar(
-      title: Text(I18n().titleStudy),
+      title: Text(I18n().titleName),
       centerTitle: true,
       actions: [
         Padding(
@@ -81,10 +100,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         ),
       ],
       bottom: TabBar(
+        controller: tabController,
         onTap: (index) =>
             ref.read(homeQuizScreenProvider.notifier).setTabIndex(index),
         isScrollable: true,
-        // タブをスクロール可能に設定
         labelColor: context.mainColor,
         labelStyle: const TextStyle(fontWeight: FontWeight.bold),
         unselectedLabelColor: Colors.grey,
@@ -118,9 +137,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 }
 
 class _Body extends ConsumerWidget {
-  const _Body({required this.categoryList});
+  const _Body({required this.categoryList, required this.tabController});
 
   final List<String> categoryList;
+  final TabController tabController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -131,6 +151,7 @@ class _Body extends ConsumerWidget {
       alignment: Alignment.bottomCenter,
       children: [
         TabBarView(
+          controller: tabController,
           children: categoryList
               .map((category) => _QuizList(category: category))
               .toList(),

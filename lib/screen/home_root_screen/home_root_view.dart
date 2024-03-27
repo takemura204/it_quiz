@@ -34,7 +34,7 @@ class _BottomNavBar extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: const Icon(LineIcons.list),
             activeIcon: const Icon(LineIcons.list),
-            label: I18n().titleStudy,
+            label: I18n().titleQuiz,
           ),
           BottomNavigationBarItem(
             icon: Transform(

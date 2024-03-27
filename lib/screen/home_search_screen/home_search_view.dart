@@ -94,7 +94,7 @@ class _QuizItemCard extends ConsumerWidget {
           showDialog(
               context: context,
               builder: (_) => PrimaryDialog(
-                    title: '検索用語を閲覧しますか？',
+                    title: '検索用語を全て閲覧しますか？',
                     subWidget: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -110,6 +110,7 @@ class _QuizItemCard extends ConsumerWidget {
                     cancelText: 'キャンセル',
                     doneText: 'プレミアム画面へ',
                     onPressed: () {
+                      Navigator.pop(context);
                       context.showScreen(
                           const PremiumDetailScreenArguments().generateRoute());
                     },

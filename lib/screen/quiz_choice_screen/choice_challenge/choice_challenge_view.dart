@@ -38,14 +38,14 @@ class _AnsQuestion extends ConsumerWidget {
     return SubstringHighlight(
       text: quizItemList[quizIndex].question,
       term: quizItemList[quizIndex].ans,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w500,
-        fontSize: context.width * 0.06,
+        fontSize: 21,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: context.width * 0.06,
+        fontSize: 21,
         color: isJudge
             ? Colors.green.withOpacity(0.7)
             : Colors.red.withOpacity(0.7),
@@ -70,15 +70,15 @@ class _QuizQuestion extends ConsumerWidget {
           quizItemList[quizIndex].ans,
           I18n().hideText(quizItemList[quizIndex].ans)),
       term: quizItemList[quizIndex].ans,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w500,
-        fontSize: context.width * 0.06,
+        fontSize: 21,
       ),
       textStyleHighlight: TextStyle(
         fontWeight: FontWeight.bold,
         color: context.mainColor,
-        fontSize: context.width * 0.06,
+        fontSize: 21,
         decoration: TextDecoration.underline,
       ),
     );
@@ -102,22 +102,22 @@ class _QuizProgress extends ConsumerWidget {
         children: [
           Text(
             "$quizIndex",
-            style: TextStyle(
-              fontSize: context.width * 0.05,
+            style: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
+          const Text(
             " / ",
             style: TextStyle(
-              fontSize: context.width * 0.04,
+              fontSize: 14,
               fontWeight: FontWeight.normal,
             ),
           ),
           Text(
             "${quizItemList.length}",
-            style: TextStyle(
-              fontSize: context.width * 0.05,
+            style: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.normal,
             ),
           ),

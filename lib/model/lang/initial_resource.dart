@@ -43,7 +43,9 @@ class I18n {
   String get category4 => "雑学";
 
   ///title
-  String get titleStudy => "クイズ";
+  String get titleName => "IT用語クイズ";
+
+  String get titleQuiz => "クイズ";
 
   String get titleSearch => "検索";
 

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
 
@@ -23,7 +22,6 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   final Ref ref;
-  TabController? _tabController;
 
   Future _initState() async {
     setIsLoading(true);
@@ -40,7 +38,6 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
 
   @override
   void dispose() {
-    _tabController?.dispose();
     super.dispose();
   }
 

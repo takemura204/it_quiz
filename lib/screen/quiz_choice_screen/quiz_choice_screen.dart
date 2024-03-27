@@ -79,7 +79,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             title: const Text("結果"),
             actions: [
               ClearButton(
-                iconSize: context.width * 0.1,
+                iconSize: 30,
                 onPressed: () {
                   //問題リセット
                   ref.read(quizChoiceScreenProvider.notifier).resetScreen();

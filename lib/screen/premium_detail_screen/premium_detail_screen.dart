@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/user.model.dart';
 
+import '../../controller/premium_detail/premium_detail_controller.dart';
 import '../../view/button/circle_button.dart';
 import '../../view/button/primary_button.dart';
 import '../screen_argument.dart';
