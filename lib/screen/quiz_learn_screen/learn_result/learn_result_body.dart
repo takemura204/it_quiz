@@ -38,7 +38,7 @@ class _LearnResultBody extends ConsumerWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            if (!isPremium) AdBanner(),
+            AdBanner(),
             _NextActionCard(quiz),
           ],
         ),

@@ -66,7 +66,7 @@ class HomeSearchScreen extends ConsumerWidget {
               ),
             ],
           ),
-          if (!isPremium) AdBanner(),
+          AdBanner(),
         ],
       ),
     );

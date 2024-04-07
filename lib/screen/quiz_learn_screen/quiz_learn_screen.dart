@@ -77,6 +77,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             titleSpacing: 0,
             centerTitle: true,
             automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
             title: const Text("結果"),
             actions: [
               ClearButton(

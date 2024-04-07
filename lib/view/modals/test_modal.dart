@@ -26,6 +26,7 @@ class TestQuizModal extends ConsumerWidget {
     final isGroup =
         ref.watch(homeQuizScreenProvider).selectedTestCategory.isNotEmpty;
     return SimpleDialog(
+      elevation: 0,
       backgroundColor: Colors.white,
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),

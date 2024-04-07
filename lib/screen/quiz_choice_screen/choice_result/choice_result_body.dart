@@ -45,7 +45,7 @@ class _ChoiceResultBody extends ConsumerWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            if (!isPremium) AdBanner(),
+            AdBanner(),
             _NextActionCard(quiz),
           ],
         ),

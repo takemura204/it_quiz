@@ -76,24 +76,24 @@ class HomeSettingScreen extends ConsumerWidget {
                   const SettingTitleBar(title: "その他", onTap: null),
                   const _SettingDeleteData(),
 
-                  GestureDetector(
-                    onTap: () {
-                      ref
-                          .read(userModelProvider.notifier)
-                          .updateIsPremium(false);
-                    },
-                    child: Container(
-                      height: 100,
-                      color: Colors.red,
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     ref
+                  //         .read(userModelProvider.notifier)
+                  //         .updateIsPremium(false);
+                  //   },
+                  //   child: Container(
+                  //     height: 100,
+                  //     color: Colors.red,
+                  //   ),
+                  // ),
 
                   ///シェア機能も追加したい。
                 ],
               ),
             ),
           ),
-          if (!isPremium) AdBanner(),
+          AdBanner(),
         ],
       ),
     );

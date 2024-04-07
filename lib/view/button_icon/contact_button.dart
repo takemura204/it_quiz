@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,7 +11,7 @@ class ContactIconButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () async {
-        final Uri uri = Uri.parse('https://forms.gle/zeFBMygChGeuL8Fc7');
+        final Uri uri = Uri.parse(I18n().contactUrl);
         await launchUrl(uri);
       },
       child: Container(

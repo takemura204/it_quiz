@@ -214,7 +214,10 @@ class SettingColorController extends StateNotifier<SettingColorState> {
         ),
 
         ///Divider
-        dividerColor: Colors.black54,
+        dividerColor: Colors.grey.shade300,
+        dividerTheme: DividerThemeData(
+          color: Colors.grey.shade400,
+        ),
 
         /// TabBar
         tabBarTheme: TabBarTheme(

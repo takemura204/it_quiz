@@ -21,7 +21,7 @@ class DisabledButton extends ConsumerWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          elevation: 1,
+          elevation: 0,
           padding: const EdgeInsets.all(3.0),
           alignment: Alignment.center,
           shape: const RoundedRectangleBorder(

@@ -33,6 +33,7 @@ class DailyMissionWidget extends ConsumerWidget {
     final dailyQuizCorrectCount = dashboardModel.dailyQuizCorrectCount;
 
     return SimpleDialog(
+      elevation: 0,
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.02),
       children: [

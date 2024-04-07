@@ -187,7 +187,7 @@ class _SelectChoice extends ConsumerWidget {
               .read(quizChoiceScreenProvider.notifier)
               .tapAnsButton(choices[index]),
       child: Card(
-        elevation: 1,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: context.secondColor,
@@ -242,7 +242,7 @@ class _SkipChoice extends ConsumerWidget {
           : () =>
               ref.read(quizChoiceScreenProvider.notifier).tapAnsButton(choices),
       child: Card(
-        elevation: 1,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: context.secondColor,

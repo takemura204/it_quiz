@@ -38,7 +38,7 @@ class _Body extends ConsumerWidget {
         ),
       );
     }
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
+
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -59,7 +59,7 @@ class _Body extends ConsumerWidget {
             ],
           ),
         ),
-        if (!isPremium) AdBanner(),
+        AdBanner(),
       ],
     );
   }

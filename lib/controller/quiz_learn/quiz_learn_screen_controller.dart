@@ -1,5 +1,4 @@
-import 'package:appinio_swiper/controllers.dart';
-import 'package:appinio_swiper/enums.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';

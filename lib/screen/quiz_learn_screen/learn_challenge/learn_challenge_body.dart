@@ -18,7 +18,7 @@ class _LearnChallengeBody extends ConsumerWidget {
 
         const Gap(15),
 
-        if (!isPremium) AdBanner(),
+        AdBanner(),
 
         ///何周目か確認
         _LapInfoBar(quiz),

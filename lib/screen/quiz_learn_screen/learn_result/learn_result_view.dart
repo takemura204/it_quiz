@@ -10,7 +10,7 @@ class _QuizResultView extends ConsumerWidget {
     return Column(
       children: [
         Card(
-          elevation: 1,
+          elevation: 0,
           color: Colors.white,
           child: Container(
             width: context.width * 1,
@@ -63,7 +63,7 @@ class _NextActionCard extends HookConsumerWidget {
     final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
     return Card(
-      elevation: 2,
+      elevation: 0,
       color: Colors.white,
       child: Container(
         alignment: Alignment.center,

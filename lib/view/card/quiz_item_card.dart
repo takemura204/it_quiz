@@ -21,7 +21,7 @@ class QuizItemCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      elevation: 1,
+      elevation: 0,
       color: Colors.white,
       child: Container(
         decoration: BoxDecoration(

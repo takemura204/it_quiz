@@ -7,10 +7,10 @@ publish_to: none
 #
 # - ストアでバージョン x.y.z+a が審査承認済みなとき、次にアップロードするバージョンは x.y.(z+1)+(a+1)
 # - ストアにバージョン x.y.z+a をアップロード済みのとき、次にアップロードするバージョンは x.y.z+(a+1)
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
-  sdk: ">=2.16.2 <3.2.0"
+  sdk: ">=2.16.2 <4.0.0"
   # 次の一行を記述するとビルドに使用する flutter sdk version を指定できる
   # Note: ビルドに使用する flutter sdk version は flutter version コマンドで選択できる
   # Warn: main.ymlも合わせて変えること！！！
@@ -154,7 +154,7 @@ dependencies:
   device_info_plus: ^9.1.1
 
   #アプリ内課金を実装したい
-  in_app_purchase: ^3.1.13
+  purchases_flutter: ^6.25.0
 
 dev_dependencies:
   flutter_test:

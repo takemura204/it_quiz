@@ -82,6 +82,9 @@ class I18n {
 
   String get buttonUnKnow => "知らない";
 
+  ///URL
+  String get contactUrl => 'https://forms.gle/388fkpEwLXgF7EkdA';
+
   String studyTypeText(StudyType studyType) {
     switch (studyType) {
       case StudyType.learn:

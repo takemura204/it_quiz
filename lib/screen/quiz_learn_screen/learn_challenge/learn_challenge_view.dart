@@ -59,7 +59,7 @@ class _QuizCard extends ConsumerWidget {
                     .setIsAnsView(true); // 画面切り替え
               },
               child: Card(
-                elevation: 1,
+                elevation: 0,
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(

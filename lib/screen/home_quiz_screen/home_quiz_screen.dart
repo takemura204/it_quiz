@@ -99,29 +99,34 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
         ),
       ],
-      bottom: TabBar(
-        controller: tabController,
-        onTap: (index) =>
-            ref.read(homeQuizScreenProvider.notifier).setTabIndex(index),
-        isScrollable: true,
-        labelColor: context.mainColor,
-        labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedLabelColor: Colors.grey,
-        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
-        tabs: List.generate(
-          categoryList.length,
-          (index) => Tab(
-            child: Container(
-              alignment: Alignment.center,
-              child: Text(
-                categoryList[index],
-                style: TextStyle(
-                  fontWeight:
-                      index == tabIndex ? FontWeight.bold : FontWeight.normal,
-                  fontSize: 16,
+      bottom: PreferredSize(
+        preferredSize:
+            const Size.fromHeight(kToolbarHeight + kTextTabBarHeight),
+        child: TabBar(
+          tabAlignment: TabAlignment.start,
+          controller: tabController,
+          onTap: (index) =>
+              ref.read(homeQuizScreenProvider.notifier).setTabIndex(index),
+          isScrollable: true,
+          labelColor: context.mainColor,
+          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          unselectedLabelColor: Colors.grey,
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+          tabs: List.generate(
+            categoryList.length,
+            (index) => Tab(
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  categoryList[index],
+                  style: TextStyle(
+                    fontWeight:
+                        index == tabIndex ? FontWeight.bold : FontWeight.normal,
+                    fontSize: 16,
+                  ),
+                  maxLines: 2, // テキストが多い場合に 2 行まで表示を許可
+                  overflow: TextOverflow.ellipsis, // 2 行を超えるテキストは省略記号で表示
                 ),
-                maxLines: 2, // テキストが多い場合に 2 行まで表示を許可
-                overflow: TextOverflow.ellipsis, // 2 行を超えるテキストは省略記号で表示
               ),
             ),
           ),

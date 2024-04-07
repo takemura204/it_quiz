@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -14,9 +15,13 @@ import '../../view/button/primary_button.dart';
 import '../screen_argument.dart';
 
 part 'widget/precautions.dart';
+
 part 'widget/premium_content.dart';
+
 part 'widget/premium_content_list.dart';
+
 part 'widget/premium_cta_button.dart';
+
 part 'widget/premium_header.dart';
 
 class PremiumDetailScreen extends ConsumerWidget {

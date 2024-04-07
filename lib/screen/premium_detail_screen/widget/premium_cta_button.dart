@@ -22,13 +22,22 @@ class _CtaButton extends HookConsumerWidget {
             onPressed: isPremium
                 ? null
                 : () {
-                    ref
-                        .read(premiumDetailProvider.notifier)
-                        .purchasePremiumItem();
+                    ref.read(userModelProvider.notifier).updateIsPremium(true);
                     print('購入プロセスを開始');
                   },
           ),
         ),
+        // Container(
+        //   color: context.backgroundColor,
+        //   padding:
+        //       const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 35),
+        //   child: PrimaryButton(
+        //     width: context.width,
+        //     height: 60,
+        //     text: 'Coming Soon...',
+        //     onPressed: null,
+        //   ),
+        // ),
       ],
     );
   }

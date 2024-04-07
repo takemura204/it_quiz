@@ -21,6 +21,7 @@ class WeakQuizModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SimpleDialog(
+      elevation: 0,
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
       children: [

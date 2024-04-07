@@ -18,7 +18,7 @@ class ChoiceChallengeBody extends ConsumerWidget {
             alignment: Alignment.center,
             children: [
               Card(
-                elevation: 1,
+                elevation: 0,
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
@@ -57,7 +57,7 @@ class ChoiceChallengeBody extends ConsumerWidget {
         ///選択肢
         _SelectAnswer(quiz),
 
-        if (!isPremium) AdBanner(),
+        AdBanner(),
       ],
     );
   }
