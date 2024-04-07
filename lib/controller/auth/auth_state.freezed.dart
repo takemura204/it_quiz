@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthState {
 //ユーザー情報
-  Account? get user => throw _privateConstructorUsedError;
+  Auth? get user => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   File? get userImage => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $AuthStateCopyWith<$Res> {
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call(
-      {Account? user,
+      {Auth? user,
       String uid,
       String userName,
       File? userImage,
@@ -72,7 +72,7 @@ abstract class $AuthStateCopyWith<$Res> {
       bool isNotSignUpCompleted,
       AuthActiveType activeType});
 
-  $AccountCopyWith<$Res>? get user;
+  $AuthCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -114,7 +114,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as Account?,
+              as Auth?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -200,12 +200,12 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
 
   @override
   @pragma('vm:prefer-inline')
-  $AccountCopyWith<$Res>? get user {
+  $AuthCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $AccountCopyWith<$Res>(_value.user!, (value) {
+    return $AuthCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -218,7 +218,7 @@ abstract class _$$_CreateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Account? user,
+      {Auth? user,
       String uid,
       String userName,
       File? userImage,
@@ -241,7 +241,7 @@ abstract class _$$_CreateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       AuthActiveType activeType});
 
   @override
-  $AccountCopyWith<$Res>? get user;
+  $AuthCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -280,7 +280,7 @@ class __$$_CreateCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as Account?,
+              as Auth?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -393,7 +393,7 @@ class _$_Create implements _Create {
 
 //ユーザー情報
   @override
-  final Account? user;
+  final Auth? user;
   @override
   @JsonKey()
   final String uid;
@@ -540,7 +540,7 @@ class _$_Create implements _Create {
 
 abstract class _Create implements AuthState {
   const factory _Create(
-      {final Account? user,
+      {final Auth? user,
       final String uid,
       final String userName,
       final File? userImage,
@@ -563,7 +563,7 @@ abstract class _Create implements AuthState {
       final AuthActiveType activeType}) = _$_Create;
 
   @override //ユーザー情報
-  Account? get user;
+  Auth? get user;
   @override
   String get uid;
   @override

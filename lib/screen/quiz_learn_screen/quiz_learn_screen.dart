@@ -13,7 +13,7 @@ import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
-import '../../model/user/account.model.dart';
+import '../../model/user/auth_model.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/admob/admob_native_advance.dart';
 import '../../view/button/defalut_button.dart';

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'account.dart';
+part of 'auth.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Account _$AccountFromJson(Map<String, dynamic> json) {
-  return _Account.fromJson(json);
+Auth _$AuthFromJson(Map<String, dynamic> json) {
+  return _Auth.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Account {
+mixin _$Auth {
 //ユーザー基本情報
   String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
@@ -36,13 +36,13 @@ mixin _$Account {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AccountCopyWith<Account> get copyWith => throw _privateConstructorUsedError;
+  $AuthCopyWith<Auth> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AccountCopyWith<$Res> {
-  factory $AccountCopyWith(Account value, $Res Function(Account) then) =
-      _$AccountCopyWithImpl<$Res, Account>;
+abstract class $AuthCopyWith<$Res> {
+  factory $AuthCopyWith(Auth value, $Res Function(Auth) then) =
+      _$AuthCopyWithImpl<$Res, Auth>;
   @useResult
   $Res call(
       {String uid,
@@ -61,9 +61,9 @@ abstract class $AccountCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AccountCopyWithImpl<$Res, $Val extends Account>
-    implements $AccountCopyWith<$Res> {
-  _$AccountCopyWithImpl(this._value, this._then);
+class _$AuthCopyWithImpl<$Res, $Val extends Auth>
+    implements $AuthCopyWith<$Res> {
+  _$AuthCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -148,10 +148,9 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
 }
 
 /// @nodoc
-abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
-  factory _$$_AccountCopyWith(
-          _$_Account value, $Res Function(_$_Account) then) =
-      __$$_AccountCopyWithImpl<$Res>;
+abstract class _$$_AuthCopyWith<$Res> implements $AuthCopyWith<$Res> {
+  factory _$$_AuthCopyWith(_$_Auth value, $Res Function(_$_Auth) then) =
+      __$$_AuthCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -172,10 +171,9 @@ abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AccountCopyWithImpl<$Res>
-    extends _$AccountCopyWithImpl<$Res, _$_Account>
-    implements _$$_AccountCopyWith<$Res> {
-  __$$_AccountCopyWithImpl(_$_Account _value, $Res Function(_$_Account) _then)
+class __$$_AuthCopyWithImpl<$Res> extends _$AuthCopyWithImpl<$Res, _$_Auth>
+    implements _$$_AuthCopyWith<$Res> {
+  __$$_AuthCopyWithImpl(_$_Auth _value, $Res Function(_$_Auth) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -193,7 +191,7 @@ class __$$_AccountCopyWithImpl<$Res>
     Object? selectNotificationTime = freezed,
     Object? isPremium = null,
   }) {
-    return _then(_$_Account(
+    return _then(_$_Auth(
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -244,8 +242,8 @@ class __$$_AccountCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Account implements _Account {
-  const _$_Account(
+class _$_Auth implements _Auth {
+  const _$_Auth(
       {this.uid = '',
       this.userName = '',
       this.email = '',
@@ -258,8 +256,7 @@ class _$_Account implements _Account {
       this.selectNotificationTime,
       this.isPremium = false});
 
-  factory _$_Account.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountFromJson(json);
+  factory _$_Auth.fromJson(Map<String, dynamic> json) => _$$_AuthFromJson(json);
 
 //ユーザー基本情報
   @override
@@ -298,14 +295,14 @@ class _$_Account implements _Account {
 
   @override
   String toString() {
-    return 'Account(uid: $uid, userName: $userName, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, themeId: $themeId, dailyGoal: $dailyGoal, selectNotificationTime: $selectNotificationTime, isPremium: $isPremium)';
+    return 'Auth(uid: $uid, userName: $userName, email: $email, password: $password, gender: $gender, birthDay: $birthDay, isLogin: $isLogin, themeId: $themeId, dailyGoal: $dailyGoal, selectNotificationTime: $selectNotificationTime, isPremium: $isPremium)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Account &&
+            other is _$_Auth &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
@@ -344,19 +341,19 @@ class _$_Account implements _Account {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
-      __$$_AccountCopyWithImpl<_$_Account>(this, _$identity);
+  _$$_AuthCopyWith<_$_Auth> get copyWith =>
+      __$$_AuthCopyWithImpl<_$_Auth>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccountToJson(
+    return _$$_AuthToJson(
       this,
     );
   }
 }
 
-abstract class _Account implements Account {
-  const factory _Account(
+abstract class _Auth implements Auth {
+  const factory _Auth(
       {final String uid,
       final String userName,
       final String email,
@@ -367,9 +364,9 @@ abstract class _Account implements Account {
       final int themeId,
       final int dailyGoal,
       final NotificationTime? selectNotificationTime,
-      final bool isPremium}) = _$_Account;
+      final bool isPremium}) = _$_Auth;
 
-  factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
+  factory _Auth.fromJson(Map<String, dynamic> json) = _$_Auth.fromJson;
 
   @override //ユーザー基本情報
   String get uid;
@@ -395,6 +392,5 @@ abstract class _Account implements Account {
   bool get isPremium;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AuthCopyWith<_$_Auth> get copyWith => throw _privateConstructorUsedError;
 }

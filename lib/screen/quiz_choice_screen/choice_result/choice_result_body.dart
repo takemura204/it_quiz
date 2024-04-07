@@ -12,8 +12,7 @@ class _ChoiceResultBody extends ConsumerWidget {
     final controller = ref.watch(quizChoiceScreenProvider);
     final duration = controller.duration;
 
-    final isPremium =
-        ref.watch(accountModelProvider.select((s) => s.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [

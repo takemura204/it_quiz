@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account.dart';
+part of 'auth.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Account _$$_AccountFromJson(Map<String, dynamic> json) => _$_Account(
+_$_Auth _$$_AuthFromJson(Map<String, dynamic> json) => _$_Auth(
       uid: json['uid'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
       email: json['email'] as String? ?? '',
@@ -23,8 +23,7 @@ _$_Account _$$_AccountFromJson(Map<String, dynamic> json) => _$_Account(
       isPremium: json['isPremium'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_AccountToJson(_$_Account instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_AuthToJson(_$_Auth instance) => <String, dynamic>{
       'uid': instance.uid,
       'userName': instance.userName,
       'email': instance.email,

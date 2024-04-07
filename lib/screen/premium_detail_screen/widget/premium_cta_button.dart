@@ -6,8 +6,7 @@ class _CtaButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium =
-        ref.watch(accountModelProvider.select((x) => x.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -23,9 +22,7 @@ class _CtaButton extends HookConsumerWidget {
             onPressed: isPremium
                 ? null
                 : () {
-                    ref
-                        .read(accountModelProvider.notifier)
-                        .updateIsPremium(true);
+                    ref.read(authModelProvider.notifier).updateIsPremium(true);
                     print('購入プロセスを開始');
                   },
           ),

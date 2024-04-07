@@ -6,14 +6,14 @@ import 'package:state_notifier/state_notifier.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../notification_time/notification_time.dart';
-import 'account.dart';
+import 'auth.dart';
 
-final accountModelProvider = StateNotifierProvider<AccountModel, Account>(
-  (ref) => AccountModel(ref),
+final authModelProvider = StateNotifierProvider<AuthModel, Auth>(
+  (ref) => AuthModel(ref),
 );
 
-class AccountModel extends StateNotifier<Account> with LocatorMixin {
-  AccountModel(this.ref) : super(const Account()) {
+class AuthModel extends StateNotifier<Auth> with LocatorMixin {
+  AuthModel(this.ref) : super(const Auth()) {
     initState();
   }
 

@@ -7,7 +7,7 @@ import 'package:kentei_quiz/controller/home_setting/home_setting_controller.dart
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
-import 'package:kentei_quiz/model/user/account.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/card/premium_card.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -38,8 +38,7 @@ class HomeSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium =
-        ref.watch(accountModelProvider.select((x) => x.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),
@@ -47,7 +46,6 @@ class HomeSettingScreen extends ConsumerWidget {
         elevation: 0,
       ),
       body: Stack(
-        alignment: Alignment.bottomCenter,
         children: [
           SingleChildScrollView(
             child: Container(
@@ -77,24 +75,29 @@ class HomeSettingScreen extends ConsumerWidget {
                   const SettingTitleBar(title: "その他", onTap: null),
                   const _SettingDeleteData(),
 
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     ref
-                  //         .read(userModelProvider.notifier)
-                  //         .updateIsPremium(false);
-                  //   },
-                  //   child: Container(
-                  //     height: 100,
-                  //     color: Colors.red,
-                  //   ),
-                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(authModelProvider.notifier)
+                          .updateIsPremium(false);
+                    },
+                    child: Container(
+                      height: 100,
+                      color: Colors.red,
+                    ),
+                  ),
 
                   ///シェア機能も追加したい。
                 ],
               ),
             ),
           ),
-          AdBanner(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              AdBanner(),
+            ],
+          ),
         ],
       ),
     );

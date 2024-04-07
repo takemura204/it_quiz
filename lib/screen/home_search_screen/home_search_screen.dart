@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/account.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/text_field.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:substring_highlight/substring_highlight.dart';

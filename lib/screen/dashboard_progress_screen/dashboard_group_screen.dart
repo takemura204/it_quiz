@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/account.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
@@ -32,7 +32,7 @@ class GroupProgressDashboard extends ConsumerWidget {
     }
     final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
     final correctRatios = ref.watch(homeQuizScreenProvider).correctRatios;
-    final isPremium = ref.watch(accountModelProvider).isPremium;
+    final isPremium = ref.watch(authModelProvider).isPremium;
 
     return Container(
       child: Card(

@@ -6,7 +6,7 @@ class _SettingNotification extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCustom = ref.watch(accountModelProvider);
+    final userCustom = ref.watch(authModelProvider);
     final defaultHour = NotificationTime.defaultTime().hour;
     final defaultMinute = NotificationTime.defaultTime().minute;
     final selectedHour = userCustom.selectNotificationTime?.hour ?? defaultHour;
@@ -44,7 +44,7 @@ class _SettingNotification extends ConsumerWidget {
                     recommendedMinute: 0,
                     onTimeChanged: (selectedTime) async {
                       ref
-                          .read(accountModelProvider.notifier)
+                          .read(authModelProvider.notifier)
                           .updateNotificationTime(
                               value: NotificationTime(
                                   hour: selectedTime.hour,

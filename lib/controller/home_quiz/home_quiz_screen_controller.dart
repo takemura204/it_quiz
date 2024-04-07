@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/model/user/account.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
@@ -43,7 +43,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
 
   /// CategoryList取得
   Future loadCategoryList() async {
-    final isPremium = ref.read(accountModelProvider).isPremium;
+    final isPremium = ref.read(authModelProvider).isPremium;
     // quizListを取得
     final List<Quiz> quizList = [...ref.read(quizModelProvider).quizList];
     // quizListをcategoryIdに基づいてインプレースでソート

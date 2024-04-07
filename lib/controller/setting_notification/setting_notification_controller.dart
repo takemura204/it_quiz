@@ -9,7 +9,7 @@ import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.d
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/setting_notification/setting_notification_state.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
-import 'package:kentei_quiz/model/user/account.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -123,7 +123,7 @@ class SettingNotificationController
       DateTimeComponents? dateTimeComponents}) async {
     try {
       final notificationTime =
-          ref.read(accountModelProvider).selectNotificationTime;
+          ref.read(authModelProvider).selectNotificationTime;
       if (notificationTime == null) {
         print('Notification time is not set');
         return;

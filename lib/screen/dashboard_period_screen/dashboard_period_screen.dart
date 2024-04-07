@@ -9,7 +9,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button/primary_button.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../model/user/account.model.dart';
+import '../../model/user/auth_model.dart';
 import '../screen_argument.dart';
 
 part 'dashboard_chart.dart';
@@ -19,8 +19,7 @@ class PeriodDashboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium =
-        ref.watch(accountModelProvider.select((x) => x.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
     return Container(
       width: context.width * 1,
       alignment: Alignment.center,

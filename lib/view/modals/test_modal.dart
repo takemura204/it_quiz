@@ -9,7 +9,7 @@ import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../model/user/account.model.dart';
+import '../../model/user/auth_model.dart';
 import '../../screen/screen_argument.dart';
 import '../button/disabled_button.dart';
 import '../button/primary_button.dart';
@@ -172,9 +172,8 @@ class _SelectRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
-    final isPremium =
-        ref.watch(accountModelProvider.select((s) => s.isPremium)) ||
-            text == categoryList.first;
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
+        text == categoryList.first;
     return GestureDetector(
       onTap: isPremium
           ? () {

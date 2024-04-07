@@ -86,7 +86,7 @@ class _QuizItemCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchKeywords = ref.watch(homeSearchScreenProvider).searchKeywords;
     final termToHighlight = searchKeywords.join('|');
-    final isPremium = ref.watch(accountModelProvider).isPremium ||
+    final isPremium = ref.watch(authModelProvider).isPremium ||
         !quizItemList[index].isPremium;
     return GestureDetector(
       onTap: () {

@@ -5,14 +5,13 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../controller/admob/admob_controller.dart';
-import '../../model/user/account.model.dart';
+import '../../model/user/auth_model.dart';
 
 class AdNative extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final adMobController = ref.read(adMobProvider.notifier);
-    final isPremium =
-        ref.watch(accountModelProvider.select((s) => s.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
 
     return !isPremium
         ? FutureBuilder<BannerAd>(

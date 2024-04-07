@@ -2,12 +2,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../notification_time/notification_time.dart';
 
-part 'account.freezed.dart';
-part 'account.g.dart';
+part 'auth.freezed.dart';
+part 'auth.g.dart';
 
 @freezed
-class Account with _$Account {
-  const factory Account({
+class Auth with _$Auth {
+  const factory Auth({
     //ユーザー基本情報
     @Default('') final String uid,
     @Default('') final String userName,
@@ -21,8 +21,7 @@ class Account with _$Account {
     @Default(10) final int dailyGoal,
     NotificationTime? selectNotificationTime,
     @Default(false) final bool isPremium,
-  }) = _Account;
+  }) = _Auth;
 
-  factory Account.fromJson(Map<String, dynamic> json) =>
-      _$AccountFromJson(json);
+  factory Auth.fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);
 }

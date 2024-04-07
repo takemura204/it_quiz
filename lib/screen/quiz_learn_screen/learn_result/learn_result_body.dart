@@ -10,8 +10,7 @@ class _LearnResultBody extends ConsumerWidget {
     final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     final controller = ref.watch(quizLearnScreenProvider);
     final duration = controller.duration;
-    final isPremium =
-        ref.watch(accountModelProvider.select((s) => s.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
