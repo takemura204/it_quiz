@@ -5,7 +5,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 
 import '../../controller/auth/auth_controller.dart';
-import '../../model/user/user.model.dart';
+import '../../model/user/account.model.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/text_field.dart';
@@ -21,7 +21,7 @@ class SettingProfileScreen extends ConsumerWidget {
     final isValidUserName = state.isValidUserName;
     final isNotTap = state.isNotTap;
     final userNameController =
-        ref.read(userModelProvider.notifier).userNameController;
+        ref.read(accountModelProvider.notifier).userNameController;
     // final genderController = controller.genderController;
     // final birthdayController = controller.birthdayController;
     // final genders = controller.genders;
@@ -164,7 +164,7 @@ class SettingProfileScreen extends ConsumerWidget {
                   ? () {
                       ref.read(authProvider.notifier).switchTap();
                       ref
-                          .read(userModelProvider.notifier)
+                          .read(accountModelProvider.notifier)
                           .updateUserName(userNameController.text)
                         ..then(
                           (value) {

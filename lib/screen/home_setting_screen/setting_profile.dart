@@ -6,7 +6,7 @@ class _SettingProfile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCustom = ref.watch(userModelProvider);
+    final userCustom = ref.watch(accountModelProvider);
     final userName = userCustom.userName;
 
     return CustomSettingBar(

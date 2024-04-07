@@ -12,7 +12,7 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
-import '../../model/user/user.model.dart';
+import '../../model/user/account.model.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';

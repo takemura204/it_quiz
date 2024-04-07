@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/account.model.dart';
 import 'package:kentei_quiz/view/text_field.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:substring_highlight/substring_highlight.dart';
@@ -42,7 +42,6 @@ class HomeSearchScreen extends ConsumerWidget {
     final isScrollLoading = state.isScrollLoading;
     final textEditingController = controller.textEditingController;
     final scrollController = controller.scrollController;
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
 
     return Scaffold(
       appBar: _AppBar(isSavedFilter: isSavedFilter),

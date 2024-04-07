@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/mission/mission_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/account.model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
@@ -26,7 +26,7 @@ class DailyMissionWidget extends ConsumerWidget {
     final _timeLimit = state.timeLimit;
     final model = ref.watch(missionModelProvider);
     final missions = model.sortedMissions;
-    final userCustom = ref.watch(userModelProvider);
+    final userCustom = ref.watch(accountModelProvider);
     final dailyGoal = userCustom.dailyGoal;
     final dashboardModel = ref.watch(dashboardModelProvider);
     final dailyQuizCount = dashboardModel.dailyQuizCount;

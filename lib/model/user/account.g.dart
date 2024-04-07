@@ -6,7 +6,7 @@ part of 'account.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
+_$_Account _$$_AccountFromJson(Map<String, dynamic> json) => _$_Account(
       uid: json['uid'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
       email: json['email'] as String? ?? '',
@@ -23,7 +23,8 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       isPremium: json['isPremium'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
+Map<String, dynamic> _$$_AccountToJson(_$_Account instance) =>
+    <String, dynamic>{
       'uid': instance.uid,
       'userName': instance.userName,
       'email': instance.email,

@@ -8,7 +8,7 @@ class I18n {
   factory I18n() => _instance ??= I18n._();
 
   ///アプリ全体
-  String get appName => "Kentei Quiz";
+  String get appName => "IT用語クイズ";
 
   ///category
   String setCategory(int categoryId) {

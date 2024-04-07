@@ -7,7 +7,6 @@ class _LearnChallengeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
     return Column(
       children: [
         ///クイズカード

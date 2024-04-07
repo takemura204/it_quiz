@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/premium_detail/premium_detail_state.dart';
+import 'package:kentei_quiz/model/lang/secret_key.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 final premiumDetailProvider =
@@ -41,9 +42,10 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
       late PurchasesConfiguration configuration;
 
       if (Platform.isAndroid) {
-        configuration = PurchasesConfiguration('Android用のRevenuecat APIキー');
+        configuration =
+            PurchasesConfiguration(SecretKey().androidRevenueCatAPIKey);
       } else if (Platform.isIOS) {
-        configuration = PurchasesConfiguration('ios用のRevenuecat APIキー');
+        configuration = PurchasesConfiguration(SecretKey().iosRevenueCatAPIKey);
       }
       await Purchases.configure(configuration);
       //offeringsを取ってくる

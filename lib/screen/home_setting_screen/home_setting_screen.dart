@@ -7,7 +7,7 @@ import 'package:kentei_quiz/controller/home_setting/home_setting_controller.dart
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/account.model.dart';
 import 'package:kentei_quiz/view/card/premium_card.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -38,7 +38,8 @@ class HomeSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
+    final isPremium =
+        ref.watch(accountModelProvider.select((x) => x.isPremium));
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),

@@ -5,14 +5,15 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../controller/admob/admob_controller.dart';
-import '../../model/user/user.model.dart';
+import '../../model/user/account.model.dart';
 
 ///バナー広告
 class AdBanner extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final adMobController = ref.read(adMobProvider.notifier);
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
+    final isPremium =
+        ref.watch(accountModelProvider.select((s) => s.isPremium));
 
     // 広告がロードされたら新しいバナー広告を作成して表示する
     return !isPremium

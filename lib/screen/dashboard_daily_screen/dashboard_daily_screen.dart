@@ -5,7 +5,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
-import '../../model/user/user.model.dart';
+import '../../model/user/account.model.dart';
 import '../../view/bar.dart';
 
 part 'dashboard_daily_view.dart';
@@ -20,7 +20,7 @@ class DailyDashboard extends ConsumerWidget {
     final dailyDuration = dashboardModel.dailyDuration.inMinutes;
     final dailyQuizCount = dashboardModel.dailyQuizCount;
     final runningDays = dashboardModel.runningDays;
-    final userModel = ref.watch(userModelProvider);
+    final userModel = ref.watch(accountModelProvider);
     final dailyGoal = userModel.dailyGoal;
     final dailyRate =
         (dailyQuizCount / dailyGoal * 100).clamp(0, 100).toStringAsFixed(0);

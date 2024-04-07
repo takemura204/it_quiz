@@ -41,8 +41,9 @@ class _QuizCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final correctRate =
         ((quiz.correctNum / quiz.quizItemList.length) * 100).round();
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium)) ||
-        !quiz.isPremium;
+    final isPremium =
+        ref.watch(accountModelProvider.select((s) => s.isPremium)) ||
+            !quiz.isPremium;
     return GestureDetector(
       onTap: () {
         if (isPremium) {
@@ -109,8 +110,9 @@ class _ProgressIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium)) ||
-        !quiz.isPremium;
+    final isPremium =
+        ref.watch(accountModelProvider.select((s) => s.isPremium)) ||
+            !quiz.isPremium;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [

@@ -134,7 +134,8 @@ class _SelectAnswer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
+    final isPremium =
+        ref.watch(accountModelProvider.select((s) => s.isPremium));
     return Container(
       width: context.width,
       alignment: Alignment.center,

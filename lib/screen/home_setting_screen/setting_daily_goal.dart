@@ -6,7 +6,7 @@ class _SettingDailyGoal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCustom = ref.watch(userModelProvider);
+    final userCustom = ref.watch(accountModelProvider);
     final dailyGoal = userCustom.dailyGoal;
 
     return CustomSettingBar(
