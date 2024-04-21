@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PremiumDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isShowPurchasedModal => throw _privateConstructorUsedError;
   bool get isSubscribed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $PremiumDetailStateCopyWith<$Res> {
           PremiumDetailState value, $Res Function(PremiumDetailState) then) =
       _$PremiumDetailStateCopyWithImpl<$Res, PremiumDetailState>;
   @useResult
-  $Res call({bool isLoading, bool isSubscribed});
+  $Res call({bool isLoading, bool isShowPurchasedModal, bool isSubscribed});
 }
 
 /// @nodoc
@@ -47,12 +48,17 @@ class _$PremiumDetailStateCopyWithImpl<$Res, $Val extends PremiumDetailState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isShowPurchasedModal = null,
     Object? isSubscribed = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowPurchasedModal: null == isShowPurchasedModal
+          ? _value.isShowPurchasedModal
+          : isShowPurchasedModal // ignore: cast_nullable_to_non_nullable
               as bool,
       isSubscribed: null == isSubscribed
           ? _value.isSubscribed
@@ -70,7 +76,7 @@ abstract class _$$_PremiumDetailStateCopyWith<$Res>
       __$$_PremiumDetailStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool isSubscribed});
+  $Res call({bool isLoading, bool isShowPurchasedModal, bool isSubscribed});
 }
 
 /// @nodoc
@@ -85,12 +91,17 @@ class __$$_PremiumDetailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isShowPurchasedModal = null,
     Object? isSubscribed = null,
   }) {
     return _then(_$_PremiumDetailState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowPurchasedModal: null == isShowPurchasedModal
+          ? _value.isShowPurchasedModal
+          : isShowPurchasedModal // ignore: cast_nullable_to_non_nullable
               as bool,
       isSubscribed: null == isSubscribed
           ? _value.isSubscribed
@@ -104,18 +115,23 @@ class __$$_PremiumDetailStateCopyWithImpl<$Res>
 
 class _$_PremiumDetailState implements _PremiumDetailState {
   const _$_PremiumDetailState(
-      {this.isLoading = false, this.isSubscribed = false});
+      {this.isLoading = false,
+      this.isShowPurchasedModal = false,
+      this.isSubscribed = false});
 
   @override
   @JsonKey()
   final bool isLoading;
   @override
   @JsonKey()
+  final bool isShowPurchasedModal;
+  @override
+  @JsonKey()
   final bool isSubscribed;
 
   @override
   String toString() {
-    return 'PremiumDetailState(isLoading: $isLoading, isSubscribed: $isSubscribed)';
+    return 'PremiumDetailState(isLoading: $isLoading, isShowPurchasedModal: $isShowPurchasedModal, isSubscribed: $isSubscribed)';
   }
 
   @override
@@ -125,12 +141,15 @@ class _$_PremiumDetailState implements _PremiumDetailState {
             other is _$_PremiumDetailState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isShowPurchasedModal, isShowPurchasedModal) ||
+                other.isShowPurchasedModal == isShowPurchasedModal) &&
             (identical(other.isSubscribed, isSubscribed) ||
                 other.isSubscribed == isSubscribed));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isSubscribed);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, isShowPurchasedModal, isSubscribed);
 
   @JsonKey(ignore: true)
   @override
@@ -142,10 +161,14 @@ class _$_PremiumDetailState implements _PremiumDetailState {
 
 abstract class _PremiumDetailState implements PremiumDetailState {
   const factory _PremiumDetailState(
-      {final bool isLoading, final bool isSubscribed}) = _$_PremiumDetailState;
+      {final bool isLoading,
+      final bool isShowPurchasedModal,
+      final bool isSubscribed}) = _$_PremiumDetailState;
 
   @override
   bool get isLoading;
+  @override
+  bool get isShowPurchasedModal;
   @override
   bool get isSubscribed;
   @override

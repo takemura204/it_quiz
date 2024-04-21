@@ -245,6 +245,7 @@ class SettingColorController extends StateNotifier<SettingColorState> {
                   BorderSide(color: getThemePrimaryColor(themeId), width: 1.5)),
           color: Colors.white,
           elevation: 0,
+          scrolledUnderElevation: 0,
           iconTheme: const IconThemeData(
             color: Colors.black87,
           ),

@@ -36,7 +36,7 @@ class GroupProgressDashboard extends ConsumerWidget {
 
     return Container(
       child: Card(
-        elevation: 1,
+        elevation: 0,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: context.width * 0.01, vertical: context.width * 0.01),

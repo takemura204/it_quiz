@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/premium_detail/premium_detail_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -108,7 +109,7 @@ class AuthModel extends StateNotifier<Auth> with LocatorMixin {
     final userName = state.userName;
     final dailyGoal = state.dailyGoal;
     final themeId = state.themeId;
-    final isPremium = state.isPremium;
+    final isPremium = ref.read(premiumDetailProvider).isSubscribed;
     final notificationTime = state.selectNotificationTime;
     await prefs.setString('uid', uid);
     await prefs.setString('user_name', userName);

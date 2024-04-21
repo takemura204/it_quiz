@@ -26,7 +26,7 @@ class DailyDashboard extends ConsumerWidget {
         (dailyQuizCount / dailyGoal * 100).clamp(0, 100).toStringAsFixed(0);
 
     return Card(
-      elevation: 1,
+      elevation: 0,
       color: Colors.white,
       margin: EdgeInsets.symmetric(
           horizontal: context.width * 0.01, vertical: context.width * 0.005),

@@ -24,7 +24,7 @@ class PeriodDashboard extends ConsumerWidget {
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
-        elevation: 1,
+        elevation: 0,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: context.width * 0.01, vertical: context.width * 0.01),

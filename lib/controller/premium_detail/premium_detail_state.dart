@@ -6,6 +6,7 @@ part 'premium_detail_state.freezed.dart';
 class PremiumDetailState with _$PremiumDetailState {
   const factory PremiumDetailState({
     @Default(false) bool isLoading,
+    @Default(false) bool isShowPurchasedModal,
     @Default(false) bool isSubscribed,
   }) = _PremiumDetailState;
 }

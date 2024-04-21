@@ -22,8 +22,7 @@ class _CtaButton extends HookConsumerWidget {
             onPressed: isPremium
                 ? null
                 : () {
-                    ref.read(authModelProvider.notifier).updateIsPremium(true);
-                    print('購入プロセスを開始');
+                    ref.read(premiumDetailProvider.notifier).buyPurchase980();
                   },
           ),
         ),
