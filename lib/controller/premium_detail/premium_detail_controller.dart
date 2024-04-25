@@ -118,7 +118,7 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
       }
     } on PlatformException catch (e) {
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
-
+      print(errorCode);
       switch (errorCode) {
         case PurchasesErrorCode.purchaseCancelledError:
           print('User canceled');

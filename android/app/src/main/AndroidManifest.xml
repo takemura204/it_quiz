@@ -20,10 +20,6 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="IT用語クイズ">
-
-        <meta-data
-            android:name="com.google.android.gms.ads.ca-app-pub-6280947803421936~1537261539"
-            android:value="ca-app-pub-6280947803421936/3698614341" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -65,5 +61,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!--Google AdMob-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6280947803421936~1537261539" />
     </application>
 </manifest>

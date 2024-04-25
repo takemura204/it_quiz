@@ -7,7 +7,7 @@ publish_to: none
 #
 # - ストアでバージョン x.y.z+a が審査承認済みなとき、次にアップロードするバージョンは x.y.(z+1)+(a+1)
 # - ストアにバージョン x.y.z+a をアップロード済みのとき、次にアップロードするバージョンは x.y.z+(a+1)
-version: 1.0.1+2
+version: 1.0.2+3
 
 environment:
   sdk: ">=2.16.2 <4.0.0"
@@ -131,7 +131,7 @@ dependencies:
   appinio_swiper: ^2.0.3
 
   #通知を実装したい
-  flutter_local_notifications: ^16.3.1+1
+  flutter_local_notifications: ^17.1.0
   permission_handler: ^11.0.1
   flutter_native_timezone_updated_gradle: ^2.0.3
 
@@ -156,6 +156,9 @@ dependencies:
   #アプリ内課金を実装したい
   purchases_flutter: ^6.25.0
 
+  #トラッキングポリシーモーダルを表示したい
+  app_tracking_transparency: ^2.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -169,6 +172,8 @@ dev_dependencies:
 
   #様々なデバイス上でのレイアウトを確認したい
   device_preview: ^1.0.0
+
+
   device_preview_screenshot: ^1.0.0
 
 flutter:

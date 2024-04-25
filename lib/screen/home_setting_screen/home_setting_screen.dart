@@ -11,6 +11,7 @@ import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/card/premium_card.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
@@ -65,6 +66,7 @@ class HomeSettingScreen extends ConsumerWidget {
                   _Divider(),
                   const _SettingThemeColor(),
                   _Divider(),
+
                   const SettingTitleBar(title: "サポート", onTap: null),
                   const _SettingContact(),
                   _Divider(),
@@ -72,27 +74,33 @@ class HomeSettingScreen extends ConsumerWidget {
                   _Divider(),
                   const _SettingAboutApp(),
                   _Divider(),
+                  const AdBanner(height: 270),
                   const SettingTitleBar(title: "その他", onTap: null),
                   const _SettingDeleteData(),
+                  Container(
+                    height: 60,
+                    color: context.backgroundColor,
+                  ),
 
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     ref
-                  //         .read(authModelProvider.notifier)
-                  //         .updateIsPremium(false);
-                  //   },
-                  //   child: Container(
-                  //     height: 100,
-                  //     color: Colors.red,
-                  //   ),
-                  // ),
+                  ///開発用
+                  GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(authModelProvider.notifier)
+                          .updateIsPremium(false);
+                    },
+                    child: Container(
+                      height: 50,
+                      color: context.backgroundColor,
+                    ),
+                  ),
 
                   ///シェア機能も追加したい。
                 ],
               ),
             ),
           ),
-          Column(
+          const Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               AdBanner(),

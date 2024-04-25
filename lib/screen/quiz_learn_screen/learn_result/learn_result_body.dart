@@ -28,7 +28,7 @@ class _LearnResultBody extends ConsumerWidget {
                   const _QuizResultView(),
                   const Gap(15),
 
-                  if (!isPremium) AdNative(),
+                  if (!isPremium) const AdBanner(height: 270),
                   const Gap(180),
                 ],
               ),
@@ -38,7 +38,7 @@ class _LearnResultBody extends ConsumerWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            AdBanner(),
+            const AdBanner(),
             _NextActionCard(quiz),
           ],
         ),

@@ -15,7 +15,6 @@ import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
 import '../../view/admob/admob_banner.dart';
-import '../../view/admob/admob_native_advance.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/clear_button.dart';

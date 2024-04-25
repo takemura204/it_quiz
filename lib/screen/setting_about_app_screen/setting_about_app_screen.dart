@@ -3,8 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:kentei_quiz/screen/screen_argument.dart';
 import 'package:kentei_quiz/view/button/secondory_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../view/button_icon/cutom_back_button.dart';
 
@@ -57,19 +59,16 @@ class SettingAboutAppScreen extends ConsumerWidget {
                   width: context.width,
                   height: 50,
                   text: '利用規約',
-                  onPressed: () {
-                    context.showScreen(const SettingUserPolicyScreenArguments()
-                        .generateRoute());
+                  onPressed: () async {
+                    await launchUrl(Uri.parse(I18n().termsUrl));
                   }),
               const Gap(10),
               SecondaryButton(
                   width: context.width,
                   height: 50,
                   text: 'プライバシーポリシー',
-                  onPressed: () {
-                    context.showScreen(
-                        const SettingPrivacyPolicyScreenArguments()
-                            .generateRoute());
+                  onPressed: () async {
+                    await launchUrl(Uri.parse(I18n().privacyPolicyUrl));
                   }),
               const Gap(10),
               SecondaryButton(

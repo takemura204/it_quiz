@@ -5,24 +5,28 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../controller/admob/admob_controller.dart';
+import '../../model/user/auth_model.dart';
 
 ///バナー広告
 class AdBanner extends ConsumerWidget {
+  const AdBanner({this.height = 60.0});
+
+  final double height;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final adMobController = ref.read(adMobProvider.notifier);
-    // final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
-    const isPremium = true;
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
+    // const isPremium = true;
     // 広告がロードされたら新しいバナー広告を作成して表示する
     return !isPremium
         ? FutureBuilder<BannerAd>(
-            future: adMobController.createNewBannerAd(), // 新しいバナー広告を生成
+            future: adMobController.createNewBannerAd(height), // 新しいバナー広告を生成
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
                   width: context.width * 1.0,
-                  // color: context.backgroundColor,
-                  height: 50,
+                  height: height,
                   child: AdWidget(ad: snapshot.data!),
                 );
               } else {

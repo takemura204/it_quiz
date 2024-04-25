@@ -83,7 +83,14 @@ class I18n {
   String get buttonUnKnow => "知らない";
 
   ///URL
-  String get contactUrl => 'https://forms.gle/388fkpEwLXgF7EkdA';
+  String get contactUrl => 'https://forms.gle/wLbnrn1ovwUDYoRv5';
+
+  ///利用規約
+  String get termsUrl =>
+      'https://takemurataiki.notion.site/IT-fa92543c55634514b10e177827679675?pvs=4';
+
+  String get privacyPolicyUrl =>
+      'https://takemurataiki.notion.site/IT-9dac9d65f24d49dd886c9303892a1cd2?pvs=4';
 
   String studyTypeText(StudyType studyType) {
     switch (studyType) {

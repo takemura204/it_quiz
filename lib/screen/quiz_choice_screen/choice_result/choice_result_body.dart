@@ -35,7 +35,7 @@ class _ChoiceResultBody extends ConsumerWidget {
                   ///正解した問題リスト
                   const _QuizResultView(),
 
-                  if (!isPremium) AdNative(),
+                  if (!isPremium) const AdBanner(height: 270),
                   const Gap(200),
                 ],
               ),
@@ -45,7 +45,7 @@ class _ChoiceResultBody extends ConsumerWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            AdBanner(),
+            const AdBanner(),
             _NextActionCard(quiz),
           ],
         ),

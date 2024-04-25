@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:kentei_quiz/model/lang/secret_key.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import 'admob_state.dart';
@@ -18,70 +18,57 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
   }
 
   late BannerAd _bannerAd;
-  late NativeAd _nativeAd;
   late InterstitialAd _interstitialAd;
 
   BannerAd get bannerAd => _bannerAd;
-
-  NativeAd get nativeAd => _nativeAd;
 
   InterstitialAd get interstitialAd => _interstitialAd;
 
   @override
   Future initState() async {
+    await initAppTrackingTransparency();
     super.initState();
   }
 
   @override
   void dispose() {
     _bannerAd.dispose();
-    _nativeAd.dispose();
     _interstitialAd.dispose();
     super.dispose();
   }
 
-  String getAdBannerUnitId() {
-    String bannerUnitId = "";
-    if (Platform.isAndroid) {
-      // Android のとき
-      bannerUnitId = kDebugMode
-          ? 'ca-app-pub-3940256099942544/6300978111' // Androidのテスト広告ID
-          : "ca-app-pub-6280947803421936/3698614341"; // 本番
-    } else if (Platform.isIOS) {
-      // iOSのとき
-      bannerUnitId = kDebugMode
-          ? 'ca-app-pub-3940256099942544/2934735716' // iOSのテスト広告ID
-          : "ca-app-pub-6280947803421936/7070404216"; //本番
+  Future initAppTrackingTransparency() async {
+    final status = await AppTrackingTransparency.requestTrackingAuthorization();
+    if (status == TrackingStatus.notDetermined) {
+      await Future.delayed(const Duration(milliseconds: 200));
+      await AppTrackingTransparency.requestTrackingAuthorization();
     }
-    return bannerUnitId;
-  }
-
-  String getAdInterstitialUnitId() {
-    String bannerUnitId = "";
-    if (Platform.isAndroid) {
-      // Android のとき
-      bannerUnitId = kDebugMode
-          ? 'ca-app-pub-3940256099942544/1033173712' // Androidのテスト広告ID
-          : "ca-app-pub-6280947803421936/3267261705"; // 本番
-    } else if (Platform.isIOS) {
-      // iOSのとき
-      bannerUnitId = kDebugMode
-          ? 'ca-app-pub-3940256099942544/4411468910' // iOSのテスト広告ID
-          : "ca-app-pub-6280947803421936/6859022352"; //本番
-    }
-    return bannerUnitId;
   }
 
   // バナー広告を新しく生成するメソッド
-  Future<BannerAd> createNewBannerAd() async {
+  Future<BannerAd> createNewBannerAd(double height) async {
     try {
+      AdSize adSize;
+      if (height <= 50) {
+        adSize = AdSize.fullBanner; // 61から90までならleaderboard
+      } else if (height <= 60) {
+        adSize = AdSize.fullBanner; // 高さ60までならfullBanner
+      } else if (height <= 90) {
+        adSize = AdSize.leaderboard; // 61から90までならleaderboard
+      } else if (height <= 100) {
+        adSize = AdSize.largeBanner; // 91から100までならlargeBanner
+      } else if (height <= 250) {
+        adSize = AdSize.mediumRectangle; // 101から250までならmediumRectangle
+      } else {
+        adSize = AdSize.leaderboard; // 251以上ならデフォルトでleaderboard
+      }
       final newBannerAd = BannerAd(
-        adUnitId: getAdBannerUnitId(),
-        size: AdSize.banner,
+        adUnitId: SecretKey().bannerAdUnitId,
+        size: adSize,
         request: const AdRequest(),
         listener: BannerAdListener(
           onAdLoaded: (Ad ad) {
-            print('Ad loaded: ${ad.adUnitId}.');
+            // print('Ad loaded: ${ad.adUnitId}.');
           },
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             print('Ad failed to load: ${ad.adUnitId}, $error');
@@ -103,7 +90,7 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
     final completer = Completer<InterstitialAd?>();
 
     InterstitialAd.load(
-      adUnitId: getAdInterstitialUnitId(),
+      adUnitId: SecretKey().interstitialAdUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
@@ -147,27 +134,3 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
     }
   }
 }
-
-///AdMobの公式テスト広告ユニットID
-// Android:
-// バナー: ca-app-pub-3940256099942544/6300978111
-// インタースティシャル: ca-app-pub-3940256099942544/1033173712
-// リワード: ca-app-pub-3940256099942544/5224354917
-// ネイティブアドバンス:ca-app-pub-3940256099942544/2247696110
-//
-// iOS:
-// バナー: ca-app-pub-3940256099942544/2934735716
-// インタースティシャル: ca-app-pub-3940256099942544/4411468910
-// リワード: ca-app-pub-3940256099942544/1712485313
-// ネイティブアドバンス:ca-app-pub-3940256099942544/3986624511
-
-///本番環境
-// Android:
-// バナー:ca-app-pub-6280947803421936/3698614341
-// インターステシャル：ca-app-pub-6280947803421936/3267261705
-// ネイティブアドバンス:ca-app-pub-5053471763020307~7242186229
-//
-//iOS:
-// バナー:ca-app-pub-6280947803421936/7070404216
-// ネイティブアドバンス；ca-app-pub-6280947803421936/5518020525
-// インターステシャル：ca-app-pub-6280947803421936/6859022352
