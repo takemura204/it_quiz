@@ -17,8 +17,8 @@ import '../../view/bar.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/modals/dialog.dart';
+import '../../view/modals/randam_modal.dart';
 import '../../view/modals/study_modal.dart';
-import '../../view/modals/test_modal.dart';
 import '../screen_argument.dart';
 
 part 'home_quiz_list.dart';
@@ -150,7 +150,7 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(quizModelProvider);
-    final testQuiz = state.testQuiz ?? initTestQuiz;
+    final testQuiz = state.randomQuiz ?? initRandomQuiz;
     final weakQuiz = state.weakQuiz ?? initWeakQuiz;
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -163,7 +163,7 @@ class _Body extends ConsumerWidget {
         ),
         _BottomQuizMenu(
           weakQuiz: weakQuiz,
-          testQuiz: testQuiz,
+          randomQuiz: testQuiz,
         ),
       ],
     );

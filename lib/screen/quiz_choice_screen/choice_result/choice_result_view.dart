@@ -96,7 +96,7 @@ class _NextActionCard extends HookConsumerWidget {
                           ).generateRoute());
                         }),
               const Gap(20),
-              if (quizType == QuizType.weak || quizType == QuizType.test) ...[
+              if (quizType == QuizType.weak || quizType == QuizType.random) ...[
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,

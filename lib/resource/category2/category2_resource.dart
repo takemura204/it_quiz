@@ -5,6 +5,21 @@ extension Category2Quiz on QuizModel {
   List<Quiz> get category2QuizList {
     final quizList = [
       Quiz(
+        title: "【頻出用語】④",
+        quizItemList: category0_4,
+        isPremium: false,
+      ),
+      Quiz(
+        title: "頻出用語⑤",
+        quizItemList: category0_5,
+        isPremium: false,
+      ),
+      Quiz(
+        title: "頻出用語⑥",
+        quizItemList: category0_6,
+        isPremium: false,
+      ),
+      Quiz(
         title: "システム開発技術①",
         quizItemList: category2_1,
       ),

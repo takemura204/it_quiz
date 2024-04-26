@@ -4,6 +4,7 @@ import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz_item/quiz_item.dart';
 
 part 'quizzes.freezed.dart';
+
 part 'quizzes.g.dart';
 
 ///問題ジャンル
@@ -17,7 +18,7 @@ class Quizzes with _$Quizzes {
     @Default([]) final List<Quiz> historyQuizList, //学習したクイズリスト一覧
     @Default([]) final List<QuizItem> quizItemList,
     Quiz? weakQuiz, //苦手克服
-    Quiz? testQuiz, //テストクイズ
+    Quiz? randomQuiz, //ランダムクイズ
     @Default(QuizType.study) final QuizType quizType, //クイズタイプ
     @Default(StudyType.learn) final StudyType studyType, //クイズタイプ
   }) = _Quizzes;
@@ -32,7 +33,7 @@ enum QuizType {
   study,
   weak,
   daily,
-  test,
+  random,
 }
 
 ///苦手克服
@@ -50,11 +51,11 @@ Quiz initWeakQuiz = Quiz(
 );
 
 ///力だめし
-Quiz initTestQuiz = Quiz(
+Quiz initRandomQuiz = Quiz(
   id: 2,
   categoryId: 6,
   category: I18n().setCategory(6),
-  title: I18n().styleTestQuiz,
+  title: I18n().styleRandomQuiz,
   isCompleted: false,
   quizItemList: [],
   correctNum: 0,

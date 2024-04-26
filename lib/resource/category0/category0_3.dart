@@ -62,7 +62,7 @@ List<QuizItem> get category0_3 {
       ans: 'DFD',
       choices: ["SoE", "DFD", "BPMN", "BPR"],
       comment:
-          "DFD（Data Flow Diagram）は、システム内のデータフローや処理の流れを視覚的に表現するためのモデリング手法。プロセス間でのデータのやり取りを図式化する。",
+          "DFDは、システム内のデータフローや処理の流れを視覚的に表現するためのモデリング手法。プロセス間でのデータのやり取りを図式化する。",
     ),
     QuizItem(
       question: '情報技術に関する基本的な知識やスキルを指す用語は何か？',

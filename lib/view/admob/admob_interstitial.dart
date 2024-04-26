@@ -4,13 +4,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/admob/admob_controller.dart';
+import '../../model/user/auth_model.dart';
 
 class AdInterstitial extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final adMobController = ref.read(adMobProvider.notifier);
-    // final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
-    const isPremium = true;
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
+    // const isPremium = true;
     return !isPremium
         ? FutureBuilder<InterstitialAd?>(
             future: adMobController.createNewInterstitialAd(),

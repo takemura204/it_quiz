@@ -16,10 +16,10 @@ import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
 
 ///テストモーダル
-class TestQuizModal extends ConsumerWidget {
-  const TestQuizModal({required this.testQuiz});
+class RandomQuizModal extends ConsumerWidget {
+  const RandomQuizModal({required this.randomQuiz});
 
-  final Quiz testQuiz;
+  final Quiz randomQuiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +40,7 @@ class TestQuizModal extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _Title(testQuiz),
+                  _Title(randomQuiz),
                   const Spacer(),
                   ClearButton(
                     iconSize: 35,
@@ -71,7 +71,7 @@ class TestQuizModal extends ConsumerWidget {
                     ? PrimaryButton(
                         width: context.width * 1,
                         height: 50,
-                        text: I18n().challengeQuiz(testQuiz.title),
+                        text: I18n().challengeQuiz(randomQuiz.title),
                         onPressed: () {
                           ref
                               .read(quizModelProvider.notifier)
@@ -80,7 +80,7 @@ class TestQuizModal extends ConsumerWidget {
                               .read(homeQuizScreenProvider.notifier)
                               .tapStartTestQuizButton();
                           final testQuiz =
-                              ref.read(quizModelProvider).testQuiz!;
+                              ref.read(quizModelProvider).randomQuiz!;
                           context.showScreen(
                             QuizChoiceScreenArguments(
                               quiz: testQuiz,
@@ -91,7 +91,7 @@ class TestQuizModal extends ConsumerWidget {
                     : DisabledButton(
                         width: context.width * 1,
                         height: 50,
-                        text: I18n().challengeQuiz(testQuiz.title),
+                        text: I18n().challengeQuiz(randomQuiz.title),
                       ),
               ),
               const Gap(5),

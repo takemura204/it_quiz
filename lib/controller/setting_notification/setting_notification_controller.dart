@@ -37,10 +37,9 @@ class SettingNotificationController
 
   Future _initState() async {
     _notificationPermissionStream();
-
     await _initTimeZone();
-    await _initLocalNotifications();
-    await checkNotificationPermission();
+    // await _initLocalNotifications();
+    // await checkNotificationPermission();
   }
 
   @override
@@ -52,7 +51,7 @@ class SettingNotificationController
   /// flutter_local_notificationsの初期化
   Future _initLocalNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('icon_notification'); // アプリのアイコンを設定
+        AndroidInitializationSettings('app_icon_foreground'); // アプリのアイコンを設定
 
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
@@ -76,7 +75,6 @@ class SettingNotificationController
   }
 
   ///通知の通知状況確認
-
   Future checkNotificationPermission() async {
     final prefs = await SharedPreferences.getInstance();
     final askedBefore = prefs.getBool('askedNotificationPermission') ?? false;
@@ -84,8 +82,7 @@ class SettingNotificationController
 
     // Android 13 (API level 33) 以降の場合、新しい通知許可プロンプトを使用
     if (Platform.isAndroid) {
-      final AndroidDeviceInfo androidInfo =
-          await DeviceInfoPlugin().androidInfo;
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
       if (androidInfo.version.sdkInt >= 33) {
         // Android 13 以降の通知許可チェック
         final bool isNotificationEnabled = await flutterLocalNotificationsPlugin

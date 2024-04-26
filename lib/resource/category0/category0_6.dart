@@ -6,8 +6,7 @@ List<QuizItem> get category0_6 {
       question: 'ウェブページの構造を記述するために使用されるマークアップ言語は何か？',
       ans: 'HTML',
       choices: ["HTML", "CSS", "JavaScript", "XML"],
-      comment:
-          "HTML（HyperText Markup Language）は、ウェブページの構造を記述するために使用される標準的なマークアップ言語。",
+      comment: "HTMLは、ウェブページの構造を記述するために使用される標準的なマークアップ言語。",
     ),
     QuizItem(
       question: '電源が切れてもデータを保持し、USBメモリやSSDなどに利用される非揮発性の記憶媒体は何か？',
@@ -43,22 +42,19 @@ List<QuizItem> get category0_6 {
       question: '複数のディスクドライブを組み合わせてデータの冗長性や性能を向上させる技術は何か？',
       ans: 'RAID',
       choices: ["RAID", "NAS", "SSD", "HDD"],
-      comment:
-          "RAID（Redundant Array of Independent Disks）は、複数のディスクドライブを組み合わせてデータの冗長性や性能を向上させる技術。",
+      comment: "RAIDは、複数のディスクドライブを組み合わせてデータの冗長性や性能を向上させる技術。",
     ),
     QuizItem(
       question: 'システムや製品が平均して故障するまでの時間は何と呼ばれるか？',
       ans: 'MTBF',
       choices: ["MTBF", "MTTR", "稼働率", "寿命"],
-      comment:
-          "MTBF（Mean Time Between Failures）は、システムや製品が平均して故障するまでの時間を指し、信頼性や耐久性を示す指標。",
+      comment: "MTBFは、システムや製品が平均して故障するまでの時間を指し、信頼性や耐久性を示す指標。",
     ),
     QuizItem(
       question: 'システムや製品が故障から復旧するまでの平均時間は何と呼ばれるか？',
       ans: 'MTTR',
       choices: ["MTTR", "MTBF", "稼働率", "復旧時間"],
-      comment:
-          "MTTR（Mean Time To Repair）は、システムや製品が故障から復旧するまでの平均時間を指し、メンテナンスの効率性や迅速性を示す指標。",
+      comment: "MTTRは、システムや製品が故障から復旧するまでの平均時間を指し、メンテナンスの効率性や迅速性を示す指標。",
     ),
     QuizItem(
       question: 'システムが故障なしに稼働し続けることができる確率、または稼働時間の割合は何と呼ばれるか？',

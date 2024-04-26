@@ -5,11 +5,26 @@ extension Category1Quiz on QuizModel {
   List<Quiz> get category1QuizList {
     final quizList = [
       Quiz(
-        title: "経営・組織論①",
+        title: "【頻出】ストラテジ系①",
+        quizItemList: category0_1,
+        isPremium: false,
+      ),
+      Quiz(
+        title: "【頻出】ストラテジ系②",
+        quizItemList: category0_2,
+        isPremium: false,
+      ),
+      Quiz(
+        title: "【頻出】ストラテジ系③",
+        quizItemList: category0_3,
+        isPremium: false,
+      ),
+      Quiz(
+        title: "経営・組織論",
         quizItemList: category1_1,
       ),
       Quiz(
-        title: "経営・組織論②",
+        title: "業務分析・データ利活用",
         quizItemList: category1_2,
       ),
       Quiz(
@@ -169,7 +184,9 @@ extension Category1Quiz on QuizModel {
     ];
     return List.generate(quizList.length, (index) {
       return quizList[index].copyWith(
-          categoryId: 1, category: I18n().setCategory(1), id: index + 1 + 100);
+          categoryId: 1,
+          category: I18n().setCategory(1),
+          id: index + 1 + I18n().category1Index);
     });
   }
 }

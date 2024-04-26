@@ -26,13 +26,13 @@ class I18n {
       case 5:
         return styleWeakQuiz;
       case 6:
-        return styleTestQuiz;
+        return styleRandomQuiz;
       default:
         return 'その他';
     }
   }
 
-  String get category0 => "重要単語";
+  String get category0 => "頻出単語";
 
   String get category1 => "ストラテジ系";
 
@@ -41,6 +41,14 @@ class I18n {
   String get category3 => "テクノロジ系";
 
   String get category4 => "雑学";
+
+  int get category0Index => 0;
+
+  int get category1Index => 1000;
+
+  int get category2Index => 2000;
+
+  int get category3Index => 3000;
 
   ///title
   String get titleName => "IT用語クイズ";
@@ -60,7 +68,7 @@ class I18n {
 
   String get styleWeakQuiz => "苦手克服";
 
-  String get styleTestQuiz => "力だめし";
+  String get styleRandomQuiz => "ランダム出題";
 
   String challengeQuiz(String quizStyle) {
     return "$quizStyleに挑戦する";
@@ -140,7 +148,7 @@ class I18n {
       case 3:
         return "🔥今日も学習の習慣をキープしよう！";
       case 4:
-        return "🌈新しい発見をしよう！";
+        return "🔍新しい発見をしてみよう！";
       case 5:
         return "🏆目指せ、レベルアップ！";
       case 6:

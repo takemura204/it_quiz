@@ -118,7 +118,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   void tapStartTestQuizButton() {
     final selectedTestCategory = state.selectedTestCategory;
     final selectedTestLength = state.selectedTestLength;
-    ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
+    ref.read(quizModelProvider.notifier).setQuizType(QuizType.random);
     ref
         .read(quizModelProvider.notifier)
         .createTestQuiz(selectedTestCategory, selectedTestLength);

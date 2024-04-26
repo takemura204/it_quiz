@@ -141,9 +141,9 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final testData = prefs.getString('test_quiz');
     if (testData != null) {
       final testQuiz = Quiz.fromJson(json.decode(testData));
-      state = state.copyWith(testQuiz: testQuiz);
+      state = state.copyWith(randomQuiz: testQuiz);
     } else {
-      state = state.copyWith(testQuiz: initTestQuiz);
+      state = state.copyWith(randomQuiz: initRandomQuiz);
     }
   }
 
@@ -204,7 +204,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         // updateWeakItem();
 
         break;
-      case QuizType.test:
+      case QuizType.random:
         _updateTestQuiz(quiz);
         updateWeakItem();
 
@@ -270,7 +270,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
       return quiz.copyWith(quizItemList: updateQuizItemList);
     }).toList();
 
-    state = state.copyWith(quizList: updateQuizList, testQuiz: updateQuiz);
+    state = state.copyWith(quizList: updateQuizList, randomQuiz: updateQuiz);
     _saveDevice(); // 保存
   }
 
@@ -389,8 +389,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         break;
       }
     }
-    final testQuiz = initTestQuiz.copyWith(quizItemList: pickedQuizList);
-    state = state.copyWith(testQuiz: testQuiz);
+    final randomQuiz = initRandomQuiz.copyWith(quizItemList: pickedQuizList);
+    state = state.copyWith(randomQuiz: randomQuiz);
   }
 
   /// 現在のインデックスを取得し、更新
@@ -436,11 +436,11 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final historyListData =
         state.historyQuizList.map((e) => json.encode(e.toJson())).toList();
     final weakData = json.encode(state.weakQuiz?.toJson());
-    final testData = json.encode(state.testQuiz?.toJson());
+    final randomData = json.encode(state.randomQuiz?.toJson());
     await prefs.setStringList('quiz_list', quizListData);
     await prefs.setStringList('history_list', historyListData);
     await prefs.setString('weak_quiz', weakData);
-    await prefs.setString('test_quiz', testData);
+    await prefs.setString('random_quiz', randomData);
   }
 
   void setIsLoading(bool value) {
