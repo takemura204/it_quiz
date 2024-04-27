@@ -5,6 +5,11 @@ extension Category3Quiz on QuizModel {
   List<Quiz> get category3QuizList {
     final quizList = [
       Quiz(
+        title: "【頻出】テクノロジ系①",
+        quizItemList: category0_6,
+        isPremium: false,
+      ),
+      Quiz(
         title: "応用数学",
         quizItemList: category3_1,
       ),
