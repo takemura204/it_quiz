@@ -41,7 +41,6 @@ import 'category2/category2_5.dart';
 import 'category2/category2_6.dart';
 import 'category2/category2_7.dart';
 import 'category2/category2_8.dart';
-import 'category2/category2_9.dart';
 import 'category3/category3_1.dart';
 import 'category3/category3_10.dart';
 import 'category3/category3_11.dart';
@@ -59,28 +58,8 @@ import 'category3/category3_21.dart';
 import 'category3/category3_22.dart';
 import 'category3/category3_23.dart';
 import 'category3/category3_24.dart';
-import 'category3/category3_25.dart';
-import 'category3/category3_26.dart';
-import 'category3/category3_27.dart';
-import 'category3/category3_28.dart';
-import 'category3/category3_29.dart';
 import 'category3/category3_3.dart';
-import 'category3/category3_30.dart';
-import 'category3/category3_31.dart';
-import 'category3/category3_32.dart';
-import 'category3/category3_33.dart';
-import 'category3/category3_34.dart';
-import 'category3/category3_35.dart';
-import 'category3/category3_36.dart';
-import 'category3/category3_37.dart';
-import 'category3/category3_38.dart';
-import 'category3/category3_39.dart';
 import 'category3/category3_4.dart';
-import 'category3/category3_40.dart';
-import 'category3/category3_41.dart';
-import 'category3/category3_42.dart';
-import 'category3/category3_43.dart';
-import 'category3/category3_44.dart';
 import 'category3/category3_5.dart';
 import 'category3/category3_6.dart';
 import 'category3/category3_7.dart';
@@ -88,8 +67,11 @@ import 'category3/category3_8.dart';
 import 'category3/category3_9.dart';
 
 part 'category0/category0_resource.dart';
+
 part 'category1/category1_resource.dart';
+
 part 'category2/category2_resource.dart';
+
 part 'category3/category3_resource.dart';
 
 extension QuizModelEx on QuizModel {

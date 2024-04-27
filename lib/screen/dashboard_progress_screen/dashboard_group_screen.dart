@@ -319,7 +319,7 @@ class _ProgressRadarChart extends StatelessWidget {
         getTitle: (index, angle) => RadarChartTitle(
           text: categories[index],
           angle: 0,
-          positionPercentageOffset: index.isEven ? 0.05 : 0.45,
+          positionPercentageOffset: index == 0 ? 0.1 : 0.35,
         ),
         titleTextStyle: TextStyle(
             color: context.mainColor,

@@ -49,7 +49,9 @@ extension Category2Quiz on QuizModel {
     ];
     return List.generate(quizList.length, (index) {
       return quizList[index].copyWith(
-          categoryId: 2, category: I18n().setCategory(2), id: index + 1 + 200);
+          categoryId: 2,
+          category: I18n().setCategory(2),
+          id: index + I18n().category2Index + 1);
     });
   }
 }
