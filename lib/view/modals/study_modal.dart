@@ -26,20 +26,18 @@ class StudyQuizModal extends ConsumerWidget {
       children: [
         Container(
           color: Colors.white,
-          width: context.width * 0.8,
+          // width: context.width * 0.8,
           child: Column(
             children: [
               const Gap(5),
 
               ///タイトル
               Container(
-                height: 45,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _Title(quiz),
-                    const Spacer(),
+                    Expanded(child: _Title(quiz)),
                     ClearButton(
                       iconSize: 35,
                       onPressed: () {},
@@ -118,8 +116,7 @@ class _Title extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 45,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       alignment: Alignment.centerLeft,
       child: Text(
         quiz.title,
@@ -138,7 +135,7 @@ class _QuizResult extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: context.height * 0.05,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       alignment: Alignment.centerLeft,
       child: Row(
         children: [

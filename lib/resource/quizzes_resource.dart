@@ -27,25 +27,7 @@ import 'category1/category1_2.dart';
 import 'category1/category1_20.dart';
 import 'category1/category1_21.dart';
 import 'category1/category1_22.dart';
-import 'category1/category1_23.dart';
-import 'category1/category1_24.dart';
-import 'category1/category1_25.dart';
-import 'category1/category1_26.dart';
-import 'category1/category1_27.dart';
-import 'category1/category1_28.dart';
-import 'category1/category1_29.dart';
 import 'category1/category1_3.dart';
-import 'category1/category1_30.dart';
-import 'category1/category1_31.dart';
-import 'category1/category1_32.dart';
-import 'category1/category1_33.dart';
-import 'category1/category1_34.dart';
-import 'category1/category1_35.dart';
-import 'category1/category1_36.dart';
-import 'category1/category1_37.dart';
-import 'category1/category1_38.dart';
-import 'category1/category1_39.dart';
-import 'category1/category1_40.dart';
 import 'category1/category1_5.dart';
 import 'category1/category1_6.dart';
 import 'category1/category1_7.dart';
@@ -112,10 +94,9 @@ part 'category3/category3_resource.dart';
 
 extension QuizModelEx on QuizModel {
   List<Quiz> get initQuizList {
-    final quizList = category0QuizList +
-        category1QuizList +
-        category2QuizList +
-        category3QuizList;
+    final quizList =
+        // category0QuizList +
+        category1QuizList + category2QuizList + category3QuizList;
 
     return quizList;
   }
