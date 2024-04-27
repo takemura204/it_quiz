@@ -86,7 +86,7 @@ class _NextActionCard extends HookConsumerWidget {
                   width: context.width * 0.45,
                   height: 55,
                   text: "再挑戦",
-                  onPressed: (quizType == QuizType.weak &&
+                  onPressed: (quizType == QuizStyleType.weak &&
                           weakQuiz!.quizItemList.isEmpty)
                       ? null
                       : () {
@@ -96,7 +96,8 @@ class _NextActionCard extends HookConsumerWidget {
                           ).generateRoute());
                         }),
               const Gap(20),
-              if (quizType == QuizType.weak || quizType == QuizType.random) ...[
+              if (quizType == QuizStyleType.weak ||
+                  quizType == QuizStyleType.random) ...[
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,

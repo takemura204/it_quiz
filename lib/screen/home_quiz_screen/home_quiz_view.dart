@@ -29,7 +29,7 @@ class _BottomQuizMenu extends ConsumerWidget {
                     : () {
                         ref
                             .read(quizModelProvider.notifier)
-                            .setQuizType(QuizType.weak);
+                            .setQuizType(QuizStyleType.weak);
                         showDialog(
                             context: context,
                             builder: (_) => WeakQuizModal(quiz: weakQuiz));
@@ -45,7 +45,7 @@ class _BottomQuizMenu extends ConsumerWidget {
               onPressed: () {
                 ref
                     .read(quizModelProvider.notifier)
-                    .setQuizType(QuizType.random);
+                    .setQuizType(QuizStyleType.random);
                 showDialog(
                   context: context,
                   builder: (_) {

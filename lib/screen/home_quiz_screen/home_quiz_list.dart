@@ -46,7 +46,7 @@ class _QuizCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         if (isPremium) {
-          ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
+          ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
           ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
           ref.read(quizModelProvider.notifier).tapQuizIndex(index);
           showDialog(
@@ -151,6 +151,8 @@ class _Title extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
+        !quiz.isPremium;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +163,7 @@ class _Title extends ConsumerWidget {
         ),
         const Gap(3),
         Text(
-          I18n().quizCorrectRate(correctRate),
+          isPremium ? I18n().quizCorrectRate(correctRate) : '追加購入で解放',
           style: context.texts.bodyMedium,
         ),
       ],

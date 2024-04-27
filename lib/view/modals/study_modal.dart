@@ -7,6 +7,7 @@ import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../screen/screen_argument.dart';
+import '../../untils/enums.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';

@@ -9,6 +9,7 @@ import 'package:kentei_quiz/resource/quizzes_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../untils/enums.dart';
 import '../quiz_item/quiz_item.dart';
 
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
@@ -190,21 +191,21 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   void updateQuiz(Quiz quiz) {
     final quizType = state.quizType;
     switch (quizType) {
-      case QuizType.study:
+      case QuizStyleType.study:
         _updateStudyQuiz(quiz);
         updateWeakItem();
 
         break;
-      case QuizType.weak:
+      case QuizStyleType.weak:
         _updateWeakQuiz(quiz);
         updateWeakItem();
         break;
-      case QuizType.daily:
+      case QuizStyleType.daily:
         // updateDailyItem(quizItemList);
         // updateWeakItem();
 
         break;
-      case QuizType.random:
+      case QuizStyleType.random:
         _updateTestQuiz(quiz);
         updateWeakItem();
 
@@ -402,7 +403,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     state = state.copyWith(quizIndex: index);
   }
 
-  void setQuizType(QuizType quizType) {
+  void setQuizType(QuizStyleType quizType) {
     state = state.copyWith(quizType: quizType);
   }
 
@@ -456,3 +457,5 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     prefs.remove("test_quiz");
   }
 }
+
+class QuizStudyType {}

@@ -3,6 +3,7 @@ import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 
 import '../../model/user/auth_model.dart';
+import '../../untils/enums.dart';
 import 'home_dashboard_screen_state.dart';
 
 final homeDashboardScreenProvider = StateNotifierProvider<

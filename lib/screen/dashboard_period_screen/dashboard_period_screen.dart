@@ -4,12 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
-import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button/primary_button.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/user/auth_model.dart';
+import '../../untils/enums.dart';
 import '../screen_argument.dart';
 
 part 'dashboard_chart.dart';

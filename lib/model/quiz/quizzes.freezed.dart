@@ -28,8 +28,8 @@ mixin _$Quizzes {
       throw _privateConstructorUsedError; //学習したクイズリスト一覧
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   Quiz? get weakQuiz => throw _privateConstructorUsedError; //苦手克服
-  Quiz? get randomQuiz => throw _privateConstructorUsedError; //テストクイズ
-  QuizType get quizType => throw _privateConstructorUsedError; //クイズタイプ
+  Quiz? get randomQuiz => throw _privateConstructorUsedError; //ランダムクイズ
+  QuizStyleType get quizType => throw _privateConstructorUsedError; //クイズタイプ
   StudyType get studyType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $QuizzesCopyWith<$Res> {
       List<QuizItem> quizItemList,
       Quiz? weakQuiz,
       Quiz? randomQuiz,
-      QuizType quizType,
+      QuizStyleType quizType,
       StudyType studyType});
 
   $QuizCopyWith<$Res>? get weakQuiz;
@@ -118,7 +118,7 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
       quizType: null == quizType
           ? _value.quizType
           : quizType // ignore: cast_nullable_to_non_nullable
-              as QuizType,
+              as QuizStyleType,
       studyType: null == studyType
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ abstract class _$$_QuizzesCopyWith<$Res> implements $QuizzesCopyWith<$Res> {
       List<QuizItem> quizItemList,
       Quiz? weakQuiz,
       Quiz? randomQuiz,
-      QuizType quizType,
+      QuizStyleType quizType,
       StudyType studyType});
 
   @override
@@ -233,7 +233,7 @@ class __$$_QuizzesCopyWithImpl<$Res>
       quizType: null == quizType
           ? _value.quizType
           : quizType // ignore: cast_nullable_to_non_nullable
-              as QuizType,
+              as QuizStyleType,
       studyType: null == studyType
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
@@ -254,7 +254,7 @@ class _$_Quizzes extends _Quizzes {
       final List<QuizItem> quizItemList = const [],
       this.weakQuiz,
       this.randomQuiz,
-      this.quizType = QuizType.study,
+      this.quizType = QuizStyleType.study,
       this.studyType = StudyType.learn})
       : _quizList = quizList,
         _historyQuizList = historyQuizList,
@@ -312,10 +312,10 @@ class _$_Quizzes extends _Quizzes {
 //苦手克服
   @override
   final Quiz? randomQuiz;
-//テストクイズ
+//ランダムクイズ
   @override
   @JsonKey()
-  final QuizType quizType;
+  final QuizStyleType quizType;
 //クイズタイプ
   @override
   @JsonKey()
@@ -391,7 +391,7 @@ abstract class _Quizzes extends Quizzes {
       final List<QuizItem> quizItemList,
       final Quiz? weakQuiz,
       final Quiz? randomQuiz,
-      final QuizType quizType,
+      final QuizStyleType quizType,
       final StudyType studyType}) = _$_Quizzes;
   _Quizzes._() : super._();
 
@@ -413,8 +413,8 @@ abstract class _Quizzes extends Quizzes {
   Quiz? get weakQuiz;
   @override //苦手克服
   Quiz? get randomQuiz;
-  @override //テストクイズ
-  QuizType get quizType;
+  @override //ランダムクイズ
+  QuizStyleType get quizType;
   @override //クイズタイプ
   StudyType get studyType;
   @override

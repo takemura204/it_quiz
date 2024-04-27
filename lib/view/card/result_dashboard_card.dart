@@ -5,8 +5,8 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../model/quiz/quiz.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 class ResultDashboardCard extends ConsumerWidget {
   const ResultDashboardCard(this.quizItemList, this.duration);

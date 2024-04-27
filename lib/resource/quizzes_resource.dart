@@ -3,6 +3,7 @@ import 'package:kentei_quiz/resource/category1/category1_4.dart';
 import '../model/lang/initial_resource.dart';
 import '../model/quiz/quiz.dart';
 import '../model/quiz/quiz_model.dart';
+import '../untils/enums.dart';
 import 'category0/category0_1.dart';
 import 'category0/category0_2.dart';
 import 'category0/category0_3.dart';
@@ -67,11 +68,8 @@ import 'category3/category3_8.dart';
 import 'category3/category3_9.dart';
 
 part 'category0/category0_resource.dart';
-
 part 'category1/category1_resource.dart';
-
 part 'category2/category2_resource.dart';
-
 part 'category3/category3_resource.dart';
 
 extension QuizModelEx on QuizModel {

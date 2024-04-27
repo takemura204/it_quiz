@@ -9,6 +9,7 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
+import '../../untils/enums.dart';
 import '../admob/admob_controller.dart';
 
 final quizChoiceScreenProvider =

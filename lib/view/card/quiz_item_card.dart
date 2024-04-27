@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 import '../button_icon/check_buton.dart';
 
 class QuizItemCard extends ConsumerWidget {

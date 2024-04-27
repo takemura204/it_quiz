@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../untils/enums.dart';
 import '../quiz_item/quiz_item.dart';
 
 part 'quiz.freezed.dart';
@@ -23,9 +24,4 @@ class Quiz with _$Quiz {
   }) = _Quiz;
 
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
-}
-
-enum StudyType {
-  learn,
-  choice,
 }

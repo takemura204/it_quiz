@@ -13,6 +13,7 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
+import '../../untils/enums.dart';
 import '../../view/bar.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
@@ -103,7 +104,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         preferredSize:
             const Size.fromHeight(kToolbarHeight + kTextTabBarHeight),
         child: TabBar(
-          tabAlignment: TabAlignment.start,
+          tabAlignment: TabAlignment.center,
           controller: tabController,
           onTap: (index) =>
               ref.read(homeQuizScreenProvider.notifier).setTabIndex(index),

@@ -11,6 +11,7 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/user/auth_model.dart';
 import '../../screen/screen_argument.dart';
+import '../../untils/enums.dart';
 import '../button/disabled_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';

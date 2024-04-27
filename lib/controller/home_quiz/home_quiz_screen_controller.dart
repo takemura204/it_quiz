@@ -7,6 +7,7 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 import 'home_quiz_screen_state.dart';
 
 final homeQuizScreenProvider =
@@ -118,7 +119,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   void tapStartTestQuizButton() {
     final selectedTestCategory = state.selectedTestCategory;
     final selectedTestLength = state.selectedTestLength;
-    ref.read(quizModelProvider.notifier).setQuizType(QuizType.random);
+    ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.random);
     ref
         .read(quizModelProvider.notifier)
         .createTestQuiz(selectedTestCategory, selectedTestLength);

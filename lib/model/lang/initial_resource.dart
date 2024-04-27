@@ -1,4 +1,4 @@
-import 'package:kentei_quiz/model/quiz/quiz.dart';
+import '../../untils/enums.dart';
 
 class I18n {
   static I18n? _instance;
