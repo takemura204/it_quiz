@@ -194,7 +194,7 @@ class _SelectLength extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<int> selectWeakLength = [10, 20, 50];
+    final List<int> selectWeakLength = [5, 10, 20];
 
     final selectedWeakLength = ref.watch(
       homeQuizScreenProvider.select((state) => state.selectedWeakLength),

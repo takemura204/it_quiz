@@ -15,7 +15,7 @@ _$_Auth _$$_AuthFromJson(Map<String, dynamic> json) => _$_Auth(
       birthDay: json['birthDay'] as String? ?? '',
       isLogin: json['isLogin'] as bool? ?? false,
       themeId: json['themeId'] as int? ?? 0,
-      dailyGoal: json['dailyGoal'] as int? ?? 10,
+      dailyGoal: json['dailyGoal'] as int? ?? 20,
       selectNotificationTime: json['selectNotificationTime'] == null
           ? null
           : NotificationTime.fromJson(

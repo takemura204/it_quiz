@@ -103,7 +103,7 @@ class _RankStatus extends ConsumerWidget {
             ],
           ),
           const Gap(2),
-          ProgressLineBar(
+          ProgressLineChart(
             height: 10,
             width: 120,
             currentScore: rank.score % rank.levelUpScore,

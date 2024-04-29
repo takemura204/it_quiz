@@ -8,6 +8,7 @@ import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
+import '../../untils/enums.dart';
 import '../admob/admob_controller.dart';
 
 final quizLearnScreenProvider =
@@ -83,7 +84,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
       isWeak: quizItemList[index].isWeak,
-      isJudge: isKnow,
+      isJudge: isKnow ? QuizStatusType.correct : QuizStatusType.incorrect,
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: lapIndex,

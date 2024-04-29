@@ -9,8 +9,8 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../view/bar.dart';
 import '../../view/button/primary_button.dart';
+import '../../view/chart/progress_line_chart.dart';
 import '../screen_argument.dart';
 
 part 'dashboard_group_progress_view.dart';
@@ -195,7 +195,7 @@ class _GroupProgressCount extends ConsumerWidget {
                 ),
               ),
               Expanded(
-                child: ProgressLineBar(
+                child: ProgressLineChart(
                   height: 20,
                   width: context.width,
                   currentScore: correctNum,
@@ -245,7 +245,7 @@ class _TotalProgressCount extends ConsumerWidget {
                     ),
                   ),
                   Expanded(
-                    child: ProgressLineBar(
+                    child: ProgressLineChart(
                       height: 20,
                       width: context.width,
                       currentScore: correctNum,

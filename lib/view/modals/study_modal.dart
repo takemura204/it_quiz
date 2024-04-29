@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 
+import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../screen/screen_argument.dart';
@@ -11,6 +12,7 @@ import '../../untils/enums.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
+import '../chart/progress_line_chart.dart';
 
 ///クイズモーダル
 class StudyQuizModal extends ConsumerWidget {
@@ -52,6 +54,18 @@ class StudyQuizModal extends ConsumerWidget {
               ///クイズ挑戦結果
               _QuizResult(quiz),
 
+              CustomProgressIndicator(
+                width: 200,
+                height: 20,
+                borderRadius: 8,
+                value1: 3,
+                value2: 10,
+                goalScore: 10,
+              ),
+
+              const Divider(height: 1),
+
+              const _SelectLength(),
               const Divider(height: 1),
               const Gap(10),
 
@@ -166,6 +180,89 @@ class _QuizResult extends ConsumerWidget {
                 style: context.texts.titleMedium,
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+///問題数指定
+class _SelectLength extends ConsumerWidget {
+  const _SelectLength();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<int> selectLength = [5, 10, 20];
+
+    final selectedStudyLength = ref.watch(
+      homeQuizScreenProvider.select((state) => state.selectedStudyLength),
+    );
+
+    final initialIndex = selectLength.indexOf(selectedStudyLength);
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 0.04, vertical: context.width * 0.02),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '問題数を選択してください。',
+            style: TextStyle(fontSize: 14),
+          ),
+          const Gap(5),
+          Container(
+            height: 50,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: context.mainColor),
+            ),
+            child: DefaultTabController(
+              length: 3,
+              initialIndex: initialIndex,
+              child: TabBar(
+                  onTap: (index) {
+                    ref
+                        .read(homeQuizScreenProvider.notifier)
+                        .selectStudyLength(selectLength[index]);
+                  },
+                  labelColor: Colors.white,
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  unselectedLabelStyle:
+                      const TextStyle(fontWeight: FontWeight.normal),
+                  unselectedLabelColor: context.mainColor,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: context.mainColor),
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        "${selectLength[0]}問",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${selectLength[1]}問",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${selectLength[2]}問",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ]),
+            ),
           ),
         ],
       ),

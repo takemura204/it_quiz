@@ -9,11 +9,11 @@ import 'package:line_icons/line_icons.dart';
 import '../../model/dashboard/dashboard_model.dart';
 import '../../model/mission/mission.dart';
 import '../../model/mission/mission_model.dart';
-import '../bar.dart';
 import '../button/defalut_button.dart';
 import '../button/disabled_button.dart';
 import '../button/primary_button.dart';
 import '../button/secondory_button.dart';
+import '../chart/progress_line_chart.dart';
 import '../icon.dart';
 
 ///クイズモーダル
@@ -203,7 +203,7 @@ class _DailyMissionCard extends ConsumerWidget {
                 ),
               ),
               Gap(context.height * 0.01),
-              ProgressLineBar(
+              ProgressLineChart(
                 height: context.height * 0.02,
                 width: context.width * 0.5,
                 currentScore: currentValue,

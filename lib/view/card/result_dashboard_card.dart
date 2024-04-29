@@ -67,7 +67,7 @@ class ResultDashboardCard extends ConsumerWidget {
                             ),
                             height: 8,
                             width: ('${quizItemList.length}'.length.toDouble() +
-                                        '${quizItemList.where((x) => x.isJudge).toList().length}'
+                                        '${quizItemList.where((x) => x.isJudge == QuizStatusType.correct).toList().length}'
                                             .length
                                             .toDouble()) *
                                     35 +
@@ -79,7 +79,7 @@ class ResultDashboardCard extends ConsumerWidget {
                             textBaseline: TextBaseline.alphabetic,
                             children: [
                               Text(
-                                "${quizItemList.where((x) => x.isJudge).toList().length}",
+                                "${quizItemList.where((x) => x.isJudge == QuizStatusType.correct).toList().length}",
                                 style: const TextStyle(
                                   color: Colors.black54,
                                   fontSize: 35,

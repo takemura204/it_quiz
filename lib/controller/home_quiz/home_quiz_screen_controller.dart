@@ -61,14 +61,15 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
         .toList();
 
     final correctRatios = categoryList.map((category) {
-      final correctNum = ref
+      final correctQuizLength = ref
           .read(quizModelProvider)
           .quizList
           .where((quiz) => quiz.category == category)
-          .fold<int>(
-            0,
-            (sum, quiz) => sum + quiz.correctNum,
-          );
+          .expand((quiz) => quiz.quizItemList)
+          .where((quizItem) => quizItem.isJudge == QuizStatusType.correct)
+          .toList()
+          .length;
+
       final quizLength = ref
           .read(quizModelProvider)
           .quizList
@@ -76,8 +77,12 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
           .expand((quiz) => quiz.quizItemList)
           .toList()
           .length;
-      return (quizLength > 0) ? (correctNum / quizLength) * 100 : 0.0;
+
+      print({'correctNum', correctQuizLength, quizLength});
+      return (quizLength > 0) ? (correctQuizLength / quizLength) * 100 : 0.0;
     }).toList();
+
+    print({'correctRatios', correctRatios});
 
     state = state.copyWith(
         categoryList: categoryList,
@@ -143,6 +148,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///問題数指定
+  void selectStudyLength(int length) {
+    state = state.copyWith(selectedStudyLength: length);
+  }
+
   void selectWeakLength(int length) {
     state = state.copyWith(selectedWeakLength: length);
   }

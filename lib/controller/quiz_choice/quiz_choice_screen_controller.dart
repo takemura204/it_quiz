@@ -99,7 +99,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
-        isJudge: true,
+        isJudge: QuizStatusType.correct,
         //正解
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: false,
@@ -117,7 +117,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
-        isJudge: false,
+        isJudge: QuizStatusType.incorrect,
         //不正解
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: true,

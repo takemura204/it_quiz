@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/untils/enums.dart';
 
 import '../quiz/quiz_model.dart';
 import 'dashboard.dart';
@@ -53,8 +54,10 @@ class DashboardModel extends StateNotifier<Dashboard> {
           quiz.timeStamp?.year == today.year) {
         dailyDuration += quiz.duration;
         dailyQuizCount += quiz.quizItemList.length;
-        dailyQuizCorrectCount +=
-            quiz.quizItemList.where((x) => x.isJudge).toList().length;
+        dailyQuizCorrectCount += quiz.quizItemList
+            .where((x) => x.isJudge == QuizStatusType.correct)
+            .toList()
+            .length;
       }
 
       // 週次データの集計
@@ -63,8 +66,10 @@ class DashboardModel extends StateNotifier<Dashboard> {
           quiz.timeStamp!.isBefore(endOfWeek.add(const Duration(days: 1)))) {
         weeklyDuration += quiz.duration;
         weeklyQuizCount += quiz.quizItemList.length;
-        weeklyQuizCorrectCount +=
-            quiz.quizItemList.where((x) => x.isJudge).toList().length;
+        weeklyQuizCorrectCount += quiz.quizItemList
+            .where((x) => x.isJudge == QuizStatusType.correct)
+            .toList()
+            .length;
       }
 
       // 月次データの集計
@@ -73,8 +78,10 @@ class DashboardModel extends StateNotifier<Dashboard> {
           quiz.timeStamp!.isBefore(endOfMonth.add(const Duration(days: 1)))) {
         monthlyDuration += quiz.duration;
         monthlyQuizCount += quiz.quizItemList.length;
-        monthlyQuizCorrectCount +=
-            quiz.quizItemList.where((x) => x.isJudge).toList().length;
+        monthlyQuizCorrectCount += quiz.quizItemList
+            .where((x) => x.isJudge == QuizStatusType.correct)
+            .toList()
+            .length;
       }
     }
 

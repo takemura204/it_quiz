@@ -252,7 +252,7 @@ class _$_Auth implements _Auth {
       this.birthDay = '',
       this.isLogin = false,
       this.themeId = 0,
-      this.dailyGoal = 10,
+      this.dailyGoal = 20,
       this.selectNotificationTime,
       this.isPremium = false});
 

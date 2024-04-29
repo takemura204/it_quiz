@@ -18,7 +18,7 @@ class Auth with _$Auth {
     @Default(false) final bool isLogin,
     //ユーザーのカスタム設定
     @Default(0) final int themeId,
-    @Default(10) final int dailyGoal,
+    @Default(20) final int dailyGoal,
     NotificationTime? selectNotificationTime,
     @Default(false) final bool isPremium,
   }) = _Auth;

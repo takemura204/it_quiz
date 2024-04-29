@@ -6,7 +6,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
 import '../../model/user/auth_model.dart';
-import '../../view/bar.dart';
+import '../../view/chart/progress_crilcle_chart.dart';
 
 part 'dashboard_daily_view.dart';
 

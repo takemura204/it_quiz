@@ -26,6 +26,7 @@ mixin _$HomeQuizScreenState {
   int get tabIndex => throw _privateConstructorUsedError; //クイズ番号
   bool get isSelected => throw _privateConstructorUsedError;
   List<String> get selectedFilterGroup => throw _privateConstructorUsedError;
+  int get selectedStudyLength => throw _privateConstructorUsedError;
   int get selectedTestLength => throw _privateConstructorUsedError;
   int get selectedWeakLength => throw _privateConstructorUsedError;
   Quiz? get selectWeakQuiz => throw _privateConstructorUsedError;
@@ -52,6 +53,7 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       int tabIndex,
       bool isSelected,
       List<String> selectedFilterGroup,
+      int selectedStudyLength,
       int selectedTestLength,
       int selectedWeakLength,
       Quiz? selectWeakQuiz});
@@ -82,6 +84,7 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? tabIndex = null,
     Object? isSelected = null,
     Object? selectedFilterGroup = null,
+    Object? selectedStudyLength = null,
     Object? selectedTestLength = null,
     Object? selectedWeakLength = null,
     Object? selectWeakQuiz = freezed,
@@ -127,6 +130,10 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.selectedFilterGroup
           : selectedFilterGroup // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      selectedStudyLength: null == selectedStudyLength
+          ? _value.selectedStudyLength
+          : selectedStudyLength // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedTestLength: null == selectedTestLength
           ? _value.selectedTestLength
           : selectedTestLength // ignore: cast_nullable_to_non_nullable
@@ -174,6 +181,7 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       int tabIndex,
       bool isSelected,
       List<String> selectedFilterGroup,
+      int selectedStudyLength,
       int selectedTestLength,
       int selectedWeakLength,
       Quiz? selectWeakQuiz});
@@ -203,6 +211,7 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? tabIndex = null,
     Object? isSelected = null,
     Object? selectedFilterGroup = null,
+    Object? selectedStudyLength = null,
     Object? selectedTestLength = null,
     Object? selectedWeakLength = null,
     Object? selectWeakQuiz = freezed,
@@ -248,6 +257,10 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
           ? _value._selectedFilterGroup
           : selectedFilterGroup // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      selectedStudyLength: null == selectedStudyLength
+          ? _value.selectedStudyLength
+          : selectedStudyLength // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedTestLength: null == selectedTestLength
           ? _value.selectedTestLength
           : selectedTestLength // ignore: cast_nullable_to_non_nullable
@@ -278,6 +291,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       this.tabIndex = 0,
       this.isSelected = false,
       final List<String> selectedFilterGroup = const [],
+      this.selectedStudyLength = 10,
       this.selectedTestLength = 10,
       this.selectedWeakLength = 10,
       this.selectWeakQuiz})
@@ -353,6 +367,9 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
 
   @override
   @JsonKey()
+  final int selectedStudyLength;
+  @override
+  @JsonKey()
   final int selectedTestLength;
   @override
   @JsonKey()
@@ -362,7 +379,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, correctRatios: $correctRatios, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, correctRatios: $correctRatios, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
@@ -390,6 +407,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
                 other.isSelected == isSelected) &&
             const DeepCollectionEquality()
                 .equals(other._selectedFilterGroup, _selectedFilterGroup) &&
+            (identical(other.selectedStudyLength, selectedStudyLength) ||
+                other.selectedStudyLength == selectedStudyLength) &&
             (identical(other.selectedTestLength, selectedTestLength) ||
                 other.selectedTestLength == selectedTestLength) &&
             (identical(other.selectedWeakLength, selectedWeakLength) ||
@@ -411,6 +430,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       tabIndex,
       isSelected,
       const DeepCollectionEquality().hash(_selectedFilterGroup),
+      selectedStudyLength,
       selectedTestLength,
       selectedWeakLength,
       selectWeakQuiz);
@@ -435,6 +455,7 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       final int tabIndex,
       final bool isSelected,
       final List<String> selectedFilterGroup,
+      final int selectedStudyLength,
       final int selectedTestLength,
       final int selectedWeakLength,
       final Quiz? selectWeakQuiz}) = _$_HomeQuizScreenState;
@@ -459,6 +480,8 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   bool get isSelected;
   @override
   List<String> get selectedFilterGroup;
+  @override
+  int get selectedStudyLength;
   @override
   int get selectedTestLength;
   @override

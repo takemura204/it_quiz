@@ -16,7 +16,25 @@ enum StudyType {
 enum QuizStatusType {
   correct, //正解
   incorrect, //不正解
-  unattempted, //未学習
+  learned, //学習済み
+  unlearned, //未学習
+}
+
+extension QuizStatusTypeExtension on QuizStatusType {
+  static QuizStatusType fromJson(String json) {
+    switch (json) {
+      case 'correct':
+        return QuizStatusType.correct;
+      case 'incorrect':
+        return QuizStatusType.incorrect;
+      case 'learned':
+        return QuizStatusType.learned;
+      case 'unlearned':
+        return QuizStatusType.unlearned;
+      default:
+        throw StateError('Unknown QuizStatusType: $json');
+    }
+  }
 }
 
 ///クイズの重要度
@@ -25,6 +43,23 @@ enum QuizImportanceType {
   normal, // 重要（星2）
   low, // 普通重要（星1）
   none, // シラバス外（星0）
+}
+
+extension QuizImportanceTypeExtension on QuizImportanceType {
+  static QuizImportanceType fromJson(String json) {
+    switch (json) {
+      case 'high':
+        return QuizImportanceType.high;
+      case 'normal':
+        return QuizImportanceType.normal;
+      case 'low':
+        return QuizImportanceType.low;
+      case 'none':
+        return QuizImportanceType.none;
+      default:
+        throw StateError('Unknown QuizStatusType: $json');
+    }
+  }
 }
 
 ///選択した期間

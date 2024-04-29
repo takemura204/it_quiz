@@ -46,80 +46,85 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   /// 全クイズ取得
   Future _getQuizListData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final quizListDataJson = prefs.getStringList('quiz_list');
-    List<Quiz> updatedQuizList = [];
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final quizListDataJson = prefs.getStringList('quiz_list');
+      List<Quiz> updatedQuizList = [];
 
-    if (quizListDataJson != null && quizListDataJson.isNotEmpty) {
-      final localQuizList =
-          quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
+      if (quizListDataJson != null && quizListDataJson.isNotEmpty) {
+        final localQuizList =
+            quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
 
-      for (var localQuiz in localQuizList) {
-        final matchedQuiz =
-            initQuizList.firstWhereOrNull((q) => q.id == localQuiz.id);
+        for (var localQuiz in localQuizList) {
+          final matchedQuiz =
+              initQuizList.firstWhereOrNull((q) => q.id == localQuiz.id);
 
-        if (matchedQuiz != null) {
-          // 更新されたクイズアイテムリストを作成
-          final List<QuizItem> updatedQuizItems = [];
+          if (matchedQuiz != null) {
+            // 更新されたクイズアイテムリストを作成
+            final List<QuizItem> updatedQuizItems = [];
 
-          // initQuizList に存在し、ローカルにも存在するクイズアイテムを更新
-          for (var localQuizItem in localQuiz.quizItemList) {
-            final matchedQuizItem = matchedQuiz.quizItemList.firstWhereOrNull(
-                (item) => item.quizId == localQuizItem.quizId);
-            if (matchedQuizItem != null) {
-              updatedQuizItems.add(localQuizItem.copyWith(
-                question: matchedQuizItem.question,
-                ans: matchedQuizItem.ans,
-                choices: matchedQuizItem.choices,
-                comment: matchedQuizItem.comment,
-                isPremium: matchedQuiz.isPremium,
-              ));
+            // initQuizList に存在し、ローカルにも存在するクイズアイテムを更新
+            for (var localQuizItem in localQuiz.quizItemList) {
+              final matchedQuizItem = matchedQuiz.quizItemList.firstWhereOrNull(
+                  (item) => item.quizId == localQuizItem.quizId);
+              if (matchedQuizItem != null) {
+                updatedQuizItems.add(localQuizItem.copyWith(
+                  question: matchedQuizItem.question,
+                  ans: matchedQuizItem.ans,
+                  choices: matchedQuizItem.choices,
+                  comment: matchedQuizItem.comment,
+                  isPremium: matchedQuizItem.isPremium,
+                  importance: matchedQuizItem.importance,
+                ));
+              }
             }
-          }
 
-          // initQuizList に存在し、ローカルにはないクイズアイテムを追加
-          for (var initQuizItem in matchedQuiz.quizItemList) {
-            if (!localQuiz.quizItemList
-                .any((localItem) => localItem.quizId == initQuizItem.quizId)) {
-              updatedQuizItems.add(initQuizItem);
+            // initQuizList に存在し、ローカルにはないクイズアイテムを追加
+            for (var initQuizItem in matchedQuiz.quizItemList) {
+              if (!localQuiz.quizItemList.any(
+                  (localItem) => localItem.quizId == initQuizItem.quizId)) {
+                updatedQuizItems.add(initQuizItem);
+              }
             }
-          }
 
-          updatedQuizList.add(localQuiz.copyWith(
-            title: matchedQuiz.title,
-            categoryId: matchedQuiz.categoryId,
-            category: matchedQuiz.category,
-            quizItemList: updatedQuizItems,
-            isPremium: matchedQuiz.isPremium,
-          ));
+            updatedQuizList.add(localQuiz.copyWith(
+              title: matchedQuiz.title,
+              categoryId: matchedQuiz.categoryId,
+              category: matchedQuiz.category,
+              quizItemList: updatedQuizItems,
+              isPremium: matchedQuiz.isPremium,
+            ));
+          }
+        }
+
+        // initQuizList にしか存在しないクイズを追加
+        final localQuizIds = localQuizList.map((quiz) => quiz.id).toSet();
+        updatedQuizList.addAll(
+            initQuizList.where((quiz) => !localQuizIds.contains(quiz.id)));
+      } else {
+        // 初回起動時は initQuizList をそのまま使用
+        updatedQuizList = _initQuizList();
+      }
+
+      final Map<String, Quiz> uniqueQuizzes = {};
+      for (var quiz in updatedQuizList) {
+        final existingQuiz = uniqueQuizzes[quiz.id];
+        if (existingQuiz == null ||
+            (existingQuiz.title == quiz.title && initQuizList.contains(quiz))) {
+          uniqueQuizzes[quiz.id.toString()] =
+              quiz; // 重複がないか、initQuizList と title が一致する場合に保持
         }
       }
+      updatedQuizList = uniqueQuizzes.values.toList(); // 重複が解消されたリストを更新
 
-      // initQuizList にしか存在しないクイズを追加
-      final localQuizIds = localQuizList.map((quiz) => quiz.id).toSet();
-      updatedQuizList.addAll(
-          initQuizList.where((quiz) => !localQuizIds.contains(quiz.id)));
-    } else {
-      // 初回起動時は initQuizList をそのまま使用
-      updatedQuizList = _initQuizList();
+      updatedQuizList.sort((a, b) => a.id.compareTo(b.id));
+      final quizItemList =
+          updatedQuizList.expand((quiz) => quiz.quizItemList).toList();
+      state =
+          state.copyWith(quizList: updatedQuizList, quizItemList: quizItemList);
+    } catch (e) {
+      print("_getQuizListData Error: $e");
     }
-
-    final Map<String, Quiz> uniqueQuizzes = {};
-    for (var quiz in updatedQuizList) {
-      final existingQuiz = uniqueQuizzes[quiz.id];
-      if (existingQuiz == null ||
-          (existingQuiz.title == quiz.title && initQuizList.contains(quiz))) {
-        uniqueQuizzes[quiz.id.toString()] =
-            quiz; // 重複がないか、initQuizList と title が一致する場合に保持
-      }
-    }
-    updatedQuizList = uniqueQuizzes.values.toList(); // 重複が解消されたリストを更新
-
-    updatedQuizList.sort((a, b) => a.id.compareTo(b.id));
-    final quizItemList =
-        updatedQuizList.expand((quiz) => quiz.quizItemList).toList();
-    state =
-        state.copyWith(quizList: updatedQuizList, quizItemList: quizItemList);
   }
 
   ///苦手リスト取得
