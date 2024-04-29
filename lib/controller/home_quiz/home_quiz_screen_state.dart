@@ -20,6 +20,8 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
     @Default(10) final int selectedStudyLength,
     @Default(10) final int selectedTestLength,
     @Default(10) final int selectedWeakLength,
+    Quiz? selectQuiz,
+    Quiz? selectStudyQuiz, //
     Quiz? selectWeakQuiz, //苦手克服
   }) = _HomeQuizScreenState;
 }

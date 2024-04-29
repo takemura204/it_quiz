@@ -78,11 +78,8 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
           .toList()
           .length;
 
-      print({'correctNum', correctQuizLength, quizLength});
       return (quizLength > 0) ? (correctQuizLength / quizLength) * 100 : 0.0;
     }).toList();
-
-    print({'correctRatios', correctRatios});
 
     state = state.copyWith(
         categoryList: categoryList,
@@ -96,8 +93,32 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     state = state.copyWith(filterQuizList: quizList);
   }
 
+  /// SelectQuiz更新
+  void setSelectQuiz(Quiz quiz) {
+    state = state.copyWith(selectQuiz: quiz);
+  }
+
+  ///selectStudyQuiz更新
+  void setSelectStudyQuiz() {
+    final selectQuiz = state.selectQuiz;
+    if (selectQuiz != null) {
+      // 既存の問題リストを取得
+      final quizItemList = [...selectQuiz.quizItemList];
+      // 選択する問題の上限数を取得
+      final selectedStudyLength = state.selectedStudyLength;
+
+      // pickedQuizListを定義し、selectedWeakLengthの数だけ問題を選択
+      final pickedQuizList = quizItemList.take(selectedStudyLength).toList();
+
+      // 更新された selectStudyQuiz を生成
+      final selectStudyQuiz = selectQuiz.copyWith(quizItemList: pickedQuizList);
+
+      state = state.copyWith(selectStudyQuiz: selectStudyQuiz);
+    }
+  }
+
   ///WeakQuiz開始
-  void tapStartWeakQuizButton() {
+  void setSelectWeakQuiz() {
     final weakQuiz = ref.read(quizModelProvider).weakQuiz!;
     final weakItemList = [...weakQuiz.quizItemList];
     state = state.copyWith(selectWeakQuiz: weakQuiz);

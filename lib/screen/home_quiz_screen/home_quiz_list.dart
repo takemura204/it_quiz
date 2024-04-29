@@ -49,6 +49,7 @@ class _QuizCard extends ConsumerWidget {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
           ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
           ref.read(quizModelProvider.notifier).tapQuizIndex(index);
+          ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
           showDialog(
               context: context, builder: (_) => StudyQuizModal(quiz: quiz));
         } else {

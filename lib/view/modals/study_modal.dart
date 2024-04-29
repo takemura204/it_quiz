@@ -22,6 +22,19 @@ class StudyQuizModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final correctValue = quiz.quizItemList
+        .where((x) => x.isJudge == QuizStatusType.correct)
+        .toList()
+        .length;
+    final incorrectValue = quiz.quizItemList
+        .where((x) => x.isJudge == QuizStatusType.incorrect)
+        .toList()
+        .length;
+    final learnedValue = quiz.quizItemList
+        .where((x) => x.isJudge == QuizStatusType.learned)
+        .toList()
+        .length;
+    final goalValue = quiz.quizItemList.length;
     return SimpleDialog(
       elevation: 0,
       insetPadding: EdgeInsets.all(context.width * 0.01),
@@ -54,13 +67,14 @@ class StudyQuizModal extends ConsumerWidget {
               ///クイズ挑戦結果
               _QuizResult(quiz),
 
-              CustomProgressIndicator(
-                width: 200,
-                height: 20,
+              QuizStatusProgressChart(
+                width: context.width * 0.9,
+                height: 30,
                 borderRadius: 8,
-                value1: 3,
-                value2: 10,
-                goalScore: 10,
+                correctValue: correctValue,
+                incorrectValue: incorrectValue,
+                learnedValue: learnedValue,
+                goalScore: goalValue,
               ),
 
               const Divider(height: 1),
@@ -69,11 +83,12 @@ class StudyQuizModal extends ConsumerWidget {
               const Divider(height: 1),
               const Gap(10),
 
-              ///クイズ形式選択
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: context.width * 0.02,
                     vertical: context.width * 0.01),
+
+                ///一問一答
                 child: DefaultButton(
                   width: context.width * 1,
                   height: 50,
@@ -83,16 +98,22 @@ class StudyQuizModal extends ConsumerWidget {
                     ref
                         .read(quizModelProvider.notifier)
                         .setStudyType(StudyType.learn);
+                    ref
+                        .read(homeQuizScreenProvider.notifier)
+                        .setSelectStudyQuiz();
+
+                    final selectStudyQuiz =
+                        ref.read(homeQuizScreenProvider).selectStudyQuiz!;
                     context.showScreen(
                       QuizLearnScreenArguments(
-                        quiz: quiz,
+                        quiz: selectStudyQuiz,
                       ).generateRoute(),
                     );
                   },
                 ),
               ),
 
-              ///4択形式クイズに挑戦する
+              ///4択形式クイズ
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: context.width * 0.02,
@@ -102,13 +123,20 @@ class StudyQuizModal extends ConsumerWidget {
                   height: 50,
                   text: I18n().styleChoiceQuiz,
                   onPressed: () {
+                    Navigator.of(context).pop();
                     ref
                         .read(quizModelProvider.notifier)
                         .setStudyType(StudyType.choice);
-                    Navigator.of(context).pop();
+                    ref
+                        .read(homeQuizScreenProvider.notifier)
+                        .setSelectStudyQuiz();
+
+                    final selectStudyQuiz =
+                        ref.read(homeQuizScreenProvider).selectStudyQuiz!;
+
                     context.showScreen(
                       QuizChoiceScreenArguments(
-                        quiz: quiz,
+                        quiz: selectStudyQuiz,
                       ).generateRoute(),
                     );
                   },

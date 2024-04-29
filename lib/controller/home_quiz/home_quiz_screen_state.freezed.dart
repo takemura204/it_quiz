@@ -29,6 +29,8 @@ mixin _$HomeQuizScreenState {
   int get selectedStudyLength => throw _privateConstructorUsedError;
   int get selectedTestLength => throw _privateConstructorUsedError;
   int get selectedWeakLength => throw _privateConstructorUsedError;
+  Quiz? get selectQuiz => throw _privateConstructorUsedError;
+  Quiz? get selectStudyQuiz => throw _privateConstructorUsedError; //
   Quiz? get selectWeakQuiz => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -56,8 +58,12 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       int selectedStudyLength,
       int selectedTestLength,
       int selectedWeakLength,
+      Quiz? selectQuiz,
+      Quiz? selectStudyQuiz,
       Quiz? selectWeakQuiz});
 
+  $QuizCopyWith<$Res>? get selectQuiz;
+  $QuizCopyWith<$Res>? get selectStudyQuiz;
   $QuizCopyWith<$Res>? get selectWeakQuiz;
 }
 
@@ -87,6 +93,8 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? selectedStudyLength = null,
     Object? selectedTestLength = null,
     Object? selectedWeakLength = null,
+    Object? selectQuiz = freezed,
+    Object? selectStudyQuiz = freezed,
     Object? selectWeakQuiz = freezed,
   }) {
     return _then(_value.copyWith(
@@ -142,11 +150,43 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.selectedWeakLength
           : selectedWeakLength // ignore: cast_nullable_to_non_nullable
               as int,
+      selectQuiz: freezed == selectQuiz
+          ? _value.selectQuiz
+          : selectQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
+      selectStudyQuiz: freezed == selectStudyQuiz
+          ? _value.selectStudyQuiz
+          : selectStudyQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       selectWeakQuiz: freezed == selectWeakQuiz
           ? _value.selectWeakQuiz
           : selectWeakQuiz // ignore: cast_nullable_to_non_nullable
               as Quiz?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizCopyWith<$Res>? get selectQuiz {
+    if (_value.selectQuiz == null) {
+      return null;
+    }
+
+    return $QuizCopyWith<$Res>(_value.selectQuiz!, (value) {
+      return _then(_value.copyWith(selectQuiz: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizCopyWith<$Res>? get selectStudyQuiz {
+    if (_value.selectStudyQuiz == null) {
+      return null;
+    }
+
+    return $QuizCopyWith<$Res>(_value.selectStudyQuiz!, (value) {
+      return _then(_value.copyWith(selectStudyQuiz: value) as $Val);
+    });
   }
 
   @override
@@ -184,8 +224,14 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       int selectedStudyLength,
       int selectedTestLength,
       int selectedWeakLength,
+      Quiz? selectQuiz,
+      Quiz? selectStudyQuiz,
       Quiz? selectWeakQuiz});
 
+  @override
+  $QuizCopyWith<$Res>? get selectQuiz;
+  @override
+  $QuizCopyWith<$Res>? get selectStudyQuiz;
   @override
   $QuizCopyWith<$Res>? get selectWeakQuiz;
 }
@@ -214,6 +260,8 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? selectedStudyLength = null,
     Object? selectedTestLength = null,
     Object? selectedWeakLength = null,
+    Object? selectQuiz = freezed,
+    Object? selectStudyQuiz = freezed,
     Object? selectWeakQuiz = freezed,
   }) {
     return _then(_$_HomeQuizScreenState(
@@ -269,6 +317,14 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
           ? _value.selectedWeakLength
           : selectedWeakLength // ignore: cast_nullable_to_non_nullable
               as int,
+      selectQuiz: freezed == selectQuiz
+          ? _value.selectQuiz
+          : selectQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
+      selectStudyQuiz: freezed == selectStudyQuiz
+          ? _value.selectStudyQuiz
+          : selectStudyQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       selectWeakQuiz: freezed == selectWeakQuiz
           ? _value.selectWeakQuiz
           : selectWeakQuiz // ignore: cast_nullable_to_non_nullable
@@ -294,6 +350,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       this.selectedStudyLength = 10,
       this.selectedTestLength = 10,
       this.selectedWeakLength = 10,
+      this.selectQuiz,
+      this.selectStudyQuiz,
       this.selectWeakQuiz})
       : _filterQuizList = filterQuizList,
         _categoryList = categoryList,
@@ -375,11 +433,16 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
   @JsonKey()
   final int selectedWeakLength;
   @override
+  final Quiz? selectQuiz;
+  @override
+  final Quiz? selectStudyQuiz;
+//
+  @override
   final Quiz? selectWeakQuiz;
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, correctRatios: $correctRatios, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, correctRatios: $correctRatios, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
@@ -413,6 +476,10 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
                 other.selectedTestLength == selectedTestLength) &&
             (identical(other.selectedWeakLength, selectedWeakLength) ||
                 other.selectedWeakLength == selectedWeakLength) &&
+            (identical(other.selectQuiz, selectQuiz) ||
+                other.selectQuiz == selectQuiz) &&
+            (identical(other.selectStudyQuiz, selectStudyQuiz) ||
+                other.selectStudyQuiz == selectStudyQuiz) &&
             (identical(other.selectWeakQuiz, selectWeakQuiz) ||
                 other.selectWeakQuiz == selectWeakQuiz));
   }
@@ -433,6 +500,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       selectedStudyLength,
       selectedTestLength,
       selectedWeakLength,
+      selectQuiz,
+      selectStudyQuiz,
       selectWeakQuiz);
 
   @JsonKey(ignore: true)
@@ -458,6 +527,8 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       final int selectedStudyLength,
       final int selectedTestLength,
       final int selectedWeakLength,
+      final Quiz? selectQuiz,
+      final Quiz? selectStudyQuiz,
       final Quiz? selectWeakQuiz}) = _$_HomeQuizScreenState;
 
   @override
@@ -487,6 +558,10 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   @override
   int get selectedWeakLength;
   @override
+  Quiz? get selectQuiz;
+  @override
+  Quiz? get selectStudyQuiz;
+  @override //
   Quiz? get selectWeakQuiz;
   @override
   @JsonKey(ignore: true)

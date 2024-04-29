@@ -77,7 +77,7 @@ class WeakQuizModal extends ConsumerWidget {
                         .setStudyType(StudyType.learn);
                     ref
                         .read(homeQuizScreenProvider.notifier)
-                        .tapStartWeakQuizButton();
+                        .setSelectWeakQuiz();
 
                     final weakQuiz =
                         ref.read(homeQuizScreenProvider).selectWeakQuiz!;
@@ -108,7 +108,7 @@ class WeakQuizModal extends ConsumerWidget {
 
                     ref
                         .read(homeQuizScreenProvider.notifier)
-                        .tapStartWeakQuizButton();
+                        .setSelectWeakQuiz();
                     final weakQuiz = ref.read(quizModelProvider).weakQuiz!;
                     context.showScreen(
                       QuizChoiceScreenArguments(

@@ -1,6 +1,7 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -24,7 +25,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   final Ref ref;
-  Quiz quiz;
+  final Quiz quiz;
   final Stopwatch _stopwatch = Stopwatch();
   late AppinioSwiperController swiperController;
 
@@ -32,7 +33,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   Future initState() async {
     swiperController = AppinioSwiperController();
     await _startStopwatch(); //学習時間計測
-    _loadQuizList();
+    _initLearnQuiz();
     super.initState();
   }
 
@@ -53,11 +54,12 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   }
 
   ///クイズ更新
-  void _loadQuizList() {
+  void _initLearnQuiz() {
+    final learnQuiz = quiz;
     //クイズリスト更新
     final quizItemList = [...state.quizItemList];
-    quizItemList.addAll(quiz.quizItemList);
-    state = state.copyWith(quizItemList: quizItemList);
+    quizItemList.addAll(learnQuiz.quizItemList);
+    state = state.copyWith(learnQuiz: learnQuiz, quizItemList: quizItemList);
   }
 
   ///学習時間計測
@@ -84,7 +86,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
       isWeak: quizItemList[index].isWeak,
-      isJudge: isKnow ? QuizStatusType.correct : QuizStatusType.incorrect,
+      isJudge: isKnow ? QuizStatusType.learned : QuizStatusType.unlearned,
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: lapIndex,
@@ -129,19 +131,20 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   void _nextQuiz() {
     final index = state.quizIndex;
     final lapIndex = state.lapIndex;
+    final learnQuiz = state.learnQuiz!;
     final quizItemList = [...state.quizItemList];
     final knowQuizList = [...state.knowQuizItemList];
     final unKnowQuizList = [...state.unKnowQuizItemList];
     //問題が終わったが,「知ってる」リストに全て含まれていない場合
     if (index == quizItemList.length - 1 &&
-        knowQuizList.length != quiz.quizItemList.length) {
+        knowQuizList.length != learnQuiz.quizItemList.length) {
       quizItemList.clear();
       quizItemList.addAll(unKnowQuizList);
       state = state.copyWith(
           quizIndex: 0, lapIndex: lapIndex + 1, quizItemList: quizItemList);
     }
     //問題が終わり,「知ってる」リストに全て含まれている場合
-    else if (state.knowQuizItemList.length == quiz.quizItemList.length) {
+    else if (state.knowQuizItemList.length == learnQuiz.quizItemList.length) {
       final isPremium = ref.read(authModelProvider).isPremium;
       quizItemList.clear(); // クイズアイテムリストをクリア
       // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
@@ -199,10 +202,16 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   ///クイズ結果更新(端末保存)
   void _updateQuiz() {
-    final quizItemList = state.quizItemList;
+    final learnQuiz = state.learnQuiz!;
+    final quizItemList = updateQuizItemList();
+    print({
+      'quizItemList.lenght',
+      learnQuiz.quizItemList.length,
+      state.quizItemList.length,
+    });
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
-    final updateQuiz = quiz.copyWith(
+    final updateQuiz = learnQuiz.copyWith(
       duration: duration,
       quizItemList: quizItemList,
       timeStamp: DateTime.now(),
@@ -211,14 +220,37 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
   }
 
+  List<QuizItem> updateQuizItemList() {
+    // state.quizItemList を quizId ベースでマップに変換
+    final stateQuizMap = {
+      for (var item in state.quizItemList) item.quizId: item
+    };
+    final selectQuiz = ref.read(homeQuizScreenProvider).selectQuiz!;
+
+    // quiz.quizItemList をイテレートして更新または追加
+    final updatedQuizItemList = selectQuiz.quizItemList.map((quizItem) {
+      // state.quizItemList に同じ quizId の要素があれば、その要素を使う
+      if (stateQuizMap.containsKey(quizItem.quizId)) {
+        return stateQuizMap[quizItem.quizId]!; // nullでないことを保証
+      }
+      // なければ新しい quizItem をそのまま使用
+      return quizItem;
+    }).toList();
+
+    return updatedQuizItemList;
+  }
+
   void updateHistoryQuiz() {
+    final learnQuiz = state.learnQuiz!;
     final quizItemList = state.quizItemList;
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
-    final correctNum =
-        quizItemList.where((x) => x.isJudge == true).toList().length;
+    final correctNum = quizItemList
+        .where((x) => x.isJudge == QuizStatusType.correct)
+        .toList()
+        .length;
     final isCompleted = quizItemList.length == correctNum;
-    final updateQuiz = quiz.copyWith(
+    final updateQuiz = learnQuiz.copyWith(
       duration: duration,
       quizItemList: quizItemList,
       correctNum: correctNum,
@@ -238,6 +270,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       isResultScreen: false,
       knowQuizItemList: [],
       unKnowQuizItemList: [],
+      learnQuiz: null,
     );
   }
 }
