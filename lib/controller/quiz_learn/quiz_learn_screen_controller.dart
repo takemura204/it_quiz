@@ -86,7 +86,9 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
       isWeak: quizItemList[index].isWeak,
-      isJudge: isKnow ? QuizStatusType.learned : QuizStatusType.unlearned,
+      status: isKnow && quizItemList[index].status == QuizStatusType.unlearned
+          ? QuizStatusType.learned
+          : quizItemList[index].status,
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: lapIndex,
@@ -181,7 +183,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
       isWeak: !quizItemList[index].isWeak,
-      isJudge: quizItemList[index].isJudge,
+      status: quizItemList[index].status,
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: quizItemList[index].lapIndex,
@@ -204,11 +206,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   void _updateQuiz() {
     final learnQuiz = state.learnQuiz!;
     final quizItemList = updateQuizItemList();
-    print({
-      'quizItemList.lenght',
-      learnQuiz.quizItemList.length,
-      state.quizItemList.length,
-    });
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
     final updateQuiz = learnQuiz.copyWith(
@@ -246,7 +243,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
     final correctNum = quizItemList
-        .where((x) => x.isJudge == QuizStatusType.correct)
+        .where((x) => x.status == QuizStatusType.correct)
         .toList()
         .length;
     final isCompleted = quizItemList.length == correctNum;

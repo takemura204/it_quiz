@@ -41,7 +41,7 @@ class _BottomQuizMenu extends ConsumerWidget {
               width: context.width * 0.46,
               height: 50,
               text: "${randomQuiz.title}",
-              icon: LineIcons.edit,
+              icon: LineIcons.random,
               onPressed: () {
                 ref
                     .read(quizModelProvider.notifier)

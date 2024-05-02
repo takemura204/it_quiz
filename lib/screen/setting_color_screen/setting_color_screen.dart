@@ -7,7 +7,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/modals/dialog.dart';
+import '../../view/modals/premium_modal.dart';
 import '../screen_argument.dart';
 
 ///カラーテーマ選択
@@ -66,7 +66,7 @@ class _ColorCards extends ConsumerWidget {
                     : () {
                         showDialog(
                             context: context,
-                            builder: (_) => PrimaryDialog(
+                            builder: (_) => NeedPremiumModal(
                                   title: 'テーマを入手しますか？',
                                   subWidget: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,8 +81,6 @@ class _ColorCards extends ConsumerWidget {
                                       ),
                                     ],
                                   ),
-                                  cancelText: 'キャンセル',
-                                  doneText: 'プレミアム画面へ',
                                   onPressed: () {
                                     Navigator.pop(context);
                                     context.showScreen(

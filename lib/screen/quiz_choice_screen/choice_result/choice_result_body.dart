@@ -9,7 +9,7 @@ class _ChoiceResultBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final correctNum = quizItemList
-        .where((x) => x.isJudge == QuizStatusType.correct)
+        .where((x) => x.status == QuizStatusType.correct)
         .toList()
         .length;
     final controller = ref.watch(quizChoiceScreenProvider);

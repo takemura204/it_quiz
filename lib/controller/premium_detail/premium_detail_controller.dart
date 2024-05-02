@@ -35,7 +35,6 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
 
   Future<void> initInAppPurchase() async {
     try {
-      print('initInAppPurchase');
       //consoleにdebug情報を出力する
       await Purchases.setLogLevel(LogLevel.debug);
       PurchasesConfiguration configuration;
@@ -51,7 +50,6 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
 
       ///offeringsを取ってくる
       final offerings = await Purchases.getOfferings();
-      print("offerings: $offerings");
 
       ///firebaseのidと、revenuecatのuserIdを一緒にしている場合、firebaseAuthのuidでログイン
       final result = await Purchases.logIn(auth.currentUser!.uid);
@@ -148,7 +146,7 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
   }
 
 //  購入の復元
-  Future<void> restorePurchase(String entitlement) async {
+  Future<void> restorePurchase() async {
     try {
       final customerInfo = await Purchases.restorePurchases();
       await updateIsSubscribed(customerInfo);

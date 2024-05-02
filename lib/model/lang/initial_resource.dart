@@ -62,7 +62,7 @@ class I18n {
   String get titleSetting => "設定";
 
   ///「学ぶ」形式
-  String get styleLeanQuiz => "用語を覚える";
+  String get styleLeanQuiz => "一問一答で覚える";
 
   String get styleChoiceQuiz => "クイズに挑戦する";
 
@@ -74,12 +74,30 @@ class I18n {
     return "$quizStyleに挑戦する";
   }
 
+  ///クイズの状況
+  String quizStatusTypeText(QuizStatusType statusType) {
+    switch (statusType) {
+      case QuizStatusType.correct:
+        return '正解';
+      case QuizStatusType.incorrect:
+        return '不正解';
+      case QuizStatusType.learned:
+        return '学習済み';
+      case QuizStatusType.unlearned:
+        return '未学習';
+      default:
+        return '〇〇';
+    }
+  }
+
   ///HomeQuiz
   String quizCorrectRate(int correctRate) {
     return "正解率:$correctRate％";
   }
 
-  String get lastQuizResult => "前回の挑戦結果";
+  String get quizResultAnswer => "正解率";
+
+  String get quizResultProgress => "学習率";
 
   String get lastWeakResult => "現在の苦手問題数";
 

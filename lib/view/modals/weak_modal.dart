@@ -226,7 +226,7 @@ class _SelectLength extends ConsumerWidget {
                   onTap: (index) {
                     ref
                         .read(homeQuizScreenProvider.notifier)
-                        .selectWeakLength(selectWeakLength[index]);
+                        .setWeakLength(selectWeakLength[index]);
                   },
                   labelColor: Colors.white,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),

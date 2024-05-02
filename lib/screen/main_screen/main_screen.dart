@@ -98,7 +98,7 @@ class _BottomNavBar extends ConsumerWidget {
           if (index == 2) {
             ref.read(dashboardModelProvider.notifier).initState();
             ref.read(homeDashboardScreenProvider.notifier).initState();
-            ref.read(homeQuizScreenProvider.notifier).loadCategoryList();
+            ref.read(homeQuizScreenProvider.notifier).initCategoryList();
           }
           if (index == 3) {
             ref.read(authProvider.notifier).initState();

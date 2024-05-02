@@ -77,76 +77,57 @@ class QuizStatusProgressChart extends StatelessWidget {
   final int correctValue;
   final int incorrectValue;
   final int learnedValue;
+  final int unlearnedValue;
   final int goalScore;
 
   const QuizStatusProgressChart({
-    Key? key,
     required this.width,
     required this.height,
     required this.borderRadius,
     required this.correctValue,
     required this.incorrectValue,
     required this.learnedValue,
+    required this.unlearnedValue,
     required this.goalScore,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     // 全体のプログレスの割合を計算
-    final totalProgress = (correctValue + incorrectValue) / goalScore;
     final progress1 = correctValue / goalScore;
     final progress2 = incorrectValue / goalScore;
     final progress3 = learnedValue / goalScore;
-    final isAchieve = goalScore <= (correctValue + incorrectValue);
+    final progress4 = unlearnedValue / goalScore;
 
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
-        color: Colors.grey.shade300,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: Container(
+        width: width,
+        height: height,
+        child: Row(
+          children: [
+            buildBarSegment(context, context.correctColor, progress1, '正解'),
+            buildBarSegment(context, context.incorrectColor, progress2, '不正解'),
+            buildBarSegment(context, context.backgroundColor, progress3, '学習済'),
+            buildBarSegment(context, context.secondColor, progress4, '未学習'),
+          ],
+        ),
       ),
-      child: Stack(
-        children: [
-          // 正解
-          Container(
-            width: width * progress1,
-            height: height,
-            decoration: BoxDecoration(
-              color: context.correctColor,
-              borderRadius: BorderRadius.horizontal(
-                left: Radius.circular(borderRadius),
-              ),
-            ),
-          ),
-          // 不正解
-          Positioned(
-            left: width * progress1,
-            child: Container(
-              width: width * progress2,
-              height: height,
-              decoration: BoxDecoration(
-                color: context.incorrectColor,
-                borderRadius: BorderRadius.horizontal(
-                  right: Radius.circular(isAchieve ? borderRadius : 0),
-                ),
-              ),
-            ),
-          ),
+    );
+  }
 
-          ///学習済
-          Container(
-            width: width * progress3,
-            height: height,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.horizontal(
-                right: Radius.circular(isAchieve ? borderRadius : 0),
-              ),
-            ),
-          ),
-          Text('$progress3'),
-        ],
+  Widget buildBarSegment(
+      BuildContext context, Color color, double progress, String label) {
+    return Expanded(
+      flex: (progress * 1000).round(), // セグメントの幅を割合で調整
+      child: Container(
+        color: color,
+        alignment: Alignment.center,
+        child: Text(
+          progress > 0 ? '${(progress * 100).round()}%' : '',
+          style:
+              context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

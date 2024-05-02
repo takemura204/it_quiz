@@ -55,7 +55,7 @@ class _QuizCard extends ConsumerWidget {
         } else {
           showDialog(
               context: context,
-              builder: (_) => PrimaryDialog(
+              builder: (_) => NeedPremiumModal(
                     title: '全てのクイズを解放しますか？',
                     subWidget: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -69,8 +69,6 @@ class _QuizCard extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    cancelText: 'キャンセル',
-                    doneText: 'プレミアム画面へ',
                     onPressed: () {
                       Navigator.pop(context);
                       context.showScreen(

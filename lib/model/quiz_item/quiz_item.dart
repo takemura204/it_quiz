@@ -14,7 +14,7 @@ class QuizItem with _$QuizItem {
     required final List<String> choices, //選択肢
     required final String comment, //解説
     @Default(false) final bool isWeak, //苦手か？
-    @Default(QuizStatusType.unlearned) final QuizStatusType isJudge, //正解したか？
+    @Default(QuizStatusType.unlearned) final QuizStatusType status, //クイズの状態
     @Default(QuizImportanceType.normal)
     final QuizImportanceType importance, //重要度
     @Default(false) final bool isSaved, //保存したか?
@@ -32,7 +32,7 @@ class QuizItem with _$QuizItem {
         ans: json['ans'] as String,
         comment: json['comment'] as String,
         isWeak: json['isWeak'] as bool,
-        isJudge: QuizStatusTypeExtension.fromJson(json['isJudge'] as String),
+        status: QuizStatusTypeExtension.fromJson(json['status'] as String),
         isSaved: json['isSaved'] as bool,
         lapIndex: json['lapIndex'] as int,
         choices:

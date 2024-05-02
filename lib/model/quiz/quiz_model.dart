@@ -11,6 +11,7 @@ import 'package:state_notifier/state_notifier.dart';
 
 import '../../untils/enums.dart';
 import '../quiz_item/quiz_item.dart';
+import '../user/auth_model.dart';
 
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
   (ref) => QuizModel(ref),
@@ -36,7 +37,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     await _getQuizListData(); // このメソッドが完了するのを待つ
     await Future.wait([
       _getWeakQuiz(),
-      _getTestQuiz(),
+      _getRandomQuiz(),
       _getHistoryQuiz(),
     ]);
     _saveDevice();
@@ -141,16 +142,10 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     }
   }
 
-  /// TestQuiz追加
-  Future _getTestQuiz() async {
-    final prefs = await SharedPreferences.getInstance();
-    final testData = prefs.getString('test_quiz');
-    if (testData != null) {
-      final testQuiz = Quiz.fromJson(json.decode(testData));
-      state = state.copyWith(randomQuiz: testQuiz);
-    } else {
-      state = state.copyWith(randomQuiz: initRandomQuiz);
-    }
+  /// RandomQuiz追加
+  Future _getRandomQuiz() async {
+    final randomQuiz = initRandomQuiz;
+    state = state.copyWith(randomQuiz: randomQuiz);
   }
 
   Future _getHistoryQuiz() async {
@@ -376,10 +371,13 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     _saveDevice(); // 保存
   }
 
-  /// TestQuiz作成
-  void createTestQuiz(List<String> testGroup, int testLength) {
+  /// RandomQuiz作成
+  void setRandomQuiz(List<String> testGroup, int testLength) {
+    final isPremium = ref.read(authModelProvider).isPremium;
+    final quizList =
+        isPremium ? state.quizList : state.quizList.where((x) => !x.isPremium);
     final filteredQuizList = [
-      ...state.quizList
+      ...quizList
           .where((quizItem) => testGroup.contains(quizItem.category))
           .expand((quizItem) => quizItem.quizItemList)
           .toList()

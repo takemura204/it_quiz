@@ -103,7 +103,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
       ans: filteredQuizItemList[index].ans,
       comment: filteredQuizItemList[index].comment,
       isWeak: filteredQuizItemList[index].isWeak,
-      isJudge: filteredQuizItemList[index].isJudge,
+      status: filteredQuizItemList[index].status,
       isSaved: !filteredQuizItemList[index].isSaved,
       choices: filteredQuizItemList[index].choices,
       lapIndex: filteredQuizItemList[index].lapIndex,

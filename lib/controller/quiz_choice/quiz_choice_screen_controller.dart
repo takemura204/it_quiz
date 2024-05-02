@@ -11,6 +11,7 @@ import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
 import '../../untils/enums.dart';
 import '../admob/admob_controller.dart';
+import '../home_quiz/home_quiz_screen_controller.dart';
 
 final quizChoiceScreenProvider =
     StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
@@ -99,7 +100,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
-        isJudge: QuizStatusType.correct,
+        status: QuizStatusType.correct,
         //正解
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: false,
@@ -117,7 +118,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
-        isJudge: QuizStatusType.incorrect,
+        status: QuizStatusType.incorrect,
         //不正解
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: true,
@@ -173,7 +174,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
       isWeak: !quizItemList[index].isWeak,
-      isJudge: quizItemList[index].isJudge,
+      status: quizItemList[index].status,
       isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
       lapIndex: quizItemList[index].lapIndex,
@@ -204,13 +205,15 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     quizItemList.sort((a, b) => a.quizId.compareTo(b.quizId));
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
-    final correctNum =
-        quizItemList.where((x) => x.isJudge == true).toList().length;
+    final correctNum = quizItemList
+        .where((x) => x.status == QuizStatusType.correct)
+        .toList()
+        .length;
 
     final isCompleted = quizItemList.length == correctNum;
     final updateQuiz = quiz.copyWith(
       duration: duration,
-      quizItemList: quizItemList,
+      quizItemList: updateQuizItemList(),
       correctNum: correctNum,
       isCompleted: isCompleted,
       timeStamp: DateTime.now(),
@@ -219,12 +222,32 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
   }
 
+  List<QuizItem> updateQuizItemList() {
+    // state.quizItemList を quizId ベースでマップに変換
+    final stateQuizMap = {
+      for (var item in state.quizItemList) item.quizId: item
+    };
+    final selectQuiz = ref.read(homeQuizScreenProvider).selectQuiz!;
+
+    // quiz.quizItemList をイテレートして更新または追加
+    final updatedQuizItemList = selectQuiz.quizItemList.map((quizItem) {
+      // state.quizItemList に同じ quizId の要素があれば、その要素を使う
+      if (stateQuizMap.containsKey(quizItem.quizId)) {
+        return stateQuizMap[quizItem.quizId]!; // nullでないことを保証
+      }
+      // なければ新しい quizItem をそのまま使用
+      return quizItem;
+    }).toList();
+
+    return updatedQuizItemList;
+  }
+
   void updateHistoryQuiz() {
     final quizItemList = state.quizItemList;
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
     final correctNum =
-        quizItemList.where((x) => x.isJudge == true).toList().length;
+        quizItemList.where((x) => x.status == true).toList().length;
     final isCompleted = quizItemList.length == correctNum;
     final updateQuiz = quiz.copyWith(
       duration: duration,

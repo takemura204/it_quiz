@@ -61,7 +61,7 @@ class QuizItemCard extends ConsumerWidget {
                         fontWeight: FontWeight.bold,
                         color: studyType == StudyType.learn
                             ? context.mainColor
-                            : quizItem.isJudge == QuizStatusType.correct
+                            : quizItem.status == QuizStatusType.correct
                                 ? Colors.green.withOpacity(0.7)
                                 : Colors.red.withOpacity(0.7),
                         decoration: TextDecoration.underline,
@@ -82,7 +82,7 @@ class QuizItemCard extends ConsumerWidget {
                           fontWeight: FontWeight.bold,
                           color: studyType == StudyType.learn
                               ? context.mainColor
-                              : quizItem.isJudge == QuizStatusType.correct
+                              : quizItem.status == QuizStatusType.correct
                                   ? Colors.green.withOpacity(0.7)
                                   : Colors.red.withOpacity(0.7),
                           decoration: TextDecoration.none,
@@ -103,11 +103,11 @@ class QuizItemCard extends ConsumerWidget {
                     horizontal: context.width * 0.01,
                     vertical: context.width * 0.02),
                 child: Icon(
-                  quizItem.isJudge == QuizStatusType.correct
+                  quizItem.status == QuizStatusType.correct
                       ? Icons.circle_outlined
                       : Icons.clear,
                   size: 45,
-                  color: quizItem.isJudge == QuizStatusType.correct
+                  color: quizItem.status == QuizStatusType.correct
                       ? Colors.green.withOpacity(0.7)
                       : Colors.red.withOpacity(0.7),
                 ),

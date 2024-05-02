@@ -17,7 +17,7 @@ import '../../untils/enums.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/chart/progress_crilcle_chart.dart';
-import '../../view/modals/dialog.dart';
+import '../../view/modals/premium_modal.dart';
 import '../../view/modals/randam_modal.dart';
 import '../../view/modals/study_modal.dart';
 import '../screen_argument.dart';
@@ -151,7 +151,7 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(quizModelProvider);
-    final testQuiz = state.randomQuiz ?? initRandomQuiz;
+    final randomQuiz = state.randomQuiz ?? initRandomQuiz;
     final weakQuiz = state.weakQuiz ?? initWeakQuiz;
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -164,7 +164,7 @@ class _Body extends ConsumerWidget {
         ),
         _BottomQuizMenu(
           weakQuiz: weakQuiz,
-          randomQuiz: testQuiz,
+          randomQuiz: randomQuiz,
         ),
       ],
     );

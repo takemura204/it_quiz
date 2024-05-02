@@ -16,6 +16,7 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/modals/dialog.dart';
+import '../../view/modals/premium_modal.dart';
 import '../screen_argument.dart';
 
 part 'home_search_view.dart';

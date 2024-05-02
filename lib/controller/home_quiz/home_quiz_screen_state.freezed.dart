@@ -18,9 +18,13 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeQuizScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
-  List<String> get categoryList => throw _privateConstructorUsedError;
+  List<String> get categoryList =>
+      throw _privateConstructorUsedError; //クイズのカテゴリリスト
+  List<String> get randomCategoryList =>
+      throw _privateConstructorUsedError; //ランダムモーダルの出題状況,
+  List<String> get quizStatusList =>
+      throw _privateConstructorUsedError; //クイズ出題状況
   List<double> get correctRatios => throw _privateConstructorUsedError;
-  List<String> get selectedTestCategory => throw _privateConstructorUsedError;
   String get selectCategory => throw _privateConstructorUsedError;
   int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
   int get tabIndex => throw _privateConstructorUsedError; //クイズ番号
@@ -48,8 +52,9 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       {bool isLoading,
       List<Quiz> filterQuizList,
       List<String> categoryList,
+      List<String> randomCategoryList,
+      List<String> quizStatusList,
       List<double> correctRatios,
-      List<String> selectedTestCategory,
       String selectCategory,
       int itemIndex,
       int tabIndex,
@@ -83,8 +88,9 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? isLoading = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
+    Object? randomCategoryList = null,
+    Object? quizStatusList = null,
     Object? correctRatios = null,
-    Object? selectedTestCategory = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
     Object? tabIndex = null,
@@ -110,14 +116,18 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      randomCategoryList: null == randomCategoryList
+          ? _value.randomCategoryList
+          : randomCategoryList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      quizStatusList: null == quizStatusList
+          ? _value.quizStatusList
+          : quizStatusList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       correctRatios: null == correctRatios
           ? _value.correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      selectedTestCategory: null == selectedTestCategory
-          ? _value.selectedTestCategory
-          : selectedTestCategory // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       selectCategory: null == selectCategory
           ? _value.selectCategory
           : selectCategory // ignore: cast_nullable_to_non_nullable
@@ -214,8 +224,9 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       {bool isLoading,
       List<Quiz> filterQuizList,
       List<String> categoryList,
+      List<String> randomCategoryList,
+      List<String> quizStatusList,
       List<double> correctRatios,
-      List<String> selectedTestCategory,
       String selectCategory,
       int itemIndex,
       int tabIndex,
@@ -250,8 +261,9 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
+    Object? randomCategoryList = null,
+    Object? quizStatusList = null,
     Object? correctRatios = null,
-    Object? selectedTestCategory = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
     Object? tabIndex = null,
@@ -277,14 +289,18 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
           ? _value._categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      randomCategoryList: null == randomCategoryList
+          ? _value._randomCategoryList
+          : randomCategoryList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      quizStatusList: null == quizStatusList
+          ? _value._quizStatusList
+          : quizStatusList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       correctRatios: null == correctRatios
           ? _value._correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      selectedTestCategory: null == selectedTestCategory
-          ? _value._selectedTestCategory
-          : selectedTestCategory // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       selectCategory: null == selectCategory
           ? _value.selectCategory
           : selectCategory // ignore: cast_nullable_to_non_nullable
@@ -340,8 +356,9 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       {this.isLoading = false,
       final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
+      final List<String> randomCategoryList = const [],
+      final List<String> quizStatusList = const [],
       final List<double> correctRatios = const [],
-      final List<String> selectedTestCategory = const [],
       this.selectCategory = "",
       this.itemIndex = 0,
       this.tabIndex = 0,
@@ -355,8 +372,9 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       this.selectWeakQuiz})
       : _filterQuizList = filterQuizList,
         _categoryList = categoryList,
+        _randomCategoryList = randomCategoryList,
+        _quizStatusList = quizStatusList,
         _correctRatios = correctRatios,
-        _selectedTestCategory = selectedTestCategory,
         _selectedFilterGroup = selectedFilterGroup;
 
   @override
@@ -380,23 +398,38 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
     return EqualUnmodifiableListView(_categoryList);
   }
 
+//クイズのカテゴリリスト
+  final List<String> _randomCategoryList;
+//クイズのカテゴリリスト
+  @override
+  @JsonKey()
+  List<String> get randomCategoryList {
+    if (_randomCategoryList is EqualUnmodifiableListView)
+      return _randomCategoryList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_randomCategoryList);
+  }
+
+//ランダムモーダルの出題状況,
+  final List<String> _quizStatusList;
+//ランダムモーダルの出題状況,
+  @override
+  @JsonKey()
+  List<String> get quizStatusList {
+    if (_quizStatusList is EqualUnmodifiableListView) return _quizStatusList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quizStatusList);
+  }
+
+//クイズ出題状況
   final List<double> _correctRatios;
+//クイズ出題状況
   @override
   @JsonKey()
   List<double> get correctRatios {
     if (_correctRatios is EqualUnmodifiableListView) return _correctRatios;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_correctRatios);
-  }
-
-  final List<String> _selectedTestCategory;
-  @override
-  @JsonKey()
-  List<String> get selectedTestCategory {
-    if (_selectedTestCategory is EqualUnmodifiableListView)
-      return _selectedTestCategory;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_selectedTestCategory);
   }
 
   @override
@@ -442,7 +475,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, correctRatios: $correctRatios, selectedTestCategory: $selectedTestCategory, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, randomCategoryList: $randomCategoryList, quizStatusList: $quizStatusList, correctRatios: $correctRatios, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
@@ -457,9 +490,11 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
             const DeepCollectionEquality()
                 .equals(other._categoryList, _categoryList) &&
             const DeepCollectionEquality()
-                .equals(other._correctRatios, _correctRatios) &&
+                .equals(other._randomCategoryList, _randomCategoryList) &&
             const DeepCollectionEquality()
-                .equals(other._selectedTestCategory, _selectedTestCategory) &&
+                .equals(other._quizStatusList, _quizStatusList) &&
+            const DeepCollectionEquality()
+                .equals(other._correctRatios, _correctRatios) &&
             (identical(other.selectCategory, selectCategory) ||
                 other.selectCategory == selectCategory) &&
             (identical(other.itemIndex, itemIndex) ||
@@ -490,8 +525,9 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       isLoading,
       const DeepCollectionEquality().hash(_filterQuizList),
       const DeepCollectionEquality().hash(_categoryList),
+      const DeepCollectionEquality().hash(_randomCategoryList),
+      const DeepCollectionEquality().hash(_quizStatusList),
       const DeepCollectionEquality().hash(_correctRatios),
-      const DeepCollectionEquality().hash(_selectedTestCategory),
       selectCategory,
       itemIndex,
       tabIndex,
@@ -517,8 +553,9 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       {final bool isLoading,
       final List<Quiz> filterQuizList,
       final List<String> categoryList,
+      final List<String> randomCategoryList,
+      final List<String> quizStatusList,
       final List<double> correctRatios,
-      final List<String> selectedTestCategory,
       final String selectCategory,
       final int itemIndex,
       final int tabIndex,
@@ -537,10 +574,12 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   List<Quiz> get filterQuizList;
   @override
   List<String> get categoryList;
-  @override
+  @override //クイズのカテゴリリスト
+  List<String> get randomCategoryList;
+  @override //ランダムモーダルの出題状況,
+  List<String> get quizStatusList;
+  @override //クイズ出題状況
   List<double> get correctRatios;
-  @override
-  List<String> get selectedTestCategory;
   @override
   String get selectCategory;
   @override

@@ -14,7 +14,7 @@ _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
           (json['choices'] as List<dynamic>).map((e) => e as String).toList(),
       comment: json['comment'] as String,
       isWeak: json['isWeak'] as bool? ?? false,
-      isJudge: $enumDecodeNullable(_$QuizStatusTypeEnumMap, json['isJudge']) ??
+      status: $enumDecodeNullable(_$QuizStatusTypeEnumMap, json['status']) ??
           QuizStatusType.unlearned,
       importance: $enumDecodeNullable(
               _$QuizImportanceTypeEnumMap, json['importance']) ??
@@ -32,7 +32,7 @@ Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
       'choices': instance.choices,
       'comment': instance.comment,
       'isWeak': instance.isWeak,
-      'isJudge': _$QuizStatusTypeEnumMap[instance.isJudge]!,
+      'status': _$QuizStatusTypeEnumMap[instance.status]!,
       'importance': _$QuizImportanceTypeEnumMap[instance.importance]!,
       'isSaved': instance.isSaved,
       'lapIndex': instance.lapIndex,

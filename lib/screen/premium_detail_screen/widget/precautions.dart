@@ -1,11 +1,11 @@
 part of '../premium_detail_screen.dart';
 
 ///注意事項
-class _Precautions extends StatelessWidget {
-  const _Precautions({Key? key}) : super(key: key);
+class _Precautions extends HookConsumerWidget {
+  const _Precautions();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final platformStoreName = kIsWeb
         ? 'ウェブストア'
         : Platform.isIOS
@@ -29,7 +29,9 @@ class _Precautions extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      //TODO: 復元処理実装
+                      ref
+                          .read(premiumDetailProvider.notifier)
+                          .restorePurchase();
                       print('復元');
                     }),
             ])),

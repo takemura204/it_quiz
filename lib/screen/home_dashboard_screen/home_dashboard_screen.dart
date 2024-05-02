@@ -38,10 +38,10 @@ class _Body extends ConsumerWidget {
       );
     }
 
-    return Stack(
+    return const Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        const SingleChildScrollView(
+        SingleChildScrollView(
           child: Column(
             children: [
               Gap(5),

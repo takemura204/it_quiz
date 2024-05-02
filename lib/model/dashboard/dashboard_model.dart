@@ -55,7 +55,7 @@ class DashboardModel extends StateNotifier<Dashboard> {
         dailyDuration += quiz.duration;
         dailyQuizCount += quiz.quizItemList.length;
         dailyQuizCorrectCount += quiz.quizItemList
-            .where((x) => x.isJudge == QuizStatusType.correct)
+            .where((x) => x.status == QuizStatusType.correct)
             .toList()
             .length;
       }
@@ -67,7 +67,7 @@ class DashboardModel extends StateNotifier<Dashboard> {
         weeklyDuration += quiz.duration;
         weeklyQuizCount += quiz.quizItemList.length;
         weeklyQuizCorrectCount += quiz.quizItemList
-            .where((x) => x.isJudge == QuizStatusType.correct)
+            .where((x) => x.status == QuizStatusType.correct)
             .toList()
             .length;
       }
@@ -79,7 +79,7 @@ class DashboardModel extends StateNotifier<Dashboard> {
         monthlyDuration += quiz.duration;
         monthlyQuizCount += quiz.quizItemList.length;
         monthlyQuizCorrectCount += quiz.quizItemList
-            .where((x) => x.isJudge == QuizStatusType.correct)
+            .where((x) => x.status == QuizStatusType.correct)
             .toList()
             .length;
       }

@@ -3,20 +3,18 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../model/user/auth_model.dart';
 import '../../screen/screen_argument.dart';
 import '../../untils/enums.dart';
 import '../button/disabled_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
 
-///テストモーダル
+///ランダムモーダル
 class RandomQuizModal extends ConsumerWidget {
   const RandomQuizModal({required this.randomQuiz});
 
@@ -25,7 +23,7 @@ class RandomQuizModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isGroup =
-        ref.watch(homeQuizScreenProvider).selectedTestCategory.isNotEmpty;
+        ref.watch(homeQuizScreenProvider).randomCategoryList.isNotEmpty;
     return SimpleDialog(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -80,11 +78,12 @@ class RandomQuizModal extends ConsumerWidget {
                           ref
                               .read(homeQuizScreenProvider.notifier)
                               .tapStartTestQuizButton();
-                          final testQuiz =
+
+                          final randomQuiz =
                               ref.read(quizModelProvider).randomQuiz!;
                           context.showScreen(
                             QuizChoiceScreenArguments(
-                              quiz: testQuiz,
+                              quiz: randomQuiz,
                             ).generateRoute(),
                           );
                         },
@@ -129,8 +128,8 @@ class _QuizRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
-    final selectedTestCategory =
-        ref.watch(homeQuizScreenProvider).selectedTestCategory;
+    final selectedRandomCategoryList =
+        ref.watch(homeQuizScreenProvider).randomCategoryList;
     if (categoryList.isEmpty) {
       return Center(
         child: SpinKitFadingCircle(
@@ -154,7 +153,7 @@ class _QuizRange extends ConsumerWidget {
           ...categoryList
               .map((category) => _SelectRange(
                     text: category,
-                    isSelected: selectedTestCategory.contains(category),
+                    isSelected: selectedRandomCategoryList.contains(category),
                   ))
               .toList(),
         ],
@@ -172,17 +171,10 @@ class _SelectRange extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
-    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
-        text == categoryList.first;
     return GestureDetector(
-      onTap: isPremium
-          ? () {
-              ref
-                  .read(homeQuizScreenProvider.notifier)
-                  .selectTestCategory(text);
-            }
-          : null,
+      onTap: () {
+        ref.read(homeQuizScreenProvider.notifier).setRandomCategory(text);
+      },
       child: Container(
         width: context.width * 0.8,
         height: 45,
@@ -191,10 +183,10 @@ class _SelectRange extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
           border: Border.all(
-            width: isPremium && isSelected ? 1 : 0.5,
-            color: isPremium && isSelected ? context.mainColor : Colors.black45,
+            width: isSelected ? 1 : 0.5,
+            color: isSelected ? context.mainColor : Colors.black45,
           ),
-          color: isPremium && isSelected
+          color: isSelected
               ? context.backgroundColor.withOpacity(0.2)
               : Colors.grey.shade400.withOpacity(0.1),
         ),
@@ -202,22 +194,16 @@ class _SelectRange extends ConsumerWidget {
         child: Row(
           children: [
             Icon(
-              isPremium
-                  ? isSelected
-                      ? Icons.task_alt
-                      : Icons.circle_outlined
-                  : LineIcons.lock,
-              color: isPremium && isSelected ? context.mainColor : Colors.grey,
+              isSelected ? Icons.task_alt : Icons.circle_outlined,
+              color: isSelected ? context.mainColor : Colors.grey,
             ),
             const Gap(5),
             Text(
               text,
               style: TextStyle(
                 fontSize: 16,
-                color:
-                    isPremium && isSelected ? context.mainColor : Colors.grey,
-                fontWeight:
-                    isPremium && isSelected ? FontWeight.bold : FontWeight.w500,
+                color: isSelected ? context.mainColor : Colors.grey,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
               ),
             ),
           ],
@@ -263,7 +249,7 @@ class _SelectLength extends ConsumerWidget {
                   onTap: (index) {
                     ref
                         .read(homeQuizScreenProvider.notifier)
-                        .selectTestLength(testLength[index]);
+                        .setRandomQuizLength(testLength[index]);
                   },
                   labelColor: Colors.white,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
