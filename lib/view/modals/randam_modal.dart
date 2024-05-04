@@ -77,7 +77,7 @@ class RandomQuizModal extends ConsumerWidget {
                               .setStudyType(StudyType.choice);
                           ref
                               .read(homeQuizScreenProvider.notifier)
-                              .tapStartTestQuizButton();
+                              .tapStartRandomQuizButton();
 
                           final randomQuiz =
                               ref.read(quizModelProvider).randomQuiz!;

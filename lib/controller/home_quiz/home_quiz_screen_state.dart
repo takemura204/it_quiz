@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kentei_quiz/untils/enums.dart';
 
 import '../../model/quiz/quiz.dart';
 
@@ -11,7 +12,8 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
     @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList, //クイズのカテゴリリスト
     @Default([]) final List<String> randomCategoryList, //ランダムモーダルの出題状況,
-    @Default([]) final List<String> quizStatusList, //クイズ出題状況
+    @Default([]) final List<QuizStatusType> statusList, //クイズ出題状況
+    @Default([]) final List<QuizStatusType> selectedStatusList, //クイズ出題状況
     @Default([]) final List<double> correctRatios,
     @Default("") final String selectCategory,
     @Default(0) final int itemIndex, //クイズ番号

@@ -37,6 +37,10 @@ class StudyQuizModal extends ConsumerWidget {
         .length;
     final unlearnedValue =
         goalValue - (correctValue + incorrectValue + learnedValue);
+    final selectedStatusList =
+        ref.watch(homeQuizScreenProvider.select((s) => s.selectedStatusList));
+
+    ///selectedStatusListがない時ボタンを押したくない。
     return SimpleDialog(
       elevation: 0,
       insetPadding: EdgeInsets.all(context.width * 0.01),
@@ -65,9 +69,6 @@ class StudyQuizModal extends ConsumerWidget {
                 children: [
                   const Gap(5),
                   const Divider(height: 1),
-
-                  // ///正答率
-                  // _QuizResult(quiz),
 
                   const Gap(15),
 
@@ -181,6 +182,9 @@ class _SelectRange extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final statusList =
+        ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -190,40 +194,28 @@ class _SelectRange extends ConsumerWidget {
         ),
         const Gap(10),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _SelectRangeCard(
-              text: "正解",
-              value: correctValue,
-              iconColor: context.correctColor,
-              unit: "問",
-              isSelected: true,
-              onTap: () {},
-            ),
-            _SelectRangeCard(
-              text: "不正解",
-              value: incorrectValue,
-              iconColor: context.incorrectColor,
-              unit: "問",
-              isSelected: true,
-              onTap: () {},
-            ),
-            _SelectRangeCard(
-              text: "学習済み",
-              value: learnedValue,
-              iconColor: context.backgroundColor,
-              unit: "問",
-              isSelected: false,
-              onTap: () {},
-            ),
-            _SelectRangeCard(
-              text: "未学習",
+              status: statusList[0],
               value: unlearnedValue,
               iconColor: context.secondColor,
-              unit: "問",
-              isSelected: true,
-              onTap: () {},
+            ),
+            _SelectRangeCard(
+              status: statusList[1],
+              value: learnedValue,
+              iconColor: context.backgroundColor,
+            ),
+            _SelectRangeCard(
+              status: statusList[2],
+              value: correctValue,
+              iconColor: context.correctColor,
+            ),
+            _SelectRangeCard(
+              status: statusList[3],
+              value: incorrectValue,
+              iconColor: context.incorrectColor,
             ),
           ],
         ),
@@ -243,52 +235,54 @@ class _SelectRange extends ConsumerWidget {
   }
 }
 
+///出題範囲
 class _SelectRangeCard extends ConsumerWidget {
-  const _SelectRangeCard(
-      {required this.value,
-      required this.text,
-      required this.iconColor,
-      required this.unit,
-      required this.isSelected,
-      required this.onTap});
+  const _SelectRangeCard({
+    required this.value,
+    required this.status,
+    required this.iconColor,
+  });
 
   final int value;
-  final String text;
+  final QuizStatusType status;
   final Color iconColor;
-  final String unit;
-  final bool isSelected;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final color = value == 0
-        ? context.secondColor.withOpacity(0.5)
-        : isSelected
-            ? context.backgroundColor.withOpacity(0.3)
-            : Colors.white;
+    final selectedStatusList =
+        ref.watch(homeQuizScreenProvider.select((s) => s.selectedStatusList));
+    final isSelected = selectedStatusList.contains(status);
+    final isExists = value != 0;
+
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        ref.read(homeQuizScreenProvider.notifier).setQuizStatusList(status);
+      },
       child: Container(
         height: context.width * 0.2,
         width: context.width * 0.22,
         child: Card(
           elevation: 0,
-          color: color,
+          color: isExists
+              ? isSelected
+                  ? context.backgroundColor.withOpacity(0.5)
+                  : Colors.white
+              : context.secondColor.withOpacity(0.3),
           shape: RoundedRectangleBorder(
-            side: value == 0
-                ? BorderSide(
-                    color: context.secondColor.withOpacity(0.3),
-                    width: 1.5,
-                  )
-                : isSelected
+            side: isExists
+                ? isSelected
                     ? BorderSide(
                         color: context.mainColor,
                         width: 1.5,
                       )
                     : BorderSide(
                         color: Colors.grey.shade300,
-                        width: 1,
-                      ),
+                        width: 1.5,
+                      )
+                : BorderSide(
+                    color: context.secondColor,
+                    width: 1,
+                  ),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -304,21 +298,30 @@ class _SelectRangeCard extends ConsumerWidget {
                   shape: BoxShape.circle,
                   color: iconColor,
                   border: Border.all(
-                      width: 0.5,
+                      width: 1,
                       color: iconColor == context.backgroundColor
                           ? context.mainColor
                           : iconColor),
                 ),
               ),
               const Gap(5),
-              Text(
-                "$text",
-                style: context.texts.titleSmall,
-              ),
+              Text(I18n().quizStatusTypeText(status),
+                  style: context.texts.titleSmall),
               const Gap(3),
               Text(
-                "$value$unit",
-                style: context.texts.bodyMedium,
+                "$value問",
+                style: context.texts.bodyMedium?.copyWith(
+                  color: isExists
+                      ? isSelected
+                          ? context.mainColor
+                          : Colors.black54
+                      : Colors.grey,
+                  fontWeight: isExists
+                      ? isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal
+                      : FontWeight.normal,
+                ),
               ),
             ],
           ),
@@ -354,7 +357,7 @@ class _SelectLength extends ConsumerWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: context.mainColor),
+            border: Border.all(color: context.secondColor),
           ),
           child: DefaultTabController(
             length: 3,
@@ -365,15 +368,16 @@ class _SelectLength extends ConsumerWidget {
                       .read(homeQuizScreenProvider.notifier)
                       .setStudyLength(selectLength[index]);
                 },
-                labelColor: Colors.white,
+                labelColor: context.mainColor,
                 labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                unselectedLabelColor: Colors.black54,
                 unselectedLabelStyle:
                     const TextStyle(fontWeight: FontWeight.normal),
-                unselectedLabelColor: context.mainColor,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: context.mainColor),
+                    border: Border.all(width: 1.5, color: context.mainColor),
+                    color: context.backgroundColor.withOpacity(0.5)),
                 tabs: [
                   Tab(
                     child: Text(

@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 
 import '../../model/quiz/quiz.dart';
@@ -32,7 +31,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
         await Future.wait([
           initQuizList(),
           initCategoryList(),
-          initSelectedRangeList(),
+          initStatusList(),
         ]);
       }
       setIsLoading(false);
@@ -90,14 +89,15 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///selectedRangeList読み込み
-  Future initSelectedRangeList() async {
-    final quizStatusList = [
-      I18n().quizStatusTypeText(QuizStatusType.correct),
-      I18n().quizStatusTypeText(QuizStatusType.incorrect),
-      I18n().quizStatusTypeText(QuizStatusType.learned),
-      I18n().quizStatusTypeText(QuizStatusType.unlearned),
+  Future initStatusList() async {
+    final statusList = [
+      QuizStatusType.unlearned,
+      QuizStatusType.learned,
+      QuizStatusType.correct,
+      QuizStatusType.incorrect,
     ];
-    state = state.copyWith(quizStatusList: quizStatusList);
+    state =
+        state.copyWith(statusList: statusList, selectedStatusList: statusList);
   }
 
   ///QuizList取得
@@ -113,21 +113,31 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
 
   ///selectStudyQuiz更新
   void setSelectStudyQuiz() {
+    // selectQuiz の存在を確認
     final selectQuiz = state.selectQuiz;
-    if (selectQuiz != null) {
-      // 既存の問題リストを取得
-      final quizItemList = [...selectQuiz.quizItemList];
-      // 選択する問題の上限数を取得
-      final selectedStudyLength = state.selectedStudyLength;
-
-      // pickedQuizListを定義し、selectedWeakLengthの数だけ問題を選択
-      final pickedQuizList = quizItemList.take(selectedStudyLength).toList();
-
-      // 更新された selectStudyQuiz を生成
-      final selectStudyQuiz = selectQuiz.copyWith(quizItemList: pickedQuizList);
-
-      state = state.copyWith(selectStudyQuiz: selectStudyQuiz);
+    if (selectQuiz == null) {
+      return;
     }
+
+    // 既存の問題リストを取得
+    final quizItemList = [...selectQuiz.quizItemList];
+
+    // selectedStatusList に基づいて問題をフィルタリング
+    final filteredQuizList = quizItemList
+        .where((quizItem) => state.selectedStatusList.contains(quizItem.status))
+        .toList();
+
+    // 選択する問題の上限数を取得
+    final selectedStudyLength = state.selectedStudyLength;
+
+    // filteredQuizList から selectedStudyLength の数だけ問題を選択
+    final pickedQuizList = filteredQuizList.take(selectedStudyLength).toList();
+
+    // 更新された selectStudyQuiz を生成
+    final selectStudyQuiz = selectQuiz.copyWith(quizItemList: pickedQuizList);
+
+    // ステートを更新
+    state = state.copyWith(selectStudyQuiz: selectStudyQuiz);
   }
 
   ///WeakQuiz開始
@@ -155,7 +165,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///TestQuiz開始
-  void tapStartTestQuizButton() {
+  void tapStartRandomQuizButton() {
     final randomCategoryList = state.randomCategoryList;
     final selectedTestLength = state.selectedTestLength;
     ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.random);
@@ -170,13 +180,14 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///　出題範囲指定
-  void setQuizStatusList(String status) {
-    final quizStatusList = [...state.quizStatusList];
-    if (quizStatusList.contains(status)) {
-      state =
-          state.copyWith(randomCategoryList: quizStatusList..remove(status));
+  void setQuizStatusList(QuizStatusType status) {
+    final selectedStatusList = [...state.selectedStatusList];
+    if (selectedStatusList.contains(status)) {
+      state = state.copyWith(
+          selectedStatusList: selectedStatusList..remove(status));
     } else {
-      state = state.copyWith(quizStatusList: quizStatusList..add(status));
+      state =
+          state.copyWith(selectedStatusList: selectedStatusList..add(status));
     }
   }
 

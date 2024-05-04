@@ -22,7 +22,9 @@ mixin _$HomeQuizScreenState {
       throw _privateConstructorUsedError; //クイズのカテゴリリスト
   List<String> get randomCategoryList =>
       throw _privateConstructorUsedError; //ランダムモーダルの出題状況,
-  List<String> get quizStatusList =>
+  List<QuizStatusType> get statusList =>
+      throw _privateConstructorUsedError; //クイズ出題状況
+  List<QuizStatusType> get selectedStatusList =>
       throw _privateConstructorUsedError; //クイズ出題状況
   List<double> get correctRatios => throw _privateConstructorUsedError;
   String get selectCategory => throw _privateConstructorUsedError;
@@ -53,7 +55,8 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> randomCategoryList,
-      List<String> quizStatusList,
+      List<QuizStatusType> statusList,
+      List<QuizStatusType> selectedStatusList,
       List<double> correctRatios,
       String selectCategory,
       int itemIndex,
@@ -89,7 +92,8 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? filterQuizList = null,
     Object? categoryList = null,
     Object? randomCategoryList = null,
-    Object? quizStatusList = null,
+    Object? statusList = null,
+    Object? selectedStatusList = null,
     Object? correctRatios = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
@@ -120,10 +124,14 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.randomCategoryList
           : randomCategoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      quizStatusList: null == quizStatusList
-          ? _value.quizStatusList
-          : quizStatusList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      statusList: null == statusList
+          ? _value.statusList
+          : statusList // ignore: cast_nullable_to_non_nullable
+              as List<QuizStatusType>,
+      selectedStatusList: null == selectedStatusList
+          ? _value.selectedStatusList
+          : selectedStatusList // ignore: cast_nullable_to_non_nullable
+              as List<QuizStatusType>,
       correctRatios: null == correctRatios
           ? _value.correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
@@ -225,7 +233,8 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> randomCategoryList,
-      List<String> quizStatusList,
+      List<QuizStatusType> statusList,
+      List<QuizStatusType> selectedStatusList,
       List<double> correctRatios,
       String selectCategory,
       int itemIndex,
@@ -262,7 +271,8 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? filterQuizList = null,
     Object? categoryList = null,
     Object? randomCategoryList = null,
-    Object? quizStatusList = null,
+    Object? statusList = null,
+    Object? selectedStatusList = null,
     Object? correctRatios = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
@@ -293,10 +303,14 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
           ? _value._randomCategoryList
           : randomCategoryList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      quizStatusList: null == quizStatusList
-          ? _value._quizStatusList
-          : quizStatusList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      statusList: null == statusList
+          ? _value._statusList
+          : statusList // ignore: cast_nullable_to_non_nullable
+              as List<QuizStatusType>,
+      selectedStatusList: null == selectedStatusList
+          ? _value._selectedStatusList
+          : selectedStatusList // ignore: cast_nullable_to_non_nullable
+              as List<QuizStatusType>,
       correctRatios: null == correctRatios
           ? _value._correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
@@ -357,7 +371,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
       final List<String> randomCategoryList = const [],
-      final List<String> quizStatusList = const [],
+      final List<QuizStatusType> statusList = const [],
+      final List<QuizStatusType> selectedStatusList = const [],
       final List<double> correctRatios = const [],
       this.selectCategory = "",
       this.itemIndex = 0,
@@ -373,7 +388,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       : _filterQuizList = filterQuizList,
         _categoryList = categoryList,
         _randomCategoryList = randomCategoryList,
-        _quizStatusList = quizStatusList,
+        _statusList = statusList,
+        _selectedStatusList = selectedStatusList,
         _correctRatios = correctRatios,
         _selectedFilterGroup = selectedFilterGroup;
 
@@ -411,14 +427,26 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
   }
 
 //ランダムモーダルの出題状況,
-  final List<String> _quizStatusList;
+  final List<QuizStatusType> _statusList;
 //ランダムモーダルの出題状況,
   @override
   @JsonKey()
-  List<String> get quizStatusList {
-    if (_quizStatusList is EqualUnmodifiableListView) return _quizStatusList;
+  List<QuizStatusType> get statusList {
+    if (_statusList is EqualUnmodifiableListView) return _statusList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_quizStatusList);
+    return EqualUnmodifiableListView(_statusList);
+  }
+
+//クイズ出題状況
+  final List<QuizStatusType> _selectedStatusList;
+//クイズ出題状況
+  @override
+  @JsonKey()
+  List<QuizStatusType> get selectedStatusList {
+    if (_selectedStatusList is EqualUnmodifiableListView)
+      return _selectedStatusList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedStatusList);
   }
 
 //クイズ出題状況
@@ -475,7 +503,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, randomCategoryList: $randomCategoryList, quizStatusList: $quizStatusList, correctRatios: $correctRatios, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, randomCategoryList: $randomCategoryList, statusList: $statusList, selectedStatusList: $selectedStatusList, correctRatios: $correctRatios, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
@@ -492,7 +520,9 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
             const DeepCollectionEquality()
                 .equals(other._randomCategoryList, _randomCategoryList) &&
             const DeepCollectionEquality()
-                .equals(other._quizStatusList, _quizStatusList) &&
+                .equals(other._statusList, _statusList) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedStatusList, _selectedStatusList) &&
             const DeepCollectionEquality()
                 .equals(other._correctRatios, _correctRatios) &&
             (identical(other.selectCategory, selectCategory) ||
@@ -526,7 +556,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       const DeepCollectionEquality().hash(_filterQuizList),
       const DeepCollectionEquality().hash(_categoryList),
       const DeepCollectionEquality().hash(_randomCategoryList),
-      const DeepCollectionEquality().hash(_quizStatusList),
+      const DeepCollectionEquality().hash(_statusList),
+      const DeepCollectionEquality().hash(_selectedStatusList),
       const DeepCollectionEquality().hash(_correctRatios),
       selectCategory,
       itemIndex,
@@ -554,7 +585,8 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       final List<Quiz> filterQuizList,
       final List<String> categoryList,
       final List<String> randomCategoryList,
-      final List<String> quizStatusList,
+      final List<QuizStatusType> statusList,
+      final List<QuizStatusType> selectedStatusList,
       final List<double> correctRatios,
       final String selectCategory,
       final int itemIndex,
@@ -577,7 +609,9 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   @override //クイズのカテゴリリスト
   List<String> get randomCategoryList;
   @override //ランダムモーダルの出題状況,
-  List<String> get quizStatusList;
+  List<QuizStatusType> get statusList;
+  @override //クイズ出題状況
+  List<QuizStatusType> get selectedStatusList;
   @override //クイズ出題状況
   List<double> get correctRatios;
   @override

@@ -106,10 +106,10 @@ class QuizStatusProgressChart extends StatelessWidget {
         height: height,
         child: Row(
           children: [
+            buildBarSegment(context, context.secondColor, progress4, '未学習'),
+            buildBarSegment(context, context.backgroundColor, progress3, '学習済'),
             buildBarSegment(context, context.correctColor, progress1, '正解'),
             buildBarSegment(context, context.incorrectColor, progress2, '不正解'),
-            buildBarSegment(context, context.backgroundColor, progress3, '学習済'),
-            buildBarSegment(context, context.secondColor, progress4, '未学習'),
           ],
         ),
       ),

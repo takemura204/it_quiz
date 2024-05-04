@@ -82,7 +82,7 @@ class I18n {
       case QuizStatusType.incorrect:
         return '不正解';
       case QuizStatusType.learned:
-        return '学習済み';
+        return '学習済';
       case QuizStatusType.unlearned:
         return '未学習';
       default:
