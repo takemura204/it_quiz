@@ -38,8 +38,8 @@ class SettingNotificationController
   Future _initState() async {
     _notificationPermissionStream();
     await _initTimeZone();
-    // await _initLocalNotifications();
-    // await checkNotificationPermission();
+    await _initLocalNotifications();
+    await checkNotificationPermission();
   }
 
   @override

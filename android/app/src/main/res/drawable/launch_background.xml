@@ -6,6 +6,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/app_icon_foreground" />
+            android:src="@drawable/icon_notification" />
     </item>
 </layer-list>

@@ -46,7 +46,7 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
   }
 
   // バナー広告を新しく生成するメソッド
-  Future<BannerAd> createNewBannerAd(double height) async {
+  Future<BannerAd?> createNewBannerAd(double height) async {
     try {
       AdSize adSize;
       if (height <= 50) {
@@ -68,10 +68,12 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
         request: const AdRequest(),
         listener: BannerAdListener(
           onAdLoaded: (Ad ad) {
-            // print('Ad loaded: ${ad.adUnitId}.');
+            // 広告がロードされた後に実行
+            print('Ad loaded: ${ad.adUnitId}.');
           },
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             print('Ad failed to load: ${ad.adUnitId}, $error');
+            print(SecretKey().bannerAdUnitId);
             ad.dispose();
           },
         ),
@@ -82,7 +84,7 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
       return newBannerAd;
     } catch (e, s) {
       print({"Error：createNewNativeAd", e, s});
-      return bannerAd;
+      return null;
     }
   }
 

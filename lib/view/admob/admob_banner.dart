@@ -20,7 +20,7 @@ class AdBanner extends ConsumerWidget {
     // const isPremium = true;
     // 広告がロードされたら新しいバナー広告を作成して表示する
     return !isPremium
-        ? FutureBuilder<BannerAd>(
+        ? FutureBuilder<BannerAd?>(
             future: adMobController.createNewBannerAd(height), // 新しいバナー広告を生成
             builder: (context, snapshot) {
               if (snapshot.hasData) {

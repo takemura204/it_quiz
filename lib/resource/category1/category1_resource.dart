@@ -68,7 +68,7 @@ extension Category1Quiz on QuizModel {
         quizItemList: category1_12,
       ),
       Quiz(
-        title: "技術開発戦略の立案・技術開発計画",
+        title: "技術開発戦略の立案・発計画",
         quizItemList: category1_13,
       ),
       Quiz(

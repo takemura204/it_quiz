@@ -67,7 +67,7 @@ class NeedPremiumModal extends ConsumerWidget {
               PrimaryButton(
                   width: context.width * 0.85,
                   height: 55,
-                  text: "Stockrプレミアムに登録する",
+                  text: "プレミアムに登録する",
                   onPressed: onPressed),
               Gap(context.height * 0.01),
               SecondaryButton(
