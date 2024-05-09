@@ -246,8 +246,10 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final quizItemList = state.quizItemList;
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
-    final correctNum =
-        quizItemList.where((x) => x.status == true).toList().length;
+    final correctNum = quizItemList
+        .where((x) => x.status == QuizStatusType.correct)
+        .toList()
+        .length;
     final isCompleted = quizItemList.length == correctNum;
     final updateQuiz = quiz.copyWith(
       duration: duration,

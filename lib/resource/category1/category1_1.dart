@@ -1,4 +1,5 @@
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
+import 'package:kentei_quiz/untils/enums.dart';
 
 import '../../model/quiz_item/quiz_item.dart';
 
@@ -10,18 +11,21 @@ List<QuizItem> get category1_1 {
       ans: '経営理念',
       choices: ["経営理念", "株主総会", "決算", "CSR"],
       comment: "経営理念は、組織の基本的な価値観や理念を示し、組織の目的や存在意義を明確にするもの。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '株式会社において、最高意思決定機関とされる会は何か？',
       ans: '株主総会',
       choices: ["株主総会", "監査役", "ディスクロージャ", "CSR"],
       comment: "株主総会は、株式会社において株主の意思決定を行う最高機関で、重要な経営判断がなされる場。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '企業が一定期間の経済活動の結果を財務的にまとめた報告は何か？',
       ans: '決算',
       choices: ["決算", "CSR", "SRI", "ディスクロージャ"],
       comment: "決算は、企業が一定期間の経済活動の結果を財務的にまとめ、収益や費用、利益などを報告すること。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業が社会的責任を果たすことを目的とした経営活動は何か？',
@@ -29,6 +33,7 @@ List<QuizItem> get category1_1 {
       choices: ["CSR", "SRI", "ディスクロージャ", "決算"],
       comment:
           "CSR（Corporate Social Responsibility）は、企業が環境保護や社会貢献など、社会的責任を果たすことを目的とした経営活動。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '社会的に責任ある投資を意味する、投資の選択基準の一つは何か？',
@@ -36,24 +41,28 @@ List<QuizItem> get category1_1 {
       choices: ["SRI", "CSR", "決算", "グリーンIT"],
       comment:
           "SRI（Socially Responsible Investment）は、環境保護や社会貢献などの社会的責任を考慮して投資を行うこと。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業が自らの経営状況や財務情報などを公開することを何というか？',
       ans: 'ディスクロージャ',
       choices: ["ディスクロージャ", "CSR", "SRI", "監査役"],
       comment: "ディスクロージャは、企業が株主や投資家などのステークホルダーに対して、経営状況や財務情報などを透明に公開すること。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '企業の監査を行い、経営の健全性を監視する役職は何か？',
       ans: '監査役',
       choices: ["監査役", "CSR", "ディスクロージャ", "SRI"],
       comment: "監査役は、企業の財務報告の正確性や経営の健全性を監視し、株主に報告する役職。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業活動において環境への影響を考慮し、持続可能な経営を目指す取り組みは何か？',
       ans: 'グリーンIT',
       choices: ["グリーンIT", "SDGs", "ゼロエミッション", "CSR"],
       comment: "グリーンITは、情報技術を活用して環境負荷を低減し、エネルギー効率の良い持続可能な経営を目指す取り組み。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '国際社会の持続可能な発展を目指し、国連が掲げる目標は何か？',
@@ -61,24 +70,28 @@ List<QuizItem> get category1_1 {
       choices: ["SDGs", "グリーンIT", "CSR", "ゼロエミッション"],
       comment:
           "SDGs（Sustainable Development Goals）は、国際社会の持続可能な発展を目指し、国連が掲げる17の目標。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '環境への負荷をゼロにすることを目指す環境保全の取り組みは何か？',
       ans: 'ゼロエミッション',
       choices: ["ゼロエミッション", "SDGs", "グリーンIT", "CSR"],
       comment: "ゼロエミッションは、産業活動などによる環境への負荷（CO2排出など）をゼロにすることを目指す環境保全の取り組み。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '企業活動に関わる利害関係者を総称して何というか？',
       ans: 'ステークホルダ',
       choices: ["ステークホルダ", "コーポレートブランド", "PDCA", "OODAループ"],
       comment: "ステークホルダは、企業活動に関わる利害関係者（株主、従業員、顧客、地域社会など）を総称する言葉。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業の総合的な価値やイメージを構築するためのブランドは何か？',
       ans: 'コーポレートブランド',
       choices: ["コーポレートブランド", "ステークホルダ", "PDCA", "OODAループ"],
       comment: "コーポレートブランドは、企業の総合的な価値やイメージを構築し、外部に伝えるためのブランド。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '計画・実行・評価・改善のサイクルを回すことで、継続的な改善を目指す手法は何か？',
@@ -86,6 +99,7 @@ List<QuizItem> get category1_1 {
       choices: ["PDCA", "コーポレートブランド", "ステークホルダ", "OODAループ"],
       comment:
           "PDCAサイクルは、計画（Plan）、実行（Do）、評価（Check）、改善（Act）のプロセスを繰り返すことで、業務やプロジェクトの継続的な改善を目指す手法。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '観察・指向・決定・行動のサイクルを通じて、迅速な意思決定と行動を促す概念は何か？',
@@ -93,6 +107,7 @@ List<QuizItem> get category1_1 {
       choices: ["OODAループ", "PDCA", "コーポレートブランド", "ステークホルダ"],
       comment:
           "OODAループ（Observe, Orient, Decide, Act）は、状況を迅速に把握し、適切な意思決定と行動を促すための概念。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '災害や緊急事態が発生した際に事業を継続させるための計画は何か？',
@@ -100,6 +115,7 @@ List<QuizItem> get category1_1 {
       choices: ["BCP", "BCM", "OODAループ", "PDCA"],
       comment:
           "BCP（Business Continuity Plan）は、災害や緊急事態が発生した際に、事業の継続や迅速な復旧を目指すための計画。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '事業継続性を確保するための組織的な管理プロセスは何か？',
@@ -107,12 +123,14 @@ List<QuizItem> get category1_1 {
       choices: ["BCM", "BCP", "OODAループ", "PDCA"],
       comment:
           "BCM（Business Continuity Management）は、事業の継続性を確保し、災害や緊急事態からの迅速な回復を目指すための組織的な管理プロセス。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '職場で実際の業務を通じて行われる教育訓練は何か？',
       ans: 'OJT',
       choices: ["OJT", "Off-JT", "e-ラーニング", "アダプティブラーニング"],
       comment: "OJT（On-the-Job Training）は、職場での実務を通じて、実際の業務環境の中で行われる教育訓練。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '職場外で行われる教育訓練、例えばセミナーや研修などは何と呼ばれるか？',
@@ -120,18 +138,21 @@ List<QuizItem> get category1_1 {
       choices: ["Off-JT", "OJT", "e-ラーニング", "アダプティブラーニング"],
       comment:
           "Off-JT（Off-the-Job Training）は、職場外で行われる教育訓練で、セミナーや研修など、職場を離れて行われる学習活動を指す。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'インターネットを利用して行われる学習のことを何というか？',
       ans: 'e-ラーニング',
       choices: ["e-ラーニング", "Off-JT", "OJT", "アダプティブラーニング"],
       comment: "e-ラーニングは、インターネットやコンピュータを利用して行われる遠隔教育やオンライン学習のこと。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '学習者の能力や進捗に応じて学習内容を自動的に調整する学習形態は何か？',
       ans: 'アダプティブラーニング',
       choices: ["アダプティブラーニング", "e-ラーニング", "Off-JT", "OJT"],
       comment: "アダプティブラーニングは、学習者の能力や進捗に応じて、学習内容や進行速度を自動的に調整する個別最適化学習形態。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '従業員がキャリア開発のために自身のスキルや経験を管理するためのデータベースは何か？',
@@ -139,12 +160,14 @@ List<QuizItem> get category1_1 {
       choices: ["CDP", "メンタルヘルス", "HRテック", "MBO"],
       comment:
           "CDP（Career Development Planning）は、従業員が自身のスキルや経験、キャリア目標などを管理し、キャリア開発を計画するための個人データベースやプロセス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '従業員の精神的健康を保つための取り組みは何と呼ばれるか？',
       ans: 'メンタルヘルス',
       choices: ["メンタルヘルス", "CDP", "HRテック", "MBO"],
       comment: "メンタルヘルスは、従業員の精神的健康やストレスマネジメントに関する取り組みで、職場の生産性や従業員の満足度向上に貢献する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '人事管理を効率化するために利用されるテクノロジーは何か？',
@@ -152,6 +175,7 @@ List<QuizItem> get category1_1 {
       choices: ["HRテック", "メンタルヘルス", "CDP", "MBO"],
       comment:
           "HRテック（Human Resources Technology）は、採用、評価、教育訓練などの人事管理プロセスを効率化するために利用されるテクノロジー。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '従業員と管理職が目標を共有し、評価する管理手法は何か？',
@@ -159,6 +183,7 @@ List<QuizItem> get category1_1 {
       choices: ["MBO", "HRテック", "メンタルヘルス", "CDP"],
       comment:
           "MBO（Management by Objectives）は、従業員と管理職が目標を共有し、その達成を目指して行動する管理手法。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '組織内の人材管理全般を指す言葉は何か？',
@@ -166,6 +191,7 @@ List<QuizItem> get category1_1 {
       choices: ["HRM", "MBO", "HRテック", "メンタルヘルス"],
       comment:
           "HRM（Human Resource Management）は、採用、教育訓練、評価、報酬など、組織内の人材管理全般を指す言葉。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '従業員が退職しないように留める取り組みは何か？',
@@ -173,24 +199,28 @@ List<QuizItem> get category1_1 {
       choices: ["リテンション", "HRM", "MBO", "HRテック"],
       comment:
           "リテンションは、従業員が組織に長く留まり、離職しないようにするための取り組み。従業員満足度の向上やエンゲージメントの強化が目的。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '組織内の才能ある人材を発見し、育成し、維持するプロセスは何か？',
       ans: 'タレントマネジメント',
       choices: ["タレントマネジメント", "リテンション", "HRM", "MBO"],
       comment: "タレントマネジメントは、組織内の才能ある人材を発見し、育成し、維持することを目的とした戦略的なプロセス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '従業員が仕事に没頭し、熱心に取り組む状態は何と呼ばれるか？',
       ans: 'ワークエンゲージメント',
       choices: ["ワークエンゲージメント", "タレントマネジメント", "リテンション", "HRM"],
       comment: "ワークエンゲージメントは、従業員が自らの仕事に対して熱心に取り組み、高いモチベーションを持つ状態。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '仕事と私生活の調和を目指す考え方は何か？',
       ans: 'ワークライフバランス',
       choices: ["ワークライフバランス", "ワークエンゲージメント", "タレントマネジメント", "リテンション"],
       comment: "ワークライフバランスは、仕事と私生活の両方に満足できるように調和を図ることを目指す考え方。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '多様な個性や価値観を尊重し、活用する経営戦略は何か？',
@@ -198,12 +228,14 @@ List<QuizItem> get category1_1 {
       choices: ["ダイバーシティ", "ワークライフバランス", "ワークエンゲージメント", "タレントマネジメント"],
       comment:
           "ダイバーシティ（Diversity）は、性別、年齢、国籍、文化、価値観など、多様な個性や背景を持つ人々を尊重し、その能力や特性を組織の成長に活用する経営戦略。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '実際の業務状況を想定した問題を解決する訓練方法は何か？',
       ans: 'インバスケット',
       choices: ["インバスケット", "ロールプレイング", "ケーススタディ", "アメーバ組織"],
       comment: "インバスケットは、実際の業務状況を想定した問題や課題を解決することを通じて、意思決定能力や問題解決能力を養う訓練方法。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '実際のビジネスシーンを模擬して行う役割演技の訓練は何か？',
@@ -211,78 +243,91 @@ List<QuizItem> get category1_1 {
       choices: ["ロールプレイング", "インバスケット", "ケーススタディ", "アメーバ組織"],
       comment:
           "ロールプレイングは、実際のビジネスシーンを模擬して役割を演じることで、コミュニケーション能力や問題解決能力を向上させる訓練方法。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '実際のビジネス事例に基づいて学習する教育手法は何か？',
       ans: 'ケーススタディ',
       choices: ["ケーススタディ", "ロールプレイング", "インバスケット", "アメーバ組織"],
       comment: "ケーススタディは、実際のビジネス事例を用いて、その状況分析や意思決定プロセスを学習する教育手法。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '女性が上位職に就くことを阻む見えない障壁を何というか？',
       ans: 'グラスシーリング',
       choices: ["グラスシーリング", "ケーススタディ", "ロールプレイング", "インバスケット"],
       comment: "グラスシーリングは、女性が上位職や経営層に進出することを阻む、組織内外の見えない障壁や制度的な偏見を指す言葉。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '労働時間の規制から一部の専門職を除外する制度は何か？',
       ans: 'ホワイトカラーエグゼンプション',
       choices: ["ホワイトカラーエグゼンプション", "グラスシーリング", "カンパニ制", "マトリックス組織"],
       comment: "ホワイトカラーエグゼンプションは、一部の専門職や管理職などを労働時間の規制から除外する制度。成果に基づく評価が中心となる。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '明確な上下関係を持ち、一元的な指揮系統が特徴の組織形態は何か？',
       ans: '階層型組織',
       choices: ["階層型組織", "事業部制", "職能別組織", "プロジェクト組織"],
       comment: "階層型組織は、明確な上下関係と一元的な指揮系統を持つ組織形態。効率的な意思決定が可能だが、柔軟性に欠けることがある。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '製品や市場ごとに独立した事業部を設ける組織形態は何か？',
       ans: '事業部制',
       choices: ["事業部制", "階層型組織", "職能別組織", "プロジェクト組織"],
       comment: "事業部制は、製品や市場ごとに独立した事業部を設け、それぞれが自己完結型の経営を行う組織形態。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '機能ごとに部門を分け、専門性を高める組織形態は何か？',
       ans: '職能別組織',
       choices: ["職能別組織", "事業部制", "階層型組織", "マトリックス組織"],
       comment: "職能別組織は、機能ごと（例：製造、営業、人事）に部門を分けることで専門性を高め、効率的な運営を目指す組織形態。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '機能別とプロジェクト別の二重構造を持つ組織形態は何か？',
       ans: 'マトリックス組織',
       choices: ["マトリックス組織", "職能別組織", "事業部制", "プロジェクト組織"],
       comment: "マトリックス組織は、機能別の組織構造とプロジェクト別の組織構造を併用することで、柔軟性と専門性の両方を追求する組織形態。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '特定のプロジェクト達成のために一時的に組織されるチームは何か？',
       ans: 'プロジェクト組織',
       choices: ["プロジェクト組織", "マトリックス組織", "職能別組織", "カンパニ制"],
       comment: "プロジェクト組織は、特定のプロジェクトや目標達成のために一時的に組織されるチーム。プロジェクト完了後は通常解散する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '小さな単位の組織が独立採算制で運営される組織形態は何か？',
       ans: 'アメーバ組織',
       choices: ["アメーバ組織", "プロジェクト組織", "マトリックス組織", "職能別組織"],
       comment: "アメーバ組織は、組織内の小さなグループがそれぞれ独立採算制で運営され、各アメーバ単位で収益責任を持つ組織形態。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '独立採算制を採用し、小さな会社のように運営される組織単位は何か？',
       ans: 'カンパニ制',
       choices: ["カンパニ制", "プロジェクト組織", "マトリックス組織", "職能別組織"],
       comment: "カンパニ制は、大企業内に独立採算制の小組織（カンパニ）を設け、それぞれが小さな会社のように運営される組織形態。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '複数の企業が協力し、柔軟に機能する組織形態は何か？',
       ans: 'ネットワーク組織',
       choices: ["ネットワーク組織", "カンパニ制", "プロジェクト組織", "マトリックス組織"],
       comment: "ネットワーク組織は、複数の企業や組織が情報やリソースを共有し、協力して機能する組織形態。柔軟性と効率性を重視する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '子会社を持つことで、経営資源の最適化を図る企業形態は何か？',
       ans: '持株会社',
       choices: ["持株会社", "ネットワーク組織", "カンパニ制", "プロジェクト組織"],
       comment: "持株会社は、他の会社の株式を保有し、経営管理を行う企業形態。子会社を通じてビジネスポートフォリオの最適化を図る。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業の最高経営責任者を指す役職は何か？',
@@ -290,6 +335,7 @@ List<QuizItem> get category1_1 {
       choices: ["CEO", "CIO", "持株会社", "ネットワーク組織"],
       comment:
           "CEO（Chief Executive Officer）は、企業の最高経営責任者で、企業の経営方針や戦略を決定し、全体の経営をリードする役職。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業の情報技術戦略を統括する最高情報責任者は何か？',
@@ -297,12 +343,14 @@ List<QuizItem> get category1_1 {
       choices: ["CIO", "CEO", "持株会社", "ネットワーク組織"],
       comment:
           "CIO（Chief Information Officer）は、企業の情報技術（IT）戦略やシステムの統括を行う最高情報責任者。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '情報技術の進化がもたらす社会や産業の大変革を指す言葉は何か？',
       ans: '第4次産業革命',
       choices: ["第4次産業革命", "Society5.0", "データ駆動型社会", "デジタルトランスフォーメーション"],
       comment: "第4次産業革命は、IoT、AI、ビッグデータなどの先進技術により、社会や産業の構造が大きく変化する現象を指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '超スマート社会を目指す日本独自の社会構想は何か？',
@@ -310,12 +358,14 @@ List<QuizItem> get category1_1 {
       choices: ["Society5.0", "第4次産業革命", "データ駆動型社会", "デジタルトランスフォーメーション"],
       comment:
           "Society5.0は、日本が提唱する超スマート社会の構想で、あらゆるモノやサービスがネットワークでつながり、人々の生活や経済活動が大きく向上する社会を目指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'データと分析に基づいて意思決定や業務を行う社会は何と呼ばれるか？',
       ans: 'データ駆動型社会',
       choices: ["データ駆動型社会", "Society5.0", "第4次産業革命", "デジタルトランスフォーメーション"],
       comment: "データ駆動型社会は、ビッグデータや分析技術を活用して、より効率的で精密な意思決定やサービス提供を行う社会のこと。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'デジタル技術を活用してビジネスモデルや組織文化を変革するプロセスは何か？',
@@ -323,12 +373,14 @@ List<QuizItem> get category1_1 {
       choices: ["デジタルトランスフォーメーション", "データ駆動型社会", "Society5.0", "第4次産業革命"],
       comment:
           "デジタルトランスフォーメーションは、デジタル技術を活用してビジネスモデルや組織文化を根本から変革し、新たな価値を創出するプロセス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '新しいビジネスモデルの創出や社会課題の解決を目指し、特定地域で規制緩和を図る日本の法制度は何か？',
       ans: '国家戦略特区法',
       choices: ["国家戦略特区法", "官民データ活用推進基本法", "デジタル社会形成基本法", "デジタルトランスフォーメーション"],
       comment: "国家戦略特区法は、特定地域において新たなビジネスモデルの創出や社会課題の解決を目指し、規制緩和や特例措置を行う日本の法制度。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '官民のデータを有効活用し、新たな価値創出や公共サービスの向上を図るための日本の法律は何か？',
@@ -336,6 +388,7 @@ List<QuizItem> get category1_1 {
       choices: ["官民データ活用推進基本法", "国家戦略特区法", "デジタル社会形成基本法", "デジタルトランスフォーメーション"],
       comment:
           "官民データ活用推進基本法は、官民のデータを有効活用することにより、経済の活性化や公共サービスの向上を図ることを目的とした日本の法律。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'デジタル技術を活用して、包括的な社会システムの変革を目指す日本の法律は何か？',
@@ -343,6 +396,7 @@ List<QuizItem> get category1_1 {
       choices: ["デジタル社会形成基本法", "官民データ活用推進基本法", "国家戦略特区法", "デジタルトランスフォーメーション"],
       comment:
           "デジタル社会形成基本法は、デジタル技術を活用して社会のあらゆる分野でのシステム改革を推進し、包括的なデジタル社会の形成を目指す日本の法律。",
+      importance: QuizImportanceType.low,
     ),
   ];
 

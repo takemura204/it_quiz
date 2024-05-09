@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 ///会計・財務
 List<QuizItem> get category1_3 {
@@ -9,48 +10,56 @@ List<QuizItem> get category1_3 {
       ans: '売上総利益',
       choices: ["売上高", "売上総利益", "営業利益", "純利益"],
       comment: "売上総利益は、売上高から売上原価を引いた後の利益で、企業の商品やサービスの販売から得られる粗利益を示す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '売上総利益から販売費及び一般管理費を引いた金額を何というか？',
       ans: '営業利益',
       choices: ["売上総利益", "営業利益", "経常利益", "純利益"],
       comment: "営業利益は、売上総利益から販売費及び一般管理費を引いた後の利益で、企業の本業から得られる利益を示す。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '営業利益に営業外収益と営業外費用を加減した金額を何というか？',
       ans: '経常利益',
       choices: ["営業利益", "経常利益", "純利益", "売上総利益"],
       comment: "経常利益は、営業利益に営業外収益と営業外費用を加減した後の利益で、企業の通常の事業活動から得られる利益を示す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '売上が変動費と固定費の合計に等しくなる売上高を何というか？',
       ans: '損益分岐点',
       choices: ["損益分岐点", "目標利益点", "変動費率", "固定費率"],
       comment: "損益分岐点は、企業の利益がゼロになる売上高の点で、この点を超えると利益が発生し、下回ると損失が発生する。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '売上高によって変動する費用を何というか？',
       ans: '変動費',
       choices: ["変動費", "固定費", "直接費", "間接費"],
       comment: "変動費は、生産量や売上高に比例して増減する費用で、原材料費や労務費などが該当する。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '売上高の増減に関わらず一定の費用を何というか？',
       ans: '固定費',
       choices: ["固定費", "変動費", "可変費", "定額費"],
       comment: "固定費は、売上高の増減にかかわらず一定である費用で、家賃や人件費などが該当する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業のある時点での資産、負債、純資産の状態を示す表を何というか？',
       ans: '貸借対照表',
       choices: ["貸借対照表", "損益計算書", "キャッシュフロー計算書", "株主資本等変動計算書"],
       comment: "貸借対照表は、企業の一定の時点での財政状態を資産、負債、純資産の三つの部門に分けて示した会計報告書。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '一定期間の企業の収益と費用を示す報告書を何というか？',
       ans: '損益計算書',
       choices: ["損益計算書", "貸借対照表", "キャッシュフロー計算書", "株主資本等変動計算書"],
       comment: "損益計算書は、企業が一定期間にわたって行った事業活動の結果として生じた収益と費用、及びその期間の利益または損失を示す報告書。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '一定期間内の現金及び現金同等物の流れを示す報告書を何というか？',
@@ -58,42 +67,49 @@ List<QuizItem> get category1_3 {
       choices: ["キャッシュフロー計算書", "貸借対照表", "損益計算書", "株主資本等変動計算書"],
       comment:
           "キャッシュフロー計算書は、企業の一定期間にわたる現金及び現金同等物の流入と流出を、経営活動、投資活動、財務活動の三つのカテゴリーに分けて示した報告書。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '一定期間の株主資本の増減を示す報告書を何というか？',
       ans: '株主資本等変動計算書',
       choices: ["株主資本等変動計算書", "貸借対照表", "損益計算書", "キャッシュフロー計算書"],
       comment: "株主資本等変動計算書は、報告期間における株主資本の増加または減少を、配当、自己株式取得、新株発行などの要因別に示した報告書。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '親会社と子会社を合わせた財務諸表を何というか？',
       ans: '連結財務諸表',
       choices: ["連結財務諸表", "単体財務諸表", "合併財務諸表", "総合財務諸表"],
       comment: "連結財務諸表は、親会社とその子会社群を一つの経済単位とみなし、まとめて作成される財務諸表。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '流動資産と流動負債の比率を何というか？',
       ans: '流動比率',
       choices: ["流動比率", "固定比率", "自己資本比率", "総資本回転率"],
       comment: "流動比率は、企業の短期的な支払い能力を示す指標で、流動資産を流動負債で割った比率。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業の全ての勘定科目の取引を記録する帳簿を何というか？',
       ans: '総勘定元帳',
       choices: ["総勘定元帳", "日記帳", "補助簿", "仕訳帳"],
       comment: "総勘定元帳は、企業の全ての勘定科目に関する取引を体系的に記録する基本的な帳簿。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業の総資産に対する純利益の割合を示す指標を何というか？',
       ans: 'ROE',
       choices: ["ROE", "ROI", "ROA", "ROS"],
       comment: "ROEは、株主資本利益率とも呼ばれ、企業の自己資本に対する純利益の割合を示す指標。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '投資に対する利益の割合を示す指標を何というか？',
       ans: 'ROI',
       choices: ["ROI", "ROE", "ROA", "ROS"],
       comment: "ROIは、投資利益率とも呼ばれ、投資に対する利益の割合を示す指標。",
+      importance: QuizImportanceType.normal,
     ),
   ];
 

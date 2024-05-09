@@ -17,24 +17,10 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
     initState();
   }
 
-  late BannerAd _bannerAd;
-  late InterstitialAd _interstitialAd;
-
-  BannerAd get bannerAd => _bannerAd;
-
-  InterstitialAd get interstitialAd => _interstitialAd;
-
   @override
   Future initState() async {
     await initAppTrackingTransparency();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _bannerAd.dispose();
-    _interstitialAd.dispose();
-    super.dispose();
   }
 
   Future initAppTrackingTransparency() async {
@@ -62,7 +48,7 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
       } else {
         adSize = AdSize.leaderboard; // 251以上ならデフォルトでleaderboard
       }
-      final newBannerAd = BannerAd(
+      final newAdBanner = BannerAd(
         adUnitId: SecretKey().bannerAdUnitId,
         size: adSize,
         request: const AdRequest(),
@@ -79,9 +65,9 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
         ),
       );
 
-      await newBannerAd.load();
+      await newAdBanner.load();
 
-      return newBannerAd;
+      return newAdBanner;
     } catch (e, s) {
       print({"Error：createNewNativeAd", e, s});
       return null;

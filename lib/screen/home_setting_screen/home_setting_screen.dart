@@ -17,9 +17,9 @@ import '../../controller/setting_notification/setting_notification_controller.da
 import '../../model/lang/initial_resource.dart';
 import '../../model/notification_time/notification_time.dart';
 import '../../view/admob/admob_banner.dart';
+import '../../view/bar.dart';
 import '../../view/bottom_sheet/daily_goal_picker.dart';
 import '../../view/bottom_sheet/time_picker.dart';
-import '../../view/bar.dart';
 import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 

@@ -28,11 +28,6 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
     initInAppPurchase();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   Future<void> initInAppPurchase() async {
     try {
       //consoleにdebug情報を出力する
@@ -49,7 +44,7 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
       }
 
       ///offeringsを取ってくる
-      final offerings = await Purchases.getOfferings();
+      await Purchases.getOfferings();
 
       ///firebaseのidと、revenuecatのuserIdを一緒にしている場合、firebaseAuthのuidでログイン
       final result = await Purchases.logIn(auth.currentUser!.uid);

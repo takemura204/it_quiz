@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../controller/admob/admob_controller.dart';
@@ -15,18 +14,18 @@ class AdBanner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final adMobController = ref.read(adMobProvider.notifier);
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
-    // const isPremium = true;
-    // 広告がロードされたら新しいバナー広告を作成して表示する
     return !isPremium
         ? FutureBuilder<BannerAd?>(
-            future: adMobController.createNewBannerAd(height), // 新しいバナー広告を生成
+            future: ref.read(adMobProvider.notifier).createNewBannerAd(height),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData &&
+                  !snapshot.hasError) {
                 return Container(
-                  width: context.width * 1.0,
+                  width: MediaQuery.of(context).size.width,
                   height: height,
+                  alignment: Alignment.center,
                   child: AdWidget(ad: snapshot.data!),
                 );
               } else {
@@ -34,14 +33,14 @@ class AdBanner extends ConsumerWidget {
                   baseColor: Colors.grey.shade300,
                   highlightColor: Colors.grey.shade100,
                   child: Container(
-                    width: context.width * 1.0,
-                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    height: height,
                     color: Colors.grey.shade300,
                   ),
                 );
               }
             },
           )
-        : Container();
+        : Container(); // プレミアムユーザーは広告を表示しない
   }
 }

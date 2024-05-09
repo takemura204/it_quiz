@@ -37,8 +37,6 @@ class StudyQuizModal extends ConsumerWidget {
         .length;
     final unlearnedValue =
         goalValue - (correctValue + incorrectValue + learnedValue);
-    final selectedStatusList =
-        ref.watch(homeQuizScreenProvider.select((s) => s.selectedStatusList));
 
     ///selectedStatusListがない時ボタンを押したくない。
     return SimpleDialog(
@@ -184,6 +182,7 @@ class _SelectRange extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final statusList =
         ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
+    final sortedCards = _getSortedCards(context, statusList);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,34 +191,21 @@ class _SelectRange extends ConsumerWidget {
           '問題範囲を選択してください。',
           style: TextStyle(fontSize: 14, color: Colors.black54),
         ),
-        const Gap(10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _SelectRangeCard(
-              status: statusList[0],
-              value: unlearnedValue,
-              iconColor: context.secondColor,
-            ),
-            _SelectRangeCard(
-              status: statusList[1],
-              value: learnedValue,
-              iconColor: context.backgroundColor,
-            ),
-            _SelectRangeCard(
-              status: statusList[2],
-              value: correctValue,
-              iconColor: context.correctColor,
-            ),
-            _SelectRangeCard(
-              status: statusList[3],
-              value: incorrectValue,
-              iconColor: context.incorrectColor,
-            ),
-          ],
+        const SizedBox(height: 10),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: sortedCards
+                .map((card) => _SelectRangeCard(
+                      status: card.status,
+                      value: card.value,
+                      iconColor: card.iconColor,
+                    ))
+                .toList(),
+          ),
         ),
-        const Gap(15),
+        const SizedBox(height: 15),
         QuizStatusProgressChart(
           width: context.width,
           height: 25,
@@ -233,6 +219,39 @@ class _SelectRange extends ConsumerWidget {
       ],
     );
   }
+
+  List<StatusCard> _getSortedCards(
+      BuildContext context, List<QuizStatusType> statusList) {
+    List<StatusCard> cards = [
+      StatusCard(
+          status: statusList[0],
+          value: unlearnedValue,
+          iconColor: context.secondColor),
+      StatusCard(
+          status: statusList[1],
+          value: learnedValue,
+          iconColor: context.backgroundColor),
+      StatusCard(
+          status: statusList[2],
+          value: incorrectValue,
+          iconColor: context.incorrectColor),
+      StatusCard(
+          status: statusList[3],
+          value: correctValue,
+          iconColor: context.correctColor),
+    ];
+    cards.sort((a, b) => a.value == 0 ? 1 : -1);
+    return cards;
+  }
+}
+
+class StatusCard {
+  final QuizStatusType status;
+  final int value;
+  final Color iconColor;
+
+  StatusCard(
+      {required this.status, required this.value, required this.iconColor});
 }
 
 ///出題範囲
@@ -259,8 +278,9 @@ class _SelectRangeCard extends ConsumerWidget {
         ref.read(homeQuizScreenProvider.notifier).setQuizStatusList(status);
       },
       child: Container(
-        height: context.width * 0.2,
-        width: context.width * 0.22,
+        // height: 70,
+        width: 100,
+        margin: const EdgeInsets.symmetric(horizontal: 3),
         child: Card(
           elevation: 0,
           color: isExists
@@ -292,8 +312,8 @@ class _SelectRangeCard extends ConsumerWidget {
             children: [
               const Gap(5),
               Container(
-                height: 20,
-                width: 20,
+                height: 15,
+                width: 15,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: iconColor,
@@ -304,9 +324,10 @@ class _SelectRangeCard extends ConsumerWidget {
                           : iconColor),
                 ),
               ),
-              const Gap(5),
+              const Gap(3),
               Text(I18n().quizStatusTypeText(status),
-                  style: context.texts.titleSmall),
+                  style: context.texts.bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(3),
               Text(
                 "$value問",
@@ -323,6 +344,7 @@ class _SelectRangeCard extends ConsumerWidget {
                       : FontWeight.normal,
                 ),
               ),
+              const Gap(5),
             ],
           ),
         ),

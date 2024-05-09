@@ -56,7 +56,7 @@ class ChoiceChallengeBody extends ConsumerWidget {
         ///選択肢
         _SelectAnswer(quiz),
 
-        AdBanner(),
+        const AdBanner(),
       ],
     );
   }

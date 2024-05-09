@@ -38,11 +38,6 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   /// CategoryList取得
   Future initCategoryList() async {
     final isPremium = ref.read(authModelProvider).isPremium;
@@ -93,8 +88,8 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     final statusList = [
       QuizStatusType.unlearned,
       QuizStatusType.learned,
-      QuizStatusType.correct,
       QuizStatusType.incorrect,
+      QuizStatusType.correct,
     ];
     state =
         state.copyWith(statusList: statusList, selectedStatusList: statusList);

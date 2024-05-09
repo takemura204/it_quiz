@@ -94,10 +94,10 @@ class QuizStatusProgressChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 全体のプログレスの割合を計算
-    final progress1 = correctValue / goalScore;
-    final progress2 = incorrectValue / goalScore;
-    final progress3 = learnedValue / goalScore;
-    final progress4 = unlearnedValue / goalScore;
+    final correctRate = correctValue / goalScore;
+    final incorrectRate = incorrectValue / goalScore;
+    final learnRate = learnedValue / goalScore;
+    final unlearnRate = unlearnedValue / goalScore;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
@@ -106,10 +106,11 @@ class QuizStatusProgressChart extends StatelessWidget {
         height: height,
         child: Row(
           children: [
-            buildBarSegment(context, context.secondColor, progress4, '未学習'),
-            buildBarSegment(context, context.backgroundColor, progress3, '学習済'),
-            buildBarSegment(context, context.correctColor, progress1, '正解'),
-            buildBarSegment(context, context.incorrectColor, progress2, '不正解'),
+            buildBarSegment(context, context.secondColor, unlearnRate, '未学習'),
+            buildBarSegment(context, context.backgroundColor, learnRate, '学習済'),
+            buildBarSegment(
+                context, context.incorrectColor, incorrectRate, '不正解'),
+            buildBarSegment(context, context.correctColor, correctRate, '正解'),
           ],
         ),
       ),
@@ -124,7 +125,11 @@ class QuizStatusProgressChart extends StatelessWidget {
         color: color,
         alignment: Alignment.center,
         child: Text(
-          progress > 0 ? '${(progress * 100).round()}%' : '',
+          width > 50
+              ? progress > 0
+                  ? '${(progress * 100).round()}%'
+                  : ''
+              : '',
           style:
               context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
         ),

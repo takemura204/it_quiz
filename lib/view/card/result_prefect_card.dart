@@ -28,7 +28,7 @@ class ResultPerfectCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'PREFECT!!',
+                  'PREFECT!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 50,
@@ -37,7 +37,7 @@ class ResultPerfectCard extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  '完璧です！全問正解で満点を達成しました！',
+                  '完璧です！全問正解を達成しました！',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
