@@ -6,8 +6,7 @@ List<QuizItem> get category0_5 {
       question: 'プロジェクトの全作業を階層的に分割し、表示するツールは何か？',
       ans: 'WBS',
       choices: ["WBS", "ガントチャート", "アローダイアグラム", "クリティカルパス分析"],
-      comment:
-          "WBS（Work Breakdown Structure）は、プロジェクトの作業を階層的に分割し、体系的に表示するためのツール。",
+      comment: "WBSは、プロジェクトの作業を階層的に分割し、体系的に表示するためのツール。",
     ),
     QuizItem(
       question: '活動やイベントを矢印で表し、プロジェクトのスケジュールを示す図法は何か？',
@@ -19,22 +18,19 @@ List<QuizItem> get category0_5 {
       question: 'ITサービスマネジメントのベストプラクティスを体系化したフレームワークは何か？',
       ans: 'ITIL',
       choices: ["ITIL", "PMBOK", "ISO/IEC 20000", "COBIT"],
-      comment:
-          "ITIL（Information Technology Infrastructure Library）は、ITサービスマネジメントのベストプラクティスを体系化したフレームワーク。",
+      comment: "ITILは、ITサービスマネジメントのベストプラクティスを体系化したフレームワーク。",
     ),
     QuizItem(
       question: 'サービス提供者と顧客の間で合意されたサービスレベルの品質を定義する文書は何か？',
       ans: 'SLA',
       choices: ["SLA", "SLO", "OLA", "SLM"],
-      comment:
-          "SLA（Service Level Agreement）は、サービス提供者と顧客間で合意されたサービスレベルの品質、範囲、責任などを定義する文書。",
+      comment: "SLAは、サービス提供者と顧客間で合意されたサービスレベルの品質、範囲、責任などを定義する文書。",
     ),
     QuizItem(
       question: '合意されたサービスレベルを維持し、継続的に改善するプロセスを何というか？',
       ans: 'SLM',
       choices: ["SLM", "SLA", "ITIL", "QoS"],
-      comment:
-          "SLM（Service Level Management）は、合意されたサービスレベルを維持し、サービス品質を継続的に改善するためのプロセス。",
+      comment: "SLMは、合意されたサービスレベルを維持し、サービス品質を継続的に改善するためのプロセス。",
     ),
     QuizItem(
       question: 'ITサービス運用において、サービス障害や問題の報告と対応を行うプロセスは何か？',

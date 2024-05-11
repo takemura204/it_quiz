@@ -1,77 +1,97 @@
+import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
 
 List<QuizItem> get category3_7 {
   final quizItems = [
     QuizItem(
-      question: 'コンピュータの中心的な処理装置であり、プログラムの命令を解釈し実行する部品は何か？',
-      ans: 'CPU',
-      choices: ["CPU", "GPU", "SSD", "HDD"],
+      question: '物体の識別やデータのやり取りに無線信号を用いる技術で、タグやリーダーを使って情報を読み取るシステムは何か？',
+      ans: 'RFID',
+      choices: ["RFID", "Bluetooth", "NFC", "IrDA"],
       comment:
-          "CPU（Central Processing Unit）は、コンピュータの中心的な処理装置で、プログラムの命令を解釈し実行する。",
+          "RFID（Radio Frequency Identification）は、無線信号を用いて物体を識別したりデータをやり取りする技術で、タグやリーダーを使用して情報を読み取る。",
     ),
     QuizItem(
-      question: '複数のCPUを搭載し、並列処理能力を高めるシステム構成は何か？',
-      ans: 'マルチプロセッサ',
-      choices: ["マルチプロセッサ", "マルチコア", "シングルプロセッサ", "デュアルコア"],
-      comment: "マルチプロセッサシステムは、複数のCPUを搭載することで並列処理能力を高め、処理速度の向上を図るシステム構成。",
-    ),
-    QuizItem(
-      question: '特に画像処理やビデオレンダリングにおいて高い処理能力を発揮する、専用のプロセッサは何か？',
-      ans: 'GPU',
-      choices: ["GPU", "CPU", "DSP", "FPGA"],
+      question: 'パソコンや周辺機器間のデータ転送に広く用いられる、シリアル通信インターフェースの規格は何か？',
+      ans: 'USB',
+      choices: ["USB", "IEEE1394", "PCMCIA", "HDMI"],
       comment:
-          "GPU（Graphics Processing Unit）は、グラフィックス処理や並列計算に特化したプロセッサで、特に画像処理やビデオレンダリングに高い処理能力を発揮する。",
+          "USB（Universal Serial Bus）は、パソコンや周辺機器間でのデータ転送に広く用いられるシリアル通信インターフェースの規格。",
     ),
     QuizItem(
-      question: 'CPUが一秒間に実行するクロックサイクルの数を表し、プロセッサの速度を示す指標は何か？',
-      ans: 'クロック周波数',
-      choices: ["クロック周波数", "バス速度", "メモリ速度", "伝送速度"],
-      comment: "クロック周波数は、CPUが一秒間に実行するクロックサイクルの数を表し、プロセッサの速度の指標となる。",
-    ),
-    QuizItem(
-      question: '電源が切れてもデータを保持しないが、アクセス速度が非常に速い半導体メモリは何か？',
-      ans: 'SRAM',
-      choices: ["SRAM", "DRAM", "ROM", "フラッシュメモリ"],
+      question: '高速なシリアル通信を提供する規格で、特にデジタルビデオカメラなどのデータ転送に用いられるものは何か？',
+      ans: 'IEEE1394',
+      choices: ["IEEE1394", "USB", "HDMI", "DisplayPort"],
       comment:
-          "SRAM（Static Random Access Memory）は、電源が切れるとデータを保持しないが、アクセス速度が非常に速い半導体メモリ。",
+          "IEEE1394（別名FireWireやi.LINK）は、高速なシリアル通信を提供する規格で、特にデジタルビデオカメラなどでのデータ転送に用いられる。",
     ),
     QuizItem(
-      question: '電源が切れるとデータを失うが、SRAMよりも低コストで大容量を実現できる半導体メモリは何か？',
-      ans: 'DRAM',
-      choices: ["DRAM", "SRAM", "ROM", "フラッシュメモリ"],
+      question: 'ノートパソコンの拡張カード用の国際標準規格で、かつては周辺機器を接続するために広く用いられたものは何か？',
+      ans: 'PCMCIA',
+      choices: ["PCMCIA", "USB", "PCI Express", "SDカード"],
       comment:
-          "DRAM（Dynamic Random Access Memory）は、電源が切れるとデータを失うが、SRAMよりも低コストで大容量のメモリを実現できる。",
+          "PCMCIA（Personal Computer Memory Card International Association）は、ノートパソコンの拡張カード用の国際標準規格で、かつて周辺機器の接続に広く用いられた。",
     ),
     QuizItem(
-      question: 'データを永続的に保存できるが、書き換えができない、または限られた回数しか書き換えできないメモリは何か？',
-      ans: 'ROM',
-      choices: ["ROM", "RAM", "SSD", "フラッシュメモリ"],
+      question: '高品質なデジタルオーディオおよびビデオを転送するためのインターフェース規格は何か？',
+      ans: 'HDMI',
+      choices: ["HDMI", "DVI", "DisplayPort", "VGA"],
       comment:
-          "ROM（Read Only Memory）は、データを永続的に保存できるが、書き換えができない、または限られた回数しか書き換えできないメモリ。",
+          "HDMI（High-Definition Multimedia Interface）は、高品質なデジタルオーディオおよびビデオを転送するためのインターフェース規格。",
     ),
     QuizItem(
-      question: '電源が切れてもデータを保持し、USBメモリやSSDなどに利用される非揮発性の記憶媒体は何か？',
-      ans: 'フラッシュメモリ',
-      choices: ["フラッシュメモリ", "SRAM", "DRAM", "ROM"],
-      comment: "フラッシュメモリは、電源が切れてもデータを保持する非揮発性の記憶媒体で、USBメモリやSSDなどに利用される。",
+      question: 'デジタルディスプレイへの高解像度ビデオとオーディオの転送に使用されるインターフェース規格は何か？',
+      ans: 'DisplayPort',
+      choices: ["DisplayPort", "HDMI", "DVI", "VGA"],
+      comment: "DisplayPortは、デジタルディスプレイへの高解像度ビデオとオーディオの転送に使用されるインターフェース規格。",
     ),
     QuizItem(
-      question: 'DRAMの発展形で、高速なデータアクセスを実現するメモリ技術は何か？',
-      ans: 'DDR SDRAM',
-      choices: ["DDR SDRAM", "SRAM", "SIMM", "DIMM"],
+      question: 'デジタルディスプレイにビデオ信号を転送するために使用されるインターフェース規格で、アナログVGAの後継とされるものは何か？',
+      ans: 'DVI',
+      choices: ["DVI", "HDMI", "DisplayPort", "VGA"],
       comment:
-          "DDR SDRAM（Double Data Rate Synchronous Dynamic Random Access Memory）は、DRAMの発展形で、データの読み書き速度を向上させたメモリ技術。",
+          "DVI（Digital Visual Interface）は、デジタルディスプレイにビデオ信号を転送するために使用されるインターフェース規格で、アナログVGAの後継とされる。",
     ),
     QuizItem(
-      question: 'メモリモジュールの形状の一つで、デスクトップPCやサーバーなどで広く使用されるものは何か？',
-      ans: 'DIMM',
-      choices: ["DIMM", "SIMM", "DDR SDRAM", "SSD"],
+      question: '短距離の無線通信技術で、携帯電話やコンピュータなどの機器間でデータを交換するために用いられるものは何か？',
+      ans: 'Bluetooth',
+      choices: ["Bluetooth", "Wi-Fi", "NFC", "IrDA"],
+      comment: "Bluetoothは、短距離の無線通信技術で、携帯電話やコンピュータなどの機器間でデータ交換するために用いられる。",
+    ),
+    QuizItem(
+      question: '赤外線通信を利用して、機器間でのデータ転送を行う技術は何か？',
+      ans: 'IrDA',
+      choices: ["IrDA", "Bluetooth", "Wi-Fi", "NFC"],
+      comment: "IrDA（Infrared Data Association）は、赤外線通信を利用して機器間でのデータ転送を行う技術。",
+    ),
+    QuizItem(
+      question: '非接触でのデータ通信を行うための無線通信技術で、スマートフォンの決済などに用いられるものは何か？',
+      ans: 'NFC',
+      choices: ["NFC", "Bluetooth", "Wi-Fi", "IrDA"],
       comment:
-          "DIMM（Dual In-line Memory Module）は、メモリモジュールの形状の一つで、両面にチップが実装されており、デスクトップPCやサーバーなどで広く使用される。",
+          "NFC（Near Field Communication）は、非接触でのデータ通信を行うための無線通信技術で、スマートフォンの決済などに用いられる。",
+    ),
+    QuizItem(
+      question: '機械的な動作を電気信号によって制御する装置は何か？',
+      ans: 'アクチュエータ',
+      choices: ["アクチュエータ", "センサー", "トランスデューサ", "リレー"],
+      comment: "アクチュエータは、電気信号を受けて機械的な動作を行う装置で、ロボットの動きや自動ドアの開閉などに用いられる。",
+    ),
+    QuizItem(
+      question: 'ハードウェアデバイスをオペレーティングシステムが認識し、利用できるようにするためのソフトウェアは何か？',
+      ans: 'デバイスドライバ',
+      choices: ["デバイスドライバ", "ファームウェア", "オペレーティングシステム", "アプリケーションソフトウェア"],
+      comment: "デバイスドライバは、ハードウェアデバイスをオペレーティングシステムが認識し、利用できるようにするためのソフトウェア。",
+    ),
+    QuizItem(
+      question: 'ユーザーが手動で設定することなく、コンピュータが周辺機器を自動的に認識して適切に設定する機能は何か？',
+      ans: 'プラグアンドプレイ',
+      choices: ["プラグアンドプレイ", "オートコンフィグ", "デバイスマネジメント", "オートインストール"],
+      comment: "プラグアンドプレイは、ユーザーの手動設定なしにコンピュータが周辺機器を自動的に認識し、適切に設定する機能。",
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + 61 + 3000);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category3Index + 701);
   });
 }

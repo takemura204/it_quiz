@@ -5,11 +5,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/premium_detail/premium_detail_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 
 import '../../view/button/circle_button.dart';
 import '../../view/button/primary_button.dart';
+import '../../view/loading.dart';
+import '../../view/modals/premium_modal.dart';
 import '../screen_argument.dart';
 
 part 'widget/precautions.dart';
@@ -23,26 +26,59 @@ class PremiumDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      backgroundColor: context.backgroundColor,
-      body: const Stack(
-        alignment: Alignment.topCenter,
+    final isLoading =
+        ref.watch(premiumDetailProvider.select((s) => s.isLoading));
+    final isShowPurchasedModal =
+        ref.watch(premiumDetailProvider.select((s) => s.isShowPurchasedModal));
+
+    Future<void>.delayed(Duration.zero, () async {
+      if (isShowPurchasedModal) {
+        ref.read(premiumDetailProvider.notifier).setIsShowPurchasedModal(false);
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return PurchasedModal(
+                title: "購入ありがとうございます🎉",
+                subtitle: "プレミアム特典が利用可能になりました！\nさっそく使ってみましょう！",
+                onPressed: () async {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                });
+          },
+        );
+      }
+    });
+    return AbsorbPointer(
+      absorbing: isLoading,
+      child: Stack(
         children: [
-          SingleChildScrollView(
-            child: Column(
+          Scaffold(
+            backgroundColor: context.backgroundColor,
+            body: const Stack(
+              alignment: Alignment.topCenter,
               children: [
-                _PremiumHeader(),
-                Gap(30),
-                _PremiumContentList(),
-                Gap(30),
-                _Precautions(),
-                Gap(120),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _PremiumHeader(),
+                      Gap(30),
+                      _PremiumContentList(),
+                      Gap(30),
+                      _Precautions(),
+                      Gap(120),
+                    ],
+                  ),
+                ),
+
+                ///購入ボタン
+                _CtaButton(),
               ],
             ),
           ),
-
-          ///購入ボタン
-          _CtaButton(),
+          Visibility(
+            visible: isLoading,
+            child: OverLayLoading(),
+          ),
         ],
       ),
     );

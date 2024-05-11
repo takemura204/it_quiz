@@ -1,12 +1,12 @@
 part of '../premium_detail_screen.dart';
 
-///注意事項
+///購入ボタン
 class _CtaButton extends HookConsumerWidget {
   const _CtaButton();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -22,11 +22,21 @@ class _CtaButton extends HookConsumerWidget {
             onPressed: isPremium
                 ? null
                 : () {
-                    ref.read(userModelProvider.notifier).updateIsPremium(true);
-                    print('購入モーダル表示');
+                    ref.read(premiumDetailProvider.notifier).buyPurchase980();
                   },
           ),
         ),
+        // Container(
+        //   color: context.backgroundColor,
+        //   padding:
+        //       const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 35),
+        //   child: PrimaryButton(
+        //     width: context.width,
+        //     height: 60,
+        //     text: 'Coming Soon...',
+        //     onPressed: null,
+        //   ),
+        // ),
       ],
     );
   }

@@ -214,7 +214,10 @@ class SettingColorController extends StateNotifier<SettingColorState> {
         ),
 
         ///Divider
-        dividerColor: Colors.black54,
+        dividerColor: Colors.grey.shade300,
+        dividerTheme: DividerThemeData(
+          color: Colors.grey.shade400,
+        ),
 
         /// TabBar
         tabBarTheme: TabBarTheme(
@@ -242,6 +245,7 @@ class SettingColorController extends StateNotifier<SettingColorState> {
                   BorderSide(color: getThemePrimaryColor(themeId), width: 1.5)),
           color: Colors.white,
           elevation: 0,
+          scrolledUnderElevation: 0,
           iconTheme: const IconThemeData(
             color: Colors.black87,
           ),

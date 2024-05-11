@@ -51,42 +51,44 @@ class _QuizCard extends ConsumerWidget {
         },
         cardsBuilder: (BuildContext context, int index) {
           final quizItem = quizItemList[index];
-          return GestureDetector(
-            onTap: () {
-              ref
-                  .read(quizLearnScreenProvider.notifier)
-                  .setIsAnsView(true); // 画面切り替え
-            },
-            child: Card(
-              elevation: 2,
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: direction != null
-                      ? direction != AppinioSwiperDirection.right
-                          ? Colors.red.withOpacity(0.7)
-                          : Colors.green.withOpacity(0.7)
-                      : Colors.grey.shade300,
-                  width: 1.5,
+          return Center(
+            child: GestureDetector(
+              onTap: () {
+                ref
+                    .read(quizLearnScreenProvider.notifier)
+                    .setIsAnsView(true); // 画面切り替え
+              },
+              child: Card(
+                elevation: 0,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: direction != null
+                        ? direction != AppinioSwiperDirection.right
+                            ? Colors.red.withOpacity(0.7)
+                            : Colors.green.withOpacity(0.7)
+                        : Colors.grey.shade300,
+                    width: 1.5,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Container(
-                width: context.width * 0.9,
-                alignment: Alignment.center,
-                // quizItemを使ってカードの内容を構築
-                child: Column(
-                  children: [
-                    const Spacer(),
+                child: Container(
+                  width: context.width * 0.9,
+                  alignment: Alignment.center,
+                  // quizItemを使ってカードの内容を構築
+                  child: Column(
+                    children: [
+                      const Spacer(),
 
-                    ///問題文
-                    _Question(quizItem, isAns && quizIndex == index),
-                    const Spacer(),
+                      ///問題文
+                      _Question(quizItem, isAns && quizIndex == index),
+                      const Spacer(),
 
-                    ///問題進捗状況
-                    _QuizProgress(quizItemList.length, index + 1),
-                    Gap(context.height * 0.01),
-                  ],
+                      ///問題進捗状況
+                      _QuizProgress(quizItemList.length, index + 1),
+                      Gap(context.height * 0.01),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -113,7 +115,7 @@ class _ActionButtons extends ConsumerWidget {
               iconSize: 40,
               containerWidth: context.width * 0.45,
               containerHeight: 100,
-              backgroundColor: const Color(0xFFFF7777),
+              backgroundColor: context.incorrectColor,
               textColor: Colors.white,
               text: I18n().buttonUnKnow,
               onPressed: () {
@@ -131,7 +133,7 @@ class _ActionButtons extends ConsumerWidget {
               iconSize: 45,
               containerWidth: context.width * 0.45,
               containerHeight: 100,
-              backgroundColor: const Color(0xFF44B571),
+              backgroundColor: context.correctColor,
               textColor: Colors.white,
               text: I18n().buttonKnow,
               onPressed: () {

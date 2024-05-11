@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 import 'home_quiz_screen_state.dart';
 
 final homeQuizScreenProvider =
@@ -23,30 +23,24 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   final Ref ref;
-  TabController? _tabController;
 
   Future _initState() async {
     setIsLoading(true);
     ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
       if (quizzes.isLoading) {
         await Future.wait([
-          loadQuizList(),
-          loadCategoryList(),
+          initQuizList(),
+          initCategoryList(),
+          initStatusList(),
         ]);
       }
       setIsLoading(false);
     });
   }
 
-  @override
-  void dispose() {
-    _tabController?.dispose();
-    super.dispose();
-  }
-
   /// CategoryList取得
-  Future loadCategoryList() async {
-    final isPremium = ref.read(userModelProvider).isPremium;
+  Future initCategoryList() async {
+    final isPremium = ref.read(authModelProvider).isPremium;
     // quizListを取得
     final List<Quiz> quizList = [...ref.read(quizModelProvider).quizList];
     // quizListをcategoryIdに基づいてインプレースでソート
@@ -56,21 +50,22 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     final categoryList =
         quizList.map((quizItem) => quizItem.category).toSet().toList();
 
-    final selectedTestCategory = quizList
+    final randomCategoryList = quizList
         .where((x) => !x.isPremium)
         .map((quizItem) => quizItem.category)
         .toSet()
         .toList();
 
     final correctRatios = categoryList.map((category) {
-      final correctNum = ref
+      final correctQuizLength = ref
           .read(quizModelProvider)
           .quizList
           .where((quiz) => quiz.category == category)
-          .fold<int>(
-            0,
-            (sum, quiz) => sum + quiz.correctNum,
-          );
+          .expand((quiz) => quiz.quizItemList)
+          .where((quizItem) => quizItem.status == QuizStatusType.correct)
+          .toList()
+          .length;
+
       final quizLength = ref
           .read(quizModelProvider)
           .quizList
@@ -78,23 +73,90 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
           .expand((quiz) => quiz.quizItemList)
           .toList()
           .length;
-      return (quizLength > 0) ? (correctNum / quizLength) * 100 : 0.0;
+
+      return (quizLength > 0) ? (correctQuizLength / quizLength) * 100 : 0.0;
     }).toList();
 
     state = state.copyWith(
         categoryList: categoryList,
-        selectedTestCategory: isPremium ? categoryList : selectedTestCategory,
+        randomCategoryList: isPremium ? categoryList : randomCategoryList,
         correctRatios: correctRatios);
   }
 
+  ///selectedRangeList読み込み
+  Future initStatusList() async {
+    final statusList = [
+      QuizStatusType.unlearned,
+      QuizStatusType.learned,
+      QuizStatusType.incorrect,
+      QuizStatusType.correct,
+    ];
+    state = state.copyWith(
+      statusList: statusList,
+      // selectedStatusList: statusList,
+    );
+  }
+
   ///QuizList取得
-  Future loadQuizList() async {
+  Future initQuizList() async {
     final quizList = ref.read(quizModelProvider).quizList;
     state = state.copyWith(filterQuizList: quizList);
   }
 
+  /// SelectQuiz更新
+  void setSelectQuiz(Quiz quiz) {
+    state = state.copyWith(selectQuiz: quiz);
+  }
+
+  ///selectStudyQuiz更新
+  void setSelectStudyQuiz() {
+    // selectQuiz の存在を確認
+    final selectQuiz = state.selectQuiz;
+    if (selectQuiz == null) {
+      return;
+    }
+
+    // 既存の問題リストを取得
+    final quizItemList = [...selectQuiz.quizItemList];
+
+    List<QuizItem> filteredQuizList;
+    if (state.selectedStatusList.isEmpty || state.isQuizStatusRecommend) {
+      // 特定のステータスに基づいて問題を並べ替える
+      final statusOrder = [
+        QuizStatusType.unlearned,
+        QuizStatusType.learned,
+        QuizStatusType.incorrect,
+        QuizStatusType.correct,
+      ];
+      filteredQuizList = quizItemList
+          .where((quizItem) => statusOrder.contains(quizItem.status))
+          .toList()
+        ..sort((a, b) => statusOrder
+            .indexOf(a.status)
+            .compareTo(statusOrder.indexOf(b.status)));
+    } else {
+      // selectedStatusList に基づいて問題をフィルタリング
+      filteredQuizList = quizItemList
+          .where(
+              (quizItem) => state.selectedStatusList.contains(quizItem.status))
+          .toList();
+    }
+
+    // 選択する問題の上限数を取得
+    final selectedStudyLength = state.selectedStudyLength;
+
+    // filteredQuizList から selectedStudyLength の数だけ問題を選択
+    final pickedQuizList = filteredQuizList.take(selectedStudyLength).toList();
+
+    // 更新された selectStudyQuiz を生成
+    final selectStudyQuiz = selectQuiz.copyWith(quizItemList: pickedQuizList);
+
+    // ステートを更新
+    state = state.copyWith(selectStudyQuiz: selectStudyQuiz);
+  }
+
   ///WeakQuiz開始
-  void tapStartWeakQuizButton() {
+  void setSelectWeakQuiz() {
     final weakQuiz = ref.read(quizModelProvider).weakQuiz!;
     final weakItemList = [...weakQuiz.quizItemList];
     state = state.copyWith(selectWeakQuiz: weakQuiz);
@@ -118,13 +180,13 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///TestQuiz開始
-  void tapStartTestQuizButton() {
-    final selectedTestCategory = state.selectedTestCategory;
+  void tapStartRandomQuizButton() {
+    final randomCategoryList = state.randomCategoryList;
     final selectedTestLength = state.selectedTestLength;
-    ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
+    ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.random);
     ref
         .read(quizModelProvider.notifier)
-        .createTestQuiz(selectedTestCategory, selectedTestLength);
+        .setRandomQuiz(randomCategoryList, selectedTestLength);
   }
 
   void setTabIndex(int index) {
@@ -132,24 +194,51 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     state = state.copyWith(tabIndex: index, selectCategory: category);
   }
 
-  ///問題範囲指定
-  void selectTestCategory(String category) {
-    final selectedTestCategory = [...state.selectedTestCategory];
-    if (selectedTestCategory.contains(category)) {
+  ///　出題範囲指定
+  void setQuizStatusList(QuizStatusType status) {
+    final selectedStatusList = [...state.selectedStatusList];
+    if (selectedStatusList.contains(status)) {
       state = state.copyWith(
-          selectedTestCategory: selectedTestCategory..remove(category));
+          selectedStatusList: selectedStatusList..remove(status));
+      if (state.selectedStatusList.isEmpty) {
+        state = state.copyWith(isQuizStatusRecommend: true);
+      }
     } else {
+      state =
+          state.copyWith(selectedStatusList: selectedStatusList..add(status));
+    }
+  }
+
+  void removeQuizStatusList() {
+    state = state.copyWith(selectedStatusList: []);
+  }
+
+  ///問題範囲指定
+  void setRandomCategory(String category) {
+    final randomCategoryList = [...state.randomCategoryList];
+    if (randomCategoryList.contains(category)) {
       state = state.copyWith(
-          selectedTestCategory: selectedTestCategory..add(category));
+          randomCategoryList: randomCategoryList..remove(category));
+    } else {
+      state =
+          state.copyWith(randomCategoryList: randomCategoryList..add(category));
     }
   }
 
   ///問題数指定
-  void selectWeakLength(int length) {
+  void setStudyLength(int length) {
+    state = state.copyWith(selectedStudyLength: length);
+  }
+
+  void setIsisQuizStatusRecommend(bool value) {
+    state = state.copyWith(isQuizStatusRecommend: value);
+  }
+
+  void setWeakLength(int length) {
     state = state.copyWith(selectedWeakLength: length);
   }
 
-  void selectTestLength(int length) {
+  void setRandomQuizLength(int length) {
     state = state.copyWith(selectedTestLength: length);
   }
 

@@ -4,13 +4,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../view/bar.dart';
 import '../../view/button/primary_button.dart';
+import '../../view/chart/progress_line_chart.dart';
 import '../screen_argument.dart';
 
 part 'dashboard_group_progress_view.dart';
@@ -32,11 +32,11 @@ class GroupProgressDashboard extends ConsumerWidget {
     }
     final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
     final correctRatios = ref.watch(homeQuizScreenProvider).correctRatios;
-    final isPremium = ref.watch(userModelProvider).isPremium;
+    final isPremium = ref.watch(authModelProvider).isPremium;
 
     return Container(
       child: Card(
-        elevation: 1,
+        elevation: 0,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: context.width * 0.01, vertical: context.width * 0.01),
@@ -195,7 +195,7 @@ class _GroupProgressCount extends ConsumerWidget {
                 ),
               ),
               Expanded(
-                child: ProgressLineBar(
+                child: ProgressLineChart(
                   height: 20,
                   width: context.width,
                   currentScore: correctNum,
@@ -245,7 +245,7 @@ class _TotalProgressCount extends ConsumerWidget {
                     ),
                   ),
                   Expanded(
-                    child: ProgressLineBar(
+                    child: ProgressLineChart(
                       height: 20,
                       width: context.width,
                       currentScore: correctNum,
@@ -319,7 +319,7 @@ class _ProgressRadarChart extends StatelessWidget {
         getTitle: (index, angle) => RadarChartTitle(
           text: categories[index],
           angle: 0,
-          positionPercentageOffset: index.isEven ? 0.05 : 0.45,
+          positionPercentageOffset: index == 0 ? 0.1 : 0.35,
         ),
         titleTextStyle: TextStyle(
             color: context.mainColor,

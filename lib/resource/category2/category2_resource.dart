@@ -5,45 +5,53 @@ extension Category2Quiz on QuizModel {
   List<Quiz> get category2QuizList {
     final quizList = [
       Quiz(
-        title: "システム開発技術①",
+        title: "【頻出】マネジメント系①",
+        quizItemList: category0_4,
+        isPremium: false,
+      ),
+      Quiz(
+        title: "【頻出】マネジメント系②",
+        quizItemList: category0_5,
+        isPremium: false,
+      ),
+      Quiz(
+        title: "システム開発技術",
         quizItemList: category2_1,
       ),
       Quiz(
-        title: "システム開発技術②",
+        title: "開発プロセス・手法",
         quizItemList: category2_2,
       ),
       Quiz(
-        title: "開発プロセス・手法①",
+        title: "プロジェクトマネジメント",
         quizItemList: category2_3,
       ),
       Quiz(
-        title: "開発プロセス・手法②",
+        title: "サービスマネジメント",
         quizItemList: category2_4,
       ),
       Quiz(
-        title: "プロジェクトマネジメント",
+        title: "サービスマネジメントシステム",
         quizItemList: category2_5,
       ),
       Quiz(
-        title: "サービス/ファシリティマネジメント",
+        title: "ファシリティマネジメント",
         quizItemList: category2_6,
       ),
       Quiz(
-        title: "サービスサポート",
+        title: "システム監査",
         quizItemList: category2_7,
       ),
       Quiz(
-        title: "システム監査",
-        quizItemList: category2_8,
-      ),
-      Quiz(
         title: "内部統制",
-        quizItemList: category2_9,
+        quizItemList: category2_8,
       ),
     ];
     return List.generate(quizList.length, (index) {
       return quizList[index].copyWith(
-          categoryId: 2, category: I18n().setCategory(2), id: index + 1 + 200);
+          categoryId: 2,
+          category: I18n().setCategory(2),
+          id: index + I18n().category2Index + 1);
     });
   }
 }

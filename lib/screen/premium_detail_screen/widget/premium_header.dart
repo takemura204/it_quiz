@@ -29,7 +29,6 @@ class _PremiumHeader extends StatelessWidget {
           ),
 
           Container(
-            height: 360,
             width: context.width,
             alignment: Alignment.center,
             child: Column(
@@ -56,10 +55,10 @@ class _PremiumHeader extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: [
-                      Stack(
+                      const Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
-                          const Text(
+                          Text(
                             'IT用語をもっと深く、',
                             style: TextStyle(
                               color: Colors.black,
@@ -68,21 +67,12 @@ class _PremiumHeader extends StatelessWidget {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: context.mainColor.withOpacity(0.7),
-                          //     borderRadius:
-                          //         const BorderRadius.all(Radius.circular(8)),
-                          //   ),
-                          //   height: 8,
-                          //   width: 275,
-                          // ),
                         ],
                       ),
-                      Stack(
+                      const Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
-                          const Text(
+                          Text(
                             '快適に学ぼう！',
                             style: TextStyle(
                               color: Colors.black,
@@ -91,15 +81,6 @@ class _PremiumHeader extends StatelessWidget {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: context.mainColor.withOpacity(0.7),
-                          //     borderRadius:
-                          //         const BorderRadius.all(Radius.circular(8)),
-                          //   ),
-                          //   height: 8,
-                          //   width: 190,
-                          // ),
                         ],
                       ),
                       const Gap(15),

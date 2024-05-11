@@ -1,4 +1,4 @@
-package com.example.kentei_quiz
+package jp.quiz.it
 
 import io.flutter.embedding.android.FlutterActivity
 

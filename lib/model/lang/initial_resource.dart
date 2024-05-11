@@ -1,4 +1,4 @@
-import 'package:kentei_quiz/model/quiz/quiz.dart';
+import '../../untils/enums.dart';
 
 class I18n {
   static I18n? _instance;
@@ -8,7 +8,7 @@ class I18n {
   factory I18n() => _instance ??= I18n._();
 
   ///アプリ全体
-  String get appName => "Kentei Quiz";
+  String get appName => "IT用語クイズ";
 
   ///category
   String setCategory(int categoryId) {
@@ -26,13 +26,13 @@ class I18n {
       case 5:
         return styleWeakQuiz;
       case 6:
-        return styleTestQuiz;
+        return styleRandomQuiz;
       default:
         return 'その他';
     }
   }
 
-  String get category0 => "重要単語";
+  String get category0 => "頻出単語";
 
   String get category1 => "ストラテジ系";
 
@@ -42,8 +42,18 @@ class I18n {
 
   String get category4 => "雑学";
 
+  int get category0Index => 0;
+
+  int get category1Index => 10000;
+
+  int get category2Index => 20000;
+
+  int get category3Index => 30000;
+
   ///title
-  String get titleStudy => "クイズ";
+  String get titleName => "IT用語クイズ";
+
+  String get titleQuiz => "クイズ";
 
   String get titleSearch => "検索";
 
@@ -52,16 +62,32 @@ class I18n {
   String get titleSetting => "設定";
 
   ///「学ぶ」形式
-  String get styleLeanQuiz => "用語を覚える";
+  String get styleLeanQuiz => "一問一答で覚える";
 
   String get styleChoiceQuiz => "クイズに挑戦する";
 
   String get styleWeakQuiz => "苦手克服";
 
-  String get styleTestQuiz => "力だめし";
+  String get styleRandomQuiz => "ランダム出題";
 
   String challengeQuiz(String quizStyle) {
     return "$quizStyleに挑戦する";
+  }
+
+  ///クイズの状況
+  String quizStatusTypeText(QuizStatusType statusType) {
+    switch (statusType) {
+      case QuizStatusType.correct:
+        return '正解';
+      case QuizStatusType.incorrect:
+        return '不正解';
+      case QuizStatusType.learned:
+        return '学習済';
+      case QuizStatusType.unlearned:
+        return '未学習';
+      default:
+        return '〇〇';
+    }
   }
 
   ///HomeQuiz
@@ -69,7 +95,9 @@ class I18n {
     return "正解率:$correctRate％";
   }
 
-  String get lastQuizResult => "前回の挑戦結果";
+  String get quizResultAnswer => "正解率";
+
+  String get quizResultProgress => "学習率";
 
   String get lastWeakResult => "現在の苦手問題数";
 
@@ -79,6 +107,16 @@ class I18n {
   String get buttonKnow => "知ってる";
 
   String get buttonUnKnow => "知らない";
+
+  ///URL
+  String get contactUrl => 'https://forms.gle/wLbnrn1ovwUDYoRv5';
+
+  ///利用規約
+  String get termsUrl =>
+      'https://takemurataiki.notion.site/IT-fa92543c55634514b10e177827679675?pvs=4';
+
+  String get privacyPolicyUrl =>
+      'https://takemurataiki.notion.site/IT-9dac9d65f24d49dd886c9303892a1cd2?pvs=4';
 
   String studyTypeText(StudyType studyType) {
     switch (studyType) {
@@ -128,7 +166,7 @@ class I18n {
       case 3:
         return "🔥今日も学習の習慣をキープしよう！";
       case 4:
-        return "🌈新しい発見をしよう！";
+        return "🔍新しい発見をしてみよう！";
       case 5:
         return "🏆目指せ、レベルアップ！";
       case 6:

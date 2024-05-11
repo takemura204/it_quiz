@@ -20,6 +20,7 @@ mixin _$QuizLearnScreenState {
   bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get lapIndex => throw _privateConstructorUsedError; //何周目
+  Quiz? get learnQuiz => throw _privateConstructorUsedError;
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get knowQuizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get unKnowQuizItemList => throw _privateConstructorUsedError;
@@ -43,12 +44,15 @@ abstract class $QuizLearnScreenStateCopyWith<$Res> {
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
+      Quiz? learnQuiz,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
       Duration duration,
       StudyType studyType,
       AppinioSwiperDirection? direction});
+
+  $QuizCopyWith<$Res>? get learnQuiz;
 }
 
 /// @nodoc
@@ -69,6 +73,7 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
     Object? isResultScreen = null,
     Object? quizIndex = null,
     Object? lapIndex = null,
+    Object? learnQuiz = freezed,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
     Object? unKnowQuizItemList = null,
@@ -93,6 +98,10 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      learnQuiz: freezed == learnQuiz
+          ? _value.learnQuiz
+          : learnQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       quizItemList: null == quizItemList
           ? _value.quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
@@ -119,6 +128,18 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
               as AppinioSwiperDirection?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizCopyWith<$Res>? get learnQuiz {
+    if (_value.learnQuiz == null) {
+      return null;
+    }
+
+    return $QuizCopyWith<$Res>(_value.learnQuiz!, (value) {
+      return _then(_value.copyWith(learnQuiz: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -133,12 +154,16 @@ abstract class _$$_CreateCopyWith<$Res>
       bool isResultScreen,
       int quizIndex,
       int lapIndex,
+      Quiz? learnQuiz,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
       Duration duration,
       StudyType studyType,
       AppinioSwiperDirection? direction});
+
+  @override
+  $QuizCopyWith<$Res>? get learnQuiz;
 }
 
 /// @nodoc
@@ -155,6 +180,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isResultScreen = null,
     Object? quizIndex = null,
     Object? lapIndex = null,
+    Object? learnQuiz = freezed,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
     Object? unKnowQuizItemList = null,
@@ -179,6 +205,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      learnQuiz: freezed == learnQuiz
+          ? _value.learnQuiz
+          : learnQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       quizItemList: null == quizItemList
           ? _value._quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
@@ -215,6 +245,7 @@ class _$_Create extends _Create {
       this.isResultScreen = false,
       this.quizIndex = 0,
       this.lapIndex = 0,
+      this.learnQuiz,
       final List<QuizItem> quizItemList = const [],
       final List<QuizItem> knowQuizItemList = const [],
       final List<QuizItem> unKnowQuizItemList = const [],
@@ -242,8 +273,9 @@ class _$_Create extends _Create {
   @JsonKey()
   final int lapIndex;
 //何周目
+  @override
+  final Quiz? learnQuiz;
   final List<QuizItem> _quizItemList;
-//何周目
   @override
   @JsonKey()
   List<QuizItem> get quizItemList {
@@ -285,7 +317,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, duration: $duration, studyType: $studyType, direction: $direction)';
+    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, learnQuiz: $learnQuiz, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, duration: $duration, studyType: $studyType, direction: $direction)';
   }
 
   @override
@@ -301,6 +333,8 @@ class _$_Create extends _Create {
                 other.quizIndex == quizIndex) &&
             (identical(other.lapIndex, lapIndex) ||
                 other.lapIndex == lapIndex) &&
+            (identical(other.learnQuiz, learnQuiz) ||
+                other.learnQuiz == learnQuiz) &&
             const DeepCollectionEquality()
                 .equals(other._quizItemList, _quizItemList) &&
             const DeepCollectionEquality()
@@ -322,6 +356,7 @@ class _$_Create extends _Create {
       isResultScreen,
       quizIndex,
       lapIndex,
+      learnQuiz,
       const DeepCollectionEquality().hash(_quizItemList),
       const DeepCollectionEquality().hash(_knowQuizItemList),
       const DeepCollectionEquality().hash(_unKnowQuizItemList),
@@ -342,6 +377,7 @@ abstract class _Create extends QuizLearnScreenState {
       final bool isResultScreen,
       final int quizIndex,
       final int lapIndex,
+      final Quiz? learnQuiz,
       final List<QuizItem> quizItemList,
       final List<QuizItem> knowQuizItemList,
       final List<QuizItem> unKnowQuizItemList,
@@ -359,6 +395,8 @@ abstract class _Create extends QuizLearnScreenState {
   @override //問題番号
   int get lapIndex;
   @override //何周目
+  Quiz? get learnQuiz;
+  @override
   List<QuizItem> get quizItemList;
   @override
   List<QuizItem> get knowQuizItemList;

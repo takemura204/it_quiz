@@ -1,10 +1,10 @@
 part of 'home_quiz_screen.dart';
 
 class _BottomQuizMenu extends ConsumerWidget {
-  const _BottomQuizMenu({required this.weakQuiz, required this.testQuiz});
+  const _BottomQuizMenu({required this.weakQuiz, required this.randomQuiz});
 
   final Quiz weakQuiz;
-  final Quiz testQuiz;
+  final Quiz randomQuiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +29,7 @@ class _BottomQuizMenu extends ConsumerWidget {
                     : () {
                         ref
                             .read(quizModelProvider.notifier)
-                            .setQuizType(QuizType.weak);
+                            .setQuizType(QuizStyleType.weak);
                         showDialog(
                             context: context,
                             builder: (_) => WeakQuizModal(quiz: weakQuiz));
@@ -40,15 +40,17 @@ class _BottomQuizMenu extends ConsumerWidget {
             PrimaryButton(
               width: context.width * 0.46,
               height: 50,
-              text: "${testQuiz.title}",
-              icon: LineIcons.edit,
+              text: "${randomQuiz.title}",
+              icon: LineIcons.random,
               onPressed: () {
-                ref.read(quizModelProvider.notifier).setQuizType(QuizType.test);
+                ref
+                    .read(quizModelProvider.notifier)
+                    .setQuizType(QuizStyleType.random);
                 showDialog(
                   context: context,
                   builder: (_) {
-                    return TestQuizModal(
-                      testQuiz: testQuiz,
+                    return RandomQuizModal(
+                      randomQuiz: randomQuiz,
                     );
                   },
                 );

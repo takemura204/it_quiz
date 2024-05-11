@@ -7,7 +7,6 @@ class ChoiceChallengeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
     return Column(
       children: [
         Gap(context.height * 0.01),
@@ -18,7 +17,7 @@ class ChoiceChallengeBody extends ConsumerWidget {
             alignment: Alignment.center,
             children: [
               Card(
-                elevation: 1,
+                elevation: 0,
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
@@ -57,7 +56,7 @@ class ChoiceChallengeBody extends ConsumerWidget {
         ///選択肢
         _SelectAnswer(quiz),
 
-        if (!isPremium) AdBanner(),
+        const AdBanner(),
       ],
     );
   }

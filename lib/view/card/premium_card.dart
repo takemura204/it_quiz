@@ -47,7 +47,7 @@ class PremiumCard extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'プレミアムでもっと深く、快適に学ぼう',
+                    'プレミアムでもっと快適に学ぼう',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

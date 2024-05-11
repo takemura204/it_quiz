@@ -17,8 +17,7 @@ class _SettingContact extends ConsumerWidget {
         ),
       ),
       onTap: () async {
-        context
-            .showScreen(const SettingContactScreenArguments().generateRoute());
+        await launchUrl(Uri.parse(I18n().contactUrl));
       },
     );
   }

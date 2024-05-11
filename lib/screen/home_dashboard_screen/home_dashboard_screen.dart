@@ -6,7 +6,6 @@ import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_cont
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../model/lang/initial_resource.dart';
-import '../../model/user/user.model.dart';
 import '../../view/admob/admob_banner.dart';
 import '../dashboard_daily_screen/dashboard_daily_screen.dart';
 import '../dashboard_period_screen/dashboard_period_screen.dart';
@@ -38,11 +37,11 @@ class _Body extends ConsumerWidget {
         ),
       );
     }
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
-    return Stack(
+
+    return const Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        const SingleChildScrollView(
+        SingleChildScrollView(
           child: Column(
             children: [
               Gap(5),
@@ -59,7 +58,7 @@ class _Body extends ConsumerWidget {
             ],
           ),
         ),
-        if (!isPremium) AdBanner(),
+        AdBanner(),
       ],
     );
   }

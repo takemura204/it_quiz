@@ -3,6 +3,8 @@ import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz_item/quiz_item.dart';
 
+import '../../untils/enums.dart';
+
 part 'quizzes.freezed.dart';
 part 'quizzes.g.dart';
 
@@ -17,8 +19,8 @@ class Quizzes with _$Quizzes {
     @Default([]) final List<Quiz> historyQuizList, //学習したクイズリスト一覧
     @Default([]) final List<QuizItem> quizItemList,
     Quiz? weakQuiz, //苦手克服
-    Quiz? testQuiz, //テストクイズ
-    @Default(QuizType.study) final QuizType quizType, //クイズタイプ
+    Quiz? randomQuiz, //ランダムクイズ
+    @Default(QuizStyleType.study) final QuizStyleType quizType, //クイズタイプ
     @Default(StudyType.learn) final StudyType studyType, //クイズタイプ
   }) = _Quizzes;
 
@@ -26,13 +28,6 @@ class Quizzes with _$Quizzes {
 
   factory Quizzes.fromJson(Map<String, dynamic> json) =>
       _$QuizzesFromJson(json);
-}
-
-enum QuizType {
-  study,
-  weak,
-  daily,
-  test,
 }
 
 ///苦手克服
@@ -50,11 +45,11 @@ Quiz initWeakQuiz = Quiz(
 );
 
 ///力だめし
-Quiz initTestQuiz = Quiz(
+Quiz initRandomQuiz = Quiz(
   id: 2,
   categoryId: 6,
   category: I18n().setCategory(6),
-  title: I18n().styleTestQuiz,
+  title: I18n().styleRandomQuiz,
   isCompleted: false,
   quizItemList: [],
   correctNum: 0,

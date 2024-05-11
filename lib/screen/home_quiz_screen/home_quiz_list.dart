@@ -41,20 +41,20 @@ class _QuizCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final correctRate =
         ((quiz.correctNum / quiz.quizItemList.length) * 100).round();
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium)) ||
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
     return GestureDetector(
       onTap: () {
         if (isPremium) {
-          ref.read(quizModelProvider.notifier).setQuizType(QuizType.study);
+          ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
           ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
           ref.read(quizModelProvider.notifier).tapQuizIndex(index);
-          showDialog(
-              context: context, builder: (_) => StudyQuizModal(quiz: quiz));
+          ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
+          showDialog(context: context, builder: (_) => StudyModal(quiz: quiz));
         } else {
           showDialog(
               context: context,
-              builder: (_) => PrimaryDialog(
+              builder: (_) => NeedPremiumModal(
                     title: '全てのクイズを解放しますか？',
                     subWidget: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -68,9 +68,8 @@ class _QuizCard extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    cancelText: 'キャンセル',
-                    doneText: 'プレミアム画面へ',
                     onPressed: () {
+                      Navigator.pop(context);
                       context.showScreen(
                           const PremiumDetailScreenArguments().generateRoute());
                     },
@@ -108,7 +107,7 @@ class _ProgressIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium)) ||
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -150,6 +149,8 @@ class _Title extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
+        !quiz.isPremium;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +161,7 @@ class _Title extends ConsumerWidget {
         ),
         const Gap(3),
         Text(
-          I18n().quizCorrectRate(correctRate),
+          isPremium ? I18n().quizCorrectRate(correctRate) : '追加購入で解放',
           style: context.texts.bodyMedium,
         ),
       ],

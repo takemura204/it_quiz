@@ -5,8 +5,8 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../model/quiz/quiz.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 class ResultDashboardCard extends ConsumerWidget {
   const ResultDashboardCard(this.quizItemList, this.duration);
@@ -67,7 +67,7 @@ class ResultDashboardCard extends ConsumerWidget {
                             ),
                             height: 8,
                             width: ('${quizItemList.length}'.length.toDouble() +
-                                        '${quizItemList.where((x) => x.isJudge).toList().length}'
+                                        '${quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length}'
                                             .length
                                             .toDouble()) *
                                     35 +
@@ -79,7 +79,7 @@ class ResultDashboardCard extends ConsumerWidget {
                             textBaseline: TextBaseline.alphabetic,
                             children: [
                               Text(
-                                "${quizItemList.where((x) => x.isJudge).toList().length}",
+                                "${quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length}",
                                 style: const TextStyle(
                                   color: Colors.black54,
                                   fontSize: 35,

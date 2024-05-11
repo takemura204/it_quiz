@@ -6,7 +6,7 @@ class _SettingPremium extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
     return CustomSettingBar(
       title: "追加購入",
       icon: LineIcons.shoppingCart,

@@ -3,17 +3,17 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/mission/mission_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../model/dashboard/dashboard_model.dart';
 import '../../model/mission/mission.dart';
 import '../../model/mission/mission_model.dart';
-import '../bar.dart';
 import '../button/defalut_button.dart';
 import '../button/disabled_button.dart';
 import '../button/primary_button.dart';
 import '../button/secondory_button.dart';
+import '../chart/progress_line_chart.dart';
 import '../icon.dart';
 
 ///クイズモーダル
@@ -26,13 +26,14 @@ class DailyMissionWidget extends ConsumerWidget {
     final _timeLimit = state.timeLimit;
     final model = ref.watch(missionModelProvider);
     final missions = model.sortedMissions;
-    final userCustom = ref.watch(userModelProvider);
+    final userCustom = ref.watch(authModelProvider);
     final dailyGoal = userCustom.dailyGoal;
     final dashboardModel = ref.watch(dashboardModelProvider);
     final dailyQuizCount = dashboardModel.dailyQuizCount;
     final dailyQuizCorrectCount = dashboardModel.dailyQuizCorrectCount;
 
     return SimpleDialog(
+      elevation: 0,
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.02),
       children: [
@@ -202,7 +203,7 @@ class _DailyMissionCard extends ConsumerWidget {
                 ),
               ),
               Gap(context.height * 0.01),
-              ProgressLineBar(
+              ProgressLineChart(
                 height: context.height * 0.02,
                 width: context.width * 0.5,
                 currentScore: currentValue,

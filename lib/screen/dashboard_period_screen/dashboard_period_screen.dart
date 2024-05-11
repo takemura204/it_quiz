@@ -4,12 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
-import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_state.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button/primary_button.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../model/user/user.model.dart';
+import '../../model/user/auth_model.dart';
+import '../../untils/enums.dart';
 import '../screen_argument.dart';
 
 part 'dashboard_chart.dart';
@@ -19,12 +19,12 @@ class PeriodDashboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
     return Container(
       width: context.width * 1,
       alignment: Alignment.center,
       child: Card(
-        elevation: 1,
+        elevation: 0,
         color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: context.width * 0.01, vertical: context.width * 0.01),

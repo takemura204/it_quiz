@@ -7,10 +7,11 @@ import 'package:kentei_quiz/controller/home_setting/home_setting_controller.dart
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/card/premium_card.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
@@ -23,14 +24,23 @@ import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
+
 part 'setting_about_app.dart';
+
 part 'setting_color.dart';
+
 part 'setting_contact.dart';
+
 part 'setting_daily_goal.dart';
+
 part 'setting_delete_data.dart';
+
 part 'setting_notification.dart';
+
 part 'setting_premium.dart';
+
 part 'setting_profile.dart';
+
 part 'setting_review.dart';
 
 class HomeSettingScreen extends ConsumerWidget {
@@ -38,7 +48,7 @@ class HomeSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((x) => x.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),
@@ -46,7 +56,6 @@ class HomeSettingScreen extends ConsumerWidget {
         elevation: 0,
       ),
       body: Stack(
-        alignment: Alignment.bottomCenter,
         children: [
           SingleChildScrollView(
             child: Container(
@@ -66,6 +75,7 @@ class HomeSettingScreen extends ConsumerWidget {
                   _Divider(),
                   const _SettingThemeColor(),
                   _Divider(),
+
                   const SettingTitleBar(title: "サポート", onTap: null),
                   const _SettingContact(),
                   _Divider(),
@@ -73,18 +83,24 @@ class HomeSettingScreen extends ConsumerWidget {
                   _Divider(),
                   const _SettingAboutApp(),
                   _Divider(),
+                  const AdBanner(height: 270),
                   const SettingTitleBar(title: "その他", onTap: null),
                   const _SettingDeleteData(),
+                  Container(
+                    height: 60,
+                    color: context.backgroundColor,
+                  ),
 
+                  ///開発用
                   GestureDetector(
                     onTap: () {
                       ref
-                          .read(userModelProvider.notifier)
+                          .read(authModelProvider.notifier)
                           .updateIsPremium(false);
                     },
                     child: Container(
-                      height: 100,
-                      color: Colors.red,
+                      height: 50,
+                      color: context.backgroundColor,
                     ),
                   ),
 
@@ -93,7 +109,12 @@ class HomeSettingScreen extends ConsumerWidget {
               ),
             ),
           ),
-          if (!isPremium) AdBanner(),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              AdBanner(),
+            ],
+          ),
         ],
       ),
     );

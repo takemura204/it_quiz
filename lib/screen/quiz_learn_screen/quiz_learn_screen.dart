@@ -13,9 +13,9 @@ import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
-import '../../model/user/user.model.dart';
+import '../../model/user/auth_model.dart';
+import '../../untils/enums.dart';
 import '../../view/admob/admob_banner.dart';
-import '../../view/admob/admob_native_advance.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/clear_button.dart';
@@ -77,6 +77,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             titleSpacing: 0,
             centerTitle: true,
             automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
             title: const Text("結果"),
             actions: [
               ClearButton(

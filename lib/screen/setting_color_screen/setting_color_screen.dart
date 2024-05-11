@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/modals/dialog.dart';
+import '../../view/modals/premium_modal.dart';
 import '../screen_argument.dart';
 
 ///カラーテーマ選択
@@ -39,8 +39,8 @@ class _ColorCards extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = ref.watch(settingColorProvider.notifier).colors;
-    final themeId = ref.watch(userModelProvider.select((s) => s.themeId));
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
+    final themeId = ref.watch(authModelProvider.select((s) => s.themeId));
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -59,14 +59,14 @@ class _ColorCards extends ConsumerWidget {
           return GestureDetector(
             onTap: isPremium
                 ? () async {
-                    ref.read(userModelProvider.notifier).updateThemeId(index);
+                    ref.read(authModelProvider.notifier).updateThemeId(index);
                   }
                 : index == 0
                     ? null
                     : () {
                         showDialog(
                             context: context,
-                            builder: (_) => PrimaryDialog(
+                            builder: (_) => NeedPremiumModal(
                                   title: 'テーマを入手しますか？',
                                   subWidget: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,9 +81,8 @@ class _ColorCards extends ConsumerWidget {
                                       ),
                                     ],
                                   ),
-                                  cancelText: 'キャンセル',
-                                  doneText: 'プレミアム画面へ',
                                   onPressed: () {
+                                    Navigator.pop(context);
                                     context.showScreen(
                                         const PremiumDetailScreenArguments()
                                             .generateRoute());

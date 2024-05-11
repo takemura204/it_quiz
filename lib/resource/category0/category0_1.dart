@@ -12,28 +12,25 @@ List<QuizItem> get category0_1 {
       question: '企業が社会的責任を果たすことを目的とした経営活動は何か？',
       ans: 'CSR',
       choices: ["CSR", "SRI", "ディスクロージャ", "決算"],
-      comment:
-          "CSR（Corporate Social Responsibility）は、企業が環境保護や社会貢献など、社会的責任を果たすことを目的とした経営活動。",
+      comment: "CSRは、企業が環境保護や社会貢献など、社会的責任を果たすことを目的とした経営活動。",
     ),
     QuizItem(
       question: '計画・実行・評価・改善のサイクルを回すことで、継続的な改善を目指す手法は何か？',
       ans: 'PDCA',
       choices: ["PDCA", "コーポレートブランド", "ステークホルダ", "OODAループ"],
-      comment:
-          "PDCAサイクルは、計画（Plan）、実行（Do）、評価（Check）、改善（Act）のプロセスを繰り返すことで、業務やプロジェクトの継続的な改善を目指す手法。",
+      comment: "PDCAサイクルは、計画、実行、評価、、改善のプロセスを繰り返すことで、業務やプロジェクトの継続的な改善を目指す手法。",
     ),
     QuizItem(
       question: '職場で実際の業務を通じて行われる教育訓練は何か？',
       ans: 'OJT',
       choices: ["OJT", "Off-JT", "e-ラーニング", "アダプティブラーニング"],
-      comment: "OJT（On-the-Job Training）は、職場での実務を通じて、実際の業務環境の中で行われる教育訓練。",
+      comment: "OJTは、職場での実務を通じて、実際の業務環境の中で行われる教育訓練。",
     ),
     QuizItem(
       question: '企業の情報技術戦略を統括する最高情報責任者は何か？',
       ans: 'CIO',
       choices: ["CIO", "CEO", "持株会社", "ネットワーク組織"],
-      comment:
-          "CIO（Chief Information Officer）は、企業の情報技術（IT）戦略やシステムの統括を行う最高情報責任者。",
+      comment: "CIOは、企業の情報技術（IT）戦略やシステムの統括を行う最高情報責任者。",
     ),
     QuizItem(
       question: '重要な少数と不重要な多数を区別して表示するグラフを何というか？',

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/view/admob/admob_native_advance.dart';
 import 'package:kentei_quiz/view/card/result_dashboard_card.dart';
 import 'package:kentei_quiz/view/card/result_prefect_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
@@ -11,8 +10,8 @@ import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../model/quiz/quizzes.dart';
-import '../../model/user/user.model.dart';
+import '../../model/user/auth_model.dart';
+import '../../untils/enums.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
@@ -79,7 +78,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             title: const Text("結果"),
             actions: [
               ClearButton(
-                iconSize: context.width * 0.1,
+                iconSize: 30,
                 onPressed: () {
                   //問題リセット
                   ref.read(quizChoiceScreenProvider.notifier).resetScreen();

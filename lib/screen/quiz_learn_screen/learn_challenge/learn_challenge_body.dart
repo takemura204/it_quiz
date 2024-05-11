@@ -7,7 +7,6 @@ class _LearnChallengeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
     return Column(
       children: [
         ///クイズカード
@@ -18,7 +17,7 @@ class _LearnChallengeBody extends ConsumerWidget {
 
         const Gap(15),
 
-        if (!isPremium) AdBanner(),
+        const AdBanner(),
 
         ///何周目か確認
         _LapInfoBar(quiz),

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 import '../button_icon/check_buton.dart';
 
 class QuizItemCard extends ConsumerWidget {
@@ -21,7 +21,7 @@ class QuizItemCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      elevation: 1,
+      elevation: 0,
       color: Colors.white,
       child: Container(
         decoration: BoxDecoration(
@@ -61,7 +61,7 @@ class QuizItemCard extends ConsumerWidget {
                         fontWeight: FontWeight.bold,
                         color: studyType == StudyType.learn
                             ? context.mainColor
-                            : quizItem.isJudge
+                            : quizItem.status == QuizStatusType.correct
                                 ? Colors.green.withOpacity(0.7)
                                 : Colors.red.withOpacity(0.7),
                         decoration: TextDecoration.underline,
@@ -82,7 +82,7 @@ class QuizItemCard extends ConsumerWidget {
                           fontWeight: FontWeight.bold,
                           color: studyType == StudyType.learn
                               ? context.mainColor
-                              : quizItem.isJudge
+                              : quizItem.status == QuizStatusType.correct
                                   ? Colors.green.withOpacity(0.7)
                                   : Colors.red.withOpacity(0.7),
                           decoration: TextDecoration.none,
@@ -103,9 +103,11 @@ class QuizItemCard extends ConsumerWidget {
                     horizontal: context.width * 0.01,
                     vertical: context.width * 0.02),
                 child: Icon(
-                  quizItem.isJudge ? Icons.circle_outlined : Icons.clear,
+                  quizItem.status == QuizStatusType.correct
+                      ? Icons.circle_outlined
+                      : Icons.clear,
                   size: 45,
-                  color: quizItem.isJudge
+                  color: quizItem.status == QuizStatusType.correct
                       ? Colors.green.withOpacity(0.7)
                       : Colors.red.withOpacity(0.7),
                 ),

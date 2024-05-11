@@ -1,3 +1,4 @@
+import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
 
 List<QuizItem> get category3_2 {
@@ -47,6 +48,7 @@ List<QuizItem> get category3_2 {
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + 11 + 3000);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category3Index + 201);
   });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kentei_quiz/controller/setting_contact/setting_contact_state.dart';
+import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 final settingNotificationProvider =
@@ -14,7 +15,7 @@ class SettingContactController extends StateNotifier<SettingContactState> {
 
   final webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..loadRequest(Uri.parse('https://forms.gle/zeFBMygChGeuL8Fc7'));
+    ..loadRequest(Uri.parse(I18n().contactUrl));
 
   Future setLoading(bool value) async {
     state = state.copyWith(isLoading: value);

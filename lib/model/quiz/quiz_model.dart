@@ -9,7 +9,9 @@ import 'package:kentei_quiz/resource/quizzes_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../untils/enums.dart';
 import '../quiz_item/quiz_item.dart';
+import '../user/auth_model.dart';
 
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
   (ref) => QuizModel(ref),
@@ -35,7 +37,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     await _getQuizListData(); // このメソッドが完了するのを待つ
     await Future.wait([
       _getWeakQuiz(),
-      _getTestQuiz(),
+      _getRandomQuiz(),
       _getHistoryQuiz(),
     ]);
     _saveDevice();
@@ -45,80 +47,85 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
 
   /// 全クイズ取得
   Future _getQuizListData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final quizListDataJson = prefs.getStringList('quiz_list');
-    List<Quiz> updatedQuizList = [];
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final quizListDataJson = prefs.getStringList('quiz_list');
+      List<Quiz> updatedQuizList = [];
 
-    if (quizListDataJson != null && quizListDataJson.isNotEmpty) {
-      final localQuizList =
-          quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
+      if (quizListDataJson != null && quizListDataJson.isNotEmpty) {
+        final localQuizList =
+            quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
 
-      for (var localQuiz in localQuizList) {
-        final matchedQuiz =
-            initQuizList.firstWhereOrNull((q) => q.id == localQuiz.id);
+        for (var localQuiz in localQuizList) {
+          final matchedQuiz =
+              initQuizList.firstWhereOrNull((q) => q.id == localQuiz.id);
 
-        if (matchedQuiz != null) {
-          // 更新されたクイズアイテムリストを作成
-          final List<QuizItem> updatedQuizItems = [];
+          if (matchedQuiz != null) {
+            // 更新されたクイズアイテムリストを作成
+            final List<QuizItem> updatedQuizItems = [];
 
-          // initQuizList に存在し、ローカルにも存在するクイズアイテムを更新
-          for (var localQuizItem in localQuiz.quizItemList) {
-            final matchedQuizItem = matchedQuiz.quizItemList.firstWhereOrNull(
-                (item) => item.quizId == localQuizItem.quizId);
-            if (matchedQuizItem != null) {
-              updatedQuizItems.add(localQuizItem.copyWith(
-                question: matchedQuizItem.question,
-                ans: matchedQuizItem.ans,
-                choices: matchedQuizItem.choices,
-                comment: matchedQuizItem.comment,
-                isPremium: matchedQuiz.isPremium,
-              ));
+            // initQuizList に存在し、ローカルにも存在するクイズアイテムを更新
+            for (var localQuizItem in localQuiz.quizItemList) {
+              final matchedQuizItem = matchedQuiz.quizItemList.firstWhereOrNull(
+                  (item) => item.quizId == localQuizItem.quizId);
+              if (matchedQuizItem != null) {
+                updatedQuizItems.add(localQuizItem.copyWith(
+                  question: matchedQuizItem.question,
+                  ans: matchedQuizItem.ans,
+                  choices: matchedQuizItem.choices,
+                  comment: matchedQuizItem.comment,
+                  isPremium: matchedQuizItem.isPremium,
+                  importance: matchedQuizItem.importance,
+                ));
+              }
             }
-          }
 
-          // initQuizList に存在し、ローカルにはないクイズアイテムを追加
-          for (var initQuizItem in matchedQuiz.quizItemList) {
-            if (!localQuiz.quizItemList
-                .any((localItem) => localItem.quizId == initQuizItem.quizId)) {
-              updatedQuizItems.add(initQuizItem);
+            // initQuizList に存在し、ローカルにはないクイズアイテムを追加
+            for (var initQuizItem in matchedQuiz.quizItemList) {
+              if (!localQuiz.quizItemList.any(
+                  (localItem) => localItem.quizId == initQuizItem.quizId)) {
+                updatedQuizItems.add(initQuizItem);
+              }
             }
-          }
 
-          updatedQuizList.add(localQuiz.copyWith(
-            title: matchedQuiz.title,
-            categoryId: matchedQuiz.categoryId,
-            category: matchedQuiz.category,
-            quizItemList: updatedQuizItems,
-            isPremium: matchedQuiz.isPremium,
-          ));
+            updatedQuizList.add(localQuiz.copyWith(
+              title: matchedQuiz.title,
+              categoryId: matchedQuiz.categoryId,
+              category: matchedQuiz.category,
+              quizItemList: updatedQuizItems,
+              isPremium: matchedQuiz.isPremium,
+            ));
+          }
+        }
+
+        // initQuizList にしか存在しないクイズを追加
+        final localQuizIds = localQuizList.map((quiz) => quiz.id).toSet();
+        updatedQuizList.addAll(
+            initQuizList.where((quiz) => !localQuizIds.contains(quiz.id)));
+      } else {
+        // 初回起動時は initQuizList をそのまま使用
+        updatedQuizList = _initQuizList();
+      }
+
+      final Map<String, Quiz> uniqueQuizzes = {};
+      for (var quiz in updatedQuizList) {
+        final existingQuiz = uniqueQuizzes[quiz.id];
+        if (existingQuiz == null ||
+            (existingQuiz.title == quiz.title && initQuizList.contains(quiz))) {
+          uniqueQuizzes[quiz.id.toString()] =
+              quiz; // 重複がないか、initQuizList と title が一致する場合に保持
         }
       }
+      updatedQuizList = uniqueQuizzes.values.toList(); // 重複が解消されたリストを更新
 
-      // initQuizList にしか存在しないクイズを追加
-      final localQuizIds = localQuizList.map((quiz) => quiz.id).toSet();
-      updatedQuizList.addAll(
-          initQuizList.where((quiz) => !localQuizIds.contains(quiz.id)));
-    } else {
-      // 初回起動時は initQuizList をそのまま使用
-      updatedQuizList = _initQuizList();
+      updatedQuizList.sort((a, b) => a.id.compareTo(b.id));
+      final quizItemList =
+          updatedQuizList.expand((quiz) => quiz.quizItemList).toList();
+      state =
+          state.copyWith(quizList: updatedQuizList, quizItemList: quizItemList);
+    } catch (e) {
+      print("_getQuizListData Error: $e");
     }
-
-    final Map<String, Quiz> uniqueQuizzes = {};
-    for (var quiz in updatedQuizList) {
-      final existingQuiz = uniqueQuizzes[quiz.id];
-      if (existingQuiz == null ||
-          (existingQuiz.title == quiz.title && initQuizList.contains(quiz))) {
-        uniqueQuizzes[quiz.id.toString()] =
-            quiz; // 重複がないか、initQuizList と title が一致する場合に保持
-      }
-    }
-    updatedQuizList = uniqueQuizzes.values.toList(); // 重複が解消されたリストを更新
-
-    updatedQuizList.sort((a, b) => a.id.compareTo(b.id));
-    final quizItemList =
-        updatedQuizList.expand((quiz) => quiz.quizItemList).toList();
-    state =
-        state.copyWith(quizList: updatedQuizList, quizItemList: quizItemList);
   }
 
   ///苦手リスト取得
@@ -135,16 +142,10 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     }
   }
 
-  /// TestQuiz追加
-  Future _getTestQuiz() async {
-    final prefs = await SharedPreferences.getInstance();
-    final testData = prefs.getString('test_quiz');
-    if (testData != null) {
-      final testQuiz = Quiz.fromJson(json.decode(testData));
-      state = state.copyWith(testQuiz: testQuiz);
-    } else {
-      state = state.copyWith(testQuiz: initTestQuiz);
-    }
+  /// RandomQuiz追加
+  Future _getRandomQuiz() async {
+    final randomQuiz = initRandomQuiz;
+    state = state.copyWith(randomQuiz: randomQuiz);
   }
 
   Future _getHistoryQuiz() async {
@@ -190,21 +191,21 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   void updateQuiz(Quiz quiz) {
     final quizType = state.quizType;
     switch (quizType) {
-      case QuizType.study:
+      case QuizStyleType.study:
         _updateStudyQuiz(quiz);
         updateWeakItem();
 
         break;
-      case QuizType.weak:
+      case QuizStyleType.weak:
         _updateWeakQuiz(quiz);
         updateWeakItem();
         break;
-      case QuizType.daily:
+      case QuizStyleType.daily:
         // updateDailyItem(quizItemList);
         // updateWeakItem();
 
         break;
-      case QuizType.test:
+      case QuizStyleType.random:
         _updateTestQuiz(quiz);
         updateWeakItem();
 
@@ -270,7 +271,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
       return quiz.copyWith(quizItemList: updateQuizItemList);
     }).toList();
 
-    state = state.copyWith(quizList: updateQuizList, testQuiz: updateQuiz);
+    state = state.copyWith(quizList: updateQuizList, randomQuiz: updateQuiz);
     _saveDevice(); // 保存
   }
 
@@ -370,10 +371,13 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     _saveDevice(); // 保存
   }
 
-  /// TestQuiz作成
-  void createTestQuiz(List<String> testGroup, int testLength) {
+  /// RandomQuiz作成
+  void setRandomQuiz(List<String> testGroup, int testLength) {
+    final isPremium = ref.read(authModelProvider).isPremium;
+    final quizList =
+        isPremium ? state.quizList : state.quizList.where((x) => !x.isPremium);
     final filteredQuizList = [
-      ...state.quizList
+      ...quizList
           .where((quizItem) => testGroup.contains(quizItem.category))
           .expand((quizItem) => quizItem.quizItemList)
           .toList()
@@ -389,8 +393,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         break;
       }
     }
-    final testQuiz = initTestQuiz.copyWith(quizItemList: pickedQuizList);
-    state = state.copyWith(testQuiz: testQuiz);
+    final randomQuiz = initRandomQuiz.copyWith(quizItemList: pickedQuizList);
+    state = state.copyWith(randomQuiz: randomQuiz);
   }
 
   /// 現在のインデックスを取得し、更新
@@ -402,7 +406,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     state = state.copyWith(quizIndex: index);
   }
 
-  void setQuizType(QuizType quizType) {
+  void setQuizType(QuizStyleType quizType) {
     state = state.copyWith(quizType: quizType);
   }
 
@@ -436,11 +440,11 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final historyListData =
         state.historyQuizList.map((e) => json.encode(e.toJson())).toList();
     final weakData = json.encode(state.weakQuiz?.toJson());
-    final testData = json.encode(state.testQuiz?.toJson());
+    final randomData = json.encode(state.randomQuiz?.toJson());
     await prefs.setStringList('quiz_list', quizListData);
     await prefs.setStringList('history_list', historyListData);
     await prefs.setString('weak_quiz', weakData);
-    await prefs.setString('test_quiz', testData);
+    await prefs.setString('random_quiz', randomData);
   }
 
   void setIsLoading(bool value) {
@@ -456,3 +460,5 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     prefs.remove("test_quiz");
   }
 }
+
+class QuizStudyType {}

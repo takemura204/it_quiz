@@ -26,7 +26,8 @@ mixin _$QuizItem {
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
   String get comment => throw _privateConstructorUsedError; //解説
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
-  bool get isJudge => throw _privateConstructorUsedError; //正解したか?
+  QuizStatusType get status => throw _privateConstructorUsedError; //クイズの状態
+  QuizImportanceType get importance => throw _privateConstructorUsedError; //重要度
   bool get isSaved => throw _privateConstructorUsedError; //保存したか?
   int get lapIndex => throw _privateConstructorUsedError; //何周目か？
   bool get isPremium => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $QuizItemCopyWith<$Res> {
       List<String> choices,
       String comment,
       bool isWeak,
-      bool isJudge,
+      QuizStatusType status,
+      QuizImportanceType importance,
       bool isSaved,
       int lapIndex,
       bool isPremium});
@@ -74,7 +76,8 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
     Object? choices = null,
     Object? comment = null,
     Object? isWeak = null,
-    Object? isJudge = null,
+    Object? status = null,
+    Object? importance = null,
     Object? isSaved = null,
     Object? lapIndex = null,
     Object? isPremium = null,
@@ -104,10 +107,14 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.isWeak
           : isWeak // ignore: cast_nullable_to_non_nullable
               as bool,
-      isJudge: null == isJudge
-          ? _value.isJudge
-          : isJudge // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as QuizStatusType,
+      importance: null == importance
+          ? _value.importance
+          : importance // ignore: cast_nullable_to_non_nullable
+              as QuizImportanceType,
       isSaved: null == isSaved
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
@@ -138,7 +145,8 @@ abstract class _$$_QuizItemCopyWith<$Res> implements $QuizItemCopyWith<$Res> {
       List<String> choices,
       String comment,
       bool isWeak,
-      bool isJudge,
+      QuizStatusType status,
+      QuizImportanceType importance,
       bool isSaved,
       int lapIndex,
       bool isPremium});
@@ -161,7 +169,8 @@ class __$$_QuizItemCopyWithImpl<$Res>
     Object? choices = null,
     Object? comment = null,
     Object? isWeak = null,
-    Object? isJudge = null,
+    Object? status = null,
+    Object? importance = null,
     Object? isSaved = null,
     Object? lapIndex = null,
     Object? isPremium = null,
@@ -191,10 +200,14 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.isWeak
           : isWeak // ignore: cast_nullable_to_non_nullable
               as bool,
-      isJudge: null == isJudge
-          ? _value.isJudge
-          : isJudge // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as QuizStatusType,
+      importance: null == importance
+          ? _value.importance
+          : importance // ignore: cast_nullable_to_non_nullable
+              as QuizImportanceType,
       isSaved: null == isSaved
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
@@ -221,7 +234,8 @@ class _$_QuizItem extends _QuizItem {
       required final List<String> choices,
       required this.comment,
       this.isWeak = false,
-      this.isJudge = false,
+      this.status = QuizStatusType.unlearned,
+      this.importance = QuizImportanceType.normal,
       this.isSaved = false,
       this.lapIndex = 0,
       this.isPremium = true})
@@ -260,8 +274,12 @@ class _$_QuizItem extends _QuizItem {
 //苦手か？
   @override
   @JsonKey()
-  final bool isJudge;
-//正解したか?
+  final QuizStatusType status;
+//クイズの状態
+  @override
+  @JsonKey()
+  final QuizImportanceType importance;
+//重要度
   @override
   @JsonKey()
   final bool isSaved;
@@ -276,7 +294,7 @@ class _$_QuizItem extends _QuizItem {
 
   @override
   String toString() {
-    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, choices: $choices, comment: $comment, isWeak: $isWeak, isJudge: $isJudge, isSaved: $isSaved, lapIndex: $lapIndex, isPremium: $isPremium)';
+    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, choices: $choices, comment: $comment, isWeak: $isWeak, status: $status, importance: $importance, isSaved: $isSaved, lapIndex: $lapIndex, isPremium: $isPremium)';
   }
 
   @override
@@ -291,7 +309,9 @@ class _$_QuizItem extends _QuizItem {
             const DeepCollectionEquality().equals(other._choices, _choices) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.isWeak, isWeak) || other.isWeak == isWeak) &&
-            (identical(other.isJudge, isJudge) || other.isJudge == isJudge) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.importance, importance) ||
+                other.importance == importance) &&
             (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
             (identical(other.lapIndex, lapIndex) ||
                 other.lapIndex == lapIndex) &&
@@ -309,7 +329,8 @@ class _$_QuizItem extends _QuizItem {
       const DeepCollectionEquality().hash(_choices),
       comment,
       isWeak,
-      isJudge,
+      status,
+      importance,
       isSaved,
       lapIndex,
       isPremium);
@@ -336,7 +357,8 @@ abstract class _QuizItem extends QuizItem {
       required final List<String> choices,
       required final String comment,
       final bool isWeak,
-      final bool isJudge,
+      final QuizStatusType status,
+      final QuizImportanceType importance,
       final bool isSaved,
       final int lapIndex,
       final bool isPremium}) = _$_QuizItem;
@@ -357,8 +379,10 @@ abstract class _QuizItem extends QuizItem {
   @override //解説
   bool get isWeak;
   @override //苦手か？
-  bool get isJudge;
-  @override //正解したか?
+  QuizStatusType get status;
+  @override //クイズの状態
+  QuizImportanceType get importance;
+  @override //重要度
   bool get isSaved;
   @override //保存したか?
   int get lapIndex;

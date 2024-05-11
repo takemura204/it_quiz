@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../model/user/user.dart';
+import '../../model/user/auth.dart';
 
 part 'auth_state.freezed.dart';
 
@@ -10,7 +10,7 @@ part 'auth_state.freezed.dart';
 class AuthState with _$AuthState {
   const factory AuthState({
     //ユーザー情報
-    User? user,
+    Auth? user,
     @Default('') final String uid,
     @Default('') final String userName,
     @Default(null) final File? userImage,

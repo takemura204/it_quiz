@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user.dart';
+part of 'auth.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -22,19 +22,29 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
 //ユーザー基本情報
   String get uid => throw _privateConstructorUsedError;
+
   String get userName => throw _privateConstructorUsedError;
+
   String get email => throw _privateConstructorUsedError;
+
   String get password => throw _privateConstructorUsedError;
+
   String get gender => throw _privateConstructorUsedError;
+
   String get birthDay => throw _privateConstructorUsedError;
+
   bool get isLogin => throw _privateConstructorUsedError; //ユーザーのカスタム設定
   int get themeId => throw _privateConstructorUsedError;
+
   int get dailyGoal => throw _privateConstructorUsedError;
+
   NotificationTime? get selectNotificationTime =>
       throw _privateConstructorUsedError;
+
   bool get isPremium => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
@@ -43,6 +53,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
+
   @useResult
   $Res call(
       {String uid,
@@ -67,6 +78,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -151,6 +163,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call(
@@ -280,6 +293,7 @@ class _$_User implements _User {
   @override
   @JsonKey()
   final bool isLogin;
+
 //ユーザーのカスタム設定
   @override
   @JsonKey()
@@ -370,26 +384,37 @@ abstract class _User implements User {
 
   @override //ユーザー基本情報
   String get uid;
+
   @override
   String get userName;
+
   @override
   String get email;
+
   @override
   String get password;
+
   @override
   String get gender;
+
   @override
   String get birthDay;
+
   @override
   bool get isLogin;
+
   @override //ユーザーのカスタム設定
   int get themeId;
+
   @override
   int get dailyGoal;
+
   @override
   NotificationTime? get selectNotificationTime;
+
   @override
   bool get isPremium;
+
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

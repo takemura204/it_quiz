@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/home_setting/home_setting_controller.dart';
-import '../../model/user/user.model.dart';
+import '../../model/user/auth_model.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 
@@ -14,7 +14,7 @@ class DailyGoalPicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizCount = ref.watch(homeSettingProvider.notifier).quizCount;
-    final dailyGoal = ref.watch(userModelProvider).dailyGoal;
+    final dailyGoal = ref.watch(authModelProvider).dailyGoal;
     final initialItem = quizCount.indexOf(dailyGoal);
     final recommendItem = quizCount.indexOf(20);
     final dailyGoalController =
@@ -118,7 +118,7 @@ class DailyGoalPicker extends ConsumerWidget {
                     ref.read(homeSettingProvider).selectedQuizCountGoal;
 
                 ref
-                    .read(userModelProvider.notifier)
+                    .read(authModelProvider.notifier)
                     .updateDailyGoal(selectedQuizCountGoal);
                 Navigator.pop(context);
               }),

@@ -7,7 +7,8 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../model/rank/rank.dart';
 import '../../model/rank/rank_model.dart';
-import '../bar.dart';
+import '../chart/progress_crilcle_chart.dart';
+import '../chart/progress_line_chart.dart';
 
 part 'rank_view.dart';
 

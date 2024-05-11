@@ -9,7 +9,7 @@ import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.d
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/setting_notification/setting_notification_state.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
-import 'package:kentei_quiz/model/user/user.model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -37,7 +37,6 @@ class SettingNotificationController
 
   Future _initState() async {
     _notificationPermissionStream();
-
     await _initTimeZone();
     await _initLocalNotifications();
     await checkNotificationPermission();
@@ -52,7 +51,7 @@ class SettingNotificationController
   /// flutter_local_notificationsの初期化
   Future _initLocalNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('icon_notification'); // アプリのアイコンを設定
+        AndroidInitializationSettings('app_icon_foreground'); // アプリのアイコンを設定
 
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
@@ -76,7 +75,6 @@ class SettingNotificationController
   }
 
   ///通知の通知状況確認
-
   Future checkNotificationPermission() async {
     final prefs = await SharedPreferences.getInstance();
     final askedBefore = prefs.getBool('askedNotificationPermission') ?? false;
@@ -84,8 +82,7 @@ class SettingNotificationController
 
     // Android 13 (API level 33) 以降の場合、新しい通知許可プロンプトを使用
     if (Platform.isAndroid) {
-      final AndroidDeviceInfo androidInfo =
-          await DeviceInfoPlugin().androidInfo;
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
       if (androidInfo.version.sdkInt >= 33) {
         // Android 13 以降の通知許可チェック
         final bool isNotificationEnabled = await flutterLocalNotificationsPlugin
@@ -123,7 +120,7 @@ class SettingNotificationController
       DateTimeComponents? dateTimeComponents}) async {
     try {
       final notificationTime =
-          ref.read(userModelProvider).selectNotificationTime;
+          ref.read(authModelProvider).selectNotificationTime;
       if (notificationTime == null) {
         print('Notification time is not set');
         return;

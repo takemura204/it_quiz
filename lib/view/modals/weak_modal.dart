@@ -8,6 +8,7 @@ import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../screen/screen_argument.dart';
+import '../../untils/enums.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
@@ -21,6 +22,7 @@ class WeakQuizModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SimpleDialog(
+      elevation: 0,
       insetPadding: EdgeInsets.all(context.width * 0.01),
       contentPadding: EdgeInsets.all(context.width * 0.01),
       children: [
@@ -75,7 +77,7 @@ class WeakQuizModal extends ConsumerWidget {
                         .setStudyType(StudyType.learn);
                     ref
                         .read(homeQuizScreenProvider.notifier)
-                        .tapStartWeakQuizButton();
+                        .setSelectWeakQuiz();
 
                     final weakQuiz =
                         ref.read(homeQuizScreenProvider).selectWeakQuiz!;
@@ -106,7 +108,7 @@ class WeakQuizModal extends ConsumerWidget {
 
                     ref
                         .read(homeQuizScreenProvider.notifier)
-                        .tapStartWeakQuizButton();
+                        .setSelectWeakQuiz();
                     final weakQuiz = ref.read(quizModelProvider).weakQuiz!;
                     context.showScreen(
                       QuizChoiceScreenArguments(
@@ -192,7 +194,7 @@ class _SelectLength extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<int> selectWeakLength = [10, 20, 50];
+    final List<int> selectWeakLength = [5, 10, 20];
 
     final selectedWeakLength = ref.watch(
       homeQuizScreenProvider.select((state) => state.selectedWeakLength),
@@ -224,7 +226,7 @@ class _SelectLength extends ConsumerWidget {
                   onTap: (index) {
                     ref
                         .read(homeQuizScreenProvider.notifier)
-                        .selectWeakLength(selectWeakLength[index]);
+                        .setWeakLength(selectWeakLength[index]);
                   },
                   labelColor: Colors.white,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),

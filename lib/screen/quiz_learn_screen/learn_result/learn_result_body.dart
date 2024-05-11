@@ -10,7 +10,7 @@ class _LearnResultBody extends ConsumerWidget {
     final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     final controller = ref.watch(quizLearnScreenProvider);
     final duration = controller.duration;
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -28,7 +28,7 @@ class _LearnResultBody extends ConsumerWidget {
                   const _QuizResultView(),
                   const Gap(15),
 
-                  if (!isPremium) AdNative(),
+                  if (!isPremium) const AdBanner(height: 270),
                   const Gap(180),
                 ],
               ),
@@ -38,7 +38,7 @@ class _LearnResultBody extends ConsumerWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            if (!isPremium) AdBanner(),
+            const AdBanner(),
             _NextActionCard(quiz),
           ],
         ),

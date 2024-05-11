@@ -9,7 +9,7 @@ class _QuizResultView extends ConsumerWidget {
     return Column(
       children: [
         Card(
-          elevation: 1,
+          elevation: 0,
           color: Colors.white,
           child: Container(
             width: context.width * 1,
@@ -70,7 +70,7 @@ class _NextActionCard extends HookConsumerWidget {
     final quizType = ref.watch(quizModelProvider).quizType;
 
     return Card(
-      elevation: 2,
+      elevation: 0,
       color: Colors.white,
       child: Container(
         alignment: Alignment.center,
@@ -86,7 +86,7 @@ class _NextActionCard extends HookConsumerWidget {
                   width: context.width * 0.45,
                   height: 55,
                   text: "再挑戦",
-                  onPressed: (quizType == QuizType.weak &&
+                  onPressed: (quizType == QuizStyleType.weak &&
                           weakQuiz!.quizItemList.isEmpty)
                       ? null
                       : () {
@@ -96,7 +96,8 @@ class _NextActionCard extends HookConsumerWidget {
                           ).generateRoute());
                         }),
               const Gap(20),
-              if (quizType == QuizType.weak || quizType == QuizType.test) ...[
+              if (quizType == QuizStyleType.weak ||
+                  quizType == QuizStyleType.random) ...[
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,

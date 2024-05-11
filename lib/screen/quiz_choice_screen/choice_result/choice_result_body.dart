@@ -8,11 +8,14 @@ class _ChoiceResultBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
-    final correctNum = quizItemList.where((x) => x.isJudge).toList().length;
+    final correctNum = quizItemList
+        .where((x) => x.status == QuizStatusType.correct)
+        .toList()
+        .length;
     final controller = ref.watch(quizChoiceScreenProvider);
     final duration = controller.duration;
 
-    final isPremium = ref.watch(userModelProvider.select((s) => s.isPremium));
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -35,7 +38,7 @@ class _ChoiceResultBody extends ConsumerWidget {
                   ///正解した問題リスト
                   const _QuizResultView(),
 
-                  if (!isPremium) AdNative(),
+                  if (!isPremium) const AdBanner(height: 270),
                   const Gap(200),
                 ],
               ),
@@ -45,7 +48,7 @@ class _ChoiceResultBody extends ConsumerWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            if (!isPremium) AdBanner(),
+            const AdBanner(),
             _NextActionCard(quiz),
           ],
         ),
