@@ -91,8 +91,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
       QuizStatusType.incorrect,
       QuizStatusType.correct,
     ];
-    state =
-        state.copyWith(statusList: statusList, selectedStatusList: statusList);
+    state = state.copyWith(
+      statusList: statusList,
+      // selectedStatusList: statusList,
+    );
   }
 
   ///QuizList取得
@@ -117,10 +119,28 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     // 既存の問題リストを取得
     final quizItemList = [...selectQuiz.quizItemList];
 
-    // selectedStatusList に基づいて問題をフィルタリング
-    final filteredQuizList = quizItemList
-        .where((quizItem) => state.selectedStatusList.contains(quizItem.status))
-        .toList();
+    List<QuizItem> filteredQuizList;
+    if (state.selectedStatusList.isEmpty || state.isQuizStatusRecommend) {
+      // 特定のステータスに基づいて問題を並べ替える
+      final statusOrder = [
+        QuizStatusType.unlearned,
+        QuizStatusType.learned,
+        QuizStatusType.incorrect,
+        QuizStatusType.correct,
+      ];
+      filteredQuizList = quizItemList
+          .where((quizItem) => statusOrder.contains(quizItem.status))
+          .toList()
+        ..sort((a, b) => statusOrder
+            .indexOf(a.status)
+            .compareTo(statusOrder.indexOf(b.status)));
+    } else {
+      // selectedStatusList に基づいて問題をフィルタリング
+      filteredQuizList = quizItemList
+          .where(
+              (quizItem) => state.selectedStatusList.contains(quizItem.status))
+          .toList();
+    }
 
     // 選択する問題の上限数を取得
     final selectedStudyLength = state.selectedStudyLength;
@@ -180,10 +200,17 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     if (selectedStatusList.contains(status)) {
       state = state.copyWith(
           selectedStatusList: selectedStatusList..remove(status));
+      if (state.selectedStatusList.isEmpty) {
+        state = state.copyWith(isQuizStatusRecommend: true);
+      }
     } else {
       state =
           state.copyWith(selectedStatusList: selectedStatusList..add(status));
     }
+  }
+
+  void removeQuizStatusList() {
+    state = state.copyWith(selectedStatusList: []);
   }
 
   ///問題範囲指定
@@ -201,6 +228,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   ///問題数指定
   void setStudyLength(int length) {
     state = state.copyWith(selectedStudyLength: length);
+  }
+
+  void setIsisQuizStatusRecommend(bool value) {
+    state = state.copyWith(isQuizStatusRecommend: value);
   }
 
   void setWeakLength(int length) {

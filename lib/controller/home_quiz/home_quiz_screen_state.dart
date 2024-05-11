@@ -18,7 +18,7 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
     @Default("") final String selectCategory,
     @Default(0) final int itemIndex, //クイズ番号
     @Default(0) final int tabIndex, //クイズ番号
-    @Default(false) bool isSelected,
+    @Default(true) bool isQuizStatusRecommend, //おまかせモードか？
     @Default([]) final List<String> selectedFilterGroup,
     @Default(10) final int selectedStudyLength,
     @Default(10) final int selectedTestLength,

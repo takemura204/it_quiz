@@ -19,10 +19,11 @@ import '../../view/button/primary_button.dart';
 import '../../view/chart/progress_crilcle_chart.dart';
 import '../../view/modals/premium_modal.dart';
 import '../../view/modals/randam_modal.dart';
-import '../../view/modals/study_modal.dart';
+import '../../view/modals/study_modal/study_modal.dart';
 import '../screen_argument.dart';
 
 part 'home_quiz_list.dart';
+
 part 'home_quiz_view.dart';
 
 class HomeQuizScreen extends HookConsumerWidget {

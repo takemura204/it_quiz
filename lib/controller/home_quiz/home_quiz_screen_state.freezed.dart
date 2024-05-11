@@ -30,7 +30,8 @@ mixin _$HomeQuizScreenState {
   String get selectCategory => throw _privateConstructorUsedError;
   int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
   int get tabIndex => throw _privateConstructorUsedError; //クイズ番号
-  bool get isSelected => throw _privateConstructorUsedError;
+  bool get isQuizStatusRecommend =>
+      throw _privateConstructorUsedError; //おまかせモードか？
   List<String> get selectedFilterGroup => throw _privateConstructorUsedError;
   int get selectedStudyLength => throw _privateConstructorUsedError;
   int get selectedTestLength => throw _privateConstructorUsedError;
@@ -61,7 +62,7 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       String selectCategory,
       int itemIndex,
       int tabIndex,
-      bool isSelected,
+      bool isQuizStatusRecommend,
       List<String> selectedFilterGroup,
       int selectedStudyLength,
       int selectedTestLength,
@@ -98,7 +99,7 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? selectCategory = null,
     Object? itemIndex = null,
     Object? tabIndex = null,
-    Object? isSelected = null,
+    Object? isQuizStatusRecommend = null,
     Object? selectedFilterGroup = null,
     Object? selectedStudyLength = null,
     Object? selectedTestLength = null,
@@ -148,9 +149,9 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
+      isQuizStatusRecommend: null == isQuizStatusRecommend
+          ? _value.isQuizStatusRecommend
+          : isQuizStatusRecommend // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedFilterGroup: null == selectedFilterGroup
           ? _value.selectedFilterGroup
@@ -239,7 +240,7 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       String selectCategory,
       int itemIndex,
       int tabIndex,
-      bool isSelected,
+      bool isQuizStatusRecommend,
       List<String> selectedFilterGroup,
       int selectedStudyLength,
       int selectedTestLength,
@@ -277,7 +278,7 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? selectCategory = null,
     Object? itemIndex = null,
     Object? tabIndex = null,
-    Object? isSelected = null,
+    Object? isQuizStatusRecommend = null,
     Object? selectedFilterGroup = null,
     Object? selectedStudyLength = null,
     Object? selectedTestLength = null,
@@ -327,9 +328,9 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
+      isQuizStatusRecommend: null == isQuizStatusRecommend
+          ? _value.isQuizStatusRecommend
+          : isQuizStatusRecommend // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedFilterGroup: null == selectedFilterGroup
           ? _value._selectedFilterGroup
@@ -377,7 +378,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       this.selectCategory = "",
       this.itemIndex = 0,
       this.tabIndex = 0,
-      this.isSelected = false,
+      this.isQuizStatusRecommend = true,
       final List<String> selectedFilterGroup = const [],
       this.selectedStudyLength = 10,
       this.selectedTestLength = 10,
@@ -473,8 +474,10 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
 //クイズ番号
   @override
   @JsonKey()
-  final bool isSelected;
+  final bool isQuizStatusRecommend;
+//おまかせモードか？
   final List<String> _selectedFilterGroup;
+//おまかせモードか？
   @override
   @JsonKey()
   List<String> get selectedFilterGroup {
@@ -503,7 +506,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, randomCategoryList: $randomCategoryList, statusList: $statusList, selectedStatusList: $selectedStatusList, correctRatios: $correctRatios, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isSelected: $isSelected, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, randomCategoryList: $randomCategoryList, statusList: $statusList, selectedStatusList: $selectedStatusList, correctRatios: $correctRatios, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isQuizStatusRecommend: $isQuizStatusRecommend, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
   }
 
   @override
@@ -531,8 +534,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
                 other.itemIndex == itemIndex) &&
             (identical(other.tabIndex, tabIndex) ||
                 other.tabIndex == tabIndex) &&
-            (identical(other.isSelected, isSelected) ||
-                other.isSelected == isSelected) &&
+            (identical(other.isQuizStatusRecommend, isQuizStatusRecommend) ||
+                other.isQuizStatusRecommend == isQuizStatusRecommend) &&
             const DeepCollectionEquality()
                 .equals(other._selectedFilterGroup, _selectedFilterGroup) &&
             (identical(other.selectedStudyLength, selectedStudyLength) ||
@@ -562,7 +565,7 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       selectCategory,
       itemIndex,
       tabIndex,
-      isSelected,
+      isQuizStatusRecommend,
       const DeepCollectionEquality().hash(_selectedFilterGroup),
       selectedStudyLength,
       selectedTestLength,
@@ -591,7 +594,7 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       final String selectCategory,
       final int itemIndex,
       final int tabIndex,
-      final bool isSelected,
+      final bool isQuizStatusRecommend,
       final List<String> selectedFilterGroup,
       final int selectedStudyLength,
       final int selectedTestLength,
@@ -621,8 +624,8 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   @override //クイズ番号
   int get tabIndex;
   @override //クイズ番号
-  bool get isSelected;
-  @override
+  bool get isQuizStatusRecommend;
+  @override //おまかせモードか？
   List<String> get selectedFilterGroup;
   @override
   int get selectedStudyLength;
