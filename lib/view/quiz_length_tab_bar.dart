@@ -1,18 +1,19 @@
-part of 'study_modal.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/model/extension_resource.dart';
 
 ///問題数指定
-class _SelectLength extends ConsumerWidget {
-  const _SelectLength();
+class QuizLengthTabBar extends ConsumerWidget {
+  const QuizLengthTabBar({required this.selectedLength, required this.onTap});
+
+  final int selectedLength;
+  final void Function(int) onTap; // 引数を取るように変更
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<int> selectLength = [5, 10, 20];
-
-    final selectedStudyLength = ref.watch(
-      homeQuizScreenProvider.select((state) => state.selectedStudyLength),
-    );
-
-    final initialIndex = selectLength.indexOf(selectedStudyLength);
+    final initialIndex = selectLength.indexOf(selectedLength);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,9 +34,7 @@ class _SelectLength extends ConsumerWidget {
             initialIndex: initialIndex,
             child: TabBar(
                 onTap: (index) {
-                  ref
-                      .read(homeQuizScreenProvider.notifier)
-                      .setStudyLength(selectLength[index]);
+                  onTap(selectLength[index]); // 選択された問題数を渡す
                 },
                 labelColor: context.mainColor,
                 labelStyle: const TextStyle(fontWeight: FontWeight.bold),

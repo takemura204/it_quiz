@@ -14,8 +14,8 @@ import '../../button/primary_button.dart';
 import '../../button_icon/clear_button.dart';
 import '../../chart/progress_line_chart.dart';
 import '../../icon/quarter_circle_icon.dart';
+import '../../quiz_length_tab_bar.dart';
 
-part 'study_modal_length.dart';
 part 'study_modal_status_cards.dart';
 part 'study_modal_title.dart';
 
@@ -42,6 +42,10 @@ class StudyModal extends ConsumerWidget {
         .length;
     final unlearnedValue =
         goalValue - (correctValue + incorrectValue + learnedValue);
+
+    final selectedStudyLength = ref.watch(
+      homeQuizScreenProvider.select((state) => state.selectedStudyLength),
+    );
 
     ///selectedStatusListがない時ボタンを押したくない。
     return SimpleDialog(
@@ -88,7 +92,14 @@ class StudyModal extends ConsumerWidget {
                   const Gap(10),
 
                   ///問題数
-                  const _SelectLength(),
+                  QuizLengthTabBar(
+                    selectedLength: selectedStudyLength,
+                    onTap: (length) {
+                      ref
+                          .read(homeQuizScreenProvider.notifier)
+                          .setStudyLength(length);
+                    },
+                  ),
                   const Gap(10),
                   const Divider(height: 1),
                   const Gap(10),

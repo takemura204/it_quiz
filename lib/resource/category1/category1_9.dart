@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category1_9 {
   final quizItems = [
@@ -9,6 +10,7 @@ List<QuizItem> get category1_9 {
       choices: ["SWOT分析", "PPM", "VRIO分析", "3C分析"],
       comment:
           "SWOT分析は、Strengths（強み）、Weaknesses（弱み）、Opportunities（機会）、Threats（脅威）の頭文字を取ったもので、企業が外部環境と内部環境を分析するために使用するフレームワーク。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'プロジェクトやビジネスユニットの戦略的ポジショニングを視覚化するために用いられるマトリックスは何か？',
@@ -16,6 +18,7 @@ List<QuizItem> get category1_9 {
       choices: ["VRIO分析", "PPM", "3C分析", "ファイブフォース分析"],
       comment:
           "PPM（Product Portfolio Matrix）は、ビジネスユニットや製品群の市場成長率と市場シェアを基に、戦略的ポジショニングを視覚化するためのツール。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '企業、顧客、競合を分析するフレームワークは何か？',
@@ -23,6 +26,7 @@ List<QuizItem> get category1_9 {
       choices: ["SWOT分析", "PPM", "VRIO分析", "3C分析"],
       comment:
           "3C分析は、Company（企業）、Customers（顧客）、Competitors（競合）の3つの要素を分析するフレームワーク。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業の競争優位を維持するための資源や能力の分析に用いるフレームワークは何か？',
@@ -30,12 +34,14 @@ List<QuizItem> get category1_9 {
       choices: ["VRIO分析", "SWOT分析", "PPM", "3C分析"],
       comment:
           "VRIO分析は、Value (価値ある), Rarity (希少性), Imitability (模倣可能性), Organization (組織化されている) の4つの要因を分析し、企業の競争優位を維持するための資源や能力を評価するフレームワーク。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業が独自の競争優位を築くための基本的な能力や強みを何というか？',
       ans: 'コアコンピタンス',
       choices: ["コアコンピタンス", "ニッチ戦略", "同質化戦略", "ブルーオーシャン戦略"],
       comment: "コアコンピタンスは、企業が競合他社と差別化し、長期的な競争優位を築くための基本的な能力や強みのこと。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '競争の激しい市場ではなく、狭い市場で専門性を活かす戦略を何というか？',
@@ -43,12 +49,14 @@ List<QuizItem> get category1_9 {
       choices: ["コアコンピタンス", "ニッチ戦略", "同質化戦略", "ブルーオーシャン戦略"],
       comment:
           "ニッチ戦略は、広い市場ではなく、特定の狭い市場やセグメントに焦点を当て、専門性や特化したサービスを提供することで競争優位を築く戦略。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '製品やサービスが市場に出回る量が増えることで、単位あたりの製造コストが低下する現象を何というか？',
       ans: '同質化戦略',
       choices: ["コモディティ化", "同質化戦略", "ニッチ戦略", "ブルーオーシャン戦略"],
       comment: "同質化戦略では、製品やサービスの差別化が進まず、競争が激化することで、価格競争が主な戦略となる傾向があります。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '未開拓の市場で新たな価値を創造し、競争を避ける戦略を何というか？',
@@ -56,18 +64,21 @@ List<QuizItem> get category1_9 {
       choices: ["ニッチ戦略", "同質化戦略", "ブルーオーシャン戦略", "アライアンス"],
       comment:
           "ブルーオーシャン戦略は、競争の激しい既存の市場（レッドオーシャン）から離れ、新たな価値を創造し競争のない新しい市場（ブルーオーシャン）を開拓する戦略。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '企業間で資源や技術を共有し、協力関係を築くことを何というか？',
       ans: 'アライアンス',
       choices: ["アウトソーシング", "M&A", "アライアンス", "OEM"],
       comment: "アライアンスは、企業間で資源や技術、情報などを共有し、協力関係を築くことで、相互に利益をもたらす戦略的な提携のこと。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '他社に製品やサービスの生産を委託することを何というか？',
       ans: 'アウトソーシング',
       choices: ["アライアンス", "アウトソーシング", "フランチャイズ", "ファブレス"],
       comment: "アウトソーシングは、コスト削減や効率化を目的として、他社に製品やサービスの生産、業務プロセスなどを委託すること。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '企業が自社ブランド製品を他社に製造させることを何というか？',
@@ -75,6 +86,7 @@ List<QuizItem> get category1_9 {
       choices: ["M&A", "OEM", "ファブレス", "フランチャイズ"],
       comment:
           "OEM（Original Equipment Manufacturer）は、企業が自社ブランドの製品を他社に製造させ、その製品を自社の製品として販売すること。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '企業が自社の生産設備を持たず、全ての製造を外部委託するビジネスモデルを何というか？',
@@ -82,12 +94,14 @@ List<QuizItem> get category1_9 {
       choices: ["ファブレス", "フランチャイズ", "アウトソーシング", "OEM"],
       comment:
           "ファブレスは、「ファブリックレス（無工場）」の略で、企業が自社の生産設備を持たず、設計や開発に注力し、製造は全て外部委託するビジネスモデル。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業が他社に自社の事業モデルを提供し、加盟店として運営させるビジネス形態を何というか？',
       ans: 'フランチャイズ',
       choices: ["フランチャイズ", "チェーンストア", "アライアンス", "MBO"],
       comment: "フランチャイズは、企業が他社に自社のブランド名、ノウハウ、事業モデルを提供し、加盟店として独立して運営させるビジネス形態。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '企業の経営者や役員が自社の株式を買い取り、非公開化を目指す買収手法を何というか？',
@@ -95,6 +109,7 @@ List<QuizItem> get category1_9 {
       choices: ["MBO", "EBO", "TOB", "M&A"],
       comment:
           "MBO（Management Buyout）は、企業の経営者や役員が自社の株式を買い取り、非公開化を目指す買収手法。これにより、経営の自由度を高めることが目的。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '従業員が自社の株式を買い取り、経営に参加することを何というか？',
@@ -102,12 +117,14 @@ List<QuizItem> get category1_9 {
       choices: ["MBO", "EBO", "TOB", "M&A"],
       comment:
           "EBO（Employee Buyout）は、従業員が自社の株式を買い取り、経営に参加すること。従業員のモチベーション向上や経営の安定化を目指す。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '企業が他社の株式を公開市場で買い集めることによって、その企業を買収する手法を何というか？',
       ans: 'TOB',
       choices: ["MBO", "EBO", "TOB", "M&A"],
       comment: "TOB（Takeover Bid）は、公開買付けのことで、企業が他社の株式を公開市場で買い集め、その企業を買収する手法。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '企業同士が合併や買収を行うことを一般に何というか？',
@@ -115,18 +132,21 @@ List<QuizItem> get category1_9 {
       choices: ["MBO", "EBO", "TOB", "M&A"],
       comment:
           "M&A（Mergers and Acquisitions）は、企業同士が合併（Merger）や買収（Acquisition）を行うこと。企業規模の拡大や新規市場への進出、競争力の強化などを目的とする。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '大量生産によって単位あたりのコストを低減させる現象を何というか？',
       ans: '規模の経済',
       choices: ["規模の経済", "経験曲線", "垂直統合", "水平統合"],
       comment: "規模の経済は、生産規模が拡大することにより、単位あたりの固定費用や変動費用が減少し、全体のコスト効率が向上する現象。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '生産量の増加に伴い、製品の単位コストが低下する現象を何というか？',
       ans: '経験曲線',
       choices: ["規模の経済", "経験曲線", "垂直統合", "水平統合"],
       comment: "経験曲線は、生産量の増加に伴い、製品の製造に関する知識や技術が蓄積され、生産効率が向上することで単位コストが低下する現象。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業が供給チェーンの上流から下流までの関連する業務を内部化することを何というか？',
@@ -134,6 +154,7 @@ List<QuizItem> get category1_9 {
       choices: ["規模の経済", "経験曲線", "垂直統合", "水平統合"],
       comment:
           "垂直統合は、原材料の調達から製品の販売に至るまでのサプライチェーンを一つの企業が内部化すること。これにより、コスト削減や品質管理の向上が図れる。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '同じ業種の企業同士が合併することを何というか？',
@@ -141,6 +162,7 @@ List<QuizItem> get category1_9 {
       choices: ["垂直統合", "水平統合", "コモディティ化", "ベンチマーキング"],
       comment:
           "水平統合は、市場での競争力を強化するため、同じ業種の企業同士が合併または買収を行うこと。これにより、市場シェアの拡大やコスト効率の向上が期待される。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '製品やサービスが差別化を失い、価格競争のみで勝負する状態になることを何というか？',
@@ -148,12 +170,14 @@ List<QuizItem> get category1_9 {
       choices: ["水平統合", "垂直統合", "コモディティ化", "ベンチマーキング"],
       comment:
           "コモディティ化は、製品やサービスが差別化の要素を失い、消費者にとってはどの企業の製品も違いがなくなり、価格のみが競争の決め手となる状態。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '他社の優れた製品やサービス、プロセスを参考にして自社の業務改善を図ることを何というか？',
       ans: 'ベンチマーキング',
       choices: ["コモディティ化", "ベンチマーキング", "ロジスティクス", "カニバリゼーション"],
       comment: "ベンチマーキングは、他社の優れた製品、サービス、業務プロセスなどを参考にし、それらを基準として自社の業務改善を図るプロセス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '物流、すなわち商品やサービスの供給プロセスの最適化を図るための活動を何というか？',
@@ -161,12 +185,14 @@ List<QuizItem> get category1_9 {
       choices: ["ベンチマーキング", "ロジスティクス", "カニバリゼーション", "ESG投資"],
       comment:
           "ロジスティクスは、生産地点から消費地点までの商品の流れ、すなわち供給プロセスを効率化し、コスト削減や顧客満足度の向上を図る活動。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '新製品が自社の既存製品の売上を奪う現象を何というか？',
       ans: 'カニバリゼーション',
       choices: ["ロジスティクス", "ベンチマーキング", "カニバリゼーション", "ESG投資"],
       comment: "カニバリゼーションは、新製品の導入によって、その新製品が自社の既存製品と競合し、既存製品の売上を奪う現象。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '環境、社会、企業統治の観点から投資対象を選定する投資戦略を何というか？',
@@ -174,6 +200,7 @@ List<QuizItem> get category1_9 {
       choices: ["カニバリゼーション", "ロジスティクス", "ベンチマーキング", "ESG投資"],
       comment:
           "ESG投資は、環境（Environment）、社会（Social）、企業統治（Governance）の3つの観点から、持続可能で社会的に責任ある投資を行う戦略。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '業界内の競争の激しさを分析するためのフレームワークは何か？',
@@ -181,6 +208,7 @@ List<QuizItem> get category1_9 {
       choices: ["ファイブフォース分析", "SWOT分析", "3C分析", "VRIO分析"],
       comment:
           "ファイブフォース分析は、マイケル・ポーターによって提唱されたモデルで、業界内の競争の激しさを分析するために、5つの力（新規参入の脅威、代替品の脅威、買い手の交渉力、売り手の交渉力、既存企業間の競争）を考慮するフレームワーク。",
+      importance: QuizImportanceType.none,
     ),
   ];
 

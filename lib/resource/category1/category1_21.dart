@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 ///システム活用促進・評価
 List<QuizItem> get category1_21 {
@@ -9,13 +10,7 @@ List<QuizItem> get category1_21 {
       ans: 'ITリテラシ',
       choices: ["SOA", "ITリテラシ", "ゲーミフィケーション", "ディジタルディバイド"],
       comment: "ITリテラシは、情報技術に関する基本的な知識や、コンピュータやインターネットを効果的に利用するためのスキルを指す。",
-    ),
-    QuizItem(
-      question: '異なるシステム間で機能を共有しやすくするための、サービス指向のアーキテクチャを何というか？',
-      ans: 'SOA',
-      choices: ["PoC", "SOA", "ITリテラシ", "ゲーミフィケーション"],
-      comment:
-          "SOA（Service-Oriented Architecture）は、ソフトウェアコンポーネントをサービスとして提供し、ネットワークを通じて異なるシステム間で機能を共有するためのアーキテクチャ。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'ゲームの要素を非ゲームのコンテキストに応用することで、ユーザーの関与を高める手法を何というか？',
@@ -23,6 +18,7 @@ List<QuizItem> get category1_21 {
       choices: ["ITリテラシ", "ゲーミフィケーション", "ディジタルディバイド", "ディジタルネイティブ"],
       comment:
           "ゲーミフィケーションは、ゲームの要素（ポイント、バッジ、ランキングなど）を非ゲームのコンテキスト（教育、マーケティング、健康管理など）に応用し、ユーザーの関与やモチベーションを高める手法。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '情報技術へのアクセス格差によって生じる社会的な分断を何というか？',
@@ -30,6 +26,7 @@ List<QuizItem> get category1_21 {
       choices: ["ゲーミフィケーション", "ディジタルディバイド", "ディジタルネイティブ", "レガシーシステム"],
       comment:
           "ディジタルディバイドは、インターネットやコンピュータなどの情報技術へのアクセスや利用スキルにおける格差が、人々や地域間で社会的な分断を生じさせる現象。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'デジタル技術に囲まれた環境で育った世代を指す用語は何か？',
@@ -37,6 +34,7 @@ List<QuizItem> get category1_21 {
       choices: ["ディジタルディバイド", "ディジタルネイティブ", "レガシーシステム", "SaaS"],
       comment:
           "ディジタルネイティブは、生まれたときからデジタル技術（インターネット、スマートフォンなど）に囲まれ、それらを自然に利用する世代を指す。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '古くから使われているが、更新が難しいシステムや技術を何というか？',
@@ -44,6 +42,7 @@ List<QuizItem> get category1_21 {
       choices: ["ディジタルネイティブ", "レガシーシステム", "クラウドコンピューティング", "IaaS"],
       comment:
           "レガシーシステムは、古くから使われているが、新しい技術やシステムへの更新が困難なために現役で使われ続けているITシステムや技術を指す。",
+      importance: QuizImportanceType.low,
     ),
   ];
   return List.generate(quizItems.length, (index) {

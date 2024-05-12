@@ -5,14 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
-import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../screen/screen_argument.dart';
 import '../../untils/enums.dart';
-import '../button/disabled_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
+import '../quiz_length_tab_bar.dart';
 
 ///ランダムモーダル
 class RandomQuizModal extends ConsumerWidget {
@@ -24,11 +23,14 @@ class RandomQuizModal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isGroup =
         ref.watch(homeQuizScreenProvider).randomCategoryList.isNotEmpty;
+    final selectedTestLength = ref.watch(
+      homeQuizScreenProvider.select((state) => state.selectedTestLength),
+    );
     return SimpleDialog(
       elevation: 0,
       backgroundColor: Colors.white,
       insetPadding: EdgeInsets.all(context.width * 0.01),
-      contentPadding: EdgeInsets.all(context.width * 0.01),
+      contentPadding: EdgeInsets.all(context.width * 0.025),
       children: [
         Container(
           color: Colors.white,
@@ -54,46 +56,48 @@ class RandomQuizModal extends ConsumerWidget {
               ///選択範囲
               const _QuizRange(),
 
-              const Gap(5),
+              const Gap(15),
 
               ///問題数
-              const _SelectLength(),
-              const Gap(5),
+              QuizLengthTabBar(
+                selectedLength: selectedTestLength,
+                onTap: (length) {
+                  ref
+                      .read(homeQuizScreenProvider.notifier)
+                      .setRandomQuizLength(length);
+                },
+              ),
+
+              const Gap(15),
 
               const Divider(height: 1),
-              const Gap(5),
+              const Gap(15),
 
               ///クイズに挑戦する
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
-                child: isGroup
-                    ? PrimaryButton(
-                        width: context.width * 1,
-                        height: 50,
-                        text: I18n().challengeQuiz(randomQuiz.title),
-                        onPressed: () {
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .setStudyType(StudyType.choice);
-                          ref
-                              .read(homeQuizScreenProvider.notifier)
-                              .tapStartRandomQuizButton();
+              PrimaryButton(
+                width: context.width,
+                height: 50,
+                text: 'クイズに挑戦する',
+                onPressed: isGroup
+                    ? () {
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .setStudyType(StudyType.choice);
+                        ref
+                            .read(homeQuizScreenProvider.notifier)
+                            .tapStartRandomQuizButton();
 
-                          final randomQuiz =
-                              ref.read(quizModelProvider).randomQuiz!;
-                          context.showScreen(
-                            QuizChoiceScreenArguments(
-                              quiz: randomQuiz,
-                            ).generateRoute(),
-                          );
-                        },
-                      )
-                    : DisabledButton(
-                        width: context.width * 1,
-                        height: 50,
-                        text: I18n().challengeQuiz(randomQuiz.title),
-                      ),
+                        final randomQuiz =
+                            ref.read(quizModelProvider).randomQuiz!;
+                        context.showScreen(
+                          QuizChoiceScreenArguments(
+                            quiz: randomQuiz,
+                          ).generateRoute(),
+                        );
+                      }
+                    : null,
               ),
+
               const Gap(5),
             ],
           ),
@@ -139,7 +143,6 @@ class _QuizRange extends ConsumerWidget {
       );
     }
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -176,7 +179,7 @@ class _SelectRange extends ConsumerWidget {
         ref.read(homeQuizScreenProvider.notifier).setRandomCategory(text);
       },
       child: Container(
-        width: context.width * 0.8,
+        width: context.width,
         height: 45,
         padding: EdgeInsets.symmetric(
             horizontal: context.width * 0.02, vertical: context.width * 0.01),
@@ -208,83 +211,6 @@ class _SelectRange extends ConsumerWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-///問題数指定
-class _SelectLength extends ConsumerWidget {
-  const _SelectLength();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final List<int> testLength = [10, 20, 50];
-    final selectedTestLength = ref.watch(
-      homeQuizScreenProvider.select((state) => state.selectedTestLength),
-    );
-    final initialIndex = testLength.indexOf(selectedTestLength);
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.04, vertical: context.width * 0.01),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            '問題数を選択してください。',
-            style: TextStyle(fontSize: 14),
-          ),
-          const Gap(5),
-          Container(
-            height: 40,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: context.mainColor),
-            ),
-            child: DefaultTabController(
-              length: 3,
-              initialIndex: initialIndex,
-              child: TabBar(
-                  onTap: (index) {
-                    ref
-                        .read(homeQuizScreenProvider.notifier)
-                        .setRandomQuizLength(testLength[index]);
-                  },
-                  labelColor: Colors.white,
-                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                  unselectedLabelStyle:
-                      const TextStyle(fontWeight: FontWeight.normal),
-                  unselectedLabelColor: context.mainColor,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: context.mainColor),
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        "${testLength[0]}問",
-                        style: TextStyle(fontSize: context.width * 0.04),
-                      ),
-                    ),
-                    Tab(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text("${testLength[1]}問",
-                            style: TextStyle(fontSize: context.width * 0.04)),
-                      ),
-                    ),
-                    Tab(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text("${testLength[2]}問",
-                            style: TextStyle(fontSize: context.width * 0.04)),
-                      ),
-                    ),
-                  ]),
-            ),
-          ),
-        ],
       ),
     );
   }
