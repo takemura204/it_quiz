@@ -155,6 +155,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     state = state.copyWith(selectStudyQuiz: selectStudyQuiz);
   }
 
+  void updateSelectQuiz(Quiz quiz) {
+    state = state.copyWith(selectQuiz: quiz);
+  }
+
   ///WeakQuiz開始
   void setSelectWeakQuiz() {
     final weakQuiz = ref.read(quizModelProvider).weakQuiz!;

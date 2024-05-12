@@ -216,7 +216,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
     final isCompleted = quizItemList.length == correctNum;
     final choiceQuiz = state.choiceQuiz!;
-    final updateQuiz = choiceQuiz!.copyWith(
+    final updateQuiz = choiceQuiz.copyWith(
       duration: duration,
       quizItemList: updateQuizItemList(),
       correctNum: correctNum,
@@ -225,6 +225,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       studyType: studyType,
     );
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
+    ref.read(homeQuizScreenProvider.notifier).updateSelectQuiz(updateQuiz);
   }
 
   List<QuizItem> updateQuizItemList() {

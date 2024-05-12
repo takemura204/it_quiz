@@ -124,14 +124,15 @@ class _NextActionCard extends HookConsumerWidget {
                           ref
                               .read(homeQuizScreenProvider.notifier)
                               .setSelectStudyQuiz();
-
                           final selectStudyQuiz =
-                              ref.read(homeQuizScreenProvider).selectStudyQuiz!;
-                          context.showScreen(
-                            QuizChoiceScreenArguments(
-                              quiz: selectStudyQuiz,
-                            ).generateRoute(),
-                          );
+                              ref.read(homeQuizScreenProvider).selectStudyQuiz;
+                          if (selectStudyQuiz!.quizItemList.isNotEmpty) {
+                            context.showScreen(
+                              QuizChoiceScreenArguments(
+                                quiz: selectStudyQuiz!,
+                              ).generateRoute(),
+                            );
+                          }
                         },
                 ),
             ],

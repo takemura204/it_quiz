@@ -123,7 +123,10 @@ class _ProgressIcon extends ConsumerWidget {
           width: 50,
           size: 50,
           goalScore: quiz.quizItemList.length,
-          currentScore: quiz.correctNum,
+          currentScore: quiz.quizItemList
+              .where((x) => x.status == QuizStatusType.correct)
+              .toList()
+              .length,
           thickness: 0.1,
           widget: Icon(
             isPremium ? Icons.check : LineIcons.lock,
