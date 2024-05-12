@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../model/quiz/quiz.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';
 
@@ -12,6 +13,7 @@ class QuizChoiceScreenState with _$QuizChoiceScreenState {
     @Default(false) final bool isAnsView, //答え表示
     @Default(false) final bool isJudge, //正解判定
     @Default(false) final bool isResultScreen,
+    Quiz? choiceQuiz,
     @Default(0) final int quizIndex, //問題番号
     @Default(0) final int quizItemIndex, //クイズアイテム番号
     @Default('') final String selectAns, //選択した番号

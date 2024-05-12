@@ -72,7 +72,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   Future tapActionButton(bool isKnow) async {
     await setIsAnsView(false);
     await setDirection(null);
-
     final lapIndex = state.lapIndex;
     final quizItemList = [...state.quizItemList];
     final index = state.quizIndex;

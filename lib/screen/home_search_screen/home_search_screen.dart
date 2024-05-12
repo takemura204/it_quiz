@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -89,6 +90,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
               ref
                   .read(homeSearchScreenProvider.notifier)
                   .tapIsSavedFilterButton();
+              HapticFeedback.lightImpact();
             },
             icon: Icon(
               isSavedFilter ? Icons.bookmark_sharp : LineIcons.bookmark,

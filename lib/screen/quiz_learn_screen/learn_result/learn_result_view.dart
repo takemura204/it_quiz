@@ -40,11 +40,12 @@ class _QuizResultView extends ConsumerWidget {
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
             return QuizItemCard(
-              quizItem: quizItemList[index],
-              studyType: StudyType.learn,
-              onPressed: () =>
-                  ref.read(quizLearnScreenProvider.notifier).tapCheckBox(index),
-            );
+                quizItem: quizItemList[index],
+                studyType: StudyType.learn,
+                onPressed: () {
+                  ref.read(quizLearnScreenProvider.notifier).tapCheckBox(index);
+                  HapticFeedback.lightImpact();
+                });
           },
         ),
       ],
@@ -53,15 +54,15 @@ class _QuizResultView extends ConsumerWidget {
 }
 
 class _NextActionCard extends HookConsumerWidget {
-  const _NextActionCard(this.quiz);
-
-  final Quiz quiz;
+  const _NextActionCard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider).quizList;
     final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
+    final learnQuiz =
+        ref.watch(quizLearnScreenProvider.select((s) => s.learnQuiz));
     return Card(
       elevation: 0,
       color: Colors.white,
@@ -84,7 +85,7 @@ class _NextActionCard extends HookConsumerWidget {
                         .updateHistoryQuiz();
                     Navigator.of(context).pop();
                     context.showScreen(QuizLearnScreenArguments(
-                      quiz: quiz,
+                      quiz: learnQuiz!,
                     ).generateRoute());
                   }),
               const Gap(10),
@@ -101,7 +102,7 @@ class _NextActionCard extends HookConsumerWidget {
                         Navigator.of(context).pop();
                         context.showScreen(
                           QuizChoiceScreenArguments(
-                            quiz: quiz,
+                            quiz: learnQuiz!,
                           ).generateRoute(),
                         );
 

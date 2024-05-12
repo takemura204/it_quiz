@@ -116,6 +116,7 @@ class _StatusCard extends ConsumerWidget {
               .setIsisQuizStatusRecommend(false);
         }
         ref.read(homeQuizScreenProvider.notifier).setQuizStatusList(status);
+        HapticFeedback.lightImpact();
       },
       child: Container(
         width: 85,
@@ -219,6 +220,7 @@ class _StatusRecommendCard extends ConsumerWidget {
               .read(homeQuizScreenProvider.notifier)
               .setIsisQuizStatusRecommend(true);
           ref.read(homeQuizScreenProvider.notifier).removeQuizStatusList();
+          HapticFeedback.lightImpact();
         }
       },
       child: Container(

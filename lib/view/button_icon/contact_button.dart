@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:line_icons/line_icons.dart';
@@ -13,6 +14,7 @@ class ContactIconButton extends ConsumerWidget {
       onTap: () async {
         final Uri uri = Uri.parse(I18n().contactUrl);
         await launchUrl(uri);
+        HapticFeedback.lightImpact();
       },
       child: Container(
         width: 80,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CircleButton extends StatelessWidget {
   const CircleButton({
@@ -16,7 +17,12 @@ class CircleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap == null
+          ? null
+          : () {
+              onTap!();
+              HapticFeedback.lightImpact();
+            },
       child: Container(
         alignment: Alignment.center,
         height: size.height,

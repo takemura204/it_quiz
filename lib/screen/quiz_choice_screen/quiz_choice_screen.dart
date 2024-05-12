@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -6,6 +7,7 @@ import 'package:kentei_quiz/view/card/result_dashboard_card.dart';
 import 'package:kentei_quiz/view/card/result_prefect_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
+import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
@@ -82,6 +84,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                 onPressed: () {
                   //問題リセット
                   ref.read(quizChoiceScreenProvider.notifier).resetScreen();
+                  HapticFeedback.lightImpact();
                 },
               ),
             ],
@@ -102,6 +105,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                             .resetScreen();
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
+                        HapticFeedback.lightImpact();
                       },
                       title: "学習を中断しますか？",
                       subWidget: Text(

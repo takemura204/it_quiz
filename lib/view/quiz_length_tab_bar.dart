@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -35,6 +36,7 @@ class QuizLengthTabBar extends ConsumerWidget {
             child: TabBar(
                 onTap: (index) {
                   onTap(selectLength[index]); // 選択された問題数を渡す
+                  HapticFeedback.lightImpact();
                 },
                 labelColor: context.mainColor,
                 labelStyle: const TextStyle(fontWeight: FontWeight.bold),

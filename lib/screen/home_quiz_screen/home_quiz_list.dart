@@ -75,6 +75,7 @@ class _QuizCard extends ConsumerWidget {
                     },
                   ));
         }
+        HapticFeedback.lightImpact();
       },
       child: Container(
         color: isPremium ? Colors.white : Colors.grey.shade200,

@@ -38,6 +38,7 @@ class _QuizCard extends ConsumerWidget {
           } else if (direction == AppinioSwiperDirection.right) {
             ref.read(quizLearnScreenProvider.notifier).tapActionButton(true);
           }
+          HapticFeedback.mediumImpact();
         },
         onSwiping: (direction) {
           ref.read(quizLearnScreenProvider.notifier).setDirection(direction);
@@ -123,6 +124,7 @@ class _ActionButtons extends ConsumerWidget {
                     .read(quizLearnScreenProvider.notifier)
                     .swiperController
                     .swipeLeft();
+                HapticFeedback.mediumImpact();
               },
             ),
             Gap(context.width * 0.02),
@@ -141,6 +143,7 @@ class _ActionButtons extends ConsumerWidget {
                     .read(quizLearnScreenProvider.notifier)
                     .swiperController
                     .swipeRight();
+                HapticFeedback.mediumImpact();
               },
             ),
           ])
@@ -157,6 +160,7 @@ class _ActionButtons extends ConsumerWidget {
             text: I18n().buttonConfirm,
             onPressed: () {
               ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
+              HapticFeedback.mediumImpact();
             },
           );
   }

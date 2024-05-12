@@ -1,6 +1,7 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,6 +25,7 @@ import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/card/quiz_item_card.dart';
 import '../../view/card/result_dashboard_card.dart';
+import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'learn_challenge/learn_challenge_body.dart';
@@ -96,9 +98,31 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: Text(quiz.title),
-            leading: CustomBackButton(onPressed: () {
-              ref.read(quizLearnScreenProvider.notifier).tapClearButton();
-              Navigator.pop(context);
+            leading: CustomBackButton(onPressed: () async {
+              await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return PrimaryDialog(
+                      onPressed: () {
+                        ref
+                            .read(quizLearnScreenProvider.notifier)
+                            .tapClearButton();
+                        Navigator.pop(context);
+                        Navigator.of(context).pop();
+                      },
+                      title: "学習を中断しますか？",
+                      subWidget: Text(
+                        "学習を中断すると\nこれまでの内容は保存されません。",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: context.width * 0.04,
+                            color: Colors.black87),
+                        maxLines: 2,
+                      ),
+                      cancelText: "続ける",
+                      doneText: "中断する",
+                    );
+                  });
             }),
             actions: const [
               ContactIconButton(),

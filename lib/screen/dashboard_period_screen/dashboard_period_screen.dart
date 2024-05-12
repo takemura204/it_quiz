@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -335,6 +336,7 @@ class _SelectPeriod extends ConsumerWidget {
                     .read(homeDashboardScreenProvider.notifier)
                     .updatePeriodData(-1);
               }
+              HapticFeedback.lightImpact();
             },
             icon: Icon(
               Icons.arrow_back_ios,
@@ -370,6 +372,7 @@ class _SelectPeriod extends ConsumerWidget {
                     .read(homeDashboardScreenProvider.notifier)
                     .updatePeriodData(1);
               }
+              HapticFeedback.lightImpact();
             },
             icon: Icon(
               Icons.arrow_forward_ios,
@@ -411,6 +414,7 @@ class _SelectPeriodTab extends ConsumerWidget {
                 ref
                     .read(homeDashboardScreenProvider.notifier)
                     .setSelectedPeriodType(index);
+                HapticFeedback.lightImpact();
               },
               labelColor: Colors.white,
               labelStyle: const TextStyle(fontWeight: FontWeight.bold),

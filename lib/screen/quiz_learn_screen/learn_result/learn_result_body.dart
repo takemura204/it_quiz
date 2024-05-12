@@ -35,11 +35,11 @@ class _LearnResultBody extends ConsumerWidget {
             ),
           ],
         ),
-        Column(
+        const Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const AdBanner(),
-            _NextActionCard(quiz),
+            AdBanner(),
+            _NextActionCard(),
           ],
         ),
       ],

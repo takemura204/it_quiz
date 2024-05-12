@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
@@ -19,6 +20,7 @@ class CustomBackButton extends ConsumerWidget {
         iconSize: context.width * 0.1,
         onPressed: () {
           onPressed();
+          HapticFeedback.lightImpact();
         },
         icon: const Icon(
           LineIcons.angleLeft,

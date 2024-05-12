@@ -114,6 +114,7 @@ class _QuizItemCard extends ConsumerWidget {
                     },
                   ));
         }
+        HapticFeedback.lightImpact();
       },
       child: Container(
         decoration: BoxDecoration(
@@ -240,8 +241,10 @@ class _SavedButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () =>
-          ref.read(homeSearchScreenProvider.notifier).tapSavedButton(index),
+      onTap: () {
+        ref.read(homeSearchScreenProvider.notifier).tapSavedButton(index);
+        HapticFeedback.lightImpact();
+      },
       child: Container(
         alignment: Alignment.center,
         width: context.width * 0.1,
