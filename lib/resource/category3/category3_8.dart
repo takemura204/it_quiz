@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category3_8 {
   final quizItems = [
@@ -8,18 +9,21 @@ List<QuizItem> get category3_8 {
       ans: 'レプリケーション',
       choices: ["レプリケーション", "クラスタリング", "ロードバランシング", "キャッシング"],
       comment: "レプリケーションは、データや情報が正確に複製され、複数のシステムやデータベース間で同期されるプロセスを指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ネットワークなどに接続されずに単独で動作するコンピュータシステムは何と呼ばれるか？',
       ans: 'スタンドアロン',
       choices: ["スタンドアロン", "デュアルシステム", "クライアントサーバシステム", "ピアツーピア"],
       comment: "スタンドアロンは、ネットワークなどに接続されずに単独で動作するコンピュータシステムを指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '2つのシステムが互いにバックアップを取り合い、一方が故障した場合に他方が処理を引き継ぐシステム構成は何か？',
       ans: 'デュアルシステム',
       choices: ["デュアルシステム", "デュプレックスシステム", "クラスタシステム", "ホットスタンバイ"],
       comment: "デュアルシステムは、2つのシステムが互いにバックアップを取り合うシステム構成で、一方が故障した際に他方が処理を引き継ぐ。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '2つのコンポーネントが同時に動作し、一方が故障した際にもう一方が即座に処理を引き継ぐシステム構成は何か？',
@@ -27,30 +31,35 @@ List<QuizItem> get category3_8 {
       choices: ["デュプレックスシステム", "デュアルシステム", "クラスタシステム", "ホットスタンバイ"],
       comment:
           "デュプレックスシステムは、2つのコンポーネントが同時に動作し、一方が故障した際にもう一方が即座に処理を引き継ぐシステム構成を指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'クライアントがサービスを要求し、サーバがそれに応答する形式のネットワークシステム構成は何か？',
       ans: 'クライアントサーバシステム',
       choices: ["クライアントサーバシステム", "ピアツーピア", "スタンドアロン", "クラスタシステム"],
       comment: "クライアントサーバシステムは、クライアントがサービスを要求し、サーバがそれに応答する形式のネットワークシステム構成を指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ネットワーク上のすべてのコンピュータが等価な立場でデータやリソースを共有するシステム構成は何か？',
       ans: 'ピアツーピア',
       choices: ["ピアツーピア", "クライアントサーバシステム", "スタンドアロン", "クラスタシステム"],
       comment: "ピアツーピア（P2P）は、ネットワーク上のすべてのコンピュータが等価な立場でデータやリソースを共有するシステム構成を指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '複数のサーバが連携して高可用性や負荷分散を実現するシステム構成は何か？',
       ans: 'クラスタシステム',
       choices: ["クラスタシステム", "デュアルシステム", "デュプレックスシステム", "ピアツーピア"],
       comment: "クラスタシステムは、複数のサーバが連携して高可用性や負荷分散を実現するシステム構成を指す。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'サーバ側でほとんどの処理を行い、クライアント側の機能を最小限に抑えたコンピュータシステムは何か？',
       ans: 'シンクライアント',
       choices: ["シンクライアント", "ファットクライアント", "デュアルシステム", "クラスタシステム"],
       comment: "シンクライアントは、サーバ側でほとんどの処理を行い、クライアント側の機能を最小限に抑えたコンピュータシステムを指す。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'ネットワークに接続された専用のファイルストレージデバイスは何か？',
@@ -58,6 +67,7 @@ List<QuizItem> get category3_8 {
       choices: ["NAS", "SAN", "SSD", "HDD"],
       comment:
           "NAS（Network Attached Storage）は、ネットワークに直接接続される専用のファイルストレージデバイスを指す。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '複数のディスクドライブを組み合わせてデータの冗長性や性能を向上させる技術は何か？',
@@ -65,6 +75,7 @@ List<QuizItem> get category3_8 {
       choices: ["RAID", "NAS", "SSD", "HDD"],
       comment:
           "RAID（Redundant Array of Independent Disks）は、複数のディスクドライブを組み合わせてデータの冗長性や性能を向上させる技術。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'コンピュータリソースを抽象化して複数の仮想マシンを同時に実行する技術は何か？',
@@ -72,6 +83,7 @@ List<QuizItem> get category3_8 {
       choices: ["仮想化", "クラスタシステム", "NAS", "RAID"],
       comment:
           "仮想化技術は、物理的なコンピュータリソースを抽象化し、それを複数の仮想マシンで共有することで、リソースの効率的な使用を可能にする。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '仮想マシンのインスタンスを物理的なサーバー間で移動させるプロセスは何か？',
@@ -79,6 +91,7 @@ List<QuizItem> get category3_8 {
       choices: ["VM", "VDI", "ライブマイグレーション", "クラウドストレージ"],
       comment:
           "ライブマイグレーションは、稼働中の仮想マシンを一台の物理サーバから別の物理サーバへと移動させる技術で、ダウンタイムを最小限に抑える。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'サーバ上でデスクトップ環境を仮想化し、ネットワークを通じてエンドユーザーに提供するシステムとは何か？',
@@ -86,6 +99,7 @@ List<QuizItem> get category3_8 {
       choices: ["VM", "VDI", "クラウドコンピューティング", "デジタルツイン"],
       comment:
           "VDI（Virtual Desktop Infrastructure）は、サーバ上でデスクトップ環境を仮想化し、ネットワークを通じてエンドユーザーに提供するシステム。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '単一の物理マシン上で複数のオペレーティングシステムを同時に実行することを可能にするソフトウェアは何か？',
@@ -93,6 +107,7 @@ List<QuizItem> get category3_8 {
       choices: ["VM", "VDI", "Docker", "クラウドサービス"],
       comment:
           "VM（Virtual Machine）は、一つの物理マシン上で複数のオペレーティングシステムを隔離して同時に実行することを可能にするソフトウェア技術。",
+      importance: QuizImportanceType.low,
     )
   ];
 

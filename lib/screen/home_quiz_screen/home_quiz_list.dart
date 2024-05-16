@@ -39,8 +39,12 @@ class _QuizCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final correctRate =
-        ((quiz.correctNum / quiz.quizItemList.length) * 100).round();
+    final goalScore = quiz.quizItemList.length;
+    final currentScore = quiz.quizItemList
+        .where((x) => x.status == QuizStatusType.correct)
+        .toList()
+        .length;
+    final correctRate = ((currentScore / goalScore) * 100).round();
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
     return GestureDetector(
@@ -56,14 +60,26 @@ class _QuizCard extends ConsumerWidget {
               context: context,
               builder: (_) => NeedPremiumModal(
                     title: '全てのクイズを解放しますか？',
-                    subWidget: const Row(
+                    subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Text(
-                            '支払いは一度きり。プレミアムに登録すると、\n全ての用語・クイズを解放できます。',
-                            style: TextStyle(color: Colors.black87),
+                          child: RichText(
                             textAlign: TextAlign.center,
+                            text: const TextSpan(
+                              style: TextStyle(color: Colors.black87),
+                              children: [
+                                TextSpan(
+                                  text: 'プレミアム特典の支払いは一度きり。\n',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '購入すると、全ての問題・クイズが解放されます。',
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -108,6 +124,12 @@ class _ProgressIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final goalScore = quiz.quizItemList.length;
+    final currentScore = quiz.quizItemList
+        .where((x) => x.status == QuizStatusType.correct)
+        .toList()
+        .length;
+
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
     return Column(
@@ -115,18 +137,15 @@ class _ProgressIcon extends ConsumerWidget {
       children: [
         Expanded(
           child: VerticalDivider(
-            color: Colors.grey.shade300,
+            color: quiz.isCompleted ? context.mainColor : context.secondColor,
             thickness: 3,
           ),
         ),
         ProgressCrilcleChart(
           width: 50,
           size: 50,
-          goalScore: quiz.quizItemList.length,
-          currentScore: quiz.quizItemList
-              .where((x) => x.status == QuizStatusType.correct)
-              .toList()
-              .length,
+          goalScore: goalScore,
+          currentScore: currentScore,
           thickness: 0.1,
           widget: Icon(
             isPremium ? Icons.check : LineIcons.lock,
@@ -136,7 +155,7 @@ class _ProgressIcon extends ConsumerWidget {
         ),
         Expanded(
           child: VerticalDivider(
-            color: Colors.grey.shade300,
+            color: quiz.isCompleted ? context.mainColor : context.secondColor,
             thickness: 3,
           ),
         ),

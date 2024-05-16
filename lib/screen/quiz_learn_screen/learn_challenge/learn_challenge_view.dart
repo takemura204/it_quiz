@@ -52,44 +52,60 @@ class _QuizCard extends ConsumerWidget {
         },
         cardsBuilder: (BuildContext context, int index) {
           final quizItem = quizItemList[index];
-          return Center(
-            child: GestureDetector(
-              onTap: () {
-                ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .setIsAnsView(true); // 画面切り替え
-              },
-              child: Card(
-                elevation: 0,
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: direction != null
-                        ? direction != AppinioSwiperDirection.right
-                            ? Colors.red.withOpacity(0.7)
-                            : Colors.green.withOpacity(0.7)
-                        : Colors.grey.shade300,
-                    width: 1.5,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
+          return GestureDetector(
+            onTap: () {
+              ref
+                  .read(quizLearnScreenProvider.notifier)
+                  .setIsAnsView(true); // 画面切り替え
+            },
+            child: Card(
+              elevation: 0,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: direction != null
+                      ? direction != AppinioSwiperDirection.right
+                          ? Colors.red.withOpacity(0.7)
+                          : Colors.green.withOpacity(0.7)
+                      : Colors.grey.shade300,
+                  width: 1.5,
                 ),
-                child: Container(
-                  width: context.width * 0.9,
-                  alignment: Alignment.center,
-                  // quizItemを使ってカードの内容を構築
-                  child: Column(
-                    children: [
-                      const Spacer(),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Container(
+                width: context.width * 0.9,
+                alignment: Alignment.center,
+                // quizItemを使ってカードの内容を構築
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Column(
+                      children: [
+                        const Spacer(),
 
-                      ///問題文
-                      _Question(quizItem, isAns && quizIndex == index),
-                      const Spacer(),
+                        ///問題文
+                        _Question(quizItem, isAns && quizIndex == index),
+                        const Spacer(),
 
-                      ///問題進捗状況
-                      _QuizProgress(quizItemList.length, index + 1),
-                      Gap(context.height * 0.01),
-                    ],
-                  ),
+                        ///問題進捗状況
+                        _QuizProgress(quizItemList.length, index + 1),
+                        Gap(context.height * 0.01),
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(top: 5, right: 5),
+                      child: SaveIconButton(
+                        quizItem: quizItem,
+                        isShowText: false,
+                        size: 40,
+                        onTap: () {
+                          ref
+                              .read(quizLearnScreenProvider.notifier)
+                              .tapSavedButton(quizItem);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

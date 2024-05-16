@@ -95,14 +95,26 @@ class _QuizItemCard extends ConsumerWidget {
               context: context,
               builder: (_) => NeedPremiumModal(
                     title: '検索用語を全て閲覧しますか？',
-                    subWidget: const Row(
+                    subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Text(
-                            '支払いは一度きり。プレミアムに登録すると、\n全ての検索用語をを閲覧・保存できます。',
-                            style: TextStyle(color: Colors.black87),
+                          child: RichText(
                             textAlign: TextAlign.center,
+                            text: const TextSpan(
+                              style: TextStyle(color: Colors.black87),
+                              children: [
+                                TextSpan(
+                                  text: 'プレミアム特典の支払いは一度きり。\n',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '購入すると、全ての検索用語をを閲覧・保存できます。',
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -177,7 +189,16 @@ class _QuizItemCard extends ConsumerWidget {
               ),
             ),
             if (isPremium)
-              _SavedButton(index: index, quizItemList: quizItemList)
+              SaveIconButton(
+                quizItem: quizItemList[index],
+                isShowText: true,
+                size: 30,
+                onTap: () {
+                  ref
+                      .read(homeSearchScreenProvider.notifier)
+                      .tapSavedButton(quizItemList[index]);
+                },
+              )
             else
               Container(
                 alignment: Alignment.center,
@@ -232,53 +253,4 @@ class _NotFindQuizItem extends HookConsumerWidget {
   }
 }
 
-class _SavedButton extends HookConsumerWidget {
-  const _SavedButton({required this.quizItemList, required this.index});
-
-  final List<QuizItem> quizItemList;
-  final int index;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      onTap: () {
-        ref.read(homeSearchScreenProvider.notifier).tapSavedButton(index);
-        HapticFeedback.lightImpact();
-      },
-      child: Container(
-        alignment: Alignment.center,
-        width: context.width * 0.1,
-        height: context.height * 0.1,
-        child: Align(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              const Spacer(),
-              Text(
-                "保存",
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: quizItemList[index].isSaved
-                      ? context.mainColor
-                      : Colors.black26,
-                ),
-              ),
-              Icon(
-                quizItemList[index].isSaved
-                    ? Icons.bookmark_sharp
-                    : LineIcons.bookmark,
-                size: 30,
-                color: quizItemList[index].isSaved
-                    ? context.mainColor
-                    : Colors.black26,
-              ),
-              Gap(context.height * 0.01),
-              const Spacer(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+///LearnQuizにも設置

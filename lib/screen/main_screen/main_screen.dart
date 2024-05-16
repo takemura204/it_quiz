@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
@@ -94,6 +95,7 @@ class _BottomNavBar extends ConsumerWidget {
           ref
               .watch(homeRootScreenControllerProvider.notifier)
               .changeTabIndex(index);
+          HapticFeedback.lightImpact();
 
           if (index == 2) {
             ref.read(dashboardModelProvider.notifier).initState();

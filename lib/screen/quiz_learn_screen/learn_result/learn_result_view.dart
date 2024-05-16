@@ -11,7 +11,6 @@ class _QuizResultView extends ConsumerWidget {
       children: [
         Card(
           elevation: 0,
-          color: Colors.white,
           child: Container(
             width: context.width * 1,
             decoration: BoxDecoration(
@@ -42,9 +41,10 @@ class _QuizResultView extends ConsumerWidget {
             return QuizItemCard(
                 quizItem: quizItemList[index],
                 studyType: StudyType.learn,
-                onPressed: () {
-                  ref.read(quizLearnScreenProvider.notifier).tapCheckBox(index);
-                  HapticFeedback.lightImpact();
+                onTap: () {
+                  ref
+                      .read(quizLearnScreenProvider.notifier)
+                      .tapSavedButton(quizItemList[index]);
                 });
           },
         ),

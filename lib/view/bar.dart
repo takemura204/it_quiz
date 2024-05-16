@@ -95,7 +95,12 @@ class CustomSettingBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap == null
+          ? null
+          : () {
+              onTap!();
+              HapticFeedback.lightImpact();
+            },
       child: Card(
         elevation: 0,
         child: Container(

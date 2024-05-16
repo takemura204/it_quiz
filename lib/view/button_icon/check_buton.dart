@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
@@ -6,16 +7,21 @@ import 'package:line_icons/line_icons.dart';
 ///チェエクボックスボタン
 class CheckBoxIconButton extends ConsumerWidget {
   const CheckBoxIconButton(
-      {required this.onPressed, required this.isCheck, required this.size});
+      {required this.onTap, required this.isCheck, required this.size});
 
-  final VoidCallback? onPressed;
+  final VoidCallback? onTap;
   final bool isCheck;
   final double size;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: onTap != null
+          ? () {
+              onTap!();
+              HapticFeedback.lightImpact();
+            }
+          : null,
       child: Container(
         width: size,
         child: Column(
@@ -32,19 +38,9 @@ class CheckBoxIconButton extends ConsumerWidget {
               height: size,
               width: size,
               padding: EdgeInsets.zero,
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: onPressed,
-                constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
-                icon: isCheck
-                    ? Icon(
-                        LineIcons.checkSquareAlt,
-                        size: size * 0.825,
-                      )
-                    : Icon(
-                        LineIcons.square,
-                        size: size,
-                      ),
+              child: Icon(
+                LineIcons.checkSquareAlt,
+                size: size * 0.825,
                 color: isCheck ? context.mainColor : Colors.grey,
               ),
             ),

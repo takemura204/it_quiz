@@ -231,7 +231,10 @@ class _StatusCard extends ConsumerWidget {
         isSeleted ? context.backgroundColor.withOpacity(0.2) : Colors.white;
     return Expanded(
       child: GestureDetector(
-        onTap: onTap,
+        onTap: () {
+          onTap();
+          HapticFeedback.lightImpact();
+        },
         child: Padding(
           padding: EdgeInsets.all(context.width * 0.01),
           child: Card(

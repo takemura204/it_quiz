@@ -41,7 +41,7 @@ class _QuizResultView extends ConsumerWidget {
             return QuizItemCard(
               quizItem: quizItemList[index],
               studyType: StudyType.choice,
-              onPressed: () {
+              onTap: () {
                 ref.read(quizChoiceScreenProvider.notifier).tapCheckBox(index);
                 HapticFeedback.lightImpact();
               },
@@ -129,7 +129,7 @@ class _NextActionCard extends HookConsumerWidget {
                           if (selectStudyQuiz!.quizItemList.isNotEmpty) {
                             context.showScreen(
                               QuizChoiceScreenArguments(
-                                quiz: selectStudyQuiz!,
+                                quiz: selectStudyQuiz,
                               ).generateRoute(),
                             );
                           }

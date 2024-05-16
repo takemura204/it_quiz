@@ -149,7 +149,7 @@ class _Body extends ConsumerWidget {
                     QuizItemCard(
                       quizItem: quizList[index].quizItemList[quizItemIndex],
                       studyType: quizList[index].studyType,
-                      onPressed: () => ref
+                      onTap: () => ref
                           .read(quizHistoryScreenProvider.notifier)
                           .tapCheckBox(index, quizItemIndex),
                     ),
