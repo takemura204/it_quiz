@@ -25,7 +25,7 @@ class NeedPremiumModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final premiumCardIndex = Random().nextInt(9) + 1; // 1 から 9 のランダムな数値を生成
-    final imagePath = 'assets/image/premium_$premiumCardIndex.svg';
+    final imagePath = 'assets/image/premium/premium_$premiumCardIndex.svg';
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(context.width * 0.05),

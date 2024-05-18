@@ -155,7 +155,7 @@ class _PremiumContent2 extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/image/premium_content5_1.png',
+                      'assets/image/premium/premium_content5_1.png',
                       fit: BoxFit.fill,
                       width: 60,
                     ),
@@ -189,7 +189,7 @@ class _PremiumContent2 extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/image/premium_content5_2.png',
+                      'assets/image/premium/premium_content5_2.png',
                       fit: BoxFit.fill,
                       width: 60,
                     ),
@@ -224,7 +224,7 @@ class _PremiumContent2 extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/image/premium_content5_3.png',
+                      'assets/image/premium/premium_content5_3.png',
                       fit: BoxFit.fill,
                       width: 60,
                     ),

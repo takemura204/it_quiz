@@ -2,17 +2,16 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import 'home_root_screen_state.dart';
+import 'main_screen_state.dart';
 
-final homeRootScreenControllerProvider =
-    StateNotifierProvider<HomeRootScreenController, HomeRootScreenState>(
-  (ref) => HomeRootScreenController(ref: ref),
+final mainScreenControllerProvider =
+    StateNotifierProvider<MainScreenController, MainScreenState>(
+  (ref) => MainScreenController(ref: ref),
 );
 
-class HomeRootScreenController extends StateNotifier<HomeRootScreenState>
+class MainScreenController extends StateNotifier<MainScreenState>
     with LocatorMixin {
-  HomeRootScreenController({required this.ref})
-      : super(const HomeRootScreenState()) {
+  MainScreenController({required this.ref}) : super(const MainScreenState()) {
     initState();
   }
 

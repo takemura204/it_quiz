@@ -191,6 +191,7 @@ flutter:
   assets:
     - assets/icon/
     - assets/image/
+    - assets/image/premium/
     - assets/launcher/
 
 flutter_launcher_icons:

@@ -10,7 +10,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/auth/auth_controller.dart';
-import '../../controller/home_root/home_root_screen_controller.dart';
+import '../../controller/main/main_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
@@ -34,7 +34,7 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeRootScreenControllerProvider);
+    final state = ref.watch(mainScreenControllerProvider);
 
     return IndexedStack(
       sizing: StackFit.expand,
@@ -54,7 +54,7 @@ class _BottomNavBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeRootScreenControllerProvider);
+    final state = ref.watch(mainScreenControllerProvider);
 
     return BottomNavigationBar(
         elevation: 300,
@@ -93,7 +93,7 @@ class _BottomNavBar extends ConsumerWidget {
         fixedColor: context.mainColor,
         onTap: (index) async {
           ref
-              .watch(homeRootScreenControllerProvider.notifier)
+              .watch(mainScreenControllerProvider.notifier)
               .changeTabIndex(index);
           HapticFeedback.lightImpact();
 

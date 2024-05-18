@@ -15,7 +15,7 @@ class PremiumCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final premiumCardIndex = ref
         .watch(homeSettingProvider.select((state) => state.premiumCardIndex));
-    final imagePath = 'assets/image/premium_$premiumCardIndex.svg';
+    final imagePath = 'assets/image/premium/premium_$premiumCardIndex.svg';
 
     return GestureDetector(
       onTap: () {

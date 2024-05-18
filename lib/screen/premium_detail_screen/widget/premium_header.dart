@@ -85,7 +85,7 @@ class _PremiumHeader extends StatelessWidget {
                       ),
                       const Gap(15),
                       Image.asset(
-                        'assets/image/premium_header.png',
+                        'assets/image/premium/premium_header.png',
                         fit: BoxFit.fill,
                         width: context.width * 0.75,
                       ),
