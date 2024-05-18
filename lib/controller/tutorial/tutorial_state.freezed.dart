@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TutorialState {
-  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isShowTutorialModal => throw _privateConstructorUsedError;
+  bool get isShowTarget1 => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TutorialStateCopyWith<TutorialState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $TutorialStateCopyWith<$Res> {
           TutorialState value, $Res Function(TutorialState) then) =
       _$TutorialStateCopyWithImpl<$Res, TutorialState>;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isShowTutorialModal, bool isShowTarget1});
 }
 
 /// @nodoc
@@ -45,12 +46,17 @@ class _$TutorialStateCopyWithImpl<$Res, $Val extends TutorialState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
+    Object? isShowTutorialModal = null,
+    Object? isShowTarget1 = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+      isShowTutorialModal: null == isShowTutorialModal
+          ? _value.isShowTutorialModal
+          : isShowTutorialModal // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowTarget1: null == isShowTarget1
+          ? _value.isShowTarget1
+          : isShowTarget1 // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -64,7 +70,7 @@ abstract class _$$_TutorialStateCopyWith<$Res>
       __$$_TutorialStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isShowTutorialModal, bool isShowTarget1});
 }
 
 /// @nodoc
@@ -78,12 +84,17 @@ class __$$_TutorialStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
+    Object? isShowTutorialModal = null,
+    Object? isShowTarget1 = null,
   }) {
     return _then(_$_TutorialState(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+      isShowTutorialModal: null == isShowTutorialModal
+          ? _value.isShowTutorialModal
+          : isShowTutorialModal // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowTarget1: null == isShowTarget1
+          ? _value.isShowTarget1
+          : isShowTarget1 // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -92,15 +103,20 @@ class __$$_TutorialStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TutorialState extends _TutorialState {
-  _$_TutorialState({this.isLoading = false}) : super._();
+  _$_TutorialState(
+      {this.isShowTutorialModal = false, this.isShowTarget1 = false})
+      : super._();
 
   @override
   @JsonKey()
-  final bool isLoading;
+  final bool isShowTutorialModal;
+  @override
+  @JsonKey()
+  final bool isShowTarget1;
 
   @override
   String toString() {
-    return 'TutorialState(isLoading: $isLoading)';
+    return 'TutorialState(isShowTutorialModal: $isShowTutorialModal, isShowTarget1: $isShowTarget1)';
   }
 
   @override
@@ -108,12 +124,15 @@ class _$_TutorialState extends _TutorialState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TutorialState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+            (identical(other.isShowTutorialModal, isShowTutorialModal) ||
+                other.isShowTutorialModal == isShowTutorialModal) &&
+            (identical(other.isShowTarget1, isShowTarget1) ||
+                other.isShowTarget1 == isShowTarget1));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode =>
+      Object.hash(runtimeType, isShowTutorialModal, isShowTarget1);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +142,15 @@ class _$_TutorialState extends _TutorialState {
 }
 
 abstract class _TutorialState extends TutorialState {
-  factory _TutorialState({final bool isLoading}) = _$_TutorialState;
+  factory _TutorialState(
+      {final bool isShowTutorialModal,
+      final bool isShowTarget1}) = _$_TutorialState;
   _TutorialState._() : super._();
 
   @override
-  bool get isLoading;
+  bool get isShowTutorialModal;
+  @override
+  bool get isShowTarget1;
   @override
   @JsonKey(ignore: true)
   _$$_TutorialStateCopyWith<_$_TutorialState> get copyWith =>

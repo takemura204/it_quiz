@@ -47,7 +47,20 @@ class _QuizCard extends ConsumerWidget {
     final correctRate = ((currentScore / goalScore) * 100).round();
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
+    final target1 = ref.read(tutorialControllerProvider.notifier).target1;
+
+    final isShowTarget1 =
+        ref.watch(tutorialControllerProvider.select((s) => s.isShowTarget1));
+    Future<void>.delayed(Duration.zero, () async {
+      if (isShowTarget1 && index == 0) {
+        ref.read(tutorialControllerProvider.notifier).setIsShowTarget1(false);
+        ref.read(tutorialControllerProvider.notifier).showTutorial(context);
+        print('a');
+      }
+    });
+
     return GestureDetector(
+      key: index == 0 ? target1 : null,
       onTap: () {
         if (isPremium) {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);

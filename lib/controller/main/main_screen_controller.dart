@@ -22,7 +22,7 @@ class MainScreenController extends StateNotifier<MainScreenState>
     super.initState();
   }
 
-  ///BttomNavigationBar変更
+  ///BottomNavigationBar変更
   void changeTabIndex(int index) {
     state = state.copyWith(currentIndex: index);
   }

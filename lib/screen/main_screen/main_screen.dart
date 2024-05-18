@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
+import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
@@ -12,6 +13,7 @@ import 'package:line_icons/line_icons.dart';
 import '../../controller/auth/auth_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
 import '../home_search_screen/home_search_screen.dart';
@@ -22,6 +24,23 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isShowTutorialModal = ref
+        .watch(tutorialControllerProvider.select((s) => s.isShowTutorialModal));
+    Future<void>.delayed(Duration.zero, () async {
+      if (isShowTutorialModal) {
+        ref
+            .read(tutorialControllerProvider.notifier)
+            .setIsShowTutorialModal(false);
+        //アンケートモーダル表示
+        await showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return TutorialModal(mainContext: context);
+          },
+        );
+      }
+    });
     return const Scaffold(
       body: _Body(),
       bottomNavigationBar: _BottomNavBar(),

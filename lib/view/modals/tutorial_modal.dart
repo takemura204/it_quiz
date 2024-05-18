@@ -1,30 +1,21 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../button/primary_button.dart';
 import '../button/secondory_button.dart';
 
-///プレミアム登録
-class NeedPremiumModal extends ConsumerWidget {
-  const NeedPremiumModal({
-    required this.onPressed,
-    required this.title,
-    required this.subWidget,
-  });
+///チュートリアルモーダル
+class TutorialModal extends ConsumerWidget {
+  const TutorialModal({required this.mainContext});
 
-  final VoidCallback onPressed;
-  final String title;
-  final Widget subWidget;
+  final BuildContext mainContext;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final premiumCardIndex = Random().nextInt(9) + 1; // 1 から 9 のランダムな数値を生成
-    final imagePath = 'assets/image/premium_$premiumCardIndex.svg';
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(context.width * 0.05),
@@ -37,6 +28,7 @@ class NeedPremiumModal extends ConsumerWidget {
         child: Container(
           width: context.width * 1,
           padding: EdgeInsets.all(context.width * 0.02),
+          margin: EdgeInsets.all(context.width * 0.02),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
@@ -45,39 +37,49 @@ class NeedPremiumModal extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Gap(15),
-              Text(
-                title,
-                style: const TextStyle(
+              const Text(
+                'インストールありがとうございます！🎉',
+                style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87),
               ),
               const Gap(15),
-              subWidget,
+              const Text(
+                'チュートリアルを開始しますか？',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black87),
+              ),
               const Gap(15),
               SvgPicture.asset(
-                imagePath,
-                width: context.width * 0.4,
-                fit: BoxFit.cover,
+                'assets/image/about_app.svg',
+                width: context.width * 0.8,
+                fit: BoxFit.fitWidth,
               ),
               const Gap(20),
 
               ///ボタン
               PrimaryButton(
-                  width: context.width * 0.85,
+                  width: context.width,
                   height: 55,
-                  text: "プレミアムに登録する",
-                  onPressed: onPressed),
+                  text: "開始する",
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    ref
+                        .read(tutorialControllerProvider.notifier)
+                        .setIsShowTarget1(true);
+                  }),
               Gap(context.height * 0.01),
               SecondaryButton(
-                width: context.width * 0.85,
+                width: context.width,
                 height: 55,
                 text: "キャンセル",
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
-              const Gap(15),
             ],
           ),
         ),

@@ -7,6 +7,7 @@ class TutorialState with _$TutorialState {
   const TutorialState._();
 
   factory TutorialState({
-    @Default(false) bool isLoading,
+    @Default(false) final bool isShowTutorialModal,
+    @Default(false) bool isShowTarget1,
   }) = _TutorialState;
 }
