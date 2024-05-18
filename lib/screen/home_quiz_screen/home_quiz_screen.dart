@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
+import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/modals/weak_modal.dart';

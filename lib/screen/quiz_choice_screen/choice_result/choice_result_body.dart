@@ -35,11 +35,7 @@ class _ChoiceResultBody extends ConsumerWidget {
                   const Gap(15),
 
                   ///正解した問題リスト
-                  const FadeInAnimation(
-                    animateDirection: AnimateDirection.bottom,
-                    delay: Duration(milliseconds: 500),
-                    child: _QuizResultView(),
-                  ),
+                  const _QuizResultView(),
 
                   if (!isPremium) const AdBanner(height: 270),
                   const Gap(200),

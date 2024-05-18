@@ -22,7 +22,7 @@ class ResultPerfectCard extends ConsumerWidget {
       ),
       alignment: Alignment.center,
       child: const FadeInAnimation(
-        animateDirection: AnimateDirection.left,
+        animateDirection: AnimateDirection.top,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

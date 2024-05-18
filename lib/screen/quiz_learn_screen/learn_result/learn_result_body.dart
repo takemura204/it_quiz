@@ -27,10 +27,7 @@ class _LearnResultBody extends ConsumerWidget {
                       const Gap(15),
 
                       ///クイズ結果一覧
-                      const FadeInAnimation(
-                          animateDirection: AnimateDirection.bottom,
-                          delay: Duration(milliseconds: 500),
-                          child: _QuizResultView()),
+                      const _QuizResultView(),
                       const Gap(15),
 
                       if (!isPremium) const AdBanner(height: 270),

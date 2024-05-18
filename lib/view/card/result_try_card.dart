@@ -22,7 +22,7 @@ class ResultTryCard extends ConsumerWidget {
       ),
       alignment: Alignment.center,
       child: FadeInAnimation(
-        animateDirection: AnimateDirection.left,
+        animateDirection: AnimateDirection.bottom,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

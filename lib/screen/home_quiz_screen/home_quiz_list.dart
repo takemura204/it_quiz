@@ -129,6 +129,7 @@ class _ProgressIcon extends ConsumerWidget {
         .where((x) => x.status == QuizStatusType.correct)
         .toList()
         .length;
+    final isCompleted = goalScore == currentScore;
 
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
@@ -137,7 +138,7 @@ class _ProgressIcon extends ConsumerWidget {
       children: [
         Expanded(
           child: VerticalDivider(
-            color: quiz.isCompleted ? context.mainColor : context.secondColor,
+            color: isCompleted ? context.mainColor : context.secondColor,
             thickness: 3,
           ),
         ),
@@ -149,13 +150,13 @@ class _ProgressIcon extends ConsumerWidget {
           thickness: 0.1,
           widget: Icon(
             isPremium ? Icons.check : LineIcons.lock,
-            color: quiz.isCompleted ? context.mainColor : Colors.black26,
+            color: isCompleted ? context.mainColor : Colors.black26,
             size: 25,
           ),
         ),
         Expanded(
           child: VerticalDivider(
-            color: quiz.isCompleted ? context.mainColor : context.secondColor,
+            color: isCompleted ? context.mainColor : context.secondColor,
             thickness: 3,
           ),
         ),
