@@ -165,6 +165,9 @@ dependencies:
   #チュートリアルでコーチマークをつけたい
   tutorial_coach_mark: ^1.2.11
 
+  #アニメーション画像を導入したい
+  lottie: ^2.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -189,6 +192,7 @@ flutter:
 
   #画像
   assets:
+    - assets/animation/
     - assets/icon/
     - assets/image/
     - assets/image/premium/

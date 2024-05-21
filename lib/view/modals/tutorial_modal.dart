@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
+import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../button/primary_button.dart';
 import '../button/secondory_button.dart';
 
@@ -18,7 +19,7 @@ class TutorialModal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Dialog(
       backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.all(context.width * 0.05),
+      insetPadding: EdgeInsets.all(context.width * 0.02),
       child: Card(
         elevation: 4,
         color: Colors.white,
@@ -69,7 +70,8 @@ class TutorialModal extends ConsumerWidget {
                     Navigator.of(context).pop();
                     ref
                         .read(tutorialControllerProvider.notifier)
-                        .setIsShowTarget1(true);
+                        .setIsShowHomeTutorial(true);
+                    ref.read(homeQuizScreenProvider.notifier).setStudyLength(5);
                   }),
               Gap(context.height * 0.01),
               SecondaryButton(

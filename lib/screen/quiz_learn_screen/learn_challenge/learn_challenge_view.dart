@@ -20,8 +20,11 @@ class _QuizCard extends ConsumerWidget {
         ),
       );
     }
+    final learnTarget1 =
+        ref.read(tutorialControllerProvider.notifier).learnTarget1;
 
     return Expanded(
+      key: learnTarget1,
       child: AppinioSwiper(
         controller: swiperController,
         cardsCount: quizItemList.length,

@@ -47,20 +47,56 @@ class _QuizCard extends ConsumerWidget {
     final correctRate = ((currentScore / goalScore) * 100).round();
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
-    final target1 = ref.read(tutorialControllerProvider.notifier).target1;
+    final homeTarget1 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget1;
 
-    final isShowTarget1 =
-        ref.watch(tutorialControllerProvider.select((s) => s.isShowTarget1));
+    final isShowHomeTutorial = ref
+        .watch(tutorialControllerProvider.select((s) => s.isShowHomeTutorial));
     Future<void>.delayed(Duration.zero, () async {
-      if (isShowTarget1 && index == 0) {
-        ref.read(tutorialControllerProvider.notifier).setIsShowTarget1(false);
-        ref.read(tutorialControllerProvider.notifier).showTutorial(context);
-        print('a');
+      if (isShowHomeTutorial && index == 0) {
+        ref
+            .read(tutorialControllerProvider.notifier)
+            .setIsShowHomeTutorial(false);
+        ref.read(tutorialControllerProvider.notifier).showHomeTutorial(
+              context: context,
+              onClickTarget: (target) {
+                if (target.identify == "homeTarget1") {
+                  ref
+                      .read(quizModelProvider.notifier)
+                      .setQuizType(QuizStyleType.study);
+                  ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
+                  ref.read(quizModelProvider.notifier).tapQuizIndex(index);
+                  ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
+                  showDialog(
+                      context: context, builder: (_) => StudyModal(quiz: quiz));
+                } else if (target.identify == "homeTarget5") {
+                  ref
+                      .read(quizModelProvider.notifier)
+                      .setStudyType(StudyType.learn);
+                  ref
+                      .read(homeQuizScreenProvider.notifier)
+                      .setSelectStudyQuiz();
+                }
+              },
+              onFinish: () {
+                Navigator.of(context).pop();
+                final selectStudyQuiz =
+                    ref.read(homeQuizScreenProvider).selectStudyQuiz!;
+                context.showScreen(
+                  QuizLearnScreenArguments(
+                    quiz: selectStudyQuiz,
+                  ).generateRoute(),
+                );
+                ref
+                    .read(tutorialControllerProvider.notifier)
+                    .setIsShowLearnTutorial(true);
+              },
+            );
       }
     });
 
     return GestureDetector(
-      key: index == 0 ? target1 : null,
+      key: index == 0 ? homeTarget1 : null,
       onTap: () {
         if (isPremium) {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);

@@ -11,6 +11,7 @@ import 'package:kentei_quiz/view/card/result_clear_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
+import '../../controller/tutorial/tutorial_controller.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
@@ -27,6 +28,7 @@ import '../../view/button_icon/save_button.dart';
 import '../../view/card/quiz_item_card.dart';
 import '../../view/card/result_dashboard_card.dart';
 import '../../view/modals/dialog.dart';
+import '../../view/tutorial/animation_image.dart';
 import '../screen_argument.dart';
 
 part 'learn_challenge/learn_challenge_body.dart';

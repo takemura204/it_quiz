@@ -4,6 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
+import '../controller/tutorial/tutorial_controller.dart';
+
 ///問題数指定
 class QuizLengthTabBar extends ConsumerWidget {
   const QuizLengthTabBar({required this.selectedLength, required this.onTap});
@@ -15,7 +17,10 @@ class QuizLengthTabBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final List<int> selectLength = [5, 10, 20];
     final initialIndex = selectLength.indexOf(selectedLength);
+    final homeTarget4 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget4;
     return Column(
+      key: homeTarget4,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(

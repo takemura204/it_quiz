@@ -21,8 +21,11 @@ class _StatusCards extends ConsumerWidget {
     final statusList =
         ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
     final sortedCards = _getSortedCards(context, statusList);
+    final homeTarget3 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget3;
 
     return Column(
+      key: homeTarget3,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(

@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category3_16 {
   final quizItems = [
@@ -9,6 +10,7 @@ List<QuizItem> get category3_16 {
       choices: ["RGB", "CMY", "CMYK", "dpi"],
       comment:
           "RGBは、ディスプレイなどで色を表現する際に使用される色空間モデルで、Red（赤）、Green（緑）、Blue（青）の3色の光を加法混合して色を作り出す。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '印刷で使用される、シアン、マゼンタ、イエローの3色のインクを減法混合して色を作り出す色空間モデルは何か？',
@@ -16,6 +18,7 @@ List<QuizItem> get category3_16 {
       choices: ["CMY", "RGB", "CMYK", "dpi"],
       comment:
           "CMYは、印刷で使用される色空間モデルで、Cyan（シアン）、Magenta（マゼンタ）、Yellow（イエロー）の3色のインクを減法混合して色を作り出す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'CMYに黒（Key）を加えた4色のインクを使用する印刷のための色空間モデルは何か？',
@@ -23,6 +26,7 @@ List<QuizItem> get category3_16 {
       choices: ["CMYK", "CMY", "RGB", "dpi"],
       comment:
           "CMYKは、Cyan（シアン）、Magenta（マゼンタ）、Yellow（イエロー）、Key（黒）の4色のインクを使用する印刷のための色空間モデル。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '画像の解像度を表す際に使用される、1インチあたりのドット数を示す単位は何か？',
@@ -30,30 +34,35 @@ List<QuizItem> get category3_16 {
       choices: ["dpi", "RGB", "CMYK", "CMY"],
       comment:
           "dpi（dots per inch）は、画像の解像度を表す際に使用される単位で、1インチあたりに含まれるドット（ピクセル）の数を示す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ビットマップ画像を編集するために用いられるソフトウェアの総称は何か？',
       ans: 'ペイント系ソフトウェア',
       choices: ["ペイント系ソフトウェア", "ドロー系ソフトウェア", "コンピュータグラフィックス", "バーチャルリアリティ"],
       comment: "ペイント系ソフトウェアは、ビットマップ画像を編集するために用いられるソフトウェアの総称で、ピクセル単位での編集が可能。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'ベクター画像を作成・編集するために用いられるソフトウェアの総称は何か？',
       ans: 'ドロー系ソフトウェア',
       choices: ["ドロー系ソフトウェア", "ペイント系ソフトウェア", "コンピュータグラフィックス", "バーチャルリアリティ"],
       comment: "ドロー系ソフトウェアは、ベクター画像を作成・編集するために用いられるソフトウェアの総称で、拡大・縮小しても画質が劣化しない。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'コンピュータを用いて作成される画像や映像などのビジュアルコンテンツ全般を指す言葉は何か？',
       ans: 'コンピュータグラフィックス',
       choices: ["コンピュータグラフィックス", "ペイント系ソフトウェア", "ドロー系ソフトウェア", "バーチャルリアリティ"],
       comment: "コンピュータグラフィックスは、コンピュータを用いて作成される画像や映像などのビジュアルコンテンツ全般を指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'コンピュータ生成の環境に没入することで現実世界を再現したり、架空の世界を体験する技術は何か？',
       ans: 'バーチャルリアリティ',
       choices: ["バーチャルリアリティ", "AR", "SR", "コンピュータグラフィックス"],
       comment: "バーチャルリアリティ（VR）は、コンピュータ生成の環境に没入することで、現実世界を再現したり、架空の世界を体験する技術。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '実際の環境にデジタル情報を重ね合わせることで、リアルタイムの対話が可能になる技術は何か？',
@@ -61,6 +70,7 @@ List<QuizItem> get category3_16 {
       choices: ["AR", "バーチャルリアリティ", "SR", "コンピュータグラフィックス"],
       comment:
           "AR（Augmented Reality）は、実際の環境にデジタル情報を重ね合わせることで、リアルタイムの対話が可能になる技術。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '実世界の空間や物体をリアルタイムでデジタル空間に複製する技術は何か？',
@@ -68,6 +78,7 @@ List<QuizItem> get category3_16 {
       choices: ["SR", "AR", "バーチャルリアリティ", "コンピュータグラフィックス"],
       comment:
           "SR（Spatial Reality）は、実世界の空間や物体をリアルタイムでデジタル空間に複製し、仮想と現実の境界をなくす技術。",
+      importance: QuizImportanceType.none,
     ),
     QuizItem(
       question: '実際の世界と仮想の世界が融合し、物理的およびデジタルオブジェクトが共存および相互作用する技術は何か？',
@@ -75,6 +86,7 @@ List<QuizItem> get category3_16 {
       choices: ["MR", "AR", "VR", "SR"],
       comment:
           "MR（Mixed Reality）は、実際の世界と仮想の世界が融合する技術で、物理的およびデジタルオブジェクトが共存および相互作用します。この技術は、より深い没入感と現実世界との連携を可能にする。",
+      importance: QuizImportanceType.none,
     ),
   ];
 

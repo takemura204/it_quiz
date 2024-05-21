@@ -6,6 +6,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 
 import '../../../controller/home_quiz/home_quiz_screen_controller.dart';
+import '../../../controller/tutorial/tutorial_controller.dart';
 import '../../../model/lang/initial_resource.dart';
 import '../../../model/quiz/quiz.dart';
 import '../../../screen/screen_argument.dart';
@@ -47,6 +48,10 @@ class StudyModal extends ConsumerWidget {
     final selectedStudyLength = ref.watch(
       homeQuizScreenProvider.select((state) => state.selectedStudyLength),
     );
+    final homeTarget2 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget2;
+    final homeTarget5 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget5;
 
     ///selectedStatusListがない時ボタンを押したくない。
     return SimpleDialog(
@@ -55,6 +60,7 @@ class StudyModal extends ConsumerWidget {
       contentPadding: EdgeInsets.all(context.width * 0.02),
       children: [
         Column(
+          key: homeTarget2,
           children: [
             const Gap(5),
 
@@ -106,27 +112,30 @@ class StudyModal extends ConsumerWidget {
                   const Gap(10),
 
                   ///一問一答
-                  DefaultButton(
-                    width: context.width * 1,
-                    height: 50,
-                    text: I18n().styleLeanQuiz,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      ref
-                          .read(quizModelProvider.notifier)
-                          .setStudyType(StudyType.learn);
-                      ref
-                          .read(homeQuizScreenProvider.notifier)
-                          .setSelectStudyQuiz();
+                  Container(
+                    key: homeTarget5,
+                    child: DefaultButton(
+                      width: context.width * 1,
+                      height: 50,
+                      text: I18n().styleLeanQuiz,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .setStudyType(StudyType.learn);
+                        ref
+                            .read(homeQuizScreenProvider.notifier)
+                            .setSelectStudyQuiz();
 
-                      final selectStudyQuiz =
-                          ref.read(homeQuizScreenProvider).selectStudyQuiz!;
-                      context.showScreen(
-                        QuizLearnScreenArguments(
-                          quiz: selectStudyQuiz,
-                        ).generateRoute(),
-                      );
-                    },
+                        final selectStudyQuiz =
+                            ref.read(homeQuizScreenProvider).selectStudyQuiz!;
+                        context.showScreen(
+                          QuizLearnScreenArguments(
+                            quiz: selectStudyQuiz,
+                          ).generateRoute(),
+                        );
+                      },
+                    ),
                   ),
 
                   const Gap(5),
