@@ -39,8 +39,8 @@ class TutorialController extends StateNotifier<TutorialState> {
   ///チュートリアルモーダル表示
   Future loadState() async {
     final prefs = await SharedPreferences.getInstance();
-    final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
-    // final isShowTutorialModal = true;
+    // final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
+    final isShowTutorialModal = true;
     state = state.copyWith(isShowTutorialModal: isShowTutorialModal);
     setIsShowLearnTutorial(true);
     _saveDevice();
@@ -205,6 +205,42 @@ class TutorialController extends StateNotifier<TutorialState> {
           shape: ShapeLightFocus.RRect,
           radius: 10,
         ),
+        TargetFocus(
+          identify: "learnTarget2",
+          keyTarget: learnTarget2,
+          contents: [
+            TargetContent(
+              align: ContentAlign.bottom,
+              padding: EdgeInsets.zero,
+              child: const Center(
+                child: Text(
+                  "保存した用語は「検索」タブから見返せます",
+                  style: style,
+                ),
+              ),
+            )
+          ],
+          shape: ShapeLightFocus.RRect,
+          radius: 10,
+        ),
+        TargetFocus(
+          identify: "learnTarget3",
+          keyTarget: learnTarget3,
+          contents: [
+            TargetContent(
+              align: ContentAlign.bottom,
+              padding: EdgeInsets.zero,
+              child: const Center(
+                child: Text(
+                  "知っている、知らないはボタンからも操作できます",
+                  style: style,
+                ),
+              ),
+            )
+          ],
+          shape: ShapeLightFocus.RRect,
+          radius: 10,
+        ),
       ],
     );
   }
@@ -213,12 +249,12 @@ class TutorialController extends StateNotifier<TutorialState> {
     state = state.copyWith(isShowHomeTutorial: value);
   }
 
-  void setIsShowLearnTutorial(bool value) {
-    state = state.copyWith(isShowLearnTutorial: value);
+  void setIsShowHomeTutorialDone(bool value) {
+    state = state.copyWith(isShowHomeTutorialDone: value);
   }
 
-  void setIsShowTarget3(bool value) {
-    state = state.copyWith(isShowTarget3: value);
+  void setIsShowLearnTutorial(bool value) {
+    state = state.copyWith(isShowLearnTutorial: value);
   }
 
   void setIsShowTapAnimation(bool value) {
@@ -285,9 +321,9 @@ class TutorialController extends StateNotifier<TutorialState> {
       hideSkip: true,
       useSafeArea: true,
       opacityShadow: 0.9,
-      focusAnimationDuration: const Duration(milliseconds: 500),
-      unFocusAnimationDuration: const Duration(milliseconds: 300),
-      pulseAnimationDuration: const Duration(milliseconds: 1000),
+      focusAnimationDuration: const Duration(milliseconds: 600),
+      unFocusAnimationDuration: const Duration(milliseconds: 200),
+      pulseAnimationDuration: const Duration(milliseconds: 600),
       pulseEnable: false,
       imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       initialFocus: 0,

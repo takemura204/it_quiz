@@ -269,12 +269,12 @@ class _StatusRecommendCard extends ConsumerWidget {
                 ],
               ),
               const Gap(3),
-              Text('おまかせ',
+              Text('おすすめ',
                   style: context.texts.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(3),
               Text(
-                "$value問",
+                "全$value問",
                 style: context.texts.bodyMedium?.copyWith(
                   color: isExists
                       ? isQuizStatusRecommend

@@ -17,7 +17,10 @@ class _QuizList extends ConsumerWidget {
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               final quiz = quizList[index];
-              return _QuizCard(quiz: quiz, index: index);
+              return _QuizCard(
+                quiz: quiz,
+                index: index,
+              );
             },
             childCount: quizList.length,
           ),
@@ -47,8 +50,6 @@ class _QuizCard extends ConsumerWidget {
     final correctRate = ((currentScore / goalScore) * 100).round();
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
-    final homeTarget1 =
-        ref.read(tutorialControllerProvider.notifier).homeTarget1;
 
     final isShowHomeTutorial = ref
         .watch(tutorialControllerProvider.select((s) => s.isShowHomeTutorial));
@@ -95,8 +96,10 @@ class _QuizCard extends ConsumerWidget {
       }
     });
 
+    final homeTarget1 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget1;
     return GestureDetector(
-      key: index == 0 ? homeTarget1 : null,
+      key: index == 0 && quiz.categoryId == 1 ? homeTarget1 : null,
       onTap: () {
         if (isPremium) {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);

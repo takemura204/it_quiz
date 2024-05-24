@@ -22,9 +22,10 @@ class _QuizCard extends ConsumerWidget {
     }
     final learnTarget1 =
         ref.read(tutorialControllerProvider.notifier).learnTarget1;
+    final learnTarget2 =
+        ref.read(tutorialControllerProvider.notifier).learnTarget2;
 
     return Expanded(
-      key: learnTarget1,
       child: AppinioSwiper(
         controller: swiperController,
         cardsCount: quizItemList.length,
@@ -56,6 +57,7 @@ class _QuizCard extends ConsumerWidget {
         cardsBuilder: (BuildContext context, int index) {
           final quizItem = quizItemList[index];
           return GestureDetector(
+            key: index == 0 ? learnTarget1 : null,
             onTap: () {
               ref
                   .read(quizLearnScreenProvider.notifier)
@@ -96,6 +98,7 @@ class _QuizCard extends ConsumerWidget {
                       ],
                     ),
                     Container(
+                      key: index == 0 ? learnTarget2 : null,
                       padding: const EdgeInsets.only(top: 5, right: 5),
                       child: SaveIconButton(
                         quizItem: quizItem,

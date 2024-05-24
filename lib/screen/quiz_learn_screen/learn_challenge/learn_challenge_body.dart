@@ -15,7 +15,8 @@ class _LearnChallengeBody extends ConsumerWidget {
         tutorialControllerProvider.select((s) => s.isShowSwipeRightAnimation));
     final isShowSwipeLeftAnimation = ref.watch(
         tutorialControllerProvider.select((s) => s.isShowSwipeLeftAnimation));
-
+    final quizIndex =
+        ref.watch(quizLearnScreenProvider.select((s) => s.quizIndex));
     Future<void>.delayed(Duration.zero, () async {
       if (isShowLearnTutorial) {
         ref
@@ -23,36 +24,46 @@ class _LearnChallengeBody extends ConsumerWidget {
             .setIsShowLearnTutorial(false);
 
         Future.delayed(const Duration(milliseconds: 500), () {
-          ref
-              .read(tutorialControllerProvider.notifier)
-              .setIsShowTapAnimation(true);
+          Future<void>.delayed(const Duration(milliseconds: 300), () async {
+            ref
+                .read(tutorialControllerProvider.notifier)
+                .setIsShowTapAnimation(true);
+          });
+
           ref.read(tutorialControllerProvider.notifier).showLearnTutorial(
                 context: context,
                 onClickTarget: (target) {
                   if (target.identify == "learnTarget1-tap") {
-                    print("learnTarget1-tap");
                     ref
                         .read(quizLearnScreenProvider.notifier)
                         .setIsAnsView(true);
                     ref
                         .read(tutorialControllerProvider.notifier)
                         .setIsShowTapAnimation(false);
-                    ref
-                        .read(tutorialControllerProvider.notifier)
-                        .setIsShowSwipeRightAnimation(true);
+                    Future<void>.delayed(const Duration(milliseconds: 300),
+                        () async {
+                      ref
+                          .read(tutorialControllerProvider.notifier)
+                          .setIsShowSwipeRightAnimation(true);
+                    });
                   } else if (target.identify == "learnTarget1-right") {
-                    print("learnTarget1-right");
                     ref
                         .read(tutorialControllerProvider.notifier)
                         .setIsShowSwipeRightAnimation(false);
-                    ref
-                        .read(tutorialControllerProvider.notifier)
-                        .setIsShowSwipeLeftAnimation(true);
+                    Future<void>.delayed(const Duration(milliseconds: 300),
+                        () async {
+                      ref
+                          .read(tutorialControllerProvider.notifier)
+                          .setIsShowSwipeLeftAnimation(true);
+                    });
                   } else if (target.identify == "learnTarget1-left") {
-                    print("learnTarget1-left");
                     ref
                         .read(tutorialControllerProvider.notifier)
                         .setIsShowSwipeLeftAnimation(false);
+                  } else if (target.identify == "learnTarget2") {
+                    ref
+                        .read(quizLearnScreenProvider.notifier)
+                        .tapSavedButton(quiz.quizItemList[quizIndex]);
                   }
                 },
                 onFinish: () {

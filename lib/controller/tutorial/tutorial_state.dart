@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lottie/lottie.dart';
 
 part 'tutorial_state.freezed.dart';
 
@@ -10,8 +9,9 @@ class TutorialState with _$TutorialState {
   factory TutorialState({
     @Default(false) final bool isShowTutorialModal,
     @Default(false) bool isShowHomeTutorial,
+    @Default(false) bool isShowHomeTutorialDone,
     @Default(false) bool isShowLearnTutorial,
-    @Default(false) bool isShowTarget3,
+    @Default(false) bool isShowLearnTutorialModal,
     @Default(false) bool isShowSwipeLeftAnimation,
     @Default(false) bool isShowSwipeRightAnimation,
     @Default(false) bool isShowTapAnimation,
