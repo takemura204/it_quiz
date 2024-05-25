@@ -89,6 +89,16 @@ class _PremiumHeader extends StatelessWidget {
                         fit: BoxFit.fill,
                         width: context.width * 0.75,
                       ),
+                      const Gap(15),
+                      Text(
+                        '※支払いは一度きりです。',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ],
                   ),
                 ),

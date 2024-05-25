@@ -9,8 +9,8 @@ import 'package:kentei_quiz/controller/premium_detail/premium_detail_controller.
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 
+import '../../view/button/animation_shadow_button.dart';
 import '../../view/button/circle_button.dart';
-import '../../view/button/primary_button.dart';
 import '../../view/loading.dart';
 import '../../view/modals/premium_modal.dart';
 import '../screen_argument.dart';

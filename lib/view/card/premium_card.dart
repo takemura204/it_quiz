@@ -70,15 +70,23 @@ class PremiumCard extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          '支払いは一度きり。',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            color: Colors.black87,
+                          ),
+                        ),
                         const Text(
-                          '支払いは一度きり。\nプレミアムプランの購入で、たくさんの特典があるため、もっと学びたい方におすすめです。',
+                          'プレミアムプランの購入で、たくさんの特典があるため、もっと学びたい方におすすめです。',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 12,
                             color: Colors.black87,
                           ),
                         ),
-                        const Gap(5),
+                        const Gap(8),
                         Row(
                           children: [
                             Icon(

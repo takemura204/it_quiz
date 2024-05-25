@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/view/tool_tip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
@@ -19,6 +20,12 @@ class TutorialController extends StateNotifier<TutorialState> {
   }
 
   final Ref ref;
+
+  Color get defaultColor => const Color(0xFF75C4BF);
+
+  Color get correctColor => const Color(0xFF44B571);
+
+  Color get incorrectColor => const Color(0xFFFF7777);
   late TutorialCoachMark tutorialCoachMark;
   List<TargetFocus> homeTargets = [];
   final homeTarget1 = GlobalKey();
@@ -42,7 +49,7 @@ class TutorialController extends StateNotifier<TutorialState> {
     // final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
     final isShowTutorialModal = true;
     state = state.copyWith(isShowTutorialModal: isShowTutorialModal);
-    setIsShowLearnTutorial(true);
+    // setIsShowLearnTutorial(true);
     _saveDevice();
   }
 
@@ -63,14 +70,19 @@ class TutorialController extends StateNotifier<TutorialState> {
           contents: [
             TargetContent(
               align: ContentAlign.bottom,
-              padding: padding,
-              child: const Center(
-                child: Text(
-                  "ここから問題を開始できます",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'ここから', style: style),
+                    TextSpan(
+                      text: '「問題」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'を開始できます', style: style),
+                  ],
                 ),
               ),
-            )
+            ),
           ],
           shape: ShapeLightFocus.RRect,
           radius: 10,
@@ -80,12 +92,18 @@ class TutorialController extends StateNotifier<TutorialState> {
           keyTarget: homeTarget2,
           contents: [
             TargetContent(
-              align: ContentAlign.top,
+              align: ContentAlign.bottom,
               padding: padding,
-              child: const Center(
-                child: Text(
-                  "タップしたら、問題の詳細設定が表示されます",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'タップしたら', style: style),
+                    TextSpan(
+                      text: '「詳細設定」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'が表示されます', style: style),
+                  ],
                 ),
               ),
             )
@@ -98,12 +116,18 @@ class TutorialController extends StateNotifier<TutorialState> {
           keyTarget: homeTarget3,
           contents: [
             TargetContent(
-              align: ContentAlign.top,
+              align: ContentAlign.bottom,
               padding: padding,
-              child: const Center(
-                child: Text(
-                  "ここで問題範囲を選択できます",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'ここで', style: style),
+                    TextSpan(
+                      text: '「問題範囲」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'を選択できます', style: style),
+                  ],
                 ),
               ),
             )
@@ -116,12 +140,18 @@ class TutorialController extends StateNotifier<TutorialState> {
           keyTarget: homeTarget4,
           contents: [
             TargetContent(
-              align: ContentAlign.top,
+              align: ContentAlign.bottom,
               padding: padding,
-              child: const Center(
-                child: Text(
-                  "ここで問題数を選択できます",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'ここで', style: style),
+                    TextSpan(
+                      text: '「問題数」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'を選択できます', style: style),
+                  ],
                 ),
               ),
             )
@@ -134,12 +164,18 @@ class TutorialController extends StateNotifier<TutorialState> {
           keyTarget: homeTarget5,
           contents: [
             TargetContent(
-              align: ContentAlign.top,
+              align: ContentAlign.bottom,
               padding: padding,
-              child: const Center(
-                child: Text(
-                  "まずは、一問一答で用語を覚えてみましょう！",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'まずは、', style: style),
+                    TextSpan(
+                      text: '「一問一答」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'で用語を覚えましょう！', style: style),
+                  ],
                 ),
               ),
             )
@@ -158,13 +194,24 @@ class TutorialController extends StateNotifier<TutorialState> {
             TargetContent(
               align: ContentAlign.bottom,
               padding: EdgeInsets.zero,
-              child: const Center(
-                child: Text(
-                  "タップすると、答えが表示されます。",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'ここで', style: style),
+                    TextSpan(
+                      text: '「問題」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'が表示されます。\nタップすると', style: style),
+                    TextSpan(
+                      text: '「答え」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'が表示されます。', style: style),
+                  ],
                 ),
               ),
-            )
+            ),
           ],
           shape: ShapeLightFocus.RRect,
           radius: 10,
@@ -176,13 +223,23 @@ class TutorialController extends StateNotifier<TutorialState> {
             TargetContent(
               align: ContentAlign.bottom,
               padding: EdgeInsets.zero,
-              child: const Center(
-                child: Text(
-                  "知っている用語は右にスワイプ",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '「知っている」',
+                      style: style.copyWith(color: correctColor),
+                    ),
+                    const TextSpan(text: '用語は', style: style),
+                    TextSpan(
+                      text: '「右」',
+                      style: style.copyWith(color: correctColor),
+                    ),
+                    const TextSpan(text: 'にスワイプ', style: style),
+                  ],
                 ),
               ),
-            )
+            ),
           ],
           shape: ShapeLightFocus.RRect,
           radius: 10,
@@ -194,10 +251,20 @@ class TutorialController extends StateNotifier<TutorialState> {
             TargetContent(
               align: ContentAlign.bottom,
               padding: EdgeInsets.zero,
-              child: const Center(
-                child: Text(
-                  "知らない用語は左にスワイプしましょう",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '「知らない」',
+                      style: style.copyWith(color: incorrectColor),
+                    ),
+                    const TextSpan(text: '用語は', style: style),
+                    TextSpan(
+                      text: '「左」',
+                      style: style.copyWith(color: incorrectColor),
+                    ),
+                    const TextSpan(text: 'にスワイプ', style: style),
+                  ],
                 ),
               ),
             )
@@ -212,10 +279,19 @@ class TutorialController extends StateNotifier<TutorialState> {
             TargetContent(
               align: ContentAlign.bottom,
               padding: EdgeInsets.zero,
-              child: const Center(
-                child: Text(
-                  "保存した用語は「検索」タブから見返せます",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '「知っている」',
+                      style: style.copyWith(color: correctColor),
+                    ),
+                    TextSpan(
+                      text: '「知らない」',
+                      style: style.copyWith(color: incorrectColor),
+                    ),
+                    const TextSpan(text: 'は、\nこのボタンからも操作できます', style: style),
+                  ],
                 ),
               ),
             )
@@ -230,11 +306,18 @@ class TutorialController extends StateNotifier<TutorialState> {
             TargetContent(
               align: ContentAlign.bottom,
               padding: EdgeInsets.zero,
-              child: const Center(
-                child: Text(
-                  "知っている、知らないはボタンからも操作できます",
-                  style: style,
+              child: CustomToolTip(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '「保存」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(
+                        text: 'した用語は後から見返せます。\nさっそく一問一答してみましょう！', style: style),
+                  ],
                 ),
+                offsetX: 125,
               ),
             )
           ],

@@ -39,13 +39,13 @@ class ResultDashboardCard extends ConsumerWidget {
                     Icon(
                       LineIcons.book,
                       color: Colors.black54,
-                      size: 28,
+                      size: 25,
                     ),
                     Text(
                       '覚えた問題数',
                       style: TextStyle(
                         color: Colors.black54,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -70,7 +70,7 @@ class ResultDashboardCard extends ConsumerWidget {
                                         '${quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length}'
                                             .length
                                             .toDouble()) *
-                                    35 +
+                                    30 +
                                 16,
                           ),
                           Row(
@@ -82,7 +82,7 @@ class ResultDashboardCard extends ConsumerWidget {
                                 "${quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length}",
                                 style: const TextStyle(
                                   color: Colors.black54,
-                                  fontSize: 35,
+                                  fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -91,7 +91,7 @@ class ResultDashboardCard extends ConsumerWidget {
                                 "/",
                                 style: TextStyle(
                                   color: Colors.black54,
-                                  fontSize: 20,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
@@ -99,7 +99,7 @@ class ResultDashboardCard extends ConsumerWidget {
                                 "${quizItemList.length}",
                                 style: const TextStyle(
                                   color: Colors.black54,
-                                  fontSize: 35,
+                                  fontSize: 30,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
@@ -130,7 +130,7 @@ class ResultDashboardCard extends ConsumerWidget {
                         ),
                         height: 8,
                         width:
-                            ('${quizItemList.length}'.length.toDouble()) * 35 +
+                            ('${quizItemList.length}'.length.toDouble()) * 30 +
                                 16,
                       ),
                       Row(
@@ -142,7 +142,7 @@ class ResultDashboardCard extends ConsumerWidget {
                             "${quizItemList.length}",
                             style: const TextStyle(
                               color: Colors.black54,
-                              fontSize: 35,
+                              fontSize: 30,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -151,7 +151,7 @@ class ResultDashboardCard extends ConsumerWidget {
                             '問',
                             style: TextStyle(
                               color: Colors.grey,
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -174,13 +174,13 @@ class ResultDashboardCard extends ConsumerWidget {
                     Icon(
                       LineIcons.clock,
                       color: Colors.black54,
-                      size: 28,
+                      size: 25,
                     ),
                     Text(
                       '学習時間',
                       style: TextStyle(
                         color: Colors.black54,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -202,7 +202,7 @@ class ResultDashboardCard extends ConsumerWidget {
                           ),
                           height: 8,
                           width:
-                              ('$displayDuration'.length.toDouble() - 1) * 35 +
+                              ('$displayDuration'.length.toDouble() - 1) * 30 +
                                   16,
                         ),
                         Row(
@@ -214,7 +214,7 @@ class ResultDashboardCard extends ConsumerWidget {
                               "$displayDuration",
                               style: const TextStyle(
                                 color: Colors.black54,
-                                fontSize: 35,
+                                fontSize: 30,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -223,7 +223,7 @@ class ResultDashboardCard extends ConsumerWidget {
                               '分',
                               style: TextStyle(
                                 color: Colors.grey,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

@@ -9,14 +9,7 @@ class _LearnChallengeBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isShowLearnTutorial = ref
         .watch(tutorialControllerProvider.select((s) => s.isShowLearnTutorial));
-    final isShowTapAnimation = ref
-        .watch(tutorialControllerProvider.select((s) => s.isShowTapAnimation));
-    final isShowSwipeRightAnimation = ref.watch(
-        tutorialControllerProvider.select((s) => s.isShowSwipeRightAnimation));
-    final isShowSwipeLeftAnimation = ref.watch(
-        tutorialControllerProvider.select((s) => s.isShowSwipeLeftAnimation));
-    final quizIndex =
-        ref.watch(quizLearnScreenProvider.select((s) => s.quizIndex));
+
     Future<void>.delayed(Duration.zero, () async {
       if (isShowLearnTutorial) {
         ref
@@ -61,9 +54,9 @@ class _LearnChallengeBody extends ConsumerWidget {
                         .read(tutorialControllerProvider.notifier)
                         .setIsShowSwipeLeftAnimation(false);
                   } else if (target.identify == "learnTarget2") {
-                    ref
-                        .read(quizLearnScreenProvider.notifier)
-                        .tapSavedButton(quiz.quizItemList[quizIndex]);
+                    // ref
+                    //     .read(quizLearnScreenProvider.notifier)
+                    //     .tapSavedButton(quiz.quizItemList[quizIndex]);
                   }
                 },
                 onFinish: () {
@@ -79,6 +72,7 @@ class _LearnChallengeBody extends ConsumerWidget {
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ///問題
             const _QuizCard(),
 
             ///知っている・知らないボタン
@@ -93,12 +87,6 @@ class _LearnChallengeBody extends ConsumerWidget {
             _LapInfoBar(quiz),
           ],
         ),
-        if (isShowTapAnimation)
-          const AnimationImage(asset: 'assets/animation/tap.json'),
-        if (isShowSwipeRightAnimation)
-          const AnimationImage(asset: 'assets/animation/swipe_right.json'),
-        if (isShowSwipeLeftAnimation)
-          const AnimationImage(asset: 'assets/animation/swipe_left.json'),
       ],
     );
   }
