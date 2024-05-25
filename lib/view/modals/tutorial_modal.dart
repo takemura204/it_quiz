@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/main/main_screen_controller.dart';
 import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
@@ -16,6 +17,8 @@ class TutorialModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isTutorialRestart = ref
+        .watch(tutorialControllerProvider.select((s) => s.isTutorialRestart));
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(context.width * 0.02),
@@ -102,6 +105,11 @@ class TutorialModal extends ConsumerWidget {
                 text: "チュートリアル開始",
                 onPressed: () {
                   Navigator.of(context).pop();
+                  if (isTutorialRestart) {
+                    ref
+                        .read(mainScreenControllerProvider.notifier)
+                        .setTabIndex(0);
+                  }
                   ref
                       .read(tutorialControllerProvider.notifier)
                       .setIsShowHomeTutorial(true);
@@ -120,6 +128,9 @@ class TutorialModal extends ConsumerWidget {
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
+                  ref
+                      .read(tutorialControllerProvider.notifier)
+                      .setIsTutorialRestart(false);
                 },
               ),
             ],

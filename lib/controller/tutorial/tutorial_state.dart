@@ -7,14 +7,14 @@ class TutorialState with _$TutorialState {
   const TutorialState._();
 
   factory TutorialState({
+    @Default(false) final bool isTutorialRestart,
     @Default(false) final bool isShowTutorialModal,
-    @Default(false) bool isShowHomeTutorial,
-    @Default(false) bool isShowHomeTutorialDone,
-    @Default(false) bool isShowLearnTutorial,
-    @Default(false) bool isShowLearnResultTutorial,
-    @Default(false) bool isShowLearnTutorialModal,
-    @Default(false) bool isShowSwipeLeftAnimation,
-    @Default(false) bool isShowSwipeRightAnimation,
-    @Default(false) bool isShowTapAnimation,
+    @Default(false) final bool isShowHomeTutorial,
+    @Default(false) final bool isShowLearnTutorial,
+    @Default(false) final bool isShowLearnResultTutorial,
+    @Default(false) final bool isShowLearnTutorialModal,
+    @Default(false) final bool isShowSwipeLeftAnimation,
+    @Default(false) final bool isShowSwipeRightAnimation,
+    @Default(false) final bool isShowTapAnimation,
   }) = _TutorialState;
 }

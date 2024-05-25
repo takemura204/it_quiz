@@ -61,6 +61,7 @@ class _QuizCard extends ConsumerWidget {
         ref.read(tutorialControllerProvider.notifier).showHomeTutorial(
               context: context,
               onClickTarget: (target) {
+                HapticFeedback.lightImpact();
                 if (target.identify == "homeTarget1") {
                   ref
                       .read(quizModelProvider.notifier)

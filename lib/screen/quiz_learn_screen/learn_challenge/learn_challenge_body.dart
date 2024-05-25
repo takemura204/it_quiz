@@ -26,6 +26,7 @@ class _LearnChallengeBody extends ConsumerWidget {
           ref.read(tutorialControllerProvider.notifier).showLearnTutorial(
                 context: context,
                 onClickTarget: (target) {
+                  HapticFeedback.lightImpact();
                   if (target.identify == "learnTarget1-tap") {
                     ref
                         .read(quizLearnScreenProvider.notifier)

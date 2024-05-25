@@ -25,6 +25,7 @@ class _LearnResultBody extends ConsumerWidget {
           ref.read(tutorialControllerProvider.notifier).showLearnResultTutorial(
                 context: context,
                 onClickTarget: (target) {
+                  HapticFeedback.lightImpact();
                   if (target.identify == "learnResultTarget1") {
                   } else if (target.identify == "learnResultTarget2") {
                     Future.delayed(const Duration(milliseconds: 1500), () {});
@@ -37,6 +38,9 @@ class _LearnResultBody extends ConsumerWidget {
                       .updateHistoryQuiz();
 
                   ref.read(quizLearnScreenProvider.notifier).tapClearButton();
+                  ref
+                      .read(tutorialControllerProvider.notifier)
+                      .setIsTutorialRestart(false);
                 },
               );
         });
@@ -77,7 +81,7 @@ class _LearnResultBody extends ConsumerWidget {
             ),
           ],
         ),
-        Column(
+        const Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

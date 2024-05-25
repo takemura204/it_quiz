@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/auth/auth_controller.dart';
 import 'package:kentei_quiz/controller/home_setting/home_setting_controller.dart';
+import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
@@ -43,6 +44,8 @@ part 'setting_profile.dart';
 
 part 'setting_review.dart';
 
+part 'setting_tutorial.dart';
+
 class HomeSettingScreen extends ConsumerWidget {
   const HomeSettingScreen();
 
@@ -77,6 +80,7 @@ class HomeSettingScreen extends ConsumerWidget {
                   _Divider(),
 
                   const SettingTitleBar(title: "サポート", onTap: null),
+                  const _SettingTutorial(),
                   const _SettingContact(),
                   _Divider(),
                   const _SettingReview(),
@@ -92,17 +96,17 @@ class HomeSettingScreen extends ConsumerWidget {
                   ),
 
                   ///開発用
-                  GestureDetector(
-                    onTap: () {
-                      ref
-                          .read(authModelProvider.notifier)
-                          .updateIsPremium(false);
-                    },
-                    child: Container(
-                      height: 50,
-                      color: context.backgroundColor,
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     ref
+                  //         .read(authModelProvider.notifier)
+                  //         .updateIsPremium(false);
+                  //   },
+                  //   child: Container(
+                  //     height: 50,
+                  //     color: context.backgroundColor,
+                  //   ),
+                  // ),
 
                   ///シェア機能も追加したい。
                 ],

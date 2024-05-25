@@ -111,9 +111,7 @@ class _BottomNavBar extends ConsumerWidget {
         currentIndex: state.currentIndex,
         fixedColor: context.mainColor,
         onTap: (index) async {
-          ref
-              .watch(mainScreenControllerProvider.notifier)
-              .changeTabIndex(index);
+          ref.watch(mainScreenControllerProvider.notifier).setTabIndex(index);
           HapticFeedback.lightImpact();
 
           if (index == 2) {

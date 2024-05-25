@@ -45,23 +45,16 @@ class TutorialController extends StateNotifier<TutorialState> {
   final learnResultTarget4 = GlobalKey();
 
   void initState() {
-    loadState();
+    _initTutorial();
     _initTargets();
   }
 
-  ///チュートリアルモーダル表示
-  Future loadState() async {
+  ///チュートリアル開始
+  Future _initTutorial() async {
     final prefs = await SharedPreferences.getInstance();
+    // prefs.remove("isShowTutorialModal");
     final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
-    // final isShowTutorialModal = true;
-    state = state.copyWith(isShowTutorialModal: isShowTutorialModal);
-    setIsShowLearnResultTutorial(true);
-    _saveDevice();
-  }
-
-  void setIsShowTutorialModal(bool value) {
-    state = state.copyWith(isShowTutorialModal: value);
-    _saveDevice();
+    setIsShowTutorialModal(isShowTutorialModal);
   }
 
   void _initTargets() {
@@ -345,12 +338,12 @@ class TutorialController extends StateNotifier<TutorialState> {
                 isUpward: true,
                 text: TextSpan(
                   children: [
-                    const TextSpan(text: 'おつかれさまでした！\n', style: style),
+                    const TextSpan(text: 'おつかれさまでした！\nここで', style: style),
                     TextSpan(
                       text: '「学習結果」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'がここで確認できます', style: style),
+                    const TextSpan(text: 'が確認できます', style: style),
                   ],
                 ),
               ),
@@ -404,7 +397,7 @@ class TutorialController extends StateNotifier<TutorialState> {
                       text: '「クイズに挑戦」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'で覚えた用語がクイズで出題されます', style: style),
+                    const TextSpan(text: 'で\n覚えた用語がクイズで出題されます', style: style),
                   ],
                 ),
               ),
@@ -440,12 +433,18 @@ class TutorialController extends StateNotifier<TutorialState> {
     );
   }
 
+  void setIsShowTutorialModal(bool value) {
+    state = state.copyWith(isShowTutorialModal: value);
+    _saveDevice();
+  }
+
   void setIsShowHomeTutorial(bool value) {
     state = state.copyWith(isShowHomeTutorial: value);
   }
 
-  void setIsShowHomeTutorialDone(bool value) {
-    state = state.copyWith(isShowHomeTutorialDone: value);
+  void setIsTutorialRestart(bool value) {
+    state = state.copyWith(isTutorialRestart: value);
+    setIsShowTutorialModal(value);
   }
 
   void setIsShowLearnTutorial(bool value) {
@@ -468,7 +467,7 @@ class TutorialController extends StateNotifier<TutorialState> {
     state = state.copyWith(isShowSwipeLeftAnimation: value);
   }
 
-// TutorialController クラスのメソッド修正
+  // TutorialController クラスのメソッド修正
   void showHomeTutorial({
     required BuildContext context,
     required Function(TargetFocus) onClickTarget,
@@ -481,13 +480,17 @@ class TutorialController extends StateNotifier<TutorialState> {
       textStyleSkip: const TextStyle(color: Colors.black87),
       paddingFocus: 0,
       alignSkip: Alignment.bottomRight,
-      skipWidget: const Text("Skip Tutorial"),
+      skipWidget: const Text("スキップ"),
       showSkipInLastTarget: false,
       onFinish: onFinish,
       onClickTarget: onClickTarget,
       onClickOverlay: (target) =>
           print("Clicked on overlay of: ${target.identify}"),
-      hideSkip: true,
+      onSkip: () {
+        setIsTutorialRestart(false);
+        return true;
+      },
+      hideSkip: !state.isTutorialRestart,
       useSafeArea: true,
       opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
@@ -511,13 +514,17 @@ class TutorialController extends StateNotifier<TutorialState> {
       textStyleSkip: const TextStyle(color: Colors.black87),
       paddingFocus: 0,
       alignSkip: Alignment.bottomRight,
-      skipWidget: const Text("Skip Tutorial"),
+      skipWidget: const Text("スキップ"),
       showSkipInLastTarget: false,
       onFinish: onFinish,
       onClickTarget: onClickTarget,
       onClickOverlay: (target) =>
           print("Clicked on overlay of: ${target.identify}"),
-      hideSkip: true,
+      onSkip: () {
+        setIsTutorialRestart(false);
+        return true;
+      },
+      hideSkip: !state.isTutorialRestart,
       useSafeArea: true,
       opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
@@ -541,13 +548,17 @@ class TutorialController extends StateNotifier<TutorialState> {
       textStyleSkip: const TextStyle(color: Colors.black87),
       paddingFocus: 0,
       alignSkip: Alignment.bottomRight,
-      skipWidget: const Text("Skip Tutorial"),
+      skipWidget: const Text("スキップ"),
       showSkipInLastTarget: false,
       onFinish: onFinish,
       onClickTarget: onClickTarget,
       onClickOverlay: (target) =>
           print("Clicked on overlay of: ${target.identify}"),
-      hideSkip: true,
+      onSkip: () {
+        setIsTutorialRestart(false);
+        return true;
+      },
+      hideSkip: !state.isTutorialRestart,
       useSafeArea: true,
       opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
