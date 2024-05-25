@@ -166,7 +166,7 @@ class _ActionButtons extends ConsumerWidget {
                 ///知らない
                 CustomCircleButton(
                   iconData: Icons.question_mark_outlined,
-                  iconSize: 40,
+                  iconSize: 35,
                   containerWidth: context.width * 0.45,
                   containerHeight: 100,
                   backgroundColor: context.incorrectColor,
@@ -185,7 +185,7 @@ class _ActionButtons extends ConsumerWidget {
                 ///知ってる
                 CustomCircleButton(
                   iconData: Icons.thumb_up,
-                  iconSize: 45,
+                  iconSize: 35,
                   containerWidth: context.width * 0.45,
                   containerHeight: 100,
                   backgroundColor: context.correctColor,
@@ -205,7 +205,7 @@ class _ActionButtons extends ConsumerWidget {
         ///確認する
         CustomCircleButton(
             iconData: Icons.cached_outlined,
-            iconSize: 50,
+            iconSize: 40,
             containerWidth: context.width * 0.9,
             containerHeight: 100,
             backgroundColor: context.mainColor,

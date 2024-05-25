@@ -38,14 +38,21 @@ class _QuizResultView extends ConsumerWidget {
           shrinkWrap: true,
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
-            return QuizItemCard(
-                quizItem: quizItemList[index],
-                studyType: StudyType.learn,
-                onTap: () {
-                  ref
-                      .read(quizLearnScreenProvider.notifier)
-                      .tapSavedButton(quizItemList[index]);
-                });
+            final learnResultTarget2 = ref
+                .read(tutorialControllerProvider.notifier)
+                .learnResultTarget2;
+            return Container(
+              key: index == 0 ? learnResultTarget2 : null,
+              child: QuizItemCard(
+                  index: index,
+                  quizItem: quizItemList[index],
+                  studyType: StudyType.learn,
+                  onTap: () {
+                    ref
+                        .read(quizLearnScreenProvider.notifier)
+                        .tapSavedButton(quizItemList[index]);
+                  }),
+            );
           },
         ),
       ],
@@ -63,7 +70,11 @@ class _NextActionCard extends HookConsumerWidget {
     final lastIndex = quizList.length - 1;
     final learnQuiz =
         ref.watch(quizLearnScreenProvider.select((s) => s.learnQuiz));
+    final learnResultTarget3 =
+        ref.read(tutorialControllerProvider.notifier).learnResultTarget3;
+
     return Card(
+      key: learnResultTarget3,
       elevation: 0,
       color: Colors.white,
       child: Container(

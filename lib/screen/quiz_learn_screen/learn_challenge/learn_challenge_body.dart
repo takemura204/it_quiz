@@ -60,7 +60,9 @@ class _LearnChallengeBody extends ConsumerWidget {
                   }
                 },
                 onFinish: () {
-                  print('finish');
+                  ref
+                      .read(tutorialControllerProvider.notifier)
+                      .setIsShowLearnResultTutorial(true);
                 },
               );
         });

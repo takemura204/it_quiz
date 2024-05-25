@@ -36,7 +36,7 @@ class CustomCircleButton extends ConsumerWidget {
       ),
       child: Container(
         width: containerWidth,
-        // height: containerHeight,
+        height: containerHeight,
         child: IconButton(
           icon: Column(
             mainAxisSize: MainAxisSize.min,

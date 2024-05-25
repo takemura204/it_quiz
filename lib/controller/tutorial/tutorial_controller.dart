@@ -26,6 +26,7 @@ class TutorialController extends StateNotifier<TutorialState> {
   Color get correctColor => const Color(0xFF44B571);
 
   Color get incorrectColor => const Color(0xFFFF7777);
+
   late TutorialCoachMark tutorialCoachMark;
   List<TargetFocus> homeTargets = [];
   final homeTarget1 = GlobalKey();
@@ -37,6 +38,11 @@ class TutorialController extends StateNotifier<TutorialState> {
   final learnTarget1 = GlobalKey();
   final learnTarget2 = GlobalKey();
   final learnTarget3 = GlobalKey();
+  List<TargetFocus> learnResultTargets = [];
+  final learnResultTarget1 = GlobalKey();
+  final learnResultTarget2 = GlobalKey();
+  final learnResultTarget3 = GlobalKey();
+  final learnResultTarget4 = GlobalKey();
 
   void initState() {
     loadState();
@@ -46,10 +52,10 @@ class TutorialController extends StateNotifier<TutorialState> {
   ///チュートリアルモーダル表示
   Future loadState() async {
     final prefs = await SharedPreferences.getInstance();
-    // final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
-    final isShowTutorialModal = true;
+    final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
+    // final isShowTutorialModal = true;
     state = state.copyWith(isShowTutorialModal: isShowTutorialModal);
-    // setIsShowLearnTutorial(true);
+    setIsShowLearnResultTutorial(true);
     _saveDevice();
   }
 
@@ -93,7 +99,7 @@ class TutorialController extends StateNotifier<TutorialState> {
           contents: [
             TargetContent(
               align: ContentAlign.bottom,
-              padding: padding,
+              padding: EdgeInsets.zero,
               child: CustomToolTip(
                 text: TextSpan(
                   children: [
@@ -326,6 +332,112 @@ class TutorialController extends StateNotifier<TutorialState> {
         ),
       ],
     );
+    learnResultTargets.addAll(
+      [
+        TargetFocus(
+          identify: "learnResultTarget1",
+          keyTarget: learnResultTarget1,
+          contents: [
+            TargetContent(
+              align: ContentAlign.bottom,
+              padding: EdgeInsets.zero,
+              child: CustomToolTip(
+                isUpward: true,
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'おつかれさまでした！\n', style: style),
+                    TextSpan(
+                      text: '「学習結果」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'がここで確認できます', style: style),
+                  ],
+                ),
+              ),
+            )
+          ],
+          shape: ShapeLightFocus.RRect,
+          radius: 10,
+        ),
+        TargetFocus(
+          identify: "learnResultTarget2",
+          keyTarget: learnResultTarget2,
+          contents: [
+            TargetContent(
+              align: ContentAlign.bottom,
+              padding: EdgeInsets.zero,
+              child: CustomToolTip(
+                isUpward: true,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '「クイズ一覧」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(
+                        text: 'から覚えた用語を\nもう一度見返してみましょう', style: style),
+                  ],
+                ),
+              ),
+            )
+          ],
+          shape: ShapeLightFocus.RRect,
+          radius: 10,
+        ),
+        TargetFocus(
+          identify: "learnResultTarget3",
+          keyTarget: learnResultTarget3,
+          contents: [
+            TargetContent(
+              align: ContentAlign.top,
+              // padding: EdgeInsets.zero,
+              child: CustomToolTip(
+                isUpward: false,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '「再挑戦」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'でもう一度、', style: style),
+                    TextSpan(
+                      text: '「クイズに挑戦」',
+                      style: style.copyWith(color: defaultColor),
+                    ),
+                    const TextSpan(text: 'で覚えた用語がクイズで出題されます', style: style),
+                  ],
+                ),
+              ),
+            )
+          ],
+          shape: ShapeLightFocus.RRect,
+          radius: 10,
+        ),
+        TargetFocus(
+          identify: "learnResultTarget4",
+          keyTarget: learnResultTarget4,
+          contents: [
+            TargetContent(
+              align: ContentAlign.bottom,
+              padding:
+                  const EdgeInsets.only(top: 0, left: 90, right: 0, bottom: 0),
+              child: const CustomToolTip(
+                isUpward: true,
+                offsetX: 125,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                        text: '以上でチュートリアルは終了です！\nおつかれさまでした🎉', style: style),
+                  ],
+                ),
+              ),
+            )
+          ],
+          shape: ShapeLightFocus.RRect,
+          radius: 10,
+        ),
+      ],
+    );
   }
 
   void setIsShowHomeTutorial(bool value) {
@@ -338,6 +450,10 @@ class TutorialController extends StateNotifier<TutorialState> {
 
   void setIsShowLearnTutorial(bool value) {
     state = state.copyWith(isShowLearnTutorial: value);
+  }
+
+  void setIsShowLearnResultTutorial(bool value) {
+    state = state.copyWith(isShowLearnResultTutorial: value);
   }
 
   void setIsShowTapAnimation(bool value) {
@@ -373,7 +489,7 @@ class TutorialController extends StateNotifier<TutorialState> {
           print("Clicked on overlay of: ${target.identify}"),
       hideSkip: true,
       useSafeArea: true,
-      opacityShadow: 0.9,
+      opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
       unFocusAnimationDuration: const Duration(milliseconds: 200),
       pulseAnimationDuration: const Duration(milliseconds: 600),
@@ -403,7 +519,37 @@ class TutorialController extends StateNotifier<TutorialState> {
           print("Clicked on overlay of: ${target.identify}"),
       hideSkip: true,
       useSafeArea: true,
-      opacityShadow: 0.9,
+      opacityShadow: 0.8,
+      focusAnimationDuration: const Duration(milliseconds: 600),
+      unFocusAnimationDuration: const Duration(milliseconds: 200),
+      pulseAnimationDuration: const Duration(milliseconds: 600),
+      pulseEnable: true,
+      imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+      initialFocus: 0,
+    )..show(context: context);
+  }
+
+  void showLearnResultTutorial({
+    required BuildContext context,
+    required Function(TargetFocus) onClickTarget,
+    required Function() onFinish,
+  }) {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: learnResultTargets,
+      colorShadow: context.backgroundColor,
+      textSkip: "SKIP",
+      textStyleSkip: const TextStyle(color: Colors.black87),
+      paddingFocus: 0,
+      alignSkip: Alignment.bottomRight,
+      skipWidget: const Text("Skip Tutorial"),
+      showSkipInLastTarget: false,
+      onFinish: onFinish,
+      onClickTarget: onClickTarget,
+      onClickOverlay: (target) =>
+          print("Clicked on overlay of: ${target.identify}"),
+      hideSkip: true,
+      useSafeArea: true,
+      opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
       unFocusAnimationDuration: const Duration(milliseconds: 200),
       pulseAnimationDuration: const Duration(milliseconds: 600),

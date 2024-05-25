@@ -77,6 +77,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isResultScreen = ref.watch(quizLearnScreenProvider).isResultScreen;
+    final learnResultTarget4 =
+        ref.read(tutorialControllerProvider.notifier).learnResultTarget4;
     return isResultScreen
         ? AppBar(
             titleSpacing: 0,
@@ -85,15 +87,20 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             backgroundColor: Colors.white,
             title: const Text("結果"),
             actions: [
-              ClearButton(
-                  iconSize: 30,
-                  onPressed: () {
-                    ref
-                        .read(quizLearnScreenProvider.notifier)
-                        .updateHistoryQuiz();
+              Container(
+                key: learnResultTarget4,
+                child: ClearButton(
+                    iconSize: 30,
+                    onPressed: () {
+                      ref
+                          .read(quizLearnScreenProvider.notifier)
+                          .updateHistoryQuiz();
 
-                    ref.read(quizLearnScreenProvider.notifier).tapClearButton();
-                  }),
+                      ref
+                          .read(quizLearnScreenProvider.notifier)
+                          .tapClearButton();
+                    }),
+              ),
             ],
           )
         : AppBar(

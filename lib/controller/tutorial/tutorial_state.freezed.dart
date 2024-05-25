@@ -20,6 +20,7 @@ mixin _$TutorialState {
   bool get isShowHomeTutorial => throw _privateConstructorUsedError;
   bool get isShowHomeTutorialDone => throw _privateConstructorUsedError;
   bool get isShowLearnTutorial => throw _privateConstructorUsedError;
+  bool get isShowLearnResultTutorial => throw _privateConstructorUsedError;
   bool get isShowLearnTutorialModal => throw _privateConstructorUsedError;
   bool get isShowSwipeLeftAnimation => throw _privateConstructorUsedError;
   bool get isShowSwipeRightAnimation => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $TutorialStateCopyWith<$Res> {
       bool isShowHomeTutorial,
       bool isShowHomeTutorialDone,
       bool isShowLearnTutorial,
+      bool isShowLearnResultTutorial,
       bool isShowLearnTutorialModal,
       bool isShowSwipeLeftAnimation,
       bool isShowSwipeRightAnimation,
@@ -64,6 +66,7 @@ class _$TutorialStateCopyWithImpl<$Res, $Val extends TutorialState>
     Object? isShowHomeTutorial = null,
     Object? isShowHomeTutorialDone = null,
     Object? isShowLearnTutorial = null,
+    Object? isShowLearnResultTutorial = null,
     Object? isShowLearnTutorialModal = null,
     Object? isShowSwipeLeftAnimation = null,
     Object? isShowSwipeRightAnimation = null,
@@ -85,6 +88,10 @@ class _$TutorialStateCopyWithImpl<$Res, $Val extends TutorialState>
       isShowLearnTutorial: null == isShowLearnTutorial
           ? _value.isShowLearnTutorial
           : isShowLearnTutorial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowLearnResultTutorial: null == isShowLearnResultTutorial
+          ? _value.isShowLearnResultTutorial
+          : isShowLearnResultTutorial // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowLearnTutorialModal: null == isShowLearnTutorialModal
           ? _value.isShowLearnTutorialModal
@@ -119,6 +126,7 @@ abstract class _$$_TutorialStateCopyWith<$Res>
       bool isShowHomeTutorial,
       bool isShowHomeTutorialDone,
       bool isShowLearnTutorial,
+      bool isShowLearnResultTutorial,
       bool isShowLearnTutorialModal,
       bool isShowSwipeLeftAnimation,
       bool isShowSwipeRightAnimation,
@@ -140,6 +148,7 @@ class __$$_TutorialStateCopyWithImpl<$Res>
     Object? isShowHomeTutorial = null,
     Object? isShowHomeTutorialDone = null,
     Object? isShowLearnTutorial = null,
+    Object? isShowLearnResultTutorial = null,
     Object? isShowLearnTutorialModal = null,
     Object? isShowSwipeLeftAnimation = null,
     Object? isShowSwipeRightAnimation = null,
@@ -161,6 +170,10 @@ class __$$_TutorialStateCopyWithImpl<$Res>
       isShowLearnTutorial: null == isShowLearnTutorial
           ? _value.isShowLearnTutorial
           : isShowLearnTutorial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowLearnResultTutorial: null == isShowLearnResultTutorial
+          ? _value.isShowLearnResultTutorial
+          : isShowLearnResultTutorial // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowLearnTutorialModal: null == isShowLearnTutorialModal
           ? _value.isShowLearnTutorialModal
@@ -190,6 +203,7 @@ class _$_TutorialState extends _TutorialState {
       this.isShowHomeTutorial = false,
       this.isShowHomeTutorialDone = false,
       this.isShowLearnTutorial = false,
+      this.isShowLearnResultTutorial = false,
       this.isShowLearnTutorialModal = false,
       this.isShowSwipeLeftAnimation = false,
       this.isShowSwipeRightAnimation = false,
@@ -210,6 +224,9 @@ class _$_TutorialState extends _TutorialState {
   final bool isShowLearnTutorial;
   @override
   @JsonKey()
+  final bool isShowLearnResultTutorial;
+  @override
+  @JsonKey()
   final bool isShowLearnTutorialModal;
   @override
   @JsonKey()
@@ -223,7 +240,7 @@ class _$_TutorialState extends _TutorialState {
 
   @override
   String toString() {
-    return 'TutorialState(isShowTutorialModal: $isShowTutorialModal, isShowHomeTutorial: $isShowHomeTutorial, isShowHomeTutorialDone: $isShowHomeTutorialDone, isShowLearnTutorial: $isShowLearnTutorial, isShowLearnTutorialModal: $isShowLearnTutorialModal, isShowSwipeLeftAnimation: $isShowSwipeLeftAnimation, isShowSwipeRightAnimation: $isShowSwipeRightAnimation, isShowTapAnimation: $isShowTapAnimation)';
+    return 'TutorialState(isShowTutorialModal: $isShowTutorialModal, isShowHomeTutorial: $isShowHomeTutorial, isShowHomeTutorialDone: $isShowHomeTutorialDone, isShowLearnTutorial: $isShowLearnTutorial, isShowLearnResultTutorial: $isShowLearnResultTutorial, isShowLearnTutorialModal: $isShowLearnTutorialModal, isShowSwipeLeftAnimation: $isShowSwipeLeftAnimation, isShowSwipeRightAnimation: $isShowSwipeRightAnimation, isShowTapAnimation: $isShowTapAnimation)';
   }
 
   @override
@@ -239,6 +256,9 @@ class _$_TutorialState extends _TutorialState {
                 other.isShowHomeTutorialDone == isShowHomeTutorialDone) &&
             (identical(other.isShowLearnTutorial, isShowLearnTutorial) ||
                 other.isShowLearnTutorial == isShowLearnTutorial) &&
+            (identical(other.isShowLearnResultTutorial,
+                    isShowLearnResultTutorial) ||
+                other.isShowLearnResultTutorial == isShowLearnResultTutorial) &&
             (identical(
                     other.isShowLearnTutorialModal, isShowLearnTutorialModal) ||
                 other.isShowLearnTutorialModal == isShowLearnTutorialModal) &&
@@ -259,6 +279,7 @@ class _$_TutorialState extends _TutorialState {
       isShowHomeTutorial,
       isShowHomeTutorialDone,
       isShowLearnTutorial,
+      isShowLearnResultTutorial,
       isShowLearnTutorialModal,
       isShowSwipeLeftAnimation,
       isShowSwipeRightAnimation,
@@ -277,6 +298,7 @@ abstract class _TutorialState extends TutorialState {
       final bool isShowHomeTutorial,
       final bool isShowHomeTutorialDone,
       final bool isShowLearnTutorial,
+      final bool isShowLearnResultTutorial,
       final bool isShowLearnTutorialModal,
       final bool isShowSwipeLeftAnimation,
       final bool isShowSwipeRightAnimation,
@@ -291,6 +313,8 @@ abstract class _TutorialState extends TutorialState {
   bool get isShowHomeTutorialDone;
   @override
   bool get isShowLearnTutorial;
+  @override
+  bool get isShowLearnResultTutorial;
   @override
   bool get isShowLearnTutorialModal;
   @override

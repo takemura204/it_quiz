@@ -11,6 +11,7 @@ class TutorialState with _$TutorialState {
     @Default(false) bool isShowHomeTutorial,
     @Default(false) bool isShowHomeTutorialDone,
     @Default(false) bool isShowLearnTutorial,
+    @Default(false) bool isShowLearnResultTutorial,
     @Default(false) bool isShowLearnTutorialModal,
     @Default(false) bool isShowSwipeLeftAnimation,
     @Default(false) bool isShowSwipeRightAnimation,
