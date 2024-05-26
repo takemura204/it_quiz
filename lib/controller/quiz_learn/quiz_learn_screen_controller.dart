@@ -72,7 +72,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
   Future tapActionButton(bool isKnow) async {
     await setIsAnsView(false);
     await setDirection(null);
-
     final lapIndex = state.lapIndex;
     final quizItemList = [...state.quizItemList];
     final index = state.quizIndex;
@@ -191,6 +190,27 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     );
     state = state.copyWith(quizItemList: quizItemList);
     _updateQuiz();
+  }
+
+  void tapSavedButton(QuizItem quizItem) {
+    final quizItemList = state.quizItemList;
+    // quizItemの答えに基づいて一致するすべてのアイテムを更新
+    final updatedQuizItems = quizItemList.map((item) {
+      if (item.ans == quizItem.ans) {
+        // isSavedを反転させる
+        return item.copyWith(isSaved: !item.isSaved);
+      }
+      return item; // 一致しない場合は元のアイテムをそのまま返す
+    }).toList();
+
+    // 更新したリストで状態を更新
+    state = state.copyWith(quizItemList: updatedQuizItems);
+    // すべての変更されたアイテムに対して更新処理を呼び出す
+    updatedQuizItems
+        .where((item) => item.ans == quizItem.ans)
+        .forEach((updatedItem) {
+      ref.read(quizModelProvider.notifier).updateSavedQuiz(updatedItem);
+    });
   }
 
   ///正解画面に切り替え

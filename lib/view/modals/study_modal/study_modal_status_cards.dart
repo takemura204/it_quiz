@@ -21,8 +21,11 @@ class _StatusCards extends ConsumerWidget {
     final statusList =
         ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
     final sortedCards = _getSortedCards(context, statusList);
+    final homeTarget3 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget3;
 
     return Column(
+      key: homeTarget3,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
@@ -116,6 +119,7 @@ class _StatusCard extends ConsumerWidget {
               .setIsisQuizStatusRecommend(false);
         }
         ref.read(homeQuizScreenProvider.notifier).setQuizStatusList(status);
+        HapticFeedback.lightImpact();
       },
       child: Container(
         width: 85,
@@ -219,6 +223,7 @@ class _StatusRecommendCard extends ConsumerWidget {
               .read(homeQuizScreenProvider.notifier)
               .setIsisQuizStatusRecommend(true);
           ref.read(homeQuizScreenProvider.notifier).removeQuizStatusList();
+          HapticFeedback.lightImpact();
         }
       },
       child: Container(
@@ -264,12 +269,12 @@ class _StatusRecommendCard extends ConsumerWidget {
                 ],
               ),
               const Gap(3),
-              Text('おまかせ',
+              Text('おすすめ',
                   style: context.texts.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(3),
               Text(
-                "$value問",
+                "全$value問",
                 style: context.texts.bodyMedium?.copyWith(
                   color: isExists
                       ? isQuizStatusRecommend

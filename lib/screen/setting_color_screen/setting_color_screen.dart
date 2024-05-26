@@ -68,15 +68,28 @@ class _ColorCards extends ConsumerWidget {
                             context: context,
                             builder: (_) => NeedPremiumModal(
                                   title: 'テーマを入手しますか？',
-                                  subWidget: const Row(
+                                  subWidget: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          '支払いは一度きり。プレミアムに登録すると、\n全てのテーマを、自分好みに変更できます。',
-                                          style:
-                                              TextStyle(color: Colors.black87),
+                                        child: RichText(
                                           textAlign: TextAlign.center,
+                                          text: const TextSpan(
+                                            style: TextStyle(
+                                                color: Colors.black87),
+                                            children: [
+                                              TextSpan(
+                                                text: 'プレミアム特典の支払いは一度きり。\n',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    '購入すると、全てのテーマを、自分好みに変更できます。',
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],

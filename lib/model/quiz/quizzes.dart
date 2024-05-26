@@ -44,7 +44,7 @@ Quiz initWeakQuiz = Quiz(
   studyType: StudyType.learn,
 );
 
-///力だめし
+///ランダム
 Quiz initRandomQuiz = Quiz(
   id: 2,
   categoryId: 6,

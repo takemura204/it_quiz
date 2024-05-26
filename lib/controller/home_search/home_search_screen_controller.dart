@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
+import 'package:kentei_quiz/model/user/auth_model.dart';
 
 import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
@@ -82,37 +83,51 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     final isSavedFilter = state.isSavedFilter;
 
     if (isSavedFilter) {
-      final quizItemList = ref
-          .read(quizModelProvider)
-          .quizList
-          .expand((x) => x.quizItemList)
-          .toList();
-      final filteredQuizItemList =
-          quizItemList.where((x) => x.isSaved).toList();
-      setFilterQuiz(filteredQuizItemList);
+      final isPremium = ref.read(authModelProvider).isPremium;
+      if (isPremium) {
+        final quizItemList = ref
+            .read(quizModelProvider)
+            .quizList
+            .expand((x) => x.quizItemList)
+            .toList();
+        final filteredQuizItemList =
+            quizItemList.where((x) => x.isSaved).toList();
+        setFilterQuiz(filteredQuizItemList);
+      } else {
+        final quizItemList = ref
+            .read(quizModelProvider)
+            .quizList
+            .where((x) => !x.isPremium)
+            .expand((x) => x.quizItemList)
+            .toList();
+        final filteredQuizItemList =
+            quizItemList.where((x) => x.isSaved).toList();
+        setFilterQuiz(filteredQuizItemList);
+      }
     } else {
       setSearchKeywords(state.searchText);
     }
   }
 
-  void tapSavedButton(int index) {
-    final filteredQuizItemList = [...state.filteredQuizItemList];
-    filteredQuizItemList[index] = QuizItem(
-      quizId: filteredQuizItemList[index].quizId,
-      question: filteredQuizItemList[index].question,
-      ans: filteredQuizItemList[index].ans,
-      comment: filteredQuizItemList[index].comment,
-      isWeak: filteredQuizItemList[index].isWeak,
-      status: filteredQuizItemList[index].status,
-      isSaved: !filteredQuizItemList[index].isSaved,
-      choices: filteredQuizItemList[index].choices,
-      lapIndex: filteredQuizItemList[index].lapIndex,
-      isPremium: filteredQuizItemList[index].isPremium,
-    );
-    final updateQuizItem = filteredQuizItemList[index];
+  void tapSavedButton(QuizItem quizItem) {
+    // quizItemの答えに基づいて一致するすべてのアイテムを更新
+    final updatedQuizItems = state.filteredQuizItemList.map((item) {
+      if (item.ans == quizItem.ans) {
+        // isSavedを反転させる
+        return item.copyWith(isSaved: !item.isSaved);
+      }
+      return item; // 一致しない場合は元のアイテムをそのまま返す
+    }).toList();
 
-    ref.read(quizModelProvider.notifier).updateSavedQuiz(updateQuizItem);
-    state = state.copyWith(filteredQuizItemList: filteredQuizItemList);
+    // 更新したリストで状態を更新
+    state = state.copyWith(filteredQuizItemList: updatedQuizItems);
+
+    // すべての変更されたアイテムに対して更新処理を呼び出す
+    updatedQuizItems
+        .where((item) => item.ans == quizItem.ans)
+        .forEach((updatedItem) {
+      ref.read(quizModelProvider.notifier).updateSavedQuiz(updatedItem);
+    });
   }
 
   ///onChanged

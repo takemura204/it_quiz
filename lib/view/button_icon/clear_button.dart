@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
@@ -21,6 +22,7 @@ class ClearButton extends ConsumerWidget {
         onPressed: () {
           onPressed();
           Navigator.of(context).pop();
+          HapticFeedback.lightImpact();
         },
         icon: Icon(
           LineIcons.times,

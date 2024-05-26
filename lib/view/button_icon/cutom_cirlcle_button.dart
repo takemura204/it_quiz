@@ -41,6 +41,7 @@ class CustomCircleButton extends ConsumerWidget {
           icon: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const Gap(5),
               Icon(
                 iconData,
                 color: textColor,
@@ -55,6 +56,7 @@ class CustomCircleButton extends ConsumerWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
+              const Gap(5),
             ],
           ),
           onPressed: onPressed,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -14,7 +15,12 @@ class SettingTitleBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap == null
+          ? null
+          : () {
+              onTap!();
+              HapticFeedback.lightImpact();
+            },
       child: Container(
         height: 45,
         color: Colors.white,
@@ -89,7 +95,12 @@ class CustomSettingBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap == null
+          ? null
+          : () {
+              onTap!();
+              HapticFeedback.lightImpact();
+            },
       child: Card(
         elevation: 0,
         child: Container(

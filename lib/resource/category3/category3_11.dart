@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category3_11 {
   final quizItems = [
@@ -9,6 +10,7 @@ List<QuizItem> get category3_11 {
       choices: ["ルートディレクトリ", "ホームディレクトリ", "パブリックディレクトリ", "システムディレクトリ"],
       comment:
           "ルートディレクトリは、ファイルシステムにおける階層構造の最上位に位置し、全てのファイルやフォルダが格納される最上位のディレクトリ。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'ユーザーが現在作業しているディレクトリのことを何と呼ぶか？',
@@ -16,36 +18,42 @@ List<QuizItem> get category3_11 {
       choices: ["カレントディレクトリ", "ルートディレクトリ", "ワーキングディレクトリ", "ベースディレクトリ"],
       comment:
           "カレントディレクトリは、ユーザーが現在作業しているディレクトリのことで、コマンドの実行やファイル操作の基準となるディレクトリ。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'ファイル名の後に付けられ、ファイルの種類や用途を示すために使用される短い文字列は何か？',
       ans: 'ファイル拡張子',
       choices: ["ファイル拡張子", "メタデータ", "ファイル属性", "ファイル識別子"],
       comment: "ファイル拡張子は、ファイル名の後にピリオドで区切って付けられ、ファイルの種類や用途を示すために使用される短い文字列。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ハードディスクなどの記憶媒体上で、ファイルが連続した領域に保存されずに断片化してしまう現象は何か？',
       ans: 'フラグメンテーション',
       choices: ["フラグメンテーション", "セグメンテーション", "デフラグメンテーション", "アロケーション"],
       comment: "フラグメンテーションは、ハードディスクなどの記憶媒体上で、ファイルが連続した領域に保存されずに断片化してしまう現象。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '複数のファイルやフォルダを一つのファイルにまとめ、圧縮することなく格納する行為やそのファイルは何と呼ばれるか？',
       ans: 'アーカイブ',
       choices: ["アーカイブ", "コンパイル", "パッケージ", "バックアップ"],
       comment: "アーカイブは、複数のファイルやフォルダを一つのファイルにまとめて格納する行為や、そのようにして作成されたファイルのこと。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'プレゼンテーションや出版物などで使用するためにデザインされたイラストや画像のコレクションは何と呼ばれるか？',
       ans: 'クリップアート',
       choices: ["クリップアート", "ベクターグラフィック", "インフォグラフィック", "ストックフォト"],
       comment: "クリップアートは、プレゼンテーションや出版物などで使用するためにデザインされ、提供されているイラストや画像のコレクション。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '大量のデータを集約し、様々な角度から分析や要約を行うことができるデータ表は何と呼ばれるか？',
       ans: 'ピボットデータ表',
       choices: ["ピボットデータ表", "スプレッドシート", "データウェアハウス", "データマート"],
       comment: "ピボットデータ表は、大量のデータを集約し、様々な角度からデータを分析や要約を行うことができるインタラクティブなデータ表。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'そのソースコードが公開され、誰でも自由に利用、改変、再配布することが許可されているソフトウェアは何と呼ばれるか？',
@@ -53,6 +61,7 @@ List<QuizItem> get category3_11 {
       choices: ["OSS", "フリーウェア", "シェアウェア", "クローズドソースソフトウェア"],
       comment:
           "OSS（Open Source Software）は、ソースコードが公開されており、誰でも自由に利用、改変、再配布することが許可されているソフトウェア。",
+      importance: QuizImportanceType.high,
     ),
   ];
 

@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category3_9 {
   final quizItems = [
@@ -8,30 +9,35 @@ List<QuizItem> get category3_9 {
       ans: 'レスポンスタイム',
       choices: ["レスポンスタイム", "スループット", "ターンアラウンドタイム", "待機時間"],
       comment: "レスポンスタイムは、システムが要求に応答するまでの時間を指し、システムの応答性能を示す指標。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'システムが単位時間あたりに処理できる仕事の量は何と呼ばれるか？',
       ans: 'スループット',
       choices: ["スループット", "レスポンスタイム", "ターンアラウンドタイム", "処理速度"],
       comment: "スループットは、システムが単位時間あたりに処理できる仕事の量を指し、システムの性能を示す重要な指標。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ジョブが開始されてから完了するまでの総時間は何と呼ばれるか？',
       ans: 'ターンアラウンドタイム',
       choices: ["ターンアラウンドタイム", "レスポンスタイム", "スループット", "実行時間"],
       comment: "ターンアラウンドタイムは、ジョブが開始されてから完了するまでの総時間を指し、システムの効率性を示す指標。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'システムの性能を評価するために実行されるテストのことは何か？',
       ans: 'ベンチマーク',
       choices: ["ベンチマーク", "パフォーマンステスト", "ストレステスト", "負荷テスト"],
       comment: "ベンチマークは、システムの性能を定量的に評価するために実行されるテストで、様々な基準やワークロードを用いて性能を比較する。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'システムが故障なしに稼働し続けることができる確率、または稼働時間の割合は何と呼ばれるか？',
       ans: '稼働率',
       choices: ["稼働率", "可用性", "信頼性", "継続性"],
       comment: "稼働率は、システムが故障なしに稼働し続けることができる確率、または稼働時間の割合を指し、システムの可用性を示す指標。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'システムや製品が平均して故障するまでの時間は何と呼ばれるか？',
@@ -39,6 +45,7 @@ List<QuizItem> get category3_9 {
       choices: ["MTBF", "MTTR", "稼働率", "寿命"],
       comment:
           "MTBF（Mean Time Between Failures）は、システムや製品が平均して故障するまでの時間を指し、信頼性や耐久性を示す指標。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'システムや製品が故障から復旧するまでの平均時間は何と呼ばれるか？',
@@ -46,36 +53,42 @@ List<QuizItem> get category3_9 {
       choices: ["MTTR", "MTBF", "稼働率", "復旧時間"],
       comment:
           "MTTR（Mean Time To Repair）は、システムや製品が故障から復旧するまでの平均時間を指し、メンテナンスの効率性や迅速性を示す指標。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'システムが故障しても安全な状態に留まるよう設計された安全性の原則は何か？',
       ans: 'フェールセーフ',
       choices: ["フェールセーフ", "フォールトトレラント", "フールプルーフ", "レジリエンス"],
       comment: "フェールセーフは、システムが故障しても安全な状態に留まる、または最小限の影響で済むように設計された安全性の原則。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'システムが部分的な故障が発生しても全体としての機能を維持し続ける能力を持つ設計原則は何か？',
       ans: 'フォールトトレラント',
       choices: ["フォールトトレラント", "フェールセーフ", "フールプルーフ", "レジリエンス"],
       comment: "フォールトトレラントは、システムが部分的な故障が発生しても全体としての機能を維持し続ける能力を持つ設計原則。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '誤操作や不適切な使用からシステムを保護する設計原則は何か？',
       ans: 'フールプルーフ',
       choices: ["フールプルーフ", "フェールセーフ", "フォールトトレラント", "レジリエンス"],
       comment: "フールプルーフは、誤操作や不適切な使用からシステムを保護し、事故や故障を防ぐための設計原則。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '主系統が故障した際に、代替系統が手動で起動されるスタンバイシステムは何と呼ばれるか？',
       ans: 'コールドスタンバイ',
       choices: ["コールドスタンバイ", "ホットスタンバイ", "ウォームスタンバイ", "デュアルシステム"],
       comment: "コールドスタンバイは、主系統が故障した際に、代替系統が手動で起動されるスタンバイシステムを指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '主系統が故障した際に、代替系統が即座に自動で切り替わり稼働を開始するスタンバイシステムは何か？',
       ans: 'ホットスタンバイ',
       choices: ["ホットスタンバイ", "コールドスタンバイ", "ウォームスタンバイ", "デュアルシステム"],
       comment: "ホットスタンバイは、主系統が故障した際に、代替系統が即座に自動で切り替わり稼働を開始するスタンバイシステムを指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'システム導入時に必要となる初期投資のコストは何と呼ばれるか？',
@@ -83,18 +96,21 @@ List<QuizItem> get category3_9 {
       choices: ["イニシャルコスト", "ランニングコスト", "TCO", "オペレーショナルコスト"],
       comment:
           "イニシャルコストは、システム導入時に必要となる初期投資のコストを指し、ハードウェア、ソフトウェア、導入作業などの費用が含まれる。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'システム稼働後に発生する日々の運用や維持管理に関わるコストは何と呼ばれるか？',
       ans: 'ランニングコスト',
       choices: ["ランニングコスト", "イニシャルコスト", "TCO", "オペレーショナルコスト"],
       comment: "ランニングコストは、システム稼働後に発生する日々の運用や維持管理に関わるコストを指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'システムの導入から廃棄までにかかる全てのコストを総称して何と呼ばれるか？',
       ans: 'TCO',
       choices: ["TCO", "イニシャルコスト", "ランニングコスト", "オペレーショナルコスト"],
       comment: "TCO（Total Cost of Ownership）は、システムの導入から廃棄までにかかる全てのコストを総称したもの。",
+      importance: QuizImportanceType.normal,
     ),
   ];
 

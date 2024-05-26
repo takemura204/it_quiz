@@ -19,6 +19,7 @@ mixin _$QuizChoiceScreenState {
   bool get isAnsView => throw _privateConstructorUsedError; //答え表示
   bool get isJudge => throw _privateConstructorUsedError; //正解判定
   bool get isResultScreen => throw _privateConstructorUsedError;
+  Quiz? get choiceQuiz => throw _privateConstructorUsedError;
   int get quizIndex => throw _privateConstructorUsedError; //問題番号
   int get quizItemIndex => throw _privateConstructorUsedError; //クイズアイテム番号
   String get selectAns => throw _privateConstructorUsedError; //選択した番号
@@ -42,6 +43,7 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       {bool isAnsView,
       bool isJudge,
       bool isResultScreen,
+      Quiz? choiceQuiz,
       int quizIndex,
       int quizItemIndex,
       String selectAns,
@@ -49,6 +51,8 @@ abstract class $QuizChoiceScreenStateCopyWith<$Res> {
       List<QuizItem> quizItemList,
       Duration duration,
       StudyType studyType});
+
+  $QuizCopyWith<$Res>? get choiceQuiz;
 }
 
 /// @nodoc
@@ -68,6 +72,7 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
     Object? isAnsView = null,
     Object? isJudge = null,
     Object? isResultScreen = null,
+    Object? choiceQuiz = freezed,
     Object? quizIndex = null,
     Object? quizItemIndex = null,
     Object? selectAns = null,
@@ -89,6 +94,10 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
+      choiceQuiz: freezed == choiceQuiz
+          ? _value.choiceQuiz
+          : choiceQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
@@ -119,6 +128,18 @@ class _$QuizChoiceScreenStateCopyWithImpl<$Res,
               as StudyType,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizCopyWith<$Res>? get choiceQuiz {
+    if (_value.choiceQuiz == null) {
+      return null;
+    }
+
+    return $QuizCopyWith<$Res>(_value.choiceQuiz!, (value) {
+      return _then(_value.copyWith(choiceQuiz: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -132,6 +153,7 @@ abstract class _$$_CreateCopyWith<$Res>
       {bool isAnsView,
       bool isJudge,
       bool isResultScreen,
+      Quiz? choiceQuiz,
       int quizIndex,
       int quizItemIndex,
       String selectAns,
@@ -139,6 +161,9 @@ abstract class _$$_CreateCopyWith<$Res>
       List<QuizItem> quizItemList,
       Duration duration,
       StudyType studyType});
+
+  @override
+  $QuizCopyWith<$Res>? get choiceQuiz;
 }
 
 /// @nodoc
@@ -154,6 +179,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isAnsView = null,
     Object? isJudge = null,
     Object? isResultScreen = null,
+    Object? choiceQuiz = freezed,
     Object? quizIndex = null,
     Object? quizItemIndex = null,
     Object? selectAns = null,
@@ -175,6 +201,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
+      choiceQuiz: freezed == choiceQuiz
+          ? _value.choiceQuiz
+          : choiceQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
@@ -214,6 +244,7 @@ class _$_Create extends _Create {
       {this.isAnsView = false,
       this.isJudge = false,
       this.isResultScreen = false,
+      this.choiceQuiz,
       this.quizIndex = 0,
       this.quizItemIndex = 0,
       this.selectAns = '',
@@ -236,6 +267,8 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final bool isResultScreen;
+  @override
+  final Quiz? choiceQuiz;
   @override
   @JsonKey()
   final int quizIndex;
@@ -280,7 +313,7 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, selectAns: $selectAns, choices: $choices, quizItemList: $quizItemList, duration: $duration, studyType: $studyType)';
+    return 'QuizChoiceScreenState(isAnsView: $isAnsView, isJudge: $isJudge, isResultScreen: $isResultScreen, choiceQuiz: $choiceQuiz, quizIndex: $quizIndex, quizItemIndex: $quizItemIndex, selectAns: $selectAns, choices: $choices, quizItemList: $quizItemList, duration: $duration, studyType: $studyType)';
   }
 
   @override
@@ -293,6 +326,8 @@ class _$_Create extends _Create {
             (identical(other.isJudge, isJudge) || other.isJudge == isJudge) &&
             (identical(other.isResultScreen, isResultScreen) ||
                 other.isResultScreen == isResultScreen) &&
+            (identical(other.choiceQuiz, choiceQuiz) ||
+                other.choiceQuiz == choiceQuiz) &&
             (identical(other.quizIndex, quizIndex) ||
                 other.quizIndex == quizIndex) &&
             (identical(other.quizItemIndex, quizItemIndex) ||
@@ -314,6 +349,7 @@ class _$_Create extends _Create {
       isAnsView,
       isJudge,
       isResultScreen,
+      choiceQuiz,
       quizIndex,
       quizItemIndex,
       selectAns,
@@ -334,6 +370,7 @@ abstract class _Create extends QuizChoiceScreenState {
       {final bool isAnsView,
       final bool isJudge,
       final bool isResultScreen,
+      final Quiz? choiceQuiz,
       final int quizIndex,
       final int quizItemIndex,
       final String selectAns,
@@ -349,6 +386,8 @@ abstract class _Create extends QuizChoiceScreenState {
   bool get isJudge;
   @override //正解判定
   bool get isResultScreen;
+  @override
+  Quiz? get choiceQuiz;
   @override
   int get quizIndex;
   @override //問題番号

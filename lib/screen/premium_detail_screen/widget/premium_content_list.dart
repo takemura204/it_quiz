@@ -114,7 +114,7 @@ class _PremiumContentList extends StatelessWidget {
               ),
             ],
           ),
-          image: 'assets/image/premium_content1.png',
+          image: 'assets/image/premium/premium_content1.png',
         ),
         const Gap(20),
         _PremiumContent(
@@ -168,7 +168,7 @@ class _PremiumContentList extends StatelessWidget {
               ),
             ],
           ),
-          image: 'assets/image/premium_content2.png',
+          image: 'assets/image/premium/premium_content2.png',
         ),
         const Gap(20),
         _PremiumContent(
@@ -238,7 +238,7 @@ class _PremiumContentList extends StatelessWidget {
               ),
             ],
           ),
-          image: 'assets/image/premium_content3.png',
+          image: 'assets/image/premium/premium_content3.png',
         ),
         const Gap(20),
         _PremiumContent(
@@ -308,7 +308,7 @@ class _PremiumContentList extends StatelessWidget {
               ),
             ],
           ),
-          image: 'assets/image/premium_content4.png',
+          image: 'assets/image/premium/premium_content4.png',
         ),
         const Gap(20),
         _PremiumContent2(

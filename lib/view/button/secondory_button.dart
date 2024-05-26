@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SecondaryButton extends ConsumerWidget {
@@ -43,7 +44,12 @@ class SecondaryButton extends ConsumerWidget {
             fontSize: 16,
           ),
         ),
-        onPressed: onPressed,
+        onPressed: onPressed == null
+            ? null
+            : () {
+                onPressed!();
+                HapticFeedback.lightImpact();
+              },
       ),
     );
   }

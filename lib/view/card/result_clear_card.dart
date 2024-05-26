@@ -1,3 +1,5 @@
+import 'package:easy_animate/animation/fade_in_animation.dart';
+import 'package:easy_animate/enum/animate_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,45 +21,48 @@ class ResultClearCard extends ConsumerWidget {
         ),
       ),
       alignment: Alignment.center,
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Gap(10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'CLEAR!!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 50,
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic,
+      child: const FadeInAnimation(
+        animateDirection: AnimateDirection.left,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Gap(10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'CLEAR!!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 50,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
-                ),
-                Gap(3),
-                Text(
-                  '毎日１歩づつ成長しています！',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Colors.white,
+                  Gap(3),
+                  Text(
+                    '毎日１歩づつ成長しています！',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.check_circle_outline,
-              color: Colors.white,
-              size: 100,
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.check_circle_outline,
+                color: Colors.white,
+                size: 100,
+              ),
             ),
-          ),
-          Gap(5),
-        ],
+            Gap(5),
+          ],
+        ),
       ),
     );
   }

@@ -20,80 +20,129 @@ class _QuizCard extends ConsumerWidget {
         ),
       );
     }
-
+    final learnTarget1 =
+        ref.read(tutorialControllerProvider.notifier).learnTarget1;
+    final learnTarget3 =
+        ref.read(tutorialControllerProvider.notifier).learnTarget3;
+    final isShowTapAnimation = ref
+        .watch(tutorialControllerProvider.select((s) => s.isShowTapAnimation));
+    final isShowSwipeRightAnimation = ref.watch(
+        tutorialControllerProvider.select((s) => s.isShowSwipeRightAnimation));
+    final isShowSwipeLeftAnimation = ref.watch(
+        tutorialControllerProvider.select((s) => s.isShowSwipeLeftAnimation));
     return Expanded(
-      child: AppinioSwiper(
-        controller: swiperController,
-        cardsCount: quizItemList.length,
-        loop: true,
-        backgroundCardsCount: (quizIndex + 1 == quizItemList.length) ? 0 : 1,
-        cardsSpacing: 0,
-        maxAngle: 90,
-        swipeOptions: const AppinioSwipeOptions.symmetric(
-            horizontal: true, vertical: false),
-        onSwipe: (index, direction) {
-          // スワイプが完全に終了した時の処理
-          if (direction == AppinioSwiperDirection.left) {
-            ref.read(quizLearnScreenProvider.notifier).tapActionButton(false);
-          } else if (direction == AppinioSwiperDirection.right) {
-            ref.read(quizLearnScreenProvider.notifier).tapActionButton(true);
-          }
-        },
-        onSwiping: (direction) {
-          ref.read(quizLearnScreenProvider.notifier).setDirection(direction);
-        },
-        onEnd: () {
-          print("All cards swiped");
-        },
-        onSwipeCancelled: () {
-          ref.read(quizLearnScreenProvider.notifier).setDirection(null);
-          return;
-        },
-        cardsBuilder: (BuildContext context, int index) {
-          final quizItem = quizItemList[index];
-          return Center(
-            child: GestureDetector(
-              onTap: () {
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AppinioSwiper(
+            controller: swiperController,
+            cardsCount: quizItemList.length,
+            loop: true,
+            backgroundCardsCount:
+                (quizIndex + 1 == quizItemList.length) ? 0 : 1,
+            cardsSpacing: 0,
+            maxAngle: 90,
+            swipeOptions: const AppinioSwipeOptions.symmetric(
+                horizontal: true, vertical: false),
+            onSwipe: (index, direction) {
+              // スワイプが完全に終了した時の処理
+              if (direction == AppinioSwiperDirection.left) {
                 ref
                     .read(quizLearnScreenProvider.notifier)
-                    .setIsAnsView(true); // 画面切り替え
-              },
-              child: Card(
-                elevation: 0,
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: direction != null
-                        ? direction != AppinioSwiperDirection.right
-                            ? Colors.red.withOpacity(0.7)
-                            : Colors.green.withOpacity(0.7)
-                        : Colors.grey.shade300,
-                    width: 1.5,
+                    .tapActionButton(false);
+              } else if (direction == AppinioSwiperDirection.right) {
+                ref
+                    .read(quizLearnScreenProvider.notifier)
+                    .tapActionButton(true);
+              }
+              HapticFeedback.mediumImpact();
+            },
+            onSwiping: (direction) {
+              ref
+                  .read(quizLearnScreenProvider.notifier)
+                  .setDirection(direction);
+            },
+            onEnd: () {
+              print("All cards swiped");
+            },
+            onSwipeCancelled: () {
+              ref.read(quizLearnScreenProvider.notifier).setDirection(null);
+              return;
+            },
+            cardsBuilder: (BuildContext context, int index) {
+              final quizItem = quizItemList[index];
+              return GestureDetector(
+                key: index == 0 ? learnTarget1 : null,
+                onTap: () {
+                  ref
+                      .read(quizLearnScreenProvider.notifier)
+                      .setIsAnsView(true); // 画面切り替え
+                },
+                child: Card(
+                  elevation: 0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: direction != null
+                          ? direction != AppinioSwiperDirection.right
+                              ? Colors.red.withOpacity(0.7)
+                              : Colors.green.withOpacity(0.7)
+                          : Colors.grey.shade300,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Container(
-                  width: context.width * 0.9,
-                  alignment: Alignment.center,
-                  // quizItemを使ってカードの内容を構築
-                  child: Column(
-                    children: [
-                      const Spacer(),
+                  child: Container(
+                    width: context.width * 0.9,
+                    alignment: Alignment.center,
+                    // quizItemを使ってカードの内容を構築
+                    child: Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        Column(
+                          children: [
+                            const Spacer(),
 
-                      ///問題文
-                      _Question(quizItem, isAns && quizIndex == index),
-                      const Spacer(),
+                            ///問題文
+                            _Question(quizItem, isAns && quizIndex == index),
+                            const Spacer(),
 
-                      ///問題進捗状況
-                      _QuizProgress(quizItemList.length, index + 1),
-                      Gap(context.height * 0.01),
-                    ],
+                            ///問題進捗状況
+                            _QuizProgress(quizItemList.length, index + 1),
+                            Gap(context.height * 0.01),
+                          ],
+                        ),
+                        Container(
+                          key: index == 0 ? learnTarget3 : null,
+                          padding: const EdgeInsets.only(top: 5, right: 5),
+                          child: SaveIconButton(
+                            quizItem: quizItem,
+                            isShowText: false,
+                            size: 40,
+                            onTap: () {
+                              ref
+                                  .read(quizLearnScreenProvider.notifier)
+                                  .tapSavedButton(quizItem);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              );
+            },
+          ),
+          if (isShowTapAnimation)
+            Container(
+              margin: EdgeInsets.all(context.width * 0.1),
+              child: const AnimationImage(asset: 'assets/animation/tap.json'),
             ),
-          );
-        },
+          if (isShowSwipeRightAnimation)
+            const AnimationImage(asset: 'assets/animation/swipe_right.json'),
+          if (isShowSwipeLeftAnimation)
+            const AnimationImage(asset: 'assets/animation/swipe_left.json'),
+        ],
       ),
     );
   }
@@ -107,49 +156,56 @@ class _ActionButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAnsView = ref.watch(quizLearnScreenProvider).isAnsView;
+    final learnTarget2 =
+        ref.read(tutorialControllerProvider.notifier).learnTarget2;
     return isAnsView
-        ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ///知らない
-            CustomCircleButton(
-              iconData: Icons.question_mark_outlined,
-              iconSize: 40,
-              containerWidth: context.width * 0.45,
-              containerHeight: 100,
-              backgroundColor: context.incorrectColor,
-              textColor: Colors.white,
-              text: I18n().buttonUnKnow,
-              onPressed: () {
-                ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .swiperController
-                    .swipeLeft();
-              },
-            ),
-            Gap(context.width * 0.02),
+        ? Row(
+            key: learnTarget2,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                ///知らない
+                CustomCircleButton(
+                  iconData: Icons.question_mark_outlined,
+                  iconSize: 35,
+                  containerWidth: context.width * 0.45,
+                  containerHeight: 100,
+                  backgroundColor: context.incorrectColor,
+                  textColor: Colors.white,
+                  text: I18n().buttonUnKnow,
+                  onPressed: () {
+                    ref
+                        .read(quizLearnScreenProvider.notifier)
+                        .swiperController
+                        .swipeLeft();
+                    HapticFeedback.mediumImpact();
+                  },
+                ),
+                Gap(context.width * 0.02),
 
-            ///知ってる
-            CustomCircleButton(
-              iconData: Icons.thumb_up,
-              iconSize: 45,
-              containerWidth: context.width * 0.45,
-              containerHeight: 100,
-              backgroundColor: context.correctColor,
-              textColor: Colors.white,
-              text: I18n().buttonKnow,
-              onPressed: () {
-                ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .swiperController
-                    .swipeRight();
-              },
-            ),
-          ])
+                ///知ってる
+                CustomCircleButton(
+                  iconData: Icons.thumb_up,
+                  iconSize: 35,
+                  containerWidth: context.width * 0.45,
+                  containerHeight: 100,
+                  backgroundColor: context.correctColor,
+                  textColor: Colors.white,
+                  text: I18n().buttonKnow,
+                  onPressed: () {
+                    ref
+                        .read(quizLearnScreenProvider.notifier)
+                        .swiperController
+                        .swipeRight();
+                    HapticFeedback.mediumImpact();
+                  },
+                ),
+              ])
         :
 
         ///確認する
         CustomCircleButton(
             iconData: Icons.cached_outlined,
-            iconSize: 50,
+            iconSize: 40,
             containerWidth: context.width * 0.9,
             containerHeight: 100,
             backgroundColor: context.mainColor,
@@ -157,6 +213,7 @@ class _ActionButtons extends ConsumerWidget {
             text: I18n().buttonConfirm,
             onPressed: () {
               ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
+              HapticFeedback.mediumImpact();
             },
           );
   }

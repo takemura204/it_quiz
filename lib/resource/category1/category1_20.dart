@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 ///ソリューションビジネス
 List<QuizItem> get category1_20 {
@@ -9,6 +10,7 @@ List<QuizItem> get category1_20 {
       ans: 'アウトソーシング',
       choices: ["アウトソーシング", "システムインテグレーション", "ホスティングサービス", "ハウジングサービス"],
       comment: "アウトソーシングは、コスト削減や専門性の高いサービスの利用を目的として、自社の業務の一部を他社に委託すること。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '複数の異なるシステムや技術を組み合わせて、一つの機能的な全体システムを構築することを何というか？',
@@ -16,6 +18,7 @@ List<QuizItem> get category1_20 {
       choices: ["アウトソーシング", "システムインテグレーション", "クラウドコンピューティング", "オンプレミス"],
       comment:
           "システムインテグレーションは、異なるシステムや技術コンポーネントを組み合わせ、統合して一つの機能的なシステムを構築するプロセス。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'インターネットを通じてサーバー、ストレージなどのコンピューティングリソースを提供するサービスは何か？',
@@ -23,6 +26,7 @@ List<QuizItem> get category1_20 {
       choices: ["システムインテグレーション", "クラウドコンピューティング", "SaaS", "IaaS"],
       comment:
           "クラウドコンピューティングは、インターネットを通じて、サーバーやストレージなどのコンピューティングリソースをオンデマンドで提供するサービス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ソフトウェアをインターネットを通じてサービスとして提供するモデルを何というか？',
@@ -30,6 +34,7 @@ List<QuizItem> get category1_20 {
       choices: ["クラウドコンピューティング", "SaaS", "PaaS", "IaaS"],
       comment:
           "SaaS（Software as a Service）は、ソフトウェアをインターネット経由でサービスとして提供し、ユーザーがオンラインでアクセスして利用するモデル。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '開発プラットフォームをインターネットを通じてサービスとして提供するモデルを何というか？',
@@ -37,6 +42,7 @@ List<QuizItem> get category1_20 {
       choices: ["SaaS", "PaaS", "IaaS", "DaaS"],
       comment:
           "PaaS（Platform as a Service）は、アプリケーションの開発に必要なプラットフォームをインターネットを通じて提供するサービスモデル。開発ツールやデータベース管理システムなどが含まれる。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'インフラストラクチャ（サーバーやストレージなど）をインターネットを通じてサービスとして提供するモデルを何というか？',
@@ -44,6 +50,7 @@ List<QuizItem> get category1_20 {
       choices: ["PaaS", "IaaS", "DaaS", "ASP"],
       comment:
           "IaaS（Infrastructure as a Service）は、サーバーやストレージ、ネットワークなどのコンピューティングインフラストラクチャをインターネット経由で提供するサービスモデル。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'デスクトップ環境をインターネットを通じてサービスとして提供するモデルを何というか？',
@@ -51,6 +58,7 @@ List<QuizItem> get category1_20 {
       choices: ["IaaS", "DaaS", "SaaS", "PaaS"],
       comment:
           "DaaS（Desktop as a Service）は、仮想化技術を用いてデスクトップ環境をインターネット経由で提供するサービスモデル。ユーザーは場所を選ばずに同じデスクトップ環境にアクセス可能。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '特定のアプリケーションソフトウェアをインターネットを通じて提供するサービスを何というか？',
@@ -58,6 +66,7 @@ List<QuizItem> get category1_20 {
       choices: ["DaaS", "ASP", "SaaS", "PaaS"],
       comment:
           "ASP（Application Service Provider）は、特定のアプリケーションソフトウェアをインターネット経由で提供するサービス。顧客はソフトウェアを購入・インストールする代わりに、サービスとしてアプリケーションを利用する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ウェブサイトの運用に必要なサーバーをレンタルするサービスを何というか？',
@@ -65,6 +74,7 @@ List<QuizItem> get category1_20 {
       choices: ["ASP", "ホスティングサービス", "ハウジングサービス", "クラウドコンピューティング"],
       comment:
           "ホスティングサービスは、ウェブサイトをインターネット上で公開するために必要なサーバーをレンタルし、その運用を代行するサービス。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '顧客が所有するサーバーをデータセンターに設置し、運用するサービスを何というか？',
@@ -72,6 +82,7 @@ List<QuizItem> get category1_20 {
       choices: ["ホスティングサービス", "ハウジングサービス", "クラウドサービス", "ASP"],
       comment:
           "ハウジングサービスは、顧客が自身で所有するサーバー機器を、サービス提供者のデータセンターに設置し、ネットワーク接続や電源、冷却などのインフラを利用して運用するサービス。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '企業が自社のデータセンター内に物理的なサーバーとストレージを設置し、自己管理するIT運用モデルを何というか？',
@@ -79,6 +90,7 @@ List<QuizItem> get category1_20 {
       choices: ["クラウドコンピューティング", "オンプレミス", "SaaS", "IaaS"],
       comment:
           "オンプレミスは、企業が自社の物理的施設内にITインフラを持ち、自身で全てを管理する運用モデル。データのコントロールとセキュリティが必要な場合に選ばれる。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '新技術や製品の実現可能性を検証するために行う、初期の試験運用を何というか？',
@@ -86,6 +98,7 @@ List<QuizItem> get category1_20 {
       choices: ["PoC", "プロトタイピング", "パイロットテスト", "ベータテスト"],
       comment:
           "PoC（Proof of Concept）は、新技術やサービスのコンセプトが実現可能であるかを確認するための初期段階のテスト。通常、大規模な投資を行う前に実施される。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '異なるシステム間での相互運用性を確保するために設計されたソフトウェアアーキテクチャは何か？',
@@ -93,6 +106,7 @@ List<QuizItem> get category1_20 {
       choices: ["API", "SOA", "マイクロサービス", "IaaS"],
       comment:
           "SOA（Service Oriented Architecture）は、異なるシステムやコンポーネントが協調して機能するためのソフトウェアアーキテクチャ。サービスの再利用を促進し、システム間の統合を容易にする。",
+      importance: QuizImportanceType.high,
     ),
   ];
   return List.generate(quizItems.length, (index) {

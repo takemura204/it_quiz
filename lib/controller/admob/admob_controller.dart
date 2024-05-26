@@ -104,21 +104,14 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
 
   ///インターステシャル広告表示
   Future showAdInterstitial() async {
-    final adShowCount = state.adShowCount;
-    if (adShowCount == 0) {
-      state = state.copyWith(adShowCount: adShowCount + 1);
+    final adShowCount = state.adShowCount + 1;
+    state = state.copyWith(adShowCount: adShowCount);
+
+    if (adShowCount % 2 == 0) {
       final interstitialAd = await createNewInterstitialAd();
       if (interstitialAd != null) {
         interstitialAd.show();
       }
-    } else if (adShowCount == 3) {
-      state = state.copyWith(adShowCount: 0);
-      final interstitialAd = await createNewInterstitialAd();
-      if (interstitialAd != null) {
-        interstitialAd.show();
-      }
-    } else {
-      state = state.copyWith(adShowCount: adShowCount + 1);
     }
   }
 }

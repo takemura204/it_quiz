@@ -17,7 +17,10 @@ class _QuizList extends ConsumerWidget {
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               final quiz = quizList[index];
-              return _QuizCard(quiz: quiz, index: index);
+              return _QuizCard(
+                quiz: quiz,
+                index: index,
+              );
             },
             childCount: quizList.length,
           ),
@@ -39,11 +42,65 @@ class _QuizCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final correctRate =
-        ((quiz.correctNum / quiz.quizItemList.length) * 100).round();
+    final goalScore = quiz.quizItemList.length;
+    final currentScore = quiz.quizItemList
+        .where((x) => x.status == QuizStatusType.correct)
+        .toList()
+        .length;
+    final correctRate = ((currentScore / goalScore) * 100).round();
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
+
+    final isShowHomeTutorial = ref
+        .watch(tutorialControllerProvider.select((s) => s.isShowHomeTutorial));
+    Future<void>.delayed(Duration.zero, () async {
+      if (isShowHomeTutorial && index == 0) {
+        ref
+            .read(tutorialControllerProvider.notifier)
+            .setIsShowHomeTutorial(false);
+        ref.read(tutorialControllerProvider.notifier).showHomeTutorial(
+              context: context,
+              onClickTarget: (target) {
+                HapticFeedback.lightImpact();
+                if (target.identify == "homeTarget1") {
+                  ref
+                      .read(quizModelProvider.notifier)
+                      .setQuizType(QuizStyleType.study);
+                  ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
+                  ref.read(quizModelProvider.notifier).tapQuizIndex(index);
+                  ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
+                  showDialog(
+                      context: context, builder: (_) => StudyModal(quiz: quiz));
+                } else if (target.identify == "homeTarget5") {
+                  ref
+                      .read(quizModelProvider.notifier)
+                      .setStudyType(StudyType.learn);
+                  ref
+                      .read(homeQuizScreenProvider.notifier)
+                      .setSelectStudyQuiz();
+                }
+              },
+              onFinish: () {
+                Navigator.of(context).pop();
+                final selectStudyQuiz =
+                    ref.read(homeQuizScreenProvider).selectStudyQuiz!;
+                context.showScreen(
+                  QuizLearnScreenArguments(
+                    quiz: selectStudyQuiz,
+                  ).generateRoute(),
+                );
+                ref
+                    .read(tutorialControllerProvider.notifier)
+                    .setIsShowLearnTutorial(true);
+              },
+            );
+      }
+    });
+
+    final homeTarget1 =
+        ref.read(tutorialControllerProvider.notifier).homeTarget1;
     return GestureDetector(
+      key: index == 0 && quiz.categoryId == 1 ? homeTarget1 : null,
       onTap: () {
         if (isPremium) {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
@@ -56,14 +113,26 @@ class _QuizCard extends ConsumerWidget {
               context: context,
               builder: (_) => NeedPremiumModal(
                     title: '全てのクイズを解放しますか？',
-                    subWidget: const Row(
+                    subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Text(
-                            '支払いは一度きり。プレミアムに登録すると、\n全ての用語・クイズを解放できます。',
-                            style: TextStyle(color: Colors.black87),
+                          child: RichText(
                             textAlign: TextAlign.center,
+                            text: const TextSpan(
+                              style: TextStyle(color: Colors.black87),
+                              children: [
+                                TextSpan(
+                                  text: 'プレミアム特典の支払いは一度きり。\n',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '購入すると、全ての問題・クイズが解放されます。',
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -75,6 +144,7 @@ class _QuizCard extends ConsumerWidget {
                     },
                   ));
         }
+        HapticFeedback.lightImpact();
       },
       child: Container(
         color: isPremium ? Colors.white : Colors.grey.shade200,
@@ -107,6 +177,13 @@ class _ProgressIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final goalScore = quiz.quizItemList.length;
+    final currentScore = quiz.quizItemList
+        .where((x) => x.status == QuizStatusType.correct)
+        .toList()
+        .length;
+    final isCompleted = goalScore == currentScore;
+
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;
     return Column(
@@ -114,25 +191,25 @@ class _ProgressIcon extends ConsumerWidget {
       children: [
         Expanded(
           child: VerticalDivider(
-            color: Colors.grey.shade300,
+            color: isCompleted ? context.mainColor : context.secondColor,
             thickness: 3,
           ),
         ),
         ProgressCrilcleChart(
           width: 50,
           size: 50,
-          goalScore: quiz.quizItemList.length,
-          currentScore: quiz.correctNum,
+          goalScore: goalScore,
+          currentScore: currentScore,
           thickness: 0.1,
           widget: Icon(
             isPremium ? Icons.check : LineIcons.lock,
-            color: quiz.isCompleted ? context.mainColor : Colors.black26,
+            color: isCompleted ? context.mainColor : Colors.black26,
             size: 25,
           ),
         ),
         Expanded(
           child: VerticalDivider(
-            color: Colors.grey.shade300,
+            color: isCompleted ? context.mainColor : context.secondColor,
             thickness: 3,
           ),
         ),

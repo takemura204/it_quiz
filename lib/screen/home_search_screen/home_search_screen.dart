@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +16,7 @@ import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../view/admob/admob_banner.dart';
+import '../../view/button_icon/save_button.dart';
 import '../../view/modals/premium_modal.dart';
 import '../screen_argument.dart';
 
@@ -57,11 +59,13 @@ class HomeSearchScreen extends ConsumerWidget {
                   isNotTextEmpty: isNotTextEmpty,
                 ),
               ),
-              // SliverToBoxAdapter(child: Text('${filteredQuizItemList.length}')),
               _QuizResultView(
                 filteredQuizItemList: filteredQuizItemList,
                 isScrollLoading: isScrollLoading,
                 maxItemsToDisplay: maxItemsToDisplay,
+              ),
+              const SliverToBoxAdapter(
+                child: Gap(70),
               ),
             ],
           ),
@@ -89,6 +93,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
               ref
                   .read(homeSearchScreenProvider.notifier)
                   .tapIsSavedFilterButton();
+              HapticFeedback.lightImpact();
             },
             icon: Icon(
               isSavedFilter ? Icons.bookmark_sharp : LineIcons.bookmark,

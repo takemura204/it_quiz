@@ -369,6 +369,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  easy_animate:
+    dependency: "direct main"
+    description:
+      name: easy_animate
+      sha256: "747c05422373a8a38096b0f099f97dd2c8ddd5540e147feaad2a19e3810cb572"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   equatable:
     dependency: transitive
     description:
@@ -1157,6 +1165,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  lottie:
+    dependency: "direct main"
+    description:
+      name: lottie
+      sha256: a93542cc2d60a7057255405f62252533f8e8956e7e06754955669fd32fb4b216
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
   matcher:
     dependency: transitive
     description:
@@ -1525,6 +1541,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  simple_animations:
+    dependency: transitive
+    description:
+      name: simple_animations
+      sha256: "1ea7b93fb98e2a611b6865d632de55607b766328d14700143353129ee0559d3a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -1674,6 +1698,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  tutorial_coach_mark:
+    dependency: "direct main"
+    description:
+      name: tutorial_coach_mark
+      sha256: "1f1fd234790afb929dec7391a4d90aa54ffe8c8e4d278d9283df8e3f5ac5d63e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.11"
   typed_data:
     dependency: transitive
     description:

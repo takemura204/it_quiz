@@ -41,9 +41,10 @@ class _QuizResultView extends ConsumerWidget {
             return QuizItemCard(
               quizItem: quizItemList[index],
               studyType: StudyType.choice,
-              onPressed: () => ref
-                  .read(quizChoiceScreenProvider.notifier)
-                  .tapCheckBox(index),
+              onTap: () {
+                ref.read(quizChoiceScreenProvider.notifier).tapCheckBox(index);
+                HapticFeedback.lightImpact();
+              },
             );
           },
         ),
@@ -59,6 +60,8 @@ class _NextActionCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final choiceQuiz =
+        ref.watch(quizChoiceScreenProvider.select((s) => s.choiceQuiz));
     final quizList = ref
         .watch(quizModelProvider)
         .quizList
@@ -92,7 +95,7 @@ class _NextActionCard extends HookConsumerWidget {
                       : () {
                           Navigator.of(context).pop();
                           context.showScreen(QuizChoiceScreenArguments(
-                            quiz: quiz,
+                            quiz: choiceQuiz!,
                           ).generateRoute());
                         }),
               const Gap(20),
@@ -102,11 +105,9 @@ class _NextActionCard extends HookConsumerWidget {
                   width: context.width * 0.45,
                   height: 55,
                   text: "完了",
-                  onPressed: (quizIndex >= lastIndex)
-                      ? null
-                      : () {
-                          Navigator.of(context).pop();
-                        },
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
               ] else
                 PrimaryButton(
@@ -117,20 +118,21 @@ class _NextActionCard extends HookConsumerWidget {
                       ? null
                       : () {
                           Navigator.of(context).pop();
-                          context.showScreen(
-                            QuizChoiceScreenArguments(
-                              quiz: quizList[quizIndex + 1],
-                            ).generateRoute(),
-                          );
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .tapQuizIndex(quizIndex + 1);
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .tapQuizCard(quizList[quizIndex + 1].id);
                           ref
                               .read(quizModelProvider.notifier)
                               .setStudyType(StudyType.choice);
+                          ref
+                              .read(homeQuizScreenProvider.notifier)
+                              .setSelectStudyQuiz();
+                          final selectStudyQuiz =
+                              ref.read(homeQuizScreenProvider).selectStudyQuiz;
+                          if (selectStudyQuiz!.quizItemList.isNotEmpty) {
+                            context.showScreen(
+                              QuizChoiceScreenArguments(
+                                quiz: selectStudyQuiz,
+                              ).generateRoute(),
+                            );
+                          }
                         },
                 ),
             ],

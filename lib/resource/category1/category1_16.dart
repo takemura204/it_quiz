@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 ///e-ビジネス
 List<QuizItem> get category1_16 {
@@ -10,18 +11,21 @@ List<QuizItem> get category1_16 {
       choices: ["ロングテール", "フリーミアム", "無店舗販売", "EC"],
       comment:
           "ロングテールは、従来のヒット商品中心の販売から脱却し、少量多品種の商品を幅広く取り揃えることで、多様なニーズに応えるビジネスモデル。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '基本機能を無料で提供しつつ、高度な機能やサービスを有料で提供するビジネスモデルを何というか？',
       ans: 'フリーミアム',
       choices: ["ロングテール", "フリーミアム", "無店舗販売", "EC"],
       comment: "フリーミアムは、基本的な機能やサービスを無料で提供し、追加機能や高度なサービスを有料オプションとして提供するビジネスモデル。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '実店舗を持たずに商品やサービスを販売するビジネススタイルを何というか？',
       ans: '無店舗販売',
       choices: ["フリーミアム", "無店舗販売", "EC", "O2O"],
       comment: "無店舗販売は、実際の店舗を持たずに、インターネットや通信販売などを通じて商品やサービスを提供するビジネススタイル。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'インターネットを利用して商品やサービスを販売することを何というか？',
@@ -29,6 +33,7 @@ List<QuizItem> get category1_16 {
       choices: ["無店舗販売", "EC", "O2O", "BtoC"],
       comment:
           "EC（Electronic Commerce）は、インターネットを利用した商取引のことで、オンラインショップや電子マーケットプレイスなどで商品やサービスが販売される。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'オンラインの情報をオフラインの行動につなげるビジネスモデルを何というか？',
@@ -36,6 +41,7 @@ List<QuizItem> get category1_16 {
       choices: ["EC", "O2O", "BtoC", "CtoC"],
       comment:
           "O2O（Online to Offline）は、オンラインでの情報やサービスを提供し、それをきっかけに消費者が実店舗を訪れるなどオフラインでの消費や行動につなげるビジネスモデル。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業が消費者に直接商品やサービスを提供するビジネスモデルを何というか？',
@@ -43,6 +49,7 @@ List<QuizItem> get category1_16 {
       choices: ["O2O", "BtoC", "CtoC", "BtoE"],
       comment:
           "BtoC（Business to Consumer）は、企業が最終消費者である個人に直接商品やサービスを販売するビジネスモデル。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '消費者が消費者に直接商品やサービスを提供する取引を何というか？',
@@ -50,6 +57,7 @@ List<QuizItem> get category1_16 {
       choices: ["BtoC", "CtoC", "BtoE", "EDI"],
       comment:
           "CtoC（Consumer to Consumer）は、個人間で商品やサービスが売買される取引のことで、オンラインオークションやフリーマーケットアプリなどがこのモデルに該当する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業が従業員に対して直接商品やサービスを提供するビジネスモデルを何というか？',
@@ -57,6 +65,7 @@ List<QuizItem> get category1_16 {
       choices: ["CtoC", "BtoE", "EDI", "EFT"],
       comment:
           "BtoE（Business to Employee）は、企業が自社の従業員に対して直接商品やサービスを提供するビジネスモデル。従業員向けの福利厚生サービスなどがこれに該当する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業間で文書やデータを電子的に交換するシステムは何か？',
@@ -64,6 +73,7 @@ List<QuizItem> get category1_16 {
       choices: ["BtoE", "EDI", "EFT", "キャッシュレス決済"],
       comment:
           "EDI（Electronic Data Interchange）は、注文書や請求書などの文書を企業間で電子的に交換することで、取引の効率化を図るシステム。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '金融機関間で資金の電子的な移動を行うシステムを何というか？',
@@ -71,12 +81,14 @@ List<QuizItem> get category1_16 {
       choices: ["EDI", "EFT", "キャッシュレス決済", "フィンテック"],
       comment:
           "EFT（Electronic Funds Transfer）は、銀行口座間で資金を電子的に移動させるシステム。オンラインバンキングや自動振込機などで利用される。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '現金を使用せずに決済を行う方法を総称して何というか？',
       ans: 'キャッシュレス決済',
       choices: ["キャッシュフロー決済", "キャッシュレス決済", "フィンテック", "クラウドファンディング"],
       comment: "キャッシュレス決済は、クレジットカード、電子マネー、QRコード決済など、現金を使用せずに行う決済方法の総称。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '金融サービスに情報技術を組み合わせた新しいサービスやビジネスモデルを何というか？',
@@ -84,6 +96,7 @@ List<QuizItem> get category1_16 {
       choices: ["ファイナンス", "フィンテック", "クラウドファンディング", "電子マーケットプレース"],
       comment:
           "フィンテック（FinTech）は、FinancialとTechnologyの合成語で、金融サービスに最新の情報技術を組み合わせて提供されるサービスやビジネスモデルを指す。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '多数の個人から少額の資金を集めてプロジェクトやビジネスを資金調達する方法を何というか？',
@@ -91,6 +104,7 @@ List<QuizItem> get category1_16 {
       choices: ["フィンテック", "クラウドファンディング", "電子マーケットプレース", "オンラインモール"],
       comment:
           "クラウドファンディングは、インターネットを通じて多数の個人から少額の資金を募り、新しいプロジェクトやビジネスの資金調達を行う方法。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'インターネット上で商品やサービスの売買が行える仮想の市場を何というか？',
@@ -98,6 +112,7 @@ List<QuizItem> get category1_16 {
       choices: ["クラウドファンディング", "電子マーケットプレース", "オンラインモール", "電子オークション"],
       comment:
           "電子マーケットプレースは、インターネット上に設けられた仮想の市場で、様々な出品者が商品やサービスを提供し、購入者がそれを購入できるプラットフォーム。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '複数の店舗が集まるインターネット上のショッピングモールを何というか？',
@@ -105,6 +120,7 @@ List<QuizItem> get category1_16 {
       choices: ["電子マーケットプレース", "オンラインモール", "電子オークション", "インターネットバンキング"],
       comment:
           "オンラインモールは、インターネット上で複数の店舗が集まり、一つのプラットフォーム内で商品やサービスを提供するショッピングモールの形態。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'インターネットを利用して商品の競売を行うシステムを何というか？',
@@ -112,6 +128,7 @@ List<QuizItem> get category1_16 {
       choices: ["オンラインモール", "電子オークション", "インターネットバンキング", "電子マネー"],
       comment:
           "電子オークションは、インターネットを通じて行われる競売のことで、出品者が商品を登録し、購入希望者が価格を競り合うオンラインプラットフォーム。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'インターネットを通じて銀行口座の管理や送金、支払いなどの金融取引を行うサービスを何というか？',
@@ -119,6 +136,7 @@ List<QuizItem> get category1_16 {
       choices: ["電子オークション", "インターネットバンキング", "電子マネー", "インターネットトレーディング"],
       comment:
           "インターネットバンキングは、インターネットを利用して銀行口座の管理や送金、支払いなどの金融取引を自宅や職場などから行えるサービス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'プリペイド方式で利用されるキャッシュレス決済手段は何か？',
@@ -126,6 +144,7 @@ List<QuizItem> get category1_16 {
       choices: ["デビットカード", "クレジットカード", "電子マネー", "プリペイドカード"],
       comment:
           "電子マネーは、あらかじめチャージされた金額を基に使用されるプリペイド方式のキャッシュレス決済手段。利用者は事前に金額を決済端末に入金し、店舗などでスムーズに支払いができる。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'インターネットを通じて証券取引を行うサービスを何というか？',
@@ -133,6 +152,7 @@ List<QuizItem> get category1_16 {
       choices: ["インターネットバンキング", "電子マネー", "インターネットトレーディング", "エスクローサービス"],
       comment:
           "インターネットトレーディングは、インターネットを利用して株式や投資信託などの証券取引を行うサービス。手軽に取引が行えることが特徴。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '取引の信頼性を確保するために、第三者が資金の保管や商品の受け渡しを仲介するサービスを何というか？',
@@ -140,6 +160,7 @@ List<QuizItem> get category1_16 {
       choices: ["インターネットトレーディング", "エスクローサービス", "クラウドソーシング", "暗号資産"],
       comment:
           "エスクローサービスは、オンライン取引において、資金の保管や商品の受け渡しを第三者が仲介することで取引の信頼性を確保するサービス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'インターネットを通じて不特定多数から仕事を募集し、外部の人材に業務を委託する手法を何というか？',
@@ -147,18 +168,21 @@ List<QuizItem> get category1_16 {
       choices: ["エスクローサービス", "クラウドソーシング", "暗号資産", "アカウントアグリゲーション"],
       comment:
           "クラウドソーシングは、インターネットを利用して不特定多数の個人や企業から仕事を募集し、外部の人材に業務を委託する手法。多様なスキルを持つ人材の活用が可能。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'デジタル資産または暗号通貨の一般的な呼び名は何か？',
       ans: '暗号資産',
       choices: ["デジタル証券", "ブロックチェーン", "暗号資産", "デジタルマネー"],
       comment: "暗号資産（旧称：仮想通貨）は、ブロックチェーン技術を利用して作られるデジタル形式の資産。代表的なものにビットコインがある。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '複数の金融アカウント情報を一元管理するためのサービスは何か？',
       ans: 'アカウントアグリゲーション',
       choices: ["アカウントアグリゲーション", "エスクローサービス", "クラウドソーシング", "フィンテック"],
       comment: "アカウントアグリゲーションは、一つのインターフェースを通じて複数の金融機関の口座情報を一元管理できるサービス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '一度の認証で顧客の身元情報を確認し、金融サービスへのアクセスを提供するプロセスを何というか？',
@@ -166,12 +190,14 @@ List<QuizItem> get category1_16 {
       choices: ["eKYC", "AML", "KYC", "デジタルID"],
       comment:
           "eKYC（Electronic Know Your Customer）は、電子的手段を用いて顧客の身元を迅速に確認し、金融サービスへのアクセスを提供するプロセス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '銀行口座から直接引き落とされる支払い方法を何というか？',
       ans: 'デビットカード',
       choices: ["デビットカード", "クレジットカード", "プリペイドカード", "電子マネー"],
       comment: "デビットカードは、使用時に連携している銀行口座から直接金額が引き落とされる支払い方法。",
+      importance: QuizImportanceType.low,
     ),
   ];
 

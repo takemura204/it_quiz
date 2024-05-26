@@ -11,7 +11,6 @@ class _QuizResultView extends ConsumerWidget {
       children: [
         Card(
           elevation: 0,
-          color: Colors.white,
           child: Container(
             width: context.width * 1,
             decoration: BoxDecoration(
@@ -39,11 +38,19 @@ class _QuizResultView extends ConsumerWidget {
           shrinkWrap: true,
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
-            return QuizItemCard(
-              quizItem: quizItemList[index],
-              studyType: StudyType.learn,
-              onPressed: () =>
-                  ref.read(quizLearnScreenProvider.notifier).tapCheckBox(index),
+            final learnResultTarget2 = ref
+                .read(tutorialControllerProvider.notifier)
+                .learnResultTarget2;
+            return Container(
+              key: index == 0 ? learnResultTarget2 : null,
+              child: QuizItemCard(
+                  quizItem: quizItemList[index],
+                  studyType: StudyType.learn,
+                  onTap: () {
+                    ref
+                        .read(quizLearnScreenProvider.notifier)
+                        .tapSavedButton(quizItemList[index]);
+                  }),
             );
           },
         ),
@@ -53,16 +60,20 @@ class _QuizResultView extends ConsumerWidget {
 }
 
 class _NextActionCard extends HookConsumerWidget {
-  const _NextActionCard(this.quiz);
-
-  final Quiz quiz;
+  const _NextActionCard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider).quizList;
     final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
+    final learnQuiz =
+        ref.watch(quizLearnScreenProvider.select((s) => s.learnQuiz));
+    final learnResultTarget3 =
+        ref.read(tutorialControllerProvider.notifier).learnResultTarget3;
+
     return Card(
+      key: learnResultTarget3,
       elevation: 0,
       color: Colors.white,
       child: Container(
@@ -84,7 +95,7 @@ class _NextActionCard extends HookConsumerWidget {
                         .updateHistoryQuiz();
                     Navigator.of(context).pop();
                     context.showScreen(QuizLearnScreenArguments(
-                      quiz: quiz,
+                      quiz: learnQuiz!,
                     ).generateRoute());
                   }),
               const Gap(10),
@@ -101,7 +112,7 @@ class _NextActionCard extends HookConsumerWidget {
                         Navigator.of(context).pop();
                         context.showScreen(
                           QuizChoiceScreenArguments(
-                            quiz: quiz,
+                            quiz: learnQuiz!,
                           ).generateRoute(),
                         );
 

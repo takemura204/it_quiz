@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/view/button_icon/save_button.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../model/quiz_item/quiz_item.dart';
@@ -10,13 +11,11 @@ import '../button_icon/check_buton.dart';
 
 class QuizItemCard extends ConsumerWidget {
   const QuizItemCard(
-      {required this.quizItem,
-      required this.studyType,
-      required this.onPressed});
+      {required this.quizItem, required this.studyType, required this.onTap});
 
   final QuizItem quizItem;
   final StudyType studyType;
-  final VoidCallback? onPressed;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,7 +63,6 @@ class QuizItemCard extends ConsumerWidget {
                             : quizItem.status == QuizStatusType.correct
                                 ? Colors.green.withOpacity(0.7)
                                 : Colors.red.withOpacity(0.7),
-                        decoration: TextDecoration.underline,
                       ),
                     ),
                     if (studyType == StudyType.choice) ...[
@@ -147,9 +145,18 @@ class QuizItemCard extends ConsumerWidget {
 
             const Gap(10),
 
-            ///苦手ボタン
-            CheckBoxIconButton(
-                isCheck: quizItem.isWeak, size: 40, onPressed: onPressed),
+            if (studyType != StudyType.learn)
+              //苦手ボタン
+              CheckBoxIconButton(
+                  isCheck: quizItem.isWeak, size: 40, onTap: onTap)
+            else
+              //保存ボタン
+              SaveIconButton(
+                quizItem: quizItem,
+                size: 30,
+                isShowText: true,
+                onTap: onTap,
+              ),
             const Gap(5),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,12 +15,13 @@ class PremiumCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final premiumCardIndex = ref
         .watch(homeSettingProvider.select((state) => state.premiumCardIndex));
-    final imagePath = 'assets/image/premium_$premiumCardIndex.svg';
+    final imagePath = 'assets/image/premium/premium_$premiumCardIndex.svg';
 
     return GestureDetector(
       onTap: () {
         context
             .showScreen(const PremiumDetailScreenArguments().generateRoute());
+        HapticFeedback.lightImpact();
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -68,15 +70,23 @@ class PremiumCard extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          '支払いは一度きり。',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            color: Colors.black87,
+                          ),
+                        ),
                         const Text(
-                          '支払いは一度きり。\nプレミアムプランの購入で、たくさんの特典があるため、もっと学びたい方におすすめです。',
+                          'プレミアムプランの購入で、たくさんの特典があるため、もっと学びたい方におすすめです。',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 12,
                             color: Colors.black87,
                           ),
                         ),
-                        const Gap(5),
+                        const Gap(8),
                         Row(
                           children: [
                             Icon(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
+import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/modals/weak_modal.dart';
@@ -23,7 +25,6 @@ import '../../view/modals/study_modal/study_modal.dart';
 import '../screen_argument.dart';
 
 part 'home_quiz_list.dart';
-
 part 'home_quiz_view.dart';
 
 class HomeQuizScreen extends HookConsumerWidget {
@@ -82,7 +83,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tabIndex = ref.watch(homeQuizScreenProvider).tabIndex;
     return AppBar(
-      title: Text(I18n().titleName),
+      title: Text(I18n().appName),
       centerTitle: true,
       actions: [
         Padding(
@@ -92,6 +93,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
               context.showScreen(
                 const QuizHistoryScreenArguments().generateRoute(),
               );
+              HapticFeedback.lightImpact();
             },
             icon: Icon(
               LineIcons.history,
@@ -107,8 +109,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         child: TabBar(
           tabAlignment: TabAlignment.center,
           controller: tabController,
-          onTap: (index) =>
-              ref.read(homeQuizScreenProvider.notifier).setTabIndex(index),
+          onTap: (index) {
+            ref.read(homeQuizScreenProvider.notifier).setTabIndex(index);
+            HapticFeedback.lightImpact();
+          },
           isScrollable: true,
           labelColor: context.mainColor,
           labelStyle: const TextStyle(fontWeight: FontWeight.bold),

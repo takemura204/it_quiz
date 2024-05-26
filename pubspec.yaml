@@ -7,7 +7,7 @@ publish_to: none
 #
 # - ストアでバージョン x.y.z+a が審査承認済みなとき、次にアップロードするバージョンは x.y.(z+1)+(a+1)
 # - ストアにバージョン x.y.z+a をアップロード済みのとき、次にアップロードするバージョンは x.y.z+(a+1)
-version: 1.0.5+5
+version: 1.0.9+9
 
 environment:
   sdk: ">=2.16.2 <4.0.0"
@@ -159,6 +159,15 @@ dependencies:
   #トラッキングポリシーモーダルを表示したい
   app_tracking_transparency: ^2.0.4
 
+  #簡単にアニメーションをつけたい
+  easy_animate: ^0.0.3
+
+  #チュートリアルでコーチマークをつけたい
+  tutorial_coach_mark: ^1.2.11
+
+  #アニメーション画像を導入したい
+  lottie: ^2.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -183,8 +192,10 @@ flutter:
 
   #画像
   assets:
+    - assets/animation/
     - assets/icon/
     - assets/image/
+    - assets/image/premium/
     - assets/launcher/
 
 flutter_launcher_icons:

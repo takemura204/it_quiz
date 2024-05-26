@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_choice/quiz_choice_screen_state.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -54,11 +55,12 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   ///クイズ更新
   void _loadQuizList() {
+    final choiceQuiz = quiz;
     final quizItemList = [...state.quizItemList];
     final newQuizItems = [...quiz.quizItemList];
     newQuizItems.shuffle();
     quizItemList.addAll(newQuizItems);
-    state = state.copyWith(quizItemList: quizItemList);
+    state = state.copyWith(choiceQuiz: choiceQuiz, quizItemList: quizItemList);
   }
 
   ///学習時間計測
@@ -109,6 +111,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         isPremium: quizItemList[quizIndex].isPremium,
       );
       state = state.copyWith(isJudge: true, quizItemList: quizItemList);
+      HapticFeedback.mediumImpact();
     }
     //不正解
     else {
@@ -127,6 +130,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         isPremium: quizItemList[quizIndex].isPremium,
       );
       state = state.copyWith(isJudge: false, quizItemList: quizItemList);
+      HapticFeedback.lightImpact();
     }
   }
 
@@ -205,21 +209,16 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     quizItemList.sort((a, b) => a.quizId.compareTo(b.quizId));
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
-    final correctNum = quizItemList
-        .where((x) => x.status == QuizStatusType.correct)
-        .toList()
-        .length;
 
-    final isCompleted = quizItemList.length == correctNum;
-    final updateQuiz = quiz.copyWith(
+    final choiceQuiz = state.choiceQuiz!;
+    final updateQuiz = choiceQuiz.copyWith(
       duration: duration,
       quizItemList: updateQuizItemList(),
-      correctNum: correctNum,
-      isCompleted: isCompleted,
       timeStamp: DateTime.now(),
       studyType: studyType,
     );
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
+    ref.read(homeQuizScreenProvider.notifier).updateSelectQuiz(updateQuiz);
   }
 
   List<QuizItem> updateQuizItemList() {
@@ -250,8 +249,9 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         .where((x) => x.status == QuizStatusType.correct)
         .toList()
         .length;
+    final choiceQuiz = state.choiceQuiz!;
     final isCompleted = quizItemList.length == correctNum;
-    final updateQuiz = quiz.copyWith(
+    final updateQuiz = choiceQuiz.copyWith(
       duration: duration,
       quizItemList: quizItemList,
       correctNum: correctNum,

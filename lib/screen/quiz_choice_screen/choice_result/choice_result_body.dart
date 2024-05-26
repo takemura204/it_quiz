@@ -32,7 +32,6 @@ class _ChoiceResultBody extends ConsumerWidget {
                     const ResultTryCard(),
 
                   ResultDashboardCard(quizItemList, duration),
-
                   const Gap(15),
 
                   ///正解した問題リスト

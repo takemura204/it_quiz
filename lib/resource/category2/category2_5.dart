@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category2_5 {
   final quizItems = [
@@ -8,12 +9,14 @@ List<QuizItem> get category2_5 {
       ans: 'インシデント管理',
       choices: ["インシデント管理", "問題管理", "変更管理", "リリース及び展開管理"],
       comment: "インシデント管理は、サービスの障害や問題が発生した際に、それを迅速に解決し、サービスの正常な運用を回復させるためのプロセス。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'インシデントの根本原因を特定し、再発防止のための対策を講じるプロセスは何か？',
       ans: '問題管理',
       choices: ["問題管理", "インシデント管理", "変更管理", "構成管理"],
       comment: "問題管理は、インシデントの根本原因を特定し、再発防止のための対策を講じることで、サービスの品質を維持・向上させるプロセス。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: 'ITサービスにおける各構成要素（CI）のバージョン、構成、相互関係を管理し、記録するプロセスは何か？',
@@ -21,18 +24,21 @@ List<QuizItem> get category2_5 {
       choices: ["構成管理", "変更管理", "インシデント管理", "問題管理"],
       comment:
           "構成管理は、ITサービスを構成する要素の詳細な情報を管理し、その正確性を維持することで、サービスの安定性と信頼性を確保するプロセス。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'ITサービスに影響を与える変更を管理し、承認された方法で実施するプロセスは何か？',
       ans: '変更管理',
       choices: ["変更管理", "構成管理", "インシデント管理", "問題管理"],
       comment: "変更管理は、ITサービスに影響を与える変更を統制し、承認された方法で効果的かつ効率的に変更を実施するためのプロセス。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '新しいまたは変更されたITサービスを本番環境に導入する活動を管理するプロセスは何か？',
       ans: 'リリース及び展開管理',
       choices: ["リリース及び展開管理", "変更管理", "構成管理", "継続的改善"],
       comment: "リリース及び展開管理は、新しいまたは変更されたITサービスを計画的に本番環境に導入し、リリースを成功させるためのプロセス。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: 'ITサービスおよびその管理プロセスの効果性と効率性を継続的に監視し、改善する活動は何か？',
@@ -40,6 +46,7 @@ List<QuizItem> get category2_5 {
       choices: ["継続的改善", "問題管理", "変更管理", "リリース及び展開管理"],
       comment:
           "継続的改善は、ITサービスおよびサービス管理プロセスの効果性と効率性を継続的に監視し、改善策を実施することでサービス品質を向上させる活動。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ユーザーからの問い合わせやサポート要求に対応するための一元的な窓口は何か？',
@@ -47,6 +54,7 @@ List<QuizItem> get category2_5 {
       choices: ["サービスデスク", "コールセンター", "ヘルプデスク", "カスタマーサポート"],
       comment:
           "サービスデスクは、ユーザーからの問い合わせやサポート要求に対応するための一元的な窓口で、インシデント管理やリクエストフルフィルメントなどの機能を提供する。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '問題やインシデントの解決が困難な場合に、上位レベルの専門家や管理者へと対応を引き継ぐプロセスは何か？',
@@ -54,6 +62,7 @@ List<QuizItem> get category2_5 {
       choices: ["エスカレーション", "デリゲーション", "コーディネーション", "トリアージ"],
       comment:
           "エスカレーションは、問題やインシデントの解決が困難な場合に、より高いレベルの専門知識や権限を持つ上位レベルへと対応を引き継ぐプロセス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'よくある質問とその回答をまとめたリストは何と呼ばれるか？',
@@ -61,6 +70,7 @@ List<QuizItem> get category2_5 {
       choices: ["FAQ", "Q&A", "インフォメーションセンター", "ナレッジベース"],
       comment:
           "FAQ（Frequently Asked Questions）は、よくある質問とその回答をまとめたリストで、ユーザーが自ら問題を解決できるよう支援する。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '自然言語処理を用いてユーザーの問い合わせに自動で回答するプログラムは何か？',
@@ -68,6 +78,7 @@ List<QuizItem> get category2_5 {
       choices: ["チャットボット", "AIアシスタント", "仮想アシスタント", "自動応答システム"],
       comment:
           "チャットボットは、自然言語処理技術を用いてユーザーの問い合わせに自動で回答するプログラムで、サービスデスクの負荷軽減などに利用される。",
+      importance: QuizImportanceType.low,
     ),
   ];
 
