@@ -39,7 +39,6 @@ class _QuizResultView extends ConsumerWidget {
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
             return QuizItemCard(
-              index: index,
               quizItem: quizItemList[index],
               studyType: StudyType.choice,
               onTap: () {

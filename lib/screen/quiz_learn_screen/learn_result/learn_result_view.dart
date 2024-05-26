@@ -44,7 +44,6 @@ class _QuizResultView extends ConsumerWidget {
             return Container(
               key: index == 0 ? learnResultTarget2 : null,
               child: QuizItemCard(
-                  index: index,
                   quizItem: quizItemList[index],
                   studyType: StudyType.learn,
                   onTap: () {

@@ -5,30 +5,21 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button_icon/save_button.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';
 import '../button_icon/check_buton.dart';
 
 class QuizItemCard extends ConsumerWidget {
   const QuizItemCard(
-      {required this.index,
-      required this.quizItem,
-      required this.studyType,
-      required this.onTap});
+      {required this.quizItem, required this.studyType, required this.onTap});
 
-  final int index;
   final QuizItem quizItem;
   final StudyType studyType;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     return Card(
-      // key: index == 0 && quizItemList.first.ans == quizItem.ans
-      //     ? learnResultTarget2
-      //     : null,
       elevation: 0,
       color: Colors.white,
       child: Container(

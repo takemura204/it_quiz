@@ -147,7 +147,6 @@ class _Body extends ConsumerWidget {
 
                     ///チェックボックスがすぐに反映されない。
                     QuizItemCard(
-                      index: index,
                       quizItem: quizList[index].quizItemList[quizItemIndex],
                       studyType: quizList[index].studyType,
                       onTap: () => ref

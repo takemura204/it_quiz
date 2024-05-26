@@ -81,6 +81,7 @@ class HomeSettingScreen extends ConsumerWidget {
 
                   const SettingTitleBar(title: "サポート", onTap: null),
                   const _SettingTutorial(),
+                  _Divider(),
                   const _SettingContact(),
                   _Divider(),
                   const _SettingReview(),
