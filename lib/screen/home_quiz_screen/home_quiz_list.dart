@@ -178,11 +178,8 @@ class _ProgressIcon extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goalScore = quiz.quizItemList.length;
-    final currentScore = quiz.quizItemList
-        .where((x) => x.status == QuizStatusType.correct)
-        .toList()
-        .length;
-    final isCompleted = goalScore == currentScore;
+    final currentScore = quiz.correctNum;
+    final isCompleted = quiz.isCompleted;
 
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;

@@ -27,11 +27,11 @@ class MainScreen extends ConsumerWidget {
     final isShowTutorialModal = ref
         .watch(tutorialControllerProvider.select((s) => s.isShowTutorialModal));
     Future<void>.delayed(Duration.zero, () async {
+      //チュートリアルモーダル表示
       if (isShowTutorialModal) {
         ref
             .read(tutorialControllerProvider.notifier)
             .setIsShowTutorialModal(false);
-        //アンケートモーダル表示
         await showDialog(
           barrierDismissible: false,
           context: context,
@@ -57,7 +57,7 @@ class _Body extends ConsumerWidget {
 
     return IndexedStack(
       sizing: StackFit.expand,
-      index: state.currentIndex,
+      index: state.currentTabIndex,
       children: const [
         HomeQuizScreen(),
         HomeSearchScreen(),
@@ -108,7 +108,7 @@ class _BottomNavBar extends ConsumerWidget {
             label: I18n().titleSetting,
           ),
         ],
-        currentIndex: state.currentIndex,
+        currentIndex: state.currentTabIndex,
         fixedColor: context.mainColor,
         onTap: (index) async {
           ref.watch(mainScreenControllerProvider.notifier).setTabIndex(index);

@@ -16,7 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainScreenState {
-  int get currentIndex => throw _privateConstructorUsedError;
+  int get currentTabIndex => throw _privateConstructorUsedError;
+  int get inAppReviewCount => throw _privateConstructorUsedError;
+  bool get isShowInAppReview => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainScreenStateCopyWith<MainScreenState> get copyWith =>
@@ -29,7 +31,8 @@ abstract class $MainScreenStateCopyWith<$Res> {
           MainScreenState value, $Res Function(MainScreenState) then) =
       _$MainScreenStateCopyWithImpl<$Res, MainScreenState>;
   @useResult
-  $Res call({int currentIndex});
+  $Res call(
+      {int currentTabIndex, int inAppReviewCount, bool isShowInAppReview});
 }
 
 /// @nodoc
@@ -45,13 +48,23 @@ class _$MainScreenStateCopyWithImpl<$Res, $Val extends MainScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = null,
+    Object? currentTabIndex = null,
+    Object? inAppReviewCount = null,
+    Object? isShowInAppReview = null,
   }) {
     return _then(_value.copyWith(
-      currentIndex: null == currentIndex
-          ? _value.currentIndex
-          : currentIndex // ignore: cast_nullable_to_non_nullable
+      currentTabIndex: null == currentTabIndex
+          ? _value.currentTabIndex
+          : currentTabIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      inAppReviewCount: null == inAppReviewCount
+          ? _value.inAppReviewCount
+          : inAppReviewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      isShowInAppReview: null == isShowInAppReview
+          ? _value.isShowInAppReview
+          : isShowInAppReview // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -64,7 +77,8 @@ abstract class _$$_MainScreenStateCopyWith<$Res>
       __$$_MainScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int currentIndex});
+  $Res call(
+      {int currentTabIndex, int inAppReviewCount, bool isShowInAppReview});
 }
 
 /// @nodoc
@@ -78,13 +92,23 @@ class __$$_MainScreenStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = null,
+    Object? currentTabIndex = null,
+    Object? inAppReviewCount = null,
+    Object? isShowInAppReview = null,
   }) {
     return _then(_$_MainScreenState(
-      currentIndex: null == currentIndex
-          ? _value.currentIndex
-          : currentIndex // ignore: cast_nullable_to_non_nullable
+      currentTabIndex: null == currentTabIndex
+          ? _value.currentTabIndex
+          : currentTabIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      inAppReviewCount: null == inAppReviewCount
+          ? _value.inAppReviewCount
+          : inAppReviewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      isShowInAppReview: null == isShowInAppReview
+          ? _value.isShowInAppReview
+          : isShowInAppReview // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -92,15 +116,24 @@ class __$$_MainScreenStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MainScreenState implements _MainScreenState {
-  const _$_MainScreenState({this.currentIndex = 0});
+  const _$_MainScreenState(
+      {this.currentTabIndex = 0,
+      this.inAppReviewCount = 0,
+      this.isShowInAppReview = false});
 
   @override
   @JsonKey()
-  final int currentIndex;
+  final int currentTabIndex;
+  @override
+  @JsonKey()
+  final int inAppReviewCount;
+  @override
+  @JsonKey()
+  final bool isShowInAppReview;
 
   @override
   String toString() {
-    return 'MainScreenState(currentIndex: $currentIndex)';
+    return 'MainScreenState(currentTabIndex: $currentTabIndex, inAppReviewCount: $inAppReviewCount, isShowInAppReview: $isShowInAppReview)';
   }
 
   @override
@@ -108,12 +141,17 @@ class _$_MainScreenState implements _MainScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MainScreenState &&
-            (identical(other.currentIndex, currentIndex) ||
-                other.currentIndex == currentIndex));
+            (identical(other.currentTabIndex, currentTabIndex) ||
+                other.currentTabIndex == currentTabIndex) &&
+            (identical(other.inAppReviewCount, inAppReviewCount) ||
+                other.inAppReviewCount == inAppReviewCount) &&
+            (identical(other.isShowInAppReview, isShowInAppReview) ||
+                other.isShowInAppReview == isShowInAppReview));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentIndex);
+  int get hashCode => Object.hash(
+      runtimeType, currentTabIndex, inAppReviewCount, isShowInAppReview);
 
   @JsonKey(ignore: true)
   @override
@@ -123,10 +161,17 @@ class _$_MainScreenState implements _MainScreenState {
 }
 
 abstract class _MainScreenState implements MainScreenState {
-  const factory _MainScreenState({final int currentIndex}) = _$_MainScreenState;
+  const factory _MainScreenState(
+      {final int currentTabIndex,
+      final int inAppReviewCount,
+      final bool isShowInAppReview}) = _$_MainScreenState;
 
   @override
-  int get currentIndex;
+  int get currentTabIndex;
+  @override
+  int get inAppReviewCount;
+  @override
+  bool get isShowInAppReview;
   @override
   @JsonKey(ignore: true)
   _$$_MainScreenStateCopyWith<_$_MainScreenState> get copyWith =>

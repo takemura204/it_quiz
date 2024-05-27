@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/main/main_screen_controller.dart';
 import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:kentei_quiz/resource/quizzes_resource.dart';
@@ -219,7 +220,19 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final selectQuizId = state.selectQuizId;
     final updateStudyQuiz = quizList.map((quiz) {
       if (quiz.id == selectQuizId) {
-        return updateQuiz;
+        final goalScore = quiz.quizItemList.length;
+        final updateScore = updateQuiz.quizItemList
+            .where((x) => x.status == QuizStatusType.correct)
+            .toList()
+            .length;
+        final isCompleted = goalScore == updateScore;
+        if (isCompleted) {
+          ref
+              .read(mainScreenControllerProvider.notifier)
+              .updateInAppReviewCount();
+        }
+        return updateQuiz.copyWith(
+            isCompleted: isCompleted, correctNum: updateScore);
       }
       return quiz;
     }).toList();
