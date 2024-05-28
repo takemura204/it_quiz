@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kentei_quiz/model/lang/secret_key.dart';
@@ -19,16 +18,7 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
 
   @override
   Future initState() async {
-    await initAppTrackingTransparency();
     super.initState();
-  }
-
-  Future initAppTrackingTransparency() async {
-    final status = await AppTrackingTransparency.requestTrackingAuthorization();
-    if (status == TrackingStatus.notDetermined) {
-      await Future.delayed(const Duration(milliseconds: 200));
-      await AppTrackingTransparency.requestTrackingAuthorization();
-    }
   }
 
   // バナー広告を新しく生成するメソッド

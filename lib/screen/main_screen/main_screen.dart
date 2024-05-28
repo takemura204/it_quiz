@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -5,14 +6,15 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
-import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/auth/auth_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
+import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../view/modals/tracking_modal.dart';
 import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
@@ -24,13 +26,18 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isShowTutorialModal = ref
-        .watch(tutorialControllerProvider.select((s) => s.isShowTutorialModal));
+    final isShowTutorialModal = ref.watch(
+        mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
+    final isShowTrackingModal = ref.watch(
+        mainScreenControllerProvider.select((s) => s.isShowTrackingModal));
+    final currentTabIndex = ref
+        .watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
+
     Future<void>.delayed(Duration.zero, () async {
       //チュートリアルモーダル表示
       if (isShowTutorialModal) {
         ref
-            .read(tutorialControllerProvider.notifier)
+            .read(mainScreenControllerProvider.notifier)
             .setIsShowTutorialModal(false);
         await showDialog(
           barrierDismissible: false,
@@ -39,6 +46,20 @@ class MainScreen extends ConsumerWidget {
             return TutorialModal(mainContext: context);
           },
         );
+      }
+      //トラッキングモーダル表示
+      if (isShowTrackingModal && currentTabIndex == 3) {
+        ref
+            .read(mainScreenControllerProvider.notifier)
+            .setIsShowTrackingModal(false);
+        if (Platform.isIOS)
+          await showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) {
+              return const TrackingModal();
+            },
+          );
       }
     });
     return const Scaffold(
@@ -53,11 +74,12 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(mainScreenControllerProvider);
+    final currentTabIndex = ref
+        .watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
 
     return IndexedStack(
       sizing: StackFit.expand,
-      index: state.currentTabIndex,
+      index: currentTabIndex,
       children: const [
         HomeQuizScreen(),
         HomeSearchScreen(),
@@ -121,6 +143,11 @@ class _BottomNavBar extends ConsumerWidget {
           }
           if (index == 3) {
             ref.read(authProvider.notifier).initState();
+            final isShowTrackingModal =
+                ref.read(mainScreenControllerProvider).isShowTrackingModal;
+            if (!isShowTrackingModal) {
+              ref.read(settingNotificationProvider.notifier).initState();
+            }
           }
         });
   }

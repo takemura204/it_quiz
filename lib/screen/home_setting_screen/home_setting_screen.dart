@@ -25,25 +25,15 @@ import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
-
 part 'setting_about_app.dart';
-
 part 'setting_color.dart';
-
 part 'setting_contact.dart';
-
 part 'setting_daily_goal.dart';
-
 part 'setting_delete_data.dart';
-
 part 'setting_notification.dart';
-
 part 'setting_premium.dart';
-
 part 'setting_profile.dart';
-
 part 'setting_review.dart';
-
 part 'setting_tutorial.dart';
 
 class HomeSettingScreen extends ConsumerWidget {

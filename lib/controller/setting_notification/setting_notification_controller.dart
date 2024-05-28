@@ -24,9 +24,7 @@ class SettingNotificationController
     extends StateNotifier<SettingNotificationState> with LocatorMixin {
   SettingNotificationController({required this.ref})
       : super(const SettingNotificationState()) {
-    () {
-      _initState();
-    }();
+    () {}();
   }
 
   final Ref ref;
@@ -35,7 +33,8 @@ class SettingNotificationController
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Future _initState() async {
+  @override
+  Future initState() async {
     _notificationPermissionStream();
     await _initTimeZone();
     await _initLocalNotifications();

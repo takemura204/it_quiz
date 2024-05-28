@@ -508,7 +508,7 @@ CHECKOUT OPTIONS:
     :tag: 10.22.0
 
 SPEC CHECKSUMS:
-  app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
+  app_tracking_transparency: e169b653478da7bb15a6c61209015378ca73e375
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   cloud_firestore: 25d1707f975581b10d9e647a3a2d61657192c844
   cloud_functions: 72e9d1846cceaf9258faa3d75cc058931a3dbf02

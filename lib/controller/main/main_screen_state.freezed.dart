@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MainScreenState {
   int get currentTabIndex => throw _privateConstructorUsedError;
   int get inAppReviewCount => throw _privateConstructorUsedError;
+  bool get isShowTutorialModal => throw _privateConstructorUsedError;
   bool get isShowInAppReview => throw _privateConstructorUsedError;
+  bool get isShowTrackingModal => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainScreenStateCopyWith<MainScreenState> get copyWith =>
@@ -32,7 +34,11 @@ abstract class $MainScreenStateCopyWith<$Res> {
       _$MainScreenStateCopyWithImpl<$Res, MainScreenState>;
   @useResult
   $Res call(
-      {int currentTabIndex, int inAppReviewCount, bool isShowInAppReview});
+      {int currentTabIndex,
+      int inAppReviewCount,
+      bool isShowTutorialModal,
+      bool isShowInAppReview,
+      bool isShowTrackingModal});
 }
 
 /// @nodoc
@@ -50,7 +56,9 @@ class _$MainScreenStateCopyWithImpl<$Res, $Val extends MainScreenState>
   $Res call({
     Object? currentTabIndex = null,
     Object? inAppReviewCount = null,
+    Object? isShowTutorialModal = null,
     Object? isShowInAppReview = null,
+    Object? isShowTrackingModal = null,
   }) {
     return _then(_value.copyWith(
       currentTabIndex: null == currentTabIndex
@@ -61,9 +69,17 @@ class _$MainScreenStateCopyWithImpl<$Res, $Val extends MainScreenState>
           ? _value.inAppReviewCount
           : inAppReviewCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isShowTutorialModal: null == isShowTutorialModal
+          ? _value.isShowTutorialModal
+          : isShowTutorialModal // ignore: cast_nullable_to_non_nullable
+              as bool,
       isShowInAppReview: null == isShowInAppReview
           ? _value.isShowInAppReview
           : isShowInAppReview // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowTrackingModal: null == isShowTrackingModal
+          ? _value.isShowTrackingModal
+          : isShowTrackingModal // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -78,7 +94,11 @@ abstract class _$$_MainScreenStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int currentTabIndex, int inAppReviewCount, bool isShowInAppReview});
+      {int currentTabIndex,
+      int inAppReviewCount,
+      bool isShowTutorialModal,
+      bool isShowInAppReview,
+      bool isShowTrackingModal});
 }
 
 /// @nodoc
@@ -94,7 +114,9 @@ class __$$_MainScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? currentTabIndex = null,
     Object? inAppReviewCount = null,
+    Object? isShowTutorialModal = null,
     Object? isShowInAppReview = null,
+    Object? isShowTrackingModal = null,
   }) {
     return _then(_$_MainScreenState(
       currentTabIndex: null == currentTabIndex
@@ -105,9 +127,17 @@ class __$$_MainScreenStateCopyWithImpl<$Res>
           ? _value.inAppReviewCount
           : inAppReviewCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isShowTutorialModal: null == isShowTutorialModal
+          ? _value.isShowTutorialModal
+          : isShowTutorialModal // ignore: cast_nullable_to_non_nullable
+              as bool,
       isShowInAppReview: null == isShowInAppReview
           ? _value.isShowInAppReview
           : isShowInAppReview // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowTrackingModal: null == isShowTrackingModal
+          ? _value.isShowTrackingModal
+          : isShowTrackingModal // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -119,7 +149,9 @@ class _$_MainScreenState implements _MainScreenState {
   const _$_MainScreenState(
       {this.currentTabIndex = 0,
       this.inAppReviewCount = 0,
-      this.isShowInAppReview = false});
+      this.isShowTutorialModal = false,
+      this.isShowInAppReview = false,
+      this.isShowTrackingModal = false});
 
   @override
   @JsonKey()
@@ -129,11 +161,17 @@ class _$_MainScreenState implements _MainScreenState {
   final int inAppReviewCount;
   @override
   @JsonKey()
+  final bool isShowTutorialModal;
+  @override
+  @JsonKey()
   final bool isShowInAppReview;
+  @override
+  @JsonKey()
+  final bool isShowTrackingModal;
 
   @override
   String toString() {
-    return 'MainScreenState(currentTabIndex: $currentTabIndex, inAppReviewCount: $inAppReviewCount, isShowInAppReview: $isShowInAppReview)';
+    return 'MainScreenState(currentTabIndex: $currentTabIndex, inAppReviewCount: $inAppReviewCount, isShowTutorialModal: $isShowTutorialModal, isShowInAppReview: $isShowInAppReview, isShowTrackingModal: $isShowTrackingModal)';
   }
 
   @override
@@ -145,13 +183,22 @@ class _$_MainScreenState implements _MainScreenState {
                 other.currentTabIndex == currentTabIndex) &&
             (identical(other.inAppReviewCount, inAppReviewCount) ||
                 other.inAppReviewCount == inAppReviewCount) &&
+            (identical(other.isShowTutorialModal, isShowTutorialModal) ||
+                other.isShowTutorialModal == isShowTutorialModal) &&
             (identical(other.isShowInAppReview, isShowInAppReview) ||
-                other.isShowInAppReview == isShowInAppReview));
+                other.isShowInAppReview == isShowInAppReview) &&
+            (identical(other.isShowTrackingModal, isShowTrackingModal) ||
+                other.isShowTrackingModal == isShowTrackingModal));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, currentTabIndex, inAppReviewCount, isShowInAppReview);
+      runtimeType,
+      currentTabIndex,
+      inAppReviewCount,
+      isShowTutorialModal,
+      isShowInAppReview,
+      isShowTrackingModal);
 
   @JsonKey(ignore: true)
   @override
@@ -164,14 +211,20 @@ abstract class _MainScreenState implements MainScreenState {
   const factory _MainScreenState(
       {final int currentTabIndex,
       final int inAppReviewCount,
-      final bool isShowInAppReview}) = _$_MainScreenState;
+      final bool isShowTutorialModal,
+      final bool isShowInAppReview,
+      final bool isShowTrackingModal}) = _$_MainScreenState;
 
   @override
   int get currentTabIndex;
   @override
   int get inAppReviewCount;
   @override
+  bool get isShowTutorialModal;
+  @override
   bool get isShowInAppReview;
+  @override
+  bool get isShowTrackingModal;
   @override
   @JsonKey(ignore: true)
   _$$_MainScreenStateCopyWith<_$_MainScreenState> get copyWith =>
