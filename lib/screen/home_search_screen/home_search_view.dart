@@ -95,6 +95,7 @@ class _QuizItemCard extends ConsumerWidget {
               context: context,
               builder: (_) => NeedPremiumModal(
                     title: '検索用語を全て閲覧しますか？',
+                    imagePath: 'assets/image/premium/premium_content5_2.png',
                     subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

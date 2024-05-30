@@ -113,6 +113,7 @@ class _QuizCard extends ConsumerWidget {
               context: context,
               builder: (_) => NeedPremiumModal(
                     title: '全てのクイズを解放しますか？',
+                    imagePath: 'assets/image/premium/premium_content1.png',
                     subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

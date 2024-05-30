@@ -68,6 +68,8 @@ class _ColorCards extends ConsumerWidget {
                             context: context,
                             builder: (_) => NeedPremiumModal(
                                   title: 'テーマを入手しますか？',
+                                  imagePath:
+                                      'assets/image/premium/premium_content5_3.png',
                                   subWidget: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
