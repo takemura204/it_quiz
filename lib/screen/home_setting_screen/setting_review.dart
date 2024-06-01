@@ -7,7 +7,7 @@ class _SettingReview extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomSettingBar(
-      title: "★5レビューで応援する",
+      title: "☆5レビューで応援",
       icon: LineIcons.bullhorn,
       customWidget: Text(
         '',
