@@ -3,18 +3,20 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/setting_notification/setting_notification_state.dart';
 import 'package:kentei_quiz/model/lang/initial_resource.dart';
+import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
+import '../../model/notification_time/notification_time.dart';
 
 final settingNotificationProvider = StateNotifierProvider<
     SettingNotificationController,
@@ -24,9 +26,7 @@ class SettingNotificationController
     extends StateNotifier<SettingNotificationState> with LocatorMixin {
   SettingNotificationController({required this.ref})
       : super(const SettingNotificationState()) {
-    () {
-      _initState();
-    }();
+    () {}();
   }
 
   final Ref ref;
@@ -35,11 +35,16 @@ class SettingNotificationController
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Future _initState() async {
+  @override
+  Future initState() async {
     _notificationPermissionStream();
     await _initTimeZone();
     await _initLocalNotifications();
     await checkNotificationPermission();
+    final selectNotificationTime =
+        ref.read(authModelProvider).selectNotificationTime;
+    await scheduleNotifications(
+        value: selectNotificationTime ?? NotificationTime.defaultTime());
   }
 
   @override
@@ -115,10 +120,9 @@ class SettingNotificationController
     });
   }
 
-  Future<void> scheduleNotifications(DateTime dateTime,
-      {required TimeOfDay selectNotificationTime,
-      DateTimeComponents? dateTimeComponents}) async {
+  Future<void> scheduleNotifications({required NotificationTime value}) async {
     try {
+      final dateTime = DateTime.now();
       final notificationTime =
           ref.read(authModelProvider).selectNotificationTime;
       if (notificationTime == null) {
@@ -128,12 +132,13 @@ class SettingNotificationController
 
       // 日時をTimeZoneを考慮した日時に変換する
       final scheduleTime = tz.TZDateTime(
-          tz.local,
-          dateTime.year,
-          dateTime.month,
-          dateTime.day,
-          selectNotificationTime.hour,
-          selectNotificationTime.minute);
+        tz.local,
+        dateTime.year,
+        dateTime.month,
+        dateTime.day,
+        value.hour ?? 8,
+        value.minute ?? 30,
+      );
 
       const NotificationDetails platformChannelSpecifics = NotificationDetails(
         android: AndroidNotificationDetails(
@@ -148,11 +153,11 @@ class SettingNotificationController
       // 通知をスケジュールする
       final flnp = FlutterLocalNotificationsPlugin();
 
-      final randomIndex = Random().nextInt(9);
+      final randomIndex = Random().nextInt(10);
 
       // 通知テキストを取得
       final notificationTitle = I18n().notificationTitle(randomIndex);
-      final notificationText = I18n().notificationText(randomIndex);
+      final notificationText = createNotificationText();
       await flnp.zonedSchedule(
         1,
         '$notificationTitle',
@@ -164,8 +169,25 @@ class SettingNotificationController
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         matchDateTimeComponents: DateTimeComponents.time,
       );
+      print({notificationTitle, notificationText});
     } catch (e) {
       print('scheduleNotifications Error: $e');
+    }
+  }
+
+  String createNotificationText() {
+    final weakQuizItemList =
+        ref.read(quizModelProvider).weakQuiz?.quizItemList ?? [];
+    final historyQuizItemList =
+        ref.read(quizModelProvider).historyQuizList.first.quizItemList;
+    final random = Random();
+
+    if (weakQuizItemList.isNotEmpty) {
+      final randomIndex = random.nextInt(weakQuizItemList.length);
+      return '「${weakQuizItemList[randomIndex].ans}」について復讐しましょう！\nクイズの「苦手克服」から挑戦できます';
+    } else {
+      final randomIndex = random.nextInt(historyQuizItemList.length);
+      return '「${historyQuizItemList[randomIndex].ans}」について覚えていますか？\nクイズに挑戦してみましょう！';
     }
   }
 }

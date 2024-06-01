@@ -40,8 +40,8 @@ class _SettingNotification extends ConsumerWidget {
                   return CustomTimePicker(
                     initialTime:
                         TimeOfDay(hour: selectedHour!, minute: selectedMinute!),
-                    recommendedHour: 9,
-                    recommendedMinute: 0,
+                    recommendedHour: 8,
+                    recommendedMinute: 30,
                     onTimeChanged: (selectedTime) async {
                       ref
                           .read(authModelProvider.notifier)
@@ -51,8 +51,10 @@ class _SettingNotification extends ConsumerWidget {
                                   minute: selectedTime.minute));
                       await ref
                           .read(settingNotificationProvider.notifier)
-                          .scheduleNotifications(DateTime.now(),
-                              selectNotificationTime: selectedTime);
+                          .scheduleNotifications(
+                              value: NotificationTime(
+                                  hour: selectedTime.hour,
+                                  minute: selectedTime.minute));
                     },
                   );
                 });

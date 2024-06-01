@@ -7,7 +7,7 @@ publish_to: none
 #
 # - ストアでバージョン x.y.z+a が審査承認済みなとき、次にアップロードするバージョンは x.y.(z+1)+(a+1)
 # - ストアにバージョン x.y.z+a をアップロード済みのとき、次にアップロードするバージョンは x.y.z+(a+1)
-version: 1.0.9+9
+version: 1.0.11+11
 
 environment:
   sdk: ">=2.16.2 <4.0.0"
@@ -157,7 +157,7 @@ dependencies:
   purchases_flutter: ^6.25.0
 
   #トラッキングポリシーモーダルを表示したい
-  app_tracking_transparency: ^2.0.4
+  app_tracking_transparency: ^2.0.5
 
   #簡単にアニメーションをつけたい
   easy_animate: ^0.0.3

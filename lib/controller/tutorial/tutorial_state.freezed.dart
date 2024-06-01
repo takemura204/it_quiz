@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TutorialState {
   bool get isTutorialRestart => throw _privateConstructorUsedError;
-  bool get isShowTutorialModal => throw _privateConstructorUsedError;
   bool get isShowHomeTutorial => throw _privateConstructorUsedError;
   bool get isShowLearnTutorial => throw _privateConstructorUsedError;
   bool get isShowLearnResultTutorial => throw _privateConstructorUsedError;
@@ -39,7 +38,6 @@ abstract class $TutorialStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isTutorialRestart,
-      bool isShowTutorialModal,
       bool isShowHomeTutorial,
       bool isShowLearnTutorial,
       bool isShowLearnResultTutorial,
@@ -63,7 +61,6 @@ class _$TutorialStateCopyWithImpl<$Res, $Val extends TutorialState>
   @override
   $Res call({
     Object? isTutorialRestart = null,
-    Object? isShowTutorialModal = null,
     Object? isShowHomeTutorial = null,
     Object? isShowLearnTutorial = null,
     Object? isShowLearnResultTutorial = null,
@@ -76,10 +73,6 @@ class _$TutorialStateCopyWithImpl<$Res, $Val extends TutorialState>
       isTutorialRestart: null == isTutorialRestart
           ? _value.isTutorialRestart
           : isTutorialRestart // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isShowTutorialModal: null == isShowTutorialModal
-          ? _value.isShowTutorialModal
-          : isShowTutorialModal // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowHomeTutorial: null == isShowHomeTutorial
           ? _value.isShowHomeTutorial
@@ -123,7 +116,6 @@ abstract class _$$_TutorialStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isTutorialRestart,
-      bool isShowTutorialModal,
       bool isShowHomeTutorial,
       bool isShowLearnTutorial,
       bool isShowLearnResultTutorial,
@@ -145,7 +137,6 @@ class __$$_TutorialStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isTutorialRestart = null,
-    Object? isShowTutorialModal = null,
     Object? isShowHomeTutorial = null,
     Object? isShowLearnTutorial = null,
     Object? isShowLearnResultTutorial = null,
@@ -158,10 +149,6 @@ class __$$_TutorialStateCopyWithImpl<$Res>
       isTutorialRestart: null == isTutorialRestart
           ? _value.isTutorialRestart
           : isTutorialRestart // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isShowTutorialModal: null == isShowTutorialModal
-          ? _value.isShowTutorialModal
-          : isShowTutorialModal // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowHomeTutorial: null == isShowHomeTutorial
           ? _value.isShowHomeTutorial
@@ -200,7 +187,6 @@ class __$$_TutorialStateCopyWithImpl<$Res>
 class _$_TutorialState extends _TutorialState {
   _$_TutorialState(
       {this.isTutorialRestart = false,
-      this.isShowTutorialModal = false,
       this.isShowHomeTutorial = false,
       this.isShowLearnTutorial = false,
       this.isShowLearnResultTutorial = false,
@@ -213,9 +199,6 @@ class _$_TutorialState extends _TutorialState {
   @override
   @JsonKey()
   final bool isTutorialRestart;
-  @override
-  @JsonKey()
-  final bool isShowTutorialModal;
   @override
   @JsonKey()
   final bool isShowHomeTutorial;
@@ -240,7 +223,7 @@ class _$_TutorialState extends _TutorialState {
 
   @override
   String toString() {
-    return 'TutorialState(isTutorialRestart: $isTutorialRestart, isShowTutorialModal: $isShowTutorialModal, isShowHomeTutorial: $isShowHomeTutorial, isShowLearnTutorial: $isShowLearnTutorial, isShowLearnResultTutorial: $isShowLearnResultTutorial, isShowLearnTutorialModal: $isShowLearnTutorialModal, isShowSwipeLeftAnimation: $isShowSwipeLeftAnimation, isShowSwipeRightAnimation: $isShowSwipeRightAnimation, isShowTapAnimation: $isShowTapAnimation)';
+    return 'TutorialState(isTutorialRestart: $isTutorialRestart, isShowHomeTutorial: $isShowHomeTutorial, isShowLearnTutorial: $isShowLearnTutorial, isShowLearnResultTutorial: $isShowLearnResultTutorial, isShowLearnTutorialModal: $isShowLearnTutorialModal, isShowSwipeLeftAnimation: $isShowSwipeLeftAnimation, isShowSwipeRightAnimation: $isShowSwipeRightAnimation, isShowTapAnimation: $isShowTapAnimation)';
   }
 
   @override
@@ -250,8 +233,6 @@ class _$_TutorialState extends _TutorialState {
             other is _$_TutorialState &&
             (identical(other.isTutorialRestart, isTutorialRestart) ||
                 other.isTutorialRestart == isTutorialRestart) &&
-            (identical(other.isShowTutorialModal, isShowTutorialModal) ||
-                other.isShowTutorialModal == isShowTutorialModal) &&
             (identical(other.isShowHomeTutorial, isShowHomeTutorial) ||
                 other.isShowHomeTutorial == isShowHomeTutorial) &&
             (identical(other.isShowLearnTutorial, isShowLearnTutorial) ||
@@ -276,7 +257,6 @@ class _$_TutorialState extends _TutorialState {
   int get hashCode => Object.hash(
       runtimeType,
       isTutorialRestart,
-      isShowTutorialModal,
       isShowHomeTutorial,
       isShowLearnTutorial,
       isShowLearnResultTutorial,
@@ -295,7 +275,6 @@ class _$_TutorialState extends _TutorialState {
 abstract class _TutorialState extends TutorialState {
   factory _TutorialState(
       {final bool isTutorialRestart,
-      final bool isShowTutorialModal,
       final bool isShowHomeTutorial,
       final bool isShowLearnTutorial,
       final bool isShowLearnResultTutorial,
@@ -307,8 +286,6 @@ abstract class _TutorialState extends TutorialState {
 
   @override
   bool get isTutorialRestart;
-  @override
-  bool get isShowTutorialModal;
   @override
   bool get isShowHomeTutorial;
   @override

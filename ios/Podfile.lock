@@ -508,7 +508,7 @@ CHECKOUT OPTIONS:
     :tag: 10.22.0
 
 SPEC CHECKSUMS:
-  app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
+  app_tracking_transparency: e169b653478da7bb15a6c61209015378ca73e375
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   cloud_firestore: 25d1707f975581b10d9e647a3a2d61657192c844
   cloud_functions: 72e9d1846cceaf9258faa3d75cc058931a3dbf02
@@ -553,7 +553,7 @@ SPEC CHECKSUMS:
   FirebaseSessions: c0939656253a1fa0e94ecc266ccf770cc8b33732
   FirebaseSharedSwift: 48076404e6e52372290d15a07d2ed1d2f1754023
   FirebaseStorage: bc7bddc743548a89cfb896843a77cf4bdde2c231
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_native_timezone_updated_gradle: d144a6b4980d61d022c539d090ab39bb390aac90

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/main/main_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/card/result_dashboard_card.dart';
 import 'package:kentei_quiz/view/card/result_prefect_card.dart';
@@ -27,8 +28,11 @@ import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'choice_challenge/choice_challenge_body.dart';
+
 part 'choice_challenge/choice_challenge_view.dart';
+
 part 'choice_result/choice_result_body.dart';
+
 part 'choice_result/choice_result_view.dart';
 
 class QuizChoiceScreen extends ConsumerWidget {
@@ -84,6 +88,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                 onPressed: () {
                   //問題リセット
                   ref.read(quizChoiceScreenProvider.notifier).resetScreen();
+                  ref
+                      .read(mainScreenControllerProvider.notifier)
+                      .setIsShowInAppReview();
                   HapticFeedback.lightImpact();
                 },
               ),

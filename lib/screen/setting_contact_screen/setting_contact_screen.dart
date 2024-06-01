@@ -14,33 +14,32 @@ class SettingContactScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref
-        .read(settingNotificationProvider.notifier)
-        .webViewController
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {
-            //進行状況の更新（例えばプログレスバーの更新）に使用
-          },
-          onPageStarted: (String url) {
-            ref.read(settingNotificationProvider.notifier).setLoading(true);
-          },
-          onPageFinished: (String url) {
-            ref.read(settingNotificationProvider.notifier).setLoading(false);
-          },
-          onWebResourceError: (WebResourceError error) {
-            // ウェブリソースの読み込み中にエラーが発生した場
-          },
-          onNavigationRequest: (NavigationRequest request) {
-            // 特定のURL（例：YouTubeのリンク）をブロックするなどのカスタムナビゲーションロジックを実装
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      );
-    final isLoading = ref.watch(settingNotificationProvider).isLoading;
+    final controller =
+        ref.read(settingContactProvider.notifier).webViewController
+          ..setNavigationDelegate(
+            NavigationDelegate(
+              onProgress: (int progress) {
+                //進行状況の更新（例えばプログレスバーの更新）に使用
+              },
+              onPageStarted: (String url) {
+                ref.read(settingContactProvider.notifier).setLoading(true);
+              },
+              onPageFinished: (String url) {
+                ref.read(settingContactProvider.notifier).setLoading(false);
+              },
+              onWebResourceError: (WebResourceError error) {
+                // ウェブリソースの読み込み中にエラーが発生した場
+              },
+              onNavigationRequest: (NavigationRequest request) {
+                // 特定のURL（例：YouTubeのリンク）をブロックするなどのカスタムナビゲーションロジックを実装
+                if (request.url.startsWith('https://www.youtube.com/')) {
+                  return NavigationDecision.prevent;
+                }
+                return NavigationDecision.navigate;
+              },
+            ),
+          );
+    final isLoading = ref.watch(settingContactProvider).isLoading;
 
     return Scaffold(
       appBar: AppBar(

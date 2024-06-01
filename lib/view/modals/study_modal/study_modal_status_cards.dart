@@ -112,15 +112,19 @@ class _StatusCard extends ConsumerWidget {
     final isExists = value != 0;
 
     return GestureDetector(
-      onTap: () {
-        if (isQuizStatusRecommend) {
-          ref
-              .read(homeQuizScreenProvider.notifier)
-              .setIsisQuizStatusRecommend(false);
-        }
-        ref.read(homeQuizScreenProvider.notifier).setQuizStatusList(status);
-        HapticFeedback.lightImpact();
-      },
+      onTap: isExists
+          ? () {
+              if (isQuizStatusRecommend) {
+                ref
+                    .read(homeQuizScreenProvider.notifier)
+                    .setIsisQuizStatusRecommend(false);
+              }
+              ref
+                  .read(homeQuizScreenProvider.notifier)
+                  .setQuizStatusList(status);
+              HapticFeedback.lightImpact();
+            }
+          : null,
       child: Container(
         width: 85,
         margin: const EdgeInsets.symmetric(horizontal: 3),

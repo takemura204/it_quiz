@@ -7,7 +7,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/modals/premium_modal.dart';
+import '../../view/modals/need_premium_modal.dart';
 import '../screen_argument.dart';
 
 ///カラーテーマ選択
@@ -68,6 +68,8 @@ class _ColorCards extends ConsumerWidget {
                             context: context,
                             builder: (_) => NeedPremiumModal(
                                   title: 'テーマを入手しますか？',
+                                  imagePath:
+                                      'assets/image/premium/premium_content5_3.png',
                                   subWidget: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [

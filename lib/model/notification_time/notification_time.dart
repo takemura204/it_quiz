@@ -15,7 +15,7 @@ class NotificationTime with _$NotificationTime {
       _$NotificationTimeFromJson(json);
 
   factory NotificationTime.defaultTime() =>
-      NotificationTime(hour: 9, minute: 0);
+      NotificationTime(hour: 8, minute: 30);
 }
 
 extension NotificationTimeX on NotificationTime {

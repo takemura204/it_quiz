@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/main/main_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/tool_tip.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import 'tutorial_state.dart';
@@ -45,16 +45,7 @@ class TutorialController extends StateNotifier<TutorialState> {
   final learnResultTarget4 = GlobalKey();
 
   void initState() {
-    _initTutorial();
     _initTargets();
-  }
-
-  ///チュートリアル開始
-  Future _initTutorial() async {
-    final prefs = await SharedPreferences.getInstance();
-    // prefs.remove("isShowTutorialModal");
-    final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
-    setIsShowTutorialModal(isShowTutorialModal);
   }
 
   void _initTargets() {
@@ -433,18 +424,15 @@ class TutorialController extends StateNotifier<TutorialState> {
     );
   }
 
-  void setIsShowTutorialModal(bool value) {
-    state = state.copyWith(isShowTutorialModal: value);
-    _saveDevice();
-  }
-
   void setIsShowHomeTutorial(bool value) {
     state = state.copyWith(isShowHomeTutorial: value);
   }
 
   void setIsTutorialRestart(bool value) {
     state = state.copyWith(isTutorialRestart: value);
-    setIsShowTutorialModal(value);
+    ref
+        .read(mainScreenControllerProvider.notifier)
+        .setIsShowTutorialModal(value);
   }
 
   void setIsShowLearnTutorial(bool value) {
@@ -568,12 +556,5 @@ class TutorialController extends StateNotifier<TutorialState> {
       imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       initialFocus: 0,
     )..show(context: context);
-  }
-
-  ///端末保存
-  Future _saveDevice() async {
-    final prefs = await SharedPreferences.getInstance();
-    final isShowTutorialModal = state.isShowTutorialModal;
-    await prefs.setBool('isShowTutorialModal', isShowTutorialModal);
   }
 }

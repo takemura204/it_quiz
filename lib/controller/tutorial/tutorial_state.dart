@@ -8,7 +8,6 @@ class TutorialState with _$TutorialState {
 
   factory TutorialState({
     @Default(false) final bool isTutorialRestart,
-    @Default(false) final bool isShowTutorialModal,
     @Default(false) final bool isShowHomeTutorial,
     @Default(false) final bool isShowLearnTutorial,
     @Default(false) final bool isShowLearnResultTutorial,

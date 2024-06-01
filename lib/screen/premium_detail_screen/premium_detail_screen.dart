@@ -12,7 +12,7 @@ import 'package:kentei_quiz/model/user/auth_model.dart';
 import '../../view/button/animation_shadow_button.dart';
 import '../../view/button/circle_button.dart';
 import '../../view/loading.dart';
-import '../../view/modals/premium_modal.dart';
+import '../../view/modals/need_premium_modal.dart';
 import '../screen_argument.dart';
 
 part 'widget/precautions.dart';

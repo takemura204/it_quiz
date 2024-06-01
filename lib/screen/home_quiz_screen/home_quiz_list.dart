@@ -113,6 +113,7 @@ class _QuizCard extends ConsumerWidget {
               context: context,
               builder: (_) => NeedPremiumModal(
                     title: '全てのクイズを解放しますか？',
+                    imagePath: 'assets/image/premium/premium_content1.png',
                     subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -159,9 +160,37 @@ class _QuizCard extends ConsumerWidget {
             ///タイトル
             _Title(quiz: quiz, correctRate: correctRate),
             const Spacer(),
-            Icon(LineIcons.angleRight,
-                color: isPremium ? context.mainColor : Colors.black26),
-            const Gap(5),
+
+            if (isPremium)
+              Card(
+                elevation: 0,
+                color: Colors.white,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    // 全ての辺に一様なボーダーを適用
+                    border: Border.all(
+                      color: context.secondColor,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                    child: Row(
+                      children: [
+                        Text(
+                          '${quiz.quizItemList.length}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Text('問'),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            const Gap(8),
           ],
         ),
       ),
@@ -178,11 +207,8 @@ class _ProgressIcon extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goalScore = quiz.quizItemList.length;
-    final currentScore = quiz.quizItemList
-        .where((x) => x.status == QuizStatusType.correct)
-        .toList()
-        .length;
-    final isCompleted = goalScore == currentScore;
+    final currentScore = quiz.correctNum;
+    final isCompleted = quiz.isCompleted;
 
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
         !quiz.isPremium;

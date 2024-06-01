@@ -9,7 +9,8 @@ import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
-import 'package:kentei_quiz/view/card/premium_card.dart';
+import 'package:kentei_quiz/view/card/need_notification_card.dart';
+import 'package:kentei_quiz/view/card/need_premium_card.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,25 +26,15 @@ import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'home_setting_view.dart';
-
 part 'setting_about_app.dart';
-
 part 'setting_color.dart';
-
 part 'setting_contact.dart';
-
 part 'setting_daily_goal.dart';
-
 part 'setting_delete_data.dart';
-
 part 'setting_notification.dart';
-
 part 'setting_premium.dart';
-
 part 'setting_profile.dart';
-
 part 'setting_review.dart';
-
 part 'setting_tutorial.dart';
 
 class HomeSettingScreen extends ConsumerWidget {
@@ -51,7 +42,6 @@ class HomeSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
     return Scaffold(
       appBar: AppBar(
         title: Text(I18n().titleSetting),
@@ -70,14 +60,15 @@ class HomeSettingScreen extends ConsumerWidget {
                   _Divider(),
                   const _SettingPremium(),
                   _Divider(),
-                  if (!isPremium) const PremiumCard(),
+                  const NeedPremiumCard(),
                   const SettingTitleBar(title: "カスタム", onTap: null),
+                  const _SettingThemeColor(),
+                  _Divider(),
                   const _SettingDailyGoal(),
                   _Divider(),
                   const _SettingNotification(),
                   _Divider(),
-                  const _SettingThemeColor(),
-                  _Divider(),
+                  const NeedNotificationCard(),
 
                   const SettingTitleBar(title: "サポート", onTap: null),
                   const _SettingTutorial(),

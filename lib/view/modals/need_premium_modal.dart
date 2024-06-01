@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -15,17 +12,17 @@ class NeedPremiumModal extends ConsumerWidget {
   const NeedPremiumModal({
     required this.onPressed,
     required this.title,
+    required this.imagePath,
     required this.subWidget,
   });
 
   final VoidCallback onPressed;
   final String title;
+  final String imagePath;
   final Widget subWidget;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final premiumCardIndex = Random().nextInt(9) + 1; // 1 から 9 のランダムな数値を生成
-    final imagePath = 'assets/image/premium/premium_$premiumCardIndex.svg';
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(context.width * 0.05),
@@ -56,10 +53,10 @@ class NeedPremiumModal extends ConsumerWidget {
               const Gap(15),
               subWidget,
               const Gap(15),
-              SvgPicture.asset(
+              Image.asset(
                 imagePath,
-                width: context.width * 0.4,
-                fit: BoxFit.cover,
+                height: context.height * 0.15,
+                fit: BoxFit.fitHeight,
               ),
               const Gap(20),
 
