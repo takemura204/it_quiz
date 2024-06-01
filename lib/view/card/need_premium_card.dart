@@ -74,7 +74,7 @@ class NeedPremiumCard extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 '支払いは一度きり。',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,

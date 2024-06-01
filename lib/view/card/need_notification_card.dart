@@ -114,7 +114,7 @@ class NeedNotificationCard extends ConsumerWidget {
                       const Gap(10),
                       Column(
                         children: [
-                          Gap(10),
+                          const Gap(10),
                           SvgPicture.asset(
                             imagePath,
                             width: context.width * 0.2,
