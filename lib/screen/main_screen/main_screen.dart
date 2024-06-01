@@ -14,7 +14,7 @@ import '../../controller/auth/auth_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
-import '../../view/modals/tracking_modal.dart';
+import '../../view/modals/need_tracking_modal.dart';
 import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
@@ -57,7 +57,7 @@ class MainScreen extends ConsumerWidget {
             barrierDismissible: false,
             context: context,
             builder: (BuildContext context) {
-              return const TrackingModal();
+              return const NeedTrackingModal();
             },
           );
       }

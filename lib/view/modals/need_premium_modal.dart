@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -25,8 +23,6 @@ class NeedPremiumModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final premiumCardIndex = Random().nextInt(9) + 1; // 1 から 9 のランダムな数値を生成
-
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(context.width * 0.05),

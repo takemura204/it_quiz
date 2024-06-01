@@ -160,9 +160,37 @@ class _QuizCard extends ConsumerWidget {
             ///タイトル
             _Title(quiz: quiz, correctRate: correctRate),
             const Spacer(),
-            Icon(LineIcons.angleRight,
-                color: isPremium ? context.mainColor : Colors.black26),
-            const Gap(5),
+
+            if (isPremium)
+              Card(
+                elevation: 0,
+                color: Colors.white,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    // 全ての辺に一様なボーダーを適用
+                    border: Border.all(
+                      color: context.secondColor,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                    child: Row(
+                      children: [
+                        Text(
+                          '${quiz.quizItemList.length}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Text('問'),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            const Gap(8),
           ],
         ),
       ),

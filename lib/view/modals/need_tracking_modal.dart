@@ -9,8 +9,8 @@ import 'package:kentei_quiz/view/button/primary_button.dart';
 import '../../controller/setting_notification/setting_notification_controller.dart';
 
 ///トラッキングモーダル
-class TrackingModal extends ConsumerWidget {
-  const TrackingModal();
+class NeedTrackingModal extends ConsumerWidget {
+  const NeedTrackingModal();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,7 +65,7 @@ class TrackingModal extends ConsumerWidget {
 
               const Gap(20),
               SvgPicture.asset(
-                'assets/image/app_tracking.svg',
+                'assets/image/need_app_tracking.svg',
                 width: context.width * 0.7,
                 fit: BoxFit.fitWidth,
               ),
