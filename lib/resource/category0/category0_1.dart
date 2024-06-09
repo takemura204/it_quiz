@@ -1,14 +1,19 @@
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category0_1 {
   final quizItems = [
     QuizItem(
-      question: '組織の基本的な価値観や理念を示すものは何か？',
+      word: '経営理念',
+      question: '企業の経営に関する信念や価値観を社員や顧客，社会に対して示すものとして最も適切なものはどれか。',
       ans: '経営理念',
-      choices: ["経営理念", "株主総会", "決算", "CSR"],
-      comment: "経営理念は、組織の基本的な価値観や理念を示し、組織の目的や存在意義を明確にするもの。",
+      choices: ["経営課題", "経営計画", "経営戦略", "経営理念"],
+      comment: "経営理念とは、企業の経営に関する信念や価値観を社員や顧客，社会に対して示すもの",
+      source: '平成22年春期 問16',
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
+      word: 'CSR',
       question: '企業が社会的責任を果たすことを目的とした経営活動は何か？',
       ans: 'CSR',
       choices: ["CSR", "SRI", "ディスクロージャ", "決算"],

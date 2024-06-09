@@ -1,5 +1,6 @@
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 
 List<QuizItem> get category3_23 {
   final quizItems = [
@@ -8,60 +9,70 @@ List<QuizItem> get category3_23 {
       ans: 'リスクマネジメント',
       choices: ["リスクマネジメント", "リスクアセスメント", "リスク対応情報", "セキュリティポリシー"],
       comment: "リスクマネジメントは、リスクの特定、分析、評価、およびそれらに対する対策の実施を含むプロセス。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '組織がセキュリティリスクのレベルを評価するために行うプロセスは何か？',
       ans: 'リスクアセスメント',
       choices: ["リスクアセスメント", "リスクマネジメント", "リスク対応情報", "セキュリティポリシー"],
       comment: "リスクアセスメントは、リスクの特定、リスクの影響と発生確率の評価を行うプロセス。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'リスクに対処するための選択肢や行動計画を含む情報は何か？',
-      ans: 'リスク対応情報',
-      choices: ["リスク対応情報", "リスクマネジメント", "リスクアセスメント", "セキュリティポリシー"],
+      ans: 'リスク対応',
+      choices: ["リスク対応", "リスクマネジメント", "リスクアセスメント", "セキュリティポリシー"],
       comment: "リスク対応情報は、特定されたリスクに対して取るべき行動や対策の選択肢を含む情報。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '組織が情報セキュリティの基本方針やルールを定めた文書は何か？',
-      ans: 'セキュリティポリシー',
-      choices: ["セキュリティポリシー", "リスクマネジメント", "リスクアセスメント", "リスク対応情報"],
+      ans: '情報セキュリティポリシー',
+      choices: ["情報セキュリティポリシー", "リスクマネジメント", "リスクアセスメント", "リスク対応情報"],
       comment: "セキュリティポリシーは、組織が情報セキュリティに関する基本方針やルールを定めた文書。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '情報が許可された者にのみアクセスされる特性は何か？',
       ans: '機密性',
       choices: ["機密性", "完全性", "可用性", "真正性"],
       comment: "機密性は、情報が許可された者にのみアクセス、開示されるべきであるという情報セキュリティの特性。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '情報が正確で変更されていないことを保証する特性は何か？',
       ans: '完全性',
       choices: ["完全性", "機密性", "可用性", "真正性"],
       comment: "完全性は、情報が正確であり、不正な変更から保護されるべきであるという情報セキュリティの特性。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '情報が必要な時に利用可能であることを保証する特性は何か？',
       ans: '可用性',
       choices: ["可用性", "機密性", "完全性", "真正性"],
       comment: "可用性は、情報やシステムが必要な時に利用可能であることを保証する情報セキュリティの特性。",
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       question: '情報や取引の当事者が本物であることを保証する特性は何か？',
       ans: '真正性',
       choices: ["真正性", "機密性", "完全性", "可用性"],
       comment: "真正性は、情報や取引の当事者が本物であり、偽装されていないことを保証する情報セキュリティの特性。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '行動やイベントの実施者を特定できる特性は何か？',
       ans: '責任追跡性',
       choices: ["責任追跡性", "否認防止", "信頼性", "機密性"],
       comment: "責任追跡性は、行動やイベントが誰によって実施されたかを特定できる情報セキュリティの特性。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '行為者が自身の行為を否認できないようにする特性は何か？',
       ans: '否認防止',
       choices: ["否認防止", "責任追跡性", "真正性", "信頼性"],
       comment: "否認防止は、行為者が自身の行為（例えば、送信したメッセージや行った取引）を否認できないようにする情報セキュリティの特性。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '情報システムが正しく機能し、予想されるサービスを提供する能力は何か？',
@@ -69,18 +80,21 @@ List<QuizItem> get category3_23 {
       choices: ["信頼性", "否認防止", "責任追跡性", "真正性"],
       comment:
           "信頼性は、情報システムが正しく機能し、予想されるサービスを提供する能力、つまり予測可能で信頼できる状態を維持する情報セキュリティの特性。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '組織が個人情報の適切な管理を実施していることを証明するための制度は何か？',
       ans: 'プライバシーマーク制度',
       choices: ["プライバシーマーク制度", "プライバシーポリシー", "サイバー保険", "情報セキュリティ委員会"],
       comment: "プライバシーマーク制度は、組織が個人情報の適切な管理を実施していることを証明するために、プライバシーマークを取得する制度。",
+      importance: QuizImportanceType.normal,
     ),
     QuizItem(
       question: '組織が個人情報の取り扱いに関する基本的な方針を公表する文書は何か？',
       ans: 'プライバシーポリシー',
       choices: ["プライバシーポリシー", "プライバシーマーク制度", "サイバー保険", "情報セキュリティ委員会"],
       comment: "プライバシーポリシーは、組織が個人情報の取り扱いに関する基本的な方針を公表する文書。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'サイバー攻撃による損害から組織を保護するための保険は何か？',
@@ -88,12 +102,14 @@ List<QuizItem> get category3_23 {
       choices: ["サイバー保険", "プライバシーポリシー", "プライバシーマーク制度", "情報セキュリティ委員会"],
       comment:
           "サイバー保険は、サイバー攻撃によるデータの損失やシステムのダウンタイムなど、サイバーリスクによる損害から組織を保護するための保険。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '組織内で情報セキュリティに関する意思決定を行うための委員会は何か？',
       ans: '情報セキュリティ委員会',
       choices: ["情報セキュリティ委員会", "サイバー保険", "プライバシーポリシー", "プライバシーマーク制度"],
       comment: "情報セキュリティ委員会は、組織内で情報セキュリティに関する方針や対策の意思決定を行うための委員会。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '組織内のセキュリティインシデントに迅速に対応するためのチームは何か？',
@@ -101,6 +117,7 @@ List<QuizItem> get category3_23 {
       choices: ["CSIRT", "SOC", "コンピュータ不正アクセス届出制度", "コンピュータウイルス届出制度"],
       comment:
           "CSIRT（Computer Security Incident Response Team）は、セキュリティインシデントが発生した際に迅速に対応するための専門チーム。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '組織の情報セキュリティを監視し、管理するための専門部署は何か？',
@@ -108,6 +125,7 @@ List<QuizItem> get category3_23 {
       choices: ["SOC", "CSIRT", "コンピュータ不正アクセス届出制度", "コンピュータウイルス届出制度"],
       comment:
           "SOC（Security Operations Center）は、組織の情報セキュリティを24時間体制で監視し、管理するための専門部署。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '不正アクセスが発生した際に、それを届け出るための制度は何か？',
@@ -119,6 +137,7 @@ List<QuizItem> get category3_23 {
         "CSIRT"
       ],
       comment: "コンピュータ不正アクセス届出制度は、不正アクセスが発生した際に、その事実を関連機関に届け出るための制度。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'コンピュータウイルスの発生を届け出るための制度は何か？',
@@ -130,6 +149,7 @@ List<QuizItem> get category3_23 {
         "CSIRT"
       ],
       comment: "コンピュータウイルス届出制度は、コンピュータウイルスの発生を関連機関に届け出るための制度。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'ソフトウェアの脆弱性に関する情報を届け出るための制度は何か？',
@@ -141,6 +161,7 @@ List<QuizItem> get category3_23 {
         "CSIRT"
       ],
       comment: "ソフトウェア等の脆弱性関連情報に関する届出制度は、ソフトウェアやシステムの脆弱性に関する情報を関連機関に届け出るための制度。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '日本のサイバーセキュリティに関する情報共有のためのプラットフォームは何か？',
@@ -148,6 +169,7 @@ List<QuizItem> get category3_23 {
       choices: ["J-CSIP", "J-CRAT", "SECURITY ACTION", "CSIRT"],
       comment:
           "J-CSIP（Japan Cybersecurity Information Platform）は、日本におけるサイバーセキュリティに関する情報共有のためのプラットフォーム。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: 'サイバーリスクの自己評価ツールを提供する日本のプロジェクトは何か？',
@@ -155,12 +177,14 @@ List<QuizItem> get category3_23 {
       choices: ["J-CRAT", "J-CSIP", "SECURITY ACTION", "SOC"],
       comment:
           "J-CRAT（Japan Cybersecurity Risk Assessment Tool）は、企業が自身のサイバーリスクを自己評価するためのツールを提供する日本のプロジェクト。",
+      importance: QuizImportanceType.low,
     ),
     QuizItem(
       question: '企業がセキュリティ対策を実施するための行動指針を提供するイニシアティブは何か？',
       ans: 'SECURITY ACTION',
       choices: ["SECURITY ACTION", "J-CRAT", "J-CSIP", "CSIRT"],
       comment: "SECURITY ACTIONは、企業がセキュリティ対策を実施するための具体的な行動指針や情報を提供するイニシアティブ。",
+      importance: QuizImportanceType.low,
     ),
   ];
 
