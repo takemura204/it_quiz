@@ -17,10 +17,10 @@ class _PremiumHeader extends StatelessWidget {
             child: CircleButton(
               icon: const Icon(
                 Icons.close,
-                size: 25,
+                size: 30,
                 color: Colors.grey,
               ),
-              size: const Size(40, 40),
+              size: const Size(45, 45),
               onTap: () {
                 Navigator.of(context).pop();
               },

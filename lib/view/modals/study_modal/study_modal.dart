@@ -71,7 +71,7 @@ class StudyModal extends ConsumerWidget {
               children: [
                 Expanded(child: _Title(quiz)),
                 ClearButton(
-                  iconSize: 35,
+                  iconSize: 40,
                   onPressed: () {},
                 ),
               ],

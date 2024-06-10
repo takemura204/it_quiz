@@ -134,7 +134,7 @@ class GroupProgressDashboard extends ConsumerWidget {
                           const Gap(30),
                           PrimaryRoundButton(
                               width: 180,
-                              height: 45,
+                              height: 50,
                               text: '購入する',
                               fontSize: 16,
                               onPressed: () {

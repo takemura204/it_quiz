@@ -28,26 +28,29 @@ class SaveIconButton extends HookConsumerWidget {
               HapticFeedback.lightImpact();
             }
           : null,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (isShowText)
-            Text(
-              "保存",
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: quizItem.isSaved ? context.mainColor : Colors.black26,
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (isShowText)
+              Text(
+                "保存",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: quizItem.isSaved ? context.mainColor : Colors.black26,
+                ),
               ),
+            Icon(
+              quizItem.isSaved ? Icons.bookmark_sharp : LineIcons.bookmark,
+              size: size,
+              color: quizItem.isSaved ? context.mainColor : Colors.black26,
             ),
-          Icon(
-            quizItem.isSaved ? Icons.bookmark_sharp : LineIcons.bookmark,
-            size: size,
-            color: quizItem.isSaved ? context.mainColor : Colors.black26,
-          ),
-          Gap(context.height * 0.01),
-        ],
+            Gap(context.height * 0.01),
+          ],
+        ),
       ),
     );
   }

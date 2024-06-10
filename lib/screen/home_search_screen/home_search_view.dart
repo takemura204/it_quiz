@@ -14,7 +14,7 @@ class _SearchBar extends ConsumerWidget {
       child: Card(
         elevation: 1,
         child: Container(
-          color: Colors.grey.shade200,
+          color: context.secondColor,
           padding: EdgeInsets.all(context.width * 0.02),
           child: SearchTextField(
             searchController: textEditingController,
@@ -95,7 +95,7 @@ class _QuizItemCard extends ConsumerWidget {
               context: context,
               builder: (_) => NeedPremiumModal(
                     title: '検索用語を全て閲覧しますか？',
-                    imagePath: 'assets/image/premium/premium_content5_2.png',
+                    imagePath: 'assets/image/premium/premium_8.svg',
                     subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -193,7 +193,7 @@ class _QuizItemCard extends ConsumerWidget {
               SaveIconButton(
                 quizItem: quizItemList[index],
                 isShowText: true,
-                size: 30,
+                size: 35,
                 onTap: () {
                   ref
                       .read(homeSearchScreenProvider.notifier)

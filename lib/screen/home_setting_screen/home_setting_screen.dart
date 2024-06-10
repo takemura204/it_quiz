@@ -88,17 +88,17 @@ class HomeSettingScreen extends ConsumerWidget {
                   ),
 
                   ///開発用
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     ref
-                  //         .read(authModelProvider.notifier)
-                  //         .updateIsPremium(false);
-                  //   },
-                  //   child: Container(
-                  //     height: 50,
-                  //     color: context.backgroundColor,
-                  //   ),
-                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(authModelProvider.notifier)
+                          .updateIsPremium(false);
+                    },
+                    child: Container(
+                      height: 50,
+                      color: context.backgroundColor,
+                    ),
+                  ),
 
                   ///シェア機能も追加したい。
                 ],

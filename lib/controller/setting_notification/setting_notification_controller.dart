@@ -169,7 +169,6 @@ class SettingNotificationController
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         matchDateTimeComponents: DateTimeComponents.time,
       );
-      print({notificationTitle, notificationText});
     } catch (e) {
       print('scheduleNotifications Error: $e');
     }
@@ -184,10 +183,10 @@ class SettingNotificationController
 
     if (weakQuizItemList.isNotEmpty) {
       final randomIndex = random.nextInt(weakQuizItemList.length);
-      return '「${weakQuizItemList[randomIndex].ans}」について復讐しましょう！\nクイズの「苦手克服」から挑戦できます';
+      return '「${weakQuizItemList[randomIndex].ans}」について復習してみましょう！\nクイズの「苦手克服」から挑戦できます';
     } else {
       final randomIndex = random.nextInt(historyQuizItemList.length);
-      return '「${historyQuizItemList[randomIndex].ans}」について覚えていますか？\nクイズに挑戦してみましょう！';
+      return '「${historyQuizItemList[randomIndex].ans}」とはどのような意味でしょう？\n履歴から確認してみましょう！';
     }
   }
 }

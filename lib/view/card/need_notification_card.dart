@@ -100,7 +100,7 @@ class NeedNotificationCard extends ConsumerWidget {
                             ),
                             Gap(5),
                             Text(
-                              '通知をONにすると、あなたに合わせた\nおすすめのクイズを毎日送信します。',
+                              '通知をONにすると、あなたに合わせた\nおすすめのクイズが指定した時間に届きます。',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,

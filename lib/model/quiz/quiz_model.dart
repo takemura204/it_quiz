@@ -71,10 +71,12 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
                   (item) => item.quizId == localQuizItem.quizId);
               if (matchedQuizItem != null) {
                 updatedQuizItems.add(localQuizItem.copyWith(
+                  word: matchedQuizItem.word,
+                  comment: matchedQuizItem.comment,
                   question: matchedQuizItem.question,
                   ans: matchedQuizItem.ans,
                   choices: matchedQuizItem.choices,
-                  comment: matchedQuizItem.comment,
+                  source: matchedQuizItem.source,
                   isPremium: matchedQuizItem.isPremium,
                   importance: matchedQuizItem.importance,
                 ));

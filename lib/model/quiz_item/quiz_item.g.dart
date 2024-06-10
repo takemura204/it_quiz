@@ -8,11 +8,15 @@ part of 'quiz_item.dart';
 
 _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
       quizId: json['quizId'] as int? ?? 0,
-      question: json['question'] as String,
-      ans: json['ans'] as String,
-      choices:
-          (json['choices'] as List<dynamic>).map((e) => e as String).toList(),
-      comment: json['comment'] as String,
+      word: json['word'] as String? ?? '',
+      comment: json['comment'] as String? ?? '',
+      question: json['question'] as String? ?? '',
+      ans: json['ans'] as String? ?? '',
+      choices: (json['choices'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      source: json['source'] as String? ?? '',
       isWeak: json['isWeak'] as bool? ?? false,
       status: $enumDecodeNullable(_$QuizStatusTypeEnumMap, json['status']) ??
           QuizStatusType.unlearned,
@@ -27,10 +31,12 @@ _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
 Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
     <String, dynamic>{
       'quizId': instance.quizId,
+      'word': instance.word,
+      'comment': instance.comment,
       'question': instance.question,
       'ans': instance.ans,
       'choices': instance.choices,
-      'comment': instance.comment,
+      'source': instance.source,
       'isWeak': instance.isWeak,
       'status': _$QuizStatusTypeEnumMap[instance.status]!,
       'importance': _$QuizImportanceTypeEnumMap[instance.importance]!,
