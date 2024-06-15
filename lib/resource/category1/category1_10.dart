@@ -6,7 +6,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category1_10 {
   final quizItems = [
     QuizItem(
-      word: 'UX',
+      word: 'UX（User Experience）',
       question: 'ユーザーが製品やサービスを使用する際の経験全般を指す言葉は何か？',
       ans: 'UX',
       choices: ["UX", "4P", "4C", "RFM分析"],
@@ -253,7 +253,7 @@ List<QuizItem> get category1_10 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'SEO',
+      word: 'SEO（Search Engine Optimization）',
       question:
           '検索エンジンの検索結果が上位に表示されるよう，Webページ内に適切なキーワードを盛り込んだり，HTMLやリンクの内容を工夫したりする手法はどれか。',
       ans: 'SEO',

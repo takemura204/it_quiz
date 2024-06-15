@@ -6,14 +6,22 @@ import '../../untils/enums.dart';
 List<QuizItem> get category1_13 {
   final quizItems = [
     QuizItem(
-      question: '企業が市場や顧客からのフィードバックを活用してイノベーションを起こす方法を何というか？',
-      ans: 'MOT',
-      choices: ["MOT", "POT", "LOT", "NOT"],
+      word: 'MOT',
+      question: 'MOT(Management of Technology)の目的として，適切なものはどれか。',
+      ans: '技術革新を効果的に自社のビジネスに結び付けて企業の成長を図る。',
+      choices: [
+        "企業経営や生産管理において数学や自然科学などを用いることで，生産性の向上を図る。",
+        "技術革新を効果的に自社のビジネスに結び付けて企業の成長を図る。",
+        "従業員が製品の質の向上について組織的に努力することで，企業としての品質向上を図る。",
+        "職場において上司などから実際の業務を通して必要な技術や知識を習得することで，業務処理能力の向上を図る。"
+      ],
       comment:
-          "MOT（Moment of Truth）は、企業が市場や顧客との接点（真実の瞬間）で得たフィードバックを活用し、製品やサービスのイノベーションを起こす方法。",
+          "MOT(Management of Technology)は、技術経営とも呼ばれ、技術開発の成果によって事業利益を獲得することを目的とした経営手法。",
+      source: '平成27年秋期 問12',
       importance: QuizImportanceType.high,
     ),
     QuizItem(
+      word: 'プロセスイノベーション',
       question: '組織の業務プロセスを根本的に見直し、効率化や効果の向上を図るイノベーションを何というか？',
       ans: 'プロセスイノベーション',
       choices: ["プロセスイノベーション", "プロダクトイノベーション", "プロジェクトイノベーション", "プログラムイノベーション"],
@@ -21,20 +29,32 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      question: '新しい製品やサービスを開発し、市場に導入することによるイノベーションを何というか？',
-      ans: 'プロダクトイノベーション',
-      choices: ["プロセスイノベーション", "プロダクトイノベーション", "プロジェクトイノベーション", "プログラムイノベーション"],
-      comment: "プロダクトイノベーションは、新しい製品やサービスを開発し、市場に導入することによるイノベーション。",
+      word: 'プロダクトイノベーション',
+      question:
+          'イノベーションは，大きくプロセスイノベーションとプロダクトイノベーションに分けることができる。プロダクトイノベーションの要因として，適切なものはどれか。',
+      ans: '市場のニーズ',
+      choices: ["効率的な生産方式", "サプライチェーン管理", "市場のニーズ", "バリューチェーン管理"],
+      comment: "プロダクトイノベーションは、新しい製品やサービスを開発し、市場にニーズに合わせて導入するイノベーション。",
+      source: '平成27年春期 問23',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      question: '将来の技術開発の方向性や目標を示し、イノベーションの計画を立てるために使用されるツールを何というか？',
-      ans: '技術ロードマップ',
-      choices: ["技術ロードマップ", "技術ナビゲーション", "技術パスウェイ", "技術ブループリント"],
-      comment: "技術ロードマップは、将来の技術開発の方向性や目標を示し、イノベーションの計画を立てるために使用されるツール。",
+      word: '技術ロードマップ',
+      question: '技術ロードマップの説明として，適切なものはどれか。',
+      ans: '対象とする分野において，実現が期待されている技術を時間軸とともに示したもの',
+      choices: [
+        "カーナビゲーションシステムなどに用いられている最短経路の探索機能の実現に必要な技術を示したもの",
+        "業務システムの開発工程で用いるソフトウェア技術の一覧を示したもの",
+        "情報システム部門の人材が習得すべき技術をキャリアとともに示したもの",
+        "対象とする分野において，実現が期待されている技術を時間軸とともに示したもの"
+      ],
+      comment:
+          "技術ロードマップは、縦軸に対象の技術・製品・サービス・市場を、横軸には時間の経過をとり、それらの要素の将来的な展望や進展目標を時系列で表した図表のことで、対象とする分野において，実現が期待されている技術を時間軸とともに示したもの。",
+      source: '令和3年 問10',
       importance: QuizImportanceType.high,
     ),
     QuizItem(
+      word: 'オープンイノベーション',
       question: '外部のアイデアや技術を積極的に取り入れ、自社のイノベーションを加速させる手法を何というか？',
       ans: 'オープンイノベーション',
       choices: [
@@ -47,6 +67,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '魔の川',
       question: 'イノベーションの過程で遭遇する、技術開発の初期段階における困難を何というか？',
       ans: '魔の川',
       choices: ["オープンイノベーション", "魔の川", "死の谷", "ダーウィンの海"],
@@ -55,6 +76,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '死の谷',
       question: '技術開発が一定の段階を超えた後に直面する、商業化までの資金繰りや市場導入の難しさを指す言葉は何か？',
       ans: '死の谷',
       choices: ["魔の川", "死の谷", "ダーウィンの海", "ハッカソン"],
@@ -63,6 +85,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ダーウィンの海',
       question: 'イノベーションの過程で、成功した技術や製品が広く普及し、市場を席巻する状態を指す言葉は何か？',
       ans: 'ダーウィンの海',
       choices: ["死の谷", "ダーウィンの海", "ハッカソン", "キャズム"],
@@ -71,6 +94,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'イノベーションのジレンマ',
       question: '既存のビジネスモデルが新しい技術や市場の変化によって脅かされる状況を指す言葉は何か？',
       ans: 'イノベーションのジレンマ',
       choices: ["キャズム", "イノベーションのジレンマ", "デザイン思考", "ペルソナ法"],
@@ -79,6 +103,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'キャズム',
       question: 'イノベーションが普及する過程で生じる、早期採用者と初期大衆の間のギャップを何というか？',
       ans: 'キャズム',
       choices: ["ハッカソン", "キャズム", "イノベーションのジレンマ", "デザイン思考"],
@@ -87,6 +112,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ハッカソン',
       question: 'プログラマーやデザイナーなどが集まり、限られた時間内でアイデアを出し合い、プロトタイプを作成するイベントは何か？',
       ans: 'ハッカソン',
       choices: ["ダーウィンの海", "ハッカソン", "キャズム", "イノベーションのジレンマ"],
@@ -95,6 +121,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'デザイン思考',
       question: '問題解決やイノベーションのプロセスにおいて、ユーザー中心のアプローチを取る思考方法は何か？',
       ans: 'デザイン思考',
       choices: ["イノベーションのジレンマ", "デザイン思考", "ペルソナ法", "バックキャスティング"],
@@ -103,6 +130,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ペルソナ法',
       question: 'ターゲットユーザーの詳細なプロファイルを作成することで、製品やサービスの設計に役立てる手法は何か？',
       ans: 'ペルソナ法',
       choices: ["デザイン思考", "ペルソナ法", "バックキャスティング", "ビジネスモデルキャンバス"],
@@ -111,6 +139,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'バックキャスティング',
       question: '望ましい未来の状態を設定し、その状態を実現するために現在から逆算して計画を立てる手法は何か？',
       ans: 'バックキャスティング',
       choices: ["ペルソナ法", "バックキャスティング", "ビジネスモデルキャンバス", "リーンスタートアップ"],
@@ -119,6 +148,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ビジネスモデルキャンバス',
       question: 'ビジネスの構想段階で、価値提案や顧客セグメント、収益モデルなどを体系的に整理するツールは何か？',
       ans: 'ビジネスモデルキャンバス',
       choices: ["バックキャスティング", "ビジネスモデルキャンバス", "リーンスタートアップ", "APIエコノミー"],
@@ -127,6 +157,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'リーンスタートアップ',
       question: 'スタートアップがリソースの制約の中で製品開発を行い、顧客のフィードバックを基に継続的に製品を改善していくアプローチは何か？',
       ans: 'リーンスタートアップ',
       choices: ["ビジネスモデルキャンバス", "リーンスタートアップ", "APIエコノミー", "ベンチャーキャピタル"],
@@ -135,6 +166,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'APIエコノミー',
       question: '第三者のアプリケーションやサービスが企業の機能やデータを利用できるようにする経済活動は何か？',
       ans: 'APIエコノミー',
       choices: ["リーンスタートアップ", "APIエコノミー", "ベンチャーキャピタル", "コーポレートベンチャーキャピタル"],
@@ -143,6 +175,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ベンチャーキャピタル',
       question: 'スタートアップや新事業に対して資金を提供し、成長を支援する投資家や投資ファンドは何というか？',
       ans: 'ベンチャーキャピタル',
       choices: ["APIエコノミー", "ベンチャーキャピタル", "コーポレートベンチャーキャピタル", "デルファイ法"],
@@ -151,6 +184,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'コーポレートベンチャーキャピタル',
       question:
           '大企業が設立するベンチャーキャピタルで、社外の革新的なスタートアップに投資し、新技術やビジネスモデルの獲得を目指すものは何か？',
       ans: 'コーポレートベンチャーキャピタル',
@@ -160,6 +194,7 @@ List<QuizItem> get category1_13 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'デルファイ法',
       question: '専門家の意見を集約し、将来の予測や意思決定を行う手法を何というか？',
       ans: 'デルファイ法',
       choices: ["コーポレートベンチャーキャピタル", "デルファイ法", "バックキャスティング", "ビジネスモデルキャンバス"],

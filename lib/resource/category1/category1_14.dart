@@ -5,6 +5,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category1_14 {
   final quizItems = [
     QuizItem(
+      word: 'POS',
       question: '販売時点情報管理を実現するシステムは何か？',
       ans: 'POS',
       choices: ["POS", "GPS", "RFID", "SFA"],
@@ -12,6 +13,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'GPS',
       question: '地球上の任意の位置を特定するために用いられるシステムは何か？',
       ans: 'GPS',
       choices: ["GIS", "GPS", "ETC", "RFID"],
@@ -20,6 +22,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'GIS',
       question: '地理情報を管理・分析するためのシステムは何か？',
       ans: 'GIS',
       choices: ["GPS", "GIS", "ITS", "ETC"],
@@ -28,6 +31,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ITS',
       question: '交通システムの効率化を目指して技術を統合したシステムは何か？',
       ans: 'ITS',
       choices: ["GIS", "GPS", "ITS", "ETC"],
@@ -36,6 +40,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ETC',
       question: '自動車の通行料金を非接触で自動的に課金するシステムは何か？',
       ans: 'ETC',
       choices: ["ETC", "ITS", "GPS", "RFID"],
@@ -43,13 +48,17 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      question: '商品や情報を自動的に識別するために利用される技術は何か？',
+      word: 'RFID',
+      question: '電車の定期券などとして利用される非接触型ICカードに用いられている技術はどれか。',
       ans: 'RFID',
-      choices: ["RFID", "POS", "SFA", "GPS"],
-      comment: "RFID（Radio Frequency Identification）は、電波を用いて商品や情報を自動的に識別する技術。",
+      choices: ["IrDA", "RFID", "バーコード", "無線LAN"],
+      comment:
+          "RFID(Radio Frequency IDentification)は、ID情報を埋め込んだICタグから電磁界や電波を用い通信可能距離は数cm～数mで無線通信をし情報をやりとりする技術。",
+      source: '平成22年春期 問78',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'セルフレジ',
       question: '顧客自身が商品のスキャンから決済までを行うレジシステムは何か？',
       ans: 'セルフレジ',
       choices: ["セルフレジ", "SFA", "ETC", "CTI"],
@@ -57,13 +66,22 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      question: '営業支援を目的とした情報システムは何か？',
-      ans: 'SFA',
-      choices: ["CTI", "SFA", "POS", "GIS"],
-      comment: "SFA（Sales Force Automation）は、営業活動の効率化をサポートするための情報システム。",
+      word: 'SFA',
+      question: 'SFAの目的に関する記述として，適切なものはどれか。',
+      ans: '蓄積された知識やノウハウを組織全体で共有し，営業活動の効率と管理水準の向上を図る。',
+      choices: [
+        "営業活動で入手した市場ニーズに対応して，製品の改良を図る。",
+        "他の優れた企業の業績や組織の分析を通じて，自社の営業組織の見直しを図る。",
+        "蓄積された知識やノウハウを組織全体で共有し，営業活動の効率と管理水準の向上を図る。",
+        "販売情報を基に，資材の調達から生産，流通，販売までの一連のプロセスを改善して全体の在庫の最適化を図る。"
+      ],
+      comment:
+          "SFA(Sales Force Automation)は、営業支援システムとも呼ばれ、営業活動にモバイル技術やインターネット技術といったITを活用して、営業の質と効率を高め売上や利益の増加につなげようとする仕組み、またはそのシステム。",
+      source: '平成27年春期 問13',
       importance: QuizImportanceType.high,
     ),
     QuizItem(
+      word: 'CTI',
       question: '電話システムとコンピュータシステムを統合して運用する技術は何か？',
       ans: 'CTI',
       choices: ["SFA", "CTI", "GPS", "ETC"],
@@ -72,13 +90,21 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.none,
     ),
     QuizItem(
-      question: '製品の製造から消費に至るまでの流通履歴を追跡可能にすることは何か？',
-      ans: 'トレーサビリティ',
-      choices: ["トレーサビリティ", "RFID", "CTI", "SFA"],
-      comment: "トレーサビリティは、製品の製造から消費に至るまでの流通履歴を追跡し、情報の透明性を高めるための概念。",
+      word: 'トレーサビリティ',
+      question: 'トレーサビリティに該当する事例として，適切なものはどれか。',
+      ans: '肉や魚に貼ってあるラベルをよりどころに生産から販売までの履歴を確認できる。',
+      choices: [
+        "インターネットやWebの技術を利用して，コンピュータを教育に応用する。",
+        "開発部門を自社内に抱えずに，開発業務を全て外部の専門企業に任せる。",
+        "個人の知識や情報を組織全体で共有し，有効に活用して業績を上げる。",
+        "肉や魚に貼ってあるラベルをよりどころに生産から販売までの履歴を確認できる。"
+      ],
+      comment: "トレーサビリティ(Traceability)は、日本語では追跡可能性といい、追跡できる能力のこと。",
+      source: '平成26年春期 問5',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'スマートグリッド',
       question: '電力供給と需要の効率を最適化するための電力ネットワークは何か？',
       ans: 'スマートグリッド',
       choices: ["スマートグリッド", "GIS", "ITS", "GPS"],
@@ -86,6 +112,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'CDN',
       question: 'コンテンツ配信ネットワークを短縮して何というか？',
       ans: 'CDN',
       choices: ["CDN", "DTP", "GIS", "CTI"],
@@ -94,6 +121,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'デジタルツイン',
       question: '物理的な資産とそのデジタル複製を統合し、データを同期させるシステムは何か？',
       ans: 'デジタルツイン',
       choices: ["デジタルツイン", "スマートグリッド", "SFA", "CTI"],
@@ -102,6 +130,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'サイバーフィジカルシステム',
       question: '物理的なプロセスとサイバー空間の技術を融合したシステムは何というか？',
       ans: 'サイバーフィジカルシステム',
       choices: ["デジタルツイン", "サイバーフィジカルシステム", "RFID", "GIS"],
@@ -109,6 +138,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '住民基本台帳ネットワークシステム',
       question: '住民の情報を一元管理する日本のシステムは何か？',
       ans: '住民基本台帳ネットワークシステム',
       choices: ["マイナンバーカード", "住民基本台帳ネットワークシステム", "マイナポータル", "Jアラート"],
@@ -116,6 +146,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'マイナンバー',
       question: '日本の個人識別番号システムは何というか？',
       ans: 'マイナンバー',
       choices: ["マイナンバーカード", "マイナポータル", "マイナンバー", "住民基本台帳ネットワークシステム"],
@@ -123,6 +154,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'マイナンバーカード',
       question: '個人識別番号を証明するためのカードは何か？',
       ans: 'マイナンバーカード',
       choices: ["マイナンバーカード", "マイナポータル", "住民基本台帳ネットワークシステム", "マイナンバー"],
@@ -130,6 +162,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'マイナポータル',
       question: 'マイナンバーを利用して公的手続きをオンラインで行うためのウェブサイトは何か？',
       ans: 'マイナポータル',
       choices: ["マイナポータル", "マイナンバーカード", "Jアラート", "住民基本台帳ネットワークシステム"],
@@ -137,6 +170,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '緊急速報',
       question: '国民の安全を確保するため、政府が緊急時に使用する警報システムは何か？',
       ans: '緊急速報',
       choices: ["緊急速報", "Jアラート", "マイナポータル", "AIアシスタント"],
@@ -144,6 +178,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'Jアラート',
       question: '日本の防災と危機管理のために導入された全国瞬時警報システムは何というか？',
       ans: 'Jアラート',
       choices: ["緊急速報", "Jアラート", "マイナポータル", "AIアシスタント"],
@@ -151,6 +186,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'DTP',
       question: 'デジタルデータやメディアを編集するためのプロセスを何というか？',
       ans: 'DTP',
       choices: ["DTP", "CDN", "SFA", "CTI"],
@@ -159,6 +195,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'AI',
       question: '人工知能技術を指す一般的な略称は何か？',
       ans: 'AI',
       choices: ["AI", "DTP", "CTI", "RFID"],
@@ -167,6 +204,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '人間中心のAI社会原則',
       question: '人間の倫理観や利益を中心に考慮したAI開発の指針を何というか？',
       ans: '人間中心のAI社会原則',
       choices: ["人間中心のAI社会原則", "AI利活用ガイドライン", "特化型AI", "汎用AI"],
@@ -174,6 +212,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'AI利活用ガイドライン',
       question: 'AIの適切な使用を促進するための日本のガイドラインは何か？',
       ans: 'AI利活用ガイドライン',
       choices: ["AI利活用ガイドライン", "人間中心のAI社会原則", "特化型AI", "汎用AI"],
@@ -181,6 +220,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '特化型AI',
       question: '特定のタスクに特化して設計されたAIは何と呼ばれるか？',
       ans: '特化型AI',
       choices: ["特化型AI", "汎用AI", "AIアシスタント", "データのバイアス"],
@@ -188,6 +228,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '汎用AI',
       question: '広範囲のタスクを自立的に学習し、実行できるAIは何と呼ばれるか？',
       ans: '汎用AI',
       choices: ["特化型AI", "汎用AI", "AIアシスタント", "データのバイアス"],
@@ -195,6 +236,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'AIアシスタント',
       question: 'ユーザーの操作を支援するために設計されたAIベースのシステムは何か？',
       ans: 'AIアシスタント',
       choices: ["AIアシスタント", "特化型AI", "汎用AI", "データのバイアス"],
@@ -202,6 +244,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'データのバイアス',
       question: 'データセットに偏りがあることによるAIの判断の偏りは何と呼ばれるか？',
       ans: 'データのバイアス',
       choices: ["データのバイアス", "アルゴリズムのバイアス", "特化型AI", "汎用AI"],
@@ -209,6 +252,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'アルゴリズムのバイアス',
       question: '処理ロジックの偏りにより、AIが不公平な判断を下す現象は何か？',
       ans: 'アルゴリズムのバイアス',
       choices: ["データのバイアス", "アルゴリズムのバイアス", "特化型AI", "汎用AI"],
@@ -216,6 +260,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'トロッコ問題',
       question: '倫理的ジレンマを解決するための思考実験の一つで、ある人を犠牲にして多くの人を救うかどうかを問うシナリオは何と呼ばれるか？',
       ans: 'トロッコ問題',
       choices: ["トロッコ問題", "ギフトエコノミー", "パレート効率", "ユーティリタリアニズム"],

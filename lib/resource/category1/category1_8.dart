@@ -54,7 +54,7 @@ List<QuizItem> get category1_8 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'ISBN',
+      word: 'ISBN（International Standard Book Number）',
       question: '図書を特定するために世界標準として使用されているコードはどれか。',
       ans: 'ISBN',
       choices: ["ISBN", "ITF", "JAN", "QR"],
@@ -64,7 +64,7 @@ List<QuizItem> get category1_8 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'ISO',
+      word: 'ISO（International Organization for Standardization）',
       question: '国際的な標準化を行う団体で、様々な分野の国際規格を定めている組織は何か？',
       ans: 'ISO',
       choices: ["IEEE", "ISO", "IETF", "W3C"],
@@ -73,7 +73,7 @@ List<QuizItem> get category1_8 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'IEC',
+      word: 'IEC（International Electrotechnical Commission）',
       question: '国際的な電気技術に関する標準化を行う団体は何か？',
       ans: 'IEC',
       choices: ["ISO", "IEC", "IEEE", "JIS"],
@@ -82,17 +82,17 @@ List<QuizItem> get category1_8 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'IEEE',
+      word: 'IEEE(Institute of Electrical and Electronics Engineers)',
       question: 'イーサネットのLANや無線LANなどに関する標準化活動を推進している，米国の学会はどれか。',
       ans: 'IEEE',
       choices: ["ICANN", "IEEE", "ISO", "ISO"],
       comment:
-          "IEEE(Institute of Electrical and Electronics Engineers，アイトリプルイー)は、アメリカ合衆国に本部を持ち、電気工学・電子工学技術分野における標準化活動を行っている専門家組織",
+          "IEEE(Institute of Electrical and Electronics Engineers)は、アメリカ合衆国に本部を持ち、電気工学・電子工学技術分野における標準化活動を行っている専門家組織",
       source: '平成28年秋期 問19',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'W3C',
+      word: 'W3C（World Wide Web Consortium）',
       question: 'ウェブ技術に関する標準を策定する国際的な組織は何か？',
       ans: 'W3C',
       choices: ["IETF", "ISO", "W3C", "IEEE"],
@@ -101,7 +101,7 @@ List<QuizItem> get category1_8 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'IETF',
+      word: 'IETF（Internet Engineering Task Force）',
       question: 'インターネットの技術的基盤に関する標準を策定する団体は何か？',
       ans: 'IETF',
       choices: ["IEEE", "ISO", "W3C", "IETF"],

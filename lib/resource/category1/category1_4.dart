@@ -137,7 +137,7 @@ List<QuizItem> get category1_4 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'CAL',
+      word: 'CAL（Client Access License）',
       question: 'クライアントアクセスライセンスの略で、サーバーへのアクセス権を与えるライセンスを何というか？',
       ans: 'CAL',
       choices: ["CAL", "SAL", "FAL", "DAL"],

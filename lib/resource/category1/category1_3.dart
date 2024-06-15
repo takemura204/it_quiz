@@ -153,12 +153,12 @@ List<QuizItem> get category1_3 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'ROI',
+      word: 'ROI(Return on Investment)',
       question: 'システム化計画において，情報システムの費用対効果を評価する。その評価指標として，適切なものはどれか。',
       ans: 'ROI',
       choices: ["PER", "ROI", "自己資本比率", "流動比率"],
       comment:
-          "ROI(Return on Investment，投下資本利益率)は、効果金額を投資額で割ったもので、投資額に対してどの程度の利益が生み出されたかを測る指標。",
+          "ROI(Return on Investment)は、効果金額を投資額で割ったもので、投資額に対してどの程度の利益が生み出されたかを測る指標。",
       importance: QuizImportanceType.normal,
     ),
   ];

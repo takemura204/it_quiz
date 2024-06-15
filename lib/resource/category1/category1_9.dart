@@ -21,7 +21,7 @@ List<QuizItem> get category1_9 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'PPM',
+      word: 'PPM(Products Portfolio Management)',
       question: 'PPMの適用事例として，適切なものはどれか。',
       ans: '個々の事業の戦略的な位置付けを明確にし，経営資源の最適配分を考える。',
       choices: [
@@ -121,7 +121,7 @@ List<QuizItem> get category1_9 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'OEM',
+      word: 'OEM（Original Equipment Manufacturer）',
       question: '企業が自社ブランド製品を他社に製造させることを何というか？',
       ans: 'OEM',
       choices: ["M&A", "OEM", "ファブレス", "フランチャイズ"],
@@ -156,7 +156,7 @@ List<QuizItem> get category1_9 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'MBO',
+      word: 'MBO(Management Buyout)',
       question: '事業の再編などに用いられるMBOの説明として，適切なものはどれか。',
       ans: '経営者が，自社の株式の大半を買い取ることで経営権を取得する。',
       choices: [
@@ -171,7 +171,7 @@ List<QuizItem> get category1_9 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'EBO',
+      word: 'EBO（Employee Buyout）',
       question: '従業員が自社の株式を買い取り、経営に参加することを何というか？',
       ans: 'EBO',
       choices: ["MBO", "EBO", "TOB", "M&A"],
@@ -180,7 +180,7 @@ List<QuizItem> get category1_9 {
       importance: QuizImportanceType.none,
     ),
     QuizItem(
-      word: 'TOB',
+      word: 'TOB(Take Over Bid)',
       question: 'TOBの説明として，最も適切なものはどれか。',
       ans: 'TOB',
       choices: [
@@ -195,7 +195,7 @@ List<QuizItem> get category1_9 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'M&A',
+      word: 'M&A(Mergers and Acquisitions)',
       question: 'M&Aに関する記述として，適切なものはどれか。',
       ans: '自社に不足している機能を企業買収などによって他社から取り込み，事業展開を速めること',
       choices: [

@@ -34,7 +34,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'CSR',
+      word: 'CSR（Corporate Social Responsibility）',
       question:
           '利益の追求だけでなく，社会に対する貢献や地球環境の保護などの社会課題を認識して取り組むという企業活動の基本となる考え方はどれか。',
       ans: 'CSR',
@@ -45,7 +45,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'SRI',
+      word: 'SRI（Socially Responsible Investment）',
       question:
           '社会的責任投資と訳され、企業への投資を行う際に、従来から投資基準となっていた経済・財務的な分析に加えて、CSR（企業の社会的責任）への取組みを考慮する投資手法は何か？',
       ans: 'SRI',
@@ -93,7 +93,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'SDGs',
+      word: 'SDGs（Sustainable Development Goals）',
       comment:
           "SDGs（Sustainable Development Goals）とは、持続可能な世界を実現するために国連が採択した，2030年までに達成されるべき開発目標。",
       question:
@@ -148,7 +148,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'BCP',
+      word: 'BCP（Business Continuity Plan）',
       comment:
           "BCP（Business Continuity Plan）は、災害や緊急事態が発生した際に、最低限の事業を継続し、または早期に復旧・再開できるようにする企業が定めた行動計画",
       question:
@@ -159,7 +159,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'BCM',
+      word: 'BCM（Business Continuity Management）',
       question: '事業継続性を確保するための組織的な管理プロセスは何か？',
       ans: 'BCM',
       choices: ["BCM", "BCP", "OODAループ", "PDCA"],
@@ -168,7 +168,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'OJT',
+      word: 'OJT（On-the-Job Training）',
       comment:
           "OJT（On-the-Job Training）とは、職場内訓練とも呼ばれ、実際の業務現場で上司や先輩の指導のもとで体系的・計画的に仕事を習得させていく教育方法。",
       question: '現在担当している業務の実践を通じて，業務の遂行に必要な技術や知識を習得させる教育訓練の手法はどれか。',
@@ -178,7 +178,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'Off-JT',
+      word: 'Off-JT（Off-the-Job Training）',
       comment:
           "Off-JT（Off-the-Job Training）とは、実際の現場で行われるOJTに対して、研修や外部セミナーへの参加などの普段の職場を離れた場所で行われる人材教育のこと",
       question: '社員育成方法のうち，Off-JTに分類されるものはどれか。',
@@ -217,7 +217,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'CDP',
+      word: 'CDP（Career Development Planning）',
       question: '従業員がキャリア開発のために自身のスキルや経験を管理するためのデータベースは何か？',
       ans: 'CDP',
       choices: ["CDP", "メンタルヘルス", "HRテック", "MBO"],
@@ -239,12 +239,11 @@ List<QuizItem> get category1_1 {
       question: '人事管理を効率化するために利用されるテクノロジーは何か？',
       ans: 'HRテック',
       choices: ["HRテック", "メンタルヘルス", "CDP", "MBO"],
-      comment:
-          "HRテック（Human Resources Technology）は、採用、評価、教育訓練などの人事管理プロセスを効率化するために利用されるテクノロジー。",
+      comment: "HRテックは、採用、評価、教育訓練などの人事管理プロセスを効率化するために利用されるテクノロジー。",
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'MBO',
+      word: 'MBO（Management by Objectives）',
       question: '従業員と管理職が目標を共有し、評価する管理手法は何か？',
       ans: 'MBO',
       choices: ["MBO", "HRテック", "メンタルヘルス", "CDP"],
@@ -253,7 +252,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'HRM',
+      word: 'HRM（Human Resource Management）',
       question: '組織内の人材管理全般を指す言葉は何か？',
       ans: 'HRM',
       choices: ["HRM", "MBO", "HRテック", "メンタルヘルス"],
@@ -300,7 +299,7 @@ List<QuizItem> get category1_1 {
       ans: 'ダイバーシティ',
       choices: ["ダイバーシティ", "ワークライフバランス", "ワークエンゲージメント", "タレントマネジメント"],
       comment:
-          "ダイバーシティ（Diversity）は、性別、年齢、国籍、文化、価値観など、多様な個性や背景を持つ人々を尊重し、その能力や特性を組織の成長に活用する経営戦略。",
+          "ダイバーシティは、性別、年齢、国籍、文化、価値観など、多様な個性や背景を持つ人々を尊重し、その能力や特性を組織の成長に活用する経営戦略。",
       importance: QuizImportanceType.low,
     ),
     QuizItem(
@@ -430,7 +429,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'CEO',
+      word: 'CEO（Chief Executive Officer）',
       question: '企業の最高経営責任者を指す役職は何か？',
       ans: 'CEO',
       choices: ["CEO", "CIO", "持株会社", "ネットワーク組織"],
@@ -439,7 +438,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'CIO',
+      word: 'CIO（Chief Information Officer）',
       comment:
           "CIO（Chief Information Officer）は、経営戦略に沿った情報戦略や、IT投資計画の策定とその実現に直接の責任を持つ最高情報責任者。",
       question: 'CIOの役割として，最も適切なものはどれか。',
