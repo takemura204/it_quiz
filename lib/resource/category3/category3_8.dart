@@ -99,7 +99,7 @@ List<QuizItem> get category3_8 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'RAID',
+      word: 'RAID（Redundant Array of Independent Disks）',
       question: 'RAID1(ミラーリング)の特徴として，適切なものはどれか。',
       ans: '2台以上のハードディスクに同じデータを書き込むことによって，データの可用性を高める。',
       choices: [

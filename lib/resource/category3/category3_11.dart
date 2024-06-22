@@ -14,6 +14,7 @@ List<QuizItem> get category3_11 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'カレントディレクトリ',
       question: 'カレントディレクトリの説明について正しいものはどれか。',
       ans: '現在作業を行っているディレクトリを意味する。',
       choices: [

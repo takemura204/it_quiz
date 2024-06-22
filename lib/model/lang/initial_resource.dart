@@ -46,6 +46,12 @@ class I18n {
 
   int get category0Index => 0;
 
+  int get category0_1Index => 1000;
+
+  int get category0_2Index => 2000;
+
+  int get category0_3Index => 3000;
+
   int get category1Index => 10000;
 
   int get category2Index => 20000;

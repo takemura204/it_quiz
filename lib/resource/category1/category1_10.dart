@@ -16,12 +16,13 @@ List<QuizItem> get category1_10 {
     ),
     QuizItem(
       word: '4P',
-      question: 'マーケティングの基本的なフレームワークで、製品、価格、流通、プロモーションの4つの要素を何というか？',
+      question: 'マーケティングミックスの検討に用いる考え方の一つであり，売り手側の視点を分類したものはどれか。',
       ans: '4P',
-      choices: ["UX", "4P", "4C", "RFM分析"],
+      choices: ["4C", "4P", "PPM", "SWOT"],
       comment:
           "4Pは、マーケティング戦略を立てる際の基本的なフレームワークで、Product（製品）、Price（価格）、Place（流通）、Promotion（プロモーション）の4つの要素を指す。",
-      importance: QuizImportanceType.low,
+      source: '平成29年春期 問2',
+      importance: QuizImportanceType.high,
     ),
     QuizItem(
       word: '4C',
@@ -72,7 +73,6 @@ List<QuizItem> get category1_10 {
       ans: 'オムニチャネル',
       choices: ["オピニオンリーダー", "オムニチャネル", "ブランド戦略", "プロダクトライフサイクル"],
       comment: "オムニチャネルは、オンラインとオフラインを含む複数の販売チャネルを統合し、顧客に一貫したショッピング体験を提供する戦略。",
-      source: '',
       importance: QuizImportanceType.low,
     ),
     QuizItem(

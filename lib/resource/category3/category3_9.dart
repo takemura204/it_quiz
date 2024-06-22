@@ -146,7 +146,7 @@ List<QuizItem> get category3_9 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'TCO',
+      word: 'TCO（Total Cost of Ownership）',
       question: 'TCO(Total Cost of Ownership)の説明として，最も適切なものはどれか。',
       ans: 'システム導入時に発生する費用と，導入後に発生する運用費・管理費の総額',
       choices: [

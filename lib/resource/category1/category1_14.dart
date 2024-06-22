@@ -5,7 +5,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category1_14 {
   final quizItems = [
     QuizItem(
-      word: 'POS',
+      word: 'POS（Point of Sale）',
       question: '販売時点情報管理を実現するシステムは何か？',
       ans: 'POS',
       choices: ["POS", "GPS", "RFID", "SFA"],
@@ -13,7 +13,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'GPS',
+      word: 'GPS（Global Positioning System）',
       question: '地球上の任意の位置を特定するために用いられるシステムは何か？',
       ans: 'GPS',
       choices: ["GIS", "GPS", "ETC", "RFID"],
@@ -22,7 +22,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'GIS',
+      word: 'GIS（Geographic Information System）',
       question: '地理情報を管理・分析するためのシステムは何か？',
       ans: 'GIS',
       choices: ["GPS", "GIS", "ITS", "ETC"],
@@ -31,7 +31,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'ITS',
+      word: 'ITS（Intelligent Transport Systems）',
       question: '交通システムの効率化を目指して技術を統合したシステムは何か？',
       ans: 'ITS',
       choices: ["GIS", "GPS", "ITS", "ETC"],
@@ -40,7 +40,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'ETC',
+      word: 'ETC（Electronic Toll Collection）',
       question: '自動車の通行料金を非接触で自動的に課金するシステムは何か？',
       ans: 'ETC',
       choices: ["ETC", "ITS", "GPS", "RFID"],
@@ -48,7 +48,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'RFID',
+      word: 'RFID(Radio Frequency IDentification)',
       question: '電車の定期券などとして利用される非接触型ICカードに用いられている技術はどれか。',
       ans: 'RFID',
       choices: ["IrDA", "RFID", "バーコード", "無線LAN"],
@@ -66,7 +66,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'SFA',
+      word: 'SFA(Sales Force Automation)',
       question: 'SFAの目的に関する記述として，適切なものはどれか。',
       ans: '蓄積された知識やノウハウを組織全体で共有し，営業活動の効率と管理水準の向上を図る。',
       choices: [
@@ -81,7 +81,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'CTI',
+      word: 'CTI（Computer Telephony Integration）',
       question: '電話システムとコンピュータシステムを統合して運用する技術は何か？',
       ans: 'CTI',
       choices: ["SFA", "CTI", "GPS", "ETC"],
@@ -112,7 +112,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'CDN',
+      word: 'CDN（Content Delivery Network）',
       question: 'コンテンツ配信ネットワークを短縮して何というか？',
       ans: 'CDN',
       choices: ["CDN", "DTP", "GIS", "CTI"],
@@ -186,7 +186,7 @@ List<QuizItem> get category1_14 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'DTP',
+      word: 'DTP（Desktop Publishing）',
       question: 'デジタルデータやメディアを編集するためのプロセスを何というか？',
       ans: 'DTP',
       choices: ["DTP", "CDN", "SFA", "CTI"],

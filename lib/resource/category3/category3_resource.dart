@@ -5,23 +5,23 @@ extension Category3Quiz on QuizModel {
   List<Quiz> get category3QuizList {
     final quizList = [
       Quiz(
-        title: "【頻出】テクノロジ系①",
-        quizItemList: category0_6,
+        title: "【頻出】構成要素",
+        quizItemList: category0_3_1,
         isPremium: false,
       ),
       Quiz(
-        title: "【頻出】テクノロジ系②",
-        quizItemList: category0_7,
+        title: "【頻出】ソフトウェア・ハードウェア",
+        quizItemList: category0_3_2,
         isPremium: false,
       ),
       Quiz(
-        title: "【頻出】テクノロジ系③",
-        quizItemList: category0_8,
+        title: "【頻出】データベース・ネットワーク",
+        quizItemList: category0_3_3,
         isPremium: false,
       ),
       Quiz(
-        title: "【頻出】テクノロジ系④",
-        quizItemList: category0_9,
+        title: "【頻出】セキュリティ",
+        quizItemList: category0_3_4,
         isPremium: false,
       ),
       Quiz(

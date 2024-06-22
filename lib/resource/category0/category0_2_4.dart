@@ -2,8 +2,38 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';
 
-List<QuizItem> get category2_8 {
+List<QuizItem> get category0_2_4 {
   final quizItems = [
+    QuizItem(
+      word: 'システム監査',
+      question: 'システム監査の実施に関する記述として，適切なものはどれか。',
+      ans: '本調査に先立って予備調査を実施する。',
+      choices: [
+        "監査計画を立案することなく監査を実施する。",
+        "監査の結果に基づき改善指導を行うことはない。",
+        "監査の結果に基づき改善指導を行うことはない。",
+        "本調査に先立って予備調査を実施する。"
+      ],
+      comment:
+          "システム監査は、組織体の情報システムのリスクに対するコントロールがリスクアセスメントに基づいて適切に整備・運用されているかを、独立かつ専門的な立場のシステム監査人が検証または評価すること。",
+      source: '平成23年特別 問42',
+      importance: QuizImportanceType.high,
+    ),
+    QuizItem(
+      word: 'システム監査基準',
+      question: 'システム監査人の行動規範を定めたシステム監査基準に関する説明として，適切なものはどれか。',
+      ans: 'システム監査業務の品質を確保し，有効かつ効率的に監査業務を実施するための基準を定めたものである。',
+      choices: [
+        "システム監査業務の品質を確保し，有効かつ効率的に監査業務を実施するための基準を定めたものである。",
+        "システム監査において，情報システムの企画・開発・運用・保守というライフサイクルの中で，リスクを低減するコントロールを適切に整備，運用するための基準を定めたものである。",
+        "システム監査人が情報処理の現場での管理の適切性を判断するときの尺度として用いるための基準を定めたものである。",
+        "組織体が効果的な情報セキュリティマネジメント体制を構築し，適切なコントロールを整備して運用するための基準を定めたものである。"
+      ],
+      comment:
+          "システム監査基準は、システム監査業務の品質を確保し、有効かつ効率的に監査を実施することを目的とした監査人の行為規範を定めたもの。",
+      source: '平成28年秋期 問54',
+      importance: QuizImportanceType.normal,
+    ),
     QuizItem(
       word: '内部統制',
       question: '内部統制の説明として，適切なものはどれか。',
@@ -34,23 +64,6 @@ List<QuizItem> get category2_8 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'リスクコントロールマトリクス',
-      question: '組織内のリスクとそれに対するコントロール活動を体系的に整理し、評価するために使用されるツールは何か？',
-      ans: 'リスクコントロールマトリクス',
-      choices: ["リスクコントロールマトリクス", "リスクアセスメント", "リスクマップ", "コントロールチャート"],
-      comment:
-          "リスクコントロールマトリクスは、組織が直面するリスクとそれに対する内部コントロール活動を体系的に整理・評価するために使用されるツール。",
-      importance: QuizImportanceType.low,
-    ),
-    QuizItem(
-      word: 'レピュテーションリスク',
-      question: '組織の評判損失につながるリスクを指す用語は何か？',
-      ans: 'レピュテーションリスク',
-      choices: ["レピュテーションリスク", "オペレーショナルリスク", "クレジットリスク", "市場リスク"],
-      comment: "レピュテーションリスクは、不適切な行動や業務の失敗などが原因で、組織の評判が損なわれ、経済的損失や信頼失墜につながるリスク。",
-      importance: QuizImportanceType.low,
-    ),
-    QuizItem(
       word: 'ITガバナンス',
       question: '組織のIT資源がビジネス目標に沿って効果的かつ効率的に使用されるように管理・監督する枠組みを何というか？',
       ans: '企業が競争優位性の構築を目的としてIT戦略の策定及び実行をコントロールし，あるべき方向へと導く組織能力',
@@ -68,7 +81,6 @@ List<QuizItem> get category2_8 {
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 801);
+    return quizItems[index].copyWith(quizId: index + I18n().category0_2Index + 401, isPremium: false);
   });
 }
