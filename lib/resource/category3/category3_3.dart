@@ -5,6 +5,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category3_3 {
   final quizItems = [
     QuizItem(
+      word: 'リスト',
       question: '複数の要素を順序付けて格納する基本的なデータ構造は何か？',
       ans: 'リスト',
       choices: ["リスト", "カラム", "スタック", "スライダー"],
@@ -12,6 +13,7 @@ List<QuizItem> get category3_3 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'キュー',
       question: '先入れ先出し（FIFO）の原則で動作し、データを一時的に保持するデータ構造は何か？',
       ans: 'キュー',
       choices: ["キュー", "リスト", "キャッシュ", "木構造"],
@@ -20,6 +22,7 @@ List<QuizItem> get category3_3 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'スタック',
       question: '後入れ先出し（LIFO）の原則で動作し、データを一時的に保持するデータ構造は何か？',
       ans: 'スタック',
       choices: ["スタック", "キュー", "リスト", "木構造"],
@@ -28,6 +31,7 @@ List<QuizItem> get category3_3 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '木構造',
       question: 'ノードと呼ばれる要素と、それらを結ぶ枝で構成される階層的なデータ構造は何か？',
       ans: '木構造',
       choices: ["木構造", "リスト", "キュー", "スタック"],
@@ -35,6 +39,7 @@ List<QuizItem> get category3_3 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '2分木',
       question: '各ノードが最大で2つの子ノードを持つことができる木構造は何か？',
       ans: '2分木',
       choices: ["2分木", "AVL木", "ヒープ", "赤黒木"],

@@ -478,7 +478,8 @@ class TutorialController extends StateNotifier<TutorialState> {
         setIsTutorialRestart(false);
         return true;
       },
-      hideSkip: !state.isTutorialRestart,
+      // hideSkip: !state.isTutorialRestart,
+      hideSkip: true,
       useSafeArea: true,
       opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
