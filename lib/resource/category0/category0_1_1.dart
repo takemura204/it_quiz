@@ -35,7 +35,7 @@ List<QuizItem> get category0_1_1 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'PDCA',
+      word: 'PDCAサイクル',
       comment:
           "PDCAサイクルは、計画（Plan）、実行（Do）、評価（Check）、改善（Act）のプロセスを繰り返すことで、業務やプロジェクトの継続的な改善を目指す手法。",
       question:

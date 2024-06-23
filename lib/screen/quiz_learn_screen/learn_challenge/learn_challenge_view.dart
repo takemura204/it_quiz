@@ -258,7 +258,7 @@ class _AnsQuestion extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SubstringHighlight(
       text: quizItem.comment,
-      term: quizItem.ans,
+      term: quizItem.word,
       textStyle: const TextStyle(
         fontSize: 21,
         color: Colors.black54,
@@ -284,8 +284,8 @@ class _ConfirmQuestion extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SubstringHighlight(
       text: quizItem.comment
-          .replaceAll(quizItem.ans, I18n().hideText(quizItem.ans)),
-      term: quizItem.ans,
+          .replaceAll(quizItem.word, I18n().hideText(quizItem.word)),
+      term: quizItem.word,
       textStyle: const TextStyle(
         fontSize: 21,
         color: Colors.black54,

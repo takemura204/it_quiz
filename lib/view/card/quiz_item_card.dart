@@ -49,7 +49,7 @@ class QuizItemCard extends ConsumerWidget {
                       text: studyType == StudyType.learn
                           ? quizItem.comment
                           : quizItem.question,
-                      term: quizItem.ans,
+                      term: quizItem.word,
                       textStyle: const TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.w500,

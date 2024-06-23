@@ -10,7 +10,7 @@ extension Category2Quiz on QuizModel {
         isPremium: false,
       ),
       Quiz(
-        title: "【頻出】ソフトウェア開発管理技術",
+        title: "【頻出】ソフトウェア開発",
         quizItemList: category0_2_2,
         isPremium: false,
       ),

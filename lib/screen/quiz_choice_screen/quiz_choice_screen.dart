@@ -6,11 +6,9 @@ import 'package:kentei_quiz/controller/main/main_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/card/result_dashboard_card.dart';
 import 'package:kentei_quiz/view/card/result_prefect_card.dart';
-import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../controller/quiz_choice/quiz_choice_screen_controller.dart';
-import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/user/auth_model.dart';
@@ -28,11 +26,8 @@ import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 
 part 'choice_challenge/choice_challenge_body.dart';
-
 part 'choice_challenge/choice_challenge_view.dart';
-
 part 'choice_result/choice_result_body.dart';
-
 part 'choice_result/choice_result_view.dart';
 
 class QuizChoiceScreen extends ConsumerWidget {

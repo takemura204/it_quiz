@@ -10,12 +10,12 @@ extension Category3Quiz on QuizModel {
         isPremium: false,
       ),
       Quiz(
-        title: "【頻出】ソフトウェア・ハードウェア",
+        title: "【頻出】ソフトウェア",
         quizItemList: category0_3_2,
         isPremium: false,
       ),
       Quiz(
-        title: "【頻出】データベース・ネットワーク",
+        title: "【頻出】ネットワーク",
         quizItemList: category0_3_3,
         isPremium: false,
       ),

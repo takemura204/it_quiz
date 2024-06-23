@@ -81,16 +81,19 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
     quizItemList[index] = QuizItem(
       quizId: quizItemList[index].quizId,
-      question: quizItemList[index].question,
-      ans: quizItemList[index].ans,
+      word: quizItemList[index].word,
       comment: quizItemList[index].comment,
+      question: quizItemList[index].question,
+      choices: quizItemList[index].choices,
+      ans: quizItemList[index].ans,
       isWeak: quizItemList[index].isWeak,
       status: isKnow && quizItemList[index].status == QuizStatusType.unlearned
           ? QuizStatusType.learned
           : quizItemList[index].status,
+      importance: quizItemList[index].importance,
       isSaved: quizItemList[index].isSaved,
-      choices: quizItemList[index].choices,
       lapIndex: lapIndex,
+      source: quizItemList[index].source,
       isPremium: quizItemList[index].isPremium,
     );
 
@@ -178,6 +181,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     final quizItemList = [...state.quizItemList];
     quizItemList[index] = QuizItem(
       quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
       question: quizItemList[index].question,
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
@@ -187,6 +191,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       choices: quizItemList[index].choices,
       lapIndex: quizItemList[index].lapIndex,
       isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
     );
     state = state.copyWith(quizItemList: quizItemList);
     _updateQuiz();

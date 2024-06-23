@@ -160,7 +160,6 @@ class _QuizCard extends ConsumerWidget {
             ///タイトル
             _Title(quiz: quiz, correctRate: correctRate),
             const Spacer(),
-
             if (isPremium)
               Card(
                 elevation: 0,
@@ -260,9 +259,9 @@ class _Title extends ConsumerWidget {
       children: [
         Text(
           quiz.title,
-          style: context.texts.titleMedium,
+          style: context.texts.titleSmall,
         ),
-        const Gap(3),
+        const Gap(5),
         Text(
           isPremium ? I18n().quizCorrectRate(correctRate) : '追加購入で解放',
           style: context.texts.bodyMedium,

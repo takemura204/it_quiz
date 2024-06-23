@@ -27,11 +27,12 @@ class ChoiceChallengeBody extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Container(
-                  width: context.width * 0.9,
+                  width: context.width * 0.97,
                   alignment: Alignment.center,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      Gap(context.height * 0.01),
                       const Spacer(),
 
                       ///問題文
@@ -39,7 +40,7 @@ class ChoiceChallengeBody extends ConsumerWidget {
 
                       const Spacer(),
 
-                      ///進捗状況
+                      ///過去問
                       _QuizProgress(quiz),
                       Gap(context.height * 0.01),
                     ],
@@ -51,7 +52,7 @@ class ChoiceChallengeBody extends ConsumerWidget {
           ),
         ),
 
-        const Gap(10),
+        Gap(context.height * 0.01),
 
         ///選択肢
         _SelectAnswer(quiz),
