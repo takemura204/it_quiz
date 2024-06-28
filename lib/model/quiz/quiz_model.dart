@@ -371,7 +371,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   ///SavedQuiz更新
-  void updateSavedQuiz(QuizItem updateQuizItem) {
+  void updateQuizItem(QuizItem updateQuizItem) {
     final quizList = state.quizList;
     final updatedQuizList = quizList.map((quiz) {
       final updatedQuizItemList = quiz.quizItemList.map((quizItem) {

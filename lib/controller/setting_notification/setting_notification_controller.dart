@@ -184,9 +184,11 @@ class SettingNotificationController
     if (weakQuizItemList.isNotEmpty) {
       final randomIndex = random.nextInt(weakQuizItemList.length);
       return '「${weakQuizItemList[randomIndex].ans}」について復習してみましょう！\nクイズの「苦手克服」から挑戦できます';
-    } else {
+    } else if (historyQuizItemList.isNotEmpty) {
       final randomIndex = random.nextInt(historyQuizItemList.length);
-      return '「${historyQuizItemList[randomIndex].ans}」とはどのような意味でしょう？\n履歴から確認してみましょう！';
+      return '「${historyQuizItemList[randomIndex].ans}」とはどのような意味だったでしょう？\n履歴から確認してみましょう！';
+    } else {
+      return '「経営理念」について学んでみましょう！';
     }
   }
 }

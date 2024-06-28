@@ -182,7 +182,6 @@ dev_dependencies:
   #様々なデバイス上でのレイアウトを確認したい
   device_preview: ^1.0.0
 
-
   device_preview_screenshot: ^1.0.0
 
 flutter:

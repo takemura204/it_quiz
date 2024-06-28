@@ -15,16 +15,21 @@ class _CtaButton extends HookConsumerWidget {
           color: context.backgroundColor,
           padding:
               const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 35),
-          child: AnimatedShadowButton(
-            width: context.width,
-            height: 60,
-            text: isPremium ? '購入済み' : 'いますぐ購入 ¥980(税込)',
-            onPressed: isPremium
-                ? null
-                : () {
+          child: isPremium
+              ? PrimaryButton(
+                  width: context.width,
+                  height: 60,
+                  text: '購入済み',
+                  onPressed: null,
+                )
+              : AnimatedShadowButton(
+                  width: context.width,
+                  height: 60,
+                  text: 'いますぐ購入 ¥980(税込)',
+                  onPressed: () {
                     ref.read(premiumDetailProvider.notifier).buyPurchase980();
                   },
-          ),
+                ),
         ),
       ],
     );

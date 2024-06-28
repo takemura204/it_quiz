@@ -141,7 +141,7 @@ class _QuizItemCard extends ConsumerWidget {
         ),
         child: Row(
           children: [
-            const Gap(7),
+            const Gap(5),
             Expanded(
               child: Container(
                 alignment: Alignment.centerLeft,
@@ -153,15 +153,44 @@ class _QuizItemCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SubstringHighlight(
-                      text: quizItemList[index].word,
-                      term: termToHighlight,
-                      textStyle: context.texts.titleLarge!,
-                      overflow: TextOverflow.clip,
-                      textStyleHighlight: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: context.mainColor,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SubstringHighlight(
+                            text: quizItemList[index].word,
+                            term: termToHighlight,
+                            textStyle: context.texts.titleLarge!,
+                            overflow: TextOverflow.clip,
+                            textStyleHighlight: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: context.mainColor,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            // CheckBoxIconButton(
+                            //   isCheck: quizItemList[index].isWeak,
+                            //   size: 35,
+                            //   onTap: () {
+                            //     ref
+                            //         .read(homeSearchScreenProvider.notifier)
+                            //         .tapCheckButton(index);
+                            //   },
+                            // ),
+                            SaveIconButton(
+                              quizItem: quizItemList[index],
+                              isShowText: true,
+                              size: 35,
+                              onTap: () {
+                                ref
+                                    .read(homeSearchScreenProvider.notifier)
+                                    .tapSaveButton(index);
+                              },
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                     const Gap(5),
                     if (isPremium)
@@ -189,18 +218,7 @@ class _QuizItemCard extends ConsumerWidget {
                 ),
               ),
             ),
-            if (isPremium)
-              SaveIconButton(
-                quizItem: quizItemList[index],
-                isShowText: true,
-                size: 35,
-                onTap: () {
-                  ref
-                      .read(homeSearchScreenProvider.notifier)
-                      .tapSavedButton(quizItemList[index]);
-                },
-              )
-            else
+            if (!isPremium)
               Container(
                 alignment: Alignment.center,
                 width: context.width * 0.1,

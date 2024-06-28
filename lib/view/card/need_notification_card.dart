@@ -27,120 +27,118 @@ class NeedNotificationCard extends ConsumerWidget {
 
     const imagePath = 'assets/image/need_setting_notification.svg';
 
-    return isNotification
-        ? Container()
-        : GestureDetector(
-            onTap: () async {
-              await ref
-                  .read(settingNotificationProvider.notifier)
-                  .checkNotificationPermission()
-                  .then((value) {
-                if (!isNotification) {
-                  openAppSettings();
-                } else {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return CustomTimePicker(
-                          initialTime: TimeOfDay(
-                              hour: selectedHour!, minute: selectedMinute!),
-                          recommendedHour: 8,
-                          recommendedMinute: 30,
-                          onTimeChanged: (selectedTime) async {
-                            ref
-                                .read(authModelProvider.notifier)
-                                .updateNotificationTime(
-                                    value: NotificationTime(
-                                        hour: selectedTime.hour,
-                                        minute: selectedTime.minute));
-                            await ref
-                                .read(settingNotificationProvider.notifier)
-                                .scheduleNotifications(
-                                    value: NotificationTime(
-                                        hour: selectedTime.hour,
-                                        minute: selectedTime.minute));
-                          },
-                        );
-                      });
-                }
-              });
-              HapticFeedback.lightImpact();
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                color: context.mainColor,
-                // 全ての辺に一様なボーダーを適用
-                border: Border.all(
-                  color: context.secondColor,
-                  width: 1.5,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Gap(10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+    return GestureDetector(
+      onTap: () async {
+        await ref
+            .read(settingNotificationProvider.notifier)
+            .checkNotificationPermission()
+            .then((value) {
+          if (!isNotification) {
+            openAppSettings();
+          } else {
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomTimePicker(
+                    initialTime:
+                        TimeOfDay(hour: selectedHour!, minute: selectedMinute!),
+                    recommendedHour: 8,
+                    recommendedMinute: 30,
+                    onTimeChanged: (selectedTime) async {
+                      ref
+                          .read(authModelProvider.notifier)
+                          .updateNotificationTime(
+                              value: NotificationTime(
+                                  hour: selectedTime.hour,
+                                  minute: selectedTime.minute));
+                      await ref
+                          .read(settingNotificationProvider.notifier)
+                          .scheduleNotifications(
+                              value: NotificationTime(
+                                  hour: selectedTime.hour,
+                                  minute: selectedTime.minute));
+                    },
+                  );
+                });
+          }
+        });
+        HapticFeedback.lightImpact();
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+          color: context.mainColor,
+          // 全ての辺に一様なボーダーを適用
+          border: Border.all(
+            color: context.secondColor,
+            width: 1.5,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Gap(10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Gap(10),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Gap(10),
-                      const Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'リマインダーで継続をサポート',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Gap(5),
-                            Text(
-                              '通知をONにすると、あなたに合わせた\nおすすめのクイズが指定した時間に届きます。',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Gap(5),
-                          ],
+                      Text(
+                        'リマインダーで継続をサポート',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.white,
                         ),
                       ),
-                      const Gap(10),
-                      Column(
-                        children: [
-                          const Gap(10),
-                          SvgPicture.asset(
-                            imagePath,
-                            width: context.width * 0.2,
-                            fit: BoxFit.cover,
-                          ),
-                          const Gap(5),
-                          Container(
-                            height: 20,
-                            child: const Text(
-                              '今すぐ設定 ＞',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
+                      Gap(5),
+                      Text(
+                        '通知をONにすると、あなたに合わせた\nおすすめのクイズが指定した時間に届きます。',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
                       ),
-                      const Gap(10),
+                      Gap(5),
                     ],
                   ),
-                  const Gap(5),
-                ],
-              ),
+                ),
+                const Gap(10),
+                Column(
+                  children: [
+                    const Gap(10),
+                    SvgPicture.asset(
+                      imagePath,
+                      width: context.width * 0.2,
+                      fit: BoxFit.cover,
+                    ),
+                    const Gap(5),
+                    Container(
+                      height: 20,
+                      child: const Text(
+                        '今すぐ設定 ＞',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(10),
+              ],
             ),
-          );
+            const Gap(5),
+          ],
+        ),
+      ),
+    );
   }
 }
