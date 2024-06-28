@@ -479,7 +479,7 @@ class TutorialController extends StateNotifier<TutorialState> {
         return true;
       },
       // hideSkip: !state.isTutorialRestart,
-      hideSkip: true,
+      hideSkip: false,
       useSafeArea: true,
       opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
@@ -513,7 +513,7 @@ class TutorialController extends StateNotifier<TutorialState> {
         setIsTutorialRestart(false);
         return true;
       },
-      hideSkip: !state.isTutorialRestart,
+      hideSkip: true,
       useSafeArea: true,
       opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),
@@ -547,7 +547,7 @@ class TutorialController extends StateNotifier<TutorialState> {
         setIsTutorialRestart(false);
         return true;
       },
-      hideSkip: !state.isTutorialRestart,
+      hideSkip: false,
       useSafeArea: true,
       opacityShadow: 0.8,
       focusAnimationDuration: const Duration(milliseconds: 600),

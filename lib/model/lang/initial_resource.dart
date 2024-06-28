@@ -163,6 +163,21 @@ class I18n {
     }
   }
 
+  String quizImportanceText(QuizImportanceType importanceType) {
+    switch (importanceType) {
+      case QuizImportanceType.none:
+        return '☆☆☆';
+      case QuizImportanceType.low:
+        return '★☆☆';
+      case QuizImportanceType.normal:
+        return '★★☆';
+      case QuizImportanceType.high:
+        return '★★★';
+      default:
+        return '';
+    }
+  }
+
   String notificationTitle(int index) {
     switch (index) {
       case 0:

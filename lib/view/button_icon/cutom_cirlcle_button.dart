@@ -53,7 +53,7 @@ class CustomCircleButton extends ConsumerWidget {
                 text,
                 style: TextStyle(
                     color: textColor,
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
               const Gap(5),

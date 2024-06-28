@@ -154,7 +154,7 @@ class _QuizItemCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SubstringHighlight(
-                      text: quizItemList[index].ans,
+                      text: quizItemList[index].word,
                       term: termToHighlight,
                       textStyle: context.texts.titleLarge!,
                       overflow: TextOverflow.clip,

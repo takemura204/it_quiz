@@ -155,7 +155,7 @@ class _SelectChoice extends ConsumerWidget {
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: isAnsView && (choices[index] == quizItemList[quizIndex].ans)
-                ? 2
+                ? 1.5
                 : 1,
             color: isAnsView
                 ? (choices[index] == quizItemList[quizIndex].ans)

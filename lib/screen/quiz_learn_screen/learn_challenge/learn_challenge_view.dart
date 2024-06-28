@@ -40,6 +40,9 @@ class _QuizCard extends ConsumerWidget {
             loop: true,
             backgroundCardsCount:
                 (quizIndex + 1 == quizItemList.length) ? 0 : 1,
+            padding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.02),
             cardsSpacing: 0,
             maxAngle: 90,
             swipeOptions: const AppinioSwipeOptions.symmetric(
@@ -85,15 +88,15 @@ class _QuizCard extends ConsumerWidget {
                     side: BorderSide(
                       color: direction != null
                           ? direction != AppinioSwiperDirection.right
-                              ? Colors.red.withOpacity(0.7)
-                              : Colors.green.withOpacity(0.7)
-                          : Colors.grey.shade300,
+                              ? context.incorrectColor
+                              : context.correctColor
+                          : context.secondColor,
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Container(
-                    width: context.width * 0.9,
+                    width: context.width,
                     alignment: Alignment.center,
                     // quizItemを使ってカードの内容を構築
                     child: Stack(
@@ -108,7 +111,7 @@ class _QuizCard extends ConsumerWidget {
                             const Spacer(),
 
                             ///問題進捗状況
-                            _QuizProgress(quizItemList.length, index + 1),
+                            _QuizProgress(quizItemList, index),
                             Gap(context.height * 0.01),
                           ],
                         ),
@@ -118,11 +121,11 @@ class _QuizCard extends ConsumerWidget {
                           child: SaveIconButton(
                             quizItem: quizItem,
                             isShowText: false,
-                            size: 40,
+                            size: 35,
                             onTap: () {
                               ref
                                   .read(quizLearnScreenProvider.notifier)
-                                  .tapSavedButton(quizItem);
+                                  .tapSavedButton(index);
                             },
                           ),
                         ),
@@ -167,7 +170,7 @@ class _ActionButtons extends ConsumerWidget {
                 CustomCircleButton(
                   iconData: Icons.question_mark_outlined,
                   iconSize: 35,
-                  containerWidth: context.width * 0.45,
+                  containerWidth: context.width * 0.47,
                   containerHeight: 100,
                   backgroundColor: context.incorrectColor,
                   textColor: Colors.white,
@@ -186,7 +189,7 @@ class _ActionButtons extends ConsumerWidget {
                 CustomCircleButton(
                   iconData: Icons.thumb_up,
                   iconSize: 35,
-                  containerWidth: context.width * 0.45,
+                  containerWidth: context.width * 0.47,
                   containerHeight: 100,
                   backgroundColor: context.correctColor,
                   textColor: Colors.white,
@@ -205,8 +208,8 @@ class _ActionButtons extends ConsumerWidget {
         ///確認する
         CustomCircleButton(
             iconData: Icons.cached_outlined,
-            iconSize: 40,
-            containerWidth: context.width * 0.9,
+            iconSize: 35,
+            containerWidth: context.width * 0.95,
             containerHeight: 100,
             backgroundColor: context.mainColor,
             textColor: isAnsView ? Colors.grey.shade400 : Colors.white,
@@ -260,15 +263,17 @@ class _AnsQuestion extends ConsumerWidget {
       text: quizItem.comment,
       term: quizItem.word,
       textStyle: const TextStyle(
-        fontSize: 21,
-        color: Colors.black54,
+        fontSize: 16,
+        color: Colors.black87,
         fontWeight: FontWeight.w500,
+        fontFamily: 'Hiragino Kaku Gothic ProN',
       ),
       textStyleHighlight: TextStyle(
-        fontSize: 21,
+        fontSize: 16,
         fontWeight: FontWeight.bold,
         color: context.mainColor,
         decoration: TextDecoration.underline,
+        fontFamily: 'Hiragino Kaku Gothic ProN',
       ),
     );
   }
@@ -287,24 +292,26 @@ class _ConfirmQuestion extends ConsumerWidget {
           .replaceAll(quizItem.word, I18n().hideText(quizItem.word)),
       term: quizItem.word,
       textStyle: const TextStyle(
-        fontSize: 21,
-        color: Colors.black54,
+        fontSize: 16,
+        color: Colors.black87,
         fontWeight: FontWeight.w500,
+        fontFamily: 'Hiragino Kaku Gothic ProN',
       ),
       textStyleHighlight: TextStyle(
-        fontSize: 21,
+        fontSize: 16,
         fontWeight: FontWeight.bold,
         color: context.mainColor,
         decoration: TextDecoration.underline,
+        fontFamily: 'Hiragino Kaku Gothic ProN',
       ),
     );
   }
 }
 
 class _QuizProgress extends ConsumerWidget {
-  const _QuizProgress(this.quizItemLength, this.index);
+  const _QuizProgress(this.quizItemList, this.index);
 
-  final int quizItemLength;
+  final List<QuizItem> quizItemList;
   final int index;
 
   @override
@@ -315,27 +322,46 @@ class _QuizProgress extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          Text(
-            "$index",
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          Gap(context.width * 0.02),
           const Text(
-            " / ",
+            '重要度',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: FontWeight.normal,
             ),
           ),
           Text(
-            "$quizItemLength",
+            ' ${I18n().quizImportanceText(quizItemList[index].importance)}',
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 14,
               fontWeight: FontWeight.normal,
             ),
           ),
+          const Spacer(),
+          Row(
+            children: [
+              Text(
+                "${index + 1}",
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              const Text(
+                " / ",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              Text(
+                "${quizItemList.length}",
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          Gap(context.width * 0.05),
         ],
       ),
     );

@@ -39,19 +39,18 @@ class ResultDashboardCard extends ConsumerWidget {
                     Icon(
                       LineIcons.book,
                       color: Colors.black54,
-                      size: 25,
+                      size: 20,
                     ),
                     Text(
                       '覚えた問題数',
                       style: TextStyle(
                         color: Colors.black54,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                const Gap(5),
                 if (isChoiceType)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -71,7 +70,7 @@ class ResultDashboardCard extends ConsumerWidget {
                                             .length
                                             .toDouble()) *
                                     30 +
-                                16,
+                                14,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -95,6 +94,7 @@ class ResultDashboardCard extends ConsumerWidget {
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
+                              const Gap(3),
                               Text(
                                 "${quizItemList.length}",
                                 style: const TextStyle(
@@ -131,7 +131,7 @@ class ResultDashboardCard extends ConsumerWidget {
                         height: 8,
                         width:
                             ('${quizItemList.length}'.length.toDouble()) * 30 +
-                                16,
+                                14,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -174,19 +174,18 @@ class ResultDashboardCard extends ConsumerWidget {
                     Icon(
                       LineIcons.clock,
                       color: Colors.black54,
-                      size: 25,
+                      size: 20,
                     ),
                     Text(
                       '学習時間',
                       style: TextStyle(
                         color: Colors.black54,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                const Gap(5),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
@@ -203,7 +202,7 @@ class ResultDashboardCard extends ConsumerWidget {
                           height: 8,
                           width:
                               ('$displayDuration'.length.toDouble() - 1) * 30 +
-                                  16,
+                                  14,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,

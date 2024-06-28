@@ -194,6 +194,28 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     _updateQuiz();
   }
 
+  void tapSaveButton(int index) {
+    final quizItemList = [...state.quizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: quizItemList[index].isWeak,
+      status: quizItemList[index].status,
+      isSaved: !quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
+    );
+    state = state.copyWith(quizItemList: quizItemList);
+
+    _updateQuiz();
+  }
+
   ///クリアボタン
   void resetScreen() {
     _stopwatch.reset();

@@ -45,11 +45,11 @@ class HomeSettingController extends StateNotifier<HomeSettingState>
   Future sendAppReview() async {
     ///アプリストアに遷移
     if (Platform.isAndroid) {
-      // final googlePlayUri = Uri.parse(
-      //     'https://play.google.com/store/apps/details?id=jp.quiz.it');
-      // if (await canLaunchUrl(googlePlayUri)) {
-      //   await launchUrl(googlePlayUri);
-      // }
+      final googlePlayUri =
+          Uri.parse('https://play.google.com/store/apps/details?id=jp.quiz.it');
+      if (await canLaunchUrl(googlePlayUri)) {
+        await launchUrl(googlePlayUri);
+      }
     } else if (Platform.isIOS) {
       final appStoreUri = Uri.parse(
           'itms-apps://itunes.apple.com/app/6479543578?action=write-review');

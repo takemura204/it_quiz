@@ -65,7 +65,7 @@ class _Body extends ConsumerWidget {
     final displayedItemCount = min(quizList.length, 20);
 
     return ListView.builder(
-      itemCount: displayedItemCount, // ここを修正
+      itemCount: displayedItemCount,
       itemBuilder: (context, index) {
         return Column(
           children: [
@@ -90,7 +90,7 @@ class _Body extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(3.0),
                             child: Text(
                               quizList[index].category,
                               style: const TextStyle(
@@ -109,7 +109,7 @@ class _Body extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(3.0),
                             child: Text(
                               I18n().studyTypeText(quizList[index].studyType),
                               style: const TextStyle(
@@ -147,11 +147,11 @@ class _Body extends ConsumerWidget {
 
                     ///チェックボックスがすぐに反映されない。
                     QuizItemCard(
+                      index: quizItemIndex,
                       quizItem: quizList[index].quizItemList[quizItemIndex],
                       studyType: quizList[index].studyType,
-                      onTap: () => ref
-                          .read(quizHistoryScreenProvider.notifier)
-                          .tapCheckBox(index, quizItemIndex),
+                      onTapCheckButton: null,
+                      onTapSaveButton: null,
                     ),
                 ],
               ),

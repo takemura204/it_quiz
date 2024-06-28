@@ -44,12 +44,18 @@ class _QuizResultView extends ConsumerWidget {
             return Container(
               key: index == 0 ? learnResultTarget2 : null,
               child: QuizItemCard(
+                  index: index,
                   quizItem: quizItemList[index],
                   studyType: StudyType.learn,
-                  onTap: () {
+                  onTapCheckButton: () {
                     ref
                         .read(quizLearnScreenProvider.notifier)
-                        .tapSavedButton(quizItemList[index]);
+                        .tapCheckBox(index);
+                  },
+                  onTapSaveButton: () {
+                    ref
+                        .read(quizLearnScreenProvider.notifier)
+                        .tapSavedButton(index);
                   }),
             );
           },

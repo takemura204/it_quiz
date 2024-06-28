@@ -89,6 +89,8 @@ class SettingColorController extends StateNotifier<SettingColorState> {
   ThemeData loadTheme(int themeId) {
     try {
       final themeData = ThemeData(
+        fontFamily: 'NotoSans',
+
         ///Card
         cardTheme: const CardTheme(
           margin: EdgeInsets.all(0),
@@ -103,12 +105,10 @@ class SettingColorController extends StateNotifier<SettingColorState> {
           selectedLabelStyle: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,
-            fontFamily: "NotoSans",
           ),
           unselectedLabelStyle: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,
-            fontFamily: "NotoSans",
           ),
           elevation: 1,
         ),
@@ -238,7 +238,6 @@ class SettingColorController extends StateNotifier<SettingColorState> {
             color: Colors.black54,
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            fontFamily: "NotoSans",
           ),
           shape: Border(
               bottom:
@@ -337,73 +336,61 @@ class SettingColorController extends StateNotifier<SettingColorState> {
   static TextTheme customize = const TextTheme(
     displayLarge: TextStyle(
         fontSize: 96,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: -1.5),
     displayMedium: TextStyle(
         fontSize: 60,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: -0.5),
     displaySmall: TextStyle(
         fontSize: 48,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.0),
     headlineMedium: TextStyle(
         fontSize: 34,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.25),
     headlineSmall: TextStyle(
         fontSize: 24,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.0),
     titleLarge: TextStyle(
         fontSize: 20,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.15),
     titleMedium: TextStyle(
         fontSize: 18,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.15),
     titleSmall: TextStyle(
         fontSize: 16,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.1),
     bodyLarge: TextStyle(
         fontSize: 16,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5),
     bodyMedium: TextStyle(
         fontSize: 14,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25),
     bodySmall: TextStyle(
         fontSize: 12,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.4),
     labelSmall: TextStyle(
         fontSize: 10,
-        fontFamily: "NotoSans",
         color: Colors.black54,
         fontWeight: FontWeight.w400,
         letterSpacing: 1.5),
