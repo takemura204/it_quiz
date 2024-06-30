@@ -89,13 +89,13 @@ class HomeSettingScreen extends ConsumerWidget {
 
                   ///開発用
                   GestureDetector(
-                    onTap: () {
+                    onLongPress: () {
                       ref
                           .read(authModelProvider.notifier)
                           .updateIsPremium(false);
                     },
                     child: Container(
-                      height: 50,
+                      height: 40,
                       color: context.backgroundColor,
                     ),
                   ),
