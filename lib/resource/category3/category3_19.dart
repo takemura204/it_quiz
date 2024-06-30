@@ -16,7 +16,7 @@ List<QuizItem> get category3_19 {
     QuizItem(
       word: 'WAN(Wide Area Network)',
       question: '広範囲にわたる地理的なエリアをカバーするネットワークのことを何というか？',
-      ans: 'WAN',
+      ans: '通信事業者のネットワークサービスを利用して，本社－支店間など地理的に離れたLAN同士を結ぶ。',
       choices: [
         "ADSL，光ファイバなど，データ通信に使う周波数帯域が広く，高速通信が可能である。",
         "あらゆる情報端末や機器が，有線や無線の多様なネットワークによって接続され，いつでもどこからでも様々なサービスが利用できる。",
@@ -38,7 +38,8 @@ List<QuizItem> get category3_19 {
         "屋内の電力線を使ってLANを構築するときに，電力と通信用信号の重ね合わせや分離を行う。",
         "ホスト名をIPアドレスに変換する。"
       ],
-      comment: "ネットワークインタフェースカードは、コンピュータやプリンターなどにネットワーク機能を追加するための拡張カードの一種。",
+      comment:
+          "ネットワークインターフェイスカード(NIC)は、コンピュータやプリンターなどにネットワーク機能を追加するための拡張カードの一種。",
       source: '平成23年秋期 問58',
       importance: QuizImportanceType.normal,
     ),
@@ -177,9 +178,9 @@ List<QuizItem> get category3_19 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'ESSID（Extended Service Set Identifier）',
+      word: 'ESSID(Extended Service Set Identifier)',
       question: '無線LANの環境において，アクセスポイン卜と端末に設定するESSIDに関する記述として，適切なものはどれか。',
-      ans: 'ESSID',
+      ans: '無線LANのネットワークを識別する文字列',
       choices: [
         "暗号通信の鍵になる文字列",
         "暗号方式の種類",
@@ -245,7 +246,7 @@ List<QuizItem> get category3_19 {
     QuizItem(
       word: 'LTE（Long Term Evolution）',
       question: '長距離の高速モバイル通信を実現するための通信規格は何か？',
-      ans: 'LTE（Long Term Evolution）',
+      ans: 'LTE',
       choices: ["LTE", "5G", "Wi-Fi", "NAT"],
       comment:
           "LTE（Long Term Evolution）は、長距離の高速モバイル通信を実現するための通信規格で、第4世代（4G）モバイル通信技術の一つ。",

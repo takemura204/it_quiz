@@ -204,45 +204,52 @@ class _SkipChoice extends ConsumerWidget {
     final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final isAnsView = ref.watch(quizChoiceScreenProvider).isAnsView;
     final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
-    const choices = 'わからない';
+    const choice = 'わからない';
     final selectAns = ref.watch(quizChoiceScreenProvider).selectAns;
-    final isTap = selectAns == choices;
+    final isTap = selectAns == choice;
 
     return GestureDetector(
       onTap: isAnsView
           ? null
           : () =>
-              ref.read(quizChoiceScreenProvider.notifier).tapAnsButton(choices),
+              ref.read(quizChoiceScreenProvider.notifier).tapAnsButton(choice),
       child: Card(
-        elevation: 0,
+        elevation: isTap ? 0 : 2,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: context.secondColor,
-            width: 1,
+            width:
+                isAnsView && (choice == quizItemList[quizIndex].ans) ? 1.5 : 1,
+            color: isAnsView
+                ? (choice == quizItemList[quizIndex].ans)
+                    ? context.correctColor
+                    : context.secondColor
+                : context.secondColor,
           ),
+          borderRadius: BorderRadius.circular(8),
         ),
+        margin: EdgeInsets.symmetric(
+            vertical: context.width * 0.01, horizontal: context.width * 0.02),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(width: 0.5, color: Colors.black45),
-            color: isTap ? context.backgroundColor : Colors.white,
+            color: isTap ? context.secondColor.withOpacity(0.25) : Colors.white,
+            borderRadius: BorderRadius.circular(8),
           ),
           width: context.width,
-          height: context.height * 0.09,
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+          padding: EdgeInsets.symmetric(
+              vertical: context.width * 0.03, horizontal: context.width * 0.02),
           child: Text(
-            choices,
-            style: isAnsView
-                ? TextStyle(
-                    fontWeight: (choices == quizItemList[quizIndex].ans)
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                    fontSize: 18,
-                    color: (choices == quizItemList[quizIndex].ans)
-                        ? Colors.green.withOpacity(0.7)
-                        : Colors.red.withOpacity(0.7),
-                  )
-                : const TextStyle(fontSize: 18),
+            choice,
+            style:
+                (isTap || (choice == quizItemList[quizIndex].ans)) && isAnsView
+                    ? TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: (choice == quizItemList[quizIndex].ans)
+                            ? context.correctColor
+                            : context.incorrectColor,
+                      )
+                    : const TextStyle(fontSize: 16, color: Colors.black87),
           ),
         ),
       ),

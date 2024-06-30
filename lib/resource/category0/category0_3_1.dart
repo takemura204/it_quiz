@@ -7,7 +7,7 @@ List<QuizItem> get category0_3_1 {
     QuizItem(
       word: 'フラッシュメモリ',
       question: 'フラッシュメモリに関する記述として，適切なものはどれか。',
-      ans: 'フラッシュメモリ',
+      ans: '記憶内容の保持に電源供給を必要としない。',
       choices: [
         "一度だけデータを書き込むことができ，以後読み出し専用である。",
         "記憶内容の保持に電源供給を必要としない。",
@@ -121,7 +121,7 @@ List<QuizItem> get category0_3_1 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: '"MTTR（Mean Time To Repair）',
+      word: 'MTTR（Mean Time To Repair）',
       question: ' あるシステムにおいて，MTBFとMTTRがどちらも1.5倍になったとき，稼働率はどうなるか。',
       ans: '変わらない。',
       choices: ["2/3倍になる", "1.5倍になる。", "2倍になる。", "変わらない。"],

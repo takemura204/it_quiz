@@ -47,30 +47,27 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   /// 全クイズ取得
+
   Future _getQuizListData() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final quizListDataJson = prefs.getStringList('quiz_list');
       List<Quiz> updatedQuizList = [];
-
       if (quizListDataJson != null && quizListDataJson.isNotEmpty) {
         final localQuizList =
             quizListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
-
         for (var localQuiz in localQuizList) {
           final matchedQuiz =
               initQuizList.firstWhereOrNull((q) => q.id == localQuiz.id);
-
           if (matchedQuiz != null) {
             // 更新されたクイズアイテムリストを作成
             final List<QuizItem> updatedQuizItems = [];
-
             // initQuizList に存在し、ローカルにも存在するクイズアイテムを更新
             for (var localQuizItem in localQuiz.quizItemList) {
               final matchedQuizItem = matchedQuiz.quizItemList.firstWhereOrNull(
                   (item) => item.quizId == localQuizItem.quizId);
               if (matchedQuizItem != null) {
-                updatedQuizItems.add(localQuizItem.copyWith(
+                final updatedQuizItem = localQuizItem.copyWith(
                   word: matchedQuizItem.word,
                   comment: matchedQuizItem.comment,
                   question: matchedQuizItem.question,
@@ -79,18 +76,29 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
                   source: matchedQuizItem.source,
                   isPremium: matchedQuizItem.isPremium,
                   importance: matchedQuizItem.importance,
-                ));
+                );
+
+                // ansがchoicesに含まれているかチェック
+                if (!updatedQuizItem.comment.contains(updatedQuizItem.word)) {
+                  print(
+                      "QuizItem with word: ${updatedQuizItem.word} ,${updatedQuizItem.quizId}.");
+                }
+
+                updatedQuizItems.add(updatedQuizItem);
               }
             }
-
             // initQuizList に存在し、ローカルにはないクイズアイテムを追加
             for (var initQuizItem in matchedQuiz.quizItemList) {
               if (!localQuiz.quizItemList.any(
                   (localItem) => localItem.quizId == initQuizItem.quizId)) {
+                // ansがchoicesに含まれているかチェック
+                if (!initQuizItem.choices.contains(initQuizItem.ans)) {
+                  print(
+                      "QuizItem with word: ${initQuizItem.word} does not contain ans in choices.");
+                }
                 updatedQuizItems.add(initQuizItem);
               }
             }
-
             updatedQuizList.add(localQuiz.copyWith(
               title: matchedQuiz.title,
               categoryId: matchedQuiz.categoryId,
@@ -100,7 +108,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
             ));
           }
         }
-
         // initQuizList にしか存在しないクイズを追加
         final localQuizIds = localQuizList.map((quiz) => quiz.id).toSet();
         updatedQuizList.addAll(
@@ -109,7 +116,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         // 初回起動時は initQuizList をそのまま使用
         updatedQuizList = _initQuizList();
       }
-
       final Map<String, Quiz> uniqueQuizzes = {};
       for (var quiz in updatedQuizList) {
         final existingQuiz = uniqueQuizzes[quiz.id];
@@ -120,7 +126,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
         }
       }
       updatedQuizList = uniqueQuizzes.values.toList(); // 重複が解消されたリストを更新
-
       updatedQuizList.sort((a, b) => a.id.compareTo(b.id));
       final quizItemList =
           updatedQuizList.expand((quiz) => quiz.quizItemList).toList();
@@ -137,7 +142,35 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final weakQuizData = prefs.getString('weak_quiz');
     if (weakQuizData != null) {
       final weakQuiz = Quiz.fromJson(json.decode(weakQuizData));
-      state = state.copyWith(weakQuiz: weakQuiz);
+      final List<QuizItem> updatedQuizItems = [];
+      final initQuizItemList = state.quizItemList;
+      // weakQuizのデータを更新
+      for (var weakQuizItem in weakQuiz.quizItemList) {
+        final matchedQuizItem = initQuizItemList
+            .firstWhereOrNull((item) => item.quizId == weakQuizItem.quizId);
+        if (matchedQuizItem != null) {
+          updatedQuizItems.add(weakQuizItem.copyWith(
+            word: matchedQuizItem.word,
+            comment: matchedQuizItem.comment,
+            question: matchedQuizItem.question,
+            ans: matchedQuizItem.ans,
+            choices: matchedQuizItem.choices,
+            source: matchedQuizItem.source,
+            isPremium: matchedQuizItem.isPremium,
+            importance: matchedQuizItem.importance,
+          ));
+        }
+      }
+
+      final updateWeakQuiz = weakQuiz.copyWith(
+        title: weakQuiz.title,
+        categoryId: weakQuiz.categoryId,
+        category: weakQuiz.category,
+        quizItemList: updatedQuizItems,
+        isPremium: weakQuiz.isPremium,
+      );
+
+      state = state.copyWith(weakQuiz: updateWeakQuiz);
     }
     //初回起動時
     else {

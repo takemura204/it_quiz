@@ -37,7 +37,7 @@ List<QuizItem> get category0_2_4 {
     QuizItem(
       word: '内部統制',
       question: '内部統制の説明として，適切なものはどれか。',
-      ans: '内部統制',
+      ans: '業務の有効性及び効率性，財務報告の信頼性，法令遵守，資産の保全を達成するために，企業内のすべての者によって遂行されるプロセスのこと',
       choices: [
         "業務の有効性及び効率性，財務報告の信頼性，法令遵守，資産の保全を達成するために，企業内のすべての者によって遂行されるプロセスのこと",
         "経営をゆだねられている経営者などが，金融機関などから資金を調達して親会社の株主から株式を買い取り，経営権を取得すること",
@@ -81,6 +81,7 @@ List<QuizItem> get category0_2_4 {
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(quizId: index + I18n().category0_2Index + 401, isPremium: false);
+    return quizItems[index].copyWith(
+        quizId: index + I18n().category0_2Index + 401, isPremium: false);
   });
 }

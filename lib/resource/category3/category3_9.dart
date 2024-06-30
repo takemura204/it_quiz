@@ -66,7 +66,7 @@ List<QuizItem> get category3_9 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: '"MTTR（Mean Time To Repair）',
+      word: 'MTTR（Mean Time To Repair）',
       question: ' あるシステムにおいて，MTBFとMTTRがどちらも1.5倍になったとき，稼働率はどうなるか。',
       ans: '変わらない。',
       choices: ["2/3倍になる", "1.5倍になる。", "2倍になる。", "変わらない。"],

@@ -154,7 +154,7 @@ List<QuizItem> get category3_22 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'マクロウイルス',
+      word: 'マクロウィルス',
       question: 'マクロウィルスに関する記述として，適切なものはどれか。',
       ans: 'ワープロソフトや表計算ソフトのデータファイルに感染する。',
       choices: [
@@ -179,7 +179,7 @@ List<QuizItem> get category3_22 {
     QuizItem(
       word: 'キーロガー',
       question: '情報セキュリティの脅威であるキーロガーの説明として，適切なものはどれか。',
-      ans: 'キーロガー',
+      ans: 'キーボード入力を記録する仕組みを利用者のPCで動作させ，この記録を入手する。',
       choices: [
         "PC利用者の背後からキーボード入力とディスプレイを見ることで情報を盗み出す。",
         "キーボード入力を記録する仕組みを利用者のPCで動作させ，この記録を入手する。",
@@ -400,9 +400,9 @@ List<QuizItem> get category3_22 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'DoS攻撃',
+      word: 'DoS(Denial of Service)攻撃',
       question: 'DoS攻撃によってサーバが受ける直接的な被害はどれか。',
-      ans: 'DoS攻撃',
+      ans: 'サービスの提供が阻害される。',
       choices: [
         "暗号化してあるデータが解読される。",
         "管理者用パスワードが変更される。",

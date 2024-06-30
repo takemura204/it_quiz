@@ -7,7 +7,7 @@ List<QuizItem> get category3_21 {
     QuizItem(
       word: 'IPアドレス',
       question: 'IPアドレスに関する記述のうち，適切なものはどれか。',
-      ans: 'IPアドレス',
+      ans: 'プライベートIPアドレスは，同一社内などのローカルなネットワーク内であれば自由に使ってよい。',
       choices: [
         "192.168.1.1のように4バイト表記のIPアドレスの数は，地球上の人口(約70億)よりも多い。",
         "IPアドレスは，各国の政府が管理している。",
@@ -50,7 +50,7 @@ List<QuizItem> get category3_21 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'DNS（Domain Name System）',
+      word: 'DNS(Domain Name System)',
       question: 'DNSサーバの機能に関する記述として，適切なものはどれか。',
       ans: '問合せのあったホスト名のIPアドレスを回答する。',
       choices: [
@@ -65,7 +65,7 @@ List<QuizItem> get category3_21 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'URL（Uniform Resource Locator）',
+      word: 'URL(Uniform Resource Locator)',
       question:
           'インターネット上にある情報の所在を表す記述方式で，"http://www.ipa.go.jp/"のような形式をもつものはどれか。',
       ans: 'URL',
@@ -108,9 +108,9 @@ List<QuizItem> get category3_21 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'bcc（blind carbon copy）',
+      word: 'bcc(Blind Carbon Copy)',
       question: '電子メールの宛先入力欄におけるBccに関する記述として，適切なものはどれか。',
-      ans: 'bcc',
+      ans: 'Bccに指定した宛先は，配信エラーが発生したときの通知先になる。',
       choices: [
         "Bccに指定した宛先には，自動的に暗号化された電子メールが送信される。",
         "Bccに指定した宛先には，本文を削除した件名だけの電子メールが送信される。",
@@ -119,6 +119,7 @@ List<QuizItem> get category3_21 {
       ],
       comment:
           "bcc(Blind Carbon Copy)は、電子メールにおける送信先指定方法の1つで、toで指定した送信先以外に、メールのコピーを送信しておきたい相手を指定する機能のことで、指定した宛先のメールアドレスは，他の宛先には通知されない。",
+      source: '平成22年秋期 問1',
       importance: QuizImportanceType.high,
     ),
     QuizItem(
@@ -137,7 +138,7 @@ List<QuizItem> get category3_21 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'CGI（Common Gateway Interface）',
+      word: 'CGI(Common Gateway Interface)',
       question: 'Webページの来訪者数カウンタなどのように，訪問者が訪れるごとに新たなページを生成する機能を実現できる仕組みはどれか。',
       ans: 'CGI',
       choices: ["CGI", "cookie", "HTML", "SQL"],
@@ -167,14 +168,14 @@ List<QuizItem> get category3_21 {
         "メールサーバから利用者の端末に電子メールを転送する方法"
       ],
       comment:
-          "MIME（Multipurpose Internet Mail Extensions）は、ASCII文字しか使用できないSMTPを利用したメールで、日本語などの2バイトコードや画像・動画・音声データを送信するための仕組み。",
+          "MIME(Multipurpose Internet Mail Extensions)は、ASCII文字しか使用できないSMTPを利用したメールで、日本語などの2バイトコードや画像・動画・音声データを送信するための仕組み。",
       source: '平成22年春期 問58',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
       word: 'RSS（Really Simple Syndication）',
       question: 'RSSの説明として，適切なものはどれか。',
-      ans: 'RSS',
+      ans: 'Webサイトの見出しや要約などを記述するフォーマットであり，Webサイトの更新情報の公開に使われる。',
       choices: [
         "Webサイトの色調やデザインに統一性をもたせるための仕組みである。",
         "Webサイトの見出しや要約などを記述するフォーマットであり，Webサイトの更新情報の公開に使われる。",
@@ -316,7 +317,7 @@ List<QuizItem> get category3_21 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'FTTH（Fiber To The Home）',
+      word: 'FTTH(Fiber To The Home)',
       question: '光ファイバーを利用して家庭やオフィスまで直接高速インターネット接続を提供する技術は何か？',
       ans: 'FTTH',
       choices: ["FTTH", "ISDN", "TCP/IP", "Wi-Fi"],

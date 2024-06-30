@@ -50,9 +50,9 @@ List<QuizItem> get category0_3_4 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'DoS攻撃',
+      word: 'DoS(Denial of Service)攻撃',
       question: 'DoS攻撃によってサーバが受ける直接的な被害はどれか。',
-      ans: 'DoS攻撃',
+      ans: 'サービスの提供が阻害される。',
       choices: [
         "暗号化してあるデータが解読される。",
         "管理者用パスワードが変更される。",
@@ -165,7 +165,7 @@ List<QuizItem> get category0_3_4 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'SSL（Secure Sockets Layer）',
+      word: 'SSL(Secure Sockets Layer)',
       question: 'SSLに関する記述のうち，適切なものはどれか。',
       ans: '通信の暗号化を行うことによって，通信経路上での通信内容の漏えいを防ぐ。',
       choices: [
@@ -180,7 +180,7 @@ List<QuizItem> get category0_3_4 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'VPN（Virtual Private Network）',
+      word: 'VPN(Virtual Private Network)',
       question:
           '社外からインターネット経由でPCを職場のネットワークに接続するときなどに利用するVPN(Virtual Private Network) に関する記述のうち，最も適切なものはどれか。',
       ans: '認証と通信データの暗号化によって，セキュリティの高い通信を行う。',
@@ -199,9 +199,9 @@ List<QuizItem> get category0_3_4 {
       word: 'ディジタル署名',
       question: '受け取ったデータが改ざんされていることを検知するのに使われる技術はどれか。',
       ans: 'ディジタル署名',
-      choices: ["圧縮", "デジタル署名", "パスワード認証", "フィルタリング"],
+      choices: ["圧縮", "ディジタル署名", "パスワード認証", "フィルタリング"],
       comment:
-          "デジタル署名は、公開鍵暗号技術を応用してデジタル文書の正当性を保証する技術で、この技術を利用すると「発信元が正当であるか」と「改ざんの有無」の2点が確認される。",
+          "ディジタル署名、公開鍵暗号技術を応用してデジタル文書の正当性を保証する技術で、この技術を利用すると「発信元が正当であるか」と「改ざんの有無」の2点が確認される。",
       source: '平成27年春期 問78',
       importance: QuizImportanceType.high,
     ),
@@ -223,7 +223,7 @@ List<QuizItem> get category0_3_4 {
     QuizItem(
       word: '生体認証(バイオメトリクス認証)',
       question: '生体認証の仕組みとして，静脈パターンを利用するものはどれか。',
-      ans: '生体認証',
+      ans: '掌(てのひら)認証',
       choices: ["顔認証", "虹(こう)彩認証", "声紋認証", "掌(てのひら)認証"],
       comment:
           "生体認証(バイオメトリクス認証)は、人間の身体的な特徴や行動の特性など個人に固有の情報を用いて本人の認証を行う方式で、身体的特徴を鍵として用いる方式では、指紋や顔・虹彩または声紋・DNAなど長期間にわたり変化しない部分の特徴が使用される。",

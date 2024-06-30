@@ -210,7 +210,7 @@ List<QuizItem> get category2_1 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: '類推見積法類推見積法',
+      word: '類推見積法',
       question: '過去のプロジェクトのデータや経験を基にして、新しいプロジェクトの工数やコストを見積もる手法を何というか？',
       ans: '類推見積法',
       choices: ["類推見積法", "ファンクションポイント法", "プログラムステップ法", "標準タスク法"],

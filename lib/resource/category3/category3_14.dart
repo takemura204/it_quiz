@@ -119,7 +119,7 @@ List<QuizItem> get category3_14 {
         "XML(Extensible Markup Language)"
       ],
       comment:
-          "CSS(Cascading Style Sheets)は、HTMLの要素をどのように修飾して表示させるかを定義するテキスト形式の文書で、構造とデザインを別の文書に分離させるために提唱されたスタイルシート言語。",
+          "CSS（Cascading Style Sheets）は、HTMLの要素をどのように修飾して表示させるかを定義するテキスト形式の文書で、構造とデザインを別の文書に分離させるために提唱されたスタイルシート言語。",
       source: '平成25年秋期 問80',
       importance: QuizImportanceType.normal,
     ),

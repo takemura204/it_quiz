@@ -39,7 +39,7 @@ List<QuizItem> get category3_20 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'HTTPS（HyperText Transfer Protocol Secure）',
+      word: 'HTTPS(HTTP over SSL/TLS)',
       question: 'ホームページへのアクセスにHTTPSを利用する目的として，適切なものはどれか。',
       ans: 'サーバの認証とデータの暗号化によって通信のセキュリティを確保する。',
       choices: [
@@ -99,7 +99,7 @@ List<QuizItem> get category3_20 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'NTP（Network Time Protocol）',
+      word: 'NTP(Network Time Protocol)',
       question: 'TCP/IPネットワークで使用されるNTP(Network Time Protocol)の役割として，適切なものはどれか。',
       ans: 'ネットワークに接続されている機器間で時刻を同期させる。',
       choices: [
@@ -114,7 +114,7 @@ List<QuizItem> get category3_20 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'DHCP（Dynamic Host Configuration Protocol）',
+      word: 'DHCP(Dynamic Host Configuration Protocol)',
       question: 'PCがネットワークに接続されたときにIPアドレスを自動的に取得するために使用されるプロトコルはどれか。',
       ans: 'DHCP',
       choices: ["DHCP", "HTTP", "NTP", "SMTP"],

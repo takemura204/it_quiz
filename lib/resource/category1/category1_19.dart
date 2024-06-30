@@ -30,7 +30,7 @@ List<QuizItem> get category1_19 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'BPR（Business Process Reengineering）',
+      word: 'BPR(Business Process Reengineering)',
       question: 'BPRに関する記述として，適切なものはどれか。',
       ans: '業務の手順を改めて見直し，抜本的に再設計する考え方',
       choices: [
@@ -50,7 +50,7 @@ List<QuizItem> get category1_19 {
       ans: 'BPM',
       choices: ["BPR", "BPM", "ワークフローシステム", "BYOD"],
       comment:
-          "BPM（Business Process Management）は、業務プロセスを継続的に管理し、改善していくことを目的としたアプローチ。プロセスの自動化、効率化、柔軟性の向上を図る。",
+          "BPM(Business Process Management)は、業務プロセスを継続的に管理し、改善していくことを目的としたアプローチ。プロセスの自動化、効率化、柔軟性の向上を図る。",
       importance: QuizImportanceType.normal,
     ),
     QuizItem(

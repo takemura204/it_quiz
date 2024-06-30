@@ -66,7 +66,7 @@ List<QuizItem> get category0_3_3 {
     QuizItem(
       word: 'ESSID（Extended Service Set Identifier）',
       question: '無線LANの環境において，アクセスポイン卜と端末に設定するESSIDに関する記述として，適切なものはどれか。',
-      ans: 'ESSID',
+      ans: '無線LANのネットワークを識別する文字列',
       choices: [
         "暗号通信の鍵になる文字列",
         "暗号方式の種類",
@@ -74,12 +74,12 @@ List<QuizItem> get category0_3_3 {
         "無線LANのネットワークを識別する文字列"
       ],
       comment:
-          "ESSID(Extended Service Set Identifier)は、無線LANの規格であるIEEE802.11シリーズにおいて「混信」を避けるためにアクセスポイントと端末に設定する識別子であるSSIDを、複数のアクセスポイントが設置されている状況に対応するため、ネットワーク識別子として拡張したもの。",
+          "ESSID（Extended Service Set Identifier）は、無線LANの規格であるIEEE802.11シリーズにおいて「混信」を避けるためにアクセスポイントと端末に設定する識別子であるSSIDを、複数のアクセスポイントが設置されている状況に対応するため、ネットワーク識別子として拡張したもの。",
       source: '平成24年秋期 問64',
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'HTTPS（HyperText Transfer Protocol Secure）',
+      word: 'HTTPS(HTTP over SSL/TLS)',
       question: 'ホームページへのアクセスにHTTPSを利用する目的として，適切なものはどれか。',
       ans: 'サーバの認証とデータの暗号化によって通信のセキュリティを確保する。',
       choices: [
@@ -123,9 +123,9 @@ List<QuizItem> get category0_3_3 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'bcc（blind carbon copy）',
+      word: 'bcc(Blind Carbon Copy)',
       question: '電子メールの宛先入力欄におけるBccに関する記述として，適切なものはどれか。',
-      ans: 'bcc',
+      ans: 'Bccに指定した宛先のメールアドレスは，他の宛先には通知されない。',
       choices: [
         "Bccに指定した宛先には，自動的に暗号化された電子メールが送信される。",
         "Bccに指定した宛先には，本文を削除した件名だけの電子メールが送信される。",
@@ -134,6 +134,7 @@ List<QuizItem> get category0_3_3 {
       ],
       comment:
           "bcc(Blind Carbon Copy)は、電子メールにおける送信先指定方法の1つで、toで指定した送信先以外に、メールのコピーを送信しておきたい相手を指定する機能のことで、指定した宛先のメールアドレスは，他の宛先には通知されない。",
+      source: '平成26年秋期 問64',
       importance: QuizImportanceType.high,
     ),
     QuizItem(
@@ -154,7 +155,7 @@ List<QuizItem> get category0_3_3 {
     QuizItem(
       word: 'RSS（Really Simple Syndication）',
       question: 'RSSの説明として，適切なものはどれか。',
-      ans: 'RSS',
+      ans: 'Webサイトの見出しや要約などを記述するフォーマットであり，Webサイトの更新情報の公開に使われる。',
       choices: [
         "Webサイトの色調やデザインに統一性をもたせるための仕組みである。",
         "Webサイトの見出しや要約などを記述するフォーマットであり，Webサイトの更新情報の公開に使われる。",

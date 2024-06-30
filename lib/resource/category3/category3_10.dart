@@ -15,7 +15,7 @@ List<QuizItem> get category3_10 {
         "PCのOSには，ハードディスク以外のCD-ROMやUSBメモリなどの外部記憶装置を利用して起動できるものもある。"
       ],
       comment:
-          "コンピュータを効率よく使うために、共通して使われるプログラムをまとめて提供する基本ソフトウェアのことで、PCにおけるWindows・MacOS・UNIX、モバイル端末におけるiOSやAndroidがOSに該当する。",
+          "OS（オペレーティングシステム）とは、コンピュータを効率よく使うために、共通して使われるプログラムをまとめて提供する基本ソフトウェアのことで、PCにおけるWindows・MacOS・UNIX、モバイル端末におけるiOSやAndroidがOSに該当する。",
       source: '平成26年春期 問78',
       importance: QuizImportanceType.high,
     ),

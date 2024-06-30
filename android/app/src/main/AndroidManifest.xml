@@ -18,7 +18,7 @@
 
     <application
         android:name="${applicationName}"
-        android:icon="@drawable/ic_launcher_foreground.png"
+        android:icon="@mipmap/ic_launcher"
         android:label="IT用語クイズ">
         <activity
             android:name=".MainActivity"

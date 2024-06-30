@@ -47,7 +47,7 @@ List<QuizItem> get category1_12 {
       importance: QuizImportanceType.high,
     ),
     QuizItem(
-      word: 'TQC',
+      word: 'TQC（Total Quality Control）',
       question: '総合的品質管理(TQM又はTQC)の重要な手法の一つである方針管理の説明として，適切なものはどれか。',
       ans: '経営トップの目標を事業部，部，課などの目標に順次展開し，それを実施計画につなげて目標達成のために継続的な改善を進めていく活動',
       choices: [
@@ -56,20 +56,13 @@ List<QuizItem> get category1_12 {
         "経営トップの目標を事業部，部，課などの目標に順次展開し，それを実施計画につなげて目標達成のために継続的な改善を進めていく活動",
         "現場で発生している問題を解決するために，関連する職場の人々がチームを作り，計画を立てて改善を進めていく活動"
       ],
+      comment:
+          "TQC（Total Quality Control）は、製造部門に対して適用された品質管理の手法であるQCを、これを製造部門以外に適用し、体系化したもの。",
       source: '平成25年春期 問14',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'TQM',
-      question: '組織全体で品質の向上を図ることを目指し、継続的な改善活動を行う品質管理のアプローチを何というか？',
-      ans: 'TQM',
-      choices: ["TQC", "TQM", "ERP", "シックスシグマ"],
-      comment:
-          "TQM（Total Quality Management）は、組織全体で品質の向上を図り、顧客満足の最大化を目指す品質管理のアプローチで、継続的な改善活動が特徴。",
-      importance: QuizImportanceType.normal,
-    ),
-    QuizItem(
-      word: 'ERP',
+      word: 'ERP（Enterprise Resource Planning）',
       question: 'ERPの説明として，最も適切なものはどれか。',
       ans: '経営資源の有効活用の観点から企業活動全般を統合的に管理し，業務を横断的に連携させることによって経営資源の最適化と経営の効率化を図る。',
       choices: [

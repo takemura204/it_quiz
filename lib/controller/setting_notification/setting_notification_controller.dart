@@ -43,7 +43,7 @@ class SettingNotificationController
     await checkNotificationPermission();
     final selectNotificationTime =
         ref.read(authModelProvider).selectNotificationTime;
-    await scheduleNotifications(
+    scheduleNotifications(
         value: selectNotificationTime ?? NotificationTime.defaultTime());
   }
 
@@ -158,6 +158,7 @@ class SettingNotificationController
       // 通知テキストを取得
       final notificationTitle = I18n().notificationTitle(randomIndex);
       final notificationText = createNotificationText();
+      print(notificationText);
       await flnp.zonedSchedule(
         1,
         '$notificationTitle',
@@ -183,7 +184,7 @@ class SettingNotificationController
 
     if (weakQuizItemList.isNotEmpty) {
       final randomIndex = random.nextInt(weakQuizItemList.length);
-      return '「${weakQuizItemList[randomIndex].ans}」について復習してみましょう！\nクイズの「苦手克服」から挑戦できます';
+      return '「${weakQuizItemList[randomIndex].word}」について復習してみましょう！\nクイズの「苦手克服」から挑戦できます';
     } else if (historyQuizItemList.isNotEmpty) {
       final randomIndex = random.nextInt(historyQuizItemList.length);
       return '「${historyQuizItemList[randomIndex].ans}」とはどのような意味だったでしょう？\n履歴から確認してみましょう！';

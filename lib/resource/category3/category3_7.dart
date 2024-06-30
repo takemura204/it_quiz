@@ -51,7 +51,7 @@ List<QuizItem> get category3_7 {
     QuizItem(
       word: 'HDMI(High-Definition Multimedia Interface)',
       question: 'HDMIの説明として，適切なものはどれか。',
-      ans: 'HDMI',
+      ans: '映像，音声及び制御信号を1本のケーブルで入出力するAV機器向けのインタフェースである。',
       choices: [
         "映像，音声及び制御信号を1本のケーブルで入出力するAV機器向けのインタフェースである。",
         "携帯電話間での情報交換などで使用される赤外線を用いたインタフェースである。",
@@ -83,7 +83,7 @@ List<QuizItem> get category3_7 {
     QuizItem(
       word: 'Bluetooth',
       question: '携帯電話機や家電などで用いられる無線通信の標準化規格であるBluetoothの活用事例はどれか。',
-      ans: 'Bluetooth',
+      ans: '1台の家庭用ゲーム機に，2個のコントローラーを無線で接続する。',
       choices: [
         "1台の家庭用ゲーム機に，2個のコントローラーを無線で接続する。",
         "カーナビゲーションシステムで人工衛星からの信号を受信する。",
@@ -138,7 +138,7 @@ List<QuizItem> get category3_7 {
     QuizItem(
       word: 'プラグアンドプレイ',
       question: 'プラグアンドプレイに関する記述として，適切なものはどれか。',
-      ans: 'プラグアンドプレイ',
+      ans: 'PCに周辺機器を接続すると，デバイスドライバの組込みや設定を自動的に行う。',
       choices: [
         "PCに周辺機器を接続すると，デバイスドライバの組込みや設定を自動的に行う。",
         "アプリケーションソフトウェアの機能を強化するソフトウェアを後から組み込む。",

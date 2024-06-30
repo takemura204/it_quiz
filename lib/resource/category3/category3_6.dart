@@ -20,7 +20,7 @@ List<QuizItem> get category3_6 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'マルチプロセッサ',
+      word: 'マルチコアプロセッサ',
       question: 'マルチコアプロセッサに関する記述のうち，適切なものはどれか。',
       ans: '各コアでそれぞれ別の処理を同時に実行することによって，システム全体の処理能力の向上を図る。',
       choices: [
@@ -93,7 +93,7 @@ List<QuizItem> get category3_6 {
     QuizItem(
       word: 'フラッシュメモリ',
       question: 'フラッシュメモリに関する記述として，適切なものはどれか。',
-      ans: 'フラッシュメモリ',
+      ans: '記憶内容の保持に電源供給を必要としない。',
       choices: [
         "一度だけデータを書き込むことができ，以後読み出し専用である。",
         "記憶内容の保持に電源供給を必要としない。",
@@ -140,7 +140,7 @@ List<QuizItem> get category3_6 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      word: 'SSD（Solid State Drive）',
+      word: 'SSD(Solid State Drive)',
       question:
           'フラッシュメモリを用いたSSD(Solid State Drive)は，ハードディスクの代わりとして期待されている記憶装置である。このSSDを用いるときに留意すべき点はどれか。',
       ans: '書込み回数に上限がある。',
@@ -166,7 +166,7 @@ List<QuizItem> get category3_6 {
     QuizItem(
       word: 'DVD',
       question: 'コンピュータの補助記憶装置であるDVD装置の説明として，適切なものはどれか。',
-      ans: 'DVD',
+      ans: '読取り専用のもの，繰返し書き込むことができるものなど，複数のタイプのメディアを利用できる。',
       choices: [
         "記録方式の性質上，CD-ROMを読むことはできない。",
         "小型化することが難しく，ノート型PCには搭載できない。",

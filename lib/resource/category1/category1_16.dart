@@ -227,9 +227,9 @@ List<QuizItem> get category1_16 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      word: 'アカウントアグリゲーション',
+      word: 'eKYC（Electronic Know Your Customer）',
       question: '一度の認証で顧客の身元情報を確認し、金融サービスへのアクセスを提供するプロセスを何というか？',
-      ans: 'アカウントアグリゲーション',
+      ans: 'eKYC',
       choices: ["eKYC", "AML", "KYC", "デジタルID"],
       comment:
           "eKYC（Electronic Know Your Customer）は、電子的手段を用いて顧客の身元を迅速に確認し、金融サービスへのアクセスを提供するプロセス。",
