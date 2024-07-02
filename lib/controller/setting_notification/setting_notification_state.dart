@@ -8,6 +8,6 @@ class SettingNotificationState with _$SettingNotificationState {
 
   const factory SettingNotificationState({
     @Default(false) final bool isLoading,
-    @Default(false) final bool isNotification,
+    final bool? isNotification,
   }) = _SettingNotificationState;
 }

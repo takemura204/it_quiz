@@ -69,8 +69,15 @@ class _QuizCard extends ConsumerWidget {
                   ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
                   ref.read(quizModelProvider.notifier).tapQuizIndex(index);
                   ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
-                  showDialog(
-                      context: context, builder: (_) => StudyModal(quiz: quiz));
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                    ),
+                    builder: (_) => StudyModal(quiz: quiz),
+                  );
                 } else if (target.identify == "homeTarget5") {
                   ref
                       .read(quizModelProvider.notifier)
@@ -107,7 +114,15 @@ class _QuizCard extends ConsumerWidget {
           ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
           ref.read(quizModelProvider.notifier).tapQuizIndex(index);
           ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
-          showDialog(context: context, builder: (_) => StudyModal(quiz: quiz));
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+            ),
+            builder: (_) => StudyModal(quiz: quiz),
+          );
         } else {
           showDialog(
               context: context,

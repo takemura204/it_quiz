@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingNotificationState {
   bool get isLoading => throw _privateConstructorUsedError;
-  bool get isNotification => throw _privateConstructorUsedError;
+  bool? get isNotification => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingNotificationStateCopyWith<SettingNotificationState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $SettingNotificationStateCopyWith<$Res> {
           $Res Function(SettingNotificationState) then) =
       _$SettingNotificationStateCopyWithImpl<$Res, SettingNotificationState>;
   @useResult
-  $Res call({bool isLoading, bool isNotification});
+  $Res call({bool isLoading, bool? isNotification});
 }
 
 /// @nodoc
@@ -48,17 +48,17 @@ class _$SettingNotificationStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
-    Object? isNotification = null,
+    Object? isNotification = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isNotification: null == isNotification
+      isNotification: freezed == isNotification
           ? _value.isNotification
           : isNotification // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -72,7 +72,7 @@ abstract class _$$_SettingNotificationStateCopyWith<$Res>
       __$$_SettingNotificationStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool isNotification});
+  $Res call({bool isLoading, bool? isNotification});
 }
 
 /// @nodoc
@@ -88,17 +88,17 @@ class __$$_SettingNotificationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? isNotification = null,
+    Object? isNotification = freezed,
   }) {
     return _then(_$_SettingNotificationState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isNotification: null == isNotification
+      isNotification: freezed == isNotification
           ? _value.isNotification
           : isNotification // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -107,15 +107,14 @@ class __$$_SettingNotificationStateCopyWithImpl<$Res>
 
 class _$_SettingNotificationState extends _SettingNotificationState {
   const _$_SettingNotificationState(
-      {this.isLoading = false, this.isNotification = false})
+      {this.isLoading = false, this.isNotification})
       : super._();
 
   @override
   @JsonKey()
   final bool isLoading;
   @override
-  @JsonKey()
-  final bool isNotification;
+  final bool? isNotification;
 
   @override
   String toString() {
@@ -147,13 +146,13 @@ class _$_SettingNotificationState extends _SettingNotificationState {
 abstract class _SettingNotificationState extends SettingNotificationState {
   const factory _SettingNotificationState(
       {final bool isLoading,
-      final bool isNotification}) = _$_SettingNotificationState;
+      final bool? isNotification}) = _$_SettingNotificationState;
   const _SettingNotificationState._() : super._();
 
   @override
   bool get isLoading;
   @override
-  bool get isNotification;
+  bool? get isNotification;
   @override
   @JsonKey(ignore: true)
   _$$_SettingNotificationStateCopyWith<_$_SettingNotificationState>

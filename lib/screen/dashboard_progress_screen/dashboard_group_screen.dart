@@ -279,8 +279,6 @@ class _ProgressRadarChart extends StatelessWidget {
     final List<double> maxValue = List.filled(categories.length, 100); // 最大値
     final List<double> minValue = List.filled(categories.length, 0); // 最小値
 
-    // final testData = [40.0, 25.0, 55.0, 65.0];
-
     return RadarChart(
       RadarChartData(
         dataSets: [

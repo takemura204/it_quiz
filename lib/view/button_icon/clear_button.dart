@@ -15,6 +15,7 @@ class ClearButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 50,
+      alignment: Alignment.center,
       child: IconButton(
         padding: EdgeInsets.all(context.width * 0.01),
         alignment: Alignment.topRight,
