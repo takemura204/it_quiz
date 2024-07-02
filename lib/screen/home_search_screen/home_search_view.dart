@@ -178,16 +178,17 @@ class _QuizItemCard extends ConsumerWidget {
                             //         .tapCheckButton(index);
                             //   },
                             // ),
-                            SaveIconButton(
-                              quizItem: quizItemList[index],
-                              isShowText: true,
-                              size: 35,
-                              onTap: () {
-                                ref
-                                    .read(homeSearchScreenProvider.notifier)
-                                    .tapSaveButton(index);
-                              },
-                            ),
+                            if (isPremium)
+                              SaveIconButton(
+                                quizItem: quizItemList[index],
+                                isShowText: true,
+                                size: 35,
+                                onTap: () {
+                                  ref
+                                      .read(homeSearchScreenProvider.notifier)
+                                      .tapSaveButton(index);
+                                },
+                              ),
                           ],
                         )
                       ],

@@ -130,12 +130,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       unKnowQuizItemList: unKnowQuizItemList,
       quizItemList: quizItemList,
     );
-
-    print({
-      quizItemList.length,
-      knowQuizItemList.length,
-      unKnowQuizItemList.length
-    });
     _nextQuiz();
   }
 

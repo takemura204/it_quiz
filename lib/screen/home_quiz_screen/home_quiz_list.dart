@@ -71,6 +71,7 @@ class _QuizCard extends ConsumerWidget {
                   ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
                   showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),

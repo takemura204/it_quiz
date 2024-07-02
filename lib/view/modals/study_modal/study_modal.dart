@@ -19,6 +19,7 @@ import '../../icon/quarter_circle_icon.dart';
 import '../../quiz_length_tab_bar.dart';
 
 part 'study_modal_status_cards.dart';
+
 part 'study_modal_title.dart';
 
 ///クイズモーダル
@@ -51,11 +52,10 @@ class StudyModal extends ConsumerWidget {
     final homeTarget5 =
         ref.read(tutorialControllerProvider.notifier).homeTarget5;
     return Container(
-      // height: 500,
+      key: homeTarget2,
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        key: homeTarget2,
         children: [
           const Gap(10),
 
@@ -120,7 +120,7 @@ class StudyModal extends ConsumerWidget {
               },
             ),
           ),
-          const Gap(5),
+          const Gap(10),
 
           ///4択形式クイズ
           PrimaryButton(
@@ -142,7 +142,7 @@ class StudyModal extends ConsumerWidget {
               );
             },
           ),
-          const Gap(30),
+          Gap(context.height * 0.03),
         ],
       ),
     );

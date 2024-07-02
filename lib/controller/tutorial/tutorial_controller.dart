@@ -82,9 +82,10 @@ class TutorialController extends StateNotifier<TutorialState> {
           keyTarget: homeTarget2,
           contents: [
             TargetContent(
-              align: ContentAlign.bottom,
+              align: ContentAlign.top,
               padding: EdgeInsets.zero,
               child: CustomToolTip(
+                isUpward: false,
                 text: TextSpan(
                   children: [
                     const TextSpan(text: 'タップしたら', style: style),
