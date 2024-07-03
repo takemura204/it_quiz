@@ -21,7 +21,6 @@ Quizzes _$QuizzesFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Quizzes {
   bool get isLoading => throw _privateConstructorUsedError;
-  int get selectQuizId => throw _privateConstructorUsedError; //選択したクイズID
   int get quizIndex => throw _privateConstructorUsedError; //選択したクイズインデックス
   List<Quiz> get quizList => throw _privateConstructorUsedError; //クイズ一覧
   List<Quiz> get historyQuizList =>
@@ -44,7 +43,6 @@ abstract class $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      int selectQuizId,
       int quizIndex,
       List<Quiz> quizList,
       List<Quiz> historyQuizList,
@@ -72,7 +70,6 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? selectQuizId = null,
     Object? quizIndex = null,
     Object? quizList = null,
     Object? historyQuizList = null,
@@ -87,10 +84,6 @@ class _$QuizzesCopyWithImpl<$Res, $Val extends Quizzes>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectQuizId: null == selectQuizId
-          ? _value.selectQuizId
-          : selectQuizId // ignore: cast_nullable_to_non_nullable
-              as int,
       quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
@@ -160,7 +153,6 @@ abstract class _$$_QuizzesCopyWith<$Res> implements $QuizzesCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      int selectQuizId,
       int quizIndex,
       List<Quiz> quizList,
       List<Quiz> historyQuizList,
@@ -187,7 +179,6 @@ class __$$_QuizzesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? selectQuizId = null,
     Object? quizIndex = null,
     Object? quizList = null,
     Object? historyQuizList = null,
@@ -202,10 +193,6 @@ class __$$_QuizzesCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectQuizId: null == selectQuizId
-          ? _value.selectQuizId
-          : selectQuizId // ignore: cast_nullable_to_non_nullable
-              as int,
       quizIndex: null == quizIndex
           ? _value.quizIndex
           : quizIndex // ignore: cast_nullable_to_non_nullable
@@ -247,7 +234,6 @@ class __$$_QuizzesCopyWithImpl<$Res>
 class _$_Quizzes extends _Quizzes {
   _$_Quizzes(
       {this.isLoading = false,
-      this.selectQuizId = 0,
       this.quizIndex = 0,
       final List<Quiz> quizList = const [],
       final List<Quiz> historyQuizList = const [],
@@ -267,10 +253,6 @@ class _$_Quizzes extends _Quizzes {
   @override
   @JsonKey()
   final bool isLoading;
-  @override
-  @JsonKey()
-  final int selectQuizId;
-//選択したクイズID
   @override
   @JsonKey()
   final int quizIndex;
@@ -323,7 +305,7 @@ class _$_Quizzes extends _Quizzes {
 
   @override
   String toString() {
-    return 'Quizzes(isLoading: $isLoading, selectQuizId: $selectQuizId, quizIndex: $quizIndex, quizList: $quizList, historyQuizList: $historyQuizList, quizItemList: $quizItemList, weakQuiz: $weakQuiz, randomQuiz: $randomQuiz, quizType: $quizType, studyType: $studyType)';
+    return 'Quizzes(isLoading: $isLoading, quizIndex: $quizIndex, quizList: $quizList, historyQuizList: $historyQuizList, quizItemList: $quizItemList, weakQuiz: $weakQuiz, randomQuiz: $randomQuiz, quizType: $quizType, studyType: $studyType)';
   }
 
   @override
@@ -333,8 +315,6 @@ class _$_Quizzes extends _Quizzes {
             other is _$_Quizzes &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.selectQuizId, selectQuizId) ||
-                other.selectQuizId == selectQuizId) &&
             (identical(other.quizIndex, quizIndex) ||
                 other.quizIndex == quizIndex) &&
             const DeepCollectionEquality().equals(other._quizList, _quizList) &&
@@ -357,7 +337,6 @@ class _$_Quizzes extends _Quizzes {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
-      selectQuizId,
       quizIndex,
       const DeepCollectionEquality().hash(_quizList),
       const DeepCollectionEquality().hash(_historyQuizList),
@@ -384,7 +363,6 @@ class _$_Quizzes extends _Quizzes {
 abstract class _Quizzes extends Quizzes {
   factory _Quizzes(
       {final bool isLoading,
-      final int selectQuizId,
       final int quizIndex,
       final List<Quiz> quizList,
       final List<Quiz> historyQuizList,
@@ -400,8 +378,6 @@ abstract class _Quizzes extends Quizzes {
   @override
   bool get isLoading;
   @override
-  int get selectQuizId;
-  @override //選択したクイズID
   int get quizIndex;
   @override //選択したクイズインデックス
   List<Quiz> get quizList;
