@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:219522966725:android:e424d75dec0443524f3cac",
+        "mobilesdk_app_id": "1:219522966725:android:9a1304d77acabefb4f3cac",
         "android_client_info": {
           "package_name": "jp.quiz.it"
         }
@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCccT2iHPlLppePI3nL3kws7mFFpADs5gQ"
+          "current_key": "AIzaSyDsQMCktKBB4pDpEyYw62NCRWxmZSjYwRY"
         }
       ],
       "services": {
@@ -31,10 +31,11 @@
               "client_type": 3
             },
             {
-              "client_id": "219522966725-ahq8u9te7aacjo31ab73qq0krv07781t.apps.googleusercontent.com",
+              "client_id": "219522966725-27v2akhel0b2a67sn0ta9hqodbguvdah.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.kenteiQuiz"
+                "bundle_id": "com.example.kenteiQuiz",
+                "app_store_id": "6479543578"
               }
             }
           ]
