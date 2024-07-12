@@ -78,7 +78,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
                 );
 
                 // ansがchoicesに含まれているかチェック
-                if (!updatedQuizItem.comment.contains(updatedQuizItem.word)) {
+                if (!updatedQuizItem.choices.contains(updatedQuizItem.ans)) {
                   print(
                       "QuizItem with word: ${updatedQuizItem.word} ,${updatedQuizItem.quizId}.");
                 }

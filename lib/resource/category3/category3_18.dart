@@ -31,7 +31,7 @@ List<QuizItem> get category3_18 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
-      source: 'トランザクション',
+      word: 'トランザクション',
       question: 'データベース内で一連の操作を一つの単位として扱うことを何と呼ぶか？',
       ans: 'トランザクション',
       choices: ["トランザクション", "排他制御", "射影", "選択"],

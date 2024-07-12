@@ -175,6 +175,7 @@ List<QuizItem> get category1_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ロジックツリー',
       question:
           '関連する要素を相互に重複することなく、全体として漏れ落ちがないように上位から下位へ分解しツリー状に可視化する図を何というか？',
       ans: 'ロジックツリー',
@@ -184,6 +185,7 @@ List<QuizItem> get category1_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'コンセプトマップ',
       question:
           '知識やアイデアなどの様々な概念についてマップ上に並べ、関連するもの同士を線で結んでそれぞれの関係をわかりやすく可視化した図を何というか？',
       ans: 'コンセプトマップ',

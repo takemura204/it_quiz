@@ -224,6 +224,7 @@ List<QuizItem> get category3_24 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'セキュアブート',
       question: 'システムが信頼できるソフトウェアからのみ起動することを保証するプロセスは何か？',
       ans: 'セキュアブート',
       choices: ["セキュアブート", "耐タンパ性", "TPM", "PCI DSS"],

@@ -28,6 +28,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'MIDI(Musical Instrument Digital Interface)',
       question: 'シンセサイザなどの電子楽器とPCを接続して演奏情報をやり取りするための規格はどれか。',
       ans: 'MIDI',
       choices: ["AVI", "BMP", "MIDI", "MP3"],

@@ -57,12 +57,13 @@ List<QuizItem> get category3_6 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      ans: 'SRAM',
-      choices: ["SRAM", "DRAM", "ROM", "フラッシュメモリ"],
       word: 'SRAM（Static Random Access Memory）',
+      question:
+          'フリップフロップと呼ばれる回路を用いることで、DRAMのようなリフレッシュ動作の必要がなく非常に高速に動作する半導体メモリのことをなんというか。',
+      ans: 'SRAM',
+      choices: ["SRAM", "フラッシュメモリ", "ROM", "DIMM"],
       comment:
-          "SRAM（Static Random Access Memory）は、電源が切れるとデータを保持しないが、アクセス速度が非常に速い半導体メモリ。",
-      source: '平成25年春期 問63',
+          "SRAM（Static Random Access Memory）は、フリップフロップと呼ばれる回路を用いることで、DRAMのようなリフレッシュ動作の必要がなく非常に高速に動作する半導体メモリ。DRAMと比べて記憶容量あたりの単価が高いため、容量が少ないキャッシュメモリなどに使用されている。",
       importance: QuizImportanceType.low,
     ),
     QuizItem(

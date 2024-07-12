@@ -117,7 +117,7 @@ class I18n {
   String get buttonUnKnow => "知らない";
 
   ///URL
-  String get contactUrl => 'https://forms.gle/wLbnrn1ovwUDYoRv5';
+  String get contactUrl => 'https://forms.gle/tt9kz7qFJRsBGtT47';
 
   ///利用規約
   String get termsUrl =>

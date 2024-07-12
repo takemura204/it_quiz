@@ -405,6 +405,7 @@ List<QuizItem> get category1_1 {
       importance: QuizImportanceType.none,
     ),
     QuizItem(
+      word: 'カンパニ制',
       question: '独立採算制を採用し、小さな会社のように運営される組織単位は何か？',
       ans: 'カンパニ制',
       choices: ["カンパニ制", "プロジェクト組織", "マトリックス組織", "職能別組織"],
