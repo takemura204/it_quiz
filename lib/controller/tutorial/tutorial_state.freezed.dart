@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TutorialState {
+  bool get isTapDone => throw _privateConstructorUsedError;
   bool get isTutorialRestart => throw _privateConstructorUsedError;
   bool get isShowHomeTutorial => throw _privateConstructorUsedError;
   bool get isShowLearnTutorial => throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $TutorialStateCopyWith<$Res> {
       _$TutorialStateCopyWithImpl<$Res, TutorialState>;
   @useResult
   $Res call(
-      {bool isTutorialRestart,
+      {bool isTapDone,
+      bool isTutorialRestart,
       bool isShowHomeTutorial,
       bool isShowLearnTutorial,
       bool isShowLearnResultTutorial,
@@ -60,6 +62,7 @@ class _$TutorialStateCopyWithImpl<$Res, $Val extends TutorialState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isTapDone = null,
     Object? isTutorialRestart = null,
     Object? isShowHomeTutorial = null,
     Object? isShowLearnTutorial = null,
@@ -70,6 +73,10 @@ class _$TutorialStateCopyWithImpl<$Res, $Val extends TutorialState>
     Object? isShowTapAnimation = null,
   }) {
     return _then(_value.copyWith(
+      isTapDone: null == isTapDone
+          ? _value.isTapDone
+          : isTapDone // ignore: cast_nullable_to_non_nullable
+              as bool,
       isTutorialRestart: null == isTutorialRestart
           ? _value.isTutorialRestart
           : isTutorialRestart // ignore: cast_nullable_to_non_nullable
@@ -115,7 +122,8 @@ abstract class _$$_TutorialStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isTutorialRestart,
+      {bool isTapDone,
+      bool isTutorialRestart,
       bool isShowHomeTutorial,
       bool isShowLearnTutorial,
       bool isShowLearnResultTutorial,
@@ -136,6 +144,7 @@ class __$$_TutorialStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isTapDone = null,
     Object? isTutorialRestart = null,
     Object? isShowHomeTutorial = null,
     Object? isShowLearnTutorial = null,
@@ -146,6 +155,10 @@ class __$$_TutorialStateCopyWithImpl<$Res>
     Object? isShowTapAnimation = null,
   }) {
     return _then(_$_TutorialState(
+      isTapDone: null == isTapDone
+          ? _value.isTapDone
+          : isTapDone // ignore: cast_nullable_to_non_nullable
+              as bool,
       isTutorialRestart: null == isTutorialRestart
           ? _value.isTutorialRestart
           : isTutorialRestart // ignore: cast_nullable_to_non_nullable
@@ -186,7 +199,8 @@ class __$$_TutorialStateCopyWithImpl<$Res>
 
 class _$_TutorialState extends _TutorialState {
   _$_TutorialState(
-      {this.isTutorialRestart = false,
+      {this.isTapDone = false,
+      this.isTutorialRestart = false,
       this.isShowHomeTutorial = false,
       this.isShowLearnTutorial = false,
       this.isShowLearnResultTutorial = false,
@@ -196,6 +210,9 @@ class _$_TutorialState extends _TutorialState {
       this.isShowTapAnimation = false})
       : super._();
 
+  @override
+  @JsonKey()
+  final bool isTapDone;
   @override
   @JsonKey()
   final bool isTutorialRestart;
@@ -223,7 +240,7 @@ class _$_TutorialState extends _TutorialState {
 
   @override
   String toString() {
-    return 'TutorialState(isTutorialRestart: $isTutorialRestart, isShowHomeTutorial: $isShowHomeTutorial, isShowLearnTutorial: $isShowLearnTutorial, isShowLearnResultTutorial: $isShowLearnResultTutorial, isShowLearnTutorialModal: $isShowLearnTutorialModal, isShowSwipeLeftAnimation: $isShowSwipeLeftAnimation, isShowSwipeRightAnimation: $isShowSwipeRightAnimation, isShowTapAnimation: $isShowTapAnimation)';
+    return 'TutorialState(isTapDone: $isTapDone, isTutorialRestart: $isTutorialRestart, isShowHomeTutorial: $isShowHomeTutorial, isShowLearnTutorial: $isShowLearnTutorial, isShowLearnResultTutorial: $isShowLearnResultTutorial, isShowLearnTutorialModal: $isShowLearnTutorialModal, isShowSwipeLeftAnimation: $isShowSwipeLeftAnimation, isShowSwipeRightAnimation: $isShowSwipeRightAnimation, isShowTapAnimation: $isShowTapAnimation)';
   }
 
   @override
@@ -231,6 +248,8 @@ class _$_TutorialState extends _TutorialState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TutorialState &&
+            (identical(other.isTapDone, isTapDone) ||
+                other.isTapDone == isTapDone) &&
             (identical(other.isTutorialRestart, isTutorialRestart) ||
                 other.isTutorialRestart == isTutorialRestart) &&
             (identical(other.isShowHomeTutorial, isShowHomeTutorial) ||
@@ -256,6 +275,7 @@ class _$_TutorialState extends _TutorialState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isTapDone,
       isTutorialRestart,
       isShowHomeTutorial,
       isShowLearnTutorial,
@@ -274,7 +294,8 @@ class _$_TutorialState extends _TutorialState {
 
 abstract class _TutorialState extends TutorialState {
   factory _TutorialState(
-      {final bool isTutorialRestart,
+      {final bool isTapDone,
+      final bool isTutorialRestart,
       final bool isShowHomeTutorial,
       final bool isShowLearnTutorial,
       final bool isShowLearnResultTutorial,
@@ -284,6 +305,8 @@ abstract class _TutorialState extends TutorialState {
       final bool isShowTapAnimation}) = _$_TutorialState;
   _TutorialState._() : super._();
 
+  @override
+  bool get isTapDone;
   @override
   bool get isTutorialRestart;
   @override

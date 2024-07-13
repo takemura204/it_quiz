@@ -10,6 +10,7 @@ import 'package:kentei_quiz/model/lang/initial_resource.dart';
 import 'package:kentei_quiz/view/card/result_clear_card.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
+import '../../controller/main/main_screen_controller.dart';
 import '../../controller/quiz_learn/quiz_learn_screen_controller.dart';
 import '../../controller/tutorial/tutorial_controller.dart';
 import '../../model/quiz/quiz.dart';
@@ -79,6 +80,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
     final isResultScreen = ref.watch(quizLearnScreenProvider).isResultScreen;
     final learnResultTarget4 =
         ref.read(tutorialControllerProvider.notifier).learnResultTarget4;
+    final isShowTutorialModal = ref.watch(
+        mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
     return isResultScreen
         ? AppBar(
             titleSpacing: 0,
@@ -108,32 +111,34 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: Text(quiz.title),
-            leading: CustomBackButton(onPressed: () async {
-              await showDialog(
-                  context: context,
-                  builder: (context) {
-                    return PrimaryDialog(
-                      onPressed: () {
-                        ref
-                            .read(quizLearnScreenProvider.notifier)
-                            .tapClearButton();
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      },
-                      title: "学習を中断しますか？",
-                      subWidget: Text(
-                        "学習を中断すると\nこれまでの内容は保存されません。",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: context.width * 0.04,
-                            color: Colors.black87),
-                        maxLines: 2,
-                      ),
-                      cancelText: "続ける",
-                      doneText: "中断する",
-                    );
-                  });
-            }),
+            leading: !isShowTutorialModal
+                ? CustomBackButton(onPressed: () async {
+                    await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return PrimaryDialog(
+                            onPressed: () {
+                              ref
+                                  .read(quizLearnScreenProvider.notifier)
+                                  .tapClearButton();
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            title: "学習を中断しますか？",
+                            subWidget: Text(
+                              "学習を中断すると\nこれまでの内容は保存されません。",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: context.width * 0.04,
+                                  color: Colors.black87),
+                              maxLines: 2,
+                            ),
+                            cancelText: "続ける",
+                            doneText: "中断する",
+                          );
+                        });
+                  })
+                : Container(),
             actions: const [
               ContactIconButton(),
             ],

@@ -10,5 +10,6 @@ class MainScreenState with _$MainScreenState {
     @Default(false) final bool isShowTutorialModal,
     @Default(false) final bool isShowInAppReview,
     @Default(false) final bool isShowTrackingModal,
+    @Default(false) final bool isShowPremiumDetailScreen,
   }) = _MainScreenState;
 }

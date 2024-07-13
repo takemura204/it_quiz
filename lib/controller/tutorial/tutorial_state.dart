@@ -7,6 +7,7 @@ class TutorialState with _$TutorialState {
   const TutorialState._();
 
   factory TutorialState({
+    @Default(false) final bool isTapDone,
     @Default(false) final bool isTutorialRestart,
     @Default(false) final bool isShowHomeTutorial,
     @Default(false) final bool isShowLearnTutorial,

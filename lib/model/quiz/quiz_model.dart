@@ -245,6 +245,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
               .read(mainScreenControllerProvider.notifier)
               .updateInAppReviewCount();
         }
+
         return updateQuiz.copyWith(
             isCompleted: isCompleted, correctNum: updateScore);
       }

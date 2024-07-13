@@ -39,55 +39,13 @@ class TutorialModal extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Gap(15),
+              const Gap(10),
               const Text(
                 'インストールありがとうございます！🎉',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87),
-              ),
-              const Gap(15),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                          text: '1分で',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                            fontSize: 16,
-                          )),
-                      TextSpan(
-                        text: 'アプリの使い方を学び、\n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black87,
-                          fontSize: 16,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '効率よく学習',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                          fontSize: 16,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'していきましょう！',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black87,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
 
               const Gap(15),
@@ -98,11 +56,54 @@ class TutorialModal extends ConsumerWidget {
               ),
               const Gap(20),
 
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: const TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '＼　',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
+                      ),
+                      TextSpan(
+                          text: '1分で',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
+                            fontSize: 16,
+                          )),
+                      TextSpan(
+                        text: '効率よく学べます！',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '　／',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Gap(10),
+
               ///ボタン
               AnimatedShadowButton(
                 width: context.width,
                 height: 60,
-                text: "チュートリアル開始",
+                text: "チュートリアルを開始！",
                 onPressed: () {
                   Navigator.of(context).pop();
                   if (isTutorialRestart) {
