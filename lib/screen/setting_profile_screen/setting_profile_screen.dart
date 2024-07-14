@@ -157,7 +157,7 @@ class SettingProfileScreen extends ConsumerWidget {
             PrimaryButton(
               width: context.width * 0.85,
               height: 60,
-              text: '更新する',
+              title: '更新する',
               onPressed: (userNameController.text.isNotEmpty &&
                           userNameController.text.length < 12) &&
                       !isNotTap

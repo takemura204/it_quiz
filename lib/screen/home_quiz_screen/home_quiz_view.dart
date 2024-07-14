@@ -50,7 +50,7 @@ class _BottomQuizMenu extends ConsumerWidget {
             PrimaryButton(
               width: context.width * 0.46,
               height: 50,
-              text: "${randomQuiz.title}",
+              title: "${randomQuiz.title}",
               icon: LineIcons.random,
               onPressed: () {
                 ref

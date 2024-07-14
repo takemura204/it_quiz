@@ -103,7 +103,7 @@ class TutorialModal extends ConsumerWidget {
               AnimatedShadowButton(
                 width: context.width,
                 height: 60,
-                text: "チュートリアルを開始！",
+                title: "チュートリアルを開始！",
                 onPressed: () {
                   Navigator.of(context).pop();
                   if (isTutorialRestart) {

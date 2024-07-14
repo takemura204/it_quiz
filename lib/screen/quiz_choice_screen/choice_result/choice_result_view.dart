@@ -109,7 +109,7 @@ class _NextActionCard extends HookConsumerWidget {
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,
-                  text: "完了",
+                  title: "完了",
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -118,7 +118,7 @@ class _NextActionCard extends HookConsumerWidget {
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,
-                  text: "次のクイズに挑戦",
+                  title: "次のクイズに挑戦",
                   onPressed: (quizIndex >= lastIndex)
                       ? null
                       : () {

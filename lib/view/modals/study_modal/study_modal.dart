@@ -19,7 +19,6 @@ import '../../icon/quarter_circle_icon.dart';
 import '../../quiz_length_tab_bar.dart';
 
 part 'study_modal_status_cards.dart';
-
 part 'study_modal_title.dart';
 
 ///クイズモーダル
@@ -126,7 +125,7 @@ class StudyModal extends ConsumerWidget {
           PrimaryButton(
             width: context.width * 1,
             height: 55,
-            text: I18n().styleChoiceQuiz,
+            title: I18n().styleChoiceQuiz,
             onPressed: () {
               Navigator.of(context).pop();
               ref

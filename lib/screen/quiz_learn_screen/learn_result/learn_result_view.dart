@@ -108,7 +108,7 @@ class _NextActionCard extends HookConsumerWidget {
               PrimaryButton(
                 width: context.width * 0.45,
                 height: 55,
-                text: "クイズに挑戦",
+                title: "クイズに挑戦",
                 onPressed: (quizIndex >= lastIndex)
                     ? null
                     : () {

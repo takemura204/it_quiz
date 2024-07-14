@@ -91,7 +91,7 @@ class WeakQuizModal extends ConsumerWidget {
           PrimaryButton(
             width: context.width * 1,
             height: 55,
-            text: I18n().styleChoiceQuiz,
+            title: I18n().styleChoiceQuiz,
             onPressed: () {
               Navigator.of(context).pop();
               ref

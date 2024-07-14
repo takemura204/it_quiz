@@ -72,7 +72,7 @@ class PrimaryDialog extends ConsumerWidget {
                   PrimaryButton(
                     width: context.width * 0.4,
                     height: 50,
-                    text: doneText,
+                    title: doneText,
                     onPressed: onPressed,
                   ),
                 ],
@@ -252,7 +252,7 @@ class PrimaryCloseDialog extends ConsumerWidget {
               PrimaryButton(
                   width: context.width * 0.8,
                   height: context.height * 0.06,
-                  text: doneText,
+                  title: doneText,
                   onPressed: onPressed),
               const Spacer(),
             ],

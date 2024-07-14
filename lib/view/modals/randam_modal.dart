@@ -99,7 +99,7 @@ class RandomQuizModal extends ConsumerWidget {
           PrimaryButton(
             width: context.width,
             height: 55,
-            text: 'クイズに挑戦する',
+            title: 'クイズに挑戦する',
             onPressed: isGroup
                 ? () {
                     ref

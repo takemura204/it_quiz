@@ -36,7 +36,7 @@ class NeedNotificationCard extends ConsumerWidget {
                   .read(settingNotificationProvider.notifier)
                   .checkNotificationPermission()
                   .then((value) {
-                if (isNotification != null && isNotification) {
+                if (isNotification) {
                   showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {

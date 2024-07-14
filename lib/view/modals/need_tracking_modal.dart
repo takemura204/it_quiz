@@ -75,7 +75,7 @@ class NeedTrackingModal extends ConsumerWidget {
               PrimaryButton(
                 width: context.width,
                 height: 60,
-                text: "次へ",
+                title: "次へ",
                 onPressed: () async {
                   await ref
                       .read(mainScreenControllerProvider.notifier)

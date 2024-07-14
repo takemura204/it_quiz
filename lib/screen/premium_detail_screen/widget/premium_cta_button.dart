@@ -19,13 +19,13 @@ class _CtaButton extends HookConsumerWidget {
               ? PrimaryButton(
                   width: context.width,
                   height: 60,
-                  text: '購入済み',
+                  title: '購入済み',
                   onPressed: null,
                 )
               : AnimatedShadowButton(
                   width: context.width,
                   height: 60,
-                  text: 'いますぐ購入 ¥980(税込)',
+                  title: 'いますぐ購入 ¥980(税込)',
                   onPressed: () {
                     ref.read(premiumDetailProvider.notifier).buyPurchase980();
                   },

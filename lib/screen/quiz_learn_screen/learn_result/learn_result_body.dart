@@ -35,16 +35,6 @@ class _LearnResultBody extends ConsumerWidget {
                       .updateHistoryQuiz();
 
                   ref.read(quizLearnScreenProvider.notifier).tapClearButton();
-                  final isShowTutorialModal = ref
-                      .read(mainScreenControllerProvider)
-                      .isShowTutorialModal;
-                  final isTutorialRestart =
-                      ref.read(tutorialControllerProvider).isTutorialRestart;
-                  print({
-                    'isShowTutorialModal',
-                    isShowTutorialModal,
-                    isTutorialRestart
-                  });
 
                   ref
                       .read(tutorialControllerProvider.notifier)

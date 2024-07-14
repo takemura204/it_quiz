@@ -155,7 +155,7 @@ class CustomTimePicker extends HookWidget {
           PrimaryButton(
               width: context.width * 0.85,
               height: 60,
-              text: "設定する",
+              title: "設定する",
               onPressed: () {
                 onTimeChanged(
                     TimeOfDay(hour: selectedHour, minute: selectedMinute));

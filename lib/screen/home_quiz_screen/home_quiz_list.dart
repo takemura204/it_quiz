@@ -10,9 +10,85 @@ class _QuizList extends ConsumerWidget {
     final state = ref.watch(quizModelProvider);
     final quizList =
         state.quizList.where((x) => x.category == category).toList();
+    final historyQuizList =
+        state.historyQuizList.where((x) => x.category == category).toList();
+
     return CustomScrollView(
       controller: ScrollController(),
       slivers: [
+        SliverToBoxAdapter(
+          child: Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(
+                horizontal: context.width * 0.02,
+                vertical: context.width * 0.04),
+            child: historyQuizList.isNotEmpty
+                ? AnimatedShadowButton(
+                    width: context.width,
+                    height: 65,
+                    title: "前回の続きから",
+                    subtitle: '${historyQuizList.last.title}',
+                    onPressed: () {
+                      final lastQuizId = historyQuizList.last.id;
+                      final index =
+                          quizList.indexWhere((quiz) => quiz.id == lastQuizId);
+
+                      if (index != -1) {
+                        final quiz = quizList[index];
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .setQuizType(QuizStyleType.study);
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .tapQuizIndex(index);
+                        ref
+                            .read(homeQuizScreenProvider.notifier)
+                            .setSelectQuiz(quiz);
+
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                          ),
+                          builder: (_) => StudyModal(quiz: quiz),
+                        );
+                      }
+                    },
+                  )
+                : AnimatedShadowButton(
+                    width: context.width,
+                    height: 65,
+                    title: "はじめる",
+                    subtitle: '${quizList.first.title}',
+                    onPressed: () {
+                      final quiz = quizList.first;
+                      ref
+                          .read(quizModelProvider.notifier)
+                          .setQuizType(QuizStyleType.study);
+                      ref.read(quizModelProvider.notifier).tapQuizIndex(0);
+                      ref
+                          .read(homeQuizScreenProvider.notifier)
+                          .setSelectQuiz(quiz);
+
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
+                        ),
+                        builder: (_) => StudyModal(quiz: quiz),
+                      );
+                    },
+                  ),
+          ),
+        ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
@@ -181,7 +257,6 @@ class _QuizCard extends ConsumerWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    // 全ての辺に一様なボーダーを適用
                     border: Border.all(
                       color: context.secondColor,
                       width: 1.5,

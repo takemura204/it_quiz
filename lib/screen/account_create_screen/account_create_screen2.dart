@@ -176,7 +176,7 @@ class AccountCreateStep2Screen extends ConsumerWidget {
                       PrimaryButton(
                         width: context.width * 0.8,
                         height: context.height * 0.07,
-                        text: '登録完了',
+                        title: '登録完了',
                         onPressed: (userNameController.text.isNotEmpty &&
                                     birthdayController.text.isNotEmpty &&
                                     genderController.text.isNotEmpty) &&
