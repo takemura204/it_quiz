@@ -57,7 +57,7 @@ class PremiumDetailScreen extends ConsumerWidget {
           Scaffold(
             backgroundColor: context.backgroundColor,
             body: const Stack(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.bottomCenter,
               children: [
                 SingleChildScrollView(
                   child: Column(

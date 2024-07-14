@@ -94,7 +94,7 @@ class _QuizItemCard extends ConsumerWidget {
           showDialog(
               context: context,
               builder: (_) => NeedPremiumModal(
-                    title: '検索用語を全て閲覧しますか？',
+                    title: '検索用語を全て解放しますか？',
                     imagePath: 'assets/image/premium/premium_8.svg',
                     subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -102,17 +102,33 @@ class _QuizItemCard extends ConsumerWidget {
                         Expanded(
                           child: RichText(
                             textAlign: TextAlign.center,
-                            text: const TextSpan(
-                              style: TextStyle(color: Colors.black87),
+                            text: TextSpan(
+                              style: const TextStyle(color: Colors.black87),
                               children: [
-                                TextSpan(
-                                  text: 'プレミアム特典の支払いは一度きり。\n',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                const TextSpan(
+                                  text: 'プレミアム特典を購入すると、\n',
                                 ),
                                 TextSpan(
-                                  text: '購入すると、全ての検索用語をを閲覧・保存できます。',
+                                  text: '全て',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: context.accentColor,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: 'のIT用語を',
+                                ),
+                                TextSpan(
+                                  text: '検索・保存',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: context.accentColor,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: 'できます。',
                                 ),
                               ],
                             ),

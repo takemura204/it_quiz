@@ -81,14 +81,10 @@ class _ColorCards extends ConsumerWidget {
                                                 color: Colors.black87),
                                             children: [
                                               TextSpan(
-                                                text: 'プレミアム特典の支払いは一度きり。\n',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                text: 'プレミアム特典を購入すると、\n',
                                               ),
                                               TextSpan(
-                                                text:
-                                                    '購入すると、全てのテーマを、自分好みに変更できます。',
+                                                text: '全てのテーマカラーを、自分好みに変更できます。',
                                               ),
                                             ],
                                           ),

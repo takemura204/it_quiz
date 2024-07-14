@@ -202,7 +202,7 @@ class _QuizCard extends ConsumerWidget {
           showDialog(
               context: context,
               builder: (_) => NeedPremiumModal(
-                    title: '全てのクイズを解放しますか？',
+                    title: '用語・クイズを解放しますか？',
                     imagePath: 'assets/image/premium/premium_content1.png',
                     subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -210,17 +210,33 @@ class _QuizCard extends ConsumerWidget {
                         Expanded(
                           child: RichText(
                             textAlign: TextAlign.center,
-                            text: const TextSpan(
-                              style: TextStyle(color: Colors.black87),
+                            text: TextSpan(
+                              style: const TextStyle(color: Colors.black87),
                               children: [
-                                TextSpan(
-                                  text: 'プレミアム特典の支払いは一度きり。\n',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                const TextSpan(
+                                  text: 'プレミアム特典を購入すると、\n',
                                 ),
                                 TextSpan(
-                                  text: '購入すると、全ての問題・クイズが解放されます。',
+                                  text: '850',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: context.accentColor,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: '以上の用語・クイズが',
+                                ),
+                                TextSpan(
+                                  text: '全て',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: context.accentColor,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: '解放されます。',
                                 ),
                               ],
                             ),

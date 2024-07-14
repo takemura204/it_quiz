@@ -42,13 +42,13 @@ class _Precautions extends HookConsumerWidget {
             '【購入するにあたっての注意事項】',
             style: TextStyle(
               color: Colors.black54,
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
           ),
           RichText(
             text: TextSpan(
-              style: const TextStyle(color: Colors.black54, fontSize: 14),
+              style: const TextStyle(color: Colors.black54, fontSize: 12),
               children: [
                 TextSpan(
                   text: '・本アプリ内での購入は、お使いの$platformStoreNameに請求されます。\n',
