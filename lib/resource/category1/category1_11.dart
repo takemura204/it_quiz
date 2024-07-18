@@ -8,7 +8,7 @@ List<QuizItem> get category1_11 {
     QuizItem(
       word: 'バランススコアカード(BSC)',
       question: 'BSC(Balanced Scorecard)の説明として適切なものはどれか。',
-      ans: '電子商取引のうち企業と消費者で行う取引',
+      ans: '財務，顧客，業務プロセス，学習と成長という視点から行う企業業績の評価手法',
       choices: [
         "一定の時点における資金調達と資金運用の状態を表示する会計報告書",
         "最低の総コストで必要な機能を確実に達成するための分析手法",
@@ -17,7 +17,7 @@ List<QuizItem> get category1_11 {
       ],
       comment:
           "バランススコアカード(BSC)は、企業のビジョンと戦略を実現するために、「財務」「顧客」「業務プロセス」「学習と成長」という4つの視点から業績を評価・分析するためのフレームワーク。",
-      source: '平成27年春期 問18',
+      source: '平成26年秋期 問9',
       importance: QuizImportanceType.high,
     ),
     QuizItem(
