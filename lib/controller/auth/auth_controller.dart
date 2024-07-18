@@ -14,7 +14,7 @@ import 'package:state_notifier/state_notifier.dart';
 import 'auth_state.dart';
 
 final authProvider = StateNotifierProvider<AuthController, AuthState>(
-  (ref) => AuthController(ref: ref),
+      (ref) => AuthController(ref: ref),
 );
 
 class AuthController extends StateNotifier<AuthState> with LocatorMixin {
@@ -41,8 +41,9 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
   final images = ["assets/image/sample_02.jpg", "assets/image/sample_01.jpg"];
 
   @override
-  void initState() {
+  Future initState() async {
     loadAccountData();
+    print({'uid', state.uid});
     super.initState();
   }
 
@@ -54,7 +55,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       final uid = user?.uid;
       if (uid != null) {
         final docSnap =
-            await FirebaseFirestore.instance.collection('users').doc(uid).get();
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
         if (docSnap.exists) {
           final data = docSnap.data();
           state = state.copyWith(
@@ -66,7 +67,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             selectGender: data?['gender'] ?? state.selectGender,
             birthDay: data?['birthDay'] != null
                 ? DateFormat('yyyy-MM-dd')
-                    .format((data?['birthDay'] as Timestamp).toDate())
+                .format((data?['birthDay'] as Timestamp).toDate())
                 : state.birthDay,
           );
         }
@@ -362,7 +363,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       final docRef = users.doc(uid);
       final docSnap = await docRef.get();
       switch (activeType) {
-        //新規登録
+      //新規登録
         case AuthActiveType.signUp:
           if (!docSnap.exists) {
             await docRef.set({
@@ -377,7 +378,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             print("Firestore Save ");
           }
           return state;
-        //ログイン
+      //ログイン
         case AuthActiveType.signIn:
           if (docSnap.exists) {
             await docRef.set({
@@ -390,7 +391,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             print("Firestore Save SignIn");
           }
           return state;
-        //プロフィール更新
+      //プロフィール更新
         case AuthActiveType.changing:
           if (docSnap.exists) {
             // 既存のドキュメントを更新
@@ -403,7 +404,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             print("Firestore Save ProfileChanging");
           }
           return state;
-        //アカウント更新
+      //アカウント更新
         case AuthActiveType.update:
           if (docSnap.exists) {
             // 既存のドキュメントを更新
@@ -415,7 +416,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             print("Firestore Save AccountUpdate");
           }
           return state;
-        //ログアウト
+      //ログアウト
         case AuthActiveType.signOut:
           if (docSnap.exists) {
             // 既存のドキュメントを更新
@@ -427,7 +428,7 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
             print("Firestore Save SignOut");
           }
           return state;
-        //アカウント削除
+      //アカウント削除
         case AuthActiveType.delete:
           if (docSnap.exists) {
             await docRef.set({

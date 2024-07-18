@@ -15,6 +15,7 @@ import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/user/auth_model.dart';
 import '../../view/modals/need_tracking_modal.dart';
 import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
@@ -36,7 +37,7 @@ class MainScreen extends ConsumerWidget {
         .select((s) => s.isShowPremiumDetailScreen));
     final currentTabIndex = ref
         .watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
-
+    final uid = ref.watch(authModelProvider.select((s) => s.uid));
     Future<void>.delayed(Duration.zero, () async {
       //チュートリアルモーダル表示
       if (isShowTutorialModal) {

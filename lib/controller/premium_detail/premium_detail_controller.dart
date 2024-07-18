@@ -47,7 +47,12 @@ class PremiumDetailController extends StateNotifier<PremiumDetailState> {
       await Purchases.getOfferings();
 
       ///firebaseのidと、revenuecatのuserIdを一緒にしている場合、firebaseAuthのuidでログイン
-      final result = await Purchases.logIn(auth.currentUser!.uid);
+      // final uid = auth.currentUser!.uid;
+      final uid = ref.read(authModelProvider).uid;
+
+      print({'initInAppPurchase', uid});
+
+      final result = await Purchases.logIn(uid);
       final customerInfo = result.customerInfo;
       print("result.customerInfo: ${result.customerInfo}");
       await updateIsSubscribed(customerInfo);

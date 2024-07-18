@@ -19,9 +19,11 @@ class _QuizList extends ConsumerWidget {
         SliverToBoxAdapter(
           child: Container(
             color: Colors.white,
-            padding: EdgeInsets.symmetric(
-                horizontal: context.width * 0.02,
-                vertical: context.width * 0.04),
+            padding: EdgeInsets.only(
+                left: context.width * 0.02,
+                right: context.width * 0.02,
+                top: context.width * 0.05,
+                bottom: context.width * 0.02),
             child: historyQuizList.isNotEmpty
                 ? AnimatedShadowButton(
                     width: context.width,
