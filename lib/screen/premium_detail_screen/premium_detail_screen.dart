@@ -8,12 +8,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/premium_detail/premium_detail_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
+import 'package:kentei_quiz/view/button/primary_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../model/lang/initial_resource.dart';
 import '../../view/button/animation_shadow_button.dart';
 import '../../view/button/circle_button.dart';
 import '../../view/loading.dart';
 import '../../view/modals/need_premium_modal.dart';
-import '../screen_argument.dart';
 
 part 'widget/precautions.dart';
 part 'widget/premium_content.dart';
@@ -55,7 +57,7 @@ class PremiumDetailScreen extends ConsumerWidget {
           Scaffold(
             backgroundColor: context.backgroundColor,
             body: const Stack(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.bottomCenter,
               children: [
                 SingleChildScrollView(
                   child: Column(

@@ -10,9 +10,87 @@ class _QuizList extends ConsumerWidget {
     final state = ref.watch(quizModelProvider);
     final quizList =
         state.quizList.where((x) => x.category == category).toList();
+    final historyQuizList =
+        state.historyQuizList.where((x) => x.category == category).toList();
+
     return CustomScrollView(
       controller: ScrollController(),
       slivers: [
+        SliverToBoxAdapter(
+          child: Container(
+            color: Colors.white,
+            padding: EdgeInsets.only(
+                left: context.width * 0.02,
+                right: context.width * 0.02,
+                top: context.width * 0.05,
+                bottom: context.width * 0.02),
+            child: historyQuizList.isNotEmpty
+                ? AnimatedShadowButton(
+                    width: context.width,
+                    height: 65,
+                    title: "前回の続きから",
+                    subtitle: '${historyQuizList.last.title}',
+                    onPressed: () {
+                      final lastQuizId = historyQuizList.last.id;
+                      final index =
+                          quizList.indexWhere((quiz) => quiz.id == lastQuizId);
+
+                      if (index != -1) {
+                        final quiz = quizList[index];
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .setQuizType(QuizStyleType.study);
+                        ref
+                            .read(quizModelProvider.notifier)
+                            .tapQuizIndex(index);
+                        ref
+                            .read(homeQuizScreenProvider.notifier)
+                            .setSelectQuiz(quiz);
+
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                          ),
+                          builder: (_) => StudyModal(quiz: quiz),
+                        );
+                      }
+                    },
+                  )
+                : AnimatedShadowButton(
+                    width: context.width,
+                    height: 65,
+                    title: "はじめる",
+                    subtitle: '${quizList.first.title}',
+                    onPressed: () {
+                      final quiz = quizList.first;
+                      ref
+                          .read(quizModelProvider.notifier)
+                          .setQuizType(QuizStyleType.study);
+                      ref.read(quizModelProvider.notifier).tapQuizIndex(0);
+                      ref
+                          .read(homeQuizScreenProvider.notifier)
+                          .setSelectQuiz(quiz);
+
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
+                        ),
+                        builder: (_) => StudyModal(quiz: quiz),
+                      );
+                    },
+                  ),
+          ),
+        ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
@@ -66,11 +144,18 @@ class _QuizCard extends ConsumerWidget {
                   ref
                       .read(quizModelProvider.notifier)
                       .setQuizType(QuizStyleType.study);
-                  ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
                   ref.read(quizModelProvider.notifier).tapQuizIndex(index);
                   ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
-                  showDialog(
-                      context: context, builder: (_) => StudyModal(quiz: quiz));
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                    ),
+                    builder: (_) => StudyModal(quiz: quiz),
+                  );
                 } else if (target.identify == "homeTarget5") {
                   ref
                       .read(quizModelProvider.notifier)
@@ -104,15 +189,22 @@ class _QuizCard extends ConsumerWidget {
       onTap: () {
         if (isPremium) {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
-          ref.read(quizModelProvider.notifier).tapQuizCard(quiz.id);
           ref.read(quizModelProvider.notifier).tapQuizIndex(index);
           ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
-          showDialog(context: context, builder: (_) => StudyModal(quiz: quiz));
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+            ),
+            builder: (_) => StudyModal(quiz: quiz),
+          );
         } else {
           showDialog(
               context: context,
               builder: (_) => NeedPremiumModal(
-                    title: '全てのクイズを解放しますか？',
+                    title: '用語・クイズを解放しますか？',
                     imagePath: 'assets/image/premium/premium_content1.png',
                     subWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -120,17 +212,33 @@ class _QuizCard extends ConsumerWidget {
                         Expanded(
                           child: RichText(
                             textAlign: TextAlign.center,
-                            text: const TextSpan(
-                              style: TextStyle(color: Colors.black87),
+                            text: TextSpan(
+                              style: const TextStyle(color: Colors.black87),
                               children: [
-                                TextSpan(
-                                  text: 'プレミアム特典の支払いは一度きり。\n',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                const TextSpan(
+                                  text: 'プレミアム特典を購入すると、\n',
                                 ),
                                 TextSpan(
-                                  text: '購入すると、全ての問題・クイズが解放されます。',
+                                  text: '850',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: context.accentColor,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: '以上の用語・クイズが',
+                                ),
+                                TextSpan(
+                                  text: '全て',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: context.accentColor,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: '解放されます。',
                                 ),
                               ],
                             ),
@@ -160,7 +268,6 @@ class _QuizCard extends ConsumerWidget {
             ///タイトル
             _Title(quiz: quiz, correctRate: correctRate),
             const Spacer(),
-
             if (isPremium)
               Card(
                 elevation: 0,
@@ -168,7 +275,6 @@ class _QuizCard extends ConsumerWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    // 全ての辺に一様なボーダーを適用
                     border: Border.all(
                       color: context.secondColor,
                       width: 1.5,
@@ -260,9 +366,9 @@ class _Title extends ConsumerWidget {
       children: [
         Text(
           quiz.title,
-          style: context.texts.titleMedium,
+          style: context.texts.titleSmall,
         ),
-        const Gap(3),
+        const Gap(5),
         Text(
           isPremium ? I18n().quizCorrectRate(correctRate) : '追加購入で解放',
           style: context.texts.bodyMedium,

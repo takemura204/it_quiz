@@ -46,6 +46,12 @@ class I18n {
 
   int get category0Index => 0;
 
+  int get category0_1Index => 1000;
+
+  int get category0_2Index => 2000;
+
+  int get category0_3Index => 3000;
+
   int get category1Index => 10000;
 
   int get category2Index => 20000;
@@ -111,7 +117,7 @@ class I18n {
   String get buttonUnKnow => "知らない";
 
   ///URL
-  String get contactUrl => 'https://forms.gle/wLbnrn1ovwUDYoRv5';
+  String get contactUrl => 'https://forms.gle/tt9kz7qFJRsBGtT47';
 
   ///利用規約
   String get termsUrl =>
@@ -154,6 +160,21 @@ class I18n {
         return caseHideText8;
       default:
         return caseHideText9;
+    }
+  }
+
+  String quizImportanceText(QuizImportanceType importanceType) {
+    switch (importanceType) {
+      case QuizImportanceType.none:
+        return '☆☆☆';
+      case QuizImportanceType.low:
+        return '★☆☆';
+      case QuizImportanceType.normal:
+        return '★★☆';
+      case QuizImportanceType.high:
+        return '★★★';
+      default:
+        return '';
     }
   }
 

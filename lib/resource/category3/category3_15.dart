@@ -5,6 +5,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category3_15 {
   final quizItems = [
     QuizItem(
+      word: 'HTML5',
       question: 'ウェブページの構造を定義するためのマークアップ言語の最新規格は何か？',
       ans: 'HTML5',
       choices: ["HTML5", "JPEG", "PDF", "ZIP"],
@@ -12,21 +13,32 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      question: '音声ファイルを圧縮するために広く使用されるフォーマットは何か？',
-      ans: 'MP3',
-      choices: ["MP3", "MIDI", "WAV", "AAC"],
-      comment: "MP3は、音声ファイルを圧縮するために広く使用されるフォーマットで、音楽ファイルの配信や共有によく用いられる。",
-      importance: QuizImportanceType.normal,
-    ),
-    QuizItem(
-      question: '音楽の演奏情報をコンピュータで扱うための規格は何か？',
-      ans: 'MIDI',
-      choices: ["MIDI", "MP3", "WAV", "AAC"],
+      word: 'MP3(Mpeg Audio Layer-3)',
+      question: 'マルチメディアのファイル形式であるMP3はどれか。',
+      ans: '音声データのためのファイル圧縮形式',
+      choices: [
+        "G4ファクシミリ通信データのためのファイル圧縮形式",
+        "音声データのためのファイル圧縮形式",
+        "カラー画像データのためのファイル圧縮形式",
+        "デジタル動画データのためのファイル圧縮形式"
+      ],
       comment:
-          "MIDI（Musical Instrument Digital Interface）は、音楽の演奏情報をコンピュータで扱うための規格で、電子楽器間の通信や制御に用いられる。",
+          "MP3(Mpeg Audio Layer-3)は、MPEG-1という動画圧縮形式で使われる不可逆音声圧縮方式の一つです。音声の圧縮方式では現在もっとも普及していている。",
+      source: '平成21年春期 問78',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'MIDI(Musical Instrument Digital Interface)',
+      question: 'シンセサイザなどの電子楽器とPCを接続して演奏情報をやり取りするための規格はどれか。',
+      ans: 'MIDI',
+      choices: ["AVI", "BMP", "MIDI", "MP3"],
+      comment:
+          "MIDI(Musical Instrument Digital Interface)は、コンピュータやシンセサイザなどの電子楽器の間で、演奏情報や制御情報をデジタル形式でやり取りするための世界共通規格。",
+      source: '平成24年春期 問64',
+      importance: QuizImportanceType.normal,
+    ),
+    QuizItem(
+      word: 'JPEG',
       question: 'デジタル画像を保存するための一般的なファイルフォーマットは何か？',
       ans: 'JPEG',
       choices: ["JPEG", "GIF", "PNG", "BMP"],
@@ -34,6 +46,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'GIF（Graphics Interchange Format）',
       question: 'アニメーションや透明度をサポートする画像フォーマットは何か？',
       ans: 'GIF',
       choices: ["GIF", "JPEG", "PNG", "BMP"],
@@ -42,6 +55,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'PNG（Portable Network Graphics）',
       question: '画像の品質を落とさずに効率的に圧縮できるファイルフォーマットは何か？',
       ans: 'PNG',
       choices: ["PNG", "JPEG", "GIF", "BMP"],
@@ -50,6 +64,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'BMP（Bitmap Image File）',
       question: 'Windows環境で広く使用されるビットマップ画像フォーマットは何か？',
       ans: 'BMP',
       choices: ["BMP", "JPEG", "PNG", "GIF"],
@@ -58,14 +73,17 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.none,
     ),
     QuizItem(
+      word: 'MPEG（Moving Picture Experts Group）',
       question: '動画や音声の圧縮に用いられる標準的なフォーマットは何か？',
       ans: 'MPEG',
-      choices: ["MPEG", "MP3", "AVI", "MOV"],
+      choices: ["BMP", "GIF", "JPEG", "MPEG"],
       comment:
-          "MPEG（Moving Picture Experts Group）は、動画や音声の圧縮に用いられる標準的なフォーマットで、複数の規格がある。",
+          "MPEG（Moving Picture Experts Group）は、カラー動画像の圧縮フォーマットで、映像データや音声データの圧縮方式のMPEG1、MPEG2、MPEG4、MPEG7などの規格がある。",
+      source: '平成25年春期 問79',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'PDF（Portable Document Format）',
       question: '電子文書を保存するために用いられるファイルフォーマットで、元のレイアウトを保持できるものは何か？',
       ans: 'PDF',
       choices: ["PDF", "DOC", "XLS", "PPT"],
@@ -74,6 +92,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ZIP',
       question: '複数のファイルやフォルダを一つのファイルに圧縮してまとめるファイルフォーマットは何か？',
       ans: 'ZIP',
       choices: ["ZIP", "RAR", "7z", "TAR"],
@@ -82,14 +101,22 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      question: 'リアルタイムで音声や映像データをインターネット上で配信し、ダウンロード完了を待たずに内容を視聴できる技術は何か？',
-      ans: 'ストリーミング',
-      choices: ["ストリーミング", "エンコード", "デコード", "DRM"],
+      word: 'ストリーミング',
+      question: 'ストリーミングを利用した動画配信の特徴に関する記述のうち，適切なものはどれか。',
+      ans: '動画のデータが全てダウンロードされるのを待たず，一部を読み込んだ段階で再生が始まる。',
+      choices: [
+        "サーバに配信データをあらかじめ保持していることが必須であり，イベントやスポーツなどを撮影しながらその映像を配信することはできない。",
+        "受信データの部分的な欠落による画質の悪化を完全に排除することが可能である。",
+        "動画再生の開始に準備時間を必要としないので，瞬時に動画の視聴を開始できる。",
+        "動画のデータが全てダウンロードされるのを待たず，一部を読み込んだ段階で再生が始まる。"
+      ],
       comment:
           "ストリーミングは、音声や映像データをリアルタイムでインターネット上に配信し、ユーザーがダウンロード完了を待たずに内容を視聴できるようにする技術。",
+      source: '平成27年春期 問76',
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'エンコード',
       question: 'データを特定の形式や規格に変換するプロセスは何と呼ばれるか？',
       ans: 'エンコード',
       choices: ["エンコード", "デコード", "ストリーミング", "DRM"],
@@ -97,6 +124,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'デコード',
       question: 'エンコードされたデータを元の形式に戻すプロセスは何と呼ばれるか？',
       ans: 'デコード',
       choices: ["デコード", "エンコード", "ストリーミング", "CPRM"],
@@ -104,6 +132,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'DRM（Digital Rights Management）',
       question: 'デジタルコンテンツの著作権保護を目的とした技術や制度は何と呼ばれるか？',
       ans: 'DRM',
       choices: ["DRM", "CPRM", "エンコード", "デコード"],
@@ -111,6 +140,7 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'CPRM（Content Protection for Recordable Media）',
       question: '特にデジタル放送の録画コンテンツに適用される著作権保護技術は何か？',
       ans: 'CPRM',
       choices: ["CPRM", "DRM", "エンコード", "デコード"],
@@ -119,13 +149,15 @@ List<QuizItem> get category3_15 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '可逆圧縮',
       question: 'データを圧縮した後にも元のデータを完全に復元できる圧縮方式は何か？',
       ans: '可逆圧縮',
       choices: ["可逆圧縮", "非可逆圧縮", "レス圧縮", "ロス圧縮"],
-      comment: "可逆圧縮（ロスレス圧縮）は、データを圧縮した後にも元のデータを完全に復元できる圧縮方式。",
+      comment: "可逆圧縮は、データを圧縮した後にも元のデータを完全に復元できる圧縮方式。",
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '非可逆圧縮',
       question: '圧縮時にある程度のデータを失うが、ファイルサイズを大幅に削減できる圧縮方式は何か？',
       ans: '非可逆圧縮',
       choices: ["非可逆圧縮", "可逆圧縮", "レス圧縮", "ロスレス圧縮"],

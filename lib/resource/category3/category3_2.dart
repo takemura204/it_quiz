@@ -5,6 +5,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category3_2 {
   final quizItems = [
     QuizItem(
+      word: '演繹推論',
       question: '一般的な法則から特定の事実や結論を導く論理的推論方法は何か？',
       ans: '演繹推論',
       choices: ["演繹推論", "帰納推論", "アブダクション推論", "類推推論"],
@@ -12,6 +13,7 @@ List<QuizItem> get category3_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '帰納推論',
       question: '特定の観察や事実から一般的な法則やルールを導き出す推論方法は何か？',
       ans: '帰納推論',
       choices: ["帰納推論", "演繹推論", "アブダクション推論", "類推推論"],
@@ -19,6 +21,7 @@ List<QuizItem> get category3_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '機械学習',
       question: 'データからパターンを学習し、新しいデータに対して予測や判断を行うための技術は何か？',
       ans: '機械学習',
       choices: ["機械学習", "人工知能", "データマイニング", "統計学"],
@@ -26,6 +29,7 @@ List<QuizItem> get category3_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ニューラルネット',
       question: '複数の層を持ち、人間の脳のニューロンのネットワークを模倣した計算モデルは何か？',
       ans: 'ニューラルネット',
       choices: ["ニューラルネット", "決定木", "サポートベクターマシン", "ランダムフォレスト"],
@@ -33,6 +37,7 @@ List<QuizItem> get category3_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ワークバックプロパゲーション',
       question: 'ニューラルネットワークにおいて、出力層の誤差を入力層に向かって逆伝播させることで重みを更新する学習アルゴリズムは何か？',
       ans: 'ワークバックプロパゲーション',
       choices: ["ワークバックプロパゲーション", "勾配降下法", "確率的勾配降下法", "最急降下法"],
@@ -40,6 +45,7 @@ List<QuizItem> get category3_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '活性化関数',
       question: 'ニューラルネットワークの各ノードで、入力信号の総和を出力信号に変換するために用いられる関数は何か？',
       ans: '活性化関数',
       choices: ["活性化関数", "損失関数", "最適化関数", "伝達関数"],
@@ -47,6 +53,7 @@ List<QuizItem> get category3_2 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ディープラーニング',
       question: '複数の隠れ層を持つニューラルネットワークを用いた学習方法で、複雑なパターンや特徴を抽出できる技術は何か？',
       ans: 'ディープラーニング',
       choices: ["ディープラーニング", "強化学習", "教師あり学習", "教師なし学習"],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
@@ -36,17 +35,25 @@ class SaveIconButton extends HookConsumerWidget {
             Text(
               "保存",
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 9,
                 fontWeight: FontWeight.bold,
-                color: quizItem.isSaved ? context.mainColor : Colors.black26,
+                color:
+                    quizItem.isSaved ? context.mainColor : Colors.grey.shade500,
+                height: 0.1,
               ),
             ),
-          Icon(
-            quizItem.isSaved ? Icons.bookmark_sharp : LineIcons.bookmark,
-            size: size,
-            color: quizItem.isSaved ? context.mainColor : Colors.black26,
+          Container(
+            height: size,
+            width: size,
+            padding: EdgeInsets.zero,
+            margin: EdgeInsets.zero,
+            child: Icon(
+              quizItem.isSaved ? Icons.bookmark_sharp : LineIcons.bookmark,
+              size: size * 0.9,
+              color:
+                  quizItem.isSaved ? context.mainColor : Colors.grey.shade500,
+            ),
           ),
-          Gap(context.height * 0.01),
         ],
       ),
     );

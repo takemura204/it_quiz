@@ -6,6 +6,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category1_18 {
   final quizItems = [
     QuizItem(
+      word: 'エンタープライズサーチ',
       question: '企業内の様々な情報源から情報を検索し、アクセス可能にするシステムを何というか？',
       ans: 'エンタープライズサーチ',
       choices: ["エンタープライズサーチ", "グループウェア", "RPA", "SNS"],
@@ -14,14 +15,21 @@ List<QuizItem> get category1_18 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      question: '企業全体のITアーキテクチャを計画し、組織全体のビジネスとITの整合性を高める取り組みを何というか？',
-      ans: 'EA',
-      choices: ["EA", "DFD", "BPMN", "BPR"],
+      word: 'EA（Enterprise Architecture）',
+      question: 'エンタープライズアーキテクチャ(EA)の説明として，最も適切なものはどれか。',
+      ans: '現状の業務と情報システムの全体像を可視化し，将来のあるべき姿を設定して，全体最適化を行うためのフレームワーク',
+      choices: [
+        "企業の情報システムにおいて，起こり得るトラブルを想定して，その社会的影響などを最小限に食い止めるための対策",
+        "現状の業務と情報システムの全体像を可視化し，将来のあるべき姿を設定して，全体最適化を行うためのフレームワーク",
+        "コスト，品質，サービス，スピードを革新的に改善するために，ビジネス・プロセスを考え直し，抜本的にデザインし直す取組み",
+        "ソフトウェアをサービスと呼ばれる業務機能上の単位で部品化し，それらを組み合わせてシステムを柔軟に構築する仕組み"
+      ],
       comment:
-          "EA（Enterprise Architecture）は、企業全体のITアーキテクチャを戦略的に計画し、組織全体でのビジネスとITの整合性を高め、効率化を図る取り組み。",
+          "EA（Enterprise Architecture）は、社会環境や情報技術の変化に素早く対応できるよう「全体最適」の観点から業務やシステムを改善するフレームワーク。",
       importance: QuizImportanceType.normal,
     ),
     QuizItem(
+      word: 'SoR',
       question: '主に安定した運用が求められる既存の業務システムを指す言葉は何か？',
       ans: 'SoR',
       choices: ["SoR", "SoE", "RPA", "BPM"],
@@ -30,6 +38,7 @@ List<QuizItem> get category1_18 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'SoE',
       question: '革新的なビジネスモデルや顧客体験を提供するための新しいITシステムを指す言葉は何か？',
       ans: 'SoE',
       choices: ["SoR", "SoE", "RPA", "エンタープライズサーチ"],

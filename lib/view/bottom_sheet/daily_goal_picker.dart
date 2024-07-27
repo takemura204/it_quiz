@@ -112,7 +112,7 @@ class DailyGoalPicker extends ConsumerWidget {
           PrimaryButton(
               width: context.width * 0.85,
               height: 60,
-              text: "設定する",
+              title: "設定する",
               onPressed: () {
                 final selectedQuizCountGoal =
                     ref.read(homeSettingProvider).selectedQuizCountGoal;

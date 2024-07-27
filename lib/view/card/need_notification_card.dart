@@ -22,8 +22,9 @@ class NeedNotificationCard extends ConsumerWidget {
     final selectedHour = userCustom.selectNotificationTime?.hour ?? defaultHour;
     final selectedMinute =
         userCustom.selectNotificationTime?.minute ?? defaultMinute;
-    final isNotification =
-        ref.watch(settingNotificationProvider.select((s) => s.isNotification));
+    final isNotification = ref.watch(
+            settingNotificationProvider.select((s) => s.isNotification)) ??
+        true;
 
     const imagePath = 'assets/image/need_setting_notification.svg';
 
@@ -35,9 +36,7 @@ class NeedNotificationCard extends ConsumerWidget {
                   .read(settingNotificationProvider.notifier)
                   .checkNotificationPermission()
                   .then((value) {
-                if (!isNotification) {
-                  openAppSettings();
-                } else {
+                if (isNotification) {
                   showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {
@@ -62,6 +61,8 @@ class NeedNotificationCard extends ConsumerWidget {
                           },
                         );
                       });
+                } else {
+                  openAppSettings();
                 }
               });
               HapticFeedback.lightImpact();
@@ -100,7 +101,7 @@ class NeedNotificationCard extends ConsumerWidget {
                             ),
                             Gap(5),
                             Text(
-                              '通知をONにすると、あなたに合わせた\nおすすめのクイズを毎日送信します。',
+                              '通知をONにすると、あなたに合わせた\nおすすめのクイズが指定した時間に届きます。',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,

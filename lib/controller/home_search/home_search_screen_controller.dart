@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 
-import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import 'home_search_screen_state.dart';
 
@@ -16,23 +15,18 @@ final homeSearchScreenProvider =
 class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
   HomeSearchScreenController({required this.ref})
       : super(HomeSearchScreenState()) {
-    _initState();
+    initState();
   }
 
   final Ref ref;
   final textEditingController = TextEditingController();
   final scrollController = ScrollController();
 
-  Future _initState() async {
+  Future initState() async {
     setIsLoading(true);
-    ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
-      if (quizzes.isLoading) {
-        await Future.wait([
-          _initFilterQuiz(),
-        ]);
-        setIsLoading(false);
-      }
-    });
+    _initFilterQuiz();
+    await Future.wait([]);
+    setIsLoading(false);
     scrollController.addListener(_scrollListener);
   }
 
@@ -109,25 +103,48 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     }
   }
 
-  void tapSavedButton(QuizItem quizItem) {
-    // quizItemの答えに基づいて一致するすべてのアイテムを更新
-    final updatedQuizItems = state.filteredQuizItemList.map((item) {
-      if (item.ans == quizItem.ans) {
-        // isSavedを反転させる
-        return item.copyWith(isSaved: !item.isSaved);
-      }
-      return item; // 一致しない場合は元のアイテムをそのまま返す
-    }).toList();
+  void tapSaveButton(int index) {
+    final quizItemList = [...state.filteredQuizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: quizItemList[index].isWeak,
+      status: quizItemList[index].status,
+      isSaved: !quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
+    );
+    state = state.copyWith(filteredQuizItemList: quizItemList);
 
-    // 更新したリストで状態を更新
-    state = state.copyWith(filteredQuizItemList: updatedQuizItems);
+    ref.read(quizModelProvider.notifier).updateQuizItem(quizItemList[index]);
+  }
 
-    // すべての変更されたアイテムに対して更新処理を呼び出す
-    updatedQuizItems
-        .where((item) => item.ans == quizItem.ans)
-        .forEach((updatedItem) {
-      ref.read(quizModelProvider.notifier).updateSavedQuiz(updatedItem);
-    });
+  void tapCheckButton(int index) {
+    final quizItemList = [...state.filteredQuizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: !quizItemList[index].isWeak,
+      status: quizItemList[index].status,
+      isSaved: quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
+    );
+    state = state.copyWith(filteredQuizItemList: quizItemList);
+
+    ref.read(quizModelProvider.notifier).updateQuizItem(quizItemList[index]);
   }
 
   ///onChanged

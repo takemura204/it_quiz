@@ -28,7 +28,7 @@ class _QuizResultView extends ConsumerWidget {
               'クイズ一覧',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 14,
               ),
             ),
           ),
@@ -39,11 +39,16 @@ class _QuizResultView extends ConsumerWidget {
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
             return QuizItemCard(
+              index: index,
               quizItem: quizItemList[index],
               studyType: StudyType.choice,
-              onTap: () {
+              onTapCheckButton: () {
                 ref.read(quizChoiceScreenProvider.notifier).tapCheckBox(index);
-                HapticFeedback.lightImpact();
+              },
+              onTapSaveButton: () {
+                ref
+                    .read(quizChoiceScreenProvider.notifier)
+                    .tapSaveButton(index);
               },
             );
           },
@@ -104,7 +109,7 @@ class _NextActionCard extends HookConsumerWidget {
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,
-                  text: "完了",
+                  title: "完了",
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -113,7 +118,7 @@ class _NextActionCard extends HookConsumerWidget {
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,
-                  text: "次のクイズに挑戦",
+                  title: "次のクイズに挑戦",
                   onPressed: (quizIndex >= lastIndex)
                       ? null
                       : () {

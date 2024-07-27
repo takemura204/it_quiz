@@ -21,10 +21,12 @@ QuizItem _$QuizItemFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$QuizItem {
   int get quizId => throw _privateConstructorUsedError; //問題番号
+  String get word => throw _privateConstructorUsedError; //単語
+  String get comment => throw _privateConstructorUsedError; //解説
   String get question => throw _privateConstructorUsedError; //問題文
   String get ans => throw _privateConstructorUsedError; //答え
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
-  String get comment => throw _privateConstructorUsedError; //解説
+  String get source => throw _privateConstructorUsedError; //出典
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
   QuizStatusType get status => throw _privateConstructorUsedError; //クイズの状態
   QuizImportanceType get importance => throw _privateConstructorUsedError; //重要度
@@ -45,10 +47,12 @@ abstract class $QuizItemCopyWith<$Res> {
   @useResult
   $Res call(
       {int quizId,
+      String word,
+      String comment,
       String question,
       String ans,
       List<String> choices,
-      String comment,
+      String source,
       bool isWeak,
       QuizStatusType status,
       QuizImportanceType importance,
@@ -71,10 +75,12 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
   @override
   $Res call({
     Object? quizId = null,
+    Object? word = null,
+    Object? comment = null,
     Object? question = null,
     Object? ans = null,
     Object? choices = null,
-    Object? comment = null,
+    Object? source = null,
     Object? isWeak = null,
     Object? status = null,
     Object? importance = null,
@@ -87,6 +93,14 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.quizId
           : quizId // ignore: cast_nullable_to_non_nullable
               as int,
+      word: null == word
+          ? _value.word
+          : word // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String,
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -99,9 +113,9 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      source: null == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
               as String,
       isWeak: null == isWeak
           ? _value.isWeak
@@ -140,10 +154,12 @@ abstract class _$$_QuizItemCopyWith<$Res> implements $QuizItemCopyWith<$Res> {
   @useResult
   $Res call(
       {int quizId,
+      String word,
+      String comment,
       String question,
       String ans,
       List<String> choices,
-      String comment,
+      String source,
       bool isWeak,
       QuizStatusType status,
       QuizImportanceType importance,
@@ -164,10 +180,12 @@ class __$$_QuizItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? quizId = null,
+    Object? word = null,
+    Object? comment = null,
     Object? question = null,
     Object? ans = null,
     Object? choices = null,
-    Object? comment = null,
+    Object? source = null,
     Object? isWeak = null,
     Object? status = null,
     Object? importance = null,
@@ -180,6 +198,14 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.quizId
           : quizId // ignore: cast_nullable_to_non_nullable
               as int,
+      word: null == word
+          ? _value.word
+          : word // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String,
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -192,9 +218,9 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value._choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      source: null == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
               as String,
       isWeak: null == isWeak
           ? _value.isWeak
@@ -229,10 +255,12 @@ class __$$_QuizItemCopyWithImpl<$Res>
 class _$_QuizItem extends _QuizItem {
   _$_QuizItem(
       {this.quizId = 0,
-      required this.question,
-      required this.ans,
-      required final List<String> choices,
-      required this.comment,
+      this.word = '',
+      this.comment = '',
+      this.question = '',
+      this.ans = '',
+      final List<String> choices = const [],
+      this.source = '',
       this.isWeak = false,
       this.status = QuizStatusType.unlearned,
       this.importance = QuizImportanceType.normal,
@@ -250,14 +278,25 @@ class _$_QuizItem extends _QuizItem {
   final int quizId;
 //問題番号
   @override
+  @JsonKey()
+  final String word;
+//単語
+  @override
+  @JsonKey()
+  final String comment;
+//解説
+  @override
+  @JsonKey()
   final String question;
 //問題文
   @override
+  @JsonKey()
   final String ans;
 //答え
   final List<String> _choices;
 //答え
   @override
+  @JsonKey()
   List<String> get choices {
     if (_choices is EqualUnmodifiableListView) return _choices;
     // ignore: implicit_dynamic_type
@@ -266,8 +305,9 @@ class _$_QuizItem extends _QuizItem {
 
 //選択肢
   @override
-  final String comment;
-//解説
+  @JsonKey()
+  final String source;
+//出典
   @override
   @JsonKey()
   final bool isWeak;
@@ -294,7 +334,7 @@ class _$_QuizItem extends _QuizItem {
 
   @override
   String toString() {
-    return 'QuizItem(quizId: $quizId, question: $question, ans: $ans, choices: $choices, comment: $comment, isWeak: $isWeak, status: $status, importance: $importance, isSaved: $isSaved, lapIndex: $lapIndex, isPremium: $isPremium)';
+    return 'QuizItem(quizId: $quizId, word: $word, comment: $comment, question: $question, ans: $ans, choices: $choices, source: $source, isWeak: $isWeak, status: $status, importance: $importance, isSaved: $isSaved, lapIndex: $lapIndex, isPremium: $isPremium)';
   }
 
   @override
@@ -303,11 +343,13 @@ class _$_QuizItem extends _QuizItem {
         (other.runtimeType == runtimeType &&
             other is _$_QuizItem &&
             (identical(other.quizId, quizId) || other.quizId == quizId) &&
+            (identical(other.word, word) || other.word == word) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.ans, ans) || other.ans == ans) &&
             const DeepCollectionEquality().equals(other._choices, _choices) &&
-            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.source, source) || other.source == source) &&
             (identical(other.isWeak, isWeak) || other.isWeak == isWeak) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.importance, importance) ||
@@ -324,10 +366,12 @@ class _$_QuizItem extends _QuizItem {
   int get hashCode => Object.hash(
       runtimeType,
       quizId,
+      word,
+      comment,
       question,
       ans,
       const DeepCollectionEquality().hash(_choices),
-      comment,
+      source,
       isWeak,
       status,
       importance,
@@ -352,10 +396,12 @@ class _$_QuizItem extends _QuizItem {
 abstract class _QuizItem extends QuizItem {
   factory _QuizItem(
       {final int quizId,
-      required final String question,
-      required final String ans,
-      required final List<String> choices,
-      required final String comment,
+      final String word,
+      final String comment,
+      final String question,
+      final String ans,
+      final List<String> choices,
+      final String source,
       final bool isWeak,
       final QuizStatusType status,
       final QuizImportanceType importance,
@@ -369,14 +415,18 @@ abstract class _QuizItem extends QuizItem {
   @override
   int get quizId;
   @override //問題番号
+  String get word;
+  @override //単語
+  String get comment;
+  @override //解説
   String get question;
   @override //問題文
   String get ans;
   @override //答え
   List<String> get choices;
   @override //選択肢
-  String get comment;
-  @override //解説
+  String get source;
+  @override //出典
   bool get isWeak;
   @override //苦手か？
   QuizStatusType get status;

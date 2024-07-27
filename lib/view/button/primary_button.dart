@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
@@ -7,14 +8,16 @@ class PrimaryButton extends ConsumerWidget {
   const PrimaryButton({
     required this.width,
     required this.height,
-    required this.text,
-    required this.onPressed,
+    required this.title,
+    this.subTitle,
     this.icon,
+    required this.onPressed,
   });
 
   final double width;
   final double height;
-  final String text;
+  final String title;
+  final String? subTitle;
   final VoidCallback? onPressed;
   final IconData? icon;
 
@@ -35,27 +38,44 @@ class PrimaryButton extends ConsumerWidget {
             ),
           ),
         ),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
-            if (icon != null)
-              Icon(
-                icon,
-                color: Colors.white,
-                size: height * 0.6,
-              ),
-            SizedBox(width: icon != null ? 6.0 : 0),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: height <= 5 ? 14 : 16,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(),
+                if (icon != null)
+                  Icon(
+                    icon,
+                    color: Colors.white,
+                    size: height * 0.6,
+                  ),
+                SizedBox(width: icon != null ? 6.0 : 0),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: height <= 5 ? 14 : 16,
+                  ),
+                ),
+                const Spacer(),
+              ],
             ),
-            const Spacer(),
+            if (subTitle != null) ...[
+              const Gap(2),
+              Text(
+                subTitle!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                  fontSize: height <= 5 ? 10 : 12,
+                ),
+              ),
+            ]
           ],
         ),
         onPressed: onPressed == null

@@ -12,7 +12,7 @@ class _PremiumContentList extends StatelessWidget {
         const Text(
           "＼　特典たくさん　／",
           style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87),
+              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black54),
         ),
         const Gap(1),
         Stack(
@@ -52,7 +52,23 @@ class _PremiumContentList extends StatelessWidget {
                 ),
               ),
               const TextSpan(
-                text: '以上の用語・クイズを解放！',
+                text: '以上の用語・クイズを',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              TextSpan(
+                text: '全て',
+                style: TextStyle(
+                  color: context.accentColor,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const TextSpan(
+                text: '解放！',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -61,7 +77,7 @@ class _PremiumContentList extends StatelessWidget {
               ),
             ],
           ),
-          titleLength: 255,
+          titleLength: 320,
           description: const TextSpan(
             children: [
               TextSpan(
@@ -184,7 +200,7 @@ class _PremiumContentList extends StatelessWidget {
                 ),
               ),
               const TextSpan(
-                text: 'が見える化！',
+                text: 'がもっと見える化！',
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 15,
@@ -193,7 +209,7 @@ class _PremiumContentList extends StatelessWidget {
               ),
             ],
           ),
-          titleLength: 200,
+          titleLength: 240,
           description: const TextSpan(
             children: [
               TextSpan(
@@ -254,7 +270,7 @@ class _PremiumContentList extends StatelessWidget {
                 ),
               ),
               const TextSpan(
-                text: 'を簡単に把握！',
+                text: 'をかんたんに把握！',
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 15,
@@ -263,7 +279,7 @@ class _PremiumContentList extends StatelessWidget {
               ),
             ],
           ),
-          titleLength: 220,
+          titleLength: 250,
           description: const TextSpan(
             children: [
               TextSpan(

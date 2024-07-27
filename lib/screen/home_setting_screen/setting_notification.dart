@@ -18,7 +18,7 @@ class _SettingNotification extends ConsumerWidget {
       title: "リマインダー",
       icon: LineIcons.stopwatch,
       customWidget: Text(
-        isNotification
+        isNotification != null && isNotification
             ? '$selectedHour:${selectedMinute.toString().padLeft(2, '0')}'
             : '許可しない',
         style: const TextStyle(
@@ -31,9 +31,7 @@ class _SettingNotification extends ConsumerWidget {
             .read(settingNotificationProvider.notifier)
             .checkNotificationPermission()
             .then((value) {
-          if (!isNotification) {
-            openAppSettings();
-          } else {
+          if (isNotification != null && isNotification) {
             showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
@@ -58,6 +56,8 @@ class _SettingNotification extends ConsumerWidget {
                     },
                   );
                 });
+          } else {
+            openAppSettings();
           }
         });
       },

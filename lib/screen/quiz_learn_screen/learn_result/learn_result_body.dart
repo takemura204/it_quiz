@@ -15,6 +15,7 @@ class _LearnResultBody extends ConsumerWidget {
         ref.read(tutorialControllerProvider.notifier).learnResultTarget1;
     final isShowLearnResultTutorial = ref.read(
         tutorialControllerProvider.select((s) => s.isShowLearnResultTutorial));
+
     Future<void>.delayed(Duration.zero, () async {
       if (isShowLearnResultTutorial) {
         ref
@@ -26,10 +27,6 @@ class _LearnResultBody extends ConsumerWidget {
                 context: context,
                 onClickTarget: (target) {
                   HapticFeedback.lightImpact();
-                  if (target.identify == "learnResultTarget1") {
-                  } else if (target.identify == "learnResultTarget2") {
-                    Future.delayed(const Duration(milliseconds: 1500), () {});
-                  }
                 },
                 onFinish: () {
                   Navigator.pop(context);
@@ -38,9 +35,13 @@ class _LearnResultBody extends ConsumerWidget {
                       .updateHistoryQuiz();
 
                   ref.read(quizLearnScreenProvider.notifier).tapClearButton();
+
                   ref
                       .read(tutorialControllerProvider.notifier)
                       .setIsTutorialRestart(false);
+                  ref
+                      .read(mainScreenControllerProvider.notifier)
+                      .setIsShowPremiumDetailScreen(true);
                 },
               );
         });

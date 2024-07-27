@@ -26,6 +26,7 @@ class AuthModel extends StateNotifier<Auth> with LocatorMixin {
     _createUserData().then((x) {
       _loadUserData();
     });
+
     // _resetData();
     super.initState();
   }
@@ -43,7 +44,10 @@ class AuthModel extends StateNotifier<Auth> with LocatorMixin {
           state = state.copyWith(uid: uid);
           await _saveDevice(); // デバイスにUIDを保存
         }
+      } else {
+        state = state.copyWith(uid: uid);
       }
+      print({'uid:', state.uid});
     } catch (e) {
       print("Firebase Auth Error: $e");
     }

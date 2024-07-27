@@ -82,7 +82,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                       PrimaryButton(
                         width: context.width * 0.8,
                         height: context.height * 0.07,
-                        text: '新規登録',
+                        title: '新規登録',
                         onPressed: (isValidEmail && isSafetyPass) && !isNotTap
                             ? () {
                                 ref.read(authProvider.notifier).switchTap();

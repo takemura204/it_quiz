@@ -5,6 +5,7 @@ import '../../untils/enums.dart';
 List<QuizItem> get category1_17 {
   final quizItems = [
     QuizItem(
+      word: 'IoT',
       question: '様々なデバイスがインターネットに接続され、相互に通信することで情報を共有し、新たな価値を生み出す技術の総称は何か？',
       ans: 'IoT',
       choices: ["IoT", "クラウドソーシング", "コネクテッドカー", "マルチデバイス"],
@@ -13,6 +14,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ドローン',
       question: '遠隔操作や自律飛行が可能な小型の無人航空機を何というか？',
       ans: 'ドローン',
       choices: ["ジャイロマスター", "ドローン", "コネクテッドカー", "自動運転"],
@@ -20,6 +22,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'コネクテッドカー',
       question: 'インターネットや通信ネットワークに接続され、情報の共有や遠隔制御が可能な自動車を何というか？',
       ans: 'コネクテッドカー',
       choices: ["シェアリングカー", "コネクテッドカー", "自動運転", "CASE"],
@@ -28,6 +31,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: '自動運転',
       question: '運転者の操作なしで目的地まで移動できる自動車の技術を何というか？',
       ans: '自動運転',
       choices: ["先進運転支援システム", "自動運転", "CASE", "ADSモジュール"],
@@ -36,6 +40,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'CASE',
       question: 'コネクテッド、自動運転、シェアリング、電動化を指す自動車産業の新たなトレンドを何というか？',
       ans: 'CASE',
       choices: ["自動運転", "CASE", "MaaS", "ワイヤレス給電"],
@@ -44,6 +49,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'MaaS',
       question: '様々な交通手段を統合的に利用し、最適な移動サービスを提供するコンセプトは何か？',
       ans: 'MaaS',
       choices: ["CASE", "MaaS", "ワイヤレス給電", "公共交通計画"],
@@ -52,6 +58,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ワイヤレス給電',
       question: 'ケーブルやプラグを使用せずに電力を供給する技術は何か？',
       ans: 'ワイヤレス給電',
       choices: ["ケーブルレス供給", "ワイヤレス給電", "クラウドサービス", "スマートファクトリー"],
@@ -60,6 +67,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'クラウドサービス',
       question: 'インターネットを利用して提供される、サーバーやストレージなどのITリソースを何というか？',
       ans: 'クラウドサービス',
       choices: ["ワイヤレス給電", "クラウドサービス", "スマートファクトリー", "スマート農業"],
@@ -68,6 +76,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'スマートファクトリー',
       question: '高度な情報技術を導入し、製造プロセスの自動化と最適化を図る現代的な工場を何というか？',
       ans: 'スマートファクトリー',
       choices: ["クラウドサービス", "スマートファクトリー", "スマート農業", "マシンビジョン"],
@@ -76,6 +85,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'スマート農業',
       question: '情報技術を農業に導入し、生産性の向上や持続可能な農業を実現する取り組みを何というか？',
       ans: 'スマート農業',
       choices: ["スマートファクトリー", "スマート農業", "マシンビジョン", "HEMS"],
@@ -84,6 +94,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'マシンビジョン',
       question: '画像処理技術を用いて、機械が視覚情報を解析するシステムを何というか？',
       ans: 'マシンビジョン',
       choices: ["スマート農業", "マシンビジョン", "HEMS", "インダストリー4.0"],
@@ -92,6 +103,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'HEMS',
       question: '家庭内のエネルギー消費を管理し、省エネルギーを実現するシステムを何というか？',
       ans: 'HEMS',
       choices: ["マシンビジョン", "HEMS", "インダストリー4.0", "組込みシステム"],
@@ -100,6 +112,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'インダストリー4.0',
       question:
           '第4次産業革命とも称され、IoTやAI、ビッグデータなどの技術を製造業に統合することで、新たな産業構造を生み出す動きを何というか？',
       ans: 'インダストリー4.0',
@@ -109,14 +122,21 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
-      question: '特定の機能を持つソフトウェアがハードウェアに組み込まれて動作するシステムを何というか？',
-      ans: '組込みシステム',
-      choices: ["組込みシステム", "HEMS", "マシンビジョン", "インダストリー4.0"],
+      word: '組込みシステム',
+      question: '電化製品などに組込みシステムを採用する利点として，適切なものはどれか。',
+      ans: '製品の改良に当たって，ソフトウェアの変更だけで一定範囲の機能追加が可能となる。',
+      choices: [
+        "PCとはソフトウェアの構造が異なり，ウイルス感染の危険性がない。",
+        "システム設計においてハードウェアの制約を受けない。",
+        "製品の改良に当たって，ソフトウェアの変更だけで一定範囲の機能追加が可能となる。",
+        "フェールセーフを担保する環境が提供されており，システムごとの対策が不要である。"
+      ],
       comment:
-          "組込みシステムは、特定の機能を持つソフトウェアがハードウェアに組み込まれ、特定のタスクを実行するために最適化されたシステム。家電製品や自動車など日常生活の様々な場面で利用されている。",
+          "組込みシステムとは、特定の機能を実現するために家電製品や機械等に組み込まれるコンピュータシステム。家電製品や自動車など日常生活の様々な場面で利用されている。",
       importance: QuizImportanceType.high,
     ),
     QuizItem(
+      word: 'ロボティクス',
       question: '自動化技術や機械技術に関連する分野で、人間の代わりに作業を行う機械やシステムを何というか？',
       ans: 'ロボティクス',
       choices: ["組込みシステム", "ロボティクス", "クラウドサービス", "スマートファクトリー"],
@@ -125,6 +145,7 @@ List<QuizItem> get category1_17 {
       importance: QuizImportanceType.low,
     ),
     QuizItem(
+      word: 'ファームウェア',
       question: 'ハードウェアに組み込まれるソフトウェアのことを指す用語は何か？',
       ans: 'ファームウェア',
       choices: ["ロボティクス", "ファームウェア", "組込みシステム", "HEMS"],

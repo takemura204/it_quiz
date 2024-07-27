@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import '../button/primary_button.dart';
-import '../button/secondory_button.dart';
+import '../button/animation_shadow_button.dart';
 
 ///プレミアム登録
 class NeedPremiumModal extends ConsumerWidget {
@@ -25,7 +25,7 @@ class NeedPremiumModal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Dialog(
       backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.all(context.width * 0.05),
+      insetPadding: EdgeInsets.all(context.width * 0.03),
       child: Card(
         elevation: 4,
         color: Colors.white,
@@ -53,29 +53,44 @@ class NeedPremiumModal extends ConsumerWidget {
               const Gap(15),
               subWidget,
               const Gap(15),
-              Image.asset(
-                imagePath,
-                height: context.height * 0.15,
-                fit: BoxFit.fitHeight,
+              if (imagePath.contains('.png'))
+                Image.asset(imagePath)
+              else if (imagePath.contains('.svg'))
+                SvgPicture.asset(
+                  imagePath,
+                  width: context.height * 0.2,
+                  fit: BoxFit.fitHeight,
+                ),
+              const Gap(25),
+
+              const Text(
+                '＼　たくさんの特典付き！　／',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54),
               ),
-              const Gap(20),
+              const Gap(8),
 
               ///ボタン
-              PrimaryButton(
-                  width: context.width * 0.85,
-                  height: 55,
-                  text: "プレミアムに登録する",
-                  onPressed: onPressed),
-              Gap(context.height * 0.01),
-              SecondaryButton(
-                width: context.width * 0.85,
-                height: 55,
-                text: "キャンセル",
+              AnimatedShadowButton(
+                width: context.width,
+                height: 60,
+                title: "プレミアム特典を見る！",
+                onPressed: onPressed,
+              ),
+              TextButton(
+                child: const Text(
+                  "キャンセル",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black54),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
-              const Gap(15),
             ],
           ),
         ),

@@ -23,6 +23,7 @@ class _Precautions extends HookConsumerWidget {
               TextSpan(
                   text: '購入済みの方はこちら',
                   style: const TextStyle(
+                    fontSize: 18,
                     color: Colors.black54,
                     fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline,
@@ -57,10 +58,8 @@ class _Precautions extends HookConsumerWidget {
                 ),
                 TextSpan(
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      context.showScreen(
-                          const SettingUserPolicyScreenArguments()
-                              .generateRoute());
+                    ..onTap = () async {
+                      await launchUrl(Uri.parse(I18n().termsUrl));
                     },
                   text: '利用規約',
                   style: TextStyle(
@@ -74,10 +73,8 @@ class _Precautions extends HookConsumerWidget {
                 ),
                 TextSpan(
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      context.showScreen(
-                          const SettingPrivacyPolicyScreenArguments()
-                              .generateRoute());
+                    ..onTap = () async {
+                      await launchUrl(Uri.parse(I18n().privacyPolicyUrl));
                     },
                   text: 'プライバシーポリシー',
                   style: TextStyle(

@@ -140,7 +140,7 @@ class AccountLoginScreen extends ConsumerWidget {
                 PrimaryButton(
                     width: context.width * 0.8,
                     height: context.height * 0.07,
-                    text: '新規登録画面へ',
+                    title: '新規登録画面へ',
                     onPressed: () {
                       Navigator.pop(context);
                       // ref.read(authScreenProvider.notifier).reset();

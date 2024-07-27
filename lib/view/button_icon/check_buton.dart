@@ -22,38 +22,29 @@ class CheckBoxIconButton extends ConsumerWidget {
               HapticFeedback.lightImpact();
             }
           : null,
-      child: Container(
-        width: size,
-        child: Column(
-          children: [
-            Text(
-              "苦手",
-              style: TextStyle(
-                fontSize: context.width * 0.025,
-                fontWeight: FontWeight.bold,
-                color: isCheck ? context.mainColor : Colors.grey,
-              ),
+      child: Column(
+        children: [
+          Text(
+            "苦手",
+            style: TextStyle(
+              fontSize: 9,
+              fontWeight: FontWeight.bold,
+              color: isCheck ? context.mainColor : Colors.grey.shade500,
+              height: 0.1,
             ),
-            Container(
-              height: size,
-              width: size,
-              padding: EdgeInsets.zero,
-              child: Icon(
-                LineIcons.checkSquareAlt,
-                size: size * 0.825,
-                color: isCheck ? context.mainColor : Colors.grey,
-              ),
+          ),
+          Container(
+            height: size,
+            width: size,
+            padding: EdgeInsets.zero,
+            margin: EdgeInsets.zero,
+            child: Icon(
+              LineIcons.checkSquareAlt,
+              size: size * 0.8,
+              color: isCheck ? context.mainColor : Colors.grey.shade500,
             ),
-            Text(
-              "",
-              style: TextStyle(
-                fontSize: context.width * 0.025,
-                fontWeight: FontWeight.bold,
-                color: isCheck ? context.mainColor : Colors.grey,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

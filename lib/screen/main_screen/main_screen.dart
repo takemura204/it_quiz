@@ -11,15 +11,18 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/auth/auth_controller.dart';
+import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/user/auth_model.dart';
 import '../../view/modals/need_tracking_modal.dart';
 import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
 import '../home_search_screen/home_search_screen.dart';
 import '../home_setting_screen/home_setting_screen.dart';
+import '../screen_argument.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen();
@@ -30,9 +33,11 @@ class MainScreen extends ConsumerWidget {
         mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
     final isShowTrackingModal = ref.watch(
         mainScreenControllerProvider.select((s) => s.isShowTrackingModal));
+    final isShowPremiumDetailScreen = ref.watch(mainScreenControllerProvider
+        .select((s) => s.isShowPremiumDetailScreen));
     final currentTabIndex = ref
         .watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
-
+    final uid = ref.watch(authModelProvider.select((s) => s.uid));
     Future<void>.delayed(Duration.zero, () async {
       //チュートリアルモーダル表示
       if (isShowTutorialModal) {
@@ -60,6 +65,16 @@ class MainScreen extends ConsumerWidget {
               return const NeedTrackingModal();
             },
           );
+      }
+      //プレミアム画面表示
+      if (isShowPremiumDetailScreen) {
+        ref
+            .read(mainScreenControllerProvider.notifier)
+            .setIsShowPremiumDetailScreen(false);
+        Future<void>.delayed(const Duration(milliseconds: 750), () async {
+          context
+              .showScreen(const PremiumDetailScreenArguments().generateRoute());
+        });
       }
     });
     return const Scaffold(
@@ -135,7 +150,9 @@ class _BottomNavBar extends ConsumerWidget {
         onTap: (index) async {
           ref.watch(mainScreenControllerProvider.notifier).setTabIndex(index);
           HapticFeedback.lightImpact();
-
+          if (index == 1) {
+            ref.read(homeSearchScreenProvider.notifier).initState();
+          }
           if (index == 2) {
             ref.read(dashboardModelProvider.notifier).initState();
             ref.read(homeDashboardScreenProvider.notifier).initState();

@@ -24,98 +24,94 @@ class WeakQuizModal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedWeakLength = ref.watch(
         homeQuizScreenProvider.select((state) => state.selectedWeakLength));
-    return SimpleDialog(
-      elevation: 0,
-      insetPadding: EdgeInsets.all(context.width * 0.01),
-      contentPadding: EdgeInsets.all(context.width * 0.025),
-      children: [
-        Container(
-          width: context.width * 0.8,
-          child: Column(
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Gap(10),
+
+          ///タイトル
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ///タイトル
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _Title(quiz),
-                  ClearButton(
-                    iconSize: 35,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              const Gap(5),
-              const Divider(height: 1),
-              const Gap(10),
-
-              ///クイズ挑戦結果
-              _QuizWeakResult(quiz),
-              const Gap(10),
-              const Divider(height: 1),
-              const Gap(15),
-
-              ///問題数
-              QuizLengthTabBar(
-                selectedLength: selectedWeakLength,
-                onTap: (length) {
-                  ref
-                      .read(homeQuizScreenProvider.notifier)
-                      .setWeakLength(length);
-                },
-              ),
-              const Gap(10),
-              const Divider(height: 1),
-              const Gap(10),
-
-              ///一問一答
-              DefaultButton(
-                width: context.width * 1,
-                height: 50,
-                text: I18n().styleLeanQuiz,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  ref
-                      .read(quizModelProvider.notifier)
-                      .setStudyType(StudyType.learn);
-                  ref.read(homeQuizScreenProvider.notifier).setSelectWeakQuiz();
-
-                  final weakQuiz =
-                      ref.read(homeQuizScreenProvider).selectWeakQuiz!;
-
-                  context.showScreen(
-                    QuizLearnScreenArguments(
-                      quiz: weakQuiz,
-                    ).generateRoute(),
-                  );
-                },
-              ),
-              const Gap(5),
-
-              ///4択形式クイズに挑戦する
-              PrimaryButton(
-                width: context.width * 1,
-                height: 50,
-                text: I18n().styleChoiceQuiz,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  ref
-                      .read(quizModelProvider.notifier)
-                      .setStudyType(StudyType.choice);
-
-                  ref.read(homeQuizScreenProvider.notifier).setSelectWeakQuiz();
-                  final weakQuiz = ref.read(quizModelProvider).weakQuiz!;
-                  context.showScreen(
-                    QuizChoiceScreenArguments(
-                      quiz: weakQuiz,
-                    ).generateRoute(),
-                  );
-                },
+              _Title(quiz),
+              ClearButton(
+                iconSize: 35,
+                onPressed: () {},
               ),
             ],
           ),
-        ),
-      ],
+          const Gap(5),
+          const Divider(height: 1),
+          const Gap(10),
+
+          ///クイズ挑戦結果
+          _QuizWeakResult(quiz),
+          const Gap(10),
+          const Divider(height: 1),
+          const Gap(15),
+
+          ///問題数
+          QuizLengthTabBar(
+            selectedLength: selectedWeakLength,
+            onTap: (length) {
+              ref.read(homeQuizScreenProvider.notifier).setWeakLength(length);
+            },
+          ),
+          const Gap(10),
+          const Divider(height: 1),
+          const Gap(10),
+
+          ///一問一答
+          DefaultButton(
+            width: context.width * 1,
+            height: 55,
+            text: I18n().styleLeanQuiz,
+            onPressed: () {
+              Navigator.of(context).pop();
+              ref
+                  .read(quizModelProvider.notifier)
+                  .setStudyType(StudyType.learn);
+              ref.read(homeQuizScreenProvider.notifier).setSelectWeakQuiz();
+
+              final weakQuiz = ref.read(homeQuizScreenProvider).selectWeakQuiz!;
+
+              context.showScreen(
+                QuizLearnScreenArguments(
+                  quiz: weakQuiz,
+                ).generateRoute(),
+              );
+            },
+          ),
+          const Gap(5),
+
+          ///4択形式クイズに挑戦する
+          PrimaryButton(
+            width: context.width * 1,
+            height: 55,
+            title: I18n().styleChoiceQuiz,
+            onPressed: () {
+              Navigator.of(context).pop();
+              ref
+                  .read(quizModelProvider.notifier)
+                  .setStudyType(StudyType.choice);
+              ref.read(homeQuizScreenProvider.notifier).setSelectWeakQuiz();
+
+              final weakQuiz = ref.read(homeQuizScreenProvider).selectWeakQuiz!;
+
+              print({'weakQuiz', weakQuiz.quizItemList.length});
+              context.showScreen(
+                QuizChoiceScreenArguments(
+                  quiz: weakQuiz,
+                ).generateRoute(),
+              );
+            },
+          ),
+          Gap(context.height * 0.03),
+        ],
+      ),
     );
   }
 }

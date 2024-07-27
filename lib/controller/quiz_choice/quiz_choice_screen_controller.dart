@@ -98,17 +98,18 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     if (ans == quizItemList[quizIndex].ans) {
       quizItemList[quizIndex] = QuizItem(
         quizId: quizItemList[quizIndex].quizId,
+        word: quizItemList[quizIndex].word,
         question: quizItemList[quizIndex].question,
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
         status: QuizStatusType.correct,
-        //正解
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: false,
-        //苦手リストから除外
         lapIndex: quizItemList[quizIndex].lapIndex,
         isPremium: quizItemList[quizIndex].isPremium,
+        source: quizItemList[quizIndex].source,
+        importance: quizItemList[quizIndex].importance,
       );
       state = state.copyWith(isJudge: true, quizItemList: quizItemList);
       HapticFeedback.mediumImpact();
@@ -117,17 +118,18 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     else {
       quizItemList[quizIndex] = QuizItem(
         quizId: quizItemList[quizIndex].quizId,
+        word: quizItemList[quizIndex].word,
         question: quizItemList[quizIndex].question,
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
         status: QuizStatusType.incorrect,
-        //不正解
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: true,
-        //苦手リスト追加
         lapIndex: quizItemList[quizIndex].lapIndex,
         isPremium: quizItemList[quizIndex].isPremium,
+        source: quizItemList[quizIndex].source,
+        importance: quizItemList[quizIndex].importance,
       );
       state = state.copyWith(isJudge: false, quizItemList: quizItemList);
       HapticFeedback.lightImpact();
@@ -137,7 +139,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///正解表示
   void _switchAnsView() {
     state = state.copyWith(isAnsView: true);
-    Future.delayed(const Duration(milliseconds: 600), () {
+    Future.delayed(const Duration(milliseconds: 900), () {
       state = state.copyWith(isAnsView: false, selectAns: '');
       _nextQuiz(); //次のクイズ
     });
@@ -174,6 +176,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final quizItemList = [...state.quizItemList];
     quizItemList[index] = QuizItem(
       quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
       question: quizItemList[index].question,
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
@@ -183,6 +186,30 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       choices: quizItemList[index].choices,
       lapIndex: quizItemList[index].lapIndex,
       isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
+    );
+    state = state.copyWith(quizItemList: quizItemList);
+
+    _updateQuiz();
+  }
+
+  void tapSaveButton(int index) {
+    final quizItemList = [...state.quizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: quizItemList[index].isWeak,
+      status: quizItemList[index].status,
+      isSaved: !quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
     );
     state = state.copyWith(quizItemList: quizItemList);
 

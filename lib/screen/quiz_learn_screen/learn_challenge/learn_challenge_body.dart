@@ -27,6 +27,7 @@ class _LearnChallengeBody extends ConsumerWidget {
                 context: context,
                 onClickTarget: (target) {
                   HapticFeedback.lightImpact();
+
                   if (target.identify == "learnTarget1-tap") {
                     ref
                         .read(quizLearnScreenProvider.notifier)
@@ -34,7 +35,7 @@ class _LearnChallengeBody extends ConsumerWidget {
                     ref
                         .read(tutorialControllerProvider.notifier)
                         .setIsShowTapAnimation(false);
-                    Future<void>.delayed(const Duration(milliseconds: 300),
+                    Future<void>.delayed(const Duration(milliseconds: 200),
                         () async {
                       ref
                           .read(tutorialControllerProvider.notifier)
@@ -44,7 +45,7 @@ class _LearnChallengeBody extends ConsumerWidget {
                     ref
                         .read(tutorialControllerProvider.notifier)
                         .setIsShowSwipeRightAnimation(false);
-                    Future<void>.delayed(const Duration(milliseconds: 300),
+                    Future<void>.delayed(const Duration(milliseconds: 200),
                         () async {
                       ref
                           .read(tutorialControllerProvider.notifier)
@@ -64,6 +65,17 @@ class _LearnChallengeBody extends ConsumerWidget {
                   ref
                       .read(tutorialControllerProvider.notifier)
                       .setIsShowLearnResultTutorial(true);
+
+                  ///念の為
+                  ref
+                      .read(tutorialControllerProvider.notifier)
+                      .setIsShowTapAnimation(false);
+                  ref
+                      .read(tutorialControllerProvider.notifier)
+                      .setIsShowSwipeRightAnimation(false);
+                  ref
+                      .read(tutorialControllerProvider.notifier)
+                      .setIsShowSwipeLeftAnimation(false);
                 },
               );
         });

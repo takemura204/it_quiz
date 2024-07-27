@@ -9,7 +9,7 @@ class _Title extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Text(
       quiz.title,
-      style: context.texts.titleLarge,
+      style: context.texts.titleMedium,
     );
   }
 }

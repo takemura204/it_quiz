@@ -1,17 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/view/button/primary_button.dart';
 
 class AnimatedShadowButton extends StatefulWidget {
   final double width;
   final double height;
-  final String text;
+  final String title;
+  final String? subtitle;
   final VoidCallback? onPressed;
 
   const AnimatedShadowButton({
     required this.width,
     required this.height,
-    required this.text,
+    required this.title,
+    this.subtitle,
     required this.onPressed,
   });
 
@@ -62,7 +64,8 @@ class _AnimatedShadowButtonState extends State<AnimatedShadowButton>
             child: PrimaryButton(
               width: widget.width,
               height: widget.height,
-              text: widget.text,
+              title: widget.title,
+              subTitle: widget.subtitle,
               onPressed: widget.onPressed,
             ),
           ),

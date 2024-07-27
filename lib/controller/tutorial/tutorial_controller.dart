@@ -63,12 +63,12 @@ class TutorialController extends StateNotifier<TutorialState> {
               child: CustomToolTip(
                 text: TextSpan(
                   children: [
-                    const TextSpan(text: 'ここから', style: style),
+                    const TextSpan(text: '学びたい', style: style),
                     TextSpan(
                       text: '「問題」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'を開始できます', style: style),
+                    const TextSpan(text: 'を選択しましょう', style: style),
                   ],
                 ),
               ),
@@ -82,17 +82,17 @@ class TutorialController extends StateNotifier<TutorialState> {
           keyTarget: homeTarget2,
           contents: [
             TargetContent(
-              align: ContentAlign.bottom,
+              align: ContentAlign.top,
               padding: EdgeInsets.zero,
               child: CustomToolTip(
+                isUpward: false,
                 text: TextSpan(
                   children: [
-                    const TextSpan(text: 'タップしたら', style: style),
                     TextSpan(
                       text: '「詳細設定」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'が表示されます', style: style),
+                    const TextSpan(text: 'が表示します', style: style),
                   ],
                 ),
               ),
@@ -116,7 +116,7 @@ class TutorialController extends StateNotifier<TutorialState> {
                       text: '「問題範囲」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'を選択できます', style: style),
+                    const TextSpan(text: 'を選択します', style: style),
                   ],
                 ),
               ),
@@ -140,7 +140,7 @@ class TutorialController extends StateNotifier<TutorialState> {
                       text: '「問題数」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'を選択できます', style: style),
+                    const TextSpan(text: 'を選択します', style: style),
                   ],
                 ),
               ),
@@ -164,7 +164,7 @@ class TutorialController extends StateNotifier<TutorialState> {
                       text: '「一問一答」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'で用語を覚えましょう！', style: style),
+                    const TextSpan(text: 'で用語を覚えましょう📚', style: style),
                   ],
                 ),
               ),
@@ -197,7 +197,7 @@ class TutorialController extends StateNotifier<TutorialState> {
                       text: '「答え」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'が表示されます。', style: style),
+                    const TextSpan(text: 'が表示します。', style: style),
                   ],
                 ),
               ),
@@ -304,7 +304,7 @@ class TutorialController extends StateNotifier<TutorialState> {
                       style: style.copyWith(color: defaultColor),
                     ),
                     const TextSpan(
-                        text: 'した用語は後から見返せます。\nさっそく一問一答してみましょう！', style: style),
+                        text: 'した用語は後から見返せます。\nさっそく一問一答してみましょう✨', style: style),
                   ],
                 ),
                 offsetX: 125,
@@ -383,7 +383,7 @@ class TutorialController extends StateNotifier<TutorialState> {
                       text: '「再挑戦」',
                       style: style.copyWith(color: defaultColor),
                     ),
-                    const TextSpan(text: 'でもう一度、', style: style),
+                    const TextSpan(text: 'でもう一度,', style: style),
                     TextSpan(
                       text: '「クイズに挑戦」',
                       style: style.copyWith(color: defaultColor),
@@ -422,6 +422,10 @@ class TutorialController extends StateNotifier<TutorialState> {
         ),
       ],
     );
+  }
+
+  void setIsTapDone(bool value) {
+    state = state.copyWith(isTapDone: value);
   }
 
   void setIsShowHomeTutorial(bool value) {
@@ -467,7 +471,7 @@ class TutorialController extends StateNotifier<TutorialState> {
       textSkip: "SKIP",
       textStyleSkip: const TextStyle(color: Colors.black87),
       paddingFocus: 0,
-      alignSkip: Alignment.bottomRight,
+      alignSkip: Alignment.topRight,
       skipWidget: const Text("スキップ"),
       showSkipInLastTarget: false,
       onFinish: onFinish,
@@ -492,7 +496,7 @@ class TutorialController extends StateNotifier<TutorialState> {
 
   void showLearnTutorial({
     required BuildContext context,
-    required Function(TargetFocus) onClickTarget,
+    required Function(TargetFocus)? onClickTarget,
     required Function() onFinish,
   }) {
     tutorialCoachMark = TutorialCoachMark(
@@ -501,7 +505,7 @@ class TutorialController extends StateNotifier<TutorialState> {
       textSkip: "SKIP",
       textStyleSkip: const TextStyle(color: Colors.black87),
       paddingFocus: 0,
-      alignSkip: Alignment.bottomRight,
+      alignSkip: Alignment.topRight,
       skipWidget: const Text("スキップ"),
       showSkipInLastTarget: false,
       onFinish: onFinish,
@@ -512,11 +516,11 @@ class TutorialController extends StateNotifier<TutorialState> {
         setIsTutorialRestart(false);
         return true;
       },
-      hideSkip: !state.isTutorialRestart,
+      hideSkip: true,
       useSafeArea: true,
       opacityShadow: 0.8,
-      focusAnimationDuration: const Duration(milliseconds: 600),
-      unFocusAnimationDuration: const Duration(milliseconds: 200),
+      focusAnimationDuration: const Duration(milliseconds: 300),
+      unFocusAnimationDuration: const Duration(milliseconds: 100),
       pulseAnimationDuration: const Duration(milliseconds: 600),
       pulseEnable: true,
       imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -535,7 +539,7 @@ class TutorialController extends StateNotifier<TutorialState> {
       textSkip: "SKIP",
       textStyleSkip: const TextStyle(color: Colors.black87),
       paddingFocus: 0,
-      alignSkip: Alignment.bottomRight,
+      alignSkip: Alignment.topRight,
       skipWidget: const Text("スキップ"),
       showSkipInLastTarget: false,
       onFinish: onFinish,

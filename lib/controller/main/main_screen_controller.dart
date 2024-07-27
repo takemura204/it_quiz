@@ -67,6 +67,10 @@ class MainScreenController extends StateNotifier<MainScreenState>
     _saveDevice();
   }
 
+  void setIsShowPremiumDetailScreen(bool value) {
+    state = state.copyWith(isShowPremiumDetailScreen: value);
+  }
+
   Future initAppTrackingTransparency() async {
     final status = await AppTrackingTransparency.requestTrackingAuthorization();
     if (status == TrackingStatus.notDetermined) {

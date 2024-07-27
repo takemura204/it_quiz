@@ -29,7 +29,7 @@ class _PremiumContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: context.mainColor, width: 1),
             ),
-            padding: const EdgeInsets.only(right: 20, left: 20),
+            padding: const EdgeInsets.only(right: 15, left: 15),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,

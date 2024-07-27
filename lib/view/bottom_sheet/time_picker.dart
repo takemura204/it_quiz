@@ -33,7 +33,7 @@ class CustomTimePicker extends HookWidget {
       child: Column(
         children: [
           Container(
-            height: 50,
+            height: 60,
             child: Row(
               children: [
                 Container(
@@ -41,7 +41,7 @@ class CustomTimePicker extends HookWidget {
                   width: 50,
                   child: IconButton(
                     alignment: Alignment.centerLeft,
-                    iconSize: 30,
+                    iconSize: 35,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -56,7 +56,7 @@ class CustomTimePicker extends HookWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: DefaultButton(
                     width: 100,
-                    height: 40,
+                    height: 50,
                     text: "おすすめ",
                     onPressed: () {
                       hourController.animateToItem(
@@ -155,7 +155,7 @@ class CustomTimePicker extends HookWidget {
           PrimaryButton(
               width: context.width * 0.85,
               height: 60,
-              text: "設定する",
+              title: "設定する",
               onPressed: () {
                 onTimeChanged(
                     TimeOfDay(hour: selectedHour, minute: selectedMinute));

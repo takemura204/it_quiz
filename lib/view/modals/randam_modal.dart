@@ -5,19 +5,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../controller/home_quiz/home_quiz_screen_controller.dart';
+import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../screen/screen_argument.dart';
 import '../../untils/enums.dart';
+import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
 import '../quiz_length_tab_bar.dart';
 
 ///ランダムモーダル
 class RandomQuizModal extends ConsumerWidget {
-  const RandomQuizModal({required this.randomQuiz});
+  const RandomQuizModal({required this.quiz});
 
-  final Quiz randomQuiz;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,83 +28,100 @@ class RandomQuizModal extends ConsumerWidget {
     final selectedTestLength = ref.watch(
       homeQuizScreenProvider.select((state) => state.selectedTestLength),
     );
-    return SimpleDialog(
-      elevation: 0,
-      backgroundColor: Colors.white,
-      insetPadding: EdgeInsets.all(context.width * 0.01),
-      contentPadding: EdgeInsets.all(context.width * 0.025),
-      children: [
-        Container(
-          color: Colors.white,
-          width: context.width * 0.8,
-          child: Column(
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Gap(10),
+
+          ///タイトル
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ///タイトル
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _Title(randomQuiz),
-                  const Spacer(),
-                  ClearButton(
-                    iconSize: 35,
-                    onPressed: () {},
-                  ),
-                ],
+              _Title(quiz),
+              const Spacer(),
+              ClearButton(
+                iconSize: 35,
+                onPressed: () {},
               ),
-
-              const Divider(height: 1),
-              const Gap(5),
-
-              ///選択範囲
-              const _QuizRange(),
-
-              const Gap(15),
-
-              ///問題数
-              QuizLengthTabBar(
-                selectedLength: selectedTestLength,
-                onTap: (length) {
-                  ref
-                      .read(homeQuizScreenProvider.notifier)
-                      .setRandomQuizLength(length);
-                },
-              ),
-
-              const Gap(15),
-
-              const Divider(height: 1),
-              const Gap(15),
-
-              ///クイズに挑戦する
-              PrimaryButton(
-                width: context.width,
-                height: 50,
-                text: 'クイズに挑戦する',
-                onPressed: isGroup
-                    ? () {
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .setStudyType(StudyType.choice);
-                        ref
-                            .read(homeQuizScreenProvider.notifier)
-                            .tapStartRandomQuizButton();
-
-                        final randomQuiz =
-                            ref.read(quizModelProvider).randomQuiz!;
-                        context.showScreen(
-                          QuizChoiceScreenArguments(
-                            quiz: randomQuiz,
-                          ).generateRoute(),
-                        );
-                      }
-                    : null,
-              ),
-
-              const Gap(5),
             ],
           ),
-        ),
-      ],
+
+          const Divider(height: 1),
+          const Gap(5),
+
+          ///選択範囲
+          const _QuizRange(),
+
+          const Gap(15),
+
+          ///問題数
+          QuizLengthTabBar(
+            selectedLength: selectedTestLength,
+            onTap: (length) {
+              ref
+                  .read(homeQuizScreenProvider.notifier)
+                  .setRandomQuizLength(length);
+            },
+          ),
+
+          const Gap(15),
+
+          const Divider(height: 1),
+          const Gap(15),
+
+          ///一問一答
+          DefaultButton(
+            width: context.width * 1,
+            height: 55,
+            text: I18n().styleLeanQuiz,
+            onPressed: () {
+              Navigator.of(context).pop();
+              ref
+                  .read(quizModelProvider.notifier)
+                  .setStudyType(StudyType.choice);
+              ref
+                  .read(homeQuizScreenProvider.notifier)
+                  .tapStartRandomQuizButton();
+
+              final randomQuiz = ref.read(quizModelProvider).randomQuiz!;
+              context.showScreen(
+                QuizLearnScreenArguments(
+                  quiz: randomQuiz,
+                ).generateRoute(),
+              );
+            },
+          ),
+          const Gap(10),
+
+          ///クイズに挑戦する
+          PrimaryButton(
+            width: context.width,
+            height: 55,
+            title: 'クイズに挑戦する',
+            onPressed: isGroup
+                ? () {
+                    ref
+                        .read(quizModelProvider.notifier)
+                        .setStudyType(StudyType.choice);
+                    ref
+                        .read(homeQuizScreenProvider.notifier)
+                        .tapStartRandomQuizButton();
+
+                    final randomQuiz = ref.read(quizModelProvider).randomQuiz!;
+                    context.showScreen(
+                      QuizChoiceScreenArguments(
+                        quiz: randomQuiz,
+                      ).generateRoute(),
+                    );
+                  }
+                : null,
+          ),
+
+          Gap(context.height * 0.03),
+        ],
+      ),
     );
   }
 }

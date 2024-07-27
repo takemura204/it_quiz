@@ -230,7 +230,7 @@ class _DailyMissionCard extends ConsumerWidget {
             PrimaryButton(
                 width: context.width * 0.2,
                 height: context.height * 0.045,
-                text: "受取",
+                title: "受取",
                 onPressed: () => ref
                     .read(missionControllerProvider.notifier)
                     .tapMissionReceiveButton(mission)),

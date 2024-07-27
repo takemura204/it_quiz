@@ -134,7 +134,7 @@ class GroupProgressDashboard extends ConsumerWidget {
                           const Gap(30),
                           PrimaryRoundButton(
                               width: 180,
-                              height: 45,
+                              height: 50,
                               text: '購入する',
                               fontSize: 16,
                               onPressed: () {
@@ -278,8 +278,6 @@ class _ProgressRadarChart extends StatelessWidget {
     // categoriesの長さに基づいて最大値と最小値のリストを動的に生成
     final List<double> maxValue = List.filled(categories.length, 100); // 最大値
     final List<double> minValue = List.filled(categories.length, 0); // 最小値
-
-    // final testData = [40.0, 25.0, 55.0, 65.0];
 
     return RadarChart(
       RadarChartData(
