@@ -29,14 +29,14 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   @override
   Future initState() async {
     // _resetData();
-    await _loadQuizData();
+    await _getQuizData();
     super.initState();
   }
 
   ///読み込み
-  Future _loadQuizData() async {
+  Future _getQuizData() async {
     setIsLoading(true);
-    await _getQuizListData(); // このメソッドが完了するのを待つ
+    await _getQuizListData();
     await Future.wait([
       _getWeakQuiz(),
       _getRandomQuiz(),
@@ -309,39 +309,6 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   }
 
   /// HistoryQuiz更新
-  Future addHistoryQuiz(Quiz updateQuiz) async {
-    // 1. 現在のhistoryQuizListをコピー
-    final historyQuizList = [...state.historyQuizList];
-
-    // 2. updateQuizをhistoryQuizListに追加
-    historyQuizList.add(updateQuiz);
-
-    // 3. historyQuizList内の同じidのQuizのquizItemListを更新
-    for (var i = 0; i < historyQuizList.length; i++) {
-      if (historyQuizList[i].id == updateQuiz.id) {
-        final updatedQuizItemList =
-            historyQuizList[i].quizItemList.map((quizItem) {
-          // updateQuizの中から対応するquizItemを見つける
-          final updatedItem = updateQuiz.quizItemList
-              .firstWhereOrNull((e) => e.quizId == quizItem.quizId);
-          if (updatedItem != null) {
-            // isWeakだけを更新
-            return quizItem.copyWith(isWeak: updatedItem.isWeak);
-          }
-          return quizItem;
-        }).toList();
-        historyQuizList[i] =
-            historyQuizList[i].copyWith(quizItemList: updatedQuizItemList);
-      }
-    }
-
-    // 4. 更新したhistoryQuizListでstateを更新
-    state = state.copyWith(historyQuizList: historyQuizList);
-
-    // 5. デバイスに保存
-    _saveDevice();
-  }
-
   Future updateHistoryQuiz(Quiz updateQuiz) async {
     // 1. 現在のhistoryQuizListをコピー
     final historyQuizList = [...state.historyQuizList];
@@ -388,7 +355,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     _saveDevice();
   }
 
-  ///SavedQuiz更新
+  ///QuizItem更新
   void updateQuizItem(QuizItem updateQuizItem) {
     final quizList = state.quizList;
     final updatedQuizList = quizList.map((quiz) {
@@ -430,7 +397,7 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     state = state.copyWith(randomQuiz: randomQuiz);
   }
 
-  void tapQuizIndex(int index) {
+  void setQuizIndex(int index) {
     state = state.copyWith(quizIndex: index);
   }
 
@@ -483,10 +450,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
   Future resetData() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("quiz_list");
-    prefs.remove("history_list");
+    // prefs.remove("history_list");
     prefs.remove("weak_quiz");
     prefs.remove("test_quiz");
   }
 }
-
-class QuizStudyType {}

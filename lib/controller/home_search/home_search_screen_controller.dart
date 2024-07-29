@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 
+import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import 'home_search_screen_state.dart';
 
@@ -24,8 +25,15 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
 
   Future initState() async {
     setIsLoading(true);
-    _initFilterQuiz();
     await Future.wait([]);
+    ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
+      if (quizzes.isLoading) {
+        await Future.wait([
+          _initFilterQuiz(),
+        ]);
+      }
+      setIsLoading(false);
+    });
     setIsLoading(false);
     scrollController.addListener(_scrollListener);
   }

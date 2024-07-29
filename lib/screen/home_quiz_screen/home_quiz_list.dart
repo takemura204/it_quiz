@@ -42,7 +42,7 @@ class _QuizList extends ConsumerWidget {
                             .setQuizType(QuizStyleType.study);
                         ref
                             .read(quizModelProvider.notifier)
-                            .tapQuizIndex(index);
+                            .setQuizIndex(index);
                         ref
                             .read(homeQuizScreenProvider.notifier)
                             .setSelectQuiz(quiz);
@@ -71,7 +71,7 @@ class _QuizList extends ConsumerWidget {
                       ref
                           .read(quizModelProvider.notifier)
                           .setQuizType(QuizStyleType.study);
-                      ref.read(quizModelProvider.notifier).tapQuizIndex(0);
+                      ref.read(quizModelProvider.notifier).setQuizIndex(0);
                       ref
                           .read(homeQuizScreenProvider.notifier)
                           .setSelectQuiz(quiz);
@@ -144,7 +144,7 @@ class _QuizCard extends ConsumerWidget {
                   ref
                       .read(quizModelProvider.notifier)
                       .setQuizType(QuizStyleType.study);
-                  ref.read(quizModelProvider.notifier).tapQuizIndex(index);
+                  ref.read(quizModelProvider.notifier).setQuizIndex(index);
                   ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
                   showModalBottomSheet(
                     context: context,
@@ -189,7 +189,7 @@ class _QuizCard extends ConsumerWidget {
       onTap: () {
         if (isPremium) {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
-          ref.read(quizModelProvider.notifier).tapQuizIndex(index);
+          ref.read(quizModelProvider.notifier).setQuizIndex(index);
           ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
           showModalBottomSheet(
             context: context,

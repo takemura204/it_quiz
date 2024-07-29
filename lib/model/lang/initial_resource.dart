@@ -61,6 +61,8 @@ class I18n {
   ///title
   String get titleName => "IT用語クイズ";
 
+  String get titleLearn => "覚える";
+
   String get titleQuiz => "クイズ";
 
   String get titleSearch => "検索";

@@ -284,7 +284,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       timeStamp: DateTime.now(),
       studyType: studyType,
     );
-    ref.read(quizModelProvider.notifier).addHistoryQuiz(updateQuiz);
+    ref.read(quizModelProvider.notifier).updateHistoryQuiz(updateQuiz);
   }
 
   ///クリアボタン
