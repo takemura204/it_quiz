@@ -1,7 +1,7 @@
 part of '../home_learn_screen.dart';
 
-class _HomeLearnBody extends ConsumerWidget {
-  const _HomeLearnBody();
+class _Body extends ConsumerWidget {
+  const _Body();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

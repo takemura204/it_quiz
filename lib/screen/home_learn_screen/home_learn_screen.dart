@@ -17,9 +17,10 @@ import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/button_icon/save_button.dart';
 import '../screen_argument.dart';
 
-part 'widget/home_learn_body.dart';
-part 'widget/home_learn_quz_item_card.dart';
-part 'widget/home_learn_view.dart';
+part 'widget/action_buttons.dart';
+part 'widget/body.dart';
+part 'widget/question.dart';
+part 'widget/quz_item_card.dart';
 
 class HomeLearnScreen extends HookConsumerWidget {
   const HomeLearnScreen();
@@ -28,7 +29,7 @@ class HomeLearnScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
       appBar: _AppBar(),
-      body: _HomeLearnBody(),
+      body: _Body(),
     );
   }
 }

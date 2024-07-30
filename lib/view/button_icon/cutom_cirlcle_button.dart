@@ -1,63 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomCircleButton extends ConsumerWidget {
   const CustomCircleButton({
     required this.iconData,
-    required this.onPressed,
     required this.iconSize,
-    required this.containerWidth,
-    required this.containerHeight,
-    required this.backgroundColor,
-    required this.textColor,
+    required this.containerSize,
+    required this.iconColor,
+    required this.containerColor,
     required this.text,
+    required this.onPressed,
   });
 
   final IconData iconData;
-  final VoidCallback onPressed;
   final double iconSize;
-  final double containerWidth;
-  final double containerHeight;
-  final Color backgroundColor;
-  final Color textColor;
+  final double containerSize;
+  final Color containerColor;
+  final Color iconColor;
   final String text;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       elevation: 1,
-      color: backgroundColor,
+      color: containerColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: backgroundColor == Colors.white
-            ? BorderSide(color: textColor, width: 1.5)
-            : BorderSide(color: backgroundColor, width: 0),
+        borderRadius: BorderRadius.circular(90),
+        side: containerColor == Colors.white
+            ? BorderSide(color: iconColor, width: 1)
+            : BorderSide(color: containerColor, width: 0),
       ),
-      child: Container(
-        width: containerWidth,
-        height: containerHeight,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 100),
+        width: containerSize,
+        height: containerSize,
         child: IconButton(
-          icon: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Gap(5),
-              Icon(
-                iconData,
-                color: textColor,
-                size: iconSize,
-              ),
-
-              const Gap(5), // アイコンとテキストの間隔
-              Text(
-                text,
-                style: TextStyle(
-                    color: textColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-              const Gap(5),
-            ],
+          icon: Icon(
+            iconData,
+            color: iconColor,
+            size: iconSize,
           ),
           onPressed: onPressed,
         ),

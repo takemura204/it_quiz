@@ -48,12 +48,25 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
   }
 
   Future _initQuizItemList() async {
-    ///プレミアム枠の単語をロックできない。
-    final quizItemList = ref
-        .read(quizModelProvider)
-        .quizList
-        .expand((x) => x.quizItemList)
-        .toList();
+    final isPremium = ref.read(authModelProvider).isPremium;
+    final List<QuizItem> quizItemList = [];
+    if (isPremium) {
+      final allQuizItemList = ref
+          .read(quizModelProvider)
+          .quizList
+          .expand((x) => x.quizItemList)
+          .toList();
+      quizItemList.addAll(allQuizItemList);
+    } else {
+      final freeQuizItemList = ref
+          .read(quizModelProvider)
+          .quizList
+          .expand((x) => x.quizItemList)
+          .where((x) => !x.isPremium)
+          .toList();
+      quizItemList.addAll(freeQuizItemList);
+    }
+
     state = state.copyWith(quizItemList: quizItemList);
   }
 

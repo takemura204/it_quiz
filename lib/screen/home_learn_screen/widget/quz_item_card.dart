@@ -66,52 +66,47 @@ class _QuizItemCard extends ConsumerWidget {
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
-                      color: direction != null
-                          ? direction != AppinioSwiperDirection.right
-                              ? context.incorrectColor
-                              : context.correctColor
-                          : context.secondColor,
+                      color: context.secondColor,
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(top: 5, right: 5),
-                            child: SaveIconButton(
-                              quizItem: quizItem,
-                              isShowText: false,
-                              size: 35,
-                              onTap: () {
-                                ref
-                                    .read(homeLearnScreenProvider.notifier)
-                                    .tapSavedButton(index);
-                              },
-                            ),
-                          ),
-                        ],
+                      _QuizItemHeader(
+                        itemIndex: index,
+                        quizItem: quizItem,
                       ),
                       const Spacer(),
 
                       ///問題文
-                      _Question(quizItem, isAnsView && itemIndex == index),
+                      _Question(
+                          quizItem: quizItem,
+                          isAnsView: isAnsView && itemIndex == index),
                       const Spacer(),
 
                       ///問題進捗状況
-                      _QuizProgress(quizItemList, index),
+                      _QuizItemFooter(quizItemList, index),
                       Gap(context.height * 0.01),
                     ],
                   ),
                 ),
-                if (direction != null)
+                if (itemIndex == index && direction != null)
                   Container(
-                    color: direction != AppinioSwiperDirection.right
-                        ? context.incorrectColor.withOpacity(0.2)
-                        : context.correctColor.withOpacity(0.2),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: itemIndex == index
+                            ? direction != AppinioSwiperDirection.right
+                                ? context.incorrectColor
+                                : context.correctColor
+                            : context.secondColor,
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: direction != AppinioSwiperDirection.right
+                          ? context.incorrectColor.withOpacity(0.2)
+                          : context.correctColor.withOpacity(0.2),
+                    ),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -155,6 +150,98 @@ class _QuizItemCard extends ConsumerWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+///保存ボタン・ジャンル
+class _QuizItemHeader extends ConsumerWidget {
+  const _QuizItemHeader({required this.itemIndex, required this.quizItem});
+
+  final int itemIndex;
+  final QuizItem quizItem;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        ///保存ボタン
+        Container(
+          padding: const EdgeInsets.only(top: 5, right: 5),
+          child: SaveIconButton(
+            quizItem: quizItem,
+            isShowText: false,
+            size: 35,
+            onTap: () {
+              ref
+                  .read(homeLearnScreenProvider.notifier)
+                  .tapSavedButton(itemIndex);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+///重要度・進捗度
+class _QuizItemFooter extends ConsumerWidget {
+  const _QuizItemFooter(this.quizItemList, this.index);
+
+  final List<QuizItem> quizItemList;
+  final int index;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          Gap(context.width * 0.02),
+          const Text(
+            '重要度',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          Text(
+            ' ${I18n().quizImportanceText(quizItemList[index].importance)}',
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              Text(
+                "${index + 1}",
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              const Text(
+                " / ",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              Text(
+                "${quizItemList.length}",
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          Gap(context.width * 0.05),
+        ],
       ),
     );
   }

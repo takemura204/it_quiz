@@ -45,7 +45,6 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
   }
 
   Future _initFilterQuiz() async {
-    ///プレミアム枠の単語をロックできない。
     final quizItemList = ref
         .read(quizModelProvider)
         .quizList

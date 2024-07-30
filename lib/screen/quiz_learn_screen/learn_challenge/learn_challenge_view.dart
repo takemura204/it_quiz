@@ -170,10 +170,9 @@ class _ActionButtons extends ConsumerWidget {
                 CustomCircleButton(
                   iconData: Icons.question_mark_outlined,
                   iconSize: 35,
-                  containerWidth: context.width * 0.47,
-                  containerHeight: 100,
-                  backgroundColor: context.incorrectColor,
-                  textColor: Colors.white,
+                  containerSize: 100,
+                  containerColor: context.incorrectColor,
+                  iconColor: Colors.white,
                   text: I18n().buttonUnKnow,
                   onPressed: () {
                     ref
@@ -189,10 +188,9 @@ class _ActionButtons extends ConsumerWidget {
                 CustomCircleButton(
                   iconData: Icons.thumb_up,
                   iconSize: 35,
-                  containerWidth: context.width * 0.47,
-                  containerHeight: 100,
-                  backgroundColor: context.correctColor,
-                  textColor: Colors.white,
+                  containerSize: 100,
+                  containerColor: context.correctColor,
+                  iconColor: Colors.white,
                   text: I18n().buttonKnow,
                   onPressed: () {
                     ref
@@ -209,10 +207,9 @@ class _ActionButtons extends ConsumerWidget {
         CustomCircleButton(
             iconData: Icons.cached_outlined,
             iconSize: 35,
-            containerWidth: context.width * 0.95,
-            containerHeight: 100,
-            backgroundColor: context.mainColor,
-            textColor: isAnsView ? Colors.grey.shade400 : Colors.white,
+            containerSize: 100,
+            containerColor: context.mainColor,
+            iconColor: isAnsView ? Colors.grey.shade400 : Colors.white,
             text: I18n().buttonConfirm,
             onPressed: () {
               ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
