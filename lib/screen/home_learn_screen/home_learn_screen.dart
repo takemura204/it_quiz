@@ -34,6 +34,32 @@ class HomeLearnScreen extends HookConsumerWidget {
   }
 }
 
+class _Body extends ConsumerWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ///問題
+        _QuizItemCard(),
+
+        ///知っている・知らないボタン
+        _ActionButtons(),
+
+        Gap(15),
+
+        ///広告
+        AdBanner(),
+
+        ///何周目か確認
+        _LapInfoBar(),
+      ],
+    );
+  }
+}
+
 class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   const _AppBar();
 
@@ -43,9 +69,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       title: Text(I18n().titleName),
       centerTitle: true,
       actions: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
+        Container(
           child: IconButton(
+            iconSize: 32,
+            padding: EdgeInsets.zero,
             onPressed: () {
               context.showScreen(
                 const QuizHistoryScreenArguments().generateRoute(),
@@ -53,12 +80,26 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
               HapticFeedback.lightImpact();
             },
             icon: Icon(
-              LineIcons.horizontalSliders,
+              LineIcons.questionCircle,
               size: 32,
-              color: context.defaultColor,
+              color: context.titleColor,
             ),
           ),
         ),
+        IconButton(
+          onPressed: () {
+            context.showScreen(
+              const QuizHistoryScreenArguments().generateRoute(),
+            );
+            HapticFeedback.lightImpact();
+          },
+          icon: Icon(
+            LineIcons.horizontalSliders,
+            size: 32,
+            color: context.titleColor,
+          ),
+        ),
+        Gap(context.width * 0.01),
       ],
       shape: Border(bottom: BorderSide(color: context.mainColor, width: 0)),
     );

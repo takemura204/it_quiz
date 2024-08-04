@@ -11,8 +11,7 @@ class _PremiumContentList extends StatelessWidget {
       children: [
         const Text(
           "＼　特典たくさん　／",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black54),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black54),
         ),
         const Gap(1),
         Stack(
@@ -28,10 +27,7 @@ class _PremiumContentList extends StatelessWidget {
             ),
             const Text(
               'プレミアムでできること',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.black87),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87),
             ),
           ],
         ),

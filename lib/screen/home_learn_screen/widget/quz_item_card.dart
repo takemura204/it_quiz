@@ -5,16 +5,11 @@ class _QuizItemCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final swiperController =
-        ref.watch(homeLearnScreenProvider.notifier).swiperController;
-    final direction =
-        ref.watch(homeLearnScreenProvider.select((s) => s.direction));
-    final quizItemList =
-        ref.watch(homeLearnScreenProvider.select((s) => s.quizItemList));
-    final isAnsView =
-        ref.watch(homeLearnScreenProvider.select((s) => s.isAnsView));
-    final itemIndex =
-        ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
+    final swiperController = ref.watch(homeLearnScreenProvider.notifier).swiperController;
+    final direction = ref.watch(homeLearnScreenProvider.select((s) => s.direction));
+    final quizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.quizItemList));
+    final isAnsView = ref.watch(homeLearnScreenProvider.select((s) => s.isAnsView));
+    final itemIndex = ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
 
     if (quizItemList.isEmpty) {
       return const _SkeletonCard();
@@ -26,18 +21,17 @@ class _QuizItemCard extends ConsumerWidget {
         cardsCount: quizItemList.length,
         loop: true,
         backgroundCardsCount: (itemIndex + 1 == quizItemList.length) ? 0 : 1,
-        padding: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.02),
+        padding:
+            EdgeInsets.symmetric(horizontal: context.width * 0.02, vertical: context.width * 0.02),
         cardsSpacing: 0,
         maxAngle: 90,
-        swipeOptions: const AppinioSwipeOptions.symmetric(
-            horizontal: true, vertical: false),
+        swipeOptions: const AppinioSwipeOptions.symmetric(horizontal: true, vertical: false),
         onSwipe: (index, direction) {
           // スワイプが完全に終了した時の処理
           if (direction == AppinioSwiperDirection.left) {
-            ref.read(homeLearnScreenProvider.notifier).tapActionButton(false);
+            ref.read(homeLearnScreenProvider.notifier).updateHomeLearnQuizItem(false);
           } else if (direction == AppinioSwiperDirection.right) {
-            ref.read(homeLearnScreenProvider.notifier).tapActionButton(true);
+            ref.read(homeLearnScreenProvider.notifier).updateHomeLearnQuizItem(true);
           }
           HapticFeedback.mediumImpact();
         },
@@ -52,12 +46,10 @@ class _QuizItemCard extends ConsumerWidget {
           return;
         },
         cardsBuilder: (BuildContext context, int index) {
-          final quizItem = quizItemList[index];
+          final updateIndex = index;
           return GestureDetector(
             onTap: () {
-              ref
-                  .read(homeLearnScreenProvider.notifier)
-                  .setIsAnsView(true); // 画面切り替え
+              ref.read(homeLearnScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
             },
             child: Stack(
               children: [
@@ -75,27 +67,27 @@ class _QuizItemCard extends ConsumerWidget {
                     children: [
                       _QuizItemHeader(
                         itemIndex: index,
-                        quizItem: quizItem,
+                        quizItem: quizItemList[updateIndex],
                       ),
                       const Spacer(),
 
                       ///問題文
                       _Question(
-                          quizItem: quizItem,
-                          isAnsView: isAnsView && itemIndex == index),
+                          quizItem: quizItemList[index],
+                          isAnsView: isAnsView && itemIndex == updateIndex),
                       const Spacer(),
 
                       ///問題進捗状況
-                      _QuizItemFooter(quizItemList, index),
+                      _QuizItemFooter(quizItemList, updateIndex),
                       Gap(context.height * 0.01),
                     ],
                   ),
                 ),
-                if (itemIndex == index && direction != null)
+                if (itemIndex == updateIndex && direction != null)
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: itemIndex == index
+                        color: itemIndex == updateIndex
                             ? direction != AppinioSwiperDirection.right
                                 ? context.incorrectColor
                                 : context.correctColor
@@ -130,9 +122,7 @@ class _QuizItemCard extends ConsumerWidget {
                           ),
                           Gap(context.height * 0.01),
                           Text(
-                            direction == AppinioSwiperDirection.right
-                                ? '知っている'
-                                : '知らない',
+                            direction == AppinioSwiperDirection.right ? '知っている' : '知らない',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -175,9 +165,7 @@ class _QuizItemHeader extends ConsumerWidget {
             isShowText: false,
             size: 35,
             onTap: () {
-              ref
-                  .read(homeLearnScreenProvider.notifier)
-                  .tapSavedButton(itemIndex);
+              ref.read(homeLearnScreenProvider.notifier).tapSavedButton(itemIndex);
             },
           ),
         ),
@@ -255,8 +243,8 @@ class _SkeletonCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.02),
+        padding:
+            EdgeInsets.symmetric(horizontal: context.width * 0.02, vertical: context.width * 0.02),
         child: Shimmer.fromColors(
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,

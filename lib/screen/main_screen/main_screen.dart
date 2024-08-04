@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
@@ -154,16 +153,15 @@ class _BottomNavBar extends ConsumerWidget {
         fixedColor: context.mainColor,
         onTap: (index) async {
           ref.watch(mainScreenControllerProvider.notifier).setTabIndex(index);
-          HapticFeedback.lightImpact();
-          if (index == 1) {
-            ref.read(homeSearchScreenProvider.notifier).initState();
-          }
           if (index == 2) {
+            ref.read(homeSearchScreenProvider.notifier).initFilterQuiz();
+          }
+          if (index == 3) {
             ref.read(dashboardModelProvider.notifier).initState();
             ref.read(homeDashboardScreenProvider.notifier).initState();
             ref.read(homeQuizScreenProvider.notifier).initCategoryList();
           }
-          if (index == 3) {
+          if (index == 4) {
             ref.read(authProvider.notifier).initState();
             final isShowTrackingModal =
                 ref.read(mainScreenControllerProvider).isShowTrackingModal;

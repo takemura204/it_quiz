@@ -29,7 +29,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
       if (quizzes.isLoading) {
         await Future.wait([
-          _initFilterQuiz(),
+          initFilterQuiz(),
         ]);
       }
       setIsLoading(false);
@@ -44,7 +44,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     super.dispose();
   }
 
-  Future _initFilterQuiz() async {
+  Future initFilterQuiz() async {
     final quizItemList = ref
         .read(quizModelProvider)
         .quizList
@@ -169,7 +169,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
         isNotTextEmpty: false,
         isSavedFilter: false,
       );
-      await _initFilterQuiz();
+      await initFilterQuiz();
       return;
     }
     final Set<String> allKeywordsSet = {};
