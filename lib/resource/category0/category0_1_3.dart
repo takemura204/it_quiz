@@ -8,8 +8,7 @@ List<QuizItem> get category0_1_3 {
     QuizItem(
       word: 'SWOT分析',
       question: 'SWOT分析の説明として，適切なものはどれか。？',
-      ans:
-          '企業を取り巻く外的環境に潜む機会及び脅威，企業がもつ強み及び弱みを分析することによって，企業活動の今後の方向性を導き出すための手法である。',
+      ans: '企業を取り巻く外的環境に潜む機会及び脅威，企業がもつ強み及び弱みを分析することによって，企業活動の今後の方向性を導き出すための手法である。',
       choices: [
         "企業を取り巻く外的環境に潜む機会及び脅威，企業がもつ強み及び弱みを分析することによって，企業活動の今後の方向性を導き出すための手法である。",
         "財務の視点，顧客の視点，業務プロセスの視点，学習と成長の視点から企業の業績をバランスよく評価・分析するための手法である。",
@@ -61,8 +60,7 @@ List<QuizItem> get category0_1_3 {
         "事業に必要な資金の調達を目的として，自社の株式を株式市場に新規に公開すること",
         "M&社会的責任の遂行を目的として，利益の追求だけでなく社会貢献や環境へ配慮した活動を行うこと"
       ],
-      comment:
-          "TOB(Take Over Bid)は、ある株式会社の株式等の買付けを「買付け期間・買取り株数・価格」を公告し、不特定多数の株主から株式市場外で買い集める制度。",
+      comment: "TOB(Take Over Bid)は、ある株式会社の株式等の買付けを「買付け期間・買取り株数・価格」を公告し、不特定多数の株主から株式市場外で買い集める制度。",
       source: '平成26年秋期 問8',
       importance: QuizImportanceType.high,
     ),
@@ -152,7 +150,7 @@ List<QuizItem> get category0_1_3 {
         "従業員の創造性，行動能力や知恵，データベース上に蓄積された知識や情報をばらばらなものとしてではなく，統合された経営資源として活用を図る。"
       ],
       comment:
-          "ERP（Enterprise Resource Planning）は、企業の財務、製造、販売、人事などの各業務システムを統合管理することで、リアルタイムで情報を共有・分析することで、意思決定の迅速化や業務プロセスの最適化を実現するシステム。",
+          "ERPは、企業の財務、製造、販売、人事などの各業務システムを統合管理することで、リアルタイムで情報を共有・分析することで、意思決定の迅速化や業務プロセスの最適化を実現するシステム。",
       source: '平成22年秋期 問25',
       importance: QuizImportanceType.high,
     ),
@@ -166,8 +164,7 @@ List<QuizItem> get category0_1_3 {
         "従業員が製品の質の向上について組織的に努力することで，企業としての品質向上を図る。",
         "職場において上司などから実際の業務を通して必要な技術や知識を習得することで，業務処理能力の向上を図る。"
       ],
-      comment:
-          "MOT(Management of Technology)は、技術経営とも呼ばれ、技術開発の成果によって事業利益を獲得することを目的とした経営手法。",
+      comment: "MOT(Management of Technology)は、技術経営とも呼ばれ、技術開発の成果によって事業利益を獲得することを目的とした経営手法。",
       source: '平成27年秋期 問12',
       importance: QuizImportanceType.high,
     ),
@@ -189,7 +186,7 @@ List<QuizItem> get category0_1_3 {
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_1Index + 301, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_1Index + 301, isPremium: false);
   });
 }
