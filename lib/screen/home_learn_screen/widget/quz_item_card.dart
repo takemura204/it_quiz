@@ -46,7 +46,6 @@ class _QuizItemCard extends ConsumerWidget {
           return;
         },
         cardsBuilder: (BuildContext context, int index) {
-          final updateIndex = index;
           return GestureDetector(
             onTap: () {
               ref.read(homeLearnScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
@@ -63,79 +62,43 @@ class _QuizItemCard extends ConsumerWidget {
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Column(
-                    children: [
-                      _QuizItemHeader(
-                        itemIndex: index,
-                        quizItem: quizItemList[updateIndex],
-                      ),
-                      const Spacer(),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Gap(20),
 
-                      ///問題文
-                      _Question(
-                          quizItem: quizItemList[index],
-                          isAnsView: isAnsView && itemIndex == updateIndex),
-                      const Spacer(),
+                        ///問題文
+                        _Question(
+                            quizItem: quizItemList[index],
+                            isAnsView: isAnsView && itemIndex == index),
 
-                      ///問題進捗状況
-                      _QuizItemFooter(quizItemList, updateIndex),
-                      Gap(context.height * 0.01),
-                    ],
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ///カテゴリ
+                            _QuizItemCategory(quizItem: quizItemList[index]),
+                            const Gap(5),
+
+                            ///重要度
+                            _QuizItemImportance(quizItemList[index]),
+                            const Gap(5),
+
+                            ///ステータス
+                            _QuizItemStatus(quizItem: quizItemList[index]),
+                            const Spacer(),
+
+                            ///保存
+                            _QuizItemSaveButton(quizItemList, index),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                if (itemIndex == updateIndex && direction != null)
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: itemIndex == updateIndex
-                            ? direction != AppinioSwiperDirection.right
-                                ? context.incorrectColor
-                                : context.correctColor
-                            : context.secondColor,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                      color: direction != AppinioSwiperDirection.right
-                          ? context.incorrectColor.withOpacity(0.2)
-                          : context.correctColor.withOpacity(0.2),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: context.height * 0.18,
-                            height: context.height * 0.18,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.8),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              direction == AppinioSwiperDirection.right
-                                  ? Icons.thumb_up
-                                  : Icons.question_mark_outlined,
-                              color: direction != AppinioSwiperDirection.right
-                                  ? context.incorrectColor.withOpacity(0.6)
-                                  : context.correctColor.withOpacity(0.6),
-                              size: context.height * 0.1,
-                            ),
-                          ),
-                          Gap(context.height * 0.01),
-                          Text(
-                            direction == AppinioSwiperDirection.right ? '知っている' : '知らない',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: direction != AppinioSwiperDirection.right
-                                  ? context.incorrectColor.withOpacity(0.8)
-                                  : context.correctColor.withOpacity(0.8),
-                              fontFamily: 'Hiragino Kaku Gothic ProN',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                if (itemIndex == index && direction != null)
+                  _DirectionStatusCard(index: index, itemIndex: itemIndex, direction: direction),
               ],
             ),
           );
@@ -145,91 +108,219 @@ class _QuizItemCard extends ConsumerWidget {
   }
 }
 
-///保存ボタン・ジャンル
-class _QuizItemHeader extends ConsumerWidget {
-  const _QuizItemHeader({required this.itemIndex, required this.quizItem});
+///カテゴリ
+class _QuizItemCategory extends ConsumerWidget {
+  const _QuizItemCategory({required this.quizItem});
 
-  final int itemIndex;
   final QuizItem quizItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        ///保存ボタン
-        Container(
-          padding: const EdgeInsets.only(top: 5, right: 5),
-          child: SaveIconButton(
-            quizItem: quizItem,
-            isShowText: false,
-            size: 35,
-            onTap: () {
-              ref.read(homeLearnScreenProvider.notifier).tapSavedButton(itemIndex);
-            },
+    final quizList = ref.watch(quizModelProvider.select((s) => s.quizList));
+    final categoryName = quizList
+        .firstWhere((quiz) => quiz.quizItemList.any((item) => item.quizId == quizItem.quizId))
+        .category;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black54, width: 0.5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: Text(
+          categoryName,
+          style: const TextStyle(
+            color: Colors.black54,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
           ),
         ),
-      ],
+      ),
     );
   }
 }
 
-///重要度・進捗度
-class _QuizItemFooter extends ConsumerWidget {
-  const _QuizItemFooter(this.quizItemList, this.index);
+///重要度
+class _QuizItemImportance extends ConsumerWidget {
+  const _QuizItemImportance(this.quizItem);
+
+  final QuizItem quizItem;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black54, width: 0.5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              '重要度',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              ' ${I18n().quizImportanceText(quizItem.importance)}',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+///ステータス
+class _QuizItemStatus extends ConsumerWidget {
+  const _QuizItemStatus({required this.quizItem});
+
+  final QuizItem quizItem;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    Color iconColor(QuizStatusType statusType) {
+      switch (statusType) {
+        case QuizStatusType.correct:
+          return context.correctColor;
+        case QuizStatusType.incorrect:
+          return context.incorrectColor;
+        case QuizStatusType.learned:
+          return context.backgroundColor;
+        case QuizStatusType.unlearned:
+          return context.secondColor;
+        default:
+          return context.secondColor;
+      }
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black54, width: 0.5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: Row(
+          children: [
+            Container(
+              height: 15,
+              width: 15,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: iconColor(quizItem.status),
+                border: Border.all(
+                    width: 1,
+                    color: iconColor(quizItem.status) == context.backgroundColor
+                        ? context.mainColor
+                        : iconColor(quizItem.status)),
+              ),
+            ),
+            const Gap(3),
+            Text(I18n().quizStatusTypeText(quizItem.status),
+                style:
+                    context.texts.bodyMedium?.copyWith(fontSize: 12, fontWeight: FontWeight.bold)),
+            const Gap(3),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+///保存ボタン
+class _QuizItemSaveButton extends ConsumerWidget {
+  const _QuizItemSaveButton(this.quizItemList, this.index);
 
   final List<QuizItem> quizItemList;
   final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return SaveIconButton(
+      quizItem: quizItemList[index],
+      isShowText: false,
+      size: 32,
+      onTap: () {
+        ref.read(homeLearnScreenProvider.notifier).tapSavedButton(index);
+      },
+    );
+  }
+}
+
+///スワイプ中のカード
+class _DirectionStatusCard extends ConsumerWidget {
+  const _DirectionStatusCard(
+      {required this.index, required this.itemIndex, required this.direction});
+
+  final int index;
+  final int itemIndex;
+  final AppinioSwiperDirection direction;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        textBaseline: TextBaseline.alphabetic,
-        children: [
-          Gap(context.width * 0.02),
-          const Text(
-            '重要度',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: itemIndex == index
+              ? direction != AppinioSwiperDirection.right
+                  ? context.incorrectColor
+                  : context.correctColor
+              : context.secondColor,
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        color: direction != AppinioSwiperDirection.right
+            ? context.incorrectColor.withOpacity(0.2)
+            : context.correctColor.withOpacity(0.2),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: context.height * 0.18,
+              height: context.height * 0.18,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.8),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                direction == AppinioSwiperDirection.right
+                    ? Icons.thumb_up
+                    : Icons.question_mark_outlined,
+                color: direction != AppinioSwiperDirection.right
+                    ? context.incorrectColor.withOpacity(0.6)
+                    : context.correctColor.withOpacity(0.6),
+                size: context.height * 0.1,
+              ),
             ),
-          ),
-          Text(
-            ' ${I18n().quizImportanceText(quizItemList[index].importance)}',
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
+            Gap(context.height * 0.01),
+            Text(
+              direction == AppinioSwiperDirection.right ? '知っている' : '知らない',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: direction != AppinioSwiperDirection.right
+                    ? context.incorrectColor.withOpacity(0.8)
+                    : context.correctColor.withOpacity(0.8),
+                fontFamily: 'Hiragino Kaku Gothic ProN',
+              ),
             ),
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              Text(
-                "${index + 1}",
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              const Text(
-                " / ",
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              Text(
-                "${quizItemList.length}",
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-          Gap(context.width * 0.05),
-        ],
+          ],
+        ),
       ),
     );
   }

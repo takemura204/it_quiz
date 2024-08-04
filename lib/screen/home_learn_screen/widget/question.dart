@@ -10,7 +10,7 @@ class _Question extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
+      padding: EdgeInsets.only(left: context.width * 0.01, right: context.width * 0.03),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -21,8 +21,7 @@ class _Question extends ConsumerWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
             },
-            child:
-                isAnsView ? _AnsQuestion(quizItem) : _ConfirmQuestion(quizItem),
+            child: isAnsView ? _AnsQuestion(quizItem) : _ConfirmQuestion(quizItem),
           ),
         ],
       ),
@@ -67,8 +66,7 @@ class _ConfirmQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SubstringHighlight(
-      text: quizItem.comment
-          .replaceAll(quizItem.word, I18n().hideText(quizItem.word)),
+      text: quizItem.comment.replaceAll(quizItem.word, I18n().hideText(quizItem.word)),
       term: quizItem.word,
       textStyle: const TextStyle(
         fontSize: 16,

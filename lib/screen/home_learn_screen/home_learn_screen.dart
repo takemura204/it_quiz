@@ -5,12 +5,14 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_learn/home_learn_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../untils/enums.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/button_icon/save_button.dart';
@@ -39,6 +41,18 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.quizItemList));
+    final knowQuizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.knowQuizItemList));
+    final unKnowQuizItemList =
+        ref.watch(homeLearnScreenProvider.select((s) => s.unKnowQuizItemList));
+    final itemIndex = ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
+    final totalItems =
+        quizItemList.length + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
+    final currentIndex =
+        itemIndex + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
+    final progress = totalItems > 0 ? currentIndex / totalItems : 0.0;
+    final direction = ref.watch(homeLearnScreenProvider.select((s) => s.direction));
+
     return const Column(
       mainAxisSize: MainAxisSize.min,
       children: [

@@ -5,11 +5,16 @@ class _ProgressTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lapIndex = ref.watch(homeLearnScreenProvider).lapIndex;
+    final direction = ref.watch(homeLearnScreenProvider.select((s) => s.direction));
+    final quizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.quizItemList));
     final knowQuizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.knowQuizItemList));
     final unKnowQuizItemList =
         ref.watch(homeLearnScreenProvider.select((s) => s.unKnowQuizItemList));
-    final direction = ref.watch(homeLearnScreenProvider.select((s) => s.direction));
+    final itemIndex = ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
+    final totalItems =
+        quizItemList.length + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
+    final currentIndex =
+        itemIndex + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -43,13 +48,10 @@ class _ProgressTile extends ConsumerWidget {
           ),
         ),
 
-        ///何周目
+        ///何問目
         Text(
-          '$lapIndex周目',
-          style: const TextStyle(
-            color: Colors.black54,
-            fontWeight: FontWeight.bold,
-          ),
+          '$currentIndex / $totalItems',
+          style: const TextStyle(color: Colors.black54, fontWeight: FontWeight.bold),
         ),
 
         ///知っている

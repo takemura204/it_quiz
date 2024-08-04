@@ -10,12 +10,15 @@ class _QuizItemProgressBar extends HookConsumerWidget {
     final unKnowQuizItemList =
         ref.watch(homeLearnScreenProvider.select((s) => s.unKnowQuizItemList));
     final itemIndex = ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
-    final totalItems = quizItemList.length + knowQuizItemList.length + unKnowQuizItemList.length;
-    final currentIndex = itemIndex + knowQuizItemList.length + unKnowQuizItemList.length;
-    final progress = currentIndex / totalItems;
+    final totalItems =
+        quizItemList.length + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
+    final currentIndex =
+        itemIndex + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
+    final progress = totalItems > 0 ? currentIndex / totalItems : 0.0;
 
     return Container(
       height: 5.0,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: context.secondColor,
         borderRadius: BorderRadius.circular(5.0),

@@ -1,8 +1,7 @@
 part of 'home_search_screen.dart';
 
 class _SearchBar extends ConsumerWidget {
-  const _SearchBar(
-      {required this.isNotTextEmpty, required this.textEditingController});
+  const _SearchBar({required this.isNotTextEmpty, required this.textEditingController});
 
   final bool isNotTextEmpty;
   final TextEditingController textEditingController;
@@ -20,9 +19,7 @@ class _SearchBar extends ConsumerWidget {
             searchController: textEditingController,
             isTextEmpty: isNotTextEmpty,
             onChanged: (_) {
-              ref
-                  .read(homeSearchScreenProvider.notifier)
-                  .setSearchText(textEditingController.text);
+              ref.read(homeSearchScreenProvider.notifier).setSearchText(textEditingController.text);
             },
             onFieldSubmitted: (_) {
               ref
@@ -65,8 +62,7 @@ class _QuizResultView extends ConsumerWidget {
               ),
             );
           }
-          return _QuizItemCard(
-              index: index, quizItemList: filteredQuizItemList);
+          return _QuizItemCard(index: index, quizItemList: filteredQuizItemList);
         },
         childCount: isScrollLoading
             ? maxItemsToDisplay + 1
@@ -86,8 +82,7 @@ class _QuizItemCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchKeywords = ref.watch(homeSearchScreenProvider).searchKeywords;
     final termToHighlight = searchKeywords.join('|');
-    final isPremium = ref.watch(authModelProvider).isPremium ||
-        !quizItemList[index].isPremium;
+    final isPremium = ref.watch(authModelProvider).isPremium || !quizItemList[index].isPremium;
     return GestureDetector(
       onTap: () {
         if (!isPremium) {
@@ -138,8 +133,7 @@ class _QuizItemCard extends ConsumerWidget {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
-                      context.showScreen(
-                          const PremiumDetailScreenArguments().generateRoute());
+                      context.showScreen(const PremiumDetailScreenArguments().generateRoute());
                     },
                   ));
         }
@@ -198,11 +192,9 @@ class _QuizItemCard extends ConsumerWidget {
                               SaveIconButton(
                                 quizItem: quizItemList[index],
                                 isShowText: true,
-                                size: 35,
+                                size: 30,
                                 onTap: () {
-                                  ref
-                                      .read(homeSearchScreenProvider.notifier)
-                                      .tapSaveButton(index);
+                                  ref.read(homeSearchScreenProvider.notifier).tapSaveButton(index);
                                 },
                               ),
                           ],

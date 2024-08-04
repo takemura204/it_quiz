@@ -18,11 +18,9 @@ class _StatusCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final statusList =
-        ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
+    final statusList = ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
     final sortedCards = _getSortedCards(context, statusList);
-    final homeTarget3 =
-        ref.read(tutorialControllerProvider.notifier).homeTarget3;
+    final homeTarget3 = ref.read(tutorialControllerProvider.notifier).homeTarget3;
 
     return Column(
       key: homeTarget3,
@@ -35,8 +33,7 @@ class _StatusCards extends ConsumerWidget {
         const SizedBox(height: 10),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             _StatusRecommendCard(
               value: goalValue,
             ),
@@ -64,25 +61,12 @@ class _StatusCards extends ConsumerWidget {
     );
   }
 
-  List<StatusCard> _getSortedCards(
-      BuildContext context, List<QuizStatusType> statusList) {
+  List<StatusCard> _getSortedCards(BuildContext context, List<QuizStatusType> statusList) {
     final List<StatusCard> cards = [
-      StatusCard(
-          status: statusList[0],
-          value: unlearnedValue,
-          iconColor: context.secondColor),
-      StatusCard(
-          status: statusList[1],
-          value: learnedValue,
-          iconColor: context.backgroundColor),
-      StatusCard(
-          status: statusList[2],
-          value: incorrectValue,
-          iconColor: context.incorrectColor),
-      StatusCard(
-          status: statusList[3],
-          value: correctValue,
-          iconColor: context.correctColor),
+      StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
+      StatusCard(status: statusList[1], value: learnedValue, iconColor: context.backgroundColor),
+      StatusCard(status: statusList[2], value: incorrectValue, iconColor: context.incorrectColor),
+      StatusCard(status: statusList[3], value: correctValue, iconColor: context.correctColor),
     ];
     cards.sort((a, b) => a.value == 0 ? 1 : -1);
     return cards;
@@ -106,8 +90,8 @@ class _StatusCard extends ConsumerWidget {
     final selectedStatusList =
         ref.watch(homeQuizScreenProvider.select((s) => s.selectedStatusList));
     final isSelected = selectedStatusList.contains(status);
-    final isQuizStatusRecommend = ref
-        .watch(homeQuizScreenProvider.select((s) => s.isQuizStatusRecommend));
+    final isQuizStatusRecommend =
+        ref.watch(homeQuizScreenProvider.select((s) => s.isQuizStatusRecommend));
 
     final isExists = value != 0;
 
@@ -115,13 +99,9 @@ class _StatusCard extends ConsumerWidget {
       onTap: isExists
           ? () {
               if (isQuizStatusRecommend) {
-                ref
-                    .read(homeQuizScreenProvider.notifier)
-                    .setIsisQuizStatusRecommend(false);
+                ref.read(homeQuizScreenProvider.notifier).setIsisQuizStatusRecommend(false);
               }
-              ref
-                  .read(homeQuizScreenProvider.notifier)
-                  .setQuizStatusList(status);
+              ref.read(homeQuizScreenProvider.notifier).setQuizStatusList(status);
               HapticFeedback.lightImpact();
             }
           : null,
@@ -173,15 +153,12 @@ class _StatusCard extends ConsumerWidget {
                   color: iconColor,
                   border: Border.all(
                       width: 1,
-                      color: iconColor == context.backgroundColor
-                          ? context.mainColor
-                          : iconColor),
+                      color: iconColor == context.backgroundColor ? context.mainColor : iconColor),
                 ),
               ),
               const Gap(3),
               Text(I18n().quizStatusTypeText(status),
-                  style: context.texts.bodyMedium
-                      ?.copyWith(fontWeight: FontWeight.bold)),
+                  style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(3),
               Text(
                 "$value問",
@@ -216,16 +193,14 @@ class _StatusRecommendCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isQuizStatusRecommend = ref
-        .watch(homeQuizScreenProvider.select((s) => s.isQuizStatusRecommend));
+    final isQuizStatusRecommend =
+        ref.watch(homeQuizScreenProvider.select((s) => s.isQuizStatusRecommend));
     final isExists = value != 0;
 
     return GestureDetector(
       onTap: () {
         if (!isQuizStatusRecommend) {
-          ref
-              .read(homeQuizScreenProvider.notifier)
-              .setIsisQuizStatusRecommend(true);
+          ref.read(homeQuizScreenProvider.notifier).setIsisQuizStatusRecommend(true);
           ref.read(homeQuizScreenProvider.notifier).removeQuizStatusList();
           HapticFeedback.lightImpact();
         }
@@ -273,9 +248,7 @@ class _StatusRecommendCard extends ConsumerWidget {
                 ],
               ),
               const Gap(3),
-              Text('おすすめ',
-                  style: context.texts.bodyMedium
-                      ?.copyWith(fontWeight: FontWeight.bold)),
+              Text('おすすめ', style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(3),
               Text(
                 "全$value問",
@@ -306,6 +279,5 @@ class StatusCard {
   final int value;
   final Color iconColor;
 
-  StatusCard(
-      {required this.status, required this.value, required this.iconColor});
+  StatusCard({required this.status, required this.value, required this.iconColor});
 }

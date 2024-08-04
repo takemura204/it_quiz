@@ -88,7 +88,7 @@ class I18n {
   String quizStatusTypeText(QuizStatusType statusType) {
     switch (statusType) {
       case QuizStatusType.correct:
-        return '正解';
+        return '正解済';
       case QuizStatusType.incorrect:
         return '不正解';
       case QuizStatusType.learned:
@@ -278,13 +278,11 @@ class I18n {
   ///　テキスト候補
   String get caseErrorText1 => "このメールアドレスは既に登録済みです。\nログイン画面から入力をお願いします。";
 
-  String get caseErrorText2 =>
-      "このメールアドレスは正しくありません。メールアドレスが正しい形式かご確認の上、もう一度お試しください。";
+  String get caseErrorText2 => "このメールアドレスは正しくありません。メールアドレスが正しい形式かご確認の上、もう一度お試しください。";
 
   String get caseErrorText3 => "このメールアドレスは登録されていません。\n新規登録画面から入力をお願いします。";
 
-  String get caseErrorText4 =>
-      "入力したメールアドレスまたはパスワードは正しくありません。\n正しい情報かご確認の上、もう一度お試しください。";
+  String get caseErrorText4 => "入力したメールアドレスまたはパスワードは正しくありません。\n正しい情報かご確認の上、もう一度お試しください。";
 
   String get caseErrorText5 => "このアカウントは一時的に無効となってます。\nしばらくしてから、もう一度お試しください。";
 

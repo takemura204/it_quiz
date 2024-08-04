@@ -5,8 +5,7 @@ class _QuizCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final swiperController =
-        ref.watch(quizLearnScreenProvider.notifier).swiperController;
+    final swiperController = ref.watch(quizLearnScreenProvider.notifier).swiperController;
     final direction = ref.watch(quizLearnScreenProvider).direction;
     final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
     final isAns = ref.watch(quizLearnScreenProvider).isAnsView;
@@ -20,16 +19,14 @@ class _QuizCard extends ConsumerWidget {
         ),
       );
     }
-    final learnTarget1 =
-        ref.read(tutorialControllerProvider.notifier).learnTarget1;
-    final learnTarget3 =
-        ref.read(tutorialControllerProvider.notifier).learnTarget3;
-    final isShowTapAnimation = ref
-        .watch(tutorialControllerProvider.select((s) => s.isShowTapAnimation));
-    final isShowSwipeRightAnimation = ref.watch(
-        tutorialControllerProvider.select((s) => s.isShowSwipeRightAnimation));
-    final isShowSwipeLeftAnimation = ref.watch(
-        tutorialControllerProvider.select((s) => s.isShowSwipeLeftAnimation));
+    final learnTarget1 = ref.read(tutorialControllerProvider.notifier).learnTarget1;
+    final learnTarget3 = ref.read(tutorialControllerProvider.notifier).learnTarget3;
+    final isShowTapAnimation =
+        ref.watch(tutorialControllerProvider.select((s) => s.isShowTapAnimation));
+    final isShowSwipeRightAnimation =
+        ref.watch(tutorialControllerProvider.select((s) => s.isShowSwipeRightAnimation));
+    final isShowSwipeLeftAnimation =
+        ref.watch(tutorialControllerProvider.select((s) => s.isShowSwipeLeftAnimation));
     return Expanded(
       child: Stack(
         alignment: Alignment.center,
@@ -38,32 +35,23 @@ class _QuizCard extends ConsumerWidget {
             controller: swiperController,
             cardsCount: quizItemList.length,
             loop: true,
-            backgroundCardsCount:
-                (quizIndex + 1 == quizItemList.length) ? 0 : 1,
+            backgroundCardsCount: (quizIndex + 1 == quizItemList.length) ? 0 : 1,
             padding: EdgeInsets.symmetric(
-                horizontal: context.width * 0.02,
-                vertical: context.width * 0.02),
+                horizontal: context.width * 0.02, vertical: context.width * 0.02),
             cardsSpacing: 0,
             maxAngle: 90,
-            swipeOptions: const AppinioSwipeOptions.symmetric(
-                horizontal: true, vertical: false),
+            swipeOptions: const AppinioSwipeOptions.symmetric(horizontal: true, vertical: false),
             onSwipe: (index, direction) {
               // スワイプが完全に終了した時の処理
               if (direction == AppinioSwiperDirection.left) {
-                ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .tapActionButton(false);
+                ref.read(quizLearnScreenProvider.notifier).tapActionButton(false);
               } else if (direction == AppinioSwiperDirection.right) {
-                ref
-                    .read(quizLearnScreenProvider.notifier)
-                    .tapActionButton(true);
+                ref.read(quizLearnScreenProvider.notifier).tapActionButton(true);
               }
               HapticFeedback.mediumImpact();
             },
             onSwiping: (direction) {
-              ref
-                  .read(quizLearnScreenProvider.notifier)
-                  .setDirection(direction);
+              ref.read(quizLearnScreenProvider.notifier).setDirection(direction);
             },
             onEnd: () {
               print("All cards swiped");
@@ -77,9 +65,7 @@ class _QuizCard extends ConsumerWidget {
               return GestureDetector(
                 key: index == 0 ? learnTarget1 : null,
                 onTap: () {
-                  ref
-                      .read(quizLearnScreenProvider.notifier)
-                      .setIsAnsView(true); // 画面切り替え
+                  ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
                 },
                 child: Card(
                   elevation: 0,
@@ -121,11 +107,9 @@ class _QuizCard extends ConsumerWidget {
                           child: SaveIconButton(
                             quizItem: quizItem,
                             isShowText: false,
-                            size: 35,
+                            size: 30,
                             onTap: () {
-                              ref
-                                  .read(quizLearnScreenProvider.notifier)
-                                  .tapSavedButton(index);
+                              ref.read(quizLearnScreenProvider.notifier).tapSavedButton(index);
                             },
                           ),
                         ),
@@ -159,48 +143,38 @@ class _ActionButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAnsView = ref.watch(quizLearnScreenProvider).isAnsView;
-    final learnTarget2 =
-        ref.read(tutorialControllerProvider.notifier).learnTarget2;
+    final learnTarget2 = ref.read(tutorialControllerProvider.notifier).learnTarget2;
     return isAnsView
-        ? Row(
-            key: learnTarget2,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-                ///知らない
-                CustomCircleButton(
-                  iconData: Icons.question_mark_outlined,
-                  iconSize: 35,
-                  containerSize: 100,
-                  containerColor: context.incorrectColor,
-                  iconColor: Colors.white,
-                  text: I18n().buttonUnKnow,
-                  onPressed: () {
-                    ref
-                        .read(quizLearnScreenProvider.notifier)
-                        .swiperController
-                        .swipeLeft();
-                    HapticFeedback.mediumImpact();
-                  },
-                ),
-                Gap(context.width * 0.02),
+        ? Row(key: learnTarget2, mainAxisAlignment: MainAxisAlignment.center, children: [
+            ///知らない
+            CustomCircleButton(
+              iconData: Icons.question_mark_outlined,
+              iconSize: 35,
+              containerSize: 100,
+              containerColor: context.incorrectColor,
+              iconColor: Colors.white,
+              text: I18n().buttonUnKnow,
+              onPressed: () {
+                ref.read(quizLearnScreenProvider.notifier).swiperController.swipeLeft();
+                HapticFeedback.mediumImpact();
+              },
+            ),
+            Gap(context.width * 0.02),
 
-                ///知ってる
-                CustomCircleButton(
-                  iconData: Icons.thumb_up,
-                  iconSize: 35,
-                  containerSize: 100,
-                  containerColor: context.correctColor,
-                  iconColor: Colors.white,
-                  text: I18n().buttonKnow,
-                  onPressed: () {
-                    ref
-                        .read(quizLearnScreenProvider.notifier)
-                        .swiperController
-                        .swipeRight();
-                    HapticFeedback.mediumImpact();
-                  },
-                ),
-              ])
+            ///知ってる
+            CustomCircleButton(
+              iconData: Icons.thumb_up,
+              iconSize: 35,
+              containerSize: 100,
+              containerColor: context.correctColor,
+              iconColor: Colors.white,
+              text: I18n().buttonKnow,
+              onPressed: () {
+                ref.read(quizLearnScreenProvider.notifier).swiperController.swipeRight();
+                HapticFeedback.mediumImpact();
+              },
+            ),
+          ])
         :
 
         ///確認する
@@ -239,8 +213,7 @@ class _Question extends ConsumerWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(child: child, opacity: animation);
             },
-            child:
-                isAnsView ? _AnsQuestion(quizItem) : _ConfirmQuestion(quizItem),
+            child: isAnsView ? _AnsQuestion(quizItem) : _ConfirmQuestion(quizItem),
           ),
         ],
       ),
@@ -285,8 +258,7 @@ class _ConfirmQuestion extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SubstringHighlight(
-      text: quizItem.comment
-          .replaceAll(quizItem.word, I18n().hideText(quizItem.word)),
+      text: quizItem.comment.replaceAll(quizItem.word, I18n().hideText(quizItem.word)),
       term: quizItem.word,
       textStyle: const TextStyle(
         fontSize: 16,
@@ -412,13 +384,8 @@ class _LapInfoBar extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                     child: AutoSizeText(
-                      ref
-                          .watch(quizLearnScreenProvider)
-                          .unKnowQuizItemList
-                          .length
-                          .toString(),
-                      style: context.texts.titleMedium
-                          ?.copyWith(color: Colors.redAccent.shade100),
+                      ref.watch(quizLearnScreenProvider).unKnowQuizItemList.length.toString(),
+                      style: context.texts.titleMedium?.copyWith(color: Colors.redAccent.shade100),
                       minFontSize: 20,
                     ),
                   ),
@@ -436,13 +403,8 @@ class _LapInfoBar extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                     child: AutoSizeText(
-                      ref
-                          .watch(quizLearnScreenProvider)
-                          .knowQuizItemList
-                          .length
-                          .toString(),
-                      style: context.texts.titleMedium
-                          ?.copyWith(color: Colors.green.shade400),
+                      ref.watch(quizLearnScreenProvider).knowQuizItemList.length.toString(),
+                      style: context.texts.titleMedium?.copyWith(color: Colors.green.shade400),
                       minFontSize: 20,
                     ),
                   ),
