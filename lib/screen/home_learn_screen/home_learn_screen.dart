@@ -1,5 +1,4 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -18,11 +17,9 @@ import '../../view/button_icon/save_button.dart';
 import '../screen_argument.dart';
 
 part 'widget/action_buttons.dart';
-
+part 'widget/progress_bar.dart';
 part 'widget/progress_tile.dart';
-
 part 'widget/question.dart';
-
 part 'widget/quz_item_card.dart';
 
 class HomeLearnScreen extends HookConsumerWidget {
@@ -45,7 +42,9 @@ class _Body extends ConsumerWidget {
     return const Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Gap(5),
+        ///プログレスバー
+        _QuizItemProgressBar(),
+        Gap(10),
 
         ///何周目か確認
         _ProgressTile(),
