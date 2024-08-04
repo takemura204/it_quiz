@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
@@ -28,20 +29,18 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isShowTutorialModal = ref.watch(
-        mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
-    final isShowTrackingModal = ref.watch(
-        mainScreenControllerProvider.select((s) => s.isShowTrackingModal));
-    final isShowPremiumDetailScreen = ref.watch(mainScreenControllerProvider
-        .select((s) => s.isShowPremiumDetailScreen));
-    final currentTabIndex = ref
-        .watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
+    final isShowTutorialModal =
+        ref.watch(mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
+    final isShowTrackingModal =
+        ref.watch(mainScreenControllerProvider.select((s) => s.isShowTrackingModal));
+    final isShowPremiumDetailScreen =
+        ref.watch(mainScreenControllerProvider.select((s) => s.isShowPremiumDetailScreen));
+    final currentTabIndex =
+        ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
     Future<void>.delayed(Duration.zero, () async {
       //チュートリアルモーダル表示
       if (isShowTutorialModal) {
-        ref
-            .read(mainScreenControllerProvider.notifier)
-            .setIsShowTutorialModal(false);
+        ref.read(mainScreenControllerProvider.notifier).setIsShowTutorialModal(false);
         await showDialog(
           barrierDismissible: false,
           context: context,
@@ -52,9 +51,7 @@ class MainScreen extends ConsumerWidget {
       }
       //トラッキングモーダル表示
       if (isShowTrackingModal && currentTabIndex == 3) {
-        ref
-            .read(mainScreenControllerProvider.notifier)
-            .setIsShowTrackingModal(false);
+        ref.read(mainScreenControllerProvider.notifier).setIsShowTrackingModal(false);
         if (Platform.isIOS)
           await showDialog(
             barrierDismissible: false,
@@ -66,12 +63,9 @@ class MainScreen extends ConsumerWidget {
       }
       //プレミアム画面表示
       if (isShowPremiumDetailScreen) {
-        ref
-            .read(mainScreenControllerProvider.notifier)
-            .setIsShowPremiumDetailScreen(false);
+        ref.read(mainScreenControllerProvider.notifier).setIsShowPremiumDetailScreen(false);
         Future<void>.delayed(const Duration(milliseconds: 750), () async {
-          context
-              .showScreen(const PremiumDetailScreenArguments().generateRoute());
+          context.showScreen(const PremiumDetailScreenArguments().generateRoute());
         });
       }
     });
@@ -87,8 +81,8 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentTabIndex = ref
-        .watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
+    final currentTabIndex =
+        ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
 
     return IndexedStack(
       sizing: StackFit.expand,
@@ -116,8 +110,18 @@ class _BottomNavBar extends ConsumerWidget {
         iconSize: 35,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(LineIcons.tags),
-            activeIcon: const Icon(LineIcons.tags),
+            icon: SvgPicture.asset(
+              'assets/icon/swipe_cards.svg',
+              width: 35,
+              height: 35,
+              colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/icon/swipe_cards_active.svg',
+              width: 35,
+              height: 35,
+              colorFilter: ColorFilter.mode(context.mainColor, BlendMode.srcIn),
+            ),
             label: I18n().titleLearn,
           ),
           BottomNavigationBarItem(
@@ -163,8 +167,7 @@ class _BottomNavBar extends ConsumerWidget {
           }
           if (index == 4) {
             ref.read(authProvider.notifier).initState();
-            final isShowTrackingModal =
-                ref.read(mainScreenControllerProvider).isShowTrackingModal;
+            final isShowTrackingModal = ref.read(mainScreenControllerProvider).isShowTrackingModal;
             if (!isShowTrackingModal) {
               ref.read(settingNotificationProvider.notifier).initState();
             }
