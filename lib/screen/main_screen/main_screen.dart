@@ -114,7 +114,7 @@ class _BottomNavBar extends ConsumerWidget {
               'assets/icon/swipe_cards.svg',
               width: 35,
               height: 35,
-              colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(Colors.black45, BlendMode.srcIn),
             ),
             activeIcon: SvgPicture.asset(
               'assets/icon/swipe_cards_active.svg',

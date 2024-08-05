@@ -9,6 +9,7 @@ part 'home_learn_screen_state.freezed.dart';
 class HomeLearnScreenState with _$HomeLearnScreenState {
   const factory HomeLearnScreenState({
     @Default(false) final bool isLoading,
+    @Default(false) final bool isTutorialDone,
     @Default(false) final bool isAnsView,
     @Default([]) final List<QuizItem> quizItemList,
     @Default([]) final List<QuizItem> knowQuizItemList,

@@ -31,6 +31,7 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
   final quizItemListName = 'home_learn_item_list';
   final knowQuizItemListName = 'home_learn_know_item_list';
   final unKnowQuizItemListName = 'home_learn_unKnow_item_list';
+  final homeLearnIsTutorial = 'homeLearnIsTutorial';
 
   Future _initState() async {
     setIsLoading(true);
@@ -40,6 +41,7 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
         await Future.wait([
           // resetData(),
           _initQuizItemList(),
+          getIsTutorialDone(),
         ]);
       }
       _saveDevice();
@@ -308,10 +310,26 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
     state = state.copyWith(isLoading: value);
   }
 
+  Future getIsTutorialDone() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isTutorialData = prefs.getBool(homeLearnIsTutorial);
+    if (isTutorialData != null) {
+      state = state.copyWith(isTutorialDone: isTutorialData);
+    }
+  }
+
+  Future setIsTutorialDone(bool value) async {
+    state = state.copyWith(isTutorialDone: value);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(homeLearnIsTutorial, value);
+    print({'isTutorialDone', state.isTutorialDone});
+  }
+
   Future resetData() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(quizItemListName);
     prefs.remove(knowQuizItemListName);
     prefs.remove(unKnowQuizItemListName);
+    prefs.remove(homeLearnIsTutorial);
   }
 }

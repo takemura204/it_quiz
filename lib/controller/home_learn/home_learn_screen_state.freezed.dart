@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeLearnScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isTutorialDone => throw _privateConstructorUsedError;
   bool get isAnsView => throw _privateConstructorUsedError;
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get knowQuizItemList => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $HomeLearnScreenStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isTutorialDone,
       bool isAnsView,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
@@ -62,6 +64,7 @@ class _$HomeLearnScreenStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isTutorialDone = null,
     Object? isAnsView = null,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
@@ -74,6 +77,10 @@ class _$HomeLearnScreenStateCopyWithImpl<$Res,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isTutorialDone: null == isTutorialDone
+          ? _value.isTutorialDone
+          : isTutorialDone // ignore: cast_nullable_to_non_nullable
               as bool,
       isAnsView: null == isAnsView
           ? _value.isAnsView
@@ -117,6 +124,7 @@ abstract class _$$_HomeLearnScreenStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isTutorialDone,
       bool isAnsView,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
@@ -138,6 +146,7 @@ class __$$_HomeLearnScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isTutorialDone = null,
     Object? isAnsView = null,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
@@ -150,6 +159,10 @@ class __$$_HomeLearnScreenStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isTutorialDone: null == isTutorialDone
+          ? _value.isTutorialDone
+          : isTutorialDone // ignore: cast_nullable_to_non_nullable
               as bool,
       isAnsView: null == isAnsView
           ? _value.isAnsView
@@ -188,6 +201,7 @@ class __$$_HomeLearnScreenStateCopyWithImpl<$Res>
 class _$_HomeLearnScreenState implements _HomeLearnScreenState {
   const _$_HomeLearnScreenState(
       {this.isLoading = false,
+      this.isTutorialDone = false,
       this.isAnsView = false,
       final List<QuizItem> quizItemList = const [],
       final List<QuizItem> knowQuizItemList = const [],
@@ -202,6 +216,9 @@ class _$_HomeLearnScreenState implements _HomeLearnScreenState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isTutorialDone;
   @override
   @JsonKey()
   final bool isAnsView;
@@ -245,7 +262,7 @@ class _$_HomeLearnScreenState implements _HomeLearnScreenState {
 
   @override
   String toString() {
-    return 'HomeLearnScreenState(isLoading: $isLoading, isAnsView: $isAnsView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction)';
+    return 'HomeLearnScreenState(isLoading: $isLoading, isTutorialDone: $isTutorialDone, isAnsView: $isAnsView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction)';
   }
 
   @override
@@ -255,6 +272,8 @@ class _$_HomeLearnScreenState implements _HomeLearnScreenState {
             other is _$_HomeLearnScreenState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isTutorialDone, isTutorialDone) ||
+                other.isTutorialDone == isTutorialDone) &&
             (identical(other.isAnsView, isAnsView) ||
                 other.isAnsView == isAnsView) &&
             const DeepCollectionEquality()
@@ -275,6 +294,7 @@ class _$_HomeLearnScreenState implements _HomeLearnScreenState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isTutorialDone,
       isAnsView,
       const DeepCollectionEquality().hash(_quizItemList),
       const DeepCollectionEquality().hash(_knowQuizItemList),
@@ -294,6 +314,7 @@ class _$_HomeLearnScreenState implements _HomeLearnScreenState {
 abstract class _HomeLearnScreenState implements HomeLearnScreenState {
   const factory _HomeLearnScreenState(
       {final bool isLoading,
+      final bool isTutorialDone,
       final bool isAnsView,
       final List<QuizItem> quizItemList,
       final List<QuizItem> knowQuizItemList,
@@ -304,6 +325,8 @@ abstract class _HomeLearnScreenState implements HomeLearnScreenState {
 
   @override
   bool get isLoading;
+  @override
+  bool get isTutorialDone;
   @override
   bool get isAnsView;
   @override

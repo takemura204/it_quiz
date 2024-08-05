@@ -8,6 +8,7 @@ class _QuizItemCard extends ConsumerWidget {
     final swiperController = ref.watch(homeLearnScreenProvider.notifier).swiperController;
     final direction = ref.watch(homeLearnScreenProvider.select((s) => s.direction));
     final quizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.quizItemList));
+    final isTutorialDone = ref.watch(homeLearnScreenProvider.select((s) => s.isTutorialDone));
     final isAnsView = ref.watch(homeLearnScreenProvider.select((s) => s.isAnsView));
     final itemIndex = ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
 
@@ -27,6 +28,10 @@ class _QuizItemCard extends ConsumerWidget {
         maxAngle: 90,
         swipeOptions: const AppinioSwipeOptions.symmetric(horizontal: true, vertical: false),
         onSwipe: (index, direction) {
+          // チュートリアルカードが表示されている時
+          if (!isTutorialDone) {
+            ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+          }
           // スワイプが完全に終了した時の処理
           if (direction == AppinioSwiperDirection.left) {
             ref.read(homeLearnScreenProvider.notifier).updateHomeLearnQuizItem(false);
@@ -36,6 +41,9 @@ class _QuizItemCard extends ConsumerWidget {
           HapticFeedback.mediumImpact();
         },
         onSwiping: (direction) {
+          if (!isTutorialDone) {
+            ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+          }
           ref.read(homeLearnScreenProvider.notifier).setDirection(direction);
         },
         onEnd: () {
@@ -48,6 +56,9 @@ class _QuizItemCard extends ConsumerWidget {
         cardsBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
+              if (!isTutorialDone) {
+                ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+              }
               ref.read(homeLearnScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
             },
             child: Stack(
@@ -99,6 +110,7 @@ class _QuizItemCard extends ConsumerWidget {
                 ),
                 if (itemIndex == index && direction != null)
                   _DirectionStatusCard(index: index, itemIndex: itemIndex, direction: direction),
+                if (!isTutorialDone) const _QuizItemTutorialCard(),
               ],
             ),
           );
@@ -321,6 +333,113 @@ class _DirectionStatusCard extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// チュートリアルカード
+class _QuizItemTutorialCard extends ConsumerWidget {
+  const _QuizItemTutorialCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.grey.withOpacity(0.85),
+      ),
+      child: Stack(
+        children: [
+          // 点線を描画
+          Positioned.fill(
+            child: CustomPaint(
+              painter: DottedLinePainter(isVertical: true),
+            ),
+          ),
+          Positioned.fill(
+            child: CustomPaint(
+              painter: DottedLinePainter(isVertical: false),
+            ),
+          ),
+
+          // 左上の領域（赤）
+          Positioned(
+            top: 0,
+            left: 0,
+            child: Container(
+              width: context.width * 0.48,
+              height: context.height * 0.4,
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icon/swipe_left.svg',
+                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    height: 80,
+                    width: 80,
+                  ),
+                  const Text(
+                    '左スワイプで\n「知らない」',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // 右上の領域（青）
+          Positioned(
+            top: 0,
+            right: 0,
+            child: Container(
+              width: context.width * 0.48,
+              height: context.height * 0.4,
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icon/swipe_right.svg',
+                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    height: 80,
+                    width: 80,
+                  ),
+                  const Text(
+                    '右スワイプで\n「知っている」',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // 下の領域（緑）
+          Positioned(
+            bottom: 0,
+            left: 0,
+            child: Container(
+              width: context.width,
+              height: context.height * 0.12,
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icon/swipe_tap.svg',
+                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    height: 70,
+                    width: 70,
+                  ),
+                  const Text(
+                    'タップで\n答え表示',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

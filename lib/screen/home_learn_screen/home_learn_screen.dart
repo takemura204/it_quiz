@@ -1,6 +1,7 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_learn/home_learn_screen_controller.dart';
@@ -16,6 +17,7 @@ import '../../untils/enums.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/button_icon/save_button.dart';
+import '../../view/chart/dotted_line_painter.dart';
 import '../screen_argument.dart';
 
 part 'widget/action_buttons.dart';
@@ -83,6 +85,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isTutorialDone = ref.watch(homeLearnScreenProvider.select((s) => s.isTutorialDone));
     return AppBar(
       title: Text(I18n().titleName),
       centerTitle: true,
@@ -92,9 +95,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             iconSize: 32,
             padding: EdgeInsets.zero,
             onPressed: () {
-              context.showScreen(
-                const QuizHistoryScreenArguments().generateRoute(),
-              );
+              ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(!isTutorialDone);
               HapticFeedback.lightImpact();
             },
             icon: Icon(
