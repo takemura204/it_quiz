@@ -1,15 +1,15 @@
-part of '../home_learn_screen.dart';
+part of '../home_study_screen.dart';
 
 class _QuizItemProgressBar extends HookConsumerWidget {
   const _QuizItemProgressBar();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.quizItemList));
-    final knowQuizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.knowQuizItemList));
+    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final knowQuizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.knowQuizItemList));
     final unKnowQuizItemList =
-        ref.watch(homeLearnScreenProvider.select((s) => s.unKnowQuizItemList));
-    final itemIndex = ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
+        ref.watch(homeStudyScreenProvider.select((s) => s.unKnowQuizItemList));
+    final itemIndex = ref.watch(homeStudyScreenProvider.select((s) => s.itemIndex));
     final totalItems =
         quizItemList.length + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
     final currentIndex =

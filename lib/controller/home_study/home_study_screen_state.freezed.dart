@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_learn_screen_state.dart';
+part of 'home_study_screen_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$HomeLearnScreenState {
+mixin _$HomeStudyScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isTutorialDone => throw _privateConstructorUsedError;
   bool get isAnsView => throw _privateConstructorUsedError;
@@ -27,15 +27,15 @@ mixin _$HomeLearnScreenState {
   AppinioSwiperDirection? get direction => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HomeLearnScreenStateCopyWith<HomeLearnScreenState> get copyWith =>
+  $HomeStudyScreenStateCopyWith<HomeStudyScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HomeLearnScreenStateCopyWith<$Res> {
-  factory $HomeLearnScreenStateCopyWith(HomeLearnScreenState value,
-          $Res Function(HomeLearnScreenState) then) =
-      _$HomeLearnScreenStateCopyWithImpl<$Res, HomeLearnScreenState>;
+abstract class $HomeStudyScreenStateCopyWith<$Res> {
+  factory $HomeStudyScreenStateCopyWith(HomeStudyScreenState value,
+          $Res Function(HomeStudyScreenState) then) =
+      _$HomeStudyScreenStateCopyWithImpl<$Res, HomeStudyScreenState>;
   @useResult
   $Res call(
       {bool isLoading,
@@ -50,10 +50,10 @@ abstract class $HomeLearnScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HomeLearnScreenStateCopyWithImpl<$Res,
-        $Val extends HomeLearnScreenState>
-    implements $HomeLearnScreenStateCopyWith<$Res> {
-  _$HomeLearnScreenStateCopyWithImpl(this._value, this._then);
+class _$HomeStudyScreenStateCopyWithImpl<$Res,
+        $Val extends HomeStudyScreenState>
+    implements $HomeStudyScreenStateCopyWith<$Res> {
+  _$HomeStudyScreenStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -115,11 +115,11 @@ class _$HomeLearnScreenStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_HomeLearnScreenStateCopyWith<$Res>
-    implements $HomeLearnScreenStateCopyWith<$Res> {
-  factory _$$_HomeLearnScreenStateCopyWith(_$_HomeLearnScreenState value,
-          $Res Function(_$_HomeLearnScreenState) then) =
-      __$$_HomeLearnScreenStateCopyWithImpl<$Res>;
+abstract class _$$_HomeStudyScreenStateCopyWith<$Res>
+    implements $HomeStudyScreenStateCopyWith<$Res> {
+  factory _$$_HomeStudyScreenStateCopyWith(_$_HomeStudyScreenState value,
+          $Res Function(_$_HomeStudyScreenState) then) =
+      __$$_HomeStudyScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -135,11 +135,11 @@ abstract class _$$_HomeLearnScreenStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_HomeLearnScreenStateCopyWithImpl<$Res>
-    extends _$HomeLearnScreenStateCopyWithImpl<$Res, _$_HomeLearnScreenState>
-    implements _$$_HomeLearnScreenStateCopyWith<$Res> {
-  __$$_HomeLearnScreenStateCopyWithImpl(_$_HomeLearnScreenState _value,
-      $Res Function(_$_HomeLearnScreenState) _then)
+class __$$_HomeStudyScreenStateCopyWithImpl<$Res>
+    extends _$HomeStudyScreenStateCopyWithImpl<$Res, _$_HomeStudyScreenState>
+    implements _$$_HomeStudyScreenStateCopyWith<$Res> {
+  __$$_HomeStudyScreenStateCopyWithImpl(_$_HomeStudyScreenState _value,
+      $Res Function(_$_HomeStudyScreenState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,7 +155,7 @@ class __$$_HomeLearnScreenStateCopyWithImpl<$Res>
     Object? lapIndex = null,
     Object? direction = freezed,
   }) {
-    return _then(_$_HomeLearnScreenState(
+    return _then(_$_HomeStudyScreenState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -198,8 +198,8 @@ class __$$_HomeLearnScreenStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeLearnScreenState implements _HomeLearnScreenState {
-  const _$_HomeLearnScreenState(
+class _$_HomeStudyScreenState implements _HomeStudyScreenState {
+  const _$_HomeStudyScreenState(
       {this.isLoading = false,
       this.isTutorialDone = false,
       this.isAnsView = false,
@@ -262,14 +262,14 @@ class _$_HomeLearnScreenState implements _HomeLearnScreenState {
 
   @override
   String toString() {
-    return 'HomeLearnScreenState(isLoading: $isLoading, isTutorialDone: $isTutorialDone, isAnsView: $isAnsView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction)';
+    return 'HomeStudyScreenState(isLoading: $isLoading, isTutorialDone: $isTutorialDone, isAnsView: $isAnsView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomeLearnScreenState &&
+            other is _$_HomeStudyScreenState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isTutorialDone, isTutorialDone) ||
@@ -306,13 +306,13 @@ class _$_HomeLearnScreenState implements _HomeLearnScreenState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HomeLearnScreenStateCopyWith<_$_HomeLearnScreenState> get copyWith =>
-      __$$_HomeLearnScreenStateCopyWithImpl<_$_HomeLearnScreenState>(
+  _$$_HomeStudyScreenStateCopyWith<_$_HomeStudyScreenState> get copyWith =>
+      __$$_HomeStudyScreenStateCopyWithImpl<_$_HomeStudyScreenState>(
           this, _$identity);
 }
 
-abstract class _HomeLearnScreenState implements HomeLearnScreenState {
-  const factory _HomeLearnScreenState(
+abstract class _HomeStudyScreenState implements HomeStudyScreenState {
+  const factory _HomeStudyScreenState(
       {final bool isLoading,
       final bool isTutorialDone,
       final bool isAnsView,
@@ -321,7 +321,7 @@ abstract class _HomeLearnScreenState implements HomeLearnScreenState {
       final List<QuizItem> unKnowQuizItemList,
       final int itemIndex,
       final int lapIndex,
-      final AppinioSwiperDirection? direction}) = _$_HomeLearnScreenState;
+      final AppinioSwiperDirection? direction}) = _$_HomeStudyScreenState;
 
   @override
   bool get isLoading;
@@ -343,6 +343,6 @@ abstract class _HomeLearnScreenState implements HomeLearnScreenState {
   AppinioSwiperDirection? get direction;
   @override
   @JsonKey(ignore: true)
-  _$$_HomeLearnScreenStateCopyWith<_$_HomeLearnScreenState> get copyWith =>
+  _$$_HomeStudyScreenStateCopyWith<_$_HomeStudyScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }

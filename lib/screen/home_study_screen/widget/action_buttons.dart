@@ -1,13 +1,13 @@
-part of '../home_learn_screen.dart';
+part of '../home_study_screen.dart';
 
 class _ActionButtons extends ConsumerWidget {
   const _ActionButtons();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAnsView = ref.watch(homeLearnScreenProvider.select((s) => s.isAnsView));
-    final direction = ref.watch(homeLearnScreenProvider.select((s) => s.direction));
-    final isTutorialDone = ref.watch(homeLearnScreenProvider.select((s) => s.isTutorialDone));
+    final isAnsView = ref.watch(homeStudyScreenProvider.select((s) => s.isAnsView));
+    final direction = ref.watch(homeStudyScreenProvider.select((s) => s.direction));
+    final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       ///知らない
       CustomCircleButton(
@@ -20,10 +20,10 @@ class _ActionButtons extends ConsumerWidget {
         text: I18n().buttonUnKnow,
         onPressed: () {
           if (!isTutorialDone) {
-            ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
           }
-          ref.read(homeLearnScreenProvider.notifier).setDirection(AppinioSwiperDirection.left);
-          ref.read(homeLearnScreenProvider.notifier).swiperController.swipeLeft();
+          ref.read(homeStudyScreenProvider.notifier).setDirection(AppinioSwiperDirection.left);
+          ref.read(homeStudyScreenProvider.notifier).swiperController.swipeLeft();
           HapticFeedback.mediumImpact();
         },
       ),
@@ -41,9 +41,9 @@ class _ActionButtons extends ConsumerWidget {
             ? null
             : () {
                 if (!isTutorialDone) {
-                  ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+                  ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
                 }
-                ref.read(homeLearnScreenProvider.notifier).setIsAnsView(true);
+                ref.read(homeStudyScreenProvider.notifier).setIsAnsView(true);
                 HapticFeedback.mediumImpact();
               },
       ),
@@ -61,10 +61,10 @@ class _ActionButtons extends ConsumerWidget {
         text: I18n().buttonKnow,
         onPressed: () {
           if (!isTutorialDone) {
-            ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
           }
-          ref.read(homeLearnScreenProvider.notifier).setDirection(AppinioSwiperDirection.right);
-          ref.read(homeLearnScreenProvider.notifier).swiperController.swipeRight();
+          ref.read(homeStudyScreenProvider.notifier).setDirection(AppinioSwiperDirection.right);
+          ref.read(homeStudyScreenProvider.notifier).swiperController.swipeRight();
           HapticFeedback.mediumImpact();
         },
       ),

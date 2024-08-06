@@ -18,10 +18,10 @@ import '../../model/lang/initial_resource.dart';
 import '../../view/modals/need_tracking_modal.dart';
 import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
-import '../home_learn_screen/home_learn_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
 import '../home_search_screen/home_search_screen.dart';
 import '../home_setting_screen/home_setting_screen.dart';
+import '../home_study_screen/home_study_screen.dart';
 import '../screen_argument.dart';
 
 class MainScreen extends ConsumerWidget {
@@ -88,7 +88,7 @@ class _Body extends ConsumerWidget {
       sizing: StackFit.expand,
       index: currentTabIndex,
       children: const [
-        HomeLearnScreen(),
+        HomeStudyScreen(),
         HomeQuizScreen(),
         HomeSearchScreen(),
         HomeDashboardScreen(),

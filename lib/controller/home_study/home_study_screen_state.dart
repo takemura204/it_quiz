@@ -3,11 +3,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../model/quiz_item/quiz_item.dart';
 
-part 'home_learn_screen_state.freezed.dart';
+part 'home_study_screen_state.freezed.dart';
 
 @freezed
-class HomeLearnScreenState with _$HomeLearnScreenState {
-  const factory HomeLearnScreenState({
+class HomeStudyScreenState with _$HomeStudyScreenState {
+  const factory HomeStudyScreenState({
     @Default(false) final bool isLoading,
     @Default(false) final bool isTutorialDone,
     @Default(false) final bool isAnsView,
@@ -17,5 +17,5 @@ class HomeLearnScreenState with _$HomeLearnScreenState {
     @Default(0) final int itemIndex,
     @Default(0) final int lapIndex,
     AppinioSwiperDirection? direction,
-  }) = _HomeLearnScreenState;
+  }) = _HomeStudyScreenState;
 }

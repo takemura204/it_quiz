@@ -1,16 +1,16 @@
-part of '../home_learn_screen.dart';
+part of '../home_study_screen.dart';
 
 class _QuizItemCard extends ConsumerWidget {
   const _QuizItemCard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final swiperController = ref.watch(homeLearnScreenProvider.notifier).swiperController;
-    final direction = ref.watch(homeLearnScreenProvider.select((s) => s.direction));
-    final quizItemList = ref.watch(homeLearnScreenProvider.select((s) => s.quizItemList));
-    final isTutorialDone = ref.watch(homeLearnScreenProvider.select((s) => s.isTutorialDone));
-    final isAnsView = ref.watch(homeLearnScreenProvider.select((s) => s.isAnsView));
-    final itemIndex = ref.watch(homeLearnScreenProvider.select((s) => s.itemIndex));
+    final swiperController = ref.watch(homeStudyScreenProvider.notifier).swiperController;
+    final direction = ref.watch(homeStudyScreenProvider.select((s) => s.direction));
+    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
+    final isAnsView = ref.watch(homeStudyScreenProvider.select((s) => s.isAnsView));
+    final itemIndex = ref.watch(homeStudyScreenProvider.select((s) => s.itemIndex));
 
     if (quizItemList.isEmpty) {
       return const _SkeletonCard();
@@ -30,36 +30,36 @@ class _QuizItemCard extends ConsumerWidget {
         onSwipe: (index, direction) {
           // チュートリアルカードが表示されている時
           if (!isTutorialDone) {
-            ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
           }
           // スワイプが完全に終了した時の処理
           if (direction == AppinioSwiperDirection.left) {
-            ref.read(homeLearnScreenProvider.notifier).updateHomeLearnQuizItem(false);
+            ref.read(homeStudyScreenProvider.notifier).updateHomeLearnQuizItem(false);
           } else if (direction == AppinioSwiperDirection.right) {
-            ref.read(homeLearnScreenProvider.notifier).updateHomeLearnQuizItem(true);
+            ref.read(homeStudyScreenProvider.notifier).updateHomeLearnQuizItem(true);
           }
           HapticFeedback.mediumImpact();
         },
         onSwiping: (direction) {
           if (!isTutorialDone) {
-            ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
           }
-          ref.read(homeLearnScreenProvider.notifier).setDirection(direction);
+          ref.read(homeStudyScreenProvider.notifier).setDirection(direction);
         },
         onEnd: () {
           print("All cards swiped");
         },
         onSwipeCancelled: () {
-          ref.read(homeLearnScreenProvider.notifier).setDirection(null);
+          ref.read(homeStudyScreenProvider.notifier).setDirection(null);
           return;
         },
         cardsBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
               if (!isTutorialDone) {
-                ref.read(homeLearnScreenProvider.notifier).setIsTutorialDone(true);
+                ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
               }
-              ref.read(homeLearnScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
+              ref.read(homeStudyScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
             },
             child: Stack(
               children: [
@@ -266,7 +266,7 @@ class _QuizItemSaveButton extends ConsumerWidget {
       isShowText: false,
       size: 32,
       onTap: () {
-        ref.read(homeLearnScreenProvider.notifier).tapSavedButton(index);
+        ref.read(homeStudyScreenProvider.notifier).tapSavedButton(index);
       },
     );
   }

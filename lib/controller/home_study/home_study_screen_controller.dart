@@ -12,26 +12,26 @@ import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
 import '../../untils/enums.dart';
-import 'home_learn_screen_state.dart';
+import 'home_study_screen_state.dart';
 
-final homeLearnScreenProvider =
-    StateNotifierProvider<HomeLearnScreenController, HomeLearnScreenState>(
-  (ref) => HomeLearnScreenController(ref: ref),
+final homeStudyScreenProvider =
+    StateNotifierProvider<HomeStudyScreenController, HomeStudyScreenState>(
+  (ref) => HomeStudyScreenController(ref: ref),
   dependencies: [quizModelProvider],
 );
 
-class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
+class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     with LocatorMixin, WidgetsBindingObserver {
-  HomeLearnScreenController({required this.ref}) : super(const HomeLearnScreenState()) {
+  HomeStudyScreenController({required this.ref}) : super(const HomeStudyScreenState()) {
     _initState();
   }
 
   final Ref ref;
   late AppinioSwiperController swiperController;
-  final quizItemListName = 'home_learn_item_list';
-  final knowQuizItemListName = 'home_learn_know_item_list';
-  final unKnowQuizItemListName = 'home_learn_unKnow_item_list';
-  final homeLearnIsTutorial = 'homeLearnIsTutorial';
+  final quizItemListName = 'study_item_list';
+  final knowQuizItemListName = 'study_know_item_list';
+  final unKnowQuizItemListName = 'study_unKnow_item_list';
+  final studyIsTutorialDone = 'studyIsTutorialDone';
 
   Future _initState() async {
     setIsLoading(true);
@@ -39,9 +39,11 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
     ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
       if (quizzes.isLoading) {
         await Future.wait([
-          // resetData(),
+          resetData(),
           _initQuizItemList(),
           getIsTutorialDone(),
+
+          ///学習時間計測したい
         ]);
       }
       _saveDevice();
@@ -312,7 +314,7 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
 
   Future getIsTutorialDone() async {
     final prefs = await SharedPreferences.getInstance();
-    final isTutorialData = prefs.getBool(homeLearnIsTutorial);
+    final isTutorialData = prefs.getBool(studyIsTutorialDone);
     if (isTutorialData != null) {
       state = state.copyWith(isTutorialDone: isTutorialData);
     }
@@ -321,7 +323,7 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
   Future setIsTutorialDone(bool value) async {
     state = state.copyWith(isTutorialDone: value);
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(homeLearnIsTutorial, value);
+    await prefs.setBool(studyIsTutorialDone, value);
     print({'isTutorialDone', state.isTutorialDone});
   }
 
@@ -330,6 +332,6 @@ class HomeLearnScreenController extends StateNotifier<HomeLearnScreenState>
     prefs.remove(quizItemListName);
     prefs.remove(knowQuizItemListName);
     prefs.remove(unKnowQuizItemListName);
-    prefs.remove(homeLearnIsTutorial);
+    prefs.remove(studyIsTutorialDone);
   }
 }
