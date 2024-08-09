@@ -108,8 +108,7 @@ class QuizStatusProgressChart extends StatelessWidget {
           children: [
             buildBarSegment(context, context.secondColor, unlearnRate, '未学習'),
             buildBarSegment(context, context.backgroundColor, learnRate, '学習済'),
-            buildBarSegment(
-                context, context.incorrectColor, incorrectRate, '不正解'),
+            buildBarSegment(context, context.incorrectColor, incorrectRate, '不正解'),
             buildBarSegment(context, context.correctColor, correctRate, '正解'),
           ],
         ),
@@ -117,21 +116,19 @@ class QuizStatusProgressChart extends StatelessWidget {
     );
   }
 
-  Widget buildBarSegment(
-      BuildContext context, Color color, double progress, String label) {
+  Widget buildBarSegment(BuildContext context, Color color, double progress, String label) {
     return Expanded(
-      flex: (progress * 1000).round(), // セグメントの幅を割合で調整
+      flex: (progress * 100).round(), // セグメントの幅を割合で調整
       child: Container(
         color: color,
         alignment: Alignment.center,
         child: Text(
-          width > 50
+          width * progress > 30
               ? progress > 0
                   ? '${(progress * 100).round()}%'
                   : ''
               : '',
-          style:
-              context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+          style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
       ),
     );

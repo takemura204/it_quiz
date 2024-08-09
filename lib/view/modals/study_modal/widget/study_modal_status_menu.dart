@@ -1,8 +1,47 @@
-part of 'study_modal.dart';
+part of '../study_modal.dart';
 
-///問題範囲
-class _StatusCards extends ConsumerWidget {
-  const _StatusCards({
+class _StatusMenu extends HookConsumerWidget {
+  const _StatusMenu({
+    required this.goalValue,
+    required this.correctValue,
+    required this.incorrectValue,
+    required this.learnedValue,
+    required this.unlearnedValue,
+  });
+
+  final int goalValue;
+  final int correctValue;
+  final int incorrectValue;
+  final int learnedValue;
+  final int unlearnedValue;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: context.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '学習状況',
+            style: TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.bold),
+          ),
+          const Gap(10),
+          _StatusMenuList(
+            goalValue: goalValue,
+            correctValue: correctValue,
+            incorrectValue: incorrectValue,
+            learnedValue: learnedValue,
+            unlearnedValue: unlearnedValue,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatusMenuList extends HookConsumerWidget {
+  const _StatusMenuList({
     required this.goalValue,
     required this.correctValue,
     required this.incorrectValue,
@@ -20,44 +59,21 @@ class _StatusCards extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final statusList = ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
     final sortedCards = _getSortedCards(context, statusList);
-    final homeTarget3 = ref.read(tutorialControllerProvider.notifier).homeTarget3;
 
-    return Column(
-      key: homeTarget3,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          '問題範囲を選択してください。',
-          style: TextStyle(fontSize: 14, color: Colors.black54),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        _StatusRecommendCard(
+          value: goalValue,
         ),
-        const SizedBox(height: 10),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            _StatusRecommendCard(
-              value: goalValue,
-            ),
-            ...sortedCards
-                .map((card) => _StatusCard(
-                      status: card.status,
-                      value: card.value,
-                      iconColor: card.iconColor,
-                    ))
-                .toList(),
-          ]),
-        ),
-        const SizedBox(height: 15),
-        QuizStatusProgressChart(
-          width: context.width,
-          height: 25,
-          borderRadius: 8,
-          correctValue: correctValue,
-          incorrectValue: incorrectValue,
-          learnedValue: learnedValue,
-          unlearnedValue: unlearnedValue,
-          goalScore: goalValue,
-        ),
-      ],
+        ...sortedCards
+            .map((card) => _StatusCard(
+                  status: card.status,
+                  value: card.value,
+                  iconColor: card.iconColor,
+                ))
+            .toList(),
+      ]),
     );
   }
 
@@ -92,7 +108,6 @@ class _StatusCard extends ConsumerWidget {
     final isSelected = selectedStatusList.contains(status);
     final isQuizStatusRecommend =
         ref.watch(homeQuizScreenProvider.select((s) => s.isQuizStatusRecommend));
-
     final isExists = value != 0;
 
     return GestureDetector(

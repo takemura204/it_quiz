@@ -5,143 +5,101 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
 import '../../../controller/home_quiz/home_quiz_screen_controller.dart';
-import '../../../controller/tutorial/tutorial_controller.dart';
 import '../../../model/lang/initial_resource.dart';
-import '../../../model/quiz/quiz.dart';
 import '../../../model/quiz/quiz_model.dart';
+import '../../../model/quiz_item/quiz_item.dart';
 import '../../../screen/screen_argument.dart';
 import '../../../untils/enums.dart';
-import '../../button/defalut_button.dart';
 import '../../button/primary_button.dart';
 import '../../button_icon/clear_button.dart';
-import '../../chart/progress_line_chart.dart';
 import '../../icon/quarter_circle_icon.dart';
-import '../../quiz_length_tab_bar.dart';
 
-part 'study_modal_status_cards.dart';
-part 'study_modal_title.dart';
+part 'widget/study_modal_footer.dart';
+part 'widget/study_modal_header.dart';
+part 'widget/study_modal_importance_menu.dart';
+part 'widget/study_modal_range_menu.dart';
+part 'widget/study_modal_status_menu.dart';
+
+Future showStudyModal(BuildContext context, List<QuizItem> quizList) async {
+  await showModalBottomSheet<Widget>(
+    isScrollControlled: true,
+    context: context,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+        borderRadius:
+            BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+    builder: (context) {
+      return StudyModal(quizItemList: quizList);
+    },
+  );
+}
 
 ///クイズモーダル
-class StudyModal extends ConsumerWidget {
-  const StudyModal({required this.quiz});
+class StudyModal extends HookConsumerWidget {
+  const StudyModal({required this.quizItemList});
 
-  final Quiz quiz;
+  final List<QuizItem> quizItemList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final goalValue = quiz.quizItemList.length;
-    final correctValue = quiz.quizItemList
-        .where((x) => x.status == QuizStatusType.correct)
-        .toList()
-        .length;
-    final incorrectValue = quiz.quizItemList
-        .where((x) => x.status == QuizStatusType.incorrect)
-        .toList()
-        .length;
-    final learnedValue = quiz.quizItemList
-        .where((x) => x.status == QuizStatusType.learned)
-        .toList()
-        .length;
-    final unlearnedValue =
-        goalValue - (correctValue + incorrectValue + learnedValue);
-    final selectedStudyLength = ref.watch(
-        homeQuizScreenProvider.select((state) => state.selectedStudyLength));
-    final homeTarget2 =
-        ref.read(tutorialControllerProvider.notifier).homeTarget2;
-    final homeTarget5 =
-        ref.read(tutorialControllerProvider.notifier).homeTarget5;
+    final goalValue = quizItemList.length;
+    final correctValue =
+        quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length;
+    final incorrectValue =
+        quizItemList.where((x) => x.status == QuizStatusType.incorrect).toList().length;
+    final learnedValue =
+        quizItemList.where((x) => x.status == QuizStatusType.learned).toList().length;
+    final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
+    final selectedStudyLength =
+        ref.watch(homeQuizScreenProvider.select((state) => state.selectedStudyLength));
     return Container(
-      key: homeTarget2,
-      padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      height: context.height * 0.65,
+      margin: const EdgeInsets.only(top: 15),
+      color: Colors.white,
+      child: Stack(
+        alignment: Alignment.topCenter,
         children: [
-          const Gap(10),
-
-          ///タイトル
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(child: _Title(quiz)),
-              ClearButton(
-                iconSize: 35,
-                onPressed: () {},
-              ),
-            ],
-          ),
-          const Divider(height: 1),
-          const Gap(10),
-
-          ///学習状況
-          _StatusCards(
-            goalValue: goalValue,
-            correctValue: correctValue,
-            incorrectValue: incorrectValue,
-            learnedValue: learnedValue,
-            unlearnedValue: unlearnedValue,
-          ),
-          const Gap(10),
-          const Divider(height: 1),
-          const Gap(10),
-
-          ///問題数
-          QuizLengthTabBar(
-            selectedLength: selectedStudyLength,
-            onTap: (length) {
-              ref.read(homeQuizScreenProvider.notifier).setStudyLength(length);
-            },
-          ),
-          const Gap(10),
-          const Divider(height: 1),
-          const Gap(15),
-
-          ///一問一答
           Container(
-            key: homeTarget5,
-            child: DefaultButton(
-              width: context.width * 1,
-              height: 55,
-              text: I18n().styleLeanQuiz,
-              onPressed: () {
-                Navigator.of(context).pop();
-                ref
-                    .read(quizModelProvider.notifier)
-                    .setStudyType(StudyType.learn);
-                ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
-                final selectStudyQuiz =
-                    ref.read(homeQuizScreenProvider).selectStudyQuiz!;
-                context.showScreen(
-                  QuizLearnScreenArguments(
-                    quiz: selectStudyQuiz,
-                  ).generateRoute(),
-                );
-              },
+            margin: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+            child: Scrollbar(
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Gap(65),
+
+                    ///分野
+                    const _RangeMenu(),
+                    const Gap(10),
+
+                    ///学習状況
+                    _StatusMenu(
+                      goalValue: goalValue,
+                      correctValue: correctValue,
+                      incorrectValue: incorrectValue,
+                      learnedValue: learnedValue,
+                      unlearnedValue: unlearnedValue,
+                    ),
+                    const Gap(10),
+
+                    ///重要度
+                    const _ImportanceMenu(),
+                    const Gap(10),
+
+                    Gap(context.height * 0.04),
+                    const Gap(100),
+                  ],
+                ),
+              ),
             ),
           ),
-          const Gap(10),
-
-          ///4択形式クイズ
-          PrimaryButton(
-            width: context.width * 1,
-            height: 55,
-            title: I18n().styleChoiceQuiz,
-            onPressed: () {
-              Navigator.of(context).pop();
-              ref
-                  .read(quizModelProvider.notifier)
-                  .setStudyType(StudyType.choice);
-              ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
-              final selectStudyQuiz =
-                  ref.read(homeQuizScreenProvider).selectStudyQuiz!;
-              context.showScreen(
-                QuizChoiceScreenArguments(
-                  quiz: selectStudyQuiz,
-                ).generateRoute(),
-              );
-            },
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _Header(title: '絞り込み'),
+              _Footer(),
+            ],
           ),
-          Gap(context.height * 0.03),
         ],
       ),
     );

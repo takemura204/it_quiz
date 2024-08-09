@@ -8,10 +8,8 @@ class _QuizList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(quizModelProvider);
-    final quizList =
-        state.quizList.where((x) => x.category == category).toList();
-    final historyQuizList =
-        state.historyQuizList.where((x) => x.category == category).toList();
+    final quizList = state.quizList.where((x) => x.category == category).toList();
+    final historyQuizList = state.historyQuizList.where((x) => x.category == category).toList();
 
     return CustomScrollView(
       controller: ScrollController(),
@@ -32,32 +30,15 @@ class _QuizList extends ConsumerWidget {
                     subtitle: '${historyQuizList.last.title}',
                     onPressed: () {
                       final lastQuizId = historyQuizList.last.id;
-                      final index =
-                          quizList.indexWhere((quiz) => quiz.id == lastQuizId);
+                      final index = quizList.indexWhere((quiz) => quiz.id == lastQuizId);
 
                       if (index != -1) {
                         final quiz = quizList[index];
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .setQuizType(QuizStyleType.study);
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .setQuizIndex(index);
-                        ref
-                            .read(homeQuizScreenProvider.notifier)
-                            .setSelectQuiz(quiz);
+                        ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
+                        ref.read(quizModelProvider.notifier).setQuizIndex(index);
+                        ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
 
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15),
-                            ),
-                          ),
-                          builder: (_) => StudyModal(quiz: quiz),
-                        );
+                        showQuizModal(context, quiz.quizItemList);
                       }
                     },
                   )
@@ -68,25 +49,11 @@ class _QuizList extends ConsumerWidget {
                     subtitle: '${quizList.first.title}',
                     onPressed: () {
                       final quiz = quizList.first;
-                      ref
-                          .read(quizModelProvider.notifier)
-                          .setQuizType(QuizStyleType.study);
+                      ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
                       ref.read(quizModelProvider.notifier).setQuizIndex(0);
-                      ref
-                          .read(homeQuizScreenProvider.notifier)
-                          .setSelectQuiz(quiz);
+                      ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
 
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                        ),
-                        builder: (_) => StudyModal(quiz: quiz),
-                      );
+                      showQuizModal(context, quiz.quizItemList);
                     },
                   ),
           ),
@@ -121,69 +88,45 @@ class _QuizCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goalScore = quiz.quizItemList.length;
-    final currentScore = quiz.quizItemList
-        .where((x) => x.status == QuizStatusType.correct)
-        .toList()
-        .length;
+    final currentScore =
+        quiz.quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length;
     final correctRate = ((currentScore / goalScore) * 100).round();
-    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
-        !quiz.isPremium;
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) || !quiz.isPremium;
 
-    final isShowHomeTutorial = ref
-        .watch(tutorialControllerProvider.select((s) => s.isShowHomeTutorial));
+    final isShowHomeTutorial =
+        ref.watch(tutorialControllerProvider.select((s) => s.isShowHomeTutorial));
     Future<void>.delayed(Duration.zero, () async {
       if (isShowHomeTutorial && index == 0) {
-        ref
-            .read(tutorialControllerProvider.notifier)
-            .setIsShowHomeTutorial(false);
+        ref.read(tutorialControllerProvider.notifier).setIsShowHomeTutorial(false);
         ref.read(tutorialControllerProvider.notifier).showHomeTutorial(
               context: context,
               onClickTarget: (target) {
                 HapticFeedback.lightImpact();
                 if (target.identify == "homeTarget1") {
-                  ref
-                      .read(quizModelProvider.notifier)
-                      .setQuizType(QuizStyleType.study);
+                  ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
                   ref.read(quizModelProvider.notifier).setQuizIndex(index);
                   ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15)),
-                    ),
-                    builder: (_) => StudyModal(quiz: quiz),
-                  );
+                  showQuizModal(context, quiz.quizItemList);
                 } else if (target.identify == "homeTarget5") {
-                  ref
-                      .read(quizModelProvider.notifier)
-                      .setStudyType(StudyType.learn);
-                  ref
-                      .read(homeQuizScreenProvider.notifier)
-                      .setSelectStudyQuiz();
+                  ref.read(quizModelProvider.notifier).setStudyType(StudyType.learn);
+                  ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
                 }
               },
               onFinish: () {
                 Navigator.of(context).pop();
-                final selectStudyQuiz =
-                    ref.read(homeQuizScreenProvider).selectStudyQuiz!;
+                final selectStudyQuiz = ref.read(homeQuizScreenProvider).selectStudyQuiz!;
                 context.showScreen(
                   QuizLearnScreenArguments(
                     quiz: selectStudyQuiz,
                   ).generateRoute(),
                 );
-                ref
-                    .read(tutorialControllerProvider.notifier)
-                    .setIsShowLearnTutorial(true);
+                ref.read(tutorialControllerProvider.notifier).setIsShowLearnTutorial(true);
               },
             );
       }
     });
 
-    final homeTarget1 =
-        ref.read(tutorialControllerProvider.notifier).homeTarget1;
+    final homeTarget1 = ref.read(tutorialControllerProvider.notifier).homeTarget1;
     return GestureDetector(
       key: index == 0 && quiz.categoryId == 1 ? homeTarget1 : null,
       onTap: () {
@@ -191,15 +134,7 @@ class _QuizCard extends ConsumerWidget {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
           ref.read(quizModelProvider.notifier).setQuizIndex(index);
           ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-            ),
-            builder: (_) => StudyModal(quiz: quiz),
-          );
+          showQuizModal(context, quiz.quizItemList);
         } else {
           showDialog(
               context: context,
@@ -248,8 +183,7 @@ class _QuizCard extends ConsumerWidget {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
-                      context.showScreen(
-                          const PremiumDetailScreenArguments().generateRoute());
+                      context.showScreen(const PremiumDetailScreenArguments().generateRoute());
                     },
                   ));
         }
@@ -282,8 +216,7 @@ class _QuizCard extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                     child: Row(
                       children: [
                         Text(
@@ -316,8 +249,7 @@ class _ProgressIcon extends ConsumerWidget {
     final currentScore = quiz.correctNum;
     final isCompleted = quiz.isCompleted;
 
-    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
-        !quiz.isPremium;
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) || !quiz.isPremium;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -358,8 +290,7 @@ class _Title extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) ||
-        !quiz.isPremium;
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) || !quiz.isPremium;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,

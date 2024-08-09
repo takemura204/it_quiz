@@ -18,7 +18,7 @@ import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/button_icon/save_button.dart';
 import '../../view/chart/dotted_line_painter.dart';
-import '../screen_argument.dart';
+import '../../view/modals/study_modal/study_modal.dart';
 
 part 'widget/action_buttons.dart';
 part 'widget/progress_bar.dart';
@@ -74,6 +74,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
+    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
     return AppBar(
       title: Text(I18n().titleName),
       centerTitle: true,
@@ -95,10 +96,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         ),
         IconButton(
           onPressed: () {
-            ///分野、重要度、ステータス、問題範囲、単語→答え、繰り返し、保存済み、苦手、全て選択
-            context.showScreen(
-              const QuizHistoryScreenArguments().generateRoute(),
-            );
+            showStudyModal(context, quizItemList);
             HapticFeedback.lightImpact();
           },
           icon: Icon(

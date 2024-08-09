@@ -8,6 +8,7 @@ import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dar
 import 'package:kentei_quiz/controller/tutorial/tutorial_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
+import 'package:kentei_quiz/view/modals/quiz_modal/quiz_modal.dart';
 import 'package:kentei_quiz/view/modals/weak_modal.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -22,7 +23,6 @@ import '../../view/button/primary_button.dart';
 import '../../view/chart/progress_crilcle_chart.dart';
 import '../../view/modals/need_premium_modal.dart';
 import '../../view/modals/randam_modal.dart';
-import '../../view/modals/study_modal/study_modal.dart';
 import '../screen_argument.dart';
 
 part 'home_quiz_list.dart';
@@ -48,9 +48,7 @@ class HomeQuizScreen extends HookConsumerWidget {
 
     useEffect(() {
       void handleTabChange() {
-        ref
-            .read(homeQuizScreenProvider.notifier)
-            .setTabIndex(tabController.index);
+        ref.read(homeQuizScreenProvider.notifier).setTabIndex(tabController.index);
       }
 
       tabController.addListener(handleTabChange);
@@ -105,8 +103,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         ),
       ],
       bottom: PreferredSize(
-        preferredSize:
-            const Size.fromHeight(kToolbarHeight + kTextTabBarHeight),
+        preferredSize: const Size.fromHeight(kToolbarHeight + kTextTabBarHeight),
         child: TabBar(
           tabAlignment: TabAlignment.center,
           controller: tabController,
@@ -127,8 +124,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                 child: Text(
                   categoryList[index],
                   style: TextStyle(
-                    fontWeight:
-                        index == tabIndex ? FontWeight.bold : FontWeight.normal,
+                    fontWeight: index == tabIndex ? FontWeight.bold : FontWeight.normal,
                     fontSize: 16,
                   ),
                   maxLines: 2, // テキストが多い場合に 2 行まで表示を許可
@@ -144,8 +140,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(kToolbarHeight + kTextTabBarHeight); // 高さを適切に設定
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + kTextTabBarHeight); // 高さを適切に設定
 }
 
 class _Body extends ConsumerWidget {
@@ -164,9 +159,7 @@ class _Body extends ConsumerWidget {
       children: [
         TabBarView(
           controller: tabController,
-          children: categoryList
-              .map((category) => _QuizList(category: category))
-              .toList(),
+          children: categoryList.map((category) => _QuizList(category: category)).toList(),
         ),
         _BottomQuizMenu(
           weakQuiz: weakQuiz,

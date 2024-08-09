@@ -39,7 +39,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
       if (quizzes.isLoading) {
         await Future.wait([
-          resetData(),
+          // resetData(),
           _initQuizItemList(),
           getIsTutorialDone(),
 
