@@ -64,7 +64,7 @@ class NeedPremiumModal extends ConsumerWidget {
               const Gap(25),
 
               const Text(
-                '＼　たくさんの特典付き！　／',
+                '＼　他にもたくさんの特典付き！　／',
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

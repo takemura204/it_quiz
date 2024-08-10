@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
@@ -39,8 +40,9 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
       if (quizzes.isLoading) {
         await Future.wait([
-          // resetData(),
           _initQuizItemList(),
+          _initCategoryList(),
+          _initStatusList(),
           getIsTutorialDone(),
 
           ///学習時間計測したい
@@ -62,15 +64,12 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   Future _initQuizItemList() async {
     // プレミアムと無料会員でクイズを取得
     final isPremium = ref.read(authModelProvider).isPremium;
-    final premiumQuizItemList =
-        ref.read(quizModelProvider).quizList.expand((x) => x.quizItemList).toList();
-    final freeQuizItemList = ref
-        .read(quizModelProvider)
-        .quizList
-        .expand((x) => x.quizItemList)
-        .where((x) => !x.isPremium)
-        .toList();
-    final List<QuizItem> quizItemList = isPremium ? premiumQuizItemList : freeQuizItemList;
+    final premiumQuizList = ref.read(quizModelProvider).quizList;
+    final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
+    final quizList = isPremium ? premiumQuizList : freeQuizList;
+    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
+    print({'isPremium', isPremium});
+    print({'quizItemList', quizItemList.length});
 
     // ローカルで保存したクイズを取得
     final prefs = await SharedPreferences.getInstance();
@@ -145,6 +144,8 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       }
 
       state = state.copyWith(
+        quizList: premiumQuizList,
+        filterQuizList: quizList,
         quizItemList: updatedQuizItemList,
         knowQuizItemList: updatedKnowQuizItemList,
         unKnowQuizItemList: updatedUnKnowQuizItemList,
@@ -154,6 +155,57 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     else {
       state = state.copyWith(quizItemList: quizItemList);
     }
+  }
+
+  Future _initCategoryList() async {
+    final quizList = [...ref.read(quizModelProvider).quizList];
+    quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
+    final categoryList = quizList.map((quizItem) => quizItem.category).toSet().toList();
+    state = state.copyWith(categoryList: categoryList);
+  }
+
+  Future _initStatusList() async {
+    final quizList = [...ref.read(quizModelProvider).quizList];
+    quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
+    final statusList = state.quizItemList.map((quizItem) => quizItem.status).toSet().toList();
+    state = state.copyWith(statusList: statusList);
+  }
+
+  ///カテゴリで絞り込み
+  Future updateCategoryFilterQuizList({required Quiz quiz, required bool isSelected}) async {
+    final quizList = [...state.quizList];
+    final filterQuizList = [...state.filterQuizList];
+    final matchQuiz = quizList.firstWhere((x) => x.id == quiz.id);
+    if (isSelected) {
+      filterQuizList.remove(matchQuiz);
+    } else {
+      filterQuizList.add(matchQuiz);
+    }
+    filterQuizList.sort((a, b) => a.id.compareTo(b.id));
+    state = state.copyWith(filterQuizList: filterQuizList);
+  }
+
+  Future updateCategoryFilterAllQuizList(
+      {required List<Quiz> categoryQuizList, required bool isSelected}) async {
+    final List<Quiz> quizList = [...state.quizList];
+    final filterQuizList = [...state.filterQuizList];
+
+    if (isSelected) {
+      // isSelectedがtrueの場合、filterQuizListからcategoryQuizListに該当するクイズを除外
+      filterQuizList.removeWhere(
+          (quiz) => categoryQuizList.any((categoryQuiz) => categoryQuiz.id == quiz.id));
+    } else {
+      // isSelectedがfalseの場合、categoryQuizListからfilterQuizListに含まれていないクイズを抽出し追加
+      filterQuizList.addAll(categoryQuizList
+          .where((quiz) => !filterQuizList.any((x) => x.id == quiz.id))
+          .map((quiz) => quizList.firstWhere((x) => x.id == quiz.id)));
+    }
+
+    // filterQuizListをidでソート
+    filterQuizList.sort((a, b) => a.id.compareTo(b.id));
+
+    // stateを更新
+    state = state.copyWith(filterQuizList: filterQuizList);
   }
 
   ///「知っている・知らない」ボタンを押した時
@@ -324,7 +376,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     state = state.copyWith(isTutorialDone: value);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(studyIsTutorialDone, value);
-    print({'isTutorialDone', state.isTutorialDone});
   }
 
   Future resetData() async {

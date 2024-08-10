@@ -20,7 +20,7 @@ class _Header extends ConsumerWidget {
               alignment: Alignment.center,
               child: Text(
                 title,
-                style: context.texts.titleSmall,
+                style: context.texts.titleMedium,
               ),
             ),
           ),

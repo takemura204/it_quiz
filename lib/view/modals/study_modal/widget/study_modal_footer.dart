@@ -5,14 +5,17 @@ class _Footer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final filterQuizList = ref.watch(homeStudyScreenProvider.select((s) => s.filterQuizList));
+    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     return Container(
       color: context.backgroundColor,
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
       child: Column(
         children: [
-          const Text(
-            '73人に絞り込み中',
-            style: TextStyle(fontSize: 12, color: Colors.black54, fontWeight: FontWeight.bold),
+          Text(
+            '${filterQuizItemList.length}個に絞り込み中',
+            style:
+                const TextStyle(fontSize: 12, color: Colors.black54, fontWeight: FontWeight.bold),
           ),
           const Gap(10),
           PrimaryButton(

@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../../model/lang/initial_resource.dart';
+import '../../../model/quiz/quiz.dart';
 import '../../../model/quiz/quiz_model.dart';
-import '../../../model/quiz_item/quiz_item.dart';
+import '../../../model/user/auth_model.dart';
 import '../../../screen/screen_argument.dart';
 import '../../../untils/enums.dart';
 import '../../button/primary_button.dart';
 import '../../button_icon/clear_button.dart';
 import '../../icon/quarter_circle_icon.dart';
+import '../need_premium_modal.dart';
 
+part 'widget/study_modal_category_menu.dart';
 part 'widget/study_modal_footer.dart';
 part 'widget/study_modal_header.dart';
 part 'widget/study_modal_importance_menu.dart';
-part 'widget/study_modal_range_menu.dart';
+part 'widget/study_modal_menu_title.dart';
 part 'widget/study_modal_status_menu.dart';
 
-Future showStudyModal(BuildContext context, List<QuizItem> quizList) async {
+Future showStudyModal(BuildContext context) async {
   await showModalBottomSheet<Widget>(
     isScrollControlled: true,
     context: context,
@@ -29,29 +34,17 @@ Future showStudyModal(BuildContext context, List<QuizItem> quizList) async {
         borderRadius:
             BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
     builder: (context) {
-      return StudyModal(quizItemList: quizList);
+      return const StudyModal();
     },
   );
 }
 
 ///クイズモーダル
 class StudyModal extends HookConsumerWidget {
-  const StudyModal({required this.quizItemList});
-
-  final List<QuizItem> quizItemList;
+  const StudyModal();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final goalValue = quizItemList.length;
-    final correctValue =
-        quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length;
-    final incorrectValue =
-        quizItemList.where((x) => x.status == QuizStatusType.incorrect).toList().length;
-    final learnedValue =
-        quizItemList.where((x) => x.status == QuizStatusType.learned).toList().length;
-    final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
-    final selectedStudyLength =
-        ref.watch(homeQuizScreenProvider.select((state) => state.selectedStudyLength));
     return Container(
       height: context.height * 0.65,
       margin: const EdgeInsets.only(top: 15),
@@ -66,20 +59,14 @@ class StudyModal extends HookConsumerWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const Gap(65),
+                    const Gap(50),
 
                     ///分野
-                    const _RangeMenu(),
-                    const Gap(10),
+                    const _CategoryMenu(),
+                    const Gap(20),
 
                     ///学習状況
-                    _StatusMenu(
-                      goalValue: goalValue,
-                      correctValue: correctValue,
-                      incorrectValue: incorrectValue,
-                      learnedValue: learnedValue,
-                      unlearnedValue: unlearnedValue,
-                    ),
+                    const _StatusMenu(),
                     const Gap(10),
 
                     ///重要度

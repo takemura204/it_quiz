@@ -10,12 +10,9 @@ class _ImportanceMenu extends HookConsumerWidget {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '出題範囲',
-            style: TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.bold),
-          ),
+          _MenuTitle(title: '重要度'),
           Gap(10),
-          _RangeList(),
+          _ImportanceList(),
         ],
       ),
     );

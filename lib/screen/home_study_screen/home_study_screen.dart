@@ -21,9 +21,13 @@ import '../../view/chart/dotted_line_painter.dart';
 import '../../view/modals/study_modal/study_modal.dart';
 
 part 'widget/action_buttons.dart';
+
 part 'widget/progress_bar.dart';
+
 part 'widget/progress_tile.dart';
+
 part 'widget/question.dart';
+
 part 'widget/quz_item_card.dart';
 
 class HomeStudyScreen extends HookConsumerWidget {
@@ -74,7 +78,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
-    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
     return AppBar(
       title: Text(I18n().titleName),
       centerTitle: true,
@@ -96,7 +99,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         ),
         IconButton(
           onPressed: () {
-            showStudyModal(context, quizItemList);
+            showStudyModal(context);
             HapticFeedback.lightImpact();
           },
           icon: Icon(

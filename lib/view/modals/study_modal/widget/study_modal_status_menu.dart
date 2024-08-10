@@ -1,39 +1,18 @@
 part of '../study_modal.dart';
 
 class _StatusMenu extends HookConsumerWidget {
-  const _StatusMenu({
-    required this.goalValue,
-    required this.correctValue,
-    required this.incorrectValue,
-    required this.learnedValue,
-    required this.unlearnedValue,
-  });
-
-  final int goalValue;
-  final int correctValue;
-  final int incorrectValue;
-  final int learnedValue;
-  final int unlearnedValue;
+  const _StatusMenu();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: context.width,
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '学習状況',
-            style: TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.bold),
-          ),
-          const Gap(10),
-          _StatusMenuList(
-            goalValue: goalValue,
-            correctValue: correctValue,
-            incorrectValue: incorrectValue,
-            learnedValue: learnedValue,
-            unlearnedValue: unlearnedValue,
-          ),
+          _MenuTitle(title: '学習状況'),
+          Gap(10),
+          _StatusMenuList(),
         ],
       ),
     );
@@ -41,23 +20,31 @@ class _StatusMenu extends HookConsumerWidget {
 }
 
 class _StatusMenuList extends HookConsumerWidget {
-  const _StatusMenuList({
-    required this.goalValue,
-    required this.correctValue,
-    required this.incorrectValue,
-    required this.learnedValue,
-    required this.unlearnedValue,
-  });
-
-  final int goalValue;
-  final int correctValue;
-  final int incorrectValue;
-  final int learnedValue;
-  final int unlearnedValue;
+  const _StatusMenuList();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final goalValue = quizItemList.length;
+    final correctValue =
+        quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length;
+    final incorrectValue =
+        quizItemList.where((x) => x.status == QuizStatusType.incorrect).toList().length;
+    final learnedValue =
+        quizItemList.where((x) => x.status == QuizStatusType.learned).toList().length;
+    final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
     final statusList = ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
+    List<StatusCard> _getSortedCards(BuildContext context, List<QuizStatusType> statusList) {
+      final List<StatusCard> cards = [
+        StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
+        StatusCard(status: statusList[1], value: learnedValue, iconColor: context.backgroundColor),
+        StatusCard(status: statusList[2], value: incorrectValue, iconColor: context.incorrectColor),
+        StatusCard(status: statusList[3], value: correctValue, iconColor: context.correctColor),
+      ];
+      cards.sort((a, b) => a.value == 0 ? 1 : -1);
+      return cards;
+    }
+
     final sortedCards = _getSortedCards(context, statusList);
 
     return SingleChildScrollView(
@@ -75,17 +62,6 @@ class _StatusMenuList extends HookConsumerWidget {
             .toList(),
       ]),
     );
-  }
-
-  List<StatusCard> _getSortedCards(BuildContext context, List<QuizStatusType> statusList) {
-    final List<StatusCard> cards = [
-      StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
-      StatusCard(status: statusList[1], value: learnedValue, iconColor: context.backgroundColor),
-      StatusCard(status: statusList[2], value: incorrectValue, iconColor: context.incorrectColor),
-      StatusCard(status: statusList[3], value: correctValue, iconColor: context.correctColor),
-    ];
-    cards.sort((a, b) => a.value == 0 ? 1 : -1);
-    return cards;
   }
 }
 
@@ -263,7 +239,7 @@ class _StatusRecommendCard extends ConsumerWidget {
                 ],
               ),
               const Gap(3),
-              Text('おすすめ', style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+              Text('すべて', style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(3),
               Text(
                 "全$value問",
