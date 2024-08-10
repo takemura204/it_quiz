@@ -68,8 +68,9 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
     final quizList = isPremium ? premiumQuizList : freeQuizList;
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-    print({'isPremium', isPremium});
-    print({'quizItemList', quizItemList.length});
+    if (quizItemList.isEmpty) {
+      return;
+    }
 
     // ローカルで保存したクイズを取得
     final prefs = await SharedPreferences.getInstance();
