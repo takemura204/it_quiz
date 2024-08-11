@@ -24,11 +24,12 @@ class _CategoryList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPremium = ref.read(authModelProvider).isPremium;
-    final premiumQuizList = ref.watch(homeStudyScreenProvider.select((s) => s.quizList));
+    final premiumQuizList = ref.watch(quizModelProvider.select((s) => s.quizList));
     final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
     final quizList = isPremium ? premiumQuizList : freeQuizList;
-    final filterQuizList = ref.watch(homeStudyScreenProvider.select((s) => s.filterQuizList));
     final categoryList = ref.watch(homeStudyScreenProvider.select((s) => s.categoryList));
+    final selectedCategoryQuizList =
+        ref.watch(homeStudyScreenProvider.select((s) => s.selectedCategoryQuizList));
 
     return Column(
       children: [
@@ -37,7 +38,7 @@ class _CategoryList extends ConsumerWidget {
               premiumQuizList.where((quiz) => quiz.category == category).toList();
           final categoryQuizList = quizList.where((quiz) => quiz.category == category).toList();
           final categoryFilterQuizList =
-              filterQuizList.where((quiz) => quiz.category == category).toList();
+              selectedCategoryQuizList.where((quiz) => quiz.category == category).toList();
           final isAllSelected = categoryQuizList.length == categoryFilterQuizList.length;
           return Container(
             margin: EdgeInsets.symmetric(horizontal: context.width * 0.02),

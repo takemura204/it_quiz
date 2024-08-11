@@ -5,8 +5,8 @@ class _Footer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final filterQuizList = ref.watch(homeStudyScreenProvider.select((s) => s.filterQuizList));
-    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
+    final filterQuizItemList =
+        ref.watch(homeStudyScreenProvider.select((s) => s.filterQuizItemList));
 
     return Container(
       color: context.backgroundColor,
@@ -45,14 +45,6 @@ class _Footer extends HookConsumerWidget {
             onPressed: filterQuizItemList.isNotEmpty
                 ? () {
                     Navigator.of(context).pop();
-                    ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
-                    ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
-                    final selectStudyQuiz = ref.read(homeQuizScreenProvider).selectStudyQuiz!;
-                    context.showScreen(
-                      QuizChoiceScreenArguments(
-                        quiz: selectStudyQuiz,
-                      ).generateRoute(),
-                    );
                   }
                 : null,
           ),

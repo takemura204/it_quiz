@@ -145,11 +145,11 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       }
 
       state = state.copyWith(
-        quizList: premiumQuizList,
-        filterQuizList: quizList,
         quizItemList: updatedQuizItemList,
         knowQuizItemList: updatedKnowQuizItemList,
         unKnowQuizItemList: updatedUnKnowQuizItemList,
+        filterQuizItemList: quizItemList,
+        selectedCategoryQuizList: quizList,
       );
     }
     // 初回起動時の設定
@@ -166,47 +166,13 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   Future _initStatusList() async {
-    final quizList = [...ref.read(quizModelProvider).quizList];
-    quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
-    final statusList = state.quizItemList.map((quizItem) => quizItem.status).toSet().toList();
+    final statusList = [
+      QuizStatusType.unlearned,
+      QuizStatusType.learned,
+      QuizStatusType.incorrect,
+      QuizStatusType.correct
+    ];
     state = state.copyWith(statusList: statusList);
-  }
-
-  ///カテゴリで絞り込み
-  Future updateCategoryFilterQuizList({required Quiz quiz, required bool isSelected}) async {
-    final quizList = [...ref.read(quizModelProvider).quizList];
-    final filterQuizList = [...state.filterQuizList];
-    final matchQuiz = quizList.firstWhere((x) => x.id == quiz.id);
-    if (isSelected) {
-      filterQuizList.remove(matchQuiz);
-    } else {
-      filterQuizList.add(matchQuiz);
-    }
-    filterQuizList.sort((a, b) => a.id.compareTo(b.id));
-    state = state.copyWith(filterQuizList: filterQuizList);
-  }
-
-  Future updateCategoryFilterAllQuizList(
-      {required List<Quiz> categoryQuizList, required bool isSelected}) async {
-    final quizList = [...ref.read(quizModelProvider).quizList];
-    final filterQuizList = [...state.filterQuizList];
-
-    if (isSelected) {
-      // isSelectedがtrueの場合、filterQuizListからcategoryQuizListに該当するクイズを除外
-      filterQuizList.removeWhere(
-          (quiz) => categoryQuizList.any((categoryQuiz) => categoryQuiz.id == quiz.id));
-    } else {
-      // isSelectedがfalseの場合、categoryQuizListからfilterQuizListに含まれていないクイズを抽出し追加
-      filterQuizList.addAll(categoryQuizList
-          .where((quiz) => !filterQuizList.any((x) => x.id == quiz.id))
-          .map((quiz) => quizList.firstWhere((x) => x.id == quiz.id)));
-    }
-
-    // filterQuizListをidでソート
-    filterQuizList.sort((a, b) => a.id.compareTo(b.id));
-
-    // stateを更新
-    state = state.copyWith(filterQuizList: filterQuizList);
   }
 
   ///「知っている・知らない」ボタンを押した時
@@ -359,6 +325,46 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     await prefs.setStringList(knowQuizItemListName, knowQuizItemList);
     await prefs.setStringList(unKnowQuizItemListName, unKnowQuizItemList);
     // await prefs.setInt(itemIndexName, itemIndex);
+  }
+
+  ///カテゴリで絞り込み
+  Future updateCategoryFilterQuizList({required Quiz quiz, required bool isSelected}) async {
+    final quizList = [...ref.read(quizModelProvider).quizList];
+    final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
+    final matchQuiz = quizList.firstWhere((x) => x.id == quiz.id);
+    if (isSelected) {
+      selectedCategoryQuizList.remove(matchQuiz);
+    } else {
+      selectedCategoryQuizList.add(matchQuiz);
+    }
+    selectedCategoryQuizList.sort((a, b) => a.id.compareTo(b.id));
+    final filterQuizItemList = selectedCategoryQuizList.expand((x) => x.quizItemList).toList();
+    state = state.copyWith(
+        selectedCategoryQuizList: selectedCategoryQuizList, filterQuizItemList: filterQuizItemList);
+  }
+
+  ///カテゴリ一括絞り込み
+  Future updateCategoryFilterAllQuizList(
+      {required List<Quiz> categoryQuizList, required bool isSelected}) async {
+    final quizList = [...ref.read(quizModelProvider).quizList];
+    final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
+
+    if (isSelected) {
+      selectedCategoryQuizList.removeWhere(
+          (quiz) => categoryQuizList.any((categoryQuiz) => categoryQuiz.id == quiz.id));
+    } else {
+      selectedCategoryQuizList.addAll(categoryQuizList
+          .where((quiz) => !selectedCategoryQuizList.any((x) => x.id == quiz.id))
+          .map((quiz) => quizList.firstWhere((x) => x.id == quiz.id)));
+    }
+    selectedCategoryQuizList.sort((a, b) => a.id.compareTo(b.id));
+    final filterQuizItemList = selectedCategoryQuizList.expand((x) => x.quizItemList).toList();
+    state = state.copyWith(
+        selectedCategoryQuizList: selectedCategoryQuizList, filterQuizItemList: filterQuizItemList);
+  }
+
+  void removeQuizStatusList() {
+    state = state.copyWith(selectedStatusList: []);
   }
 
   void setIsLoading(bool value) {

@@ -10,15 +10,13 @@ import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';
 import 'home_quiz_screen_state.dart';
 
-final homeQuizScreenProvider =
-    StateNotifierProvider<HomeQuizScreenController, HomeQuizScreenState>(
+final homeQuizScreenProvider = StateNotifierProvider<HomeQuizScreenController, HomeQuizScreenState>(
   (ref) => HomeQuizScreenController(ref: ref),
   dependencies: [quizModelProvider],
 );
 
 class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
-  HomeQuizScreenController({required this.ref})
-      : super(const HomeQuizScreenState()) {
+  HomeQuizScreenController({required this.ref}) : super(const HomeQuizScreenState()) {
     _initState();
   }
 
@@ -47,14 +45,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
 
     // ソートされたリストからカテゴリー名を取り出して重複を削除
-    final categoryList =
-        quizList.map((quizItem) => quizItem.category).toSet().toList();
+    final categoryList = quizList.map((quizItem) => quizItem.category).toSet().toList();
 
-    final randomCategoryList = quizList
-        .where((x) => !x.isPremium)
-        .map((quizItem) => quizItem.category)
-        .toSet()
-        .toList();
+    final randomCategoryList =
+        quizList.where((x) => !x.isPremium).map((quizItem) => quizItem.category).toSet().toList();
 
     final correctRatios = categoryList.map((category) {
       final correctQuizLength = ref
@@ -91,10 +85,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
       QuizStatusType.incorrect,
       QuizStatusType.correct,
     ];
-    state = state.copyWith(
-      statusList: statusList,
-      // selectedStatusList: statusList,
-    );
+    state = state.copyWith(statusList: statusList);
   }
 
   ///QuizList取得
@@ -131,14 +122,11 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
       filteredQuizList = quizItemList
           .where((quizItem) => statusOrder.contains(quizItem.status))
           .toList()
-        ..sort((a, b) => statusOrder
-            .indexOf(a.status)
-            .compareTo(statusOrder.indexOf(b.status)));
+        ..sort((a, b) => statusOrder.indexOf(a.status).compareTo(statusOrder.indexOf(b.status)));
     } else {
       // selectedStatusList に基づいて問題をフィルタリング
       filteredQuizList = quizItemList
-          .where(
-              (quizItem) => state.selectedStatusList.contains(quizItem.status))
+          .where((quizItem) => state.selectedStatusList.contains(quizItem.status))
           .toList();
     }
 
@@ -177,8 +165,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
         break;
       }
     }
-    final selectWeakQuiz =
-        state.selectWeakQuiz!.copyWith(quizItemList: pickedQuizList);
+    final selectWeakQuiz = state.selectWeakQuiz!.copyWith(quizItemList: pickedQuizList);
 
     state = state.copyWith(selectWeakQuiz: selectWeakQuiz);
   }
@@ -188,9 +175,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     final randomCategoryList = state.randomCategoryList;
     final selectedTestLength = state.selectedTestLength;
     ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.random);
-    ref
-        .read(quizModelProvider.notifier)
-        .setRandomQuiz(randomCategoryList, selectedTestLength);
+    ref.read(quizModelProvider.notifier).setRandomQuiz(randomCategoryList, selectedTestLength);
   }
 
   void setTabIndex(int index) {
@@ -202,14 +187,12 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   void setQuizStatusList(QuizStatusType status) {
     final selectedStatusList = [...state.selectedStatusList];
     if (selectedStatusList.contains(status)) {
-      state = state.copyWith(
-          selectedStatusList: selectedStatusList..remove(status));
+      state = state.copyWith(selectedStatusList: selectedStatusList..remove(status));
       if (state.selectedStatusList.isEmpty) {
         state = state.copyWith(isQuizStatusRecommend: true);
       }
     } else {
-      state =
-          state.copyWith(selectedStatusList: selectedStatusList..add(status));
+      state = state.copyWith(selectedStatusList: selectedStatusList..add(status));
     }
   }
 
@@ -221,11 +204,9 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   void setRandomCategory(String category) {
     final randomCategoryList = [...state.randomCategoryList];
     if (randomCategoryList.contains(category)) {
-      state = state.copyWith(
-          randomCategoryList: randomCategoryList..remove(category));
+      state = state.copyWith(randomCategoryList: randomCategoryList..remove(category));
     } else {
-      state =
-          state.copyWith(randomCategoryList: randomCategoryList..add(category));
+      state = state.copyWith(randomCategoryList: randomCategoryList..add(category));
     }
   }
 

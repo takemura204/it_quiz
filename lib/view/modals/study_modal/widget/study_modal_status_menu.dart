@@ -33,7 +33,7 @@ class _StatusMenuList extends HookConsumerWidget {
     final learnedValue =
         quizItemList.where((x) => x.status == QuizStatusType.learned).toList().length;
     final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
-    final statusList = ref.watch(homeQuizScreenProvider.select((s) => s.statusList));
+    final statusList = ref.watch(homeStudyScreenProvider.select((s) => s.statusList));
     List<StatusCard> _getSortedCards(BuildContext context, List<QuizStatusType> statusList) {
       final List<StatusCard> cards = [
         StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
@@ -56,7 +56,7 @@ class _StatusMenuList extends HookConsumerWidget {
         ...sortedCards
             .map((card) => _StatusCard(
                   status: card.status,
-                  value: card.value,
+                  statusValue: card.value,
                   iconColor: card.iconColor,
                 ))
             .toList(),
@@ -68,69 +68,65 @@ class _StatusMenuList extends HookConsumerWidget {
 ///出題範囲選択
 class _StatusCard extends ConsumerWidget {
   const _StatusCard({
-    required this.value,
     required this.status,
+    required this.statusValue,
     required this.iconColor,
   });
 
-  final int value;
   final QuizStatusType status;
+  final int statusValue;
   final Color iconColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedStatusList =
-        ref.watch(homeQuizScreenProvider.select((s) => s.selectedStatusList));
+        ref.watch(homeStudyScreenProvider.select((s) => s.selectedStatusList));
     final isSelected = selectedStatusList.contains(status);
-    final isQuizStatusRecommend =
-        ref.watch(homeQuizScreenProvider.select((s) => s.isQuizStatusRecommend));
-    final isExists = value != 0;
+    final isStatusList = selectedStatusList.isEmpty;
+    final isExists = statusValue != 0;
 
     return GestureDetector(
       onTap: isExists
           ? () {
-              if (isQuizStatusRecommend) {
-                ref.read(homeQuizScreenProvider.notifier).setIsisQuizStatusRecommend(false);
-              }
-              ref.read(homeQuizScreenProvider.notifier).setQuizStatusList(status);
+              ref.read(homeStudyScreenProvider.notifier).updateStatusFilterQuizList(status);
               HapticFeedback.lightImpact();
             }
           : null,
       child: Container(
-        width: 85,
         margin: const EdgeInsets.symmetric(horizontal: 3),
-        child: Card(
-          elevation: 0,
+        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+        decoration: BoxDecoration(
           color: isExists
-              ? !isQuizStatusRecommend
+              ? !isStatusList
                   ? isSelected
                       ? context.backgroundColor.withOpacity(0.5)
                       : Colors.white
                   : Colors.white
               : context.secondColor.withOpacity(0.3),
-          shape: RoundedRectangleBorder(
-            side: isExists
-                ? !isQuizStatusRecommend
-                    ? isSelected
-                        ? BorderSide(
-                            color: context.mainColor,
-                            width: 1.5,
-                          )
-                        : BorderSide(
-                            color: Colors.grey.shade300,
-                            width: 1.5,
-                          )
-                    : BorderSide(
-                        color: Colors.grey.shade300,
-                        width: 1.5,
-                      )
-                : BorderSide(
-                    color: context.secondColor,
-                    width: 1,
-                  ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
+          border: isExists
+              ? !isStatusList
+                  ? isSelected
+                      ? Border.all(
+                          color: context.mainColor,
+                          width: 1.5,
+                        )
+                      : Border.all(
+                          color: Colors.grey.shade300,
+                          width: 1.5,
+                        )
+                  : Border.all(
+                      color: Colors.grey.shade300,
+                      width: 1.5,
+                    )
+              : Border.all(
+                  color: context.secondColor,
+                  width: 1,
+                ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,24 +146,6 @@ class _StatusCard extends ConsumerWidget {
               const Gap(3),
               Text(I18n().quizStatusTypeText(status),
                   style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-              const Gap(3),
-              Text(
-                "$value問",
-                style: context.texts.bodyMedium?.copyWith(
-                  color: isExists
-                      ? !isQuizStatusRecommend
-                          ? isSelected
-                              ? context.mainColor
-                              : Colors.black54
-                          : Colors.black54
-                      : Colors.grey,
-                  fontWeight: isExists
-                      ? isSelected
-                          ? FontWeight.bold
-                          : FontWeight.normal
-                      : FontWeight.normal,
-                ),
-              ),
               const Gap(5),
             ],
           ),
@@ -184,46 +162,37 @@ class _StatusRecommendCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isQuizStatusRecommend =
-        ref.watch(homeQuizScreenProvider.select((s) => s.isQuizStatusRecommend));
-    final isExists = value != 0;
+    final selectedStatusList =
+        ref.watch(homeStudyScreenProvider.select((s) => s.selectedStatusList));
+
+    final isStatusList = selectedStatusList.isEmpty;
 
     return GestureDetector(
       onTap: () {
-        if (!isQuizStatusRecommend) {
-          ref.read(homeQuizScreenProvider.notifier).setIsisQuizStatusRecommend(true);
-          ref.read(homeQuizScreenProvider.notifier).removeQuizStatusList();
+        if (!isStatusList) {
+          ref.read(homeStudyScreenProvider.notifier).removeQuizStatusList();
           HapticFeedback.lightImpact();
         }
       },
       child: Container(
-        width: 85,
         margin: const EdgeInsets.symmetric(horizontal: 3),
-        child: Card(
-          elevation: 0,
-          color: isExists
-              ? isQuizStatusRecommend
-                  ? context.backgroundColor.withOpacity(0.5)
-                  : Colors.white
-              : context.secondColor.withOpacity(0.3),
-          shape: RoundedRectangleBorder(
-            side: isExists
-                ? isQuizStatusRecommend
-                    ? BorderSide(
-                        color: context.mainColor,
-                        width: 1.5,
-                      )
-                    : BorderSide(
-                        color: Colors.grey.shade300,
-                        width: 1.5,
-                      )
-                : BorderSide(
-                    color: context.secondColor,
-                    width: 1,
-                  ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
+        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+        decoration: BoxDecoration(
+          color: isStatusList ? context.backgroundColor.withOpacity(0.5) : Colors.white,
+          border: isStatusList
+              ? Border.all(
+                  color: context.mainColor,
+                  width: 1.5,
+                )
+              : Border.all(
+                  color: Colors.grey.shade300,
+                  width: 1.5,
+                ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -240,22 +209,6 @@ class _StatusRecommendCard extends ConsumerWidget {
               ),
               const Gap(3),
               Text('すべて', style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-              const Gap(3),
-              Text(
-                "全$value問",
-                style: context.texts.bodyMedium?.copyWith(
-                  color: isExists
-                      ? isQuizStatusRecommend
-                          ? context.mainColor
-                          : Colors.black54
-                      : Colors.grey,
-                  fontWeight: isExists
-                      ? isQuizStatusRecommend
-                          ? FontWeight.bold
-                          : FontWeight.normal
-                      : FontWeight.normal,
-                ),
-              ),
               const Gap(5),
             ],
           ),
