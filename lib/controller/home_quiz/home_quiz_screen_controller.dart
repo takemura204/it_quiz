@@ -56,7 +56,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
           .quizList
           .where((quiz) => quiz.category == category)
           .expand((quiz) => quiz.quizItemList)
-          .where((quizItem) => quizItem.status == QuizStatusType.correct)
+          .where((quizItem) => quizItem.status == StatusType.correct)
           .toList()
           .length;
 
@@ -80,10 +80,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   ///selectedRangeList読み込み
   Future initStatusList() async {
     final statusList = [
-      QuizStatusType.unlearned,
-      QuizStatusType.learned,
-      QuizStatusType.incorrect,
-      QuizStatusType.correct,
+      StatusType.unlearned,
+      StatusType.learned,
+      StatusType.incorrect,
+      StatusType.correct,
     ];
     state = state.copyWith(statusList: statusList);
   }
@@ -114,10 +114,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     if (state.selectedStatusList.isEmpty || state.isQuizStatusRecommend) {
       // 特定のステータスに基づいて問題を並べ替える
       final statusOrder = [
-        QuizStatusType.unlearned,
-        QuizStatusType.learned,
-        QuizStatusType.incorrect,
-        QuizStatusType.correct,
+        StatusType.unlearned,
+        StatusType.learned,
+        StatusType.incorrect,
+        StatusType.correct,
       ];
       filteredQuizList = quizItemList
           .where((quizItem) => statusOrder.contains(quizItem.status))
@@ -184,7 +184,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///　出題範囲指定
-  void setQuizStatusList(QuizStatusType status) {
+  void setQuizStatusList(StatusType status) {
     final selectedStatusList = [...state.selectedStatusList];
     if (selectedStatusList.contains(status)) {
       state = state.copyWith(selectedStatusList: selectedStatusList..remove(status));

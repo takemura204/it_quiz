@@ -10,9 +10,8 @@ List<QuizItem> get category1_10 {
       question: 'ユーザーが製品やサービスを使用する際の経験全般を指す言葉は何か？',
       ans: 'UX',
       choices: ["UX", "4P", "4C", "RFM分析"],
-      comment:
-          "UX（User Experience）は、ユーザーが製品やサービスを使用する際の経験全般を指し、使いやすさや満足度などが含まれる。",
-      importance: QuizImportanceType.low,
+      comment: "UX（User Experience）は、ユーザーが製品やサービスを使用する際の経験全般を指し、使いやすさや満足度などが含まれる。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '4P',
@@ -22,7 +21,7 @@ List<QuizItem> get category1_10 {
       comment:
           "4Pは、マーケティング戦略を立てる際の基本的なフレームワークで、Product（製品）、Price（価格）、Place（流通）、Promotion（プロモーション）の4つの要素を指す。",
       source: '平成29年春期 問2',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '4C',
@@ -31,7 +30,7 @@ List<QuizItem> get category1_10 {
       choices: ["4P", "4C", "RFM分析", "アンゾフの成長マトリクス"],
       comment:
           "4Cは、顧客中心のマーケティング戦略を立てるためのフレームワークで、Customer value（顧客価値）、Cost（コスト）、Convenience（利便性）、Communication（コミュニケーション）の4つの要素を指す。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'RFM分析',
@@ -41,16 +40,15 @@ List<QuizItem> get category1_10 {
       comment:
           "RFM分析は、顧客の購買行動のうち、Recency(最終購買日)、Frequency(購買頻度)、Monetary(累計購買金額)という3点に注目して顧客分析を行う手法。",
       source: '平成28年秋期 問32',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'アンゾフの成長マトリクス',
       question: '市場の拡大と製品の開発に焦点を当てた成長戦略を体系的に示したマトリクスを何というか？',
       ans: 'アンゾフの成長マトリクス',
       choices: ["RFM分析", "アンゾフの成長マトリクス", "オピニオンリーダー", "オムニチャネル"],
-      comment:
-          "アンゾフの成長マトリクスは、市場浸透、市場開発、製品開発、多角化の4つの戦略を用いて、企業の成長戦略を体系的に示したマトリクス。",
-      importance: QuizImportanceType.low,
+      comment: "アンゾフの成長マトリクスは、市場浸透、市場開発、製品開発、多角化の4つの戦略を用いて、企業の成長戦略を体系的に示したマトリクス。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'オピニオンリーダー',
@@ -65,7 +63,7 @@ List<QuizItem> get category1_10 {
       comment:
           "オピニオンリーダーは、特定の製品やブランドに対して影響力を持ち、他人の意見形成に影響を与える人のことで医薬品業界における著名教授、ファッション業界におけるモデルや芸能人などが挙げられる。",
       source: '平成23年秋期 問8',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'オムニチャネル',
@@ -73,7 +71,7 @@ List<QuizItem> get category1_10 {
       ans: 'オムニチャネル',
       choices: ["オピニオンリーダー", "オムニチャネル", "ブランド戦略", "プロダクトライフサイクル"],
       comment: "オムニチャネルは、オンラインとオフラインを含む複数の販売チャネルを統合し、顧客に一貫したショッピング体験を提供する戦略。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ブランド戦略',
@@ -81,7 +79,7 @@ List<QuizItem> get category1_10 {
       ans: 'ブランド戦略',
       choices: ["オムニチャネル", "ブランド戦略", "プロダクトライフサイクル", "セグメントマーケティング"],
       comment: "ブランド戦略は、企業が自社の製品やサービスに関連付けるイメージや価値観を構築し、長期的に維持、発展させていくための戦略。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'プロダクトライフサイクル',
@@ -96,16 +94,15 @@ List<QuizItem> get category1_10 {
       comment:
           "プロダクトライフサイクルとは、製品を市場に投入してから販売活動によって普及、成熟しやがて落ち込んでその寿命が終わるまでの過程を、「導入期→成長期→成熟期→衰退期」の順で推移していくと表現したモデル。",
       source: '平成21年春期 問31',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ポジショニング',
       question: '市場内での製品やブランドの位置づけを戦略的に決定することを何というか？',
       ans: 'ポジショニング',
       choices: ["セグメントマーケティング", "ダイレクトマーケティング", "ポジショニング", "クロスメディアマーケティング"],
-      comment:
-          "ポジショニングは、製品やブランドを市場内でどのように位置づけ、消費者の心にどのようなイメージを植え付けるかを戦略的に決定するプロセス。",
-      importance: QuizImportanceType.low,
+      comment: "ポジショニングは、製品やブランドを市場内でどのように位置づけ、消費者の心にどのようなイメージを植え付けるかを戦略的に決定するプロセス。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ターゲットマーケティング',
@@ -117,52 +114,33 @@ List<QuizItem> get category1_10 {
         "市場を幾つかのセグメン卜に分割し，少数のセグメントに絞ったアプローチを行う。",
         "商品が市場に導入されて衰退するまでの期間を分割し，各期間に対応した戦略を設定する。"
       ],
-      comment:
-          "ターゲットマーケティングとは、市場を細分化し、特定のニーズ、特徴、行動パターンを持つ顧客セグメントに焦点を当ててマーケティング活動を行うアプローチ。",
+      comment: "ターゲットマーケティングとは、市場を細分化し、特定のニーズ、特徴、行動パターンを持つ顧客セグメントに焦点を当ててマーケティング活動を行うアプローチ。",
       source: '平成25年秋期 問22',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ダイレクトマーケティング',
       question: '顧客から直接注文を受けて商品やサービスを提供するマーケティング手法を何というか？',
       ans: 'ダイレクトマーケティング',
-      choices: [
-        "セグメントマーケティング",
-        "ダイレクトマーケティング",
-        "クロスメディアマーケティング",
-        "インバウンドマーケティング"
-      ],
-      comment:
-          "ダイレクトマーケティングは、広告やプロモーションを通じて直接顧客にアプローチし、郵便、電話、インターネットなどを使って直接注文を受け、商品やサービスを提供する手法。",
-      importance: QuizImportanceType.low,
+      choices: ["セグメントマーケティング", "ダイレクトマーケティング", "クロスメディアマーケティング", "インバウンドマーケティング"],
+      comment: "ダイレクトマーケティングは、広告やプロモーションを通じて直接顧客にアプローチし、郵便、電話、インターネットなどを使って直接注文を受け、商品やサービスを提供する手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クロスメディアマーケティング',
       question: '複数のメディアを組み合わせて一貫したメッセージを伝えるマーケティング手法を何というか？',
       ans: 'クロスメディアマーケティング',
-      choices: [
-        "ダイレクトマーケティング",
-        "クロスメディアマーケティング",
-        "インバウンドマーケティング",
-        "ソーシャルマーケティング"
-      ],
-      comment:
-          "クロスメディアマーケティングは、テレビ、ラジオ、インターネット、印刷物など複数のメディアを組み合わせて、一貫したメッセージを顧客に伝えるマーケティング手法。",
-      importance: QuizImportanceType.normal,
+      choices: ["ダイレクトマーケティング", "クロスメディアマーケティング", "インバウンドマーケティング", "ソーシャルマーケティング"],
+      comment: "クロスメディアマーケティングは、テレビ、ラジオ、インターネット、印刷物など複数のメディアを組み合わせて、一貫したメッセージを顧客に伝えるマーケティング手法。",
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'インバウンドマーケティング',
       question: '顧客が自発的に企業のコンテンツや製品に関心を持ち、接触してくるマーケティング手法を何というか？',
       ans: 'インバウンドマーケティング',
-      choices: [
-        "クロスメディアマーケティング",
-        "インバウンドマーケティング",
-        "ソーシャルマーケティング",
-        "ワントゥワンマーケティング"
-      ],
-      comment:
-          "インバウンドマーケティングは、有益なコンテンツを提供し、顧客が自発的に企業のウェブサイトやブログなどに関心を持ち、接触してくるマーケティング手法。",
-      importance: QuizImportanceType.normal,
+      choices: ["クロスメディアマーケティング", "インバウンドマーケティング", "ソーシャルマーケティング", "ワントゥワンマーケティング"],
+      comment: "インバウンドマーケティングは、有益なコンテンツを提供し、顧客が自発的に企業のウェブサイトやブログなどに関心を持ち、接触してくるマーケティング手法。",
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ソーシャルマーケティング',
@@ -170,23 +148,21 @@ List<QuizItem> get category1_10 {
       ans: 'ソーシャルマーケティング',
       choices: ["インバウンドマーケティング", "ソーシャルマーケティング", "ワントゥワンマーケティング", "プッシュ戦略"],
       comment: "ソーシャルマーケティングは、公衆衛生の向上、環境保護など社会的な課題の解決を目的として行われるマーケティング手法。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'ワントゥワンマーケティング',
       question: '一人一人のニーズを把握し，それを充足する製品やサービスを提供しようとするマーケティング手法はどれか。',
       ans: 'ワントゥワンマーケティング',
       choices: ["ソーシャルマーケティング", "テレマーケティング", "マスマーケティング", "ワントゥワンマーケティング"],
-      comment:
-          "ワントゥワンマーケティングは、顧客一人ひとりの特性やニーズを把握し、個別に最適化された製品やサービス、情報を提供するマーケティング手法。",
+      comment: "ワントゥワンマーケティングは、顧客一人ひとりの特性やニーズを把握し、個別に最適化された製品やサービス、情報を提供するマーケティング手法。",
       source: '平成28年春期 問29',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'プッシュ戦略',
       ans: '販売店への客の誘導を図る広告宣伝の投入',
-      question:
-          'マーケティングミックスの4Pの一つであるプロモーションの戦略には，プッシュ戦略とプル戦略がある。メーカーの販売促進策のうち，プル戦略に該当するものはどれか。',
+      question: 'マーケティングミックスの4Pの一つであるプロモーションの戦略には，プッシュ戦略とプル戦略がある。メーカーの販売促進策のうち，プル戦略に該当するものはどれか。',
       choices: [
         "商品知識やセールストークに関する販売員教育の強化",
         "販売員を店頭へ派遣する応援販売の実施",
@@ -194,12 +170,11 @@ List<QuizItem> get category1_10 {
         "販売店への客の誘導を図る広告宣伝の投入"
       ],
       comment: "プッシュ戦略は、流通業者や小売業者を通じて製品を積極的に市場に押し出し、顧客に製品を購入してもらうマーケティング手法。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'プル戦略',
-      question:
-          'マーケティングミックスの4Pの一つであるプロモーションの戦略には，プッシュ戦略とプル戦略がある。メーカーの販売促進策のうち，プル戦略に該当するものはどれか。',
+      question: 'マーケティングミックスの4Pの一つであるプロモーションの戦略には，プッシュ戦略とプル戦略がある。メーカーの販売促進策のうち，プル戦略に該当するものはどれか。',
       ans: '販売店への客の誘導を図る広告宣伝の投入',
       choices: [
         "商品知識やセールストークに関する販売員教育の強化",
@@ -209,7 +184,7 @@ List<QuizItem> get category1_10 {
       ],
       comment: "プル戦略は、広告やプロモーションを通じて顧客の関心を引き、顧客が自発的に製品やサービスを求めるように促すマーケティング手法。",
       source: '平成24年秋期 問26',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'Webマーケティング',
@@ -217,7 +192,7 @@ List<QuizItem> get category1_10 {
       ans: 'Webマーケティング',
       choices: ["プル戦略", "Webマーケティング", "インターネット広告", "オプトインメール広告"],
       comment: "Webマーケティングは、ウェブサイトやSNS、電子メールなどインターネットを利用したマーケティング活動全般を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'インターネット広告',
@@ -225,16 +200,15 @@ List<QuizItem> get category1_10 {
       ans: 'インターネット広告',
       choices: ["ウェブマーケティング", "インターネット広告", "オプトインメール広告", "リスティング広告"],
       comment: "インターネット広告は、ウェブサイト、ソーシャルメディア、その他オンラインプラットフォームを通じて行われる広告活動全般。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'オプトインメール広告',
-      question:
-          'インターネットを利用した広告において，あらかじめ受信者からの同意を得て，受信者の興味がある分野についての広告をメールで送るものはどれか。',
+      question: 'インターネットを利用した広告において，あらかじめ受信者からの同意を得て，受信者の興味がある分野についての広告をメールで送るものはどれか。',
       ans: 'オプトインメール広告',
       choices: ["アフィリエイト広告", "オーバーレイ広告", "オプトアウトメール広告", "オプトインメール広告"],
       comment: "オプトインメール広告は、宣伝・広告メールを受け取ることを承諾した受信者に対して送信されるダイレクトメール型の広告",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'バナー広告',
@@ -249,7 +223,7 @@ List<QuizItem> get category1_10 {
       comment:
           "バナー広告は、Webページ上で他のWebサイトを紹介する役割を持つ画像広告のことで、主に広告・宣伝用に作られ、興味ある閲覧者がクリックするとその画像広告が紹介するサイトを表示する仕組み。",
       source: '平成23年特別 問29',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'リスティング広告',
@@ -257,18 +231,17 @@ List<QuizItem> get category1_10 {
       ans: 'リスティング広告',
       choices: ["リスティング広告", "SEO", "バナー広告", "ディジタルサイネージ"],
       comment: "リスティング広告は、検索エンジンの検索結果ページに、ユーザーの検索クエリに基づいて関連する広告を表示するシステム。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'SEO（Search Engine Optimization）',
-      question:
-          '検索エンジンの検索結果が上位に表示されるよう，Webページ内に適切なキーワードを盛り込んだり，HTMLやリンクの内容を工夫したりする手法はどれか。',
+      question: '検索エンジンの検索結果が上位に表示されるよう，Webページ内に適切なキーワードを盛り込んだり，HTMLやリンクの内容を工夫したりする手法はどれか。',
       ans: 'SEO',
       choices: ["BPO", "LPO", "MBO", "SEO"],
       comment:
           "SEO（Search Engine Optimization）は、Webサイトを制作するときに、Googleなどの検索エンジンの検索で上位に表示させることを目指して、ページやサイト全体の最適化を測る手法。",
       source: '平成29年春期 問11',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'アフィリエイト',
@@ -282,7 +255,7 @@ List<QuizItem> get category1_10 {
       ],
       comment: "アフィリエイトは、他者のウェブサイトに自社の広告を設置し、成果に応じて報酬を支払うインターネット広告の手法。",
       source: '平成21年秋期 問26',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'レコメンデーション',
@@ -290,10 +263,9 @@ List<QuizItem> get category1_10 {
           'インターネットショッピングにおいて，個人がアクセスしたWebページの閲覧履歴や商品の購入履歴を分析し，関心のありそうな情報を表示して別商品の購入を促すマーケティング手法はどれか。',
       ans: 'レコメンデーション',
       choices: ["アフィリエイト", "オークション", "フラッシュマーケティング", "レコメンデーション"],
-      comment:
-          "レコメンデーションは、過去の購買履歴や閲覧履歴などユーザーの行動データに基づいて、個別に最適化された製品やコンテンツを推薦する機能。",
+      comment: "レコメンデーションは、過去の購買履歴や閲覧履歴などユーザーの行動データに基づいて、個別に最適化された製品やコンテンツを推薦する機能。",
       source: '平成28年春期 問3',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ディジタルサイネージ',
@@ -301,7 +273,7 @@ List<QuizItem> get category1_10 {
       ans: 'ディジタルサイネージ',
       choices: ["レコメンデーション", "ディジタルサイネージ", "スキミングプライシング", "ペネトレーションプライシング"],
       comment: "ディジタルサイネージは、ショッピングモールや空港など公共の場所で、デジタル技術を用いて情報や広告を表示するシステム。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'スキミングプライシング',
@@ -309,16 +281,15 @@ List<QuizItem> get category1_10 {
       ans: 'スキミングプライシング',
       choices: ["ディジタルサイネージ", "スキミングプライシング", "ペネトレーションプライシング", "ダイナミックプライシング"],
       comment: "スキミングプライシングは、新製品を市場に導入する際に初期に高価格で販売し、徐々に価格を下げていく価格設定戦略。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ペネトレーションプライシング',
       question: '新製品を低価格で販売し、迅速に市場を拡大する価格設定戦略を何というか？',
       ans: 'ペネトレーションプライシング',
       choices: ["スキミングプライシング", "ペネトレーションプライシング", "ダイナミックプライシング", "リテールサポート"],
-      comment:
-          "ペネトレーションプライシングは、新製品を市場に導入する際に低価格で販売し、迅速に市場シェアを拡大することを目指す価格設定戦略。",
-      importance: QuizImportanceType.low,
+      comment: "ペネトレーションプライシングは、新製品を市場に導入する際に低価格で販売し、迅速に市場シェアを拡大することを目指す価格設定戦略。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ダイナミックプライシング',
@@ -326,16 +297,15 @@ List<QuizItem> get category1_10 {
       ans: 'ダイナミックプライシング',
       choices: ["ペネトレーションプライシング", "ダイナミックプライシング", "リテールサポート", "クロスセリング"],
       comment: "ダイナミックプライシングは、需要や在庫状況、競合他社の価格などの要因に応じて、価格をリアルタイムで変動させる価格設定戦略。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'リテールサポート',
       question: '小売店への販売促進活動やサポートを強化することで、製品の小売業者による取り扱いを増やす戦略を何というか？',
       ans: 'リテールサポート',
       choices: ["ダイナミックプライシング", "リテールサポート", "クロスセリング", "バスケット分析"],
-      comment:
-          "リテールサポートは、小売業者への販売促進活動やサポートを強化することにより、製品の小売業者による取り扱いを増やし、販売促進を図る戦略。",
-      importance: QuizImportanceType.none,
+      comment: "リテールサポートは、小売業者への販売促進活動やサポートを強化することにより、製品の小売業者による取り扱いを増やし、販売促進を図る戦略。",
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'クロスセリング',
@@ -343,21 +313,19 @@ List<QuizItem> get category1_10 {
       ans: 'クロスセリング',
       choices: ["リテールサポート", "クロスセリング", "バスケット分析", "ESG投資"],
       comment: "クロスセリングは、顧客がある製品を購入する際に、その製品と関連する別の製品も推薦し、同時に購入することを促す販売戦略。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'バスケット分析',
       question: '顧客の購買データを分析し、購入される製品間の関連性を明らかにする分析手法を何というか？',
       ans: 'バスケット分析',
       choices: ["クロスセリング", "バスケット分析", "ESG投資", "ファイブフォース分析"],
-      comment:
-          "バスケット分析は、顧客の購買データから、一緒に購入される傾向にある製品の組み合わせを分析し、製品間の関連性を明らかにする分析手法。",
-      importance: QuizImportanceType.low,
+      comment: "バスケット分析は、顧客の購買データから、一緒に購入される傾向にある製品の組み合わせを分析し、製品間の関連性を明らかにする分析手法。",
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 1001);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 1001);
   });
 }

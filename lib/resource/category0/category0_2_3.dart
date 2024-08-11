@@ -7,8 +7,7 @@ List<QuizItem> get category0_2_3 {
     QuizItem(
       word: 'WBS(Work Breakdown Structure)',
       question: 'システム開発プロジェクトのWBS作成における要素分解に関する説明として，適切なものはどれか。',
-      ans:
-          'システム開発の成果物を作成するために必要なコストや所要時間を見積もることができ，それらが管理できるレベルまで要素分解をすることが望ましい。',
+      ans: 'システム開発の成果物を作成するために必要なコストや所要時間を見積もることができ，それらが管理できるレベルまで要素分解をすることが望ましい。',
       choices: [
         "システム開発の成果物を作成するために必要なコストや所要時間を見積もることができ，それらが管理できるレベルまで要素分解をすることが望ましい。",
         "システム開発を外部に発注する場合は，成果物を発注先が作成するので成果物の要素分解を全て発注先に一任する。",
@@ -18,7 +17,7 @@ List<QuizItem> get category0_2_3 {
       comment:
           "WBS(Work Breakdown Structure)は、プロジェクト目標を達成し、必要な成果物を過不足なく作成するために、プロジェクトチームが実行すべき作業を、成果物を主体に階層的に要素分解したもの。",
       source: '平成26年春期 問42',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'アローダイアグラム',
@@ -28,12 +27,11 @@ List<QuizItem> get category0_2_3 {
       comment:
           "アローダイアグラムは、プロジェクトの各作業間の関連性や順序関係を視覚的に表現する図で、作業関係を分析することで時間的に余裕のない一連の作業を洗い出すことができるため。プロジェクトのスケジュール管理に使用される。",
       source: '平成25年春期 問44',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ITIL(アイティル)',
-      question:
-          'ITIL(Information Technology Infrastructure Library)を説明したものはどれか。',
+      question: 'ITIL(Information Technology Infrastructure Library)を説明したものはどれか。',
       ans: 'ITサービスマネジメントのフレームワーク',
       choices: [
         "ITサービスマネジメントのフレームワーク",
@@ -44,7 +42,7 @@ List<QuizItem> get category0_2_3 {
       comment:
           "ITIL(アイティル)は、ITサービスマネジメントのベストプラクティスを集めたフレームワークで、現在の最新バージョンである「2011 edition」では、5つの分野「サービスストラテジ」「サービスデザイン」「サービストランジション」「サービスオペレーション」「継続的サービス改善(CSI)」ごとに1冊ずつの書籍にまとめられている。",
       source: '平成29年春期 問35',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SLA(Service Level Agreement)',
@@ -59,18 +57,17 @@ List<QuizItem> get category0_2_3 {
       ],
       comment:
           "SLA(Service Level Agreement)は、通信サービス事業者などのサービス提供者と利用者の間で交わされる、サービスの品質保証に関する合意もしくは契約文書。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SLM(Service Level Management)',
-      question:
-          'SLAの合意内容を達成するために，サービス状況のモニタリングやレビューなどを通じてサービスレベルの維持や向上を図る活動を何というか。',
+      question: 'SLAの合意内容を達成するために，サービス状況のモニタリングやレビューなどを通じてサービスレベルの維持や向上を図る活動を何というか。',
       ans: 'SLM',
       choices: ["CSR", "ERP", "SLM", "SWOT"],
       comment:
           "SLM(Service Level Management)は、サービスレベル合意(SLA)に基づき、合意されたITサービスの提供を実現し、そのサービス品質の継続的な維持・改善を行うITサービスマネジメントの管理プロセス",
       source: '平成28年春期 問41',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'インシデント管理',
@@ -84,13 +81,12 @@ List<QuizItem> get category0_2_3 {
       ],
       comment: "インシデント管理は、サービスの障害や問題が発生した際に、それを迅速に解決し、サービスの正常な運用を回復させるためのプロセス。",
       source: '平成24年春期 問39',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '問題管理',
       question: 'ITサービスマネジメントのプロセスには，インシデント管理，問題管理，リリース管理などの活動がある。問題管理の活動はどれか。',
-      ans:
-          'メールシステムがダウンした。原因を究明するために情報システムの担当者とシステムを構築したベンダーの技術者を招集し，情報収集を開始した。',
+      ans: 'メールシステムがダウンした。原因を究明するために情報システムの担当者とシステムを構築したベンダーの技術者を招集し，情報収集を開始した。',
       choices: [
         "電子メールが送信できないと各部署から連絡があった。サービスを再開するためにバックアップシステムを立ち上げた。",
         "電子メールが送信できないと問合せがあった。利用者にPCの設定を確認してもらったところ，電子メールアドレスが誤っていたので修正した。",
@@ -100,7 +96,7 @@ List<QuizItem> get category0_2_3 {
       comment:
           "問題管理は、ITILのサービスサポートを構成するプロセスのひとつで、インシデントや障害原因の把握と管理を行い、根本原因を究明して、回避策や恒久的な対策を策定するプロセス",
       source: '平成22年秋期 問33',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'サービスデスク',
@@ -115,7 +111,7 @@ List<QuizItem> get category0_2_3 {
       comment:
           "サービスデスクは、ユーザーに対して「単一の窓口」を提供し、あらゆる問い合わせを受付け、その記録を一元管理すると共に問題解決を行う適切な部門・あるいはプロセスへの引き継ぎを担当する部門のこと。",
       source: '平成23年特別 問46',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ファシリティマネジメント',
@@ -127,15 +123,14 @@ List<QuizItem> get category0_2_3 {
         "設置場所は水漏れのおそれのある排水管の近くを避けた。",
         "ネットワークを介して伝送する情報などを暗号化する機能を設けた。"
       ],
-      comment:
-          "ファシリティマネジメントは、企業・団体が保有または使用する全施設資産とそれらの利用環境を経営戦略的視点から総合的かつ統括的に企画、管理、活用する経営活動。",
+      comment: "ファシリティマネジメントは、企業・団体が保有または使用する全施設資産とそれらの利用環境を経営戦略的視点から総合的かつ統括的に企画、管理、活用する経営活動。",
       source: '平成22年春期 問39',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_2Index + 301, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_2Index + 301, isPremium: false);
   });
 }

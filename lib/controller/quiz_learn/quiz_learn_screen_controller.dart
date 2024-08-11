@@ -86,8 +86,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       choices: quizItemList[index].choices,
       ans: quizItemList[index].ans,
       isWeak: quizItemList[index].isWeak,
-      status: isKnow && quizItemList[index].status == QuizStatusType.unlearned
-          ? QuizStatusType.learned
+      status: isKnow && quizItemList[index].status == StatusType.unlearned
+          ? StatusType.learned
           : quizItemList[index].status,
       importance: quizItemList[index].importance,
       isSaved: quizItemList[index].isSaved,
@@ -142,12 +142,10 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     final knowQuizList = [...state.knowQuizItemList];
     final unKnowQuizList = [...state.unKnowQuizItemList];
     //問題が終わったが,「知ってる」リストに全て含まれていない場合
-    if (index == quizItemList.length - 1 &&
-        knowQuizList.length != learnQuiz.quizItemList.length) {
+    if (index == quizItemList.length - 1 && knowQuizList.length != learnQuiz.quizItemList.length) {
       quizItemList.clear();
       quizItemList.addAll(unKnowQuizList);
-      state = state.copyWith(
-          quizIndex: 0, lapIndex: lapIndex + 1, quizItemList: quizItemList);
+      state = state.copyWith(quizIndex: 0, lapIndex: lapIndex + 1, quizItemList: quizItemList);
     }
     //問題が終わり,「知ってる」リストに全て含まれている場合
     else if (state.knowQuizItemList.length == learnQuiz.quizItemList.length) {
@@ -155,8 +153,8 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       quizItemList.clear(); // クイズアイテムリストをクリア
       // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
 
-      quizItemList.addAll([...knowQuizList, ...unKnowQuizList]
-        ..sort((a, b) => a.quizId.compareTo(b.quizId)));
+      quizItemList.addAll(
+          [...knowQuizList, ...unKnowQuizList]..sort((a, b) => a.quizId.compareTo(b.quizId)));
       _stopwatch.stop();
       state = state.copyWith(
         duration: _stopwatch.elapsed,
@@ -241,16 +239,13 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       timeStamp: DateTime.now(),
       studyType: studyType,
     );
-    state = state.copyWith(
-        learnQuiz: learnQuiz.copyWith(quizItemList: state.quizItemList));
+    state = state.copyWith(learnQuiz: learnQuiz.copyWith(quizItemList: state.quizItemList));
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
   }
 
   List<QuizItem> updateQuizItemList() {
     // state.quizItemList を quizId ベースでマップに変換
-    final stateQuizMap = {
-      for (var item in state.quizItemList) item.quizId: item
-    };
+    final stateQuizMap = {for (var item in state.quizItemList) item.quizId: item};
     final selectQuiz = ref.read(homeQuizScreenProvider).selectQuiz!;
 
     // quiz.quizItemList をイテレートして更新または追加
@@ -271,10 +266,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     final quizItemList = state.quizItemList;
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
-    final correctNum = quizItemList
-        .where((x) => x.status == QuizStatusType.correct)
-        .toList()
-        .length;
+    final correctNum = quizItemList.where((x) => x.status == StatusType.correct).toList().length;
     final isCompleted = quizItemList.length == correctNum;
     final updateQuiz = learnQuiz.copyWith(
       duration: duration,

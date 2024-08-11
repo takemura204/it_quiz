@@ -15,10 +15,9 @@ List<QuizItem> get category1_6 {
         "労使の協定を書面で締結し，行政官庁に届け出ること",
         "割増賃金について，支給細目が決まっていること"
       ],
-      comment:
-          "労働基準法は、労働契約や労働条件（賃金、労働時間、休日、休憩、割増賃金など）並びに職場の安全衛生、年少者や妊産婦の保護、災害補償などについての最低基準を定めた法律。",
+      comment: "労働基準法は、労働契約や労働条件（賃金、労働時間、休日、休憩、割増賃金など）並びに職場の安全衛生、年少者や妊産婦の保護、災害補償などについての最低基準を定めた法律。",
       source: '平成21年秋期 問23',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'フレックスタイム制',
@@ -26,7 +25,7 @@ List<QuizItem> get category1_6 {
       ans: 'フレックスタイム制',
       choices: ["裁量労働制", "フレックスタイム制", "シフト制", "定時制"],
       comment: "フレックスタイム制は、一定のコアタイムを除き、労働者が労働時間の開始と終了時刻を自由に設定できる労働時間制度。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '裁量労働制',
@@ -34,7 +33,7 @@ List<QuizItem> get category1_6 {
       ans: '裁量労働制',
       choices: ["フレックスタイム制", "裁量労働制", "変形労働時間制", "タスク制"],
       comment: "裁量労働制は、労働者が自らの裁量で仕事の進め方を決めることができ、労働時間ではなく成果によって評価される労働制度。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '労働契約法',
@@ -42,7 +41,7 @@ List<QuizItem> get category1_6 {
       ans: '労働契約法',
       choices: ["労働基準法", "労働契約法", "労働者派遣法", "最低賃金法"],
       comment: "労働契約法は、労働契約の締結、変更、解除など労働者と使用者間の労働条件に関する契約の内容を規定する法律。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '労働者派遣法',
@@ -54,10 +53,9 @@ List<QuizItem> get category1_6 {
         "派遣労働者のキャリアに関する助言，指導",
         "派遣労働者の雇用の安定を図るために必要な措置"
       ],
-      comment:
-          "労働者派遣法とは、職業安定法と相まって、必要な技術をもった労働者を企業に派遣する事業が適正に運営されるように、派遣労働者の保護を図るための法律。",
+      comment: "労働者派遣法とは、職業安定法と相まって、必要な技術をもった労働者を企業に派遣する事業が適正に運営されるように、派遣労働者の保護を図るための法律。",
       source: '平成25年春期 問20',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '守秘義務契約',
@@ -65,21 +63,18 @@ List<QuizItem> get category1_6 {
           '新たに考案したアルゴリズムを用いた画像処理のプログラミング作業を，外部ベンダーに委託することにした。情報の取扱いについて厳格に管理することを促すために契約書に盛り込む項目として，適切なものはどれか。',
       ans: '守秘義務契約',
       choices: ["開発後の保守体制", "開発体制図", "システム全体の性能保証", "守秘義務契約"],
-      comment:
-          "守秘義務契約は、営業秘密や個人情報などをやり取りする取引を行う場合に、その情報の開示の目的、範囲、管理方法、禁止事項などを明確にするために締結される契約",
+      comment: "守秘義務契約は、営業秘密や個人情報などをやり取りする取引を行う場合に、その情報の開示の目的、範囲、管理方法、禁止事項などを明確にするために締結される契約",
       source: '平成24年秋期 問52',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '特定商取引法',
-      question:
-          '訪問販売や通信販売などのトラブルが生じやすい取引において，消費者を保護するために，事業者が守るべきルールを定めた法律はどれか。',
+      question: '訪問販売や通信販売などのトラブルが生じやすい取引において，消費者を保護するために，事業者が守るべきルールを定めた法律はどれか。',
       ans: '特定商取引法',
       choices: ["PL法", "独占禁止法", "特定商取引法", "不正競争防止法"],
-      comment:
-          "特定商取引法(特商法)は、特定商取引を公正にし、購入者等が受けることのある損害の防止を図ることにより、購入者等の利益を保護することを目的とする法律。",
+      comment: "特定商取引法(特商法)は、特定商取引を公正にし、購入者等が受けることのある損害の防止を図ることにより、購入者等の利益を保護することを目的とする法律。",
       source: '平成26年秋期 問5',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '独占禁止法',
@@ -87,7 +82,7 @@ List<QuizItem> get category1_6 {
       ans: '独占禁止法',
       choices: ["独占禁止法", "公正取引法", "競争促進法", "商慣行法"],
       comment: "独占禁止法は、企業間の公正な競争を確保し、消費者の利益を守るために、独占やカルテルなどの競争を制限する行為を禁止する法律。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '特定デジタルプラットフォームの透明性',
@@ -96,7 +91,7 @@ List<QuizItem> get category1_6 {
       choices: ["特定デジタルプラットフォームの透明性", "下請代金支払遅延等防止法", "資金決済法", "金融商品取引法"],
       comment:
           "特定デジタルプラットフォームの透明性及び公正性の向上に関する法律は、大手デジタルプラットフォーム事業者の取引透明性を確保し、公正な市場環境を促進することを目的としている。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '下請代金支払遅延等防止法',
@@ -104,7 +99,7 @@ List<QuizItem> get category1_6 {
       ans: '下請代金支払遅延等防止法',
       choices: ["下請代金支払遅延等防止法", "金融商品取引法", "資金決済法", "製造物責任法"],
       comment: "下請代金支払遅延等防止法は、下請け業者への代金支払いを適正に行うことを義務付け、遅延や不当な取引条件の防止を目的とする法律。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '資金決済法',
@@ -112,7 +107,7 @@ List<QuizItem> get category1_6 {
       ans: '資金決済法',
       choices: ["資金決済法", "下請代金支払遅延等防止法", "特定デジタルプラットフォームの透明性", "金融商品取引法"],
       comment: "資金決済法は、プリペイドカードや電子マネー、仮想通貨などの資金決済サービスの提供条件を規制し、利用者保護を図るための法律。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '金融商品取引法',
@@ -120,31 +115,28 @@ List<QuizItem> get category1_6 {
       ans: '金融商品取引法',
       choices: ["金融商品取引法", "資金決済法", "下請代金支払遅延等防止法", "製造物責任法"],
       comment: "金融商品取引法は、証券取引の透明性を確保し、不正取引を防止することで投資家を保護する目的の法律。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'リサイクル法',
       question: '使用済み製品の再利用やリサイクルを促進するために設けられている日本の法律は何か？',
       ans: 'リサイクル法',
       choices: ["リサイクル法", "製造物責任法", "金融商品取引法", "特定商取引法"],
-      comment:
-          "リサイクル法は、使用済みの製品や廃材を再利用し、リサイクルすることを促進するために設けられている法律。これにより、環境保護と資源の持続的な利用が図られる。",
-      importance: QuizImportanceType.low,
+      comment: "リサイクル法は、使用済みの製品や廃材を再利用し、リサイクルすることを促進するために設けられている法律。これにより、環境保護と資源の持続的な利用が図られる。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '製造物責任法',
       question: 'PL法(製造物責任法)の保護の対象はどれか。',
       ans: '消費者',
       choices: ["小売業者", "消費者", "メーカー", "輸入業者"],
-      comment:
-          "製造物責任法(PL法)は、製造物の安全性上の欠陥により人の生命、身体、財産に被害が生じた場合に、消費者が製造業者に対して損害賠償を請求できることを定めた法律",
+      comment: "製造物責任法(PL法)は、製造物の安全性上の欠陥により人の生命、身体、財産に被害が生じた場合に、消費者が製造業者に対して損害賠償を請求できることを定めた法律",
       source: '平成26年春期 問17',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 601);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 601);
   });
 }

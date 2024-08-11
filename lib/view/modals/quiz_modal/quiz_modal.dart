@@ -81,12 +81,10 @@ class StudyModalList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goalValue = quizItemList.length;
-    final correctValue =
-        quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length;
+    final correctValue = quizItemList.where((x) => x.status == StatusType.correct).toList().length;
     final incorrectValue =
-        quizItemList.where((x) => x.status == QuizStatusType.incorrect).toList().length;
-    final learnedValue =
-        quizItemList.where((x) => x.status == QuizStatusType.learned).toList().length;
+        quizItemList.where((x) => x.status == StatusType.incorrect).toList().length;
+    final learnedValue = quizItemList.where((x) => x.status == StatusType.learned).toList().length;
     final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
     final selectedStudyLength =
         ref.watch(homeQuizScreenProvider.select((state) => state.selectedStudyLength));

@@ -22,9 +22,9 @@ mixin _$HomeQuizScreenState {
       throw _privateConstructorUsedError; //クイズのカテゴリリスト
   List<String> get randomCategoryList =>
       throw _privateConstructorUsedError; //ランダムモーダルの出題状況,
-  List<QuizStatusType> get statusList =>
+  List<StatusType> get statusList =>
       throw _privateConstructorUsedError; //クイズ出題状況
-  List<QuizStatusType> get selectedStatusList =>
+  List<StatusType> get selectedStatusList =>
       throw _privateConstructorUsedError; //クイズ出題状況
   List<double> get correctRatios => throw _privateConstructorUsedError;
   String get selectCategory => throw _privateConstructorUsedError;
@@ -56,8 +56,8 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> randomCategoryList,
-      List<QuizStatusType> statusList,
-      List<QuizStatusType> selectedStatusList,
+      List<StatusType> statusList,
+      List<StatusType> selectedStatusList,
       List<double> correctRatios,
       String selectCategory,
       int itemIndex,
@@ -128,11 +128,11 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
       statusList: null == statusList
           ? _value.statusList
           : statusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
       selectedStatusList: null == selectedStatusList
           ? _value.selectedStatusList
           : selectedStatusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
       correctRatios: null == correctRatios
           ? _value.correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
@@ -234,8 +234,8 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> randomCategoryList,
-      List<QuizStatusType> statusList,
-      List<QuizStatusType> selectedStatusList,
+      List<StatusType> statusList,
+      List<StatusType> selectedStatusList,
       List<double> correctRatios,
       String selectCategory,
       int itemIndex,
@@ -307,11 +307,11 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
       statusList: null == statusList
           ? _value._statusList
           : statusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
       selectedStatusList: null == selectedStatusList
           ? _value._selectedStatusList
           : selectedStatusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
       correctRatios: null == correctRatios
           ? _value._correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
@@ -372,8 +372,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
       final List<String> randomCategoryList = const [],
-      final List<QuizStatusType> statusList = const [],
-      final List<QuizStatusType> selectedStatusList = const [],
+      final List<StatusType> statusList = const [],
+      final List<StatusType> selectedStatusList = const [],
       final List<double> correctRatios = const [],
       this.selectCategory = "",
       this.itemIndex = 0,
@@ -428,22 +428,22 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
   }
 
 //ランダムモーダルの出題状況,
-  final List<QuizStatusType> _statusList;
+  final List<StatusType> _statusList;
 //ランダムモーダルの出題状況,
   @override
   @JsonKey()
-  List<QuizStatusType> get statusList {
+  List<StatusType> get statusList {
     if (_statusList is EqualUnmodifiableListView) return _statusList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_statusList);
   }
 
 //クイズ出題状況
-  final List<QuizStatusType> _selectedStatusList;
+  final List<StatusType> _selectedStatusList;
 //クイズ出題状況
   @override
   @JsonKey()
-  List<QuizStatusType> get selectedStatusList {
+  List<StatusType> get selectedStatusList {
     if (_selectedStatusList is EqualUnmodifiableListView)
       return _selectedStatusList;
     // ignore: implicit_dynamic_type
@@ -588,8 +588,8 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       final List<Quiz> filterQuizList,
       final List<String> categoryList,
       final List<String> randomCategoryList,
-      final List<QuizStatusType> statusList,
-      final List<QuizStatusType> selectedStatusList,
+      final List<StatusType> statusList,
+      final List<StatusType> selectedStatusList,
       final List<double> correctRatios,
       final String selectCategory,
       final int itemIndex,
@@ -612,9 +612,9 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   @override //クイズのカテゴリリスト
   List<String> get randomCategoryList;
   @override //ランダムモーダルの出題状況,
-  List<QuizStatusType> get statusList;
+  List<StatusType> get statusList;
   @override //クイズ出題状況
-  List<QuizStatusType> get selectedStatusList;
+  List<StatusType> get selectedStatusList;
   @override //クイズ出題状況
   List<double> get correctRatios;
   @override

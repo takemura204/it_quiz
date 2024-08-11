@@ -10,7 +10,7 @@ List<QuizItem> get category3_14 {
       ans: 'ユーザビリティ',
       choices: ["ユーザビリティ", "アクセシビリティ", "ジェスチャーインタフェース", "VUI"],
       comment: "ユーザビリティは、製品やサービスが利用者にとってどれだけ使いやすいか、効率的か、満足度が高いかという品質の側面を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'アクセシビリティ',
@@ -24,7 +24,7 @@ List<QuizItem> get category3_14 {
       ],
       comment:
           "年齢や身体的制約・利用環境などにかかわらず、さまざまな製品や建物やサービスなどを支障なく利用できるかどうかを表す概念のことで、Webサイトを利用する際に、誰もがWebサイトにアクセスでき、かつ、サイト内を不自由なく利用できるかどうかの度合いのことをWebアクセシビリティという。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ジェスチャーインタフェース',
@@ -32,25 +32,23 @@ List<QuizItem> get category3_14 {
       ans: 'ジェスチャーインタフェース',
       choices: ["ジェスチャーインタフェース", "VUI", "GUI", "人間中心設計"],
       comment: "ジェスチャーインタフェースは、ユーザーが手や指の動きでコマンドを実行できるように設計されたインタフェースのこと。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'VUI（Voice User Interface）',
       question: '音声認識と音声合成を用いてユーザーとコンピュータがやりとりするインタフェースは何か？',
       ans: 'VUI',
       choices: ["VUI", "ジェスチャーインタフェース", "GUI", "アクセシビリティ"],
-      comment:
-          "VUI（Voice User Interface）は、音声認識と音声合成を用いてユーザーとコンピュータがやりとりするインタフェース。",
-      importance: QuizImportanceType.low,
+      comment: "VUI（Voice User Interface）は、音声認識と音声合成を用いてユーザーとコンピュータがやりとりするインタフェース。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'GUI（Graphical User Interface）',
       question: 'グラフィカルな要素を用いてユーザーとコンピュータがやりとりするインタフェースは何か？',
       ans: 'GUI',
       choices: ["GUI", "VUI", "ジェスチャーインタフェース", "アクセシビリティ"],
-      comment:
-          "GUI（Graphical User Interface）は、グラフィカルな要素を用いてユーザーとコンピュータがやりとりするインタフェース。",
-      importance: QuizImportanceType.low,
+      comment: "GUI（Graphical User Interface）は、グラフィカルな要素を用いてユーザーとコンピュータがやりとりするインタフェース。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ラジオボタン',
@@ -58,7 +56,7 @@ List<QuizItem> get category3_14 {
       ans: 'ラジオボタン',
       choices: ["ラジオボタン", "チェックボックス", "リストボックス", "プルダウンメニュー"],
       comment: "ラジオボタンは、一度に一つの選択肢のみを選択できるGUIの要素で、複数の選択肢の中から一つを選ぶ際に使用される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'チェックボックス',
@@ -66,7 +64,7 @@ List<QuizItem> get category3_14 {
       ans: 'チェックボックス',
       choices: ["チェックボックス", "ラジオボタン", "リストボックス", "プルダウンメニュー"],
       comment: "チェックボックスは、複数の選択肢から複数を選択できるGUIの要素で、オプションの有効化・無効化に使用される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'リストボックス',
@@ -74,7 +72,7 @@ List<QuizItem> get category3_14 {
       ans: 'リストボックス',
       choices: ["リストボックス", "チェックボックス", "ラジオボタン", "プルダウンメニュー"],
       comment: "リストボックスは、リスト形式で表示され、ユーザーが一つまたは複数の選択肢を選択できるGUIの要素。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'プルダウンメニュー',
@@ -88,7 +86,7 @@ List<QuizItem> get category3_14 {
       ],
       comment:
           "プルダウンメニューは、アプリケーションウィンドウの上部にあるメニュー項目をクリックすると、そのメニューに属する詳細な操作がすだれのように下に表示される形式をもつ操作部品。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ポップアップメニュー',
@@ -96,21 +94,19 @@ List<QuizItem> get category3_14 {
       ans: 'ポップアップメニュー',
       choices: ["ポップアップメニュー", "プルダウンメニュー", "リストボックス", "チェックボックス"],
       comment: "ポップアップメニューは、ユーザーの特定のアクションに応じて一時的に表示されるメニューで、コンテキストメニューとも呼ばれる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'サムネイル',
       question: '小さな画像で、より大きな画像や情報のプレビューとして機能するものは何か？',
       ans: 'サムネイル',
       choices: ["サムネイル", "アイコン", "ピクトグラム", "インフォグラフィックス"],
-      comment:
-          "サムネイルは、小さな画像で、より大きな画像や情報のプレビューとして機能するもの。ウェブページやデジタルアルバムでよく使用される。",
-      importance: QuizImportanceType.low,
+      comment: "サムネイルは、小さな画像で、より大きな画像や情報のプレビューとして機能するもの。ウェブページやデジタルアルバムでよく使用される。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'CSS（Cascading Style Sheets）',
-      question:
-          'Webページの作成・編集において，Webサイト全体の色調やデザインに統一性をもたせたい場合，HTMLと組み合わせて利用すると効果的なものはどれか。',
+      question: 'Webページの作成・編集において，Webサイト全体の色調やデザインに統一性をもたせたい場合，HTMLと組み合わせて利用すると効果的なものはどれか。',
       ans: 'CSS(Cascading Style Sheets)',
       choices: [
         "CSS(Cascading Style Sheets)",
@@ -121,16 +117,15 @@ List<QuizItem> get category3_14 {
       comment:
           "CSS（Cascading Style Sheets）は、HTMLの要素をどのように修飾して表示させるかを定義するテキスト形式の文書で、構造とデザインを別の文書に分離させるために提唱されたスタイルシート言語。",
       source: '平成25年秋期 問80',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'モバイルファースト',
       question: 'デザインや開発のプロセスにおいて、モバイルデバイスでの使用を最優先に考えるアプローチは何か？',
       ans: 'モバイルファースト',
       choices: ["モバイルファースト", "レスポンシブデザイン", "アダプティブデザイン", "クロスプラットフォーム"],
-      comment:
-          "モバイルファーストは、デザインや開発のプロセスにおいてモバイルデバイスでの使用を最優先に考え、それに基づいて設計するアプローチ。",
-      importance: QuizImportanceType.low,
+      comment: "モバイルファーストは、デザインや開発のプロセスにおいてモバイルデバイスでの使用を最優先に考え、それに基づいて設計するアプローチ。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '人間中心設計',
@@ -138,12 +133,11 @@ List<QuizItem> get category3_14 {
       ans: '人間中心設計',
       choices: ["人間中心設計", "UXデザイン", "ユーザビリティ", "アクセシビリティ"],
       comment: "人間中心設計は、製品やサービスの設計において、最終的なユーザーのニーズや体験を中心に考慮する設計思想。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 1401);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 1401);
   });
 }

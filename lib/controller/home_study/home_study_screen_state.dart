@@ -24,8 +24,9 @@ class HomeStudyScreenState with _$HomeStudyScreenState {
     @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList,
     @Default([]) final List<Quiz> selectedCategoryQuizList,
-    @Default([]) final List<QuizStatusType> statusList,
-    @Default([]) final List<QuizStatusType> selectedStatusList,
-    @Default([]) final List<QuizImportanceType> importanceList,
+    @Default([]) final List<StatusType> statusList,
+    @Default([]) final List<StatusType> selectedStatusList,
+    @Default([]) final List<ImportanceType> importanceList,
+    @Default([]) final List<ImportanceType> selectedImportanceList,
   }) = _HomeStudyScreenState;
 }

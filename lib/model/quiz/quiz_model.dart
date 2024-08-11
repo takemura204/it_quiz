@@ -233,10 +233,8 @@ class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
     final updateQuizList = quizList.map((quiz) {
       if (quiz.id == updateQuiz.id) {
         final goalScore = quiz.quizItemList.length;
-        final updateScore = updateQuiz.quizItemList
-            .where((x) => x.status == QuizStatusType.correct)
-            .toList()
-            .length;
+        final updateScore =
+            updateQuiz.quizItemList.where((x) => x.status == StatusType.correct).toList().length;
         final isCompleted = goalScore == updateScore;
         if (isCompleted) {
           ref.read(mainScreenControllerProvider.notifier).updateInAppReviewCount();

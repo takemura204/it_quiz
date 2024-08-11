@@ -11,7 +11,7 @@ List<QuizItem> get category2_3 {
       ans: 'ステークホルダ',
       choices: ["ステークホルダ", "プロジェクトマネージャ", "チームメンバー", "エンドユーザー"],
       comment: "ステークホルダは、プロジェクトの結果に影響を受ける、または影響を与える可能性がある個人や組織のことを指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'プロジェクト',
@@ -25,7 +25,7 @@ List<QuizItem> get category2_3 {
       ],
       comment: "プロジェクトとは、特定の目的や目標を達成するために実行される定常業務ではない一度限りの活動や計画。",
       source: '平成24年秋期 問43',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'プロジェクト憲章',
@@ -35,13 +35,12 @@ List<QuizItem> get category2_3 {
       choices: ["スケジュール", "体制", "品質マネジメント計画", "プロジェクトの目的"],
       comment: "プロジェクト憲章は、プロジェクトの背景や目的、実施要綱、方針などを決めてプロジェクトを公式に立ち上げるために作成される文書。",
       source: '平成21年秋期 問41',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'WBS(Work Breakdown Structure)',
       question: 'システム開発プロジェクトのWBS作成における要素分解に関する説明として，適切なものはどれか。',
-      ans:
-          'システム開発の成果物を作成するために必要なコストや所要時間を見積もることができ，それらが管理できるレベルまで要素分解をすることが望ましい。',
+      ans: 'システム開発の成果物を作成するために必要なコストや所要時間を見積もることができ，それらが管理できるレベルまで要素分解をすることが望ましい。',
       choices: [
         "システム開発の成果物を作成するために必要なコストや所要時間を見積もることができ，それらが管理できるレベルまで要素分解をすることが望ましい。",
         "システム開発を外部に発注する場合は，成果物を発注先が作成するので成果物の要素分解を全て発注先に一任する。",
@@ -51,7 +50,7 @@ List<QuizItem> get category2_3 {
       comment:
           "WBS(Work Breakdown Structure)は、プロジェクト目標を達成し、必要な成果物を過不足なく作成するために、プロジェクトチームが実行すべき作業を、成果物を主体に階層的に要素分解したもの。",
       source: '平成26年春期 問42',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'アローダイアグラム',
@@ -61,17 +60,16 @@ List<QuizItem> get category2_3 {
       comment:
           "アローダイアグラムは、プロジェクトの各作業間の関連性や順序関係を視覚的に表現する図で、作業関係を分析することで時間的に余裕のない一連の作業を洗い出すことができるため。プロジェクトのスケジュール管理に使用される。",
       source: '平成25年春期 問44',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ガントチャート',
-      question:
-          'プロジェクトマネジメントのために作成する図のうち，進捗が進んでいたり遅れていたりする状況を視覚的に確認できる図として，最も適切なものはどれか。',
+      question: 'プロジェクトマネジメントのために作成する図のうち，進捗が進んでいたり遅れていたりする状況を視覚的に確認できる図として，最も適切なものはどれか。',
       ans: 'ガントチャート',
       choices: ["WBS", "ガントチャート", "特性要因図", "パレート図"],
       comment: "ガントチャートは、縦軸に作業項目・横軸に時間をとり、作業に必要な期間を横棒の長さで表記する図法。",
       source: '平成24年春期 問31',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'PMBOK(Project Management Body of Knowledge)',
@@ -86,7 +84,7 @@ List<QuizItem> get category2_3 {
       comment:
           "PMBOK(Project Management Body of Knowledge)は、アメリカのプロジェクトマネジメント協会(PMI)によって策定されたプロジェクト管理に必要な知識を体系化したフレームワーク。",
       source: '平成27年春期 問41',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クリティカルパス分析',
@@ -98,10 +96,9 @@ List<QuizItem> get category2_3 {
         "クリテイカルパス上の作業が遅延すると，プロジェクトの完了も遅延する。",
         "プロジェクトにおいてクリテイカルパスは一つだけ存在する。"
       ],
-      comment:
-          "クリティカルパス分析とは、プロジェクトのスケジュールにおいて、遅延することがプロジェクト全体の遅延につながってしまう一連の作業のつながりを示す経路。",
+      comment: "クリティカルパス分析とは、プロジェクトのスケジュールにおいて、遅延することがプロジェクト全体の遅延につながってしまう一連の作業のつながりを示す経路。",
       source: '平成23年特別 問33',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'マイルストーン',
@@ -111,7 +108,7 @@ List<QuizItem> get category2_3 {
       comment:
           "マイルストーンとは、昔に道沿いに設置された目印・道しるべのことで目的地までの距離(1マイル=1.6km)等を記したもので、、区切りやチェックポイントとしての意味で使われる。",
       source: '平成21年春期 問36',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'プル型コミュニケーション',
@@ -124,15 +121,13 @@ List<QuizItem> get category2_3 {
         "テレビ会議システムを使って進捗会議を行う。",
         "電子メールに進捗会議の議事録を添付して配信する。"
       ],
-      comment:
-          "プル型コミュニケーションとは、掲示板やe-ラーニングなどのように、受信者が自分の意思で必要になったときに情報にアクセスさせる方法",
+      comment: "プル型コミュニケーションとは、掲示板やe-ラーニングなどのように、受信者が自分の意思で必要になったときに情報にアクセスさせる方法",
       source: '平成26年秋期 問38',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 301);
+    return quizItems[index].copyWith(quizId: index + I18n().category2Index + 301);
   });
 }

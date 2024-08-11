@@ -14,10 +14,9 @@ List<QuizItem> get category2_6 {
         "設置場所は水漏れのおそれのある排水管の近くを避けた。",
         "ネットワークを介して伝送する情報などを暗号化する機能を設けた。"
       ],
-      comment:
-          "ファシリティマネジメントは、企業・団体が保有または使用する全施設資産とそれらの利用環境を経営戦略的視点から総合的かつ統括的に企画、管理、活用する経営活動。",
+      comment: "ファシリティマネジメントは、企業・団体が保有または使用する全施設資産とそれらの利用環境を経営戦略的視点から総合的かつ統括的に企画、管理、活用する経営活動。",
       source: '平成22年春期 問39',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '無停電電源装置(UPS)',
@@ -32,7 +31,7 @@ List<QuizItem> get category2_6 {
       comment:
           "無停電電源装置(UPS)は、自家発電装置が電源を供給し始めるまでの間、サーバに電源を供給する役目をもつ機器のことで、機器内部に電気を蓄えていて、電源の瞬断時にシステムを安全に終了する時間を与えてくれたり、自家発電装置による電源供給までの間つなぎの役目を果たす。",
       source: '平成23年秋期 問43',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'セキュリティワイヤ',
@@ -44,10 +43,9 @@ List<QuizItem> get category2_6 {
         "社外で使用するノート型PCの画面の盗み見を防止する。",
         "停電が発生した場合でもシステムに代替電力を供給する。"
       ],
-      comment:
-          "セキュリティワイヤは、不正アクセスや物理的な侵入を防ぐために設置される、主にノートパソコンに取り付ける盗難防止用のワイヤのこと。",
+      comment: "セキュリティワイヤは、不正アクセスや物理的な侵入を防ぐために設置される、主にノートパソコンに取り付ける盗難防止用のワイヤのこと。",
       source: '平成22年秋期 問50',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'フリーアドレス',
@@ -56,7 +54,7 @@ List<QuizItem> get category2_6 {
       choices: ["フリーアドレス", "フリーウェア", "フリーフォーマット", "フリーメール"],
       comment: "フリーアドレスは、社員が個々に机を持たず、机を使用するときに空いている座席を使用するオフィススタイルです。",
       source: '平成25年秋期 問36',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'サージ防護',
@@ -64,12 +62,11 @@ List<QuizItem> get category2_6 {
       ans: 'サージ防護',
       choices: ["サージ防護", "過電流保護", "アース", "断熱"],
       comment: "サージ防護は、雷などによる電源からの突発的な電圧上昇（サージ）からコンピュータや電子機器を保護するための対策。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 601);
+    return quizItems[index].copyWith(quizId: index + I18n().category2Index + 601);
   });
 }

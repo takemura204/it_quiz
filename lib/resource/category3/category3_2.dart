@@ -10,7 +10,7 @@ List<QuizItem> get category3_2 {
       ans: '演繹推論',
       choices: ["演繹推論", "帰納推論", "アブダクション推論", "類推推論"],
       comment: "演繹推論は、一般的な法則から出発して、特定の事実や結論を導き出す論理的な推論方法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '帰納推論',
@@ -18,7 +18,7 @@ List<QuizItem> get category3_2 {
       ans: '帰納推論',
       choices: ["帰納推論", "演繹推論", "アブダクション推論", "類推推論"],
       comment: "帰納推論は、個々の事例や観察から出発して、一般的な法則やルールを導き出す推論方法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '機械学習',
@@ -26,7 +26,7 @@ List<QuizItem> get category3_2 {
       ans: '機械学習',
       choices: ["機械学習", "人工知能", "データマイニング", "統計学"],
       comment: "機械学習は、データからパターンを学習し、その学習結果を基にして新しいデータに対して予測や判断を行う技術。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ニューラルネット',
@@ -34,7 +34,7 @@ List<QuizItem> get category3_2 {
       ans: 'ニューラルネット',
       choices: ["ニューラルネット", "決定木", "サポートベクターマシン", "ランダムフォレスト"],
       comment: "ニューラルネットは、複数の層を持ち、人間の脳のニューロンのネットワークを模倣した計算モデルで、機械学習の一形態。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ワークバックプロパゲーション',
@@ -42,7 +42,7 @@ List<QuizItem> get category3_2 {
       ans: 'ワークバックプロパゲーション',
       choices: ["ワークバックプロパゲーション", "勾配降下法", "確率的勾配降下法", "最急降下法"],
       comment: "ワークバックプロパゲーションは、ニューラルネットワークの学習において、出力層の誤差を逆伝播させて重みを更新するアルゴリズム。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '活性化関数',
@@ -50,7 +50,7 @@ List<QuizItem> get category3_2 {
       ans: '活性化関数',
       choices: ["活性化関数", "損失関数", "最適化関数", "伝達関数"],
       comment: "活性化関数は、ニューラルネットワークの各ノード（ニューロン）で、入力信号の総和を出力信号に変換するために用いられる関数。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ディープラーニング',
@@ -58,12 +58,11 @@ List<QuizItem> get category3_2 {
       ans: 'ディープラーニング',
       choices: ["ディープラーニング", "強化学習", "教師あり学習", "教師なし学習"],
       comment: "ディープラーニングは、複数の隠れ層を持つニューラルネットワークを用いて、複雑なパターンや特徴を抽出し学習する技術。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 201);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 201);
   });
 }

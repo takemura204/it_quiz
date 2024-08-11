@@ -16,13 +16,12 @@ List<QuizItem> get category2_5 {
       ],
       comment: "インシデント管理は、サービスの障害や問題が発生した際に、それを迅速に解決し、サービスの正常な運用を回復させるためのプロセス。",
       source: '平成24年春期 問39',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '問題管理',
       question: 'ITサービスマネジメントのプロセスには，インシデント管理，問題管理，リリース管理などの活動がある。問題管理の活動はどれか。',
-      ans:
-          'メールシステムがダウンした。原因を究明するために情報システムの担当者とシステムを構築したベンダーの技術者を招集し，情報収集を開始した。',
+      ans: 'メールシステムがダウンした。原因を究明するために情報システムの担当者とシステムを構築したベンダーの技術者を招集し，情報収集を開始した。',
       choices: [
         "電子メールが送信できないと各部署から連絡があった。サービスを再開するためにバックアップシステムを立ち上げた。",
         "電子メールが送信できないと問合せがあった。利用者にPCの設定を確認してもらったところ，電子メールアドレスが誤っていたので修正した。",
@@ -32,18 +31,16 @@ List<QuizItem> get category2_5 {
       comment:
           "問題管理は、ITILのサービスサポートを構成するプロセスのひとつで、インシデントや障害原因の把握と管理を行い、根本原因を究明して、回避策や恒久的な対策を策定するプロセス",
       source: '平成22年秋期 問33',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '構成管理',
-      question:
-          'サービスサポートにおける管理機能のうち，ハードウェア，ソフトウェアといったIT資産を網羅的に洗い出し，IT資産の管理台帳に記録し管理するものはどれか。',
+      question: 'サービスサポートにおける管理機能のうち，ハードウェア，ソフトウェアといったIT資産を網羅的に洗い出し，IT資産の管理台帳に記録し管理するものはどれか。',
       ans: '構成管理',
       choices: ["インシデント管理", "構成管理", "問題管理", "リリース管理"],
-      comment:
-          "構成管理は、ITサービスを構成する要素の詳細な情報を管理し、その正確性を維持することで、サービスの安定性と信頼性を確保するプロセス。",
+      comment: "構成管理は、ITサービスを構成する要素の詳細な情報を管理し、その正確性を維持することで、サービスの安定性と信頼性を確保するプロセス。",
       source: '平成22年春期 問41',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '変更管理',
@@ -52,7 +49,7 @@ List<QuizItem> get category2_5 {
       choices: ["インシデント管理", "構成管理", "変更管理", "リリース管理"],
       comment: "変更管理は、変更作業に伴うリスクを管理し、変更作業の管理とリリース管理プロセスへ引き継ぐかどうかの評価を行うプロセス。",
       source: '平成22年秋期 問40',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'リリース及び展開管理',
@@ -64,19 +61,17 @@ List<QuizItem> get category2_5 {
         "組織で使用しているIT資産を正確に把握し，不適切な使用をさせない。",
         "変更管理で承認された変更を稼働環境に適用する。"
       ],
-      comment:
-          "リリース及び展開管理は、変更管理プロセスで承認された変更作業について、実際の本番環境へのベストな展開方法を考え、実際に変更を実施するプロセス",
+      comment: "リリース及び展開管理は、変更管理プロセスで承認された変更作業について、実際の本番環境へのベストな展開方法を考え、実際に変更を実施するプロセス",
       source: '平成23年特別 問40',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '継続的改善',
       question: 'ITサービスおよびその管理プロセスの効果性と効率性を継続的に監視し、改善する活動は何か？',
       ans: '継続的改善',
       choices: ["継続的改善", "問題管理", "変更管理", "リリース及び展開管理"],
-      comment:
-          "継続的改善は、ITサービスおよびサービス管理プロセスの効果性と効率性を継続的に監視し、改善策を実施することでサービス品質を向上させる活動。",
-      importance: QuizImportanceType.low,
+      comment: "継続的改善は、ITサービスおよびサービス管理プロセスの効果性と効率性を継続的に監視し、改善策を実施することでサービス品質を向上させる活動。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'サービスデスク',
@@ -91,39 +86,35 @@ List<QuizItem> get category2_5 {
       comment:
           "サービスデスクは、ユーザーに対して「単一の窓口」を提供し、あらゆる問い合わせを受付け、その記録を一元管理すると共に問題解決を行う適切な部門・あるいはプロセスへの引き継ぎを担当する部門のこと。",
       source: '平成23年特別 問46',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'エスカレーション',
       question: '問題やインシデントの解決が困難な場合に、上位レベルの専門家や管理者へと対応を引き継ぐプロセスは何か？',
       ans: 'エスカレーション',
       choices: ["エスカレーション", "デリゲーション", "コーディネーション", "トリアージ"],
-      comment:
-          "エスカレーションは、問題やインシデントの解決が困難な場合に、より高いレベルの専門知識や権限を持つ上位レベルへと対応を引き継ぐプロセス。",
-      importance: QuizImportanceType.low,
+      comment: "エスカレーションは、問題やインシデントの解決が困難な場合に、より高いレベルの専門知識や権限を持つ上位レベルへと対応を引き継ぐプロセス。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'FAQ（Frequently Asked Questions）',
       question: 'よくある質問とその回答をまとめたリストは何と呼ばれるか？',
       ans: 'FAQ',
       choices: ["FAQ", "Q&A", "インフォメーションセンター", "ナレッジベース"],
-      comment:
-          "FAQ（Frequently Asked Questions）は、よくある質問とその回答をまとめたリストで、ユーザーが自ら問題を解決できるよう支援する。",
-      importance: QuizImportanceType.low,
+      comment: "FAQ（Frequently Asked Questions）は、よくある質問とその回答をまとめたリストで、ユーザーが自ら問題を解決できるよう支援する。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'チャットボット',
       question: '自然言語処理を用いてユーザーの問い合わせに自動で回答するプログラムは何か？',
       ans: 'チャットボット',
       choices: ["チャットボット", "AIアシスタント", "仮想アシスタント", "自動応答システム"],
-      comment:
-          "チャットボットは、自然言語処理技術を用いてユーザーの問い合わせに自動で回答するプログラムで、サービスデスクの負荷軽減などに利用される。",
-      importance: QuizImportanceType.low,
+      comment: "チャットボットは、自然言語処理技術を用いてユーザーの問い合わせに自動で回答するプログラムで、サービスデスクの負荷軽減などに利用される。",
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 501);
+    return quizItems[index].copyWith(quizId: index + I18n().category2Index + 501);
   });
 }

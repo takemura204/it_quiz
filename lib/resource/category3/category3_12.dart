@@ -10,16 +10,15 @@ List<QuizItem> get category3_12 {
       ans: 'ウェアラブル端末',
       choices: ["ウェアラブル端末", "スマートデバイス", "ペンタブレット", "イメージスキャナ"],
       comment: "ウェアラブル端末は、腕時計やメガネなど、身につけることができる小型の電子機器で、健康管理や通信など様々な機能を持つ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'スマートデバイス',
       question: '高度なコンピューティング機能とネットワーク接続機能を持ち、日常生活で広く使用される電子機器は何か？',
       ans: 'スマートデバイス',
       choices: ["スマートデバイス", "ウェアラブル端末", "イメージスキャナ", "3Dプリンタ"],
-      comment:
-          "スマートデバイスは、スマートフォンやタブレットなど、高度なコンピューティング機能とネットワーク接続機能を持つ日常生活で広く使用される電子機器。",
-      importance: QuizImportanceType.low,
+      comment: "スマートデバイスは、スマートフォンやタブレットなど、高度なコンピューティング機能とネットワーク接続機能を持つ日常生活で広く使用される電子機器。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ペンタブレット',
@@ -27,7 +26,7 @@ List<QuizItem> get category3_12 {
       ans: 'ペンタブレット',
       choices: ["ペンタブレット", "タッチパネル", "イメージスキャナ", "ウェアラブル端末"],
       comment: "ペンタブレットは、ペンのような入力装置を用いてコンピュータに直接グラフィックを入力するためのデバイス。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'イメージスキャナ',
@@ -36,7 +35,7 @@ List<QuizItem> get category3_12 {
       choices: ["GPS受信機", "スキャナー", "ディジタイザ", "プロッタ"],
       comment: "イメージスキャナは、文書や写真などのアナログ情報をデジタルデータとしてコンピュータに取り込むための機器。",
       source: '平成28年春期 問14',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'タッチパネル',
@@ -48,10 +47,9 @@ List<QuizItem> get category3_12 {
         "表面のタッチセンサーを用いて指の動きを認識し，ホイールと呼ばれる円盤に似た部品を回すようにして操作を行う。",
         "平板状の入力装置を指でなぞることで，画面上のマウスポインタなどの操作を行う。"
       ],
-      comment:
-          "タッチパネルは、ディスプレイに表示される画像に直接触れることでデータを入力する装置で、銀行のATMやスマートフォンの入力装置として採用されている。",
+      comment: "タッチパネルは、ディスプレイに表示される画像に直接触れることでデータを入力する装置で、銀行のATMやスマートフォンの入力装置として採用されている。",
       source: '平成25年春期 問56',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'プロジェクタ',
@@ -59,7 +57,7 @@ List<QuizItem> get category3_12 {
       ans: 'プロジェクタ',
       choices: ["プロジェクタ", "モニター", "ディスプレイ", "テレビ"],
       comment: "プロジェクタは、画像や映像を壁やスクリーン上に投影するために使用される機器。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '3Dプリンタ',
@@ -67,7 +65,7 @@ List<QuizItem> get category3_12 {
       ans: '3Dプリンタ',
       choices: ["3Dプリンタ", "インクジェットプリンタ", "レーザプリンタ", "感熱式プリンタ"],
       comment: "3Dプリンタは、立体的な物体を層ごとに造形していくことで物理的なモデルを作成するプリンタ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'OCR（Optical Character Recognition）',
@@ -77,25 +75,23 @@ List<QuizItem> get category3_12 {
       comment:
           "OCR（Optical Character Recognition）は、紙や画像内の文字をパターンマッチング技術やAI技術を用いて解析して読み取り、デジタルのテキストデータに変換する装置やソフトウェア。",
       source: '平成27年秋期 問47',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'OMR',
       question: 'マークシートのような形式で回答されたデータを光学的に読み取る技術は何か？',
       ans: 'OMR',
       choices: ["OMR", "OCR", "スキャナ", "バーコードリーダー"],
-      comment:
-          "OMR（Optical Mark Recognition）は、マークシートのような形式で回答されたデータを光学的に読み取る技術。",
-      importance: QuizImportanceType.low,
+      comment: "OMR（Optical Mark Recognition）は、マークシートのような形式で回答されたデータを光学的に読み取る技術。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'Webカメラ',
       question: 'インターネット上でのビデオ通話や会議などに使用される、映像をデジタルデータとしてコンピュータに取り込むためのカメラは何か？',
       ans: 'Webカメラ',
       choices: ["Webカメラ", "デジタルカメラ", "アクションカメラ", "イメージスキャナ"],
-      comment:
-          "Webカメラは、インターネット上でのビデオ通話や会議などに使用される、映像をデジタルデータとしてコンピュータに取り込むためのカメラ。",
-      importance: QuizImportanceType.low,
+      comment: "Webカメラは、インターネット上でのビデオ通話や会議などに使用される、映像をデジタルデータとしてコンピュータに取り込むためのカメラ。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'インクジェットプリンタ',
@@ -103,7 +99,7 @@ List<QuizItem> get category3_12 {
       ans: 'インクジェットプリンタ',
       choices: ["インクジェットプリンタ", "レーザプリンタ", "インパクトプリンタ", "感熱式プリンタ"],
       comment: "インクジェットプリンタは、インクを微細な滴として紙に吹き付けることで文字や画像を印刷するプリンタ。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'インパクトプリンター',
@@ -113,7 +109,7 @@ List<QuizItem> get category3_12 {
       comment:
           "インパクトプリンターは、細かいピンや活字でインクリボンを紙に打ち付けることで印刷するプリンターで、カーボン紙や感圧紙(ノーカーボン紙)などの複写式の紙に印刷をすることができる。",
       source: '平成24年秋期 問81',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '感熱式プリンタ',
@@ -121,7 +117,7 @@ List<QuizItem> get category3_12 {
       ans: '感熱式プリンタ',
       choices: ["感熱式プリンタ", "インクジェットプリンタ", "レーザプリンタ", "インパクトプリンタ"],
       comment: "感熱式プリンタは、熱に反応する特殊な紙を使用し、熱を加えることで文字や画像を印刷するプリンタ。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'レーザプリンター',
@@ -131,12 +127,11 @@ List<QuizItem> get category3_12 {
       comment:
           "レーザプリンターは、レーザ光線を使って図や文字を描き、それをトナーに付着させて用紙に焼き付けるプリンターで、高価であるため主に業務用として利用されており、印刷がページ単位であることが特徴。",
       source: '平成28年春期 問88',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 1201);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 1201);
   });
 }

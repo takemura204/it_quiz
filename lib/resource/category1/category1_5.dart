@@ -11,17 +11,16 @@ List<QuizItem> get category1_5 {
       ans: 'サイバーセキュリティ基本法',
       choices: ["サイバーセキュリティ基本法", "不正アクセス禁止法", "個人情報保護法", "マイナンバー法"],
       comment: "サイバーセキュリティ基本法は、国のサイバーセキュリティに関する基本的な方針や体制の整備などを定めた法律。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '不正アクセス禁止法',
-      question:
-          'ネットワークに接続されアクセスが制限されているコンピュータに対して，システムのセキュリティ上の弱点を突いて侵入する行為を規制している法律はどれか。',
+      question: 'ネットワークに接続されアクセスが制限されているコンピュータに対して，システムのセキュリティ上の弱点を突いて侵入する行為を規制している法律はどれか。',
       ans: '不正アクセス禁止法',
       choices: ["通信傍受法", "不正アクセス禁止法", "プロバイダ責任制限法", "マイナンバー法"],
       comment:
           "不正アクセス禁止法とは、コンピュータネットワークに接続できる環境で、本人の承諾なしに他人のID・パスワード等を使って認証が必要なページに接続する行為、および、本人に許可なく第三者へIDとパスワードを教えるなどの助長行為の禁止を定めた法律",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
       source: '平成28年秋期 問31',
     ),
     QuizItem(
@@ -37,7 +36,7 @@ List<QuizItem> get category1_5 {
       comment:
           "個人情報保護法とは、個人情報の適正な取扱いに関し基本的な事項を定め、国及び地方公共団体の責務等を明らかにするとともに、個人情報を取り扱う事業者の遵守すべき義務等を定めることにより、個人情報の有用性に配慮しつつ、個人の権利利益を保護することを目的とする法律。",
       source: '平成24年秋期 問20',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '個人情報取扱事業者',
@@ -45,7 +44,7 @@ List<QuizItem> get category1_5 {
       ans: '個人情報取扱事業者',
       choices: ["個人情報取扱事業者", "情報セキュリティ管理者", "データコントローラー", "プロセッサー"],
       comment: "個人情報取扱事業者は、個人情報を取り扱う事業の実施者であり、個人情報保護法に基づき適切な情報管理が求められる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '個人情報保護委員会',
@@ -53,7 +52,7 @@ List<QuizItem> get category1_5 {
       ans: '個人情報保護委員会',
       choices: ["個人情報保護委員会", "情報セキュリティ委員会", "データ保護委員会", "サイバーセキュリティ対策本部"],
       comment: "個人情報保護委員会は、個人情報の保護に関する政策の企画・立案や監視・指導等を行うために設置された独立行政委員会。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '個人識別符号',
@@ -61,7 +60,7 @@ List<QuizItem> get category1_5 {
       ans: '個人識別符号',
       choices: ["個人識別符号", "個人情報", "機微情報", "要配慮情報"],
       comment: "個人識別符号は、個人を識別するために用いられる番号や記号などの情報で、特定の個人を識別することができる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '要配慮個人情報',
@@ -69,16 +68,15 @@ List<QuizItem> get category1_5 {
       ans: '要配慮個人情報',
       choices: ["要配慮個人情報", "一般個人情報", "敏感個人情報", "保護個人情報"],
       comment: "要配慮個人情報は、人種、信条、社会的身分、医療履歴、犯罪歴などの特に注意して取り扱う必要のある個人情報。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '匿名加工情報',
       question: '個人を特定できないよう加工された情報を何というか？',
       ans: '匿名加工情報',
       choices: ["匿名加工情報", "非個人化情報", "脱個人情報", "アノニマイズド情報"],
-      comment:
-          "匿名加工情報は、特定の個人を識別することができないように加工された情報で、元の個人情報からは個人を特定できない状態になっている。",
-      importance: QuizImportanceType.low,
+      comment: "匿名加工情報は、特定の個人を識別することができないように加工された情報で、元の個人情報からは個人を特定できない状態になっている。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'オプトイン',
@@ -86,7 +84,7 @@ List<QuizItem> get category1_5 {
       ans: 'オプトイン',
       choices: ["オプトイン", "オプトアウト", "インフォームドコンセント", "プライバシーコンセント"],
       comment: "オプトインは、事前に利用者の同意を得てから個人情報を収集・利用するシステムや方針を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'オプトアウト',
@@ -94,16 +92,15 @@ List<QuizItem> get category1_5 {
       ans: 'オプトアウト',
       choices: ["オプトイン", "オプトアウト", "プライバシーポリシー", "データプロテクション"],
       comment: "オプトアウトは、個人情報の収集・利用に対して、事前にまたは事後に拒否の意志を表明することができるシステムや方針を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'マイナンバー法',
       question: '日本の国民に一人一つずつ与えられる番号制度の法律は何か？',
       ans: 'マイナンバー法',
       choices: ["マイナンバー法", "個人情報保護法", "社会保障・税番号制度法", "公的個人認証法"],
-      comment:
-          "マイナンバー法は、全ての日本国民及び日本に住む外国人に一人一つずつ固有の番号（マイナンバー）を与え、社会保障、税、災害対策の効率化を目的とした制度の法律。",
-      importance: QuizImportanceType.low,
+      comment: "マイナンバー法は、全ての日本国民及び日本に住む外国人に一人一つずつ固有の番号（マイナンバー）を与え、社会保障、税、災害対策の効率化を目的とした制度の法律。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '一般データ保護規則',
@@ -111,7 +108,7 @@ List<QuizItem> get category1_5 {
       ans: '一般データ保護規則',
       choices: ["一般データ保護規則", "個人情報保護法", "データプライバシー法", "サイバーセキュリティ法"],
       comment: "一般データ保護規則（GDPR）は、ヨーロッパ連合（EU）における個人データの保護とプライバシーの強化を目的とした法規則。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '消去権',
@@ -119,7 +116,7 @@ List<QuizItem> get category1_5 {
       ans: '消去権',
       choices: ["アクセス権", "訂正権", "消去権", "データポータビリティ権"],
       comment: "消去権（忘れられる権利）は、個人が自分に関する情報を保有する事業者に対して、特定の条件の下でその情報の削除を要求する権利。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '特定電子メール法',
@@ -130,7 +127,7 @@ List<QuizItem> get category1_5 {
       comment:
           "特定電子メール法は、広告や宣伝など営利目的で送信される迷惑メールを規制し、電子メールの利用についての良好な環境を整備する目的で「特定電子メールの送信の適正化等に関する法律」(特定電子メール法)という法律",
       source: '平成25年春期 問1',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ウイルス作成罪',
@@ -138,7 +135,7 @@ List<QuizItem> get category1_5 {
       ans: 'ウイルス作成罪',
       choices: ["ウイルス作成罪", "データ改ざん罪", "不正アクセス罪", "サイバー犯罪罪"],
       comment: "ウイルス作成罪は、コンピュータウイルスを作成、提供、保有することを禁止し、これらの行為に対する罰則を定めた罪。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'システム管理基準',
@@ -146,33 +143,25 @@ List<QuizItem> get category1_5 {
           '組織が経営戦略と情報システム戦略に基づいて情報システムの企画・開発・運用・保守を行うとき，そのライフサイクルの中で効果的な情報システム投資及びリスク低減のためのコントロールを適切に行うための実践規範はどれか。',
       ans: 'システム管理基準',
       choices: ["システム管理基準", "システム監査基準", "システム管理基準", "情報システム安全対策基準"],
-      comment:
-          "システム管理基準は、情報システムの管理においてどの組織でも共通して留意すべき基本的事項を体系化・一般化したもので、経済産業省により策定されてい流ポリシー。",
+      comment: "システム管理基準は、情報システムの管理においてどの組織でも共通して留意すべき基本的事項を体系化・一般化したもので、経済産業省により策定されてい流ポリシー。",
       source: '平成27年春期 問1',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'サイバーセキュリティ経営ガイドライン',
       question: '企業の経営層がサイバーセキュリティを経営の一部として取り組むためのガイドラインは何か？',
       ans: 'サイバーセキュリティ経営ガイドライン',
-      choices: [
-        "サイバーセキュリティ経営ガイドライン",
-        "情報セキュリティポリシー",
-        "サイバーセキュリティ基本方針",
-        "情報セキュリティ管理基準"
-      ],
-      comment:
-          "サイバーセキュリティ経営ガイドラインは、企業の経営層がサイバーセキュリティを経営戦略の一部として組み込み、実践するための指針やガイドライン。",
-      importance: QuizImportanceType.low,
+      choices: ["サイバーセキュリティ経営ガイドライン", "情報セキュリティポリシー", "サイバーセキュリティ基本方針", "情報セキュリティ管理基準"],
+      comment: "サイバーセキュリティ経営ガイドラインは、企業の経営層がサイバーセキュリティを経営戦略の一部として組み込み、実践するための指針やガイドライン。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '情報セキュリティ管理基準',
       question: '情報セキュリティを維持するために企業や組織が定めるべき基準は何か？',
       ans: '情報セキュリティ管理基準',
       choices: ["情報セキュリティ管理基準", "プライバシーポリシー", "データ保護基準", "セキュリティガバナンス"],
-      comment:
-          "情報セキュリティ管理基準は、情報資産の保護や情報セキュリティインシデントの予防・対応を目的として、企業や組織が定める一連の管理基準やポリシー。",
-      importance: QuizImportanceType.low,
+      comment: "情報セキュリティ管理基準は、情報資産の保護や情報セキュリティインシデントの予防・対応を目的として、企業や組織が定める一連の管理基準やポリシー。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'サイバー・フィジカル・セキュリティ対策フレームワーク',
@@ -186,7 +175,7 @@ List<QuizItem> get category1_5 {
       ],
       comment:
           "サイバー・フィジカル・セキュリティ対策フレームワークは、サイバー空間だけでなく物理空間におけるセキュリティ対策も統合的に考慮し、全体的なセキュリティ強化を目指すための枠組み。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'プロバイダ責任制限法',
@@ -201,12 +190,11 @@ List<QuizItem> get category1_5 {
       comment:
           "プロバイダ責任制限法は、インターネットでのウェブページや電子掲示板などへの投稿のように不特定多数の者が閲覧する通信について、プロバイダ等※の「損害賠償責任」および、それらの通信で損害を被った者に与えられる「発信者情報の開示請求権」を定めた法律。",
       source: '平成23年秋期 問28',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 501);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 501);
   });
 }

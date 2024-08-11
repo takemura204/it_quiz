@@ -17,7 +17,7 @@ List<QuizItem> get category0_1_4 {
       comment:
           "SFA(Sales Force Automation)は、営業支援システムとも呼ばれ、営業活動にモバイル技術やインターネット技術といったITを活用して、営業の質と効率を高め売上や利益の増加につなげようとする仕組み、またはそのシステム。",
       source: '平成27年春期 問13',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'コンカレントエンジニアリング',
@@ -27,7 +27,7 @@ List<QuizItem> get category0_1_4 {
       comment:
           "コンカレントエンジニアリング(Concurrent Engineering)は、主に製造業において、設計から生産に至るまでの各プロセスを同時並行的に行うことで、開発期間や納期の短縮および生産コストの削減を図る手法。",
       source: '平成26年春期 問28',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'BtoC（Business to Consumer）',
@@ -42,7 +42,7 @@ List<QuizItem> get category0_1_4 {
       comment:
           "BtoC（Business to Consumer）は、企業が最終消費者である個人に直接商品やサービスを販売するビジネスモデルで、ネットショップでの取引やインターネットを介したサービスの提供などが含まれる。",
       source: '平成27年秋期 問17',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '組込みシステム',
@@ -54,9 +54,8 @@ List<QuizItem> get category0_1_4 {
         "製品の改良に当たって，ソフトウェアの変更だけで一定範囲の機能追加が可能となる。",
         "フェールセーフを担保する環境が提供されており，システムごとの対策が不要である。"
       ],
-      comment:
-          "組込みシステムとは、特定の機能を実現するために家電製品や機械等に組み込まれるコンピュータシステム。家電製品や自動車など日常生活の様々な場面で利用されている。",
-      importance: QuizImportanceType.high,
+      comment: "組込みシステムとは、特定の機能を実現するために家電製品や機械等に組み込まれるコンピュータシステム。家電製品や自動車など日常生活の様々な場面で利用されている。",
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'DFD(Data Flow Diagram)',
@@ -68,10 +67,9 @@ List<QuizItem> get category0_1_4 {
         "システムを構成する要素の属性や操作，要素同士の関係を表記する。",
         "データの流れに着目し，業務のデータの流れと処理の関係を表記する。"
       ],
-      comment:
-          "DFD(Data Flow Diagram)は、データの流れに着目して、その対象となる業務のデータの流れと処理の関係をわかりやすく図式化する構造化分析の手法。",
+      comment: "DFD(Data Flow Diagram)は、データの流れに着目して、その対象となる業務のデータの流れと処理の関係をわかりやすく図式化する構造化分析の手法。",
       source: '平成29年春期 問14',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'アウトソーシング',
@@ -85,7 +83,7 @@ List<QuizItem> get category0_1_4 {
       ],
       comment: "アウトソーシングは、コスト削減や専門性の高いサービスの利用を目的として、自社の業務の一部または全部を他社に委託すること。",
       source: '平成22年秋期 問3',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SaaS（Software as a Service）',
@@ -97,10 +95,9 @@ List<QuizItem> get category0_1_4 {
         "ソフトウェアの機能を複数の企業にインターネット経由でサービスとして提供し，使用料を課金する。",
         "ソフトウェアをダウンロードさせる対価としてライセンス料を課金する。"
       ],
-      comment:
-          "SaaS（Software as a Service）は、ソフトウェアをインターネット経由でサービスとして提供し、ユーザーがオンラインでアクセスして利用するモデル。",
+      comment: "SaaS（Software as a Service）は、ソフトウェアをインターネット経由でサービスとして提供し、ユーザーがオンラインでアクセスして利用するモデル。",
       source: '平成21年春期 問6',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ASP（Application Service Provider）',
@@ -115,7 +112,7 @@ List<QuizItem> get category0_1_4 {
       comment:
           "ASP（Application Service Provider）は、業務用のアプリケーションをインターネットを通じて、顧客にレンタルする事業者のことで、サービス利用側には、購入や新規開発よりもコストを低く抑えることができることやシステム管理の負担が少なくなる。",
       source: '平成22年春期 問13',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ハウジングサービス',
@@ -127,19 +124,17 @@ List<QuizItem> get category0_1_4 {
         "サーバや社内のコンピュータのOSやオフィスソフトの更新作業を回避することができる。",
         "自社サーバによるサービス提供に必要なネットワークや施設に関する費用を低減することができる。"
       ],
-      comment:
-          "ハウジングサービスとは、顧客の通信機器や情報発信用のコンピュータ(サーバ)を、自社の回線設備の整った施設に設置するサービスで、通信業者やプロバイダが行っている。",
+      comment: "ハウジングサービスとは、顧客の通信機器や情報発信用のコンピュータ(サーバ)を、自社の回線設備の整った施設に設置するサービスで、通信業者やプロバイダが行っている。",
       source: '平成22年春期 問22',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'オンプレミス',
       question: '企業が自社のデータセンター内に物理的なサーバーとストレージを設置し、自己管理するIT運用モデルを何というか？',
       ans: 'オンプレミス',
       choices: ["クラウドコンピューティング", "オンプレミス", "SaaS", "IaaS"],
-      comment:
-          "オンプレミスは、企業が自社の物理的施設内にITインフラを持ち、自身で全てを管理する運用モデル。データのコントロールとセキュリティが必要な場合に選ばれる。",
-      importance: QuizImportanceType.high,
+      comment: "オンプレミスは、企業が自社の物理的施設内にITインフラを持ち、自身で全てを管理する運用モデル。データのコントロールとセキュリティが必要な場合に選ばれる。",
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SOA(Service Oriented Architecture)',
@@ -155,12 +150,12 @@ List<QuizItem> get category0_1_4 {
       comment:
           "SOA(Service Oriented Architecture)は、業務上の一処理に相当するソフトウェアで実現されている機能や部品を独立したサービスとし、それらを組み合わせ連携させることで全体のシステムを構築するという設計手法。",
       source: '平成26年春期 問3',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_1Index + 401, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_1Index + 401, isPremium: false);
   });
 }

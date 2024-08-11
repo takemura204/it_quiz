@@ -202,15 +202,15 @@ class _QuizItemStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Color iconColor(QuizStatusType statusType) {
+    Color iconColor(StatusType statusType) {
       switch (statusType) {
-        case QuizStatusType.correct:
+        case StatusType.correct:
           return context.correctColor;
-        case QuizStatusType.incorrect:
+        case StatusType.incorrect:
           return context.incorrectColor;
-        case QuizStatusType.learned:
+        case StatusType.learned:
           return context.backgroundColor;
-        case QuizStatusType.unlearned:
+        case StatusType.unlearned:
           return context.secondColor;
         default:
           return context.secondColor;

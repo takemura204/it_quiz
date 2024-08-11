@@ -39,13 +39,11 @@ class DashboardModel extends StateNotifier<Dashboard> {
     int monthlyQuizCount = 0;
     int monthlyQuizCorrectCount = 0;
 
-    final startOfWeek =
-        DateTime(today.year, today.month, today.day - (today.weekday - 1));
-    final endOfWeek = startOfWeek.add(const Duration(
-        days: 6, hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
+    final startOfWeek = DateTime(today.year, today.month, today.day - (today.weekday - 1));
+    final endOfWeek = startOfWeek
+        .add(const Duration(days: 6, hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
     final startOfMonth = DateTime(today.year, today.month, 1);
-    final endOfMonth =
-        DateTime(today.year, today.month + 1, 0, 23, 59, 59, 999);
+    final endOfMonth = DateTime(today.year, today.month + 1, 0, 23, 59, 59, 999);
     // 共通のロジックでデータを集計
     for (var quiz in quizzes) {
       // デイリーデータの集計
@@ -54,34 +52,26 @@ class DashboardModel extends StateNotifier<Dashboard> {
           quiz.timeStamp?.year == today.year) {
         dailyDuration += quiz.duration;
         dailyQuizCount += quiz.quizItemList.length;
-        dailyQuizCorrectCount += quiz.quizItemList
-            .where((x) => x.status == QuizStatusType.correct)
-            .toList()
-            .length;
+        dailyQuizCorrectCount +=
+            quiz.quizItemList.where((x) => x.status == StatusType.correct).toList().length;
       }
 
       // 週次データの集計
-      if (quiz.timeStamp!
-              .isAfter(startOfWeek.subtract(const Duration(days: 1))) &&
+      if (quiz.timeStamp!.isAfter(startOfWeek.subtract(const Duration(days: 1))) &&
           quiz.timeStamp!.isBefore(endOfWeek.add(const Duration(days: 1)))) {
         weeklyDuration += quiz.duration;
         weeklyQuizCount += quiz.quizItemList.length;
-        weeklyQuizCorrectCount += quiz.quizItemList
-            .where((x) => x.status == QuizStatusType.correct)
-            .toList()
-            .length;
+        weeklyQuizCorrectCount +=
+            quiz.quizItemList.where((x) => x.status == StatusType.correct).toList().length;
       }
 
       // 月次データの集計
-      if (quiz.timeStamp!
-              .isAfter(startOfMonth.subtract(const Duration(days: 1))) &&
+      if (quiz.timeStamp!.isAfter(startOfMonth.subtract(const Duration(days: 1))) &&
           quiz.timeStamp!.isBefore(endOfMonth.add(const Duration(days: 1)))) {
         monthlyDuration += quiz.duration;
         monthlyQuizCount += quiz.quizItemList.length;
-        monthlyQuizCorrectCount += quiz.quizItemList
-            .where((x) => x.status == QuizStatusType.correct)
-            .toList()
-            .length;
+        monthlyQuizCorrectCount +=
+            quiz.quizItemList.where((x) => x.status == StatusType.correct).toList().length;
       }
     }
 
@@ -91,8 +81,7 @@ class DashboardModel extends StateNotifier<Dashboard> {
     // quizzesリストからtimeStampを取得し、異なる日をセットに追加
     for (var quiz in quizzes) {
       if (quiz.timeStamp != null) {
-        final dateOnly = DateTime(
-            quiz.timeStamp!.year, quiz.timeStamp!.month, quiz.timeStamp!.day);
+        final dateOnly = DateTime(quiz.timeStamp!.year, quiz.timeStamp!.month, quiz.timeStamp!.day);
         uniqueDays.add(dateOnly);
       }
     }

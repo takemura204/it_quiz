@@ -17,7 +17,7 @@ List<QuizItem> get category3_6 {
       comment:
           "CPU（Central Processing Unit）は、コンピュータの中心的な処理装置で、プログラムの命令を解釈し実行され、同じ構造を持つCPUであれば、クロック周波数が高くなるほど単位時間当たりの計算可能回数が多くなる。",
       source: '平成23年特別 問67',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'マルチコアプロセッサ',
@@ -31,7 +31,7 @@ List<QuizItem> get category3_6 {
       ],
       comment: "マルチコアプロセッサは、複数台のプロセッサを並列に動作させることによって処理能力の向上を図ることを目的としたシステム構成。",
       source: '平成26年秋期 問53',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'GPU(Graphics Processing Unit)',
@@ -46,7 +46,7 @@ List<QuizItem> get category3_6 {
       comment:
           "GPU(Graphics Processing Unit)は、PCなどにおいて画像処理を専門に担当するハードウェア部品で、動画再生や3DCGのレンダリングなどの高負荷な演算が要求される処理においてCPUの補助演算装置として機能する。",
       source: '平成28年秋期 問58',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'クロック周波数',
@@ -54,42 +54,34 @@ List<QuizItem> get category3_6 {
       ans: 'クロック周波数',
       choices: ["クロック周波数", "バス速度", "メモリ速度", "伝送速度"],
       comment: "クロック周波数は、CPUが一秒間に実行するクロックサイクルの数を表し、プロセッサの速度の指標となる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'SRAM（Static Random Access Memory）',
-      question:
-          'フリップフロップと呼ばれる回路を用いることで、DRAMのようなリフレッシュ動作の必要がなく非常に高速に動作する半導体メモリのことをなんというか。',
+      question: 'フリップフロップと呼ばれる回路を用いることで、DRAMのようなリフレッシュ動作の必要がなく非常に高速に動作する半導体メモリのことをなんというか。',
       ans: 'SRAM',
       choices: ["SRAM", "フラッシュメモリ", "ROM", "DIMM"],
       comment:
           "SRAM（Static Random Access Memory）は、フリップフロップと呼ばれる回路を用いることで、DRAMのようなリフレッシュ動作の必要がなく非常に高速に動作する半導体メモリ。DRAMと比べて記憶容量あたりの単価が高いため、容量が少ないキャッシュメモリなどに使用されている。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'DRAM（Dynamic Random Access Memory）',
       question: '電源が切れるとデータを失うが、SRAMよりも低コストで大容量を実現できる半導体メモリは何か？',
       ans: '主記憶装置に利用される。',
-      choices: [
-        "アクセスは，SRAMと比較して高速である。",
-        "主記憶装置に利用される。",
-        "電力供給が停止しても記憶内容は保持される。",
-        "読出し専用のメモリである。"
-      ],
-      comment:
-          "DRAM（Dynamic Random Access Memory）は、電源が切れるとデータを失うが、SRAMよりも低コストで大容量のメモリを実現できる。",
+      choices: ["アクセスは，SRAMと比較して高速である。", "主記憶装置に利用される。", "電力供給が停止しても記憶内容は保持される。", "読出し専用のメモリである。"],
+      comment: "DRAM（Dynamic Random Access Memory）は、電源が切れるとデータを失うが、SRAMよりも低コストで大容量のメモリを実現できる。",
       source: '平成21年秋期 問83',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ROM',
       question: 'DRAM，ROM，SRAM，フラッシュメモリのうち，電力供給が途絶えても内容が消えない不揮発性メモリはどれか',
       ans: 'ROMとフラッシュメモリ',
       choices: ["DRAMとSRAM", "DRAMとフラッシュメモリ", "ROMとSRAM", "ROMとフラッシュメモリ"],
-      comment:
-          "ROM（Read Only Memory）は、データを永続的に保存できるが、書き換えができない、または限られた回数しか書き換えできないメモリ。",
+      comment: "ROM（Read Only Memory）は、データを永続的に保存できるが、書き換えができない、または限られた回数しか書き換えできないメモリ。",
       source: '平成25年春期 問63',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'フラッシュメモリ',
@@ -104,17 +96,16 @@ List<QuizItem> get category3_6 {
       comment:
           "フラッシュメモリは、書き換え可能であり、電源を切ってもデータが消えない半導体メモリで、携帯電話、デジタルカメラなどの記憶媒体として広く普及していて、小型で大容量・安価なことため、手軽なデータの持ち運びに使われる。",
       source: '平成22年春期 問81',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
-      word:
-          'DDR SDRAM（Double Data Rate Synchronous Dynamic Random Access Memory）',
+      word: 'DDR SDRAM（Double Data Rate Synchronous Dynamic Random Access Memory）',
       question: 'DRAMの発展形で、高速なデータアクセスを実現するメモリ技術は何か？',
       ans: 'DDR SDRAM',
       choices: ["DDR SDRAM", "SRAM", "SIMM", "DIMM"],
       comment:
           "DDR SDRAM（Double Data Rate Synchronous Dynamic Random Access Memory）は、DRAMの発展形で、データの読み書き速度を向上させたメモリ技術。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'DIMM（Dual In-line Memory Module）',
@@ -123,7 +114,7 @@ List<QuizItem> get category3_6 {
       choices: ["DIMM", "SIMM", "DDR SDRAM", "SSD"],
       comment:
           "DIMM（Dual In-line Memory Module）は、メモリモジュールの形状の一つで、両面にチップが実装されており、デスクトップPCやサーバーなどで広く使用される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ハードディスク装置(HDD)',
@@ -135,26 +126,20 @@ List<QuizItem> get category3_6 {
         "データの保持に電力供給が必要である。",
         "ランダムアクセスが可能である。"
       ],
-      comment:
-          "ハードディスク装置(HDD)は、ガラスやアルミ合金，セラミックの薄い円盤状媒体表面に磁性体を塗布したものを複数枚重ね、その磁気円盤の表面にデータを記録する装置のこと",
+      comment: "ハードディスク装置(HDD)は、ガラスやアルミ合金，セラミックの薄い円盤状媒体表面に磁性体を塗布したものを複数枚重ね、その磁気円盤の表面にデータを記録する装置のこと",
       source: '平成24年春期 問63',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'SSD(Solid State Drive)',
       question:
           'フラッシュメモリを用いたSSD(Solid State Drive)は，ハードディスクの代わりとして期待されている記憶装置である。このSSDを用いるときに留意すべき点はどれか。',
       ans: '書込み回数に上限がある。',
-      choices: [
-        "書込み回数に上限がある。",
-        "書込みよりも読出しが遅い。",
-        "振動や衝撃に弱い。",
-        "ファイルの断片化による性能悪化が著しい。"
-      ],
+      choices: ["書込み回数に上限がある。", "書込みよりも読出しが遅い。", "振動や衝撃に弱い。", "ファイルの断片化による性能悪化が著しい。"],
       comment:
           "SSD(Solid State Drive)は、HDDにくらべてシークタイム・回転待ち時間等の機械動作時間がなく、データの読み書きが早いのが特徴の書き換え可能回数に上限な大容量記憶装置のこと",
       source: '平成21年秋期 問57',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'CD',
@@ -162,7 +147,7 @@ List<QuizItem> get category3_6 {
       ans: 'CD',
       choices: ["CD", "DVD", "Blu-ray Disc", "SDカード"],
       comment: "CDは、音楽やデータを保存するために用いられる光学式記憶媒体の一つ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'DVD',
@@ -175,7 +160,7 @@ List<QuizItem> get category3_6 {
         "読取り専用のもの，繰返し書き込むことができるものなど，複数のタイプのメディアを利用できる。"
       ],
       comment: "DVDは、CDと同じ媒体のサイズながらおよそ6倍のデジタルデータを記録できる光ディスク",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'Blu-ray Disc',
@@ -185,16 +170,15 @@ List<QuizItem> get category3_6 {
       comment:
           "Blu-ray Discは、高いデータ密度を持ち、HD映像などの大容量データを保存するのに適した光学式記憶媒体のことで、片面一層のディスクに25GBのデータを記録することができる。",
       source: '平成25年春期 問70',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'SDカード',
       question: '小型で取り扱いやすく、カメラやスマートフォンなどで使用されるフラッシュメモリ型の記憶媒体は何か？',
       ans: 'SDカード',
       choices: ["SDカード", "SSD", "CD", "HDD"],
-      comment:
-          "SDカード（Secure Digital Card）は、小型で取り扱いやすいフラッシュメモリ型の記憶媒体で、カメラやスマートフォンなどで広く使用される。",
-      importance: QuizImportanceType.low,
+      comment: "SDカード（Secure Digital Card）は、小型で取り扱いやすいフラッシュメモリ型の記憶媒体で、カメラやスマートフォンなどで広く使用される。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'キャッシュメモリ',
@@ -206,10 +190,9 @@ List<QuizItem> get category3_6 {
         "主記憶容量を超える大きさプログラムでも動作させることができる仕組みをもつメモリ",
         "主記憶を複数のブロックに分割することによって，同時アクセスを可能にするメモリ"
       ],
-      comment:
-          "キャッシュメモリは、CPUコアと主記憶の間にあって，CPUが頻繁にアクセスするデータや命令を一時的に保存し、データアクセス速度の向上を図るための高速メモリ。",
+      comment: "キャッシュメモリは、CPUコアと主記憶の間にあって，CPUが頻繁にアクセスするデータや命令を一時的に保存し、データアクセス速度の向上を図るための高速メモリ。",
       source: '平成22年春期 問66',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '主記憶',
@@ -217,21 +200,19 @@ List<QuizItem> get category3_6 {
       ans: '主記憶',
       choices: ["主記憶", "補助記憶", "キャッシュメモリ", "フラッシュメモリ"],
       comment: "主記憶（主記憶装置、RAM）は、CPUが直接アクセスできるメモリで、プログラム実行時に使用されるデータや命令を保持する。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '補助記憶',
       question: 'データを永続的に保存するための記憶装置で、主記憶よりも大容量のデータを保持することができる装置は何か？',
       ans: '補助記憶',
       choices: ["補助記憶", "主記憶", "キャッシュメモリ", "SSD"],
-      comment:
-          "補助記憶（補助記憶装置）は、データを永続的に保存し、主記憶よりも大容量のデータを保持するための記憶装置。HDDやSSDなどがこれに該当する。",
-      importance: QuizImportanceType.low,
+      comment: "補助記憶（補助記憶装置）は、データを永続的に保存し、主記憶よりも大容量のデータを保持するための記憶装置。HDDやSSDなどがこれに該当する。",
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 601);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 601);
   });
 }

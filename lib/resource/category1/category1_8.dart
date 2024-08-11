@@ -15,10 +15,9 @@ List<QuizItem> get category1_8 {
         "特定の企業やグループなどが採用した仕様が広く使用されるようになり，事実上の業界標準になったもの",
         "特定の国や地域，企業などに限られた基準ではなく，世界中どこでも適用される規格"
       ],
-      comment:
-          "デファクトスタンダードとは、公には明確に決まっているわけでないのに、市場のシェアやユーザーからの支持により事実上その分野で標準的なものと認識されている状態。",
+      comment: "デファクトスタンダードとは、公には明確に決まっているわけでないのに、市場のシェアやユーザーからの支持により事実上その分野で標準的なものと認識されている状態。",
       source: '平成21年秋期 問1',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'フォーラム標準',
@@ -26,7 +25,7 @@ List<QuizItem> get category1_8 {
       ans: 'フォーラム標準',
       choices: ["デファクトスタンダード", "フォーラム標準", "ISO", "IEC"],
       comment: "フォーラム標準は、特定の業界団体やコンソーシアムが定める非公式ながらも、その業界内で広く受け入れられている標準を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'JANコード',
@@ -36,7 +35,7 @@ List<QuizItem> get category1_8 {
       comment:
           "JANコードは、バーコード規格のひとつで、製造した事業者と商品を識別するための共通商品コード体系で、13桁のタイプと8桁のタイプがあり、バーコードリーダーで読み取り可能。",
       source: '平成22年春期 問24',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'QRコード',
@@ -51,17 +50,16 @@ List<QuizItem> get category1_8 {
       comment:
           "QRコードは、高速かつ大量のデータを格納できる二次元コードの一種で、縦横に情報を持っているため、格納できる情報量が多く、数字だけでなく英字や漢字など多言語のデータも格納することが可能で。また,3隅の四角い位置検出パターンによって360度読み取り可能、汚れなどがあっても正確に読み取れるように、誤り訂正語を含む。",
       source: '平成26年春期 問12',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ISBN（International Standard Book Number）',
       question: '図書を特定するために世界標準として使用されているコードはどれか。',
       ans: 'ISBN',
       choices: ["ISBN", "ITF", "JAN", "QR"],
-      comment:
-          "ISBN（International Standard Book Number）は、書籍に付与される国際的な識別コードで、各書籍を特定するために使用される。",
+      comment: "ISBN（International Standard Book Number）は、書籍に付与される国際的な識別コードで、各書籍を特定するために使用される。",
       source: '平成27年秋期 問20',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ISO（International Organization for Standardization）',
@@ -70,7 +68,7 @@ List<QuizItem> get category1_8 {
       choices: ["IEEE", "ISO", "IETF", "W3C"],
       comment:
           "ISO（International Organization for Standardization）は、国際的な標準化を行う団体で、品質管理や環境管理など様々な分野の国際規格を定めている。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'IEC（International Electrotechnical Commission）',
@@ -79,7 +77,7 @@ List<QuizItem> get category1_8 {
       choices: ["ISO", "IEC", "IEEE", "JIS"],
       comment:
           "IEC（International Electrotechnical Commission）は、国際的な電気技術に関する標準化を行う団体で、電気製品の安全性や性能に関する規格を定めている。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'IEEE(Institute of Electrical and Electronics Engineers)',
@@ -89,16 +87,15 @@ List<QuizItem> get category1_8 {
       comment:
           "IEEE(Institute of Electrical and Electronics Engineers)は、アメリカ合衆国に本部を持ち、電気工学・電子工学技術分野における標準化活動を行っている専門家組織",
       source: '平成28年秋期 問19',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'W3C（World Wide Web Consortium）',
       question: 'ウェブ技術に関する標準を策定する国際的な組織は何か？',
       ans: 'W3C',
       choices: ["IETF", "ISO", "W3C", "IEEE"],
-      comment:
-          "W3C（World Wide Web Consortium）は、ウェブ技術に関する標準を策定する国際的な組織で、HTMLやCSSなどの規格を定めている。",
-      importance: QuizImportanceType.low,
+      comment: "W3C（World Wide Web Consortium）は、ウェブ技術に関する標準を策定する国際的な組織で、HTMLやCSSなどの規格を定めている。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'IETF（Internet Engineering Task Force）',
@@ -107,7 +104,7 @@ List<QuizItem> get category1_8 {
       choices: ["IEEE", "ISO", "W3C", "IETF"],
       comment:
           "IETF（Internet Engineering Task Force）は、インターネットの技術的基盤に関する標準を策定する団体で、プロトコルなどの規格を定めている。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'JIS',
@@ -122,7 +119,7 @@ List<QuizItem> get category1_8 {
       comment:
           "日本産業規格(JIS)は、鉱工業製品、プログラムその他の電磁的記録、建築物、役務について、その種類、形式、形状、構造および品質、性能などの事項を、全国的に統一することを目的として定められる規格",
       source: '平成27年春期 問14',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ISO 9000',
@@ -131,16 +128,15 @@ List<QuizItem> get category1_8 {
       choices: ["JIS Q 9001", "JIS Q 14001", "JIS Q 15001", "JIS Q 27001"],
       comment:
           "ISO 9000シリーズは、ISOにより策定された規格で、組織の品質マネジメントシステムの要求事項を定めた国際標準規格で、JIS版として、JIS Q 9000、JIS Q 9001およびJIS Q 9004～JIS Q 9006がある。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ISO 14000',
       question: '環境マネジメントシステムの要求事項を定めた国際標準は何か？',
       ans: 'ISO 14000',
       choices: ["ISO 9000", "ISO 14000", "ISO 26000", "ISO/IEC 27000"],
-      comment:
-          "ISO 14000シリーズは、組織が環境パフォーマンスを管理し改善するための環境マネジメントシステムの要求事項を定めた国際標準。",
-      importance: QuizImportanceType.normal,
+      comment: "ISO 14000シリーズは、組織が環境パフォーマンスを管理し改善するための環境マネジメントシステムの要求事項を定めた国際標準。",
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ISO 26000',
@@ -148,30 +144,27 @@ List<QuizItem> get category1_8 {
       ans: 'ISO 26000',
       choices: ["ISO 9000", "ISO 14000", "ISO 26000", "ISO/IEC 27000"],
       comment: "ISO 26000は、組織が社会の持続可能な発展に貢献するために社会的責任を果たす方法に関する指針を提供する国際標準。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ISO/IEC 27000',
       question: '情報セキュリティマネジメントシステム（ISMS）の要求事項を定めた国際標準は何か？',
       ans: 'ISO/IEC 27000',
       choices: ["ISO 9000", "ISO 14000", "ISO 26000", "ISO/IEC 27000"],
-      comment:
-          "ISO/IEC 27000シリーズは、組織が情報セキュリティリスクを適切に管理するための情報セキュリティマネジメントシステムの要求事項を定めた国際標準。",
-      importance: QuizImportanceType.low,
+      comment: "ISO/IEC 27000シリーズは、組織が情報セキュリティリスクを適切に管理するための情報セキュリティマネジメントシステムの要求事項を定めた国際標準。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'JIS Q 38500',
       question: '組織のITガバナンスに関する指針を提供するJIS規格は何か？',
       ans: 'JIS Q 38500',
       choices: ["JIS Q 38500", "JIS X 8341", "JIS Z 8115", "JIS K 5600"],
-      comment:
-          "JIS Q 38500は、組織のIT資源の有効活用を支援し、経営戦略とIT戦略の整合性を高めるためのITガバナンスに関する指針を提供するJIS規格。",
-      importance: QuizImportanceType.low,
+      comment: "JIS Q 38500は、組織のIT資源の有効活用を支援し、経営戦略とIT戦略の整合性を高めるためのITガバナンスに関する指針を提供するJIS規格。",
+      importance: ImportanceType.low,
     )
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 801);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 801);
   });
 }

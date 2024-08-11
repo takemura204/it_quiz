@@ -53,19 +53,18 @@ class QuizItemCard extends ConsumerWidget {
                       children: [
                         Text(
                           '第${index + 1}問',
-                          style: const TextStyle(
-                              color: Colors.black87, fontSize: 14),
+                          style: const TextStyle(color: Colors.black87, fontSize: 14),
                         ),
                         const Gap(5),
 
                         ///⚪︎×アイコン
                         if (studyType != StudyType.learn)
                           Icon(
-                            quizItem.status == QuizStatusType.correct
+                            quizItem.status == StatusType.correct
                                 ? Icons.circle_outlined
                                 : Icons.clear,
                             size: 25,
-                            color: quizItem.status == QuizStatusType.correct
+                            color: quizItem.status == StatusType.correct
                                 ? context.correctColor
                                 : context.incorrectColor,
                           )
@@ -127,8 +126,7 @@ class QuizItemCard extends ConsumerWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: context.width * 0.02),
+                        padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
                         child: Text(
                           '${quizItem.question}',
                           style: const TextStyle(
@@ -146,13 +144,12 @@ class QuizItemCard extends ConsumerWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: context.width * 0.02),
+                        padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
                         child: Text(
                           '${quizItem.ans}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: quizItem.status == QuizStatusType.correct
+                            color: quizItem.status == StatusType.correct
                                 ? context.correctColor
                                 : context.incorrectColor,
                             decoration: TextDecoration.none,
@@ -168,8 +165,7 @@ class QuizItemCard extends ConsumerWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: context.width * 0.02),
+                        padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
                         child: Text(
                           '${quizItem.comment}',
                           style: const TextStyle(
@@ -187,8 +183,7 @@ class QuizItemCard extends ConsumerWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: context.width * 0.02),
+                          padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
                           child: Text(
                             '${quizItem.source}',
                             style: const TextStyle(
@@ -206,8 +201,7 @@ class QuizItemCard extends ConsumerWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: context.width * 0.02),
+                        padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
                         child: Text(
                           '${quizItem.word}',
                           style: TextStyle(
@@ -226,8 +220,7 @@ class QuizItemCard extends ConsumerWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: context.width * 0.02),
+                        padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
                         child: Text(
                           '${quizItem.comment}',
                           style: const TextStyle(

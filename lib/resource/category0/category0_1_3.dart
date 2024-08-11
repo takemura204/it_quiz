@@ -18,7 +18,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "SWOT分析は、Strengths（強み）、Weaknesses（弱み）、Opportunities（機会）、Threats（脅威）の頭文字を取ったもので、企業が外部環境と内部環境を分析するために使用するフレームワーク。",
       source: '平成25年春期 問24',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'PPM(Products Portfolio Management)',
@@ -33,7 +33,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "PPM(Products Portfolio Management)とは、縦軸と横軸に「市場成長率」と「市場占有率」を設定したマトリックス図を4つの象限に区分し，市場における製品(または事業やサービス)の位置付けを2つの観点で分類して資源配分を検討する手法。",
       source: '平成26年春期 問9',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'アウトソーシング',
@@ -48,7 +48,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "アウトソーシングとは、自社の業務の一部または全部を外部業者へ委託することで、人材育成や設備投資のコストが低減される。海外へ外部委託する形態を特にオフショア・アウトソーシングという。",
       source: '平成22年秋期 問3',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'TOB(Take Over Bid)',
@@ -62,7 +62,7 @@ List<QuizItem> get category0_1_3 {
       ],
       comment: "TOB(Take Over Bid)は、ある株式会社の株式等の買付けを「買付け期間・買取り株数・価格」を公告し、不特定多数の株主から株式市場外で買い集める制度。",
       source: '平成26年秋期 問8',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '4P',
@@ -72,7 +72,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "4Pは、マーケティング戦略を立てる際の基本的なフレームワークで、Product（製品）、Price（価格）、Place（流通）、Promotion（プロモーション）の4つの要素を指す。",
       source: '平成29年春期 問2',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'RFM分析',
@@ -82,7 +82,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "RFM分析は、顧客の購買行動のうち、Recency(最終購買日)、Frequency(購買頻度)、Monetary(累計購買金額)という3点に注目して顧客分析を行う手法。",
       source: '平成28年秋期 問32',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'バランススコアカード(BSC)',
@@ -97,7 +97,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "バランススコアカード(BSC)は、企業のビジョンと戦略を実現するために、「財務」「顧客」「業務プロセス」「学習と成長」という4つの視点から業績を評価・分析するためのフレームワーク。",
       source: '平成27年春期 問18',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'バリューエンジニアリング(VE)',
@@ -107,7 +107,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "バリューエンジニアリング(VE)とは、製品やサービスの「価値」を、それが果たすべき「機能」とそのためにかける「コスト」との関係で把握し、システム化された手順によって「価値」の向上をはかる手法。",
       source: '平成25年春期 問29',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'CRM',
@@ -122,7 +122,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "CRM(Customer Relationship Management)は、顧客満足度を向上させるために、顧客との関係を構築することに重点を置く顧客関係管理の経営手法で、購入からアフターサービスに至るまでの詳細な顧客データベースを活用し、顧客一人一人に合わせたマーケティングを行うことで売上増につながる優良顧客を確保することを目的としている。",
       source: '平成24年春期 問7',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SCM',
@@ -137,7 +137,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "SCM（Supply Chain Management）は、生産・在庫・購買・販売・物流などのすべての情報をリアルタイムに交換・一元管理することによって生産から販売に至る一連の流れ全体の効率を大幅に向上させることを目指す経営手法。",
       source: '平成27年秋期 問6',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ERP',
@@ -152,7 +152,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "ERPは、企業の財務、製造、販売、人事などの各業務システムを統合管理することで、リアルタイムで情報を共有・分析することで、意思決定の迅速化や業務プロセスの最適化を実現するシステム。",
       source: '平成22年秋期 問25',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'MOT',
@@ -166,7 +166,7 @@ List<QuizItem> get category0_1_3 {
       ],
       comment: "MOT(Management of Technology)は、技術経営とも呼ばれ、技術開発の成果によって事業利益を獲得することを目的とした経営手法。",
       source: '平成27年秋期 問12',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '技術ロードマップ',
@@ -181,7 +181,7 @@ List<QuizItem> get category0_1_3 {
       comment:
           "技術ロードマップは、縦軸に対象の技術・製品・サービス・市場を、横軸には時間の経過をとり、それらの要素の将来的な展望や進展目標を時系列で表した図表のことで、対象とする分野において，実現が期待されている技術を時間軸とともに示したもの。",
       source: '令和3年 問10',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 

@@ -11,7 +11,7 @@ List<QuizItem> get category1_2 {
       ans: 'フィールドワーク',
       choices: ["デスクリサーチ", "フィールドワーク", "ケーススタディ", "リモートリサーチ"],
       comment: "フィールドワークは、研究者や調査者が直接現地に赴き、観察やインタビューなどを通じてデータを収集する調査方法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'パレート図',
@@ -26,7 +26,7 @@ List<QuizItem> get category1_2 {
         "放射状に伸びた数値軸上の値を線で結んだ多角形の図"
       ],
       source: '平成23年秋期 問14',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ABC分析',
@@ -40,7 +40,7 @@ List<QuizItem> get category1_2 {
         "優先的に管理すべき対象を明確にするために，売上金額などの累積構成比を基に重要度のランク付けを行う手法"
       ],
       source: '平成22年春期 問23',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '特性要因図',
@@ -50,7 +50,7 @@ List<QuizItem> get category1_2 {
       choices: ["アローダイアグラム", "特性要因図", "パレート図", "マトリックス図"],
       comment: "特性要因図は、問題の原因と結果の関係を魚の骨の形に図式化したもので、原因分析に用いられる。",
       source: '平成26年春期 問4',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '管理図',
@@ -58,7 +58,7 @@ List<QuizItem> get category1_2 {
       ans: '管理図',
       choices: ["管理図", "プロセスマップ", "ワークフローチャート", "オペレーションチャート"],
       comment: "管理図は、製造やビジネスプロセスなどの品質管理で、プロセスが統制状態にあるかどうかを監視するために使用されるグラフ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '系統図',
@@ -66,7 +66,7 @@ List<QuizItem> get category1_2 {
       ans: '系統図',
       choices: ["系統図", "フローチャート", "マインドマップ", "ネットワーク図"],
       comment: "系統図は、生物の分類学や情報の階層構造を示すために使用される、枝分かれする構造を持つ図。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '最小二乗法',
@@ -74,7 +74,7 @@ List<QuizItem> get category1_2 {
       ans: '最小二乗法',
       choices: ["最小二乗法", "モンテカルロ法", "ニュートン法", "勾配降下法"],
       comment: "最小二乗法は、観測データに最もよく適合する直線（または曲線）を見つけるために、誤差の二乗和が最小になるように計算する方法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '回帰分析',
@@ -82,34 +82,31 @@ List<QuizItem> get category1_2 {
       ans: '回帰分析',
       choices: ["回帰分析", "相関分析", "因子分析", "クラスタ分析"],
       comment: "回帰分析は、一つ以上の独立変数と従属変数との間の関係をモデル化し、予測や因果関係の推定に用いる統計的手法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '擬似相関',
       question: '二つの変数が関連しているように見えるが、実際には別の変数によって引き起こされている関係を何というか？',
       ans: '擬似相関',
       choices: ["直接相関", "擬似相関", "部分相関", "重相関"],
-      comment:
-          "擬似相関は、二つの変数間に見られる相関関係が、実際には他の一つまたは複数の変数によって引き起こされることによるもので、直接的な因果関係がない場合の関係。",
-      importance: QuizImportanceType.low,
+      comment: "擬似相関は、二つの変数間に見られる相関関係が、実際には他の一つまたは複数の変数によって引き起こされることによるもので、直接的な因果関係がない場合の関係。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '散布図',
       question: '2種類のデータの関係性を表すことを目的として用いるものはどれか。',
-      comment:
-          "散布図とは、縦軸、横軸に2つの項目の量や大きさ等を対応させたXYグラフ上に、いくつかのデータを打点することで、2項目間の分布・相関関係を視覚的に把握する図法。",
+      comment: "散布図とは、縦軸、横軸に2つの項目の量や大きさ等を対応させたXYグラフ上に、いくつかのデータを打点することで、2項目間の分布・相関関係を視覚的に把握する図法。",
       ans: '散布図',
       choices: ["決定表", "散布図", "特性要因図", "パレート図"],
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'マトリックス図',
       question: '複数の基準や要素間の関連を可視化するために用いられる図は何か？',
       ans: 'マトリックス図',
       choices: ["マトリックス図", "パレート図", "ガントチャート", "ヒートマップ"],
-      comment:
-          "マトリックス図は、複数の基準や要素間の関係性を二次元的に整理し、それらの関連を可視化するために用いられるツール。プロジェクト管理や品質管理でよく使用される。",
-      importance: QuizImportanceType.low,
+      comment: "マトリックス図は、複数の基準や要素間の関係性を二次元的に整理し、それらの関連を可視化するために用いられるツール。プロジェクト管理や品質管理でよく使用される。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '箱ひげ図',
@@ -117,7 +114,7 @@ List<QuizItem> get category1_2 {
       ans: '箱ひげ図',
       choices: ["箱ひげ図", "レーダチャート", "ヒストグラム", "折れ線グラフ"],
       comment: "箱ひげ図は、データの中央値、四分位数、外れ値などを視覚的に表現するために用いられるグラフ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ヒートマップ',
@@ -125,7 +122,7 @@ List<QuizItem> get category1_2 {
       ans: 'ヒートマップ',
       choices: ["ヒートマップ", "散布図", "コンターマップ", "バブルチャート"],
       comment: "ヒートマップは、値の大きさを色の濃淡で表現し、データのパターンや相関関係を視覚的に示す図。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'レーダチャート',
@@ -136,7 +133,7 @@ List<QuizItem> get category1_2 {
       comment:
           "レーダチャートは、中心から正多角形状に配置される各項目の軸に、値や基準値に対する比率をプロットし、各点を線で結んだ形状で表す図法で、量の大小を把握しつつ、項目同士のバランスを比較するのに適している。",
       source: '平成25年秋期 問15',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ヒストグラム',
@@ -145,16 +142,15 @@ List<QuizItem> get category1_2 {
       ans: 'ヒストグラム',
       choices: ["管理図", "特性要因図", "パレート図", "ヒストグラム"],
       source: '平成28年春期 問32',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'モザイク図',
       question: '二つのカテゴリーに分類されるデータを、色分けしたタイルで表現する図を何というか？',
       ans: 'モザイク図',
       choices: ["モザイク図", "トレリス図", "ヒートマップ", "タイルマップ"],
-      comment:
-          "モザイク図は、二つのカテゴリーに分類されるデータを、縦軸と横軸それぞれに分類したクロス集計表（二元分割表）のグラフ化で用いられ、データのパターンを視覚的に示す図。",
-      importance: QuizImportanceType.low,
+      comment: "モザイク図は、二つのカテゴリーに分類されるデータを、縦軸と横軸それぞれに分類したクロス集計表（二元分割表）のグラフ化で用いられ、データのパターンを視覚的に示す図。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クロス集計表',
@@ -163,36 +159,32 @@ List<QuizItem> get category1_2 {
       choices: ["クロス集計表", "相関表", "頻度分布表", "データマトリックス"],
       comment:
           "クロス集計表は、二つ以上の質問を掛け合わせて、カテゴリー変数間の関係性を示すために、一方の変数を行、もう一方を列にして、それぞれのカテゴリーの組み合わせに対する頻度や数値を配置した表。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '分割表',
       question: 'データを分析する際に、特定の変数間の関係性を明らかにするために使用される表を何というか？',
       ans: '分割表',
       choices: ["分割表", "関連表", "ピボットテーブル", "コンティンジェンシーテーブル"],
-      comment:
-          "分割表は、特定のカテゴリー変数間の関連性や相関を調べるために、それぞれのカテゴリーに属するデータの頻度や数値を整理して表示した表。",
-      importance: QuizImportanceType.low,
+      comment: "分割表は、特定のカテゴリー変数間の関連性や相関を調べるために、それぞれのカテゴリーに属するデータの頻度や数値を整理して表示した表。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ロジックツリー',
-      question:
-          '関連する要素を相互に重複することなく、全体として漏れ落ちがないように上位から下位へ分解しツリー状に可視化する図を何というか？',
+      question: '関連する要素を相互に重複することなく、全体として漏れ落ちがないように上位から下位へ分解しツリー状に可視化する図を何というか？',
       ans: 'ロジックツリー',
       choices: ["ロジックツリー", "マインドマップ", "フローチャート", "コンセプトマップ"],
       comment:
           "ロジックツリーとは、ロジカルシンキングをするときのツールの一つで、考えるべき事柄について、関連する要素を相互に重複することなく、全体として漏れ落ちがないように上位から下位へ分解しツリー状に可視化する技法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'コンセプトマップ',
-      question:
-          '知識やアイデアなどの様々な概念についてマップ上に並べ、関連するもの同士を線で結んでそれぞれの関係をわかりやすく可視化した図を何というか？',
+      question: '知識やアイデアなどの様々な概念についてマップ上に並べ、関連するもの同士を線で結んでそれぞれの関係をわかりやすく可視化した図を何というか？',
       ans: 'コンセプトマップ',
       choices: ["コンセプトマップ", "思考マップ", "アイデアマップ", "ナレッジマップ"],
-      comment:
-          "コンセプトマップとは、知識やアイデアなどの様々な概念についてマップ上に並べ、関連するもの同士を線で結んでそれぞれの関係をわかりやすく可視化した図。",
-      importance: QuizImportanceType.low,
+      comment: "コンセプトマップとは、知識やアイデアなどの様々な概念についてマップ上に並べ、関連するもの同士を線で結んでそれぞれの関係をわかりやすく可視化した図。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'CSV',
@@ -200,7 +192,7 @@ List<QuizItem> get category1_2 {
       ans: 'CSV',
       choices: ["CSV", "XML", "JSON", "XLS"],
       comment: "CSVは、データをコンマで区切って表形式で保存するシンプルなテキストファイル形式。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'シェープファイル',
@@ -208,16 +200,15 @@ List<QuizItem> get category1_2 {
       ans: 'シェープファイル',
       choices: ["シェープファイル", "KMLファイル", "GeoJSONファイル", "TopoJSONファイル"],
       comment: "シェープファイルは、地理情報システム（GIS）で使用される、地理的な形状と属性情報を含むファイル形式。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '共起キーワード',
       question: 'テキストデータにおいて、一緒に出現する頻度が高いキーワードを分析することを何というか？',
       ans: '共起キーワード',
       choices: ["共起キーワード", "キーワード密度", "メタキーワード", "キーワード最適化"],
-      comment:
-          "共起キーワードは、テキストデータ分析において、特定の単語やフレーズが文書内で一緒に出現する頻度を分析することで、関連性や文脈を理解するための手法。",
-      importance: QuizImportanceType.low,
+      comment: "共起キーワードは、テキストデータ分析において、特定の単語やフレーズが文書内で一緒に出現する頻度を分析することで、関連性や文脈を理解するための手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'チャートジャンク',
@@ -225,7 +216,7 @@ List<QuizItem> get category1_2 {
       ans: 'チャートジャンク',
       choices: ["チャートジャンク", "ビジュアルノイズ", "グラフィッククラッター", "デザインオーバーロード"],
       comment: "チャートジャンクは、グラフやチャートにおいて情報の伝達や理解を妨げる、装飾的で不要な要素や視覚的な雑音を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'GISデータ',
@@ -233,7 +224,7 @@ List<QuizItem> get category1_2 {
       ans: 'GISデータ',
       choices: ["GISデータ", "ビッグデータ", "メタデータ", "トランザクションデータ"],
       comment: "GISデータは、地理情報システム（GIS）で使用される、位置情報や地理的なデータを含むデータセット。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クロスセクションデータ',
@@ -241,7 +232,7 @@ List<QuizItem> get category1_2 {
       ans: 'クロスセクションデータ',
       choices: ["クロスセクションデータ", "タイムシリーズデータ", "パネルデータ", "ロングチューディナルデータ"],
       comment: "クロスセクションデータは、異なる時点や場所で同じ種類のデータを収集し、それらを横断的に比較・分析するためのデータ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '母集団',
@@ -249,7 +240,7 @@ List<QuizItem> get category1_2 {
       ans: '母集団',
       choices: ["母集団", "標本抽出", "ランダムサンプリング", "クラスターサンプリング"],
       comment: "母集団は、統計学において調査や実験の対象となる全体の集団を指し、この中から一部を選んで標本とする。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '標本抽出',
@@ -257,7 +248,7 @@ List<QuizItem> get category1_2 {
       ans: '標本抽出',
       choices: ["標本抽出", "母集団", "分散分析", "無作為抽出"],
       comment: "標本抽出は、統計的な調査や研究において、全体の集団（母集団）から代表的なデータの一部（標本）を選び出す過程。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '仮説検定',
@@ -265,7 +256,7 @@ List<QuizItem> get category1_2 {
       ans: '仮説検定',
       choices: ["仮説検定", "データ検証", "因子分析", "変数分析"],
       comment: "仮説検定は、統計学において設定された仮説がデータによってどの程度支持されるか、または棄却されるかを評価する手続き。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '有意水準',
@@ -273,7 +264,7 @@ List<QuizItem> get category1_2 {
       ans: '有意水準',
       choices: ["有意水準", "信頼区間", "p値", "効果量"],
       comment: "有意水準は、統計的仮説検定において、帰無仮説を誤って棄却する確率の上限を設定する値で、通常は5%や1%などが用いられる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '第1種の誤り',
@@ -281,7 +272,7 @@ List<QuizItem> get category1_2 {
       ans: '第1種の誤り',
       choices: ["第1種の誤り", "第2種の誤り", "過剰適合", "選択バイアス"],
       comment: "第1種の誤りは、統計的仮説検定において、実際には真である帰無仮説を誤って棄却することによって生じる誤り。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '第2種の誤り',
@@ -289,26 +280,24 @@ List<QuizItem> get category1_2 {
       ans: '第2種の誤り',
       choices: ["第1種の誤り", "第2種の誤り", "サンプリングエラー", "測定誤差"],
       comment: "第2種の誤りは、統計的仮説検定において、実際には偽である帰無仮説を誤って受容することによって生じる誤り。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'A/Bテスト',
       question: '2つのバリエーションを同時に実施して比較するテストを何というか？',
       ans: 'A/Bテスト',
       choices: ["A/Bテスト", "多変量テスト", "コントロールテスト", "ブラインドテスト"],
-      comment:
-          "A/Bテストは、ウェブサイトのデザインやマーケティングメールなど、2つのバリエーションAとBを同時にテストし、どちらがより効果的であるかを比較・評価する手法。",
-      importance: QuizImportanceType.low,
+      comment: "A/Bテストは、ウェブサイトのデザインやマーケティングメールなど、2つのバリエーションAとBを同時にテストし、どちらがより効果的であるかを比較・評価する手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'BI',
-      question:
-          'ビジネスに関わるあらゆる情報を蓄積し，その情報を経営者や社員が自ら分析し，分析結果を経営や事業推進に役立てるといった概念はどれか。',
+      question: 'ビジネスに関わるあらゆる情報を蓄積し，その情報を経営者や社員が自ら分析し，分析結果を経営や事業推進に役立てるといった概念はどれか。',
       ans: 'BI',
       choices: ["BI", "BPR", "EA", "SOA"],
       comment: "BIは、企業が保有する大量のデータを分析し、ビジネス上の意思決定を支援するための技術やプロセス、ツールの総称。",
       source: '平成27年春期 問6',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'データウェアハウス',
@@ -318,7 +307,7 @@ List<QuizItem> get category1_2 {
       comment:
           "データウェアハウスは、企業内に散在しているデータの有効活用を目的に、過去から現在までの基幹系データベースや外部データベースを整理・統合した効果的な戦略的意思決定を支援するためのデータベース。",
       source: '平成26年秋期 問16',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'データマイニング',
@@ -328,16 +317,15 @@ List<QuizItem> get category1_2 {
       ans: 'データマイニング',
       choices: ["データウェアハウス", "データプロセッシング", "データマイニング", "データモデリング"],
       source: '平成28年秋期 問27',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ビッグデータ',
       question: '非常に大量で複雑なデータセットを指し、従来のデータベースやデータ処理アプリケーションでは扱いにくいデータを何というか？',
       ans: 'ビッグデータ',
       choices: ["ビッグデータ", "メタデータ", "オープンデータ", "クラウドデータ"],
-      comment:
-          "ビッグデータは、その規模、速度、多様性によって従来のデータベース管理ツールでは処理や分析が困難な非常に大量かつ複雑なデータセット。",
-      importance: QuizImportanceType.low,
+      comment: "ビッグデータは、その規模、速度、多様性によって従来のデータベース管理ツールでは処理や分析が困難な非常に大量かつ複雑なデータセット。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'テキストマイニング',
@@ -346,16 +334,15 @@ List<QuizItem> get category1_2 {
       choices: ["テキストマイニング", "コンテンツマイニング", "ウェブマイニング", "ソーシャルメディアマイニング"],
       comment:
           "テキストマイニングは、自然言語処理（NLP）や機械学習などの技術を用いて、テキストデータから情報を抽出し、構造化されていないデータの中からパターンや関連性を発見する分析手法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'データサイエンティスト',
       question: 'データ分析やモデリングによって洞察を得るための技術や方法論を駆使する専門家を何というか？',
       ans: 'データサイエンティスト',
       choices: ["データサイエンティスト", "データアナリスト", "データエンジニア", "ビジネスアナリスト"],
-      comment:
-          "データサイエンティストは、数学や統計学、機械学習、データマイニングなどの専門知識を活用して、大量のデータから有益な情報を抽出し、ビジネスや研究に役立てる専門家。",
-      importance: QuizImportanceType.low,
+      comment: "データサイエンティストは、数学や統計学、機械学習、データマイニングなどの専門知識を活用して、大量のデータから有益な情報を抽出し、ビジネスや研究に役立てる専門家。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'データサイエンスのサイクル',
@@ -364,36 +351,33 @@ List<QuizItem> get category1_2 {
       choices: ["データサイエンスのサイクル", "アジャイル開発", "ウォーターフォールモデル", "データライフサイクル"],
       comment:
           "データサイエンスのサイクルは、問題の定義、データの収集と前処理、探索的データ分析、モデルの構築と評価、結果の解釈とコミュニケーションに至るまでの、データサイエンスプロジェクトにおける一連のステップ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ブレーンストーミング',
-      question:
-          '複数人が集まり，お互いの意見を批判せず，質より量を重視して自由に意見を出し合うことによって，アイディアを創出していく技法はどれか。',
+      question: '複数人が集まり，お互いの意見を批判せず，質より量を重視して自由に意見を出し合うことによって，アイディアを創出していく技法はどれか。',
       ans: 'ブレーンストーミング',
       choices: ["ブレーンストーミング", "ベンチマーキング", "ロールプレイング", "ワークデザイン"],
       comment:
           "ブレーンストーミングは、様なアイディアを幅広く集めるために行われるグループ討議の方法で、問題の解決策や新しいアイディアの考案を試みる際に参加者が自由にアイデアを出し合い、批判や評価を避けながら、新しいアイデアや創造的な解決策を引き出すためのグループ活動。",
       source: '平成28年秋期 問15',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ブレーンライティング',
       question: 'アイデアを個別に書き出し、その後で共有・評価するブレーンストーミングのバリエーションを何というか？',
       ans: 'ブレーンライティング',
       choices: ["ブレーンライティング", "アイデアマラソン", "サイレントブレーンストーミング", "クリエイティブライティング"],
-      comment:
-          "ブレーンライティングは、アイデアを個々に静かに書き出し、その後で集めて共有・評価する、ブレーンストーミングのバリエーションで、より内向的な参加者も参加しやすい方法。",
-      importance: QuizImportanceType.low,
+      comment: "ブレーンライティングは、アイデアを個々に静かに書き出し、その後で集めて共有・評価する、ブレーンストーミングのバリエーションで、より内向的な参加者も参加しやすい方法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '親和図法',
       question: '関連するアイデアや情報を視覚的にグルーピングして整理する手法を何というか？',
       ans: '親和図法',
       choices: ["親和図法", "SWOT分析", "マトリクス図法", "ペルソナ法"],
-      comment:
-          "親和図法は、ブレーンストーミングで生み出されたアイデアや情報を、類似性や関連性に基づいてグルーピングし、大きなテーマやカテゴリに整理していく手法。",
-      importance: QuizImportanceType.low,
+      comment: "親和図法は、ブレーンストーミングで生み出されたアイデアや情報を、類似性や関連性に基づいてグルーピングし、大きなテーマやカテゴリに整理していく手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'デシジョンツリー',
@@ -401,21 +385,19 @@ List<QuizItem> get category1_2 {
       ans: 'デシジョンツリー',
       choices: ["デシジョンツリー", "ニューラルネットワーク", "ランダムフォレスト", "クラスタリング"],
       comment: "デシジョンツリーは、データを分類したり予測したりするために使用される、条件分岐によって構成される木構造のモデル。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'シミュレーション',
       question: '実際に実行する前にコンピュータを使って実験やテストを行うことを何というか？',
       ans: 'シミュレーション',
       choices: ["シミュレーション", "プロトタイピング", "ベンチマーキング", "デバッギング"],
-      comment:
-          "シミュレーションは、実世界のプロセスやシステムをモデル化し、コンピュータ上でその挙動を再現・分析することで、予測や理解を深める手法。",
-      importance: QuizImportanceType.low,
+      comment: "シミュレーションは、実世界のプロセスやシステムをモデル化し、コンピュータ上でその挙動を再現・分析することで、予測や理解を深める手法。",
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 201);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 201);
   });
 }

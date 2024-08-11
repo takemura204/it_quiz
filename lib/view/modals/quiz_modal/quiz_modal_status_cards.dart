@@ -38,7 +38,7 @@ class _StatusCardList extends ConsumerWidget {
     );
   }
 
-  List<StatusCard> _getSortedCards(BuildContext context, List<QuizStatusType> statusList) {
+  List<StatusCard> _getSortedCards(BuildContext context, List<StatusType> statusList) {
     final List<StatusCard> cards = [
       StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
       StatusCard(status: statusList[1], value: learnedValue, iconColor: context.backgroundColor),
@@ -59,7 +59,7 @@ class _StatusCard extends ConsumerWidget {
   });
 
   final int value;
-  final QuizStatusType status;
+  final StatusType status;
   final Color iconColor;
 
   @override
@@ -251,7 +251,7 @@ class _StatusRecommendCard extends ConsumerWidget {
 }
 
 class StatusCard {
-  final QuizStatusType status;
+  final StatusType status;
   final int value;
   final Color iconColor;
 

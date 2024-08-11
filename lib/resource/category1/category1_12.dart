@@ -18,7 +18,7 @@ List<QuizItem> get category1_12 {
       comment:
           "CRM(Customer Relationship Management)は、顧客満足度を向上させるために、顧客との関係を構築することに重点を置く顧客関係管理の経営手法で、購入からアフターサービスに至るまでの詳細な顧客データベースを活用し、顧客一人一人に合わせたマーケティングを行うことで売上増につながる優良顧客を確保することを目的としている。",
       source: '平成24年春期 問7',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'バリューチェーンマネジメント',
@@ -29,7 +29,7 @@ List<QuizItem> get category1_12 {
       comment:
           "バリューチェーンマネジメントは、業務を「購買物流」「製造」「出荷物流」「販売・マーケティング」「サービス」という5つの主活動と、「調達」「技術開発」「人事・労務管理」「全般管理」の4つの支援活動に分類し、製品の付加価値がどの部分（機能）で生み出されているかを分析し、価値の連鎖を最適化する手法。",
       source: '平成22年春期 問9',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'SCM',
@@ -44,7 +44,7 @@ List<QuizItem> get category1_12 {
       comment:
           "SCM（Supply Chain Management）は、生産・在庫・購買・販売・物流などのすべての情報をリアルタイムに交換・一元管理することによって生産から販売に至る一連の流れ全体の効率を大幅に向上させることを目指す経営手法。",
       source: '平成27年秋期 問6',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'TQC（Total Quality Control）',
@@ -56,10 +56,9 @@ List<QuizItem> get category1_12 {
         "経営トップの目標を事業部，部，課などの目標に順次展開し，それを実施計画につなげて目標達成のために継続的な改善を進めていく活動",
         "現場で発生している問題を解決するために，関連する職場の人々がチームを作り，計画を立てて改善を進めていく活動"
       ],
-      comment:
-          "TQC（Total Quality Control）は、製造部門に対して適用された品質管理の手法であるQCを、これを製造部門以外に適用し、体系化したもの。",
+      comment: "TQC（Total Quality Control）は、製造部門に対して適用された品質管理の手法であるQCを、これを製造部門以外に適用し、体系化したもの。",
       source: '平成25年春期 問14',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ERP（Enterprise Resource Planning）',
@@ -74,7 +73,7 @@ List<QuizItem> get category1_12 {
       comment:
           "ERP（Enterprise Resource Planning）は、企業の財務、製造、販売、人事などの各業務システムを統合管理することで、リアルタイムで情報を共有・分析することで、意思決定の迅速化や業務プロセスの最適化を実現するシステム。",
       source: '平成22年秋期 問25',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'シックスシグマ',
@@ -89,7 +88,7 @@ List<QuizItem> get category1_12 {
       comment:
           "シックスシグマは、主に製造業において、統計分析手法、品質管理手法を体系的に用いて製品製造工程などの各種プロセスの分析を行い、原因の特定やそれへの対策を行って、不良率の引き下げや顧客満足度の向上などを目指す品質管理手法、または経営手法。",
       source: '平成24年春期 問24',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ナレッジマネジメント(KM)',
@@ -97,10 +96,9 @@ List<QuizItem> get category1_12 {
           'X社では，工場で長期間排水処理を担当してきた社員の経験やノウハウを文書化して蓄積することで，日常の排水処理業務に対応するとともに，新たな処理設備の設計に活かしている。この事例の考え方として，適切なものはどれか。',
       ans: 'ナレッジマネジメント',
       choices: ["ERP", "SFA", "サプライチェーンマネジメント", "ナレッジマネジメント"],
-      comment:
-          "ナレッジマネジメント(KM)は、企業が保持している情報・知識、個人が持っているノウハウや経験などの知的資産を共有して、創造的な仕事につなげていく経営活動。",
+      comment: "ナレッジマネジメント(KM)は、企業が保持している情報・知識、個人が持っているノウハウや経験などの知的資産を共有して、創造的な仕事につなげていく経営活動。",
       source: '平成27年春期 問29',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'TOC',
@@ -110,12 +108,11 @@ List<QuizItem> get category1_12 {
       comment:
           "TOC(Theory Of Constraints)は、工程の流れの中でボトルネック、すなわち制約条件になっている部分を特定し、その部分を重点的に改善することで収益の最大化を図る管理手法。",
       source: '平成29年春期 問6',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 1201);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 1201);
   });
 }

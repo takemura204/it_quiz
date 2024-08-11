@@ -52,7 +52,8 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
           _initQuizItemList(),
           _initCategoryList(),
           _initStatusList(),
-          getIsTutorialDone(),
+          _initImportanceList(),
+          _initIsTutorialDone(),
 
           ///学習時間計測したい
         ]);
@@ -172,12 +173,31 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   Future _initStatusList() async {
     final statusList = [
-      QuizStatusType.unlearned,
-      QuizStatusType.learned,
-      QuizStatusType.incorrect,
-      QuizStatusType.correct
+      StatusType.unlearned,
+      StatusType.learned,
+      StatusType.incorrect,
+      StatusType.correct
     ];
     state = state.copyWith(statusList: statusList);
+  }
+
+  Future _initImportanceList() async {
+    final importanceList = [
+      ImportanceType.high,
+      ImportanceType.normal,
+      ImportanceType.low,
+      ImportanceType.none,
+    ];
+    state = state.copyWith(importanceList: importanceList);
+  }
+
+  ///チュートリアルカード表示
+  Future _initIsTutorialDone() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isTutorialData = prefs.getBool(studyIsTutorialDone);
+    if (isTutorialData != null) {
+      state = state.copyWith(isTutorialDone: isTutorialData);
+    }
   }
 
   ///「知っている・知らない」ボタンを押した時
@@ -198,8 +218,8 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       choices: quizItemList[itemIndex].choices,
       ans: quizItemList[itemIndex].ans,
       isWeak: quizItemList[itemIndex].isWeak,
-      status: isKnow && quizItemList[itemIndex].status == QuizStatusType.unlearned
-          ? QuizStatusType.learned
+      status: isKnow && quizItemList[itemIndex].status == StatusType.unlearned
+          ? StatusType.learned
           : quizItemList[itemIndex].status,
       importance: quizItemList[itemIndex].importance,
       isSaved: quizItemList[itemIndex].isSaved,
@@ -278,7 +298,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
         quizItemList: quizItemList,
       );
     }
-    _updateQuiz(quizItemList[itemIndex]);
+    _updateQuizItem(quizItemList[itemIndex]);
     _saveDevice();
   }
 
@@ -310,26 +330,22 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       importance: quizItemList[index].importance,
     );
     state = state.copyWith(quizItemList: quizItemList);
-    _updateQuiz(quizItemList[index]);
+    _updateQuizItem(quizItemList[index]);
   }
 
   ///クイズ結果更新(端末保存)
-  void _updateQuiz(QuizItem quizItem) {
+  void _updateQuizItem(QuizItem quizItem) {
     ref.read(quizModelProvider.notifier).updateQuizItem(quizItem);
   }
 
-  /// 端末保存
-  Future _saveDevice() async {
-    final prefs = await SharedPreferences.getInstance();
-    final quizItemListData = state.quizItemList.map((e) => json.encode(e.toJson())).toList();
-    final knowQuizItemList = state.knowQuizItemList.map((e) => json.encode(e.toJson())).toList();
-    final unKnowQuizItemList =
-        state.unKnowQuizItemList.map((e) => json.encode(e.toJson())).toList();
+  void setIsLoading(bool value) {
+    state = state.copyWith(isLoading: value);
+  }
 
-    await prefs.setStringList(quizItemListName, quizItemListData);
-    await prefs.setStringList(knowQuizItemListName, knowQuizItemList);
-    await prefs.setStringList(unKnowQuizItemListName, unKnowQuizItemList);
-    // await prefs.setInt(itemIndexName, itemIndex);
+  Future setIsTutorialDone(bool value) async {
+    state = state.copyWith(isTutorialDone: value);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(studyIsTutorialDone, value);
   }
 
   ///カテゴリで絞り込み
@@ -366,13 +382,11 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   ///学習状況絞り込み
-  void updateStatusQuizList(QuizStatusType status) {
+  void updateStatusQuizList(StatusType status) {
     final selectedStatusList = [...state.selectedStatusList];
     if (selectedStatusList.contains(status)) {
-      print('.contains(status)');
       selectedStatusList.remove(status);
     } else {
-      print('else');
       selectedStatusList.add(status);
     }
 
@@ -380,11 +394,30 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     _updateFilterQuizList();
   }
 
-  void resetStatusList() {
+  void updateAllStatusList() {
     state = state.copyWith(selectedStatusList: []);
     _updateFilterQuizList();
   }
 
+  ///重要度絞り込み
+  void updateImportanceQuizList(ImportanceType importance) {
+    final selectedImportanceList = [...state.selectedImportanceList];
+    if (selectedImportanceList.contains(importance)) {
+      selectedImportanceList.remove(importance);
+    } else {
+      selectedImportanceList.add(importance);
+    }
+
+    state = state.copyWith(selectedImportanceList: selectedImportanceList);
+    _updateFilterQuizList();
+  }
+
+  void updateAllImportanceList() {
+    state = state.copyWith(selectedImportanceList: []);
+    _updateFilterQuizList();
+  }
+
+  ///絞り込みリスト更新
   Future _updateFilterQuizList() async {
     final quizList = getQuizList();
 
@@ -407,26 +440,35 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
           .toList();
     }
 
+    // 重要度で絞り込み
+    if (state.selectedImportanceList.isNotEmpty) {
+      filterQuizList = filterQuizList
+          .map((quiz) {
+            final filteredItems = quiz.quizItemList
+                .where((quizItem) => state.selectedImportanceList.contains(quizItem.importance))
+                .toList();
+            return quiz.copyWith(quizItemList: filteredItems);
+          })
+          .where((quiz) => quiz.quizItemList.isNotEmpty)
+          .toList();
+    }
+
     filterQuizList.sort((a, b) => a.id.compareTo(b.id));
     state = state.copyWith(filterQuizList: filterQuizList);
   }
 
-  void setIsLoading(bool value) {
-    state = state.copyWith(isLoading: value);
-  }
-
-  Future getIsTutorialDone() async {
+  /// 端末保存
+  Future _saveDevice() async {
     final prefs = await SharedPreferences.getInstance();
-    final isTutorialData = prefs.getBool(studyIsTutorialDone);
-    if (isTutorialData != null) {
-      state = state.copyWith(isTutorialDone: isTutorialData);
-    }
-  }
+    final quizItemListData = state.quizItemList.map((e) => json.encode(e.toJson())).toList();
+    final knowQuizItemList = state.knowQuizItemList.map((e) => json.encode(e.toJson())).toList();
+    final unKnowQuizItemList =
+        state.unKnowQuizItemList.map((e) => json.encode(e.toJson())).toList();
 
-  Future setIsTutorialDone(bool value) async {
-    state = state.copyWith(isTutorialDone: value);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(studyIsTutorialDone, value);
+    await prefs.setStringList(quizItemListName, quizItemListData);
+    await prefs.setStringList(knowQuizItemListName, knowQuizItemList);
+    await prefs.setStringList(unKnowQuizItemListName, unKnowQuizItemList);
+    // await prefs.setInt(itemIndexName, itemIndex);
   }
 
   Future resetData() async {

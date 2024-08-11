@@ -8,36 +8,29 @@ List<QuizItem> get category0_1_2 {
       word: '著作権法',
       question: '著作権法の保護の対象となるものはどれか。',
       ans: '風景を撮影した写真',
-      choices: [
-        "形状や色が斬新な机のデザイン",
-        "自然法則を利用した技術的に新しい仕組み",
-        "新発売した商品の名称",
-        "風景を撮影した写真"
-      ],
+      choices: ["形状や色が斬新な机のデザイン", "自然法則を利用した技術的に新しい仕組み", "新発売した商品の名称", "風景を撮影した写真"],
       comment:
           "著作権法とは、著作物(思想または感情を創作物に表現したもの)や、著作者の権利を保護する法律で、文芸，学術，音楽，美術の創作物や、コンピュータ関連においてはプログラムやデータベースも著作権法による保護対象に含まれる。",
       source: '平成26年春期 問29',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '特許法',
-      comment:
-          "特許法とは、発明をした者にその発明を独占して使用できる権利を与えることで、知的財産を保護し、その発明を公開することにより産業の発展を促進させる目的で制定された法律。",
+      comment: "特許法とは、発明をした者にその発明を独占して使用できる権利を与えることで、知的財産を保護し、その発明を公開することにより産業の発展を促進させる目的で制定された法律。",
       question: 'インターネットを利用した新たなビジネスモデルを保護する法律はどれか。',
       ans: '特許法',
       choices: ["意匠法", "商標法", "著作権法", "特許法"],
       source: '平成25年春期 問11',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ビジネスモデル特許',
       question: 'コンピュータを活用して新しいビジネスモデルを構築した。このビジネスモデルを保護する法律はどれか。',
       ans: 'ビジネスモデル特許',
       choices: ["ビジネスモデル特許", "著作権法", "意匠権", "商標法"],
-      comment:
-          "ビジネスモデル特許とは、コンピュータ・ネットワーク・ソフトウェア等の特定のビジネス方法やシステムに関する新規性や独自性を保護する特許。",
+      comment: "ビジネスモデル特許とは、コンピュータ・ネットワーク・ソフトウェア等の特定のビジネス方法やシステムに関する新規性や独自性を保護する特許。",
       source: '平成22年春期 問7',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '意匠法',
@@ -49,20 +42,18 @@ List<QuizItem> get category0_1_2 {
         "工芸家がデザインし職人が量産できる，可愛らしい姿の土産物の張子の虎",
         "魚のうろこのような形の重なりが美しい，山の斜面に作られた棚田の景観"
       ],
-      comment:
-          "意匠法は、物の形状や模様、色彩などで表した商品デザインなどのように、工業上の利用性があり、製品の価値や魅力を高める形状・デザインに対して認められる権利。",
+      comment: "意匠法は、物の形状や模様、色彩などで表した商品デザインなどのように、工業上の利用性があり、製品の価値や魅力を高める形状・デザインに対して認められる権利。",
       source: '平成29年春期 問17',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '不正競争防止法',
       question: '他社に損害を与える目的で，他社のサービス名と類似したドメイン名を取得して使用するような行為を禁止している法律はどれか。',
       ans: '不正競争防止法',
       choices: ["個人情報保護法", "電気通信事業法", "不正アクセス行為の禁止等に関する法律", "不正競争防止法"],
-      comment:
-          "不正競争防止法は、他者の商品やサービス、商標、宣伝方法などを模倣することによる不正競争を防止し、公正な競争を保持するための法律。",
+      comment: "不正競争防止法は、他者の商品やサービス、商標、宣伝方法などを模倣することによる不正競争を防止し、公正な競争を保持するための法律。",
       source: '平成25年春期 問25',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'クロスライセンス',
@@ -76,17 +67,16 @@ List<QuizItem> get category0_1_2 {
       ],
       comment: "クロスライセンスは、複数の企業が互いに自社の特許や技術などの知的財産を使用することを許可し合う契約。",
       source: '平成26年秋期 問10',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '不正アクセス禁止法',
-      question:
-          'ネットワークに接続されアクセスが制限されているコンピュータに対して，システムのセキュリティ上の弱点を突いて侵入する行為を規制している法律はどれか。',
+      question: 'ネットワークに接続されアクセスが制限されているコンピュータに対して，システムのセキュリティ上の弱点を突いて侵入する行為を規制している法律はどれか。',
       ans: '不正アクセス禁止法',
       choices: ["通信傍受法", "不正アクセス禁止法", "プロバイダ責任制限法", "マイナンバー法"],
       comment:
           "不正アクセス禁止法とは、コンピュータネットワークに接続できる環境で、本人の承諾なしに他人のID・パスワード等を使って認証が必要なページに接続する行為、および、本人に許可なく第三者へIDとパスワードを教えるなどの助長行為の禁止を定めた法律",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
       source: '平成28年秋期 問31',
     ),
     QuizItem(
@@ -102,7 +92,7 @@ List<QuizItem> get category0_1_2 {
       comment:
           "個人情報保護法とは、個人情報の適正な取扱いに関し基本的な事項を定め、国及び地方公共団体の責務等を明らかにするとともに、個人情報を取り扱う事業者の遵守すべき義務等を定めることにより、個人情報の有用性に配慮しつつ、個人の権利利益を保護することを目的とする法律。",
       source: '平成24年秋期 問20',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '労働者派遣法',
@@ -114,10 +104,9 @@ List<QuizItem> get category0_1_2 {
         "派遣労働者のキャリアに関する助言，指導",
         "派遣労働者の雇用の安定を図るために必要な措置"
       ],
-      comment:
-          "労働者派遣法とは、職業安定法と相まって、必要な技術をもった労働者を企業に派遣する事業が適正に運営されるように、派遣労働者の保護を図るための法律。",
+      comment: "労働者派遣法とは、職業安定法と相まって、必要な技術をもった労働者を企業に派遣する事業が適正に運営されるように、派遣労働者の保護を図るための法律。",
       source: '平成25年春期 問20',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'コーポレートガバナンス',
@@ -129,10 +118,9 @@ List<QuizItem> get category0_1_2 {
         "事業の成功に向けて，持続的な競争優位性の確立に向けた事業領域の設定や経営資源の投入への基本的な枠組み",
         "社会や利害関係者に公表した，企業の存在価値や社会的意義など，経営における普遍的な信念や価値観"
       ],
-      comment:
-          "コーポレートガバナンスとは、企業の経営について利害関係者が監視・規律することで「企業の収益力の強化」と「企業の不祥事を防ぐ」という2つを達成するための仕組み",
+      comment: "コーポレートガバナンスとは、企業の経営について利害関係者が監視・規律することで「企業の収益力の強化」と「企業の不祥事を防ぐ」という2つを達成するための仕組み",
       source: '平成28年秋期 問16',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'JANコード',
@@ -142,7 +130,7 @@ List<QuizItem> get category0_1_2 {
       comment:
           "JANコードは、バーコード規格のひとつで、製造した事業者と商品を識別するための共通商品コード体系で、13桁のタイプと8桁のタイプがあり、バーコードリーダーで読み取り可能。",
       source: '平成22年春期 問24',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ISO 9000',
@@ -151,12 +139,12 @@ List<QuizItem> get category0_1_2 {
       choices: ["JIS Q 9001", "JIS Q 14001", "JIS Q 15001", "JIS Q 27001"],
       comment:
           "ISO 9000シリーズは、ISOにより策定された規格で、組織の品質マネジメントシステムの要求事項を定めた国際標準規格で、JIS版として、JIS Q 9000、JIS Q 9001およびJIS Q 9004～JIS Q 9006がある。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_1Index + 201, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_1Index + 201, isPremium: false);
   });
 }

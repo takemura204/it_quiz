@@ -10,12 +10,11 @@ List<QuizItem> get category2_4 {
       ans: 'ITサービスマネジメント',
       choices: ["ITサービスマネジメント", "ITガバナンス", "IT戦略計画", "IT運用管理"],
       comment: "ITサービスマネジメントは、ITサービスの提供と運用を効果的に管理し、顧客に価値を提供するための組織的なアプローチ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ITIL(アイティル)',
-      question:
-          'ITIL(Information Technology Infrastructure Library)を説明したものはどれか。',
+      question: 'ITIL(Information Technology Infrastructure Library)を説明したものはどれか。',
       ans: 'ITサービスマネジメントのフレームワーク',
       choices: [
         "ITサービスマネジメントのフレームワーク",
@@ -26,7 +25,7 @@ List<QuizItem> get category2_4 {
       comment:
           "ITIL(アイティル)は、ITサービスマネジメントのベストプラクティスを集めたフレームワークで、現在の最新バージョンである「2011 edition」では、5つの分野「サービスストラテジ」「サービスデザイン」「サービストランジション」「サービスオペレーション」「継続的サービス改善(CSI)」ごとに1冊ずつの書籍にまとめられている。",
       source: '平成29年春期 問35',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SLA(Service Level Agreement)',
@@ -41,23 +40,21 @@ List<QuizItem> get category2_4 {
       ],
       comment:
           "SLA(Service Level Agreement)は、通信サービス事業者などのサービス提供者と利用者の間で交わされる、サービスの品質保証に関する合意もしくは契約文書。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SLM(Service Level Management)',
-      question:
-          'SLAの合意内容を達成するために，サービス状況のモニタリングやレビューなどを通じてサービスレベルの維持や向上を図る活動を何というか。',
+      question: 'SLAの合意内容を達成するために，サービス状況のモニタリングやレビューなどを通じてサービスレベルの維持や向上を図る活動を何というか。',
       ans: 'SLM',
       choices: ["CSR", "ERP", "SLM", "SWOT"],
       comment:
           "SLM(Service Level Management)は、サービスレベル合意(SLA)に基づき、合意されたITサービスの提供を実現し、そのサービス品質の継続的な維持・改善を行うITサービスマネジメントの管理プロセス",
       source: '平成28年春期 問41',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 401);
+    return quizItems[index].copyWith(quizId: index + I18n().category2Index + 401);
   });
 }

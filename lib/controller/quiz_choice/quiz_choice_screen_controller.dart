@@ -103,7 +103,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
-        status: QuizStatusType.correct,
+        status: StatusType.correct,
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: false,
         lapIndex: quizItemList[quizIndex].lapIndex,
@@ -123,7 +123,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
         ans: quizItemList[quizIndex].ans,
         choices: quizItemList[quizIndex].choices,
         comment: quizItemList[quizIndex].comment,
-        status: QuizStatusType.incorrect,
+        status: StatusType.incorrect,
         isSaved: quizItemList[quizIndex].isSaved,
         isWeak: true,
         lapIndex: quizItemList[quizIndex].lapIndex,
@@ -156,8 +156,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     //問題が終わった時
     if (quizIndex == state.quizItemList.length - 1) {
       _stopwatch.stop();
-      state = state.copyWith(
-          duration: _stopwatch.elapsed, quizIndex: 0, isResultScreen: true);
+      state = state.copyWith(duration: _stopwatch.elapsed, quizIndex: 0, isResultScreen: true);
       if (!isPremium) {
         ref.read(adMobProvider.notifier).showAdInterstitial();
       }
@@ -250,9 +249,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   List<QuizItem> updateQuizItemList() {
     // state.quizItemList を quizId ベースでマップに変換
-    final stateQuizMap = {
-      for (var item in state.quizItemList) item.quizId: item
-    };
+    final stateQuizMap = {for (var item in state.quizItemList) item.quizId: item};
     final selectQuiz = ref.read(homeQuizScreenProvider).selectQuiz!;
 
     // quiz.quizItemList をイテレートして更新または追加
@@ -272,10 +269,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final quizItemList = state.quizItemList;
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
-    final correctNum = quizItemList
-        .where((x) => x.status == QuizStatusType.correct)
-        .toList()
-        .length;
+    final correctNum = quizItemList.where((x) => x.status == StatusType.correct).toList().length;
     final choiceQuiz = state.choiceQuiz!;
     final isCompleted = quizItemList.length == correctNum;
     final updateQuiz = choiceQuiz.copyWith(

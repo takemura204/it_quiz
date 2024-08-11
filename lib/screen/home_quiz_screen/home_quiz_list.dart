@@ -89,7 +89,7 @@ class _QuizCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final goalScore = quiz.quizItemList.length;
     final currentScore =
-        quiz.quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length;
+        quiz.quizItemList.where((x) => x.status == StatusType.correct).toList().length;
     final correctRate = ((currentScore / goalScore) * 100).round();
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium)) || !quiz.isPremium;
 

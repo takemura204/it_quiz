@@ -61,12 +61,11 @@ class ResultDashboardCard extends ConsumerWidget {
                           Container(
                             decoration: BoxDecoration(
                               color: context.mainColor,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             height: 8,
                             width: ('${quizItemList.length}'.length.toDouble() +
-                                        '${quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length}'
+                                        '${quizItemList.where((x) => x.status == StatusType.correct).toList().length}'
                                             .length
                                             .toDouble()) *
                                     30 +
@@ -78,7 +77,7 @@ class ResultDashboardCard extends ConsumerWidget {
                             textBaseline: TextBaseline.alphabetic,
                             children: [
                               Text(
-                                "${quizItemList.where((x) => x.status == QuizStatusType.correct).toList().length}",
+                                "${quizItemList.where((x) => x.status == StatusType.correct).toList().length}",
                                 style: const TextStyle(
                                   color: Colors.black54,
                                   fontSize: 30,
@@ -125,13 +124,10 @@ class ResultDashboardCard extends ConsumerWidget {
                       Container(
                         decoration: BoxDecoration(
                           color: context.mainColor,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
+                          borderRadius: const BorderRadius.all(Radius.circular(8)),
                         ),
                         height: 8,
-                        width:
-                            ('${quizItemList.length}'.length.toDouble()) * 30 +
-                                14,
+                        width: ('${quizItemList.length}'.length.toDouble()) * 30 + 14,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -196,13 +192,10 @@ class ResultDashboardCard extends ConsumerWidget {
                         Container(
                           decoration: BoxDecoration(
                             color: context.mainColor,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8)),
+                            borderRadius: const BorderRadius.all(Radius.circular(8)),
                           ),
                           height: 8,
-                          width:
-                              ('$displayDuration'.length.toDouble() - 1) * 30 +
-                                  14,
+                          width: ('$displayDuration'.length.toDouble() - 1) * 30 + 14,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,

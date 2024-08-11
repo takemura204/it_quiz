@@ -10,9 +10,8 @@ List<QuizItem> get category1_18 {
       question: '企業内の様々な情報源から情報を検索し、アクセス可能にするシステムを何というか？',
       ans: 'エンタープライズサーチ',
       choices: ["エンタープライズサーチ", "グループウェア", "RPA", "SNS"],
-      comment:
-          "エンタープライズサーチは、企業内の文書やデータベースなど、様々な情報源から必要な情報を迅速に検索し、アクセス可能にするシステム。",
-      importance: QuizImportanceType.low,
+      comment: "エンタープライズサーチは、企業内の文書やデータベースなど、様々な情報源から必要な情報を迅速に検索し、アクセス可能にするシステム。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'EA（Enterprise Architecture）',
@@ -26,16 +25,15 @@ List<QuizItem> get category1_18 {
       ],
       comment:
           "EA（Enterprise Architecture）は、社会環境や情報技術の変化に素早く対応できるよう「全体最適」の観点から業務やシステムを改善するフレームワーク。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'SoR',
       question: '主に安定した運用が求められる既存の業務システムを指す言葉は何か？',
       ans: 'SoR',
       choices: ["SoR", "SoE", "RPA", "BPM"],
-      comment:
-          "SoR（System of Records）は、会計や人事管理など、安定した運用が求められ、企業の基幹業務を支える既存の業務システムを指す。",
-      importance: QuizImportanceType.low,
+      comment: "SoR（System of Records）は、会計や人事管理など、安定した運用が求められ、企業の基幹業務を支える既存の業務システムを指す。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'SoE',
@@ -44,12 +42,11 @@ List<QuizItem> get category1_18 {
       choices: ["SoR", "SoE", "RPA", "エンタープライズサーチ"],
       comment:
           "SoE（System of Engagement）は、顧客との関わりを深めたり、革新的なビジネスモデルを支えたりするために開発される、ユーザー中心の新しいITシステムを指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 1801);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 1801);
   });
 }

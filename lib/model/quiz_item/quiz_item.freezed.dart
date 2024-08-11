@@ -28,8 +28,8 @@ mixin _$QuizItem {
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
   String get source => throw _privateConstructorUsedError; //出典
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
-  QuizStatusType get status => throw _privateConstructorUsedError; //クイズの状態
-  QuizImportanceType get importance => throw _privateConstructorUsedError; //重要度
+  StatusType get status => throw _privateConstructorUsedError; //クイズの状態
+  ImportanceType get importance => throw _privateConstructorUsedError; //重要度
   bool get isSaved => throw _privateConstructorUsedError; //保存したか?
   int get lapIndex => throw _privateConstructorUsedError; //何周目か？
   bool get isPremium => throw _privateConstructorUsedError;
@@ -54,8 +54,8 @@ abstract class $QuizItemCopyWith<$Res> {
       List<String> choices,
       String source,
       bool isWeak,
-      QuizStatusType status,
-      QuizImportanceType importance,
+      StatusType status,
+      ImportanceType importance,
       bool isSaved,
       int lapIndex,
       bool isPremium});
@@ -124,11 +124,11 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as QuizStatusType,
+              as StatusType,
       importance: null == importance
           ? _value.importance
           : importance // ignore: cast_nullable_to_non_nullable
-              as QuizImportanceType,
+              as ImportanceType,
       isSaved: null == isSaved
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
@@ -161,8 +161,8 @@ abstract class _$$_QuizItemCopyWith<$Res> implements $QuizItemCopyWith<$Res> {
       List<String> choices,
       String source,
       bool isWeak,
-      QuizStatusType status,
-      QuizImportanceType importance,
+      StatusType status,
+      ImportanceType importance,
       bool isSaved,
       int lapIndex,
       bool isPremium});
@@ -229,11 +229,11 @@ class __$$_QuizItemCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as QuizStatusType,
+              as StatusType,
       importance: null == importance
           ? _value.importance
           : importance // ignore: cast_nullable_to_non_nullable
-              as QuizImportanceType,
+              as ImportanceType,
       isSaved: null == isSaved
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
@@ -262,8 +262,8 @@ class _$_QuizItem extends _QuizItem {
       final List<String> choices = const [],
       this.source = '',
       this.isWeak = false,
-      this.status = QuizStatusType.unlearned,
-      this.importance = QuizImportanceType.normal,
+      this.status = StatusType.unlearned,
+      this.importance = ImportanceType.normal,
       this.isSaved = false,
       this.lapIndex = 0,
       this.isPremium = true})
@@ -314,11 +314,11 @@ class _$_QuizItem extends _QuizItem {
 //苦手か？
   @override
   @JsonKey()
-  final QuizStatusType status;
+  final StatusType status;
 //クイズの状態
   @override
   @JsonKey()
-  final QuizImportanceType importance;
+  final ImportanceType importance;
 //重要度
   @override
   @JsonKey()
@@ -403,8 +403,8 @@ abstract class _QuizItem extends QuizItem {
       final List<String> choices,
       final String source,
       final bool isWeak,
-      final QuizStatusType status,
-      final QuizImportanceType importance,
+      final StatusType status,
+      final ImportanceType importance,
       final bool isSaved,
       final int lapIndex,
       final bool isPremium}) = _$_QuizItem;
@@ -429,9 +429,9 @@ abstract class _QuizItem extends QuizItem {
   @override //出典
   bool get isWeak;
   @override //苦手か？
-  QuizStatusType get status;
+  StatusType get status;
   @override //クイズの状態
-  QuizImportanceType get importance;
+  ImportanceType get importance;
   @override //重要度
   bool get isSaved;
   @override //保存したか?

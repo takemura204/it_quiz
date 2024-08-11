@@ -10,18 +10,16 @@ List<QuizItem> get category3_9 {
       ans: 'レスポンスタイム',
       choices: ["レスポンスタイム", "スループット", "ターンアラウンドタイム", "待機時間"],
       comment: "レスポンスタイムは、システムが要求に応答するまでの時間を指し、システムの応答性能を示す指標。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'スループット',
-      question:
-          'コンピュータシステムが単位時間当たりに処理できるジョブやトランザクションなどの処理件数のことであり，コンピュータの処理能力を表すものはどれか。',
+      question: 'コンピュータシステムが単位時間当たりに処理できるジョブやトランザクションなどの処理件数のことであり，コンピュータの処理能力を表すものはどれか。',
       ans: 'スループット',
       choices: ["アクセスタイム", "スループット", "タイムスタンプ", "レスポンスタイム"],
-      comment:
-          "スループットとは、コンピュータやネットワークが一定時間内に処理できる仕事量のことで、システムにおけるパフォーマンスの評価基準。",
+      comment: "スループットとは、コンピュータやネットワークが一定時間内に処理できる仕事量のことで、システムにおけるパフォーマンスの評価基準。",
       source: '平成21年秋期 問61',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ターンアラウンドタイム',
@@ -29,7 +27,7 @@ List<QuizItem> get category3_9 {
       ans: 'ターンアラウンドタイム',
       choices: ["ターンアラウンドタイム", "レスポンスタイム", "スループット", "実行時間"],
       comment: "ターンアラウンドタイムは、ジョブが開始されてから完了するまでの総時間を指し、システムの効率性を示す指標。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ベンチマーク',
@@ -44,7 +42,7 @@ List<QuizItem> get category3_9 {
       comment:
           "ベンチマークは、システム性能評価の技法で、典型的なプログラムを実行し、入出力や制御プログラムを含めたシステムの総合的な処理性能を定量的に測定する手法で、整数や浮動小数点演算の能力を評価するSPEC、オンライントランザクション処理能力を評価するTPCなどがある。",
       source: '平成23年特別 問66',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '稼働率',
@@ -53,7 +51,7 @@ List<QuizItem> get category3_9 {
       choices: ["0.02", "0.20", "0.88", "0.98"],
       comment: "稼働率は、システムが故障なしに稼働し続けることができる確率、または稼働時間の割合を指し、システムの可用性を示す指標。",
       source: '平成24年春期 問70',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'MTBF（Mean Time Between Failures）',
@@ -63,17 +61,16 @@ List<QuizItem> get category3_9 {
       choices: ["480", "540", "599.4", "600"],
       comment:
           "MTBF（Mean Time Between Failures）は、システムの信頼性をあらわす指標で、システムの修理が完了し正常に稼働し始めてから、次回故障するまでの平均故障間隔のこと。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'MTTR（Mean Time To Repair）',
       question: ' あるシステムにおいて，MTBFとMTTRがどちらも1.5倍になったとき，稼働率はどうなるか。',
       ans: '変わらない。',
       choices: ["2/3倍になる", "1.5倍になる。", "2倍になる。", "変わらない。"],
-      comment:
-          "MTTR（Mean Time To Repair）は、システムの故障を修理するために要した平均修復時間のことで、システムの保守性をあらわす指標としても用いられる。",
+      comment: "MTTR（Mean Time To Repair）は、システムの故障を修理するために要した平均修復時間のことで、システムの保守性をあらわす指標としても用いられる。",
       source: '平成23年特別 問71',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'フェールセーフ',
@@ -87,7 +84,7 @@ List<QuizItem> get category3_9 {
       ],
       comment: "フェールセーフは、システムが故障しても安全な状態に留まる、または最小限の影響で済むように設計された安全性の原則。",
       source: '平成21年春期 問65',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'フォールトトレラント',
@@ -95,7 +92,7 @@ List<QuizItem> get category3_9 {
       ans: 'フォールトトレラント',
       choices: ["フォールトトレラント", "フェールセーフ", "フールプルーフ", "レジリエンス"],
       comment: "フォールトトレラントは、システムが部分的な故障が発生しても全体としての機能を維持し続ける能力を持つ設計原則。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'フールプルーフ',
@@ -110,7 +107,7 @@ List<QuizItem> get category3_9 {
       comment:
           "フールプルーフは、不特定多数の人が操作するシステムに、入力データのチェックやエラーメッセージの表示などの機能を加えることで、人為的ミスによるシステムの誤動作を防ぐように設計する考え方。",
       source: '平成21年秋期 問67',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'コールドスタンバイ',
@@ -118,7 +115,7 @@ List<QuizItem> get category3_9 {
       ans: 'コールドスタンバイ',
       choices: ["コールドスタンバイ", "ホットスタンバイ", "ウォームスタンバイ", "デュアルシステム"],
       comment: "コールドスタンバイは、主系統が故障した際に、代替系統が手動で起動されるスタンバイシステムを指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ホットスタンバイ',
@@ -126,16 +123,15 @@ List<QuizItem> get category3_9 {
       ans: 'ホットスタンバイ',
       choices: ["ホットスタンバイ", "コールドスタンバイ", "ウォームスタンバイ", "デュアルシステム"],
       comment: "ホットスタンバイは、主系統が故障した際に、代替系統が即座に自動で切り替わり稼働を開始するスタンバイシステムを指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'イニシャルコスト',
       question: 'システム導入時に必要となる初期投資のコストは何と呼ばれるか？',
       ans: 'イニシャルコスト',
       choices: ["イニシャルコスト", "ランニングコスト", "TCO", "オペレーショナルコスト"],
-      comment:
-          "イニシャルコストは、システム導入時に必要となる初期投資のコストを指し、ハードウェア、ソフトウェア、導入作業などの費用が含まれる。",
-      importance: QuizImportanceType.low,
+      comment: "イニシャルコストは、システム導入時に必要となる初期投資のコストを指し、ハードウェア、ソフトウェア、導入作業などの費用が含まれる。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ランニングコスト',
@@ -143,7 +139,7 @@ List<QuizItem> get category3_9 {
       ans: 'ランニングコスト',
       choices: ["ランニングコスト", "イニシャルコスト", "TCO", "オペレーショナルコスト"],
       comment: "ランニングコストは、システム稼働後に発生する日々の運用や維持管理に関わるコストを指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'TCO（Total Cost of Ownership）',
@@ -157,12 +153,11 @@ List<QuizItem> get category3_9 {
       ],
       comment:
           "TCO（Total Cost of Ownership）は、ある設備・システムなどにかかわる、購入から廃棄までに必要な時間と支出の総計金額を表し、システム開発やハードウェア導入、ソフトウェアの導入など初期投資に必要となるイニシャルコストと、運用・保守・教育・アップグレードなど維持管理に必要となるランニングコストに分類することができる。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 901);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 901);
   });
 }

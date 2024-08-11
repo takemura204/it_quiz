@@ -17,7 +17,7 @@ List<QuizItem> get category0_3_1 {
       comment:
           "フラッシュメモリは、書き換え可能であり、電源を切ってもデータが消えない半導体メモリで、携帯電話、デジタルカメラなどの記憶媒体として広く普及していて、小型で大容量・安価なことため、手軽なデータの持ち運びに使われる。",
       source: '平成22年春期 問81',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'キャッシュメモリ',
@@ -29,10 +29,9 @@ List<QuizItem> get category0_3_1 {
         "主記憶容量を超える大きさプログラムでも動作させることができる仕組みをもつメモリ",
         "主記憶を複数のブロックに分割することによって，同時アクセスを可能にするメモリ"
       ],
-      comment:
-          "キャッシュメモリは、CPUコアと主記憶の間にあって，CPUが頻繁にアクセスするデータや命令を一時的に保存し、データアクセス速度の向上を図るための高速メモリ。",
+      comment: "キャッシュメモリは、CPUコアと主記憶の間にあって，CPUが頻繁にアクセスするデータや命令を一時的に保存し、データアクセス速度の向上を図るための高速メモリ。",
       source: '平成22年春期 問66',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'デバイスドライバ',
@@ -47,13 +46,12 @@ List<QuizItem> get category0_3_1 {
       comment:
           "デバイスドライバ(Device Driver)は、コンピュータに接続された周辺機器を管理・制御するための抽象化したインタフェースを、他のアプリケーションソフトウェアに対して提供するためのソフトウェア／プログラム。",
       source: '平成30年春期 問83',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'デュアルシステム',
       question: 'デュアルシステムの特徴を説明したものはどれか。',
-      ans:
-          '同じ処理を行うシステムを二重に用意し，処理結果を照合することで処理の正しさを確認する方式であり，一方に故障が発生したら，故障したシステムを切り離して処理を続行する。',
+      ans: '同じ処理を行うシステムを二重に用意し，処理結果を照合することで処理の正しさを確認する方式であり，一方に故障が発生したら，故障したシステムを切り離して処理を続行する。',
       choices: [
         "同じ処理を行うシステムを二重に用意し，処理結果を照合することで処理の正しさを確認する方式であり，一方に故障が発生したら，故障したシステムを切り離して処理を続行する。",
         "同じ装置を2台使用することで，シンプレックスシステムに対し，処理能力を2倍に向上させることができる。",
@@ -63,7 +61,7 @@ List<QuizItem> get category0_3_1 {
       comment:
           "デュアルシステム(Dual System)は、信頼化設計の一つであり、同じ処理を2組のコンピュータシステムで行い、その結果を照合機でチェックしながら処理を進行していくシステム構成。障害発生時には、問題のある側のシステムをメイン処理から切り離し、残された側のシステムのみで処理を続行しつつ、障害からの回復を図る。",
       source: '平成28年春期 問75',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'シンクライアント',
@@ -78,7 +76,7 @@ List<QuizItem> get category0_3_1 {
       comment:
           "シンクライアントとは、「薄い，少ない」の意味で、ユーザーが使用する端末にサーバに接続するための必要最小限のネットワーク機能、入出力をするためのGUIなどだけを装備させ、ほとんどの処理をサーバ側で行うシステム設計",
       source: '平成23年秋期 問86',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'RAID（Redundant Array of Independent Disks）',
@@ -93,7 +91,7 @@ List<QuizItem> get category0_3_1 {
       comment:
           "RAID（Redundant Array of Independent Disks）は、複数台のディスク装置を組み合わせ、1つの仮想的なディスクとして扱うことで信頼性や性能を向上させる技術。",
       source: '平成23年秋期 問82',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ベンチマーク',
@@ -108,7 +106,7 @@ List<QuizItem> get category0_3_1 {
       comment:
           "ベンチマークは、システム性能評価の技法で、典型的なプログラムを実行し、入出力や制御プログラムを含めたシステムの総合的な処理性能を定量的に測定する手法で、整数や浮動小数点演算の能力を評価するSPEC、オンライントランザクション処理能力を評価するTPCなどがある。",
       source: '平成23年特別 問66',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'MTBF（Mean Time Between Failures）',
@@ -118,22 +116,21 @@ List<QuizItem> get category0_3_1 {
       choices: ["480", "540", "599.4", "600"],
       comment:
           "MTBF（Mean Time Between Failures）は、システムの信頼性をあらわす指標で、システムの修理が完了し正常に稼働し始めてから、次回故障するまでの平均故障間隔のこと。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'MTTR（Mean Time To Repair）',
       question: ' あるシステムにおいて，MTBFとMTTRがどちらも1.5倍になったとき，稼働率はどうなるか。',
       ans: '変わらない。',
       choices: ["2/3倍になる", "1.5倍になる。", "2倍になる。", "変わらない。"],
-      comment:
-          "MTTR（Mean Time To Repair）は、システムの故障を修理するために要した平均修復時間のことで、システムの保守性をあらわす指標としても用いられる。",
+      comment: "MTTR（Mean Time To Repair）は、システムの故障を修理するために要した平均修復時間のことで、システムの保守性をあらわす指標としても用いられる。",
       source: '平成23年特別 問71',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_3Index + 101, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_3Index + 101, isPremium: false);
   });
 }

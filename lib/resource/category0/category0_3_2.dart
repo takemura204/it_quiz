@@ -17,7 +17,7 @@ List<QuizItem> get category0_3_2 {
       comment:
           "OS（オペレーティングシステム）とは、コンピュータを効率よく使うために、共通して使われるプログラムをまとめて提供する基本ソフトウェアのことで、PCにおけるWindows・MacOS・UNIX、モバイル端末におけるiOSやAndroidがOSに該当する。",
       source: '平成26年春期 問78',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '仮想記憶',
@@ -32,7 +32,7 @@ List<QuizItem> get category0_3_2 {
       comment:
           "仮想記憶方式は、プログラムが必要とするメモリサイズが主記憶のサイズを上回った場合、補助記憶装置(HDDなど)を仮想アドレス空間として使い主記憶のサイズよりも大きなプログラムを実行可能にする方式。",
       source: '平成21年秋期 問59',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ルートディレクトリ',
@@ -41,7 +41,7 @@ List<QuizItem> get category0_3_2 {
       choices: ["ルートディレクトリ", "ホームディレクトリ", "カレントディレクトリ", "システムディレクトリ"],
       comment: "ルートディレクトリは、PCでファイルやディレクトリを階層的に管理するとき，最上位の階層に当たるディレクトリ。",
       source: '平成23年特別 問83',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'カレントディレクトリ',
@@ -53,10 +53,9 @@ List<QuizItem> get category0_3_2 {
         "現在作業を行っているディレクトリを意味する。",
         "現在作業を行っているディレクトリを基点として，目的のファイルやディレクトリまで，全ての経路をディレクトリ構造に従って示す。"
       ],
-      comment:
-          "カレントディレクトリは、ユーザーが現在作業しているディレクトリのことで、コマンドの実行やファイル操作の基準となるディレクトリ。",
+      comment: "カレントディレクトリは、ユーザーが現在作業しているディレクトリのことで、コマンドの実行やファイル操作の基準となるディレクトリ。",
       source: '平成23年秋期 問74',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'OSS(Open Source Software)',
@@ -71,7 +70,7 @@ List<QuizItem> get category0_3_2 {
       comment:
           "OSS(Open Source Software)とは、Linuxに代表されるソースコードを無償公開して、誰もが改良や再頒布を行えるようにした形態，またはそれにより開発されたソフトウェアのこと。",
       source: '平成23年秋期 問66',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'イメージスキャナ',
@@ -80,7 +79,7 @@ List<QuizItem> get category0_3_2 {
       choices: ["GPS受信機", "スキャナー", "ディジタイザ", "プロッタ"],
       comment: "イメージスキャナは、文書や写真などのアナログ情報をデジタルデータとしてコンピュータに取り込むための機器。",
       source: '平成28年春期 問14',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'タッチパネル',
@@ -92,15 +91,14 @@ List<QuizItem> get category0_3_2 {
         "表面のタッチセンサーを用いて指の動きを認識し，ホイールと呼ばれる円盤に似た部品を回すようにして操作を行う。",
         "平板状の入力装置を指でなぞることで，画面上のマウスポインタなどの操作を行う。"
       ],
-      comment:
-          "タッチパネルは、ディスプレイに表示される画像に直接触れることでデータを入力する装置で、銀行のATMやスマートフォンの入力装置として採用されている。",
+      comment: "タッチパネルは、ディスプレイに表示される画像に直接触れることでデータを入力する装置で、銀行のATMやスマートフォンの入力装置として採用されている。",
       source: '平成25年春期 問56',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_3Index + 201, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_3Index + 201, isPremium: false);
   });
 }

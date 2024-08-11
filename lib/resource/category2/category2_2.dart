@@ -18,7 +18,7 @@ List<QuizItem> get category2_2 {
       comment:
           "オブジェクト指向設計とは、多くの仕様に共通する機能をひとまとめにし、いくつかの開発プロジェクトで再利用可能にする設計方法で、利用者はオブジェクトの手続きを呼び出すだけで目的の機能を実装できる。",
       source: '平成21年秋期 問47',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'データ中心アプローチ',
@@ -26,7 +26,7 @@ List<QuizItem> get category2_2 {
       ans: 'データ中心アプローチ',
       choices: ["データ中心アプローチ", "プロセス中心アプローチ", "オブジェクト指向", "UML"],
       comment: "データ中心アプローチは、データの構造や関係性を中心に考え、それに基づいてシステムを設計・開発するアプローチ。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'プロセス中心アプローチ',
@@ -34,27 +34,25 @@ List<QuizItem> get category2_2 {
       ans: 'プロセス中心アプローチ',
       choices: ["プロセス中心アプローチ", "データ中心アプローチ", "オブジェクト指向", "UML"],
       comment: "プロセス中心アプローチは、プロセスや手順の流れを中心に考え、それに基づいてシステムを設計・開発するアプローチ。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'UML(Unified Modeling Language)',
       question: '業務の流れを，図式的に記述することができるのはどれか。',
       ans: 'UML',
       choices: ["E-R図", "UML", "親和図法", "ロジックツリー"],
-      comment:
-          "UML(Unified Modeling Language)は、グラフィカルな記述で抽象化したシステムのモデル（UMLモデル）を生成する汎用モデリング言語。",
+      comment: "UML(Unified Modeling Language)は、グラフィカルな記述で抽象化したシステムのモデル（UMLモデル）を生成する汎用モデリング言語。",
       source: '平成22年春期 問29',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'DevOps',
-      question:
-          '開発（Development）と運用（Operations）の連携を重視し、ソフトウェアのリリースや運用を迅速かつ効率的に行う文化や実践を何というか？',
+      question: '開発（Development）と運用（Operations）の連携を重視し、ソフトウェアのリリースや運用を迅速かつ効率的に行う文化や実践を何というか？',
       ans: 'DevOps',
       choices: ["DevOps", "アジャイル", "スクラム", "XP"],
       comment:
           "DevOpsは、ソフトウェア開発（Development）とIT運用（Operations）の協力を促進し、継続的なインテグレーション、デリバリー、デプロイメントを実現する文化や実践のこと。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ウォータフォールモデル',
@@ -70,7 +68,7 @@ List<QuizItem> get category2_2 {
       comment:
           "ウォータフォールモデルは、開発プロジェクトを時系列に「要求定義」「外部設計」「内部設計」「開発」「テスト」「運用」などの作業工程に分割し、開発を上流から下流に一方向に進める開発モデル。",
       source: '平成27年春期 問32',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'スパイラルモデル',
@@ -81,7 +79,7 @@ List<QuizItem> get category2_2 {
       comment:
           "スパイラルモデルは、「設計」→「プログラミング」→「テスト」という一連の開発工程を繰り返しながら機能の改良・追加し、開発コストの増加などのリスクを最小にしつつシステム開発を行う開発モデル。",
       source: '平成26年秋期 問42',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'プロトタイピングモデル',
@@ -89,19 +87,17 @@ List<QuizItem> get category2_2 {
           'システム開発の初期の段階で，ユーザーと開発者との仕様の認識の違いなどを確認するために，システムの機能の一部やユーザーインタフェースなどを試作し，ユーザーや開発者がこれを評価することによって暖味さを取り除くシステム開発モデルはどれか。',
       ans: 'プロトタイピング',
       choices: ["ウォーターフォール", "オブジェクト指向", "共通フレーム", "プロトタイピング"],
-      comment:
-          "プロトタイピングモデルは、システム開発プロセスの早い段階でシステムの試作品をつくり、利用者にそのイメージを理解させ、承認を得ながら開発を進めていく開発モデル。",
+      comment: "プロトタイピングモデルは、システム開発プロセスの早い段階でシステムの試作品をつくり、利用者にそのイメージを理解させ、承認を得ながら開発を進めていく開発モデル。",
       source: '平成27年秋期 問38',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'RAD（Rapid Application Development）',
       question: '迅速なアプリケーション開発を目指し、短期間で高品質なシステムを開発するための方法論は何か？',
       ans: 'RAD',
       choices: ["RAD", "ウォータフォールモデル", "スパイラルモデル", "プロトタイピングモデル"],
-      comment:
-          "RAD（Rapid Application Development）は、ユーザー参加型の開発やプロトタイピングを活用し、短期間でアプリケーションを開発する方法論。",
-      importance: QuizImportanceType.low,
+      comment: "RAD（Rapid Application Development）は、ユーザー参加型の開発やプロトタイピングを活用し、短期間でアプリケーションを開発する方法論。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'リバースエンジニアリング',
@@ -113,19 +109,17 @@ List<QuizItem> get category2_2 {
         "事業内容は変えないが，仕事の流れや方法を根本的に見直すことによって，最も望ましい業務の姿に変革する手法",
         "製品の開発から生産に至る作業工程において，同時にできる作業を並行して進めることによって，期間を短縮する手法"
       ],
-      comment:
-          "リバースエンジニアリングは、既存ソフトウェアの動作を解析するなどして、製品の構造を分析し、そこから製造方法や動作原理、設計図、ソースコードなどを調査する技法。",
+      comment: "リバースエンジニアリングは、既存ソフトウェアの動作を解析するなどして、製品の構造を分析し、そこから製造方法や動作原理、設計図、ソースコードなどを調査する技法。",
       source: '平成26年春期 問47',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'アジャイル',
       question: '小さなチームで短期間のイテレーションを繰り返し、柔軟かつ迅速にソフトウェア開発を行う手法を総称して何というか？',
       ans: 'アジャイル',
       choices: ["アジャイル", "DevOps", "スクラム", "XP"],
-      comment:
-          "アジャイル開発は、柔軟性と効率性を重視し、短期間の反復開発サイクル（イテレーション）を通じて、顧客の変化する要求に迅速に対応するソフトウェア開発手法。",
-      importance: QuizImportanceType.low,
+      comment: "アジャイル開発は、柔軟性と効率性を重視し、短期間の反復開発サイクル（イテレーション）を通じて、顧客の変化する要求に迅速に対応するソフトウェア開発手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'XP',
@@ -134,7 +128,7 @@ List<QuizItem> get category2_2 {
       choices: ["XP", "スクラム", "リーン", "カンバン"],
       comment:
           "XP（エクストリーム・プログラミング）は、継続的な顧客のフィードバックと小さなリリースを重視し、コーディング規約の遵守、ペアプログラミング、テスト駆動開発などを取り入れるアジャイル開発の手法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'テスト駆動開発',
@@ -143,16 +137,15 @@ List<QuizItem> get category2_2 {
       choices: ["テスト駆動開発", "リファクタリング", "ペアプログラミング", "スクラム"],
       comment:
           "テスト駆動開発（TDD: Test-Driven Development）は、テストを先に書き、そのテストをパスする最小限のコードを実装し、次にそのコードをリファクタリングするという短い開発サイクルを繰り返す手法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ペアプログラミング',
       question: '二人一組で一つのコンピュータを用いてプログラミングを行う開発手法を何というか？',
       ans: 'ペアプログラミング',
       choices: ["ペアプログラミング", "テスト駆動開発", "リファクタリング", "スクラム"],
-      comment:
-          "ペアプログラミングは、二人一組で一つのコンピュータに向かい、一人がコーディング（ドライバー）を行い、もう一人がレビュー（ナビゲーター）を行う開発手法。",
-      importance: QuizImportanceType.low,
+      comment: "ペアプログラミングは、二人一組で一つのコンピュータに向かい、一人がコーディング（ドライバー）を行い、もう一人がレビュー（ナビゲーター）を行う開発手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'リファクタリング',
@@ -160,16 +153,15 @@ List<QuizItem> get category2_2 {
       ans: 'リファクタリング',
       choices: ["リファクタリング", "リバースエンジニアリング", "テスト駆動開発", "ペアプログラミング"],
       comment: "リファクタリングは、外部から見た振る舞いを変えずに、ソフトウェアの内部構造を整理し、改善する活動。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'スクラム',
       question: '小さなチームでスプリントと呼ばれる短期間のイテレーションを繰り返し、製品を開発するアジャイル開発のフレームワークは何か？',
       ans: 'スクラム',
       choices: ["スクラム", "XP", "カンバン", "リーン"],
-      comment:
-          "スクラムは、自己組織化された小さなチームが、定期的なスプリントを通じて、進行中の作業を継続的にレビューしながら製品を開発するアジャイル開発のフレームワーク。",
-      importance: QuizImportanceType.low,
+      comment: "スクラムは、自己組織化された小さなチームが、定期的なスプリントを通じて、進行中の作業を継続的にレビューしながら製品を開発するアジャイル開発のフレームワーク。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '共通フレーム',
@@ -184,7 +176,7 @@ List<QuizItem> get category2_2 {
       comment:
           "共通フレームは、ソフトウェア開発とその取引の適正化に向けて、それらのベースとなる作業項目の一つひとつを定義し標準化したもので、ソフトウェア産業界においての「共通の物差し」となることを目的として策定された規格",
       source: '平成28年秋期 問45',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'CMMI(Capability Maturity Model Integration)',
@@ -194,12 +186,11 @@ List<QuizItem> get category2_2 {
       comment:
           "CMMI(Capability Maturity Model Integration)は、統合能力成熟度モデルと呼ばれ、組織におけるプロセス改善をガイドするモデルで、プロジェクト管理，プロセス管理，エンジニアリング，支援に関するプロセスについて、効果的なプロセスであるために重要な要素をゴール及びプラクティスという概念を用いて整理される。",
       source: '平成24年春期 問38',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 201);
+    return quizItems[index].copyWith(quizId: index + I18n().category2Index + 201);
   });
 }

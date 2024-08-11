@@ -85,15 +85,15 @@ class I18n {
   }
 
   ///クイズの状況
-  String quizStatusTypeText(QuizStatusType statusType) {
+  String quizStatusTypeText(StatusType statusType) {
     switch (statusType) {
-      case QuizStatusType.correct:
+      case StatusType.correct:
         return '正解済';
-      case QuizStatusType.incorrect:
+      case StatusType.incorrect:
         return '不正解';
-      case QuizStatusType.learned:
+      case StatusType.learned:
         return '学習済';
-      case QuizStatusType.unlearned:
+      case StatusType.unlearned:
         return '未学習';
       default:
         return '〇〇';
@@ -165,15 +165,15 @@ class I18n {
     }
   }
 
-  String quizImportanceText(QuizImportanceType importanceType) {
+  String quizImportanceText(ImportanceType importanceType) {
     switch (importanceType) {
-      case QuizImportanceType.none:
+      case ImportanceType.none:
         return '☆☆☆';
-      case QuizImportanceType.low:
+      case ImportanceType.low:
         return '★☆☆';
-      case QuizImportanceType.normal:
+      case ImportanceType.normal:
         return '★★☆';
-      case QuizImportanceType.high:
+      case ImportanceType.high:
         return '★★★';
       default:
         return '';

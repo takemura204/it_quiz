@@ -11,7 +11,7 @@ List<QuizItem> get category3_17 {
       choices: ["関係データベース", "データベース管理システム", "NoSQL", "RDBMS"],
       comment: "関係データベースは、データをテーブル（関係）の集合として管理し、行と列で構成される。",
       source: '平成26年秋期 問74',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'データベース管理システム',
@@ -23,10 +23,9 @@ List<QuizItem> get category3_17 {
         "ネットワークで送受信するデータを暗号化する。",
         "複数の利用者がデータの一貫性を確保しながら情報を共有する。"
       ],
-      comment:
-          "データベース管理システム（DBMS）は、データベースを効率的に管理し、データの定義、更新、取得を行うためのソフトウェアシステム。",
+      comment: "データベース管理システム（DBMS）は、データベースを効率的に管理し、データの定義、更新、取得を行うためのソフトウェアシステム。",
       source: '平成23年秋期 問53',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'RDBMS',
@@ -35,7 +34,7 @@ List<QuizItem> get category3_17 {
       choices: ["RDBMS", "データベース管理システム", "関係データベース", "NoSQL"],
       comment:
           "RDBMS（Relational Database Management System）は、関係データベースを管理するためのDBMSの一種で、SQLを使用してデータを操作する。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'NoSQL',
@@ -43,7 +42,7 @@ List<QuizItem> get category3_17 {
       ans: 'NoSQL',
       choices: ["NoSQL", "RDBMS", "関係データベース", "データベース管理システム"],
       comment: "NoSQLデータベースは、非関係型のデータモデルを採用し、スケーラビリティや柔軟なスキーマを特徴とするデータベースの総称。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'データクレンジング',
@@ -51,7 +50,7 @@ List<QuizItem> get category3_17 {
       ans: 'データクレンジング',
       choices: ["データクレンジング", "射影", "選択", "排他制御"],
       comment: "データクレンジングは、データベース内の不正確、不完全、重複したデータを特定し、修正または削除するプロセス。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'E-R図',
@@ -66,7 +65,7 @@ List<QuizItem> get category3_17 {
       comment:
           "E-R図(Entity-Relationship Diagram)は、関係データベースの設計に利用されるデータモデル化手法で、データベース化の対象となる実体と実体の持つ属性、を図式化して表現することができます。",
       source: '平成24年春期 問76',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '主キー',
@@ -78,20 +77,18 @@ List<QuizItem> get category3_17 {
         "主キーに指定した属性(列)に対し，検索条件を指定できるようにする。",
         "主キーに指定した属性(列)を算術演算の対象として扱えるようにする。"
       ],
-      comment:
-          "主キーは、関係データベースのテーブル(表)ごとに設定され、テーブルの中である一つの行を一意に特定できる値を保持する属性(列)、または属性の組合せのこと。",
+      comment: "主キーは、関係データベースのテーブル(表)ごとに設定され、テーブルの中である一つの行を一意に特定できる値を保持する属性(列)、または属性の組合せのこと。",
       source: '平成22年春期 問83',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '外部キー',
       question: '他のテーブルの主キーを参照し、テーブル間の関係を構築するための列は何か？',
       ans: '外部キー，インデックス',
       choices: ["インデックス", "外部キー，インデックス", "主キー", "主キー，外部キー，インデックス"],
-      comment:
-          "外部キーは、他のテーブルの主キーを参照し、テーブル間の関係を構築するための列で、2つ以上の別行を参照することもあるため複数の設定が可能。",
+      comment: "外部キーは、他のテーブルの主キーを参照し、テーブル間の関係を構築するための列で、2つ以上の別行を参照することもあるため複数の設定が可能。",
       source: '平成25年秋期 問51',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'インデックス',
@@ -99,12 +96,11 @@ List<QuizItem> get category3_17 {
       ans: 'インデックス',
       choices: ["インデックス", "主キー", "外部キー", "射影"],
       comment: "インデックスは、データベース内でデータの検索速度を向上させるために使用されるデータ構造。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 1701);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 1701);
   });
 }
