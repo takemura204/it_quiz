@@ -15,7 +15,6 @@ class _Footer extends HookConsumerWidget {
         children: [
           TweenAnimationBuilder<int>(
             tween: IntTween(
-              // begin: 0,
               end: filterQuizItemList.length, // 現在の長さを終点とする
             ),
             duration: const Duration(milliseconds: 300), // アニメーションの長さを調整します
@@ -43,17 +42,19 @@ class _Footer extends HookConsumerWidget {
             width: context.width * 1,
             height: 60,
             title: 'この条件で絞り込む',
-            onPressed: () {
-              Navigator.of(context).pop();
-              ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
-              ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
-              final selectStudyQuiz = ref.read(homeQuizScreenProvider).selectStudyQuiz!;
-              context.showScreen(
-                QuizChoiceScreenArguments(
-                  quiz: selectStudyQuiz,
-                ).generateRoute(),
-              );
-            },
+            onPressed: filterQuizItemList.isNotEmpty
+                ? () {
+                    Navigator.of(context).pop();
+                    ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
+                    ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
+                    final selectStudyQuiz = ref.read(homeQuizScreenProvider).selectStudyQuiz!;
+                    context.showScreen(
+                      QuizChoiceScreenArguments(
+                        quiz: selectStudyQuiz,
+                      ).generateRoute(),
+                    );
+                  }
+                : null,
           ),
           Gap(context.height * 0.025),
         ],

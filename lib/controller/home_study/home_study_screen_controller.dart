@@ -174,7 +174,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   ///カテゴリで絞り込み
   Future updateCategoryFilterQuizList({required Quiz quiz, required bool isSelected}) async {
-    final quizList = [...state.quizList];
+    final quizList = [...ref.read(quizModelProvider).quizList];
     final filterQuizList = [...state.filterQuizList];
     final matchQuiz = quizList.firstWhere((x) => x.id == quiz.id);
     if (isSelected) {
@@ -188,7 +188,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   Future updateCategoryFilterAllQuizList(
       {required List<Quiz> categoryQuizList, required bool isSelected}) async {
-    final List<Quiz> quizList = [...state.quizList];
+    final quizList = [...ref.read(quizModelProvider).quizList];
     final filterQuizList = [...state.filterQuizList];
 
     if (isSelected) {

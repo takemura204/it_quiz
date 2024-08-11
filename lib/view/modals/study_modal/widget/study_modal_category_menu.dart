@@ -207,8 +207,8 @@ class _CategoryItemCard extends HookConsumerWidget {
                   ? context.backgroundColor.withOpacity(0.5)
                   : Colors.white,
           border: isSelected
-              ? Border.all(color: context.mainColor, width: 0.5)
-              : Border.all(color: Colors.grey, width: 0.5),
+              ? Border.all(color: context.mainColor, width: 1.5)
+              : Border.all(color: context.secondColor, width: 1.5),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
