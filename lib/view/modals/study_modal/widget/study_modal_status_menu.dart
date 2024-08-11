@@ -24,23 +24,14 @@ class _StatusMenuList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final quizItemList = ref.watch(quizModelProvider.select((s) => s.quizItemList));
     final goalValue = quizItemList.length;
-    final correctValue = quizItemList
-        .where((x) => x.status == StatusType.correct)
-        .toList()
-        .length;
+    final correctValue = quizItemList.where((x) => x.status == StatusType.correct).toList().length;
     final incorrectValue =
-        quizItemList
-            .where((x) => x.status == StatusType.incorrect)
-            .toList()
-            .length;
-    final learnedValue = quizItemList
-        .where((x) => x.status == StatusType.learned)
-        .toList()
-        .length;
+        quizItemList.where((x) => x.status == StatusType.incorrect).toList().length;
+    final learnedValue = quizItemList.where((x) => x.status == StatusType.learned).toList().length;
     final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
-    final statusList = ref.watch(homeStudyScreenProvider.select((s) => s.statusList));
+    final statusList = ref.watch(homeStudyModalProvider.select((s) => s.statusList));
     List<StatusCard> _getSortedCards(BuildContext context, List<StatusType> statusList) {
       final List<StatusCard> cards = [
         StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
@@ -61,12 +52,11 @@ class _StatusMenuList extends HookConsumerWidget {
           value: goalValue,
         ),
         ...sortedCards
-            .map((card) =>
-            _StatusCard(
-              status: card.status,
-              statusValue: card.value,
-              iconColor: card.iconColor,
-            ))
+            .map((card) => _StatusCard(
+                  status: card.status,
+                  statusValue: card.value,
+                  iconColor: card.iconColor,
+                ))
             .toList(),
       ]),
     );
@@ -81,14 +71,14 @@ class _StatusDefaultCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedStatusList =
-    ref.watch(homeStudyScreenProvider.select((s) => s.selectedStatusList));
+        ref.watch(homeStudyModalProvider.select((s) => s.selectedStatusList));
 
     final isStatusList = selectedStatusList.isEmpty;
 
     return GestureDetector(
       onTap: () {
         if (!isStatusList) {
-          ref.read(homeStudyScreenProvider.notifier).updateAllStatusList();
+          ref.read(homeStudyModalProvider.notifier).updateAllStatusList();
           HapticFeedback.lightImpact();
         }
       },
@@ -99,13 +89,13 @@ class _StatusDefaultCard extends ConsumerWidget {
           color: isStatusList ? context.backgroundColor.withOpacity(0.5) : Colors.white,
           border: isStatusList
               ? Border.all(
-            color: context.mainColor,
-            width: 1.5,
-          )
+                  color: context.mainColor,
+                  width: 1.5,
+                )
               : Border.all(
-            color: Colors.grey.shade300,
-            width: 1.5,
-          ),
+                  color: Colors.grey.shade300,
+                  width: 1.5,
+                ),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
@@ -151,7 +141,7 @@ class _StatusCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedStatusList =
-    ref.watch(homeStudyScreenProvider.select((s) => s.selectedStatusList));
+        ref.watch(homeStudyModalProvider.select((s) => s.selectedStatusList));
     final isSelected = selectedStatusList.contains(status);
     final isStatusList = selectedStatusList.isEmpty;
     final isExists = statusValue != 0;
@@ -159,9 +149,9 @@ class _StatusCard extends ConsumerWidget {
     return GestureDetector(
       onTap: isExists
           ? () {
-        ref.read(homeStudyScreenProvider.notifier).updateStatusQuizList(status);
-        HapticFeedback.lightImpact();
-      }
+              ref.read(homeStudyModalProvider.notifier).updateStatusQuizList(status);
+              HapticFeedback.lightImpact();
+            }
           : null,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 3),
@@ -169,30 +159,30 @@ class _StatusCard extends ConsumerWidget {
         decoration: BoxDecoration(
           color: isExists
               ? !isStatusList
-              ? isSelected
-              ? context.backgroundColor.withOpacity(0.5)
-              : Colors.white
-              : Colors.white
+                  ? isSelected
+                      ? context.backgroundColor.withOpacity(0.5)
+                      : Colors.white
+                  : Colors.white
               : context.secondColor.withOpacity(0.3),
           border: isExists
               ? !isStatusList
-              ? isSelected
-              ? Border.all(
-            color: context.mainColor,
-            width: 1.5,
-          )
+                  ? isSelected
+                      ? Border.all(
+                          color: context.mainColor,
+                          width: 1.5,
+                        )
+                      : Border.all(
+                          color: Colors.grey.shade300,
+                          width: 1.5,
+                        )
+                  : Border.all(
+                      color: Colors.grey.shade300,
+                      width: 1.5,
+                    )
               : Border.all(
-            color: Colors.grey.shade300,
-            width: 1.5,
-          )
-              : Border.all(
-            color: Colors.grey.shade300,
-            width: 1.5,
-          )
-              : Border.all(
-            color: context.secondColor,
-            width: 1,
-          ),
+                  color: context.secondColor,
+                  width: 1,
+                ),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(

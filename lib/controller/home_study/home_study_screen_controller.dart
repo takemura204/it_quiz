@@ -32,6 +32,9 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   final quizItemListName = 'study_item_list';
   final knowQuizItemListName = 'study_know_item_list';
   final unKnowQuizItemListName = 'study_unKnow_item_list';
+  final categoryListName = 'study_category_list';
+  final statusListName = 'study_status_list';
+  final importanceListName = 'study_importance_list';
   final studyIsTutorialDone = 'studyIsTutorialDone';
 
   /// プレミアムと無料会員でクイズを取得
@@ -50,12 +53,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       if (quizzes.isLoading) {
         await Future.wait([
           _initQuizItemList(),
-          _initCategoryList(),
-          _initStatusList(),
-          _initImportanceList(),
           _initIsTutorialDone(),
-
-          ///学習時間計測したい
         ]);
       }
       _saveDevice();
@@ -78,7 +76,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       return;
     }
 
-    // ローカルで保存したクイズを取得
+    // 保存したクイズを取得
     final prefs = await SharedPreferences.getInstance();
     final quizItemListData = prefs.getStringList(quizItemListName);
     final knowQuizItemListData = prefs.getStringList(knowQuizItemListName);
@@ -154,41 +152,12 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
         quizItemList: updatedQuizItemList,
         knowQuizItemList: updatedKnowQuizItemList,
         unKnowQuizItemList: updatedUnKnowQuizItemList,
-        filterQuizList: quizList,
-        selectedCategoryQuizList: quizList,
       );
     }
     // 初回起動時の設定
     else {
       state = state.copyWith(quizItemList: quizItemList);
     }
-  }
-
-  Future _initCategoryList() async {
-    final quizList = [...ref.read(quizModelProvider).quizList];
-    quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
-    final categoryList = quizList.map((quizItem) => quizItem.category).toSet().toList();
-    state = state.copyWith(categoryList: categoryList);
-  }
-
-  Future _initStatusList() async {
-    final statusList = [
-      StatusType.unlearned,
-      StatusType.learned,
-      StatusType.incorrect,
-      StatusType.correct
-    ];
-    state = state.copyWith(statusList: statusList);
-  }
-
-  Future _initImportanceList() async {
-    final importanceList = [
-      ImportanceType.high,
-      ImportanceType.normal,
-      ImportanceType.low,
-      ImportanceType.none,
-    ];
-    state = state.copyWith(importanceList: importanceList);
   }
 
   ///チュートリアルカード表示
@@ -346,115 +315,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     state = state.copyWith(isTutorialDone: value);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(studyIsTutorialDone, value);
-  }
-
-  ///カテゴリで絞り込み
-  Future updateCategoryQuizList({required Quiz quiz, required bool isSelected}) async {
-    final quizList = getQuizList();
-    final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
-    final matchQuiz = quizList.firstWhere((x) => x.id == quiz.id);
-    if (isSelected) {
-      selectedCategoryQuizList.remove(matchQuiz);
-    } else {
-      selectedCategoryQuizList.add(matchQuiz);
-    }
-    selectedCategoryQuizList.sort((a, b) => a.id.compareTo(b.id));
-    state = state.copyWith(selectedCategoryQuizList: selectedCategoryQuizList);
-    _updateFilterQuizList();
-  }
-
-  ///カテゴリ一括絞り込み
-  Future updateAllCategoryQuizList(
-      {required List<Quiz> categoryQuizList, required bool isSelected}) async {
-    final quizList = getQuizList();
-    final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
-    if (isSelected) {
-      selectedCategoryQuizList.removeWhere(
-          (quiz) => categoryQuizList.any((categoryQuiz) => categoryQuiz.id == quiz.id));
-    } else {
-      selectedCategoryQuizList.addAll(categoryQuizList
-          .where((quiz) => !selectedCategoryQuizList.any((x) => x.id == quiz.id))
-          .map((quiz) => quizList.firstWhere((x) => x.id == quiz.id)));
-    }
-    selectedCategoryQuizList.sort((a, b) => a.id.compareTo(b.id));
-    state = state.copyWith(selectedCategoryQuizList: selectedCategoryQuizList);
-    _updateFilterQuizList();
-  }
-
-  ///学習状況絞り込み
-  void updateStatusQuizList(StatusType status) {
-    final selectedStatusList = [...state.selectedStatusList];
-    if (selectedStatusList.contains(status)) {
-      selectedStatusList.remove(status);
-    } else {
-      selectedStatusList.add(status);
-    }
-
-    state = state.copyWith(selectedStatusList: selectedStatusList);
-    _updateFilterQuizList();
-  }
-
-  void updateAllStatusList() {
-    state = state.copyWith(selectedStatusList: []);
-    _updateFilterQuizList();
-  }
-
-  ///重要度絞り込み
-  void updateImportanceQuizList(ImportanceType importance) {
-    final selectedImportanceList = [...state.selectedImportanceList];
-    if (selectedImportanceList.contains(importance)) {
-      selectedImportanceList.remove(importance);
-    } else {
-      selectedImportanceList.add(importance);
-    }
-
-    state = state.copyWith(selectedImportanceList: selectedImportanceList);
-    _updateFilterQuizList();
-  }
-
-  void updateAllImportanceList() {
-    state = state.copyWith(selectedImportanceList: []);
-    _updateFilterQuizList();
-  }
-
-  ///絞り込みリスト更新
-  Future _updateFilterQuizList() async {
-    final quizList = getQuizList();
-
-    // カテゴリで絞り込み
-    List<Quiz> filterQuizList = quizList
-        .where((quiz) =>
-            state.selectedCategoryQuizList.any((selectedQuiz) => selectedQuiz.id == quiz.id))
-        .toList();
-
-    // ステータスで絞り込み
-    if (state.selectedStatusList.isNotEmpty) {
-      filterQuizList = filterQuizList
-          .map((quiz) {
-            final filteredItems = quiz.quizItemList
-                .where((quizItem) => state.selectedStatusList.contains(quizItem.status))
-                .toList();
-            return quiz.copyWith(quizItemList: filteredItems);
-          })
-          .where((quiz) => quiz.quizItemList.isNotEmpty)
-          .toList();
-    }
-
-    // 重要度で絞り込み
-    if (state.selectedImportanceList.isNotEmpty) {
-      filterQuizList = filterQuizList
-          .map((quiz) {
-            final filteredItems = quiz.quizItemList
-                .where((quizItem) => state.selectedImportanceList.contains(quizItem.importance))
-                .toList();
-            return quiz.copyWith(quizItemList: filteredItems);
-          })
-          .where((quiz) => quiz.quizItemList.isNotEmpty)
-          .toList();
-    }
-
-    filterQuizList.sort((a, b) => a.id.compareTo(b.id));
-    state = state.copyWith(filterQuizList: filterQuizList);
   }
 
   /// 端末保存

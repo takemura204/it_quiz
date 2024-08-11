@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_study_modal/home_study_modal_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
@@ -21,13 +22,9 @@ import '../../view/chart/dotted_line_painter.dart';
 import '../../view/modals/study_modal/study_modal.dart';
 
 part 'widget/action_buttons.dart';
-
 part 'widget/progress_bar.dart';
-
 part 'widget/progress_tile.dart';
-
 part 'widget/question.dart';
-
 part 'widget/quz_item_card.dart';
 
 class HomeStudyScreen extends HookConsumerWidget {
@@ -78,6 +75,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
+    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final filterQuizList = ref.watch(homeStudyModalProvider.select((s) => s.filterQuizList));
+    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
+    final isFiltered = quizItemList.length == filterQuizItemList.length;
     return AppBar(
       title: Text(I18n().titleName),
       centerTitle: true,
@@ -90,10 +91,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
               ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(!isTutorialDone);
               HapticFeedback.lightImpact();
             },
-            icon: Icon(
+            icon: const Icon(
               LineIcons.questionCircle,
               size: 32,
-              color: context.titleColor,
+              color: Colors.black54,
             ),
           ),
         ),
@@ -105,7 +106,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
           icon: Icon(
             LineIcons.horizontalSliders,
             size: 32,
-            color: context.titleColor,
+            color: isFiltered ? context.mainColor : Colors.black54,
           ),
         ),
         Gap(context.width * 0.01),

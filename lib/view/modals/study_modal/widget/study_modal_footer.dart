@@ -5,7 +5,7 @@ class _Footer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final filterQuizList = ref.watch(homeStudyScreenProvider.select((s) => s.filterQuizList));
+    final filterQuizList = ref.watch(homeStudyModalProvider.select((s) => s.filterQuizList));
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     return Container(
       color: context.backgroundColor,

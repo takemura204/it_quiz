@@ -24,7 +24,7 @@ class _ImportanceList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final quizItemList = ref.watch(quizModelProvider.select((s) => s.quizItemList));
     final highValue =
         quizItemList.where((x) => x.importance == ImportanceType.high).toList().length;
     final normalValue =
@@ -33,8 +33,8 @@ class _ImportanceList extends HookConsumerWidget {
     final noneValue =
         quizItemList.where((x) => x.importance == ImportanceType.none).toList().length;
     final selectedImportanceList =
-        ref.watch(homeStudyScreenProvider.select((s) => s.selectedImportanceList));
-    final importanceList = ref.watch(homeStudyScreenProvider.select((s) => s.importanceList));
+        ref.watch(homeStudyModalProvider.select((s) => s.selectedImportanceList));
+    final importanceList = ref.watch(homeStudyModalProvider.select((s) => s.importanceList));
     List<ImportanceCard> _getSortedCards(BuildContext context, List<ImportanceType> statusList) {
       final List<ImportanceCard> cards = [
         ImportanceCard(importance: importanceList[0], value: highValue),
@@ -73,7 +73,7 @@ class _ImportanceDefaultCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         if (!isStatusList) {
-          ref.read(homeStudyScreenProvider.notifier).updateAllImportanceList();
+          ref.read(homeStudyModalProvider.notifier).updateAllImportanceList();
           HapticFeedback.lightImpact();
         }
       },
@@ -131,7 +131,7 @@ class _ImportanceCard extends ConsumerWidget {
     return GestureDetector(
       onTap: isExists
           ? () {
-              ref.read(homeStudyScreenProvider.notifier).updateImportanceQuizList(importance);
+              ref.read(homeStudyModalProvider.notifier).updateImportanceQuizList(importance);
               HapticFeedback.lightImpact();
             }
           : null,

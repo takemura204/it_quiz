@@ -27,9 +27,9 @@ class _CategoryList extends ConsumerWidget {
     final premiumQuizList = ref.watch(quizModelProvider.select((s) => s.quizList));
     final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
     final quizList = isPremium ? premiumQuizList : freeQuizList;
-    final categoryList = ref.watch(homeStudyScreenProvider.select((s) => s.categoryList));
+    final categoryList = ref.watch(homeStudyModalProvider.select((s) => s.categoryList));
     final selectedCategoryQuizList =
-        ref.watch(homeStudyScreenProvider.select((s) => s.selectedCategoryQuizList));
+        ref.watch(homeStudyModalProvider.select((s) => s.selectedCategoryQuizList));
 
     return Column(
       children: [
@@ -72,9 +72,7 @@ class _CategoryList extends ConsumerWidget {
                               alignment: Alignment.center,
                               padding: EdgeInsets.zero,
                               onPressed: () {
-                                ref
-                                    .read(homeStudyScreenProvider.notifier)
-                                    .updateAllCategoryQuizList(
+                                ref.read(homeStudyModalProvider.notifier).updateAllCategoryQuizList(
                                       categoryQuizList: categoryQuizList,
                                       isSelected: isAllSelected,
                                     );
@@ -195,7 +193,7 @@ class _CategoryItemCard extends HookConsumerWidget {
                   ));
         } else {
           ref
-              .read(homeStudyScreenProvider.notifier)
+              .read(homeStudyModalProvider.notifier)
               .updateCategoryQuizList(quiz: quiz, isSelected: isSelected);
         }
       },

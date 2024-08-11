@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
+import 'package:kentei_quiz/controller/home_study_modal/home_study_modal_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
@@ -38,7 +38,6 @@ Future showStudyModal(BuildContext context) async {
   );
 }
 
-///クイズモーダル
 class StudyModal extends HookConsumerWidget {
   const StudyModal();
 
@@ -53,27 +52,25 @@ class StudyModal extends HookConsumerWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(horizontal: context.width * 0.02),
-            child: Scrollbar(
+            child: const Scrollbar(
               thumbVisibility: true,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const Gap(50),
+                    Gap(50),
 
                     ///出題範囲
-                    const _CategoryMenu(),
-                    const Gap(20),
+                    _CategoryMenu(),
+                    Gap(20),
 
                     ///学習状況
-                    const _StatusMenu(),
-                    const Gap(10),
+                    _StatusMenu(),
+                    Gap(10),
 
                     ///重要度
-                    const _ImportanceMenu(),
-                    const Gap(10),
+                    _ImportanceMenu(),
 
-                    Gap(context.height * 0.04),
-                    const Gap(100),
+                    Gap(150),
                   ],
                 ),
               ),
