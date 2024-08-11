@@ -27,7 +27,7 @@ mixin _$HomeStudyScreenState {
   int get lapIndex => throw _privateConstructorUsedError;
   AppinioSwiperDirection? get direction =>
       throw _privateConstructorUsedError; //StudyModal
-  List<QuizItem> get filterQuizItemList => throw _privateConstructorUsedError;
+  List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
   List<String> get categoryList => throw _privateConstructorUsedError;
   List<Quiz> get selectedCategoryQuizList => throw _privateConstructorUsedError;
   List<QuizStatusType> get statusList => throw _privateConstructorUsedError;
@@ -57,7 +57,7 @@ abstract class $HomeStudyScreenStateCopyWith<$Res> {
       int itemIndex,
       int lapIndex,
       AppinioSwiperDirection? direction,
-      List<QuizItem> filterQuizItemList,
+      List<Quiz> filterQuizList,
       List<String> categoryList,
       List<Quiz> selectedCategoryQuizList,
       List<QuizStatusType> statusList,
@@ -88,7 +88,7 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
     Object? itemIndex = null,
     Object? lapIndex = null,
     Object? direction = freezed,
-    Object? filterQuizItemList = null,
+    Object? filterQuizList = null,
     Object? categoryList = null,
     Object? selectedCategoryQuizList = null,
     Object? statusList = null,
@@ -132,10 +132,10 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as AppinioSwiperDirection?,
-      filterQuizItemList: null == filterQuizItemList
-          ? _value.filterQuizItemList
-          : filterQuizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
+      filterQuizList: null == filterQuizList
+          ? _value.filterQuizList
+          : filterQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
       categoryList: null == categoryList
           ? _value.categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
@@ -178,7 +178,7 @@ abstract class _$$_HomeStudyScreenStateCopyWith<$Res>
       int itemIndex,
       int lapIndex,
       AppinioSwiperDirection? direction,
-      List<QuizItem> filterQuizItemList,
+      List<Quiz> filterQuizList,
       List<String> categoryList,
       List<Quiz> selectedCategoryQuizList,
       List<QuizStatusType> statusList,
@@ -206,7 +206,7 @@ class __$$_HomeStudyScreenStateCopyWithImpl<$Res>
     Object? itemIndex = null,
     Object? lapIndex = null,
     Object? direction = freezed,
-    Object? filterQuizItemList = null,
+    Object? filterQuizList = null,
     Object? categoryList = null,
     Object? selectedCategoryQuizList = null,
     Object? statusList = null,
@@ -250,10 +250,10 @@ class __$$_HomeStudyScreenStateCopyWithImpl<$Res>
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as AppinioSwiperDirection?,
-      filterQuizItemList: null == filterQuizItemList
-          ? _value._filterQuizItemList
-          : filterQuizItemList // ignore: cast_nullable_to_non_nullable
-              as List<QuizItem>,
+      filterQuizList: null == filterQuizList
+          ? _value._filterQuizList
+          : filterQuizList // ignore: cast_nullable_to_non_nullable
+              as List<Quiz>,
       categoryList: null == categoryList
           ? _value._categoryList
           : categoryList // ignore: cast_nullable_to_non_nullable
@@ -291,7 +291,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
       this.itemIndex = 0,
       this.lapIndex = 0,
       this.direction,
-      final List<QuizItem> filterQuizItemList = const [],
+      final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
       final List<Quiz> selectedCategoryQuizList = const [],
       final List<QuizStatusType> statusList = const [],
@@ -300,7 +300,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
       : _quizItemList = quizItemList,
         _knowQuizItemList = knowQuizItemList,
         _unKnowQuizItemList = unKnowQuizItemList,
-        _filterQuizItemList = filterQuizItemList,
+        _filterQuizList = filterQuizList,
         _categoryList = categoryList,
         _selectedCategoryQuizList = selectedCategoryQuizList,
         _statusList = statusList,
@@ -355,15 +355,14 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
   @override
   final AppinioSwiperDirection? direction;
 //StudyModal
-  final List<QuizItem> _filterQuizItemList;
+  final List<Quiz> _filterQuizList;
 //StudyModal
   @override
   @JsonKey()
-  List<QuizItem> get filterQuizItemList {
-    if (_filterQuizItemList is EqualUnmodifiableListView)
-      return _filterQuizItemList;
+  List<Quiz> get filterQuizList {
+    if (_filterQuizList is EqualUnmodifiableListView) return _filterQuizList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_filterQuizItemList);
+    return EqualUnmodifiableListView(_filterQuizList);
   }
 
   final List<String> _categoryList;
@@ -415,7 +414,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
 
   @override
   String toString() {
-    return 'HomeStudyScreenState(isLoading: $isLoading, isTutorialDone: $isTutorialDone, isAnsView: $isAnsView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction, filterQuizItemList: $filterQuizItemList, categoryList: $categoryList, selectedCategoryQuizList: $selectedCategoryQuizList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList)';
+    return 'HomeStudyScreenState(isLoading: $isLoading, isTutorialDone: $isTutorialDone, isAnsView: $isAnsView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction, filterQuizList: $filterQuizList, categoryList: $categoryList, selectedCategoryQuizList: $selectedCategoryQuizList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList)';
   }
 
   @override
@@ -442,7 +441,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
             (identical(other.direction, direction) ||
                 other.direction == direction) &&
             const DeepCollectionEquality()
-                .equals(other._filterQuizItemList, _filterQuizItemList) &&
+                .equals(other._filterQuizList, _filterQuizList) &&
             const DeepCollectionEquality()
                 .equals(other._categoryList, _categoryList) &&
             const DeepCollectionEquality().equals(
@@ -467,7 +466,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
       itemIndex,
       lapIndex,
       direction,
-      const DeepCollectionEquality().hash(_filterQuizItemList),
+      const DeepCollectionEquality().hash(_filterQuizList),
       const DeepCollectionEquality().hash(_categoryList),
       const DeepCollectionEquality().hash(_selectedCategoryQuizList),
       const DeepCollectionEquality().hash(_statusList),
@@ -493,7 +492,7 @@ abstract class _HomeStudyScreenState implements HomeStudyScreenState {
       final int itemIndex,
       final int lapIndex,
       final AppinioSwiperDirection? direction,
-      final List<QuizItem> filterQuizItemList,
+      final List<Quiz> filterQuizList,
       final List<String> categoryList,
       final List<Quiz> selectedCategoryQuizList,
       final List<QuizStatusType> statusList,
@@ -519,7 +518,7 @@ abstract class _HomeStudyScreenState implements HomeStudyScreenState {
   @override
   AppinioSwiperDirection? get direction;
   @override //StudyModal
-  List<QuizItem> get filterQuizItemList;
+  List<Quiz> get filterQuizList;
   @override
   List<String> get categoryList;
   @override

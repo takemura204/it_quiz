@@ -74,7 +74,7 @@ class _CategoryList extends ConsumerWidget {
                               onPressed: () {
                                 ref
                                     .read(homeStudyScreenProvider.notifier)
-                                    .updateCategoryFilterAllQuizList(
+                                    .updateAllCategoryQuizList(
                                       categoryQuizList: categoryQuizList,
                                       isSelected: isAllSelected,
                                     );
@@ -196,7 +196,7 @@ class _CategoryItemCard extends HookConsumerWidget {
         } else {
           ref
               .read(homeStudyScreenProvider.notifier)
-              .updateCategoryFilterQuizList(quiz: quiz, isSelected: isSelected);
+              .updateCategoryQuizList(quiz: quiz, isSelected: isSelected);
         }
       },
       child: Container(

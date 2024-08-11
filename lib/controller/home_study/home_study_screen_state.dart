@@ -21,7 +21,7 @@ class HomeStudyScreenState with _$HomeStudyScreenState {
     @Default(0) final int lapIndex,
     AppinioSwiperDirection? direction,
     //StudyModal
-    @Default([]) final List<QuizItem> filterQuizItemList,
+    @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList,
     @Default([]) final List<Quiz> selectedCategoryQuizList,
     @Default([]) final List<QuizStatusType> statusList,

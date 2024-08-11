@@ -34,6 +34,15 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   final unKnowQuizItemListName = 'study_unKnow_item_list';
   final studyIsTutorialDone = 'studyIsTutorialDone';
 
+  /// プレミアムと無料会員でクイズを取得
+  List<Quiz> getQuizList() {
+    final isPremium = ref.read(authModelProvider).isPremium;
+    final premiumQuizList = ref.read(quizModelProvider).quizList;
+    final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
+    final quizList = isPremium ? premiumQuizList : freeQuizList;
+    return quizList;
+  }
+
   Future _initState() async {
     setIsLoading(true);
     swiperController = AppinioSwiperController();
@@ -62,11 +71,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   ///QuizItem更新
   Future _initQuizItemList() async {
-    // プレミアムと無料会員でクイズを取得
-    final isPremium = ref.read(authModelProvider).isPremium;
-    final premiumQuizList = ref.read(quizModelProvider).quizList;
-    final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
-    final quizList = isPremium ? premiumQuizList : freeQuizList;
+    final quizList = getQuizList();
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
     if (quizItemList.isEmpty) {
       return;
@@ -148,7 +153,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
         quizItemList: updatedQuizItemList,
         knowQuizItemList: updatedKnowQuizItemList,
         unKnowQuizItemList: updatedUnKnowQuizItemList,
-        filterQuizItemList: quizItemList,
+        filterQuizList: quizList,
         selectedCategoryQuizList: quizList,
       );
     }
@@ -328,8 +333,8 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   ///カテゴリで絞り込み
-  Future updateCategoryFilterQuizList({required Quiz quiz, required bool isSelected}) async {
-    final quizList = [...ref.read(quizModelProvider).quizList];
+  Future updateCategoryQuizList({required Quiz quiz, required bool isSelected}) async {
+    final quizList = getQuizList();
     final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
     final matchQuiz = quizList.firstWhere((x) => x.id == quiz.id);
     if (isSelected) {
@@ -338,17 +343,15 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       selectedCategoryQuizList.add(matchQuiz);
     }
     selectedCategoryQuizList.sort((a, b) => a.id.compareTo(b.id));
-    final filterQuizItemList = selectedCategoryQuizList.expand((x) => x.quizItemList).toList();
-    state = state.copyWith(
-        selectedCategoryQuizList: selectedCategoryQuizList, filterQuizItemList: filterQuizItemList);
+    state = state.copyWith(selectedCategoryQuizList: selectedCategoryQuizList);
+    _updateFilterQuizList();
   }
 
   ///カテゴリ一括絞り込み
-  Future updateCategoryFilterAllQuizList(
+  Future updateAllCategoryQuizList(
       {required List<Quiz> categoryQuizList, required bool isSelected}) async {
-    final quizList = [...ref.read(quizModelProvider).quizList];
+    final quizList = getQuizList();
     final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
-
     if (isSelected) {
       selectedCategoryQuizList.removeWhere(
           (quiz) => categoryQuizList.any((categoryQuiz) => categoryQuiz.id == quiz.id));
@@ -358,13 +361,54 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
           .map((quiz) => quizList.firstWhere((x) => x.id == quiz.id)));
     }
     selectedCategoryQuizList.sort((a, b) => a.id.compareTo(b.id));
-    final filterQuizItemList = selectedCategoryQuizList.expand((x) => x.quizItemList).toList();
-    state = state.copyWith(
-        selectedCategoryQuizList: selectedCategoryQuizList, filterQuizItemList: filterQuizItemList);
+    state = state.copyWith(selectedCategoryQuizList: selectedCategoryQuizList);
+    _updateFilterQuizList();
   }
 
-  void removeQuizStatusList() {
+  ///学習状況絞り込み
+  void updateStatusQuizList(QuizStatusType status) {
+    final selectedStatusList = [...state.selectedStatusList];
+    if (selectedStatusList.contains(status)) {
+      print('.contains(status)');
+      selectedStatusList.remove(status);
+    } else {
+      print('else');
+      selectedStatusList.add(status);
+    }
+
+    state = state.copyWith(selectedStatusList: selectedStatusList);
+    _updateFilterQuizList();
+  }
+
+  void resetStatusList() {
     state = state.copyWith(selectedStatusList: []);
+    _updateFilterQuizList();
+  }
+
+  Future _updateFilterQuizList() async {
+    final quizList = getQuizList();
+
+    // カテゴリで絞り込み
+    List<Quiz> filterQuizList = quizList
+        .where((quiz) =>
+            state.selectedCategoryQuizList.any((selectedQuiz) => selectedQuiz.id == quiz.id))
+        .toList();
+
+    // ステータスで絞り込み
+    if (state.selectedStatusList.isNotEmpty) {
+      filterQuizList = filterQuizList
+          .map((quiz) {
+            final filteredItems = quiz.quizItemList
+                .where((quizItem) => state.selectedStatusList.contains(quizItem.status))
+                .toList();
+            return quiz.copyWith(quizItemList: filteredItems);
+          })
+          .where((quiz) => quiz.quizItemList.isNotEmpty)
+          .toList();
+    }
+
+    filterQuizList.sort((a, b) => a.id.compareTo(b.id));
+    state = state.copyWith(filterQuizList: filterQuizList);
   }
 
   void setIsLoading(bool value) {

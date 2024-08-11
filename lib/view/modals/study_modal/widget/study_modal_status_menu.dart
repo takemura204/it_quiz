@@ -88,7 +88,7 @@ class _StatusCard extends ConsumerWidget {
     return GestureDetector(
       onTap: isExists
           ? () {
-              ref.read(homeStudyScreenProvider.notifier).updateStatusFilterQuizList(status);
+              ref.read(homeStudyScreenProvider.notifier).updateStatusQuizList(status);
               HapticFeedback.lightImpact();
             }
           : null,
@@ -170,7 +170,7 @@ class _StatusRecommendCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         if (!isStatusList) {
-          ref.read(homeStudyScreenProvider.notifier).removeQuizStatusList();
+          ref.read(homeStudyScreenProvider.notifier).resetStatusList();
           HapticFeedback.lightImpact();
         }
       },
