@@ -43,6 +43,7 @@ class _Footer extends HookConsumerWidget {
             title: 'この条件で絞り込む',
             onPressed: filterQuizItemList.isNotEmpty
                 ? () {
+                    ref.read(homeStudyModalProvider.notifier).updateStudyQuizItemList();
                     Navigator.of(context).pop();
                   }
                 : null,

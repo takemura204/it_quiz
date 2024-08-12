@@ -15,6 +15,7 @@ import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/quiz/quiz_model.dart';
 import '../../view/modals/need_tracking_modal.dart';
 import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
@@ -22,6 +23,7 @@ import '../home_quiz_screen/home_quiz_screen.dart';
 import '../home_search_screen/home_search_screen.dart';
 import '../home_setting_screen/home_setting_screen.dart';
 import '../home_study_screen/home_study_screen.dart';
+import '../launch_screen/launch_screen.dart';
 import '../screen_argument.dart';
 
 class MainScreen extends ConsumerWidget {
@@ -37,6 +39,7 @@ class MainScreen extends ConsumerWidget {
         ref.watch(mainScreenControllerProvider.select((s) => s.isShowPremiumDetailScreen));
     final currentTabIndex =
         ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
+
     Future<void>.delayed(Duration.zero, () async {
       //チュートリアルモーダル表示
       if (isShowTutorialModal) {
@@ -81,6 +84,10 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizList = ref.watch(quizModelProvider.select((s) => s.quizList));
+    if (quizList.isEmpty) {
+      return LaunchScreen();
+    }
     final currentTabIndex =
         ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
 
@@ -103,10 +110,10 @@ class _BottomNavBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(mainScreenControllerProvider);
+    final currentTabIndex =
+        ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
 
     return BottomNavigationBar(
-        elevation: 300,
         iconSize: 35,
         items: [
           BottomNavigationBarItem(
@@ -153,7 +160,7 @@ class _BottomNavBar extends ConsumerWidget {
             label: I18n().titleSetting,
           ),
         ],
-        currentIndex: state.currentTabIndex,
+        currentIndex: currentTabIndex,
         fixedColor: context.mainColor,
         onTap: (index) async {
           ref.watch(mainScreenControllerProvider.notifier).setTabIndex(index);

@@ -12,37 +12,30 @@ import 'package:state_notifier/state_notifier.dart';
 
 import '../../untils/enums.dart';
 import '../quiz_item/quiz_item.dart';
-import '../user/auth.dart';
 import '../user/auth_model.dart';
 
 final quizModelProvider = StateNotifierProvider<QuizModel, Quizzes>(
   (ref) => QuizModel(ref),
-  dependencies: [authModelProvider],
 );
 
-class QuizModel extends StateNotifier<Quizzes> with LocatorMixin {
+class QuizModel extends StateNotifier<Quizzes>  {
   QuizModel(this.ref) : super(Quizzes()) {
-    initState();
+    () async {
+      await initState();
+    }();
   }
 
   final Ref ref;
   final now = DateTime.now();
 
-  @override
-  Future initState() async {
-    ref.listen<Auth>(authModelProvider, (_, auth) async {
-      await Future.wait([
-        // _resetData(),
-        _getQuizData(),
 
-        ///学習時間計測したい
-      ]);
-      super.initState();
-    });
+  Future initState() async {
+    // _resetData();
+    await _initQuizListData();
   }
 
   ///読み込み
-  Future _getQuizData() async {
+  Future _initQuizListData() async {
     setIsLoading(true);
     await _getQuizListData();
     await Future.wait([

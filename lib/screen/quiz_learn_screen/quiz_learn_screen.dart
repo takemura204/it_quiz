@@ -78,10 +78,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isResultScreen = ref.watch(quizLearnScreenProvider).isResultScreen;
-    final learnResultTarget4 =
-        ref.read(tutorialControllerProvider.notifier).learnResultTarget4;
-    final isShowTutorialModal = ref.watch(
-        mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
+    final learnResultTarget4 = ref.read(tutorialControllerProvider.notifier).learnResultTarget4;
+    final isShowTutorialModal =
+        ref.watch(mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
     return isResultScreen
         ? AppBar(
             titleSpacing: 0,
@@ -95,13 +94,10 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                 child: ClearButton(
                     iconSize: 30,
                     onPressed: () {
-                      ref
-                          .read(quizLearnScreenProvider.notifier)
-                          .updateHistoryQuiz();
+                      ref.read(quizLearnScreenProvider.notifier).updateHistoryQuiz();
 
-                      ref
-                          .read(quizLearnScreenProvider.notifier)
-                          .tapClearButton();
+                      ref.read(quizLearnScreenProvider.notifier).tapClearButton();
+                      Navigator.of(context).pop();
                     }),
               ),
             ],
@@ -118,9 +114,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                         builder: (context) {
                           return PrimaryDialog(
                             onPressed: () {
-                              ref
-                                  .read(quizLearnScreenProvider.notifier)
-                                  .tapClearButton();
+                              ref.read(quizLearnScreenProvider.notifier).tapClearButton();
                               Navigator.pop(context);
                               Navigator.pop(context);
                             },
@@ -128,9 +122,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                             subWidget: Text(
                               "学習を中断すると\nこれまでの内容は保存されません。",
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: context.width * 0.04,
-                                  color: Colors.black87),
+                              style:
+                                  TextStyle(fontSize: context.width * 0.04, color: Colors.black87),
                               maxLines: 2,
                             ),
                             cancelText: "続ける",
@@ -160,10 +153,7 @@ class _Body extends ConsumerWidget {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        if (isResultScreen)
-          _LearnResultBody(quiz)
-        else
-          _LearnChallengeBody(quiz),
+        if (isResultScreen) _LearnResultBody(quiz) else _LearnChallengeBody(quiz),
       ],
     );
   }

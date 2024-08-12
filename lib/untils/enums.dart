@@ -32,7 +32,7 @@ extension StatusTypeExtension on StatusType {
       case 'unlearned':
         return StatusType.unlearned;
       default:
-        throw StateError('Unknown QuizStatusType: $json');
+        throw StateError('Unknown StatusType: $json');
     }
   }
 }

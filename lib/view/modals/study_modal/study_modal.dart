@@ -7,6 +7,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../../controller/home_study/home_study_screen_controller.dart';
 import '../../../model/lang/initial_resource.dart';
 import '../../../model/quiz/quiz.dart';
 import '../../../model/user/auth_model.dart';
@@ -18,14 +19,19 @@ import '../../icon/quarter_circle_icon.dart';
 import '../need_premium_modal.dart';
 
 part 'widget/study_modal_category_menu.dart';
+
 part 'widget/study_modal_footer.dart';
+
 part 'widget/study_modal_header.dart';
+
 part 'widget/study_modal_importance_menu.dart';
+
 part 'widget/study_modal_menu_title.dart';
+
 part 'widget/study_modal_status_menu.dart';
 
 Future showStudyModal(BuildContext context) async {
-  await showModalBottomSheet<Widget>(
+  await showModalBottomSheet(
     isScrollControlled: true,
     context: context,
     backgroundColor: Colors.white,
@@ -69,7 +75,6 @@ class StudyModal extends HookConsumerWidget {
 
                     ///重要度
                     _ImportanceMenu(),
-
                     Gap(150),
                   ],
                 ),

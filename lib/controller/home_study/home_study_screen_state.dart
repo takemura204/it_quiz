@@ -9,7 +9,7 @@ part 'home_study_screen_state.freezed.dart';
 class HomeStudyScreenState with _$HomeStudyScreenState {
   const factory HomeStudyScreenState({
     @Default(false) final bool isLoading,
-    @Default(false) final bool isTutorialDone,
+    @Default(false) final bool isShowTutorial,
     @Default(false) final bool isAnsView,
     @Default([]) final List<QuizItem> quizItemList,
     @Default([]) final List<QuizItem> knowQuizItemList,

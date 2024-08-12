@@ -24,7 +24,9 @@ class _ImportanceList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizModelProvider.select((s) => s.quizItemList));
+    final quizList = ref.watch(homeStudyModalProvider.notifier).getQuizList();
+    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
+
     final highValue =
         quizItemList.where((x) => x.importance == ImportanceType.high).toList().length;
     final normalValue =

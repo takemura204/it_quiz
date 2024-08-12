@@ -117,7 +117,8 @@ class _CategoryItemList extends HookConsumerWidget {
         spacing: 8,
         runSpacing: 8,
         children: quizList.map((quiz) {
-          final isSelected = filterQuizList.contains(quiz);
+          final isSelected = filterQuizList.any((filteredQuiz) => filteredQuiz.id == quiz.id);
+          // final isSelected = filterQuizList.contains(quiz);
           return _CategoryItemCard(
             quiz: quiz,
             isSelected: isSelected,

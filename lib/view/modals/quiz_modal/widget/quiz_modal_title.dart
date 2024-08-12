@@ -26,7 +26,9 @@ class _ModalTitle extends ConsumerWidget {
           ),
           ClearButton(
             iconSize: 30,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
           const Gap(10),
         ],

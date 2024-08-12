@@ -19,6 +19,7 @@ import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/button_icon/save_button.dart';
 import '../../view/chart/dotted_line_painter.dart';
+import '../../view/modals/dialog.dart';
 import '../../view/modals/study_modal/study_modal.dart';
 
 part 'widget/action_buttons.dart';
@@ -32,6 +33,32 @@ class HomeStudyScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isShowCancelModal = ref.watch(homeStudyModalProvider.select((s) => s.isShowCancelModal));
+    Future.delayed(Duration.zero, () async {
+      if (isShowCancelModal) {
+        ref.read(homeStudyModalProvider.notifier).setIsShowCancelModal(false);
+        await showDialog(
+            context: context,
+            builder: (context) {
+              return PrimaryDialog(
+                onPressed: () {
+                  ref.read(homeStudyModalProvider.notifier).resetFilterQuizList();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+                title: "学習を中断しますか？",
+                subWidget: Text(
+                  "学習を中断すると\nこれまでの内容は保存されません。",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: context.width * 0.04, color: Colors.black87),
+                  maxLines: 2,
+                ),
+                cancelText: "続ける",
+                doneText: "中断する",
+              );
+            });
+      }
+    });
     return const Scaffold(
       appBar: _AppBar(),
       body: _Body(),
@@ -74,8 +101,9 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
-    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final isShowTutorial = ref.watch(homeStudyScreenProvider.select((s) => s.isShowTutorial));
+    final quizList = ref.watch(homeStudyScreenProvider.notifier).getQuizList();
+    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
     final filterQuizList = ref.watch(homeStudyModalProvider.select((s) => s.filterQuizList));
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     final isFiltered = quizItemList.length == filterQuizItemList.length;
@@ -88,7 +116,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             iconSize: 32,
             padding: EdgeInsets.zero,
             onPressed: () {
-              ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(!isTutorialDone);
+              ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(!isShowTutorial);
               HapticFeedback.lightImpact();
             },
             icon: const Icon(
@@ -99,14 +127,14 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
         ),
         IconButton(
-          onPressed: () {
+          onPressed: () async {
             showStudyModal(context);
             HapticFeedback.lightImpact();
           },
           icon: Icon(
             LineIcons.horizontalSliders,
             size: 32,
-            color: isFiltered ? context.mainColor : Colors.black54,
+            color: isFiltered ? Colors.black54 : context.mainColor,
           ),
         ),
         Gap(context.width * 0.01),

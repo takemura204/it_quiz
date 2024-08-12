@@ -22,8 +22,8 @@ class WeakQuizModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedWeakLength = ref.watch(
-        homeQuizScreenProvider.select((state) => state.selectedWeakLength));
+    final selectedWeakLength =
+        ref.watch(homeQuizScreenProvider.select((state) => state.selectedWeakLength));
     return Container(
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
       child: Column(
@@ -39,7 +39,9 @@ class WeakQuizModal extends ConsumerWidget {
               _Title(quiz),
               ClearButton(
                 iconSize: 35,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
             ],
           ),
@@ -71,9 +73,7 @@ class WeakQuizModal extends ConsumerWidget {
             text: I18n().styleLeanQuiz,
             onPressed: () {
               Navigator.of(context).pop();
-              ref
-                  .read(quizModelProvider.notifier)
-                  .setStudyType(StudyType.learn);
+              ref.read(quizModelProvider.notifier).setStudyType(StudyType.learn);
               ref.read(homeQuizScreenProvider.notifier).setSelectWeakQuiz();
 
               final weakQuiz = ref.read(homeQuizScreenProvider).selectWeakQuiz!;
@@ -94,9 +94,7 @@ class WeakQuizModal extends ConsumerWidget {
             title: I18n().styleChoiceQuiz,
             onPressed: () {
               Navigator.of(context).pop();
-              ref
-                  .read(quizModelProvider.notifier)
-                  .setStudyType(StudyType.choice);
+              ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
               ref.read(homeQuizScreenProvider.notifier).setSelectWeakQuiz();
 
               final weakQuiz = ref.read(homeQuizScreenProvider).selectWeakQuiz!;

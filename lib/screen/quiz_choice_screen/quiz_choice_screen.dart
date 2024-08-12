@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/main/main_screen_controller.dart';
@@ -83,10 +82,8 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                 onPressed: () {
                   //問題リセット
                   ref.read(quizChoiceScreenProvider.notifier).resetScreen();
-                  ref
-                      .read(mainScreenControllerProvider.notifier)
-                      .setIsShowInAppReview();
-                  HapticFeedback.lightImpact();
+                  ref.read(mainScreenControllerProvider.notifier).setIsShowInAppReview();
+                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -102,20 +99,15 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
                   builder: (context) {
                     return PrimaryDialog(
                       onPressed: () {
-                        ref
-                            .read(quizChoiceScreenProvider.notifier)
-                            .resetScreen();
+                        ref.read(quizChoiceScreenProvider.notifier).resetScreen();
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
-                        HapticFeedback.lightImpact();
                       },
                       title: "学習を中断しますか？",
                       subWidget: Text(
                         "学習を中断すると\nこれまでの内容は保存されません。",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: context.width * 0.04,
-                            color: Colors.black87),
+                        style: TextStyle(fontSize: context.width * 0.04, color: Colors.black87),
                         maxLines: 2,
                       ),
                       cancelText: "続ける",

@@ -21,7 +21,6 @@ class ClearButton extends ConsumerWidget {
           iconSize: iconSize,
           onPressed: () {
             onPressed();
-            Navigator.of(context).pop();
             HapticFeedback.lightImpact();
           },
           icon: Icon(

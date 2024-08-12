@@ -23,8 +23,7 @@ class RandomQuizModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isGroup =
-        ref.watch(homeQuizScreenProvider).randomCategoryList.isNotEmpty;
+    final isGroup = ref.watch(homeQuizScreenProvider).randomCategoryList.isNotEmpty;
     final selectedTestLength = ref.watch(
       homeQuizScreenProvider.select((state) => state.selectedTestLength),
     );
@@ -43,7 +42,9 @@ class RandomQuizModal extends ConsumerWidget {
               const Spacer(),
               ClearButton(
                 iconSize: 35,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
             ],
           ),
@@ -60,9 +61,7 @@ class RandomQuizModal extends ConsumerWidget {
           QuizLengthTabBar(
             selectedLength: selectedTestLength,
             onTap: (length) {
-              ref
-                  .read(homeQuizScreenProvider.notifier)
-                  .setRandomQuizLength(length);
+              ref.read(homeQuizScreenProvider.notifier).setRandomQuizLength(length);
             },
           ),
 
@@ -78,12 +77,8 @@ class RandomQuizModal extends ConsumerWidget {
             text: I18n().styleLeanQuiz,
             onPressed: () {
               Navigator.of(context).pop();
-              ref
-                  .read(quizModelProvider.notifier)
-                  .setStudyType(StudyType.choice);
-              ref
-                  .read(homeQuizScreenProvider.notifier)
-                  .tapStartRandomQuizButton();
+              ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
+              ref.read(homeQuizScreenProvider.notifier).tapStartRandomQuizButton();
 
               final randomQuiz = ref.read(quizModelProvider).randomQuiz!;
               context.showScreen(
@@ -102,12 +97,8 @@ class RandomQuizModal extends ConsumerWidget {
             title: 'クイズに挑戦する',
             onPressed: isGroup
                 ? () {
-                    ref
-                        .read(quizModelProvider.notifier)
-                        .setStudyType(StudyType.choice);
-                    ref
-                        .read(homeQuizScreenProvider.notifier)
-                        .tapStartRandomQuizButton();
+                    ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
+                    ref.read(homeQuizScreenProvider.notifier).tapStartRandomQuizButton();
 
                     final randomQuiz = ref.read(quizModelProvider).randomQuiz!;
                     context.showScreen(
@@ -151,8 +142,7 @@ class _QuizRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categoryList = ref.watch(homeQuizScreenProvider).categoryList;
-    final selectedRandomCategoryList =
-        ref.watch(homeQuizScreenProvider).randomCategoryList;
+    final selectedRandomCategoryList = ref.watch(homeQuizScreenProvider).randomCategoryList;
     if (categoryList.isEmpty) {
       return Center(
         child: SpinKitFadingCircle(
@@ -200,8 +190,8 @@ class _SelectRange extends ConsumerWidget {
       child: Container(
         width: context.width,
         height: 45,
-        padding: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.01),
+        padding:
+            EdgeInsets.symmetric(horizontal: context.width * 0.02, vertical: context.width * 0.01),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
           border: Border.all(

@@ -13,25 +13,25 @@ final authModelProvider = StateNotifierProvider<AuthModel, Auth>(
   (ref) => AuthModel(ref),
 );
 
-class AuthModel extends StateNotifier<Auth> with LocatorMixin {
+class AuthModel extends StateNotifier<Auth>  {
   AuthModel(this.ref) : super(const Auth()) {
-    initState();
+    () async {
+      await _initState();
+    }();
   }
 
   final Ref ref;
   final userNameController = TextEditingController();
 
-  @override
-  Future initState() async {
-    _createUserData().then((x) {
-      _loadUserData();
-    });
 
+  Future _initState() async {
+
+    await _initUserData();
+    await _loadUserData();
     // _resetData();
-    super.initState();
   }
 
-  Future _createUserData() async {
+  Future _initUserData() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -47,7 +47,7 @@ class AuthModel extends StateNotifier<Auth> with LocatorMixin {
       } else {
         state = state.copyWith(uid: uid);
       }
-      print({'uid:', state.uid});
+      print('uid:${state.uid}');
     } catch (e) {
       print("Firebase Auth Error: $e");
     }

@@ -8,7 +8,7 @@ class _QuizItemCard extends ConsumerWidget {
     final swiperController = ref.watch(homeStudyScreenProvider.notifier).swiperController;
     final direction = ref.watch(homeStudyScreenProvider.select((s) => s.direction));
     final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
-    final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
+    final isShowTutorial = ref.watch(homeStudyScreenProvider.select((s) => s.isShowTutorial));
     final isAnsView = ref.watch(homeStudyScreenProvider.select((s) => s.isAnsView));
     final itemIndex = ref.watch(homeStudyScreenProvider.select((s) => s.itemIndex));
 
@@ -29,8 +29,8 @@ class _QuizItemCard extends ConsumerWidget {
         swipeOptions: const AppinioSwipeOptions.symmetric(horizontal: true, vertical: false),
         onSwipe: (index, direction) {
           // チュートリアルカードが表示されている時
-          if (!isTutorialDone) {
-            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
+          if (!isShowTutorial) {
+            ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
           }
           // スワイプが完全に終了した時の処理
           if (direction == AppinioSwiperDirection.left) {
@@ -41,8 +41,8 @@ class _QuizItemCard extends ConsumerWidget {
           HapticFeedback.mediumImpact();
         },
         onSwiping: (direction) {
-          if (!isTutorialDone) {
-            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
+          if (!isShowTutorial) {
+            ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
           }
           ref.read(homeStudyScreenProvider.notifier).setDirection(direction);
         },
@@ -56,8 +56,8 @@ class _QuizItemCard extends ConsumerWidget {
         cardsBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              if (!isTutorialDone) {
-                ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
+              if (!isShowTutorial) {
+                ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
               }
               ref.read(homeStudyScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
             },
@@ -110,7 +110,7 @@ class _QuizItemCard extends ConsumerWidget {
                 ),
                 if (itemIndex == index && direction != null)
                   _DirectionStatusCard(index: index, itemIndex: itemIndex, direction: direction),
-                if (!isTutorialDone) const _QuizItemTutorialCard(),
+                if (!isShowTutorial) const _QuizItemTutorialCard(),
               ],
             ),
           );
@@ -460,7 +460,7 @@ class _SkeletonCard extends ConsumerWidget {
           highlightColor: Colors.grey[100]!,
           child: Container(
             height: context.height * 0.7,
-            width: context.width * 0.9,
+            width: context.width * 0.95,
             decoration: BoxDecoration(
               color: Colors.grey[300],
               borderRadius: BorderRadius.circular(10),

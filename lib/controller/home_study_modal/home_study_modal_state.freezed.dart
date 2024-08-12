@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeStudyModalState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isShowCancelModal => throw _privateConstructorUsedError;
   List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
   List<String> get categoryList => throw _privateConstructorUsedError;
   List<Quiz> get selectedCategoryQuizList => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $HomeStudyModalStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isShowCancelModal,
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<Quiz> selectedCategoryQuizList,
@@ -62,6 +64,7 @@ class _$HomeStudyModalStateCopyWithImpl<$Res, $Val extends HomeStudyModalState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isShowCancelModal = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
     Object? selectedCategoryQuizList = null,
@@ -74,6 +77,10 @@ class _$HomeStudyModalStateCopyWithImpl<$Res, $Val extends HomeStudyModalState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowCancelModal: null == isShowCancelModal
+          ? _value.isShowCancelModal
+          : isShowCancelModal // ignore: cast_nullable_to_non_nullable
               as bool,
       filterQuizList: null == filterQuizList
           ? _value.filterQuizList
@@ -117,6 +124,7 @@ abstract class _$$_HomeStudyModalStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isShowCancelModal,
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<Quiz> selectedCategoryQuizList,
@@ -138,6 +146,7 @@ class __$$_HomeStudyModalStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isShowCancelModal = null,
     Object? filterQuizList = null,
     Object? categoryList = null,
     Object? selectedCategoryQuizList = null,
@@ -150,6 +159,10 @@ class __$$_HomeStudyModalStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowCancelModal: null == isShowCancelModal
+          ? _value.isShowCancelModal
+          : isShowCancelModal // ignore: cast_nullable_to_non_nullable
               as bool,
       filterQuizList: null == filterQuizList
           ? _value._filterQuizList
@@ -188,6 +201,7 @@ class __$$_HomeStudyModalStateCopyWithImpl<$Res>
 class _$_HomeStudyModalState implements _HomeStudyModalState {
   const _$_HomeStudyModalState(
       {this.isLoading = false,
+      this.isShowCancelModal = false,
       final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
       final List<Quiz> selectedCategoryQuizList = const [],
@@ -206,6 +220,9 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isShowCancelModal;
   final List<Quiz> _filterQuizList;
   @override
   @JsonKey()
@@ -274,7 +291,7 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
 
   @override
   String toString() {
-    return 'HomeStudyModalState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, selectedCategoryQuizList: $selectedCategoryQuizList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList)';
+    return 'HomeStudyModalState(isLoading: $isLoading, isShowCancelModal: $isShowCancelModal, filterQuizList: $filterQuizList, categoryList: $categoryList, selectedCategoryQuizList: $selectedCategoryQuizList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList)';
   }
 
   @override
@@ -284,6 +301,8 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
             other is _$_HomeStudyModalState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isShowCancelModal, isShowCancelModal) ||
+                other.isShowCancelModal == isShowCancelModal) &&
             const DeepCollectionEquality()
                 .equals(other._filterQuizList, _filterQuizList) &&
             const DeepCollectionEquality()
@@ -304,6 +323,7 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isShowCancelModal,
       const DeepCollectionEquality().hash(_filterQuizList),
       const DeepCollectionEquality().hash(_categoryList),
       const DeepCollectionEquality().hash(_selectedCategoryQuizList),
@@ -323,6 +343,7 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
 abstract class _HomeStudyModalState implements HomeStudyModalState {
   const factory _HomeStudyModalState(
           {final bool isLoading,
+          final bool isShowCancelModal,
           final List<Quiz> filterQuizList,
           final List<String> categoryList,
           final List<Quiz> selectedCategoryQuizList,
@@ -334,6 +355,8 @@ abstract class _HomeStudyModalState implements HomeStudyModalState {
 
   @override
   bool get isLoading;
+  @override
+  bool get isShowCancelModal;
   @override
   List<Quiz> get filterQuizList;
   @override

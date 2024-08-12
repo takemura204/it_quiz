@@ -7,7 +7,7 @@ class _ActionButtons extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isAnsView = ref.watch(homeStudyScreenProvider.select((s) => s.isAnsView));
     final direction = ref.watch(homeStudyScreenProvider.select((s) => s.direction));
-    final isTutorialDone = ref.watch(homeStudyScreenProvider.select((s) => s.isTutorialDone));
+    final isShowTutorial = ref.watch(homeStudyScreenProvider.select((s) => s.isShowTutorial));
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       ///知らない
       CustomCircleButton(
@@ -19,8 +19,8 @@ class _ActionButtons extends ConsumerWidget {
         iconColor: direction == AppinioSwiperDirection.left ? Colors.white : context.incorrectColor,
         text: I18n().buttonUnKnow,
         onPressed: () {
-          if (!isTutorialDone) {
-            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
+          if (!isShowTutorial) {
+            ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
           }
           ref.read(homeStudyScreenProvider.notifier).setDirection(AppinioSwiperDirection.left);
           ref.read(homeStudyScreenProvider.notifier).swiperController.swipeLeft();
@@ -40,8 +40,8 @@ class _ActionButtons extends ConsumerWidget {
         onPressed: isAnsView
             ? null
             : () {
-                if (!isTutorialDone) {
-                  ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
+                if (!isShowTutorial) {
+                  ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
                 }
                 ref.read(homeStudyScreenProvider.notifier).setIsAnsView(true);
                 HapticFeedback.mediumImpact();
@@ -60,8 +60,8 @@ class _ActionButtons extends ConsumerWidget {
         iconColor: direction == AppinioSwiperDirection.right ? Colors.white : context.correctColor,
         text: I18n().buttonKnow,
         onPressed: () {
-          if (!isTutorialDone) {
-            ref.read(homeStudyScreenProvider.notifier).setIsTutorialDone(true);
+          if (!isShowTutorial) {
+            ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
           }
           ref.read(homeStudyScreenProvider.notifier).setDirection(AppinioSwiperDirection.right);
           ref.read(homeStudyScreenProvider.notifier).swiperController.swipeRight();

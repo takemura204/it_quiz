@@ -9,6 +9,7 @@ part 'home_study_modal_state.freezed.dart';
 class HomeStudyModalState with _$HomeStudyModalState {
   const factory HomeStudyModalState({
     @Default(false) final bool isLoading,
+    @Default(false) final bool isShowCancelModal,
     @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList,
     @Default([]) final List<Quiz> selectedCategoryQuizList,
