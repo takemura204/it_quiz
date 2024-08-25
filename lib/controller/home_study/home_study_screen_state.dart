@@ -11,6 +11,7 @@ class HomeStudyScreenState with _$HomeStudyScreenState {
     @Default(false) final bool isLoading,
     @Default(false) final bool isShowTutorial,
     @Default(false) final bool isAnsView,
+    @Default(false) final bool isResultView,
     @Default([]) final List<QuizItem> quizItemList,
     @Default([]) final List<QuizItem> knowQuizItemList,
     @Default([]) final List<QuizItem> unKnowQuizItemList,

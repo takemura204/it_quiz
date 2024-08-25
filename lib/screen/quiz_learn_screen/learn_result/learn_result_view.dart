@@ -22,8 +22,7 @@ class _QuizResultView extends ConsumerWidget {
               ),
             ),
             padding: EdgeInsets.symmetric(
-                horizontal: context.width * 0.02,
-                vertical: context.width * 0.02),
+                horizontal: context.width * 0.02, vertical: context.width * 0.02),
             child: const Text(
               'クイズ一覧',
               style: TextStyle(
@@ -38,9 +37,8 @@ class _QuizResultView extends ConsumerWidget {
           shrinkWrap: true,
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
-            final learnResultTarget2 = ref
-                .read(tutorialControllerProvider.notifier)
-                .learnResultTarget2;
+            final learnResultTarget2 =
+                ref.read(tutorialControllerProvider.notifier).learnResultTarget2;
             return Container(
               key: index == 0 ? learnResultTarget2 : null,
               child: QuizItemCard(
@@ -48,14 +46,10 @@ class _QuizResultView extends ConsumerWidget {
                   quizItem: quizItemList[index],
                   studyType: StudyType.learn,
                   onTapCheckButton: () {
-                    ref
-                        .read(quizLearnScreenProvider.notifier)
-                        .tapCheckBox(index);
+                    ref.read(quizLearnScreenProvider.notifier).tapCheckBox(index);
                   },
                   onTapSaveButton: () {
-                    ref
-                        .read(quizLearnScreenProvider.notifier)
-                        .tapSavedButton(index);
+                    ref.read(quizLearnScreenProvider.notifier).tapSavedButton(index);
                   }),
             );
           },
@@ -73,10 +67,8 @@ class _NextActionCard extends HookConsumerWidget {
     final quizList = ref.watch(quizModelProvider).quizList;
     final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
-    final learnQuiz =
-        ref.watch(quizLearnScreenProvider.select((s) => s.learnQuiz));
-    final learnResultTarget3 =
-        ref.read(tutorialControllerProvider.notifier).learnResultTarget3;
+    final learnQuiz = ref.watch(quizLearnScreenProvider.select((s) => s.learnQuiz));
+    final learnResultTarget3 = ref.read(tutorialControllerProvider.notifier).learnResultTarget3;
 
     return Card(
       key: learnResultTarget3,
@@ -96,9 +88,7 @@ class _NextActionCard extends HookConsumerWidget {
                   height: 55,
                   text: "再挑戦",
                   onPressed: () {
-                    ref
-                        .read(quizLearnScreenProvider.notifier)
-                        .updateHistoryQuiz();
+                    ref.read(quizLearnScreenProvider.notifier).updateHistoryQuiz();
                     Navigator.of(context).pop();
                     context.showScreen(QuizLearnScreenArguments(
                       quiz: learnQuiz!,
@@ -112,9 +102,7 @@ class _NextActionCard extends HookConsumerWidget {
                 onPressed: (quizIndex >= lastIndex)
                     ? null
                     : () {
-                        ref
-                            .read(quizLearnScreenProvider.notifier)
-                            .updateHistoryQuiz();
+                        ref.read(quizLearnScreenProvider.notifier).updateHistoryQuiz();
                         Navigator.of(context).pop();
                         context.showScreen(
                           QuizChoiceScreenArguments(
@@ -123,9 +111,7 @@ class _NextActionCard extends HookConsumerWidget {
                         );
 
                         Future.delayed(const Duration(milliseconds: 600), () {
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .setStudyType(StudyType.choice);
+                          ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
                         });
                       },
               ),

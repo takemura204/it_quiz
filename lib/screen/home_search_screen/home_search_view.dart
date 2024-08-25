@@ -149,97 +149,106 @@ class _QuizItemCard extends ConsumerWidget {
             ),
           ),
         ),
-        child: Row(
-          children: [
-            const Gap(5),
-            Expanded(
-              child: Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(
-                    left: context.width * 0.02,
-                    right: context.width * 0,
-                    top: context.height * 0.02,
-                    bottom: context.height * 0.02),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
+        child: Container(
+          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.only(
+              left: context.width * 0.02,
+              right: context.width * 0.01,
+              top: context.height * 0.015,
+              bottom: context.height * 0.01),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  const Gap(5),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: SubstringHighlight(
-                            text: quizItemList[index].word,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: SubstringHighlight(
+                                text: quizItemList[index].word,
+                                term: termToHighlight,
+                                textStyle: context.texts.titleLarge!,
+                                overflow: TextOverflow.clip,
+                                textStyleHighlight: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: context.mainColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Gap(5),
+                        if (isPremium)
+                          SubstringHighlight(
+                            text: quizItemList[index].comment,
                             term: termToHighlight,
-                            textStyle: context.texts.titleLarge!,
+                            textStyle: context.texts.bodyMedium!,
                             overflow: TextOverflow.clip,
                             textStyleHighlight: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: context.mainColor,
+                              decoration: TextDecoration.underline,
+                            ),
+                          )
+                        else
+                          const Text(
+                            'プレミアムで閲覧可能',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black54,
                             ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            // CheckBoxIconButton(
-                            //   isCheck: quizItemList[index].isWeak,
-                            //   size: 35,
-                            //   onTap: () {
-                            //     ref
-                            //         .read(homeSearchScreenProvider.notifier)
-                            //         .tapCheckButton(index);
-                            //   },
-                            // ),
-                            if (isPremium)
-                              SaveIconButton(
-                                quizItem: quizItemList[index],
-                                isShowText: true,
-                                size: 30,
-                                onTap: () {
-                                  ref.read(homeSearchScreenProvider.notifier).tapSaveButton(index);
-                                },
-                              ),
-                          ],
-                        )
+                        const Gap(10),
                       ],
                     ),
-                    const Gap(5),
-                    if (isPremium)
-                      SubstringHighlight(
-                        text: quizItemList[index].comment,
-                        term: termToHighlight,
-                        textStyle: context.texts.bodyMedium!,
-                        overflow: TextOverflow.clip,
-                        textStyleHighlight: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: context.mainColor,
-                          decoration: TextDecoration.underline,
-                        ),
-                      )
-                    else
-                      const Text(
-                        'プレミアムで閲覧可能',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black54,
-                        ),
+                  ),
+                  if (!isPremium)
+                    Container(
+                      alignment: Alignment.center,
+                      width: context.width * 0.1,
+                      height: context.height * 0.1,
+                      child: const Icon(
+                        LineIcons.lock,
+                        color: Colors.grey,
+                        size: 30,
                       ),
+                    ),
+                  const Gap(5),
+                ],
+              ),
+              if (isPremium)
+                Row(
+                  children: [
+                    ///カテゴリ
+                    CategoryTag(quizItem: quizItemList[index]),
+                    const Gap(5),
+
+                    ///重要度
+                    ImportanceTag(quizItemList[index]),
+                    const Gap(5),
+
+                    ///ステータス
+                    StatusTag(quizItem: quizItemList[index]),
+                    const Spacer(),
+
+                    ///保存
+                    SaveIconButton(
+                      quizItem: quizItemList[index],
+                      isShowText: false,
+                      size: 32,
+                      onTap: () {
+                        ref.read(homeSearchScreenProvider.notifier).tapSaveButton(index);
+                      },
+                    ),
                   ],
                 ),
-              ),
-            ),
-            if (!isPremium)
-              Container(
-                alignment: Alignment.center,
-                width: context.width * 0.1,
-                height: context.height * 0.1,
-                child: const Icon(
-                  LineIcons.lock,
-                  color: Colors.grey,
-                  size: 30,
-                ),
-              ),
-            const Gap(5),
-          ],
+            ],
+          ),
         ),
       ),
     );

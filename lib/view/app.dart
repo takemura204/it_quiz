@@ -30,7 +30,7 @@ class _MaterialApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      title: I18n().appName,
+      title: I18n().appNameTitle,
       theme: themeData,
       darkTheme: themeData,
       home: const MainScreen(),

@@ -20,13 +20,13 @@ class ResultClearCard extends ConsumerWidget {
           ),
         ),
       ),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       alignment: Alignment.center,
       child: const FadeInAnimation(
         animateDirection: AnimateDirection.left,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Gap(10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,9 +40,9 @@ class ResultClearCard extends ConsumerWidget {
                       fontStyle: FontStyle.italic,
                     ),
                   ),
-                  Gap(3),
+                  Gap(5),
                   Text(
-                    '毎日１歩づつ成長しています！',
+                    ' 毎日の学習が成功を導いています！',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -52,15 +52,11 @@ class ResultClearCard extends ConsumerWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.check_circle_outline,
-                color: Colors.white,
-                size: 100,
-              ),
+            Icon(
+              Icons.check_circle_outline,
+              color: Colors.white,
+              size: 120,
             ),
-            Gap(5),
           ],
         ),
       ),

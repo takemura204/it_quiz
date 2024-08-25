@@ -129,7 +129,7 @@ class _BottomNavBar extends ConsumerWidget {
               height: 35,
               colorFilter: ColorFilter.mode(context.mainColor, BlendMode.srcIn),
             ),
-            label: I18n().titleLearn,
+            label: I18n().titleStudy,
           ),
           BottomNavigationBarItem(
             icon: const Icon(LineIcons.list),

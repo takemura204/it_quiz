@@ -89,19 +89,26 @@ class _QuizItemCard extends ConsumerWidget {
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ///カテゴリ
-                            _QuizItemCategory(quizItem: quizItemList[index]),
+                            CategoryTag(quizItem: quizItemList[index]),
                             const Gap(5),
 
                             ///重要度
-                            _QuizItemImportance(quizItemList[index]),
+                            ImportanceTag(quizItemList[index]),
                             const Gap(5),
 
                             ///ステータス
-                            _QuizItemStatus(quizItem: quizItemList[index]),
+                            StatusTag(quizItem: quizItemList[index]),
                             const Spacer(),
 
                             ///保存
-                            _QuizItemSaveButton(quizItemList, index),
+                            SaveIconButton(
+                              quizItem: quizItemList[index],
+                              isShowText: false,
+                              size: 32,
+                              onTap: () {
+                                ref.read(homeStudyScreenProvider.notifier).tapSavedButton(index);
+                              },
+                            ),
                           ],
                         ),
                       ],
@@ -116,158 +123,6 @@ class _QuizItemCard extends ConsumerWidget {
           );
         },
       ),
-    );
-  }
-}
-
-///カテゴリ
-class _QuizItemCategory extends ConsumerWidget {
-  const _QuizItemCategory({required this.quizItem});
-
-  final QuizItem quizItem;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizModelProvider.select((s) => s.quizList));
-    final categoryName = quizList
-        .firstWhere((quiz) => quiz.quizItemList.any((item) => item.quizId == quizItem.quizId))
-        .category;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black54, width: 0.5),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: Text(
-          categoryName,
-          style: const TextStyle(
-            color: Colors.black54,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-///重要度
-class _QuizItemImportance extends ConsumerWidget {
-  const _QuizItemImportance(this.quizItem);
-
-  final QuizItem quizItem;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black54, width: 0.5),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              '重要度',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              ' ${I18n().quizImportanceText(quizItem.importance)}',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-///ステータス
-class _QuizItemStatus extends ConsumerWidget {
-  const _QuizItemStatus({required this.quizItem});
-
-  final QuizItem quizItem;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    Color iconColor(StatusType statusType) {
-      switch (statusType) {
-        case StatusType.correct:
-          return context.correctColor;
-        case StatusType.incorrect:
-          return context.incorrectColor;
-        case StatusType.learned:
-          return context.backgroundColor;
-        case StatusType.unlearned:
-          return context.secondColor;
-        default:
-          return context.secondColor;
-      }
-    }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black54, width: 0.5),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: Row(
-          children: [
-            Container(
-              height: 15,
-              width: 15,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: iconColor(quizItem.status),
-                border: Border.all(
-                    width: 1,
-                    color: iconColor(quizItem.status) == context.backgroundColor
-                        ? context.mainColor
-                        : iconColor(quizItem.status)),
-              ),
-            ),
-            const Gap(3),
-            Text(I18n().quizStatusTypeText(quizItem.status),
-                style:
-                    context.texts.bodyMedium?.copyWith(fontSize: 12, fontWeight: FontWeight.bold)),
-            const Gap(3),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-///保存ボタン
-class _QuizItemSaveButton extends ConsumerWidget {
-  const _QuizItemSaveButton(this.quizItemList, this.index);
-
-  final List<QuizItem> quizItemList;
-  final int index;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SaveIconButton(
-      quizItem: quizItemList[index],
-      isShowText: false,
-      size: 32,
-      onTap: () {
-        ref.read(homeStudyScreenProvider.notifier).tapSavedButton(index);
-      },
     );
   }
 }

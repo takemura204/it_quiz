@@ -7,20 +7,18 @@ class _LearnResultBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizLearnScreenProvider).quizItemList;
+    final quizItemList = ref.watch(quizLearnScreenProvider.select((s) => s.quizItemList));
+    final knowQuizItemList = ref.watch(quizLearnScreenProvider.select((s) => s.knowQuizItemList));
     final controller = ref.watch(quizLearnScreenProvider);
     final duration = controller.duration;
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
-    final learnResultTarget1 =
-        ref.read(tutorialControllerProvider.notifier).learnResultTarget1;
-    final isShowLearnResultTutorial = ref.read(
-        tutorialControllerProvider.select((s) => s.isShowLearnResultTutorial));
+    final learnResultTarget1 = ref.read(tutorialControllerProvider.notifier).learnResultTarget1;
+    final isShowLearnResultTutorial =
+        ref.read(tutorialControllerProvider.select((s) => s.isShowLearnResultTutorial));
 
     Future<void>.delayed(Duration.zero, () async {
       if (isShowLearnResultTutorial) {
-        ref
-            .read(tutorialControllerProvider.notifier)
-            .setIsShowLearnResultTutorial(false);
+        ref.read(tutorialControllerProvider.notifier).setIsShowLearnResultTutorial(false);
 
         Future.delayed(const Duration(milliseconds: 500), () {
           ref.read(tutorialControllerProvider.notifier).showLearnResultTutorial(
@@ -30,15 +28,11 @@ class _LearnResultBody extends ConsumerWidget {
                 },
                 onFinish: () {
                   Navigator.pop(context);
-                  ref
-                      .read(quizLearnScreenProvider.notifier)
-                      .updateHistoryQuiz();
+                  ref.read(quizLearnScreenProvider.notifier).updateHistoryQuiz();
 
                   ref.read(quizLearnScreenProvider.notifier).tapClearButton();
 
-                  ref
-                      .read(tutorialControllerProvider.notifier)
-                      .setIsTutorialRestart(false);
+                  ref.read(tutorialControllerProvider.notifier).setIsTutorialRestart(false);
                   ref
                       .read(mainScreenControllerProvider.notifier)
                       .setIsShowPremiumDetailScreen(true);
@@ -63,11 +57,15 @@ class _LearnResultBody extends ConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const ResultClearCard(),
-                          ResultDashboardCard(quizItemList, duration),
+                          ResultDashboardCard(
+                            quizItemList: quizItemList,
+                            resultQuizItemList: knowQuizItemList,
+                            duration: duration,
+                          ),
                         ],
                       ),
 
-                      const Gap(15),
+                      const Gap(20),
 
                       ///クイズ結果一覧
                       const _QuizResultView(),

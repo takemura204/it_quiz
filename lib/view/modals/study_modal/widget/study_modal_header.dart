@@ -7,8 +7,7 @@ class _Header extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(homeStudyScreenProvider.notifier).getQuizList();
-    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
+    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
     final filterQuizList = ref.watch(homeStudyModalProvider.select((s) => s.filterQuizList));
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     final isFiltered = quizItemList.length != filterQuizItemList.length;

@@ -79,7 +79,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     if (quizItemListData != null && quizItemListData.isNotEmpty) {
       final localQuizItemList =
           quizItemListData.map((e) => QuizItem.fromJson(json.decode(e))).toList();
-      print({'localQuizItemList', localQuizItemList.length});
       for (var localQuizItem in localQuizItemList) {
         final matchedQuizItem = quizItemList.firstWhere((x) => x.quizId == localQuizItem.quizId);
         // 知っている・知らないのリストに含まれていない場合に追加
@@ -228,28 +227,16 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   ///次の問題に進む
   void _nextQuiz() {
     final itemIndex = state.itemIndex;
-    final lapIndex = state.lapIndex;
     final quizItemList = [...state.quizItemList];
-    final knowQuizList = [...state.knowQuizItemList];
-    final unKnowQuizList = [...state.unKnowQuizItemList];
-    //問題が終わったが,「知ってる」リストに全て含まれていない場合
-    if (itemIndex == quizItemList.length - 1 && knowQuizList.length != state.quizItemList.length) {
-      quizItemList.clear();
-      quizItemList.addAll(unKnowQuizList);
-      state = state.copyWith(itemIndex: 0, lapIndex: lapIndex + 1, quizItemList: quizItemList);
-    }
-    //問題が終わり,「知ってる」リストに全て含まれている場合
-    else if (state.knowQuizItemList.length == state.quizItemList.length) {
+    //クイズが完了したが、「知らない」がまだ含まれる場合
+    if (itemIndex == quizItemList.length - 1) {
+      setIsStudyDone(true);
       quizItemList.clear(); // クイズアイテムリストをクリア
       // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
-      quizItemList.addAll(
-          [...knowQuizList, ...unKnowQuizList]..sort((a, b) => a.quizId.compareTo(b.quizId)));
 
-      state = state.copyWith(
-        itemIndex: 0,
-        lapIndex: lapIndex + 1,
-        quizItemList: quizItemList,
-      );
+      quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
+        ..sort((a, b) => a.quizId.compareTo(b.quizId)));
+      state = state.copyWith(quizItemList: quizItemList);
     }
     //まだ問題が続けられる時
     else {
@@ -267,8 +254,35 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     state = state.copyWith(isAnsView: value);
   }
 
+  ///完了画面に切り替え
+  Future setIsStudyDone(bool value) async {
+    state = state.copyWith(isResultView: value);
+  }
+
   Future setDirection(AppinioSwiperDirection? direction) async {
     state = state.copyWith(direction: direction);
+  }
+
+  ///保存ボタンをタップした時
+  void tapWeakButton(int index) {
+    final quizItemList = [...state.quizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: !quizItemList[index].isWeak,
+      status: quizItemList[index].status,
+      isSaved: quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
+    );
+    state = state.copyWith(quizItemList: quizItemList);
+    _updateQuizItem(quizItemList[index]);
   }
 
   ///保存ボタンをタップした時
@@ -307,7 +321,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       itemIndex: 0,
       isAnsView: false,
     );
-    print({'quizItemList', quizItemList.length});
     _saveDevice();
   }
 
@@ -332,8 +345,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     await prefs.setStringList(quizItemListName, quizItemListData);
     await prefs.setStringList(knowQuizItemListName, knowQuizItemList);
     await prefs.setStringList(unKnowQuizItemListName, unKnowQuizItemList);
-
-    print({'quizItemListData', quizItemListData.length});
   }
 
   Future resetData() async {

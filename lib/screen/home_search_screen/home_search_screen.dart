@@ -18,6 +18,9 @@ import '../../model/quiz_item/quiz_item.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/save_button.dart';
 import '../../view/modals/need_premium_modal.dart';
+import '../../view/tag/category_tag.dart';
+import '../../view/tag/importance_tag.dart';
+import '../../view/tag/status_tag.dart';
 import '../screen_argument.dart';
 
 part 'home_search_view.dart';
@@ -90,9 +93,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
             onPressed: () {
-              ref
-                  .read(homeSearchScreenProvider.notifier)
-                  .tapIsSavedFilterButton();
+              ref.read(homeSearchScreenProvider.notifier).tapIsSavedFilterButton();
               HapticFeedback.lightImpact();
             },
             icon: Icon(

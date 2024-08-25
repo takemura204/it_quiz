@@ -19,6 +19,7 @@ import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
 import '../../untils/enums.dart';
 import '../../view/admob/admob_banner.dart';
+import '../../view/animation_image.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/clear_button.dart';
@@ -29,7 +30,6 @@ import '../../view/button_icon/save_button.dart';
 import '../../view/card/quiz_item_card.dart';
 import '../../view/card/result_dashboard_card.dart';
 import '../../view/modals/dialog.dart';
-import '../../view/tutorial/animation_image.dart';
 import '../screen_argument.dart';
 
 part 'learn_challenge/learn_challenge_body.dart';

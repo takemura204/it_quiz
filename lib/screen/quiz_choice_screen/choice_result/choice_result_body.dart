@@ -8,7 +8,8 @@ class _ChoiceResultBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
-    final correctNum = quizItemList.where((x) => x.status == StatusType.correct).toList().length;
+    final correctQuizItemList = quizItemList.where((x) => x.status == StatusType.correct).toList();
+    final correctNum = correctQuizItemList.length;
     final controller = ref.watch(quizChoiceScreenProvider);
     final duration = controller.duration;
 
@@ -28,7 +29,11 @@ class _ChoiceResultBody extends ConsumerWidget {
                   else
                     const ResultTryCard(),
 
-                  ResultDashboardCard(quizItemList, duration),
+                  ResultDashboardCard(
+                    quizItemList: quizItemList,
+                    resultQuizItemList: correctQuizItemList,
+                    duration: duration,
+                  ),
                   const Gap(15),
 
                   ///正解した問題リスト

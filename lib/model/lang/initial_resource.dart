@@ -8,9 +8,31 @@ class I18n {
   factory I18n() => _instance ??= I18n._();
 
   ///アプリ全体
-  String get appName => "IT用語クイズ";
+  String get appNameTitle => "IT用語クイズ";
 
-  String get appNamePremium => "IT用語クイズ Premium";
+  ///AppBar
+  String get titleAppName => "IT用語クイズ";
+
+  String get titleStudy => "覚える";
+
+  String get titleQuiz => "クイズ";
+
+  String get titleSearch => "検索";
+
+  String get titleDashboard => "スコア";
+
+  String get titleSetting => "設定";
+
+  String get titleResult => "結果";
+
+  ///Button
+  String get styleLeanQuiz => "一問一答で覚える";
+
+  String get styleChoiceQuiz => "クイズに挑戦する";
+
+  String get styleWeakQuiz => "苦手克服";
+
+  String get styleRandomQuiz => "ランダム出題";
 
   ///category
   String setCategory(int categoryId) {
@@ -58,28 +80,6 @@ class I18n {
 
   int get category3Index => 30000;
 
-  ///title
-  String get titleName => "IT用語クイズ";
-
-  String get titleLearn => "覚える";
-
-  String get titleQuiz => "クイズ";
-
-  String get titleSearch => "検索";
-
-  String get titleDashboard => "スコア";
-
-  String get titleSetting => "設定";
-
-  ///「学ぶ」形式
-  String get styleLeanQuiz => "一問一答で覚える";
-
-  String get styleChoiceQuiz => "クイズに挑戦する";
-
-  String get styleWeakQuiz => "苦手克服";
-
-  String get styleRandomQuiz => "ランダム出題";
-
   String challengeQuiz(String quizStyle) {
     return "$quizStyleに挑戦する";
   }
@@ -103,6 +103,18 @@ class I18n {
   ///HomeQuiz
   String quizCorrectRate(int correctRate) {
     return "正解率:$correctRate％";
+  }
+
+  ///ResultScreen
+  String setResultDashboardCountTitle(StudyType studyType) {
+    switch (studyType) {
+      case StudyType.learn:
+        return '覚えた用語';
+      case StudyType.choice:
+        return '正解したクイズ';
+      default:
+        return '覚えた数';
+    }
   }
 
   String get quizResultAnswer => "正解率";

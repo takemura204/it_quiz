@@ -25,8 +25,7 @@ class Quizzes with _$Quizzes {
 
   Quizzes._();
 
-  factory Quizzes.fromJson(Map<String, dynamic> json) =>
-      _$QuizzesFromJson(json);
+  factory Quizzes.fromJson(Map<String, dynamic> json) => _$QuizzesFromJson(json);
 }
 
 ///苦手克服
