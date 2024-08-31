@@ -245,6 +245,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
 
     filterQuizList.sort((a, b) => a.id.compareTo(b.id));
     state = state.copyWith(filterQuizList: filterQuizList);
+    _saveDevice();
   }
 
   Future resetFilterQuizList() async {
@@ -258,6 +259,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     final filterQuizList = state.filterQuizList;
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     ref.read(homeStudyScreenProvider.notifier).updateStudyQuizItemList(filterQuizItemList);
+
     _saveDevice();
   }
 
@@ -265,9 +267,6 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     state = state.copyWith(isLoading: value);
   }
 
-  void setIsShowCancelModal(bool value) {
-    state = state.copyWith(isShowCancelModal: value);
-  }
 
   /// 端末保存
   Future _saveDevice() async {

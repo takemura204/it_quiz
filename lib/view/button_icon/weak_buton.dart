@@ -4,13 +4,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
-///チェエクボックスボタン
-class CheckBoxIconButton extends ConsumerWidget {
-  const CheckBoxIconButton(
-      {required this.onTap, required this.isCheck, required this.size});
+import '../../model/quiz_item/quiz_item.dart';
 
+///チェエクボックスボタン
+class WeakIconButton extends ConsumerWidget {
+  const WeakIconButton({required this.quizItem, required this.onTap, required this.size});
+
+  final QuizItem quizItem;
   final VoidCallback? onTap;
-  final bool isCheck;
   final double size;
 
   @override
@@ -29,7 +30,7 @@ class CheckBoxIconButton extends ConsumerWidget {
             style: TextStyle(
               fontSize: 9,
               fontWeight: FontWeight.bold,
-              color: isCheck ? context.mainColor : Colors.grey.shade500,
+              color: quizItem.isWeak ? context.mainColor : Colors.grey.shade500,
               height: 0.1,
             ),
           ),
@@ -41,7 +42,7 @@ class CheckBoxIconButton extends ConsumerWidget {
             child: Icon(
               LineIcons.checkSquareAlt,
               size: size * 0.8,
-              color: isCheck ? context.mainColor : Colors.grey.shade500,
+              color: quizItem.isWeak ? context.mainColor : Colors.grey.shade500,
             ),
           ),
         ],

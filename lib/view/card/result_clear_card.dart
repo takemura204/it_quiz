@@ -42,7 +42,7 @@ class ResultClearCard extends ConsumerWidget {
                   ),
                   Gap(5),
                   Text(
-                    ' 毎日の学習が成功を導いています！',
+                    ' 毎日の学習が成長の１歩です！',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,

@@ -20,6 +20,7 @@ mixin _$HomeStudyScreenState {
   bool get isShowTutorial => throw _privateConstructorUsedError;
   bool get isAnsView => throw _privateConstructorUsedError;
   bool get isResultView => throw _privateConstructorUsedError;
+  bool get isFinishView => throw _privateConstructorUsedError;
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get knowQuizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get unKnowQuizItemList => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $HomeStudyScreenStateCopyWith<$Res> {
       bool isShowTutorial,
       bool isAnsView,
       bool isResultView,
+      bool isFinishView,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
@@ -69,6 +71,7 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
     Object? isShowTutorial = null,
     Object? isAnsView = null,
     Object? isResultView = null,
+    Object? isFinishView = null,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
     Object? unKnowQuizItemList = null,
@@ -92,6 +95,10 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
       isResultView: null == isResultView
           ? _value.isResultView
           : isResultView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFinishView: null == isFinishView
+          ? _value.isFinishView
+          : isFinishView // ignore: cast_nullable_to_non_nullable
               as bool,
       quizItemList: null == quizItemList
           ? _value.quizItemList
@@ -134,6 +141,7 @@ abstract class _$$_HomeStudyScreenStateCopyWith<$Res>
       bool isShowTutorial,
       bool isAnsView,
       bool isResultView,
+      bool isFinishView,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
@@ -157,6 +165,7 @@ class __$$_HomeStudyScreenStateCopyWithImpl<$Res>
     Object? isShowTutorial = null,
     Object? isAnsView = null,
     Object? isResultView = null,
+    Object? isFinishView = null,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
     Object? unKnowQuizItemList = null,
@@ -180,6 +189,10 @@ class __$$_HomeStudyScreenStateCopyWithImpl<$Res>
       isResultView: null == isResultView
           ? _value.isResultView
           : isResultView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFinishView: null == isFinishView
+          ? _value.isFinishView
+          : isFinishView // ignore: cast_nullable_to_non_nullable
               as bool,
       quizItemList: null == quizItemList
           ? _value._quizItemList
@@ -217,6 +230,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
       this.isShowTutorial = false,
       this.isAnsView = false,
       this.isResultView = false,
+      this.isFinishView = false,
       final List<QuizItem> quizItemList = const [],
       final List<QuizItem> knowQuizItemList = const [],
       final List<QuizItem> unKnowQuizItemList = const [],
@@ -239,6 +253,9 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
   @override
   @JsonKey()
   final bool isResultView;
+  @override
+  @JsonKey()
+  final bool isFinishView;
   final List<QuizItem> _quizItemList;
   @override
   @JsonKey()
@@ -279,7 +296,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
 
   @override
   String toString() {
-    return 'HomeStudyScreenState(isLoading: $isLoading, isShowTutorial: $isShowTutorial, isAnsView: $isAnsView, isResultView: $isResultView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction)';
+    return 'HomeStudyScreenState(isLoading: $isLoading, isShowTutorial: $isShowTutorial, isAnsView: $isAnsView, isResultView: $isResultView, isFinishView: $isFinishView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction)';
   }
 
   @override
@@ -295,6 +312,8 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
                 other.isAnsView == isAnsView) &&
             (identical(other.isResultView, isResultView) ||
                 other.isResultView == isResultView) &&
+            (identical(other.isFinishView, isFinishView) ||
+                other.isFinishView == isFinishView) &&
             const DeepCollectionEquality()
                 .equals(other._quizItemList, _quizItemList) &&
             const DeepCollectionEquality()
@@ -316,6 +335,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
       isShowTutorial,
       isAnsView,
       isResultView,
+      isFinishView,
       const DeepCollectionEquality().hash(_quizItemList),
       const DeepCollectionEquality().hash(_knowQuizItemList),
       const DeepCollectionEquality().hash(_unKnowQuizItemList),
@@ -337,6 +357,7 @@ abstract class _HomeStudyScreenState implements HomeStudyScreenState {
       final bool isShowTutorial,
       final bool isAnsView,
       final bool isResultView,
+      final bool isFinishView,
       final List<QuizItem> quizItemList,
       final List<QuizItem> knowQuizItemList,
       final List<QuizItem> unKnowQuizItemList,
@@ -352,6 +373,8 @@ abstract class _HomeStudyScreenState implements HomeStudyScreenState {
   bool get isAnsView;
   @override
   bool get isResultView;
+  @override
+  bool get isFinishView;
   @override
   List<QuizItem> get quizItemList;
   @override

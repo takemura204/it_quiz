@@ -22,8 +22,7 @@ class _QuizResultView extends ConsumerWidget {
               ),
             ),
             padding: EdgeInsets.symmetric(
-                horizontal: context.width * 0.02,
-                vertical: context.width * 0.02),
+                horizontal: context.width * 0.02, vertical: context.width * 0.02),
             child: const Text(
               'クイズ一覧',
               style: TextStyle(
@@ -38,7 +37,7 @@ class _QuizResultView extends ConsumerWidget {
           shrinkWrap: true,
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
-            return QuizItemCard(
+            return ResultItemCard(
               index: index,
               quizItem: quizItemList[index],
               studyType: StudyType.choice,
@@ -46,9 +45,7 @@ class _QuizResultView extends ConsumerWidget {
                 ref.read(quizChoiceScreenProvider.notifier).tapCheckBox(index);
               },
               onTapSaveButton: () {
-                ref
-                    .read(quizChoiceScreenProvider.notifier)
-                    .tapSaveButton(index);
+                ref.read(quizChoiceScreenProvider.notifier).tapSaveButton(index);
               },
             );
           },
@@ -65,13 +62,9 @@ class _NextActionCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final choiceQuiz =
-        ref.watch(quizChoiceScreenProvider.select((s) => s.choiceQuiz));
-    final quizList = ref
-        .watch(quizModelProvider)
-        .quizList
-        .where((x) => x.category == quiz.category)
-        .toList();
+    final choiceQuiz = ref.watch(quizChoiceScreenProvider.select((s) => s.choiceQuiz));
+    final quizList =
+        ref.watch(quizModelProvider).quizList.where((x) => x.category == quiz.category).toList();
     final weakQuiz = ref.watch(quizModelProvider).weakQuiz;
     final quizIndex = ref.watch(quizModelProvider).quizIndex;
     final lastIndex = quizList.length - 1;
@@ -94,8 +87,7 @@ class _NextActionCard extends HookConsumerWidget {
                   width: context.width * 0.45,
                   height: 55,
                   text: "再挑戦",
-                  onPressed: (quizType == QuizStyleType.weak &&
-                          weakQuiz!.quizItemList.isEmpty)
+                  onPressed: (quizType == QuizStyleType.weak && weakQuiz!.quizItemList.isEmpty)
                       ? null
                       : () {
                           Navigator.of(context).pop();
@@ -104,8 +96,7 @@ class _NextActionCard extends HookConsumerWidget {
                           ).generateRoute());
                         }),
               const Gap(20),
-              if (quizType == QuizStyleType.weak ||
-                  quizType == QuizStyleType.random) ...[
+              if (quizType == QuizStyleType.weak || quizType == QuizStyleType.random) ...[
                 PrimaryButton(
                   width: context.width * 0.45,
                   height: 55,
@@ -123,14 +114,9 @@ class _NextActionCard extends HookConsumerWidget {
                       ? null
                       : () {
                           Navigator.of(context).pop();
-                          ref
-                              .read(quizModelProvider.notifier)
-                              .setStudyType(StudyType.choice);
-                          ref
-                              .read(homeQuizScreenProvider.notifier)
-                              .setSelectStudyQuiz();
-                          final selectStudyQuiz =
-                              ref.read(homeQuizScreenProvider).selectStudyQuiz;
+                          ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
+                          ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
+                          final selectStudyQuiz = ref.read(homeQuizScreenProvider).selectStudyQuiz;
                           if (selectStudyQuiz!.quizItemList.isNotEmpty) {
                             context.showScreen(
                               QuizChoiceScreenArguments(

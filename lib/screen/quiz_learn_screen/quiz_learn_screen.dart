@@ -27,8 +27,8 @@ import '../../view/button_icon/contact_button.dart';
 import '../../view/button_icon/cutom_back_button.dart';
 import '../../view/button_icon/cutom_cirlcle_button.dart';
 import '../../view/button_icon/save_button.dart';
-import '../../view/card/quiz_item_card.dart';
 import '../../view/card/result_dashboard_card.dart';
+import '../../view/card/result_item_card.dart';
 import '../../view/modals/dialog.dart';
 import '../screen_argument.dart';
 

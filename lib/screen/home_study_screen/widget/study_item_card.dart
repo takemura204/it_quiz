@@ -1,7 +1,7 @@
 part of '../home_study_screen.dart';
 
-class _QuizItemCard extends ConsumerWidget {
-  const _QuizItemCard();
+class _StudyItemCard extends ConsumerWidget {
+  const _StudyItemCard();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -93,7 +93,7 @@ class _QuizItemCard extends ConsumerWidget {
                             const Gap(5),
 
                             ///重要度
-                            ImportanceTag(quizItemList[index]),
+                            ImportanceTag(quizItem: quizItemList[index]),
                             const Gap(5),
 
                             ///ステータス

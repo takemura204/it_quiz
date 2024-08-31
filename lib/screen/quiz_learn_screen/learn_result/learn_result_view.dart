@@ -41,7 +41,7 @@ class _QuizResultView extends ConsumerWidget {
                 ref.read(tutorialControllerProvider.notifier).learnResultTarget2;
             return Container(
               key: index == 0 ? learnResultTarget2 : null,
-              child: QuizItemCard(
+              child: ResultItemCard(
                   index: index,
                   quizItem: quizItemList[index],
                   studyType: StudyType.learn,

@@ -30,9 +30,28 @@ class _Header extends ConsumerWidget {
           ),
           ClearButton(
             iconSize: 30,
-            onPressed: () {
+            onPressed: () async {
               if (isFiltered) {
-                ref.read(homeStudyModalProvider.notifier).setIsShowCancelModal(true);
+                await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return PrimaryDialog(
+                        onPressed: () {
+                          ref.read(homeStudyModalProvider.notifier).resetFilterQuizList();
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        title: "学習を中断しますか？",
+                        subWidget: Text(
+                          "学習を中断すると\nこれまでの内容は保存されません。",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: context.width * 0.04, color: Colors.black87),
+                          maxLines: 2,
+                        ),
+                        cancelText: "続ける",
+                        doneText: "中断する",
+                      );
+                    });
               } else {
                 Navigator.of(context).pop();
               }

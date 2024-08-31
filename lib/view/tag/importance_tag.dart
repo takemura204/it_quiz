@@ -6,7 +6,7 @@ import '../../model/quiz_item/quiz_item.dart';
 
 ///重要度
 class ImportanceTag extends ConsumerWidget {
-  const ImportanceTag(this.quizItem);
+  const ImportanceTag({required this.quizItem});
 
   final QuizItem quizItem;
 

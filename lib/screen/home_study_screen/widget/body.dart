@@ -1,15 +1,5 @@
 part of '../home_study_screen.dart';
 
-class _Body extends ConsumerWidget {
-  const _Body();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
-    return isResultView ? const _ResultBody() : const _ChallengeBody();
-  }
-}
-
 class _ChallengeBody extends ConsumerWidget {
   const _ChallengeBody();
 
@@ -26,7 +16,7 @@ class _ChallengeBody extends ConsumerWidget {
         _ProgressTile(),
 
         ///問題
-        _QuizItemCard(),
+        _StudyItemCard(),
 
         ///知っている・知らないボタン
         _ActionButtons(),
@@ -40,56 +30,108 @@ class _ChallengeBody extends ConsumerWidget {
   }
 }
 
-class _ResultBody extends ConsumerWidget {
-  const _ResultBody();
+class _FinishBody extends ConsumerWidget {
+  const _FinishBody();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
-    final knowQuizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.knowQuizItemList));
-    Future<void>.delayed(Duration.zero, () async {});
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  ///結果カード
-                  Column(
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const ResultClearCard(),
-                          ResultDashboardCard(
-                            quizItemList: quizItemList,
-                            resultQuizItemList: knowQuizItemList,
-                            duration: const Duration(seconds: 1),
-                          ),
-                        ],
-                      ),
-
-                      const Gap(20),
-
-                      ///クイズ結果一覧
-                      _ResultList(quizItemList: quizItemList),
-                      const Gap(15),
-
-                      const AdBanner(height: 270),
-                      const Gap(180),
-                    ],
-                  ),
-                ],
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Gap(30),
+            const Spacer(),
+            Container(
+              height: context.height * 0.2,
+              child: AnimationImage(
+                asset: 'assets/animation/done.json',
+                isRepeat: false,
               ),
             ),
+            const Spacer(),
+            const Text(
+              'おつかれさまです🎉🎉\n覚えたい用語を学習できました！！',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.black54,
+              ),
+            ),
+            const Gap(10),
+            const Text(
+              '条件を変えて、より多くの用語を覚えましょう',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+                color: Colors.black87,
+              ),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Gap(10),
+                Expanded(
+                  child: DefaultVerticalButton(
+                      width: context.width * 0.45,
+                      height: 85,
+                      text: "もう一度",
+                      icon: LineIcons.alternateRedo,
+                      onPressed: () {
+                        ref.read(homeStudyScreenProvider.notifier).restartStudyQuiz();
+                      }),
+                ),
+                const Gap(10),
+                Expanded(
+                  child: PrimaryVerticalButton(
+                    width: context.width * 0.45,
+                    height: 85,
+                    title: "条件を変更",
+                    icon: LineIcons.horizontalSliders,
+                    onPressed: () {
+                      showStudyModal(context);
+                    },
+                  ),
+                ),
+                const Gap(10),
+              ],
+            ),
+            const Gap(10),
+            TextButton(
+              onPressed: () {
+                context.showScreen(
+                  QuizResultScreenArguments(quizItemList: quizItemList).generateRoute(),
+                );
+              },
+              child: const Text(
+                '結果を確認',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black54,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            const Spacer(),
+            const Gap(60),
           ],
         ),
+
+        ///広告
         const Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            AnimationImage(
+              asset: 'assets/animation/confetti.json',
+              isColor: false,
+            ),
+            Spacer(),
             AdBanner(),
           ],
         ),

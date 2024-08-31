@@ -46,7 +46,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     setIsLoading(true);
     swiperController = AppinioSwiperController();
     _initQuizItemList();
-    _initIsTutorialDone();
+    _initIsShowTutorial();
     _saveDevice();
     setIsLoading(false);
   }
@@ -151,7 +151,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   ///チュートリアルカード表示
-  Future _initIsTutorialDone() async {
+  Future _initIsShowTutorial() async {
     final prefs = await SharedPreferences.getInstance();
     final isShowTutorialData = prefs.getBool(isShowTutorial);
     if (isShowTutorialData != null) {
@@ -230,7 +230,8 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     final quizItemList = [...state.quizItemList];
     //クイズが完了したが、「知らない」がまだ含まれる場合
     if (itemIndex == quizItemList.length - 1) {
-      setIsStudyDone(true);
+      setIsFinishView(true);
+      setIsResultView(true);
       quizItemList.clear(); // クイズアイテムリストをクリア
       // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
 
@@ -249,21 +250,44 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     _saveDevice();
   }
 
+  void restartStudyQuiz() {
+    final quizItemList = [...state.quizItemList];
+    quizItemList.clear();
+
+    quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
+      ..sort((a, b) => a.quizId.compareTo(b.quizId)));
+    state = state.copyWith(
+      quizItemList: quizItemList,
+      knowQuizItemList: [],
+      unKnowQuizItemList: [],
+      itemIndex: 0,
+      isResultView: false,
+      isFinishView: false,
+    );
+    _saveDevice();
+  }
+
   ///正解画面に切り替え
   Future setIsAnsView(bool value) async {
     state = state.copyWith(isAnsView: value);
   }
 
-  ///完了画面に切り替え
-  Future setIsStudyDone(bool value) async {
+  ///リザルト画面に切り替え
+  Future setIsResultView(bool value) async {
     state = state.copyWith(isResultView: value);
+  }
+
+  ///完了画面に切り替え
+  Future setIsFinishView(bool value) async {
+    print({'setIsFinishView', value});
+    state = state.copyWith(isFinishView: value);
   }
 
   Future setDirection(AppinioSwiperDirection? direction) async {
     state = state.copyWith(direction: direction);
   }
 
-  ///保存ボタンをタップした時
+  ///苦手ボタンをタップした時
   void tapWeakButton(int index) {
     final quizItemList = [...state.quizItemList];
     quizItemList[index] = QuizItem(
@@ -321,6 +345,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       itemIndex: 0,
       isAnsView: false,
     );
+    print(quizItemList);
     _saveDevice();
   }
 

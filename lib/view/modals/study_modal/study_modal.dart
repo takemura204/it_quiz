@@ -16,18 +16,14 @@ import '../../../untils/enums.dart';
 import '../../button/primary_button.dart';
 import '../../button_icon/clear_button.dart';
 import '../../icon/quarter_circle_icon.dart';
+import '../dialog.dart';
 import '../need_premium_modal.dart';
 
 part 'widget/study_modal_category_menu.dart';
-
 part 'widget/study_modal_footer.dart';
-
 part 'widget/study_modal_header.dart';
-
 part 'widget/study_modal_importance_menu.dart';
-
 part 'widget/study_modal_menu_title.dart';
-
 part 'widget/study_modal_status_menu.dart';
 
 Future showStudyModal(BuildContext context) async {

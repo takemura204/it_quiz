@@ -23,11 +23,11 @@ List<QuizItem> get category0_1_1 {
       importance: ImportanceType.high,
     ),
     QuizItem(
-      word: 'CSR（Corporate Social Responsibility）',
+      word: 'CSR(Corporate Social Responsibility)',
       question: '利益の追求だけでなく，社会に対する貢献や地球環境の保護などの社会課題を認識して取り組むという企業活動の基本となる考え方はどれか。',
       ans: 'CSR',
       choices: ["BCP", "CSR", "M&A", "MBO"],
-      comment: "CSR（Corporate Social Responsibility）とは、企業が環境保護や社会貢献など、社会的責任を果たすことを目的とした経営活動。",
+      comment: "CSR(Corporate Social Responsibility)とは、企業が環境保護や社会貢献など、社会的責任を果たすことを目的とした経営活動。",
       source: '平成27年秋期 問21',
       importance: ImportanceType.high,
     ),

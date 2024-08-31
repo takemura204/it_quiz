@@ -45,19 +45,15 @@ class DefaultButton extends ConsumerWidget {
             if (icon != null)
               Icon(
                 icon,
-                color: onPressed == null
-                    ? Colors.grey.shade500
-                    : context.mainColor,
-                size: height * 0.58,
+                color: onPressed == null ? Colors.grey.shade500 : context.mainColor,
+                size: height * 0.5,
               ),
             SizedBox(width: icon != null ? 6.0 : 0),
             Text(
               text,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: onPressed == null
-                    ? Colors.grey.shade500
-                    : context.mainColor,
+                color: onPressed == null ? Colors.grey.shade500 : context.mainColor,
                 fontWeight: FontWeight.bold,
                 fontSize: height < context.height * 0.05 ? 14 : 16,
               ),

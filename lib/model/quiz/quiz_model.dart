@@ -8,7 +8,6 @@ import 'package:kentei_quiz/model/quiz/quiz.dart';
 import 'package:kentei_quiz/model/quiz/quizzes.dart';
 import 'package:kentei_quiz/resource/quizzes_resource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 import '../../untils/enums.dart';
 import '../quiz_item/quiz_item.dart';

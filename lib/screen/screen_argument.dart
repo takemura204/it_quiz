@@ -5,6 +5,7 @@ import 'package:kentei_quiz/screen/premium_detail_screen/premium_detail_screen.d
 import 'package:kentei_quiz/screen/quiz_choice_screen/quiz_choice_screen.dart';
 import 'package:kentei_quiz/screen/quiz_history_screen/quiz_history_screen.dart';
 import 'package:kentei_quiz/screen/quiz_learn_screen/quiz_learn_screen.dart';
+import 'package:kentei_quiz/screen/quiz_result_screen/quiz_result_screen.dart';
 import 'package:kentei_quiz/screen/setting_about_app_screen/setting_about_app_screen.dart';
 import 'package:kentei_quiz/screen/setting_about_app_screen/setting_license_screen.dart';
 import 'package:kentei_quiz/screen/setting_about_app_screen/setting_privacy_policy_screen.dart';
@@ -14,6 +15,7 @@ import 'package:kentei_quiz/screen/setting_contact_screen/setting_contact_screen
 import 'package:kentei_quiz/screen/setting_profile_screen/setting_profile_screen.dart';
 
 import '../model/quiz/quiz.dart';
+import '../model/quiz_item/quiz_item.dart';
 import '../model/screen_argument_resource.dart';
 import 'account_create_screen/account_create_screen1.dart';
 import 'account_create_screen/account_create_screen2.dart';
@@ -31,8 +33,7 @@ class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizLearnScreen(quiz),
+        pageBuilder: (context, animation, secondaryAnimation) => QuizLearnScreen(quiz),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
               MaterialPageRoute(builder: (context) => QuizLearnScreen(quiz)),
@@ -45,9 +46,7 @@ class QuizLearnScreenArguments with _NoParamsMixin implements IScreenArguments {
 }
 
 ///4択形式へ画面遷移
-class QuizChoiceScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class QuizChoiceScreenArguments with _NoParamsMixin implements IScreenArguments {
   const QuizChoiceScreenArguments({required this.quiz});
 
   final Quiz quiz;
@@ -57,8 +56,7 @@ class QuizChoiceScreenArguments
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            QuizChoiceScreen(quiz),
+        pageBuilder: (context, animation, secondaryAnimation) => QuizChoiceScreen(quiz),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
               MaterialPageRoute(builder: (context) => QuizChoiceScreen(quiz)),
@@ -70,9 +68,30 @@ class QuizChoiceScreenArguments
       );
 }
 
-class QuizHistoryScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+///クイズ結果へ画面遷移
+class QuizResultScreenArguments with _NoParamsMixin implements IScreenArguments {
+  const QuizResultScreenArguments({required this.quizItemList});
+
+  final List<QuizItem> quizItemList;
+
+  @override
+  String get screenNameFormat => "/quiz_result";
+
+  @override
+  Route generateRoute() => PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => QuizResultScreen(quizItemList),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+              MaterialPageRoute(builder: (context) => QuizResultScreen(quizItemList)),
+              context,
+              animation,
+              secondaryAnimation,
+              child);
+        },
+      );
+}
+
+class QuizHistoryScreenArguments with _NoParamsMixin implements IScreenArguments {
   const QuizHistoryScreenArguments();
 
   @override
@@ -85,9 +104,7 @@ class QuizHistoryScreenArguments
 }
 
 ///カラーテーマ画面
-class SettingColorScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class SettingColorScreenArguments with _NoParamsMixin implements IScreenArguments {
   const SettingColorScreenArguments();
 
   @override
@@ -100,9 +117,7 @@ class SettingColorScreenArguments
 }
 
 ///お問い合わせ画面
-class SettingContactScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class SettingContactScreenArguments with _NoParamsMixin implements IScreenArguments {
   const SettingContactScreenArguments();
 
   @override
@@ -115,9 +130,7 @@ class SettingContactScreenArguments
 }
 
 ///このアプリについて
-class SettingAboutAppScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class SettingAboutAppScreenArguments with _NoParamsMixin implements IScreenArguments {
   const SettingAboutAppScreenArguments();
 
   @override
@@ -129,9 +142,7 @@ class SettingAboutAppScreenArguments
       );
 }
 
-class PremiumDetailScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class PremiumDetailScreenArguments with _NoParamsMixin implements IScreenArguments {
   const PremiumDetailScreenArguments();
 
   @override
@@ -139,12 +150,10 @@ class PremiumDetailScreenArguments
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const PremiumDetailScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) => const PremiumDetailScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(
-                  builder: (context) => const PremiumDetailScreen()),
+              MaterialPageRoute(builder: (context) => const PremiumDetailScreen()),
               context,
               animation,
               secondaryAnimation,
@@ -154,9 +163,7 @@ class PremiumDetailScreenArguments
 }
 
 ///プロフィール画面
-class SettingProfileScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class SettingProfileScreenArguments with _NoParamsMixin implements IScreenArguments {
   const SettingProfileScreenArguments();
 
   @override
@@ -169,9 +176,7 @@ class SettingProfileScreenArguments
 }
 
 ///ログイン画面
-class AccountLoginScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class AccountLoginScreenArguments with _NoParamsMixin implements IScreenArguments {
   const AccountLoginScreenArguments();
 
   @override
@@ -179,8 +184,7 @@ class AccountLoginScreenArguments
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            AccountLoginScreen(this),
+        pageBuilder: (context, animation, secondaryAnimation) => AccountLoginScreen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
               MaterialPageRoute(builder: (context) => AccountLoginScreen(this)),
@@ -193,9 +197,7 @@ class AccountLoginScreenArguments
 }
 
 ///新規登録1
-class AccountCreateStep1ScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class AccountCreateStep1ScreenArguments with _NoParamsMixin implements IScreenArguments {
   const AccountCreateStep1ScreenArguments();
 
   @override
@@ -203,12 +205,10 @@ class AccountCreateStep1ScreenArguments
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            AccountCreateStep1Screen(this),
+        pageBuilder: (context, animation, secondaryAnimation) => AccountCreateStep1Screen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(
-                  builder: (context) => AccountCreateStep1Screen(this)),
+              MaterialPageRoute(builder: (context) => AccountCreateStep1Screen(this)),
               context,
               animation,
               secondaryAnimation,
@@ -218,9 +218,7 @@ class AccountCreateStep1ScreenArguments
 }
 
 ///新規登録2
-class AccountCreateStep2ScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class AccountCreateStep2ScreenArguments with _NoParamsMixin implements IScreenArguments {
   const AccountCreateStep2ScreenArguments();
 
   @override
@@ -233,9 +231,7 @@ class AccountCreateStep2ScreenArguments
 }
 
 ///パスワード再設定
-class AccountUpdateScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class AccountUpdateScreenArguments with _NoParamsMixin implements IScreenArguments {
   const AccountUpdateScreenArguments();
 
   @override
@@ -243,12 +239,10 @@ class AccountUpdateScreenArguments
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            AccountUpdateScreen(this),
+        pageBuilder: (context, animation, secondaryAnimation) => AccountUpdateScreen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(
-                  builder: (context) => AccountUpdateScreen(this)),
+              MaterialPageRoute(builder: (context) => AccountUpdateScreen(this)),
               context,
               animation,
               secondaryAnimation,
@@ -258,9 +252,7 @@ class AccountUpdateScreenArguments
 }
 
 ///パスワード再設定
-class AccountDeleteScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class AccountDeleteScreenArguments with _NoParamsMixin implements IScreenArguments {
   const AccountDeleteScreenArguments();
 
   @override
@@ -268,12 +260,10 @@ class AccountDeleteScreenArguments
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            AccountDeleteScreen(this),
+        pageBuilder: (context, animation, secondaryAnimation) => AccountDeleteScreen(this),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(
-                  builder: (context) => AccountDeleteScreen(this)),
+              MaterialPageRoute(builder: (context) => AccountDeleteScreen(this)),
               context,
               animation,
               secondaryAnimation,
@@ -283,9 +273,7 @@ class AccountDeleteScreenArguments
 }
 
 ///プライバシーポリシー
-class SettingLicenseScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class SettingLicenseScreenArguments with _NoParamsMixin implements IScreenArguments {
   const SettingLicenseScreenArguments();
 
   @override
@@ -298,9 +286,7 @@ class SettingLicenseScreenArguments
 }
 
 ///利用規約
-class SettingUserPolicyScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class SettingUserPolicyScreenArguments with _NoParamsMixin implements IScreenArguments {
   const SettingUserPolicyScreenArguments();
 
   @override
@@ -313,9 +299,7 @@ class SettingUserPolicyScreenArguments
 }
 
 ///プライバシーポリシー
-class SettingPrivacyPolicyScreenArguments
-    with _NoParamsMixin
-    implements IScreenArguments {
+class SettingPrivacyPolicyScreenArguments with _NoParamsMixin implements IScreenArguments {
   const SettingPrivacyPolicyScreenArguments();
 
   @override

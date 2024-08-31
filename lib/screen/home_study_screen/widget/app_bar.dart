@@ -5,19 +5,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
-    return isResultView ? const _ResultAppBar() : const _ChallengeAppBar();
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class _ChallengeAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _ChallengeAppBar();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
     final isShowTutorial = ref.watch(homeStudyScreenProvider.select((s) => s.isShowTutorial));
     final quizList = ref.watch(homeStudyScreenProvider.notifier).getQuizList();
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
@@ -56,22 +43,6 @@ class _ChallengeAppBar extends ConsumerWidget implements PreferredSizeWidget {
         ),
         Gap(context.width * 0.01),
       ],
-      shape: Border(bottom: BorderSide(color: context.mainColor, width: 0)),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class _ResultAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _ResultAppBar();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return AppBar(
-      title: Text(I18n().titleResult),
-      centerTitle: true,
       shape: Border(bottom: BorderSide(color: context.mainColor, width: 0)),
     );
   }

@@ -186,7 +186,7 @@ class _QuizItemCard extends ConsumerWidget {
                           SubstringHighlight(
                             text: quizItemList[index].comment,
                             term: termToHighlight,
-                            textStyle: context.texts.bodyMedium!,
+                            textStyle: const TextStyle(color: Colors.black87),
                             overflow: TextOverflow.clip,
                             textStyleHighlight: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -229,7 +229,7 @@ class _QuizItemCard extends ConsumerWidget {
                     const Gap(5),
 
                     ///重要度
-                    ImportanceTag(quizItemList[index]),
+                    ImportanceTag(quizItem: quizItemList[index]),
                     const Gap(5),
 
                     ///ステータス
@@ -239,7 +239,7 @@ class _QuizItemCard extends ConsumerWidget {
                     ///保存
                     SaveIconButton(
                       quizItem: quizItemList[index],
-                      isShowText: false,
+                      isShowText: true,
                       size: 32,
                       onTap: () {
                         ref.read(homeSearchScreenProvider.notifier).tapSaveButton(index);

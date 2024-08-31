@@ -44,6 +44,8 @@ class _Footer extends HookConsumerWidget {
             onPressed: filterQuizItemList.isNotEmpty
                 ? () {
                     ref.read(homeStudyModalProvider.notifier).updateStudyQuizItemList();
+                    ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
+                    ref.read(homeStudyScreenProvider.notifier).setIsFinishView(false);
                     Navigator.of(context).pop();
                   }
                 : null,
