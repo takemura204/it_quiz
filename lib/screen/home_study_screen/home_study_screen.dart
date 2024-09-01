@@ -43,14 +43,19 @@ class HomeStudyScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final knowQuizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.knowQuizItemList));
+    final unKnowQuizItemList =
+        ref.watch(homeStudyScreenProvider.select((s) => s.unKnowQuizItemList));
+    final totalQuizItemList = [...quizItemList, ...knowQuizItemList, ...unKnowQuizItemList]
+      ..sort((a, b) => a.quizId.compareTo(b.quizId));
     final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
     final isFinishView = ref.watch(homeStudyScreenProvider.select((s) => s.isFinishView));
     Future.delayed(Duration.zero, () async {
       //リザルト画面表示
       if (isResultView) {
-        ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
+        // ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
         context.showScreen(
-          QuizResultScreenArguments(quizItemList: quizItemList).generateRoute(),
+          QuizResultScreenArguments(quizItemList: totalQuizItemList).generateRoute(),
         );
       }
     });

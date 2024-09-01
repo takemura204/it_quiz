@@ -142,7 +142,7 @@ List<QuizItem> get category0_1_1 {
       importance: ImportanceType.high,
     ),
     QuizItem(
-      word: 'ROE',
+      word: 'ROE(Return On Equity)',
       question: 'ROE(Return On Equity)を説明したものはどれか。',
       ans: '自己資本に対して，どれだけの利益を生み出したかを表す指標',
       choices: [
@@ -152,7 +152,7 @@ List<QuizItem> get category0_1_1 {
         "自己資本に対して，どれだけの利益を生み出したかを表す指標"
       ],
       comment:
-          "ROE(Return On Equity，自己資本利益率)は、自己資本（純資産）に対する当期純利益の割合を示す指標で、ある企業が、一会計期間の企業活動を通じて「株主の投資額に比してどれだけ効率的に利益を獲得したか」を判断する指標。",
+          "ROE(Return On Equity)は、自己資本（純資産）に対する当期純利益の割合を示す指標で、ある企業が、一会計期間の企業活動を通じて「株主の投資額に比してどれだけ効率的に利益を獲得したか」を判断する指標。",
       source: '平成25年秋期 問3',
       importance: ImportanceType.high,
     ),

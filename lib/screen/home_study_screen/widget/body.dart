@@ -35,7 +35,6 @@ class _FinishBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -46,7 +45,7 @@ class _FinishBody extends ConsumerWidget {
             const Spacer(),
             Container(
               height: context.height * 0.2,
-              child: AnimationImage(
+              child: const AnimationImage(
                 asset: 'assets/animation/done.json',
                 isRepeat: false,
               ),
@@ -105,9 +104,7 @@ class _FinishBody extends ConsumerWidget {
             const Gap(10),
             TextButton(
               onPressed: () {
-                context.showScreen(
-                  QuizResultScreenArguments(quizItemList: quizItemList).generateRoute(),
-                );
+                ref.read(homeStudyScreenProvider.notifier).setIsResultView(true);
               },
               child: const Text(
                 '結果を確認',

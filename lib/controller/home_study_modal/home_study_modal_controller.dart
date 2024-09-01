@@ -245,6 +245,8 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
 
     filterQuizList.sort((a, b) => a.id.compareTo(b.id));
     state = state.copyWith(filterQuizList: filterQuizList);
+    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
+    print({'updateFilterQuizList', filterQuizItemList.first});
     _saveDevice();
   }
 
@@ -256,10 +258,10 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   }
 
   void updateStudyQuizItemList() {
+    updateFilterQuizList();
     final filterQuizList = state.filterQuizList;
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     ref.read(homeStudyScreenProvider.notifier).updateStudyQuizItemList(filterQuizItemList);
-
     _saveDevice();
   }
 

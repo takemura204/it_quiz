@@ -31,6 +31,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   final knowQuizItemListName = 'study_know_item_list';
   final unKnowQuizItemListName = 'study_unKnow_item_list';
   final isShowTutorial = 'is_show_tutorial';
+  final isFinishView = 'is_finish_view';
 
   /// プレミアムと無料会員でクイズを取得
   List<Quiz> getQuizList() {
@@ -45,8 +46,10 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     // resetData();
     setIsLoading(true);
     swiperController = AppinioSwiperController();
-    _initQuizItemList();
-    _initIsShowTutorial();
+    await _initIsShowTutorial();
+    await _initIsFinishView();
+    await _initQuizItemList();
+
     _saveDevice();
     setIsLoading(false);
   }
@@ -75,8 +78,48 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     final List<QuizItem> updatedKnowQuizItemList = [];
     final List<QuizItem> updatedUnKnowQuizItemList = [];
 
+    // 知っているクイズリストの更新
+    if (knowQuizItemListData != null && knowQuizItemListData.isNotEmpty) {
+      final localKnowQuizItemList =
+          knowQuizItemListData.map((e) => QuizItem.fromJson(json.decode(e))).toList();
+      for (var localQuizItem in localKnowQuizItemList) {
+        final matchedQuizItem = quizItemList.firstWhere((x) => x.quizId == localQuizItem.quizId);
+        final updatedQuizItem = localQuizItem.copyWith(
+          word: matchedQuizItem.word,
+          comment: matchedQuizItem.comment,
+          question: matchedQuizItem.question,
+          ans: matchedQuizItem.ans,
+          choices: matchedQuizItem.choices,
+          source: matchedQuizItem.source,
+          isPremium: matchedQuizItem.isPremium,
+          importance: matchedQuizItem.importance,
+        );
+        updatedKnowQuizItemList.add(updatedQuizItem);
+      }
+    }
+
+    // 知らないクイズリストの更新
+    if (unKnowQuizItemListData != null && unKnowQuizItemListData.isNotEmpty) {
+      final localUnKnowQuizItemList =
+          unKnowQuizItemListData.map((e) => QuizItem.fromJson(json.decode(e))).toList();
+      for (var localQuizItem in localUnKnowQuizItemList) {
+        final matchedQuizItem = quizItemList.firstWhere((x) => x.quizId == localQuizItem.quizId);
+        final updatedQuizItem = localQuizItem.copyWith(
+          word: matchedQuizItem.word,
+          comment: matchedQuizItem.comment,
+          question: matchedQuizItem.question,
+          ans: matchedQuizItem.ans,
+          choices: matchedQuizItem.choices,
+          source: matchedQuizItem.source,
+          isPremium: matchedQuizItem.isPremium,
+          importance: matchedQuizItem.importance,
+        );
+        updatedUnKnowQuizItemList.add(updatedQuizItem);
+      }
+    }
+
     // クイズリストの更新
-    if (quizItemListData != null && quizItemListData.isNotEmpty) {
+    if (quizItemListData != null) {
       final localQuizItemList =
           quizItemListData.map((e) => QuizItem.fromJson(json.decode(e))).toList();
       for (var localQuizItem in localQuizItemList) {
@@ -97,57 +140,21 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
           updatedQuizItemList.add(updatedQuizItem);
         }
       }
-
-      // 知っているクイズリストの更新
-      if (knowQuizItemListData != null && knowQuizItemListData.isNotEmpty) {
-        final localKnowQuizItemList =
-            knowQuizItemListData.map((e) => QuizItem.fromJson(json.decode(e))).toList();
-        for (var localQuizItem in localKnowQuizItemList) {
-          final matchedQuizItem = quizItemList.firstWhere((x) => x.quizId == localQuizItem.quizId);
-          final updatedQuizItem = localQuizItem.copyWith(
-            word: matchedQuizItem.word,
-            comment: matchedQuizItem.comment,
-            question: matchedQuizItem.question,
-            ans: matchedQuizItem.ans,
-            choices: matchedQuizItem.choices,
-            source: matchedQuizItem.source,
-            isPremium: matchedQuizItem.isPremium,
-            importance: matchedQuizItem.importance,
-          );
-          updatedKnowQuizItemList.add(updatedQuizItem);
-        }
-      }
-
-      // 知らないクイズリストの更新
-      if (unKnowQuizItemListData != null && unKnowQuizItemListData.isNotEmpty) {
-        final localUnKnowQuizItemList =
-            unKnowQuizItemListData.map((e) => QuizItem.fromJson(json.decode(e))).toList();
-        for (var localQuizItem in localUnKnowQuizItemList) {
-          final matchedQuizItem = quizItemList.firstWhere((x) => x.quizId == localQuizItem.quizId);
-          final updatedQuizItem = localQuizItem.copyWith(
-            word: matchedQuizItem.word,
-            comment: matchedQuizItem.comment,
-            question: matchedQuizItem.question,
-            ans: matchedQuizItem.ans,
-            choices: matchedQuizItem.choices,
-            source: matchedQuizItem.source,
-            isPremium: matchedQuizItem.isPremium,
-            importance: matchedQuizItem.importance,
-          );
-          updatedUnKnowQuizItemList.add(updatedQuizItem);
-        }
-      }
-
-      state = state.copyWith(
-        quizItemList: updatedQuizItemList,
-        knowQuizItemList: updatedKnowQuizItemList,
-        unKnowQuizItemList: updatedUnKnowQuizItemList,
-      );
+    } else {
+      updatedQuizItemList.addAll(quizItemList);
     }
-    // 初回起動時の設定
-    else {
-      state = state.copyWith(quizItemList: quizItemList);
-    }
+
+    state = state.copyWith(
+      quizItemList: updatedQuizItemList,
+      knowQuizItemList: updatedKnowQuizItemList,
+      unKnowQuizItemList: updatedUnKnowQuizItemList,
+    );
+    print({
+      'QuizItem',
+      updatedQuizItemList.length,
+      updatedKnowQuizItemList.length,
+      updatedUnKnowQuizItemList.length,
+    });
   }
 
   ///チュートリアルカード表示
@@ -156,6 +163,16 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     final isShowTutorialData = prefs.getBool(isShowTutorial);
     if (isShowTutorialData != null) {
       state = state.copyWith(isShowTutorial: isShowTutorialData);
+    }
+  }
+
+  ///完了画面表示
+  Future _initIsFinishView() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isFinishViewData = prefs.getBool(isFinishView);
+    if (isFinishViewData != null) {
+      state = state.copyWith(isFinishView: isFinishViewData);
+      print({'_initIsFinishView', state.isFinishView});
     }
   }
 
@@ -232,11 +249,9 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     if (itemIndex == quizItemList.length - 1) {
       setIsFinishView(true);
       setIsResultView(true);
-      quizItemList.clear(); // クイズアイテムリストをクリア
-      // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
-
-      quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
-        ..sort((a, b) => a.quizId.compareTo(b.quizId)));
+      _updateQuizItem(quizItemList[itemIndex]);
+      _saveDevice();
+      quizItemList.clear();
       state = state.copyWith(quizItemList: quizItemList);
     }
     //まだ問題が続けられる時
@@ -245,15 +260,14 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
         itemIndex: itemIndex + 1,
         quizItemList: quizItemList,
       );
+      _updateQuizItem(quizItemList[itemIndex]);
+      _saveDevice();
     }
-    _updateQuizItem(quizItemList[itemIndex]);
-    _saveDevice();
   }
 
   void restartStudyQuiz() {
     final quizItemList = [...state.quizItemList];
     quizItemList.clear();
-
     quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
       ..sort((a, b) => a.quizId.compareTo(b.quizId)));
     state = state.copyWith(
@@ -261,30 +275,10 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       knowQuizItemList: [],
       unKnowQuizItemList: [],
       itemIndex: 0,
-      isResultView: false,
-      isFinishView: false,
     );
+    setIsResultView(false);
+    setIsFinishView(false);
     _saveDevice();
-  }
-
-  ///正解画面に切り替え
-  Future setIsAnsView(bool value) async {
-    state = state.copyWith(isAnsView: value);
-  }
-
-  ///リザルト画面に切り替え
-  Future setIsResultView(bool value) async {
-    state = state.copyWith(isResultView: value);
-  }
-
-  ///完了画面に切り替え
-  Future setIsFinishView(bool value) async {
-    print({'setIsFinishView', value});
-    state = state.copyWith(isFinishView: value);
-  }
-
-  Future setDirection(AppinioSwiperDirection? direction) async {
-    state = state.copyWith(direction: direction);
   }
 
   ///苦手ボタンをタップした時
@@ -345,7 +339,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       itemIndex: 0,
       isAnsView: false,
     );
-    print(quizItemList);
+    print({'updateStudyQuizItemList', quizItemList});
     _saveDevice();
   }
 
@@ -353,10 +347,32 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     state = state.copyWith(isLoading: value);
   }
 
+  ///チュートリアル切り替え
   Future setIsShowTutorial(bool value) async {
     state = state.copyWith(isShowTutorial: value);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(isShowTutorial, value);
+  }
+
+  ///正解画面に切り替え
+  Future setIsAnsView(bool value) async {
+    state = state.copyWith(isAnsView: value);
+  }
+
+  ///リザルト画面に切り替え
+  Future setIsResultView(bool value) async {
+    state = state.copyWith(isResultView: value);
+  }
+
+  ///完了画面に切り替え
+  Future setIsFinishView(bool value) async {
+    state = state.copyWith(isFinishView: value);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(isFinishView, value);
+  }
+
+  Future setDirection(AppinioSwiperDirection? direction) async {
+    state = state.copyWith(direction: direction);
   }
 
   /// 端末保存

@@ -7,32 +7,45 @@ class NextActionButtons extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
     return Container(
       color: context.backgroundColor,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
       width: context.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          DefaultVerticalButton(
+          const Gap(10),
+          Expanded(
+            child: DefaultVerticalButton(
               width: context.width * 0.45,
               height: 85,
-              text: "もう一度挑戦",
+              text: "もう一度",
               icon: LineIcons.alternateRedo,
-              onPressed: () {
+              onPressed: () async {
                 ref.read(homeStudyScreenProvider.notifier).restartStudyQuiz();
-              }),
-          PrimaryVerticalButton(
-            width: context.width * 0.45,
-            height: 85,
-            title: "検索条件を変更",
-            icon: LineIcons.forward,
-            onPressed: () {
-              showStudyModal(context);
-            },
+                if (isResultView) {
+                  ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
           ),
+          const Gap(10),
+          Expanded(
+            child: PrimaryVerticalButton(
+              width: context.width * 0.45,
+              height: 85,
+              title: "条件を変更",
+              icon: LineIcons.horizontalSliders,
+              onPressed: () {
+                showStudyModal(context);
+              },
+            ),
+          ),
+          const Gap(10),
         ],
       ),
     );

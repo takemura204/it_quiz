@@ -12,7 +12,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     final isFiltered = quizItemList.length == filterQuizItemList.length;
     return AppBar(
-      title: Text(I18n().titleStudy),
+      title: Text(I18n().titleAppName),
       centerTitle: true,
       actions: [
         Container(
