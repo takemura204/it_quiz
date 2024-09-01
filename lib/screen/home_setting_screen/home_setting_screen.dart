@@ -71,8 +71,8 @@ class HomeSettingScreen extends ConsumerWidget {
                   const NeedNotificationCard(),
 
                   const SettingTitleBar(title: "サポート", onTap: null),
-                  const _SettingTutorial(),
-                  _Divider(),
+                  // const _SettingTutorial(),
+                  // _Divider(),
                   const _SettingContact(),
                   _Divider(),
                   const _SettingReview(),
@@ -90,9 +90,7 @@ class HomeSettingScreen extends ConsumerWidget {
                   ///開発用
                   GestureDetector(
                     onLongPress: () {
-                      ref
-                          .read(authModelProvider.notifier)
-                          .updateIsPremium(false);
+                      ref.read(authModelProvider.notifier).updateIsPremium(false);
                     },
                     child: Container(
                       height: 40,

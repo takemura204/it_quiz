@@ -51,6 +51,7 @@ class _Footer extends HookConsumerWidget {
                     }
 
                     ref.read(homeStudyScreenProvider.notifier).setIsFinishView(false);
+                    ref.read(homeStudyScreenProvider.notifier).startStopwatch();
                     Navigator.of(context).pop();
                   }
                 : null,

@@ -70,19 +70,21 @@ class QuizChoiceScreenArguments with _NoParamsMixin implements IScreenArguments 
 
 ///クイズ結果へ画面遷移
 class QuizResultScreenArguments with _NoParamsMixin implements IScreenArguments {
-  const QuizResultScreenArguments({required this.quizItemList});
+  const QuizResultScreenArguments({required this.quizItemList, required this.duration});
 
   final List<QuizItem> quizItemList;
+  final Duration duration;
 
   @override
   String get screenNameFormat => "/quiz_result";
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => QuizResultScreen(quizItemList),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            QuizResultScreen(quizItemList, duration),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => QuizResultScreen(quizItemList)),
+              MaterialPageRoute(builder: (context) => QuizResultScreen(quizItemList, duration)),
               context,
               animation,
               secondaryAnimation,

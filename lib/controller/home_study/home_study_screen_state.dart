@@ -18,6 +18,7 @@ class HomeStudyScreenState with _$HomeStudyScreenState {
     @Default([]) final List<QuizItem> unKnowQuizItemList,
     @Default(0) final int itemIndex,
     @Default(0) final int lapIndex,
+    @Default(Duration.zero) final Duration duration, // 学習時間
     AppinioSwiperDirection? direction,
   }) = _HomeStudyScreenState;
 }

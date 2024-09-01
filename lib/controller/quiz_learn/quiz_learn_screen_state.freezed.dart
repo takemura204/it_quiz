@@ -24,7 +24,7 @@ mixin _$QuizLearnScreenState {
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get knowQuizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get unKnowQuizItemList => throw _privateConstructorUsedError;
-  Duration get duration => throw _privateConstructorUsedError; // 所要時間
+  Duration get duration => throw _privateConstructorUsedError; // 学習時間
   StudyType get studyType => throw _privateConstructorUsedError; //クイズタイプ
   AppinioSwiperDirection? get direction => throw _privateConstructorUsedError;
 
@@ -307,7 +307,7 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final Duration duration;
-// 所要時間
+// 学習時間
   @override
   @JsonKey()
   final StudyType studyType;
@@ -404,7 +404,7 @@ abstract class _Create extends QuizLearnScreenState {
   List<QuizItem> get unKnowQuizItemList;
   @override
   Duration get duration;
-  @override // 所要時間
+  @override // 学習時間
   StudyType get studyType;
   @override //クイズタイプ
   AppinioSwiperDirection? get direction;

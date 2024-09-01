@@ -1,14 +1,14 @@
 part of '../quiz_result_screen.dart';
 
 class _Body extends ConsumerWidget {
-  const _Body(this.quizItemList);
+  const _Body(this.quizItemList, this.duration);
 
   final List<QuizItem> quizItemList;
+  final Duration duration;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final knowQuizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.knowQuizItemList));
-    Future<void>.delayed(Duration.zero, () async {});
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -25,7 +25,7 @@ class _Body extends ConsumerWidget {
                       ResultDashboardCard(
                         quizItemList: quizItemList,
                         resultQuizItemList: knowQuizItemList,
-                        duration: const Duration(seconds: 1),
+                        duration: duration,
                       ),
                     ],
                   ),

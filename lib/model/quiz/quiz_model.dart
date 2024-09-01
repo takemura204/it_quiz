@@ -288,32 +288,13 @@ class QuizModel extends StateNotifier<Quizzes>  {
     _saveDevice(); // 保存
   }
 
-  /// HistoryQuiz更新
-  Future updateHistoryQuiz(Quiz updateQuiz) async {
-    // 1. 現在のhistoryQuizListをコピー
+  /// HistoryQuiz追加
+  Future createHistoryQuiz(Quiz updateQuiz) async {
     final historyQuizList = [...state.historyQuizList];
-
-    // 3. historyQuizList内の同じidのQuizのquizItemListを更新
-    for (var i = 0; i < historyQuizList.length; i++) {
-      if (historyQuizList[i].id == updateQuiz.id) {
-        final updatedQuizItemList = historyQuizList[i].quizItemList.map((quizItem) {
-          // updateQuizの中から対応するquizItemを見つける
-          final updatedItem =
-              updateQuiz.quizItemList.firstWhereOrNull((e) => e.quizId == quizItem.quizId);
-          if (updatedItem != null) {
-            // isWeakだけを更新
-            return quizItem.copyWith(isWeak: updatedItem.isWeak);
-          }
-          return quizItem;
-        }).toList();
-        historyQuizList[i] = historyQuizList[i].copyWith(quizItemList: updatedQuizItemList);
-      }
-    }
-
-    // 4. 更新したhistoryQuizListでstateを更新
+    print({'historyQuizList 1',historyQuizList.length});
+    historyQuizList.add(updateQuiz);
+    print({'historyQuizList 2',historyQuizList.length});
     state = state.copyWith(historyQuizList: historyQuizList);
-
-    // 5. デバイスに保存
     _saveDevice();
   }
 

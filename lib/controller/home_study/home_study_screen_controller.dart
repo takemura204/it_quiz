@@ -9,6 +9,7 @@ import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
+import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
 import '../../untils/enums.dart';
@@ -26,6 +27,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   final Ref ref;
+  final Stopwatch stopwatch = Stopwatch();
   late AppinioSwiperController swiperController;
   final quizItemListName = 'study_item_list';
   final knowQuizItemListName = 'study_know_item_list';
@@ -49,7 +51,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     await _initIsShowTutorial();
     await _initIsFinishView();
     await _initQuizItemList();
-
+    await startStopwatch();
     _saveDevice();
     setIsLoading(false);
   }
@@ -59,6 +61,15 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     WidgetsBinding.instance.removeObserver(this);
     swiperController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      stopwatch.start(); // アプリが前面に戻ったときにタイマーを再開
+    } else if (state == AppLifecycleState.paused) {
+      stopwatch.stop(); // アプリが背景に移動したときにタイマーを停止
+    }
   }
 
   ///QuizItem更新
@@ -149,12 +160,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       knowQuizItemList: updatedKnowQuizItemList,
       unKnowQuizItemList: updatedUnKnowQuizItemList,
     );
-    print({
-      'QuizItem',
-      updatedQuizItemList.length,
-      updatedKnowQuizItemList.length,
-      updatedUnKnowQuizItemList.length,
-    });
   }
 
   ///チュートリアルカード表示
@@ -173,6 +178,14 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     if (isFinishViewData != null) {
       state = state.copyWith(isFinishView: isFinishViewData);
       print({'_initIsFinishView', state.isFinishView});
+    }
+  }
+
+  ///学習時間計測
+  Future startStopwatch() async {
+    if (!state.isFinishView && !state.isResultView) {
+      WidgetsBinding.instance.addObserver(this);
+      stopwatch.start(); //学習時間記録
     }
   }
 
@@ -252,7 +265,10 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       _updateQuizItem(quizItemList[itemIndex]);
       _saveDevice();
       quizItemList.clear();
-      state = state.copyWith(quizItemList: quizItemList);
+      stopwatch.stop();
+      state = state.copyWith(quizItemList: quizItemList, duration: stopwatch.elapsed);
+      print({'duration', state.duration});
+      updateHistoryQuiz();
     }
     //まだ問題が続けられる時
     else {
@@ -278,6 +294,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     );
     setIsResultView(false);
     setIsFinishView(false);
+    startStopwatch();
     _saveDevice();
   }
 
@@ -328,6 +345,24 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   ///クイズ結果更新
   void _updateQuizItem(QuizItem quizItem) {
     ref.read(quizModelProvider.notifier).updateQuizItem(quizItem);
+  }
+
+  ///クイズ結果更新(端末保存)
+  void updateHistoryQuiz() {
+    final quizItemList = [
+      ...state.quizItemList,
+      ...state.knowQuizItemList,
+      ...state.unKnowQuizItemList
+    ]..sort((a, b) => a.quizId.compareTo(b.quizId));
+    final duration = state.duration;
+    final studyType = ref.read(quizModelProvider).studyType;
+    final updateQuiz = initStudyQuiz.copyWith(
+      duration: duration,
+      quizItemList: quizItemList,
+      timeStamp: DateTime.now(),
+      studyType: studyType,
+    );
+    ref.read(quizModelProvider.notifier).createHistoryQuiz(updateQuiz);
   }
 
   ///クイズ結果更新(端末保存)

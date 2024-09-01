@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
+import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
@@ -17,7 +18,6 @@ import '../../controller/setting_notification/setting_notification_controller.da
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../view/modals/need_tracking_modal.dart';
-import '../../view/modals/tutorial_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
 import '../home_search_screen/home_search_screen.dart';
@@ -41,17 +41,17 @@ class MainScreen extends ConsumerWidget {
         ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
 
     Future<void>.delayed(Duration.zero, () async {
-      //チュートリアルモーダル表示
-      if (isShowTutorialModal) {
-        ref.read(mainScreenControllerProvider.notifier).setIsShowTutorialModal(false);
-        await showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (BuildContext context) {
-            return TutorialModal(mainContext: context);
-          },
-        );
-      }
+      // //チュートリアルモーダル表示
+      // if (isShowTutorialModal) {
+      //   ref.read(mainScreenControllerProvider.notifier).setIsShowTutorialModal(false);
+      //   await showDialog(
+      //     barrierDismissible: false,
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return TutorialModal(mainContext: context);
+      //     },
+      //   );
+      // }
       //トラッキングモーダル表示
       if (isShowTrackingModal && currentTabIndex == 3) {
         ref.read(mainScreenControllerProvider.notifier).setIsShowTrackingModal(false);
@@ -163,7 +163,10 @@ class _BottomNavBar extends ConsumerWidget {
         currentIndex: currentTabIndex,
         fixedColor: context.mainColor,
         onTap: (index) async {
-          ref.watch(mainScreenControllerProvider.notifier).setTabIndex(index);
+          ref.read(mainScreenControllerProvider.notifier).setTabIndex(index);
+          if (index != 1) {
+            ref.read(homeStudyScreenProvider.notifier).stopwatch.stop();
+          }
           if (index == 2) {
             ref.read(homeSearchScreenProvider.notifier).initFilterQuiz();
           }

@@ -26,6 +26,7 @@ mixin _$HomeStudyScreenState {
   List<QuizItem> get unKnowQuizItemList => throw _privateConstructorUsedError;
   int get itemIndex => throw _privateConstructorUsedError;
   int get lapIndex => throw _privateConstructorUsedError;
+  Duration get duration => throw _privateConstructorUsedError; // 学習時間
   AppinioSwiperDirection? get direction => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -50,6 +51,7 @@ abstract class $HomeStudyScreenStateCopyWith<$Res> {
       List<QuizItem> unKnowQuizItemList,
       int itemIndex,
       int lapIndex,
+      Duration duration,
       AppinioSwiperDirection? direction});
 }
 
@@ -77,6 +79,7 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
     Object? unKnowQuizItemList = null,
     Object? itemIndex = null,
     Object? lapIndex = null,
+    Object? duration = null,
     Object? direction = freezed,
   }) {
     return _then(_value.copyWith(
@@ -120,6 +123,10 @@ class _$HomeStudyScreenStateCopyWithImpl<$Res,
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
       direction: freezed == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -147,6 +154,7 @@ abstract class _$$_HomeStudyScreenStateCopyWith<$Res>
       List<QuizItem> unKnowQuizItemList,
       int itemIndex,
       int lapIndex,
+      Duration duration,
       AppinioSwiperDirection? direction});
 }
 
@@ -171,6 +179,7 @@ class __$$_HomeStudyScreenStateCopyWithImpl<$Res>
     Object? unKnowQuizItemList = null,
     Object? itemIndex = null,
     Object? lapIndex = null,
+    Object? duration = null,
     Object? direction = freezed,
   }) {
     return _then(_$_HomeStudyScreenState(
@@ -214,6 +223,10 @@ class __$$_HomeStudyScreenStateCopyWithImpl<$Res>
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
       direction: freezed == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -236,6 +249,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
       final List<QuizItem> unKnowQuizItemList = const [],
       this.itemIndex = 0,
       this.lapIndex = 0,
+      this.duration = Duration.zero,
       this.direction})
       : _quizItemList = quizItemList,
         _knowQuizItemList = knowQuizItemList,
@@ -292,11 +306,15 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
   @JsonKey()
   final int lapIndex;
   @override
+  @JsonKey()
+  final Duration duration;
+// 学習時間
+  @override
   final AppinioSwiperDirection? direction;
 
   @override
   String toString() {
-    return 'HomeStudyScreenState(isLoading: $isLoading, isShowTutorial: $isShowTutorial, isAnsView: $isAnsView, isResultView: $isResultView, isFinishView: $isFinishView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, direction: $direction)';
+    return 'HomeStudyScreenState(isLoading: $isLoading, isShowTutorial: $isShowTutorial, isAnsView: $isAnsView, isResultView: $isResultView, isFinishView: $isFinishView, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, itemIndex: $itemIndex, lapIndex: $lapIndex, duration: $duration, direction: $direction)';
   }
 
   @override
@@ -324,6 +342,8 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
                 other.itemIndex == itemIndex) &&
             (identical(other.lapIndex, lapIndex) ||
                 other.lapIndex == lapIndex) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
             (identical(other.direction, direction) ||
                 other.direction == direction));
   }
@@ -341,6 +361,7 @@ class _$_HomeStudyScreenState implements _HomeStudyScreenState {
       const DeepCollectionEquality().hash(_unKnowQuizItemList),
       itemIndex,
       lapIndex,
+      duration,
       direction);
 
   @JsonKey(ignore: true)
@@ -363,6 +384,7 @@ abstract class _HomeStudyScreenState implements HomeStudyScreenState {
       final List<QuizItem> unKnowQuizItemList,
       final int itemIndex,
       final int lapIndex,
+      final Duration duration,
       final AppinioSwiperDirection? direction}) = _$_HomeStudyScreenState;
 
   @override
@@ -386,6 +408,8 @@ abstract class _HomeStudyScreenState implements HomeStudyScreenState {
   @override
   int get lapIndex;
   @override
+  Duration get duration;
+  @override // 学習時間
   AppinioSwiperDirection? get direction;
   @override
   @JsonKey(ignore: true)

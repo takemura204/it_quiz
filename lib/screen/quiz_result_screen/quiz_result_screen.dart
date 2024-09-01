@@ -6,7 +6,6 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_study/home_study_screen_controller.dart';
-import '../../controller/home_study_modal/home_study_modal_controller.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';
@@ -23,15 +22,16 @@ part 'widget/next_action_buttons.dart';
 part 'widget/result_item_list.dart';
 
 class QuizResultScreen extends HookConsumerWidget {
-  const QuizResultScreen(this.quizItemList);
+  const QuizResultScreen(this.quizItemList, this.duration);
 
   final List<QuizItem> quizItemList;
+  final Duration duration;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: const _AppBar(),
-      body: _Body(quizItemList),
+      body: _Body(quizItemList, duration),
     );
   }
 }

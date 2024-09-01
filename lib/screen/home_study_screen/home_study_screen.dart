@@ -50,12 +50,14 @@ class HomeStudyScreen extends HookConsumerWidget {
       ..sort((a, b) => a.quizId.compareTo(b.quizId));
     final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
     final isFinishView = ref.watch(homeStudyScreenProvider.select((s) => s.isFinishView));
+    final duration = ref.watch(homeStudyScreenProvider.select((s) => s.duration));
     Future.delayed(Duration.zero, () async {
       //リザルト画面表示
       if (isResultView) {
         // ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
         context.showScreen(
-          QuizResultScreenArguments(quizItemList: totalQuizItemList).generateRoute(),
+          QuizResultScreenArguments(quizItemList: totalQuizItemList, duration: duration)
+              .generateRoute(),
         );
       }
     });

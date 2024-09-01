@@ -55,3 +55,12 @@ Quiz initRandomQuiz = Quiz(
   duration: Duration.zero,
   studyType: StudyType.learn,
 );
+
+///覚える
+Quiz initStudyQuiz = Quiz(
+  id: 3,
+  category: I18n().setCategory(6),
+  title: I18n().styleLeanQuiz,
+  quizItemList: [],
+  studyType: StudyType.learn,
+);
