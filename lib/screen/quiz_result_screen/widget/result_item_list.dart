@@ -1,10 +1,9 @@
 part of '../quiz_result_screen.dart';
 
 class _ResultItemList extends ConsumerWidget {
-  const _ResultItemList({required this.quizItemList, required this.knowQuizItemList});
+  const _ResultItemList({required this.quizItemList});
 
   final List<QuizItem> quizItemList;
-  final List<QuizItem> knowQuizItemList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,12 +36,11 @@ class _ResultItemList extends ConsumerWidget {
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
             final quizItem = quizItemList[index];
-            final isKnow = knowQuizItemList.any((knowItem) => knowItem.quizId == quizItem.quizId);
             return ResultItemCard(
                 index: index,
                 quizItem: quizItemList[index],
                 studyType: StudyType.learn,
-                isKnow: isKnow,
+                isKnow: quizItem.isKnow,
                 onTapCheckButton: () {
                   ref.read(homeStudyScreenProvider.notifier).tapWeakButton(index);
                 },

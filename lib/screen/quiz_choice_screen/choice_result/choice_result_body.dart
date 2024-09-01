@@ -7,7 +7,9 @@ class _ChoiceResultBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
+    final quizItemList = ref
+        .watch(quizChoiceScreenProvider)
+        .quizItemList;
     final correctQuizItemList = quizItemList.where((x) => x.status == StatusType.correct).toList();
     final correctNum = correctQuizItemList.length;
     final controller = ref.watch(quizChoiceScreenProvider);
@@ -24,14 +26,14 @@ class _ChoiceResultBody extends ConsumerWidget {
                 [
                   if (correctNum == quizItemList.length)
                     const ResultPerfectCard()
-                  else if (correctNum >= quizItemList.length * 0.6)
-                    const ResultGoodCard()
                   else
-                    const ResultTryCard(),
+                    if (correctNum >= quizItemList.length * 0.6)
+                      const ResultGoodCard()
+                    else
+                      const ResultTryCard(),
 
                   ResultDashboardCard(
                     quizItemList: quizItemList,
-                    resultQuizItemList: correctQuizItemList,
                     duration: duration,
                   ),
                   const Gap(15),

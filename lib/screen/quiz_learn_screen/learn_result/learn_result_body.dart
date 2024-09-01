@@ -8,7 +8,6 @@ class _LearnResultBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizItemList = ref.watch(quizLearnScreenProvider.select((s) => s.quizItemList));
-    final knowQuizItemList = ref.watch(quizLearnScreenProvider.select((s) => s.knowQuizItemList));
     final controller = ref.watch(quizLearnScreenProvider);
     final duration = controller.duration;
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
@@ -59,7 +58,6 @@ class _LearnResultBody extends ConsumerWidget {
                           const ResultClearCard(),
                           ResultDashboardCard(
                             quizItemList: quizItemList,
-                            resultQuizItemList: knowQuizItemList,
                             duration: duration,
                           ),
                         ],

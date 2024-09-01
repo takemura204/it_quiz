@@ -18,12 +18,13 @@ _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
           const [],
       source: json['source'] as String? ?? '',
       isWeak: json['isWeak'] as bool? ?? false,
+      isSaved: json['isSaved'] as bool? ?? false,
+      isKnow: json['isKnow'] as bool? ?? false,
       status: $enumDecodeNullable(_$StatusTypeEnumMap, json['status']) ??
           StatusType.unlearned,
       importance:
           $enumDecodeNullable(_$ImportanceTypeEnumMap, json['importance']) ??
               ImportanceType.normal,
-      isSaved: json['isSaved'] as bool? ?? false,
       lapIndex: json['lapIndex'] as int? ?? 0,
       isPremium: json['isPremium'] as bool? ?? true,
     );
@@ -38,9 +39,10 @@ Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
       'choices': instance.choices,
       'source': instance.source,
       'isWeak': instance.isWeak,
+      'isSaved': instance.isSaved,
+      'isKnow': instance.isKnow,
       'status': _$StatusTypeEnumMap[instance.status]!,
       'importance': _$ImportanceTypeEnumMap[instance.importance]!,
-      'isSaved': instance.isSaved,
       'lapIndex': instance.lapIndex,
       'isPremium': instance.isPremium,
     };

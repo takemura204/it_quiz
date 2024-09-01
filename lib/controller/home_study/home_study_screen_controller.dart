@@ -207,6 +207,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       choices: quizItemList[itemIndex].choices,
       ans: quizItemList[itemIndex].ans,
       isWeak: quizItemList[itemIndex].isWeak,
+      isKnow: isKnow,
       status: isKnow && quizItemList[itemIndex].status == StatusType.unlearned
           ? StatusType.learned
           : quizItemList[itemIndex].status,
@@ -267,7 +268,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       quizItemList.clear();
       stopwatch.stop();
       state = state.copyWith(quizItemList: quizItemList, duration: stopwatch.elapsed);
-      print({'duration', state.duration});
       updateHistoryQuiz();
     }
     //まだ問題が続けられる時
@@ -307,14 +307,15 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       question: quizItemList[index].question,
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
-      isWeak: !quizItemList[index].isWeak,
-      status: quizItemList[index].status,
-      isSaved: quizItemList[index].isSaved,
       choices: quizItemList[index].choices,
+      source: quizItemList[index].source,
+      isSaved: quizItemList[index].isSaved,
+      isWeak: !quizItemList[index].isWeak,
+      isKnow: quizItemList[index].isKnow,
+      status: quizItemList[index].status,
+      importance: quizItemList[index].importance,
       lapIndex: quizItemList[index].lapIndex,
       isPremium: quizItemList[index].isPremium,
-      source: quizItemList[index].source,
-      importance: quizItemList[index].importance,
     );
     state = state.copyWith(quizItemList: quizItemList);
     _updateQuizItem(quizItemList[index]);
@@ -322,6 +323,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   ///保存ボタンをタップした時
   void tapSavedButton(int index) {
+    print(index);
     final quizItemList = [...state.quizItemList];
     quizItemList[index] = QuizItem(
       quizId: quizItemList[index].quizId,
@@ -330,6 +332,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       ans: quizItemList[index].ans,
       comment: quizItemList[index].comment,
       isWeak: quizItemList[index].isWeak,
+      isKnow: quizItemList[index].isKnow,
       status: quizItemList[index].status,
       isSaved: !quizItemList[index].isSaved,
       choices: quizItemList[index].choices,

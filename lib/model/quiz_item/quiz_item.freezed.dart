@@ -28,9 +28,10 @@ mixin _$QuizItem {
   List<String> get choices => throw _privateConstructorUsedError; //選択肢
   String get source => throw _privateConstructorUsedError; //出典
   bool get isWeak => throw _privateConstructorUsedError; //苦手か？
+  bool get isSaved => throw _privateConstructorUsedError; //保存したか?
+  bool get isKnow => throw _privateConstructorUsedError; //知っているか？
   StatusType get status => throw _privateConstructorUsedError; //クイズの状態
   ImportanceType get importance => throw _privateConstructorUsedError; //重要度
-  bool get isSaved => throw _privateConstructorUsedError; //保存したか?
   int get lapIndex => throw _privateConstructorUsedError; //何周目か？
   bool get isPremium => throw _privateConstructorUsedError;
 
@@ -54,9 +55,10 @@ abstract class $QuizItemCopyWith<$Res> {
       List<String> choices,
       String source,
       bool isWeak,
+      bool isSaved,
+      bool isKnow,
       StatusType status,
       ImportanceType importance,
-      bool isSaved,
       int lapIndex,
       bool isPremium});
 }
@@ -82,9 +84,10 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
     Object? choices = null,
     Object? source = null,
     Object? isWeak = null,
+    Object? isSaved = null,
+    Object? isKnow = null,
     Object? status = null,
     Object? importance = null,
-    Object? isSaved = null,
     Object? lapIndex = null,
     Object? isPremium = null,
   }) {
@@ -121,6 +124,14 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.isWeak
           : isWeak // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isKnow: null == isKnow
+          ? _value.isKnow
+          : isKnow // ignore: cast_nullable_to_non_nullable
+              as bool,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -129,10 +140,6 @@ class _$QuizItemCopyWithImpl<$Res, $Val extends QuizItem>
           ? _value.importance
           : importance // ignore: cast_nullable_to_non_nullable
               as ImportanceType,
-      isSaved: null == isSaved
-          ? _value.isSaved
-          : isSaved // ignore: cast_nullable_to_non_nullable
-              as bool,
       lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
@@ -161,9 +168,10 @@ abstract class _$$_QuizItemCopyWith<$Res> implements $QuizItemCopyWith<$Res> {
       List<String> choices,
       String source,
       bool isWeak,
+      bool isSaved,
+      bool isKnow,
       StatusType status,
       ImportanceType importance,
-      bool isSaved,
       int lapIndex,
       bool isPremium});
 }
@@ -187,9 +195,10 @@ class __$$_QuizItemCopyWithImpl<$Res>
     Object? choices = null,
     Object? source = null,
     Object? isWeak = null,
+    Object? isSaved = null,
+    Object? isKnow = null,
     Object? status = null,
     Object? importance = null,
-    Object? isSaved = null,
     Object? lapIndex = null,
     Object? isPremium = null,
   }) {
@@ -226,6 +235,14 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.isWeak
           : isWeak // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isKnow: null == isKnow
+          ? _value.isKnow
+          : isKnow // ignore: cast_nullable_to_non_nullable
+              as bool,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -234,10 +251,6 @@ class __$$_QuizItemCopyWithImpl<$Res>
           ? _value.importance
           : importance // ignore: cast_nullable_to_non_nullable
               as ImportanceType,
-      isSaved: null == isSaved
-          ? _value.isSaved
-          : isSaved // ignore: cast_nullable_to_non_nullable
-              as bool,
       lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
@@ -262,9 +275,10 @@ class _$_QuizItem extends _QuizItem {
       final List<String> choices = const [],
       this.source = '',
       this.isWeak = false,
+      this.isSaved = false,
+      this.isKnow = false,
       this.status = StatusType.unlearned,
       this.importance = ImportanceType.normal,
-      this.isSaved = false,
       this.lapIndex = 0,
       this.isPremium = true})
       : _choices = choices,
@@ -314,16 +328,20 @@ class _$_QuizItem extends _QuizItem {
 //苦手か？
   @override
   @JsonKey()
+  final bool isSaved;
+//保存したか?
+  @override
+  @JsonKey()
+  final bool isKnow;
+//知っているか？
+  @override
+  @JsonKey()
   final StatusType status;
 //クイズの状態
   @override
   @JsonKey()
   final ImportanceType importance;
 //重要度
-  @override
-  @JsonKey()
-  final bool isSaved;
-//保存したか?
   @override
   @JsonKey()
   final int lapIndex;
@@ -334,7 +352,7 @@ class _$_QuizItem extends _QuizItem {
 
   @override
   String toString() {
-    return 'QuizItem(quizId: $quizId, word: $word, comment: $comment, question: $question, ans: $ans, choices: $choices, source: $source, isWeak: $isWeak, status: $status, importance: $importance, isSaved: $isSaved, lapIndex: $lapIndex, isPremium: $isPremium)';
+    return 'QuizItem(quizId: $quizId, word: $word, comment: $comment, question: $question, ans: $ans, choices: $choices, source: $source, isWeak: $isWeak, isSaved: $isSaved, isKnow: $isKnow, status: $status, importance: $importance, lapIndex: $lapIndex, isPremium: $isPremium)';
   }
 
   @override
@@ -351,10 +369,11 @@ class _$_QuizItem extends _QuizItem {
             const DeepCollectionEquality().equals(other._choices, _choices) &&
             (identical(other.source, source) || other.source == source) &&
             (identical(other.isWeak, isWeak) || other.isWeak == isWeak) &&
+            (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
+            (identical(other.isKnow, isKnow) || other.isKnow == isKnow) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.importance, importance) ||
                 other.importance == importance) &&
-            (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
             (identical(other.lapIndex, lapIndex) ||
                 other.lapIndex == lapIndex) &&
             (identical(other.isPremium, isPremium) ||
@@ -373,9 +392,10 @@ class _$_QuizItem extends _QuizItem {
       const DeepCollectionEquality().hash(_choices),
       source,
       isWeak,
+      isSaved,
+      isKnow,
       status,
       importance,
-      isSaved,
       lapIndex,
       isPremium);
 
@@ -403,9 +423,10 @@ abstract class _QuizItem extends QuizItem {
       final List<String> choices,
       final String source,
       final bool isWeak,
+      final bool isSaved,
+      final bool isKnow,
       final StatusType status,
       final ImportanceType importance,
-      final bool isSaved,
       final int lapIndex,
       final bool isPremium}) = _$_QuizItem;
   _QuizItem._() : super._();
@@ -429,12 +450,14 @@ abstract class _QuizItem extends QuizItem {
   @override //出典
   bool get isWeak;
   @override //苦手か？
+  bool get isSaved;
+  @override //保存したか?
+  bool get isKnow;
+  @override //知っているか？
   StatusType get status;
   @override //クイズの状態
   ImportanceType get importance;
   @override //重要度
-  bool get isSaved;
-  @override //保存したか?
   int get lapIndex;
   @override //何周目か？
   bool get isPremium;

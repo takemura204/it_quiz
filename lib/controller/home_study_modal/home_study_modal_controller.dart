@@ -29,6 +29,9 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   final categoryListName = 'study_category_list';
   final statusListName = 'study_status_list';
   final importanceListName = 'study_importance_list';
+  final isRepeatName = 'study_is_repeat';
+  final isSavedName = 'study_is_saved';
+  final isWeakName = 'study_is_weak';
 
   /// プレミアムと無料会員でクイズを取得
   List<Quiz> getQuizList() {
@@ -46,6 +49,9 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     await _initCategoryList();
     await _initStatusList();
     await _initImportanceList();
+    await _initIsRepeat();
+    await _initIsSaved();
+    await _initIsWeak();
     _saveDevice();
     setIsLoading(false);
   }
@@ -72,7 +78,6 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     state = state.copyWith(filterQuizList: updatedFilterQuizList);
   }
 
-  /// CategoryList取得
   Future _initCategoryList() async {
     final quizList = getQuizList();
     final categoryList = quizList.map((quizItem) => quizItem.category).toSet().toList();
@@ -90,7 +95,6 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
         state.copyWith(categoryList: categoryList, selectedCategoryQuizList: updatedCategoryList);
   }
 
-  /// StatusList取得
   Future _initStatusList() async {
     final quizList = getQuizList();
     final statusList = [
@@ -113,7 +117,6 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     state = state.copyWith(statusList: statusList, selectedStatusList: updatedStatusList);
   }
 
-  /// ImportanceList取得
   Future _initImportanceList() async {
     final quizList = getQuizList();
     final importanceList = [
@@ -138,7 +141,31 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
         importanceList: importanceList, selectedImportanceList: updatedImportanceList);
   }
 
-  ///カテゴリで絞り込み
+  Future _initIsRepeat() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isRepeatData = prefs.getBool(isRepeatName);
+    if (isRepeatData != null) {
+      state = state.copyWith(isRepeat: isRepeatData);
+    }
+  }
+
+  Future _initIsSaved() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isSavedData = prefs.getBool(isSavedName);
+    if (isSavedData != null) {
+      state = state.copyWith(isSaved: isSavedData);
+    }
+  }
+
+  Future _initIsWeak() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isWeakData = prefs.getBool(isWeakName);
+    if (isWeakData != null) {
+      state = state.copyWith(isWeak: isWeakData);
+    }
+  }
+
+  ///Categoryで絞り込み
   Future updateCategoryQuizList({required Quiz quiz, required bool isSelected}) async {
     final quizList = getQuizList();
     final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
@@ -153,7 +180,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     updateFilterQuizList();
   }
 
-  ///カテゴリ一括絞り込み
+  ///Category一括絞り込み
   Future updateAllCategoryQuizList(
       {required List<Quiz> categoryQuizList, required bool isSelected}) async {
     final quizList = getQuizList();
@@ -171,7 +198,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     updateFilterQuizList();
   }
 
-  ///学習状況絞り込み
+  ///Status絞り込み
   void updateStatusQuizList(StatusType status) {
     final selectedStatusList = [...state.selectedStatusList];
     if (selectedStatusList.contains(status)) {
@@ -189,7 +216,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     updateFilterQuizList();
   }
 
-  ///重要度絞り込み
+  ///Importance絞り込み
   void updateImportanceQuizList(ImportanceType importance) {
     final selectedImportanceList = [...state.selectedImportanceList];
     if (selectedImportanceList.contains(importance)) {
@@ -207,7 +234,21 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     updateFilterQuizList();
   }
 
-  ///絞り込みリスト更新
+  void updateIsRepeat(bool value) {
+    state = state.copyWith(isRepeat: value);
+    updateFilterQuizList();
+  }
+
+  void updateIsSaved(bool value) {
+    state = state.copyWith(isSaved: value);
+    updateFilterQuizList();
+  }
+
+  void updateIsWeak(bool value) {
+    state = state.copyWith(isWeak: value);
+    updateFilterQuizList();
+  }
+
   Future updateFilterQuizList() async {
     final quizList = getQuizList();
 
@@ -243,17 +284,43 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
           .toList();
     }
 
+    // 保存で絞り込み
+    if (state.isSaved) {
+      filterQuizList = filterQuizList
+          .map((quiz) {
+        final filteredItems = quiz.quizItemList
+            .where((item) => item.isSaved)
+            .toList();
+        return quiz.copyWith(quizItemList: filteredItems);
+      })
+          .where((quiz) => quiz.quizItemList.isNotEmpty)
+          .toList();
+    }
+
+    // 苦手で絞り込み
+    if (state.isWeak) {
+      filterQuizList = filterQuizList
+          .map((quiz) {
+        final filteredItems = quiz.quizItemList
+            .where((item) => item.isWeak)
+            .toList();
+        return quiz.copyWith(quizItemList: filteredItems);
+      })
+          .where((quiz) => quiz.quizItemList.isNotEmpty)
+          .toList();
+    }
+
     filterQuizList.sort((a, b) => a.id.compareTo(b.id));
     state = state.copyWith(filterQuizList: filterQuizList);
-    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
-    print({'updateFilterQuizList', filterQuizItemList.first});
-    _saveDevice();
   }
 
   Future resetFilterQuizList() async {
     await _initCategoryList();
     await _initStatusList();
     await _initImportanceList();
+    await _initIsRepeat();
+    await _initIsSaved();
+    await _initIsWeak();
     updateFilterQuizList();
   }
 
@@ -269,7 +336,6 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     state = state.copyWith(isLoading: value);
   }
 
-
   /// 端末保存
   Future _saveDevice() async {
     final prefs = await SharedPreferences.getInstance();
@@ -278,11 +344,17 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
         state.selectedCategoryQuizList.map((e) => json.encode(e.toJson())).toList();
     final statusListData = state.selectedStatusList.map((e) => e.name).toList();
     final importanceListData = state.selectedImportanceList.map((e) => e.name).toList();
+    final isRepeat = state.isRepeat;
+    final isSaved = state.isSaved;
+    final isWeak = state.isWeak;
 
     await prefs.setStringList(filterQuizListName, filterQuizListData);
     await prefs.setStringList(categoryListName, categoryListData);
     await prefs.setStringList(statusListName, statusListData);
     await prefs.setStringList(importanceListName, importanceListData);
+    await prefs.setBool(isRepeatName, isRepeat);
+    await prefs.setBool(isSavedName, isSaved);
+    await prefs.setBool(isWeakName, isWeak);
   }
 
   Future resetData() async {

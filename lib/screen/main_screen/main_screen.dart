@@ -31,8 +31,6 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isShowTutorialModal =
-        ref.watch(mainScreenControllerProvider.select((s) => s.isShowTutorialModal));
     final isShowTrackingModal =
         ref.watch(mainScreenControllerProvider.select((s) => s.isShowTrackingModal));
     final isShowPremiumDetailScreen =

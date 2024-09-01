@@ -20,6 +20,7 @@ import '../dialog.dart';
 import '../need_premium_modal.dart';
 
 part 'widget/study_modal_category_menu.dart';
+part 'widget/study_modal_detail_menu.dart';
 part 'widget/study_modal_footer.dart';
 part 'widget/study_modal_header.dart';
 part 'widget/study_modal_importance_menu.dart';
@@ -71,6 +72,11 @@ class StudyModal extends HookConsumerWidget {
 
                     ///重要度
                     _ImportanceMenu(),
+                    Gap(10),
+
+                    ///詳細設定
+                    _DetailMenu(),
+
                     Gap(150),
                   ],
                 ),

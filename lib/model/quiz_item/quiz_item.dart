@@ -16,9 +16,10 @@ class QuizItem with _$QuizItem {
     @Default([]) final List<String> choices, //選択肢
     @Default('') final String source, //出典
     @Default(false) final bool isWeak, //苦手か？
+    @Default(false) final bool isSaved, //保存したか?
+    @Default(false) final bool isKnow, //知っているか？
     @Default(StatusType.unlearned) final StatusType status, //クイズの状態
     @Default(ImportanceType.normal) final ImportanceType importance, //重要度
-    @Default(false) final bool isSaved, //保存したか?
     @Default(0) final int lapIndex, //何周目か？
     @Default(true) final bool isPremium, //プレミアムか？
   }) = _QuizItem;
@@ -30,8 +31,9 @@ class QuizItem with _$QuizItem {
   factory QuizItem.fromJson(Map<String, dynamic> json) => _$_QuizItem(
         quizId: json['quizId'] as int,
         isWeak: json['isWeak'] as bool,
-        status: StatusTypeExtension.fromJson(json['status'] as String),
         isSaved: json['isSaved'] as bool,
+        isKnow: json['isKnow'] as bool ?? false,
+        status: StatusTypeExtension.fromJson(json['status'] as String),
         lapIndex: json['lapIndex'] as int,
       );
 }

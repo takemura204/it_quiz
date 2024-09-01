@@ -25,6 +25,9 @@ mixin _$HomeStudyModalState {
   List<ImportanceType> get importanceList => throw _privateConstructorUsedError;
   List<ImportanceType> get selectedImportanceList =>
       throw _privateConstructorUsedError;
+  bool get isRepeat => throw _privateConstructorUsedError;
+  bool get isSaved => throw _privateConstructorUsedError;
+  bool get isWeak => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStudyModalStateCopyWith<HomeStudyModalState> get copyWith =>
@@ -45,7 +48,10 @@ abstract class $HomeStudyModalStateCopyWith<$Res> {
       List<StatusType> statusList,
       List<StatusType> selectedStatusList,
       List<ImportanceType> importanceList,
-      List<ImportanceType> selectedImportanceList});
+      List<ImportanceType> selectedImportanceList,
+      bool isRepeat,
+      bool isSaved,
+      bool isWeak});
 }
 
 /// @nodoc
@@ -69,6 +75,9 @@ class _$HomeStudyModalStateCopyWithImpl<$Res, $Val extends HomeStudyModalState>
     Object? selectedStatusList = null,
     Object? importanceList = null,
     Object? selectedImportanceList = null,
+    Object? isRepeat = null,
+    Object? isSaved = null,
+    Object? isWeak = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -103,6 +112,18 @@ class _$HomeStudyModalStateCopyWithImpl<$Res, $Val extends HomeStudyModalState>
           ? _value.selectedImportanceList
           : selectedImportanceList // ignore: cast_nullable_to_non_nullable
               as List<ImportanceType>,
+      isRepeat: null == isRepeat
+          ? _value.isRepeat
+          : isRepeat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isWeak: null == isWeak
+          ? _value.isWeak
+          : isWeak // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -123,7 +144,10 @@ abstract class _$$_HomeStudyModalStateCopyWith<$Res>
       List<StatusType> statusList,
       List<StatusType> selectedStatusList,
       List<ImportanceType> importanceList,
-      List<ImportanceType> selectedImportanceList});
+      List<ImportanceType> selectedImportanceList,
+      bool isRepeat,
+      bool isSaved,
+      bool isWeak});
 }
 
 /// @nodoc
@@ -145,6 +169,9 @@ class __$$_HomeStudyModalStateCopyWithImpl<$Res>
     Object? selectedStatusList = null,
     Object? importanceList = null,
     Object? selectedImportanceList = null,
+    Object? isRepeat = null,
+    Object? isSaved = null,
+    Object? isWeak = null,
   }) {
     return _then(_$_HomeStudyModalState(
       isLoading: null == isLoading
@@ -179,6 +206,18 @@ class __$$_HomeStudyModalStateCopyWithImpl<$Res>
           ? _value._selectedImportanceList
           : selectedImportanceList // ignore: cast_nullable_to_non_nullable
               as List<ImportanceType>,
+      isRepeat: null == isRepeat
+          ? _value.isRepeat
+          : isRepeat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isWeak: null == isWeak
+          ? _value.isWeak
+          : isWeak // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -194,7 +233,10 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
       final List<StatusType> statusList = const [],
       final List<StatusType> selectedStatusList = const [],
       final List<ImportanceType> importanceList = const [],
-      final List<ImportanceType> selectedImportanceList = const []})
+      final List<ImportanceType> selectedImportanceList = const [],
+      this.isRepeat = true,
+      this.isSaved = false,
+      this.isWeak = false})
       : _filterQuizList = filterQuizList,
         _categoryList = categoryList,
         _selectedCategoryQuizList = selectedCategoryQuizList,
@@ -273,8 +315,18 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
   }
 
   @override
+  @JsonKey()
+  final bool isRepeat;
+  @override
+  @JsonKey()
+  final bool isSaved;
+  @override
+  @JsonKey()
+  final bool isWeak;
+
+  @override
   String toString() {
-    return 'HomeStudyModalState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, selectedCategoryQuizList: $selectedCategoryQuizList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList)';
+    return 'HomeStudyModalState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, selectedCategoryQuizList: $selectedCategoryQuizList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList, isRepeat: $isRepeat, isSaved: $isSaved, isWeak: $isWeak)';
   }
 
   @override
@@ -297,7 +349,11 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
             const DeepCollectionEquality()
                 .equals(other._importanceList, _importanceList) &&
             const DeepCollectionEquality().equals(
-                other._selectedImportanceList, _selectedImportanceList));
+                other._selectedImportanceList, _selectedImportanceList) &&
+            (identical(other.isRepeat, isRepeat) ||
+                other.isRepeat == isRepeat) &&
+            (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
+            (identical(other.isWeak, isWeak) || other.isWeak == isWeak));
   }
 
   @override
@@ -310,7 +366,10 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
       const DeepCollectionEquality().hash(_statusList),
       const DeepCollectionEquality().hash(_selectedStatusList),
       const DeepCollectionEquality().hash(_importanceList),
-      const DeepCollectionEquality().hash(_selectedImportanceList));
+      const DeepCollectionEquality().hash(_selectedImportanceList),
+      isRepeat,
+      isSaved,
+      isWeak);
 
   @JsonKey(ignore: true)
   @override
@@ -322,15 +381,17 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
 
 abstract class _HomeStudyModalState implements HomeStudyModalState {
   const factory _HomeStudyModalState(
-          {final bool isLoading,
-          final List<Quiz> filterQuizList,
-          final List<String> categoryList,
-          final List<Quiz> selectedCategoryQuizList,
-          final List<StatusType> statusList,
-          final List<StatusType> selectedStatusList,
-          final List<ImportanceType> importanceList,
-          final List<ImportanceType> selectedImportanceList}) =
-      _$_HomeStudyModalState;
+      {final bool isLoading,
+      final List<Quiz> filterQuizList,
+      final List<String> categoryList,
+      final List<Quiz> selectedCategoryQuizList,
+      final List<StatusType> statusList,
+      final List<StatusType> selectedStatusList,
+      final List<ImportanceType> importanceList,
+      final List<ImportanceType> selectedImportanceList,
+      final bool isRepeat,
+      final bool isSaved,
+      final bool isWeak}) = _$_HomeStudyModalState;
 
   @override
   bool get isLoading;
@@ -348,6 +409,12 @@ abstract class _HomeStudyModalState implements HomeStudyModalState {
   List<ImportanceType> get importanceList;
   @override
   List<ImportanceType> get selectedImportanceList;
+  @override
+  bool get isRepeat;
+  @override
+  bool get isSaved;
+  @override
+  bool get isWeak;
   @override
   @JsonKey(ignore: true)
   _$$_HomeStudyModalStateCopyWith<_$_HomeStudyModalState> get copyWith =>

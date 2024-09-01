@@ -47,7 +47,8 @@ class _ResultItemList extends ConsumerWidget {
                   ref.read(homeStudyScreenProvider.notifier).tapWeakButton(index);
                 },
                 onTapSaveButton: () {
-                  ref.read(homeStudyScreenProvider.notifier).tapSavedButton(index);
+                  print(index);
+                  // ref.read(homeStudyScreenProvider.notifier).tapSavedButton(index);
                 });
           },
         ),

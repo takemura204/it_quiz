@@ -8,7 +8,6 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final knowQuizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.knowQuizItemList));
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -24,7 +23,6 @@ class _Body extends ConsumerWidget {
                       const ResultClearCard(),
                       ResultDashboardCard(
                         quizItemList: quizItemList,
-                        resultQuizItemList: knowQuizItemList,
                         duration: duration,
                       ),
                     ],
@@ -33,7 +31,7 @@ class _Body extends ConsumerWidget {
                   const Gap(20),
 
                   ///クイズ結果一覧
-                  _ResultItemList(quizItemList: quizItemList, knowQuizItemList: knowQuizItemList),
+                  _ResultItemList(quizItemList: quizItemList),
                   const Gap(15),
 
                   const AdBanner(height: 270),

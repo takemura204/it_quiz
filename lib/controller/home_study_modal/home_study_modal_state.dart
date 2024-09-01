@@ -16,5 +16,8 @@ class HomeStudyModalState with _$HomeStudyModalState {
     @Default([]) final List<StatusType> selectedStatusList,
     @Default([]) final List<ImportanceType> importanceList,
     @Default([]) final List<ImportanceType> selectedImportanceList,
+    @Default(true) final bool isRepeat,
+    @Default(false) final bool isSaved,
+    @Default(false) final bool isWeak,
   }) = _HomeStudyModalState;
 }

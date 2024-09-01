@@ -12,12 +12,10 @@ import '../../untils/enums.dart';
 class ResultDashboardCard extends ConsumerWidget {
   const ResultDashboardCard({
     required this.quizItemList,
-    required this.resultQuizItemList,
     required this.duration,
   });
 
   final List<QuizItem> quizItemList;
-  final List<QuizItem> resultQuizItemList;
   final Duration duration;
 
   @override
@@ -86,7 +84,7 @@ class ResultDashboardCard extends ConsumerWidget {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
-                              "${resultQuizItemList.length}",
+                              "${quizItemList.where((x) => x.isKnow).length}",
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 30,
