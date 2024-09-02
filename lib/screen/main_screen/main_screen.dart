@@ -17,6 +17,7 @@ import '../../controller/main/main_screen_controller.dart';
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz_model.dart';
+import '../../untils/enums.dart';
 import '../../view/modals/need_tracking_modal.dart';
 import '../home_dashboard_screen/home_dashboard_screen.dart';
 import '../home_quiz_screen/home_quiz_screen.dart';
@@ -162,8 +163,11 @@ class _BottomNavBar extends ConsumerWidget {
         fixedColor: context.mainColor,
         onTap: (index) async {
           ref.read(mainScreenControllerProvider.notifier).setTabIndex(index);
-          if (index != 1) {
+          if (index != 0) {
             ref.read(homeStudyScreenProvider.notifier).stopwatch.stop();
+          }
+          if (index == 0) {
+            ref.read(quizModelProvider.notifier).setStudyType(StudyType.study);
           }
           if (index == 2) {
             ref.read(homeSearchScreenProvider.notifier).initFilterQuiz();

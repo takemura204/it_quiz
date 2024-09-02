@@ -177,7 +177,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     final isFinishViewData = prefs.getBool(isFinishView);
     if (isFinishViewData != null) {
       state = state.copyWith(isFinishView: isFinishViewData);
-      print({'_initIsFinishView', state.isFinishView});
     }
   }
 
@@ -266,8 +265,15 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       _updateQuizItem(quizItemList[itemIndex]);
       _saveDevice();
       quizItemList.clear();
+      quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
+        ..sort((a, b) => a.quizId.compareTo(b.quizId)));
       stopwatch.stop();
-      state = state.copyWith(quizItemList: quizItemList, duration: stopwatch.elapsed);
+      state = state.copyWith(
+        quizItemList: quizItemList,
+        knowQuizItemList: [],
+        unKnowQuizItemList: [],
+        duration: stopwatch.elapsed,
+      );
       updateHistoryQuiz();
     }
     //まだ問題が続けられる時
@@ -282,10 +288,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   void restartStudyQuiz() {
-    final quizItemList = [...state.quizItemList];
-    quizItemList.clear();
-    quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
-      ..sort((a, b) => a.quizId.compareTo(b.quizId)));
+    final quizItemList = [...state.quizItemList]..sort((a, b) => a.quizId.compareTo(b.quizId));
     state = state.copyWith(
       quizItemList: quizItemList,
       knowQuizItemList: [],
@@ -323,7 +326,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   ///保存ボタンをタップした時
   void tapSavedButton(int index) {
-    print(index);
     final quizItemList = [...state.quizItemList];
     quizItemList[index] = QuizItem(
       quizId: quizItemList[index].quizId,
@@ -341,7 +343,9 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       source: quizItemList[index].source,
       importance: quizItemList[index].importance,
     );
+    print({'tapSavedButton', index, quizItemList[index].isSaved});
     state = state.copyWith(quizItemList: quizItemList);
+    print({'tapSavedButton', index, state.quizItemList[index].isSaved});
     _updateQuizItem(quizItemList[index]);
   }
 

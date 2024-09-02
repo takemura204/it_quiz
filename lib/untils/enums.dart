@@ -8,6 +8,7 @@ enum QuizStyleType {
 
 ///クイズ勉強のタイプ
 enum StudyType {
+  study,
   learn, //一問一答
   choice, //四択
 }

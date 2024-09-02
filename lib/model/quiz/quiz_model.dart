@@ -291,9 +291,7 @@ class QuizModel extends StateNotifier<Quizzes>  {
   /// HistoryQuiz追加
   Future createHistoryQuiz(Quiz updateQuiz) async {
     final historyQuizList = [...state.historyQuizList];
-    print({'historyQuizList 1',historyQuizList.length});
     historyQuizList.add(updateQuiz);
-    print({'historyQuizList 2',historyQuizList.length});
     state = state.copyWith(historyQuizList: historyQuizList);
     _saveDevice();
   }

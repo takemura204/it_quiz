@@ -20,7 +20,7 @@ class Quizzes with _$Quizzes {
     Quiz? weakQuiz, //苦手克服
     Quiz? randomQuiz, //ランダムクイズ
     @Default(QuizStyleType.study) final QuizStyleType quizType, //クイズタイプ
-    @Default(StudyType.learn) final StudyType studyType, //クイズタイプ
+    @Default(StudyType.study) final StudyType studyType, //クイズタイプ
   }) = _Quizzes;
 
   Quizzes._();

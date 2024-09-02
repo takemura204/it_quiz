@@ -29,12 +29,19 @@ import '../../view/modals/study_modal/study_modal.dart';
 import '../quiz_result_screen/quiz_result_screen.dart';
 
 part 'widget/action_buttons.dart';
+
 part 'widget/app_bar.dart';
+
 part 'widget/body.dart';
+
 part 'widget/progress_bar.dart';
+
 part 'widget/progress_tile.dart';
+
 part 'widget/question.dart';
+
 part 'widget/result_item_list.dart';
+
 part 'widget/study_item_card.dart';
 
 class HomeStudyScreen extends HookConsumerWidget {
@@ -42,23 +49,12 @@ class HomeStudyScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
-    final knowQuizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.knowQuizItemList));
-    final unKnowQuizItemList =
-        ref.watch(homeStudyScreenProvider.select((s) => s.unKnowQuizItemList));
-    final totalQuizItemList = [...quizItemList, ...knowQuizItemList, ...unKnowQuizItemList]
-      ..sort((a, b) => a.quizId.compareTo(b.quizId));
     final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
     final isFinishView = ref.watch(homeStudyScreenProvider.select((s) => s.isFinishView));
-    final duration = ref.watch(homeStudyScreenProvider.select((s) => s.duration));
     Future.delayed(Duration.zero, () async {
-      //リザルト画面表示
       if (isResultView) {
         // ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
-        context.showScreen(
-          QuizResultScreenArguments(quizItemList: totalQuizItemList, duration: duration)
-              .generateRoute(),
-        );
+        context.showScreen(const QuizResultScreenArguments().generateRoute());
       }
     });
     return Scaffold(

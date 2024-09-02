@@ -7,7 +7,8 @@ class _ResultItemList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final studyType = ref.watch(quizModelProvider).studyType;
+    final studyType = ref.watch(quizModelProvider.select((s) => s.studyType));
+
     return Column(
       children: [
         Card(

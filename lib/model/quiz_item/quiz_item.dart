@@ -27,12 +27,12 @@ class QuizItem with _$QuizItem {
   QuizItem._();
 
   ///新しくデータを追加するとき、??で初期データを追加する。
-  ///例：isTest: json['isTest'] as bool ?? false,
+  ///例：isTest: json['isTest'] as bool? ?? false,
   factory QuizItem.fromJson(Map<String, dynamic> json) => _$_QuizItem(
         quizId: json['quizId'] as int,
         isWeak: json['isWeak'] as bool,
         isSaved: json['isSaved'] as bool,
-        isKnow: json['isKnow'] as bool ?? false,
+        isKnow: json['isKnow'] as bool? ?? false,
         status: StatusTypeExtension.fromJson(json['status'] as String),
         lapIndex: json['lapIndex'] as int,
       );
