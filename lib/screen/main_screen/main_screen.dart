@@ -120,7 +120,7 @@ class _BottomNavBar extends ConsumerWidget {
               'assets/icon/swipe_cards.svg',
               width: 35,
               height: 35,
-              colorFilter: const ColorFilter.mode(Colors.black45, BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(Colors.black38, BlendMode.srcIn),
             ),
             activeIcon: SvgPicture.asset(
               'assets/icon/swipe_cards_active.svg',
@@ -131,8 +131,18 @@ class _BottomNavBar extends ConsumerWidget {
             label: I18n().titleStudy,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(LineIcons.list),
-            activeIcon: const Icon(LineIcons.list),
+            icon: SvgPicture.asset(
+              'assets/icon/list.svg',
+              width: 35,
+              height: 35,
+              colorFilter: const ColorFilter.mode(Colors.black26, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/icon/list.svg',
+              width: 35,
+              height: 35,
+              colorFilter: ColorFilter.mode(context.mainColor, BlendMode.srcIn),
+            ),
             label: I18n().titleQuiz,
           ),
           BottomNavigationBarItem(

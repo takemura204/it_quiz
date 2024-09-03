@@ -18,6 +18,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../controller/home_study/home_study_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
+import '../../model/user/auth_model.dart';
 import '../../untils/enums.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/animation_image.dart';
@@ -29,19 +30,12 @@ import '../../view/modals/study_modal/study_modal.dart';
 import '../quiz_result_screen/quiz_result_screen.dart';
 
 part 'widget/action_buttons.dart';
-
 part 'widget/app_bar.dart';
-
 part 'widget/body.dart';
-
 part 'widget/progress_bar.dart';
-
 part 'widget/progress_tile.dart';
-
 part 'widget/question.dart';
-
 part 'widget/result_item_list.dart';
-
 part 'widget/study_item_card.dart';
 
 class HomeStudyScreen extends HookConsumerWidget {

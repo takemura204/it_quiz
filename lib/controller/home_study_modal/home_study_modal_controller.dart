@@ -45,6 +45,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   Future _initState() async {
     setIsLoading(true);
     // resetData();
+    print('_initState');
     await _initFilterQuizList();
     await _initCategoryList();
     await _initStatusList();
@@ -64,7 +65,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
 
   /// FilterQuizList取得
   Future _initFilterQuizList() async {
-    final quizList = getQuizList();
+    final quizList = [...getQuizList()];
     final prefs = await SharedPreferences.getInstance();
     final filterQuizListData = prefs.getStringList(filterQuizListName);
     final List<Quiz> updatedFilterQuizList = [];
@@ -79,7 +80,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   }
 
   Future _initCategoryList() async {
-    final quizList = getQuizList();
+    final quizList = [...getQuizList()];
     final categoryList = quizList.map((quizItem) => quizItem.category).toSet().toList();
     quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
     final prefs = await SharedPreferences.getInstance();
@@ -96,7 +97,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   }
 
   Future _initStatusList() async {
-    final quizList = getQuizList();
+    final quizList = [...getQuizList()];
     final statusList = [
       StatusType.unlearned,
       StatusType.learned,
@@ -115,10 +116,12 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     }
 
     state = state.copyWith(statusList: statusList, selectedStatusList: updatedStatusList);
+
+    print({'statusList',state.statusList,state.selectedStatusList});
   }
 
   Future _initImportanceList() async {
-    final quizList = getQuizList();
+    final quizList = [...getQuizList()];
     final importanceList = [
       ImportanceType.high,
       ImportanceType.normal,
@@ -168,7 +171,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
 
   ///Categoryで絞り込み
   Future updateCategoryQuizList({required Quiz quiz, required bool isSelected}) async {
-    final quizList = getQuizList();
+    final quizList = [...getQuizList()];
     final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
     final matchQuiz = quizList.firstWhere((x) => x.id == quiz.id);
     if (isSelected) {
@@ -184,7 +187,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   ///Category一括絞り込み
   Future updateAllCategoryQuizList(
       {required List<Quiz> categoryQuizList, required bool isSelected}) async {
-    final quizList = getQuizList();
+    final quizList = [...getQuizList()];
     final selectedCategoryQuizList = [...state.selectedCategoryQuizList];
     if (isSelected) {
       selectedCategoryQuizList.removeWhere(
@@ -251,7 +254,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   }
 
   Future updateFilterQuizList() async {
-    final quizList = getQuizList();
+    final quizList =[...getQuizList()];
 
     // カテゴリで絞り込み
     List<Quiz> filterQuizList = quizList

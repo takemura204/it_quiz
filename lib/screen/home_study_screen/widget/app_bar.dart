@@ -5,6 +5,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
     final isShowTutorial = ref.watch(homeStudyScreenProvider.select((s) => s.isShowTutorial));
     final quizList = ref.watch(homeStudyScreenProvider.notifier).getQuizList();
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
@@ -12,7 +13,14 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     final isFiltered = quizItemList.length == filterQuizItemList.length;
     return AppBar(
-      title: Text(I18n().titleAppName),
+      title: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(I18n().titleAppName),
+          const Gap(5),
+          if (isPremium) const _PremiumLabel(),
+        ],
+      ),
       centerTitle: true,
       actions: [
         Container(
@@ -49,4 +57,56 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+///プレミアム購入時
+class _PremiumLabel extends ConsumerWidget {
+  const _PremiumLabel();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      decoration: BoxDecoration(
+        color: context.accentColor,
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+        child: Text(
+          'PREMIUM',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+///プレミアム購入時
+class _FreeLabel extends ConsumerWidget {
+  const _FreeLabel();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+        child: Text(
+          'Free',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -82,6 +82,8 @@ class _SwitchMenu extends HookConsumerWidget {
                 activeTrackColor: context.mainColor.withOpacity(0.5),
                 inactiveThumbColor: context.secondColor,
                 inactiveTrackColor: context.secondColor.withOpacity(0.5),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                trackColor: context.accentColor,
                 onChanged: onChanged,
               ),
               const Gap(5),

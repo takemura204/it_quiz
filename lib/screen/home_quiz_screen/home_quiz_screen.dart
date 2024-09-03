@@ -82,7 +82,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tabIndex = ref.watch(homeQuizScreenProvider).tabIndex;
     return AppBar(
-      title: Text(I18n().appNameTitle),
+      title: Text(I18n().titleQuiz),
       centerTitle: true,
       actions: [
         Padding(

@@ -16,7 +16,6 @@ class _ProgressTile extends ConsumerWidget {
         quizItemList.length + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
     final currentIndex =
         isRepeat ? knowQuizItemList.length : knowQuizItemList.length + unKnowQuizItemList.length;
-    final lapIndex = ref.watch(homeStudyScreenProvider.select((s) => s.lapIndex));
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
