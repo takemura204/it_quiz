@@ -5,6 +5,7 @@ class _ProgressTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isRepeat = ref.watch(homeStudyScreenProvider.select((s) => s.isRepeat));
     final direction = ref.watch(homeStudyScreenProvider.select((s) => s.direction));
     final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
     final knowQuizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.knowQuizItemList));
@@ -14,7 +15,9 @@ class _ProgressTile extends ConsumerWidget {
     final totalItems =
         quizItemList.length + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
     final currentIndex =
-        itemIndex + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
+        isRepeat ? knowQuizItemList.length : knowQuizItemList.length + unKnowQuizItemList.length;
+    final lapIndex = ref.watch(homeStudyScreenProvider.select((s) => s.lapIndex));
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

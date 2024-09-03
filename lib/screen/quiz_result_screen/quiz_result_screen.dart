@@ -8,6 +8,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_study/home_study_screen_controller.dart';
+import '../../controller/main/main_screen_controller.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';

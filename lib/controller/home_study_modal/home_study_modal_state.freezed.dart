@@ -234,7 +234,7 @@ class _$_HomeStudyModalState implements _HomeStudyModalState {
       final List<StatusType> selectedStatusList = const [],
       final List<ImportanceType> importanceList = const [],
       final List<ImportanceType> selectedImportanceList = const [],
-      this.isRepeat = true,
+      this.isRepeat = false,
       this.isSaved = false,
       this.isWeak = false})
       : _filterQuizList = filterQuizList,

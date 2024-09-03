@@ -62,7 +62,7 @@ class _FinishBody extends ConsumerWidget {
             ),
             const Gap(10),
             const Text(
-              '条件を変えて、より多くの用語を覚えましょう',
+              '条件を変えて、より多くの用語を覚えましょう💪',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.normal,

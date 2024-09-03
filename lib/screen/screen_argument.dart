@@ -79,7 +79,7 @@ class QuizResultScreenArguments with _NoParamsMixin implements IScreenArguments 
         pageBuilder: (context, animation, secondaryAnimation) => const QuizResultScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => QuizResultScreen()),
+              MaterialPageRoute(builder: (context) => const QuizResultScreen()),
               context,
               animation,
               secondaryAnimation,

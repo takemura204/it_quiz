@@ -4,6 +4,7 @@ import 'package:appinio_swiper/controllers.dart';
 import 'package:appinio_swiper/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_study_modal/home_study_modal_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -13,6 +14,8 @@ import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
 import '../../untils/enums.dart';
+import '../admob/admob_controller.dart';
+import '../main/main_screen_controller.dart';
 import 'home_study_screen_state.dart';
 
 final homeStudyScreenProvider =
@@ -251,6 +254,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       unKnowQuizItemList: unKnowQuizItemList,
       quizItemList: quizItemList,
     );
+
     _nextQuiz();
   }
 
@@ -258,23 +262,52 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   void _nextQuiz() {
     final itemIndex = state.itemIndex;
     final quizItemList = [...state.quizItemList];
+    final knowQuizItemList = [...state.knowQuizItemList];
+    final unKnowQuizItemList = [...state.unKnowQuizItemList];
+    final isRepeat = ref.read(homeStudyModalProvider).isRepeat;
     //クイズが完了したが、「知らない」がまだ含まれる場合
     if (itemIndex == quizItemList.length - 1) {
-      setIsFinishView(true);
-      setIsResultView(true);
-      _updateQuizItem(quizItemList[itemIndex]);
-      _saveDevice();
-      quizItemList.clear();
-      quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
-        ..sort((a, b) => a.quizId.compareTo(b.quizId)));
-      stopwatch.stop();
-      state = state.copyWith(
-        quizItemList: quizItemList,
-        knowQuizItemList: [],
-        unKnowQuizItemList: [],
-        duration: stopwatch.elapsed,
-      );
-      updateHistoryQuiz();
+      //「知らない」用語を繰り返す場合
+      if (isRepeat && unKnowQuizItemList.isNotEmpty) {
+        _updateQuizItem(quizItemList[itemIndex]);
+        _saveDevice();
+        quizItemList.clear();
+        quizItemList
+            .addAll([...state.unKnowQuizItemList]..sort((a, b) => a.quizId.compareTo(b.quizId)));
+        state = state.copyWith(
+          quizItemList: quizItemList,
+          knowQuizItemList: knowQuizItemList,
+          unKnowQuizItemList: [],
+          itemIndex: 0,
+          lapIndex: state.lapIndex + 1,
+        );
+      }
+      //リザルト画面に移動
+      else {
+        final isPremium = ref.read(authModelProvider).isPremium;
+        if (!isPremium) {
+          ref.read(adMobProvider.notifier).showAdInterstitial();
+        }
+
+        ref.read(mainScreenControllerProvider.notifier).updateInAppReviewCount();
+
+        setIsFinishView(true);
+        setIsResultView(true);
+        _updateQuizItem(quizItemList[itemIndex]);
+        _saveDevice();
+        quizItemList.clear();
+        quizItemList.addAll([...state.knowQuizItemList, ...state.unKnowQuizItemList]
+          ..sort((a, b) => a.quizId.compareTo(b.quizId)));
+        stopwatch.stop();
+        state = state.copyWith(
+          quizItemList: quizItemList,
+          knowQuizItemList: [],
+          unKnowQuizItemList: [],
+          duration: stopwatch.elapsed,
+          lapIndex: 0,
+        );
+        updateHistoryQuiz();
+      }
     }
     //まだ問題が続けられる時
     else {
@@ -343,9 +376,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       source: quizItemList[index].source,
       importance: quizItemList[index].importance,
     );
-    print({'tapSavedButton', index, quizItemList[index].isSaved});
     state = state.copyWith(quizItemList: quizItemList);
-    print({'tapSavedButton', index, state.quizItemList[index].isSaved});
     _updateQuizItem(quizItemList[index]);
   }
 
@@ -381,7 +412,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       itemIndex: 0,
       isAnsView: false,
     );
-    print({'updateStudyQuizItemList', quizItemList});
     _saveDevice();
   }
 
@@ -415,6 +445,10 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   Future setDirection(AppinioSwiperDirection? direction) async {
     state = state.copyWith(direction: direction);
+  }
+
+  void setIsRepeat(bool value) {
+    state = state.copyWith(isRepeat: value);
   }
 
   /// 端末保存

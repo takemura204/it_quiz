@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kentei_quiz/model/lang/secret_key.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import 'admob_state.dart';
@@ -16,9 +17,18 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
     initState();
   }
 
+  final adShowCountName = 'adShowCount';
+
   @override
   Future initState() async {
+    await getAdShowCount();
     super.initState();
+  }
+
+  Future getAdShowCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    final adShowCount = prefs.getInt(adShowCountName) ?? state.adShowCount;
+    state = state.copyWith(adShowCount: adShowCount);
   }
 
   // バナー広告を新しく生成するメソッド
@@ -77,8 +87,7 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
             onAdDismissedFullScreenContent: (InterstitialAd ad) {
               ad.dispose();
             },
-            onAdFailedToShowFullScreenContent:
-                (InterstitialAd ad, AdError error) {
+            onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
               ad.dispose();
             },
           );
@@ -96,12 +105,18 @@ class AdMobController extends StateNotifier<AdMobState> with LocatorMixin {
   Future showAdInterstitial() async {
     final adShowCount = state.adShowCount + 1;
     state = state.copyWith(adShowCount: adShowCount);
+    _saveDevice();
 
-    if (adShowCount % 2 == 0) {
+    if (adShowCount % 3 == 0) {
       final interstitialAd = await createNewInterstitialAd();
       if (interstitialAd != null) {
         interstitialAd.show();
       }
     }
+  }
+
+  Future _saveDevice() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(adShowCountName, state.adShowCount);
   }
 }

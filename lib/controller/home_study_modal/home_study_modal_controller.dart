@@ -146,6 +146,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     final isRepeatData = prefs.getBool(isRepeatName);
     if (isRepeatData != null) {
       state = state.copyWith(isRepeat: isRepeatData);
+      ref.read(homeStudyScreenProvider.notifier).setIsRepeat(state.isRepeat);
     }
   }
 
@@ -329,6 +330,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     final filterQuizList = state.filterQuizList;
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
     ref.read(homeStudyScreenProvider.notifier).updateStudyQuizItemList(filterQuizItemList);
+    ref.read(homeStudyScreenProvider.notifier).setIsRepeat(state.isRepeat);
     _saveDevice();
   }
 

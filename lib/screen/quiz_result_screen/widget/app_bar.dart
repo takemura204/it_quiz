@@ -15,6 +15,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
             iconSize: 30,
             onPressed: () {
               ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
+              ref.read(mainScreenControllerProvider.notifier).setIsShowInAppReview();
               Navigator.of(context).pop();
             }),
         Gap(context.width * 0.02),

@@ -152,7 +152,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
       final isPremium = ref.read(authModelProvider).isPremium;
       quizItemList.clear(); // クイズアイテムリストをクリア
       // 知ってるリストと知らないリストを結合して、quizIdの昇順に並べ替え
-
       quizItemList.addAll(
           [...knowQuizList, ...unKnowQuizList]..sort((a, b) => a.quizId.compareTo(b.quizId)));
       _stopwatch.stop();

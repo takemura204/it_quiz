@@ -14,7 +14,10 @@ class _QuizItemProgressBar extends HookConsumerWidget {
         quizItemList.length + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
     final currentIndex =
         itemIndex + (knowQuizItemList.length + unKnowQuizItemList.length - itemIndex);
-    final progress = totalItems > 0 ? currentIndex / totalItems : 0.0;
+    final isRepeat = ref.watch(homeStudyScreenProvider.select((s) => s.isRepeat));
+    final isNotRepeatProgress = totalItems > 0 ? currentIndex / totalItems : 0.0;
+    final isRepeatProgress = totalItems > 0 ? knowQuizItemList.length / totalItems : 0.0;
+    final progress = isRepeat ? isRepeatProgress : isNotRepeatProgress;
 
     return Container(
       height: 5.0,

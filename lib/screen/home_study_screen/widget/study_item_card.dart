@@ -55,11 +55,11 @@ class _StudyItemCard extends ConsumerWidget {
         },
         cardsBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            onTap: () {
+            onTapDown: (details) {
               if (!isShowTutorial) {
                 ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
               }
-              ref.read(homeStudyScreenProvider.notifier).setIsAnsView(true); // 画面切り替え
+              ref.read(homeStudyScreenProvider.notifier).setIsAnsView(true);
             },
             child: Stack(
               children: [

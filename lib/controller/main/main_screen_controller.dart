@@ -6,13 +6,11 @@ import 'package:state_notifier/state_notifier.dart';
 
 import 'main_screen_state.dart';
 
-final mainScreenControllerProvider =
-    StateNotifierProvider<MainScreenController, MainScreenState>(
+final mainScreenControllerProvider = StateNotifierProvider<MainScreenController, MainScreenState>(
   (ref) => MainScreenController(ref: ref),
 );
 
-class MainScreenController extends StateNotifier<MainScreenState>
-    with LocatorMixin {
+class MainScreenController extends StateNotifier<MainScreenState> with LocatorMixin {
   MainScreenController({required this.ref}) : super(const MainScreenState()) {
     initState();
   }
@@ -22,8 +20,7 @@ class MainScreenController extends StateNotifier<MainScreenState>
   @override
   Future initState() async {
     final prefs = await SharedPreferences.getInstance();
-    final inAppReviewCount =
-        prefs.getInt('inAppReviewCount') ?? state.inAppReviewCount;
+    final inAppReviewCount = prefs.getInt('inAppReviewCount') ?? state.inAppReviewCount;
     final isShowTrackingModal = prefs.getBool('isShowTrackingModal') ?? true;
     final isShowTutorialModal = prefs.getBool('isShowTutorialModal') ?? true;
     //トラッキング許可表示
@@ -44,13 +41,14 @@ class MainScreenController extends StateNotifier<MainScreenState>
   ///レビュー表示
   Future<void> updateInAppReviewCount() async {
     final updateShowInAppReviewCount = state.inAppReviewCount + 1;
-    state = state.copyWith(
-        inAppReviewCount: updateShowInAppReviewCount, isShowInAppReview: true);
+    state = state.copyWith(inAppReviewCount: updateShowInAppReviewCount, isShowInAppReview: true);
     _saveDevice();
+    print({'inAppReviewCount', state.inAppReviewCount});
   }
 
   void setIsShowInAppReview() {
-    if (state.inAppReviewCount % 3 == 0 && state.isShowInAppReview) {
+    if ((state.inAppReviewCount == 5 || state.inAppReviewCount % 10 == 0) &&
+        state.isShowInAppReview) {
       final inAppReview = InAppReview.instance;
       inAppReview.requestReview();
       state = state.copyWith(isShowInAppReview: false);
