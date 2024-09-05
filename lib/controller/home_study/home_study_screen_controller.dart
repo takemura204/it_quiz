@@ -387,11 +387,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   ///クイズ結果更新(端末保存)
   void updateHistoryQuiz() {
-    final quizItemList = [
-      ...state.quizItemList,
-      ...state.knowQuizItemList,
-      ...state.unKnowQuizItemList
-    ]..sort((a, b) => a.quizId.compareTo(b.quizId));
+    final quizItemList = [...state.quizItemList]..sort((a, b) => a.quizId.compareTo(b.quizId));
     final duration = state.duration;
     final studyType = ref.read(quizModelProvider).studyType;
     final updateQuiz = initStudyQuiz.copyWith(

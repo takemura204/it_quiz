@@ -15,7 +15,7 @@ import '../../model/lang/initial_resource.dart';
 import '../../view/button/animation_shadow_button.dart';
 import '../../view/button/circle_button.dart';
 import '../../view/loading.dart';
-import '../../view/modals/need_premium_modal.dart';
+import '../../view/modals/need_premium_modal/need_premium_modal.dart';
 
 part 'widget/precautions.dart';
 part 'widget/premium_content.dart';
@@ -28,8 +28,7 @@ class PremiumDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading =
-        ref.watch(premiumDetailProvider.select((s) => s.isLoading));
+    final isLoading = ref.watch(premiumDetailProvider.select((s) => s.isLoading));
     final isShowPurchasedModal =
         ref.watch(premiumDetailProvider.select((s) => s.isShowPurchasedModal));
 

@@ -59,8 +59,9 @@ Quiz initRandomQuiz = Quiz(
 ///覚える
 Quiz initStudyQuiz = Quiz(
   id: 3,
-  category: I18n().setCategory(6),
-  title: I18n().styleLeanQuiz,
+  categoryId: 7,
+  category: I18n().setCategory(7),
+  title: '覚える',
   quizItemList: [],
-  studyType: StudyType.learn,
+  studyType: StudyType.study,
 );

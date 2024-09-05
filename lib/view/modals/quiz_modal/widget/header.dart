@@ -1,12 +1,16 @@
 part of '../quiz_modal.dart';
 
-class _ModalTitle extends ConsumerWidget {
-  const _ModalTitle({required this.title});
+class _Header extends ConsumerWidget {
+  const _Header({required this.title});
 
   final String title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
+    final filterQuizList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizList));
+    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
+    final isFiltered = quizItemList.length != filterQuizItemList.length;
     return Container(
       color: Colors.white,
       child: Row(
@@ -20,14 +24,37 @@ class _ModalTitle extends ConsumerWidget {
               alignment: Alignment.center,
               child: Text(
                 title,
-                style: context.texts.titleSmall,
+                style: context.texts.titleMedium,
               ),
             ),
           ),
           ClearButton(
             iconSize: 30,
-            onPressed: () {
-              Navigator.of(context).pop();
+            onPressed: () async {
+              if (isFiltered) {
+                await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return PrimaryDialog(
+                        onPressed: () {
+                          ref.read(homeQuizModalProvider.notifier).resetFilterQuizList();
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        title: "学習を中断しますか？",
+                        subWidget: Text(
+                          "学習を中断すると\nこれまでの内容は保存されません。",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: context.width * 0.04, color: Colors.black87),
+                          maxLines: 2,
+                        ),
+                        cancelText: "続ける",
+                        doneText: "中断する",
+                      );
+                    });
+              } else {
+                Navigator.of(context).pop();
+              }
             },
           ),
           const Gap(10),

@@ -5,27 +5,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_study_modal/home_study_modal_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
+import 'package:kentei_quiz/view/modals/need_premium_modal/premium_quiz_modal.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../controller/home_study/home_study_screen_controller.dart';
 import '../../../model/lang/initial_resource.dart';
 import '../../../model/quiz/quiz.dart';
 import '../../../model/user/auth_model.dart';
-import '../../../screen/screen_argument.dart';
 import '../../../untils/enums.dart';
 import '../../button/primary_button.dart';
 import '../../button_icon/clear_button.dart';
 import '../../icon/quarter_circle_icon.dart';
 import '../dialog.dart';
-import '../need_premium_modal.dart';
 
-part 'widget/study_modal_category_menu.dart';
-part 'widget/study_modal_detail_menu.dart';
-part 'widget/study_modal_footer.dart';
-part 'widget/study_modal_header.dart';
-part 'widget/study_modal_importance_menu.dart';
-part 'widget/study_modal_menu_title.dart';
-part 'widget/study_modal_status_menu.dart';
+part 'widget/category_menu.dart';
+part 'widget/detail_menu.dart';
+part 'widget/footer.dart';
+part 'widget/header.dart';
+part 'widget/importance_menu.dart';
+part 'widget/menu_title.dart';
+part 'widget/status_menu.dart';
 
 Future showStudyModal(BuildContext context) async {
   await showModalBottomSheet(

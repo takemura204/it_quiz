@@ -5,15 +5,12 @@ import 'package:kentei_quiz/model/user/auth_model.dart';
 
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
-import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';
 import 'home_quiz_screen_state.dart';
 
 final homeQuizScreenProvider = StateNotifierProvider<HomeQuizScreenController, HomeQuizScreenState>(
-  (ref) => HomeQuizScreenController(ref: ref),
-  dependencies: [quizModelProvider],
-);
+    (ref) => HomeQuizScreenController(ref: ref));
 
 class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   HomeQuizScreenController({required this.ref}) : super(const HomeQuizScreenState()) {
@@ -24,16 +21,10 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
 
   Future _initState() async {
     setIsLoading(true);
-    ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
-      if (quizzes.isLoading) {
-        await Future.wait([
-          initQuizList(),
-          initCategoryList(),
-          initStatusList(),
-        ]);
-      }
-      setIsLoading(false);
-    });
+    await initQuizList();
+    await initCategoryList();
+    await initStatusList();
+    setIsLoading(false);
   }
 
   /// CategoryList取得

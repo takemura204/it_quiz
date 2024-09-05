@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import '../button/animation_shadow_button.dart';
+import '../../button/animation_shadow_button.dart';
 
 ///プレミアム登録
 class NeedPremiumModal extends ConsumerWidget {
@@ -46,9 +46,7 @@ class NeedPremiumModal extends ConsumerWidget {
               Text(
                 title,
                 style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87),
+                    fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
               ),
               const Gap(15),
               subWidget,
@@ -65,10 +63,7 @@ class NeedPremiumModal extends ConsumerWidget {
 
               const Text(
                 '＼　他にもたくさんの特典付き！　／',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black54),
               ),
               const Gap(8),
 
@@ -82,10 +77,8 @@ class NeedPremiumModal extends ConsumerWidget {
               TextButton(
                 child: const Text(
                   "キャンセル",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black54),
+                  style:
+                      TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black54),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -101,8 +94,7 @@ class NeedPremiumModal extends ConsumerWidget {
 
 ///プレミアム購入完了モーダル
 class PurchasedModal extends HookWidget {
-  const PurchasedModal(
-      {required this.title, required this.subtitle, required this.onPressed});
+  const PurchasedModal({required this.title, required this.subtitle, required this.onPressed});
 
   final String title;
   final String subtitle;
@@ -119,8 +111,8 @@ class PurchasedModal extends HookWidget {
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
         ),
-        padding: EdgeInsets.symmetric(
-            horizontal: context.width * 0.02, vertical: context.width * 0.02),
+        padding:
+            EdgeInsets.symmetric(horizontal: context.width * 0.02, vertical: context.width * 0.02),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -130,10 +122,8 @@ class PurchasedModal extends HookWidget {
             ///タイトル
             Text(
               "$title",
-              style: const TextStyle(
-                  fontSize: 21,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87),
+              style:
+                  const TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.black87),
               textAlign: TextAlign.center,
             ),
             Gap(context.height * 0.02),

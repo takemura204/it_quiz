@@ -76,9 +76,7 @@ part 'category3/category3_resource.dart';
 
 extension QuizModelEx on QuizModel {
   List<Quiz> get initQuizList {
-    final quizList =
-        // category0QuizList +
-        category1QuizList + category2QuizList + category3QuizList;
+    final quizList = category1QuizList + category2QuizList + category3QuizList;
 
     return quizList;
   }

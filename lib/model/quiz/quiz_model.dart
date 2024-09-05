@@ -160,35 +160,61 @@ class QuizModel extends StateNotifier<Quizzes>  {
     final prefs = await SharedPreferences.getInstance();
     final historyListDataJson = prefs.getStringList('history_list');
     if (historyListDataJson != null && historyListDataJson.isNotEmpty) {
-      final getQuizList = historyListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
-      final updateQuizList = getQuizList.map((quiz) {
-        // studyQuizから、対応するアイテムを探す
-        final updatedItem = initQuizList.firstWhereOrNull((e) => e.id == quiz.id);
-        if (updatedItem != null) {
-          // 各クイズに対して、questionの更新を適用
-          return quiz.copyWith(
-            quizItemList: quiz.quizItemList.map((quizItem) {
-              // updatedItemのクイズリストから、対応するクイズを探す
-              final updatedQuiz =
-                  updatedItem.quizItemList.firstWhereOrNull((e) => e.quizId == quizItem.quizId);
-              if (updatedQuiz != null) {
-                // questionだけを更新
+      final localHistoryQuizList = historyListDataJson.map((e) => Quiz.fromJson(json.decode(e))).toList();
+      final updateHistoryQuizList = localHistoryQuizList.map((localQuiz) {
+        final matchedQuiz = initQuizList.firstWhereOrNull((e) => e.id == localQuiz.id);
+        if (matchedQuiz != null) {
+          // 各クイズに対して、quizの更新
+          return localQuiz.copyWith(
+            title: matchedQuiz.title,
+            categoryId: matchedQuiz.categoryId,
+            category: matchedQuiz.category,
+            isPremium: matchedQuiz.isPremium,
+            quizItemList: localQuiz.quizItemList.map((quizItem) {
+              final quizItemList = initQuizList.expand((quiz) => quiz.quizItemList).toList();
+              final matchedQuizItem =
+               quizItemList.firstWhereOrNull((e) => e.quizId == quizItem.quizId);
+              if (matchedQuizItem != null) {
                 return quizItem.copyWith(
-                  word: updatedQuiz.word,
-                  question: updatedQuiz.question,
-                  ans: updatedQuiz.ans,
-                  choices: updatedQuiz.choices,
-                  comment: updatedQuiz.comment,
+                  word: matchedQuizItem.word,
+                  comment: matchedQuizItem.comment,
+                  question: matchedQuizItem.question,
+                  ans: matchedQuizItem.ans,
+                  choices: matchedQuizItem.choices,
+                  source: matchedQuizItem.source,
+                  isPremium: matchedQuizItem.isPremium,
+                  importance: matchedQuizItem.importance,
                 );
               }
-              // 対応するクイズが見つからなかった場合、変更なし
               return quizItem;
             }).toList(),
           );
         }
-        return quiz;
+        else {
+          return localQuiz.copyWith(
+            quizItemList: localQuiz.quizItemList.map((quizItem) {
+              final quizItemList = initQuizList.expand((quiz) => quiz.quizItemList).toList();
+              final matchedQuizItem =
+              quizItemList.firstWhereOrNull((e) => e.quizId == quizItem.quizId);
+              if (matchedQuizItem != null) {
+                return quizItem.copyWith(
+                  word: matchedQuizItem.word,
+                  comment: matchedQuizItem.comment,
+                  question: matchedQuizItem.question,
+                  ans: matchedQuizItem.ans,
+                  choices: matchedQuizItem.choices,
+                  source: matchedQuizItem.source,
+                  isPremium: matchedQuizItem.isPremium,
+                  importance: matchedQuizItem.importance,
+                );
+              }
+              return quizItem;
+            }).toList(),
+          );
+        }
       }).toList();
-      state = state.copyWith(historyQuizList: updateQuizList);
+      state = state.copyWith(historyQuizList: updateHistoryQuizList);
+      print({'historyList',updateHistoryQuizList.last.quizItemList});
     }
     _saveDevice();
   }

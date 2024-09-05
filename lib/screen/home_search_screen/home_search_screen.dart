@@ -17,7 +17,7 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/save_button.dart';
-import '../../view/modals/need_premium_modal.dart';
+import '../../view/modals/need_premium_modal/need_premium_modal.dart';
 import '../../view/tag/category_tag.dart';
 import '../../view/tag/importance_tag.dart';
 import '../../view/tag/status_tag.dart';

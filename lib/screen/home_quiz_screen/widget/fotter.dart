@@ -1,7 +1,7 @@
-part of 'home_quiz_screen.dart';
+part of '../home_quiz_screen.dart';
 
-class _BottomQuizMenu extends ConsumerWidget {
-  const _BottomQuizMenu({required this.weakQuiz, required this.randomQuiz});
+class _Fotter extends ConsumerWidget {
+  const _Fotter({required this.weakQuiz, required this.randomQuiz});
 
   final Quiz weakQuiz;
   final Quiz randomQuiz;
@@ -27,23 +27,23 @@ class _BottomQuizMenu extends ConsumerWidget {
                 onPressed: weakQuiz.quizItemList.isEmpty
                     ? null
                     : () {
-                        ref
-                            .read(quizModelProvider.notifier)
-                            .setQuizType(QuizStyleType.weak);
-                        ref
-                            .read(homeQuizScreenProvider.notifier)
-                            .setSelectQuiz(weakQuiz);
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15)),
-                          ),
-                          builder: (_) => WeakQuizModal(quiz: weakQuiz),
-                        );
-                      }),
+                  ref
+                      .read(quizModelProvider.notifier)
+                      .setQuizType(QuizStyleType.weak);
+                  ref
+                      .read(homeQuizScreenProvider.notifier)
+                      .setSelectQuiz(weakQuiz);
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                    ),
+                    builder: (_) => WeakQuizModal(quiz: weakQuiz),
+                  );
+                }),
             const Gap(10),
 
             ///テストボタン

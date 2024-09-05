@@ -7,7 +7,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/modals/need_premium_modal.dart';
+import '../../view/modals/need_premium_modal/need_premium_modal.dart';
 import '../screen_argument.dart';
 
 ///カラーテーマ選択
@@ -43,8 +43,8 @@ class _ColorCards extends ConsumerWidget {
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.01, vertical: context.width * 0.01),
+      padding:
+          EdgeInsets.symmetric(horizontal: context.width * 0.01, vertical: context.width * 0.01),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -68,8 +68,7 @@ class _ColorCards extends ConsumerWidget {
                             context: context,
                             builder: (_) => NeedPremiumModal(
                                   title: 'テーマを入手しますか？',
-                                  imagePath:
-                                      'assets/image/premium/premium_content5_3.png',
+                                  imagePath: 'assets/image/premium/premium_content5_3.png',
                                   subWidget: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -77,8 +76,7 @@ class _ColorCards extends ConsumerWidget {
                                         child: RichText(
                                           textAlign: TextAlign.center,
                                           text: const TextSpan(
-                                            style: TextStyle(
-                                                color: Colors.black87),
+                                            style: TextStyle(color: Colors.black87),
                                             children: [
                                               TextSpan(
                                                 text: 'プレミアム特典を購入すると、\n',
@@ -95,8 +93,7 @@ class _ColorCards extends ConsumerWidget {
                                   onPressed: () {
                                     Navigator.pop(context);
                                     context.showScreen(
-                                        const PremiumDetailScreenArguments()
-                                            .generateRoute());
+                                        const PremiumDetailScreenArguments().generateRoute());
                                   },
                                 ));
                       },
@@ -108,8 +105,7 @@ class _ColorCards extends ConsumerWidget {
                       : Colors.grey.shade200,
               elevation: 1,
               margin: EdgeInsets.symmetric(
-                  horizontal: context.width * 0.01,
-                  vertical: context.width * 0.01),
+                  horizontal: context.width * 0.01, vertical: context.width * 0.01),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide(
@@ -166,14 +162,11 @@ class _ColorCards extends ConsumerWidget {
 
                       ///テキスト
                       Text(
-                        ref
-                            .watch(settingColorProvider.notifier)
-                            .colorName(index),
+                        ref.watch(settingColorProvider.notifier).colorName(index),
                         style: TextStyle(
                           color: _isSelected ? colors[index] : Colors.black54,
                           fontSize: context.width * 0.03,
-                          fontWeight:
-                              _isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight: _isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                       ),
                       Gap(context.height * 0.01),

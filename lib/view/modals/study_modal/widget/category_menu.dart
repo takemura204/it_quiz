@@ -142,56 +142,7 @@ class _CategoryItemCard extends HookConsumerWidget {
     return GestureDetector(
       onTap: () {
         if (isLock) {
-          showDialog(
-              context: context,
-              builder: (_) => NeedPremiumModal(
-                    title: '用語・クイズを解放しますか？',
-                    imagePath: 'assets/image/premium/premium_content1.png',
-                    subWidget: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              style: const TextStyle(color: Colors.black87),
-                              children: [
-                                const TextSpan(
-                                  text: 'プレミアム特典を購入すると、\n',
-                                ),
-                                TextSpan(
-                                  text: '850',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: context.accentColor,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                const TextSpan(
-                                  text: '以上の用語・クイズが',
-                                ),
-                                TextSpan(
-                                  text: '全て',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: context.accentColor,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                const TextSpan(
-                                  text: '解放されます。',
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      context.showScreen(const PremiumDetailScreenArguments().generateRoute());
-                    },
-                  ));
+          showPremiumQuizModal(context);
         } else {
           ref
               .read(homeStudyModalProvider.notifier)

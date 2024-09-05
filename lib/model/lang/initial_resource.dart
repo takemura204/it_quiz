@@ -34,6 +34,8 @@ class I18n {
 
   String get styleRandomQuiz => "ランダム出題";
 
+  String get styleStudyQuiz => "覚える";
+
   ///category
   String setCategory(int categoryId) {
     switch (categoryId) {
@@ -51,6 +53,8 @@ class I18n {
         return styleWeakQuiz;
       case 6:
         return styleRandomQuiz;
+      case 7:
+        return styleStudyQuiz;
       default:
         return 'その他';
     }
