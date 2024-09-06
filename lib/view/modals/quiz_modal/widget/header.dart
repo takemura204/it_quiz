@@ -1,16 +1,14 @@
 part of '../quiz_modal.dart';
 
 class _Header extends ConsumerWidget {
-  const _Header({required this.title});
+  const _Header({required this.title, required this.quizItemList});
 
   final String title;
+  final List<QuizItem> quizItemList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(homeStudyScreenProvider.select((s) => s.quizItemList));
-    final filterQuizList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizList));
-    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
-    final isFiltered = quizItemList.length != filterQuizItemList.length;
+    final filterQuizItemList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizItemList));
     return Container(
       color: Colors.white,
       child: Row(
@@ -24,34 +22,16 @@ class _Header extends ConsumerWidget {
               alignment: Alignment.center,
               child: Text(
                 title,
-                style: context.texts.titleMedium,
+                style: context.texts.titleSmall,
               ),
             ),
           ),
           ClearButton(
             iconSize: 30,
             onPressed: () async {
-              if (isFiltered) {
-                await showDialog(
-                    context: context,
-                    builder: (context) {
-                      return PrimaryDialog(
-                        onPressed: () {
-                          ref.read(homeQuizModalProvider.notifier).resetFilterQuizList();
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        },
-                        title: "学習を中断しますか？",
-                        subWidget: Text(
-                          "学習を中断すると\nこれまでの内容は保存されません。",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: context.width * 0.04, color: Colors.black87),
-                          maxLines: 2,
-                        ),
-                        cancelText: "続ける",
-                        doneText: "中断する",
-                      );
-                    });
+              if (quizItemList.length != filterQuizItemList.length) {
+                ref.read(homeQuizModalProvider.notifier).resetFilterQuizList();
+                Navigator.of(context).pop();
               } else {
                 Navigator.of(context).pop();
               }

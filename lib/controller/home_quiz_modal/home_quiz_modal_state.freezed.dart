@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeQuizModalState {
   bool get isLoading => throw _privateConstructorUsedError;
-  List<Quiz> get filterQuizList => throw _privateConstructorUsedError;
+  List<QuizItem> get filterQuizItemList => throw _privateConstructorUsedError;
   List<StatusType> get statusList => throw _privateConstructorUsedError;
   List<StatusType> get selectedStatusList => throw _privateConstructorUsedError;
   List<ImportanceType> get importanceList => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $HomeQuizModalStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      List<Quiz> filterQuizList,
+      List<QuizItem> filterQuizItemList,
       List<StatusType> statusList,
       List<StatusType> selectedStatusList,
       List<ImportanceType> importanceList,
@@ -64,7 +64,7 @@ class _$HomeQuizModalStateCopyWithImpl<$Res, $Val extends HomeQuizModalState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? filterQuizList = null,
+    Object? filterQuizItemList = null,
     Object? statusList = null,
     Object? selectedStatusList = null,
     Object? importanceList = null,
@@ -78,10 +78,10 @@ class _$HomeQuizModalStateCopyWithImpl<$Res, $Val extends HomeQuizModalState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      filterQuizList: null == filterQuizList
-          ? _value.filterQuizList
-          : filterQuizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
+      filterQuizItemList: null == filterQuizItemList
+          ? _value.filterQuizItemList
+          : filterQuizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
       statusList: null == statusList
           ? _value.statusList
           : statusList // ignore: cast_nullable_to_non_nullable
@@ -124,7 +124,7 @@ abstract class _$$_HomeQuizModalStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      List<Quiz> filterQuizList,
+      List<QuizItem> filterQuizItemList,
       List<StatusType> statusList,
       List<StatusType> selectedStatusList,
       List<ImportanceType> importanceList,
@@ -146,7 +146,7 @@ class __$$_HomeQuizModalStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? filterQuizList = null,
+    Object? filterQuizItemList = null,
     Object? statusList = null,
     Object? selectedStatusList = null,
     Object? importanceList = null,
@@ -160,10 +160,10 @@ class __$$_HomeQuizModalStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      filterQuizList: null == filterQuizList
-          ? _value._filterQuizList
-          : filterQuizList // ignore: cast_nullable_to_non_nullable
-              as List<Quiz>,
+      filterQuizItemList: null == filterQuizItemList
+          ? _value._filterQuizItemList
+          : filterQuizItemList // ignore: cast_nullable_to_non_nullable
+              as List<QuizItem>,
       statusList: null == statusList
           ? _value._statusList
           : statusList // ignore: cast_nullable_to_non_nullable
@@ -201,7 +201,7 @@ class __$$_HomeQuizModalStateCopyWithImpl<$Res>
 class _$_HomeQuizModalState implements _HomeQuizModalState {
   const _$_HomeQuizModalState(
       {this.isLoading = false,
-      final List<Quiz> filterQuizList = const [],
+      final List<QuizItem> filterQuizItemList = const [],
       final List<StatusType> statusList = const [],
       final List<StatusType> selectedStatusList = const [],
       final List<ImportanceType> importanceList = const [],
@@ -209,7 +209,7 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
       this.isRepeat = false,
       this.isSaved = false,
       this.isWeak = false})
-      : _filterQuizList = filterQuizList,
+      : _filterQuizItemList = filterQuizItemList,
         _statusList = statusList,
         _selectedStatusList = selectedStatusList,
         _importanceList = importanceList,
@@ -218,13 +218,14 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
   @override
   @JsonKey()
   final bool isLoading;
-  final List<Quiz> _filterQuizList;
+  final List<QuizItem> _filterQuizItemList;
   @override
   @JsonKey()
-  List<Quiz> get filterQuizList {
-    if (_filterQuizList is EqualUnmodifiableListView) return _filterQuizList;
+  List<QuizItem> get filterQuizItemList {
+    if (_filterQuizItemList is EqualUnmodifiableListView)
+      return _filterQuizItemList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_filterQuizList);
+    return EqualUnmodifiableListView(_filterQuizItemList);
   }
 
   final List<StatusType> _statusList;
@@ -277,7 +278,7 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
 
   @override
   String toString() {
-    return 'HomeQuizModalState(isLoading: $isLoading, filterQuizList: $filterQuizList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList, isRepeat: $isRepeat, isSaved: $isSaved, isWeak: $isWeak)';
+    return 'HomeQuizModalState(isLoading: $isLoading, filterQuizItemList: $filterQuizItemList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList, isRepeat: $isRepeat, isSaved: $isSaved, isWeak: $isWeak)';
   }
 
   @override
@@ -288,7 +289,7 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             const DeepCollectionEquality()
-                .equals(other._filterQuizList, _filterQuizList) &&
+                .equals(other._filterQuizItemList, _filterQuizItemList) &&
             const DeepCollectionEquality()
                 .equals(other._statusList, _statusList) &&
             const DeepCollectionEquality()
@@ -307,7 +308,7 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
-      const DeepCollectionEquality().hash(_filterQuizList),
+      const DeepCollectionEquality().hash(_filterQuizItemList),
       const DeepCollectionEquality().hash(_statusList),
       const DeepCollectionEquality().hash(_selectedStatusList),
       const DeepCollectionEquality().hash(_importanceList),
@@ -327,7 +328,7 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
 abstract class _HomeQuizModalState implements HomeQuizModalState {
   const factory _HomeQuizModalState(
       {final bool isLoading,
-      final List<Quiz> filterQuizList,
+      final List<QuizItem> filterQuizItemList,
       final List<StatusType> statusList,
       final List<StatusType> selectedStatusList,
       final List<ImportanceType> importanceList,
@@ -339,7 +340,7 @@ abstract class _HomeQuizModalState implements HomeQuizModalState {
   @override
   bool get isLoading;
   @override
-  List<Quiz> get filterQuizList;
+  List<QuizItem> get filterQuizItemList;
   @override
   List<StatusType> get statusList;
   @override

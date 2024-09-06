@@ -214,7 +214,6 @@ class QuizModel extends StateNotifier<Quizzes>  {
         }
       }).toList();
       state = state.copyWith(historyQuizList: updateHistoryQuizList);
-      print({'historyList',updateHistoryQuizList.last.quizItemList});
     }
     _saveDevice();
   }

@@ -5,8 +5,7 @@ class _Footer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final filterQuizList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizList));
-    final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();
+    final filterQuizItemList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizItemList));
     final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
     return Container(
       color: context.backgroundColor,
@@ -15,7 +14,7 @@ class _Footer extends HookConsumerWidget {
         children: [
           TweenAnimationBuilder<int>(
             tween: IntTween(
-              end: filterQuizItemList.length, // 現在の長さを終点とする
+              end: filterQuizItemList.length,
             ),
             duration: const Duration(milliseconds: 300), // アニメーションの長さを調整します
             builder: (context, value, child) => RichText(

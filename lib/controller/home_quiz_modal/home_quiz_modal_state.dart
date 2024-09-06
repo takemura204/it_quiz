@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kentei_quiz/untils/enums.dart';
-
-import '../../model/quiz/quiz.dart';
+import '../../model/quiz_item/quiz_item.dart';
 
 part 'home_quiz_modal_state.freezed.dart';
 
@@ -9,7 +8,7 @@ part 'home_quiz_modal_state.freezed.dart';
 class HomeQuizModalState with _$HomeQuizModalState {
   const factory HomeQuizModalState({
     @Default(false) final bool isLoading,
-    @Default([]) final List<Quiz> filterQuizList,
+    @Default([]) final List<QuizItem> filterQuizItemList,
     @Default([]) final List<StatusType> statusList,
     @Default([]) final List<StatusType> selectedStatusList,
     @Default([]) final List<ImportanceType> importanceList,

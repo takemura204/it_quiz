@@ -16,6 +16,7 @@ final homeStudyModalProvider = StateNotifierProvider<HomeStudyModalController, H
   (ref) => HomeStudyModalController(ref: ref),
 );
 
+
 class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
     with LocatorMixin, WidgetsBindingObserver {
   HomeStudyModalController({required this.ref}) : super(const HomeStudyModalState()) {
@@ -45,7 +46,7 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   Future _initState() async {
     setIsLoading(true);
     // resetData();
-    print('_initState');
+
     await _initFilterQuizList();
     await _initCategoryList();
     await _initStatusList();
@@ -117,7 +118,6 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
 
     state = state.copyWith(statusList: statusList, selectedStatusList: updatedStatusList);
 
-    print({'statusList',state.statusList,state.selectedStatusList});
   }
 
   Future _initImportanceList() async {

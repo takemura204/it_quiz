@@ -1,18 +1,20 @@
 part of '../quiz_modal.dart';
 
 class _StatusMenu extends HookConsumerWidget {
-  const _StatusMenu();
+  const _StatusMenu({required this.quizItemList});
+
+  final List<QuizItem> quizItemList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: context.width,
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _MenuTitle(title: '学習状況'),
-          Gap(10),
-          _StatusMenuList(),
+          const _MenuTitle(title: '学習状況'),
+          const Gap(10),
+          _StatusMenuList(quizItemList: quizItemList),
         ],
       ),
     );
@@ -20,12 +22,12 @@ class _StatusMenu extends HookConsumerWidget {
 }
 
 class _StatusMenuList extends HookConsumerWidget {
-  const _StatusMenuList();
+  const _StatusMenuList({required this.quizItemList});
+
+  final List<QuizItem> quizItemList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(homeQuizModalProvider.notifier).getQuizList();
-    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
     final goalValue = quizItemList.length;
     final correctValue = quizItemList.where((x) => x.status == StatusType.correct).toList().length;
     final incorrectValue =
@@ -34,6 +36,9 @@ class _StatusMenuList extends HookConsumerWidget {
     final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
     final statusList = ref.watch(homeQuizModalProvider.select((s) => s.statusList));
     List<StatusCard> _getSortedCards(BuildContext context, List<StatusType> statusList) {
+      if (statusList.isEmpty) {
+        return [];
+      }
       final List<StatusCard> cards = [
         StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
         StatusCard(status: statusList[1], value: learnedValue, iconColor: context.backgroundColor),
@@ -144,7 +149,6 @@ class _StatusCard extends ConsumerWidget {
     final isSelected = selectedStatusList.contains(status);
     final isStatusList = selectedStatusList.isEmpty;
     final isExists = statusValue != 0;
-
     return GestureDetector(
       onTap: isExists
           ? () {

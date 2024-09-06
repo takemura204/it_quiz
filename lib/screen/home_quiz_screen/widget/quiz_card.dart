@@ -20,7 +20,7 @@ class _QuizCard extends ConsumerWidget {
           ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.study);
           ref.read(quizModelProvider.notifier).setQuizIndex(index);
           ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(quiz);
-          showQuizModal(context, quiz.quizItemList);
+          showQuizModal(context, quiz);
         } else {
           showPremiumQuizModal(context);
         }

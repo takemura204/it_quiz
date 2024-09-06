@@ -37,7 +37,8 @@ class _ImportanceList extends HookConsumerWidget {
     final selectedImportanceList =
         ref.watch(homeStudyModalProvider.select((s) => s.selectedImportanceList));
     final importanceList = ref.watch(homeStudyModalProvider.select((s) => s.importanceList));
-    List<ImportanceCard> _getSortedCards(BuildContext context, List<ImportanceType> statusList) {
+    List<ImportanceCard> _getSortedCards(
+        BuildContext context, List<ImportanceType> importanceList) {
       final List<ImportanceCard> cards = [
         ImportanceCard(importance: importanceList[0], value: highValue),
         ImportanceCard(importance: importanceList[1], value: normalValue),

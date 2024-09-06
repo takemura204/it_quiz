@@ -1,18 +1,20 @@
 part of '../quiz_modal.dart';
 
 class _ImportanceMenu extends HookConsumerWidget {
-  const _ImportanceMenu();
+  const _ImportanceMenu({required this.quizItemList});
+
+  final List<QuizItem> quizItemList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: context.width,
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _MenuTitle(title: '重要度'),
-          Gap(10),
-          _ImportanceList(),
+          const _MenuTitle(title: '重要度'),
+          const Gap(10),
+          _ImportanceList(quizItemList: quizItemList),
         ],
       ),
     );
@@ -20,13 +22,12 @@ class _ImportanceMenu extends HookConsumerWidget {
 }
 
 class _ImportanceList extends HookConsumerWidget {
-  const _ImportanceList();
+  const _ImportanceList({required this.quizItemList});
+
+  final List<QuizItem> quizItemList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(homeQuizModalProvider.notifier).getQuizList();
-    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-
     final highValue =
         quizItemList.where((x) => x.importance == ImportanceType.high).toList().length;
     final normalValue =
@@ -37,7 +38,11 @@ class _ImportanceList extends HookConsumerWidget {
     final selectedImportanceList =
         ref.watch(homeQuizModalProvider.select((s) => s.selectedImportanceList));
     final importanceList = ref.watch(homeQuizModalProvider.select((s) => s.importanceList));
-    List<ImportanceCard> _getSortedCards(BuildContext context, List<ImportanceType> statusList) {
+    List<ImportanceCard> _getSortedCards(
+        BuildContext context, List<ImportanceType> importanceList) {
+      if (importanceList.isEmpty) {
+        return [];
+      }
       final List<ImportanceCard> cards = [
         ImportanceCard(importance: importanceList[0], value: highValue),
         ImportanceCard(importance: importanceList[1], value: normalValue),
