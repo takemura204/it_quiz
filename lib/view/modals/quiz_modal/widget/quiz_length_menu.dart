@@ -4,11 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 
-import '../controller/tutorial/tutorial_controller.dart';
-
 ///問題数指定
-class QuizLengthTabBar extends ConsumerWidget {
-  const QuizLengthTabBar({required this.selectedLength, required this.onTap});
+class QuizLengthMenu extends ConsumerWidget {
+  const QuizLengthMenu({required this.selectedLength, required this.onTap});
 
   final int selectedLength;
   final void Function(int) onTap; // 引数を取るように変更
@@ -17,10 +15,7 @@ class QuizLengthTabBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final List<int> selectLength = [5, 10, 20];
     final initialIndex = selectLength.indexOf(selectedLength);
-    final homeTarget4 =
-        ref.read(tutorialControllerProvider.notifier).homeTarget4;
     return Column(
-      key: homeTarget4,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
@@ -46,8 +41,7 @@ class QuizLengthTabBar extends ConsumerWidget {
                 labelColor: context.mainColor,
                 labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 unselectedLabelColor: Colors.black54,
-                unselectedLabelStyle:
-                    const TextStyle(fontWeight: FontWeight.normal),
+                unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),

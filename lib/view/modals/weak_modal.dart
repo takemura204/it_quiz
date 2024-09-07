@@ -12,7 +12,7 @@ import '../../untils/enums.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
-import '../quiz_length_tab_bar.dart';
+import 'quiz_modal/widget/quiz_length_menu.dart';
 
 ///クイズモーダル
 class WeakQuizModal extends ConsumerWidget {
@@ -56,7 +56,7 @@ class WeakQuizModal extends ConsumerWidget {
           const Gap(15),
 
           ///問題数
-          QuizLengthTabBar(
+          QuizLengthMenu(
             selectedLength: selectedWeakLength,
             onTap: (length) {
               ref.read(homeQuizScreenProvider.notifier).setWeakLength(length);

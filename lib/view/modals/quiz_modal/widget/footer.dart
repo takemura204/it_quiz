@@ -28,7 +28,7 @@ class _Footer extends HookConsumerWidget {
                         fontSize: 16, color: context.mainColor, fontWeight: FontWeight.bold),
                   ),
                   const TextSpan(
-                    text: ' 個に絞り込み中',
+                    text: ' 問に絞り込み中',
                     style:
                         TextStyle(fontSize: 12, color: Colors.black54, fontWeight: FontWeight.bold),
                   ),

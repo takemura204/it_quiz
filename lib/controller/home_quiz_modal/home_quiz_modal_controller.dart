@@ -30,6 +30,7 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
   final isRepeatName = 'quiz_is_repeat';
   final isSavedName = 'quiz_is_saved';
   final isWeakName = 'quiz_is_weak';
+  final quizItemCountName = 'quiz_item_count';
 
 
   Future _initState() async {
@@ -40,6 +41,7 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     await _initIsRepeat();
     await _initIsSaved();
     await _initIsWeak();
+    await _initQuizCount();
     await updateFilterQuizList();
     _saveDevice();
     setIsLoading(false);
@@ -126,6 +128,14 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     }
   }
 
+  Future _initQuizCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    final quizItemCountData = prefs.getInt(quizItemCountName);
+    if (quizItemCountData != null) {
+      state = state.copyWith(quizItemCount: quizItemCountData);
+    }
+  }
+
   ///Status絞り込み
   void updateStatusQuizList(StatusType status) {
     final selectedStatusList = [...state.selectedStatusList];
@@ -177,6 +187,16 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     updateFilterQuizList();
   }
 
+  void updateQuizItemCount(int value) {
+
+    final updateQuizItemCount = state.quizItemCount + value;
+    if (updateQuizItemCount>=5 && updateQuizItemCount<=50) {
+      state = state.copyWith(quizItemCount: updateQuizItemCount);
+      updateFilterQuizList();
+    }
+
+  }
+
   Future updateFilterQuizList() async {
     final quizItemList = quiz.quizItemList;
     List<QuizItem> filterQuizItemList =[...quizItemList];
@@ -208,6 +228,10 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
           .where((item) => item.isWeak)
           .toList();
     }
+
+    // リストをシャッフルしてから指定された数だけ抽出
+    final quizItemCount =state.quizItemCount;
+    filterQuizItemList = (filterQuizItemList..shuffle()).take(quizItemCount).toList();
 
     state = state.copyWith(filterQuizItemList: filterQuizItemList);
   }
@@ -242,6 +266,7 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     final isRepeat = state.isRepeat;
     final isSaved = state.isSaved;
     final isWeak = state.isWeak;
+    final quizItemCount = state.quizItemCount;
 
     await prefs.setStringList(filterQuizItemListName, filterQuizItemListData);
     await prefs.setStringList(statusListName, statusListData);
@@ -249,6 +274,7 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     await prefs.setBool(isRepeatName, isRepeat);
     await prefs.setBool(isSavedName, isSaved);
     await prefs.setBool(isWeakName, isWeak);
+    await prefs.setInt(quizItemCountName, quizItemCount);
   }
 
   Future resetData() async {

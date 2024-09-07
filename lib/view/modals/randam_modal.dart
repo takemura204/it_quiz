@@ -13,7 +13,7 @@ import '../../untils/enums.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
-import '../quiz_length_tab_bar.dart';
+import 'quiz_modal/widget/quiz_length_menu.dart';
 
 ///ランダムモーダル
 class RandomQuizModal extends ConsumerWidget {
@@ -58,7 +58,7 @@ class RandomQuizModal extends ConsumerWidget {
           const Gap(15),
 
           ///問題数
-          QuizLengthTabBar(
+          QuizLengthMenu(
             selectedLength: selectedTestLength,
             onTap: (length) {
               ref.read(homeQuizScreenProvider.notifier).setRandomQuizLength(length);
