@@ -12,7 +12,7 @@ import '../../untils/enums.dart';
 import '../button/defalut_button.dart';
 import '../button/primary_button.dart';
 import '../button_icon/clear_button.dart';
-import 'quiz_modal/widget/quiz_length_menu.dart';
+import '../quiz_length_tab.dart';
 
 ///クイズモーダル
 class WeakQuizModal extends ConsumerWidget {

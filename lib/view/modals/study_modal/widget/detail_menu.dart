@@ -16,15 +16,6 @@ class _DetailMenu extends HookConsumerWidget {
           const _MenuTitle(title: '詳細設定'),
           const Gap(5),
           _SwitchMenu(
-            text: '「知らない」用語を繰り返す',
-            icon: LineIcons.alternateRedo,
-            isSwitchValue: isRepeat,
-            onChanged: (bool value) {
-              ref.read(homeStudyModalProvider.notifier).updateIsRepeat(value);
-            },
-          ),
-          const Gap(5),
-          _SwitchMenu(
             text: '「保存」の用語のみ',
             icon: LineIcons.bookmark,
             isSwitchValue: isSaved,
@@ -39,6 +30,15 @@ class _DetailMenu extends HookConsumerWidget {
             isSwitchValue: isWeak,
             onChanged: (bool value) {
               ref.read(homeStudyModalProvider.notifier).updateIsWeak(value);
+            },
+          ),
+          const Gap(5),
+          _SwitchMenu(
+            text: '「知らない」用語を繰り返す',
+            icon: LineIcons.alternateRedo,
+            isSwitchValue: isRepeat,
+            onChanged: (bool value) {
+              ref.read(homeStudyModalProvider.notifier).updateIsRepeat(value);
             },
           ),
         ],
@@ -69,7 +69,7 @@ class _SwitchMenu extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 25),
+              Icon(icon, size: 30),
               const Gap(5),
               Text(
                 text,

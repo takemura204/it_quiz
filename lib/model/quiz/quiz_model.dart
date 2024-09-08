@@ -234,12 +234,10 @@ class QuizModel extends StateNotifier<Quizzes>  {
       case QuizStyleType.daily:
         // updateDailyItem(quizItemList);
         // updateWeakItem();
-
         break;
       case QuizStyleType.random:
         _updateTestQuiz(quiz);
         updateWeakItem();
-
         break;
     }
   }

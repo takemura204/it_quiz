@@ -26,15 +26,15 @@ class I18n {
   String get titleResult => "結果";
 
   ///Button
-  String get styleLeanQuiz => "一問一答で覚える";
+  String get styleLeanQuiz => "用語カード";
 
-  String get styleChoiceQuiz => "クイズに挑戦する";
+  String get styleChoiceQuiz => "四択クイズ";
 
   String get styleWeakQuiz => "苦手克服";
 
   String get styleRandomQuiz => "ランダム出題";
 
-  String get styleStudyQuiz => "覚える";
+  String get styleStudyQuiz => "用語カード";
 
   ///category
   String setCategory(int categoryId) {

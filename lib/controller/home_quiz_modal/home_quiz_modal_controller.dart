@@ -257,6 +257,20 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     state = state.copyWith(isLoading: value);
   }
 
+  void setSelectedStudyTypeTabIndex(int index) {
+    state = state.copyWith(selectedStudyTypeTabIndex: index);
+  }
+
+  void setStudyType(int index) {
+    if (index == 0) {
+      state = state.copyWith(selectedStudyType: StudyType.choice,selectedStudyTypeTabIndex:index);
+    }else {
+      state = state.copyWith(selectedStudyType: StudyType.learn,selectedStudyTypeTabIndex:index);
+    }
+    print(state.selectedStudyType);
+  }
+
+
   /// 端末保存
   Future _saveDevice() async {
     final prefs = await SharedPreferences.getInstance();

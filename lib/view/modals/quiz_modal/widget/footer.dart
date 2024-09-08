@@ -40,7 +40,7 @@ class _Footer extends HookConsumerWidget {
           PrimaryButton(
             width: context.width * 1,
             height: 60,
-            title: 'この条件で絞り込む',
+            title: 'この条件でクイズを開始',
             onPressed: filterQuizItemList.isNotEmpty
                 ? () {
                     ref.read(homeQuizModalProvider.notifier).updateStudyQuizItemList();

@@ -23,6 +23,9 @@ mixin _$HomeQuizModalState {
   List<ImportanceType> get importanceList => throw _privateConstructorUsedError;
   List<ImportanceType> get selectedImportanceList =>
       throw _privateConstructorUsedError;
+  StudyType get selectedStudyType =>
+      throw _privateConstructorUsedError; //クイズタイプ
+  int get selectedStudyTypeTabIndex => throw _privateConstructorUsedError;
   int get quizItemCount => throw _privateConstructorUsedError;
   bool get isRepeat => throw _privateConstructorUsedError;
   bool get isSaved => throw _privateConstructorUsedError;
@@ -46,6 +49,8 @@ abstract class $HomeQuizModalStateCopyWith<$Res> {
       List<StatusType> selectedStatusList,
       List<ImportanceType> importanceList,
       List<ImportanceType> selectedImportanceList,
+      StudyType selectedStudyType,
+      int selectedStudyTypeTabIndex,
       int quizItemCount,
       bool isRepeat,
       bool isSaved,
@@ -71,6 +76,8 @@ class _$HomeQuizModalStateCopyWithImpl<$Res, $Val extends HomeQuizModalState>
     Object? selectedStatusList = null,
     Object? importanceList = null,
     Object? selectedImportanceList = null,
+    Object? selectedStudyType = null,
+    Object? selectedStudyTypeTabIndex = null,
     Object? quizItemCount = null,
     Object? isRepeat = null,
     Object? isSaved = null,
@@ -101,6 +108,14 @@ class _$HomeQuizModalStateCopyWithImpl<$Res, $Val extends HomeQuizModalState>
           ? _value.selectedImportanceList
           : selectedImportanceList // ignore: cast_nullable_to_non_nullable
               as List<ImportanceType>,
+      selectedStudyType: null == selectedStudyType
+          ? _value.selectedStudyType
+          : selectedStudyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
+      selectedStudyTypeTabIndex: null == selectedStudyTypeTabIndex
+          ? _value.selectedStudyTypeTabIndex
+          : selectedStudyTypeTabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       quizItemCount: null == quizItemCount
           ? _value.quizItemCount
           : quizItemCount // ignore: cast_nullable_to_non_nullable
@@ -136,6 +151,8 @@ abstract class _$$_HomeQuizModalStateCopyWith<$Res>
       List<StatusType> selectedStatusList,
       List<ImportanceType> importanceList,
       List<ImportanceType> selectedImportanceList,
+      StudyType selectedStudyType,
+      int selectedStudyTypeTabIndex,
       int quizItemCount,
       bool isRepeat,
       bool isSaved,
@@ -159,6 +176,8 @@ class __$$_HomeQuizModalStateCopyWithImpl<$Res>
     Object? selectedStatusList = null,
     Object? importanceList = null,
     Object? selectedImportanceList = null,
+    Object? selectedStudyType = null,
+    Object? selectedStudyTypeTabIndex = null,
     Object? quizItemCount = null,
     Object? isRepeat = null,
     Object? isSaved = null,
@@ -189,6 +208,14 @@ class __$$_HomeQuizModalStateCopyWithImpl<$Res>
           ? _value._selectedImportanceList
           : selectedImportanceList // ignore: cast_nullable_to_non_nullable
               as List<ImportanceType>,
+      selectedStudyType: null == selectedStudyType
+          ? _value.selectedStudyType
+          : selectedStudyType // ignore: cast_nullable_to_non_nullable
+              as StudyType,
+      selectedStudyTypeTabIndex: null == selectedStudyTypeTabIndex
+          ? _value.selectedStudyTypeTabIndex
+          : selectedStudyTypeTabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       quizItemCount: null == quizItemCount
           ? _value.quizItemCount
           : quizItemCount // ignore: cast_nullable_to_non_nullable
@@ -219,6 +246,8 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
       final List<StatusType> selectedStatusList = const [],
       final List<ImportanceType> importanceList = const [],
       final List<ImportanceType> selectedImportanceList = const [],
+      this.selectedStudyType = StudyType.choice,
+      this.selectedStudyTypeTabIndex = 0,
       this.quizItemCount = 5,
       this.isRepeat = false,
       this.isSaved = false,
@@ -282,6 +311,13 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
 
   @override
   @JsonKey()
+  final StudyType selectedStudyType;
+//クイズタイプ
+  @override
+  @JsonKey()
+  final int selectedStudyTypeTabIndex;
+  @override
+  @JsonKey()
   final int quizItemCount;
   @override
   @JsonKey()
@@ -295,7 +331,7 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
 
   @override
   String toString() {
-    return 'HomeQuizModalState(isLoading: $isLoading, filterQuizItemList: $filterQuizItemList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList, quizItemCount: $quizItemCount, isRepeat: $isRepeat, isSaved: $isSaved, isWeak: $isWeak)';
+    return 'HomeQuizModalState(isLoading: $isLoading, filterQuizItemList: $filterQuizItemList, statusList: $statusList, selectedStatusList: $selectedStatusList, importanceList: $importanceList, selectedImportanceList: $selectedImportanceList, selectedStudyType: $selectedStudyType, selectedStudyTypeTabIndex: $selectedStudyTypeTabIndex, quizItemCount: $quizItemCount, isRepeat: $isRepeat, isSaved: $isSaved, isWeak: $isWeak)';
   }
 
   @override
@@ -315,6 +351,11 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
                 .equals(other._importanceList, _importanceList) &&
             const DeepCollectionEquality().equals(
                 other._selectedImportanceList, _selectedImportanceList) &&
+            (identical(other.selectedStudyType, selectedStudyType) ||
+                other.selectedStudyType == selectedStudyType) &&
+            (identical(other.selectedStudyTypeTabIndex,
+                    selectedStudyTypeTabIndex) ||
+                other.selectedStudyTypeTabIndex == selectedStudyTypeTabIndex) &&
             (identical(other.quizItemCount, quizItemCount) ||
                 other.quizItemCount == quizItemCount) &&
             (identical(other.isRepeat, isRepeat) ||
@@ -332,6 +373,8 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
       const DeepCollectionEquality().hash(_selectedStatusList),
       const DeepCollectionEquality().hash(_importanceList),
       const DeepCollectionEquality().hash(_selectedImportanceList),
+      selectedStudyType,
+      selectedStudyTypeTabIndex,
       quizItemCount,
       isRepeat,
       isSaved,
@@ -353,6 +396,8 @@ abstract class _HomeQuizModalState implements HomeQuizModalState {
       final List<StatusType> selectedStatusList,
       final List<ImportanceType> importanceList,
       final List<ImportanceType> selectedImportanceList,
+      final StudyType selectedStudyType,
+      final int selectedStudyTypeTabIndex,
       final int quizItemCount,
       final bool isRepeat,
       final bool isSaved,
@@ -370,6 +415,10 @@ abstract class _HomeQuizModalState implements HomeQuizModalState {
   List<ImportanceType> get importanceList;
   @override
   List<ImportanceType> get selectedImportanceList;
+  @override
+  StudyType get selectedStudyType;
+  @override //クイズタイプ
+  int get selectedStudyTypeTabIndex;
   @override
   int get quizItemCount;
   @override

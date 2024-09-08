@@ -8,6 +8,7 @@ class _DetailMenu extends HookConsumerWidget {
     final isRepeat = ref.watch(homeQuizModalProvider.select((s) => s.isRepeat));
     final isSaved = ref.watch(homeQuizModalProvider.select((s) => s.isSaved));
     final isWeak = ref.watch(homeQuizModalProvider.select((s) => s.isWeak));
+    final studyType = ref.watch(homeQuizModalProvider.select((s) => s.selectedStudyType));
     final quizItemCount = ref.watch(homeQuizModalProvider.select((s) => s.quizItemCount));
     return Container(
       width: context.width,
@@ -29,15 +30,6 @@ class _DetailMenu extends HookConsumerWidget {
           ),
           const Gap(5),
           _SwitchMenu(
-            text: '「知らない」用語を繰り返す',
-            icon: LineIcons.alternateRedo,
-            isSwitchValue: isRepeat,
-            onChanged: (bool value) {
-              ref.read(homeQuizModalProvider.notifier).updateIsRepeat(value);
-            },
-          ),
-          const Gap(5),
-          _SwitchMenu(
             text: '「保存」のクイズのみ',
             icon: LineIcons.bookmark,
             isSwitchValue: isSaved,
@@ -54,6 +46,16 @@ class _DetailMenu extends HookConsumerWidget {
               ref.read(homeQuizModalProvider.notifier).updateIsWeak(value);
             },
           ),
+          const Gap(5),
+          if (studyType != StudyType.choice)
+            _SwitchMenu(
+              text: '「知らない」用語を繰り返す',
+              icon: LineIcons.alternateRedo,
+              isSwitchValue: isRepeat,
+              onChanged: (bool value) {
+                ref.read(homeQuizModalProvider.notifier).updateIsRepeat(value);
+              },
+            ),
         ],
       ),
     );
@@ -82,7 +84,7 @@ class _SwitchMenu extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 25),
+              Icon(icon, size: 30),
               const Gap(5),
               Text(
                 text,
@@ -135,7 +137,7 @@ class _CountMenu extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 25),
+              Icon(icon, size: 30),
               const Gap(5),
               Text(
                 text,

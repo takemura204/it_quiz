@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../../controller/home_quiz/home_quiz_screen_controller.dart';
 import '../../../controller/home_quiz_modal/home_quiz_modal_controller.dart';
 import '../../../controller/home_study/home_study_screen_controller.dart';
 import '../../../model/lang/initial_resource.dart';
@@ -22,6 +22,7 @@ part 'widget/header.dart';
 part 'widget/importance_menu.dart';
 part 'widget/menu_title.dart';
 part 'widget/status_menu.dart';
+part 'widget/study_type_menu.dart';
 
 Future showQuizModal(BuildContext context, Quiz quiz) async {
   await showModalBottomSheet<Widget>(
@@ -50,9 +51,6 @@ class QuizModal extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedStudyLength =
-        ref.watch(homeQuizScreenProvider.select((state) => state.selectedStudyLength));
-
     return Container(
       height: context.height * 0.65,
       margin: const EdgeInsets.only(top: 15),
@@ -68,6 +66,10 @@ class QuizModal extends HookConsumerWidget {
                 child: Column(
                   children: [
                     const Gap(50),
+
+                    ///学習形式
+                    const _StudyTypeMenu(),
+                    const Gap(10),
 
                     ///学習状況
                     _StatusMenu(quizItemList: quiz.quizItemList),

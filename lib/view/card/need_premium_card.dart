@@ -14,8 +14,8 @@ class NeedPremiumCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final premiumCardIndex = ref
-        .watch(homeSettingProvider.select((state) => state.premiumCardIndex));
+    final premiumCardIndex =
+        ref.watch(homeSettingProvider.select((state) => state.premiumCardIndex));
     final isPremium = ref.watch(authModelProvider.select((x) => x.isPremium));
     final imagePath = 'assets/image/premium/premium_$premiumCardIndex.svg';
 
@@ -23,14 +23,13 @@ class NeedPremiumCard extends ConsumerWidget {
         ? Container()
         : GestureDetector(
             onTap: () {
-              context.showScreen(
-                  const PremiumDetailScreenArguments().generateRoute());
+              context.showScreen(const PremiumDetailScreenArguments().generateRoute());
               HapticFeedback.lightImpact();
             },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: context.backgroundColor.withOpacity(0.2),
                 // 全ての辺に一様なボーダーを適用
                 border: Border.all(
                   color: context.mainColor,
@@ -192,11 +191,10 @@ class NeedPremiumCard extends ConsumerWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.grey.shade600),
+                              borderRadius: BorderRadius.circular(20), color: Colors.grey.shade600),
                           alignment: Alignment.center,
                           child: const Text(
-                            'くわしく見る',
+                            'くわしく見る >',
                             softWrap: true,
                             style: TextStyle(
                               fontSize: 10,
