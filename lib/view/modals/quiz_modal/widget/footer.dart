@@ -1,12 +1,14 @@
 part of '../quiz_modal.dart';
 
 class _Footer extends HookConsumerWidget {
-  const _Footer();
+  const _Footer({required this.quiz});
+
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filterQuizItemList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizItemList));
-    final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
+    final studyType = ref.watch(homeQuizModalProvider.select((s) => s.selectedStudyType));
     return Container(
       color: context.backgroundColor,
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
@@ -40,18 +42,21 @@ class _Footer extends HookConsumerWidget {
           PrimaryButton(
             width: context.width * 1,
             height: 60,
-            title: 'この条件でクイズを開始',
+            title: 'この条件でクイズ開始',
             onPressed: filterQuizItemList.isNotEmpty
                 ? () {
-                    ref.read(homeQuizModalProvider.notifier).updateStudyQuizItemList();
-                    if (isResultView) {
-                      Navigator.of(context).pop();
-                      ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
-                    }
-
-                    ref.read(homeStudyScreenProvider.notifier).setIsFinishView(false);
-                    ref.read(homeStudyScreenProvider.notifier).startStopwatch();
+                    ref.read(homeQuizModalProvider.notifier).updateFilterQuizList();
                     Navigator.of(context).pop();
+                    ref.read(quizModelProvider.notifier).setStudyType(studyType);
+                    if (studyType == StudyType.choice) {
+                      context.showScreen(QuizChoiceScreenArguments(
+                        quiz: quiz.copyWith(quizItemList: filterQuizItemList),
+                      ).generateRoute());
+                    } else {
+                      context.showScreen(QuizLearnScreenArguments(
+                        quiz: quiz.copyWith(quizItemList: filterQuizItemList),
+                      ).generateRoute());
+                    }
                   }
                 : null,
           ),

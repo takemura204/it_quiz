@@ -50,22 +50,7 @@ class QuizLearnScreen extends ConsumerWidget {
           (ref) => QuizLearnScreenController(ref: ref, quiz: quiz),
         ),
       ],
-      child: _Scaffold(quiz),
-    );
-  }
-}
-
-class _Scaffold extends ConsumerWidget {
-  const _Scaffold(this.quiz);
-
-  final Quiz quiz;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Stack(
-      children: [
-        Scaffold(appBar: _AppBar(quiz), body: _Body(quiz)),
-      ],
+      child: Scaffold(appBar: _AppBar(quiz), body: _Body(quiz)),
     );
   }
 }

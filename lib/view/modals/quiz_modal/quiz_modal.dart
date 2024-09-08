@@ -4,13 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../controller/home_quiz_modal/home_quiz_modal_controller.dart';
-import '../../../controller/home_study/home_study_screen_controller.dart';
 import '../../../model/lang/initial_resource.dart';
 import '../../../model/quiz/quiz.dart';
 import '../../../model/quiz_item/quiz_item.dart';
+import '../../../screen/screen_argument.dart';
 import '../../../untils/enums.dart';
 import '../../button/primary_button.dart';
 import '../../button_icon/clear_button.dart';
@@ -93,7 +94,7 @@ class QuizModal extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _Header(title: quiz.title, quizItemList: quiz.quizItemList),
-              const _Footer(),
+              _Footer(quiz: quiz),
             ],
           ),
         ],

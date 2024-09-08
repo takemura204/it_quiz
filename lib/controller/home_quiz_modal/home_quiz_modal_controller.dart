@@ -242,16 +242,10 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     await _initIsRepeat();
     await _initIsSaved();
     await _initIsWeak();
+    await _initIsWeak();
     updateFilterQuizList();
   }
 
-  void updateStudyQuizItemList() {
-    updateFilterQuizList();
-    final filterQuizItemList = state.filterQuizItemList;
-    // ref.read(homeStudyScreenProvider.notifier).updateStudyQuizItemList(filterQuizItemList);
-    // ref.read(homeStudyScreenProvider.notifier).setIsRepeat(state.isRepeat);
-    _saveDevice();
-  }
 
   void setIsLoading(bool value) {
     state = state.copyWith(isLoading: value);
@@ -267,7 +261,6 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     }else {
       state = state.copyWith(selectedStudyType: StudyType.learn,selectedStudyTypeTabIndex:index);
     }
-    print(state.selectedStudyType);
   }
 
 
