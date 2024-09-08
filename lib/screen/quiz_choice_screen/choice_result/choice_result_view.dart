@@ -42,10 +42,10 @@ class _QuizResultView extends ConsumerWidget {
               quizItem: quizItemList[index],
               studyType: StudyType.choice,
               onTapCheckButton: () {
-                ref.read(quizChoiceScreenProvider.notifier).tapCheckBox(index);
+                ref.read(quizChoiceScreenProvider.notifier).tapWeakButton(index);
               },
               onTapSaveButton: () {
-                ref.read(quizChoiceScreenProvider.notifier).tapSaveButton(index);
+                ref.read(quizChoiceScreenProvider.notifier).tapSavedButton(index);
               },
             );
           },

@@ -15,7 +15,7 @@ import '../admob/admob_controller.dart';
 import '../home_quiz/home_quiz_screen_controller.dart';
 
 final quizChoiceScreenProvider =
-    StateNotifierProvider<QuizChoiceScreenController, QuizChoiceScreenState>(
+    StateNotifierProvider.autoDispose<QuizChoiceScreenController, QuizChoiceScreenState>(
   (ref) => throw UnimplementedError(),
 );
 
@@ -23,19 +23,18 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     with LocatorMixin, WidgetsBindingObserver {
   QuizChoiceScreenController({required this.ref, required this.quiz})
       : super(const QuizChoiceScreenState()) {
-    initState();
+    _initState();
   }
 
   final Ref ref;
   Quiz quiz;
   final Stopwatch _stopwatch = Stopwatch();
 
-  @override
-  void initState() {
-    _startStopwatch(); //学習時間計測
-    _loadQuizList(); //クイズ読み込み
-    _shuffleChoice(); //選択肢ランダム表示
-    super.initState();
+  Future _initState() async {
+    await _startStopwatch();
+    await _initQuizList();
+    await _initChoices();
+    ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
   }
 
   @override
@@ -53,29 +52,25 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     }
   }
 
-  ///クイズ更新
-  void _loadQuizList() {
+  ///クイズ取得
+  Future _initQuizList() async {
     final choiceQuiz = quiz;
-    final quizItemList = [...state.quizItemList];
-    final newQuizItems = [...quiz.quizItemList];
-    newQuizItems.shuffle();
-    quizItemList.addAll(newQuizItems);
+    final quizItemList = [...choiceQuiz.quizItemList];
+    quizItemList.shuffle();
     state = state.copyWith(choiceQuiz: choiceQuiz, quizItemList: quizItemList);
   }
 
-  ///学習時間計測
-  void _startStopwatch() {
-    WidgetsBinding.instance.addObserver(this);
-    _stopwatch.start(); //学習時間記録
+  ///選択肢取得
+  Future _initChoices() async {
+    final choices = [...state.quizItemList[state.quizIndex].choices];
+    choices.shuffle();
+    state = state.copyWith(choices: choices);
   }
 
-  ///選択肢を混ぜる
-  void _shuffleChoice() {
-    final choices = [...state.choices]..clear();
-    final argumentsChoices = [...state.quizItemList[state.quizIndex].choices];
-    argumentsChoices.shuffle();
-    choices.addAll(argumentsChoices);
-    state = state.copyWith(choices: choices);
+  ///学習時間計測
+  Future _startStopwatch() async {
+    WidgetsBinding.instance.addObserver(this);
+    _stopwatch.start(); //学習時間記録
   }
 
   ///選択肢を押した時
@@ -167,11 +162,11 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     else {
       state = state.copyWith(quizIndex: quizIndex + 1);
     }
-    _shuffleChoice();
+    _initChoices();
   }
 
   ///チェックボックス切り替え
-  void tapCheckBox(int index) {
+  void tapWeakButton(int index) {
     final quizItemList = [...state.quizItemList];
     quizItemList[index] = QuizItem(
       quizId: quizItemList[index].quizId,
@@ -193,7 +188,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     _updateQuiz();
   }
 
-  void tapSaveButton(int index) {
+  void tapSavedButton(int index) {
     final quizItemList = [...state.quizItemList];
     quizItemList[index] = QuizItem(
       quizId: quizItemList[index].quizId,

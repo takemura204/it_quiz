@@ -4,7 +4,6 @@ import 'package:appinio_swiper/controllers.dart';
 import 'package:appinio_swiper/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/home_study_modal/home_study_modal_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -185,14 +184,14 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   ///学習時間計測
   Future startStopwatch() async {
-    if (!state.isFinishView && !state.isResultView) {
+    if (!state.isFinishView && !state.isResultScreen) {
       WidgetsBinding.instance.addObserver(this);
       stopwatch.start(); //学習時間記録
     }
   }
 
   ///「知っている・知らない」ボタンを押した時
-  Future updateHomeLearnQuizItem(bool isKnow) async {
+  Future updateHomeStudyQuizItem(bool isKnow) async {
     await setIsAnsView(false);
     await setDirection(null);
     final lapIndex = state.lapIndex;
@@ -264,7 +263,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
     final quizItemList = [...state.quizItemList];
     final knowQuizItemList = [...state.knowQuizItemList];
     final unKnowQuizItemList = [...state.unKnowQuizItemList];
-    final isRepeat = ref.read(homeStudyModalProvider).isRepeat;
+    final isRepeat = state.isRepeat;
     //クイズが完了したが、「知らない」がまだ含まれる場合
     if (itemIndex == quizItemList.length - 1) {
       //「知らない」用語を繰り返す場合
@@ -292,7 +291,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
         ref.read(mainScreenControllerProvider.notifier).updateInAppReviewCount();
 
         setIsFinishView(true);
-        setIsResultView(true);
+        setIsResultScreen(true);
         _updateQuizItem(quizItemList[itemIndex]);
         _saveDevice();
         quizItemList.clear();
@@ -328,7 +327,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
       unKnowQuizItemList: [],
       itemIndex: 0,
     );
-    setIsResultView(false);
+    setIsResultScreen(false);
     setIsFinishView(false);
     startStopwatch();
     _saveDevice();
@@ -428,8 +427,8 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   }
 
   ///リザルト画面に切り替え
-  Future setIsResultView(bool value) async {
-    state = state.copyWith(isResultView: value);
+  Future setIsResultScreen(bool value) async {
+    state = state.copyWith(isResultScreen: value);
   }
 
   ///完了画面に切り替え

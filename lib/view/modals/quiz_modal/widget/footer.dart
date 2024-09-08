@@ -47,7 +47,6 @@ class _Footer extends HookConsumerWidget {
                 ? () {
                     ref.read(homeQuizModalProvider.notifier).updateFilterQuizList();
                     Navigator.of(context).pop();
-                    ref.read(quizModelProvider.notifier).setStudyType(studyType);
                     if (studyType == StudyType.choice) {
                       context.showScreen(QuizChoiceScreenArguments(
                         quiz: quiz.copyWith(quizItemList: filterQuizItemList),

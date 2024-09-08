@@ -43,7 +43,6 @@ class MainScreenController extends StateNotifier<MainScreenState> with LocatorMi
     final updateShowInAppReviewCount = state.inAppReviewCount + 1;
     state = state.copyWith(inAppReviewCount: updateShowInAppReviewCount, isShowInAppReview: true);
     _saveDevice();
-    print({'inAppReviewCount', state.inAppReviewCount});
   }
 
   void setIsShowInAppReview() {

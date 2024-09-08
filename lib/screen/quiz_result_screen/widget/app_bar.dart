@@ -14,7 +14,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         ClearButton(
             iconSize: 30,
             onPressed: () {
-              ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
+              ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(false);
               ref.read(mainScreenControllerProvider.notifier).setIsShowInAppReview();
               Navigator.of(context).pop();
             }),

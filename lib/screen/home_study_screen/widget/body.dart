@@ -16,7 +16,7 @@ class _ChallengeBody extends ConsumerWidget {
         _ProgressTile(),
 
         ///問題
-        _StudyItemCard(),
+        _QuizItemCard(),
 
         ///知っている・知らないボタン
         _ActionButtons(),
@@ -81,7 +81,11 @@ class _FinishBody extends ConsumerWidget {
                       width: context.width * 0.45,
                       height: 85,
                       text: "もう一度",
-                      icon: LineIcons.alternateRedo,
+                      iconWidget: Icon(
+                        LineIcons.alternateRedo,
+                        color: context.mainColor,
+                        size: 40,
+                      ),
                       onPressed: () {
                         ref.read(homeStudyScreenProvider.notifier).restartStudyQuiz();
                       }),
@@ -92,7 +96,11 @@ class _FinishBody extends ConsumerWidget {
                     width: context.width * 0.45,
                     height: 85,
                     title: "条件を変更",
-                    icon: LineIcons.horizontalSliders,
+                    iconWidget: const Icon(
+                      LineIcons.horizontalSliders,
+                      color: Colors.white,
+                      size: 40,
+                    ),
                     onPressed: () {
                       showStudyModal(context);
                     },
@@ -104,7 +112,7 @@ class _FinishBody extends ConsumerWidget {
             const Gap(10),
             TextButton(
               onPressed: () {
-                ref.read(homeStudyScreenProvider.notifier).setIsResultView(true);
+                ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(true);
               },
               child: const Text(
                 '結果を確認',

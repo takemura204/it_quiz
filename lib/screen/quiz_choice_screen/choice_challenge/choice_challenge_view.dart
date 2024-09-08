@@ -2,50 +2,37 @@ part of '../quiz_choice_screen.dart';
 
 ///問題文
 class _Question extends ConsumerWidget {
-  const _Question(this.quizItem);
+  const _Question(this.quiz);
 
-  final Quiz quizItem;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: EdgeInsets.all(context.width * 0.02),
-      child: _QuizQuestion(quizItem),
-    );
-  }
-}
-
-class _QuizQuestion extends ConsumerWidget {
-  const _QuizQuestion(this.quizItem);
-
-  final Quiz quizItem;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
 
-    return Text(
-      quizItemList[quizIndex].question,
-      style: const TextStyle(
-        color: Colors.black87,
-        fontWeight: FontWeight.w500,
-        fontSize: 16,
+    return Padding(
+      padding: EdgeInsets.all(context.width * 0.02),
+      child: Text(
+        quiz.quizItemList[quizIndex].question,
+        style: const TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.w500,
+          fontSize: 16,
+        ),
       ),
     );
   }
 }
 
 class _QuizProgress extends ConsumerWidget {
-  const _QuizProgress(this.quizItem);
+  const _QuizProgress(this.quiz);
 
-  final Quiz quizItem;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizItemList = ref.watch(quizChoiceScreenProvider).quizItemList;
     final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
-    final source = quizItemList[quizIndex].source;
+    final source = quiz.quizItemList[quizIndex].source;
 
     return Row(
       children: [
@@ -77,7 +64,7 @@ class _QuizProgress extends ConsumerWidget {
               ),
             ),
             Text(
-              "${quizItemList.length}",
+              "${quiz.quizItemList.length}",
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
@@ -92,13 +79,14 @@ class _QuizProgress extends ConsumerWidget {
 }
 
 class _SelectAnswer extends ConsumerWidget {
-  const _SelectAnswer(this.quizItem);
+  const _SelectAnswer(this.quiz);
 
-  final Quiz quizItem;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
+    final choices = ref.watch(quizChoiceScreenProvider.select((s) => s.choices));
     return Container(
       height: context.height * 0.45,
       width: context.width,
@@ -116,10 +104,7 @@ class _SelectAnswer extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start, // これも上からの配置
           children: [
             Gap(context.width * 0.05),
-            const _SelectChoice(0),
-            const _SelectChoice(1),
-            const _SelectChoice(2),
-            const _SelectChoice(3),
+            ...List.generate(choices.length, (index) => _SelectChoice(index)),
             if (isPremium) const _SkipChoice(),
             Gap(context.width * 0.05),
           ],
@@ -147,16 +132,12 @@ class _SelectChoice extends ConsumerWidget {
     return GestureDetector(
       onTap: isAnsView
           ? null
-          : () => ref
-              .read(quizChoiceScreenProvider.notifier)
-              .tapAnsButton(choices[index]),
+          : () => ref.read(quizChoiceScreenProvider.notifier).tapAnsButton(choices[index]),
       child: Card(
         elevation: isTap ? 0 : 2,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            width: isAnsView && (choices[index] == quizItemList[quizIndex].ans)
-                ? 1.5
-                : 1,
+            width: isAnsView && (choices[index] == quizItemList[quizIndex].ans) ? 1.5 : 1,
             color: isAnsView
                 ? (choices[index] == quizItemList[quizIndex].ans)
                     ? context.correctColor
@@ -165,8 +146,8 @@ class _SelectChoice extends ConsumerWidget {
           ),
           borderRadius: BorderRadius.circular(8),
         ),
-        margin: EdgeInsets.symmetric(
-            vertical: context.width * 0.01, horizontal: context.width * 0.02),
+        margin:
+            EdgeInsets.symmetric(vertical: context.width * 0.01, horizontal: context.width * 0.02),
         child: Container(
           decoration: BoxDecoration(
             color: isTap ? context.secondColor.withOpacity(0.25) : Colors.white,
@@ -178,8 +159,7 @@ class _SelectChoice extends ConsumerWidget {
               vertical: context.width * 0.03, horizontal: context.width * 0.02),
           child: Text(
             choices[index],
-            style: (isTap || (choices[index] == quizItemList[quizIndex].ans)) &&
-                    isAnsView
+            style: (isTap || (choices[index] == quizItemList[quizIndex].ans)) && isAnsView
                 ? TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -209,16 +189,13 @@ class _SkipChoice extends ConsumerWidget {
     final isTap = selectAns == choice;
 
     return GestureDetector(
-      onTap: isAnsView
-          ? null
-          : () =>
-              ref.read(quizChoiceScreenProvider.notifier).tapAnsButton(choice),
+      onTap:
+          isAnsView ? null : () => ref.read(quizChoiceScreenProvider.notifier).tapAnsButton(choice),
       child: Card(
         elevation: isTap ? 0 : 2,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            width:
-                isAnsView && (choice == quizItemList[quizIndex].ans) ? 1.5 : 1,
+            width: isAnsView && (choice == quizItemList[quizIndex].ans) ? 1.5 : 1,
             color: isAnsView
                 ? (choice == quizItemList[quizIndex].ans)
                     ? context.correctColor
@@ -227,8 +204,8 @@ class _SkipChoice extends ConsumerWidget {
           ),
           borderRadius: BorderRadius.circular(8),
         ),
-        margin: EdgeInsets.symmetric(
-            vertical: context.width * 0.01, horizontal: context.width * 0.02),
+        margin:
+            EdgeInsets.symmetric(vertical: context.width * 0.01, horizontal: context.width * 0.02),
         child: Container(
           decoration: BoxDecoration(
             color: isTap ? context.secondColor.withOpacity(0.25) : Colors.white,
@@ -240,16 +217,15 @@ class _SkipChoice extends ConsumerWidget {
               vertical: context.width * 0.03, horizontal: context.width * 0.02),
           child: Text(
             choice,
-            style:
-                (isTap || (choice == quizItemList[quizIndex].ans)) && isAnsView
-                    ? TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: (choice == quizItemList[quizIndex].ans)
-                            ? context.correctColor
-                            : context.incorrectColor,
-                      )
-                    : const TextStyle(fontSize: 16, color: Colors.black87),
+            style: (isTap || (choice == quizItemList[quizIndex].ans)) && isAnsView
+                ? TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: (choice == quizItemList[quizIndex].ans)
+                        ? context.correctColor
+                        : context.incorrectColor,
+                  )
+                : const TextStyle(fontSize: 16, color: Colors.black87),
           ),
         ),
       ),
@@ -258,9 +234,9 @@ class _SkipChoice extends ConsumerWidget {
 }
 
 class _JudgeIcon extends ConsumerWidget {
-  const _JudgeIcon(this.quizItem);
+  const _JudgeIcon(this.quiz);
 
-  final Quiz quizItem;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

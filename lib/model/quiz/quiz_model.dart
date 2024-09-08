@@ -385,6 +385,7 @@ class QuizModel extends StateNotifier<Quizzes>  {
 
   void setStudyType(StudyType studyType) {
     state = state.copyWith(studyType: studyType);
+    print({'studyType',state.studyType});
   }
 
   List<Quiz> _initQuizList() {

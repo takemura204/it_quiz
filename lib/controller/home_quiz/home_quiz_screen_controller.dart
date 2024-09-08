@@ -23,8 +23,13 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     setIsLoading(true);
     await initQuizList();
     await initCategoryList();
-    await initStatusList();
     setIsLoading(false);
+  }
+
+  ///QuizList取得
+  Future initQuizList() async {
+    final quizList = ref.read(quizModelProvider).quizList;
+    state = state.copyWith(filterQuizList: quizList);
   }
 
   /// CategoryList取得
@@ -66,23 +71,6 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
         categoryList: categoryList,
         randomCategoryList: isPremium ? categoryList : randomCategoryList,
         correctRatios: correctRatios);
-  }
-
-  ///selectedRangeList読み込み
-  Future initStatusList() async {
-    final statusList = [
-      StatusType.unlearned,
-      StatusType.learned,
-      StatusType.incorrect,
-      StatusType.correct,
-    ];
-    state = state.copyWith(statusList: statusList);
-  }
-
-  ///QuizList取得
-  Future initQuizList() async {
-    final quizList = ref.read(quizModelProvider).quizList;
-    state = state.copyWith(filterQuizList: quizList);
   }
 
   /// SelectQuiz更新

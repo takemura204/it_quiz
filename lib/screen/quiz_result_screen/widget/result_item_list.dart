@@ -9,6 +9,32 @@ class _ResultItemList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final studyType = ref.watch(quizModelProvider.select((s) => s.studyType));
 
+    void onTapCheckButton(StudyType studyType, int index) {
+      switch (studyType) {
+        case StudyType.study:
+          return ref.read(homeStudyScreenProvider.notifier).tapWeakButton(index);
+        case StudyType.learn:
+          return ref.read(quizLearnScreenProvider.notifier).tapWeakButton(index);
+        case StudyType.choice:
+          return ref.read(quizChoiceScreenProvider.notifier).tapWeakButton(index);
+        default:
+          return;
+      }
+    }
+
+    void tapSavedButton(StudyType studyType, int index) {
+      switch (studyType) {
+        case StudyType.study:
+          return ref.read(homeStudyScreenProvider.notifier).tapSavedButton(index);
+        case StudyType.learn:
+          return ref.read(quizLearnScreenProvider.notifier).tapSavedButton(index);
+        case StudyType.choice:
+          return ref.read(quizChoiceScreenProvider.notifier).tapSavedButton(index);
+        default:
+          return;
+      }
+    }
+
     return Column(
       children: [
         Card(
@@ -43,10 +69,10 @@ class _ResultItemList extends ConsumerWidget {
                 studyType: StudyType.learn,
                 isKnow: quizItem.isKnow,
                 onTapCheckButton: () {
-                  ref.read(homeStudyScreenProvider.notifier).tapWeakButton(index);
+                  onTapCheckButton(studyType, index);
                 },
                 onTapSaveButton: () {
-                  ref.read(homeStudyScreenProvider.notifier).tapSavedButton(index);
+                  tapSavedButton(studyType, index);
                 });
           },
         ),

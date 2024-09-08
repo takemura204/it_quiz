@@ -15,6 +15,7 @@ import 'package:kentei_quiz/screen/setting_contact_screen/setting_contact_screen
 import 'package:kentei_quiz/screen/setting_profile_screen/setting_profile_screen.dart';
 
 import '../model/quiz/quiz.dart';
+import '../model/quiz_item/quiz_item.dart';
 import '../model/screen_argument_resource.dart';
 import 'account_create_screen/account_create_screen1.dart';
 import 'account_create_screen/account_create_screen2.dart';
@@ -69,17 +70,21 @@ class QuizChoiceScreenArguments with _NoParamsMixin implements IScreenArguments 
 
 ///クイズ結果へ画面遷移
 class QuizResultScreenArguments with _NoParamsMixin implements IScreenArguments {
-  const QuizResultScreenArguments();
+  const QuizResultScreenArguments(this.quizItemList, this.duration);
+
+  final List<QuizItem> quizItemList;
+  final Duration duration;
 
   @override
   String get screenNameFormat => "/quiz_result";
 
   @override
   Route generateRoute() => PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const QuizResultScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            QuizResultScreen(quizItemList, duration),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-              MaterialPageRoute(builder: (context) => const QuizResultScreen()),
+              MaterialPageRoute(builder: (context) => QuizResultScreen(quizItemList, duration)),
               context,
               animation,
               secondaryAnimation,

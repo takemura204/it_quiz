@@ -16,16 +16,17 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuizLearnScreenState {
-  bool get isAnsView => throw _privateConstructorUsedError; //正解画面切り替え
-  bool get isResultScreen => throw _privateConstructorUsedError; //結果画面切り替え
-  int get quizIndex => throw _privateConstructorUsedError; //問題番号
-  int get lapIndex => throw _privateConstructorUsedError; //何周目
-  Quiz? get learnQuiz => throw _privateConstructorUsedError;
+  bool get isAnsView => throw _privateConstructorUsedError;
+  bool get isRepeat => throw _privateConstructorUsedError;
+  bool get isResultScreen => throw _privateConstructorUsedError;
+  int get itemIndex => throw _privateConstructorUsedError;
+  int get lapIndex => throw _privateConstructorUsedError;
   List<QuizItem> get quizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get knowQuizItemList => throw _privateConstructorUsedError;
   List<QuizItem> get unKnowQuizItemList => throw _privateConstructorUsedError;
   Duration get duration => throw _privateConstructorUsedError; // 学習時間
   StudyType get studyType => throw _privateConstructorUsedError; //クイズタイプ
+  Quiz? get learnQuiz => throw _privateConstructorUsedError;
   AppinioSwiperDirection? get direction => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -41,15 +42,16 @@ abstract class $QuizLearnScreenStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isAnsView,
+      bool isRepeat,
       bool isResultScreen,
-      int quizIndex,
+      int itemIndex,
       int lapIndex,
-      Quiz? learnQuiz,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
       Duration duration,
       StudyType studyType,
+      Quiz? learnQuiz,
       AppinioSwiperDirection? direction});
 
   $QuizCopyWith<$Res>? get learnQuiz;
@@ -70,15 +72,16 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isAnsView = null,
+    Object? isRepeat = null,
     Object? isResultScreen = null,
-    Object? quizIndex = null,
+    Object? itemIndex = null,
     Object? lapIndex = null,
-    Object? learnQuiz = freezed,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
     Object? unKnowQuizItemList = null,
     Object? duration = null,
     Object? studyType = null,
+    Object? learnQuiz = freezed,
     Object? direction = freezed,
   }) {
     return _then(_value.copyWith(
@@ -86,22 +89,22 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
               as bool,
+      isRepeat: null == isRepeat
+          ? _value.isRepeat
+          : isRepeat // ignore: cast_nullable_to_non_nullable
+              as bool,
       isResultScreen: null == isResultScreen
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
-      quizIndex: null == quizIndex
-          ? _value.quizIndex
-          : quizIndex // ignore: cast_nullable_to_non_nullable
+      itemIndex: null == itemIndex
+          ? _value.itemIndex
+          : itemIndex // ignore: cast_nullable_to_non_nullable
               as int,
       lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      learnQuiz: freezed == learnQuiz
-          ? _value.learnQuiz
-          : learnQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
       quizItemList: null == quizItemList
           ? _value.quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
@@ -122,6 +125,10 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
               as StudyType,
+      learnQuiz: freezed == learnQuiz
+          ? _value.learnQuiz
+          : learnQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       direction: freezed == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -143,23 +150,25 @@ class _$QuizLearnScreenStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreateCopyWith<$Res>
+abstract class _$$_QuizLearnScreenStateCopyWith<$Res>
     implements $QuizLearnScreenStateCopyWith<$Res> {
-  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
-      __$$_CreateCopyWithImpl<$Res>;
+  factory _$$_QuizLearnScreenStateCopyWith(_$_QuizLearnScreenState value,
+          $Res Function(_$_QuizLearnScreenState) then) =
+      __$$_QuizLearnScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool isAnsView,
+      bool isRepeat,
       bool isResultScreen,
-      int quizIndex,
+      int itemIndex,
       int lapIndex,
-      Quiz? learnQuiz,
       List<QuizItem> quizItemList,
       List<QuizItem> knowQuizItemList,
       List<QuizItem> unKnowQuizItemList,
       Duration duration,
       StudyType studyType,
+      Quiz? learnQuiz,
       AppinioSwiperDirection? direction});
 
   @override
@@ -167,48 +176,50 @@ abstract class _$$_CreateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateCopyWithImpl<$Res>
-    extends _$QuizLearnScreenStateCopyWithImpl<$Res, _$_Create>
-    implements _$$_CreateCopyWith<$Res> {
-  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+class __$$_QuizLearnScreenStateCopyWithImpl<$Res>
+    extends _$QuizLearnScreenStateCopyWithImpl<$Res, _$_QuizLearnScreenState>
+    implements _$$_QuizLearnScreenStateCopyWith<$Res> {
+  __$$_QuizLearnScreenStateCopyWithImpl(_$_QuizLearnScreenState _value,
+      $Res Function(_$_QuizLearnScreenState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isAnsView = null,
+    Object? isRepeat = null,
     Object? isResultScreen = null,
-    Object? quizIndex = null,
+    Object? itemIndex = null,
     Object? lapIndex = null,
-    Object? learnQuiz = freezed,
     Object? quizItemList = null,
     Object? knowQuizItemList = null,
     Object? unKnowQuizItemList = null,
     Object? duration = null,
     Object? studyType = null,
+    Object? learnQuiz = freezed,
     Object? direction = freezed,
   }) {
-    return _then(_$_Create(
+    return _then(_$_QuizLearnScreenState(
       isAnsView: null == isAnsView
           ? _value.isAnsView
           : isAnsView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRepeat: null == isRepeat
+          ? _value.isRepeat
+          : isRepeat // ignore: cast_nullable_to_non_nullable
               as bool,
       isResultScreen: null == isResultScreen
           ? _value.isResultScreen
           : isResultScreen // ignore: cast_nullable_to_non_nullable
               as bool,
-      quizIndex: null == quizIndex
-          ? _value.quizIndex
-          : quizIndex // ignore: cast_nullable_to_non_nullable
+      itemIndex: null == itemIndex
+          ? _value.itemIndex
+          : itemIndex // ignore: cast_nullable_to_non_nullable
               as int,
       lapIndex: null == lapIndex
           ? _value.lapIndex
           : lapIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      learnQuiz: freezed == learnQuiz
-          ? _value.learnQuiz
-          : learnQuiz // ignore: cast_nullable_to_non_nullable
-              as Quiz?,
       quizItemList: null == quizItemList
           ? _value._quizItemList
           : quizItemList // ignore: cast_nullable_to_non_nullable
@@ -229,6 +240,10 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.studyType
           : studyType // ignore: cast_nullable_to_non_nullable
               as StudyType,
+      learnQuiz: freezed == learnQuiz
+          ? _value.learnQuiz
+          : learnQuiz // ignore: cast_nullable_to_non_nullable
+              as Quiz?,
       direction: freezed == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -239,18 +254,19 @@ class __$$_CreateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Create extends _Create {
-  const _$_Create(
+class _$_QuizLearnScreenState extends _QuizLearnScreenState {
+  const _$_QuizLearnScreenState(
       {this.isAnsView = false,
+      this.isRepeat = false,
       this.isResultScreen = false,
-      this.quizIndex = 0,
+      this.itemIndex = 0,
       this.lapIndex = 0,
-      this.learnQuiz,
       final List<QuizItem> quizItemList = const [],
       final List<QuizItem> knowQuizItemList = const [],
       final List<QuizItem> unKnowQuizItemList = const [],
       this.duration = Duration.zero,
       this.studyType = StudyType.learn,
+      this.learnQuiz,
       this.direction})
       : _quizItemList = quizItemList,
         _knowQuizItemList = knowQuizItemList,
@@ -260,21 +276,18 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final bool isAnsView;
-//正解画面切り替え
+  @override
+  @JsonKey()
+  final bool isRepeat;
   @override
   @JsonKey()
   final bool isResultScreen;
-//結果画面切り替え
   @override
   @JsonKey()
-  final int quizIndex;
-//問題番号
+  final int itemIndex;
   @override
   @JsonKey()
   final int lapIndex;
-//何周目
-  @override
-  final Quiz? learnQuiz;
   final List<QuizItem> _quizItemList;
   @override
   @JsonKey()
@@ -313,28 +326,30 @@ class _$_Create extends _Create {
   final StudyType studyType;
 //クイズタイプ
   @override
+  final Quiz? learnQuiz;
+  @override
   final AppinioSwiperDirection? direction;
 
   @override
   String toString() {
-    return 'QuizLearnScreenState(isAnsView: $isAnsView, isResultScreen: $isResultScreen, quizIndex: $quizIndex, lapIndex: $lapIndex, learnQuiz: $learnQuiz, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, duration: $duration, studyType: $studyType, direction: $direction)';
+    return 'QuizLearnScreenState(isAnsView: $isAnsView, isRepeat: $isRepeat, isResultScreen: $isResultScreen, itemIndex: $itemIndex, lapIndex: $lapIndex, quizItemList: $quizItemList, knowQuizItemList: $knowQuizItemList, unKnowQuizItemList: $unKnowQuizItemList, duration: $duration, studyType: $studyType, learnQuiz: $learnQuiz, direction: $direction)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Create &&
+            other is _$_QuizLearnScreenState &&
             (identical(other.isAnsView, isAnsView) ||
                 other.isAnsView == isAnsView) &&
+            (identical(other.isRepeat, isRepeat) ||
+                other.isRepeat == isRepeat) &&
             (identical(other.isResultScreen, isResultScreen) ||
                 other.isResultScreen == isResultScreen) &&
-            (identical(other.quizIndex, quizIndex) ||
-                other.quizIndex == quizIndex) &&
+            (identical(other.itemIndex, itemIndex) ||
+                other.itemIndex == itemIndex) &&
             (identical(other.lapIndex, lapIndex) ||
                 other.lapIndex == lapIndex) &&
-            (identical(other.learnQuiz, learnQuiz) ||
-                other.learnQuiz == learnQuiz) &&
             const DeepCollectionEquality()
                 .equals(other._quizItemList, _quizItemList) &&
             const DeepCollectionEquality()
@@ -345,6 +360,8 @@ class _$_Create extends _Create {
                 other.duration == duration) &&
             (identical(other.studyType, studyType) ||
                 other.studyType == studyType) &&
+            (identical(other.learnQuiz, learnQuiz) ||
+                other.learnQuiz == learnQuiz) &&
             (identical(other.direction, direction) ||
                 other.direction == direction));
   }
@@ -353,49 +370,52 @@ class _$_Create extends _Create {
   int get hashCode => Object.hash(
       runtimeType,
       isAnsView,
+      isRepeat,
       isResultScreen,
-      quizIndex,
+      itemIndex,
       lapIndex,
-      learnQuiz,
       const DeepCollectionEquality().hash(_quizItemList),
       const DeepCollectionEquality().hash(_knowQuizItemList),
       const DeepCollectionEquality().hash(_unKnowQuizItemList),
       duration,
       studyType,
+      learnQuiz,
       direction);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
-      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
+  _$$_QuizLearnScreenStateCopyWith<_$_QuizLearnScreenState> get copyWith =>
+      __$$_QuizLearnScreenStateCopyWithImpl<_$_QuizLearnScreenState>(
+          this, _$identity);
 }
 
-abstract class _Create extends QuizLearnScreenState {
-  const factory _Create(
+abstract class _QuizLearnScreenState extends QuizLearnScreenState {
+  const factory _QuizLearnScreenState(
       {final bool isAnsView,
+      final bool isRepeat,
       final bool isResultScreen,
-      final int quizIndex,
+      final int itemIndex,
       final int lapIndex,
-      final Quiz? learnQuiz,
       final List<QuizItem> quizItemList,
       final List<QuizItem> knowQuizItemList,
       final List<QuizItem> unKnowQuizItemList,
       final Duration duration,
       final StudyType studyType,
-      final AppinioSwiperDirection? direction}) = _$_Create;
-  const _Create._() : super._();
+      final Quiz? learnQuiz,
+      final AppinioSwiperDirection? direction}) = _$_QuizLearnScreenState;
+  const _QuizLearnScreenState._() : super._();
 
   @override
   bool get isAnsView;
-  @override //正解画面切り替え
+  @override
+  bool get isRepeat;
+  @override
   bool get isResultScreen;
-  @override //結果画面切り替え
-  int get quizIndex;
-  @override //問題番号
+  @override
+  int get itemIndex;
+  @override
   int get lapIndex;
-  @override //何周目
-  Quiz? get learnQuiz;
   @override
   List<QuizItem> get quizItemList;
   @override
@@ -407,9 +427,11 @@ abstract class _Create extends QuizLearnScreenState {
   @override // 学習時間
   StudyType get studyType;
   @override //クイズタイプ
+  Quiz? get learnQuiz;
+  @override
   AppinioSwiperDirection? get direction;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
+  _$$_QuizLearnScreenStateCopyWith<_$_QuizLearnScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/premium_detail/premium_detail_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../notification_time/notification_time.dart';

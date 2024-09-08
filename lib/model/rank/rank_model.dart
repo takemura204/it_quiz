@@ -169,7 +169,7 @@ class RankModel extends StateNotifier<Ranks> {
   }
 
   /// 現在のstateをリセット
-  Future _resetData() async {
+  Future resetData() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("rankData");
   }

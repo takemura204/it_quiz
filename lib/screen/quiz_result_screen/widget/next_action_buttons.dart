@@ -7,181 +7,181 @@ class NextActionButtons extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isResultView = ref.watch(homeStudyScreenProvider.select((s) => s.isResultView));
+    final studyType = ref.watch(quizModelProvider.select((s) => s.studyType));
+    Widget actionButtonsWidget(StudyType studyType) {
+      switch (studyType) {
+        case StudyType.study:
+          return const _StudyActionButtons();
+        case StudyType.learn:
+          return const _LearnActionButtons();
+        case StudyType.choice:
+          return const _ChoiceActionButtons();
+        default:
+          return const Gap(0);
+      }
+    }
+
     return Container(
       color: context.backgroundColor,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
       width: context.width,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Gap(10),
-          Expanded(
-            child: DefaultVerticalButton(
-              width: context.width * 0.45,
-              height: 85,
-              text: "もう一度",
-              icon: LineIcons.alternateRedo,
-              onPressed: () async {
-                ref.read(homeStudyScreenProvider.notifier).restartStudyQuiz();
-                if (isResultView) {
-                  ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-          ),
-          const Gap(10),
-          Expanded(
-            child: PrimaryVerticalButton(
-              width: context.width * 0.45,
-              height: 85,
-              title: "条件を変更",
-              icon: LineIcons.horizontalSliders,
-              onPressed: () {
-                showStudyModal(context);
-              },
-            ),
-          ),
-          const Gap(10),
-        ],
-      ),
+      child: actionButtonsWidget(studyType),
     );
   }
 }
 
-class DefaultVerticalButton extends HookConsumerWidget {
-  const DefaultVerticalButton({
-    required this.width,
-    required this.height,
-    required this.text,
-    required this.icon,
-    required this.onPressed,
-  });
-
-  final double width;
-  final double height;
-  final String text;
-  final VoidCallback? onPressed;
-  final IconData? icon;
+class _StudyActionButtons extends HookConsumerWidget {
+  const _StudyActionButtons();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: height,
-      // width: width,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          padding: const EdgeInsets.all(3.0),
-          alignment: Alignment.center,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
+    final isResultScreen = ref.watch(homeStudyScreenProvider.select((s) => s.isResultScreen));
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Gap(10),
+        Expanded(
+          child: DefaultVerticalButton(
+            width: context.width * 0.45,
+            height: 85,
+            text: "もう一度",
+            iconWidget: Icon(
+              LineIcons.alternateRedo,
+              color: context.mainColor,
+              size: 40,
             ),
-          ),
-          side: BorderSide(
-            color: onPressed == null ? Colors.white10 : context.mainColor,
-            width: 1,
+            onPressed: () async {
+              ref.read(homeStudyScreenProvider.notifier).restartStudyQuiz();
+              if (isResultScreen) {
+                ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(false);
+                Navigator.of(context).pop();
+              }
+            },
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null)
-              Icon(
-                icon,
-                color: onPressed == null ? Colors.grey.shade500 : context.mainColor,
-                size: height * 0.45,
-              ),
-            SizedBox(width: icon != null ? 6.0 : 0),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: onPressed == null ? Colors.grey.shade500 : context.mainColor,
-                fontWeight: FontWeight.bold,
-                fontSize: height < context.height * 0.05 ? 14 : 16,
-              ),
+        const Gap(10),
+        Expanded(
+          child: PrimaryVerticalButton(
+            width: context.width * 0.45,
+            height: 85,
+            title: "条件を変更",
+            iconWidget: const Icon(
+              LineIcons.horizontalSliders,
+              color: Colors.white,
+              size: 40,
             ),
-          ],
+            onPressed: () {
+              showStudyModal(context);
+            },
+          ),
         ),
-        onPressed: onPressed == null
-            ? null
-            : () {
-                onPressed!();
-                HapticFeedback.lightImpact();
-              },
-      ),
+        const Gap(10),
+      ],
     );
   }
 }
 
-class PrimaryVerticalButton extends HookConsumerWidget {
-  const PrimaryVerticalButton({
-    required this.width,
-    required this.height,
-    required this.title,
-    this.subTitle,
-    this.icon,
-    required this.onPressed,
-  });
-
-  final double width;
-  final double height;
-  final String title;
-  final String? subTitle;
-  final VoidCallback? onPressed;
-  final IconData? icon;
+class _LearnActionButtons extends HookConsumerWidget {
+  const _LearnActionButtons();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: height,
-      width: width,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: context.mainColor,
-          elevation: 0,
-          padding: const EdgeInsets.all(3.0),
-          alignment: Alignment.center,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
+    final selectQuiz = ref.watch(homeQuizScreenProvider.select((s) => s.selectQuiz));
+    final quizItemList = ref.watch(quizLearnScreenProvider.select((s) => s.quizItemList));
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Gap(10),
+        Expanded(
+          child: DefaultVerticalButton(
+            width: context.width * 0.45,
+            height: 85,
+            text: "もう一度",
+            iconWidget: Icon(
+              LineIcons.alternateRedo,
+              color: context.mainColor,
+              size: 40,
             ),
+            onPressed: () async {
+              ref.read(quizLearnScreenProvider.notifier).restartLearnQuiz();
+            },
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null)
-              Icon(
-                icon,
-                color: Colors.white,
-                size: height * 0.45,
-              ),
-            SizedBox(width: icon != null ? 8.0 : 0),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: height <= 5 ? 14 : 16,
-              ),
+        const Gap(10),
+        Expanded(
+          child: PrimaryVerticalButton(
+            width: context.width * 0.45,
+            height: 85,
+            title: "クイズに挑戦",
+            iconWidget: SvgPicture.asset(
+              'assets/icon/list.svg',
+              width: 40,
+              height: 40,
+              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             ),
-          ],
+            onPressed: () {
+              Navigator.of(context).pop();
+              context.showScreen(QuizChoiceScreenArguments(
+                quiz: selectQuiz!.copyWith(quizItemList: quizItemList),
+              ).generateRoute());
+            },
+          ),
         ),
-        onPressed: onPressed == null
-            ? null
-            : () {
-                onPressed!();
-                HapticFeedback.lightImpact();
-              },
-      ),
+        const Gap(10),
+      ],
+    );
+  }
+}
+
+class _ChoiceActionButtons extends HookConsumerWidget {
+  const _ChoiceActionButtons();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isResultScreen = ref.watch(homeStudyScreenProvider.select((s) => s.isResultScreen));
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Gap(10),
+        Expanded(
+          child: DefaultVerticalButton(
+            width: context.width * 0.45,
+            height: 85,
+            text: "もう一度",
+            iconWidget: Icon(
+              LineIcons.alternateRedo,
+              color: context.mainColor,
+              size: 40,
+            ),
+            onPressed: () async {
+              ref.read(homeStudyScreenProvider.notifier).restartStudyQuiz();
+              if (isResultScreen) {
+                ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(false);
+                Navigator.of(context).pop();
+              }
+            },
+          ),
+        ),
+        const Gap(10),
+        Expanded(
+          child: PrimaryVerticalButton(
+            width: context.width * 0.45,
+            height: 85,
+            title: "条件を変更",
+            iconWidget: const Icon(
+              LineIcons.horizontalSliders,
+              color: Colors.white,
+              size: 40,
+            ),
+            onPressed: () {},
+          ),
+        ),
+        const Gap(10),
+      ],
     );
   }
 }

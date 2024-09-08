@@ -84,29 +84,3 @@ class _PremiumLabel extends ConsumerWidget {
     );
   }
 }
-
-///プレミアム購入時
-class _FreeLabel extends ConsumerWidget {
-  const _FreeLabel();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-      ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-        child: Text(
-          'Free',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}
