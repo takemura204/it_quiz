@@ -43,7 +43,6 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     await _initIsWeak();
     await _initQuizCount();
     await updateFilterQuizList();
-    _saveDevice();
     setIsLoading(false);
   }
 
@@ -234,6 +233,7 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     filterQuizItemList = (filterQuizItemList..shuffle()).take(quizItemCount).toList();
 
     state = state.copyWith(filterQuizItemList: filterQuizItemList);
+    _saveDevice();
   }
 
   Future resetFilterQuizList() async {

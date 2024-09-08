@@ -2,6 +2,7 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../../model/quiz/quiz.dart';
@@ -33,6 +34,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     swiperController = AppinioSwiperController();
     await startStopwatch(); //学習時間計測
     await _initLearnQuiz();
+    await _initIsRepeat();
     ref.read(quizModelProvider.notifier).setStudyType(StudyType.learn);
   }
 
@@ -57,6 +59,16 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     final learnQuiz = quiz;
     final quizItemList = [...learnQuiz.quizItemList];
     state = state.copyWith(learnQuiz: learnQuiz, quizItemList: quizItemList);
+  }
+
+  Future _initIsRepeat() async {
+    final prefs = await SharedPreferences.getInstance();
+    const isRepeatName = 'quiz_is_repeat';
+    final isRepeatData = prefs.getBool(isRepeatName);
+    if (isRepeatData != null) {
+      state = state.copyWith(isRepeat: isRepeatData);
+    }
+    print(isRepeatName);
   }
 
   ///学習時間計測
@@ -294,6 +306,7 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
 
   void setIsRepeat(bool value) {
     state = state.copyWith(isRepeat: value);
+    print(state.isRepeat);
   }
 
   ///クリアボタン

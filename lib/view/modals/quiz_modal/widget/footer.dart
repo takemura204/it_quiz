@@ -9,6 +9,7 @@ class _Footer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final filterQuizItemList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizItemList));
     final studyType = ref.watch(homeQuizModalProvider.select((s) => s.selectedStudyType));
+    final isRepeat = ref.watch(homeQuizModalProvider.select((s) => s.isRepeat));
     return Container(
       color: context.backgroundColor,
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),

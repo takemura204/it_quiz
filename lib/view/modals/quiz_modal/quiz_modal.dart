@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/quiz_learn/quiz_learn_screen_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../controller/home_quiz_modal/home_quiz_modal_controller.dart';
