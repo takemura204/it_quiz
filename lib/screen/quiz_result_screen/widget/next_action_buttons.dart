@@ -141,7 +141,7 @@ class _ChoiceActionButtons extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isResultScreen = ref.watch(homeStudyScreenProvider.select((s) => s.isResultScreen));
+    final filterQuizList = ref.watch(homeQuizScreenProvider.select((s) => s.filterQuizList));
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -158,11 +158,7 @@ class _ChoiceActionButtons extends HookConsumerWidget {
               size: 40,
             ),
             onPressed: () async {
-              ref.read(homeStudyScreenProvider.notifier).restartStudyQuiz();
-              if (isResultScreen) {
-                ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(false);
-                Navigator.of(context).pop();
-              }
+              ref.read(quizChoiceScreenProvider.notifier).restartChoiceQuiz();
             },
           ),
         ),
@@ -171,13 +167,25 @@ class _ChoiceActionButtons extends HookConsumerWidget {
           child: PrimaryVerticalButton(
             width: context.width * 0.45,
             height: 85,
-            title: "条件を変更",
+            title: "次のクイズに挑戦",
             iconWidget: const Icon(
-              LineIcons.horizontalSliders,
-              color: Colors.white,
+              Icons.keyboard_double_arrow_right,
               size: 40,
+              color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              ///次のクイズがモーダルの設定が反映されていない。
+              Navigator.of(context).pop();
+              ref.read(homeQuizScreenProvider.notifier).setNextQuiz();
+              final selectStudyQuiz = ref.read(homeQuizScreenProvider).selectStudyQuiz;
+              if (selectStudyQuiz!.quizItemList.isNotEmpty) {
+                context.showScreen(
+                  QuizChoiceScreenArguments(
+                    quiz: selectStudyQuiz,
+                  ).generateRoute(),
+                );
+              }
+            },
           ),
         ),
         const Gap(10),

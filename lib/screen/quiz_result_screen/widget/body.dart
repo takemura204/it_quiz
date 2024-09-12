@@ -16,15 +16,12 @@ class _Body extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  ///結果カード
+                  ///リザルト
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const ResultClearCard(),
-                      ResultDashboardCard(
-                        quizItemList: quizItemList,
-                        duration: duration,
-                      ),
+                      _ResultHeaderCard(quizItemList),
+                      _ResultDashboardCard(quizItemList: quizItemList, duration: duration),
                     ],
                   ),
 

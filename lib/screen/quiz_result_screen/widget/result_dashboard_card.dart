@@ -1,19 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/model/extension_resource.dart';
-import 'package:kentei_quiz/model/lang/initial_resource.dart';
-import 'package:kentei_quiz/model/quiz/quiz_model.dart';
-import 'package:line_icons/line_icons.dart';
+part of '../quiz_result_screen.dart';
 
-import '../../model/quiz_item/quiz_item.dart';
-import '../../untils/enums.dart';
-
-class ResultDashboardCard extends ConsumerWidget {
-  const ResultDashboardCard({
-    required this.quizItemList,
-    required this.duration,
-  });
+class _ResultDashboardCard extends ConsumerWidget {
+  const _ResultDashboardCard({required this.quizItemList, required this.duration});
 
   final List<QuizItem> quizItemList;
   final Duration duration;
@@ -24,6 +12,18 @@ class ResultDashboardCard extends ConsumerWidget {
     final minutes = duration.inMinutes;
     final seconds = duration.inSeconds % 60;
     final displayDuration = (minutes + seconds / 60).toStringAsFixed(1);
+
+    int _quizItemResultLength(StudyType studyType) {
+      switch (studyType) {
+        case StudyType.study:
+        case StudyType.learn:
+          return quizItemList.where((x) => x.isKnow).length;
+        case StudyType.choice:
+          return quizItemList.where((x) => x.status == StatusType.correct).toList().length;
+        default:
+          return 0;
+      }
+    }
 
     return Card(
       elevation: 1,
@@ -66,25 +66,22 @@ class ResultDashboardCard extends ConsumerWidget {
                       alignment: Alignment.bottomCenter,
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                            color: context.mainColor,
-                            borderRadius: const BorderRadius.all(Radius.circular(8)),
-                          ),
-                          height: 8,
-                          width: ('${quizItemList.length}'.length.toDouble() +
-                                      '${quizItemList.where((x) => x.status == StatusType.correct).toList().length}'
-                                          .length
-                                          .toDouble()) *
-                                  30 +
-                              14,
-                        ),
+                            decoration: BoxDecoration(
+                              color: context.mainColor,
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
+                            ),
+                            height: 8,
+                            width: ('${quizItemList.length}'.length.toDouble() +
+                                        '${_quizItemResultLength(studyType)}'.length.toDouble()) *
+                                    30 +
+                                14),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
-                              "${quizItemList.where((x) => x.isKnow).length}",
+                              "${_quizItemResultLength(studyType)}",
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 30,

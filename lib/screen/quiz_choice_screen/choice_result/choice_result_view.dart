@@ -115,7 +115,7 @@ class _NextActionCard extends HookConsumerWidget {
                       : () {
                           Navigator.of(context).pop();
                           ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);
-                          ref.read(homeQuizScreenProvider.notifier).setSelectStudyQuiz();
+                          ref.read(homeQuizScreenProvider.notifier).setNextQuiz();
                           final selectStudyQuiz = ref.read(homeQuizScreenProvider).selectStudyQuiz;
                           if (selectStudyQuiz!.quizItemList.isNotEmpty) {
                             context.showScreen(

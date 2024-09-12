@@ -1,3 +1,5 @@
+import 'package:easy_animate/animation/fade_in_animation.dart';
+import 'package:easy_animate/enum/animate_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -10,6 +12,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../../controller/home_study/home_study_screen_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
+import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../untils/enums.dart';
@@ -17,8 +20,6 @@ import '../../view/admob/admob_banner.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/button_icon/clear_button.dart';
-import '../../view/card/result_clear_card.dart';
-import '../../view/card/result_dashboard_card.dart';
 import '../../view/card/result_item_card.dart';
 import '../../view/modals/study_modal/study_modal.dart';
 import '../screen_argument.dart';
@@ -26,6 +27,8 @@ import '../screen_argument.dart';
 part 'widget/app_bar.dart';
 part 'widget/body.dart';
 part 'widget/next_action_buttons.dart';
+part 'widget/result_dashboard_card.dart';
+part 'widget/result_header_card.dart';
 part 'widget/result_item_list.dart';
 
 class QuizResultScreen extends HookConsumerWidget {

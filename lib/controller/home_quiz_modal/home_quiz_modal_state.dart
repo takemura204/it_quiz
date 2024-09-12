@@ -16,7 +16,7 @@ class HomeQuizModalState with _$HomeQuizModalState {
     @Default([]) final List<ImportanceType> selectedImportanceList,
     @Default(StudyType.choice) final StudyType selectedStudyType, //クイズタイプ
     @Default(0) final int selectedStudyTypeTabIndex,
-    @Default(5) final int quizItemCount,
+    @Default(10) final int quizItemCount,
     @Default(false) final bool isRepeat,
     @Default(false) final bool isSaved,
     @Default(false) final bool isWeak,

@@ -1,85 +1,7 @@
 part of '../quiz_choice_screen.dart';
 
-///問題文
-class _Question extends ConsumerWidget {
-  const _Question(this.quiz);
-
-  final Quiz quiz;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
-
-    return Padding(
-      padding: EdgeInsets.all(context.width * 0.02),
-      child: Text(
-        quiz.quizItemList[quizIndex].question,
-        style: const TextStyle(
-          color: Colors.black87,
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-        ),
-      ),
-    );
-  }
-}
-
-class _QuizProgress extends ConsumerWidget {
-  const _QuizProgress(this.quiz);
-
-  final Quiz quiz;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final quizIndex = ref.watch(quizChoiceScreenProvider).quizIndex;
-    final source = quiz.quizItemList[quizIndex].source;
-
-    return Row(
-      children: [
-        Gap(context.width * 0.02),
-        Text(
-          source != '' ? "出題：$source" : '',
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
-        const Spacer(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(
-              "${quizIndex + 1}",
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            const Text(
-              " / ",
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            Text(
-              "${quiz.quizItemList.length}",
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-        Gap(context.width * 0.05),
-      ],
-    );
-  }
-}
-
-class _SelectAnswer extends ConsumerWidget {
-  const _SelectAnswer(this.quiz);
+class _ChoiceList extends ConsumerWidget {
+  const _ChoiceList(this.quiz);
 
   final Quiz quiz;
 
@@ -230,37 +152,5 @@ class _SkipChoice extends ConsumerWidget {
         ),
       ),
     );
-  }
-}
-
-class _JudgeIcon extends ConsumerWidget {
-  const _JudgeIcon(this.quiz);
-
-  final Quiz quiz;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isJudge = ref.watch(quizChoiceScreenProvider).isJudge;
-    final isAnsView = ref.watch(quizChoiceScreenProvider).isAnsView;
-
-    return isAnsView
-        ? Align(
-            alignment: Alignment.center,
-            child: Container(
-              width: context.height * 0.4,
-              child: isJudge
-                  ? Icon(
-                      Icons.circle_outlined,
-                      color: Colors.green.withOpacity(0.7),
-                      size: context.height * 0.35,
-                    )
-                  : Icon(
-                      Icons.clear,
-                      color: Colors.red.withOpacity(0.7),
-                      size: context.height * 0.35,
-                    ),
-            ),
-          )
-        : const SizedBox.shrink();
   }
 }

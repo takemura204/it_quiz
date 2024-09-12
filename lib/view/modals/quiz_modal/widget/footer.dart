@@ -8,8 +8,8 @@ class _Footer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filterQuizItemList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizItemList));
+    final quizItemCount = ref.watch(homeQuizModalProvider.select((s) => s.quizItemCount));
     final studyType = ref.watch(homeQuizModalProvider.select((s) => s.selectedStudyType));
-    final isRepeat = ref.watch(homeQuizModalProvider.select((s) => s.isRepeat));
     return Container(
       color: context.backgroundColor,
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
@@ -47,6 +47,7 @@ class _Footer extends HookConsumerWidget {
             onPressed: filterQuizItemList.isNotEmpty
                 ? () {
                     ref.read(homeQuizModalProvider.notifier).updateFilterQuizList();
+                    ref.read(homeQuizScreenProvider.notifier).setStudyLength(quizItemCount);
                     Navigator.of(context).pop();
                     if (studyType == StudyType.choice) {
                       context.showScreen(QuizChoiceScreenArguments(

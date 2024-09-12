@@ -111,7 +111,7 @@ class DefaultVerticalButton extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (iconWidget != null) iconWidget!,
-            SizedBox(width: iconWidget != null ? 6.0 : 0),
+            SizedBox(width: iconWidget != null ? 8.0 : 0),
             Text(
               text,
               textAlign: TextAlign.center,

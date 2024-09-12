@@ -57,7 +57,11 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     final choiceQuiz = quiz;
     final quizItemList = [...choiceQuiz.quizItemList];
     quizItemList.shuffle();
-    state = state.copyWith(choiceQuiz: choiceQuiz, quizItemList: quizItemList);
+    state = state.copyWith(
+      choiceQuiz: choiceQuiz,
+      quizItemList: quizItemList,
+      quizIndex: 0,
+    );
   }
 
   ///選択肢取得
@@ -82,6 +86,10 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
 
   void _setSelectAns(String ans) {
     state = state.copyWith(selectAns: ans);
+  }
+
+  Future setIsResultScreen(bool value) async {
+    state = state.copyWith(isResultScreen: value);
   }
 
   ///クイズ判定
@@ -148,6 +156,8 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   void _nextQuiz() {
     final isPremium = ref.read(authModelProvider).isPremium;
     final quizIndex = state.quizIndex;
+    final quizItemList = [...state.quizItemList];
+
     //問題が終わった時
     if (quizIndex == state.quizItemList.length - 1) {
       _stopwatch.stop();
@@ -208,6 +218,13 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     state = state.copyWith(quizItemList: quizItemList);
 
     _updateQuiz();
+  }
+
+  Future restartChoiceQuiz() async {
+    await _initQuizList();
+    await _initChoices();
+    await _startStopwatch();
+    setIsResultScreen(false);
   }
 
   ///クリアボタン

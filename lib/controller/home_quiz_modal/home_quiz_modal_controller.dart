@@ -231,9 +231,9 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     // リストをシャッフルしてから指定された数だけ抽出
     final quizItemCount =state.quizItemCount;
     filterQuizItemList = (filterQuizItemList..shuffle()).take(quizItemCount).toList();
-
     state = state.copyWith(filterQuizItemList: filterQuizItemList);
     _saveDevice();
+
   }
 
   Future resetFilterQuizList() async {

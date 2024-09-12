@@ -21,13 +21,13 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
 
   Future _initState() async {
     setIsLoading(true);
-    await initQuizList();
+    await _initQuizList();
     await initCategoryList();
     setIsLoading(false);
   }
 
   ///QuizList取得
-  Future initQuizList() async {
+  Future _initQuizList() async {
     final quizList = ref.read(quizModelProvider).quizList;
     state = state.copyWith(filterQuizList: quizList);
   }
@@ -79,7 +79,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///selectStudyQuiz更新
-  void setSelectStudyQuiz() {
+  void setNextQuiz() {
     // selectQuiz の存在を確認
     final selectQuiz = state.selectQuiz;
     if (selectQuiz == null) {
@@ -92,16 +92,16 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     List<QuizItem> filteredQuizList;
     if (state.selectedStatusList.isEmpty || state.isQuizStatusRecommend) {
       // 特定のステータスに基づいて問題を並べ替える
-      final statusOrder = [
+      final statusList = [
         StatusType.unlearned,
         StatusType.learned,
         StatusType.incorrect,
         StatusType.correct,
       ];
       filteredQuizList = quizItemList
-          .where((quizItem) => statusOrder.contains(quizItem.status))
+          .where((quizItem) => statusList.contains(quizItem.status))
           .toList()
-        ..sort((a, b) => statusOrder.indexOf(a.status).compareTo(statusOrder.indexOf(b.status)));
+        ..sort((a, b) => statusList.indexOf(a.status).compareTo(statusList.indexOf(b.status)));
     } else {
       // selectedStatusList に基づいて問題をフィルタリング
       filteredQuizList = quizItemList

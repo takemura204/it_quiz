@@ -5,6 +5,26 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final studyType = ref.watch(quizModelProvider.select((s) => s.studyType));
+
+    void onTapClearButton(StudyType studyType) {
+      switch (studyType) {
+        case StudyType.study:
+          ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(false);
+          ref.read(mainScreenControllerProvider.notifier).setIsShowInAppReview();
+          return;
+        case StudyType.learn:
+          ref.read(mainScreenControllerProvider.notifier).setIsShowInAppReview();
+          return;
+        case StudyType.choice:
+          ref.read(quizChoiceScreenProvider.notifier).resetScreen();
+          ref.read(mainScreenControllerProvider.notifier).setIsShowInAppReview();
+          return;
+        default:
+          return;
+      }
+    }
+
     return AppBar(
       titleSpacing: 0,
       centerTitle: true,
@@ -14,8 +34,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
         ClearButton(
             iconSize: 30,
             onPressed: () {
-              ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(false);
-              ref.read(mainScreenControllerProvider.notifier).setIsShowInAppReview();
+              onTapClearButton(studyType);
               Navigator.of(context).pop();
             }),
         Gap(context.width * 0.02),

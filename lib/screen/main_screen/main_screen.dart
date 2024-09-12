@@ -4,8 +4,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/home_dashboard/home_dashboard_screen_controller.dart';
-import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dart';
 import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
 import 'package:kentei_quiz/model/dashboard/dashboard_model.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -179,13 +177,15 @@ class _BottomNavBar extends ConsumerWidget {
           if (index == 0) {
             ref.read(quizModelProvider.notifier).setStudyType(StudyType.study);
           }
+          if (index == 1) {
+            // ref.read(homeDashboardScreenProvider.notifier).initState();
+            // ref.read(homeQuizScreenProvider.notifier).initCategoryList();
+          }
           if (index == 2) {
             ref.read(homeSearchScreenProvider.notifier).initFilterQuiz();
           }
           if (index == 3) {
             ref.read(dashboardModelProvider.notifier).initState();
-            ref.read(homeDashboardScreenProvider.notifier).initState();
-            ref.read(homeQuizScreenProvider.notifier).initCategoryList();
           }
           if (index == 4) {
             ref.read(authProvider.notifier).initState();

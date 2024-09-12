@@ -68,7 +68,6 @@ class QuizLearnScreenController extends StateNotifier<QuizLearnScreenState>
     if (isRepeatData != null) {
       state = state.copyWith(isRepeat: isRepeatData);
     }
-    print(isRepeatName);
   }
 
   ///学習時間計測
