@@ -7,14 +7,14 @@ class DefaultButton extends ConsumerWidget {
   const DefaultButton({
     required this.width,
     required this.height,
-    required this.text,
+    required this.title,
     required this.onPressed,
     this.icon,
   });
 
   final double width;
   final double height;
-  final String text;
+  final String title;
   final VoidCallback? onPressed;
   final IconData? icon;
 
@@ -50,7 +50,7 @@ class DefaultButton extends ConsumerWidget {
               ),
             SizedBox(width: icon != null ? 6.0 : 0),
             Text(
-              text,
+              title,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: onPressed == null ? Colors.grey.shade500 : context.mainColor,

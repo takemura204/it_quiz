@@ -25,6 +25,7 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
   final Ref ref;
   final Quiz quiz;
   final filterQuizItemListName = 'quiz_filter_quiz_item_list';
+  final categoryListName = 'quiz_category_list';
   final statusListName = 'quiz_status_list';
   final importanceListName = 'quiz_importance_list';
   final isRepeatName = 'quiz_is_repeat';
@@ -51,6 +52,8 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
+
+
 
   ///引数のquizItemListがselectedStatusListにない時、からにする。
   Future _initStatusList() async {
@@ -134,6 +137,7 @@ class HomeQuizModalController extends StateNotifier<HomeQuizModalState>
       state = state.copyWith(quizItemCount: quizItemCountData);
     }
   }
+
 
   ///Status絞り込み
   void updateStatusQuizList(StatusType status) {

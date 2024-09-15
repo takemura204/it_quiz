@@ -110,8 +110,7 @@ class DailyMissionWidget extends ConsumerWidget {
 }
 
 class _Title extends ConsumerWidget {
-  const _Title(
-      {required this.title, required this.subtitle, required this.icon});
+  const _Title({required this.title, required this.subtitle, required this.icon});
 
   final String title;
   final String subtitle;
@@ -127,8 +126,7 @@ class _Title extends ConsumerWidget {
       ),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(
-              color: context.mainColor, width: context.width * 0.003),
+          bottom: BorderSide(color: context.mainColor, width: context.width * 0.003),
         ),
       ),
       child: Row(
@@ -150,9 +148,7 @@ class _Title extends ConsumerWidget {
           const Spacer(),
           Text(
             subtitle,
-            style: TextStyle(
-                fontSize: context.height * 0.018,
-                fontWeight: FontWeight.normal),
+            style: TextStyle(fontSize: context.height * 0.018, fontWeight: FontWeight.normal),
           ),
         ],
       ),
@@ -220,7 +216,7 @@ class _DailyMissionCard extends ConsumerWidget {
             DefaultButton(
               width: context.width * 0.2,
               height: context.height * 0.045,
-              text: "挑戦する",
+              title: "挑戦する",
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -231,9 +227,8 @@ class _DailyMissionCard extends ConsumerWidget {
                 width: context.width * 0.2,
                 height: context.height * 0.045,
                 title: "受取",
-                onPressed: () => ref
-                    .read(missionControllerProvider.notifier)
-                    .tapMissionReceiveButton(mission)),
+                onPressed: () =>
+                    ref.read(missionControllerProvider.notifier).tapMissionReceiveButton(mission)),
           ],
           if (isDone && mission.isReceived) ...[
             DisabledButton(

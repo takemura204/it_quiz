@@ -80,16 +80,25 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
   ///選択肢を押した時
   void tapAnsButton(String ans) {
     _setSelectAns(ans);
-    _judgeQuiz(); //正誤判定,スコア判定
-    _switchAnsView(); //答え表示,次の問題
+    _judgeQuiz();
+    _setIsAnsView();
   }
 
   void _setSelectAns(String ans) {
     state = state.copyWith(selectAns: ans);
   }
 
-  Future setIsResultScreen(bool value) async {
+  Future _setIsResultScreen(bool value) async {
     state = state.copyWith(isResultScreen: value);
+  }
+
+  ///正解表示
+  void _setIsAnsView() {
+    state = state.copyWith(isAnsView: true);
+    Future.delayed(const Duration(milliseconds: 900), () {
+      state = state.copyWith(isAnsView: false, selectAns: '');
+      _nextQuiz(); //次のクイズ
+    });
   }
 
   ///クイズ判定
@@ -139,24 +148,10 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     }
   }
 
-  ///正解表示
-  void _switchAnsView() {
-    state = state.copyWith(isAnsView: true);
-    Future.delayed(const Duration(milliseconds: 900), () {
-      state = state.copyWith(isAnsView: false, selectAns: '');
-      _nextQuiz(); //次のクイズ
-    });
-  }
-
-  void setStudyType(StudyType studyType) {
-    state = state.copyWith(studyType: studyType);
-  }
-
   ///次の問題
   void _nextQuiz() {
     final isPremium = ref.read(authModelProvider).isPremium;
     final quizIndex = state.quizIndex;
-    final quizItemList = [...state.quizItemList];
 
     //問題が終わった時
     if (quizIndex == state.quizItemList.length - 1) {
@@ -224,7 +219,7 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
     await _initQuizList();
     await _initChoices();
     await _startStopwatch();
-    setIsResultScreen(false);
+    await _setIsResultScreen(false);
   }
 
   ///クリアボタン
@@ -255,8 +250,8 @@ class QuizChoiceScreenController extends StateNotifier<QuizChoiceScreenState>
       timeStamp: DateTime.now(),
       studyType: studyType,
     );
+    ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(updateQuiz);
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
-    ref.read(homeQuizScreenProvider.notifier).updateSelectQuiz(updateQuiz);
   }
 
   List<QuizItem> updateQuizItemList() {

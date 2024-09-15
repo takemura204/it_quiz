@@ -22,10 +22,8 @@ class CustomTimePicker extends HookWidget {
   Widget build(BuildContext context) {
     int selectedHour = initialTime.hour;
     int selectedMinute = initialTime.minute;
-    final hourController =
-        FixedExtentScrollController(initialItem: selectedHour);
-    final minuteController =
-        FixedExtentScrollController(initialItem: selectedMinute ~/ 5);
+    final hourController = FixedExtentScrollController(initialItem: selectedHour);
+    final minuteController = FixedExtentScrollController(initialItem: selectedMinute ~/ 5);
 
     return Container(
       height: 380,
@@ -57,7 +55,7 @@ class CustomTimePicker extends HookWidget {
                   child: DefaultButton(
                     width: 100,
                     height: 50,
-                    text: "おすすめ",
+                    title: "おすすめ",
                     onPressed: () {
                       hourController.animateToItem(
                         recommendedHour,
@@ -106,9 +104,7 @@ class CustomTimePicker extends HookWidget {
                         itemExtent: 42,
                         children: [
                           for (var i = 0; i < 24; i++)
-                            Center(
-                                child: Text('$i',
-                                    style: const TextStyle(fontSize: 16))),
+                            Center(child: Text('$i', style: const TextStyle(fontSize: 16))),
                         ],
                       ),
                     ],
@@ -157,8 +153,7 @@ class CustomTimePicker extends HookWidget {
               height: 60,
               title: "設定する",
               onPressed: () {
-                onTimeChanged(
-                    TimeOfDay(hour: selectedHour, minute: selectedMinute));
+                onTimeChanged(TimeOfDay(hour: selectedHour, minute: selectedMinute));
                 Navigator.pop(context);
               }),
           const Gap(20),

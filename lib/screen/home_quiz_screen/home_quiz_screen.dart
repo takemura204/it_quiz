@@ -8,9 +8,9 @@ import 'package:kentei_quiz/controller/home_quiz/home_quiz_screen_controller.dar
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/modals/quiz_modal/quiz_modal.dart';
-import 'package:kentei_quiz/view/modals/weak_modal.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../controller/home_quiz_modal/home_quiz_modal_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
@@ -21,7 +21,6 @@ import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/chart/progress_crilcle_chart.dart';
 import '../../view/modals/need_premium_modal/premium_quiz_modal.dart';
-import '../../view/modals/randam_modal.dart';
 import '../screen_argument.dart';
 
 part 'widget/app_bar.dart';

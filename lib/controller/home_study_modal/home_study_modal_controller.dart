@@ -46,7 +46,6 @@ class HomeStudyModalController extends StateNotifier<HomeStudyModalState>
   Future _initState() async {
     setIsLoading(true);
     // resetData();
-
     await _initFilterQuizList();
     await _initCategoryList();
     await _initStatusList();

@@ -173,7 +173,7 @@ class DefaultDialog extends ConsumerWidget {
                   DefaultButton(
                       width: context.width * 0.4,
                       height: context.height * 0.06,
-                      text: doneText,
+                      title: doneText,
                       onPressed: onPressed),
                   const Spacer(),
                 ],
@@ -349,7 +349,7 @@ class DefaultCloseDialog extends ConsumerWidget {
               DefaultButton(
                   width: context.width * 0.8,
                   height: context.height * 0.06,
-                  text: doneText,
+                  title: doneText,
                   onPressed: onPressed),
               const Spacer(),
               Gap(context.height * 0.005),

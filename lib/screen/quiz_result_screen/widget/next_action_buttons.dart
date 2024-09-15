@@ -141,7 +141,6 @@ class _ChoiceActionButtons extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final filterQuizList = ref.watch(homeQuizScreenProvider.select((s) => s.filterQuizList));
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,

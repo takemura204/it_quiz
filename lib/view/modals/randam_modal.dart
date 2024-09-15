@@ -74,7 +74,7 @@ class RandomQuizModal extends ConsumerWidget {
           DefaultButton(
             width: context.width * 1,
             height: 55,
-            text: I18n().styleLeanQuiz,
+            title: I18n().styleLeanQuiz,
             onPressed: () {
               Navigator.of(context).pop();
               ref.read(quizModelProvider.notifier).setStudyType(StudyType.choice);

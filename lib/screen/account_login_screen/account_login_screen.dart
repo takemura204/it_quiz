@@ -24,8 +24,7 @@ class AccountLoginScreen extends ConsumerWidget {
     final isSafetyPass = ref.watch(authProvider).isSafetyPass;
     final isObscure = ref.watch(authProvider).isObscure;
     final emailController = ref.watch(authProvider.notifier).emailController;
-    final passwordController =
-        ref.watch(authProvider.notifier).passwordController;
+    final passwordController = ref.watch(authProvider.notifier).passwordController;
     final formKey = ref.watch(authProvider.notifier).loginFormKey;
     final focusNode = ref.watch(authProvider.notifier).loginFocusNode;
     final isNotTap = ref.watch(authProvider).isNotTap;
@@ -49,8 +48,7 @@ class AccountLoginScreen extends ConsumerWidget {
                       EmailTextField(
                         emailController: emailController,
                         isValidEmail: emailController.text.isNotEmpty,
-                        onChanged: (email) =>
-                            ref.read(authProvider.notifier).setEmail(email),
+                        onChanged: (email) => ref.read(authProvider.notifier).setEmail(email),
                       ),
 
                       ///パスワード
@@ -60,9 +58,8 @@ class AccountLoginScreen extends ConsumerWidget {
                         isSafetyPass: isSafetyPass,
                         isObscure: isObscure,
                         isLogin: true,
-                        onChanged: (password) => ref
-                            .read(authProvider.notifier)
-                            .setPassword(password),
+                        onChanged: (password) =>
+                            ref.read(authProvider.notifier).setPassword(password),
                         obscureIconButtonPressed: () =>
                             ref.read(authProvider.notifier).switchObscure(),
                       ),
@@ -76,7 +73,7 @@ class AccountLoginScreen extends ConsumerWidget {
                 DefaultButton(
                   width: context.width * 0.8,
                   height: context.height * 0.07,
-                  text: 'ログイン',
+                  title: 'ログイン',
                   onPressed: emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty &&
                           !isNotTap

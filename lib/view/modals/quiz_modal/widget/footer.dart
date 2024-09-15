@@ -9,6 +9,11 @@ class _Footer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final filterQuizItemList = ref.watch(homeQuizModalProvider.select((s) => s.filterQuizItemList));
     final quizItemCount = ref.watch(homeQuizModalProvider.select((s) => s.quizItemCount));
+    final selectedStatusList = ref.watch(homeQuizModalProvider.select((s) => s.selectedStatusList));
+    final selectedImportanceList =
+        ref.watch(homeQuizModalProvider.select((s) => s.selectedImportanceList));
+    final isSaved = ref.watch(homeQuizModalProvider.select((s) => s.isSaved));
+    final isWeak = ref.watch(homeQuizModalProvider.select((s) => s.isWeak));
     final studyType = ref.watch(homeQuizModalProvider.select((s) => s.selectedStudyType));
     return Container(
       color: context.backgroundColor,
@@ -47,7 +52,15 @@ class _Footer extends HookConsumerWidget {
             onPressed: filterQuizItemList.isNotEmpty
                 ? () {
                     ref.read(homeQuizModalProvider.notifier).updateFilterQuizList();
-                    ref.read(homeQuizScreenProvider.notifier).setStudyLength(quizItemCount);
+                    ref.read(homeQuizScreenProvider.notifier).setStudyQuizLength(quizItemCount);
+                    ref
+                        .read(homeQuizScreenProvider.notifier)
+                        .setSelectedStatusList(selectedStatusList);
+                    ref
+                        .read(homeQuizScreenProvider.notifier)
+                        .setSelectedImportanceList(selectedImportanceList);
+                    ref.read(homeQuizScreenProvider.notifier).setIsSaved(isSaved);
+                    ref.read(homeQuizScreenProvider.notifier).setIsWeak(isWeak);
                     Navigator.of(context).pop();
                     if (studyType == StudyType.choice) {
                       context.showScreen(QuizChoiceScreenArguments(

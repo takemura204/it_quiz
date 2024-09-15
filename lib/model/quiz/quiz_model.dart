@@ -27,6 +27,15 @@ class QuizModel extends StateNotifier<Quizzes>  {
   final Ref ref;
   final now = DateTime.now();
 
+  /// プレミアムと無料会員でクイズを取得
+  List<Quiz> getQuizList() {
+    final isPremium = ref.read(authModelProvider).isPremium;
+    final premiumQuizList = state.quizList;
+    final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
+    final quizList = isPremium ? premiumQuizList : freeQuizList;
+    return quizList;
+  }
+
 
   Future initState() async {
     // _resetData();
@@ -152,7 +161,8 @@ class QuizModel extends StateNotifier<Quizzes>  {
 
   /// RandomQuiz追加
   Future _getRandomQuiz() async {
-    final randomQuiz = initRandomQuiz;
+    final quizItemList = getQuizList().expand((x) => x.quizItemList).toList();
+    final randomQuiz = initRandomQuiz.copyWith(quizItemList: quizItemList);
     state = state.copyWith(randomQuiz: randomQuiz);
   }
 
@@ -217,6 +227,8 @@ class QuizModel extends StateNotifier<Quizzes>  {
     }
     _saveDevice();
   }
+
+
 
   ///クイズ更新
   void updateQuiz(Quiz quiz) {
@@ -385,7 +397,6 @@ class QuizModel extends StateNotifier<Quizzes>  {
 
   void setStudyType(StudyType studyType) {
     state = state.copyWith(studyType: studyType);
-    print({'studyType',state.studyType});
   }
 
   List<Quiz> _initQuizList() {

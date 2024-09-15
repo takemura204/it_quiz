@@ -16,7 +16,6 @@ class ResultItemCard extends ConsumerWidget {
     required this.index,
     required this.quizItem,
     required this.studyType,
-    this.isKnow = true,
     required this.onTapCheckButton,
     required this.onTapSaveButton,
   });
@@ -24,7 +23,6 @@ class ResultItemCard extends ConsumerWidget {
   final int index;
   final QuizItem quizItem;
   final StudyType studyType;
-  final bool isKnow;
   final VoidCallback? onTapCheckButton;
   final VoidCallback? onTapSaveButton;
 
@@ -47,9 +45,9 @@ class ResultItemCard extends ConsumerWidget {
                 children: [
                   const Gap(5),
                   if (studyType == StudyType.choice)
-                    _ChoiceQuizItemExplanation(quizItem: quizItem)
+                    _ChoiceQuizItem(quizItem: quizItem)
                   else
-                    _LearnQuizItemExplanation(quizItem: quizItem, isKnow: isKnow),
+                    _LearnQuizItem(quizItem: quizItem),
                   const Gap(10),
                   Row(
                     children: [
@@ -92,11 +90,10 @@ class ResultItemCard extends ConsumerWidget {
 }
 
 ///用語の解説
-class _LearnQuizItemExplanation extends ConsumerWidget {
-  const _LearnQuizItemExplanation({required this.quizItem, required this.isKnow});
+class _LearnQuizItem extends ConsumerWidget {
+  const _LearnQuizItem({required this.quizItem});
 
   final QuizItem quizItem;
-  final bool isKnow;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -107,7 +104,7 @@ class _LearnQuizItemExplanation extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
           child: Row(
             children: [
-              if (isKnow)
+              if (quizItem.isKnow)
                 Container(
                     padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 3),
                     decoration: BoxDecoration(
@@ -130,8 +127,8 @@ class _LearnQuizItemExplanation extends ConsumerWidget {
               Expanded(
                 child: Text(
                   '${quizItem.word}',
-                  style: context.texts.titleLarge!
-                      .copyWith(color: isKnow ? context.correctColor : context.incorrectColor),
+                  style: context.texts.titleLarge!.copyWith(
+                      color: quizItem.isKnow ? context.correctColor : context.incorrectColor),
                 ),
               ),
             ],
@@ -151,8 +148,8 @@ class _LearnQuizItemExplanation extends ConsumerWidget {
 }
 
 ///クイズの解説
-class _ChoiceQuizItemExplanation extends ConsumerWidget {
-  const _ChoiceQuizItemExplanation({required this.quizItem});
+class _ChoiceQuizItem extends ConsumerWidget {
+  const _ChoiceQuizItem({required this.quizItem});
 
   final QuizItem quizItem;
 
@@ -163,19 +160,13 @@ class _ChoiceQuizItemExplanation extends ConsumerWidget {
       children: [
         const Text(
           '【問題】',
-          style: TextStyle(
-            color: Colors.black87,
-            fontSize: 14,
-          ),
+          style: TextStyle(color: Colors.black87),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
           child: Text(
             '${quizItem.question}',
-            style: const TextStyle(
-              color: Colors.black87,
-              fontSize: 14,
-            ),
+            style: const TextStyle(color: Colors.black87),
           ),
         ),
         const Gap(5),
@@ -215,20 +206,11 @@ class _ChoiceQuizItemExplanation extends ConsumerWidget {
         ),
         if (quizItem.source != '') ...[
           const Gap(5),
-          const Text(
-            '【出題】',
-            style: TextStyle(
-              color: Colors.black87,
-              fontSize: 14,
-            ),
-          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
             child: Text(
-              '${quizItem.source}',
-              style: const TextStyle(
-                color: Colors.black87,
-              ),
+              '出典：${quizItem.source}',
+              style: const TextStyle(),
             ),
           ),
         ],

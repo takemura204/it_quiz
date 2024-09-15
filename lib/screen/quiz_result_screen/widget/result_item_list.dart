@@ -62,12 +62,10 @@ class _ResultItemList extends ConsumerWidget {
           shrinkWrap: true,
           itemCount: quizItemList.length,
           itemBuilder: (BuildContext context, int index) {
-            final quizItem = quizItemList[index];
             return ResultItemCard(
                 index: index,
                 quizItem: quizItemList[index],
-                studyType: StudyType.learn,
-                isKnow: quizItem.isKnow,
+                studyType: studyType,
                 onTapCheckButton: () {
                   onTapCheckButton(studyType, index);
                 },

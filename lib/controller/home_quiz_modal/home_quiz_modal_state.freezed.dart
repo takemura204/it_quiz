@@ -248,7 +248,7 @@ class _$_HomeQuizModalState implements _HomeQuizModalState {
       final List<ImportanceType> selectedImportanceList = const [],
       this.selectedStudyType = StudyType.choice,
       this.selectedStudyTypeTabIndex = 0,
-      this.quizItemCount = 5,
+      this.quizItemCount = 10,
       this.isRepeat = false,
       this.isSaved = false,
       this.isWeak = false})

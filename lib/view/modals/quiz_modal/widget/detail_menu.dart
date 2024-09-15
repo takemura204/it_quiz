@@ -5,6 +5,7 @@ class _DetailMenu extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizType = ref.read(quizModelProvider.select((s) => s.quizType));
     final isRepeat = ref.watch(homeQuizModalProvider.select((s) => s.isRepeat));
     final isSaved = ref.watch(homeQuizModalProvider.select((s) => s.isSaved));
     final isWeak = ref.watch(homeQuizModalProvider.select((s) => s.isWeak));
@@ -38,15 +39,17 @@ class _DetailMenu extends HookConsumerWidget {
             },
           ),
           const Gap(5),
-          _SwitchMenu(
-            text: '「苦手」のクイズのみ',
-            icon: LineIcons.checkSquareAlt,
-            isSwitchValue: isWeak,
-            onChanged: (bool value) {
-              ref.read(homeQuizModalProvider.notifier).updateIsWeak(value);
-            },
-          ),
-          const Gap(5),
+          if (quizType != QuizStyleType.weak) ...[
+            _SwitchMenu(
+              text: '「苦手」のクイズのみ',
+              icon: LineIcons.checkSquareAlt,
+              isSwitchValue: isWeak,
+              onChanged: (bool value) {
+                ref.read(homeQuizModalProvider.notifier).updateIsWeak(value);
+              },
+            ),
+            const Gap(5),
+          ],
           if (studyType != StudyType.choice)
             _SwitchMenu(
               text: '「知らない」用語を繰り返す',

@@ -22,55 +22,27 @@ class _Fotter extends ConsumerWidget {
             DefaultButton(
                 width: context.width * 0.46,
                 height: 50,
-                text: '${weakQuiz.title} ${weakQuiz.quizItemList.length}問',
+                title: '${weakQuiz.title} ${weakQuiz.quizItemList.length}問',
                 icon: LineIcons.checkSquareAlt,
                 onPressed: weakQuiz.quizItemList.isEmpty
                     ? null
                     : () {
-                  ref
-                      .read(quizModelProvider.notifier)
-                      .setQuizType(QuizStyleType.weak);
-                  ref
-                      .read(homeQuizScreenProvider.notifier)
-                      .setSelectQuiz(weakQuiz);
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15)),
-                    ),
-                    builder: (_) => WeakQuizModal(quiz: weakQuiz),
-                  );
-                }),
+                        ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.weak);
+                        ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(weakQuiz);
+                        showQuizModal(context, weakQuiz);
+                      }),
             const Gap(10),
 
             ///テストボタン
             PrimaryButton(
               width: context.width * 0.46,
               height: 50,
-              title: "${randomQuiz.title}",
+              title: '${randomQuiz.title}',
               icon: LineIcons.random,
               onPressed: () {
-                ref
-                    .read(quizModelProvider.notifier)
-                    .setQuizType(QuizStyleType.random);
-                ref
-                    .read(homeQuizScreenProvider.notifier)
-                    .setSelectQuiz(randomQuiz);
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15)),
-                  ),
-                  builder: (_) => RandomQuizModal(
-                    quiz: randomQuiz,
-                  ),
-                );
+                ref.read(quizModelProvider.notifier).setQuizType(QuizStyleType.random);
+                ref.read(homeQuizScreenProvider.notifier).setSelectQuiz(randomQuiz);
+                showQuizModal(context, randomQuiz);
               },
             ),
           ],

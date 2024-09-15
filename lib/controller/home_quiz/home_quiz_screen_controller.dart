@@ -22,7 +22,7 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   Future _initState() async {
     setIsLoading(true);
     await _initQuizList();
-    await initCategoryList();
+    await _initCategoryList();
     setIsLoading(false);
   }
 
@@ -33,16 +33,11 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   /// CategoryList取得
-  Future initCategoryList() async {
+  Future _initCategoryList() async {
     final isPremium = ref.read(authModelProvider).isPremium;
-    // quizListを取得
-    final List<Quiz> quizList = [...ref.read(quizModelProvider).quizList];
-    // quizListをcategoryIdに基づいてインプレースでソート
+    final quizList = [...ref.read(quizModelProvider).quizList];
     quizList.sort((a, b) => a.categoryId.compareTo(b.categoryId));
-
-    // ソートされたリストからカテゴリー名を取り出して重複を削除
     final categoryList = quizList.map((quizItem) => quizItem.category).toSet().toList();
-
     final randomCategoryList =
         quizList.where((x) => !x.isPremium).map((quizItem) => quizItem.category).toSet().toList();
 
@@ -79,51 +74,44 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
   }
 
   ///selectStudyQuiz更新
-  void setNextQuiz() {
-    // selectQuiz の存在を確認
+  Future setNextQuiz() async {
     final selectQuiz = state.selectQuiz;
     if (selectQuiz == null) {
       return;
     }
+    final quizItemList = selectQuiz.quizItemList;
+    List<QuizItem> filterQuizItemList = [...quizItemList];
 
-    // 既存の問題リストを取得
-    final quizItemList = [...selectQuiz.quizItemList];
-
-    List<QuizItem> filteredQuizList;
-    if (state.selectedStatusList.isEmpty || state.isQuizStatusRecommend) {
-      // 特定のステータスに基づいて問題を並べ替える
-      final statusList = [
-        StatusType.unlearned,
-        StatusType.learned,
-        StatusType.incorrect,
-        StatusType.correct,
-      ];
-      filteredQuizList = quizItemList
-          .where((quizItem) => statusList.contains(quizItem.status))
-          .toList()
-        ..sort((a, b) => statusList.indexOf(a.status).compareTo(statusList.indexOf(b.status)));
-    } else {
-      // selectedStatusList に基づいて問題をフィルタリング
-      filteredQuizList = quizItemList
+    // ステータスで絞り込み
+    if (state.selectedStatusList.isNotEmpty) {
+      filterQuizItemList = filterQuizItemList
           .where((quizItem) => state.selectedStatusList.contains(quizItem.status))
           .toList();
     }
 
-    // 選択する問題の上限数を取得
-    final selectedStudyLength = state.selectedStudyLength;
+    // 重要度で絞り込み
+    if (state.selectedImportanceList.isNotEmpty) {
+      filterQuizItemList = filterQuizItemList
+          .where((quizItem) => state.selectedImportanceList.contains(quizItem.importance))
+          .toList();
+    }
 
-    // filteredQuizList から selectedStudyLength の数だけ問題を選択
-    final pickedQuizList = filteredQuizList.take(selectedStudyLength).toList();
+    // 保存で絞り込み
+    if (state.isSaved) {
+      filterQuizItemList = filterQuizItemList.where((item) => item.isSaved).toList();
+    }
 
-    // 更新された selectStudyQuiz を生成
-    final selectStudyQuiz = selectQuiz.copyWith(quizItemList: pickedQuizList);
+    // 苦手で絞り込み
+    if (state.isWeak) {
+      filterQuizItemList = filterQuizItemList.where((item) => item.isWeak).toList();
+    }
 
-    // ステートを更新
+    // リストをシャッフルしてから指定された数だけ抽出
+    final quizItemCount = state.selectedStudyLength;
+    filterQuizItemList = (filterQuizItemList..shuffle()).take(quizItemCount).toList();
+
+    final selectStudyQuiz = selectQuiz.copyWith(quizItemList: filterQuizItemList);
     state = state.copyWith(selectStudyQuiz: selectStudyQuiz);
-  }
-
-  void updateSelectQuiz(Quiz quiz) {
-    state = state.copyWith(selectQuiz: quiz);
   }
 
   ///WeakQuiz開始
@@ -157,26 +145,36 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     ref.read(quizModelProvider.notifier).setRandomQuiz(randomCategoryList, selectedTestLength);
   }
 
-  void setTabIndex(int index) {
-    final category = state.categoryList[index];
-    state = state.copyWith(tabIndex: index, selectCategory: category);
+  ///　出題範囲指定
+  void setSelectedStatusList(List<StatusType> statusList) {
+    final selectedStatusList = [...statusList];
+    state = state.copyWith(selectedStatusList: selectedStatusList);
   }
 
   ///　出題範囲指定
-  void setQuizStatusList(StatusType status) {
-    final selectedStatusList = [...state.selectedStatusList];
-    if (selectedStatusList.contains(status)) {
-      state = state.copyWith(selectedStatusList: selectedStatusList..remove(status));
-      if (state.selectedStatusList.isEmpty) {
-        state = state.copyWith(isQuizStatusRecommend: true);
-      }
-    } else {
-      state = state.copyWith(selectedStatusList: selectedStatusList..add(status));
-    }
+  void setSelectedImportanceList(List<ImportanceType> importanceList) {
+    final selectedImportanceList = [...importanceList];
+    state = state.copyWith(selectedImportanceList: selectedImportanceList);
   }
 
-  void removeQuizStatusList() {
-    state = state.copyWith(selectedStatusList: []);
+  ///問題数指定
+  void setStudyQuizLength(int length) {
+    state = state.copyWith(selectedStudyLength: length);
+  }
+
+  ///問題数指定
+  void setIsSaved(bool value) {
+    state = state.copyWith(isSaved: value);
+  }
+
+  ///苦手指定
+  void setIsWeak(bool value) {
+    state = state.copyWith(isWeak: value);
+  }
+
+  void setTabIndex(int index) {
+    final category = state.categoryList[index];
+    state = state.copyWith(tabIndex: index, selectCategory: category);
   }
 
   ///問題範囲指定
@@ -187,11 +185,6 @@ class HomeQuizScreenController extends StateNotifier<HomeQuizScreenState> {
     } else {
       state = state.copyWith(randomCategoryList: randomCategoryList..add(category));
     }
-  }
-
-  ///問題数指定
-  void setStudyLength(int length) {
-    state = state.copyWith(selectedStudyLength: length);
   }
 
   void setIsisQuizStatusRecommend(bool value) {
