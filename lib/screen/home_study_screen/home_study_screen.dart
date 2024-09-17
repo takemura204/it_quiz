@@ -16,6 +16,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../controller/home_study/home_study_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
+import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../model/user/auth_model.dart';
 import '../../view/admob/admob_banner.dart';

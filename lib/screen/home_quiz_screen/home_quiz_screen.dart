@@ -10,7 +10,6 @@ import 'package:kentei_quiz/model/user/auth_model.dart';
 import 'package:kentei_quiz/view/modals/quiz_modal/quiz_modal.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../controller/home_quiz_modal/home_quiz_modal_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
@@ -20,12 +19,11 @@ import '../../view/button/animation_shadow_button.dart';
 import '../../view/button/defalut_button.dart';
 import '../../view/button/primary_button.dart';
 import '../../view/chart/progress_crilcle_chart.dart';
-import '../../view/modals/need_premium_modal/premium_quiz_modal.dart';
-import '../screen_argument.dart';
+import '../../view/modals/need_premium_modal/need_premium_quiz_modal.dart';
 
 part 'widget/app_bar.dart';
 part 'widget/body.dart';
-part 'widget/fotter.dart';
+part 'widget/footer.dart';
 part 'widget/quiz_card.dart';
 part 'widget/quiz_list.dart';
 
@@ -37,10 +35,7 @@ class HomeQuizScreen extends HookConsumerWidget {
     final isLoading = ref.watch(homeQuizScreenProvider).isLoading;
     if (isLoading) {
       return Center(
-        child: SpinKitFadingCircle(
-          color: context.mainColor,
-          size: context.height * 0.1,
-        ),
+        child: SpinKitFadingCircle(color: context.mainColor, size: context.height * 0.1),
       );
     }
 

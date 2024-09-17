@@ -18,7 +18,7 @@ class _Body extends ConsumerWidget {
           controller: tabController,
           children: categoryList.map((category) => _QuizList(category: category)).toList(),
         ),
-        _Fotter(
+        _Footer(
           weakQuiz: weakQuiz,
           randomQuiz: randomQuiz,
         ),

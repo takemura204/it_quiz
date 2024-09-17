@@ -1,4 +1,4 @@
-part of '../study_modal.dart';
+part of '../search_modal.dart';
 
 class _ImportanceMenu extends HookConsumerWidget {
   const _ImportanceMenu();
@@ -35,8 +35,8 @@ class _ImportanceList extends HookConsumerWidget {
     final noneValue =
         quizItemList.where((x) => x.importance == ImportanceType.none).toList().length;
     final selectedImportanceList =
-        ref.watch(homeStudyModalProvider.select((s) => s.selectedImportanceList));
-    final importanceList = ref.watch(homeStudyModalProvider.select((s) => s.importanceList));
+        ref.watch(homeSearchModalProvider.select((s) => s.selectedImportanceList));
+    final importanceList = ref.watch(homeSearchModalProvider.select((s) => s.importanceList));
     List<ImportanceCard> _getSortedCards(
         BuildContext context, List<ImportanceType> importanceList) {
       final List<ImportanceCard> cards = [
@@ -76,7 +76,7 @@ class _ImportanceDefaultCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         if (!isStatusList) {
-          ref.read(homeStudyModalProvider.notifier).updateAllImportanceList();
+          ref.read(homeSearchModalProvider.notifier).updateAllImportanceList();
           HapticFeedback.lightImpact();
         }
       },
@@ -134,7 +134,7 @@ class _ImportanceCard extends ConsumerWidget {
     return GestureDetector(
       onTap: isExists
           ? () {
-              ref.read(homeStudyModalProvider.notifier).updateImportanceQuizList(importance);
+              ref.read(homeSearchModalProvider.notifier).updateImportanceQuizList(importance);
               HapticFeedback.lightImpact();
             }
           : null,

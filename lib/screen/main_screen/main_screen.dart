@@ -10,7 +10,6 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../controller/auth/auth_controller.dart';
-import '../../controller/home_search/home_search_screen_controller.dart';
 import '../../controller/main/main_screen_controller.dart';
 import '../../controller/setting_notification/setting_notification_controller.dart';
 import '../../model/lang/initial_resource.dart';
@@ -176,13 +175,6 @@ class _BottomNavBar extends ConsumerWidget {
           }
           if (index == 0) {
             ref.read(quizModelProvider.notifier).setStudyType(StudyType.study);
-          }
-          if (index == 1) {
-            // ref.read(homeDashboardScreenProvider.notifier).initState();
-            // ref.read(homeQuizScreenProvider.notifier).initCategoryList();
-          }
-          if (index == 2) {
-            ref.read(homeSearchScreenProvider.notifier).initFilterQuiz();
           }
           if (index == 3) {
             ref.read(dashboardModelProvider.notifier).initState();

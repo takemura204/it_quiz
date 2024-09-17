@@ -1,7 +1,7 @@
 part of '../home_quiz_screen.dart';
 
-class _Fotter extends ConsumerWidget {
-  const _Fotter({required this.weakQuiz, required this.randomQuiz});
+class _Footer extends ConsumerWidget {
+  const _Footer({required this.weakQuiz, required this.randomQuiz});
 
   final Quiz weakQuiz;
   final Quiz randomQuiz;

@@ -93,8 +93,8 @@ class NeedPremiumModal extends ConsumerWidget {
 }
 
 ///プレミアム購入完了モーダル
-class PurchasedModal extends HookWidget {
-  const PurchasedModal({required this.title, required this.subtitle, required this.onPressed});
+class PurchasedDoneModal extends HookWidget {
+  const PurchasedDoneModal({required this.title, required this.subtitle, required this.onPressed});
 
   final String title;
   final String subtitle;

@@ -24,7 +24,7 @@ class _StatusMenuList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(homeStudyModalProvider.notifier).getQuizList();
+    final quizList = ref.watch(quizModelProvider.notifier).getQuizList();
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
     final goalValue = quizItemList.length;
     final correctValue = quizItemList.where((x) => x.status == StatusType.correct).toList().length;

@@ -8,10 +8,12 @@ import '../../model/quiz_item/quiz_item.dart';
 
 ///チェエクボックスボタン
 class WeakIconButton extends ConsumerWidget {
-  const WeakIconButton({required this.quizItem, required this.onTap, required this.size});
+  const WeakIconButton(
+      {required this.quizItem, required this.isShowText, required this.onTap, required this.size});
 
   final QuizItem quizItem;
   final VoidCallback? onTap;
+  final bool isShowText;
   final double size;
 
   @override
@@ -25,15 +27,16 @@ class WeakIconButton extends ConsumerWidget {
           : null,
       child: Column(
         children: [
-          Text(
-            "苦手",
-            style: TextStyle(
-              fontSize: 9,
-              fontWeight: FontWeight.bold,
-              color: quizItem.isWeak ? context.mainColor : Colors.grey.shade500,
-              height: 0.1,
+          if (isShowText)
+            Text(
+              "苦手",
+              style: TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.bold,
+                color: quizItem.isWeak ? context.mainColor : Colors.grey.shade500,
+                height: 0.1,
+              ),
             ),
-          ),
           Container(
             height: size,
             width: size,

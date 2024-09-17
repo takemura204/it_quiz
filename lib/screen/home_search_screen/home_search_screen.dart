@@ -6,8 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_search_modal/home_search_modal_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
+import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
+import 'package:kentei_quiz/view/modals/studys_modal/search_modal.dart';
 import 'package:kentei_quiz/view/text_field.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:substring_highlight/substring_highlight.dart';
@@ -17,22 +20,27 @@ import '../../model/lang/initial_resource.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import '../../view/admob/admob_banner.dart';
 import '../../view/button_icon/save_button.dart';
-import '../../view/modals/need_premium_modal/need_premium_modal.dart';
+import '../../view/button_icon/weak_buton.dart';
+import '../../view/modals/need_premium_modal/need_premium_search_modal.dart';
 import '../../view/tag/category_tag.dart';
 import '../../view/tag/importance_tag.dart';
 import '../../view/tag/status_tag.dart';
-import '../screen_argument.dart';
 
-part 'home_search_view.dart';
+part 'widget/app_bar.dart';
+
+part 'widget/body.dart';
+
+part 'widget/quiz_item_list.dart';
+
+part 'widget/search_header.dart';
 
 class HomeSearchScreen extends ConsumerWidget {
   const HomeSearchScreen();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeSearchScreenProvider);
-    final controller = ref.watch(homeSearchScreenProvider.notifier);
-    if (state.isLoading) {
+    final isLoading = ref.watch(homeSearchScreenProvider.select((s) => s.isLoading));
+    if (isLoading) {
       return Center(
         child: SpinKitFadingCircle(
           color: context.mainColor,
@@ -40,72 +48,11 @@ class HomeSearchScreen extends ConsumerWidget {
         ),
       );
     }
-    final isSavedFilter = state.isSavedFilter;
-    final isNotTextEmpty = state.isNotTextEmpty;
-    final filteredQuizItemList = state.filteredQuizItemList;
-    final maxItemsToDisplay = state.maxItemsToDisplay;
-    final isScrollLoading = state.isScrollLoading;
-    final textEditingController = controller.textEditingController;
-    final scrollController = controller.scrollController;
+    final isSavedFilter = ref.watch(homeSearchScreenProvider.select((s) => s.isSavedFilter));
 
     return Scaffold(
       appBar: _AppBar(isSavedFilter: isSavedFilter),
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: _SearchBar(
-                  textEditingController: textEditingController,
-                  isNotTextEmpty: isNotTextEmpty,
-                ),
-              ),
-              _QuizResultView(
-                filteredQuizItemList: filteredQuizItemList,
-                isScrollLoading: isScrollLoading,
-                maxItemsToDisplay: maxItemsToDisplay,
-              ),
-              const SliverToBoxAdapter(
-                child: Gap(70),
-              ),
-            ],
-          ),
-          const AdBanner(),
-        ],
-      ),
+      body: const _Body(),
     );
   }
-}
-
-class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const _AppBar({required this.isSavedFilter});
-
-  final bool isSavedFilter;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return AppBar(
-      title: Text(I18n().titleSearch),
-      centerTitle: true,
-      elevation: 0,
-      actions: [
-        IconButton(
-            onPressed: () {
-              ref.read(homeSearchScreenProvider.notifier).tapIsSavedFilterButton();
-              HapticFeedback.lightImpact();
-            },
-            icon: Icon(
-              isSavedFilter ? Icons.bookmark_sharp : LineIcons.bookmark,
-              size: 32,
-              color: isSavedFilter ? context.mainColor : Colors.black26,
-            )),
-        const Gap(3),
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

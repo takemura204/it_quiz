@@ -38,7 +38,7 @@ class PremiumDetailScreen extends ConsumerWidget {
         await showDialog(
           context: context,
           builder: (BuildContext context) {
-            return PurchasedModal(
+            return PurchasedDoneModal(
                 title: "購入ありがとうございます🎉",
                 subtitle: "プレミアム特典が利用可能になりました！\nさっそく使ってみましょう！",
                 onPressed: () async {

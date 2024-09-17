@@ -1,39 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kentei_quiz/controller/home_search_modal/home_search_modal_controller.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/model/user/auth_model.dart';
 
-import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
 import 'home_search_screen_state.dart';
 
 final homeSearchScreenProvider =
     StateNotifierProvider<HomeSearchScreenController, HomeSearchScreenState>(
-  (ref) => HomeSearchScreenController(ref: ref),
-  dependencies: [quizModelProvider],
-);
+        (ref) => HomeSearchScreenController(ref: ref));
 
 class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
-  HomeSearchScreenController({required this.ref})
-      : super(HomeSearchScreenState()) {
-    initState();
+  HomeSearchScreenController({required this.ref}) : super(HomeSearchScreenState()) {
+    _initState();
   }
 
   final Ref ref;
   final textEditingController = TextEditingController();
   final scrollController = ScrollController();
 
-  Future initState() async {
+  Future _initState() async {
     setIsLoading(true);
-    await Future.wait([]);
-    ref.listen<Quizzes>(quizModelProvider, (_, quizzes) async {
-      if (quizzes.isLoading) {
-        await Future.wait([
-          initFilterQuiz(),
-        ]);
-      }
-      setIsLoading(false);
-    });
+    await _initFilterQuiz();
     setIsLoading(false);
     scrollController.addListener(_scrollListener);
   }
@@ -44,39 +33,14 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     super.dispose();
   }
 
-  Future initFilterQuiz() async {
-    final quizItemList = ref
-        .read(quizModelProvider)
-        .quizList
-        .expand((x) => x.quizItemList)
-        .toList();
-    setFilterQuiz(quizItemList);
+  Future _initFilterQuiz() async {
+    final quizItemList =
+        ref.read(quizModelProvider).quizList.expand((x) => x.quizItemList).toList();
+    updateFilteredQuizItemList(quizItemList);
   }
 
-  Future _scrollListener() async {
-    if (scrollController.position.atEdge &&
-        scrollController.position.pixels != 0) {
-      if (state.maxItemsToDisplay < state.filteredQuizItemList.length &&
-          !state.isScrollLoading) {
-        state = state.copyWith(isScrollLoading: true);
-        await Future.delayed(const Duration(milliseconds: 100));
-        setMaxItemsToDisplay();
-        state = state.copyWith(isScrollLoading: false);
-      }
-    }
-  }
-
-  void setMaxItemsToDisplay() {
-    if (state.maxItemsToDisplay < state.filteredQuizItemList.length) {
-      state = state.copyWith(
-        maxItemsToDisplay: state.maxItemsToDisplay + 50,
-        isScrollLoading: true,
-      );
-    }
-  }
-
-  void setFilterQuiz(List<QuizItem> quiz) {
-    state = state.copyWith(filteredQuizItemList: quiz);
+  void updateFilteredQuizItemList(List<QuizItem> quizItemList) {
+    state = state.copyWith(searchQuizItemList: quizItemList);
   }
 
   void tapIsSavedFilterButton() {
@@ -86,14 +50,10 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     if (isSavedFilter) {
       final isPremium = ref.read(authModelProvider).isPremium;
       if (isPremium) {
-        final quizItemList = ref
-            .read(quizModelProvider)
-            .quizList
-            .expand((x) => x.quizItemList)
-            .toList();
-        final filteredQuizItemList =
-            quizItemList.where((x) => x.isSaved).toList();
-        setFilterQuiz(filteredQuizItemList);
+        final quizItemList =
+            ref.read(quizModelProvider).quizList.expand((x) => x.quizItemList).toList();
+        final filteredQuizItemList = quizItemList.where((x) => x.isSaved).toList();
+        updateFilteredQuizItemList(filteredQuizItemList);
       } else {
         final quizItemList = ref
             .read(quizModelProvider)
@@ -101,57 +61,12 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
             .where((x) => !x.isPremium)
             .expand((x) => x.quizItemList)
             .toList();
-        final filteredQuizItemList =
-            quizItemList.where((x) => x.isSaved).toList();
-        setFilterQuiz(filteredQuizItemList);
+        final filteredQuizItemList = quizItemList.where((x) => x.isSaved).toList();
+        updateFilteredQuizItemList(filteredQuizItemList);
       }
     } else {
       setSearchKeywords(state.searchText);
     }
-  }
-
-  void tapSaveButton(int index) {
-    final quizItemList = [...state.filteredQuizItemList];
-    quizItemList[index] = QuizItem(
-      quizId: quizItemList[index].quizId,
-      word: quizItemList[index].word,
-      question: quizItemList[index].question,
-      ans: quizItemList[index].ans,
-      comment: quizItemList[index].comment,
-      isWeak: quizItemList[index].isWeak,
-      status: quizItemList[index].status,
-      isSaved: !quizItemList[index].isSaved,
-      choices: quizItemList[index].choices,
-      lapIndex: quizItemList[index].lapIndex,
-      isPremium: quizItemList[index].isPremium,
-      source: quizItemList[index].source,
-      importance: quizItemList[index].importance,
-    );
-    state = state.copyWith(filteredQuizItemList: quizItemList);
-
-    ref.read(quizModelProvider.notifier).updateQuizItem(quizItemList[index]);
-  }
-
-  void tapCheckButton(int index) {
-    final quizItemList = [...state.filteredQuizItemList];
-    quizItemList[index] = QuizItem(
-      quizId: quizItemList[index].quizId,
-      word: quizItemList[index].word,
-      question: quizItemList[index].question,
-      ans: quizItemList[index].ans,
-      comment: quizItemList[index].comment,
-      isWeak: !quizItemList[index].isWeak,
-      status: quizItemList[index].status,
-      isSaved: quizItemList[index].isSaved,
-      choices: quizItemList[index].choices,
-      lapIndex: quizItemList[index].lapIndex,
-      isPremium: quizItemList[index].isPremium,
-      source: quizItemList[index].source,
-      importance: quizItemList[index].importance,
-    );
-    state = state.copyWith(filteredQuizItemList: quizItemList);
-
-    ref.read(quizModelProvider.notifier).updateQuizItem(quizItemList[index]);
   }
 
   ///onChanged
@@ -159,9 +74,12 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     state = state.copyWith(searchText: text, isNotTextEmpty: text.isNotEmpty);
   }
 
-  ///onFieldSubmitted
+  ///検索結果
   Future setSearchKeywords(String text) async {
-    final normalizedTexts = _normalizeText(text);
+    final quizItemList =
+        ref.read(quizModelProvider).quizList.expand((x) => x.quizItemList).toList();
+    final filterQuizItemList =
+        ref.read(homeSearchModalProvider).filterQuizList.expand((x) => x.quizItemList).toList();
     if (text.isEmpty) {
       state = state.copyWith(
         searchText: '',
@@ -169,36 +87,33 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
         isNotTextEmpty: false,
         isSavedFilter: false,
       );
-      await initFilterQuiz();
+      updateFilteredQuizItemList(filterQuizItemList);
       return;
+    } else {
+      final normalizedTexts = _normalizeText(text);
+      final Set<String> allKeywordsSet = {};
+      for (var normalizedText in normalizedTexts) {
+        allKeywordsSet.addAll(_splitBySpace(normalizedText));
+      }
+
+      final allKeywords = allKeywordsSet.toList();
+      final matchedKeywords = _matchedKeywords(allKeywords);
+      final searchKeywords = matchedKeywords.isNotEmpty ? matchedKeywords : allKeywords;
+      final searchQuizItemList = searchKeywords.isEmpty
+          ? quizItemList
+          : filterQuizItemList.where((item) {
+              return searchKeywords.any((keyword) {
+                return item.comment.contains(keyword);
+              });
+            }).toList();
+      state = state.copyWith(
+        isSavedFilter: false,
+        searchKeywords: searchKeywords,
+        searchText: text,
+        isNotTextEmpty: text.isNotEmpty,
+        searchQuizItemList: searchQuizItemList,
+      );
     }
-    final Set<String> allKeywordsSet = {};
-
-    for (var normalizedText in normalizedTexts) {
-      allKeywordsSet.addAll(_splitBySpace(normalizedText));
-    }
-
-    final allKeywords = allKeywordsSet.toList();
-    final matchedKeywords = _matchedKeywords(allKeywords);
-    final searchKeywords =
-        matchedKeywords.isNotEmpty ? matchedKeywords : allKeywords;
-
-    final quizList = ref.read(quizModelProvider).quizList;
-    final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-    final filteredQuizItemList = searchKeywords.isEmpty
-        ? quizItemList
-        : quizItemList.where((item) {
-            return searchKeywords.any((keyword) {
-              return item.comment.contains(keyword);
-            });
-          }).toList();
-    state = state.copyWith(
-      isSavedFilter: false,
-      searchKeywords: searchKeywords,
-      searchText: text,
-      isNotTextEmpty: text.isNotEmpty,
-      filteredQuizItemList: filteredQuizItemList,
-    );
   }
 
   ///onClear
@@ -253,8 +168,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     // normalizedTexts.add(toUppercase);
 
     // 4. カタカナをひらがなに変換
-    final String toHiragana =
-        processed.replaceAllMapped(RegExp(r'[\u30A1-\u30F6]'), (match) {
+    final String toHiragana = processed.replaceAllMapped(RegExp(r'[\u30A1-\u30F6]'), (match) {
       final code = match.group(0)!.codeUnitAt(0);
       return String.fromCharCode(code - 0x60);
     });
@@ -262,8 +176,7 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     normalizedTexts.add(toHiragana);
 
     // 5. ひらがなをカタカナに変換
-    final String toKatakana =
-        processed.replaceAllMapped(RegExp(r'[\u3041-\u3096]'), (match) {
+    final String toKatakana = processed.replaceAllMapped(RegExp(r'[\u3041-\u3096]'), (match) {
       final code = match.group(0)!.codeUnitAt(0);
       return String.fromCharCode(code + 0x60);
     });
@@ -275,7 +188,6 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
       '一': 'いち',
       '二': 'に',
       '三': 'さん',
-      // 他の漢字とひらがなの対応を追加
     };
 
     String _toCommonHiragana = processed;
@@ -286,6 +198,61 @@ class HomeSearchScreenController extends StateNotifier<HomeSearchScreenState> {
     normalizedTexts.add(_toCommonHiragana);
 
     return normalizedTexts;
+  }
+
+  void tapSaveButton(int index) {
+    final quizItemList = [...state.searchQuizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: quizItemList[index].isWeak,
+      status: quizItemList[index].status,
+      isSaved: !quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
+    );
+    state = state.copyWith(searchQuizItemList: quizItemList);
+    ref.read(quizModelProvider.notifier).updateQuizItem(quizItemList[index]);
+  }
+
+  void tapWeakButton(int index) {
+    final quizItemList = [...state.searchQuizItemList];
+    quizItemList[index] = QuizItem(
+      quizId: quizItemList[index].quizId,
+      word: quizItemList[index].word,
+      question: quizItemList[index].question,
+      ans: quizItemList[index].ans,
+      comment: quizItemList[index].comment,
+      isWeak: !quizItemList[index].isWeak,
+      status: quizItemList[index].status,
+      isSaved: quizItemList[index].isSaved,
+      choices: quizItemList[index].choices,
+      lapIndex: quizItemList[index].lapIndex,
+      isPremium: quizItemList[index].isPremium,
+      source: quizItemList[index].source,
+      importance: quizItemList[index].importance,
+    );
+    state = state.copyWith(searchQuizItemList: quizItemList);
+
+    ref.read(quizModelProvider.notifier).updateQuizItem(quizItemList[index]);
+  }
+
+  Future _scrollListener() async {
+    if (scrollController.position.atEdge && scrollController.position.pixels != 0) {
+      if (state.maxItemsToDisplay < state.searchQuizItemList.length && !state.isScrollLoading) {
+        state = state.copyWith(isScrollLoading: true);
+        await Future.delayed(const Duration(milliseconds: 100));
+        state =
+            state.copyWith(maxItemsToDisplay: state.maxItemsToDisplay + 100, isScrollLoading: true);
+        state = state.copyWith(isScrollLoading: false);
+      }
+    }
   }
 
   void setIsLoading(bool value) {

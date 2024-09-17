@@ -1,7 +1,7 @@
-part of '../study_modal.dart';
+part of '../search_modal.dart';
 
-class _ImportanceMenu extends HookConsumerWidget {
-  const _ImportanceMenu();
+class _StatusMenu extends HookConsumerWidget {
+  const _StatusMenu();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -10,73 +10,76 @@ class _ImportanceMenu extends HookConsumerWidget {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _MenuTitle(title: '重要度'),
+          _MenuTitle(title: '学習状況'),
           Gap(10),
-          _ImportanceList(),
+          _StatusMenuList(),
         ],
       ),
     );
   }
 }
 
-class _ImportanceList extends HookConsumerWidget {
-  const _ImportanceList();
+class _StatusMenuList extends HookConsumerWidget {
+  const _StatusMenuList();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizList = ref.watch(quizModelProvider.notifier).getQuizList();
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
-
-    final highValue =
-        quizItemList.where((x) => x.importance == ImportanceType.high).toList().length;
-    final normalValue =
-        quizItemList.where((x) => x.importance == ImportanceType.normal).toList().length;
-    final lowValue = quizItemList.where((x) => x.importance == ImportanceType.low).toList().length;
-    final noneValue =
-        quizItemList.where((x) => x.importance == ImportanceType.none).toList().length;
-    final selectedImportanceList =
-        ref.watch(homeStudyModalProvider.select((s) => s.selectedImportanceList));
-    final importanceList = ref.watch(homeStudyModalProvider.select((s) => s.importanceList));
-    List<ImportanceCard> _getSortedCards(
-        BuildContext context, List<ImportanceType> importanceList) {
-      final List<ImportanceCard> cards = [
-        ImportanceCard(importance: importanceList[0], value: highValue),
-        ImportanceCard(importance: importanceList[1], value: normalValue),
-        ImportanceCard(importance: importanceList[2], value: lowValue),
-        ImportanceCard(importance: importanceList[3], value: noneValue),
+    final goalValue = quizItemList.length;
+    final correctValue = quizItemList.where((x) => x.status == StatusType.correct).toList().length;
+    final incorrectValue =
+        quizItemList.where((x) => x.status == StatusType.incorrect).toList().length;
+    final learnedValue = quizItemList.where((x) => x.status == StatusType.learned).toList().length;
+    final unlearnedValue = goalValue - (correctValue + incorrectValue + learnedValue);
+    final statusList = ref.watch(homeSearchModalProvider.select((s) => s.statusList));
+    List<StatusCard> _getSortedCards(BuildContext context, List<StatusType> statusList) {
+      final List<StatusCard> cards = [
+        StatusCard(status: statusList[0], value: unlearnedValue, iconColor: context.secondColor),
+        StatusCard(status: statusList[1], value: learnedValue, iconColor: context.backgroundColor),
+        StatusCard(status: statusList[2], value: incorrectValue, iconColor: context.incorrectColor),
+        StatusCard(status: statusList[3], value: correctValue, iconColor: context.correctColor),
       ];
+      cards.sort((a, b) => a.value == 0 ? 1 : -1);
       return cards;
     }
 
-    final sortImportanceCards = _getSortedCards(context, importanceList);
+    final sortedCards = _getSortedCards(context, statusList);
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        _ImportanceDefaultCard(selectedImportanceList: selectedImportanceList),
-        ...sortImportanceCards
-            .map((card) => _ImportanceCard(
-                selectedImportanceList: selectedImportanceList,
-                importance: card.importance,
-                value: card.value))
+        _StatusDefaultCard(
+          value: goalValue,
+        ),
+        ...sortedCards
+            .map((card) => _StatusCard(
+                  status: card.status,
+                  statusValue: card.value,
+                  iconColor: card.iconColor,
+                ))
             .toList(),
       ]),
     );
   }
 }
 
-class _ImportanceDefaultCard extends ConsumerWidget {
-  const _ImportanceDefaultCard({required this.selectedImportanceList});
+class _StatusDefaultCard extends ConsumerWidget {
+  const _StatusDefaultCard({required this.value});
 
-  final List<ImportanceType> selectedImportanceList;
+  final int value;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isStatusList = selectedImportanceList.isEmpty;
+    final selectedStatusList =
+        ref.watch(homeSearchModalProvider.select((s) => s.selectedStatusList));
+
+    final isStatusList = selectedStatusList.isEmpty;
 
     return GestureDetector(
       onTap: () {
         if (!isStatusList) {
-          ref.read(homeStudyModalProvider.notifier).updateAllImportanceList();
+          ref.read(homeSearchModalProvider.notifier).updateAllStatusList();
           HapticFeedback.lightImpact();
         }
       },
@@ -104,6 +107,16 @@ class _ImportanceDefaultCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Gap(5),
+              QuarterCircle(
+                size: 15,
+                colorList: [
+                  context.correctColor,
+                  context.backgroundColor,
+                  context.incorrectColor,
+                  context.secondColor,
+                ],
+              ),
+              const Gap(3),
               Text('すべて', style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(5),
             ],
@@ -114,27 +127,30 @@ class _ImportanceDefaultCard extends ConsumerWidget {
   }
 }
 
-class _ImportanceCard extends ConsumerWidget {
-  const _ImportanceCard({
-    required this.selectedImportanceList,
-    required this.importance,
-    required this.value,
+///出題範囲選択
+class _StatusCard extends ConsumerWidget {
+  const _StatusCard({
+    required this.status,
+    required this.statusValue,
+    required this.iconColor,
   });
 
-  final List<ImportanceType> selectedImportanceList;
-  final ImportanceType importance;
-  final int value;
+  final StatusType status;
+  final int statusValue;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSelected = selectedImportanceList.contains(importance);
-    final isStatusList = selectedImportanceList.isEmpty;
-    final isExists = value != 0;
+    final selectedStatusList =
+        ref.watch(homeSearchModalProvider.select((s) => s.selectedStatusList));
+    final isSelected = selectedStatusList.contains(status);
+    final isStatusList = selectedStatusList.isEmpty;
+    final isExists = statusValue != 0;
 
     return GestureDetector(
       onTap: isExists
           ? () {
-              ref.read(homeStudyModalProvider.notifier).updateImportanceQuizList(importance);
+              ref.read(homeSearchModalProvider.notifier).updateStatusQuizList(status);
               HapticFeedback.lightImpact();
             }
           : null,
@@ -178,7 +194,19 @@ class _ImportanceCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Gap(5),
-              Text(I18n().quizImportanceText(importance),
+              Container(
+                height: 15,
+                width: 15,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: iconColor,
+                  border: Border.all(
+                      width: 1,
+                      color: iconColor == context.backgroundColor ? context.mainColor : iconColor),
+                ),
+              ),
+              const Gap(3),
+              Text(I18n().quizStatusTypeText(status),
                   style: context.texts.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
               const Gap(5),
             ],
@@ -189,9 +217,10 @@ class _ImportanceCard extends ConsumerWidget {
   }
 }
 
-class ImportanceCard {
-  final ImportanceType importance;
+class StatusCard {
+  final StatusType status;
   final int value;
+  final Color iconColor;
 
-  ImportanceCard({required this.importance, required this.value});
+  StatusCard({required this.status, required this.value, required this.iconColor});
 }

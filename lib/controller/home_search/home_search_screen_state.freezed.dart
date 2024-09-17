@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeSearchScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isScrollLoading => throw _privateConstructorUsedError;
-  List<QuizItem> get filteredQuizItemList => throw _privateConstructorUsedError;
+  List<QuizItem> get searchQuizItemList => throw _privateConstructorUsedError;
   String get searchText => throw _privateConstructorUsedError;
   List<String> get searchKeywords => throw _privateConstructorUsedError;
   bool get isValidSearch => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $HomeSearchScreenStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isScrollLoading,
-      List<QuizItem> filteredQuizItemList,
+      List<QuizItem> searchQuizItemList,
       String searchText,
       List<String> searchKeywords,
       bool isValidSearch,
@@ -65,7 +65,7 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
   $Res call({
     Object? isLoading = null,
     Object? isScrollLoading = null,
-    Object? filteredQuizItemList = null,
+    Object? searchQuizItemList = null,
     Object? searchText = null,
     Object? searchKeywords = null,
     Object? isValidSearch = null,
@@ -82,9 +82,9 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
           ? _value.isScrollLoading
           : isScrollLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      filteredQuizItemList: null == filteredQuizItemList
-          ? _value.filteredQuizItemList
-          : filteredQuizItemList // ignore: cast_nullable_to_non_nullable
+      searchQuizItemList: null == searchQuizItemList
+          ? _value.searchQuizItemList
+          : searchQuizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItem>,
       searchText: null == searchText
           ? _value.searchText
@@ -115,16 +115,17 @@ class _$HomeSearchScreenStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreateCopyWith<$Res>
+abstract class _$$_HomeSearchScreenStateCopyWith<$Res>
     implements $HomeSearchScreenStateCopyWith<$Res> {
-  factory _$$_CreateCopyWith(_$_Create value, $Res Function(_$_Create) then) =
-      __$$_CreateCopyWithImpl<$Res>;
+  factory _$$_HomeSearchScreenStateCopyWith(_$_HomeSearchScreenState value,
+          $Res Function(_$_HomeSearchScreenState) then) =
+      __$$_HomeSearchScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool isLoading,
       bool isScrollLoading,
-      List<QuizItem> filteredQuizItemList,
+      List<QuizItem> searchQuizItemList,
       String searchText,
       List<String> searchKeywords,
       bool isValidSearch,
@@ -134,10 +135,11 @@ abstract class _$$_CreateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateCopyWithImpl<$Res>
-    extends _$HomeSearchScreenStateCopyWithImpl<$Res, _$_Create>
-    implements _$$_CreateCopyWith<$Res> {
-  __$$_CreateCopyWithImpl(_$_Create _value, $Res Function(_$_Create) _then)
+class __$$_HomeSearchScreenStateCopyWithImpl<$Res>
+    extends _$HomeSearchScreenStateCopyWithImpl<$Res, _$_HomeSearchScreenState>
+    implements _$$_HomeSearchScreenStateCopyWith<$Res> {
+  __$$_HomeSearchScreenStateCopyWithImpl(_$_HomeSearchScreenState _value,
+      $Res Function(_$_HomeSearchScreenState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +147,7 @@ class __$$_CreateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isScrollLoading = null,
-    Object? filteredQuizItemList = null,
+    Object? searchQuizItemList = null,
     Object? searchText = null,
     Object? searchKeywords = null,
     Object? isValidSearch = null,
@@ -153,7 +155,7 @@ class __$$_CreateCopyWithImpl<$Res>
     Object? isSavedFilter = null,
     Object? maxItemsToDisplay = null,
   }) {
-    return _then(_$_Create(
+    return _then(_$_HomeSearchScreenState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -162,9 +164,9 @@ class __$$_CreateCopyWithImpl<$Res>
           ? _value.isScrollLoading
           : isScrollLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      filteredQuizItemList: null == filteredQuizItemList
-          ? _value._filteredQuizItemList
-          : filteredQuizItemList // ignore: cast_nullable_to_non_nullable
+      searchQuizItemList: null == searchQuizItemList
+          ? _value._searchQuizItemList
+          : searchQuizItemList // ignore: cast_nullable_to_non_nullable
               as List<QuizItem>,
       searchText: null == searchText
           ? _value.searchText
@@ -196,18 +198,18 @@ class __$$_CreateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Create extends _Create {
-  _$_Create(
+class _$_HomeSearchScreenState extends _HomeSearchScreenState {
+  _$_HomeSearchScreenState(
       {this.isLoading = false,
       this.isScrollLoading = false,
-      final List<QuizItem> filteredQuizItemList = const [],
+      final List<QuizItem> searchQuizItemList = const [],
       this.searchText = "",
       final List<String> searchKeywords = const [],
       this.isValidSearch = false,
       this.isNotTextEmpty = false,
       this.isSavedFilter = false,
       this.maxItemsToDisplay = 50})
-      : _filteredQuizItemList = filteredQuizItemList,
+      : _searchQuizItemList = searchQuizItemList,
         _searchKeywords = searchKeywords,
         super._();
 
@@ -217,14 +219,14 @@ class _$_Create extends _Create {
   @override
   @JsonKey()
   final bool isScrollLoading;
-  final List<QuizItem> _filteredQuizItemList;
+  final List<QuizItem> _searchQuizItemList;
   @override
   @JsonKey()
-  List<QuizItem> get filteredQuizItemList {
-    if (_filteredQuizItemList is EqualUnmodifiableListView)
-      return _filteredQuizItemList;
+  List<QuizItem> get searchQuizItemList {
+    if (_searchQuizItemList is EqualUnmodifiableListView)
+      return _searchQuizItemList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_filteredQuizItemList);
+    return EqualUnmodifiableListView(_searchQuizItemList);
   }
 
   @override
@@ -254,20 +256,20 @@ class _$_Create extends _Create {
 
   @override
   String toString() {
-    return 'HomeSearchScreenState(isLoading: $isLoading, isScrollLoading: $isScrollLoading, filteredQuizItemList: $filteredQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty, isSavedFilter: $isSavedFilter, maxItemsToDisplay: $maxItemsToDisplay)';
+    return 'HomeSearchScreenState(isLoading: $isLoading, isScrollLoading: $isScrollLoading, searchQuizItemList: $searchQuizItemList, searchText: $searchText, searchKeywords: $searchKeywords, isValidSearch: $isValidSearch, isNotTextEmpty: $isNotTextEmpty, isSavedFilter: $isSavedFilter, maxItemsToDisplay: $maxItemsToDisplay)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Create &&
+            other is _$_HomeSearchScreenState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isScrollLoading, isScrollLoading) ||
                 other.isScrollLoading == isScrollLoading) &&
             const DeepCollectionEquality()
-                .equals(other._filteredQuizItemList, _filteredQuizItemList) &&
+                .equals(other._searchQuizItemList, _searchQuizItemList) &&
             (identical(other.searchText, searchText) ||
                 other.searchText == searchText) &&
             const DeepCollectionEquality()
@@ -287,7 +289,7 @@ class _$_Create extends _Create {
       runtimeType,
       isLoading,
       isScrollLoading,
-      const DeepCollectionEquality().hash(_filteredQuizItemList),
+      const DeepCollectionEquality().hash(_searchQuizItemList),
       searchText,
       const DeepCollectionEquality().hash(_searchKeywords),
       isValidSearch,
@@ -298,29 +300,30 @@ class _$_Create extends _Create {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
-      __$$_CreateCopyWithImpl<_$_Create>(this, _$identity);
+  _$$_HomeSearchScreenStateCopyWith<_$_HomeSearchScreenState> get copyWith =>
+      __$$_HomeSearchScreenStateCopyWithImpl<_$_HomeSearchScreenState>(
+          this, _$identity);
 }
 
-abstract class _Create extends HomeSearchScreenState {
-  factory _Create(
+abstract class _HomeSearchScreenState extends HomeSearchScreenState {
+  factory _HomeSearchScreenState(
       {final bool isLoading,
       final bool isScrollLoading,
-      final List<QuizItem> filteredQuizItemList,
+      final List<QuizItem> searchQuizItemList,
       final String searchText,
       final List<String> searchKeywords,
       final bool isValidSearch,
       final bool isNotTextEmpty,
       final bool isSavedFilter,
-      final int maxItemsToDisplay}) = _$_Create;
-  _Create._() : super._();
+      final int maxItemsToDisplay}) = _$_HomeSearchScreenState;
+  _HomeSearchScreenState._() : super._();
 
   @override
   bool get isLoading;
   @override
   bool get isScrollLoading;
   @override
-  List<QuizItem> get filteredQuizItemList;
+  List<QuizItem> get searchQuizItemList;
   @override
   String get searchText;
   @override
@@ -335,6 +338,6 @@ abstract class _Create extends HomeSearchScreenState {
   int get maxItemsToDisplay;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateCopyWith<_$_Create> get copyWith =>
+  _$$_HomeSearchScreenStateCopyWith<_$_HomeSearchScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }

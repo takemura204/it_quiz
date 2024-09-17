@@ -8,14 +8,14 @@ class HomeSearchScreenState with _$HomeSearchScreenState {
   factory HomeSearchScreenState({
     @Default(false) bool isLoading,
     @Default(false) bool isScrollLoading,
-    @Default([]) List<QuizItem> filteredQuizItemList,
+    @Default([]) List<QuizItem> searchQuizItemList,
     @Default("") String searchText,
     @Default([]) List<String> searchKeywords,
     @Default(false) bool isValidSearch,
     @Default(false) bool isNotTextEmpty,
     @Default(false) bool isSavedFilter,
     @Default(50) int maxItemsToDisplay,
-  }) = _Create;
+  }) = _HomeSearchScreenState;
 
   HomeSearchScreenState._();
 }

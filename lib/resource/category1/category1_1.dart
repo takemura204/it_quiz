@@ -127,7 +127,7 @@ List<QuizItem> get category1_1 {
       comment: "PDCAサイクルは、計画（Plan）、実行（Do）、評価（Check）、改善（Act）のプロセスを繰り返すことで、業務やプロジェクトの継続的な改善を目指す手法。",
       question: 'ISMSの運用において，監査結果をインプットとし，ISMSを継続的に改善するための是正処置及び予防処置を行うプロセスはPDCAサイクルのどれにあたるか。',
       choices: ["P", "D", "C", "A"],
-      ans: 'C',
+      ans: 'A',
       source: '平成27年春期 問75',
       importance: ImportanceType.high,
     ),

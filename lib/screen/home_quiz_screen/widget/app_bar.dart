@@ -12,24 +12,6 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(I18n().titleQuiz),
       centerTitle: true,
-      actions: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.width * 0.01),
-          child: IconButton(
-            onPressed: () {
-              context.showScreen(
-                const QuizHistoryScreenArguments().generateRoute(),
-              );
-              HapticFeedback.lightImpact();
-            },
-            icon: Icon(
-              LineIcons.history,
-              size: 32,
-              color: context.mainColor,
-            ),
-          ),
-        ),
-      ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + kTextTabBarHeight),
         child: TabBar(

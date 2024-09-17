@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/controller/home_study_modal/home_study_modal_controller.dart';
+import 'package:kentei_quiz/controller/home_search/home_search_screen_controller.dart';
+import 'package:kentei_quiz/controller/home_search_modal/home_search_modal_controller.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:kentei_quiz/model/quiz/quiz_model.dart';
 import 'package:kentei_quiz/view/modals/need_premium_modal/need_premium_quiz_modal.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../../controller/home_study/home_study_screen_controller.dart';
 import '../../../model/lang/initial_resource.dart';
 import '../../../model/quiz/quiz.dart';
 import '../../../model/user/auth_model.dart';
@@ -26,7 +26,7 @@ part 'widget/importance_menu.dart';
 part 'widget/menu_title.dart';
 part 'widget/status_menu.dart';
 
-Future showStudyModal(BuildContext context) async {
+Future showSearchModal(BuildContext context) async {
   await showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -35,13 +35,13 @@ Future showStudyModal(BuildContext context) async {
         borderRadius:
             BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
     builder: (context) {
-      return const StudyModal();
+      return const SearchModal();
     },
   );
 }
 
-class StudyModal extends HookConsumerWidget {
-  const StudyModal();
+class SearchModal extends HookConsumerWidget {
+  const SearchModal();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

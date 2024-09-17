@@ -66,6 +66,7 @@ class ResultItemCard extends ConsumerWidget {
                       ///苦手
                       WeakIconButton(
                         quizItem: quizItem,
+                        isShowText: true,
                         size: 32,
                         onTap: onTapCheckButton,
                       ),

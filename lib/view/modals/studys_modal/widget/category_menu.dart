@@ -1,4 +1,4 @@
-part of '../study_modal.dart';
+part of '../search_modal.dart';
 
 class _CategoryMenu extends HookConsumerWidget {
   const _CategoryMenu();
@@ -27,9 +27,9 @@ class _CategoryList extends ConsumerWidget {
     final premiumQuizList = ref.watch(quizModelProvider.select((s) => s.quizList));
     final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
     final quizList = isPremium ? premiumQuizList : freeQuizList;
-    final categoryList = ref.watch(homeStudyModalProvider.select((s) => s.categoryList));
+    final categoryList = ref.watch(homeSearchModalProvider.select((s) => s.categoryList));
     final selectedCategoryQuizList =
-        ref.watch(homeStudyModalProvider.select((s) => s.selectedCategoryQuizList));
+        ref.watch(homeSearchModalProvider.select((s) => s.selectedCategoryQuizList));
 
     return Column(
       children: [
@@ -72,7 +72,9 @@ class _CategoryList extends ConsumerWidget {
                               alignment: Alignment.center,
                               padding: EdgeInsets.zero,
                               onPressed: () {
-                                ref.read(homeStudyModalProvider.notifier).updateAllCategoryQuizList(
+                                ref
+                                    .read(homeSearchModalProvider.notifier)
+                                    .updateAllCategoryQuizList(
                                       categoryQuizList: categoryQuizList,
                                       isSelected: isAllSelected,
                                     );
@@ -144,7 +146,7 @@ class _CategoryItemCard extends HookConsumerWidget {
           showPremiumQuizModal(context);
         } else {
           ref
-              .read(homeStudyModalProvider.notifier)
+              .read(homeSearchModalProvider.notifier)
               .updateCategoryQuizList(quiz: quiz, isSelected: isSelected);
         }
       },

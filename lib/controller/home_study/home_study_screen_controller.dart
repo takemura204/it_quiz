@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import '../../model/quiz/quiz.dart';
 import '../../model/quiz/quiz_model.dart';
 import '../../model/quiz/quizzes.dart';
 import '../../model/quiz_item/quiz_item.dart';
@@ -36,15 +35,6 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
   final unKnowQuizItemListName = 'study_unKnow_item_list';
   final isShowTutorial = 'is_show_tutorial';
   final isFinishView = 'is_finish_view';
-
-  /// プレミアムと無料会員でクイズを取得
-  List<Quiz> getQuizList() {
-    final isPremium = ref.read(authModelProvider).isPremium;
-    final premiumQuizList = ref.read(quizModelProvider).quizList;
-    final freeQuizList = premiumQuizList.where((x) => !x.isPremium).toList();
-    final quizList = isPremium ? premiumQuizList : freeQuizList;
-    return quizList;
-  }
 
   Future _initState() async {
     // resetData();
@@ -76,7 +66,7 @@ class HomeStudyScreenController extends StateNotifier<HomeStudyScreenState>
 
   ///QuizItem更新
   Future _initQuizItemList() async {
-    final quizList = getQuizList();
+    final quizList = ref.read(quizModelProvider.notifier).getQuizList();
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
     if (quizItemList.isEmpty) {
       return;

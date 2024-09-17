@@ -7,7 +7,7 @@ class _AppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isPremium = ref.watch(authModelProvider.select((s) => s.isPremium));
     final isShowTutorial = ref.watch(homeStudyScreenProvider.select((s) => s.isShowTutorial));
-    final quizList = ref.watch(homeStudyScreenProvider.notifier).getQuizList();
+    final quizList = ref.watch(quizModelProvider.notifier).getQuizList();
     final quizItemList = quizList.expand((x) => x.quizItemList).toList();
     final filterQuizList = ref.watch(homeStudyModalProvider.select((s) => s.filterQuizList));
     final filterQuizItemList = filterQuizList.expand((x) => x.quizItemList).toList();

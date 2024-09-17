@@ -29,7 +29,7 @@ class NeedPremiumCard extends ConsumerWidget {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
-                color: context.backgroundColor.withOpacity(0.2),
+                // color: context.backgroundColor.withOpacity(0.1),
                 // 全ての辺に一様なボーダーを適用
                 border: Border.all(
                   color: context.mainColor,
