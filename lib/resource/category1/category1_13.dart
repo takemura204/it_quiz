@@ -15,10 +15,9 @@ List<QuizItem> get category1_13 {
         "従業員が製品の質の向上について組織的に努力することで，企業としての品質向上を図る。",
         "職場において上司などから実際の業務を通して必要な技術や知識を習得することで，業務処理能力の向上を図る。"
       ],
-      comment:
-          "MOT(Management of Technology)は、技術経営とも呼ばれ、技術開発の成果によって事業利益を獲得することを目的とした経営手法。",
+      comment: "MOT(Management of Technology)は、技術経営とも呼ばれ、技術開発の成果によって事業利益を獲得することを目的とした経営手法。",
       source: '平成27年秋期 問12',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'プロセスイノベーション',
@@ -26,17 +25,16 @@ List<QuizItem> get category1_13 {
       ans: 'プロセスイノベーション',
       choices: ["プロセスイノベーション", "プロダクトイノベーション", "プロジェクトイノベーション", "プログラムイノベーション"],
       comment: "プロセスイノベーションは、組織の業務プロセスを根本的に見直し、効率化や効果の向上を図るためのイノベーション。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'プロダクトイノベーション',
-      question:
-          'イノベーションは，大きくプロセスイノベーションとプロダクトイノベーションに分けることができる。プロダクトイノベーションの要因として，適切なものはどれか。',
+      question: 'イノベーションは，大きくプロセスイノベーションとプロダクトイノベーションに分けることができる。プロダクトイノベーションの要因として，適切なものはどれか。',
       ans: '市場のニーズ',
       choices: ["効率的な生産方式", "サプライチェーン管理", "市場のニーズ", "バリューチェーン管理"],
       comment: "プロダクトイノベーションは、新しい製品やサービスを開発し、市場にニーズに合わせて導入するイノベーション。",
       source: '平成27年春期 問23',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '技術ロードマップ',
@@ -51,20 +49,15 @@ List<QuizItem> get category1_13 {
       comment:
           "技術ロードマップは、縦軸に対象の技術・製品・サービス・市場を、横軸には時間の経過をとり、それらの要素の将来的な展望や進展目標を時系列で表した図表のことで、対象とする分野において，実現が期待されている技術を時間軸とともに示したもの。",
       source: '令和3年 問10',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'オープンイノベーション',
       question: '外部のアイデアや技術を積極的に取り入れ、自社のイノベーションを加速させる手法を何というか？',
       ans: 'オープンイノベーション',
-      choices: [
-        "オープンイノベーション",
-        "オープンソースイノベーション",
-        "オープンマインドイノベーション",
-        "オープンフィールドイノベーション"
-      ],
+      choices: ["オープンイノベーション", "オープンソースイノベーション", "オープンマインドイノベーション", "オープンフィールドイノベーション"],
       comment: "オープンイノベーションは、外部のアイデアや技術を積極的に取り入れることにより、自社のイノベーションを加速させる手法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '魔の川',
@@ -73,16 +66,15 @@ List<QuizItem> get category1_13 {
       choices: ["オープンイノベーション", "魔の川", "死の谷", "ダーウィンの海"],
       comment:
           "魔の川は、イノベーションの過程で遭遇する可能性のある、技術開発の初期段階における困難や障害を指す比喩的表現。資金調達やリソースの不足などが原因でプロジェクトが停滞するリスクを指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '死の谷',
       question: '技術開発が一定の段階を超えた後に直面する、商業化までの資金繰りや市場導入の難しさを指す言葉は何か？',
       ans: '死の谷',
       choices: ["魔の川", "死の谷", "ダーウィンの海", "ハッカソン"],
-      comment:
-          "死の谷は、技術開発がある程度進行した後に直面する、商業化のための資金繰りや市場導入の難しさを表す比喩的な表現。多くのスタートアップがこの段階で挫折する。",
-      importance: QuizImportanceType.low,
+      comment: "死の谷は、技術開発がある程度進行した後に直面する、商業化のための資金繰りや市場導入の難しさを表す比喩的な表現。多くのスタートアップがこの段階で挫折する。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ダーウィンの海',
@@ -91,7 +83,7 @@ List<QuizItem> get category1_13 {
       choices: ["死の谷", "ダーウィンの海", "ハッカソン", "キャズム"],
       comment:
           "ダーウィンの海は、イノベーションの過程で、成功した技術や製品が広く普及し、市場を席巻する状態を指す比喩的な表現。生き残ったイノベーションが強く進化し、市場で成功を収める様子を表す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'イノベーションのジレンマ',
@@ -100,16 +92,15 @@ List<QuizItem> get category1_13 {
       choices: ["キャズム", "イノベーションのジレンマ", "デザイン思考", "ペルソナ法"],
       comment:
           "イノベーションのジレンマは、既存の成功しているビジネスモデルが新しい技術や市場の変化によって脅かされ、適応できない状況を指す。この概念はクレイトン・クリステンセンによって提唱された。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'キャズム',
       question: 'イノベーションが普及する過程で生じる、早期採用者と初期大衆の間のギャップを何というか？',
       ans: 'キャズム',
       choices: ["ハッカソン", "キャズム", "イノベーションのジレンマ", "デザイン思考"],
-      comment:
-          "キャズムは、新技術や製品の市場普及の過程で、早期採用者と初期大衆の間に生じる採用のギャップを指す。このギャップを超えることがイノベーションの成功には重要。",
-      importance: QuizImportanceType.low,
+      comment: "キャズムは、新技術や製品の市場普及の過程で、早期採用者と初期大衆の間に生じる採用のギャップを指す。このギャップを超えることがイノベーションの成功には重要。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ハッカソン',
@@ -118,34 +109,31 @@ List<QuizItem> get category1_13 {
       choices: ["ダーウィンの海", "ハッカソン", "キャズム", "イノベーションのジレンマ"],
       comment:
           "ハッカソンは、プログラマーやデザイナー、その他のクリエイティブな人材が集まり、限られた時間内でアイデアを出し合い、プロトタイプを作成するイベント。新しい技術やサービスの開発を促進する。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'デザイン思考',
       question: '問題解決やイノベーションのプロセスにおいて、ユーザー中心のアプローチを取る思考方法は何か？',
       ans: 'デザイン思考',
       choices: ["イノベーションのジレンマ", "デザイン思考", "ペルソナ法", "バックキャスティング"],
-      comment:
-          "デザイン思考は、創造的な問題解決のプロセスで、ユーザーのニーズや経験を深く理解し、その視点からイノベーションを生み出そうとするユーザー中心のアプローチを指す。",
-      importance: QuizImportanceType.low,
+      comment: "デザイン思考は、創造的な問題解決のプロセスで、ユーザーのニーズや経験を深く理解し、その視点からイノベーションを生み出そうとするユーザー中心のアプローチを指す。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ペルソナ法',
       question: 'ターゲットユーザーの詳細なプロファイルを作成することで、製品やサービスの設計に役立てる手法は何か？',
       ans: 'ペルソナ法',
       choices: ["デザイン思考", "ペルソナ法", "バックキャスティング", "ビジネスモデルキャンバス"],
-      comment:
-          "ペルソナ法は、架空の典型的なユーザー「ペルソナ」の詳細なプロファイルを作成し、そのペルソナを基に製品やサービスの設計を行う手法。ユーザー中心の設計を促進する。",
-      importance: QuizImportanceType.low,
+      comment: "ペルソナ法は、架空の典型的なユーザー「ペルソナ」の詳細なプロファイルを作成し、そのペルソナを基に製品やサービスの設計を行う手法。ユーザー中心の設計を促進する。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'バックキャスティング',
       question: '望ましい未来の状態を設定し、その状態を実現するために現在から逆算して計画を立てる手法は何か？',
       ans: 'バックキャスティング',
       choices: ["ペルソナ法", "バックキャスティング", "ビジネスモデルキャンバス", "リーンスタートアップ"],
-      comment:
-          "バックキャスティングは、望ましい未来の状態を設定し、その目標を達成するために現在から必要な手順や戦略を逆算して計画を立てる手法。未来志向のアプローチを指す。",
-      importance: QuizImportanceType.low,
+      comment: "バックキャスティングは、望ましい未来の状態を設定し、その目標を達成するために現在から必要な手順や戦略を逆算して計画を立てる手法。未来志向のアプローチを指す。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ビジネスモデルキャンバス',
@@ -154,16 +142,15 @@ List<QuizItem> get category1_13 {
       choices: ["バックキャスティング", "ビジネスモデルキャンバス", "リーンスタートアップ", "APIエコノミー"],
       comment:
           "ビジネスモデルキャンバスは、9つの構成要素（価値提案、顧客セグメント、チャネルなど）を用いてビジネスモデルを体系的に整理し、ビジネスの構想を視覚的に表現するツール。スタートアップや新事業の企画段階で広く利用される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'リーンスタートアップ',
       question: 'スタートアップがリソースの制約の中で製品開発を行い、顧客のフィードバックを基に継続的に製品を改善していくアプローチは何か？',
       ans: 'リーンスタートアップ',
       choices: ["ビジネスモデルキャンバス", "リーンスタートアップ", "APIエコノミー", "ベンチャーキャピタル"],
-      comment:
-          "リーンスタートアップは、最小限の機能を持つ製品（最小実行可能製品、MVP）を早期に市場に投入し、顧客のフィードバックを得ながら製品を継続的に改善していくアプローチ。",
-      importance: QuizImportanceType.low,
+      comment: "リーンスタートアップは、最小限の機能を持つ製品（最小実行可能製品、MVP）を早期に市場に投入し、顧客のフィードバックを得ながら製品を継続的に改善していくアプローチ。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'APIエコノミー',
@@ -172,26 +159,24 @@ List<QuizItem> get category1_13 {
       choices: ["リーンスタートアップ", "APIエコノミー", "ベンチャーキャピタル", "コーポレートベンチャーキャピタル"],
       comment:
           "APIエコノミーは、企業が提供するAPI（Application Programming Interface）を通じて、外部のアプリケーションやサービスが企業の機能やデータを利用できるようにすることで、新たな価値創造やビジネスチャンスを生み出す経済活動。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ベンチャーキャピタル',
       question: 'スタートアップや新事業に対して資金を提供し、成長を支援する投資家や投資ファンドは何というか？',
       ans: 'ベンチャーキャピタル',
       choices: ["APIエコノミー", "ベンチャーキャピタル", "コーポレートベンチャーキャピタル", "デルファイ法"],
-      comment:
-          "ベンチャーキャピタルは、高いリスクを伴うスタートアップや新事業に対して資金を提供し、事業の成長を支援する投資家や投資ファンドのこと。",
-      importance: QuizImportanceType.low,
+      comment: "ベンチャーキャピタルは、高いリスクを伴うスタートアップや新事業に対して資金を提供し、事業の成長を支援する投資家や投資ファンドのこと。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'コーポレートベンチャーキャピタル',
-      question:
-          '大企業が設立するベンチャーキャピタルで、社外の革新的なスタートアップに投資し、新技術やビジネスモデルの獲得を目指すものは何か？',
+      question: '大企業が設立するベンチャーキャピタルで、社外の革新的なスタートアップに投資し、新技術やビジネスモデルの獲得を目指すものは何か？',
       ans: 'コーポレートベンチャーキャピタル',
       choices: ["ベンチャーキャピタル", "コーポレートベンチャーキャピタル", "デルファイ法", "バックキャスティング"],
       comment:
           "コーポレートベンチャーキャピタルは、大企業が設立または関与するベンチャーキャピタルで、社外の革新的なスタートアップへの投資を通じて、新技術やビジネスモデルの獲得、事業シナジーの創出を目指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'デルファイ法',
@@ -200,12 +185,11 @@ List<QuizItem> get category1_13 {
       choices: ["コーポレートベンチャーキャピタル", "デルファイ法", "バックキャスティング", "ビジネスモデルキャンバス"],
       comment:
           "デルファイ法は、複数の専門家にアンケートを行い、その意見を集約して将来の予測や意思決定を支援する手法。匿名性を保ちながら、専門家の意見を反復的に調整し合意に至るプロセスが特徴。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     )
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 1301);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 1301);
   });
 }

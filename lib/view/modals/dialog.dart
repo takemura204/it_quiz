@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/model/extension_resource.dart';
@@ -47,9 +48,7 @@ class PrimaryDialog extends ConsumerWidget {
               Text(
                 title,
                 style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87),
+                    fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
               ),
               const Gap(15),
               subWidget,
@@ -73,7 +72,10 @@ class PrimaryDialog extends ConsumerWidget {
                     width: context.width * 0.4,
                     height: 50,
                     title: doneText,
-                    onPressed: onPressed,
+                    onPressed: () {
+                      onPressed();
+                      HapticFeedback.lightImpact();
+                    },
                   ),
                 ],
               ),
@@ -171,7 +173,7 @@ class DefaultDialog extends ConsumerWidget {
                   DefaultButton(
                       width: context.width * 0.4,
                       height: context.height * 0.06,
-                      text: doneText,
+                      title: doneText,
                       onPressed: onPressed),
                   const Spacer(),
                 ],
@@ -347,7 +349,7 @@ class DefaultCloseDialog extends ConsumerWidget {
               DefaultButton(
                   width: context.width * 0.8,
                   height: context.height * 0.06,
-                  text: doneText,
+                  title: doneText,
                   onPressed: onPressed),
               const Spacer(),
               Gap(context.height * 0.005),

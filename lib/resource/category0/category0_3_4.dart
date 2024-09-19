@@ -17,7 +17,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "ソーシャルエンジニアリングは、技術的な方法ではなく、人の心理的な弱みやミスに付け込んでパスワードなどの秘密情報を不正に取得する行為の総称で、なりすまし、ショルダーハッキング、トラッシング、のぞき見などの行動が挙げられる。",
       source: '平成28年春期 問86',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ボット',
@@ -32,7 +32,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "ボットは、インターネット上で決められたタスクを繰り返し実行するコンピュータプログラムを指し、感染させたコンピュータをネットワークを通じて外部からの遠隔操作で操れる状態にしてしまうなどの不正目的で作成されたものも存在する。",
       source: '平成21年秋期 問73',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'クロスサイトスクリプティング(XSS)',
@@ -47,22 +47,17 @@ List<QuizItem> get category0_3_4 {
       comment:
           "クロスサイトスクリプティング(XSS)は、動的にWebページを生成するアプリケーションのセキュリティ上の不備を意図的に利用して、悪意のあるスクリプトを混入させることで、攻撃者が仕込んだ操作を実行させたり、別のサイトを横断してユーザーのクッキーや個人情報を盗んだりする攻撃手法。",
       source: '平成27年春期 問84',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'DoS(Denial of Service)攻撃',
       question: 'DoS攻撃によってサーバが受ける直接的な被害はどれか。',
       ans: 'サービスの提供が阻害される。',
-      choices: [
-        "暗号化してあるデータが解読される。",
-        "管理者用パスワードが変更される。",
-        "コンピュータウイルスに感染する。",
-        "サービスの提供が阻害される。"
-      ],
+      choices: ["暗号化してあるデータが解読される。", "管理者用パスワードが変更される。", "コンピュータウイルスに感染する。", "サービスの提供が阻害される。"],
       comment:
           "DoS(Denial of Service)攻撃は、通常ではありえない数のリクエストを攻撃対象サーバに送信することで、サーバやそれが属するネットワークを過負荷状態にし、システムダウンや応答停止などの障害を引き起こさせる攻撃。",
       source: '平成26年春期 問53',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'フィッシング',
@@ -77,7 +72,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "フィッシングは、銀行やクレジットカード会社、ショッピングサイトなどの有名企業を装ったメールを送付し、個人情報を不正に搾取する行為で、攻撃者は、巧妙な方法で利用者に正当なメールであると認識させ、メール本文内のハイパーリンクをクリックさせることで、本物そっくりな偽のWebサイトに誘導。",
       source: '平成28年春期 問63',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'リスクマネジメント',
@@ -92,7 +87,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "リスクマネジメントは、組織体の活動に伴い発生するあらゆるリスクを、統合的、包括的、戦略的に把握、評価、最適化し、価値の最大化を図る手法のことで、リスクアセスメントとリスク対応がある。",
       source: '平成25年春期 問71',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '情報セキュリティポリシー',
@@ -107,7 +102,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "情報セキュリティポリシーは、企業や組織として一貫したセキュリティ対策を行うために、技術的対策だけでなく、利用・運用面、管理面、組織体制をも含めた、企業や組織のセキュリティ方針と対策の基準を示したもの。",
       source: '平成26年秋期 問61',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '機密性',
@@ -122,7 +117,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "機密性は、情報セキュリティマネジメントの概念の一要素で、許可された正規のユーザだけが情報にアクセスできる特性を示し、アクセス権をもたない者からのアクセスを遮断し、情報改ざん、不正情報の混入や漏えいを防止することで高まる。",
       source: '平成25年秋期 問75',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '完全性',
@@ -132,7 +127,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "完全性は、情報セキュリティマネジメントの概念の一要素で、情報が完全で、改ざん・破壊されていない特性を示し、データや情報の正確性、正当性、網羅性、一貫性を維持することが重要。",
       source: '平成22年秋期 問53',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '可用性',
@@ -144,10 +139,9 @@ List<QuizItem> get category0_3_4 {
         "社内のサーバに不正侵入されて，社外秘の情報が漏えいした。",
         "取引先との電子決済システムがDoS攻撃を受け，処理ができなくなった。"
       ],
-      comment:
-          "可用性は、情報セキュリティマネジメントの概念の一要素で、障害が発生しても安定したサービスを提供でき、ユーザーが必要な時にシステムを利用可能である特性を示す。",
+      comment: "可用性は、情報セキュリティマネジメントの概念の一要素で、障害が発生しても安定したサービスを提供でき、ユーザーが必要な時にシステムを利用可能である特性を示す。",
       source: '平成28年春期 問83',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'DMZ(非武装地帯)',
@@ -162,7 +156,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "DMZ(非武装地帯)とは、社内ネットワークと社外ネットワークの中間的な場所に位置し、外部からアクセスされることを前提としたWebサーバやメールサーバなどの公開サーバを設置するネットワークセグメント",
       source: '平成23年特別 問55',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SSL(Secure Sockets Layer)',
@@ -177,7 +171,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "SSL(Secure Sockets Layer)は、通信の暗号化，デジタル証明書を利用した改ざん検出，ノード認証を含む統合セキュアプロトコルで、OSI基本参照モデルのトランスポート層で動作するので, 新規にソフトウェアをインストールすることなく上位のアプリケーション層プログラムからも意識せずに利用することが可能。",
       source: '平成23年秋期 問71',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'VPN(Virtual Private Network)',
@@ -193,17 +187,16 @@ List<QuizItem> get category0_3_4 {
       source: '平成23年秋期 問70',
       comment:
           "VPN(Virtual Private Network)は、多数の加入者が共用する公衆回線で接続された拠点間の通信において、認証及び暗号化と復号によって仮想的な専用回線を構築し、セキュリティを確保する技術。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ディジタル署名',
       question: '受け取ったデータが改ざんされていることを検知するのに使われる技術はどれか。',
       ans: 'ディジタル署名',
       choices: ["圧縮", "ディジタル署名", "パスワード認証", "フィルタリング"],
-      comment:
-          "ディジタル署名、公開鍵暗号技術を応用してデジタル文書の正当性を保証する技術で、この技術を利用すると「発信元が正当であるか」と「改ざんの有無」の2点が確認される。",
+      comment: "ディジタル署名、公開鍵暗号技術を応用してデジタル文書の正当性を保証する技術で、この技術を利用すると「発信元が正当であるか」と「改ざんの有無」の2点が確認される。",
       source: '平成27年春期 問78',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'シングルサインオン',
@@ -218,7 +211,7 @@ List<QuizItem> get category0_3_4 {
       comment:
           "シングルサインオン(SSO)は、ユーザー認証を一度受けるだけで許可された複数のサーバやアプリケーションへのアクセスについても認証する仕組みで、利用するアプリケーションごとに設定されているID・パスワードなどを覚えたり、その都度入力を行う手間がなくなるため、エンドユーザーの利便性の向上が期待できる。",
       source: '平成28年春期 問93',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '生体認証(バイオメトリクス認証)',
@@ -228,12 +221,12 @@ List<QuizItem> get category0_3_4 {
       comment:
           "生体認証(バイオメトリクス認証)は、人間の身体的な特徴や行動の特性など個人に固有の情報を用いて本人の認証を行う方式で、身体的特徴を鍵として用いる方式では、指紋や顔・虹彩または声紋・DNAなど長期間にわたり変化しない部分の特徴が使用される。",
       source: '平成23年特別 問68',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_3Index + 401, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_3Index + 401, isPremium: false);
   });
 }

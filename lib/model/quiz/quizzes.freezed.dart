@@ -241,7 +241,7 @@ class _$_Quizzes extends _Quizzes {
       this.weakQuiz,
       this.randomQuiz,
       this.quizType = QuizStyleType.study,
-      this.studyType = StudyType.learn})
+      this.studyType = StudyType.study})
       : _quizList = quizList,
         _historyQuizList = historyQuizList,
         _quizItemList = quizItemList,

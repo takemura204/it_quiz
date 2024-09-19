@@ -17,7 +17,7 @@ List<QuizItem> get category1_21 {
       ],
       comment:
           "ITリテラシは、情報と識字を合わせた言葉で、PCを利用して情報の整理・蓄積や分析などを行ったり、インターネットなどを使って必要な情報を適切に収集・評価・発信したりするなどの、情報を活用する能力。",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ゲーミフィケーション',
@@ -26,39 +26,35 @@ List<QuizItem> get category1_21 {
       choices: ["ITリテラシ", "ゲーミフィケーション", "ディジタルディバイド", "ディジタルネイティブ"],
       comment:
           "ゲーミフィケーションは、ゲームの要素（ポイント、バッジ、ランキングなど）を非ゲームのコンテキスト（教育、マーケティング、健康管理など）に応用し、ユーザーの関与やモチベーションを高める手法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ディジタルディバイド',
       question: '情報を活用できる環境や能力の差によって，待遇や収入などの格差が生じることを表すものはどれか。',
       ans: 'ディジタルディバイド',
       choices: ["情報バリアフリー", "情報リテラシー", "ディジタルディバイド", "データマイニング"],
-      comment:
-          "ディジタルディバイドは、インターネットやコンピュータなどの情報技術へのアクセスや利用スキルにおける格差が、人々や地域間で社会的な分断を生じさせる現象。",
+      comment: "ディジタルディバイドは、インターネットやコンピュータなどの情報技術へのアクセスや利用スキルにおける格差が、人々や地域間で社会的な分断を生じさせる現象。",
       source: '平成27年秋期 問16',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ディジタルネイティブ',
       question: 'デジタル技術に囲まれた環境で育った世代を指す用語は何か？',
       ans: 'ディジタルネイティブ',
       choices: ["ディジタルディバイド", "ディジタルネイティブ", "レガシーシステム", "SaaS"],
-      comment:
-          "ディジタルネイティブは、生まれたときからデジタル技術（インターネット、スマートフォンなど）に囲まれ、それらを自然に利用する世代を指す。",
-      importance: QuizImportanceType.none,
+      comment: "ディジタルネイティブは、生まれたときからデジタル技術（インターネット、スマートフォンなど）に囲まれ、それらを自然に利用する世代を指す。",
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'レガシーシステム',
       question: '古くから使われているが、更新が難しいシステムや技術を何というか？',
       ans: 'レガシーシステム',
       choices: ["ディジタルネイティブ", "レガシーシステム", "クラウドコンピューティング", "IaaS"],
-      comment:
-          "レガシーシステムは、古くから使われているが、新しい技術やシステムへの更新が困難なために現役で使われ続けているITシステムや技術を指す。",
-      importance: QuizImportanceType.low,
+      comment: "レガシーシステムは、古くから使われているが、新しい技術やシステムへの更新が困難なために現役で使われ続けているITシステムや技術を指す。",
+      importance: ImportanceType.low,
     ),
   ];
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 2101);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 2101);
   });
 }

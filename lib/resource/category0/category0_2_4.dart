@@ -17,7 +17,7 @@ List<QuizItem> get category0_2_4 {
       comment:
           "システム監査は、組織体の情報システムのリスクに対するコントロールがリスクアセスメントに基づいて適切に整備・運用されているかを、独立かつ専門的な立場のシステム監査人が検証または評価すること。",
       source: '平成23年特別 問42',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'システム監査基準',
@@ -29,10 +29,9 @@ List<QuizItem> get category0_2_4 {
         "システム監査人が情報処理の現場での管理の適切性を判断するときの尺度として用いるための基準を定めたものである。",
         "組織体が効果的な情報セキュリティマネジメント体制を構築し，適切なコントロールを整備して運用するための基準を定めたものである。"
       ],
-      comment:
-          "システム監査基準は、システム監査業務の品質を確保し、有効かつ効率的に監査を実施することを目的とした監査人の行為規範を定めたもの。",
+      comment: "システム監査基準は、システム監査業務の品質を確保し、有効かつ効率的に監査を実施することを目的とした監査人の行為規範を定めたもの。",
       source: '平成28年秋期 問54',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '内部統制',
@@ -44,10 +43,9 @@ List<QuizItem> get category0_2_4 {
         "仕事と仕事から離れた個人の生活の両方について，どちらかが犠牲になることなく，それぞれをバランスよく充実させていこうという考え方のこと",
         "組織活動の目的を達成するための組織体の取組みであり，業務とシステムをともに最適化することを目指す手法のこと"
       ],
-      comment:
-          "内部統制は、組織内部のルールや手順を整備し、業務に組み込んで適切に運用することで、業務の有効性・効率性、財務報告の信頼性、法令遵守、資産の保全を確保する取組み",
+      comment: "内部統制は、組織内部のルールや手順を整備し、業務に組み込んで適切に運用することで、業務の有効性・効率性、財務報告の信頼性、法令遵守、資産の保全を確保する取組み",
       source: '平成23年特別 問39',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '職務分掌',
@@ -61,7 +59,7 @@ List<QuizItem> get category0_2_4 {
       ],
       comment: "職務分掌は、仕事の役割分担や仕事の権限を明確にすること、及びその考え方に基づき適切に設定された権限ルールのこと",
       source: '平成28年春期 問26',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ITガバナンス',
@@ -76,12 +74,12 @@ List<QuizItem> get category0_2_4 {
       comment:
           "ITガバナンスは、企業が競争優位性を構築するために、IT戦略の策定・実行をガイドし、あるべき方向へ導く組織能力であり、ITへの投資・効果・リスクを継続的に最適化する為の組織的な仕組み。",
       source: '平成28年秋期 問51',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_2Index + 401, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_2Index + 401, isPremium: false);
   });
 }

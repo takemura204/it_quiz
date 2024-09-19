@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/premium_detail/premium_detail_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 import '../../controller/setting_color/setting_color_controller.dart';
 import '../notification_time/notification_time.dart';
@@ -13,25 +12,25 @@ final authModelProvider = StateNotifierProvider<AuthModel, Auth>(
   (ref) => AuthModel(ref),
 );
 
-class AuthModel extends StateNotifier<Auth> with LocatorMixin {
+class AuthModel extends StateNotifier<Auth>  {
   AuthModel(this.ref) : super(const Auth()) {
-    initState();
+    () async {
+      await _initState();
+    }();
   }
 
   final Ref ref;
   final userNameController = TextEditingController();
 
-  @override
-  Future initState() async {
-    _createUserData().then((x) {
-      _loadUserData();
-    });
 
+  Future _initState() async {
+
+    await _initUserData();
+    await _loadUserData();
     // _resetData();
-    super.initState();
   }
 
-  Future _createUserData() async {
+  Future _initUserData() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -47,7 +46,7 @@ class AuthModel extends StateNotifier<Auth> with LocatorMixin {
       } else {
         state = state.copyWith(uid: uid);
       }
-      print({'uid:', state.uid});
+      print('uid:${state.uid}');
     } catch (e) {
       print("Firebase Auth Error: $e");
     }

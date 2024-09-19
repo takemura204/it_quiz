@@ -30,7 +30,7 @@ _$_Quizzes _$$_QuizzesFromJson(Map<String, dynamic> json) => _$_Quizzes(
       quizType: $enumDecodeNullable(_$QuizStyleTypeEnumMap, json['quizType']) ??
           QuizStyleType.study,
       studyType: $enumDecodeNullable(_$StudyTypeEnumMap, json['studyType']) ??
-          StudyType.learn,
+          StudyType.study,
     );
 
 Map<String, dynamic> _$$_QuizzesToJson(_$_Quizzes instance) =>
@@ -54,6 +54,7 @@ const _$QuizStyleTypeEnumMap = {
 };
 
 const _$StudyTypeEnumMap = {
+  StudyType.study: 'study',
   StudyType.learn: 'learn',
   StudyType.choice: 'choice',
 };

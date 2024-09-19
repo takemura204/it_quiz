@@ -10,21 +10,19 @@ List<QuizItem> get category1_22 {
       question: 'システム化計画の立案はソフトウェアライフサイクルのどのプロセスに含まれるか。',
       ans: '企画',
       choices: ["運用", "開発", "企画", "要件定義"],
-      comment:
-          "企画プロセスは、プロジェクトの初期段階で行われるプロセスで、開発の目的や目標の設定、プロジェクトの範囲や方針の定義などを行う。",
+      comment: "企画プロセスは、プロジェクトの初期段階で行われるプロセスで、開発の目的や目標の設定、プロジェクトの範囲や方針の定義などを行う。",
       source: '平成26年春期 問21',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '要件定義プロセス',
-      question:
-          'システム開発作業において，新たに構築又は再構築する業務の機能を明確にし，それに基づいて情報システム化の範囲とその機能を具体的に明示するプロセスはどれか。',
+      question: 'システム開発作業において，新たに構築又は再構築する業務の機能を明確にし，それに基づいて情報システム化の範囲とその機能を具体的に明示するプロセスはどれか。',
       ans: '要件定義',
       choices: ["外部設計", "内部設計", "プログラミング", "要件定義"],
       comment:
           "要件定義プロセスは、システム開発において、新たに構築する業務、システムの仕様、及びシステム化の範囲と機能を明確にし、それらをシステム取得者側の利害関係者間で合意するプロセス。",
       source: '平成26年秋期 問25',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '業務要件',
@@ -39,25 +37,23 @@ List<QuizItem> get category1_22 {
       comment:
           "業務要件とは、要件定義を行う目的は、新たに構築する業務、システムの仕様を明確化し、それをベースにIT化範囲とその機能を具体的に明示することを目的とし、新しい業務のあり方や運用をまとめた上で、業務上実現すべき条件や環境のこと",
       source: '平成24年春期 問8',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '機能要件',
       question: 'システムが提供すべき具体的な機能やサービスの詳細を指す言葉は何か？',
       ans: '機能要件',
       choices: ["業務要件", "機能要件", "非機能要件", "要件定義プロセス"],
-      comment:
-          "機能要件は、システムがユーザーに提供すべき具体的な機能やサービスの詳細を指し、システムがどのような操作を行えるか、どのような処理を実行するかなどを定義します。",
-      importance: QuizImportanceType.low,
+      comment: "機能要件は、システムがユーザーに提供すべき具体的な機能やサービスの詳細を指し、システムがどのような操作を行えるか、どのような処理を実行するかなどを定義します。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '非機能要件',
       question: 'システムの性能やセキュリティ、可用性など、機能以外の品質や条件を指す言葉は何か？',
       ans: '非機能要件',
       choices: ["機能要件", "非機能要件", "業務要件", "要件定義プロセス"],
-      comment:
-          "非機能要件は、システムの性能やセキュリティ、可用性、拡張性など、機能以外の品質や条件を指し、システムの運用や保守に関わる重要な要素を定義します。",
-      importance: QuizImportanceType.low,
+      comment: "非機能要件は、システムの性能やセキュリティ、可用性、拡張性など、機能以外の品質や条件を指し、システムの運用や保守に関わる重要な要素を定義します。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'RFI',
@@ -66,7 +62,7 @@ List<QuizItem> get category1_22 {
       choices: ["RFP", "RFI", "非機能要件", "企画プロセス"],
       comment:
           "RFI（Request for Information）は、製品やサービスに関する詳細情報や企業情報を得るために、潜在的な供給業者に対して情報提供を求める文書です。市場調査や技術調査の一環として利用されます。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '提案依頼書(RFP)',
@@ -80,20 +76,18 @@ List<QuizItem> get category1_22 {
       ],
       comment:
           "提案依頼書(RFP)は、情報システムの調達を予定している企業・組織が、発注先候補のITベンダーに対して具体的なシステム提案をするように求めること、または提案依頼を行うためにシステム要件や調達要件を取りまとめた文書",
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'グリーン調達',
       question: '環境に配慮した製品やサービスを優先的に購入する取り組みを何というか？',
       ans: 'グリーン調達',
       choices: ["RFP", "グリーン調達", "RFI", "非機能要件"],
-      comment:
-          "グリーン調達は、環境負荷の少ない製品やサービスを優先的に購入することで、環境保全に貢献する取り組みです。持続可能な消費や生産活動の促進につながります。",
-      importance: QuizImportanceType.low,
+      comment: "グリーン調達は、環境負荷の少ない製品やサービスを優先的に購入することで、環境保全に貢献する取り組みです。持続可能な消費や生産活動の促進につながります。",
+      importance: ImportanceType.low,
     ),
   ];
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 2201);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 2201);
   });
 }

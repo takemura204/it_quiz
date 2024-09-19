@@ -10,7 +10,7 @@ List<QuizItem> get category3_18 {
       ans: '射影',
       choices: ["射影", "選択", "排他制御", "トランザクション"],
       comment: "射影は、テーブルから特定の列だけを取り出す操作で、クエリにおいて特定の属性のみを抽出する際に用いられる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '選択',
@@ -18,7 +18,7 @@ List<QuizItem> get category3_18 {
       ans: '選択',
       choices: ["結合", "射影", "選択", "和"],
       comment: "選択は、テーブルから特定の条件を満たす行だけを取り出す操作で、特定の条件に一致するデータのみを抽出する際に用いられる。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '排他制御',
@@ -28,7 +28,7 @@ List<QuizItem> get category3_18 {
       comment:
           "排他制御は、1人のユーザーが更新処理を行っている間、他のユーザーには更新処理の実行を待たせることで同時に更新処理が実行されることを防ぎ、データの不整合が発生しないように制御する方法。",
       source: '平成27年春期 問77',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'トランザクション',
@@ -36,16 +36,15 @@ List<QuizItem> get category3_18 {
       ans: 'トランザクション',
       choices: ["トランザクション", "排他制御", "射影", "選択"],
       comment: "トランザクションは、データベース内で一連の操作を一つの単位として扱い、データの整合性を保つための仕組み。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ACID特性',
       question: 'トランザクションが持つべき4つの基本特性（原子性、一貫性、独立性、持続性）を示す用語は何か？',
       ans: 'ACID特性',
       choices: ["ACID特性", "排他制御", "デッドロック", "2相コミットメント"],
-      comment:
-          "ACID特性は、トランザクションが持つべき4つの基本特性（Atomicity、Consistency、Isolation、Durability）を示す用語。",
-      importance: QuizImportanceType.low,
+      comment: "ACID特性は、トランザクションが持つべき4つの基本特性（Atomicity、Consistency、Isolation、Durability）を示す用語。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'デッドロック',
@@ -60,7 +59,7 @@ List<QuizItem> get category3_18 {
       comment:
           "デッドロックは、共有資源を使用する2つ以上のプロセスが、互いに相手プロセスが必要とする資源を排他的に使用していて、互いのプロセスが相手が使用している資源の解放を待っている状態。",
       source: '平成24年秋期 問67',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '2相コミットメント',
@@ -68,7 +67,7 @@ List<QuizItem> get category3_18 {
       ans: '2相コミットメント',
       choices: ["2相コミットメント", "デッドロック", "ACID特性", "排他制御"],
       comment: "2相コミットメントは、分散システム内でトランザクションを一貫性をもって完了させるために使用されるプロトコル。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'チェックポイント',
@@ -76,7 +75,7 @@ List<QuizItem> get category3_18 {
       ans: 'チェックポイント',
       choices: ["チェックポイント", "ロールバック", "ロールフォワード", "2相コミットメント"],
       comment: "チェックポイントは、トランザクションが安全な状態にコミットされるポイントで、システム障害からの回復に利用される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ロールバック',
@@ -84,7 +83,7 @@ List<QuizItem> get category3_18 {
       ans: 'ロールバック',
       choices: ["ロールバック", "チェックポイント", "ロールフォワード", "2相コミットメント"],
       comment: "ロールバックは、トランザクションが失敗した場合に、それまでの変更を取り消し元の状態に戻す操作。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ロールフォワード',
@@ -92,12 +91,11 @@ List<QuizItem> get category3_18 {
       ans: 'ロールフォワード',
       choices: ["ロールフォワード", "ロールバック", "チェックポイント", "2相コミットメント"],
       comment: "ロールフォワードは、トランザクションが失敗した後に、チェックポイント以降の正しい変更を再適用して状態を復元する操作。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 1801);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 1801);
   });
 }

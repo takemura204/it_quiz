@@ -15,10 +15,9 @@ List<QuizItem> get category1_19 {
         "システムを構成する要素の属性や操作，要素同士の関係を表記する。",
         "データの流れに着目し，業務のデータの流れと処理の関係を表記する。"
       ],
-      comment:
-          "DFD(Data Flow Diagram)は、データの流れに着目して、その対象となる業務のデータの流れと処理の関係をわかりやすく図式化する構造化分析の手法。",
+      comment: "DFD(Data Flow Diagram)は、データの流れに着目して、その対象となる業務のデータの流れと処理の関係をわかりやすく図式化する構造化分析の手法。",
       source: '平成29年春期 問14',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'BPMN（Business Process Model and Notation）',
@@ -27,7 +26,7 @@ List<QuizItem> get category1_19 {
       choices: ["DFD", "BPMN", "BPR", "EA"],
       comment:
           "BPMN（Business Process Model and Notation）は、ビジネスプロセスを視覚的に表現し、分析や改善のための標準的な記法。プロセスのフローを図式化して理解しやすくする。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'BPR(Business Process Reengineering)',
@@ -42,7 +41,7 @@ List<QuizItem> get category1_19 {
       comment:
           "BPR(Business Process Reengineering)は、既存の組織やビジネスルールを抜本的に見直し、職務、業務フロー、管理機構、情報システムを再設計する手法、または組織構造や情報システムを首尾一貫したビジネスプロセスへ再統合し、効率や生産性の劇的な改善を目指す取り組み。",
       source: '平成28年秋期 問2',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'BPM(Business Process Management)',
@@ -56,7 +55,7 @@ List<QuizItem> get category1_19 {
       ],
       comment:
           "BPM(Business Process Management)は、業務プロセスを継続的に管理し、改善していくことを目的としたアプローチ。プロセスの自動化、効率化、柔軟性の向上を図る。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ワークフローシステム',
@@ -68,10 +67,9 @@ List<QuizItem> get category1_19 {
         "自社と得意先の間で，見積書や注文書などの商取引の情報をネットワーク経由で相互にやり取りする。",
         "自動車工場の生産ラインにおいて，自工程の生産状況に合わせて，必要な部品を必要なだけ前工程から調達する。"
       ],
-      comment:
-          "ワークフローシステムは、業務プロセスの各ステップを自動化し、業務の流れを効率的に管理・最適化するためのシステムで、業務の可視化、迅速化、正確性の向上に貢献する。",
+      comment: "ワークフローシステムは、業務プロセスの各ステップを自動化し、業務の流れを効率的に管理・最適化するためのシステムで、業務の可視化、迅速化、正確性の向上に貢献する。",
       source: '平成22年秋期 問6',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'RPA（Robotic Process Automation）',
@@ -80,7 +78,7 @@ List<QuizItem> get category1_19 {
       choices: ["ワークフローシステム", "RPA", "BYOD", "M2M"],
       comment:
           "RPA（Robotic Process Automation）は、人が行っていた定型的な業務プロセスをソフトウェアロボットで自動化し、業務の効率化やコスト削減を目指す技術。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'BYOD（Bring Your Own Device）',
@@ -89,7 +87,7 @@ List<QuizItem> get category1_19 {
       choices: ["RPA", "BYOD", "M2M", "テレワーク"],
       comment:
           "BYOD（Bring Your Own Device）は、従業員が自身のスマートフォンやタブレットなどの個人端末を業務に利用することを許可する制度。柔軟な働き方や効率化を促進する。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'M2M（Machine to Machine）',
@@ -98,16 +96,15 @@ List<QuizItem> get category1_19 {
       choices: ["BYOD", "M2M", "テレワーク", "グループウェア"],
       comment:
           "M2M（Machine to Machine）は、機器同士がインターネットや他のネットワークを通じて直接通信を行い、データの交換や制御を自動的に実行する技術。産業機械、家電製品、車両など様々な分野で応用される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'テレワーク',
       question: 'インターネット技術を利用して、自宅などの職場以外の場所から仕事を行う働き方を何というか？',
       ans: 'テレワーク',
       choices: ["M2M", "テレワーク", "グループウェア", "SNS"],
-      comment:
-          "テレワークは、インターネットや情報通信技術を活用して、自宅や移動中など職場以外の場所で仕事を行う働き方。柔軟な労働環境の実現や、通勤時間の削減が可能。",
-      importance: QuizImportanceType.low,
+      comment: "テレワークは、インターネットや情報通信技術を活用して、自宅や移動中など職場以外の場所で仕事を行う働き方。柔軟な労働環境の実現や、通勤時間の削減が可能。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'グループウェア',
@@ -116,7 +113,7 @@ List<QuizItem> get category1_19 {
       choices: ["スケジュール管理", "セキュリティ管理", "ネットワーク管理", "ユーザー管理"],
       comment:
           "グループウェアは、電子メール、スケジュール管理、文書共有など、社内のコンピュータネットワーク上を利用した社員同士が情報を効率的に共有することを目的としたソフトウェア。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'チャット',
@@ -125,7 +122,7 @@ List<QuizItem> get category1_19 {
       choices: ["ブログ", "チャット", "SNS", "シェアリングエコノミー"],
       comment:
           "チャットは、インターネットを利用してリアルタイムでテキストメッセージを交換するコミュニケーションツール。個人間のやり取りや、グループでのディスカッションに利用される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'SNS（Social Networking Service）',
@@ -136,34 +133,31 @@ List<QuizItem> get category1_19 {
       comment:
           "SNS（Social Networking Service）は、ユーザーがプロフィールを作成し、他のユーザーと友達になったり、メッセージの交換、写真や動画の共有などを行うインターネット上のプラットフォーム。",
       source: '平成24年秋期 問4',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'シェアリングエコノミー',
       question: '所有することなく、必要に応じて商品やサービスを共有またはレンタルする経済活動を何というか？',
       ans: 'シェアリングエコノミー',
       choices: ["SNS", "シェアリングエコノミー", "ライフログ", "情報銀行"],
-      comment:
-          "シェアリングエコノミーは、個人や企業が所有する商品やサービスを、インターネットを通じて共有またはレンタルすることで、効率的な資源利用を目指す経済活動。",
-      importance: QuizImportanceType.low,
+      comment: "シェアリングエコノミーは、個人や企業が所有する商品やサービスを、インターネットを通じて共有またはレンタルすることで、効率的な資源利用を目指す経済活動。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ライフログ',
       question: '個人の日々の活動や体験を記録し、データとして蓄積する行為を何というか？',
       ans: 'ライフログ',
       choices: ["シェアリングエコノミー", "ライフログ", "情報銀行", "PDS"],
-      comment:
-          "ライフログは、個人が日常生活の中での活動や体験、行動パターンなどをデジタルデータとして記録し蓄積する行為。健康管理や行動分析などに利用される。",
-      importance: QuizImportanceType.low,
+      comment: "ライフログは、個人が日常生活の中での活動や体験、行動パターンなどをデジタルデータとして記録し蓄積する行為。健康管理や行動分析などに利用される。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '情報銀行',
       question: '個人の情報を安全に管理し、個人の同意のもとで第三者に提供することができるサービスを何というか？',
       ans: '情報銀行',
       choices: ["ライフログ", "情報銀行", "PDS", "エンタープライズサーチ"],
-      comment:
-          "情報銀行は、個人のプライバシーに関わる情報を安全に管理し、個人の同意のもとで必要な場合に限り、第三者に情報を提供することができるサービス。",
-      importance: QuizImportanceType.low,
+      comment: "情報銀行は、個人のプライバシーに関わる情報を安全に管理し、個人の同意のもとで必要な場合に限り、第三者に情報を提供することができるサービス。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'PDS（Personal Data Store）',
@@ -172,11 +166,10 @@ List<QuizItem> get category1_19 {
       choices: ["情報銀行", "PDS", "エンタープライズサーチ", "EA"],
       comment:
           "PDS（Personal Data Store）は、個人が自分自身のデータを一元的に管理し、自身でそのデータの共有や利用をコントロールするためのシステム。プライバシー保護やデータの自己主権を実現する。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
   ];
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 1901);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 1901);
   });
 }

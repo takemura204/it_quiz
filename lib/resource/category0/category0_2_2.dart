@@ -17,17 +17,16 @@ List<QuizItem> get category0_2_2 {
       comment:
           "オブジェクト指向設計とは、多くの仕様に共通する機能をひとまとめにし、いくつかの開発プロジェクトで再利用可能にする設計方法で、利用者はオブジェクトの手続きを呼び出すだけで目的の機能を実装できる。",
       source: '平成21年秋期 問47',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'UML(Unified Modeling Language)',
       question: '業務の流れを，図式的に記述することができるのはどれか。',
       ans: 'UML',
       choices: ["E-R図", "UML", "親和図法", "ロジックツリー"],
-      comment:
-          "UML(Unified Modeling Language)は、グラフィカルな記述で抽象化したシステムのモデル（UMLモデル）を生成する汎用モデリング言語。",
+      comment: "UML(Unified Modeling Language)は、グラフィカルな記述で抽象化したシステムのモデル（UMLモデル）を生成する汎用モデリング言語。",
       source: '平成22年春期 問29',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ウォータフォールモデル',
@@ -43,7 +42,7 @@ List<QuizItem> get category0_2_2 {
       comment:
           "ウォータフォールモデルは、開発プロジェクトを時系列に「要求定義」「外部設計」「内部設計」「開発」「テスト」「運用」などの作業工程に分割し、開発を上流から下流に一方向に進める開発モデル。",
       source: '平成27年春期 問32',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'スパイラルモデル',
@@ -54,7 +53,7 @@ List<QuizItem> get category0_2_2 {
       comment:
           "スパイラルモデルは、「設計」→「プログラミング」→「テスト」という一連の開発工程を繰り返しながら機能の改良・追加し、開発コストの増加などのリスクを最小にしつつシステム開発を行う開発モデル。",
       source: '平成26年秋期 問42',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'プロトタイピングモデル',
@@ -62,10 +61,9 @@ List<QuizItem> get category0_2_2 {
           'システム開発の初期の段階で，ユーザーと開発者との仕様の認識の違いなどを確認するために，システムの機能の一部やユーザーインタフェースなどを試作し，ユーザーや開発者がこれを評価することによって暖味さを取り除くシステム開発モデルはどれか。',
       ans: 'プロトタイピング',
       choices: ["ウォーターフォール", "オブジェクト指向", "共通フレーム", "プロトタイピング"],
-      comment:
-          "プロトタイピングモデルは、システム開発プロセスの早い段階でシステムの試作品をつくり、利用者にそのイメージを理解させ、承認を得ながら開発を進めていく開発モデル。",
+      comment: "プロトタイピングモデルは、システム開発プロセスの早い段階でシステムの試作品をつくり、利用者にそのイメージを理解させ、承認を得ながら開発を進めていく開発モデル。",
       source: '平成27年秋期 問38',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'リバースエンジニアリング',
@@ -77,10 +75,9 @@ List<QuizItem> get category0_2_2 {
         "事業内容は変えないが，仕事の流れや方法を根本的に見直すことによって，最も望ましい業務の姿に変革する手法",
         "製品の開発から生産に至る作業工程において，同時にできる作業を並行して進めることによって，期間を短縮する手法"
       ],
-      comment:
-          "リバースエンジニアリングは、既存ソフトウェアの動作を解析するなどして、製品の構造を分析し、そこから製造方法や動作原理、設計図、ソースコードなどを調査する技法。",
+      comment: "リバースエンジニアリングは、既存ソフトウェアの動作を解析するなどして、製品の構造を分析し、そこから製造方法や動作原理、設計図、ソースコードなどを調査する技法。",
       source: '平成26年春期 問47',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '共通フレーム',
@@ -95,7 +92,7 @@ List<QuizItem> get category0_2_2 {
       comment:
           "共通フレームは、ソフトウェア開発とその取引の適正化に向けて、それらのベースとなる作業項目の一つひとつを定義し標準化したもので、ソフトウェア産業界においての「共通の物差し」となることを目的として策定された規格",
       source: '平成28年秋期 問45',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'CMMI(Capability Maturity Model Integration)',
@@ -105,12 +102,12 @@ List<QuizItem> get category0_2_2 {
       comment:
           "CMMI(Capability Maturity Model Integration)は、統合能力成熟度モデルと呼ばれ、組織におけるプロセス改善をガイドするモデルで、プロジェクト管理，プロセス管理，エンジニアリング，支援に関するプロセスについて、効果的なプロセスであるために重要な要素をゴール及びプラクティスという概念を用いて整理される。",
       source: '平成24年春期 問38',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_2Index + 201, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_2Index + 201, isPremium: false);
   });
 }

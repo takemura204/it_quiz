@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kentei_quiz/model/extension_resource.dart';
 import 'package:line_icons/line_icons.dart';
 
 ///Clearボタン
@@ -14,20 +13,21 @@ class ClearButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 50,
-      alignment: Alignment.center,
-      child: IconButton(
-        padding: EdgeInsets.all(context.width * 0.01),
-        alignment: Alignment.topRight,
-        iconSize: iconSize,
-        onPressed: () {
-          onPressed();
-          Navigator.of(context).pop();
-          HapticFeedback.lightImpact();
-        },
-        icon: Icon(
-          LineIcons.times,
-          color: context.mainColor,
+      height: iconSize,
+      width: iconSize,
+      child: Center(
+        child: IconButton(
+          padding: EdgeInsets.zero,
+          iconSize: iconSize,
+          onPressed: () {
+            onPressed();
+            HapticFeedback.lightImpact();
+          },
+          icon: Icon(
+            LineIcons.times,
+            color: Colors.black54,
+            size: iconSize - 5,
+          ),
         ),
       ),
     );

@@ -3,7 +3,6 @@ import 'package:kentei_quiz/resource/category1/category1_4.dart';
 import '../model/lang/initial_resource.dart';
 import '../model/quiz/quiz.dart';
 import '../model/quiz/quiz_model.dart';
-import '../untils/enums.dart';
 import 'category0/category0_1_1.dart';
 import 'category0/category0_1_2.dart';
 import 'category0/category0_1_3.dart';
@@ -77,38 +76,8 @@ part 'category3/category3_resource.dart';
 
 extension QuizModelEx on QuizModel {
   List<Quiz> get initQuizList {
-    final quizList =
-        // category0QuizList +
-        category1QuizList + category2QuizList + category3QuizList;
+    final quizList = category1QuizList + category2QuizList + category3QuizList;
 
     return quizList;
   }
-
-  ///苦手克服
-  Quiz get initWeakQuiz => Quiz(
-        id: 2,
-        categoryId: 5,
-        category: I18n().setCategory(5),
-        title: "苦手克服",
-        isCompleted: false,
-        quizItemList: [],
-        correctNum: 0,
-        timeStamp: null,
-        duration: Duration.zero,
-        studyType: StudyType.learn,
-      );
-
-  ///力だめし
-  Quiz get initTestQuiz => Quiz(
-        id: 3,
-        categoryId: 4,
-        category: I18n().setCategory(4),
-        title: "力だめし",
-        isCompleted: false,
-        quizItemList: [],
-        correctNum: 0,
-        timeStamp: null,
-        duration: Duration.zero,
-        studyType: StudyType.learn,
-      );
 }

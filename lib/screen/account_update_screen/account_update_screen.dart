@@ -50,8 +50,7 @@ class AccountUpdateScreen extends ConsumerWidget {
                       EmailTextField(
                         emailController: emailController,
                         isValidEmail: emailController.text.isNotEmpty,
-                        onChanged: (email) =>
-                            ref.read(authProvider.notifier).setEmail(email),
+                        onChanged: (email) => ref.read(authProvider.notifier).setEmail(email),
                       ),
                     ],
                   ),
@@ -63,13 +62,11 @@ class AccountUpdateScreen extends ConsumerWidget {
                 DefaultButton(
                   width: context.width * 0.8,
                   height: context.height * 0.07,
-                  text: '再設定する',
+                  title: '再設定する',
                   onPressed: emailController.text.isNotEmpty && !isNotTap
                       ? () {
                           ref.read(authProvider.notifier).switchTap();
-                          ref
-                              .read(authProvider.notifier)
-                              .sendPasswordResetEmail()
+                          ref.read(authProvider.notifier).sendPasswordResetEmail()
                             ..then((value) {
                               //ログイン失敗
                               if (value.hasError) {

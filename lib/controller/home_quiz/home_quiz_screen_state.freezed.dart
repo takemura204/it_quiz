@@ -22,10 +22,12 @@ mixin _$HomeQuizScreenState {
       throw _privateConstructorUsedError; //クイズのカテゴリリスト
   List<String> get randomCategoryList =>
       throw _privateConstructorUsedError; //ランダムモーダルの出題状況,
-  List<QuizStatusType> get statusList =>
+  List<StatusType> get statusList =>
       throw _privateConstructorUsedError; //クイズ出題状況
-  List<QuizStatusType> get selectedStatusList =>
+  List<StatusType> get selectedStatusList =>
       throw _privateConstructorUsedError; //クイズ出題状況
+  List<ImportanceType> get selectedImportanceList =>
+      throw _privateConstructorUsedError; //重要度
   List<double> get correctRatios => throw _privateConstructorUsedError;
   String get selectCategory => throw _privateConstructorUsedError;
   int get itemIndex => throw _privateConstructorUsedError; //クイズ番号
@@ -37,8 +39,11 @@ mixin _$HomeQuizScreenState {
   int get selectedTestLength => throw _privateConstructorUsedError;
   int get selectedWeakLength => throw _privateConstructorUsedError;
   Quiz? get selectQuiz => throw _privateConstructorUsedError;
-  Quiz? get selectStudyQuiz => throw _privateConstructorUsedError; //
-  Quiz? get selectWeakQuiz => throw _privateConstructorUsedError;
+  Quiz? get selectStudyQuiz => throw _privateConstructorUsedError;
+  Quiz? get selectWeakQuiz => throw _privateConstructorUsedError; //苦手克服
+  bool get isRepeat => throw _privateConstructorUsedError;
+  bool get isSaved => throw _privateConstructorUsedError;
+  bool get isWeak => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeQuizScreenStateCopyWith<HomeQuizScreenState> get copyWith =>
@@ -56,8 +61,9 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> randomCategoryList,
-      List<QuizStatusType> statusList,
-      List<QuizStatusType> selectedStatusList,
+      List<StatusType> statusList,
+      List<StatusType> selectedStatusList,
+      List<ImportanceType> selectedImportanceList,
       List<double> correctRatios,
       String selectCategory,
       int itemIndex,
@@ -69,7 +75,10 @@ abstract class $HomeQuizScreenStateCopyWith<$Res> {
       int selectedWeakLength,
       Quiz? selectQuiz,
       Quiz? selectStudyQuiz,
-      Quiz? selectWeakQuiz});
+      Quiz? selectWeakQuiz,
+      bool isRepeat,
+      bool isSaved,
+      bool isWeak});
 
   $QuizCopyWith<$Res>? get selectQuiz;
   $QuizCopyWith<$Res>? get selectStudyQuiz;
@@ -95,6 +104,7 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? randomCategoryList = null,
     Object? statusList = null,
     Object? selectedStatusList = null,
+    Object? selectedImportanceList = null,
     Object? correctRatios = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
@@ -107,6 +117,9 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
     Object? selectQuiz = freezed,
     Object? selectStudyQuiz = freezed,
     Object? selectWeakQuiz = freezed,
+    Object? isRepeat = null,
+    Object? isSaved = null,
+    Object? isWeak = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -128,11 +141,15 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
       statusList: null == statusList
           ? _value.statusList
           : statusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
       selectedStatusList: null == selectedStatusList
           ? _value.selectedStatusList
           : selectedStatusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
+      selectedImportanceList: null == selectedImportanceList
+          ? _value.selectedImportanceList
+          : selectedImportanceList // ignore: cast_nullable_to_non_nullable
+              as List<ImportanceType>,
       correctRatios: null == correctRatios
           ? _value.correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
@@ -181,6 +198,18 @@ class _$HomeQuizScreenStateCopyWithImpl<$Res, $Val extends HomeQuizScreenState>
           ? _value.selectWeakQuiz
           : selectWeakQuiz // ignore: cast_nullable_to_non_nullable
               as Quiz?,
+      isRepeat: null == isRepeat
+          ? _value.isRepeat
+          : isRepeat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isWeak: null == isWeak
+          ? _value.isWeak
+          : isWeak // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -234,8 +263,9 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       List<Quiz> filterQuizList,
       List<String> categoryList,
       List<String> randomCategoryList,
-      List<QuizStatusType> statusList,
-      List<QuizStatusType> selectedStatusList,
+      List<StatusType> statusList,
+      List<StatusType> selectedStatusList,
+      List<ImportanceType> selectedImportanceList,
       List<double> correctRatios,
       String selectCategory,
       int itemIndex,
@@ -247,7 +277,10 @@ abstract class _$$_HomeQuizScreenStateCopyWith<$Res>
       int selectedWeakLength,
       Quiz? selectQuiz,
       Quiz? selectStudyQuiz,
-      Quiz? selectWeakQuiz});
+      Quiz? selectWeakQuiz,
+      bool isRepeat,
+      bool isSaved,
+      bool isWeak});
 
   @override
   $QuizCopyWith<$Res>? get selectQuiz;
@@ -274,6 +307,7 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? randomCategoryList = null,
     Object? statusList = null,
     Object? selectedStatusList = null,
+    Object? selectedImportanceList = null,
     Object? correctRatios = null,
     Object? selectCategory = null,
     Object? itemIndex = null,
@@ -286,6 +320,9 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
     Object? selectQuiz = freezed,
     Object? selectStudyQuiz = freezed,
     Object? selectWeakQuiz = freezed,
+    Object? isRepeat = null,
+    Object? isSaved = null,
+    Object? isWeak = null,
   }) {
     return _then(_$_HomeQuizScreenState(
       isLoading: null == isLoading
@@ -307,11 +344,15 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
       statusList: null == statusList
           ? _value._statusList
           : statusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
       selectedStatusList: null == selectedStatusList
           ? _value._selectedStatusList
           : selectedStatusList // ignore: cast_nullable_to_non_nullable
-              as List<QuizStatusType>,
+              as List<StatusType>,
+      selectedImportanceList: null == selectedImportanceList
+          ? _value._selectedImportanceList
+          : selectedImportanceList // ignore: cast_nullable_to_non_nullable
+              as List<ImportanceType>,
       correctRatios: null == correctRatios
           ? _value._correctRatios
           : correctRatios // ignore: cast_nullable_to_non_nullable
@@ -360,6 +401,18 @@ class __$$_HomeQuizScreenStateCopyWithImpl<$Res>
           ? _value.selectWeakQuiz
           : selectWeakQuiz // ignore: cast_nullable_to_non_nullable
               as Quiz?,
+      isRepeat: null == isRepeat
+          ? _value.isRepeat
+          : isRepeat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSaved: null == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isWeak: null == isWeak
+          ? _value.isWeak
+          : isWeak // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -372,8 +425,9 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       final List<Quiz> filterQuizList = const [],
       final List<String> categoryList = const [],
       final List<String> randomCategoryList = const [],
-      final List<QuizStatusType> statusList = const [],
-      final List<QuizStatusType> selectedStatusList = const [],
+      final List<StatusType> statusList = const [],
+      final List<StatusType> selectedStatusList = const [],
+      final List<ImportanceType> selectedImportanceList = const [],
       final List<double> correctRatios = const [],
       this.selectCategory = "",
       this.itemIndex = 0,
@@ -385,12 +439,16 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
       this.selectedWeakLength = 10,
       this.selectQuiz,
       this.selectStudyQuiz,
-      this.selectWeakQuiz})
+      this.selectWeakQuiz,
+      this.isRepeat = false,
+      this.isSaved = false,
+      this.isWeak = false})
       : _filterQuizList = filterQuizList,
         _categoryList = categoryList,
         _randomCategoryList = randomCategoryList,
         _statusList = statusList,
         _selectedStatusList = selectedStatusList,
+        _selectedImportanceList = selectedImportanceList,
         _correctRatios = correctRatios,
         _selectedFilterGroup = selectedFilterGroup;
 
@@ -428,22 +486,22 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
   }
 
 //ランダムモーダルの出題状況,
-  final List<QuizStatusType> _statusList;
+  final List<StatusType> _statusList;
 //ランダムモーダルの出題状況,
   @override
   @JsonKey()
-  List<QuizStatusType> get statusList {
+  List<StatusType> get statusList {
     if (_statusList is EqualUnmodifiableListView) return _statusList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_statusList);
   }
 
 //クイズ出題状況
-  final List<QuizStatusType> _selectedStatusList;
+  final List<StatusType> _selectedStatusList;
 //クイズ出題状況
   @override
   @JsonKey()
-  List<QuizStatusType> get selectedStatusList {
+  List<StatusType> get selectedStatusList {
     if (_selectedStatusList is EqualUnmodifiableListView)
       return _selectedStatusList;
     // ignore: implicit_dynamic_type
@@ -451,8 +509,20 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
   }
 
 //クイズ出題状況
-  final List<double> _correctRatios;
+  final List<ImportanceType> _selectedImportanceList;
 //クイズ出題状況
+  @override
+  @JsonKey()
+  List<ImportanceType> get selectedImportanceList {
+    if (_selectedImportanceList is EqualUnmodifiableListView)
+      return _selectedImportanceList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedImportanceList);
+  }
+
+//重要度
+  final List<double> _correctRatios;
+//重要度
   @override
   @JsonKey()
   List<double> get correctRatios {
@@ -500,13 +570,22 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
   final Quiz? selectQuiz;
   @override
   final Quiz? selectStudyQuiz;
-//
   @override
   final Quiz? selectWeakQuiz;
+//苦手克服
+  @override
+  @JsonKey()
+  final bool isRepeat;
+  @override
+  @JsonKey()
+  final bool isSaved;
+  @override
+  @JsonKey()
+  final bool isWeak;
 
   @override
   String toString() {
-    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, randomCategoryList: $randomCategoryList, statusList: $statusList, selectedStatusList: $selectedStatusList, correctRatios: $correctRatios, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isQuizStatusRecommend: $isQuizStatusRecommend, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz)';
+    return 'HomeQuizScreenState(isLoading: $isLoading, filterQuizList: $filterQuizList, categoryList: $categoryList, randomCategoryList: $randomCategoryList, statusList: $statusList, selectedStatusList: $selectedStatusList, selectedImportanceList: $selectedImportanceList, correctRatios: $correctRatios, selectCategory: $selectCategory, itemIndex: $itemIndex, tabIndex: $tabIndex, isQuizStatusRecommend: $isQuizStatusRecommend, selectedFilterGroup: $selectedFilterGroup, selectedStudyLength: $selectedStudyLength, selectedTestLength: $selectedTestLength, selectedWeakLength: $selectedWeakLength, selectQuiz: $selectQuiz, selectStudyQuiz: $selectStudyQuiz, selectWeakQuiz: $selectWeakQuiz, isRepeat: $isRepeat, isSaved: $isSaved, isWeak: $isWeak)';
   }
 
   @override
@@ -526,6 +605,8 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
                 .equals(other._statusList, _statusList) &&
             const DeepCollectionEquality()
                 .equals(other._selectedStatusList, _selectedStatusList) &&
+            const DeepCollectionEquality().equals(
+                other._selectedImportanceList, _selectedImportanceList) &&
             const DeepCollectionEquality()
                 .equals(other._correctRatios, _correctRatios) &&
             (identical(other.selectCategory, selectCategory) ||
@@ -549,30 +630,39 @@ class _$_HomeQuizScreenState implements _HomeQuizScreenState {
             (identical(other.selectStudyQuiz, selectStudyQuiz) ||
                 other.selectStudyQuiz == selectStudyQuiz) &&
             (identical(other.selectWeakQuiz, selectWeakQuiz) ||
-                other.selectWeakQuiz == selectWeakQuiz));
+                other.selectWeakQuiz == selectWeakQuiz) &&
+            (identical(other.isRepeat, isRepeat) ||
+                other.isRepeat == isRepeat) &&
+            (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
+            (identical(other.isWeak, isWeak) || other.isWeak == isWeak));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isLoading,
-      const DeepCollectionEquality().hash(_filterQuizList),
-      const DeepCollectionEquality().hash(_categoryList),
-      const DeepCollectionEquality().hash(_randomCategoryList),
-      const DeepCollectionEquality().hash(_statusList),
-      const DeepCollectionEquality().hash(_selectedStatusList),
-      const DeepCollectionEquality().hash(_correctRatios),
-      selectCategory,
-      itemIndex,
-      tabIndex,
-      isQuizStatusRecommend,
-      const DeepCollectionEquality().hash(_selectedFilterGroup),
-      selectedStudyLength,
-      selectedTestLength,
-      selectedWeakLength,
-      selectQuiz,
-      selectStudyQuiz,
-      selectWeakQuiz);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        isLoading,
+        const DeepCollectionEquality().hash(_filterQuizList),
+        const DeepCollectionEquality().hash(_categoryList),
+        const DeepCollectionEquality().hash(_randomCategoryList),
+        const DeepCollectionEquality().hash(_statusList),
+        const DeepCollectionEquality().hash(_selectedStatusList),
+        const DeepCollectionEquality().hash(_selectedImportanceList),
+        const DeepCollectionEquality().hash(_correctRatios),
+        selectCategory,
+        itemIndex,
+        tabIndex,
+        isQuizStatusRecommend,
+        const DeepCollectionEquality().hash(_selectedFilterGroup),
+        selectedStudyLength,
+        selectedTestLength,
+        selectedWeakLength,
+        selectQuiz,
+        selectStudyQuiz,
+        selectWeakQuiz,
+        isRepeat,
+        isSaved,
+        isWeak
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -588,8 +678,9 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       final List<Quiz> filterQuizList,
       final List<String> categoryList,
       final List<String> randomCategoryList,
-      final List<QuizStatusType> statusList,
-      final List<QuizStatusType> selectedStatusList,
+      final List<StatusType> statusList,
+      final List<StatusType> selectedStatusList,
+      final List<ImportanceType> selectedImportanceList,
       final List<double> correctRatios,
       final String selectCategory,
       final int itemIndex,
@@ -601,7 +692,10 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
       final int selectedWeakLength,
       final Quiz? selectQuiz,
       final Quiz? selectStudyQuiz,
-      final Quiz? selectWeakQuiz}) = _$_HomeQuizScreenState;
+      final Quiz? selectWeakQuiz,
+      final bool isRepeat,
+      final bool isSaved,
+      final bool isWeak}) = _$_HomeQuizScreenState;
 
   @override
   bool get isLoading;
@@ -612,10 +706,12 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   @override //クイズのカテゴリリスト
   List<String> get randomCategoryList;
   @override //ランダムモーダルの出題状況,
-  List<QuizStatusType> get statusList;
+  List<StatusType> get statusList;
   @override //クイズ出題状況
-  List<QuizStatusType> get selectedStatusList;
+  List<StatusType> get selectedStatusList;
   @override //クイズ出題状況
+  List<ImportanceType> get selectedImportanceList;
+  @override //重要度
   List<double> get correctRatios;
   @override
   String get selectCategory;
@@ -637,8 +733,14 @@ abstract class _HomeQuizScreenState implements HomeQuizScreenState {
   Quiz? get selectQuiz;
   @override
   Quiz? get selectStudyQuiz;
-  @override //
+  @override
   Quiz? get selectWeakQuiz;
+  @override //苦手克服
+  bool get isRepeat;
+  @override
+  bool get isSaved;
+  @override
+  bool get isWeak;
   @override
   @JsonKey(ignore: true)
   _$$_HomeQuizScreenStateCopyWith<_$_HomeQuizScreenState> get copyWith =>

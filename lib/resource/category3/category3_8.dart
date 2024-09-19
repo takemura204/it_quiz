@@ -10,7 +10,7 @@ List<QuizItem> get category3_8 {
       ans: 'レプリケーション',
       choices: ["レプリケーション", "クラスタリング", "ロードバランシング", "キャッシング"],
       comment: "レプリケーションは、データや情報が正確に複製され、複数のシステムやデータベース間で同期されるプロセスを指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'スタンドアロン',
@@ -19,13 +19,12 @@ List<QuizItem> get category3_8 {
       choices: ["シンクライアント", "シングルプロセッサ", "スタンドアロン", "ピアツーピア"],
       comment: "スタンドアロンは、あるコンピュータが他のコンピュータやネットワークと接続しておらず、独立した存在である状態。",
       source: '平成27年春期 問67',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'デュアルシステム',
       question: 'デュアルシステムの特徴を説明したものはどれか。',
-      ans:
-          '同じ処理を行うシステムを二重に用意し，処理結果を照合することで処理の正しさを確認する方式であり，一方に故障が発生したら，故障したシステムを切り離して処理を続行する。',
+      ans: '同じ処理を行うシステムを二重に用意し，処理結果を照合することで処理の正しさを確認する方式であり，一方に故障が発生したら，故障したシステムを切り離して処理を続行する。',
       choices: [
         "同じ処理を行うシステムを二重に用意し，処理結果を照合することで処理の正しさを確認する方式であり，一方に故障が発生したら，故障したシステムを切り離して処理を続行する。",
         "同じ装置を2台使用することで，シンプレックスシステムに対し，処理能力を2倍に向上させることができる。",
@@ -35,16 +34,15 @@ List<QuizItem> get category3_8 {
       comment:
           "デュアルシステム(Dual System)は、信頼化設計の一つであり、同じ処理を2組のコンピュータシステムで行い、その結果を照合機でチェックしながら処理を進行していくシステム構成。障害発生時には、問題のある側のシステムをメイン処理から切り離し、残された側のシステムのみで処理を続行しつつ、障害からの回復を図る。",
       source: '平成28年春期 問75',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'デュプレックスシステム',
       question: '2つのコンポーネントが同時に動作し、一方が故障した際にもう一方が即座に処理を引き継ぐシステム構成は何か？',
       ans: 'デュプレックスシステム',
       choices: ["デュプレックスシステム", "デュアルシステム", "クラスタシステム", "ホットスタンバイ"],
-      comment:
-          "デュプレックスシステムは、2つのコンポーネントが同時に動作し、一方が故障した際にもう一方が即座に処理を引き継ぐシステム構成を指す。",
-      importance: QuizImportanceType.low,
+      comment: "デュプレックスシステムは、2つのコンポーネントが同時に動作し、一方が故障した際にもう一方が即座に処理を引き継ぐシステム構成を指す。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クライアントサーバシステム',
@@ -52,7 +50,7 @@ List<QuizItem> get category3_8 {
       ans: 'クライアントサーバシステム',
       choices: ["クライアントサーバシステム", "ピアツーピア", "スタンドアロン", "クラスタシステム"],
       comment: "クライアントサーバシステムは、クライアントがサービスを要求し、サーバがそれに応答する形式のネットワークシステム構成を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ピアツーピア',
@@ -60,7 +58,7 @@ List<QuizItem> get category3_8 {
       ans: 'ピアツーピア',
       choices: ["ピアツーピア", "クライアントサーバシステム", "スタンドアロン", "クラスタシステム"],
       comment: "ピアツーピア（P2P）は、ネットワーク上のすべてのコンピュータが等価な立場でデータやリソースを共有するシステム構成を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クラスタシステム',
@@ -71,7 +69,7 @@ List<QuizItem> get category3_8 {
       comment:
           "クラスタシステムは、複数のコンピュータを結合し、葡萄の房（クラスター）のようにひとまとまりのシステムにしたもので、1台のコンピュータでは得ることのできない処理性能や可用性を得ることができる。",
       source: '平成21年春期 問73',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'シンクライアント',
@@ -86,7 +84,7 @@ List<QuizItem> get category3_8 {
       comment:
           "シンクライアントとは、「薄い，少ない」の意味で、ユーザーが使用する端末にサーバに接続するための必要最小限のネットワーク機能、入出力をするためのGUIなどだけを装備させ、ほとんどの処理をサーバ側で行うシステム設計",
       source: '平成23年秋期 問86',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'NAS(Network Attached Storage)',
@@ -96,7 +94,7 @@ List<QuizItem> get category3_8 {
       comment:
           "NAS(Network Attached Storage)は、TCP/IPのコンピュータネットワークに直接接続して使用するファイルサーバで、コントローラーとハードディスクから構成されている。",
       source: '平成25年秋期 問59',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'RAID（Redundant Array of Independent Disks）',
@@ -111,7 +109,7 @@ List<QuizItem> get category3_8 {
       comment:
           "RAID（Redundant Array of Independent Disks）は、複数台のディスク装置を組み合わせ、1つの仮想的なディスクとして扱うことで信頼性や性能を向上させる技術。",
       source: '平成23年秋期 問82',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '仮想化',
@@ -123,19 +121,17 @@ List<QuizItem> get category3_8 {
         "一つのコンピュータ上で，仮想的に複数のコンピュータを実現させる技術",
         "補助記憶装置の一部を利用して，主記憶装置の容量よりも大きなメモリ領域を仮想的に利用できる技術"
       ],
-      comment:
-          "サーバの仮想化は、1台の物理サーバ上で複数のサーバOSを稼働させる技術で、物理的管理が簡易化、資源の有効利用、CPUのオーバーヘッドの向上が特徴とされる。",
+      comment: "サーバの仮想化は、1台の物理サーバ上で複数のサーバOSを稼働させる技術で、物理的管理が簡易化、資源の有効利用、CPUのオーバーヘッドの向上が特徴とされる。",
       source: '平成23年秋期 問54',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ライブマイグレーション',
       question: '仮想マシンのインスタンスを物理的なサーバー間で移動させるプロセスは何か？',
       ans: 'ライブマイグレーション',
       choices: ["VM", "VDI", "ライブマイグレーション", "クラウドストレージ"],
-      comment:
-          "ライブマイグレーションは、稼働中の仮想マシンを一台の物理サーバから別の物理サーバへと移動させる技術で、ダウンタイムを最小限に抑える。",
-      importance: QuizImportanceType.low,
+      comment: "ライブマイグレーションは、稼働中の仮想マシンを一台の物理サーバから別の物理サーバへと移動させる技術で、ダウンタイムを最小限に抑える。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'VDI',
@@ -144,21 +140,19 @@ List<QuizItem> get category3_8 {
       choices: ["VM", "VDI", "クラウドコンピューティング", "デジタルツイン"],
       comment:
           "VDI（Virtual Desktop Infrastructure）は、サーバ上でデスクトップ環境を仮想化し、ネットワークを通じてエンドユーザーに提供するシステム。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'VM',
       question: '単一の物理マシン上で複数のオペレーティングシステムを同時に実行することを可能にするソフトウェアは何か？',
       ans: 'VM',
       choices: ["VM", "VDI", "Docker", "クラウドサービス"],
-      comment:
-          "VM（Virtual Machine）は、一つの物理マシン上で複数のオペレーティングシステムを隔離して同時に実行することを可能にするソフトウェア技術。",
-      importance: QuizImportanceType.low,
+      comment: "VM（Virtual Machine）は、一つの物理マシン上で複数のオペレーティングシステムを隔離して同時に実行することを可能にするソフトウェア技術。",
+      importance: ImportanceType.low,
     )
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 801);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 801);
   });
 }

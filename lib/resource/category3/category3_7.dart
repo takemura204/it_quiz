@@ -12,12 +12,11 @@ List<QuizItem> get category3_7 {
       comment:
           "RFID(Radio Frequency IDentification)は、ID情報を埋め込んだRFタグ(ICタグ)から電磁界や電波を用い通信可能距離は数cm～数mで無線通信をし情報をやりとりする技術。",
       source: '平成22年春期 問78',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'USB（Universal Serial Bus）',
-      question:
-          'USBは，PCにハードディスク，プリンターなどの様々な周辺機器を接続できるインタフェースである。USB2.0に関する記述のうち，適切なものはどれか',
+      question: 'USBは，PCにハードディスク，プリンターなどの様々な周辺機器を接続できるインタフェースである。USB2.0に関する記述のうち，適切なものはどれか',
       ans: '電力消費が少ない周辺機器は，電源に接続することなしにUSB接続するだけで電源供給を得ることができる。',
       choices: [
         "PC，USBハブ及び周辺機器側のコネクタ形状は1種類に統一されている。",
@@ -28,16 +27,15 @@ List<QuizItem> get category3_7 {
       comment:
           "USB（Universal Serial Bus）は、シリアルバス規格のひとつであり、主な特徴として、ハブを使うことで最大127台まで接続可能、ホットプラグ・プラグアンドプレイが可能、バスパワー方式に対応しており小電力のデバイスならコードを介して電源供給が可能なことなどが挙げられる。",
       source: '平成22年秋期 問70',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'IEEE1394（別名FireWireやi.LINK）',
       question: '高速なシリアル通信を提供する規格で、特にデジタルビデオカメラなどのデータ転送に用いられるものは何か？',
       ans: 'IEEE1394',
       choices: ["IEEE1394", "USB", "HDMI", "DisplayPort"],
-      comment:
-          "IEEE1394（別名FireWireやi.LINK）は、高速なシリアル通信を提供する規格で、特にデジタルビデオカメラなどでのデータ転送に用いられる。",
-      importance: QuizImportanceType.low,
+      comment: "IEEE1394（別名FireWireやi.LINK）は、高速なシリアル通信を提供する規格で、特にデジタルビデオカメラなどでのデータ転送に用いられる。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'PCMCIA',
@@ -46,7 +44,7 @@ List<QuizItem> get category3_7 {
       choices: ["PCMCIA", "USB", "PCI Express", "SDカード"],
       comment:
           "PCMCIA（Personal Computer Memory Card International Association）は、ノートパソコンの拡張カード用の国際標準規格で、かつて周辺機器の接続に広く用いられた。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'HDMI(High-Definition Multimedia Interface)',
@@ -61,7 +59,7 @@ List<QuizItem> get category3_7 {
       comment:
           "HDMI(High-Definition Multimedia Interface)は、PCとディスプレイの接続標準規格であるDVIを基に音声伝送機能や著作権保護機能、色差伝送機能を加えるなどAV家電向けに改良したデジタル家電向けのインタフェース。",
       source: '平成26年春期 問73',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'DisplayPort',
@@ -69,7 +67,7 @@ List<QuizItem> get category3_7 {
       ans: 'DisplayPort',
       choices: ["DisplayPort", "HDMI", "DVI", "VGA"],
       comment: "DisplayPortは、デジタルディスプレイへの高解像度ビデオとオーディオの転送に使用されるインターフェース規格。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'DVI（Digital Visual Interface）',
@@ -78,7 +76,7 @@ List<QuizItem> get category3_7 {
       choices: ["DVI", "HDMI", "DisplayPort", "VGA"],
       comment:
           "DVI（Digital Visual Interface）は、デジタルディスプレイにビデオ信号を転送するために使用されるインターフェース規格で、アナログVGAの後継とされる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'Bluetooth',
@@ -93,7 +91,7 @@ List<QuizItem> get category3_7 {
       comment:
           "Bluetoothは、免許申請や使用登録の不要な2.4GHz帯の電波を用いて、数mから100m程度の距離の情報機器間で、電波を使い最大24Mbpsの無線通信を行い。パソコンと周辺機器の接続などの用途で幅広く普及している。",
       source: '平成25年秋期 問21',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'IrDA（Infrared Data Association）',
@@ -101,7 +99,7 @@ List<QuizItem> get category3_7 {
       ans: 'IrDA',
       choices: ["IrDA", "Bluetooth", "Wi-Fi", "NFC"],
       comment: "IrDA（Infrared Data Association）は、赤外線通信を利用して機器間でのデータ転送を行う技術。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'NFC（Near Field Communication）',
@@ -110,7 +108,7 @@ List<QuizItem> get category3_7 {
       choices: ["Bluetooth", "IrDA", "NFC", "Wi-Fi"],
       comment:
           "NFC（Near Field Communication）は、近距離無線通信と呼ばれ、非接触型ICカードの技術に基づいて開発されたもので、数センチ～20cm以内の極近距離で通信を行うことできる。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'アクチュエータ',
@@ -118,7 +116,7 @@ List<QuizItem> get category3_7 {
       ans: 'アクチュエータ',
       choices: ["アクチュエータ", "センサー", "トランスデューサ", "リレー"],
       comment: "アクチュエータは、電気信号を受けて機械的な動作を行う装置で、ロボットの動きや自動ドアの開閉などに用いられる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'デバイスドライバ',
@@ -133,7 +131,7 @@ List<QuizItem> get category3_7 {
       comment:
           "デバイスドライバ(Device Driver)は、コンピュータに接続された周辺機器を管理・制御するための抽象化したインタフェースを、他のアプリケーションソフトウェアに対して提供するためのソフトウェア／プログラム。",
       source: '平成30年春期 問83',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'プラグアンドプレイ',
@@ -145,15 +143,13 @@ List<QuizItem> get category3_7 {
         "周辺機器との接続ケーブルを介して，PCから周辺機器に電力を供給する。",
         "特定のプログラムを実行して，処理に掛かる時間でシステムの性能を評価する。"
       ],
-      comment:
-          "プラグアンドプレイ(Plug and Play)は、周辺機器を接続するのと同時に、自動的にPCが認識しデバイスドライバのインストールと設定を行う機能。",
+      comment: "プラグアンドプレイ(Plug and Play)は、周辺機器を接続するのと同時に、自動的にPCが認識しデバイスドライバのインストールと設定を行う機能。",
       source: '平成27年春期 問82',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 701);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 701);
   });
 }

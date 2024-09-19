@@ -10,7 +10,7 @@ List<QuizItem> get category3_22 {
       ans: '盗み見',
       choices: ["盗み見", "クラッキング", "ソーシャルエンジニアリング", "ビジネスメール詐欺"],
       comment: "盗み見は、他人のプライベートな情報やデータを無許可で覗き見る行為を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クラッキング',
@@ -18,7 +18,7 @@ List<QuizItem> get category3_22 {
       ans: 'クラッキング',
       choices: ["クラッキング", "盗み見", "ソーシャルエンジニアリング", "ビジネスメール詐欺"],
       comment: "クラッキングは、セキュリティを破って不正にコンピューターシステムに侵入し、データを盗んだり破壊したりする行為。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ソーシャルエンジニアリング',
@@ -33,7 +33,7 @@ List<QuizItem> get category3_22 {
       comment:
           "ソーシャルエンジニアリングは、技術的な方法ではなく、人の心理的な弱みやミスに付け込んでパスワードなどの秘密情報を不正に取得する行為の総称で、なりすまし、ショルダーハッキング、トラッシング、のぞき見などの行動が挙げられる。",
       source: '平成28年春期 問86',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ビジネスメール詐欺',
@@ -41,7 +41,7 @@ List<QuizItem> get category3_22 {
       ans: 'ビジネスメール詐欺',
       choices: ["ビジネスメール詐欺", "ソーシャルエンジニアリング", "クラッキング", "盗み見"],
       comment: "ビジネスメール詐欺は、正規のビジネスメールを装って送り、受け取った人に金銭の振り込みなどを要求する詐欺行為。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ダークウェブ',
@@ -49,7 +49,7 @@ List<QuizItem> get category3_22 {
       ans: 'ダークウェブ',
       choices: ["ダークウェブ", "マルウェア", "ボット", "スパイウェア"],
       comment: "ダークウェブは、通常の検索エンジンではアクセスできないインターネットの隠された部分で、違法な取引や情報交換が行われるエリア。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'マルウェア',
@@ -63,7 +63,7 @@ List<QuizItem> get category3_22 {
       ],
       comment: "マルウェア(Malware)とは、不正な有害な動作をする目的で悪意をもって作成されたソフトウェアやプログラムの総称。",
       source: '平成25年秋期 問77',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ボット',
@@ -78,7 +78,7 @@ List<QuizItem> get category3_22 {
       comment:
           "ボットは、インターネット上で決められたタスクを繰り返し実行するコンピュータプログラムを指し、感染させたコンピュータをネットワークを通じて外部からの遠隔操作で操れる状態にしてしまうなどの不正目的で作成されたものも存在する。",
       source: '平成21年秋期 問73',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'スパイウェア',
@@ -93,7 +93,7 @@ List<QuizItem> get category3_22 {
       comment:
           "スパイウェアは、利用者や管理者の意図に反してインストールされ、利用者の個人情報やアクセス履歴、Cookie情報、マウスやキーボードの入力などの情報を収集し、勝手に外部に送信する不正プログラム。",
       source: '平成27年春期 問66',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ランサムウェア',
@@ -108,7 +108,7 @@ List<QuizItem> get category3_22 {
       comment:
           "ランサムウェアは、感染したコンピュータのデータを勝手に暗号化し正常にアクセスできない状態にした後、データへのアクセスが制限されたユーザーに対して元に戻すための復元プログラムを買うように迫る身代金要求型のマルウェア。",
       source: '平成28年春期 問61',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ファイルレスマルウェア',
@@ -116,7 +116,7 @@ List<QuizItem> get category3_22 {
       ans: 'ファイルレスマルウェア',
       choices: ["ファイルレスマルウェア", "ランサムウェア", "スパイウェア", "ボット"],
       comment: "ファイルレスマルウェアは、従来のファイルを使用せずにメモリ内で直接実行され、検出を避けることが可能なマルウェア。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ワーム',
@@ -127,7 +127,7 @@ List<QuizItem> get category3_22 {
       comment:
           "ワームは、不正ソフトウェアの一種で自身が独立したプログラムで、ネットワークを介して他のコンピュータに入り込んで増殖を繰り返し、感染したコンピュータに不具合が生じるとともにネットワーク負荷の増大やCPU負荷の増大などの被害をもたらす。",
       source: '平成21年秋期 問58',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'トロイの木馬',
@@ -142,16 +142,15 @@ List<QuizItem> get category3_22 {
       comment:
           "トロイの木馬は、実行形式のプログラム(.exe)を被害者が実行することで動作を開始し、一見通常の動作をしているように見せかけておいて、裏ではOSの設定変更，パスワードの窃盗，外部からの遠隔操作の踏み台になるなどの悪意のある動作を秘密裏に行うウィルス。",
       source: '平成24年春期 問54',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'RAT（Remote Access Trojan）',
       question: '遠隔からコンピュータを制御するために使用されるマルウェアは何か？',
       ans: 'RAT',
       choices: ["RAT", "トロイの木馬", "ワーム", "スパイウェア"],
-      comment:
-          "RAT（Remote Access Trojan）は、遠隔からコンピュータを制御するために使用されるトロイの木馬型マルウェア。",
-      importance: QuizImportanceType.low,
+      comment: "RAT（Remote Access Trojan）は、遠隔からコンピュータを制御するために使用されるトロイの木馬型マルウェア。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'マクロウィルス',
@@ -166,7 +165,7 @@ List<QuizItem> get category3_22 {
       comment:
           "マクロウィルスとは、ワープロソフトや表計算ソフトに組み込まれているプログラム実行機能を悪用したマルウェアのことで、不正なプログラムが仕込まれたWord／Excel形式のファイルを開くことによって感染する。",
       source: '平成21年春期 問81',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ガンブラー',
@@ -174,7 +173,7 @@ List<QuizItem> get category3_22 {
       ans: 'ガンブラー',
       choices: ["ガンブラー", "キーロガー", "バックドア", "マクロウイルス"],
       comment: "ガンブラーは、ウェブサイトを経由して訪問者のコンピュータにマルウェアを自動的に配布するために使用されるツール。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'キーロガー',
@@ -189,7 +188,7 @@ List<QuizItem> get category3_22 {
       comment:
           "キーロガーとは、PCへのキーボード入力を逐一監視し、それを記録するソフトウェアまたはハードウェアで、悪意を持ってPCにインストールされた場合には、利用者の入力情報を秘密裏に盗むことも可能なため、不正に入手される恐れがあることからセキュリティ上の問題となっている。",
       source: '平成23年特別 問75',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'バックドア',
@@ -199,35 +198,32 @@ List<QuizItem> get category3_22 {
       comment:
           "バックドアは、IDやパスワードを使って通信を制限したり、使用権を確認するコンピュータの機能を無許可で利用するために、コンピュータ内に(他人に知られる事無く)攻撃者が設けた通信接続の機能。",
       source: '平成26年春期 問61',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ファイル交換ソフトウェア',
       question: 'ファイルを共有する目的で使用されるが、マルウェアの感染経路となることもあるソフトウェアは何か？',
       ans: 'ファイル交換ソフトウェア',
       choices: ["ファイル交換ソフトウェア", "バックドア", "キーロガー", "ガンブラー"],
-      comment:
-          "ファイル交換ソフトウェアは、インターネット上でファイルを共有する目的で使用されるが、不正なファイルが混入してマルウェアの感染経路となることもある。",
-      importance: QuizImportanceType.low,
+      comment: "ファイル交換ソフトウェアは、インターネット上でファイルを共有する目的で使用されるが、不正なファイルが混入してマルウェアの感染経路となることもある。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'セキュリティホール',
       question: '不正アクセスなどに利用される，コンピュータシステムやネットワークに存在する弱点や欠陥のことを何というか。',
       ans: 'セキュリティホール',
       choices: ["インシデント", "セキュリティホール", "ハッキング", "フォレンジック"],
-      comment:
-          "セキュリティホールは、ソフトウェアにおいて、プログラムの不具合や設計上のミスが原因となって発生した情報セキュリティ上の弱点のこと。",
+      comment: "セキュリティホールは、ソフトウェアにおいて、プログラムの不具合や設計上のミスが原因となって発生した情報セキュリティ上の弱点のこと。",
       source: '平成26年秋期 問58',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'シャドーIT',
       question: '組織の公式な承認や管理を経ずに使用されるITシステムやソフトウェアを指す言葉は何か？',
       ans: 'シャドーIT',
       choices: ["シャドーIT", "セキュリティホール", "キーロガー", "バックドア"],
-      comment:
-          "シャドーITは、組織の公式な承認や管理を経ずに従業員によって使用されるITシステムやソフトウェアを指し、セキュリティリスクを高めることがある。",
-      importance: QuizImportanceType.normal,
+      comment: "シャドーITは、組織の公式な承認や管理を経ずに従業員によって使用されるITシステムやソフトウェアを指し、セキュリティリスクを高めることがある。",
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '不正のトライアングル',
@@ -235,7 +231,7 @@ List<QuizItem> get category3_22 {
       ans: '不正のトライアングル',
       choices: ["不正のトライアングル", "シャドーIT", "セキュリティホール", "クロスサイトスクリプティング"],
       comment: "不正のトライアングルは、不正行為を行う際に必要とされる3つの要素、すなわち機会、動機、正当化の理論。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '辞書攻撃',
@@ -243,7 +239,7 @@ List<QuizItem> get category3_22 {
       ans: '辞書攻撃',
       choices: ["辞書攻撃", "総当たり攻撃", "パスワードリスト攻撃", "クロスサイトリクエストフォージェリ"],
       comment: "辞書攻撃は、事前に収集した単語リスト（辞書ファイル）を使ってパスワードや暗号キーなどを推測しようとする攻撃方法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '総当たり攻撃',
@@ -254,7 +250,7 @@ List<QuizItem> get category3_22 {
       comment:
           "総当たり攻撃とは、パスワードクラックに用いられる手法の1つで、特定の文字数および文字種で設定される可能性のある組合せのすべてを試すことで不正ログインを試みる攻撃手法。",
       source: '平成28年秋期 問83',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'パスワードリスト攻撃',
@@ -263,7 +259,7 @@ List<QuizItem> get category3_22 {
       choices: ["パスワードリスト攻撃", "総当たり攻撃", "辞書攻撃", "クロスサイトスクリプティング"],
       comment:
           "パスワードリスト攻撃は、漏洩したパスワードのリストや以前の攻撃で得られたパスワードを使って認証を突破しようとする攻撃方法で、パスワード長が短く、使用可能な文字種が少ない場合は、破られる可能性が高くなる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クロスサイトスクリプティング(XSS)',
@@ -278,77 +274,47 @@ List<QuizItem> get category3_22 {
       comment:
           "クロスサイトスクリプティング(XSS)は、動的にWebページを生成するアプリケーションのセキュリティ上の不備を意図的に利用して、悪意のあるスクリプトを混入させることで、攻撃者が仕込んだ操作を実行させたり、別のサイトを横断してユーザーのクッキーや個人情報を盗んだりする攻撃手法。",
       source: '平成27年春期 問84',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'クロスサイトリクエストフォージェリ',
       question: '攻撃者がユーザーのブラウザを悪用して、ユーザーの意図しないリクエストをウェQuestを送信させる攻撃手法は何か？',
       ans: 'クロスサイトリクエストフォージェリ',
-      choices: [
-        "クロスサイトリクエストフォージェリ",
-        "クロスサイトスクリプティング",
-        "クリックジャッキング",
-        "ドライブバイダウンロード"
-      ],
-      comment:
-          "クロスサイトリクエストフォージェリ（CSRF）は、攻撃者がユーザーのブラウザを悪用して、ユーザーの意図しないリクエストをウェブアプリケーションに送信させる攻撃手法。",
-      importance: QuizImportanceType.low,
+      choices: ["クロスサイトリクエストフォージェリ", "クロスサイトスクリプティング", "クリックジャッキング", "ドライブバイダウンロード"],
+      comment: "クロスサイトリクエストフォージェリ（CSRF）は、攻撃者がユーザーのブラウザを悪用して、ユーザーの意図しないリクエストをウェブアプリケーションに送信させる攻撃手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クリックジャッキング',
       question: 'ユーザーが意図せずに他のアクションを実行してしまうような操作を促す攻撃手法は何か？',
       ans: 'クリックジャッキング',
-      choices: [
-        "クリックジャッキング",
-        "クロスサイトリクエストフォージェリ",
-        "クロスサイトスクリプティング",
-        "ドライブバイダウンロード"
-      ],
-      comment:
-          "クリックジャッキングは、ユーザーが意図せずに他のアクションを実行してしまうような操作を促す攻撃手法。これは、透明または見えないフレームを使って実現されることが多い。",
-      importance: QuizImportanceType.low,
+      choices: ["クリックジャッキング", "クロスサイトリクエストフォージェリ", "クロスサイトスクリプティング", "ドライブバイダウンロード"],
+      comment: "クリックジャッキングは、ユーザーが意図せずに他のアクションを実行してしまうような操作を促す攻撃手法。これは、透明または見えないフレームを使って実現されることが多い。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ドライブバイダウンロード',
       question: 'ユーザーが悪意のあるウェブサイトを訪れるだけで自動的にマルウェアがダウンロードされる攻撃は何か？',
       ans: 'ドライブバイダウンロード',
-      choices: [
-        "ドライブバイダウンロード",
-        "クリックジャッキング",
-        "クロスサイトリクエストフォージェリ",
-        "クロスサイトスクリプティング"
-      ],
-      comment:
-          "ドライブバイダウンロードは、ユーザーが悪意のあるウェブサイトを訪れるだけで、何の警告もなく自動的にマルウェアがダウンロードされる攻撃。",
-      importance: QuizImportanceType.low,
+      choices: ["ドライブバイダウンロード", "クリックジャッキング", "クロスサイトリクエストフォージェリ", "クロスサイトスクリプティング"],
+      comment: "ドライブバイダウンロードは、ユーザーが悪意のあるウェブサイトを訪れるだけで、何の警告もなく自動的にマルウェアがダウンロードされる攻撃。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'SQLインジェクション',
       question: 'ウェブアプリケーションが不正なSQLクエリを実行してしまうことを利用した攻撃は何か？',
       ans: 'SQLインジェクション',
-      choices: [
-        "SQLインジェクション",
-        "ディレクトリトラバーサル",
-        "クロスサイトスクリプティング",
-        "ドライブバイダウンロード"
-      ],
-      comment:
-          "SQLインジェクションは、ウェブアプリケーションが不正なSQLクエリを実行してしまうことを利用した攻撃。これにより、データベースから情報が漏洩する恐れがある。",
-      importance: QuizImportanceType.low,
+      choices: ["SQLインジェクション", "ディレクトリトラバーサル", "クロスサイトスクリプティング", "ドライブバイダウンロード"],
+      comment: "SQLインジェクションは、ウェブアプリケーションが不正なSQLクエリを実行してしまうことを利用した攻撃。これにより、データベースから情報が漏洩する恐れがある。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ディレクトリトラバーサル',
       question: 'ウェブアプリケーションのセキュリティが不十分な場合に、攻撃者がシステムファイルにアクセスする攻撃は何か？',
       ans: 'ディレクトリトラバーサル',
-      choices: [
-        "ディレクトリトラバーサル",
-        "SQLインジェクション",
-        "クロスサイトスクリプティング",
-        "ドライブバイダウンロード"
-      ],
-      comment:
-          "ディレクトリトラバーサルは、ウェブアプリケーションのセキュリティが不十分な場合に、攻撃者がシステムファイルに不正にアクセスする攻撃。",
-      importance: QuizImportanceType.low,
+      choices: ["ディレクトリトラバーサル", "SQLインジェクション", "クロスサイトスクリプティング", "ドライブバイダウンロード"],
+      comment: "ディレクトリトラバーサルは、ウェブアプリケーションのセキュリティが不十分な場合に、攻撃者がシステムファイルに不正にアクセスする攻撃。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '中間者攻撃',
@@ -356,7 +322,7 @@ List<QuizItem> get category3_22 {
       ans: '中間者攻撃',
       choices: ["中間者攻撃", "MITB攻撃", "第三者中継", "IPスプーフィング"],
       comment: "中間者攻撃（Man-in-the-Middle Attack）は、攻撃者が通信中のデータを傍受し、情報を盗み出す攻撃。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'MITB攻撃',
@@ -364,7 +330,7 @@ List<QuizItem> get category3_22 {
       ans: 'MITB攻撃',
       choices: ["MITB攻撃", "中間者攻撃", "第三者中継", "IPスプーフィング"],
       comment: "MITB攻撃は、オンラインバンキングなどで、ユーザーと銀行の間に攻撃者が入り込む攻撃。ブラウザの脆弱性を利用して行われる。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '第三者中継',
@@ -372,7 +338,7 @@ List<QuizItem> get category3_22 {
       ans: '第三者中継',
       choices: ["第三者中継", "中間者攻撃", "MITB攻撃", "IPスプーフィング"],
       comment: "第三者中継は、攻撃者が合法的な参加者になりすまして通信を行い、データを傍受または改ざんする攻撃。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'IPスプーフィング',
@@ -380,16 +346,15 @@ List<QuizItem> get category3_22 {
       ans: 'IPスプーフィング',
       choices: ["IPスプーフィング", "第三者中継", "中間者攻撃", "MITB攻撃"],
       comment: "IPスプーフィングは、攻撃者が他のデバイスのIPアドレスを偽装し、信頼関係を悪用する攻撃。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'キャッシュポイズニング',
       question: 'DNS情報を改ざんし、ユーザーを偽のウェブサイトに誘導する攻撃は何か？',
       ans: 'キャッシュポイズニング',
       choices: ["キャッシュポイズニング", "IPスプーフィング", "中間者攻撃", "MITB攻撃"],
-      comment:
-          "キャッシュポイズニング（DNS Cache Poisoning）は、DNSサーバのキャッシュ情報を改ざんし、ユーザーを偽のウェブサイトに誘導する攻撃。",
-      importance: QuizImportanceType.high,
+      comment: "キャッシュポイズニング（DNS Cache Poisoning）は、DNSサーバのキャッシュ情報を改ざんし、ユーザーを偽のウェブサイトに誘導する攻撃。",
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'セッションハイジャック',
@@ -397,22 +362,17 @@ List<QuizItem> get category3_22 {
       ans: 'セッションハイジャック',
       choices: ["セッションハイジャック", "キャッシュポイズニング", "IPスプーフィング", "中間者攻撃"],
       comment: "セッションハイジャックは、攻撃者が既存のセッションを乗っ取り、ユーザーになりすまして機密情報にアクセスする攻撃。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'DoS(Denial of Service)攻撃',
       question: 'DoS攻撃によってサーバが受ける直接的な被害はどれか。',
       ans: 'サービスの提供が阻害される。',
-      choices: [
-        "暗号化してあるデータが解読される。",
-        "管理者用パスワードが変更される。",
-        "コンピュータウイルスに感染する。",
-        "サービスの提供が阻害される。"
-      ],
+      choices: ["暗号化してあるデータが解読される。", "管理者用パスワードが変更される。", "コンピュータウイルスに感染する。", "サービスの提供が阻害される。"],
       comment:
           "DoS(Denial of Service)攻撃は、通常ではありえない数のリクエストを攻撃対象サーバに送信することで、サーバやそれが属するネットワークを過負荷状態にし、システムダウンや応答停止などの障害を引き起こさせる攻撃。",
       source: '平成26年春期 問53',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'DDoS攻撃',
@@ -421,7 +381,7 @@ List<QuizItem> get category3_22 {
       choices: ["DDoS攻撃", "DoS攻撃", "クリプトジャッキング", "標的型攻撃"],
       comment:
           "DDoS攻撃（Distributed Denial of Service Attack）は、複数のボットネットを使用して大量の通信を送りつけ、サービスを停止させる攻撃。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クリプトジャッキング',
@@ -429,7 +389,7 @@ List<QuizItem> get category3_22 {
       ans: 'クリプトジャッキング',
       choices: ["クリプトジャッキング", "DDoS攻撃", "DoS攻撃", "標的型攻撃"],
       comment: "クリプトジャッキングは、他人のコンピュータを無断で使用し、仮想通貨のマイニングを行う攻撃。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '標的型攻撃',
@@ -437,16 +397,15 @@ List<QuizItem> get category3_22 {
       ans: '標的型攻撃',
       choices: ["標的型攻撃", "クリプトジャッキング", "DDoS攻撃", "DoS攻撃"],
       comment: "標的型攻撃は、特定の組織や個人を狙って精密に計画されたサイバー攻撃。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '水飲み場型攻撃',
       question: '攻撃者が公共の場所でのWi-Fiネットワークなどを利用して攻撃を行う手法は何か？',
       ans: '水飲み場型攻撃',
       choices: ["水飲み場型攻撃", "やり取り型攻撃", "フィッシング", "ワンクリック詐欺"],
-      comment:
-          "水飲み場型攻撃は、攻撃者が公共の場所でのWi-Fiネットワークなどを利用して、その場所を訪れる人々を標的とした攻撃を行う手法。",
-      importance: QuizImportanceType.low,
+      comment: "水飲み場型攻撃は、攻撃者が公共の場所でのWi-Fiネットワークなどを利用して、その場所を訪れる人々を標的とした攻撃を行う手法。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'やり取り型攻撃',
@@ -454,7 +413,7 @@ List<QuizItem> get category3_22 {
       ans: 'やり取り型攻撃',
       choices: ["やり取り型攻撃", "水飲み場型攻撃", "フィッシング", "ワンクリック詐欺"],
       comment: "やり取り型攻撃は、攻撃者が対象とするユーザーとメールやメッセージなどのやり取りを行いながら、信頼を得て攻撃を仕掛ける手法。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'フィッシング',
@@ -469,7 +428,7 @@ List<QuizItem> get category3_22 {
       comment:
           "フィッシングは、銀行やクレジットカード会社、ショッピングサイトなどの有名企業を装ったメールを送付し、個人情報を不正に搾取する行為で、攻撃者は、巧妙な方法で利用者に正当なメールであると認識させ、メール本文内のハイパーリンクをクリックさせることで、本物そっくりな偽のWebサイトに誘導。",
       source: '平成28年春期 問63',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ワンクリック詐欺',
@@ -477,13 +436,12 @@ List<QuizItem> get category3_22 {
       ans: 'ワンクリック詐欺',
       choices: ["ワンクリック詐欺", "フィッシング", "やり取り型攻撃", "水飲み場型攻撃"],
       comment: "ワンクリック詐欺は、ユーザーが知らないうちにリンクをクリックするだけで、不正な契約や購入を強制させる詐欺。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ゼロデイ攻撃',
       question: 'まだ公にされていないソフトウェアの脆弱性を悪用した攻撃は何か？',
-      ans:
-          'ソフトウェアに脆弱性が存在することが判明したとき，そのソフトウェアの修正プログラムがベンダーから提供される前に，判明した脆弱性を利用して行われる攻撃',
+      ans: 'ソフトウェアに脆弱性が存在することが判明したとき，そのソフトウェアの修正プログラムがベンダーから提供される前に，判明した脆弱性を利用して行われる攻撃',
       choices: [
         "TCP/IPのプロトコルのポート番号を順番に変えながらサーバにアクセスし，侵入口と成り得る脆(ぜい)弱なポートがないかどうかを調べる攻撃",
         "システムの管理者や利用者などから，巧妙な話術や盗み見などによって，パスワードなどのセキュリティ上重要な情報を入手して，利用者になりすましてシステムに侵入する攻撃",
@@ -493,7 +451,7 @@ List<QuizItem> get category3_22 {
       comment:
           "ゼロデイ攻撃は、あるOSやソフトウェアに脆弱性が存在することが判明し、ソフトウェアの修正プログラムがベンダーから提供されるより前に、その脆弱性を悪用して行われる攻撃。",
       source: '平成25年秋期 問74',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ウォードライビング',
@@ -501,7 +459,7 @@ List<QuizItem> get category3_22 {
       ans: 'ウォードライビング',
       choices: ["ウォードライビング", "ポートスキャン", "ゼロデイ攻撃", "サラミ法"],
       comment: "ウォードライビングは、攻撃者が車を使って移動しながら、無線LANのアクセスポイントを探し出し、地図上に記録する活動。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'バッファオーバフロー攻撃',
@@ -513,14 +471,12 @@ List<QuizItem> get category3_22 {
         "ネットワークを流れるパスワードを盗聴し，それを利用して不正にアクセスする。",
         "プログラムが用意している入力用のデータ領域を超えるサイズのデータを入力することで，想定外の動作をさせる。"
       ],
-      comment:
-          "バッファオーバフロー攻撃は、プログラムが予期しない大量のデータを受け取ることで、システムのメモリ領域を超えて不正なコードを実行させる攻撃。",
-      importance: QuizImportanceType.low,
+      comment: "バッファオーバフロー攻撃は、プログラムが予期しない大量のデータを受け取ることで、システムのメモリ領域を超えて不正なコードを実行させる攻撃。",
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 2201);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 2201);
   });
 }

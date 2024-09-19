@@ -11,49 +11,43 @@ List<QuizItem> get category0_1_1 {
       choices: ["経営課題", "経営計画", "経営戦略", "経営理念"],
       comment: "経営理念とは、企業の経営に関する信念や価値観を社員や顧客，社会に対して示すもの。",
       source: '平成22年春期 問16',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '株主総会',
       question: '株式会社の最高意思決定機関はどれか。',
       ans: '株主総会',
       choices: ["株主総会", "監査役会", "代表取締役", "取締役会"],
-      comment:
-          "株主総会とは、株式会社の実質的な所有者である株主によって構成され、経営の基本的方針や重要事項を決定する株式会社の最高意思決定機関。",
+      comment: "株主総会とは、株式会社の実質的な所有者である株主によって構成され、経営の基本的方針や重要事項を決定する株式会社の最高意思決定機関。",
       source: '平成23年秋期 問16',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
-      word: 'CSR（Corporate Social Responsibility）',
-      question:
-          '利益の追求だけでなく，社会に対する貢献や地球環境の保護などの社会課題を認識して取り組むという企業活動の基本となる考え方はどれか。',
+      word: 'CSR(Corporate Social Responsibility)',
+      question: '利益の追求だけでなく，社会に対する貢献や地球環境の保護などの社会課題を認識して取り組むという企業活動の基本となる考え方はどれか。',
       ans: 'CSR',
       choices: ["BCP", "CSR", "M&A", "MBO"],
-      comment:
-          "CSR（Corporate Social Responsibility）とは、企業が環境保護や社会貢献など、社会的責任を果たすことを目的とした経営活動。",
+      comment: "CSR(Corporate Social Responsibility)とは、企業が環境保護や社会貢献など、社会的責任を果たすことを目的とした経営活動。",
       source: '平成27年秋期 問21',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'PDCAサイクル',
-      comment:
-          "PDCAサイクルは、計画（Plan）、実行（Do）、評価（Check）、改善（Act）のプロセスを繰り返すことで、業務やプロジェクトの継続的な改善を目指す手法。",
-      question:
-          'ISMSの運用において，監査結果をインプットとし，ISMSを継続的に改善するための是正処置及び予防処置を行うプロセスはPDCAサイクルのどれにあたるか。',
+      comment: "PDCAサイクルは、計画（Plan）、実行（Do）、評価（Check）、改善（Act）のプロセスを繰り返すことで、業務やプロジェクトの継続的な改善を目指す手法。",
+      question: 'ISMSの運用において，監査結果をインプットとし，ISMSを継続的に改善するための是正処置及び予防処置を行うプロセスはPDCAサイクルのどれにあたるか。',
       choices: ["P", "D", "C", "A"],
-      ans: 'C',
+      ans: 'A',
       source: '平成27年春期 問75',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'OJT（On-the-Job Training）',
-      comment:
-          "OJT（On-the-Job Training）とは、職場内訓練とも呼ばれ、実際の業務現場で上司や先輩の指導のもとで体系的・計画的に仕事を習得させていく教育方法。",
+      comment: "OJT（On-the-Job Training）とは、職場内訓練とも呼ばれ、実際の業務現場で上司や先輩の指導のもとで体系的・計画的に仕事を習得させていく教育方法。",
       question: '現在担当している業務の実践を通じて，業務の遂行に必要な技術や知識を習得させる教育訓練の手法はどれか。',
       ans: 'OJT',
       choices: ["CDP", "Off-JT", "e-ラーニング", "OJT"],
       source: '平成27年春期 問3',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '事業部制',
@@ -67,7 +61,7 @@ List<QuizItem> get category0_1_1 {
         "利益責任と業務遂行に必要な職能を，製品別，顧客別又は地域別にもつことによって，自己完結的な経営活動が展開できる組織である。"
       ],
       source: '平成25年春期 問22',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '職能別組織',
@@ -81,12 +75,11 @@ List<QuizItem> get category0_1_1 {
         "製品や機能などの単位を組み合わせることによって，縦と横の構造をもつように構成する組織"
       ],
       source: '平成27年春期 問26',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'CIO（Chief Information Officer）',
-      comment:
-          "CIO（Chief Information Officer）は、経営戦略に沿った情報戦略や、IT投資計画の策定とその実現に直接の責任を持つ最高情報責任者。",
+      comment: "CIO（Chief Information Officer）は、経営戦略に沿った情報戦略や、IT投資計画の策定とその実現に直接の責任を持つ最高情報責任者。",
       question: 'CIOの役割として，最も適切なものはどれか。',
       ans: '経営戦略を実現するための情報戦略の立案及び実施を主導する。',
       choices: [
@@ -96,7 +89,7 @@ List<QuizItem> get category0_1_1 {
         "自社の資金効率の向上，及び財務会計の正確性を維持する。"
       ],
       source: '平成23年秋期 問2',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'パレート図',
@@ -111,7 +104,7 @@ List<QuizItem> get category0_1_1 {
         "放射状に伸びた数値軸上の値を線で結んだ多角形の図"
       ],
       source: '平成23年秋期 問14',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'データマイニング',
@@ -121,18 +114,17 @@ List<QuizItem> get category0_1_1 {
       ans: 'データマイニング',
       choices: ["データウェアハウス", "データプロセッシング", "データマイニング", "データモデリング"],
       source: '平成28年秋期 問27',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ブレーンストーミング',
-      question:
-          '複数人が集まり，お互いの意見を批判せず，質より量を重視して自由に意見を出し合うことによって，アイディアを創出していく技法はどれか。',
+      question: '複数人が集まり，お互いの意見を批判せず，質より量を重視して自由に意見を出し合うことによって，アイディアを創出していく技法はどれか。',
       ans: 'ブレーンストーミング',
       choices: ["ブレーンストーミング", "ベンチマーキング", "ロールプレイング", "ワークデザイン"],
       comment:
           "ブレーンストーミングは、様なアイディアを幅広く集めるために行われるグループ討議の方法で、問題の解決策や新しいアイディアの考案を試みる際に参加者が自由にアイデアを出し合い、批判や評価を避けながら、新しいアイデアや創造的な解決策を引き出すためのグループ活動。",
       source: '平成28年秋期 問15',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '損益分岐点',
@@ -147,10 +139,10 @@ List<QuizItem> get category0_1_1 {
       comment:
           "損益分岐点は、損益分岐点売上高＝固定費÷(1－変動費率)の公式で、企業の利益がゼロになる売上高の点で、この点を超えると利益が発生し、損益分岐点売上高を下げるためには、固定費、または変動費率を下げることが必要。",
       source: '平成23年特別 問21',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
-      word: 'ROE',
+      word: 'ROE(Return On Equity)',
       question: 'ROE(Return On Equity)を説明したものはどれか。',
       ans: '自己資本に対して，どれだけの利益を生み出したかを表す指標',
       choices: [
@@ -160,14 +152,14 @@ List<QuizItem> get category0_1_1 {
         "自己資本に対して，どれだけの利益を生み出したかを表す指標"
       ],
       comment:
-          "ROE(Return On Equity，自己資本利益率)は、自己資本（純資産）に対する当期純利益の割合を示す指標で、ある企業が、一会計期間の企業活動を通じて「株主の投資額に比してどれだけ効率的に利益を獲得したか」を判断する指標。",
+          "ROE(Return On Equity)は、自己資本（純資産）に対する当期純利益の割合を示す指標で、ある企業が、一会計期間の企業活動を通じて「株主の投資額に比してどれだけ効率的に利益を獲得したか」を判断する指標。",
       source: '平成25年秋期 問3',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_1Index + 101, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_1Index + 101, isPremium: false);
   });
 }

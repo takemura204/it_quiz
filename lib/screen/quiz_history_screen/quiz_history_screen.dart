@@ -9,7 +9,7 @@ import 'package:kentei_quiz/model/extension_resource.dart';
 import '../../controller/quiz_history/quiz_history_screen_controller.dart';
 import '../../model/lang/initial_resource.dart';
 import '../../view/button_icon/cutom_back_button.dart';
-import '../../view/card/quiz_item_card.dart';
+import '../../view/card/result_item_card.dart';
 
 part 'quiz_history_view.dart';
 
@@ -70,8 +70,7 @@ class _Body extends ConsumerWidget {
         return Column(
           children: [
             Theme(
-              data:
-                  Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
                 backgroundColor: Colors.white,
                 collapsedBackgroundColor: Colors.white,
@@ -94,9 +93,7 @@ class _Body extends ConsumerWidget {
                             child: Text(
                               quizList[index].category,
                               style: const TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
+                                  color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -113,9 +110,7 @@ class _Body extends ConsumerWidget {
                             child: Text(
                               I18n().studyTypeText(quizList[index].studyType),
                               style: const TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
+                                  color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -146,7 +141,7 @@ class _Body extends ConsumerWidget {
                       quizItemIndex++)
 
                     ///チェックボックスがすぐに反映されない。
-                    QuizItemCard(
+                    ResultItemCard(
                       index: quizItemIndex,
                       quizItem: quizList[index].quizItemList[quizItemIndex],
                       studyType: quizList[index].studyType,

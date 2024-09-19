@@ -17,8 +17,8 @@ class TutorialModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isTutorialRestart = ref
-        .watch(tutorialControllerProvider.select((s) => s.isTutorialRestart));
+    final isTutorialRestart =
+        ref.watch(tutorialControllerProvider.select((s) => s.isTutorialRestart));
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(context.width * 0.02),
@@ -42,10 +42,7 @@ class TutorialModal extends ConsumerWidget {
               const Gap(10),
               const Text(
                 'インストールありがとうございます！🎉',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87),
               ),
 
               const Gap(15),
@@ -107,14 +104,10 @@ class TutorialModal extends ConsumerWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                   if (isTutorialRestart) {
-                    ref
-                        .read(mainScreenControllerProvider.notifier)
-                        .setTabIndex(0);
+                    ref.read(mainScreenControllerProvider.notifier).setTabIndex(0);
                   }
-                  ref
-                      .read(tutorialControllerProvider.notifier)
-                      .setIsShowHomeTutorial(true);
-                  ref.read(homeQuizScreenProvider.notifier).setStudyLength(5);
+                  ref.read(tutorialControllerProvider.notifier).setIsShowHomeTutorial(true);
+                  ref.read(homeQuizScreenProvider.notifier).setStudyQuizLength(5);
                 },
               ),
 
@@ -122,16 +115,12 @@ class TutorialModal extends ConsumerWidget {
               TextButton(
                 child: const Text(
                   "スキップ",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black54),
+                  style:
+                      TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black54),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  ref
-                      .read(tutorialControllerProvider.notifier)
-                      .setIsTutorialRestart(false);
+                  ref.read(tutorialControllerProvider.notifier).setIsTutorialRestart(false);
                 },
               ),
             ],

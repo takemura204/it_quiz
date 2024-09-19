@@ -8,9 +8,33 @@ class I18n {
   factory I18n() => _instance ??= I18n._();
 
   ///アプリ全体
-  String get appName => "IT用語クイズ";
+  String get appNameTitle => "IT用語クイズ";
 
-  String get appNamePremium => "IT用語クイズ Premium";
+  ///AppBar
+  String get titleAppName => "IT用語クイズ";
+
+  String get titleStudy => "覚える";
+
+  String get titleQuiz => "クイズ";
+
+  String get titleSearch => "検索";
+
+  String get titleDashboard => "スコア";
+
+  String get titleSetting => "設定";
+
+  String get titleResult => "結果";
+
+  ///Button
+  String get styleLeanQuiz => "用語カード";
+
+  String get styleChoiceQuiz => "四択クイズ";
+
+  String get styleWeakQuiz => "苦手克服";
+
+  String get styleRandomQuiz => "ランダム出題";
+
+  String get styleStudyQuiz => "用語カード";
 
   ///category
   String setCategory(int categoryId) {
@@ -29,6 +53,8 @@ class I18n {
         return styleWeakQuiz;
       case 6:
         return styleRandomQuiz;
+      case 7:
+        return styleStudyQuiz;
       default:
         return 'その他';
     }
@@ -58,40 +84,20 @@ class I18n {
 
   int get category3Index => 30000;
 
-  ///title
-  String get titleName => "IT用語クイズ";
-
-  String get titleQuiz => "クイズ";
-
-  String get titleSearch => "検索";
-
-  String get titleDashboard => "スコア";
-
-  String get titleSetting => "設定";
-
-  ///「学ぶ」形式
-  String get styleLeanQuiz => "一問一答で覚える";
-
-  String get styleChoiceQuiz => "クイズに挑戦する";
-
-  String get styleWeakQuiz => "苦手克服";
-
-  String get styleRandomQuiz => "ランダム出題";
-
   String challengeQuiz(String quizStyle) {
     return "$quizStyleに挑戦する";
   }
 
   ///クイズの状況
-  String quizStatusTypeText(QuizStatusType statusType) {
+  String quizStatusTypeText(StatusType statusType) {
     switch (statusType) {
-      case QuizStatusType.correct:
-        return '正解';
-      case QuizStatusType.incorrect:
+      case StatusType.correct:
+        return '正解済';
+      case StatusType.incorrect:
         return '不正解';
-      case QuizStatusType.learned:
+      case StatusType.learned:
         return '学習済';
-      case QuizStatusType.unlearned:
+      case StatusType.unlearned:
         return '未学習';
       default:
         return '〇〇';
@@ -101,6 +107,18 @@ class I18n {
   ///HomeQuiz
   String quizCorrectRate(int correctRate) {
     return "正解率:$correctRate％";
+  }
+
+  ///ResultScreen
+  String setResultDashboardCountTitle(StudyType studyType) {
+    switch (studyType) {
+      case StudyType.learn:
+        return '覚えた用語';
+      case StudyType.choice:
+        return '正解したクイズ';
+      default:
+        return '覚えた数';
+    }
   }
 
   String get quizResultAnswer => "正解率";
@@ -163,15 +181,15 @@ class I18n {
     }
   }
 
-  String quizImportanceText(QuizImportanceType importanceType) {
+  String quizImportanceText(ImportanceType importanceType) {
     switch (importanceType) {
-      case QuizImportanceType.none:
+      case ImportanceType.none:
         return '☆☆☆';
-      case QuizImportanceType.low:
+      case ImportanceType.low:
         return '★☆☆';
-      case QuizImportanceType.normal:
+      case ImportanceType.normal:
         return '★★☆';
-      case QuizImportanceType.high:
+      case ImportanceType.high:
         return '★★★';
       default:
         return '';
@@ -276,13 +294,11 @@ class I18n {
   ///　テキスト候補
   String get caseErrorText1 => "このメールアドレスは既に登録済みです。\nログイン画面から入力をお願いします。";
 
-  String get caseErrorText2 =>
-      "このメールアドレスは正しくありません。メールアドレスが正しい形式かご確認の上、もう一度お試しください。";
+  String get caseErrorText2 => "このメールアドレスは正しくありません。メールアドレスが正しい形式かご確認の上、もう一度お試しください。";
 
   String get caseErrorText3 => "このメールアドレスは登録されていません。\n新規登録画面から入力をお願いします。";
 
-  String get caseErrorText4 =>
-      "入力したメールアドレスまたはパスワードは正しくありません。\n正しい情報かご確認の上、もう一度お試しください。";
+  String get caseErrorText4 => "入力したメールアドレスまたはパスワードは正しくありません。\n正しい情報かご確認の上、もう一度お試しください。";
 
   String get caseErrorText5 => "このアカウントは一時的に無効となってます。\nしばらくしてから、もう一度お試しください。";
 

@@ -130,3 +130,64 @@ class PrimaryRoundButton extends ConsumerWidget {
     );
   }
 }
+
+class PrimaryVerticalButton extends HookConsumerWidget {
+  const PrimaryVerticalButton({
+    required this.width,
+    required this.height,
+    required this.title,
+    this.subTitle,
+    this.iconWidget,
+    required this.onPressed,
+  });
+
+  final double width;
+  final double height;
+  final String title;
+  final String? subTitle;
+  final VoidCallback? onPressed;
+  final Widget? iconWidget;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      height: height,
+      width: width,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.mainColor,
+          elevation: 0,
+          padding: const EdgeInsets.all(3.0),
+          alignment: Alignment.center,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (iconWidget != null) iconWidget!,
+            SizedBox(width: iconWidget != null ? 8.0 : 0),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: height <= 5 ? 14 : 16,
+              ),
+            ),
+          ],
+        ),
+        onPressed: onPressed == null
+            ? null
+            : () {
+                onPressed!();
+                HapticFeedback.lightImpact();
+              },
+      ),
+    );
+  }
+}

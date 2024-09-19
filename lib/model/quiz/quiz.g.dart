@@ -42,6 +42,7 @@ Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
     };
 
 const _$StudyTypeEnumMap = {
+  StudyType.study: 'study',
   StudyType.learn: 'learn',
   StudyType.choice: 'choice',
 };

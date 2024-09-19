@@ -17,16 +17,15 @@ List<QuizItem> get category2_7 {
       comment:
           "システム監査は、組織体の情報システムのリスクに対するコントロールがリスクアセスメントに基づいて適切に整備・運用されているかを、独立かつ専門的な立場のシステム監査人が検証または評価すること。",
       source: '平成23年特別 問42',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '情報セキュリティ監査',
       question: '組織が情報資産を保護し、リスクを管理するために取り組むべき方針や手順、実践の総体を指す用語は何か？',
       ans: '情報セキュリティ監査',
       choices: ["情報セキュリティ監査", "データプライバシー", "ITガバナンス", "サイバーセキュリティ"],
-      comment:
-          "情報セキュリティ監査は、組織の情報資産を不正アクセス、漏洩、改ざん、破壊等から保護し、リスクを管理するための方針や手順、実践の総体。",
-      importance: QuizImportanceType.low,
+      comment: "情報セキュリティ監査は、組織の情報資産を不正アクセス、漏洩、改ざん、破壊等から保護し、リスクを管理するための方針や手順、実践の総体。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'システム監査基準',
@@ -38,10 +37,9 @@ List<QuizItem> get category2_7 {
         "システム監査人が情報処理の現場での管理の適切性を判断するときの尺度として用いるための基準を定めたものである。",
         "組織体が効果的な情報セキュリティマネジメント体制を構築し，適切なコントロールを整備して運用するための基準を定めたものである。"
       ],
-      comment:
-          "システム監査基準は、システム監査業務の品質を確保し、有効かつ効率的に監査を実施することを目的とした監査人の行為規範を定めたもの。",
+      comment: "システム監査基準は、システム監査業務の品質を確保し、有効かつ効率的に監査を実施することを目的とした監査人の行為規範を定めたもの。",
       source: '平成28年秋期 問54',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '監査証拠',
@@ -49,7 +47,7 @@ List<QuizItem> get category2_7 {
       ans: '監査証拠',
       choices: ["監査証拠", "監査報告", "リスク評価資料", "コンプライアンス記録"],
       comment: "監査証拠は、システム監査において監査対象の管理・運用の適切さを評価するために収集される情報や資料。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '監査調書',
@@ -57,7 +55,7 @@ List<QuizItem> get category2_7 {
       ans: '監査調書',
       choices: ["監査調書", "監査報告書", "チェックリスト", "監査記録"],
       comment: "監査調書は、システム監査の過程で確認された監査対象の現状や問題点、改善点などを記録した文書。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'システム監査報告書',
@@ -65,21 +63,19 @@ List<QuizItem> get category2_7 {
       ans: 'システム監査報告書',
       choices: ["システム監査報告書", "監査調書", "実施報告書", "評価結果報告書"],
       comment: "システム監査報告書は、システム監査の結果や推奨事項、改善策などをまとめて関係者に提供される文書。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'フォローアップ',
       question: '監査や評価の後、実施された改善措置が適切かどうかを確認するための活動を何というか？',
       ans: 'フォローアップ',
       choices: ["フォローアップ", "リスク再評価", "アフターアクションレビュー", "パフォーマンスモニタリング"],
-      comment:
-          "フォローアップは、監査や評価の結果に基づいて実施された改善措置が適切に行われているかを確認し、必要に応じて追加の改善を促す活動。",
-      importance: QuizImportanceType.low,
+      comment: "フォローアップは、監査や評価の結果に基づいて実施された改善措置が適切に行われているかを確認し、必要に応じて追加の改善を促す活動。",
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 701);
+    return quizItems[index].copyWith(quizId: index + I18n().category2Index + 701);
   });
 }

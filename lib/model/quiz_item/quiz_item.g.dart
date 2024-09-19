@@ -18,12 +18,13 @@ _$_QuizItem _$$_QuizItemFromJson(Map<String, dynamic> json) => _$_QuizItem(
           const [],
       source: json['source'] as String? ?? '',
       isWeak: json['isWeak'] as bool? ?? false,
-      status: $enumDecodeNullable(_$QuizStatusTypeEnumMap, json['status']) ??
-          QuizStatusType.unlearned,
-      importance: $enumDecodeNullable(
-              _$QuizImportanceTypeEnumMap, json['importance']) ??
-          QuizImportanceType.normal,
       isSaved: json['isSaved'] as bool? ?? false,
+      isKnow: json['isKnow'] as bool? ?? false,
+      status: $enumDecodeNullable(_$StatusTypeEnumMap, json['status']) ??
+          StatusType.unlearned,
+      importance:
+          $enumDecodeNullable(_$ImportanceTypeEnumMap, json['importance']) ??
+              ImportanceType.normal,
       lapIndex: json['lapIndex'] as int? ?? 0,
       isPremium: json['isPremium'] as bool? ?? true,
     );
@@ -38,23 +39,24 @@ Map<String, dynamic> _$$_QuizItemToJson(_$_QuizItem instance) =>
       'choices': instance.choices,
       'source': instance.source,
       'isWeak': instance.isWeak,
-      'status': _$QuizStatusTypeEnumMap[instance.status]!,
-      'importance': _$QuizImportanceTypeEnumMap[instance.importance]!,
       'isSaved': instance.isSaved,
+      'isKnow': instance.isKnow,
+      'status': _$StatusTypeEnumMap[instance.status]!,
+      'importance': _$ImportanceTypeEnumMap[instance.importance]!,
       'lapIndex': instance.lapIndex,
       'isPremium': instance.isPremium,
     };
 
-const _$QuizStatusTypeEnumMap = {
-  QuizStatusType.correct: 'correct',
-  QuizStatusType.incorrect: 'incorrect',
-  QuizStatusType.learned: 'learned',
-  QuizStatusType.unlearned: 'unlearned',
+const _$StatusTypeEnumMap = {
+  StatusType.correct: 'correct',
+  StatusType.incorrect: 'incorrect',
+  StatusType.learned: 'learned',
+  StatusType.unlearned: 'unlearned',
 };
 
-const _$QuizImportanceTypeEnumMap = {
-  QuizImportanceType.high: 'high',
-  QuizImportanceType.normal: 'normal',
-  QuizImportanceType.low: 'low',
-  QuizImportanceType.none: 'none',
+const _$ImportanceTypeEnumMap = {
+  ImportanceType.high: 'high',
+  ImportanceType.normal: 'normal',
+  ImportanceType.low: 'low',
+  ImportanceType.none: 'none',
 };

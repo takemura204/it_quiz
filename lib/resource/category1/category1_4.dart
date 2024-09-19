@@ -8,36 +8,29 @@ List<QuizItem> get category1_4 {
       word: '著作権法',
       question: '著作権法の保護の対象となるものはどれか。',
       ans: '風景を撮影した写真',
-      choices: [
-        "形状や色が斬新な机のデザイン",
-        "自然法則を利用した技術的に新しい仕組み",
-        "新発売した商品の名称",
-        "風景を撮影した写真"
-      ],
+      choices: ["形状や色が斬新な机のデザイン", "自然法則を利用した技術的に新しい仕組み", "新発売した商品の名称", "風景を撮影した写真"],
       comment:
           "著作権法とは、著作物(思想または感情を創作物に表現したもの)や、著作者の権利を保護する法律で、文芸，学術，音楽，美術の創作物や、コンピュータ関連においてはプログラムやデータベースも著作権法による保護対象に含まれる。",
       source: '平成26年春期 問29',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '特許法',
-      comment:
-          "特許法とは、発明をした者にその発明を独占して使用できる権利を与えることで、知的財産を保護し、その発明を公開することにより産業の発展を促進させる目的で制定された法律。",
+      comment: "特許法とは、発明をした者にその発明を独占して使用できる権利を与えることで、知的財産を保護し、その発明を公開することにより産業の発展を促進させる目的で制定された法律。",
       question: 'インターネットを利用した新たなビジネスモデルを保護する法律はどれか。',
       ans: '特許法',
       choices: ["意匠法", "商標法", "著作権法", "特許法"],
       source: '平成25年春期 問11',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ビジネスモデル特許',
       question: 'コンピュータを活用して新しいビジネスモデルを構築した。このビジネスモデルを保護する法律はどれか。',
       ans: 'ビジネスモデル特許',
       choices: ["ビジネスモデル特許", "著作権法", "意匠権", "商標法"],
-      comment:
-          "ビジネスモデル特許とは、コンピュータ・ネットワーク・ソフトウェア等の特定のビジネス方法やシステムに関する新規性や独自性を保護する特許。",
+      comment: "ビジネスモデル特許とは、コンピュータ・ネットワーク・ソフトウェア等の特定のビジネス方法やシステムに関する新規性や独自性を保護する特許。",
       source: '平成22年春期 問7',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '実用新案法',
@@ -45,7 +38,7 @@ List<QuizItem> get category1_4 {
       ans: '実用新案法',
       choices: ["特許法", "実用新案法", "商標法", "著作権法"],
       comment: "実用新案法は、機械や器具の形状、構造、または組み合わせに関する新規で実用的なアイデアを保護する法律。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '意匠法',
@@ -58,20 +51,19 @@ List<QuizItem> get category1_4 {
         "魚のうろこのような形の重なりが美しい，山の斜面に作られた棚田の景観"
       ],
       comment:
-          "意匠法は、物の形状や模様、色彩などで表した商品デザインなどのように、工業上の利用性があり、製品の価値や魅力を高める形状・デザインに対して認められる権利。",
+          "意匠法は、物の形状や模様、色彩などで表した商品のデザインなどのように、工業上有用で製品の価値を高める形状やデザインに対する権利を保護する法律。権利存続期間は出願日から25年である。",
       source: '平成29年春期 問17',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '商標法',
-      question:
-          '事業者の信用維持や需要者の混同を回避するために，更新の申請を繰り返すことで，実質的に永続的な権利保有が可能な工業所有権はどれか。',
+      question: '事業者の信用維持や需要者の混同を回避するために，更新の申請を繰り返すことで，実質的に永続的な権利保有が可能な工業所有権はどれか。',
       ans: '商標権',
       choices: ["意匠権", "実用新案権", "商標権", "特許権"],
       comment:
           "商標法は、品・サービス名やロゴマークなどの商品の使用権などを保護する法律で、事業者の信用維持や需要者の混同を回避するために，更新の申請を繰り返すことで，実質的に永続的な権利保有が可能な工業所有権。",
       source: '平成27年春期 問21',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'トレードマーク',
@@ -79,7 +71,7 @@ List<QuizItem> get category1_4 {
       ans: 'トレードマーク',
       choices: ["トレードマーク", "サービスマーク", "ブランドマーク", "ロゴタイプ"],
       comment: "トレードマークは、商品を識別するために企業が使用する記号やロゴで、商標として保護される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'サービスマーク',
@@ -87,17 +79,16 @@ List<QuizItem> get category1_4 {
       ans: 'サービスマーク',
       choices: ["トレードマーク", "サービスマーク", "ブランドネーム", "ロゴ"],
       comment: "サービスマークは、商品ではなくサービスを識別するために使用されるマークや名称で、商標として保護される。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '不正競争防止法',
       question: '他社に損害を与える目的で，他社のサービス名と類似したドメイン名を取得して使用するような行為を禁止している法律はどれか。',
       ans: '不正競争防止法',
       choices: ["個人情報保護法", "電気通信事業法", "不正アクセス行為の禁止等に関する法律", "不正競争防止法"],
-      comment:
-          "不正競争防止法は、他者の商品やサービス、商標、宣伝方法などを模倣することによる不正競争を防止し、公正な競争を保持するための法律。",
+      comment: "不正競争防止法は、他者の商品やサービス、商標、宣伝方法などを模倣することによる不正競争を防止し、公正な競争を保持するための法律。",
       source: '平成25年春期 問25',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '営業秘密',
@@ -105,7 +96,7 @@ List<QuizItem> get category1_4 {
       ans: '営業秘密',
       choices: ["営業秘密", "著作権情報", "特許情報", "実用新案情報"],
       comment: "営業秘密は、企業が秘密として管理し、競争上の優位性を保つための技術や営業情報で、不正な方法での取得や使用を禁じられている。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '限定提供データ',
@@ -113,20 +104,15 @@ List<QuizItem> get category1_4 {
       ans: '限定提供データ',
       choices: ["オープンデータ", "限定提供データ", "プライベートデータ", "シェアデータ"],
       comment: "限定提供データは、契約に基づき、特定の条件下でのみ第三者に提供・利用が許可されるデータ。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ボリュームライセンス契約',
       question: '複数のユーザーがソフトウェアを利用できるようにするライセンス形態は何か？',
       ans: 'ボリュームライセンス契約',
-      choices: [
-        "ボリュームライセンス契約",
-        "シングルライセンス契約",
-        "パーソナルライセンス契約",
-        "エンタープライズライセンス契約"
-      ],
+      choices: ["ボリュームライセンス契約", "シングルライセンス契約", "パーソナルライセンス契約", "エンタープライズライセンス契約"],
       comment: "ボリュームライセンス契約は、企業や組織が多数のユーザーに対してソフトウェアを提供できるようにするライセンス形態。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'サイトライセンス契約',
@@ -134,16 +120,15 @@ List<QuizItem> get category1_4 {
       ans: 'サイトライセンス契約',
       choices: ["サイトライセンス契約", "ユーザーライセンス契約", "デバイスライセンス契約", "グローバルライセンス契約"],
       comment: "サイトライセンス契約は、特定の場所や施設内で、ソフトウェアを無制限に利用できるライセンス形態。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'CAL（Client Access License）',
       question: 'クライアントアクセスライセンスの略で、サーバーへのアクセス権を与えるライセンスを何というか？',
       ans: 'CAL',
       choices: ["CAL", "SAL", "FAL", "DAL"],
-      comment:
-          "CAL（Client Access License）は、ユーザーやデバイスがサーバーのサービスにアクセスするための権利を与えるライセンス。",
-      importance: QuizImportanceType.low,
+      comment: "CAL（Client Access License）は、ユーザーやデバイスがサーバーのサービスにアクセスするための権利を与えるライセンス。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'フリーソフトウェア',
@@ -151,7 +136,7 @@ List<QuizItem> get category1_4 {
       ans: 'フリーソフトウェア',
       choices: ["フリーソフトウェア", "シェアウェア", "コマーシャルソフトウェア", "オープンソースソフトウェア"],
       comment: "フリーソフトウェアは、利用者が無料で使用、コピー、配布することができるソフトウェア。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'シェアウェア',
@@ -159,7 +144,7 @@ List<QuizItem> get category1_4 {
       ans: 'シェアウェア',
       choices: ["シェアウェア", "フリーソフトウェア", "オープンソースソフトウェア", "デモソフトウェア"],
       comment: "シェアウェアは、初期の試用期間は無料で利用できるが、その後は利用を継続するために料金を支払う必要があるソフトウェア。",
-      importance: QuizImportanceType.none,
+      importance: ImportanceType.none,
     ),
     QuizItem(
       word: 'パブリックドメインソフトウェア',
@@ -168,7 +153,7 @@ List<QuizItem> get category1_4 {
       choices: ["シェアウェア", "パッケージソフトウェア", "パブリックドメインソフトウェア", "ユーティリティソフトウェア"],
       comment: "パブリックドメインソフトウェアは、著作権者が著作権を放棄し、誰もが制限なく利用できるようにしたソフトウェア。",
       source: '平成24年春期 問11',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'アクティベーション',
@@ -176,7 +161,7 @@ List<QuizItem> get category1_4 {
       ans: 'アクティベーション',
       choices: ["アクティベーション", "レジストレーション", "認証", "検証"],
       comment: "アクティベーションは、ソフトウェアの正規性を確認し、ライセンスに基づいて製品を使用する権利を得るためのプロセス。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'サブスクリプション',
@@ -184,7 +169,7 @@ List<QuizItem> get category1_4 {
       ans: 'サブスクリプション',
       choices: ["サブスクリプション", "ワンタイムパーチェス", "ライフタイムライセンス", "リース"],
       comment: "サブスクリプションは、定期的な支払いを行うことでソフトウェアを利用できる契約形態。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'クロスライセンス',
@@ -198,12 +183,11 @@ List<QuizItem> get category1_4 {
       ],
       comment: "クロスライセンスは、複数の企業が互いに自社の特許や技術などの知的財産を使用することを許可し合う契約。",
       source: '平成26年秋期 問10',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 401);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 401);
   });
 }

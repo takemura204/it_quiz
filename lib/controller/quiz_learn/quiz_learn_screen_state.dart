@@ -12,16 +12,17 @@ class QuizLearnScreenState with _$QuizLearnScreenState {
   const QuizLearnScreenState._();
 
   const factory QuizLearnScreenState({
-    @Default(false) final bool isAnsView, //正解画面切り替え
-    @Default(false) final bool isResultScreen, //結果画面切り替え
-    @Default(0) final int quizIndex, //問題番号
-    @Default(0) final int lapIndex, //何周目
-    Quiz? learnQuiz,
+    @Default(false) final bool isAnsView,
+    @Default(false) final bool isRepeat,
+    @Default(false) final bool isResultScreen,
+    @Default(0) final int itemIndex,
+    @Default(0) final int lapIndex,
     @Default([]) final List<QuizItem> quizItemList,
     @Default([]) final List<QuizItem> knowQuizItemList,
     @Default([]) final List<QuizItem> unKnowQuizItemList,
-    @Default(Duration.zero) final Duration duration, // 所要時間
+    @Default(Duration.zero) final Duration duration, // 学習時間
     @Default(StudyType.learn) final StudyType studyType, //クイズタイプ
+    Quiz? learnQuiz,
     AppinioSwiperDirection? direction,
-  }) = _Create;
+  }) = _QuizLearnScreenState;
 }

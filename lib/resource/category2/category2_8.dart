@@ -14,10 +14,9 @@ List<QuizItem> get category2_8 {
         "仕事と仕事から離れた個人の生活の両方について，どちらかが犠牲になることなく，それぞれをバランスよく充実させていこうという考え方のこと",
         "組織活動の目的を達成するための組織体の取組みであり，業務とシステムをともに最適化することを目指す手法のこと"
       ],
-      comment:
-          "内部統制は、組織内部のルールや手順を整備し、業務に組み込んで適切に運用することで、業務の有効性・効率性、財務報告の信頼性、法令遵守、資産の保全を確保する取組み",
+      comment: "内部統制は、組織内部のルールや手順を整備し、業務に組み込んで適切に運用することで、業務の有効性・効率性、財務報告の信頼性、法令遵守、資産の保全を確保する取組み",
       source: '平成23年特別 問39',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '職務分掌',
@@ -31,16 +30,15 @@ List<QuizItem> get category2_8 {
       ],
       comment: "職務分掌は、仕事の役割分担や仕事の権限を明確にすること、及びその考え方に基づき適切に設定された権限ルールのこと",
       source: '平成28年春期 問26',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'リスクコントロールマトリクス',
       question: '組織内のリスクとそれに対するコントロール活動を体系的に整理し、評価するために使用されるツールは何か？',
       ans: 'リスクコントロールマトリクス',
       choices: ["リスクコントロールマトリクス", "リスクアセスメント", "リスクマップ", "コントロールチャート"],
-      comment:
-          "リスクコントロールマトリクスは、組織が直面するリスクとそれに対する内部コントロール活動を体系的に整理・評価するために使用されるツール。",
-      importance: QuizImportanceType.low,
+      comment: "リスクコントロールマトリクスは、組織が直面するリスクとそれに対する内部コントロール活動を体系的に整理・評価するために使用されるツール。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'レピュテーションリスク',
@@ -48,7 +46,7 @@ List<QuizItem> get category2_8 {
       ans: 'レピュテーションリスク',
       choices: ["レピュテーションリスク", "オペレーショナルリスク", "クレジットリスク", "市場リスク"],
       comment: "レピュテーションリスクは、不適切な行動や業務の失敗などが原因で、組織の評判が損なわれ、経済的損失や信頼失墜につながるリスク。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ITガバナンス',
@@ -63,12 +61,11 @@ List<QuizItem> get category2_8 {
       comment:
           "ITガバナンスは、企業が競争優位性を構築するために、IT戦略の策定・実行をガイドし、あるべき方向へ導く組織能力であり、ITへの投資・効果・リスクを継続的に最適化する為の組織的な仕組み。",
       source: '平成28年秋期 問51',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category2Index + 801);
+    return quizItems[index].copyWith(quizId: index + I18n().category2Index + 801);
   });
 }

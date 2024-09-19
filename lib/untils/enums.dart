@@ -8,54 +8,55 @@ enum QuizStyleType {
 
 ///クイズ勉強のタイプ
 enum StudyType {
+  study,
   learn, //一問一答
   choice, //四択
 }
 
 ///クイズの正誤
-enum QuizStatusType {
+enum StatusType {
   correct, //正解
   incorrect, //不正解
   learned, //学習済み
   unlearned, //未学習
 }
 
-extension QuizStatusTypeExtension on QuizStatusType {
-  static QuizStatusType fromJson(String json) {
+extension StatusTypeExtension on StatusType {
+  static StatusType fromJson(String json) {
     switch (json) {
       case 'correct':
-        return QuizStatusType.correct;
+        return StatusType.correct;
       case 'incorrect':
-        return QuizStatusType.incorrect;
+        return StatusType.incorrect;
       case 'learned':
-        return QuizStatusType.learned;
+        return StatusType.learned;
       case 'unlearned':
-        return QuizStatusType.unlearned;
+        return StatusType.unlearned;
       default:
-        throw StateError('Unknown QuizStatusType: $json');
+        throw StateError('Unknown StatusType: $json');
     }
   }
 }
 
 ///クイズの重要度
-enum QuizImportanceType {
+enum ImportanceType {
   high, // 非常に重要（星3）
   normal, // 重要（星2）
   low, // 普通重要（星1）
   none, // シラバス外（星0）
 }
 
-extension QuizImportanceTypeExtension on QuizImportanceType {
-  static QuizImportanceType fromJson(String json) {
+extension ImportanceTypeExtension on ImportanceType {
+  static ImportanceType fromJson(String json) {
     switch (json) {
       case 'high':
-        return QuizImportanceType.high;
+        return ImportanceType.high;
       case 'normal':
-        return QuizImportanceType.normal;
+        return ImportanceType.normal;
       case 'low':
-        return QuizImportanceType.low;
+        return ImportanceType.low;
       case 'none':
-        return QuizImportanceType.none;
+        return ImportanceType.none;
       default:
         throw StateError('Unknown QuizStatusType: $json');
     }

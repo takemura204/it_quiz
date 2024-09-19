@@ -18,16 +18,15 @@ List<QuizItem> get category1_7 {
       comment:
           "コンプライアンスとは「法令遵守」という意味です。コンプライアンス経営は、企業倫理に基づき、ルール、マニュアル、チェックシステムなどを整備し、法令や社内規則、業界ガイドライン、倫理、道徳を遵守した企業活動",
       source: '平成21年春期 問1',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ネチケット',
       question: 'インターネット上での礼儀やマナーを指す言葉は何か？',
       ans: 'ネチケット',
       choices: ["ネチケット", "コンプライアンス", "フェイクニュース", "チェーンメール"],
-      comment:
-          "ネチケットは、インターネット上でのコミュニケーションにおける礼儀やマナーを指す造語で、「ネット」と「エチケット」の組み合わせ。",
-      importance: QuizImportanceType.low,
+      comment: "ネチケットは、インターネット上でのコミュニケーションにおける礼儀やマナーを指す造語で、「ネット」と「エチケット」の組み合わせ。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ソーシャルメディアポリシー',
@@ -35,7 +34,7 @@ List<QuizItem> get category1_7 {
       ans: 'ソーシャルメディアポリシー',
       choices: ["ソーシャルメディアポリシー", "ネチケット", "コーポレートガバナンス", "コンプライアンス"],
       comment: "ソーシャルメディアポリシーは、企業が従業員のソーシャルメディアの利用に関して定めたルールや指針のこと。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'フェイクニュース',
@@ -43,7 +42,7 @@ List<QuizItem> get category1_7 {
       ans: 'フェイクニュース',
       choices: ["フェイクニュース", "チェーンメール", "ヘイトスピーチ", "ファクトチェック"],
       comment: "フェイクニュースは、事実ではない情報が真実であるかのようにインターネット上で広まる現象を指す。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'チェーンメール',
@@ -51,7 +50,7 @@ List<QuizItem> get category1_7 {
       ans: 'チェーンメール',
       choices: ["チェーンメール", "フェイクニュース", "ヘイトスピーチ", "ネチケット"],
       comment: "チェーンメールは、受け取った人に対してさらに多くの人へ転送するよう促す内容のメールのこと。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ヘイトスピーチ',
@@ -59,7 +58,7 @@ List<QuizItem> get category1_7 {
       ans: 'ヘイトスピーチ',
       choices: ["ヘイトスピーチ", "フェイクニュース", "チェーンメール", "ソーシャルメディアポリシー"],
       comment: "ヘイトスピーチは、人種、民族、性別、宗教、性的指向など特定の属性を持つ個人や集団に対して憎悪や差別をあおる発言のこと。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'ファクトチェック',
@@ -67,7 +66,7 @@ List<QuizItem> get category1_7 {
       ans: 'ファクトチェック',
       choices: ["ファクトチェック", "フェイクニュース対策", "情報検証", "真実確認"],
       comment: "ファクトチェックは、公表された情報やニュースの真偽を調査し、検証する行為のこと。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '倫理的・法的・社会的な課題',
@@ -76,7 +75,7 @@ List<QuizItem> get category1_7 {
       choices: ["倫理的・法的・社会的な課題", "公益通報者保護法", "情報公開法", "データプライバシー"],
       comment:
           "倫理的・法的・社会的な課題は、特に新しい技術やビジネスモデルが社会に導入される際に、その活動が現行の法律や倫理、社会的価値観とどのように関係しているかを考慮する必要がある。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'コーポレートガバナンス',
@@ -88,10 +87,9 @@ List<QuizItem> get category1_7 {
         "事業の成功に向けて，持続的な競争優位性の確立に向けた事業領域の設定や経営資源の投入への基本的な枠組み",
         "社会や利害関係者に公表した，企業の存在価値や社会的意義など，経営における普遍的な信念や価値観"
       ],
-      comment:
-          "コーポレートガバナンスとは、企業の経営について利害関係者が監視・規律することで「企業の収益力の強化」と「企業の不祥事を防ぐ」という2つを達成するための仕組み",
+      comment: "コーポレートガバナンスとは、企業の経営について利害関係者が監視・規律することで「企業の収益力の強化」と「企業の不祥事を防ぐ」という2つを達成するための仕組み",
       source: '平成28年秋期 問16',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '公益通報者保護法',
@@ -107,7 +105,7 @@ List<QuizItem> get category1_7 {
       comment:
           "公益通報者保護法は、犯罪行為等を公益通報をしたことを理由とする公益通報者の解雇の無効等並びに公益通報に関し事業者及び行政機関がとるべき措置を定めることにより、公益通報者の保護等を図ることを目的とした法律。",
       source: '平成26年春期 問19',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '内部統制報告制度',
@@ -116,21 +114,19 @@ List<QuizItem> get category1_7 {
       choices: ["クーリングオフ制度", "製造物責任法", "内部統制報告制度", "不正アクセス禁止法"],
       comment:
           "内部統制報告制度は、上場企業が、事業年度ごとに当該事業企業の財務報告に係る内部統制の適正性について評価した報告書を有価証券報告書と併せて内閣総理大臣に提出しなくてはならないことを定めた制度。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '情報公開法',
       question: '政府機関が保有する情報について公開を義務付ける日本の法律は何か？',
       ans: '情報公開法',
       choices: ["情報公開法", "プライバシー保護法", "公益通報者保護法", "情報セキュリティ管理基準"],
-      comment:
-          "情報公開法は、公的機関が保有する情報の開示を求めることができる法律で、市民の知る権利を保障し、行政の透明性を高める目的がある。",
-      importance: QuizImportanceType.low,
+      comment: "情報公開法は、公的機関が保有する情報の開示を求めることができる法律で、市民の知る権利を保障し、行政の透明性を高める目的がある。",
+      importance: ImportanceType.low,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category1Index + 701);
+    return quizItems[index].copyWith(quizId: index + I18n().category1Index + 701);
   });
 }

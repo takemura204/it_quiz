@@ -12,8 +12,9 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
     @Default([]) final List<Quiz> filterQuizList,
     @Default([]) final List<String> categoryList, //クイズのカテゴリリスト
     @Default([]) final List<String> randomCategoryList, //ランダムモーダルの出題状況,
-    @Default([]) final List<QuizStatusType> statusList, //クイズ出題状況
-    @Default([]) final List<QuizStatusType> selectedStatusList, //クイズ出題状況
+    @Default([]) final List<StatusType> statusList, //クイズ出題状況
+    @Default([]) final List<StatusType> selectedStatusList, //クイズ出題状況
+    @Default([]) final List<ImportanceType> selectedImportanceList, //重要度
     @Default([]) final List<double> correctRatios,
     @Default("") final String selectCategory,
     @Default(0) final int itemIndex, //クイズ番号
@@ -24,7 +25,10 @@ class HomeQuizScreenState with _$HomeQuizScreenState {
     @Default(10) final int selectedTestLength,
     @Default(10) final int selectedWeakLength,
     Quiz? selectQuiz,
-    Quiz? selectStudyQuiz, //
+    Quiz? selectStudyQuiz,
     Quiz? selectWeakQuiz, //苦手克服
+    @Default(false) final bool isRepeat,
+    @Default(false) final bool isSaved,
+    @Default(false) final bool isWeak,
   }) = _HomeQuizScreenState;
 }

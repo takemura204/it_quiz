@@ -6,14 +6,13 @@ List<QuizItem> get category0_2_1 {
   final quizItems = [
     QuizItem(
       word: '外部設計',
-      question:
-          'システム開発を，システム要件定義，外部設計，内部設計，プログラミングの順で進めるとき，画面のレイアウトや帳票の様式を定義する工程として，最も適切なものはどれか。',
+      question: 'システム開発を，システム要件定義，外部設計，内部設計，プログラミングの順で進めるとき，画面のレイアウトや帳票の様式を定義する工程として，最も適切なものはどれか。',
       ans: '外部設計',
       choices: ["システム要件定義", "外部設計", "内部設計", "プログラミング"],
       comment:
           "外部設計は、要件定義で得られたシステム要件をもとにシステムの機能を確定すプロセスで、サブシステムの定義と機能分割，論理データモデル設計，画面・帳票・コードの設計などが実施される。",
       source: '平成25年春期 問49',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '内部設計',
@@ -27,7 +26,7 @@ List<QuizItem> get category0_2_1 {
       ],
       comment: "内部設計は、外部設計で定められた仕様に基づいて、ソフトウェアの内部構造や動作の詳細を設計する工程。",
       source: '平成24年秋期 問38',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'コーディング',
@@ -41,18 +40,16 @@ List<QuizItem> get category0_2_1 {
       ],
       comment: "コーディングは、内部設計の指示に従って、使用するプログラム言語の文法やコーディングでプログラムのソースコードを作成する工程。",
       source: '平成21年春期 問49',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ホワイトボックステスト',
-      question:
-          '開発者Aさんは，入力データが意図されたとおりに処理されるかを，プログラムの内部構造を分析し確認している。現在Aさんが行っているテストはどれか。',
+      question: '開発者Aさんは，入力データが意図されたとおりに処理されるかを，プログラムの内部構造を分析し確認している。現在Aさんが行っているテストはどれか。',
       ans: 'ホワイトボックステスト',
       choices: ["システムテスト", "トップダウンテスト", "ブラックボックステスト", "ホワイトボックステスト"],
-      comment:
-          "ホワイトボックステストは、プログラムやモジュールの単体テストとして実施されるテスト手法で、内部構造に基づき仕様書どおりに動作するかを検証するために実施される。",
+      comment: "ホワイトボックステストは、プログラムやモジュールの単体テストとして実施されるテスト手法で、内部構造に基づき仕様書どおりに動作するかを検証するために実施される。",
       source: '平成26年春期 問34',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ブラックボックステスト',
@@ -63,7 +60,7 @@ List<QuizItem> get category0_2_1 {
       comment:
           "ブラックボックステストは、システムの内部構造を考慮せず、システムに与える入力とそれに対する出力だけに着目して、入力に対する出力が仕様書どおりになっているかを検証するテス。",
       source: '平成26年秋期 問44',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '結合テスト',
@@ -75,10 +72,9 @@ List<QuizItem> get category0_2_1 {
         "プログラマが検証ツールやチェックリストを利用して，プログラムがコーディング基準に従って作成されていることを確認する。",
         "プログラム間のインターフェースが整合していることを確認する。"
       ],
-      comment:
-          "結合テストは、単体テストが完了した2つ以上のモジュールを組み合わせて動作させることで、モジュール間のインターフェースに関するエラーを検出することを目的としたテスト。",
+      comment: "結合テストは、単体テストが完了した2つ以上のモジュールを組み合わせて動作させることで、モジュール間のインターフェースに関するエラーを検出することを目的としたテスト。",
       source: '平成22年春期 問34',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'システムテスト',
@@ -90,10 +86,9 @@ List<QuizItem> get category0_2_1 {
         "設計書の仕様に基づくだけでなく，プログラムのコードを理解し，不具合を修正しながらテストする。",
         "ソフトウエアの機能的なテストだけでなく，性能などの非機能要件もテストする。"
       ],
-      comment:
-          "システムテストは、システムとしての要件が満たされているか検証するために行われるテストで、システム要件定義で定められた機能や能力がすべて備わっているかを確認する工程。",
+      comment: "システムテストは、システムとしての要件が満たされているか検証するために行われるテストで、システム要件定義で定められた機能や能力がすべて備わっているかを確認する工程。",
       source: '平成25年秋期 問35',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: '運用テスト',
@@ -101,7 +96,7 @@ List<QuizItem> get category0_2_1 {
       ans: '運用テスト',
       choices: ["運用テスト", "システムテスト", "結合テスト", "単体テスト"],
       comment: "運用テストは、実際の運用環境や条件下でソフトウェアが正しく機能するかを検証するテスト。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: '受入れテスト',
@@ -109,10 +104,9 @@ List<QuizItem> get category0_2_1 {
           '利用者がベンダーに委託したソフトウェア開発において，利用者側が実際の運用と同様の条件でソフトウェアを使用し，正常に稼働することを確認するテストとして，適切なものはどれか。',
       ans: '受入れテスト',
       choices: ["受入れテスト", "結合テスト", "システムテスト", "単体テスト"],
-      comment:
-          "受入れテストは、納品・導入されたソフトウェアやシステムがユーザーや発注者の要求通りの機能を備えているかをユーザーや発注者が確認するテストで、承認テストとも呼ばれる。",
+      comment: "受入れテストは、納品・導入されたソフトウェアやシステムがユーザーや発注者の要求通りの機能を備えているかをユーザーや発注者が確認するテストで、承認テストとも呼ばれる。",
       source: '平成24年秋期 問37',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ソフトウェア保守',
@@ -127,7 +121,7 @@ List<QuizItem> get category0_2_1 {
       comment:
           "ソフトウェア保守は、運用開始後のソフトウェアに対して変更や機能改善への対応，プログラムのバグへの対応，ビジネス環境の変化に応じたプログラムの修正作業などを実施するプロセス。",
       source: '平成26年春期 問36',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'ファンクションポイント法',
@@ -142,12 +136,12 @@ List<QuizItem> get category0_2_1 {
       comment:
           "ファンクションポイント法は、ソフトウェアの見積りにおいて、外部入出力や内部ファイルの数と難易度の高さから論理的にファンクションポイントを算出し、開発規模を見積もる手法。",
       source: '平成25年春期 問48',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index].copyWith(
-        quizId: index + I18n().category0_2Index + 101, isPremium: false);
+    return quizItems[index]
+        .copyWith(quizId: index + I18n().category0_2Index + 101, isPremium: false);
   });
 }

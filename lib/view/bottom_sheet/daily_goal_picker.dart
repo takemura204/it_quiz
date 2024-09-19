@@ -17,8 +17,7 @@ class DailyGoalPicker extends ConsumerWidget {
     final dailyGoal = ref.watch(authModelProvider).dailyGoal;
     final initialItem = quizCount.indexOf(dailyGoal);
     final recommendItem = quizCount.indexOf(20);
-    final dailyGoalController =
-        FixedExtentScrollController(initialItem: initialItem);
+    final dailyGoalController = FixedExtentScrollController(initialItem: initialItem);
 
     return Container(
       height: 380,
@@ -50,7 +49,7 @@ class DailyGoalPicker extends ConsumerWidget {
                   child: DefaultButton(
                     width: 100,
                     height: 40,
-                    text: "おすすめ",
+                    title: "おすすめ",
                     onPressed: () {
                       dailyGoalController.animateToItem(
                         recommendItem,
@@ -96,8 +95,7 @@ class DailyGoalPicker extends ConsumerWidget {
                         itemExtent: 42,
                         children: quizCount.map((int count) {
                           return Center(
-                            child: Text('$count問',
-                                style: const TextStyle(fontSize: 16)),
+                            child: Text('$count問', style: const TextStyle(fontSize: 16)),
                           );
                         }).toList(),
                       ),
@@ -114,12 +112,9 @@ class DailyGoalPicker extends ConsumerWidget {
               height: 60,
               title: "設定する",
               onPressed: () {
-                final selectedQuizCountGoal =
-                    ref.read(homeSettingProvider).selectedQuizCountGoal;
+                final selectedQuizCountGoal = ref.read(homeSettingProvider).selectedQuizCountGoal;
 
-                ref
-                    .read(authModelProvider.notifier)
-                    .updateDailyGoal(selectedQuizCountGoal);
+                ref.read(authModelProvider.notifier).updateDailyGoal(selectedQuizCountGoal);
                 Navigator.pop(context);
               }),
           const Gap(20),

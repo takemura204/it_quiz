@@ -20,13 +20,12 @@ class Quizzes with _$Quizzes {
     Quiz? weakQuiz, //苦手克服
     Quiz? randomQuiz, //ランダムクイズ
     @Default(QuizStyleType.study) final QuizStyleType quizType, //クイズタイプ
-    @Default(StudyType.learn) final StudyType studyType, //クイズタイプ
+    @Default(StudyType.study) final StudyType studyType, //クイズタイプ
   }) = _Quizzes;
 
   Quizzes._();
 
-  factory Quizzes.fromJson(Map<String, dynamic> json) =>
-      _$QuizzesFromJson(json);
+  factory Quizzes.fromJson(Map<String, dynamic> json) => _$QuizzesFromJson(json);
 }
 
 ///苦手克服
@@ -55,4 +54,14 @@ Quiz initRandomQuiz = Quiz(
   timeStamp: null,
   duration: Duration.zero,
   studyType: StudyType.learn,
+);
+
+///覚える
+Quiz initStudyQuiz = Quiz(
+  id: 3,
+  categoryId: 7,
+  category: I18n().setCategory(7),
+  title: '覚える',
+  quizItemList: [],
+  studyType: StudyType.study,
 );

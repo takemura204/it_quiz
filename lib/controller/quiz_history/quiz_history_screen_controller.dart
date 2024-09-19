@@ -13,8 +13,7 @@ final quizHistoryScreenProvider =
 
 class QuizHistoryScreenController extends StateNotifier<QuizHistoryScreenState>
     with LocatorMixin, WidgetsBindingObserver {
-  QuizHistoryScreenController({required this.ref})
-      : super(const QuizHistoryScreenState()) {
+  QuizHistoryScreenController({required this.ref}) : super(const QuizHistoryScreenState()) {
     initState();
   }
 
@@ -66,6 +65,6 @@ class QuizHistoryScreenController extends StateNotifier<QuizHistoryScreenState>
     final updateQuiz = quizList[index].copyWith(quizItemList: quizItemList);
 
     ref.read(quizModelProvider.notifier).updateQuiz(updateQuiz);
-    ref.read(quizModelProvider.notifier).updateHistoryQuiz(updateQuiz);
+    ref.read(quizModelProvider.notifier).createHistoryQuiz(updateQuiz);
   }
 }

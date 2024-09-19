@@ -23,8 +23,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
     final isSafetyPass = ref.watch(authProvider).isSafetyPass;
     final isObscure = ref.watch(authProvider).isObscure;
     final emailController = ref.watch(authProvider.notifier).emailController;
-    final passwordController =
-        ref.watch(authProvider.notifier).passwordController;
+    final passwordController = ref.watch(authProvider.notifier).passwordController;
     final formKey = ref.watch(authProvider.notifier).createAccountFormKey1;
     final focusNode = ref.watch(authProvider.notifier).createFocusNode1;
     final isNotTap = ref.watch(authProvider).isNotTap;
@@ -59,8 +58,7 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                       EmailTextField(
                         emailController: emailController,
                         isValidEmail: isValidEmail,
-                        onChanged: (email) =>
-                            ref.read(authProvider.notifier).setEmail(email),
+                        onChanged: (email) => ref.read(authProvider.notifier).setEmail(email),
                       ),
 
                       ///パスワード
@@ -70,9 +68,8 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                         isSafetyPass: isSafetyPass,
                         isObscure: isObscure,
                         isLogin: false,
-                        onChanged: (password) => ref
-                            .read(authProvider.notifier)
-                            .setPassword(password),
+                        onChanged: (password) =>
+                            ref.read(authProvider.notifier).setPassword(password),
                         obscureIconButtonPressed: () =>
                             ref.read(authProvider.notifier).switchObscure(),
                       ),
@@ -95,19 +92,15 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                           context: context,
                                           builder: (_) => SecondaryCloseDialog(
                                             onPressed: () {
-                                              ref
-                                                  .read(authProvider.notifier)
-                                                  .switchHasError();
+                                              ref.read(authProvider.notifier).switchHasError();
                                               Navigator.of(context).pop();
                                             },
                                             title: "エラー",
                                             subWidget: Text(
-                                              I18n().loginErrorText(
-                                                  value.errorText),
+                                              I18n().loginErrorText(value.errorText),
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
-                                                  fontSize:
-                                                      context.width * 0.035,
+                                                  fontSize: context.width * 0.035,
                                                   color: Colors.black87),
                                               maxLines: 2,
                                             ),
@@ -119,13 +112,10 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                                       else {
                                         Navigator.pop(context);
                                         context.showScreen(
-                                          const AccountCreateStep2ScreenArguments()
-                                              .generateRoute(),
+                                          const AccountCreateStep2ScreenArguments().generateRoute(),
                                         );
                                       }
-                                      ref
-                                          .read(authProvider.notifier)
-                                          .switchTap();
+                                      ref.read(authProvider.notifier).switchTap();
                                     },
                                   );
                               }
@@ -163,11 +153,9 @@ class AccountCreateStep1Screen extends ConsumerWidget {
                       DefaultButton(
                           width: context.width * 0.8,
                           height: context.height * 0.07,
-                          text: 'ログイン画面へ',
+                          title: 'ログイン画面へ',
                           onPressed: () {
-                            context.showScreen(
-                                const AccountLoginScreenArguments()
-                                    .generateRoute());
+                            context.showScreen(const AccountLoginScreenArguments().generateRoute());
                           }),
                     ],
                   ),

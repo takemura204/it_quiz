@@ -11,23 +11,18 @@ List<QuizItem> get category3_20 {
       choices: ["OSI基本参照モデル", "TCP/IP", "HTTP", "DHCP"],
       comment:
           "OSI基本参照モデルは、ネットワーク内の通信を7つの階層（レイヤー）で定義する国際標準モデルで、各レイヤーが独立した機能を持つことで、通信プロセスを理解しやすくする。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'TCP/IP（Transmission Control Protocol/Internet Protocol）',
       question:
           'ネットワークを介したアプリケーション間の通信を実現するために，数多くのプロトコルが階層的に使用されている。次の記述中のa，bに入れるプロトコル名の適切な組合せはどれか。\nインターネットでWebページを閲覧する場合，ブラウザとWebサーバは，[a] というプロトコルを使用する。この [a] による通信は，その下層の [b] と，さらにその下層のIPというプロトコルを使用する。',
       ans: 'a.HTTP,b.TCP',
-      choices: [
-        "a.FTP,b.Ethernet",
-        "a.HTTP,b.TCP",
-        "a.SMTP,b.POP3",
-        "a.www,b.HTML"
-      ],
+      choices: ["a.FTP,b.Ethernet", "a.HTTP,b.TCP", "a.SMTP,b.POP3", "a.www,b.HTML"],
       comment:
           "TCP/IP（Transmission Control Protocol/Internet Protocol）は、インターネットやLANなどで標準的に使われている、あらゆるコンピュータや異なるOSで相互に通信ことを可能にする通信プロトコル群。",
       source: '平成22年秋期 問65',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'HTTP（HyperText Transfer Protocol）',
@@ -36,7 +31,7 @@ List<QuizItem> get category3_20 {
       choices: ["HTTP", "HTTPS", "TCP/IP", "FTP"],
       comment:
           "HTTP（HyperText Transfer Protocol）は、ウェブページのデータ転送に使用されるプロトコルで、ウェブサーバーとクライアント間でHTMLなどのドキュメントをやり取りする。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'HTTPS(HTTP over SSL/TLS)',
@@ -51,7 +46,7 @@ List<QuizItem> get category3_20 {
       comment:
           "HTTPS(HTTP over SSL/TLS)は、SSLの技術を用いて個人情報の送信や電子決済などのWebのデータ通信を安全に行うためのもので、SSLでカプセル化することでサーバおよびクライアントの認証，通信経路の暗号化，セッション管理などの機能が加わり、盗聴やなりすましなどの脅威から通信データを保護をすることができる。",
       source: '平成24年春期 問80',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'SMTP（Simple Mail Transfer Protocol）',
@@ -60,7 +55,7 @@ List<QuizItem> get category3_20 {
       choices: ["SMTP", "POP", "HTTP", "FTP"],
       comment:
           "SMTP（Simple Mail Transfer Protocol）は、電子メールの送信に使用されるプロトコルで、メールサーバー間やメールクライアントからメールサーバーへのメール送信を担う。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'POP',
@@ -70,7 +65,7 @@ List<QuizItem> get category3_20 {
       comment:
           "POP（Post Office Protocol）は、ユーザ側に実装されているメールソフトがメールサーバから自身のメールを取り出す処理において使用するメール受信用プロトコルで、現在最も普及している「POP3」は、POPのバージョン3にあたる。",
       source: '平成24年秋期 問77',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'IMAP(Internet Message Access Protocol)',
@@ -81,7 +76,7 @@ List<QuizItem> get category3_20 {
       comment:
           "IMAP(Internet Message Access Protocol)は、電子メールの受信に使われるプロトコルで、メールをクライアントのメーラーではなくメールサーバ上で管理します。これによりメール状態の一元管理や複数の端末で同じメールを読むことができるなど、複数の端末を使用する場合に適したメールプロトコルとなっています。POPと違いメールサーバ内のメールを選択して受信することが可能。",
       source: '平成25年春期 問84',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'FTP（File Transfer Protocol）',
@@ -96,7 +91,7 @@ List<QuizItem> get category3_20 {
       comment:
           "FTP（File Transfer Protocol）は、ネットワーク上でファイルの転送を行うための通信プロトコルで、ユーザ名やパスワードを平文で送信する仕様でセキュリティ上の脆弱性があるため、現在では、代わりにセキュアな接続上で認証情報をやり取りするSFTPやFTPSが用いられることが多い。",
       source: '平成24年春期 問60',
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'NTP(Network Time Protocol)',
@@ -111,7 +106,7 @@ List<QuizItem> get category3_20 {
       comment:
           "NTP(Network Time Protocol)は、ネットワークに接続されたサーバとクライアントのシステム時計を正しい時刻(協定世界時:UTC)に合わせるためのプロトコル。",
       source: '平成23年特別 問85',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'DHCP(Dynamic Host Configuration Protocol)',
@@ -120,27 +115,21 @@ List<QuizItem> get category3_20 {
       choices: ["DHCP", "HTTP", "NTP", "SMTP"],
       comment:
           "DHCP(Dynamic Host Configuration Protocol)は、TCP/IPネットワークで、ネットワークに接続するノードへのIPアドレスの割り当てをアドレスプールから自動的に行うプロトコル。",
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
     QuizItem(
       word: 'ポート番号',
       question: 'TCP/IPのポート番号によって識別されるものはどれか。',
       ans: '通信相手のアプリケーションソフトウェア',
-      choices: [
-        "コンピュータに装着されたLANカード",
-        "通信相手のアプリケーションソフトウェア",
-        "通信相手のコンピュータ",
-        "無線LANのアクセスポイント"
-      ],
+      choices: ["コンピュータに装着されたLANカード", "通信相手のアプリケーションソフトウェア", "通信相手のコンピュータ", "無線LANのアクセスポイント"],
       comment:
           "ポート番号は、IPアドレスが送受信の対象コンピュータを識別する情報であるのに対して、データの宛先となるアプリケーションを表す情報で、ポート番号はOSI基本参照モデルのトランスポート層で、ローカルノード内のアプリケーションを0～65535の数値で識別する。",
       source: '平成22年春期 問80',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 2001);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 2001);
   });
 }

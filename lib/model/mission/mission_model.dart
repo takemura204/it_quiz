@@ -68,8 +68,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
   List<Mission> _updateMissions(List<Mission> missions) {
     return missions.map((mission) {
       // updatedAtが今日の日付でない場合、更新する
-      if (mission.updatedAt == null ||
-          !_isSameDay(mission.updatedAt!, DateTime.now())) {
+      if (mission.updatedAt == null || !_isSameDay(mission.updatedAt!, DateTime.now())) {
         // defaultMissionsから対応するmissionを取得
         final matchMission = defaultMissions.firstWhere(
             (defaultMission) => defaultMission.missionId == mission.missionId,
@@ -104,8 +103,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
 
   Future _saveMissions(List<Mission> missions) async {
     final prefs = await SharedPreferences.getInstance();
-    final missionList =
-        missions.map((mission) => jsonEncode(mission.toJson())).toList();
+    final missionList = missions.map((mission) => jsonEncode(mission.toJson())).toList();
     prefs.setStringList('missions', missionList);
   }
 
@@ -124,7 +122,7 @@ class MissionModel extends StateNotifier<Missions> with LocatorMixin {
   }
 
   /// 現在のstateをリセット
-  Future _resetData() async {
+  Future resetData() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("missions");
   }

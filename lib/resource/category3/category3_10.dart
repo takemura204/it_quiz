@@ -17,16 +17,15 @@ List<QuizItem> get category3_10 {
       comment:
           "OS（オペレーティングシステム）とは、コンピュータを効率よく使うために、共通して使われるプログラムをまとめて提供する基本ソフトウェアのことで、PCにおけるWindows・MacOS・UNIX、モバイル端末におけるiOSやAndroidがOSに該当する。",
       source: '平成26年春期 問78',
-      importance: QuizImportanceType.high,
+      importance: ImportanceType.high,
     ),
     QuizItem(
       word: 'Windows',
       question: 'マイクロソフト社によって開発され、世界中で広く使用されているオペレーティングシステムは何か？',
       ans: 'Windows',
       choices: ["Windows", "Mac OS", "Linux", "Chrome OS"],
-      comment:
-          "Windowsは、マイクロソフト社によって開発されたオペレーティングシステムで、個人用コンピュータから企業向けサーバまで幅広く使用されている。",
-      importance: QuizImportanceType.low,
+      comment: "Windowsは、マイクロソフト社によって開発されたオペレーティングシステムで、個人用コンピュータから企業向けサーバまで幅広く使用されている。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'Mac OS',
@@ -34,7 +33,7 @@ List<QuizItem> get category3_10 {
       ans: 'Mac OS',
       choices: ["Mac OS", "Windows", "UNIX", "iOS"],
       comment: "Mac OSは、アップル社によって開発されたオペレーティングシステムで、Macintoshコンピュータで使用されている。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'UNIX',
@@ -42,45 +41,40 @@ List<QuizItem> get category3_10 {
       ans: 'UNIX',
       choices: ["UNIX", "Windows", "Mac OS", "Linux"],
       comment: "UNIXは、複数のユーザーや複数のタスクを同時に処理することを目的として設計された、高度なオペレーティングシステムの一種。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'Chrome OS',
       question: 'Googleによって開発され、クラウドコンピューティングに特化したオペレーティングシステムは何か？',
       ans: 'Chrome OS',
       choices: ["Chrome OS", "Android", "Windows", "Mac OS"],
-      comment:
-          "Chrome OSは、Googleによって開発されたオペレーティングシステムで、クラウドコンピューティングに特化し、主にChromebookで使用されている。",
-      importance: QuizImportanceType.low,
+      comment: "Chrome OSは、Googleによって開発されたオペレーティングシステムで、クラウドコンピューティングに特化し、主にChromebookで使用されている。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'Linux',
-      question:
-          'オープンソースで開発されているUNIX系のオペレーティングシステムで、サーバやデスクトップなど幅広い用途で使用されているものは何か？',
+      question: 'オープンソースで開発されているUNIX系のオペレーティングシステムで、サーバやデスクトップなど幅広い用途で使用されているものは何か？',
       ans: 'Linux',
       choices: ["Linux", "UNIX", "Windows", "Chrome OS"],
       comment:
           "Linuxは、オープンソースで開発されているUNIX系のオペレーティングシステムで、その柔軟性と自由度の高さから、サーバやデスクトップなど幅広い用途で使用されている。",
-      importance: QuizImportanceType.low,
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'iOS',
       question: 'アップル社によって開発され、iPhoneやiPadなどのモバイルデバイスで使用されるオペレーティングシステムは何か？',
       ans: 'iOS',
       choices: ["iOS", "Android", "Windows Mobile", "Chrome OS"],
-      comment:
-          "iOSは、アップル社によって開発されたオペレーティングシステムで、iPhoneやiPadなどのモバイルデバイスで使用されている。",
-      importance: QuizImportanceType.low,
+      comment: "iOSは、アップル社によって開発されたオペレーティングシステムで、iPhoneやiPadなどのモバイルデバイスで使用されている。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: 'Android',
-      question:
-          'Googleによって開発され、スマートフォンやタブレットなどのモバイルデバイスで広く使用されているオペレーティングシステムは何か？',
+      question: 'Googleによって開発され、スマートフォンやタブレットなどのモバイルデバイスで広く使用されているオペレーティングシステムは何か？',
       ans: 'Android',
       choices: ["Android", "iOS", "Windows Phone", "BlackBerry OS"],
-      comment:
-          "Androidは、Googleによって開発されたオペレーティングシステムで、スマートフォンやタブレットなどのモバイルデバイスで広く使用されている。",
-      importance: QuizImportanceType.low,
+      comment: "Androidは、Googleによって開発されたオペレーティングシステムで、スマートフォンやタブレットなどのモバイルデバイスで広く使用されている。",
+      importance: ImportanceType.low,
     ),
     QuizItem(
       word: '仮想記憶',
@@ -95,12 +89,11 @@ List<QuizItem> get category3_10 {
       comment:
           "仮想記憶方式は、プログラムが必要とするメモリサイズが主記憶のサイズを上回った場合、補助記憶装置(HDDなど)を仮想アドレス空間として使い主記憶のサイズよりも大きなプログラムを実行可能にする方式。",
       source: '平成21年秋期 問59',
-      importance: QuizImportanceType.normal,
+      importance: ImportanceType.normal,
     ),
   ];
 
   return List.generate(quizItems.length, (index) {
-    return quizItems[index]
-        .copyWith(quizId: index + I18n().category3Index + 1001);
+    return quizItems[index].copyWith(quizId: index + I18n().category3Index + 1001);
   });
 }
