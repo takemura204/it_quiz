@@ -31,12 +31,15 @@ class _Body extends ConsumerWidget {
               isScrollLoading: isScrollLoading,
               maxItemsToDisplay: maxItemsToDisplay,
             ),
-            const SliverToBoxAdapter(
-              child: Gap(70),
-            ),
+            const SliverToBoxAdapter(child: Gap(70)),
           ],
         ),
-        const AdBanner(),
+        const Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            AdBanner(),
+          ],
+        ),
       ],
     );
   }

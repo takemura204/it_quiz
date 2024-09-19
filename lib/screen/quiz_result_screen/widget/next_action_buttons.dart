@@ -24,7 +24,7 @@ class NextActionButtons extends HookConsumerWidget {
     return Container(
       color: context.backgroundColor,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 25),
       width: context.width,
       child: actionButtonsWidget(studyType),
     );

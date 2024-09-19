@@ -33,12 +33,7 @@ class _ProgressTile extends ConsumerWidget {
               right: BorderSide(color: context.incorrectColor, width: 1.0),
               left: BorderSide.none,
             ),
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(90),
-              bottomRight: Radius.circular(90),
-              topLeft: Radius.zero,
-              bottomLeft: Radius.zero,
-            ),
+            borderRadius: const BorderRadius.horizontal(right: Radius.circular(90)),
           ),
           child: Text(
             direction == AppinioSwiperDirection.left ? '+1' : '${unKnowQuizItemList.length}',

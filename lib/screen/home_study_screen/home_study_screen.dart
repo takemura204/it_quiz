@@ -47,7 +47,6 @@ class HomeStudyScreen extends HookConsumerWidget {
     final duration = ref.watch(homeStudyScreenProvider.select((s) => s.duration));
     Future.delayed(Duration.zero, () async {
       if (isResultScreen) {
-        // ref.read(homeStudyScreenProvider.notifier).setIsResultView(false);
         context.showScreen(QuizResultScreenArguments(quizItemList, duration).generateRoute());
       }
     });

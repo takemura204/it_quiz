@@ -60,6 +60,7 @@ class _QuizItemCard extends ConsumerWidget {
                 ref.read(homeStudyScreenProvider.notifier).setIsShowTutorial(true);
               }
               ref.read(homeStudyScreenProvider.notifier).setIsAnsView(true);
+              HapticFeedback.lightImpact();
             },
             child: Stack(
               children: [

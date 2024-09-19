@@ -113,6 +113,7 @@ class _FinishBody extends ConsumerWidget {
             TextButton(
               onPressed: () {
                 ref.read(homeStudyScreenProvider.notifier).setIsResultScreen(true);
+                HapticFeedback.lightImpact();
               },
               child: const Text(
                 '結果を確認',

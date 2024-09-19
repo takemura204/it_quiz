@@ -58,7 +58,12 @@ class _Body extends ConsumerWidget {
             ],
           ),
         ),
-        AdBanner(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            AdBanner(),
+          ],
+        ),
       ],
     );
   }

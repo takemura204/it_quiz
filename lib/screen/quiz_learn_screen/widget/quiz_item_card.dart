@@ -50,6 +50,7 @@ class _QuizItemCard extends ConsumerWidget {
           return GestureDetector(
             onTapDown: (details) {
               ref.read(quizLearnScreenProvider.notifier).setIsAnsView(true);
+              HapticFeedback.lightImpact();
             },
             child: Stack(
               children: [

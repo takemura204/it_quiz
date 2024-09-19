@@ -46,7 +46,7 @@ class MainScreenController extends StateNotifier<MainScreenState> with LocatorMi
   }
 
   void setIsShowInAppReview() {
-    if ((state.inAppReviewCount == 5 || state.inAppReviewCount % 10 == 0) &&
+    if ((state.inAppReviewCount == 5 || state.inAppReviewCount % 15 == 0) &&
         state.isShowInAppReview) {
       final inAppReview = InAppReview.instance;
       inAppReview.requestReview();

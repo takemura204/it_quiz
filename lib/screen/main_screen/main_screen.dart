@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kentei_quiz/controller/home_study/home_study_screen_controller.dart';
@@ -23,6 +24,9 @@ import '../home_setting_screen/home_setting_screen.dart';
 import '../home_study_screen/home_study_screen.dart';
 import '../launch_screen/launch_screen.dart';
 import '../screen_argument.dart';
+
+part 'widget/body.dart';
+part 'widget/bottom_nav_bar.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen();
@@ -72,120 +76,5 @@ class MainScreen extends ConsumerWidget {
       body: _Body(),
       bottomNavigationBar: _BottomNavBar(),
     );
-  }
-}
-
-class _Body extends ConsumerWidget {
-  const _Body();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final quizList = ref.watch(quizModelProvider.select((s) => s.quizList));
-    if (quizList.isEmpty) {
-      return LaunchScreen();
-    }
-    final currentTabIndex =
-        ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
-
-    return IndexedStack(
-      sizing: StackFit.expand,
-      index: currentTabIndex,
-      children: const [
-        HomeStudyScreen(),
-        HomeQuizScreen(),
-        HomeSearchScreen(),
-        HomeDashboardScreen(),
-        HomeSettingScreen(),
-      ],
-    );
-  }
-}
-
-class _BottomNavBar extends ConsumerWidget {
-  const _BottomNavBar();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentTabIndex =
-        ref.watch(mainScreenControllerProvider.select((s) => s.currentTabIndex));
-
-    return BottomNavigationBar(
-        iconSize: 35,
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icon/swipe_cards.svg',
-              width: 35,
-              height: 35,
-              colorFilter: const ColorFilter.mode(Colors.black38, BlendMode.srcIn),
-            ),
-            activeIcon: SvgPicture.asset(
-              'assets/icon/swipe_cards_active.svg',
-              width: 35,
-              height: 35,
-              colorFilter: ColorFilter.mode(context.mainColor, BlendMode.srcIn),
-            ),
-            label: I18n().titleStudy,
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icon/list.svg',
-              width: 35,
-              height: 35,
-              colorFilter: const ColorFilter.mode(Colors.black26, BlendMode.srcIn),
-            ),
-            activeIcon: SvgPicture.asset(
-              'assets/icon/list.svg',
-              width: 35,
-              height: 35,
-              colorFilter: ColorFilter.mode(context.mainColor, BlendMode.srcIn),
-            ),
-            label: I18n().titleQuiz,
-          ),
-          BottomNavigationBarItem(
-            icon: Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()..rotateY(math.pi),
-              child: const Icon(LineIcons.search),
-            ),
-            activeIcon: Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()..rotateY(math.pi),
-              child: const Icon(LineIcons.search),
-            ),
-            label: I18n().titleSearch,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(LineIcons.barChartAlt),
-            activeIcon: const Icon(LineIcons.barChartAlt),
-            label: I18n().titleDashboard,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(LineIcons.cog),
-            activeIcon: const Icon(LineIcons.cog),
-            label: I18n().titleSetting,
-          ),
-        ],
-        currentIndex: currentTabIndex,
-        fixedColor: context.mainColor,
-        onTap: (index) async {
-          ref.read(mainScreenControllerProvider.notifier).setTabIndex(index);
-          if (index != 0) {
-            ref.read(homeStudyScreenProvider.notifier).stopwatch.stop();
-          }
-          if (index == 0) {
-            ref.read(quizModelProvider.notifier).setStudyType(StudyType.study);
-          }
-          if (index == 3) {
-            ref.read(dashboardModelProvider.notifier).initState();
-          }
-          if (index == 4) {
-            ref.read(authProvider.notifier).initState();
-            final isShowTrackingModal = ref.read(mainScreenControllerProvider).isShowTrackingModal;
-            if (!isShowTrackingModal) {
-              ref.read(settingNotificationProvider.notifier).initState();
-            }
-          }
-        });
   }
 }
